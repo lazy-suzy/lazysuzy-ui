@@ -7,8 +7,6 @@ import { Component, OnInit } from '@angular/core';
 })
 export class NavDesktopComponent implements OnInit {
 
-  constructor() { }
-
   ngOnInit() {
   }
 
