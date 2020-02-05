@@ -28,7 +28,9 @@
               "src/assets"
             ],
             "styles": [
-              "src/styles.less"
+              "src/custom-theme.scss",
+              "src/styles.less",
+              "node_modules/tachyons/css/tachyons.min.css"
             ],
             "scripts": []
           },
@@ -88,7 +90,8 @@
               "src/assets"
             ],
             "styles": [
-              "src/styles.less"
+              "src/styles.less",
+              "node_modules/tachyons/css/tachyons.min.css"
             ],
             "scripts": []
           }
@@ -119,6 +122,7 @@
           }
         }
       }
-    }},
+    }
+  },
   "defaultProject": "lazysuzy-ui"
 }
