@@ -1,0 +1,3406 @@
+{
+    "total": 5124,
+    "constructor_count": 0,
+    "sortType": [
+      {
+        "name": "Recommended",
+        "value": "recommended",
+        "enabled": false
+      },
+      {
+        "name": "Popularity",
+        "value": "popularity",
+        "enabled": false
+      },
+      {
+        "name": "Price: Low to High",
+        "value": "price_low_to_high",
+        "enabled": false
+      },
+      {
+        "name": "Price: High to Low",
+        "value": "price_high_to_low",
+        "enabled": false
+      }
+    ],
+    "limit": 24,
+    "filterData": {
+      "brand": [
+        {
+          "name": "CB2",
+          "value": "cb2",
+          "enabled": true,
+          "checked": false,
+          "count": 1039
+        },
+        {
+          "name": "Crate & Barrel",
+          "value": "cab",
+          "enabled": true,
+          "checked": false,
+          "count": 3244
+        },
+        {
+          "name": "Pier 1",
+          "value": "pier1",
+          "enabled": true,
+          "checked": true,
+          "count": 5124
+        },
+        {
+          "name": "Pottery Barn",
+          "value": "potterybarn",
+          "enabled": false,
+          "checked": false,
+          "count": 0
+        },
+        {
+          "name": "West Elm",
+          "value": "westelm",
+          "enabled": true,
+          "checked": false,
+          "count": 1883
+        },
+        {
+          "name": "World Market",
+          "value": "nw",
+          "enabled": true,
+          "checked": false,
+          "count": 513
+        }
+      ],
+      "price": {
+        "from": 0,
+        "to": 9896,
+        "max": 9896,
+        "min": 0
+      },
+      "type": [],
+      "color": [
+        {
+          "name": "Black",
+          "value": "black",
+          "hex": "#000000",
+          "enabled": true,
+          "checked": false
+        },
+        {
+          "name": "Blue",
+          "value": "blue",
+          "hex": "#0000ee",
+          "enabled": true,
+          "checked": false
+        },
+        {
+          "name": "Brown",
+          "value": "brown",
+          "hex": "#a52a2a",
+          "enabled": true,
+          "checked": false
+        },
+        {
+          "name": "Clear",
+          "value": "clear",
+          "hex": "#dcf0ef",
+          "enabled": false,
+          "checked": false
+        },
+        {
+          "name": "Copper",
+          "value": "copper",
+          "hex": "#b87333",
+          "enabled": true,
+          "checked": false
+        },
+        {
+          "name": "Gold",
+          "value": "gold",
+          "hex": "#FFD700",
+          "enabled": true,
+          "checked": false
+        },
+        {
+          "name": "Green",
+          "value": "green",
+          "hex": "#008000",
+          "enabled": true,
+          "checked": false
+        },
+        {
+          "name": "Grey",
+          "value": "grey",
+          "hex": "#808080",
+          "enabled": false,
+          "checked": false
+        },
+        {
+          "name": "Multicolor",
+          "value": "multicolor",
+          "hex": "#eeeeee",
+          "enabled": true,
+          "checked": false
+        },
+        {
+          "name": "Pink",
+          "value": "pink",
+          "hex": "#FFC0CB",
+          "enabled": true,
+          "checked": false
+        },
+        {
+          "name": "Purple",
+          "value": "purple",
+          "hex": "#800080",
+          "enabled": true,
+          "checked": false
+        },
+        {
+          "name": "Red",
+          "value": "red",
+          "hex": "#FF0000",
+          "enabled": true,
+          "checked": false
+        },
+        {
+          "name": "Silver",
+          "value": "silver",
+          "hex": "#C0C0C0",
+          "enabled": true,
+          "checked": false
+        },
+        {
+          "name": "Tan",
+          "value": "tan",
+          "hex": "#d2b48c",
+          "enabled": true,
+          "checked": false
+        },
+        {
+          "name": "White",
+          "value": "white",
+          "hex": "#ffffff",
+          "enabled": true,
+          "checked": false
+        }
+      ],
+      "category": [
+        {
+          "name": "Lighting",
+          "value": 1102,
+          "checked": false,
+          "enabled": true
+        },
+        {
+          "name": "Rugs",
+          "value": 1103,
+          "checked": false,
+          "enabled": true
+        },
+        {
+          "name": "Sofas",
+          "value": 201,
+          "checked": false,
+          "enabled": true
+        },
+        {
+          "name": "Loveseats",
+          "value": 206,
+          "checked": false,
+          "enabled": true
+        },
+        {
+          "name": "Accent Chairs",
+          "value": 210,
+          "checked": false,
+          "enabled": true
+        },
+        {
+          "name": "Ottomans",
+          "value": 217,
+          "checked": false,
+          "enabled": true
+        },
+        {
+          "name": "Benches",
+          "value": 216,
+          "checked": false,
+          "enabled": true
+        },
+        {
+          "name": "Bookcases",
+          "value": 227,
+          "checked": false,
+          "enabled": true
+        },
+        {
+          "name": "Beds",
+          "value": 301,
+          "checked": false,
+          "enabled": true
+        },
+        {
+          "name": "Headboards",
+          "value": 308,
+          "checked": false,
+          "enabled": true
+        },
+        {
+          "name": "Mattresses",
+          "value": 309,
+          "checked": false,
+          "enabled": true
+        },
+        {
+          "name": "Dressers & Wardrobes",
+          "value": 310,
+          "checked": false,
+          "enabled": true
+        },
+        {
+          "name": "Nightstands",
+          "value": 315,
+          "checked": false,
+          "enabled": true
+        },
+        {
+          "name": "Bedroom Benches",
+          "value": 317,
+          "checked": false,
+          "enabled": true
+        },
+        {
+          "name": "Vanity",
+          "value": 323,
+          "checked": false,
+          "enabled": true
+        },
+        {
+          "name": "Hallway Seating",
+          "value": 401,
+          "checked": false,
+          "enabled": true
+        },
+        {
+          "name": "Hallway Tables",
+          "value": 402,
+          "checked": false,
+          "enabled": true
+        },
+        {
+          "name": "Hallway Storage",
+          "value": 403,
+          "checked": false,
+          "enabled": true
+        },
+        {
+          "name": "Dining Benches",
+          "value": 503,
+          "checked": false,
+          "enabled": true
+        },
+        {
+          "name": "Dining Chairs",
+          "value": 504,
+          "checked": false,
+          "enabled": true
+        },
+        {
+          "name": "Dining Stools",
+          "value": 505,
+          "checked": false,
+          "enabled": true
+        },
+        {
+          "name": "Dining Tables",
+          "value": 507,
+          "checked": false,
+          "enabled": true
+        },
+        {
+          "name": "Buffets & Cabinets",
+          "value": 510,
+          "checked": false,
+          "enabled": true
+        },
+        {
+          "name": "Dining Sets",
+          "value": 515,
+          "checked": false,
+          "enabled": true
+        },
+        {
+          "name": "Office Chairs",
+          "value": 601,
+          "checked": false,
+          "enabled": true
+        },
+        {
+          "name": "Desks & Tables",
+          "value": 602,
+          "checked": false,
+          "enabled": true
+        },
+        {
+          "name": "Office Bookcases",
+          "value": 604,
+          "checked": false,
+          "enabled": true
+        },
+        {
+          "name": "Office Storage",
+          "value": 605,
+          "checked": false,
+          "enabled": true
+        },
+        {
+          "name": "Laundry",
+          "value": 701,
+          "checked": false,
+          "enabled": true
+        },
+        {
+          "name": "Outdoor Sofas",
+          "value": 802,
+          "checked": false,
+          "enabled": true
+        },
+        {
+          "name": "Outdoor Sectionals",
+          "value": 803,
+          "checked": false,
+          "enabled": true
+        },
+        {
+          "name": "Outdoor Chairs",
+          "value": 808,
+          "checked": false,
+          "enabled": true
+        },
+        {
+          "name": "Outdoor Cushions",
+          "value": 819,
+          "checked": false,
+          "enabled": true
+        },
+        {
+          "name": "Outdoor Sets",
+          "value": 827,
+          "checked": false,
+          "enabled": true
+        },
+        {
+          "name": "Papasans",
+          "value": 817,
+          "checked": false,
+          "enabled": true
+        },
+        {
+          "name": "Outdoor Benches",
+          "value": 815,
+          "checked": false,
+          "enabled": true
+        },
+        {
+          "name": "Outdoor Tables",
+          "value": 822,
+          "checked": false,
+          "enabled": true
+        },
+        {
+          "name": "Kids Beds",
+          "value": 910,
+          "checked": false,
+          "enabled": true
+        },
+        {
+          "name": "Sectionals",
+          "value": 202,
+          "checked": false,
+          "enabled": false
+        },
+        {
+          "name": "Sleeper & Daybeds",
+          "value": 207,
+          "checked": false,
+          "enabled": false
+        },
+        {
+          "name": "Coffee & Side Tables",
+          "value": 223,
+          "checked": false,
+          "enabled": false
+        },
+        {
+          "name": "Game Room",
+          "value": 233,
+          "checked": false,
+          "enabled": false
+        },
+        {
+          "name": "Ottomans",
+          "value": 324,
+          "checked": false,
+          "enabled": false
+        },
+        {
+          "name": "Bar",
+          "value": 501,
+          "checked": false,
+          "enabled": false
+        },
+        {
+          "name": "Bath Cabinets",
+          "value": 703,
+          "checked": false,
+          "enabled": false
+        },
+        {
+          "name": "Shelving",
+          "value": 704,
+          "checked": false,
+          "enabled": false
+        },
+        {
+          "name": "Outdoor Ottomans",
+          "value": 801,
+          "checked": false,
+          "enabled": false
+        },
+        {
+          "name": "Outdoor Accessories",
+          "value": 828,
+          "checked": false,
+          "enabled": false
+        },
+        {
+          "name": "Kids Chairs",
+          "value": 920,
+          "checked": false,
+          "enabled": false
+        },
+        {
+          "name": "Kids Tables",
+          "value": 930,
+          "checked": false,
+          "enabled": false
+        },
+        {
+          "name": "Kids Storage",
+          "value": 940,
+          "checked": false,
+          "enabled": false
+        },
+        {
+          "name": "Mirrors",
+          "value": 1101,
+          "checked": false,
+          "enabled": false
+        }
+      ]
+    },
+    "products": [
+      {
+        "id": 2,
+        "sku": "2759995",
+        "is_new": false,
+        "site": "Pier 1",
+        "name": "Navy Blue Velvet Armchair",
+        "product_url": "https://www.pier1.com/chas-navy-blue-velvet-armchair/2759995.html",
+        "product_detail_url": "https://www.lazysuzy.com/product/2759995",
+        "is_price": "299",
+        "was_price": "499.95",
+        "percent_discount": "40.19",
+        "model_code": "Navy",
+        "color": "blue",
+        "collection": "Chas",
+        "condition": "",
+        "main_image": "https://www.lazysuzy.com/Pier-1/pier1_images/2759995_main.jpg",
+        "reviews": 1078,
+        "rating": 4.73,
+        "wishlisted": false,
+        "variations": [
+          {
+            "time_taken": 0.0011279582977294922,
+            "product_sku": "2759995",
+            "variation_sku": "2739505",
+            "name": "Indigo Meadow",
+            "has_parent_sku": true,
+            "image": "https://www.lazysuzy.com/Pier-1/pier1_images/2739505_main.jpg",
+            "link": "/product/2739505",
+            "swatch_image": "https://www.lazysuzy.com/Pier-1/pier1_images/2739505_main.jpg"
+          },
+          {
+            "time_taken": 0.0011279582977294922,
+            "product_sku": "2759995",
+            "variation_sku": "2536461",
+            "name": "Coffee",
+            "has_parent_sku": true,
+            "image": "https://www.lazysuzy.com/Pier-1/pier1_images/2536461_main.jpg",
+            "link": "/product/2536461",
+            "swatch_image": "https://www.lazysuzy.com/Pier-1/pier1_images/2536461_main.jpg"
+          },
+          {
+            "time_taken": 0.0011279582977294922,
+            "product_sku": "2759995",
+            "variation_sku": "2443389",
+            "name": "Blue Seersucker",
+            "has_parent_sku": true,
+            "image": "https://www.lazysuzy.com/Pier-1/pier1_images/2443389_main.jpg",
+            "link": "/product/2443389",
+            "swatch_image": "https://www.lazysuzy.com/Pier-1/pier1_images/2443389_main.jpg"
+          },
+          {
+            "time_taken": 0.0011279582977294922,
+            "product_sku": "2759995",
+            "variation_sku": "2655501",
+            "name": "Blue Meadow",
+            "has_parent_sku": true,
+            "image": "https://www.lazysuzy.com/Pier-1/pier1_images/2655501_main.jpg",
+            "link": "/product/2655501",
+            "swatch_image": "https://www.lazysuzy.com/Pier-1/pier1_images/2655501_main.jpg"
+          },
+          {
+            "time_taken": 0.0011279582977294922,
+            "product_sku": "2759995",
+            "variation_sku": "3478541",
+            "name": "Black Buffalo Check",
+            "has_parent_sku": true,
+            "image": "https://www.lazysuzy.com/Pier-1/pier1_images/3478541_main.jpg",
+            "link": "/product/3478541",
+            "swatch_image": "https://www.lazysuzy.com/Pier-1/pier1_images/3478541_main.jpg"
+          },
+          {
+            "time_taken": 0.0011279582977294922,
+            "product_sku": "2759995",
+            "variation_sku": "3201222",
+            "name": "Flax",
+            "has_parent_sku": true,
+            "image": "https://www.lazysuzy.com/Pier-1/pier1_images/3201222_main.jpg",
+            "link": "/product/3201222",
+            "swatch_image": "https://www.lazysuzy.com/Pier-1/pier1_images/3201222_main.jpg"
+          },
+          {
+            "time_taken": 0.0011279582977294922,
+            "product_sku": "2759995",
+            "variation_sku": "4127472",
+            "name": "Eucalyptus",
+            "has_parent_sku": true,
+            "image": "https://www.lazysuzy.com/Pier-1/pier1_images/4127472_main.jpg",
+            "link": "/product/4127472",
+            "swatch_image": "https://www.lazysuzy.com/Pier-1/pier1_images/4127472_main.jpg"
+          },
+          {
+            "time_taken": 0.0011279582977294922,
+            "product_sku": "2759995",
+            "variation_sku": "2800179",
+            "name": "Olive",
+            "has_parent_sku": true,
+            "image": "https://www.lazysuzy.com/Pier-1/pier1_images/2800179_main.jpg",
+            "link": "/product/2800179",
+            "swatch_image": "https://www.lazysuzy.com/Pier-1/pier1_images/2800179_main.jpg"
+          },
+          {
+            "time_taken": 0.0011279582977294922,
+            "product_sku": "2759995",
+            "variation_sku": "3134254",
+            "name": "Zinc Gray",
+            "has_parent_sku": true,
+            "image": "https://www.lazysuzy.com/Pier-1/pier1_images/3134254_main.jpg",
+            "link": "/product/3134254",
+            "swatch_image": "https://www.lazysuzy.com/Pier-1/pier1_images/3134254_main.jpg"
+          },
+          {
+            "time_taken": 0.0011279582977294922,
+            "product_sku": "2759995",
+            "variation_sku": "3001806",
+            "name": "Flax Sky",
+            "has_parent_sku": true,
+            "image": "https://www.lazysuzy.com/Pier-1/pier1_images/3001806_main.jpg",
+            "link": "/product/3001806",
+            "swatch_image": "https://www.lazysuzy.com/Pier-1/pier1_images/3001806_main.jpg"
+          },
+          {
+            "time_taken": 0.0011279582977294922,
+            "product_sku": "2759995",
+            "variation_sku": "3990600",
+            "name": "Blue Stripe",
+            "has_parent_sku": true,
+            "image": "https://www.lazysuzy.com/Pier-1/pier1_images/3990600_main.jpg",
+            "link": "/product/3990600",
+            "swatch_image": "https://www.lazysuzy.com/Pier-1/pier1_images/3990600_main.jpg"
+          },
+          {
+            "time_taken": 0.0011279582977294922,
+            "product_sku": "2759995",
+            "variation_sku": "3259724",
+            "name": "Pierformance Charcoal",
+            "has_parent_sku": true,
+            "image": "https://www.lazysuzy.com/Pier-1/pier1_images/3259724_main.jpg",
+            "link": "/product/3259724",
+            "swatch_image": "https://www.lazysuzy.com/Pier-1/pier1_images/3259724_main.jpg"
+          },
+          {
+            "time_taken": 0.0011279582977294922,
+            "product_sku": "2759995",
+            "variation_sku": "3259802",
+            "name": "Pierformance Bark",
+            "has_parent_sku": true,
+            "image": "https://www.lazysuzy.com/Pier-1/pier1_images/3259802_main.jpg",
+            "link": "/product/3259802",
+            "swatch_image": "https://www.lazysuzy.com/Pier-1/pier1_images/3259802_main.jpg"
+          },
+          {
+            "time_taken": 0.0011279582977294922,
+            "product_sku": "2759995",
+            "variation_sku": "3707184",
+            "name": "Gray Buffalo Check",
+            "has_parent_sku": true,
+            "image": "https://www.lazysuzy.com/Pier-1/pier1_images/3707184_main.jpg",
+            "link": "/product/3707184",
+            "swatch_image": "https://www.lazysuzy.com/Pier-1/pier1_images/3707184_main.jpg"
+          },
+          {
+            "time_taken": 0.0011279582977294922,
+            "product_sku": "2759995",
+            "variation_sku": "3282889",
+            "name": "Estrella Fleur",
+            "has_parent_sku": true,
+            "image": "https://www.lazysuzy.com/Pier-1/pier1_images/3282889_main.jpg",
+            "link": "/product/3282889",
+            "swatch_image": "https://www.lazysuzy.com/Pier-1/pier1_images/3282889_main.jpg"
+          },
+          {
+            "time_taken": 0.0011279582977294922,
+            "product_sku": "2759995",
+            "variation_sku": "3182710",
+            "name": "Ivory",
+            "has_parent_sku": true,
+            "image": "https://www.lazysuzy.com/Pier-1/pier1_images/3182710_main.jpg",
+            "link": "/product/3182710",
+            "swatch_image": "https://www.lazysuzy.com/Pier-1/pier1_images/3182710_main.jpg"
+          },
+          {
+            "time_taken": 0.0011279582977294922,
+            "product_sku": "2759995",
+            "variation_sku": "3990613",
+            "name": "Beige Stripe",
+            "has_parent_sku": true,
+            "image": "https://www.lazysuzy.com/Pier-1/pier1_images/3990613_main.jpg",
+            "link": "/product/3990613",
+            "swatch_image": "https://www.lazysuzy.com/Pier-1/pier1_images/3990613_main.jpg"
+          },
+          {
+            "time_taken": 0.0011279582977294922,
+            "product_sku": "2759995",
+            "variation_sku": "3449383",
+            "name": "Pewter",
+            "has_parent_sku": true,
+            "image": "https://www.lazysuzy.com/Pier-1/pier1_images/3449383_main.jpg",
+            "link": "/product/3449383",
+            "swatch_image": "https://www.lazysuzy.com/Pier-1/pier1_images/3449383_main.jpg"
+          },
+          {
+            "time_taken": 0.0011279582977294922,
+            "product_sku": "2759995",
+            "variation_sku": "3281016",
+            "name": "Green",
+            "has_parent_sku": true,
+            "image": "https://www.lazysuzy.com/Pier-1/pier1_images/3281016_main.jpg",
+            "link": "/product/3281016",
+            "swatch_image": "https://www.lazysuzy.com/Pier-1/pier1_images/3281016_main.jpg"
+          },
+          {
+            "time_taken": 0.0011279582977294922,
+            "product_sku": "2759995",
+            "variation_sku": "4127522",
+            "name": "Mist",
+            "has_parent_sku": true,
+            "image": "https://www.lazysuzy.com/Pier-1/pier1_images/4127522_main.jpg",
+            "link": "/product/4127522",
+            "swatch_image": "https://www.lazysuzy.com/Pier-1/pier1_images/4127522_main.jpg"
+          },
+          {
+            "time_taken": 0.0011279582977294922,
+            "product_sku": "2759995",
+            "variation_sku": "2800216",
+            "name": "Cayenne",
+            "has_parent_sku": true,
+            "image": "https://www.lazysuzy.com/Pier-1/pier1_images/2800216_main.jpg",
+            "link": "/product/2800216",
+            "swatch_image": "https://www.lazysuzy.com/Pier-1/pier1_images/2800216_main.jpg"
+          },
+          {
+            "time_taken": 0.0011279582977294922,
+            "product_sku": "2759995",
+            "variation_sku": "4127510",
+            "name": "Plum",
+            "has_parent_sku": true,
+            "image": "https://www.lazysuzy.com/Pier-1/pier1_images/4127510_main.jpg",
+            "link": "/product/4127510",
+            "swatch_image": "https://www.lazysuzy.com/Pier-1/pier1_images/4127510_main.jpg"
+          },
+          {
+            "time_taken": 0.0011279582977294922,
+            "product_sku": "2759995",
+            "variation_sku": "3458265",
+            "name": "Pierformance Ruby",
+            "has_parent_sku": true,
+            "image": "https://www.lazysuzy.com/Pier-1/pier1_images/3458265_main.jpg",
+            "link": "/product/3458265",
+            "swatch_image": "https://www.lazysuzy.com/Pier-1/pier1_images/3458265_main.jpg"
+          }
+        ]
+      },
+      {
+        "id": 2,
+        "sku": "2603518",
+        "is_new": false,
+        "site": "Pier 1",
+        "name": "Ivory Tufted Large Contour Chair Cushion",
+        "product_url": "https://www.pier1.com/calliope-ivory tufted-large-contour-chair-cushion/2603518.html",
+        "product_detail_url": "https://www.lazysuzy.com/product/2603518",
+        "is_price": "50",
+        "was_price": "50",
+        "percent_discount": "0.00",
+        "model_code": "Ivory Calliope",
+        "color": "white",
+        "collection": "Calliope",
+        "condition": "Indoor/Outdoor",
+        "main_image": "https://www.lazysuzy.com/Pier-1/pier1_images/2603518_main.jpg",
+        "reviews": 685,
+        "rating": 4.69,
+        "wishlisted": false,
+        "variations": [
+          {
+            "time_taken": 0.000720977783203125,
+            "product_sku": "2603518",
+            "variation_sku": "2795763",
+            "name": "Indigo Calliope",
+            "has_parent_sku": true,
+            "image": "https://www.lazysuzy.com/Pier-1/pier1_images/2795763_main.jpg",
+            "link": "/product/2795763",
+            "swatch_image": "https://www.lazysuzy.com/Pier-1/pier1_images/2795763_main.jpg"
+          },
+          {
+            "time_taken": 0.000720977783203125,
+            "product_sku": "2603518",
+            "variation_sku": "3158946",
+            "name": "Vibrant Paisley",
+            "has_parent_sku": true,
+            "image": "https://www.lazysuzy.com/Pier-1/pier1_images/3158946_main.jpg",
+            "link": "/product/3158946",
+            "swatch_image": "https://www.lazysuzy.com/Pier-1/pier1_images/3158946_main.jpg"
+          },
+          {
+            "time_taken": 0.000720977783203125,
+            "product_sku": "2603518",
+            "variation_sku": "3162578",
+            "name": "Natural Carmela",
+            "has_parent_sku": true,
+            "image": "https://www.lazysuzy.com/Pier-1/pier1_images/3162578_main.jpg",
+            "link": "/product/3162578",
+            "swatch_image": "https://www.lazysuzy.com/Pier-1/pier1_images/3162578_main.jpg"
+          },
+          {
+            "time_taken": 0.000720977783203125,
+            "product_sku": "2603518",
+            "variation_sku": "3156358",
+            "name": "Cream Calliope",
+            "has_parent_sku": true,
+            "image": "https://www.lazysuzy.com/Pier-1/pier1_images/3156358_main.jpg",
+            "link": "/product/3156358",
+            "swatch_image": "https://www.lazysuzy.com/Pier-1/pier1_images/3156358_main.jpg"
+          },
+          {
+            "time_taken": 0.000720977783203125,
+            "product_sku": "2603518",
+            "variation_sku": "2603678",
+            "name": "Spice Calliope",
+            "has_parent_sku": true,
+            "image": "https://www.lazysuzy.com/Pier-1/pier1_images/2603678_main.jpg",
+            "link": "/product/2603678",
+            "swatch_image": "https://www.lazysuzy.com/Pier-1/pier1_images/2603678_main.jpg"
+          },
+          {
+            "time_taken": 0.000720977783203125,
+            "product_sku": "2603518",
+            "variation_sku": "2603665",
+            "name": "Maui Calliope",
+            "has_parent_sku": true,
+            "image": "https://www.lazysuzy.com/Pier-1/pier1_images/2603665_main.jpg",
+            "link": "/product/2603665",
+            "swatch_image": "https://www.lazysuzy.com/Pier-1/pier1_images/2603665_main.jpg"
+          },
+          {
+            "time_taken": 0.000720977783203125,
+            "product_sku": "2603518",
+            "variation_sku": "2603652",
+            "name": "Moss Calliope",
+            "has_parent_sku": true,
+            "image": "https://www.lazysuzy.com/Pier-1/pier1_images/2603652_main.jpg",
+            "link": "/product/2603652",
+            "swatch_image": "https://www.lazysuzy.com/Pier-1/pier1_images/2603652_main.jpg"
+          },
+          {
+            "time_taken": 0.000720977783203125,
+            "product_sku": "2603518",
+            "variation_sku": "2969257",
+            "name": "Marisela",
+            "has_parent_sku": true,
+            "image": "https://www.lazysuzy.com/Pier-1/pier1_images/2969257_main.jpg",
+            "link": "/product/2969257",
+            "swatch_image": "https://www.lazysuzy.com/Pier-1/pier1_images/2969257_main.jpg"
+          },
+          {
+            "time_taken": 0.000720977783203125,
+            "product_sku": "2603518",
+            "variation_sku": "3268515",
+            "name": "Eva Blue Green",
+            "has_parent_sku": true,
+            "image": "https://www.lazysuzy.com/Pier-1/pier1_images/3268515_main.jpg",
+            "link": "/product/3268515",
+            "swatch_image": "https://www.lazysuzy.com/Pier-1/pier1_images/3268515_main.jpg"
+          },
+          {
+            "time_taken": 0.000720977783203125,
+            "product_sku": "2603518",
+            "variation_sku": "3268073",
+            "name": "Eva Clay",
+            "has_parent_sku": true,
+            "image": "https://www.lazysuzy.com/Pier-1/pier1_images/3268073_main.jpg",
+            "link": "/product/3268073",
+            "swatch_image": "https://www.lazysuzy.com/Pier-1/pier1_images/3268073_main.jpg"
+          }
+        ]
+      },
+      {
+        "id": 2,
+        "sku": "2603505",
+        "is_new": false,
+        "site": "Pier 1",
+        "name": "Ivory Tufted Standard Contour Chair Cushion",
+        "product_url": "https://www.pier1.com/calliope-ivory tufted-standard-contour-chair-cushion/2603505.html",
+        "product_detail_url": "https://www.lazysuzy.com/product/2603505",
+        "is_price": "40",
+        "was_price": "40",
+        "percent_discount": "0.00",
+        "model_code": "Ivory Calliope",
+        "color": "white",
+        "collection": "Calliope",
+        "condition": "Indoor/Outdoor",
+        "main_image": "https://www.lazysuzy.com/Pier-1/pier1_images/2603505_main.jpg",
+        "reviews": 584,
+        "rating": 4.76,
+        "wishlisted": false,
+        "variations": [
+          {
+            "time_taken": 0.000682830810546875,
+            "product_sku": "2603505",
+            "variation_sku": "2603561",
+            "name": "Maui Calliope",
+            "has_parent_sku": true,
+            "image": "https://www.lazysuzy.com/Pier-1/pier1_images/2603561_main.jpg",
+            "link": "/product/2603561",
+            "swatch_image": "https://www.lazysuzy.com/Pier-1/pier1_images/2603561_main.jpg"
+          },
+          {
+            "time_taken": 0.000682830810546875,
+            "product_sku": "2603505",
+            "variation_sku": "2795735",
+            "name": "Indigo Calliope",
+            "has_parent_sku": true,
+            "image": "https://www.lazysuzy.com/Pier-1/pier1_images/2795735_main.jpg",
+            "link": "/product/2795735",
+            "swatch_image": "https://www.lazysuzy.com/Pier-1/pier1_images/2795735_main.jpg"
+          },
+          {
+            "time_taken": 0.000682830810546875,
+            "product_sku": "2603505",
+            "variation_sku": "2603546",
+            "name": "Moss Calliope",
+            "has_parent_sku": true,
+            "image": "https://www.lazysuzy.com/Pier-1/pier1_images/2603546_main.jpg",
+            "link": "/product/2603546",
+            "swatch_image": "https://www.lazysuzy.com/Pier-1/pier1_images/2603546_main.jpg"
+          },
+          {
+            "time_taken": 0.000682830810546875,
+            "product_sku": "2603505",
+            "variation_sku": "2913917",
+            "name": "Natural Carmela",
+            "has_parent_sku": true,
+            "image": "https://www.lazysuzy.com/Pier-1/pier1_images/2913917_main.jpg",
+            "link": "/product/2913917",
+            "swatch_image": "https://www.lazysuzy.com/Pier-1/pier1_images/2913917_main.jpg"
+          },
+          {
+            "time_taken": 0.000682830810546875,
+            "product_sku": "2603505",
+            "variation_sku": "3268530",
+            "name": "Eva Blue",
+            "has_parent_sku": true,
+            "image": "https://www.lazysuzy.com/Pier-1/pier1_images/3268530_main.jpg",
+            "link": "/product/3268530",
+            "swatch_image": "https://www.lazysuzy.com/Pier-1/pier1_images/3268530_main.jpg"
+          },
+          {
+            "time_taken": 0.000682830810546875,
+            "product_sku": "2603505",
+            "variation_sku": "3156267",
+            "name": "Cream Calliope",
+            "has_parent_sku": true,
+            "image": "https://www.lazysuzy.com/Pier-1/pier1_images/3156267_main.jpg",
+            "link": "/product/3156267",
+            "swatch_image": "https://www.lazysuzy.com/Pier-1/pier1_images/3156267_main.jpg"
+          },
+          {
+            "time_taken": 0.000682830810546875,
+            "product_sku": "2603505",
+            "variation_sku": "3268058",
+            "name": "Eva Clay",
+            "has_parent_sku": true,
+            "image": "https://www.lazysuzy.com/Pier-1/pier1_images/3268058_main.jpg",
+            "link": "/product/3268058",
+            "swatch_image": "https://www.lazysuzy.com/Pier-1/pier1_images/3268058_main.jpg"
+          },
+          {
+            "time_taken": 0.000682830810546875,
+            "product_sku": "2603505",
+            "variation_sku": "3256276",
+            "name": "Carmela Sunset Stripe",
+            "has_parent_sku": true,
+            "image": "https://www.lazysuzy.com/Pier-1/pier1_images/3256276_main.jpg",
+            "link": "/product/3256276",
+            "swatch_image": "https://www.lazysuzy.com/Pier-1/pier1_images/3256276_main.jpg"
+          },
+          {
+            "time_taken": 0.000682830810546875,
+            "product_sku": "2603505",
+            "variation_sku": "2603574",
+            "name": "Spice Calliope",
+            "has_parent_sku": true,
+            "image": "https://www.lazysuzy.com/Pier-1/pier1_images/2603574_main.jpg",
+            "link": "/product/2603574",
+            "swatch_image": "https://www.lazysuzy.com/Pier-1/pier1_images/2603574_main.jpg"
+          }
+        ]
+      },
+      {
+        "id": 2,
+        "sku": "2739505",
+        "is_new": false,
+        "site": "Pier 1",
+        "name": "Indigo Blue Floral Armchair",
+        "product_url": "https://www.pier1.com/chas-indigo-blue-floral-armchair/2739505.html",
+        "product_detail_url": "https://www.lazysuzy.com/product/2739505",
+        "is_price": "299",
+        "was_price": "499.95",
+        "percent_discount": "40.19",
+        "model_code": "Indigo Meadow",
+        "color": "blue",
+        "collection": "Chas",
+        "condition": "",
+        "main_image": "https://www.lazysuzy.com/Pier-1/pier1_images/2739505_main.jpg",
+        "reviews": 1078,
+        "rating": 4.73,
+        "wishlisted": false,
+        "variations": [
+          {
+            "time_taken": 0.001046895980834961,
+            "product_sku": "2739505",
+            "variation_sku": "2759995",
+            "name": "Navy",
+            "has_parent_sku": true,
+            "image": "https://www.lazysuzy.com/Pier-1/pier1_images/2759995_main.jpg",
+            "link": "/product/2759995",
+            "swatch_image": "https://www.lazysuzy.com/Pier-1/pier1_images/2759995_main.jpg"
+          },
+          {
+            "time_taken": 0.001046895980834961,
+            "product_sku": "2739505",
+            "variation_sku": "2536461",
+            "name": "Coffee",
+            "has_parent_sku": true,
+            "image": "https://www.lazysuzy.com/Pier-1/pier1_images/2536461_main.jpg",
+            "link": "/product/2536461",
+            "swatch_image": "https://www.lazysuzy.com/Pier-1/pier1_images/2536461_main.jpg"
+          },
+          {
+            "time_taken": 0.001046895980834961,
+            "product_sku": "2739505",
+            "variation_sku": "2443389",
+            "name": "Blue Seersucker",
+            "has_parent_sku": true,
+            "image": "https://www.lazysuzy.com/Pier-1/pier1_images/2443389_main.jpg",
+            "link": "/product/2443389",
+            "swatch_image": "https://www.lazysuzy.com/Pier-1/pier1_images/2443389_main.jpg"
+          },
+          {
+            "time_taken": 0.001046895980834961,
+            "product_sku": "2739505",
+            "variation_sku": "2655501",
+            "name": "Blue Meadow",
+            "has_parent_sku": true,
+            "image": "https://www.lazysuzy.com/Pier-1/pier1_images/2655501_main.jpg",
+            "link": "/product/2655501",
+            "swatch_image": "https://www.lazysuzy.com/Pier-1/pier1_images/2655501_main.jpg"
+          },
+          {
+            "time_taken": 0.001046895980834961,
+            "product_sku": "2739505",
+            "variation_sku": "3478541",
+            "name": "Black Buffalo Check",
+            "has_parent_sku": true,
+            "image": "https://www.lazysuzy.com/Pier-1/pier1_images/3478541_main.jpg",
+            "link": "/product/3478541",
+            "swatch_image": "https://www.lazysuzy.com/Pier-1/pier1_images/3478541_main.jpg"
+          },
+          {
+            "time_taken": 0.001046895980834961,
+            "product_sku": "2739505",
+            "variation_sku": "3201222",
+            "name": "Flax",
+            "has_parent_sku": true,
+            "image": "https://www.lazysuzy.com/Pier-1/pier1_images/3201222_main.jpg",
+            "link": "/product/3201222",
+            "swatch_image": "https://www.lazysuzy.com/Pier-1/pier1_images/3201222_main.jpg"
+          },
+          {
+            "time_taken": 0.001046895980834961,
+            "product_sku": "2739505",
+            "variation_sku": "4127472",
+            "name": "Eucalyptus",
+            "has_parent_sku": true,
+            "image": "https://www.lazysuzy.com/Pier-1/pier1_images/4127472_main.jpg",
+            "link": "/product/4127472",
+            "swatch_image": "https://www.lazysuzy.com/Pier-1/pier1_images/4127472_main.jpg"
+          },
+          {
+            "time_taken": 0.001046895980834961,
+            "product_sku": "2739505",
+            "variation_sku": "2800179",
+            "name": "Olive",
+            "has_parent_sku": true,
+            "image": "https://www.lazysuzy.com/Pier-1/pier1_images/2800179_main.jpg",
+            "link": "/product/2800179",
+            "swatch_image": "https://www.lazysuzy.com/Pier-1/pier1_images/2800179_main.jpg"
+          },
+          {
+            "time_taken": 0.001046895980834961,
+            "product_sku": "2739505",
+            "variation_sku": "3134254",
+            "name": "Zinc Gray",
+            "has_parent_sku": true,
+            "image": "https://www.lazysuzy.com/Pier-1/pier1_images/3134254_main.jpg",
+            "link": "/product/3134254",
+            "swatch_image": "https://www.lazysuzy.com/Pier-1/pier1_images/3134254_main.jpg"
+          },
+          {
+            "time_taken": 0.001046895980834961,
+            "product_sku": "2739505",
+            "variation_sku": "3001806",
+            "name": "Flax Sky",
+            "has_parent_sku": true,
+            "image": "https://www.lazysuzy.com/Pier-1/pier1_images/3001806_main.jpg",
+            "link": "/product/3001806",
+            "swatch_image": "https://www.lazysuzy.com/Pier-1/pier1_images/3001806_main.jpg"
+          },
+          {
+            "time_taken": 0.001046895980834961,
+            "product_sku": "2739505",
+            "variation_sku": "3990600",
+            "name": "Blue Stripe",
+            "has_parent_sku": true,
+            "image": "https://www.lazysuzy.com/Pier-1/pier1_images/3990600_main.jpg",
+            "link": "/product/3990600",
+            "swatch_image": "https://www.lazysuzy.com/Pier-1/pier1_images/3990600_main.jpg"
+          },
+          {
+            "time_taken": 0.001046895980834961,
+            "product_sku": "2739505",
+            "variation_sku": "3259724",
+            "name": "Pierformance Charcoal",
+            "has_parent_sku": true,
+            "image": "https://www.lazysuzy.com/Pier-1/pier1_images/3259724_main.jpg",
+            "link": "/product/3259724",
+            "swatch_image": "https://www.lazysuzy.com/Pier-1/pier1_images/3259724_main.jpg"
+          },
+          {
+            "time_taken": 0.001046895980834961,
+            "product_sku": "2739505",
+            "variation_sku": "3259802",
+            "name": "Pierformance Bark",
+            "has_parent_sku": true,
+            "image": "https://www.lazysuzy.com/Pier-1/pier1_images/3259802_main.jpg",
+            "link": "/product/3259802",
+            "swatch_image": "https://www.lazysuzy.com/Pier-1/pier1_images/3259802_main.jpg"
+          },
+          {
+            "time_taken": 0.001046895980834961,
+            "product_sku": "2739505",
+            "variation_sku": "3707184",
+            "name": "Gray Buffalo Check",
+            "has_parent_sku": true,
+            "image": "https://www.lazysuzy.com/Pier-1/pier1_images/3707184_main.jpg",
+            "link": "/product/3707184",
+            "swatch_image": "https://www.lazysuzy.com/Pier-1/pier1_images/3707184_main.jpg"
+          },
+          {
+            "time_taken": 0.001046895980834961,
+            "product_sku": "2739505",
+            "variation_sku": "3282889",
+            "name": "Estrella Fleur",
+            "has_parent_sku": true,
+            "image": "https://www.lazysuzy.com/Pier-1/pier1_images/3282889_main.jpg",
+            "link": "/product/3282889",
+            "swatch_image": "https://www.lazysuzy.com/Pier-1/pier1_images/3282889_main.jpg"
+          },
+          {
+            "time_taken": 0.001046895980834961,
+            "product_sku": "2739505",
+            "variation_sku": "3182710",
+            "name": "Ivory",
+            "has_parent_sku": true,
+            "image": "https://www.lazysuzy.com/Pier-1/pier1_images/3182710_main.jpg",
+            "link": "/product/3182710",
+            "swatch_image": "https://www.lazysuzy.com/Pier-1/pier1_images/3182710_main.jpg"
+          },
+          {
+            "time_taken": 0.001046895980834961,
+            "product_sku": "2739505",
+            "variation_sku": "3990613",
+            "name": "Beige Stripe",
+            "has_parent_sku": true,
+            "image": "https://www.lazysuzy.com/Pier-1/pier1_images/3990613_main.jpg",
+            "link": "/product/3990613",
+            "swatch_image": "https://www.lazysuzy.com/Pier-1/pier1_images/3990613_main.jpg"
+          },
+          {
+            "time_taken": 0.001046895980834961,
+            "product_sku": "2739505",
+            "variation_sku": "3449383",
+            "name": "Pewter",
+            "has_parent_sku": true,
+            "image": "https://www.lazysuzy.com/Pier-1/pier1_images/3449383_main.jpg",
+            "link": "/product/3449383",
+            "swatch_image": "https://www.lazysuzy.com/Pier-1/pier1_images/3449383_main.jpg"
+          },
+          {
+            "time_taken": 0.001046895980834961,
+            "product_sku": "2739505",
+            "variation_sku": "3281016",
+            "name": "Green",
+            "has_parent_sku": true,
+            "image": "https://www.lazysuzy.com/Pier-1/pier1_images/3281016_main.jpg",
+            "link": "/product/3281016",
+            "swatch_image": "https://www.lazysuzy.com/Pier-1/pier1_images/3281016_main.jpg"
+          },
+          {
+            "time_taken": 0.001046895980834961,
+            "product_sku": "2739505",
+            "variation_sku": "4127522",
+            "name": "Mist",
+            "has_parent_sku": true,
+            "image": "https://www.lazysuzy.com/Pier-1/pier1_images/4127522_main.jpg",
+            "link": "/product/4127522",
+            "swatch_image": "https://www.lazysuzy.com/Pier-1/pier1_images/4127522_main.jpg"
+          },
+          {
+            "time_taken": 0.001046895980834961,
+            "product_sku": "2739505",
+            "variation_sku": "2800216",
+            "name": "Cayenne",
+            "has_parent_sku": true,
+            "image": "https://www.lazysuzy.com/Pier-1/pier1_images/2800216_main.jpg",
+            "link": "/product/2800216",
+            "swatch_image": "https://www.lazysuzy.com/Pier-1/pier1_images/2800216_main.jpg"
+          },
+          {
+            "time_taken": 0.001046895980834961,
+            "product_sku": "2739505",
+            "variation_sku": "4127510",
+            "name": "Plum",
+            "has_parent_sku": true,
+            "image": "https://www.lazysuzy.com/Pier-1/pier1_images/4127510_main.jpg",
+            "link": "/product/4127510",
+            "swatch_image": "https://www.lazysuzy.com/Pier-1/pier1_images/4127510_main.jpg"
+          },
+          {
+            "time_taken": 0.001046895980834961,
+            "product_sku": "2739505",
+            "variation_sku": "3458265",
+            "name": "Pierformance Ruby",
+            "has_parent_sku": true,
+            "image": "https://www.lazysuzy.com/Pier-1/pier1_images/3458265_main.jpg",
+            "link": "/product/3458265",
+            "swatch_image": "https://www.lazysuzy.com/Pier-1/pier1_images/3458265_main.jpg"
+          }
+        ]
+      },
+      {
+        "id": 2,
+        "sku": "2461640",
+        "is_new": false,
+        "site": "Pier 1",
+        "name": "Fuzzy Sand Cushion",
+        "product_url": "https://www.pier1.com/2461640.html",
+        "product_detail_url": "https://www.lazysuzy.com/product/2461640",
+        "is_price": "90",
+        "was_price": "90",
+        "percent_discount": "0.00",
+        "model_code": "Sand Fuzzy",
+        "color": "tan",
+        "collection": "Papasan",
+        "condition": "More Colors",
+        "main_image": "https://www.lazysuzy.com/Pier-1/pier1_images/2461640_main.jpg",
+        "reviews": 730,
+        "rating": 4.51,
+        "wishlisted": false,
+        "variations": [
+          {
+            "time_taken": 0.0005819797515869141,
+            "product_sku": "2461640",
+            "variation_sku": "2451595",
+            "name": "Teal Plush",
+            "has_parent_sku": true,
+            "image": "https://www.lazysuzy.com/Pier-1/pier1_images/2451595_main.jpg",
+            "link": "/product/2451595",
+            "swatch_image": "https://www.lazysuzy.com/Pier-1/pier1_images/2451595_main.jpg"
+          },
+          {
+            "time_taken": 0.0005819797515869141,
+            "product_sku": "2461640",
+            "variation_sku": "2886470",
+            "name": "Red Plush",
+            "has_parent_sku": true,
+            "image": "https://www.lazysuzy.com/Pier-1/pier1_images/2886470_main.jpg",
+            "link": "/product/2886470",
+            "swatch_image": "https://www.lazysuzy.com/Pier-1/pier1_images/2886470_main.jpg"
+          },
+          {
+            "time_taken": 0.0005819797515869141,
+            "product_sku": "2461640",
+            "variation_sku": "2630420",
+            "name": "Khaki Plush",
+            "has_parent_sku": true,
+            "image": "https://www.lazysuzy.com/Pier-1/pier1_images/2630420_main.jpg",
+            "link": "/product/2630420",
+            "swatch_image": "https://www.lazysuzy.com/Pier-1/pier1_images/2630420_main.jpg"
+          },
+          {
+            "time_taken": 0.0005819797515869141,
+            "product_sku": "2461640",
+            "variation_sku": "3158987",
+            "name": "Vibrant Paisley",
+            "has_parent_sku": true,
+            "image": "https://www.lazysuzy.com/Pier-1/pier1_images/3158987_main.jpg",
+            "link": "/product/3158987",
+            "swatch_image": "https://www.lazysuzy.com/Pier-1/pier1_images/3158987_main.jpg"
+          },
+          {
+            "time_taken": 0.0005819797515869141,
+            "product_sku": "2461640",
+            "variation_sku": "3217200",
+            "name": "Mink",
+            "has_parent_sku": true,
+            "image": "https://www.lazysuzy.com/Pier-1/pier1_images/3217200_main.jpg",
+            "link": "/product/3217200",
+            "swatch_image": "https://www.lazysuzy.com/Pier-1/pier1_images/3217200_main.jpg"
+          },
+          {
+            "time_taken": 0.0005819797515869141,
+            "product_sku": "2461640",
+            "variation_sku": "2423598",
+            "name": "Chocolate Fuzzy",
+            "has_parent_sku": true,
+            "image": "https://www.lazysuzy.com/Pier-1/pier1_images/2423598_main.jpg",
+            "link": "/product/2423598",
+            "swatch_image": "https://www.lazysuzy.com/Pier-1/pier1_images/2423598_main.jpg"
+          },
+          {
+            "time_taken": 0.0005819797515869141,
+            "product_sku": "2461640",
+            "variation_sku": "2774586",
+            "name": "Charcoal Fuzzy",
+            "has_parent_sku": true,
+            "image": "https://www.lazysuzy.com/Pier-1/pier1_images/2774586_main.jpg",
+            "link": "/product/2774586",
+            "swatch_image": "https://www.lazysuzy.com/Pier-1/pier1_images/2774586_main.jpg"
+          }
+        ]
+      },
+      {
+        "id": 2,
+        "sku": "3019325",
+        "is_new": false,
+        "site": "Pier 1",
+        "name": "Indigo Dining Chair Cushion",
+        "product_url": "https://www.pier1.com/calliope-indigo dining-chair-cushion/3019325.html",
+        "product_detail_url": "https://www.lazysuzy.com/product/3019325",
+        "is_price": "29.99",
+        "was_price": "29.99",
+        "percent_discount": "0.00",
+        "model_code": "Indigo Calliope",
+        "color": "blue",
+        "collection": "Calliope",
+        "condition": "Indoor/Outdoor",
+        "main_image": "https://www.lazysuzy.com/Pier-1/pier1_images/3019325_main.jpg",
+        "reviews": 542,
+        "rating": 4.65,
+        "wishlisted": false,
+        "variations": [
+          {
+            "time_taken": 0.0006651878356933594,
+            "product_sku": "3019325",
+            "variation_sku": "2652564",
+            "name": "Ivory Calliope",
+            "has_parent_sku": true,
+            "image": "https://www.lazysuzy.com/Pier-1/pier1_images/2652564_main.jpg",
+            "link": "/product/2652564",
+            "swatch_image": "https://www.lazysuzy.com/Pier-1/pier1_images/2652564_main.jpg"
+          },
+          {
+            "time_taken": 0.0006651878356933594,
+            "product_sku": "3019325",
+            "variation_sku": "3197248",
+            "name": "Carmela Sunset Stripe",
+            "has_parent_sku": true,
+            "image": "https://www.lazysuzy.com/Pier-1/pier1_images/3197248_main.jpg",
+            "link": "/product/3197248",
+            "swatch_image": "https://www.lazysuzy.com/Pier-1/pier1_images/3197248_main.jpg"
+          },
+          {
+            "time_taken": 0.0006651878356933594,
+            "product_sku": "3019325",
+            "variation_sku": "3268493",
+            "name": "Eva Blue Green",
+            "has_parent_sku": true,
+            "image": "https://www.lazysuzy.com/Pier-1/pier1_images/3268493_main.jpg",
+            "link": "/product/3268493",
+            "swatch_image": "https://www.lazysuzy.com/Pier-1/pier1_images/3268493_main.jpg"
+          },
+          {
+            "time_taken": 0.0006651878356933594,
+            "product_sku": "3019325",
+            "variation_sku": "3303284",
+            "name": "Maui Calliope",
+            "has_parent_sku": true,
+            "image": "https://www.lazysuzy.com/Pier-1/pier1_images/3303284_main.jpg",
+            "link": "/product/3303284",
+            "swatch_image": "https://www.lazysuzy.com/Pier-1/pier1_images/3303284_main.jpg"
+          },
+          {
+            "time_taken": 0.0006651878356933594,
+            "product_sku": "3019325",
+            "variation_sku": "3256787",
+            "name": "Marisela",
+            "has_parent_sku": true,
+            "image": "https://www.lazysuzy.com/Pier-1/pier1_images/3256787_main.jpg",
+            "link": "/product/3256787",
+            "swatch_image": "https://www.lazysuzy.com/Pier-1/pier1_images/3256787_main.jpg"
+          },
+          {
+            "time_taken": 0.0006651878356933594,
+            "product_sku": "3019325",
+            "variation_sku": "3268099",
+            "name": "Eva Clay",
+            "has_parent_sku": true,
+            "image": "https://www.lazysuzy.com/Pier-1/pier1_images/3268099_main.jpg",
+            "link": "/product/3268099",
+            "swatch_image": "https://www.lazysuzy.com/Pier-1/pier1_images/3268099_main.jpg"
+          },
+          {
+            "time_taken": 0.0006651878356933594,
+            "product_sku": "3019325",
+            "variation_sku": "3303269",
+            "name": "Spice Calliope",
+            "has_parent_sku": true,
+            "image": "https://www.lazysuzy.com/Pier-1/pier1_images/3303269_main.jpg",
+            "link": "/product/3303269",
+            "swatch_image": "https://www.lazysuzy.com/Pier-1/pier1_images/3303269_main.jpg"
+          },
+          {
+            "time_taken": 0.0006651878356933594,
+            "product_sku": "3019325",
+            "variation_sku": "2913895",
+            "name": "Natural Carmela",
+            "has_parent_sku": true,
+            "image": "https://www.lazysuzy.com/Pier-1/pier1_images/2913895_main.jpg",
+            "link": "/product/2913895",
+            "swatch_image": "https://www.lazysuzy.com/Pier-1/pier1_images/2913895_main.jpg"
+          },
+          {
+            "time_taken": 0.0006651878356933594,
+            "product_sku": "3019325",
+            "variation_sku": "3303271",
+            "name": "Moss Calliope",
+            "has_parent_sku": true,
+            "image": "https://www.lazysuzy.com/Pier-1/pier1_images/3303271_main.jpg",
+            "link": "/product/3303271",
+            "swatch_image": "https://www.lazysuzy.com/Pier-1/pier1_images/3303271_main.jpg"
+          },
+          {
+            "time_taken": 0.0006651878356933594,
+            "product_sku": "3019325",
+            "variation_sku": "3303306",
+            "name": "Cream Calliope",
+            "has_parent_sku": true,
+            "image": "https://www.lazysuzy.com/Pier-1/pier1_images/3303306_main.jpg",
+            "link": "/product/3303306",
+            "swatch_image": "https://www.lazysuzy.com/Pier-1/pier1_images/3303306_main.jpg"
+          }
+        ]
+      },
+      {
+        "id": 2,
+        "sku": "2536461",
+        "is_new": false,
+        "site": "Pier 1",
+        "name": "Coffee Brown & Tapestry Armchair",
+        "product_url": "https://www.pier1.com/chas-coffee-brown-&-tapestry-armchair/2536461.html",
+        "product_detail_url": "https://www.lazysuzy.com/product/2536461",
+        "is_price": "299",
+        "was_price": "549.95",
+        "percent_discount": "45.63",
+        "model_code": "Coffee",
+        "color": "brown",
+        "collection": "Chas",
+        "condition": "",
+        "main_image": "https://www.lazysuzy.com/Pier-1/pier1_images/2536461_main.jpg",
+        "reviews": 1078,
+        "rating": 4.73,
+        "wishlisted": false,
+        "variations": [
+          {
+            "time_taken": 0.0009770393371582031,
+            "product_sku": "2536461",
+            "variation_sku": "2759995",
+            "name": "Navy",
+            "has_parent_sku": true,
+            "image": "https://www.lazysuzy.com/Pier-1/pier1_images/2759995_main.jpg",
+            "link": "/product/2759995",
+            "swatch_image": "https://www.lazysuzy.com/Pier-1/pier1_images/2759995_main.jpg"
+          },
+          {
+            "time_taken": 0.0009770393371582031,
+            "product_sku": "2536461",
+            "variation_sku": "2739505",
+            "name": "Indigo Meadow",
+            "has_parent_sku": true,
+            "image": "https://www.lazysuzy.com/Pier-1/pier1_images/2739505_main.jpg",
+            "link": "/product/2739505",
+            "swatch_image": "https://www.lazysuzy.com/Pier-1/pier1_images/2739505_main.jpg"
+          },
+          {
+            "time_taken": 0.0009770393371582031,
+            "product_sku": "2536461",
+            "variation_sku": "2443389",
+            "name": "Blue Seersucker",
+            "has_parent_sku": true,
+            "image": "https://www.lazysuzy.com/Pier-1/pier1_images/2443389_main.jpg",
+            "link": "/product/2443389",
+            "swatch_image": "https://www.lazysuzy.com/Pier-1/pier1_images/2443389_main.jpg"
+          },
+          {
+            "time_taken": 0.0009770393371582031,
+            "product_sku": "2536461",
+            "variation_sku": "2655501",
+            "name": "Blue Meadow",
+            "has_parent_sku": true,
+            "image": "https://www.lazysuzy.com/Pier-1/pier1_images/2655501_main.jpg",
+            "link": "/product/2655501",
+            "swatch_image": "https://www.lazysuzy.com/Pier-1/pier1_images/2655501_main.jpg"
+          },
+          {
+            "time_taken": 0.0009770393371582031,
+            "product_sku": "2536461",
+            "variation_sku": "3478541",
+            "name": "Black Buffalo Check",
+            "has_parent_sku": true,
+            "image": "https://www.lazysuzy.com/Pier-1/pier1_images/3478541_main.jpg",
+            "link": "/product/3478541",
+            "swatch_image": "https://www.lazysuzy.com/Pier-1/pier1_images/3478541_main.jpg"
+          },
+          {
+            "time_taken": 0.0009770393371582031,
+            "product_sku": "2536461",
+            "variation_sku": "3201222",
+            "name": "Flax",
+            "has_parent_sku": true,
+            "image": "https://www.lazysuzy.com/Pier-1/pier1_images/3201222_main.jpg",
+            "link": "/product/3201222",
+            "swatch_image": "https://www.lazysuzy.com/Pier-1/pier1_images/3201222_main.jpg"
+          },
+          {
+            "time_taken": 0.0009770393371582031,
+            "product_sku": "2536461",
+            "variation_sku": "4127472",
+            "name": "Eucalyptus",
+            "has_parent_sku": true,
+            "image": "https://www.lazysuzy.com/Pier-1/pier1_images/4127472_main.jpg",
+            "link": "/product/4127472",
+            "swatch_image": "https://www.lazysuzy.com/Pier-1/pier1_images/4127472_main.jpg"
+          },
+          {
+            "time_taken": 0.0009770393371582031,
+            "product_sku": "2536461",
+            "variation_sku": "2800179",
+            "name": "Olive",
+            "has_parent_sku": true,
+            "image": "https://www.lazysuzy.com/Pier-1/pier1_images/2800179_main.jpg",
+            "link": "/product/2800179",
+            "swatch_image": "https://www.lazysuzy.com/Pier-1/pier1_images/2800179_main.jpg"
+          },
+          {
+            "time_taken": 0.0009770393371582031,
+            "product_sku": "2536461",
+            "variation_sku": "3134254",
+            "name": "Zinc Gray",
+            "has_parent_sku": true,
+            "image": "https://www.lazysuzy.com/Pier-1/pier1_images/3134254_main.jpg",
+            "link": "/product/3134254",
+            "swatch_image": "https://www.lazysuzy.com/Pier-1/pier1_images/3134254_main.jpg"
+          },
+          {
+            "time_taken": 0.0009770393371582031,
+            "product_sku": "2536461",
+            "variation_sku": "3001806",
+            "name": "Flax Sky",
+            "has_parent_sku": true,
+            "image": "https://www.lazysuzy.com/Pier-1/pier1_images/3001806_main.jpg",
+            "link": "/product/3001806",
+            "swatch_image": "https://www.lazysuzy.com/Pier-1/pier1_images/3001806_main.jpg"
+          },
+          {
+            "time_taken": 0.0009770393371582031,
+            "product_sku": "2536461",
+            "variation_sku": "3990600",
+            "name": "Blue Stripe",
+            "has_parent_sku": true,
+            "image": "https://www.lazysuzy.com/Pier-1/pier1_images/3990600_main.jpg",
+            "link": "/product/3990600",
+            "swatch_image": "https://www.lazysuzy.com/Pier-1/pier1_images/3990600_main.jpg"
+          },
+          {
+            "time_taken": 0.0009770393371582031,
+            "product_sku": "2536461",
+            "variation_sku": "3259724",
+            "name": "Pierformance Charcoal",
+            "has_parent_sku": true,
+            "image": "https://www.lazysuzy.com/Pier-1/pier1_images/3259724_main.jpg",
+            "link": "/product/3259724",
+            "swatch_image": "https://www.lazysuzy.com/Pier-1/pier1_images/3259724_main.jpg"
+          },
+          {
+            "time_taken": 0.0009770393371582031,
+            "product_sku": "2536461",
+            "variation_sku": "3259802",
+            "name": "Pierformance Bark",
+            "has_parent_sku": true,
+            "image": "https://www.lazysuzy.com/Pier-1/pier1_images/3259802_main.jpg",
+            "link": "/product/3259802",
+            "swatch_image": "https://www.lazysuzy.com/Pier-1/pier1_images/3259802_main.jpg"
+          },
+          {
+            "time_taken": 0.0009770393371582031,
+            "product_sku": "2536461",
+            "variation_sku": "3707184",
+            "name": "Gray Buffalo Check",
+            "has_parent_sku": true,
+            "image": "https://www.lazysuzy.com/Pier-1/pier1_images/3707184_main.jpg",
+            "link": "/product/3707184",
+            "swatch_image": "https://www.lazysuzy.com/Pier-1/pier1_images/3707184_main.jpg"
+          },
+          {
+            "time_taken": 0.0009770393371582031,
+            "product_sku": "2536461",
+            "variation_sku": "3282889",
+            "name": "Estrella Fleur",
+            "has_parent_sku": true,
+            "image": "https://www.lazysuzy.com/Pier-1/pier1_images/3282889_main.jpg",
+            "link": "/product/3282889",
+            "swatch_image": "https://www.lazysuzy.com/Pier-1/pier1_images/3282889_main.jpg"
+          },
+          {
+            "time_taken": 0.0009770393371582031,
+            "product_sku": "2536461",
+            "variation_sku": "3182710",
+            "name": "Ivory",
+            "has_parent_sku": true,
+            "image": "https://www.lazysuzy.com/Pier-1/pier1_images/3182710_main.jpg",
+            "link": "/product/3182710",
+            "swatch_image": "https://www.lazysuzy.com/Pier-1/pier1_images/3182710_main.jpg"
+          },
+          {
+            "time_taken": 0.0009770393371582031,
+            "product_sku": "2536461",
+            "variation_sku": "3990613",
+            "name": "Beige Stripe",
+            "has_parent_sku": true,
+            "image": "https://www.lazysuzy.com/Pier-1/pier1_images/3990613_main.jpg",
+            "link": "/product/3990613",
+            "swatch_image": "https://www.lazysuzy.com/Pier-1/pier1_images/3990613_main.jpg"
+          },
+          {
+            "time_taken": 0.0009770393371582031,
+            "product_sku": "2536461",
+            "variation_sku": "3449383",
+            "name": "Pewter",
+            "has_parent_sku": true,
+            "image": "https://www.lazysuzy.com/Pier-1/pier1_images/3449383_main.jpg",
+            "link": "/product/3449383",
+            "swatch_image": "https://www.lazysuzy.com/Pier-1/pier1_images/3449383_main.jpg"
+          },
+          {
+            "time_taken": 0.0009770393371582031,
+            "product_sku": "2536461",
+            "variation_sku": "3281016",
+            "name": "Green",
+            "has_parent_sku": true,
+            "image": "https://www.lazysuzy.com/Pier-1/pier1_images/3281016_main.jpg",
+            "link": "/product/3281016",
+            "swatch_image": "https://www.lazysuzy.com/Pier-1/pier1_images/3281016_main.jpg"
+          },
+          {
+            "time_taken": 0.0009770393371582031,
+            "product_sku": "2536461",
+            "variation_sku": "4127522",
+            "name": "Mist",
+            "has_parent_sku": true,
+            "image": "https://www.lazysuzy.com/Pier-1/pier1_images/4127522_main.jpg",
+            "link": "/product/4127522",
+            "swatch_image": "https://www.lazysuzy.com/Pier-1/pier1_images/4127522_main.jpg"
+          },
+          {
+            "time_taken": 0.0009770393371582031,
+            "product_sku": "2536461",
+            "variation_sku": "2800216",
+            "name": "Cayenne",
+            "has_parent_sku": true,
+            "image": "https://www.lazysuzy.com/Pier-1/pier1_images/2800216_main.jpg",
+            "link": "/product/2800216",
+            "swatch_image": "https://www.lazysuzy.com/Pier-1/pier1_images/2800216_main.jpg"
+          },
+          {
+            "time_taken": 0.0009770393371582031,
+            "product_sku": "2536461",
+            "variation_sku": "4127510",
+            "name": "Plum",
+            "has_parent_sku": true,
+            "image": "https://www.lazysuzy.com/Pier-1/pier1_images/4127510_main.jpg",
+            "link": "/product/4127510",
+            "swatch_image": "https://www.lazysuzy.com/Pier-1/pier1_images/4127510_main.jpg"
+          },
+          {
+            "time_taken": 0.0009770393371582031,
+            "product_sku": "2536461",
+            "variation_sku": "3458265",
+            "name": "Pierformance Ruby",
+            "has_parent_sku": true,
+            "image": "https://www.lazysuzy.com/Pier-1/pier1_images/3458265_main.jpg",
+            "link": "/product/3458265",
+            "swatch_image": "https://www.lazysuzy.com/Pier-1/pier1_images/3458265_main.jpg"
+          }
+        ]
+      },
+      {
+        "id": 2,
+        "sku": "2732061",
+        "is_new": false,
+        "site": "Pier 1",
+        "name": "Linen Dining Chair with Black Espresso Wood",
+        "product_url": "https://www.pier1.com/corinne-linen-dining-chair-with-black-espresso-wood/2732061.html",
+        "product_detail_url": "https://www.lazysuzy.com/product/2732061",
+        "is_price": "249.99",
+        "was_price": "249.99",
+        "percent_discount": "0.00",
+        "model_code": "Linen",
+        "color": "natural",
+        "collection": "Corinne",
+        "condition": "Limited Quantity",
+        "main_image": "https://www.lazysuzy.com/Pier-1/pier1_images/2732061_main.jpg",
+        "reviews": 436,
+        "rating": 4.68,
+        "wishlisted": false,
+        "variations": [
+          {
+            "time_taken": 0.0008029937744140625,
+            "product_sku": "2732061",
+            "variation_sku": "3195511",
+            "name": "Dolce Blue",
+            "has_parent_sku": true,
+            "image": "https://www.lazysuzy.com/Pier-1/pier1_images/3195511_main.jpg",
+            "link": "/product/3195511",
+            "swatch_image": "https://www.lazysuzy.com/Pier-1/pier1_images/3195511_main.jpg"
+          },
+          {
+            "time_taken": 0.0008029937744140625,
+            "product_sku": "2732061",
+            "variation_sku": "2837108",
+            "name": "Ivory",
+            "has_parent_sku": true,
+            "image": "https://www.lazysuzy.com/Pier-1/pier1_images/2837108_main.jpg",
+            "link": "/product/2837108",
+            "swatch_image": "https://www.lazysuzy.com/Pier-1/pier1_images/2837108_main.jpg"
+          },
+          {
+            "time_taken": 0.0008029937744140625,
+            "product_sku": "2732061",
+            "variation_sku": "3052695",
+            "name": "Charcoal",
+            "has_parent_sku": true,
+            "image": "https://www.lazysuzy.com/Pier-1/pier1_images/3052695_main.jpg",
+            "link": "/product/3052695",
+            "swatch_image": "https://www.lazysuzy.com/Pier-1/pier1_images/3052695_main.jpg"
+          },
+          {
+            "time_taken": 0.0008029937744140625,
+            "product_sku": "2732061",
+            "variation_sku": "4127457",
+            "name": "Gray Medallion",
+            "has_parent_sku": true,
+            "image": "https://www.lazysuzy.com/Pier-1/pier1_images/4127457_main.jpg",
+            "link": "/product/4127457",
+            "swatch_image": "https://www.lazysuzy.com/Pier-1/pier1_images/4127457_main.jpg"
+          },
+          {
+            "time_taken": 0.0008029937744140625,
+            "product_sku": "2732061",
+            "variation_sku": "2996457",
+            "name": "Latte",
+            "has_parent_sku": true,
+            "image": "https://www.lazysuzy.com/Pier-1/pier1_images/2996457_main.jpg",
+            "link": "/product/2996457",
+            "swatch_image": "https://www.lazysuzy.com/Pier-1/pier1_images/2996457_main.jpg"
+          },
+          {
+            "time_taken": 0.0008029937744140625,
+            "product_sku": "2732061",
+            "variation_sku": "4134173",
+            "name": "Gray Velvet",
+            "has_parent_sku": true,
+            "image": "https://www.lazysuzy.com/Pier-1/pier1_images/4134173_main.jpg",
+            "link": "/product/4134173",
+            "swatch_image": "https://www.lazysuzy.com/Pier-1/pier1_images/4134173_main.jpg"
+          },
+          {
+            "time_taken": 0.0008029937744140625,
+            "product_sku": "2732061",
+            "variation_sku": "3342710",
+            "name": "Cornflower Natural Stonewash",
+            "has_parent_sku": true,
+            "image": "https://www.lazysuzy.com/Pier-1/pier1_images/3342710_main.jpg",
+            "link": "/product/3342710",
+            "swatch_image": "https://www.lazysuzy.com/Pier-1/pier1_images/3342710_main.jpg"
+          },
+          {
+            "time_taken": 0.0008029937744140625,
+            "product_sku": "2732061",
+            "variation_sku": "2874448",
+            "name": "Indigo",
+            "has_parent_sku": true,
+            "image": "https://www.lazysuzy.com/Pier-1/pier1_images/2874448_main.jpg",
+            "link": "/product/2874448",
+            "swatch_image": "https://www.lazysuzy.com/Pier-1/pier1_images/2874448_main.jpg"
+          },
+          {
+            "time_taken": 0.0008029937744140625,
+            "product_sku": "2732061",
+            "variation_sku": "3342708",
+            "name": "Brown Natural Whitewash",
+            "has_parent_sku": true,
+            "image": "https://www.lazysuzy.com/Pier-1/pier1_images/3342708_main.jpg",
+            "link": "/product/3342708",
+            "swatch_image": "https://www.lazysuzy.com/Pier-1/pier1_images/3342708_main.jpg"
+          },
+          {
+            "time_taken": 0.0008029937744140625,
+            "product_sku": "2732061",
+            "variation_sku": "2772154",
+            "name": "Gold",
+            "has_parent_sku": true,
+            "image": "https://www.lazysuzy.com/Pier-1/pier1_images/2772154_main.jpg",
+            "link": "/product/2772154",
+            "swatch_image": "https://www.lazysuzy.com/Pier-1/pier1_images/2772154_main.jpg"
+          },
+          {
+            "time_taken": 0.0008029937744140625,
+            "product_sku": "2732061",
+            "variation_sku": "3342699",
+            "name": "Ivory Natural Whitewash",
+            "has_parent_sku": true,
+            "image": "https://www.lazysuzy.com/Pier-1/pier1_images/3342699_main.jpg",
+            "link": "/product/3342699",
+            "swatch_image": "https://www.lazysuzy.com/Pier-1/pier1_images/3342699_main.jpg"
+          },
+          {
+            "time_taken": 0.0008029937744140625,
+            "product_sku": "2732061",
+            "variation_sku": "3263986",
+            "name": "Gratitude",
+            "has_parent_sku": true,
+            "image": "https://www.lazysuzy.com/Pier-1/pier1_images/3263986_main.jpg",
+            "link": "/product/3263986",
+            "swatch_image": "https://www.lazysuzy.com/Pier-1/pier1_images/3263986_main.jpg"
+          },
+          {
+            "time_taken": 0.0008029937744140625,
+            "product_sku": "2732061",
+            "variation_sku": "3263960",
+            "name": "Charcoal Natural Whitewash",
+            "has_parent_sku": true,
+            "image": "https://www.lazysuzy.com/Pier-1/pier1_images/3263960_main.jpg",
+            "link": "/product/3263960",
+            "swatch_image": "https://www.lazysuzy.com/Pier-1/pier1_images/3263960_main.jpg"
+          },
+          {
+            "time_taken": 0.0008029937744140625,
+            "product_sku": "2732061",
+            "variation_sku": "4134158",
+            "name": "Eucalyptus",
+            "has_parent_sku": true,
+            "image": "https://www.lazysuzy.com/Pier-1/pier1_images/4134158_main.jpg",
+            "link": "/product/4134158",
+            "swatch_image": "https://www.lazysuzy.com/Pier-1/pier1_images/4134158_main.jpg"
+          },
+          {
+            "time_taken": 0.0008029937744140625,
+            "product_sku": "2732061",
+            "variation_sku": "4149250",
+            "name": "Eucalyptus",
+            "has_parent_sku": true,
+            "image": "https://www.lazysuzy.com/Pier-1/pier1_images/4149250_main.jpg",
+            "link": "/product/4149250",
+            "swatch_image": "https://www.lazysuzy.com/Pier-1/pier1_images/4149250_main.jpg"
+          }
+        ]
+      },
+      {
+        "id": 2,
+        "sku": "2443389",
+        "is_new": false,
+        "site": "Pier 1",
+        "name": "Gray Blue & White Seersucker Armchair",
+        "product_url": "https://www.pier1.com/chas-gray-blue-&-white-seersucker-armchair/2443389.html",
+        "product_detail_url": "https://www.lazysuzy.com/product/2443389",
+        "is_price": "299",
+        "was_price": "499.95",
+        "percent_discount": "40.19",
+        "model_code": "Blue Seersucker",
+        "color": "Blue Seersucker",
+        "collection": "Chas",
+        "condition": "",
+        "main_image": "https://www.lazysuzy.com/Pier-1/pier1_images/2443389_main.jpg",
+        "reviews": 1069,
+        "rating": 4.73,
+        "wishlisted": false,
+        "variations": [
+          {
+            "time_taken": 0.001024007797241211,
+            "product_sku": "2443389",
+            "variation_sku": "2759995",
+            "name": "Navy",
+            "has_parent_sku": true,
+            "image": "https://www.lazysuzy.com/Pier-1/pier1_images/2759995_main.jpg",
+            "link": "/product/2759995",
+            "swatch_image": "https://www.lazysuzy.com/Pier-1/pier1_images/2759995_main.jpg"
+          },
+          {
+            "time_taken": 0.001024007797241211,
+            "product_sku": "2443389",
+            "variation_sku": "2739505",
+            "name": "Indigo Meadow",
+            "has_parent_sku": true,
+            "image": "https://www.lazysuzy.com/Pier-1/pier1_images/2739505_main.jpg",
+            "link": "/product/2739505",
+            "swatch_image": "https://www.lazysuzy.com/Pier-1/pier1_images/2739505_main.jpg"
+          },
+          {
+            "time_taken": 0.001024007797241211,
+            "product_sku": "2443389",
+            "variation_sku": "2536461",
+            "name": "Coffee",
+            "has_parent_sku": true,
+            "image": "https://www.lazysuzy.com/Pier-1/pier1_images/2536461_main.jpg",
+            "link": "/product/2536461",
+            "swatch_image": "https://www.lazysuzy.com/Pier-1/pier1_images/2536461_main.jpg"
+          },
+          {
+            "time_taken": 0.001024007797241211,
+            "product_sku": "2443389",
+            "variation_sku": "2655501",
+            "name": "Blue Meadow",
+            "has_parent_sku": true,
+            "image": "https://www.lazysuzy.com/Pier-1/pier1_images/2655501_main.jpg",
+            "link": "/product/2655501",
+            "swatch_image": "https://www.lazysuzy.com/Pier-1/pier1_images/2655501_main.jpg"
+          },
+          {
+            "time_taken": 0.001024007797241211,
+            "product_sku": "2443389",
+            "variation_sku": "3478541",
+            "name": "Black Buffalo Check",
+            "has_parent_sku": true,
+            "image": "https://www.lazysuzy.com/Pier-1/pier1_images/3478541_main.jpg",
+            "link": "/product/3478541",
+            "swatch_image": "https://www.lazysuzy.com/Pier-1/pier1_images/3478541_main.jpg"
+          },
+          {
+            "time_taken": 0.001024007797241211,
+            "product_sku": "2443389",
+            "variation_sku": "3201222",
+            "name": "Flax",
+            "has_parent_sku": true,
+            "image": "https://www.lazysuzy.com/Pier-1/pier1_images/3201222_main.jpg",
+            "link": "/product/3201222",
+            "swatch_image": "https://www.lazysuzy.com/Pier-1/pier1_images/3201222_main.jpg"
+          },
+          {
+            "time_taken": 0.001024007797241211,
+            "product_sku": "2443389",
+            "variation_sku": "4127472",
+            "name": "Eucalyptus",
+            "has_parent_sku": true,
+            "image": "https://www.lazysuzy.com/Pier-1/pier1_images/4127472_main.jpg",
+            "link": "/product/4127472",
+            "swatch_image": "https://www.lazysuzy.com/Pier-1/pier1_images/4127472_main.jpg"
+          },
+          {
+            "time_taken": 0.001024007797241211,
+            "product_sku": "2443389",
+            "variation_sku": "2800179",
+            "name": "Olive",
+            "has_parent_sku": true,
+            "image": "https://www.lazysuzy.com/Pier-1/pier1_images/2800179_main.jpg",
+            "link": "/product/2800179",
+            "swatch_image": "https://www.lazysuzy.com/Pier-1/pier1_images/2800179_main.jpg"
+          },
+          {
+            "time_taken": 0.001024007797241211,
+            "product_sku": "2443389",
+            "variation_sku": "3134254",
+            "name": "Zinc Gray",
+            "has_parent_sku": true,
+            "image": "https://www.lazysuzy.com/Pier-1/pier1_images/3134254_main.jpg",
+            "link": "/product/3134254",
+            "swatch_image": "https://www.lazysuzy.com/Pier-1/pier1_images/3134254_main.jpg"
+          },
+          {
+            "time_taken": 0.001024007797241211,
+            "product_sku": "2443389",
+            "variation_sku": "3001806",
+            "name": "Flax Sky",
+            "has_parent_sku": true,
+            "image": "https://www.lazysuzy.com/Pier-1/pier1_images/3001806_main.jpg",
+            "link": "/product/3001806",
+            "swatch_image": "https://www.lazysuzy.com/Pier-1/pier1_images/3001806_main.jpg"
+          },
+          {
+            "time_taken": 0.001024007797241211,
+            "product_sku": "2443389",
+            "variation_sku": "3990600",
+            "name": "Blue Stripe",
+            "has_parent_sku": true,
+            "image": "https://www.lazysuzy.com/Pier-1/pier1_images/3990600_main.jpg",
+            "link": "/product/3990600",
+            "swatch_image": "https://www.lazysuzy.com/Pier-1/pier1_images/3990600_main.jpg"
+          },
+          {
+            "time_taken": 0.001024007797241211,
+            "product_sku": "2443389",
+            "variation_sku": "3259724",
+            "name": "Pierformance Charcoal",
+            "has_parent_sku": true,
+            "image": "https://www.lazysuzy.com/Pier-1/pier1_images/3259724_main.jpg",
+            "link": "/product/3259724",
+            "swatch_image": "https://www.lazysuzy.com/Pier-1/pier1_images/3259724_main.jpg"
+          },
+          {
+            "time_taken": 0.001024007797241211,
+            "product_sku": "2443389",
+            "variation_sku": "3259802",
+            "name": "Pierformance Bark",
+            "has_parent_sku": true,
+            "image": "https://www.lazysuzy.com/Pier-1/pier1_images/3259802_main.jpg",
+            "link": "/product/3259802",
+            "swatch_image": "https://www.lazysuzy.com/Pier-1/pier1_images/3259802_main.jpg"
+          },
+          {
+            "time_taken": 0.001024007797241211,
+            "product_sku": "2443389",
+            "variation_sku": "3707184",
+            "name": "Gray Buffalo Check",
+            "has_parent_sku": true,
+            "image": "https://www.lazysuzy.com/Pier-1/pier1_images/3707184_main.jpg",
+            "link": "/product/3707184",
+            "swatch_image": "https://www.lazysuzy.com/Pier-1/pier1_images/3707184_main.jpg"
+          },
+          {
+            "time_taken": 0.001024007797241211,
+            "product_sku": "2443389",
+            "variation_sku": "3282889",
+            "name": "Estrella Fleur",
+            "has_parent_sku": true,
+            "image": "https://www.lazysuzy.com/Pier-1/pier1_images/3282889_main.jpg",
+            "link": "/product/3282889",
+            "swatch_image": "https://www.lazysuzy.com/Pier-1/pier1_images/3282889_main.jpg"
+          },
+          {
+            "time_taken": 0.001024007797241211,
+            "product_sku": "2443389",
+            "variation_sku": "3182710",
+            "name": "Ivory",
+            "has_parent_sku": true,
+            "image": "https://www.lazysuzy.com/Pier-1/pier1_images/3182710_main.jpg",
+            "link": "/product/3182710",
+            "swatch_image": "https://www.lazysuzy.com/Pier-1/pier1_images/3182710_main.jpg"
+          },
+          {
+            "time_taken": 0.001024007797241211,
+            "product_sku": "2443389",
+            "variation_sku": "3990613",
+            "name": "Beige Stripe",
+            "has_parent_sku": true,
+            "image": "https://www.lazysuzy.com/Pier-1/pier1_images/3990613_main.jpg",
+            "link": "/product/3990613",
+            "swatch_image": "https://www.lazysuzy.com/Pier-1/pier1_images/3990613_main.jpg"
+          },
+          {
+            "time_taken": 0.001024007797241211,
+            "product_sku": "2443389",
+            "variation_sku": "3449383",
+            "name": "Pewter",
+            "has_parent_sku": true,
+            "image": "https://www.lazysuzy.com/Pier-1/pier1_images/3449383_main.jpg",
+            "link": "/product/3449383",
+            "swatch_image": "https://www.lazysuzy.com/Pier-1/pier1_images/3449383_main.jpg"
+          },
+          {
+            "time_taken": 0.001024007797241211,
+            "product_sku": "2443389",
+            "variation_sku": "3281016",
+            "name": "Green",
+            "has_parent_sku": true,
+            "image": "https://www.lazysuzy.com/Pier-1/pier1_images/3281016_main.jpg",
+            "link": "/product/3281016",
+            "swatch_image": "https://www.lazysuzy.com/Pier-1/pier1_images/3281016_main.jpg"
+          },
+          {
+            "time_taken": 0.001024007797241211,
+            "product_sku": "2443389",
+            "variation_sku": "4127522",
+            "name": "Mist",
+            "has_parent_sku": true,
+            "image": "https://www.lazysuzy.com/Pier-1/pier1_images/4127522_main.jpg",
+            "link": "/product/4127522",
+            "swatch_image": "https://www.lazysuzy.com/Pier-1/pier1_images/4127522_main.jpg"
+          },
+          {
+            "time_taken": 0.001024007797241211,
+            "product_sku": "2443389",
+            "variation_sku": "2800216",
+            "name": "Cayenne",
+            "has_parent_sku": true,
+            "image": "https://www.lazysuzy.com/Pier-1/pier1_images/2800216_main.jpg",
+            "link": "/product/2800216",
+            "swatch_image": "https://www.lazysuzy.com/Pier-1/pier1_images/2800216_main.jpg"
+          },
+          {
+            "time_taken": 0.001024007797241211,
+            "product_sku": "2443389",
+            "variation_sku": "4127510",
+            "name": "Plum",
+            "has_parent_sku": true,
+            "image": "https://www.lazysuzy.com/Pier-1/pier1_images/4127510_main.jpg",
+            "link": "/product/4127510",
+            "swatch_image": "https://www.lazysuzy.com/Pier-1/pier1_images/4127510_main.jpg"
+          },
+          {
+            "time_taken": 0.001024007797241211,
+            "product_sku": "2443389",
+            "variation_sku": "3458265",
+            "name": "Pierformance Ruby",
+            "has_parent_sku": true,
+            "image": "https://www.lazysuzy.com/Pier-1/pier1_images/3458265_main.jpg",
+            "link": "/product/3458265",
+            "swatch_image": "https://www.lazysuzy.com/Pier-1/pier1_images/3458265_main.jpg"
+          }
+        ]
+      },
+      {
+        "id": 2,
+        "sku": "PS74362",
+        "is_new": false,
+        "site": "Pier 1",
+        "name": "Natural Stonewash Dining Tables",
+        "product_url": "https://www.pier1.com/bradding-natural-stonewash-dining-tables/PS74362.html",
+        "product_detail_url": "https://www.lazysuzy.com/product/PS74362",
+        "is_price": "599.99-999.99",
+        "was_price": "599.99-999.99",
+        "percent_discount": "0.00",
+        "model_code": "",
+        "color": "natural",
+        "collection": "Bradding",
+        "condition": "",
+        "main_image": "https://www.lazysuzy.com/Pier-1/pier1_images/PS74362_main.jpg",
+        "reviews": 369,
+        "rating": 4.76,
+        "wishlisted": false,
+        "variations": []
+      },
+      {
+        "id": 2,
+        "sku": "2795763",
+        "is_new": false,
+        "site": "Pier 1",
+        "name": "Indigo Tufted Large Contour Chair Cushion",
+        "product_url": "https://www.pier1.com/calliope-indigo tufted-large-contour-chair-cushion/2795763.html",
+        "product_detail_url": "https://www.lazysuzy.com/product/2795763",
+        "is_price": "50",
+        "was_price": "50",
+        "percent_discount": "0.00",
+        "model_code": "Indigo Calliope",
+        "color": "blue",
+        "collection": "Calliope",
+        "condition": "Indoor/Outdoor",
+        "main_image": "https://www.lazysuzy.com/Pier-1/pier1_images/2795763_main.jpg",
+        "reviews": 685,
+        "rating": 4.69,
+        "wishlisted": false,
+        "variations": [
+          {
+            "time_taken": 0.0006759166717529297,
+            "product_sku": "2795763",
+            "variation_sku": "2603518",
+            "name": "Ivory Calliope",
+            "has_parent_sku": true,
+            "image": "https://www.lazysuzy.com/Pier-1/pier1_images/2603518_main.jpg",
+            "link": "/product/2603518",
+            "swatch_image": "https://www.lazysuzy.com/Pier-1/pier1_images/2603518_main.jpg"
+          },
+          {
+            "time_taken": 0.0006759166717529297,
+            "product_sku": "2795763",
+            "variation_sku": "3158946",
+            "name": "Vibrant Paisley",
+            "has_parent_sku": true,
+            "image": "https://www.lazysuzy.com/Pier-1/pier1_images/3158946_main.jpg",
+            "link": "/product/3158946",
+            "swatch_image": "https://www.lazysuzy.com/Pier-1/pier1_images/3158946_main.jpg"
+          },
+          {
+            "time_taken": 0.0006759166717529297,
+            "product_sku": "2795763",
+            "variation_sku": "3162578",
+            "name": "Natural Carmela",
+            "has_parent_sku": true,
+            "image": "https://www.lazysuzy.com/Pier-1/pier1_images/3162578_main.jpg",
+            "link": "/product/3162578",
+            "swatch_image": "https://www.lazysuzy.com/Pier-1/pier1_images/3162578_main.jpg"
+          },
+          {
+            "time_taken": 0.0006759166717529297,
+            "product_sku": "2795763",
+            "variation_sku": "3156358",
+            "name": "Cream Calliope",
+            "has_parent_sku": true,
+            "image": "https://www.lazysuzy.com/Pier-1/pier1_images/3156358_main.jpg",
+            "link": "/product/3156358",
+            "swatch_image": "https://www.lazysuzy.com/Pier-1/pier1_images/3156358_main.jpg"
+          },
+          {
+            "time_taken": 0.0006759166717529297,
+            "product_sku": "2795763",
+            "variation_sku": "2603678",
+            "name": "Spice Calliope",
+            "has_parent_sku": true,
+            "image": "https://www.lazysuzy.com/Pier-1/pier1_images/2603678_main.jpg",
+            "link": "/product/2603678",
+            "swatch_image": "https://www.lazysuzy.com/Pier-1/pier1_images/2603678_main.jpg"
+          },
+          {
+            "time_taken": 0.0006759166717529297,
+            "product_sku": "2795763",
+            "variation_sku": "2603665",
+            "name": "Maui Calliope",
+            "has_parent_sku": true,
+            "image": "https://www.lazysuzy.com/Pier-1/pier1_images/2603665_main.jpg",
+            "link": "/product/2603665",
+            "swatch_image": "https://www.lazysuzy.com/Pier-1/pier1_images/2603665_main.jpg"
+          },
+          {
+            "time_taken": 0.0006759166717529297,
+            "product_sku": "2795763",
+            "variation_sku": "2603652",
+            "name": "Moss Calliope",
+            "has_parent_sku": true,
+            "image": "https://www.lazysuzy.com/Pier-1/pier1_images/2603652_main.jpg",
+            "link": "/product/2603652",
+            "swatch_image": "https://www.lazysuzy.com/Pier-1/pier1_images/2603652_main.jpg"
+          },
+          {
+            "time_taken": 0.0006759166717529297,
+            "product_sku": "2795763",
+            "variation_sku": "2969257",
+            "name": "Marisela",
+            "has_parent_sku": true,
+            "image": "https://www.lazysuzy.com/Pier-1/pier1_images/2969257_main.jpg",
+            "link": "/product/2969257",
+            "swatch_image": "https://www.lazysuzy.com/Pier-1/pier1_images/2969257_main.jpg"
+          },
+          {
+            "time_taken": 0.0006759166717529297,
+            "product_sku": "2795763",
+            "variation_sku": "3268515",
+            "name": "Eva Blue Green",
+            "has_parent_sku": true,
+            "image": "https://www.lazysuzy.com/Pier-1/pier1_images/3268515_main.jpg",
+            "link": "/product/3268515",
+            "swatch_image": "https://www.lazysuzy.com/Pier-1/pier1_images/3268515_main.jpg"
+          },
+          {
+            "time_taken": 0.0006759166717529297,
+            "product_sku": "2795763",
+            "variation_sku": "3268073",
+            "name": "Eva Clay",
+            "has_parent_sku": true,
+            "image": "https://www.lazysuzy.com/Pier-1/pier1_images/3268073_main.jpg",
+            "link": "/product/3268073",
+            "swatch_image": "https://www.lazysuzy.com/Pier-1/pier1_images/3268073_main.jpg"
+          }
+        ]
+      },
+      {
+        "id": 2,
+        "sku": "2457536",
+        "is_new": false,
+        "site": "Pier 1",
+        "name": "Espresso X Dining Table Base",
+        "product_url": "https://www.pier1.com/2457536.html",
+        "product_detail_url": "https://www.lazysuzy.com/product/2457536",
+        "is_price": "149.95",
+        "was_price": "149.95",
+        "percent_discount": "0.00",
+        "model_code": "Espresso",
+        "color": "brown",
+        "collection": "Simon",
+        "condition": "",
+        "main_image": "https://www.lazysuzy.com/Pier-1/pier1_images/2457536_main.jpg",
+        "reviews": 356,
+        "rating": 4.72,
+        "wishlisted": false,
+        "variations": [
+          {
+            "time_taken": 0.0005218982696533203,
+            "product_sku": "2457536",
+            "variation_sku": "2786186",
+            "name": "Java",
+            "has_parent_sku": true,
+            "image": "https://www.lazysuzy.com/Pier-1/pier1_images/2786186_main.jpg",
+            "link": "/product/2786186",
+            "swatch_image": "https://www.lazysuzy.com/Pier-1/pier1_images/2786186_main.jpg"
+          },
+          {
+            "time_taken": 0.0005218982696533203,
+            "product_sku": "2457536",
+            "variation_sku": "4158222",
+            "name": "Burnished Brass",
+            "has_parent_sku": true,
+            "image": "https://www.lazysuzy.com/Pier-1/pier1_images/4158222_main.jpg",
+            "link": "/product/4158222",
+            "swatch_image": "https://www.lazysuzy.com/Pier-1/pier1_images/4158222_main.jpg"
+          }
+        ]
+      },
+      {
+        "id": 2,
+        "sku": "2603561",
+        "is_new": false,
+        "site": "Pier 1",
+        "name": "Maui Tufted Standard Contour Chair Cushion",
+        "product_url": "https://www.pier1.com/calliope-maui tufted-standard-contour-chair-cushion/2603561.html",
+        "product_detail_url": "https://www.lazysuzy.com/product/2603561",
+        "is_price": "40",
+        "was_price": "40",
+        "percent_discount": "0.00",
+        "model_code": "Maui Calliope",
+        "color": "blue",
+        "collection": "Calliope",
+        "condition": "Indoor/Outdoor",
+        "main_image": "https://www.lazysuzy.com/Pier-1/pier1_images/2603561_main.jpg",
+        "reviews": 584,
+        "rating": 4.76,
+        "wishlisted": false,
+        "variations": [
+          {
+            "time_taken": 0.0006418228149414062,
+            "product_sku": "2603561",
+            "variation_sku": "2603505",
+            "name": "Ivory Calliope",
+            "has_parent_sku": true,
+            "image": "https://www.lazysuzy.com/Pier-1/pier1_images/2603505_main.jpg",
+            "link": "/product/2603505",
+            "swatch_image": "https://www.lazysuzy.com/Pier-1/pier1_images/2603505_main.jpg"
+          },
+          {
+            "time_taken": 0.0006418228149414062,
+            "product_sku": "2603561",
+            "variation_sku": "2795735",
+            "name": "Indigo Calliope",
+            "has_parent_sku": true,
+            "image": "https://www.lazysuzy.com/Pier-1/pier1_images/2795735_main.jpg",
+            "link": "/product/2795735",
+            "swatch_image": "https://www.lazysuzy.com/Pier-1/pier1_images/2795735_main.jpg"
+          },
+          {
+            "time_taken": 0.0006418228149414062,
+            "product_sku": "2603561",
+            "variation_sku": "2603546",
+            "name": "Moss Calliope",
+            "has_parent_sku": true,
+            "image": "https://www.lazysuzy.com/Pier-1/pier1_images/2603546_main.jpg",
+            "link": "/product/2603546",
+            "swatch_image": "https://www.lazysuzy.com/Pier-1/pier1_images/2603546_main.jpg"
+          },
+          {
+            "time_taken": 0.0006418228149414062,
+            "product_sku": "2603561",
+            "variation_sku": "2913917",
+            "name": "Natural Carmela",
+            "has_parent_sku": true,
+            "image": "https://www.lazysuzy.com/Pier-1/pier1_images/2913917_main.jpg",
+            "link": "/product/2913917",
+            "swatch_image": "https://www.lazysuzy.com/Pier-1/pier1_images/2913917_main.jpg"
+          },
+          {
+            "time_taken": 0.0006418228149414062,
+            "product_sku": "2603561",
+            "variation_sku": "3268530",
+            "name": "Eva Blue",
+            "has_parent_sku": true,
+            "image": "https://www.lazysuzy.com/Pier-1/pier1_images/3268530_main.jpg",
+            "link": "/product/3268530",
+            "swatch_image": "https://www.lazysuzy.com/Pier-1/pier1_images/3268530_main.jpg"
+          },
+          {
+            "time_taken": 0.0006418228149414062,
+            "product_sku": "2603561",
+            "variation_sku": "3156267",
+            "name": "Cream Calliope",
+            "has_parent_sku": true,
+            "image": "https://www.lazysuzy.com/Pier-1/pier1_images/3156267_main.jpg",
+            "link": "/product/3156267",
+            "swatch_image": "https://www.lazysuzy.com/Pier-1/pier1_images/3156267_main.jpg"
+          },
+          {
+            "time_taken": 0.0006418228149414062,
+            "product_sku": "2603561",
+            "variation_sku": "3268058",
+            "name": "Eva Clay",
+            "has_parent_sku": true,
+            "image": "https://www.lazysuzy.com/Pier-1/pier1_images/3268058_main.jpg",
+            "link": "/product/3268058",
+            "swatch_image": "https://www.lazysuzy.com/Pier-1/pier1_images/3268058_main.jpg"
+          },
+          {
+            "time_taken": 0.0006418228149414062,
+            "product_sku": "2603561",
+            "variation_sku": "3256276",
+            "name": "Carmela Sunset Stripe",
+            "has_parent_sku": true,
+            "image": "https://www.lazysuzy.com/Pier-1/pier1_images/3256276_main.jpg",
+            "link": "/product/3256276",
+            "swatch_image": "https://www.lazysuzy.com/Pier-1/pier1_images/3256276_main.jpg"
+          },
+          {
+            "time_taken": 0.0006418228149414062,
+            "product_sku": "2603561",
+            "variation_sku": "2603574",
+            "name": "Spice Calliope",
+            "has_parent_sku": true,
+            "image": "https://www.lazysuzy.com/Pier-1/pier1_images/2603574_main.jpg",
+            "link": "/product/2603574",
+            "swatch_image": "https://www.lazysuzy.com/Pier-1/pier1_images/2603574_main.jpg"
+          }
+        ]
+      },
+      {
+        "id": 2,
+        "sku": "2655501",
+        "is_new": false,
+        "site": "Pier 1",
+        "name": "Blue Floral Armchair",
+        "product_url": "https://www.pier1.com/chas-blue-floral-armchair/2655501.html",
+        "product_detail_url": "https://www.lazysuzy.com/product/2655501",
+        "is_price": "299",
+        "was_price": "499.95",
+        "percent_discount": "40.19",
+        "model_code": "Blue Meadow",
+        "color": "blue",
+        "collection": "Chas",
+        "condition": "",
+        "main_image": "https://www.lazysuzy.com/Pier-1/pier1_images/2655501_main.jpg",
+        "reviews": 1078,
+        "rating": 4.73,
+        "wishlisted": false,
+        "variations": [
+          {
+            "time_taken": 0.0009868144989013672,
+            "product_sku": "2655501",
+            "variation_sku": "2759995",
+            "name": "Navy",
+            "has_parent_sku": true,
+            "image": "https://www.lazysuzy.com/Pier-1/pier1_images/2759995_main.jpg",
+            "link": "/product/2759995",
+            "swatch_image": "https://www.lazysuzy.com/Pier-1/pier1_images/2759995_main.jpg"
+          },
+          {
+            "time_taken": 0.0009868144989013672,
+            "product_sku": "2655501",
+            "variation_sku": "2739505",
+            "name": "Indigo Meadow",
+            "has_parent_sku": true,
+            "image": "https://www.lazysuzy.com/Pier-1/pier1_images/2739505_main.jpg",
+            "link": "/product/2739505",
+            "swatch_image": "https://www.lazysuzy.com/Pier-1/pier1_images/2739505_main.jpg"
+          },
+          {
+            "time_taken": 0.0009868144989013672,
+            "product_sku": "2655501",
+            "variation_sku": "2536461",
+            "name": "Coffee",
+            "has_parent_sku": true,
+            "image": "https://www.lazysuzy.com/Pier-1/pier1_images/2536461_main.jpg",
+            "link": "/product/2536461",
+            "swatch_image": "https://www.lazysuzy.com/Pier-1/pier1_images/2536461_main.jpg"
+          },
+          {
+            "time_taken": 0.0009868144989013672,
+            "product_sku": "2655501",
+            "variation_sku": "2443389",
+            "name": "Blue Seersucker",
+            "has_parent_sku": true,
+            "image": "https://www.lazysuzy.com/Pier-1/pier1_images/2443389_main.jpg",
+            "link": "/product/2443389",
+            "swatch_image": "https://www.lazysuzy.com/Pier-1/pier1_images/2443389_main.jpg"
+          },
+          {
+            "time_taken": 0.0009868144989013672,
+            "product_sku": "2655501",
+            "variation_sku": "3478541",
+            "name": "Black Buffalo Check",
+            "has_parent_sku": true,
+            "image": "https://www.lazysuzy.com/Pier-1/pier1_images/3478541_main.jpg",
+            "link": "/product/3478541",
+            "swatch_image": "https://www.lazysuzy.com/Pier-1/pier1_images/3478541_main.jpg"
+          },
+          {
+            "time_taken": 0.0009868144989013672,
+            "product_sku": "2655501",
+            "variation_sku": "3201222",
+            "name": "Flax",
+            "has_parent_sku": true,
+            "image": "https://www.lazysuzy.com/Pier-1/pier1_images/3201222_main.jpg",
+            "link": "/product/3201222",
+            "swatch_image": "https://www.lazysuzy.com/Pier-1/pier1_images/3201222_main.jpg"
+          },
+          {
+            "time_taken": 0.0009868144989013672,
+            "product_sku": "2655501",
+            "variation_sku": "4127472",
+            "name": "Eucalyptus",
+            "has_parent_sku": true,
+            "image": "https://www.lazysuzy.com/Pier-1/pier1_images/4127472_main.jpg",
+            "link": "/product/4127472",
+            "swatch_image": "https://www.lazysuzy.com/Pier-1/pier1_images/4127472_main.jpg"
+          },
+          {
+            "time_taken": 0.0009868144989013672,
+            "product_sku": "2655501",
+            "variation_sku": "2800179",
+            "name": "Olive",
+            "has_parent_sku": true,
+            "image": "https://www.lazysuzy.com/Pier-1/pier1_images/2800179_main.jpg",
+            "link": "/product/2800179",
+            "swatch_image": "https://www.lazysuzy.com/Pier-1/pier1_images/2800179_main.jpg"
+          },
+          {
+            "time_taken": 0.0009868144989013672,
+            "product_sku": "2655501",
+            "variation_sku": "3134254",
+            "name": "Zinc Gray",
+            "has_parent_sku": true,
+            "image": "https://www.lazysuzy.com/Pier-1/pier1_images/3134254_main.jpg",
+            "link": "/product/3134254",
+            "swatch_image": "https://www.lazysuzy.com/Pier-1/pier1_images/3134254_main.jpg"
+          },
+          {
+            "time_taken": 0.0009868144989013672,
+            "product_sku": "2655501",
+            "variation_sku": "3001806",
+            "name": "Flax Sky",
+            "has_parent_sku": true,
+            "image": "https://www.lazysuzy.com/Pier-1/pier1_images/3001806_main.jpg",
+            "link": "/product/3001806",
+            "swatch_image": "https://www.lazysuzy.com/Pier-1/pier1_images/3001806_main.jpg"
+          },
+          {
+            "time_taken": 0.0009868144989013672,
+            "product_sku": "2655501",
+            "variation_sku": "3990600",
+            "name": "Blue Stripe",
+            "has_parent_sku": true,
+            "image": "https://www.lazysuzy.com/Pier-1/pier1_images/3990600_main.jpg",
+            "link": "/product/3990600",
+            "swatch_image": "https://www.lazysuzy.com/Pier-1/pier1_images/3990600_main.jpg"
+          },
+          {
+            "time_taken": 0.0009868144989013672,
+            "product_sku": "2655501",
+            "variation_sku": "3259724",
+            "name": "Pierformance Charcoal",
+            "has_parent_sku": true,
+            "image": "https://www.lazysuzy.com/Pier-1/pier1_images/3259724_main.jpg",
+            "link": "/product/3259724",
+            "swatch_image": "https://www.lazysuzy.com/Pier-1/pier1_images/3259724_main.jpg"
+          },
+          {
+            "time_taken": 0.0009868144989013672,
+            "product_sku": "2655501",
+            "variation_sku": "3259802",
+            "name": "Pierformance Bark",
+            "has_parent_sku": true,
+            "image": "https://www.lazysuzy.com/Pier-1/pier1_images/3259802_main.jpg",
+            "link": "/product/3259802",
+            "swatch_image": "https://www.lazysuzy.com/Pier-1/pier1_images/3259802_main.jpg"
+          },
+          {
+            "time_taken": 0.0009868144989013672,
+            "product_sku": "2655501",
+            "variation_sku": "3707184",
+            "name": "Gray Buffalo Check",
+            "has_parent_sku": true,
+            "image": "https://www.lazysuzy.com/Pier-1/pier1_images/3707184_main.jpg",
+            "link": "/product/3707184",
+            "swatch_image": "https://www.lazysuzy.com/Pier-1/pier1_images/3707184_main.jpg"
+          },
+          {
+            "time_taken": 0.0009868144989013672,
+            "product_sku": "2655501",
+            "variation_sku": "3282889",
+            "name": "Estrella Fleur",
+            "has_parent_sku": true,
+            "image": "https://www.lazysuzy.com/Pier-1/pier1_images/3282889_main.jpg",
+            "link": "/product/3282889",
+            "swatch_image": "https://www.lazysuzy.com/Pier-1/pier1_images/3282889_main.jpg"
+          },
+          {
+            "time_taken": 0.0009868144989013672,
+            "product_sku": "2655501",
+            "variation_sku": "3182710",
+            "name": "Ivory",
+            "has_parent_sku": true,
+            "image": "https://www.lazysuzy.com/Pier-1/pier1_images/3182710_main.jpg",
+            "link": "/product/3182710",
+            "swatch_image": "https://www.lazysuzy.com/Pier-1/pier1_images/3182710_main.jpg"
+          },
+          {
+            "time_taken": 0.0009868144989013672,
+            "product_sku": "2655501",
+            "variation_sku": "3990613",
+            "name": "Beige Stripe",
+            "has_parent_sku": true,
+            "image": "https://www.lazysuzy.com/Pier-1/pier1_images/3990613_main.jpg",
+            "link": "/product/3990613",
+            "swatch_image": "https://www.lazysuzy.com/Pier-1/pier1_images/3990613_main.jpg"
+          },
+          {
+            "time_taken": 0.0009868144989013672,
+            "product_sku": "2655501",
+            "variation_sku": "3449383",
+            "name": "Pewter",
+            "has_parent_sku": true,
+            "image": "https://www.lazysuzy.com/Pier-1/pier1_images/3449383_main.jpg",
+            "link": "/product/3449383",
+            "swatch_image": "https://www.lazysuzy.com/Pier-1/pier1_images/3449383_main.jpg"
+          },
+          {
+            "time_taken": 0.0009868144989013672,
+            "product_sku": "2655501",
+            "variation_sku": "3281016",
+            "name": "Green",
+            "has_parent_sku": true,
+            "image": "https://www.lazysuzy.com/Pier-1/pier1_images/3281016_main.jpg",
+            "link": "/product/3281016",
+            "swatch_image": "https://www.lazysuzy.com/Pier-1/pier1_images/3281016_main.jpg"
+          },
+          {
+            "time_taken": 0.0009868144989013672,
+            "product_sku": "2655501",
+            "variation_sku": "4127522",
+            "name": "Mist",
+            "has_parent_sku": true,
+            "image": "https://www.lazysuzy.com/Pier-1/pier1_images/4127522_main.jpg",
+            "link": "/product/4127522",
+            "swatch_image": "https://www.lazysuzy.com/Pier-1/pier1_images/4127522_main.jpg"
+          },
+          {
+            "time_taken": 0.0009868144989013672,
+            "product_sku": "2655501",
+            "variation_sku": "2800216",
+            "name": "Cayenne",
+            "has_parent_sku": true,
+            "image": "https://www.lazysuzy.com/Pier-1/pier1_images/2800216_main.jpg",
+            "link": "/product/2800216",
+            "swatch_image": "https://www.lazysuzy.com/Pier-1/pier1_images/2800216_main.jpg"
+          },
+          {
+            "time_taken": 0.0009868144989013672,
+            "product_sku": "2655501",
+            "variation_sku": "4127510",
+            "name": "Plum",
+            "has_parent_sku": true,
+            "image": "https://www.lazysuzy.com/Pier-1/pier1_images/4127510_main.jpg",
+            "link": "/product/4127510",
+            "swatch_image": "https://www.lazysuzy.com/Pier-1/pier1_images/4127510_main.jpg"
+          },
+          {
+            "time_taken": 0.0009868144989013672,
+            "product_sku": "2655501",
+            "variation_sku": "3458265",
+            "name": "Pierformance Ruby",
+            "has_parent_sku": true,
+            "image": "https://www.lazysuzy.com/Pier-1/pier1_images/3458265_main.jpg",
+            "link": "/product/3458265",
+            "swatch_image": "https://www.lazysuzy.com/Pier-1/pier1_images/3458265_main.jpg"
+          }
+        ]
+      },
+      {
+        "id": 2,
+        "sku": "2992565",
+        "is_new": false,
+        "site": "Pier 1",
+        "name": "Natural Stonewash 84\" Dining Table",
+        "product_url": "https://www.pier1.com/2992565.html",
+        "product_detail_url": "https://www.lazysuzy.com/product/2992565",
+        "is_price": "799.99",
+        "was_price": "799.99",
+        "percent_discount": "0.00",
+        "model_code": "Natural Stonewash",
+        "color": "natural",
+        "collection": "Bradding",
+        "condition": "",
+        "main_image": "https://www.lazysuzy.com/Pier-1/pier1_images/2992565_main.jpg",
+        "reviews": 318,
+        "rating": 4.72,
+        "wishlisted": false,
+        "variations": [
+          {
+            "time_taken": 0.0005857944488525391,
+            "product_sku": "2992565",
+            "variation_sku": "4119842",
+            "name": "Honey Stonewash",
+            "has_parent_sku": true,
+            "image": "https://www.lazysuzy.com/Pier-1/pier1_images/4119842_main.jpg",
+            "link": "/product/4119842",
+            "swatch_image": "https://www.lazysuzy.com/Pier-1/pier1_images/4119842_main.jpg"
+          },
+          {
+            "time_taken": 0.0005857944488525391,
+            "product_sku": "2992565",
+            "variation_sku": "3193240",
+            "name": "Shadow Gray",
+            "has_parent_sku": true,
+            "image": "https://www.lazysuzy.com/Pier-1/pier1_images/3193240_main.jpg",
+            "link": "/product/3193240",
+            "swatch_image": "https://www.lazysuzy.com/Pier-1/pier1_images/3193240_main.jpg"
+          },
+          {
+            "time_taken": 0.0005857944488525391,
+            "product_sku": "2992565",
+            "variation_sku": "3020029",
+            "name": "Espresso",
+            "has_parent_sku": true,
+            "image": "https://www.lazysuzy.com/Pier-1/pier1_images/3020029_main.jpg",
+            "link": "/product/3020029",
+            "swatch_image": "https://www.lazysuzy.com/Pier-1/pier1_images/3020029_main.jpg"
+          },
+          {
+            "time_taken": 0.0005857944488525391,
+            "product_sku": "2992565",
+            "variation_sku": "3448075",
+            "name": "Rain White",
+            "has_parent_sku": true,
+            "image": "https://www.lazysuzy.com/Pier-1/pier1_images/3448075_main.jpg",
+            "link": "/product/3448075",
+            "swatch_image": "https://www.lazysuzy.com/Pier-1/pier1_images/3448075_main.jpg"
+          }
+        ]
+      },
+      {
+        "id": 2,
+        "sku": "IDS032",
+        "is_new": false,
+        "site": "Pier 1",
+        "name": "Chair Frame with Cushion",
+        "product_url": "https://www.pier1.com/papasan-chair-frame-with-cushion/IDS032.html",
+        "product_detail_url": "https://www.lazysuzy.com/product/IDS032",
+        "is_price": "35-90",
+        "was_price": "35-90",
+        "percent_discount": "0.00",
+        "model_code": "",
+        "color": "",
+        "collection": "Papasan",
+        "condition": "",
+        "main_image": "https://www.lazysuzy.com/Pier-1/pier1_images/IDS032_main.jpg",
+        "reviews": 372,
+        "rating": 4.45,
+        "wishlisted": false,
+        "variations": []
+      },
+      {
+        "id": 2,
+        "sku": "3168506",
+        "is_new": false,
+        "site": "Pier 1",
+        "name": "Tufted Linen Gray Chair",
+        "product_url": "https://www.pier1.com/eliza-tufted-linen-gray-chair/3168506.html",
+        "product_detail_url": "https://www.lazysuzy.com/product/3168506",
+        "is_price": "549.95",
+        "was_price": "549.95",
+        "percent_discount": "0.00",
+        "model_code": "Tange Gray",
+        "color": "gray",
+        "collection": "Eliza",
+        "condition": "",
+        "main_image": "https://www.lazysuzy.com/Pier-1/pier1_images/3168506_main.jpg",
+        "reviews": 303,
+        "rating": 4.67,
+        "wishlisted": false,
+        "variations": [
+          {
+            "time_taken": 0.0005509853363037109,
+            "product_sku": "3168506",
+            "variation_sku": "3200109",
+            "name": "Beige",
+            "has_parent_sku": true,
+            "image": "https://www.lazysuzy.com/Pier-1/pier1_images/3200109_main.jpg",
+            "link": "/product/3200109",
+            "swatch_image": "https://www.lazysuzy.com/Pier-1/pier1_images/3200109_main.jpg"
+          },
+          {
+            "time_taken": 0.0005509853363037109,
+            "product_sku": "3168506",
+            "variation_sku": "3103097",
+            "name": "Claret Red",
+            "has_parent_sku": true,
+            "image": "https://www.lazysuzy.com/Pier-1/pier1_images/3103097_main.jpg",
+            "link": "/product/3103097",
+            "swatch_image": "https://www.lazysuzy.com/Pier-1/pier1_images/3103097_main.jpg"
+          },
+          {
+            "time_taken": 0.0005509853363037109,
+            "product_sku": "3168506",
+            "variation_sku": "4135557",
+            "name": "Brown Faux Leather",
+            "has_parent_sku": true,
+            "image": "https://www.lazysuzy.com/Pier-1/pier1_images/4135557_main.jpg",
+            "link": "/product/4135557",
+            "swatch_image": "https://www.lazysuzy.com/Pier-1/pier1_images/4135557_main.jpg"
+          },
+          {
+            "time_taken": 0.0005509853363037109,
+            "product_sku": "3168506",
+            "variation_sku": "3476057",
+            "name": "Ink",
+            "has_parent_sku": true,
+            "image": "https://www.lazysuzy.com/Pier-1/pier1_images/3476057_main.jpg",
+            "link": "/product/3476057",
+            "swatch_image": "https://www.lazysuzy.com/Pier-1/pier1_images/3476057_main.jpg"
+          }
+        ]
+      },
+      {
+        "id": 2,
+        "sku": "3195511",
+        "is_new": false,
+        "site": "Pier 1",
+        "name": "Blue Dining Chair with Espresso Wood ",
+        "product_url": "https://www.pier1.com/corinne-blue-dining-chair-with-espresso-wood-/3195511.html",
+        "product_detail_url": "https://www.lazysuzy.com/product/3195511",
+        "is_price": "249.99",
+        "was_price": "249.99",
+        "percent_discount": "0.00",
+        "model_code": "Dolce Blue",
+        "color": "blue",
+        "collection": "Corinne",
+        "condition": "",
+        "main_image": "https://www.lazysuzy.com/Pier-1/pier1_images/3195511_main.jpg",
+        "reviews": 436,
+        "rating": 4.68,
+        "wishlisted": false,
+        "variations": [
+          {
+            "time_taken": 0.000782012939453125,
+            "product_sku": "3195511",
+            "variation_sku": "2732061",
+            "name": "Linen",
+            "has_parent_sku": true,
+            "image": "https://www.lazysuzy.com/Pier-1/pier1_images/2732061_main.jpg",
+            "link": "/product/2732061",
+            "swatch_image": "https://www.lazysuzy.com/Pier-1/pier1_images/2732061_main.jpg"
+          },
+          {
+            "time_taken": 0.000782012939453125,
+            "product_sku": "3195511",
+            "variation_sku": "2837108",
+            "name": "Ivory",
+            "has_parent_sku": true,
+            "image": "https://www.lazysuzy.com/Pier-1/pier1_images/2837108_main.jpg",
+            "link": "/product/2837108",
+            "swatch_image": "https://www.lazysuzy.com/Pier-1/pier1_images/2837108_main.jpg"
+          },
+          {
+            "time_taken": 0.000782012939453125,
+            "product_sku": "3195511",
+            "variation_sku": "3052695",
+            "name": "Charcoal",
+            "has_parent_sku": true,
+            "image": "https://www.lazysuzy.com/Pier-1/pier1_images/3052695_main.jpg",
+            "link": "/product/3052695",
+            "swatch_image": "https://www.lazysuzy.com/Pier-1/pier1_images/3052695_main.jpg"
+          },
+          {
+            "time_taken": 0.000782012939453125,
+            "product_sku": "3195511",
+            "variation_sku": "4127457",
+            "name": "Gray Medallion",
+            "has_parent_sku": true,
+            "image": "https://www.lazysuzy.com/Pier-1/pier1_images/4127457_main.jpg",
+            "link": "/product/4127457",
+            "swatch_image": "https://www.lazysuzy.com/Pier-1/pier1_images/4127457_main.jpg"
+          },
+          {
+            "time_taken": 0.000782012939453125,
+            "product_sku": "3195511",
+            "variation_sku": "2996457",
+            "name": "Latte",
+            "has_parent_sku": true,
+            "image": "https://www.lazysuzy.com/Pier-1/pier1_images/2996457_main.jpg",
+            "link": "/product/2996457",
+            "swatch_image": "https://www.lazysuzy.com/Pier-1/pier1_images/2996457_main.jpg"
+          },
+          {
+            "time_taken": 0.000782012939453125,
+            "product_sku": "3195511",
+            "variation_sku": "4134173",
+            "name": "Gray Velvet",
+            "has_parent_sku": true,
+            "image": "https://www.lazysuzy.com/Pier-1/pier1_images/4134173_main.jpg",
+            "link": "/product/4134173",
+            "swatch_image": "https://www.lazysuzy.com/Pier-1/pier1_images/4134173_main.jpg"
+          },
+          {
+            "time_taken": 0.000782012939453125,
+            "product_sku": "3195511",
+            "variation_sku": "3342710",
+            "name": "Cornflower Natural Stonewash",
+            "has_parent_sku": true,
+            "image": "https://www.lazysuzy.com/Pier-1/pier1_images/3342710_main.jpg",
+            "link": "/product/3342710",
+            "swatch_image": "https://www.lazysuzy.com/Pier-1/pier1_images/3342710_main.jpg"
+          },
+          {
+            "time_taken": 0.000782012939453125,
+            "product_sku": "3195511",
+            "variation_sku": "2874448",
+            "name": "Indigo",
+            "has_parent_sku": true,
+            "image": "https://www.lazysuzy.com/Pier-1/pier1_images/2874448_main.jpg",
+            "link": "/product/2874448",
+            "swatch_image": "https://www.lazysuzy.com/Pier-1/pier1_images/2874448_main.jpg"
+          },
+          {
+            "time_taken": 0.000782012939453125,
+            "product_sku": "3195511",
+            "variation_sku": "3342708",
+            "name": "Brown Natural Whitewash",
+            "has_parent_sku": true,
+            "image": "https://www.lazysuzy.com/Pier-1/pier1_images/3342708_main.jpg",
+            "link": "/product/3342708",
+            "swatch_image": "https://www.lazysuzy.com/Pier-1/pier1_images/3342708_main.jpg"
+          },
+          {
+            "time_taken": 0.000782012939453125,
+            "product_sku": "3195511",
+            "variation_sku": "2772154",
+            "name": "Gold",
+            "has_parent_sku": true,
+            "image": "https://www.lazysuzy.com/Pier-1/pier1_images/2772154_main.jpg",
+            "link": "/product/2772154",
+            "swatch_image": "https://www.lazysuzy.com/Pier-1/pier1_images/2772154_main.jpg"
+          },
+          {
+            "time_taken": 0.000782012939453125,
+            "product_sku": "3195511",
+            "variation_sku": "3342699",
+            "name": "Ivory Natural Whitewash",
+            "has_parent_sku": true,
+            "image": "https://www.lazysuzy.com/Pier-1/pier1_images/3342699_main.jpg",
+            "link": "/product/3342699",
+            "swatch_image": "https://www.lazysuzy.com/Pier-1/pier1_images/3342699_main.jpg"
+          },
+          {
+            "time_taken": 0.000782012939453125,
+            "product_sku": "3195511",
+            "variation_sku": "3263986",
+            "name": "Gratitude",
+            "has_parent_sku": true,
+            "image": "https://www.lazysuzy.com/Pier-1/pier1_images/3263986_main.jpg",
+            "link": "/product/3263986",
+            "swatch_image": "https://www.lazysuzy.com/Pier-1/pier1_images/3263986_main.jpg"
+          },
+          {
+            "time_taken": 0.000782012939453125,
+            "product_sku": "3195511",
+            "variation_sku": "3263960",
+            "name": "Charcoal Natural Whitewash",
+            "has_parent_sku": true,
+            "image": "https://www.lazysuzy.com/Pier-1/pier1_images/3263960_main.jpg",
+            "link": "/product/3263960",
+            "swatch_image": "https://www.lazysuzy.com/Pier-1/pier1_images/3263960_main.jpg"
+          },
+          {
+            "time_taken": 0.000782012939453125,
+            "product_sku": "3195511",
+            "variation_sku": "4134158",
+            "name": "Eucalyptus",
+            "has_parent_sku": true,
+            "image": "https://www.lazysuzy.com/Pier-1/pier1_images/4134158_main.jpg",
+            "link": "/product/4134158",
+            "swatch_image": "https://www.lazysuzy.com/Pier-1/pier1_images/4134158_main.jpg"
+          },
+          {
+            "time_taken": 0.000782012939453125,
+            "product_sku": "3195511",
+            "variation_sku": "4149250",
+            "name": "Eucalyptus",
+            "has_parent_sku": true,
+            "image": "https://www.lazysuzy.com/Pier-1/pier1_images/4149250_main.jpg",
+            "link": "/product/4149250",
+            "swatch_image": "https://www.lazysuzy.com/Pier-1/pier1_images/4149250_main.jpg"
+          }
+        ]
+      },
+      {
+        "id": 2,
+        "sku": "3478541",
+        "is_new": false,
+        "site": "Pier 1",
+        "name": "Black Buffalo Check Chair ",
+        "product_url": "https://www.pier1.com/chas-black-buffalo-check-chair-/3478541.html",
+        "product_detail_url": "https://www.lazysuzy.com/product/3478541",
+        "is_price": "299",
+        "was_price": "499.95",
+        "percent_discount": "40.19",
+        "model_code": "Black Buffalo Check",
+        "color": "black",
+        "collection": "Chas",
+        "condition": "",
+        "main_image": "https://www.lazysuzy.com/Pier-1/pier1_images/3478541_main.jpg",
+        "reviews": 1078,
+        "rating": 4.73,
+        "wishlisted": false,
+        "variations": [
+          {
+            "time_taken": 0.0009729862213134766,
+            "product_sku": "3478541",
+            "variation_sku": "2759995",
+            "name": "Navy",
+            "has_parent_sku": true,
+            "image": "https://www.lazysuzy.com/Pier-1/pier1_images/2759995_main.jpg",
+            "link": "/product/2759995",
+            "swatch_image": "https://www.lazysuzy.com/Pier-1/pier1_images/2759995_main.jpg"
+          },
+          {
+            "time_taken": 0.0009729862213134766,
+            "product_sku": "3478541",
+            "variation_sku": "2739505",
+            "name": "Indigo Meadow",
+            "has_parent_sku": true,
+            "image": "https://www.lazysuzy.com/Pier-1/pier1_images/2739505_main.jpg",
+            "link": "/product/2739505",
+            "swatch_image": "https://www.lazysuzy.com/Pier-1/pier1_images/2739505_main.jpg"
+          },
+          {
+            "time_taken": 0.0009729862213134766,
+            "product_sku": "3478541",
+            "variation_sku": "2536461",
+            "name": "Coffee",
+            "has_parent_sku": true,
+            "image": "https://www.lazysuzy.com/Pier-1/pier1_images/2536461_main.jpg",
+            "link": "/product/2536461",
+            "swatch_image": "https://www.lazysuzy.com/Pier-1/pier1_images/2536461_main.jpg"
+          },
+          {
+            "time_taken": 0.0009729862213134766,
+            "product_sku": "3478541",
+            "variation_sku": "2443389",
+            "name": "Blue Seersucker",
+            "has_parent_sku": true,
+            "image": "https://www.lazysuzy.com/Pier-1/pier1_images/2443389_main.jpg",
+            "link": "/product/2443389",
+            "swatch_image": "https://www.lazysuzy.com/Pier-1/pier1_images/2443389_main.jpg"
+          },
+          {
+            "time_taken": 0.0009729862213134766,
+            "product_sku": "3478541",
+            "variation_sku": "2655501",
+            "name": "Blue Meadow",
+            "has_parent_sku": true,
+            "image": "https://www.lazysuzy.com/Pier-1/pier1_images/2655501_main.jpg",
+            "link": "/product/2655501",
+            "swatch_image": "https://www.lazysuzy.com/Pier-1/pier1_images/2655501_main.jpg"
+          },
+          {
+            "time_taken": 0.0009729862213134766,
+            "product_sku": "3478541",
+            "variation_sku": "3201222",
+            "name": "Flax",
+            "has_parent_sku": true,
+            "image": "https://www.lazysuzy.com/Pier-1/pier1_images/3201222_main.jpg",
+            "link": "/product/3201222",
+            "swatch_image": "https://www.lazysuzy.com/Pier-1/pier1_images/3201222_main.jpg"
+          },
+          {
+            "time_taken": 0.0009729862213134766,
+            "product_sku": "3478541",
+            "variation_sku": "4127472",
+            "name": "Eucalyptus",
+            "has_parent_sku": true,
+            "image": "https://www.lazysuzy.com/Pier-1/pier1_images/4127472_main.jpg",
+            "link": "/product/4127472",
+            "swatch_image": "https://www.lazysuzy.com/Pier-1/pier1_images/4127472_main.jpg"
+          },
+          {
+            "time_taken": 0.0009729862213134766,
+            "product_sku": "3478541",
+            "variation_sku": "2800179",
+            "name": "Olive",
+            "has_parent_sku": true,
+            "image": "https://www.lazysuzy.com/Pier-1/pier1_images/2800179_main.jpg",
+            "link": "/product/2800179",
+            "swatch_image": "https://www.lazysuzy.com/Pier-1/pier1_images/2800179_main.jpg"
+          },
+          {
+            "time_taken": 0.0009729862213134766,
+            "product_sku": "3478541",
+            "variation_sku": "3134254",
+            "name": "Zinc Gray",
+            "has_parent_sku": true,
+            "image": "https://www.lazysuzy.com/Pier-1/pier1_images/3134254_main.jpg",
+            "link": "/product/3134254",
+            "swatch_image": "https://www.lazysuzy.com/Pier-1/pier1_images/3134254_main.jpg"
+          },
+          {
+            "time_taken": 0.0009729862213134766,
+            "product_sku": "3478541",
+            "variation_sku": "3001806",
+            "name": "Flax Sky",
+            "has_parent_sku": true,
+            "image": "https://www.lazysuzy.com/Pier-1/pier1_images/3001806_main.jpg",
+            "link": "/product/3001806",
+            "swatch_image": "https://www.lazysuzy.com/Pier-1/pier1_images/3001806_main.jpg"
+          },
+          {
+            "time_taken": 0.0009729862213134766,
+            "product_sku": "3478541",
+            "variation_sku": "3990600",
+            "name": "Blue Stripe",
+            "has_parent_sku": true,
+            "image": "https://www.lazysuzy.com/Pier-1/pier1_images/3990600_main.jpg",
+            "link": "/product/3990600",
+            "swatch_image": "https://www.lazysuzy.com/Pier-1/pier1_images/3990600_main.jpg"
+          },
+          {
+            "time_taken": 0.0009729862213134766,
+            "product_sku": "3478541",
+            "variation_sku": "3259724",
+            "name": "Pierformance Charcoal",
+            "has_parent_sku": true,
+            "image": "https://www.lazysuzy.com/Pier-1/pier1_images/3259724_main.jpg",
+            "link": "/product/3259724",
+            "swatch_image": "https://www.lazysuzy.com/Pier-1/pier1_images/3259724_main.jpg"
+          },
+          {
+            "time_taken": 0.0009729862213134766,
+            "product_sku": "3478541",
+            "variation_sku": "3259802",
+            "name": "Pierformance Bark",
+            "has_parent_sku": true,
+            "image": "https://www.lazysuzy.com/Pier-1/pier1_images/3259802_main.jpg",
+            "link": "/product/3259802",
+            "swatch_image": "https://www.lazysuzy.com/Pier-1/pier1_images/3259802_main.jpg"
+          },
+          {
+            "time_taken": 0.0009729862213134766,
+            "product_sku": "3478541",
+            "variation_sku": "3707184",
+            "name": "Gray Buffalo Check",
+            "has_parent_sku": true,
+            "image": "https://www.lazysuzy.com/Pier-1/pier1_images/3707184_main.jpg",
+            "link": "/product/3707184",
+            "swatch_image": "https://www.lazysuzy.com/Pier-1/pier1_images/3707184_main.jpg"
+          },
+          {
+            "time_taken": 0.0009729862213134766,
+            "product_sku": "3478541",
+            "variation_sku": "3282889",
+            "name": "Estrella Fleur",
+            "has_parent_sku": true,
+            "image": "https://www.lazysuzy.com/Pier-1/pier1_images/3282889_main.jpg",
+            "link": "/product/3282889",
+            "swatch_image": "https://www.lazysuzy.com/Pier-1/pier1_images/3282889_main.jpg"
+          },
+          {
+            "time_taken": 0.0009729862213134766,
+            "product_sku": "3478541",
+            "variation_sku": "3182710",
+            "name": "Ivory",
+            "has_parent_sku": true,
+            "image": "https://www.lazysuzy.com/Pier-1/pier1_images/3182710_main.jpg",
+            "link": "/product/3182710",
+            "swatch_image": "https://www.lazysuzy.com/Pier-1/pier1_images/3182710_main.jpg"
+          },
+          {
+            "time_taken": 0.0009729862213134766,
+            "product_sku": "3478541",
+            "variation_sku": "3990613",
+            "name": "Beige Stripe",
+            "has_parent_sku": true,
+            "image": "https://www.lazysuzy.com/Pier-1/pier1_images/3990613_main.jpg",
+            "link": "/product/3990613",
+            "swatch_image": "https://www.lazysuzy.com/Pier-1/pier1_images/3990613_main.jpg"
+          },
+          {
+            "time_taken": 0.0009729862213134766,
+            "product_sku": "3478541",
+            "variation_sku": "3449383",
+            "name": "Pewter",
+            "has_parent_sku": true,
+            "image": "https://www.lazysuzy.com/Pier-1/pier1_images/3449383_main.jpg",
+            "link": "/product/3449383",
+            "swatch_image": "https://www.lazysuzy.com/Pier-1/pier1_images/3449383_main.jpg"
+          },
+          {
+            "time_taken": 0.0009729862213134766,
+            "product_sku": "3478541",
+            "variation_sku": "3281016",
+            "name": "Green",
+            "has_parent_sku": true,
+            "image": "https://www.lazysuzy.com/Pier-1/pier1_images/3281016_main.jpg",
+            "link": "/product/3281016",
+            "swatch_image": "https://www.lazysuzy.com/Pier-1/pier1_images/3281016_main.jpg"
+          },
+          {
+            "time_taken": 0.0009729862213134766,
+            "product_sku": "3478541",
+            "variation_sku": "4127522",
+            "name": "Mist",
+            "has_parent_sku": true,
+            "image": "https://www.lazysuzy.com/Pier-1/pier1_images/4127522_main.jpg",
+            "link": "/product/4127522",
+            "swatch_image": "https://www.lazysuzy.com/Pier-1/pier1_images/4127522_main.jpg"
+          },
+          {
+            "time_taken": 0.0009729862213134766,
+            "product_sku": "3478541",
+            "variation_sku": "2800216",
+            "name": "Cayenne",
+            "has_parent_sku": true,
+            "image": "https://www.lazysuzy.com/Pier-1/pier1_images/2800216_main.jpg",
+            "link": "/product/2800216",
+            "swatch_image": "https://www.lazysuzy.com/Pier-1/pier1_images/2800216_main.jpg"
+          },
+          {
+            "time_taken": 0.0009729862213134766,
+            "product_sku": "3478541",
+            "variation_sku": "4127510",
+            "name": "Plum",
+            "has_parent_sku": true,
+            "image": "https://www.lazysuzy.com/Pier-1/pier1_images/4127510_main.jpg",
+            "link": "/product/4127510",
+            "swatch_image": "https://www.lazysuzy.com/Pier-1/pier1_images/4127510_main.jpg"
+          },
+          {
+            "time_taken": 0.0009729862213134766,
+            "product_sku": "3478541",
+            "variation_sku": "3458265",
+            "name": "Pierformance Ruby",
+            "has_parent_sku": true,
+            "image": "https://www.lazysuzy.com/Pier-1/pier1_images/3458265_main.jpg",
+            "link": "/product/3458265",
+            "swatch_image": "https://www.lazysuzy.com/Pier-1/pier1_images/3458265_main.jpg"
+          }
+        ]
+      },
+      {
+        "id": 2,
+        "sku": "3136043",
+        "is_new": false,
+        "site": "Pier 1",
+        "name": "Bennett Small White Metal Lantern",
+        "product_url": "https://www.pier1.com/3136043.html",
+        "product_detail_url": "https://www.lazysuzy.com/product/3136043",
+        "is_price": "19.99",
+        "was_price": "19.99",
+        "percent_discount": "0.00",
+        "model_code": "White",
+        "color": "white",
+        "collection": "",
+        "condition": "Indoor/Outdoor",
+        "main_image": "https://www.lazysuzy.com/Pier-1/pier1_images/3136043_main.jpg",
+        "reviews": 255,
+        "rating": 4.9,
+        "wishlisted": false,
+        "variations": [
+          {
+            "time_taken": 0.0005180835723876953,
+            "product_sku": "3136043",
+            "variation_sku": "3136056",
+            "name": "Bronze",
+            "has_parent_sku": true,
+            "image": "https://www.lazysuzy.com/Pier-1/pier1_images/3136056_main.jpg",
+            "link": "/product/3136056",
+            "swatch_image": "https://www.lazysuzy.com/Pier-1/pier1_images/3136056_main.jpg"
+          },
+          {
+            "time_taken": 0.0005180835723876953,
+            "product_sku": "3136043",
+            "variation_sku": "3136028",
+            "name": "Red",
+            "has_parent_sku": true,
+            "image": "https://www.lazysuzy.com/Pier-1/pier1_images/3136028_main.jpg",
+            "link": "/product/3136028",
+            "swatch_image": "https://www.lazysuzy.com/Pier-1/pier1_images/3136028_main.jpg"
+          }
+        ]
+      },
+      {
+        "id": 2,
+        "sku": "3006627",
+        "is_new": false,
+        "site": "Pier 1",
+        "name": "Bennett Medium White Metal Lantern",
+        "product_url": "https://www.pier1.com/3006627.html",
+        "product_detail_url": "https://www.lazysuzy.com/product/3006627",
+        "is_price": "39.99",
+        "was_price": "39.99",
+        "percent_discount": "0.00",
+        "model_code": "White",
+        "color": "white",
+        "collection": "",
+        "condition": "Indoor/Outdoor",
+        "main_image": "https://www.lazysuzy.com/Pier-1/pier1_images/3006627_main.jpg",
+        "reviews": 251,
+        "rating": 4.91,
+        "wishlisted": false,
+        "variations": [
+          {
+            "time_taken": 0.0005359649658203125,
+            "product_sku": "3006627",
+            "variation_sku": "3006630",
+            "name": "Bronze",
+            "has_parent_sku": true,
+            "image": "https://www.lazysuzy.com/Pier-1/pier1_images/3006630_main.jpg",
+            "link": "/product/3006630",
+            "swatch_image": "https://www.lazysuzy.com/Pier-1/pier1_images/3006630_main.jpg"
+          },
+          {
+            "time_taken": 0.0005359649658203125,
+            "product_sku": "3006627",
+            "variation_sku": "3279230",
+            "name": "Blue",
+            "has_parent_sku": true,
+            "image": "https://www.lazysuzy.com/Pier-1/pier1_images/3279230_main.jpg",
+            "link": "/product/3279230",
+            "swatch_image": "https://www.lazysuzy.com/Pier-1/pier1_images/3279230_main.jpg"
+          },
+          {
+            "time_taken": 0.0005359649658203125,
+            "product_sku": "3006627",
+            "variation_sku": "3006601",
+            "name": "Red",
+            "has_parent_sku": true,
+            "image": "https://www.lazysuzy.com/Pier-1/pier1_images/3006601_main.jpg",
+            "link": "/product/3006601",
+            "swatch_image": "https://www.lazysuzy.com/Pier-1/pier1_images/3006601_main.jpg"
+          }
+        ]
+      },
+      {
+        "id": 2,
+        "sku": "IDT102",
+        "is_new": false,
+        "site": "Pier 1",
+        "name": "Natural Stonewash 9-Piece Dining Set with Armchairs",
+        "product_url": "https://www.pier1.com/bradding-natural-stonewash-9-piece-dining-set-with-armchairs/IDT102.html",
+        "product_detail_url": "https://www.lazysuzy.com/product/IDT102",
+        "is_price": "2279.91",
+        "was_price": "2279.91",
+        "percent_discount": "0.00",
+        "model_code": "",
+        "color": "natural",
+        "collection": "Bradding",
+        "condition": "",
+        "main_image": "https://www.lazysuzy.com/Pier-1/pier1_images/IDT102_main.jpg",
+        "reviews": 266,
+        "rating": 4.73,
+        "wishlisted": false,
+        "variations": []
+      },
+      {
+        "id": 2,
+        "sku": "IDT103",
+        "is_new": false,
+        "site": "Pier 1",
+        "name": "Natural Stonewash 7-Piece Dining Set with Armchairs",
+        "product_url": "https://www.pier1.com/bradding-natural-stonewash-7-piece-dining-set-with-armchairs/IDT103.html",
+        "product_detail_url": "https://www.lazysuzy.com/product/IDT103",
+        "is_price": "1919.93",
+        "was_price": "1919.93",
+        "percent_discount": "0.00",
+        "model_code": "",
+        "color": "natural",
+        "collection": "Bradding",
+        "condition": "",
+        "main_image": "https://www.lazysuzy.com/Pier-1/pier1_images/IDT103_main.jpg",
+        "reviews": 266,
+        "rating": 4.73,
+        "wishlisted": false,
+        "variations": []
+      },
+      {
+        "id": 2,
+        "sku": "IDT100",
+        "is_new": false,
+        "site": "Pier 1",
+        "name": "Natural Stonewash 7-Piece Dining Set",
+        "product_url": "https://www.pier1.com/bradding-natural-stonewash-7-piece-dining-set/IDT100.html",
+        "product_detail_url": "https://www.lazysuzy.com/product/IDT100",
+        "is_price": "1879.93",
+        "was_price": "1879.93",
+        "percent_discount": "0.00",
+        "model_code": "",
+        "color": "natural",
+        "collection": "Bradding",
+        "condition": "",
+        "main_image": "https://www.lazysuzy.com/Pier-1/pier1_images/IDT100_main.jpg",
+        "reviews": 260,
+        "rating": 4.74,
+        "wishlisted": false,
+        "variations": []
+      }
+    ]
+  }
