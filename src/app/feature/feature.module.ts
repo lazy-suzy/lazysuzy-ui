@@ -1,10 +1,10 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
-import { ProductsModule } from './containers';
+import { LandingModule, ProductsModule } from './containers';
 
 const DECLARATIONS = [];
 
-const MODULES = [CommonModule, ProductsModule];
+const MODULES = [CommonModule, ProductsModule, LandingModule];
 
 @NgModule({
   declarations: [...DECLARATIONS],
