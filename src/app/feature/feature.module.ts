@@ -1,13 +1,14 @@
-import { NgModule } from "@angular/core";
-import { CommonModule } from "@angular/common";
+import { CommonModule } from '@angular/common';
+import { NgModule } from '@angular/core';
+import { ProductsModule } from './containers';
 
 const DECLARATIONS = [];
 
-const MODULES = [CommonModule];
+const MODULES = [CommonModule, ProductsModule];
 
 @NgModule({
   declarations: [...DECLARATIONS],
   imports: [...MODULES],
-  exports: [...DECLARATIONS, ...MODULES]
+  exports: [...DECLARATIONS, ...MODULES],
 })
 export class FeatureModule {}
