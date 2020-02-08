@@ -1,13 +1,29 @@
 <mat-toolbar class="fixed">
-    <mat-toolbar-row class="flex justify-around">
-        <ng-container *ngFor="let category of categories; let i = index">
-            <span class="grow pointer ph2 f5" [matMenuTriggerFor]="menu">{{ category.display }}</span>
-            <mat-menu #menu="matMenu">
-                <a *ngFor="let subcategory of category.subCategories" [routerLink]="subcategory.route"
-                    routerLinkActive="active" class="no-underline">
-                    <button mat-menu-item>{{ subcategory.display | titlecase }}</button>
+    <mat-toolbar-row class="flex justify-between">
+        <div class="flex justify-around w-75">
+            <a routerLink="/" routerLinkActive="active" class="no-underline flex items-center mr3">
+                <img class="w4 pointer grow" [src]="logoPath" alt="Lazy Suzy Home">
+            </a>
+            <ng-container *ngFor="let category of categories; let i = index">
+                <span class="grow pointer ph2 f5"
+                    [matMenuTriggerFor]="categoryMenu">{{ category.display | titlecase }}</span>
+                <mat-menu #categoryMenu="matMenu">
+                    <a *ngFor="let subcategory of category.subCategories" [routerLink]="subcategory.route"
+                        routerLinkActive="active" class="no-underline">
+                        <button mat-menu-item>{{ subcategory.display | titlecase }}</button>
+                    </a>
+                </mat-menu>
+            </ng-container>
+        </div>
+        <div class="mr3 flex items-center">
+            <mat-icon class="grow pointer" aria-hidden="false" aria-label="Account" [matMenuTriggerFor]="accountMenu">
+                account_circle</mat-icon>
+            <mat-menu #accountMenu="matMenu">
+                <a *ngFor="let action of accountActions" [routerLink]="action.route" routerLinkActive="active"
+                    class="no-underline">
+                    <button mat-menu-item>{{ action.display | titlecase }}</button>
                 </a>
             </mat-menu>
-        </ng-container>
+        </div>
     </mat-toolbar-row>
 </mat-toolbar>

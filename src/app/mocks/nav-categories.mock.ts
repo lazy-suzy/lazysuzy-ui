@@ -2,7 +2,7 @@ import { INavCategory } from './../shared/models';
 
 export const MOCK_NAV_CATEGORIES: INavCategory[] = [
   {
-    display: 'Living',
+    display: 'living',
     subCategories: [
       {
         display: 'sofa',
@@ -47,44 +47,44 @@ export const MOCK_NAV_CATEGORIES: INavCategory[] = [
     ],
   },
   {
-    display: 'Bedroom',
+    display: 'bedroom',
     subCategories: [
       {
-        display: 'Beds',
+        display: 'beds',
         route: '/products/beds',
       },
       {
-        display: 'Headboard',
+        display: 'headboard',
         route: '/products/headboard',
       },
       {
-        display: 'Mattresses',
+        display: 'mattresses',
         route: '/products/mattresses',
       },
       {
-        display: 'Storage',
+        display: 'storage',
         route: '/products/storage',
       },
       {
-        display: 'Nightstands',
+        display: 'nightstands',
         route: '/products/nightstands',
       },
       {
-        display: 'Benches',
+        display: 'benches',
         route: '/products/benches',
       },
       {
-        display: 'Ottomans & Stools',
+        display: 'ottomans & Stools',
         route: '/products/ottomans-stools',
       },
       {
-        display: 'Vanity',
+        display: 'vanity',
         route: '/products/vanity',
       },
     ],
   },
   {
-    display: 'Hallway',
+    display: 'hallway',
     subCategories: [
       {
         display: 'seating',
@@ -101,7 +101,7 @@ export const MOCK_NAV_CATEGORIES: INavCategory[] = [
     ],
   },
   {
-    display: 'Dining',
+    display: 'dining',
     subCategories: [
       {
         display: 'tables',
@@ -134,7 +134,7 @@ export const MOCK_NAV_CATEGORIES: INavCategory[] = [
     ],
   },
   {
-    display: 'Office',
+    display: 'office',
     subCategories: [
       {
         display: 'desk & tables',
@@ -168,7 +168,7 @@ export const MOCK_NAV_CATEGORIES: INavCategory[] = [
     ],
   },
   {
-    display: 'Outdoor',
+    display: 'outdoor',
     subCategories: [
       {
         display: 'sofa',
@@ -213,7 +213,7 @@ export const MOCK_NAV_CATEGORIES: INavCategory[] = [
     ],
   },
   {
-    display: 'Kids',
+    display: 'kids',
     subCategories: [
       {
         display: 'beds',
@@ -234,7 +234,7 @@ export const MOCK_NAV_CATEGORIES: INavCategory[] = [
     ],
   },
   {
-    display: 'Decor',
+    display: 'decor',
     subCategories: [
       {
         display: 'mirrors',
