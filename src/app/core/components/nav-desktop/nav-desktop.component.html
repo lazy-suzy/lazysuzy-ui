@@ -3,8 +3,10 @@
         <ng-container *ngFor="let category of categories; let i = index">
             <span class="grow pointer ph2 f5" [matMenuTriggerFor]="menu">{{ category.display }}</span>
             <mat-menu #menu="matMenu">
-                <button mat-menu-item
-                    *ngFor="let subcategory of category.subCategories">{{ subcategory.display }}</button>
+                <a *ngFor="let subcategory of category.subCategories" [routerLink]="subcategory.route"
+                    routerLinkActive="active" class="no-underline">
+                    <button mat-menu-item>{{ subcategory.display | titlecase }}</button>
+                </a>
             </mat-menu>
         </ng-container>
     </mat-toolbar-row>
