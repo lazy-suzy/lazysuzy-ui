@@ -1,9 +1,9 @@
 export interface INavCategory {
   display: string;
-  subCategories: INavSubCategory[];
+  subCategories: IMenuItem[];
 }
 
-interface INavSubCategory {
+export interface IMenuItem {
   display: string;
   route: string;
 }

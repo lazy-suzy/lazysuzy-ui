@@ -1,10 +1,11 @@
+import { FooterModule } from './components/footer/footer.module';
 import { NavDesktopModule } from './components/nav-desktop/nav-desktop.module';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 const DECLARATIONS = [];
 
-const MODULES = [CommonModule, NavDesktopModule];
+const MODULES = [CommonModule, NavDesktopModule, FooterModule];
 
 @NgModule({
   declarations: [...DECLARATIONS],
