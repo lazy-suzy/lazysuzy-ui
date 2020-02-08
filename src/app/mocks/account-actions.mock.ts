@@ -1,4 +1,6 @@
-export const MOCK_ACCOUNT_ACTIONS = [
+import { IMenuItem } from './../shared/models';
+
+export const MOCK_ACCOUNT_ACTIONS: IMenuItem[] = [
   {
     display: 'login',
     route: '/login',
