@@ -1,14 +1,14 @@
-import { NavDesktopModule } from './components/nav-desktop/nav-desktop.module';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { LandingComponent } from './landing.component';
 
-const DECLARATIONS = [];
+const DECLARATIONS = [LandingComponent];
 
-const MODULES = [CommonModule, NavDesktopModule];
+const MODULES = [CommonModule];
 
 @NgModule({
   declarations: [...DECLARATIONS],
   imports: [...MODULES],
   exports: [...DECLARATIONS, ...MODULES],
 })
-export class CoreModule {}
+export class LandingModule {}
