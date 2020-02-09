@@ -1,9 +1,9 @@
-import { INavCategory } from './../shared/models';
+import { IDepartment } from './../shared/models';
 
-export const MOCK_NAV_CATEGORIES: INavCategory[] = [
+export const MOCK_DEPARTMENTS: IDepartment[] = [
   {
     display: 'living',
-    subCategories: [
+    categories: [
       {
         display: 'sofa',
         route: '/products/sofa',
@@ -48,7 +48,7 @@ export const MOCK_NAV_CATEGORIES: INavCategory[] = [
   },
   {
     display: 'bedroom',
-    subCategories: [
+    categories: [
       {
         display: 'beds',
         route: '/products/beds',
@@ -85,7 +85,7 @@ export const MOCK_NAV_CATEGORIES: INavCategory[] = [
   },
   {
     display: 'hallway',
-    subCategories: [
+    categories: [
       {
         display: 'seating',
         route: '/products/seating',
@@ -102,7 +102,7 @@ export const MOCK_NAV_CATEGORIES: INavCategory[] = [
   },
   {
     display: 'dining',
-    subCategories: [
+    categories: [
       {
         display: 'tables',
         route: '/products/tables',
@@ -135,7 +135,7 @@ export const MOCK_NAV_CATEGORIES: INavCategory[] = [
   },
   {
     display: 'office',
-    subCategories: [
+    categories: [
       {
         display: 'desk & tables',
         route: '/products/desk-tables',
@@ -152,7 +152,7 @@ export const MOCK_NAV_CATEGORIES: INavCategory[] = [
   },
   {
     display: 'Bath',
-    subCategories: [
+    categories: [
       {
         display: 'laundry',
         route: '/products/laundry',
@@ -169,7 +169,7 @@ export const MOCK_NAV_CATEGORIES: INavCategory[] = [
   },
   {
     display: 'outdoor',
-    subCategories: [
+    categories: [
       {
         display: 'sofa',
         route: '/products/sofa',
@@ -214,7 +214,7 @@ export const MOCK_NAV_CATEGORIES: INavCategory[] = [
   },
   {
     display: 'kids',
-    subCategories: [
+    categories: [
       {
         display: 'beds',
         route: '/products/beds',
@@ -235,7 +235,7 @@ export const MOCK_NAV_CATEGORIES: INavCategory[] = [
   },
   {
     display: 'decor',
-    subCategories: [
+    categories: [
       {
         display: 'mirrors',
         route: '/products/mirrors',

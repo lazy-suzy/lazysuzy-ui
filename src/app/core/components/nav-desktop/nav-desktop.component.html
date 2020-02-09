@@ -4,13 +4,13 @@
             <a routerLink="/" routerLinkActive="active" class="no-underline flex items-center mr3">
                 <img class="w4 pointer grow" [src]="logoPath" alt="Lazy Suzy Home">
             </a>
-            <ng-container *ngFor="let category of categories; let i = index">
+            <ng-container *ngFor="let department of departments; let i = index">
                 <span class="grow pointer ph2 f5"
-                    [matMenuTriggerFor]="categoryMenu">{{ category.display | titlecase }}</span>
-                <mat-menu #categoryMenu="matMenu">
-                    <a *ngFor="let subcategory of category.subCategories" [routerLink]="subcategory.route"
+                    [matMenuTriggerFor]="departmentMenu">{{ department.display | titlecase }}</span>
+                <mat-menu #departmentMenu="matMenu">
+                    <a *ngFor="let category of department.category" [routerLink]="category.route"
                         routerLinkActive="active" class="no-underline">
-                        <button mat-menu-item>{{ subcategory.display | titlecase }}</button>
+                        <button mat-menu-item>{{ category.display | titlecase }}</button>
                     </a>
                 </mat-menu>
             </ng-container>
