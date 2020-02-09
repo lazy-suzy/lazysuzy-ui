@@ -1,0 +1,2549 @@
+{
+  "seo_data": {
+    "page_title": "Sofas",
+    "full_title": "Living Room Sofas",
+    "email_title": "Sofas",
+    "description": "Search hundreds of Sofas from top brands at once. Add to your room designs with your own design boards.",
+    "image_url": "https://www.lazysuzy.com/images/product-category/Sofa.png"
+  },
+  "total": 441,
+  "constructor_count": 0,
+  "sortType": [
+    { "name": "Recommended", "value": "recommended", "enabled": false },
+    { "name": "Popularity", "value": "popularity", "enabled": false },
+    {
+      "name": "Price: Low to High",
+      "value": "price_low_to_high",
+      "enabled": false
+    },
+    {
+      "name": "Price: High to Low",
+      "value": "price_high_to_low",
+      "enabled": false
+    }
+  ],
+  "limit": 24,
+  "filterData": {
+    "brand": [
+      {
+        "name": "CB2",
+        "value": "cb2",
+        "enabled": true,
+        "checked": false,
+        "count": 150
+      },
+      {
+        "name": "Crate & Barrel",
+        "value": "cab",
+        "enabled": true,
+        "checked": false,
+        "count": 161
+      },
+      {
+        "name": "Pier 1",
+        "value": "pier1",
+        "enabled": true,
+        "checked": false,
+        "count": 9
+      },
+      {
+        "name": "Pottery Barn",
+        "value": "potterybarn",
+        "enabled": false,
+        "checked": false,
+        "count": 0
+      },
+      {
+        "name": "West Elm",
+        "value": "westelm",
+        "enabled": true,
+        "checked": false,
+        "count": 109
+      },
+      {
+        "name": "World Market",
+        "value": "nw",
+        "enabled": true,
+        "checked": false,
+        "count": 12
+      }
+    ],
+    "price": { "from": 300, "to": 9896, "max": 9896, "min": 299.99 },
+    "type": [
+      {
+        "name": "Storage ",
+        "value": "storage ",
+        "enabled": true,
+        "checked": false,
+        "count": 3
+      }
+    ],
+    "color": [
+      {
+        "name": "Black",
+        "value": "black",
+        "hex": "#000000",
+        "enabled": true,
+        "checked": false
+      },
+      {
+        "name": "Blue",
+        "value": "blue",
+        "hex": "#0000ee",
+        "enabled": true,
+        "checked": false
+      },
+      {
+        "name": "Brown",
+        "value": "brown",
+        "hex": "#a52a2a",
+        "enabled": true,
+        "checked": false
+      },
+      {
+        "name": "Clear",
+        "value": "clear",
+        "hex": "#dcf0ef",
+        "enabled": false,
+        "checked": false
+      },
+      {
+        "name": "Copper",
+        "value": "copper",
+        "hex": "#b87333",
+        "enabled": false,
+        "checked": false
+      },
+      {
+        "name": "Gold",
+        "value": "gold",
+        "hex": "#FFD700",
+        "enabled": false,
+        "checked": false
+      },
+      {
+        "name": "Green",
+        "value": "green",
+        "hex": "#008000",
+        "enabled": true,
+        "checked": false
+      },
+      {
+        "name": "Grey",
+        "value": "grey",
+        "hex": "#808080",
+        "enabled": true,
+        "checked": false
+      },
+      {
+        "name": "Multicolor",
+        "value": "multicolor",
+        "hex": "#eeeeee",
+        "enabled": true,
+        "checked": false
+      },
+      {
+        "name": "Pink",
+        "value": "pink",
+        "hex": "#FFC0CB",
+        "enabled": true,
+        "checked": false
+      },
+      {
+        "name": "Purple",
+        "value": "purple",
+        "hex": "#800080",
+        "enabled": false,
+        "checked": false
+      },
+      {
+        "name": "Red",
+        "value": "red",
+        "hex": "#FF0000",
+        "enabled": true,
+        "checked": false
+      },
+      {
+        "name": "Silver",
+        "value": "silver",
+        "hex": "#C0C0C0",
+        "enabled": true,
+        "checked": false
+      },
+      {
+        "name": "Tan",
+        "value": "tan",
+        "hex": "#d2b48c",
+        "enabled": true,
+        "checked": false
+      },
+      {
+        "name": "White",
+        "value": "white",
+        "hex": "#ffffff",
+        "enabled": false,
+        "checked": false
+      }
+    ],
+    "category": null
+  },
+  "products": [
+    {
+      "id": 5,
+      "sku": "302835",
+      "is_new": false,
+      "site": "Crate & Barrel",
+      "name": "Lounge II 93\" Sofa",
+      "product_url": "https://www.crateandbarrel.com/lounge-ii-93-sofa/s302835",
+      "product_detail_url": "https://www.lazysuzy.com/product/302835",
+      "is_price": "1799",
+      "was_price": "1799",
+      "percent_discount": "0.00",
+      "model_code": "",
+      "color": "Black,Blue,Grey,Tan",
+      "collection": "",
+      "condition": "",
+      "main_image": "https://www.lazysuzy.com/cnb/images-new/isimageCrateLoungeII93SofaCementSHS15_1x1LoungeII93SofaCementSHS15_1x1",
+      "reviews": 537,
+      "rating": 4.3911,
+      "wishlisted": false,
+      "variations": [
+        {
+          "product_sku": "302835",
+          "variation_sku": "302835",
+          "name": "Taft, Cement",
+          "has_parent_sku": true,
+          "swatch_image": "https://www.lazysuzy.com/cnb/images-new/choice_398zmweb_swatch_custom_thumbnail200201060500choice_398zm.jpgchoice_398zm.jpg",
+          "image": "https://www.lazysuzy.com/cnb/images-new/isimageCrateitem_103_147_398_0item_103_147_398_0",
+          "link": "/product/302835"
+        },
+        {
+          "product_sku": "302835",
+          "variation_sku": "302843",
+          "name": "Taft, Truffle",
+          "has_parent_sku": true,
+          "swatch_image": "https://www.lazysuzy.com/cnb/images-new/choice_403zmweb_swatch_custom_thumbnail200201060500choice_403zm.jpgchoice_403zm.jpg",
+          "image": "https://www.lazysuzy.com/cnb/images-new/isimageCrateitem_103_147_403_0item_103_147_403_0",
+          "link": "/product/302843"
+        },
+        {
+          "product_sku": "302835",
+          "variation_sku": "483522",
+          "name": "Taft, Steel",
+          "has_parent_sku": true,
+          "swatch_image": "https://www.lazysuzy.com/cnb/images-new/choice_402zmweb_swatch_custom_thumbnail200201060500choice_402zm.jpgchoice_402zm.jpg",
+          "image": "https://www.lazysuzy.com/cnb/images-new/isimageCrateitem_103_147_402_0item_103_147_402_0",
+          "link": "/product/483522"
+        },
+        {
+          "product_sku": "302835",
+          "variation_sku": "304463",
+          "name": "View, White",
+          "has_parent_sku": false,
+          "swatch_image": "https://www.lazysuzy.com/cnb/images-new/choice_355zmweb_swatch_custom_thumbnail200201060500choice_355zm.jpgchoice_355zm.jpg",
+          "image": "https://www.lazysuzy.com/cnb/images-new/isimageCrateitem_103_147_355_0item_103_147_355_0",
+          "link": "/product/302835"
+        },
+        {
+          "product_sku": "302835",
+          "variation_sku": "304463",
+          "name": "Taft, Pearl",
+          "has_parent_sku": false,
+          "swatch_image": "https://www.lazysuzy.com/cnb/images-new/choice_401zmweb_swatch_custom_thumbnail200201060500choice_401zm.jpgchoice_401zm.jpg",
+          "image": "https://www.lazysuzy.com/cnb/images-new/isimageCrateitem_103_147_401_0item_103_147_401_0",
+          "link": "/product/302835"
+        },
+        {
+          "product_sku": "302835",
+          "variation_sku": "304463",
+          "name": "View, Wheat",
+          "has_parent_sku": false,
+          "swatch_image": "https://www.lazysuzy.com/cnb/images-new/choice_354zmweb_swatch_custom_thumbnail200201060500choice_354zm.jpgchoice_354zm.jpg",
+          "image": "https://www.lazysuzy.com/cnb/images-new/isimageCrateitem_103_147_354_0item_103_147_354_0",
+          "link": "/product/302835"
+        },
+        {
+          "product_sku": "302835",
+          "variation_sku": "304463",
+          "name": "View, Taupe",
+          "has_parent_sku": false,
+          "swatch_image": "https://www.lazysuzy.com/cnb/images-new/choice_353zmweb_swatch_custom_thumbnail200201060500choice_353zm.jpgchoice_353zm.jpg",
+          "image": "https://www.lazysuzy.com/cnb/images-new/isimageCrateitem_103_147_353_0item_103_147_353_0",
+          "link": "/product/302835"
+        },
+        {
+          "product_sku": "302835",
+          "variation_sku": "304463",
+          "name": "View, Ale",
+          "has_parent_sku": false,
+          "swatch_image": "https://www.lazysuzy.com/cnb/images-new/choice_347zmweb_swatch_custom_thumbnail200201060500choice_347zm.jpgchoice_347zm.jpg",
+          "image": "https://www.lazysuzy.com/cnb/images-new/isimageCrateitem_103_147_347_0item_103_147_347_0",
+          "link": "/product/302835"
+        },
+        {
+          "product_sku": "302835",
+          "variation_sku": "304463",
+          "name": "Taft, Heather",
+          "has_parent_sku": false,
+          "swatch_image": "https://www.lazysuzy.com/cnb/images-new/choice_400zmweb_swatch_custom_thumbnail200201060500choice_400zm.jpgchoice_400zm.jpg",
+          "image": "https://www.lazysuzy.com/cnb/images-new/isimageCrateitem_103_147_400_0item_103_147_400_0",
+          "link": "/product/302835"
+        },
+        {
+          "product_sku": "302835",
+          "variation_sku": "304463",
+          "name": "View, Espresso",
+          "has_parent_sku": false,
+          "swatch_image": "https://www.lazysuzy.com/cnb/images-new/choice_357zmweb_swatch_custom_thumbnail200201060500choice_357zm.jpgchoice_357zm.jpg",
+          "image": "https://www.lazysuzy.com/cnb/images-new/isimageCrateitem_103_147_357_0item_103_147_357_0",
+          "link": "/product/302835"
+        },
+        {
+          "product_sku": "302835",
+          "variation_sku": "304463",
+          "name": "View, Grey",
+          "has_parent_sku": false,
+          "swatch_image": "https://www.lazysuzy.com/cnb/images-new/choice_349zmweb_swatch_custom_thumbnail200201060500choice_349zm.jpgchoice_349zm.jpg",
+          "image": "https://www.lazysuzy.com/cnb/images-new/isimageCrateitem_103_147_349_0item_103_147_349_0",
+          "link": "/product/302835"
+        },
+        {
+          "product_sku": "302835",
+          "variation_sku": "304463",
+          "name": "View, Otter",
+          "has_parent_sku": false,
+          "swatch_image": "https://www.lazysuzy.com/cnb/images-new/choice_351zmweb_swatch_custom_thumbnail200201060500choice_351zm.jpgchoice_351zm.jpg",
+          "image": "https://www.lazysuzy.com/cnb/images-new/isimageCrateitem_103_147_351_0item_103_147_351_0",
+          "link": "/product/302835"
+        },
+        {
+          "product_sku": "302835",
+          "variation_sku": "304463",
+          "name": "View, Pewter",
+          "has_parent_sku": false,
+          "swatch_image": "https://www.lazysuzy.com/cnb/images-new/choice_352zmweb_swatch_custom_thumbnail200201060500choice_352zm.jpgchoice_352zm.jpg",
+          "image": "https://www.lazysuzy.com/cnb/images-new/isimageCrateitem_103_147_352_0item_103_147_352_0",
+          "link": "/product/302835"
+        },
+        {
+          "product_sku": "302835",
+          "variation_sku": "304463",
+          "name": "View, Black",
+          "has_parent_sku": false,
+          "swatch_image": "https://www.lazysuzy.com/cnb/images-new/choice_358zmweb_swatch_custom_thumbnail200201060500choice_358zm.jpgchoice_358zm.jpg",
+          "image": "https://www.lazysuzy.com/cnb/images-new/isimageCrateitem_103_147_358_0item_103_147_358_0",
+          "link": "/product/302835"
+        },
+        {
+          "product_sku": "302835",
+          "variation_sku": "304463",
+          "name": "View, Nile",
+          "has_parent_sku": false,
+          "swatch_image": "https://www.lazysuzy.com/cnb/images-new/choice_356zmweb_swatch_custom_thumbnail200201060500choice_356zm.jpgchoice_356zm.jpg",
+          "image": "https://www.lazysuzy.com/cnb/images-new/isimageCrateitem_103_147_356_0item_103_147_356_0",
+          "link": "/product/302835"
+        },
+        {
+          "product_sku": "302835",
+          "variation_sku": "304463",
+          "name": "View, Navy",
+          "has_parent_sku": false,
+          "swatch_image": "https://www.lazysuzy.com/cnb/images-new/choice_350zmweb_swatch_custom_thumbnail200201060500choice_350zm.jpgchoice_350zm.jpg",
+          "image": "https://www.lazysuzy.com/cnb/images-new/isimageCrateitem_103_147_350_0item_103_147_350_0",
+          "link": "/product/302835"
+        },
+        {
+          "product_sku": "302835",
+          "variation_sku": "304463",
+          "name": "Taft, Cobalt",
+          "has_parent_sku": false,
+          "swatch_image": "https://www.lazysuzy.com/cnb/images-new/choice_399zmweb_swatch_custom_thumbnail200201060500choice_399zm.jpgchoice_399zm.jpg",
+          "image": "https://www.lazysuzy.com/cnb/images-new/isimageCrateitem_103_147_399_0item_103_147_399_0",
+          "link": "/product/302835"
+        },
+        {
+          "product_sku": "302835",
+          "variation_sku": "304463",
+          "name": "View, Berry",
+          "has_parent_sku": false,
+          "swatch_image": "https://www.lazysuzy.com/cnb/images-new/choice_348zmweb_swatch_custom_thumbnail200201060500choice_348zm.jpgchoice_348zm.jpg",
+          "image": "https://www.lazysuzy.com/cnb/images-new/isimageCrateitem_103_147_348_0item_103_147_348_0",
+          "link": "/product/302835"
+        },
+        {
+          "product_sku": "302835",
+          "variation_sku": "304463",
+          "name": "View, Brandy",
+          "has_parent_sku": false,
+          "swatch_image": "https://www.lazysuzy.com/cnb/images-new/choice_1836zmweb_swatch_custom_thumbnail200201060500choice_1836zm.jpgchoice_1836zm.jpg",
+          "image": "https://www.lazysuzy.com/cnb/images-new/isimageCrateitem_103_147_1836_0item_103_147_1836_0",
+          "link": "/product/302835"
+        }
+      ]
+    },
+    {
+      "id": 5,
+      "sku": "231370",
+      "is_new": false,
+      "site": "Crate & Barrel",
+      "name": "Lounge II Petite 93\" Sofa",
+      "product_url": "https://www.crateandbarrel.com/lounge-ii-petite-93-sofa/s231370",
+      "product_detail_url": "https://www.lazysuzy.com/product/231370",
+      "is_price": "1749",
+      "was_price": "1749",
+      "percent_discount": "0.00",
+      "model_code": "",
+      "color": "",
+      "collection": "",
+      "condition": "",
+      "main_image": "https://www.lazysuzy.com/cnb/images-new/isimageCrateLoungeIIPetite93inSofaTaftTrflSHS16_1x1LoungeIIPetite93inSofaTaftTrflSHS16_1x1",
+      "reviews": 537,
+      "rating": 4.3911,
+      "wishlisted": false,
+      "variations": [
+        {
+          "product_sku": "231370",
+          "variation_sku": "231370",
+          "name": "Taft, Truffle",
+          "has_parent_sku": true,
+          "swatch_image": "https://www.lazysuzy.com/cnb/images-new/choice_403zmweb_swatch_custom_thumbnail200201072248choice_403zm.jpgchoice_403zm.jpg",
+          "image": "https://www.lazysuzy.com/cnb/images-new/isimageCrateitem_236_147_403_0item_236_147_403_0",
+          "link": "/product/231370"
+        },
+        {
+          "product_sku": "231370",
+          "variation_sku": "231316",
+          "name": "Taft, Cement",
+          "has_parent_sku": true,
+          "swatch_image": "https://www.lazysuzy.com/cnb/images-new/choice_398zmweb_swatch_custom_thumbnail200201072248choice_398zm.jpgchoice_398zm.jpg",
+          "image": "https://www.lazysuzy.com/cnb/images-new/isimageCrateitem_236_147_398_0item_236_147_398_0",
+          "link": "/product/231316"
+        },
+        {
+          "product_sku": "231370",
+          "variation_sku": "231356",
+          "name": "Taft, Steel",
+          "has_parent_sku": true,
+          "swatch_image": "https://www.lazysuzy.com/cnb/images-new/choice_402zmweb_swatch_custom_thumbnail200201072248choice_402zm.jpgchoice_402zm.jpg",
+          "image": "https://www.lazysuzy.com/cnb/images-new/isimageCrateitem_236_147_402_0item_236_147_402_0",
+          "link": "/product/231356"
+        },
+        {
+          "product_sku": "231370",
+          "variation_sku": "590241",
+          "name": "View, White",
+          "has_parent_sku": false,
+          "swatch_image": "https://www.lazysuzy.com/cnb/images-new/choice_355zmweb_swatch_custom_thumbnail200201072248choice_355zm.jpgchoice_355zm.jpg",
+          "image": "https://www.lazysuzy.com/cnb/images-new/isimageCrateitem_236_147_355_0item_236_147_355_0",
+          "link": "/product/231370"
+        },
+        {
+          "product_sku": "231370",
+          "variation_sku": "590241",
+          "name": "Taft, Pearl",
+          "has_parent_sku": false,
+          "swatch_image": "https://www.lazysuzy.com/cnb/images-new/choice_401zmweb_swatch_custom_thumbnail200201072248choice_401zm.jpgchoice_401zm.jpg",
+          "image": "https://www.lazysuzy.com/cnb/images-new/isimageCrateitem_236_147_401_0item_236_147_401_0",
+          "link": "/product/231370"
+        },
+        {
+          "product_sku": "231370",
+          "variation_sku": "590241",
+          "name": "View, Wheat",
+          "has_parent_sku": false,
+          "swatch_image": "https://www.lazysuzy.com/cnb/images-new/choice_354zmweb_swatch_custom_thumbnail200201072248choice_354zm.jpgchoice_354zm.jpg",
+          "image": "https://www.lazysuzy.com/cnb/images-new/isimageCrateitem_236_147_354_0item_236_147_354_0",
+          "link": "/product/231370"
+        },
+        {
+          "product_sku": "231370",
+          "variation_sku": "590241",
+          "name": "View, Taupe",
+          "has_parent_sku": false,
+          "swatch_image": "https://www.lazysuzy.com/cnb/images-new/choice_353zmweb_swatch_custom_thumbnail200201072248choice_353zm.jpgchoice_353zm.jpg",
+          "image": "https://www.lazysuzy.com/cnb/images-new/isimageCrateitem_236_147_353_0item_236_147_353_0",
+          "link": "/product/231370"
+        },
+        {
+          "product_sku": "231370",
+          "variation_sku": "590241",
+          "name": "View, Ale",
+          "has_parent_sku": false,
+          "swatch_image": "https://www.lazysuzy.com/cnb/images-new/choice_347zmweb_swatch_custom_thumbnail200201072248choice_347zm.jpgchoice_347zm.jpg",
+          "image": "https://www.lazysuzy.com/cnb/images-new/isimageCrateitem_236_147_347_0item_236_147_347_0",
+          "link": "/product/231370"
+        },
+        {
+          "product_sku": "231370",
+          "variation_sku": "590241",
+          "name": "Taft, Heather",
+          "has_parent_sku": false,
+          "swatch_image": "https://www.lazysuzy.com/cnb/images-new/choice_400zmweb_swatch_custom_thumbnail200201072248choice_400zm.jpgchoice_400zm.jpg",
+          "image": "https://www.lazysuzy.com/cnb/images-new/isimageCrateitem_236_147_400_0item_236_147_400_0",
+          "link": "/product/231370"
+        },
+        {
+          "product_sku": "231370",
+          "variation_sku": "590241",
+          "name": "View, Espresso",
+          "has_parent_sku": false,
+          "swatch_image": "https://www.lazysuzy.com/cnb/images-new/choice_357zmweb_swatch_custom_thumbnail200201072248choice_357zm.jpgchoice_357zm.jpg",
+          "image": "https://www.lazysuzy.com/cnb/images-new/isimageCrateitem_236_147_357_0item_236_147_357_0",
+          "link": "/product/231370"
+        },
+        {
+          "product_sku": "231370",
+          "variation_sku": "590241",
+          "name": "View, Grey",
+          "has_parent_sku": false,
+          "swatch_image": "https://www.lazysuzy.com/cnb/images-new/choice_349zmweb_swatch_custom_thumbnail200201072248choice_349zm.jpgchoice_349zm.jpg",
+          "image": "https://www.lazysuzy.com/cnb/images-new/isimageCrateitem_236_147_349_0item_236_147_349_0",
+          "link": "/product/231370"
+        },
+        {
+          "product_sku": "231370",
+          "variation_sku": "590241",
+          "name": "View, Otter",
+          "has_parent_sku": false,
+          "swatch_image": "https://www.lazysuzy.com/cnb/images-new/choice_351zmweb_swatch_custom_thumbnail200201072248choice_351zm.jpgchoice_351zm.jpg",
+          "image": "https://www.lazysuzy.com/cnb/images-new/isimageCrateitem_236_147_351_0item_236_147_351_0",
+          "link": "/product/231370"
+        },
+        {
+          "product_sku": "231370",
+          "variation_sku": "590241",
+          "name": "View, Pewter",
+          "has_parent_sku": false,
+          "swatch_image": "https://www.lazysuzy.com/cnb/images-new/choice_352zmweb_swatch_custom_thumbnail200201072248choice_352zm.jpgchoice_352zm.jpg",
+          "image": "https://www.lazysuzy.com/cnb/images-new/isimageCrateitem_236_147_352_0item_236_147_352_0",
+          "link": "/product/231370"
+        },
+        {
+          "product_sku": "231370",
+          "variation_sku": "590241",
+          "name": "View, Black",
+          "has_parent_sku": false,
+          "swatch_image": "https://www.lazysuzy.com/cnb/images-new/choice_358zmweb_swatch_custom_thumbnail200201072248choice_358zm.jpgchoice_358zm.jpg",
+          "image": "https://www.lazysuzy.com/cnb/images-new/isimageCrateitem_236_147_358_0item_236_147_358_0",
+          "link": "/product/231370"
+        },
+        {
+          "product_sku": "231370",
+          "variation_sku": "590241",
+          "name": "View, Nile",
+          "has_parent_sku": false,
+          "swatch_image": "https://www.lazysuzy.com/cnb/images-new/choice_356zmweb_swatch_custom_thumbnail200201072248choice_356zm.jpgchoice_356zm.jpg",
+          "image": "https://www.lazysuzy.com/cnb/images-new/isimageCrateitem_236_147_356_0item_236_147_356_0",
+          "link": "/product/231370"
+        },
+        {
+          "product_sku": "231370",
+          "variation_sku": "590241",
+          "name": "View, Navy",
+          "has_parent_sku": false,
+          "swatch_image": "https://www.lazysuzy.com/cnb/images-new/choice_350zmweb_swatch_custom_thumbnail200201072248choice_350zm.jpgchoice_350zm.jpg",
+          "image": "https://www.lazysuzy.com/cnb/images-new/isimageCrateitem_236_147_350_0item_236_147_350_0",
+          "link": "/product/231370"
+        },
+        {
+          "product_sku": "231370",
+          "variation_sku": "590241",
+          "name": "Taft, Cobalt",
+          "has_parent_sku": false,
+          "swatch_image": "https://www.lazysuzy.com/cnb/images-new/choice_399zmweb_swatch_custom_thumbnail200201072248choice_399zm.jpgchoice_399zm.jpg",
+          "image": "https://www.lazysuzy.com/cnb/images-new/isimageCrateitem_236_147_399_0item_236_147_399_0",
+          "link": "/product/231370"
+        },
+        {
+          "product_sku": "231370",
+          "variation_sku": "590241",
+          "name": "View, Berry",
+          "has_parent_sku": false,
+          "swatch_image": "https://www.lazysuzy.com/cnb/images-new/choice_348zmweb_swatch_custom_thumbnail200201072248choice_348zm.jpgchoice_348zm.jpg",
+          "image": "https://www.lazysuzy.com/cnb/images-new/isimageCrateitem_236_147_348_0item_236_147_348_0",
+          "link": "/product/231370"
+        },
+        {
+          "product_sku": "231370",
+          "variation_sku": "590241",
+          "name": "View, Brandy",
+          "has_parent_sku": false,
+          "swatch_image": "https://www.lazysuzy.com/cnb/images-new/choice_1836zmweb_swatch_custom_thumbnail200201072248choice_1836zm.jpgchoice_1836zm.jpg",
+          "image": "https://www.lazysuzy.com/cnb/images-new/isimageCrateitem_236_147_1836_0item_236_147_1836_0",
+          "link": "/product/231370"
+        }
+      ]
+    },
+    {
+      "id": 1,
+      "sku": "283934",
+      "is_new": false,
+      "site": "CB2",
+      "name": "Flex Gravel Sleeper Sofa",
+      "product_url": "https://cb2.com/flex-gravel-sleeper-sofa/s283934",
+      "product_detail_url": "https://www.lazysuzy.com/product/283934",
+      "is_price": "999",
+      "was_price": "999",
+      "percent_discount": "0.00",
+      "model_code": "",
+      "color": "",
+      "collection": "",
+      "condition": "",
+      "main_image": "https://www.lazysuzy.com/cb2/images/isimageCB2FlexSofaGravelAV2S15FlexSofaGravelAV2S15",
+      "reviews": 238,
+      "rating": 4.4034,
+      "wishlisted": false,
+      "variations": [
+        {
+          "product_sku": "283934",
+          "variation_sku": "283934",
+          "name": "Basic, Gravel",
+          "has_parent_sku": true,
+          "swatch_image": "https://www.lazysuzy.com/cb2/images/choice_1034zmweb_swatch_custom_thumbnail200114052526choice_1034zm.jpgchoice_1034zm.jpg",
+          "image": "https://www.lazysuzy.com/cb2/images/isimageCB2item_329_118_1034_0item_329_118_1034_0",
+          "link": "/product/283934"
+        },
+        {
+          "product_sku": "283934",
+          "variation_sku": "150992",
+          "name": "Dess, Microgrid Grey",
+          "has_parent_sku": true,
+          "swatch_image": "https://www.lazysuzy.com/cb2/images/choice_1047zmweb_swatch_custom_thumbnail200114052526choice_1047zm.jpgchoice_1047zm.jpg",
+          "image": "https://www.lazysuzy.com/cb2/images/isimageCB2item_329_118_1047_0item_329_118_1047_0",
+          "link": "/product/150992"
+        },
+        {
+          "product_sku": "283934",
+          "variation_sku": "356748",
+          "name": "Jaly, Black",
+          "has_parent_sku": true,
+          "swatch_image": "https://www.lazysuzy.com/cb2/images/choice_1903zmweb_swatch_custom_thumbnail200114052524choice_1903zm.jpgchoice_1903zm.jpg",
+          "image": "https://www.lazysuzy.com/cb2/images/isimageCB2item_329_118_1903_0item_329_118_1903_0",
+          "link": "/product/356748"
+        }
+      ]
+    },
+    {
+      "id": 5,
+      "sku": "302850",
+      "is_new": false,
+      "site": "Crate & Barrel",
+      "name": "Lounge II 83\" Sofa",
+      "product_url": "https://www.crateandbarrel.com/lounge-ii-83-sofa/s302850",
+      "product_detail_url": "https://www.lazysuzy.com/product/302850",
+      "is_price": "1699",
+      "was_price": "1699",
+      "percent_discount": "0.00",
+      "model_code": "",
+      "color": "Black,Blue,Grey,Tan",
+      "collection": "",
+      "condition": "",
+      "main_image": "https://www.lazysuzy.com/cnb/images-new/isimageCrateLoungeII83SofaCementSHS15_1x1LoungeII83SofaCementSHS15_1x1",
+      "reviews": 213,
+      "rating": 4.3239,
+      "wishlisted": false,
+      "variations": [
+        {
+          "product_sku": "302850",
+          "variation_sku": "302850",
+          "name": "Taft, Cement",
+          "has_parent_sku": true,
+          "swatch_image": "https://www.lazysuzy.com/cnb/images-new/choice_398zmweb_swatch_custom_thumbnail200201072248choice_398zm.jpgchoice_398zm.jpg",
+          "image": "https://www.lazysuzy.com/cnb/images-new/isimageCrateitem_103_146_398_0item_103_146_398_0",
+          "link": "/product/302850"
+        },
+        {
+          "product_sku": "302850",
+          "variation_sku": "302877",
+          "name": "Taft, Truffle",
+          "has_parent_sku": true,
+          "swatch_image": "https://www.lazysuzy.com/cnb/images-new/choice_403zmweb_swatch_custom_thumbnail200201072248choice_403zm.jpgchoice_403zm.jpg",
+          "image": "https://www.lazysuzy.com/cnb/images-new/isimageCrateitem_103_146_403_0item_103_146_403_0",
+          "link": "/product/302877"
+        },
+        {
+          "product_sku": "302850",
+          "variation_sku": "483595",
+          "name": "Taft, Steel",
+          "has_parent_sku": true,
+          "swatch_image": "https://www.lazysuzy.com/cnb/images-new/choice_402zmweb_swatch_custom_thumbnail200201072248choice_402zm.jpgchoice_402zm.jpg",
+          "image": "https://www.lazysuzy.com/cnb/images-new/isimageCrateitem_103_146_402_0item_103_146_402_0",
+          "link": "/product/483595"
+        },
+        {
+          "product_sku": "302850",
+          "variation_sku": "304470",
+          "name": "View, White",
+          "has_parent_sku": false,
+          "swatch_image": "https://www.lazysuzy.com/cnb/images-new/choice_355zmweb_swatch_custom_thumbnail200201072248choice_355zm.jpgchoice_355zm.jpg",
+          "image": "https://www.lazysuzy.com/cnb/images-new/isimageCrateitem_103_146_355_0item_103_146_355_0",
+          "link": "/product/302850"
+        },
+        {
+          "product_sku": "302850",
+          "variation_sku": "304470",
+          "name": "Taft, Pearl",
+          "has_parent_sku": false,
+          "swatch_image": "https://www.lazysuzy.com/cnb/images-new/choice_401zmweb_swatch_custom_thumbnail200201072248choice_401zm.jpgchoice_401zm.jpg",
+          "image": "https://www.lazysuzy.com/cnb/images-new/isimageCrateitem_103_146_401_0item_103_146_401_0",
+          "link": "/product/302850"
+        },
+        {
+          "product_sku": "302850",
+          "variation_sku": "304470",
+          "name": "View, Wheat",
+          "has_parent_sku": false,
+          "swatch_image": "https://www.lazysuzy.com/cnb/images-new/choice_354zmweb_swatch_custom_thumbnail200201072248choice_354zm.jpgchoice_354zm.jpg",
+          "image": "https://www.lazysuzy.com/cnb/images-new/isimageCrateitem_103_146_354_0item_103_146_354_0",
+          "link": "/product/302850"
+        },
+        {
+          "product_sku": "302850",
+          "variation_sku": "304470",
+          "name": "View, Taupe",
+          "has_parent_sku": false,
+          "swatch_image": "https://www.lazysuzy.com/cnb/images-new/choice_353zmweb_swatch_custom_thumbnail200201072248choice_353zm.jpgchoice_353zm.jpg",
+          "image": "https://www.lazysuzy.com/cnb/images-new/isimageCrateitem_103_146_353_0item_103_146_353_0",
+          "link": "/product/302850"
+        },
+        {
+          "product_sku": "302850",
+          "variation_sku": "304470",
+          "name": "View, Ale",
+          "has_parent_sku": false,
+          "swatch_image": "https://www.lazysuzy.com/cnb/images-new/choice_347zmweb_swatch_custom_thumbnail200201072248choice_347zm.jpgchoice_347zm.jpg",
+          "image": "https://www.lazysuzy.com/cnb/images-new/isimageCrateitem_103_146_347_0item_103_146_347_0",
+          "link": "/product/302850"
+        },
+        {
+          "product_sku": "302850",
+          "variation_sku": "304470",
+          "name": "Taft, Heather",
+          "has_parent_sku": false,
+          "swatch_image": "https://www.lazysuzy.com/cnb/images-new/choice_400zmweb_swatch_custom_thumbnail200201072248choice_400zm.jpgchoice_400zm.jpg",
+          "image": "https://www.lazysuzy.com/cnb/images-new/isimageCrateitem_103_146_400_0item_103_146_400_0",
+          "link": "/product/302850"
+        },
+        {
+          "product_sku": "302850",
+          "variation_sku": "304470",
+          "name": "View, Espresso",
+          "has_parent_sku": false,
+          "swatch_image": "https://www.lazysuzy.com/cnb/images-new/choice_357zmweb_swatch_custom_thumbnail200201072248choice_357zm.jpgchoice_357zm.jpg",
+          "image": "https://www.lazysuzy.com/cnb/images-new/isimageCrateitem_103_146_357_0item_103_146_357_0",
+          "link": "/product/302850"
+        },
+        {
+          "product_sku": "302850",
+          "variation_sku": "304470",
+          "name": "View, Grey",
+          "has_parent_sku": false,
+          "swatch_image": "https://www.lazysuzy.com/cnb/images-new/choice_349zmweb_swatch_custom_thumbnail200201072248choice_349zm.jpgchoice_349zm.jpg",
+          "image": "https://www.lazysuzy.com/cnb/images-new/isimageCrateitem_103_146_349_0item_103_146_349_0",
+          "link": "/product/302850"
+        },
+        {
+          "product_sku": "302850",
+          "variation_sku": "304470",
+          "name": "View, Otter",
+          "has_parent_sku": false,
+          "swatch_image": "https://www.lazysuzy.com/cnb/images-new/choice_351zmweb_swatch_custom_thumbnail200201072248choice_351zm.jpgchoice_351zm.jpg",
+          "image": "https://www.lazysuzy.com/cnb/images-new/isimageCrateitem_103_146_351_0item_103_146_351_0",
+          "link": "/product/302850"
+        },
+        {
+          "product_sku": "302850",
+          "variation_sku": "304470",
+          "name": "View, Pewter",
+          "has_parent_sku": false,
+          "swatch_image": "https://www.lazysuzy.com/cnb/images-new/choice_352zmweb_swatch_custom_thumbnail200201072248choice_352zm.jpgchoice_352zm.jpg",
+          "image": "https://www.lazysuzy.com/cnb/images-new/isimageCrateitem_103_146_352_0item_103_146_352_0",
+          "link": "/product/302850"
+        },
+        {
+          "product_sku": "302850",
+          "variation_sku": "304470",
+          "name": "View, Black",
+          "has_parent_sku": false,
+          "swatch_image": "https://www.lazysuzy.com/cnb/images-new/choice_358zmweb_swatch_custom_thumbnail200201072248choice_358zm.jpgchoice_358zm.jpg",
+          "image": "https://www.lazysuzy.com/cnb/images-new/isimageCrateitem_103_146_358_0item_103_146_358_0",
+          "link": "/product/302850"
+        },
+        {
+          "product_sku": "302850",
+          "variation_sku": "304470",
+          "name": "View, Nile",
+          "has_parent_sku": false,
+          "swatch_image": "https://www.lazysuzy.com/cnb/images-new/choice_356zmweb_swatch_custom_thumbnail200201072248choice_356zm.jpgchoice_356zm.jpg",
+          "image": "https://www.lazysuzy.com/cnb/images-new/isimageCrateitem_103_146_356_0item_103_146_356_0",
+          "link": "/product/302850"
+        },
+        {
+          "product_sku": "302850",
+          "variation_sku": "304470",
+          "name": "View, Navy",
+          "has_parent_sku": false,
+          "swatch_image": "https://www.lazysuzy.com/cnb/images-new/choice_350zmweb_swatch_custom_thumbnail200201072248choice_350zm.jpgchoice_350zm.jpg",
+          "image": "https://www.lazysuzy.com/cnb/images-new/isimageCrateitem_103_146_350_0item_103_146_350_0",
+          "link": "/product/302850"
+        },
+        {
+          "product_sku": "302850",
+          "variation_sku": "304470",
+          "name": "Taft, Cobalt",
+          "has_parent_sku": false,
+          "swatch_image": "https://www.lazysuzy.com/cnb/images-new/choice_399zmweb_swatch_custom_thumbnail200201072248choice_399zm.jpgchoice_399zm.jpg",
+          "image": "https://www.lazysuzy.com/cnb/images-new/isimageCrateitem_103_146_399_0item_103_146_399_0",
+          "link": "/product/302850"
+        },
+        {
+          "product_sku": "302850",
+          "variation_sku": "304470",
+          "name": "View, Berry",
+          "has_parent_sku": false,
+          "swatch_image": "https://www.lazysuzy.com/cnb/images-new/choice_348zmweb_swatch_custom_thumbnail200201072248choice_348zm.jpgchoice_348zm.jpg",
+          "image": "https://www.lazysuzy.com/cnb/images-new/isimageCrateitem_103_146_348_0item_103_146_348_0",
+          "link": "/product/302850"
+        },
+        {
+          "product_sku": "302850",
+          "variation_sku": "304470",
+          "name": "View, Brandy",
+          "has_parent_sku": false,
+          "swatch_image": "https://www.lazysuzy.com/cnb/images-new/choice_1836zmweb_swatch_custom_thumbnail200201072248choice_1836zm.jpgchoice_1836zm.jpg",
+          "image": "https://www.lazysuzy.com/cnb/images-new/isimageCrateitem_103_146_1836_0item_103_146_1836_0",
+          "link": "/product/302850"
+        }
+      ]
+    },
+    {
+      "id": 5,
+      "sku": "231360",
+      "is_new": false,
+      "site": "Crate & Barrel",
+      "name": "Lounge II Petite 83\" Sofa",
+      "product_url": "https://www.crateandbarrel.com/lounge-ii-petite-83-sofa/s231360",
+      "product_detail_url": "https://www.lazysuzy.com/product/231360",
+      "is_price": "1649",
+      "was_price": "1649",
+      "percent_discount": "0.00",
+      "model_code": "",
+      "color": "Grey",
+      "collection": "",
+      "condition": "",
+      "main_image": "https://www.lazysuzy.com/cnb/images-new/isimageCrateLoungeIIPetite83inSofaTaftSteelSHS17_1x1LoungeIIPetite83inSofaTaftSteelSHS17_1x1",
+      "reviews": 213,
+      "rating": 4.3239,
+      "wishlisted": false,
+      "variations": [
+        {
+          "product_sku": "231360",
+          "variation_sku": "231360",
+          "name": "Taft, Steel",
+          "has_parent_sku": true,
+          "swatch_image": "https://www.lazysuzy.com/cnb/images-new/choice_402zmweb_swatch_custom_thumbnail200201072248choice_402zm.jpgchoice_402zm.jpg",
+          "image": "https://www.lazysuzy.com/cnb/images-new/isimageCrateitem_236_146_402_0item_236_146_402_0",
+          "link": "/product/231360"
+        },
+        {
+          "product_sku": "231360",
+          "variation_sku": "231388",
+          "name": "Taft, Truffle",
+          "has_parent_sku": true,
+          "swatch_image": "https://www.lazysuzy.com/cnb/images-new/choice_403zmweb_swatch_custom_thumbnail200201072248choice_403zm.jpgchoice_403zm.jpg",
+          "image": "https://www.lazysuzy.com/cnb/images-new/isimageCrateitem_236_146_403_0item_236_146_403_0",
+          "link": "/product/231388"
+        },
+        {
+          "product_sku": "231360",
+          "variation_sku": "231338",
+          "name": "Taft, Cement",
+          "has_parent_sku": true,
+          "swatch_image": "https://www.lazysuzy.com/cnb/images-new/choice_398zmweb_swatch_custom_thumbnail200201072248choice_398zm.jpgchoice_398zm.jpg",
+          "image": "https://www.lazysuzy.com/cnb/images-new/isimageCrateitem_236_146_398_0item_236_146_398_0",
+          "link": "/product/231338"
+        },
+        {
+          "product_sku": "231360",
+          "variation_sku": "590264",
+          "name": "View, White",
+          "has_parent_sku": false,
+          "swatch_image": "https://www.lazysuzy.com/cnb/images-new/choice_355zmweb_swatch_custom_thumbnail200201072248choice_355zm.jpgchoice_355zm.jpg",
+          "image": "https://www.lazysuzy.com/cnb/images-new/isimageCrateitem_236_146_355_0item_236_146_355_0",
+          "link": "/product/231360"
+        },
+        {
+          "product_sku": "231360",
+          "variation_sku": "590264",
+          "name": "Taft, Pearl",
+          "has_parent_sku": false,
+          "swatch_image": "https://www.lazysuzy.com/cnb/images-new/choice_401zmweb_swatch_custom_thumbnail200201072248choice_401zm.jpgchoice_401zm.jpg",
+          "image": "https://www.lazysuzy.com/cnb/images-new/isimageCrateitem_236_146_401_0item_236_146_401_0",
+          "link": "/product/231360"
+        },
+        {
+          "product_sku": "231360",
+          "variation_sku": "590264",
+          "name": "View, Wheat",
+          "has_parent_sku": false,
+          "swatch_image": "https://www.lazysuzy.com/cnb/images-new/choice_354zmweb_swatch_custom_thumbnail200201072248choice_354zm.jpgchoice_354zm.jpg",
+          "image": "https://www.lazysuzy.com/cnb/images-new/isimageCrateitem_236_146_354_0item_236_146_354_0",
+          "link": "/product/231360"
+        },
+        {
+          "product_sku": "231360",
+          "variation_sku": "590264",
+          "name": "View, Taupe",
+          "has_parent_sku": false,
+          "swatch_image": "https://www.lazysuzy.com/cnb/images-new/choice_353zmweb_swatch_custom_thumbnail200201072248choice_353zm.jpgchoice_353zm.jpg",
+          "image": "https://www.lazysuzy.com/cnb/images-new/isimageCrateitem_236_146_353_0item_236_146_353_0",
+          "link": "/product/231360"
+        },
+        {
+          "product_sku": "231360",
+          "variation_sku": "590264",
+          "name": "View, Ale",
+          "has_parent_sku": false,
+          "swatch_image": "https://www.lazysuzy.com/cnb/images-new/choice_347zmweb_swatch_custom_thumbnail200201072248choice_347zm.jpgchoice_347zm.jpg",
+          "image": "https://www.lazysuzy.com/cnb/images-new/isimageCrateitem_236_146_347_0item_236_146_347_0",
+          "link": "/product/231360"
+        },
+        {
+          "product_sku": "231360",
+          "variation_sku": "590264",
+          "name": "Taft, Heather",
+          "has_parent_sku": false,
+          "swatch_image": "https://www.lazysuzy.com/cnb/images-new/choice_400zmweb_swatch_custom_thumbnail200201072248choice_400zm.jpgchoice_400zm.jpg",
+          "image": "https://www.lazysuzy.com/cnb/images-new/isimageCrateitem_236_146_400_0item_236_146_400_0",
+          "link": "/product/231360"
+        },
+        {
+          "product_sku": "231360",
+          "variation_sku": "590264",
+          "name": "View, Espresso",
+          "has_parent_sku": false,
+          "swatch_image": "https://www.lazysuzy.com/cnb/images-new/choice_357zmweb_swatch_custom_thumbnail200201072248choice_357zm.jpgchoice_357zm.jpg",
+          "image": "https://www.lazysuzy.com/cnb/images-new/isimageCrateitem_236_146_357_0item_236_146_357_0",
+          "link": "/product/231360"
+        },
+        {
+          "product_sku": "231360",
+          "variation_sku": "590264",
+          "name": "View, Grey",
+          "has_parent_sku": false,
+          "swatch_image": "https://www.lazysuzy.com/cnb/images-new/choice_349zmweb_swatch_custom_thumbnail200201072248choice_349zm.jpgchoice_349zm.jpg",
+          "image": "https://www.lazysuzy.com/cnb/images-new/isimageCrateitem_236_146_349_0item_236_146_349_0",
+          "link": "/product/231360"
+        },
+        {
+          "product_sku": "231360",
+          "variation_sku": "590264",
+          "name": "View, Otter",
+          "has_parent_sku": false,
+          "swatch_image": "https://www.lazysuzy.com/cnb/images-new/choice_351zmweb_swatch_custom_thumbnail200201072248choice_351zm.jpgchoice_351zm.jpg",
+          "image": "https://www.lazysuzy.com/cnb/images-new/isimageCrateitem_236_146_351_0item_236_146_351_0",
+          "link": "/product/231360"
+        },
+        {
+          "product_sku": "231360",
+          "variation_sku": "590264",
+          "name": "View, Pewter",
+          "has_parent_sku": false,
+          "swatch_image": "https://www.lazysuzy.com/cnb/images-new/choice_352zmweb_swatch_custom_thumbnail200201072248choice_352zm.jpgchoice_352zm.jpg",
+          "image": "https://www.lazysuzy.com/cnb/images-new/isimageCrateitem_236_146_352_0item_236_146_352_0",
+          "link": "/product/231360"
+        },
+        {
+          "product_sku": "231360",
+          "variation_sku": "590264",
+          "name": "View, Black",
+          "has_parent_sku": false,
+          "swatch_image": "https://www.lazysuzy.com/cnb/images-new/choice_358zmweb_swatch_custom_thumbnail200201072248choice_358zm.jpgchoice_358zm.jpg",
+          "image": "https://www.lazysuzy.com/cnb/images-new/isimageCrateitem_236_146_358_0item_236_146_358_0",
+          "link": "/product/231360"
+        },
+        {
+          "product_sku": "231360",
+          "variation_sku": "590264",
+          "name": "View, Nile",
+          "has_parent_sku": false,
+          "swatch_image": "https://www.lazysuzy.com/cnb/images-new/choice_356zmweb_swatch_custom_thumbnail200201072248choice_356zm.jpgchoice_356zm.jpg",
+          "image": "https://www.lazysuzy.com/cnb/images-new/isimageCrateitem_236_146_356_0item_236_146_356_0",
+          "link": "/product/231360"
+        },
+        {
+          "product_sku": "231360",
+          "variation_sku": "590264",
+          "name": "View, Navy",
+          "has_parent_sku": false,
+          "swatch_image": "https://www.lazysuzy.com/cnb/images-new/choice_350zmweb_swatch_custom_thumbnail200201072248choice_350zm.jpgchoice_350zm.jpg",
+          "image": "https://www.lazysuzy.com/cnb/images-new/isimageCrateitem_236_146_350_0item_236_146_350_0",
+          "link": "/product/231360"
+        },
+        {
+          "product_sku": "231360",
+          "variation_sku": "590264",
+          "name": "Taft, Cobalt",
+          "has_parent_sku": false,
+          "swatch_image": "https://www.lazysuzy.com/cnb/images-new/choice_399zmweb_swatch_custom_thumbnail200201072248choice_399zm.jpgchoice_399zm.jpg",
+          "image": "https://www.lazysuzy.com/cnb/images-new/isimageCrateitem_236_146_399_0item_236_146_399_0",
+          "link": "/product/231360"
+        },
+        {
+          "product_sku": "231360",
+          "variation_sku": "590264",
+          "name": "View, Berry",
+          "has_parent_sku": false,
+          "swatch_image": "https://www.lazysuzy.com/cnb/images-new/choice_348zmweb_swatch_custom_thumbnail200201072248choice_348zm.jpgchoice_348zm.jpg",
+          "image": "https://www.lazysuzy.com/cnb/images-new/isimageCrateitem_236_146_348_0item_236_146_348_0",
+          "link": "/product/231360"
+        },
+        {
+          "product_sku": "231360",
+          "variation_sku": "590264",
+          "name": "View, Brandy",
+          "has_parent_sku": false,
+          "swatch_image": "https://www.lazysuzy.com/cnb/images-new/choice_1836zmweb_swatch_custom_thumbnail200201072248choice_1836zm.jpgchoice_1836zm.jpg",
+          "image": "https://www.lazysuzy.com/cnb/images-new/isimageCrateitem_236_146_1836_0item_236_146_1836_0",
+          "link": "/product/231360"
+        }
+      ]
+    },
+    {
+      "id": 4,
+      "sku": "541136",
+      "is_new": false,
+      "site": "World Market",
+      "name": "Quentin Chesterfield Sofa",
+      "product_url": "http://www.anrdoezrs.net/click-8945510-13226176?url=https://www.worldmarket.com/product/charcoal-gray-quentin-chesterfield-sofa.do",
+      "product_detail_url": "https://www.lazysuzy.com/product/541136",
+      "is_price": "599.99",
+      "was_price": "749.99",
+      "percent_discount": "20.00",
+      "model_code": null,
+      "color": "Gray",
+      "collection": null,
+      "condition": null,
+      "main_image": "https://www.lazysuzy.com/nw/images/69445_XXX_v1.tif&wid=2000&cvt=jpeg",
+      "reviews": 130,
+      "rating": 4.8,
+      "wishlisted": false,
+      "variations": []
+    },
+    {
+      "id": 5,
+      "sku": "258002",
+      "is_new": false,
+      "site": "Crate & Barrel",
+      "name": "Willow Modern Slipcovered Sofa",
+      "product_url": "https://www.crateandbarrel.com/willow-sofa/s258002",
+      "product_detail_url": "https://www.lazysuzy.com/product/258002",
+      "is_price": "1899",
+      "was_price": "1899",
+      "percent_discount": "0.00",
+      "model_code": "",
+      "color": "Blue,Green,Grey,Yellow",
+      "collection": "",
+      "condition": "",
+      "main_image": "https://www.lazysuzy.com/cnb/images-new/isimageCrateWillow2QSlprDsSnwSHS15_1x1Willow2QSlprDsSnwSHS15_1x1",
+      "reviews": 131,
+      "rating": 4.4885,
+      "wishlisted": false,
+      "variations": [
+        {
+          "product_sku": "258002",
+          "variation_sku": "258002",
+          "name": "Kingston, Snow",
+          "has_parent_sku": true,
+          "swatch_image": "https://www.lazysuzy.com/cnb/images-new/choice_329zmweb_swatch_custom_thumbnail200203060505choice_329zm.jpgchoice_329zm.jpg",
+          "image": "https://www.lazysuzy.com/cnb/images-new/isimageCrateitem_161_146_329_0item_161_146_329_0",
+          "link": "/product/258002"
+        },
+        {
+          "product_sku": "258002",
+          "variation_sku": "484023",
+          "name": "Kingston, Pepper",
+          "has_parent_sku": true,
+          "swatch_image": "https://www.lazysuzy.com/cnb/images-new/choice_327zmweb_swatch_custom_thumbnail200203060505choice_327zm.jpgchoice_327zm.jpg",
+          "image": "https://www.lazysuzy.com/cnb/images-new/isimageCrateitem_161_146_327_0item_161_146_327_0",
+          "link": "/product/484023"
+        },
+        {
+          "product_sku": "258002",
+          "variation_sku": "476270",
+          "name": "Kingston, Sand",
+          "has_parent_sku": false,
+          "swatch_image": "https://www.lazysuzy.com/cnb/images-new/choice_328zmweb_swatch_custom_thumbnail200203060505choice_328zm.jpgchoice_328zm.jpg",
+          "image": "https://www.lazysuzy.com/cnb/images-new/isimageCrateitem_161_146_328_0item_161_146_328_0",
+          "link": "/product/258002"
+        },
+        {
+          "product_sku": "258002",
+          "variation_sku": "476270",
+          "name": "Kingston, Coffee",
+          "has_parent_sku": false,
+          "swatch_image": "https://www.lazysuzy.com/cnb/images-new/choice_334zmweb_swatch_custom_thumbnail200203060505choice_334zm.jpgchoice_334zm.jpg",
+          "image": "https://www.lazysuzy.com/cnb/images-new/isimageCrateitem_161_146_334_0item_161_146_334_0",
+          "link": "/product/258002"
+        },
+        {
+          "product_sku": "258002",
+          "variation_sku": "476270",
+          "name": "Kingston, Dove",
+          "has_parent_sku": false,
+          "swatch_image": "https://www.lazysuzy.com/cnb/images-new/choice_333zmweb_swatch_custom_thumbnail200203060505choice_333zm.jpgchoice_333zm.jpg",
+          "image": "https://www.lazysuzy.com/cnb/images-new/isimageCrateitem_161_146_333_0item_161_146_333_0",
+          "link": "/product/258002"
+        },
+        {
+          "product_sku": "258002",
+          "variation_sku": "476270",
+          "name": "Kingston, Spruce",
+          "has_parent_sku": false,
+          "swatch_image": "https://www.lazysuzy.com/cnb/images-new/choice_330zmweb_swatch_custom_thumbnail200203060505choice_330zm.jpgchoice_330zm.jpg",
+          "image": "https://www.lazysuzy.com/cnb/images-new/isimageCrateitem_161_146_330_0item_161_146_330_0",
+          "link": "/product/258002"
+        },
+        {
+          "product_sku": "258002",
+          "variation_sku": "476270",
+          "name": "Kingston, Artichoke",
+          "has_parent_sku": false,
+          "swatch_image": "https://www.lazysuzy.com/cnb/images-new/choice_322zmweb_swatch_custom_thumbnail200203060505choice_322zm.jpgchoice_322zm.jpg",
+          "image": "https://www.lazysuzy.com/cnb/images-new/isimageCrateitem_161_146_322_0item_161_146_322_0",
+          "link": "/product/258002"
+        },
+        {
+          "product_sku": "258002",
+          "variation_sku": "476270",
+          "name": "Kingston, Lake",
+          "has_parent_sku": false,
+          "swatch_image": "https://www.lazysuzy.com/cnb/images-new/choice_323zmweb_swatch_custom_thumbnail200203060505choice_323zm.jpgchoice_323zm.jpg",
+          "image": "https://www.lazysuzy.com/cnb/images-new/isimageCrateitem_161_146_323_0item_161_146_323_0",
+          "link": "/product/258002"
+        },
+        {
+          "product_sku": "258002",
+          "variation_sku": "476270",
+          "name": "Kingston, Denim",
+          "has_parent_sku": false,
+          "swatch_image": "https://www.lazysuzy.com/cnb/images-new/choice_325zmweb_swatch_custom_thumbnail200203060505choice_325zm.jpgchoice_325zm.jpg",
+          "image": "https://www.lazysuzy.com/cnb/images-new/isimageCrateitem_161_146_325_0item_161_146_325_0",
+          "link": "/product/258002"
+        },
+        {
+          "product_sku": "258002",
+          "variation_sku": "476270",
+          "name": "Kingston, Cranberry",
+          "has_parent_sku": false,
+          "swatch_image": "https://www.lazysuzy.com/cnb/images-new/choice_324zmweb_swatch_custom_thumbnail200203060505choice_324zm.jpgchoice_324zm.jpg",
+          "image": "https://www.lazysuzy.com/cnb/images-new/isimageCrateitem_161_146_324_0item_161_146_324_0",
+          "link": "/product/258002"
+        }
+      ]
+    },
+    {
+      "id": 4,
+      "sku": "372991",
+      "is_new": false,
+      "site": "World Market",
+      "name": "Studio Day Sofa",
+      "product_url": "http://www.dpbolvw.net/click-8945510-13226176?url=https://www.worldmarket.com/product/studio-day-sofa.do",
+      "product_detail_url": "https://www.lazysuzy.com/product/372991",
+      "is_price": "299.99",
+      "was_price": "",
+      "percent_discount": null,
+      "model_code": null,
+      "color": "Brown > White",
+      "collection": null,
+      "condition": null,
+      "main_image": "https://www.lazysuzy.com/nw/images/006_XXX_v1.tif&wid=2000&cvt=jpeg",
+      "reviews": 142,
+      "rating": 3.9,
+      "wishlisted": false,
+      "variations": []
+    },
+    {
+      "id": 5,
+      "sku": "106389",
+      "is_new": false,
+      "site": "Crate & Barrel",
+      "name": "Petrie Midcentury Sofa",
+      "product_url": "https://www.crateandbarrel.com/petrie-sofa/s106389",
+      "product_detail_url": "https://www.lazysuzy.com/product/106389",
+      "is_price": "1899",
+      "was_price": "1899",
+      "percent_discount": "0.00",
+      "model_code": "",
+      "color": "Green,Grey,Orange,Teal,Yellow",
+      "collection": "",
+      "condition": "",
+      "main_image": "https://www.lazysuzy.com/cnb/images-new/isimageCratePetrieSofaJnsFeltGreySHF16_1x1PetrieSofaJnsFeltGreySHF16_1x1",
+      "reviews": 97,
+      "rating": 4.4433,
+      "wishlisted": false,
+      "variations": [
+        {
+          "product_sku": "106389",
+          "variation_sku": "106389",
+          "name": "Jonas, Felt Grey",
+          "has_parent_sku": true,
+          "swatch_image": "https://www.lazysuzy.com/cnb/images-new/choice_303zmweb_swatch_custom_thumbnail200201072218choice_303zm.jpgchoice_303zm.jpg",
+          "image": "https://www.lazysuzy.com/cnb/images-new/isimageCrateitem_135_147_303_122item_135_147_303_122",
+          "link": "/product/106389"
+        },
+        {
+          "product_sku": "106389",
+          "variation_sku": "337233",
+          "name": "Jonas, Charcoal",
+          "has_parent_sku": true,
+          "swatch_image": "https://www.lazysuzy.com/cnb/images-new/choice_302zmweb_swatch_custom_thumbnail200115071849choice_302zm.jpgchoice_302zm.jpg",
+          "image": "https://www.lazysuzy.com/cnb/images-new/isimageCrateitem_135_147_302_0item_135_147_302_0",
+          "link": "/product/337233"
+        },
+        {
+          "product_sku": "106389",
+          "variation_sku": "148177",
+          "name": "Jonas, Chalk",
+          "has_parent_sku": false,
+          "swatch_image": "https://www.lazysuzy.com/cnb/images-new/choice_301zmweb_swatch_custom_thumbnail200201072218choice_301zm.jpgchoice_301zm.jpg",
+          "image": "https://www.lazysuzy.com/cnb/images-new/isimageCrateitem_135_147_301_122item_135_147_301_122",
+          "link": "/product/106389"
+        },
+        {
+          "product_sku": "106389",
+          "variation_sku": "148177",
+          "name": "Jonas, Golden",
+          "has_parent_sku": false,
+          "swatch_image": "https://www.lazysuzy.com/cnb/images-new/choice_304zmweb_swatch_custom_thumbnail200201072218choice_304zm.jpgchoice_304zm.jpg",
+          "image": "https://www.lazysuzy.com/cnb/images-new/isimageCrateitem_135_147_304_122item_135_147_304_122",
+          "link": "/product/106389"
+        },
+        {
+          "product_sku": "106389",
+          "variation_sku": "148177",
+          "name": "Jonas, Kilt",
+          "has_parent_sku": false,
+          "swatch_image": "https://www.lazysuzy.com/cnb/images-new/choice_314zmweb_swatch_custom_thumbnail200201072218choice_314zm.jpgchoice_314zm.jpg",
+          "image": "https://www.lazysuzy.com/cnb/images-new/isimageCrateitem_135_147_314_122item_135_147_314_122",
+          "link": "/product/106389"
+        },
+        {
+          "product_sku": "106389",
+          "variation_sku": "148177",
+          "name": "Jonas, Seamist",
+          "has_parent_sku": false,
+          "swatch_image": "https://www.lazysuzy.com/cnb/images-new/choice_305zmweb_swatch_custom_thumbnail200201072218choice_305zm.jpgchoice_305zm.jpg",
+          "image": "https://www.lazysuzy.com/cnb/images-new/isimageCrateitem_135_147_305_122item_135_147_305_122",
+          "link": "/product/106389"
+        },
+        {
+          "product_sku": "106389",
+          "variation_sku": "148177",
+          "name": "Jonas, Turquoise",
+          "has_parent_sku": false,
+          "swatch_image": "https://www.lazysuzy.com/cnb/images-new/choice_306zmweb_swatch_custom_thumbnail200201072218choice_306zm.jpgchoice_306zm.jpg",
+          "image": "https://www.lazysuzy.com/cnb/images-new/isimageCrateitem_135_147_306_122item_135_147_306_122",
+          "link": "/product/106389"
+        },
+        {
+          "product_sku": "106389",
+          "variation_sku": "148177",
+          "name": "Jonas, Navy",
+          "has_parent_sku": false,
+          "swatch_image": "https://www.lazysuzy.com/cnb/images-new/choice_315zmweb_swatch_custom_thumbnail200201072218choice_315zm.jpgchoice_315zm.jpg",
+          "image": "https://www.lazysuzy.com/cnb/images-new/isimageCrateitem_135_147_315_122item_135_147_315_122",
+          "link": "/product/106389"
+        },
+        {
+          "product_sku": "106389",
+          "variation_sku": "148177",
+          "name": "Jonas, Blood Orange",
+          "has_parent_sku": false,
+          "swatch_image": "https://www.lazysuzy.com/cnb/images-new/choice_300zmweb_swatch_custom_thumbnail200201072218choice_300zm.jpgchoice_300zm.jpg",
+          "image": "https://www.lazysuzy.com/cnb/images-new/isimageCrateitem_135_147_300_122item_135_147_300_122",
+          "link": "/product/106389"
+        },
+        {
+          "product_sku": "106389",
+          "variation_sku": "148177",
+          "name": "Jonas, Charcoal",
+          "has_parent_sku": false,
+          "swatch_image": "https://www.lazysuzy.com/cnb/images-new/choice_302zmweb_swatch_custom_thumbnail200201072218choice_302zm.jpgchoice_302zm.jpg",
+          "image": "https://www.lazysuzy.com/cnb/images-new/isimageCrateitem_135_147_302_122item_135_147_302_122",
+          "link": "/product/106389"
+        }
+      ]
+    },
+    {
+      "id": 4,
+      "sku": "550025",
+      "is_new": false,
+      "site": "World Market",
+      "name": "Oatmeal Woven Noelle Sofa and Ottoman",
+      "product_url": "http://www.anrdoezrs.net/click-8945510-13226176?url=https://www.worldmarket.com/product/oatmeal-woven-noelle-sofa-and-ottoman.do",
+      "product_detail_url": "https://www.lazysuzy.com/product/550025",
+      "is_price": "599.99",
+      "was_price": "799.99",
+      "percent_discount": "25.00",
+      "model_code": null,
+      "color": "Gray > Natural",
+      "collection": null,
+      "condition": null,
+      "main_image": "https://www.lazysuzy.com/nw/images/74810_XXX_v1.tif&wid=2000&cvt=jpeg",
+      "reviews": 78,
+      "rating": 4.5,
+      "wishlisted": false,
+      "variations": []
+    },
+    {
+      "id": 5,
+      "sku": "231316",
+      "is_new": false,
+      "site": "Crate & Barrel",
+      "name": "Lounge II Petite 93\" Sofa",
+      "product_url": "https://www.crateandbarrel.com/lounge-ii-petite-93-sofa/s231316",
+      "product_detail_url": "https://www.lazysuzy.com/product/231316",
+      "is_price": "1749",
+      "was_price": "1749",
+      "percent_discount": "0.00",
+      "model_code": "",
+      "color": "Grey",
+      "collection": "",
+      "condition": "",
+      "main_image": "https://www.lazysuzy.com/cnb/images-new/isimageCrateLoungeIIPetite93inSofaTaftCmntSHS17_1x1LoungeIIPetite93inSofaTaftCmntSHS17_1x1",
+      "reviews": 537,
+      "rating": 4.3911,
+      "wishlisted": false,
+      "variations": [
+        {
+          "product_sku": "231316",
+          "variation_sku": "231316",
+          "name": "Taft, Cement",
+          "has_parent_sku": true,
+          "swatch_image": "https://www.lazysuzy.com/cnb/images-new/choice_398zmweb_swatch_custom_thumbnail200201060500choice_398zm.jpgchoice_398zm.jpg",
+          "image": "https://www.lazysuzy.com/cnb/images-new/isimageCrateitem_236_147_398_0item_236_147_398_0",
+          "link": "/product/231316"
+        },
+        {
+          "product_sku": "231316",
+          "variation_sku": "231370",
+          "name": "Taft, Truffle",
+          "has_parent_sku": true,
+          "swatch_image": "https://www.lazysuzy.com/cnb/images-new/choice_403zmweb_swatch_custom_thumbnail200201060500choice_403zm.jpgchoice_403zm.jpg",
+          "image": "https://www.lazysuzy.com/cnb/images-new/isimageCrateitem_236_147_403_0item_236_147_403_0",
+          "link": "/product/231370"
+        },
+        {
+          "product_sku": "231316",
+          "variation_sku": "231356",
+          "name": "Taft, Steel",
+          "has_parent_sku": true,
+          "swatch_image": "https://www.lazysuzy.com/cnb/images-new/choice_402zmweb_swatch_custom_thumbnail200201060500choice_402zm.jpgchoice_402zm.jpg",
+          "image": "https://www.lazysuzy.com/cnb/images-new/isimageCrateitem_236_147_402_0item_236_147_402_0",
+          "link": "/product/231356"
+        },
+        {
+          "product_sku": "231316",
+          "variation_sku": "590241",
+          "name": "View, White",
+          "has_parent_sku": false,
+          "swatch_image": "https://www.lazysuzy.com/cnb/images-new/choice_355zmweb_swatch_custom_thumbnail200201060500choice_355zm.jpgchoice_355zm.jpg",
+          "image": "https://www.lazysuzy.com/cnb/images-new/isimageCrateitem_236_147_355_0item_236_147_355_0",
+          "link": "/product/231316"
+        },
+        {
+          "product_sku": "231316",
+          "variation_sku": "590241",
+          "name": "Taft, Pearl",
+          "has_parent_sku": false,
+          "swatch_image": "https://www.lazysuzy.com/cnb/images-new/choice_401zmweb_swatch_custom_thumbnail200201060500choice_401zm.jpgchoice_401zm.jpg",
+          "image": "https://www.lazysuzy.com/cnb/images-new/isimageCrateitem_236_147_401_0item_236_147_401_0",
+          "link": "/product/231316"
+        },
+        {
+          "product_sku": "231316",
+          "variation_sku": "590241",
+          "name": "View, Wheat",
+          "has_parent_sku": false,
+          "swatch_image": "https://www.lazysuzy.com/cnb/images-new/choice_354zmweb_swatch_custom_thumbnail200201060500choice_354zm.jpgchoice_354zm.jpg",
+          "image": "https://www.lazysuzy.com/cnb/images-new/isimageCrateitem_236_147_354_0item_236_147_354_0",
+          "link": "/product/231316"
+        },
+        {
+          "product_sku": "231316",
+          "variation_sku": "590241",
+          "name": "View, Taupe",
+          "has_parent_sku": false,
+          "swatch_image": "https://www.lazysuzy.com/cnb/images-new/choice_353zmweb_swatch_custom_thumbnail200201060500choice_353zm.jpgchoice_353zm.jpg",
+          "image": "https://www.lazysuzy.com/cnb/images-new/isimageCrateitem_236_147_353_0item_236_147_353_0",
+          "link": "/product/231316"
+        },
+        {
+          "product_sku": "231316",
+          "variation_sku": "590241",
+          "name": "View, Ale",
+          "has_parent_sku": false,
+          "swatch_image": "https://www.lazysuzy.com/cnb/images-new/choice_347zmweb_swatch_custom_thumbnail200201060500choice_347zm.jpgchoice_347zm.jpg",
+          "image": "https://www.lazysuzy.com/cnb/images-new/isimageCrateitem_236_147_347_0item_236_147_347_0",
+          "link": "/product/231316"
+        },
+        {
+          "product_sku": "231316",
+          "variation_sku": "590241",
+          "name": "Taft, Heather",
+          "has_parent_sku": false,
+          "swatch_image": "https://www.lazysuzy.com/cnb/images-new/choice_400zmweb_swatch_custom_thumbnail200201060500choice_400zm.jpgchoice_400zm.jpg",
+          "image": "https://www.lazysuzy.com/cnb/images-new/isimageCrateitem_236_147_400_0item_236_147_400_0",
+          "link": "/product/231316"
+        },
+        {
+          "product_sku": "231316",
+          "variation_sku": "590241",
+          "name": "View, Espresso",
+          "has_parent_sku": false,
+          "swatch_image": "https://www.lazysuzy.com/cnb/images-new/choice_357zmweb_swatch_custom_thumbnail200201060500choice_357zm.jpgchoice_357zm.jpg",
+          "image": "https://www.lazysuzy.com/cnb/images-new/isimageCrateitem_236_147_357_0item_236_147_357_0",
+          "link": "/product/231316"
+        },
+        {
+          "product_sku": "231316",
+          "variation_sku": "590241",
+          "name": "View, Grey",
+          "has_parent_sku": false,
+          "swatch_image": "https://www.lazysuzy.com/cnb/images-new/choice_349zmweb_swatch_custom_thumbnail200201060500choice_349zm.jpgchoice_349zm.jpg",
+          "image": "https://www.lazysuzy.com/cnb/images-new/isimageCrateitem_236_147_349_0item_236_147_349_0",
+          "link": "/product/231316"
+        },
+        {
+          "product_sku": "231316",
+          "variation_sku": "590241",
+          "name": "View, Otter",
+          "has_parent_sku": false,
+          "swatch_image": "https://www.lazysuzy.com/cnb/images-new/choice_351zmweb_swatch_custom_thumbnail200201060500choice_351zm.jpgchoice_351zm.jpg",
+          "image": "https://www.lazysuzy.com/cnb/images-new/isimageCrateitem_236_147_351_0item_236_147_351_0",
+          "link": "/product/231316"
+        },
+        {
+          "product_sku": "231316",
+          "variation_sku": "590241",
+          "name": "View, Pewter",
+          "has_parent_sku": false,
+          "swatch_image": "https://www.lazysuzy.com/cnb/images-new/choice_352zmweb_swatch_custom_thumbnail200201060500choice_352zm.jpgchoice_352zm.jpg",
+          "image": "https://www.lazysuzy.com/cnb/images-new/isimageCrateitem_236_147_352_0item_236_147_352_0",
+          "link": "/product/231316"
+        },
+        {
+          "product_sku": "231316",
+          "variation_sku": "590241",
+          "name": "View, Black",
+          "has_parent_sku": false,
+          "swatch_image": "https://www.lazysuzy.com/cnb/images-new/choice_358zmweb_swatch_custom_thumbnail200201060500choice_358zm.jpgchoice_358zm.jpg",
+          "image": "https://www.lazysuzy.com/cnb/images-new/isimageCrateitem_236_147_358_0item_236_147_358_0",
+          "link": "/product/231316"
+        },
+        {
+          "product_sku": "231316",
+          "variation_sku": "590241",
+          "name": "View, Nile",
+          "has_parent_sku": false,
+          "swatch_image": "https://www.lazysuzy.com/cnb/images-new/choice_356zmweb_swatch_custom_thumbnail200201060500choice_356zm.jpgchoice_356zm.jpg",
+          "image": "https://www.lazysuzy.com/cnb/images-new/isimageCrateitem_236_147_356_0item_236_147_356_0",
+          "link": "/product/231316"
+        },
+        {
+          "product_sku": "231316",
+          "variation_sku": "590241",
+          "name": "View, Navy",
+          "has_parent_sku": false,
+          "swatch_image": "https://www.lazysuzy.com/cnb/images-new/choice_350zmweb_swatch_custom_thumbnail200201060500choice_350zm.jpgchoice_350zm.jpg",
+          "image": "https://www.lazysuzy.com/cnb/images-new/isimageCrateitem_236_147_350_0item_236_147_350_0",
+          "link": "/product/231316"
+        },
+        {
+          "product_sku": "231316",
+          "variation_sku": "590241",
+          "name": "Taft, Cobalt",
+          "has_parent_sku": false,
+          "swatch_image": "https://www.lazysuzy.com/cnb/images-new/choice_399zmweb_swatch_custom_thumbnail200201060500choice_399zm.jpgchoice_399zm.jpg",
+          "image": "https://www.lazysuzy.com/cnb/images-new/isimageCrateitem_236_147_399_0item_236_147_399_0",
+          "link": "/product/231316"
+        },
+        {
+          "product_sku": "231316",
+          "variation_sku": "590241",
+          "name": "View, Berry",
+          "has_parent_sku": false,
+          "swatch_image": "https://www.lazysuzy.com/cnb/images-new/choice_348zmweb_swatch_custom_thumbnail200201060500choice_348zm.jpgchoice_348zm.jpg",
+          "image": "https://www.lazysuzy.com/cnb/images-new/isimageCrateitem_236_147_348_0item_236_147_348_0",
+          "link": "/product/231316"
+        },
+        {
+          "product_sku": "231316",
+          "variation_sku": "590241",
+          "name": "View, Brandy",
+          "has_parent_sku": false,
+          "swatch_image": "https://www.lazysuzy.com/cnb/images-new/choice_1836zmweb_swatch_custom_thumbnail200201060500choice_1836zm.jpgchoice_1836zm.jpg",
+          "image": "https://www.lazysuzy.com/cnb/images-new/isimageCrateitem_236_147_1836_0item_236_147_1836_0",
+          "link": "/product/231316"
+        }
+      ]
+    },
+    {
+      "id": 5,
+      "sku": "483522",
+      "is_new": false,
+      "site": "Crate & Barrel",
+      "name": "Lounge II 93\" Sofa",
+      "product_url": "https://www.crateandbarrel.com/lounge-ii-93-sofa/s483522",
+      "product_detail_url": "https://www.lazysuzy.com/product/483522",
+      "is_price": "1799",
+      "was_price": "1799",
+      "percent_discount": "0.00",
+      "model_code": "",
+      "color": "Black,Blue,Green,Grey,Red,Tan",
+      "collection": "",
+      "condition": "",
+      "main_image": "https://www.lazysuzy.com/cnb/images-new/isimageCrateLoungeII93SofaTaftSteelSHS16_1x1LoungeII93SofaTaftSteelSHS16_1x1",
+      "reviews": 537,
+      "rating": 4.3911,
+      "wishlisted": false,
+      "variations": [
+        {
+          "product_sku": "483522",
+          "variation_sku": "483522",
+          "name": "Taft, Steel",
+          "has_parent_sku": true,
+          "swatch_image": "https://www.lazysuzy.com/cnb/images-new/choice_402zmweb_swatch_custom_thumbnail200201060500choice_402zm.jpgchoice_402zm.jpg",
+          "image": "https://www.lazysuzy.com/cnb/images-new/isimageCrateitem_103_147_402_0item_103_147_402_0",
+          "link": "/product/483522"
+        },
+        {
+          "product_sku": "483522",
+          "variation_sku": "302843",
+          "name": "Taft, Truffle",
+          "has_parent_sku": true,
+          "swatch_image": "https://www.lazysuzy.com/cnb/images-new/choice_403zmweb_swatch_custom_thumbnail200201060500choice_403zm.jpgchoice_403zm.jpg",
+          "image": "https://www.lazysuzy.com/cnb/images-new/isimageCrateitem_103_147_403_0item_103_147_403_0",
+          "link": "/product/302843"
+        },
+        {
+          "product_sku": "483522",
+          "variation_sku": "302835",
+          "name": "Taft, Cement",
+          "has_parent_sku": true,
+          "swatch_image": "https://www.lazysuzy.com/cnb/images-new/choice_398zmweb_swatch_custom_thumbnail200201060500choice_398zm.jpgchoice_398zm.jpg",
+          "image": "https://www.lazysuzy.com/cnb/images-new/isimageCrateitem_103_147_398_0item_103_147_398_0",
+          "link": "/product/302835"
+        },
+        {
+          "product_sku": "483522",
+          "variation_sku": "304463",
+          "name": "View, White",
+          "has_parent_sku": false,
+          "swatch_image": "https://www.lazysuzy.com/cnb/images-new/choice_355zmweb_swatch_custom_thumbnail200201060500choice_355zm.jpgchoice_355zm.jpg",
+          "image": "https://www.lazysuzy.com/cnb/images-new/isimageCrateitem_103_147_355_0item_103_147_355_0",
+          "link": "/product/483522"
+        },
+        {
+          "product_sku": "483522",
+          "variation_sku": "304463",
+          "name": "Taft, Pearl",
+          "has_parent_sku": false,
+          "swatch_image": "https://www.lazysuzy.com/cnb/images-new/choice_401zmweb_swatch_custom_thumbnail200201060500choice_401zm.jpgchoice_401zm.jpg",
+          "image": "https://www.lazysuzy.com/cnb/images-new/isimageCrateitem_103_147_401_0item_103_147_401_0",
+          "link": "/product/483522"
+        },
+        {
+          "product_sku": "483522",
+          "variation_sku": "304463",
+          "name": "View, Wheat",
+          "has_parent_sku": false,
+          "swatch_image": "https://www.lazysuzy.com/cnb/images-new/choice_354zmweb_swatch_custom_thumbnail200201060500choice_354zm.jpgchoice_354zm.jpg",
+          "image": "https://www.lazysuzy.com/cnb/images-new/isimageCrateitem_103_147_354_0item_103_147_354_0",
+          "link": "/product/483522"
+        },
+        {
+          "product_sku": "483522",
+          "variation_sku": "304463",
+          "name": "View, Taupe",
+          "has_parent_sku": false,
+          "swatch_image": "https://www.lazysuzy.com/cnb/images-new/choice_353zmweb_swatch_custom_thumbnail200201060500choice_353zm.jpgchoice_353zm.jpg",
+          "image": "https://www.lazysuzy.com/cnb/images-new/isimageCrateitem_103_147_353_0item_103_147_353_0",
+          "link": "/product/483522"
+        },
+        {
+          "product_sku": "483522",
+          "variation_sku": "304463",
+          "name": "View, Ale",
+          "has_parent_sku": false,
+          "swatch_image": "https://www.lazysuzy.com/cnb/images-new/choice_347zmweb_swatch_custom_thumbnail200201060500choice_347zm.jpgchoice_347zm.jpg",
+          "image": "https://www.lazysuzy.com/cnb/images-new/isimageCrateitem_103_147_347_0item_103_147_347_0",
+          "link": "/product/483522"
+        },
+        {
+          "product_sku": "483522",
+          "variation_sku": "304463",
+          "name": "Taft, Heather",
+          "has_parent_sku": false,
+          "swatch_image": "https://www.lazysuzy.com/cnb/images-new/choice_400zmweb_swatch_custom_thumbnail200201060500choice_400zm.jpgchoice_400zm.jpg",
+          "image": "https://www.lazysuzy.com/cnb/images-new/isimageCrateitem_103_147_400_0item_103_147_400_0",
+          "link": "/product/483522"
+        },
+        {
+          "product_sku": "483522",
+          "variation_sku": "304463",
+          "name": "View, Espresso",
+          "has_parent_sku": false,
+          "swatch_image": "https://www.lazysuzy.com/cnb/images-new/choice_357zmweb_swatch_custom_thumbnail200201060500choice_357zm.jpgchoice_357zm.jpg",
+          "image": "https://www.lazysuzy.com/cnb/images-new/isimageCrateitem_103_147_357_0item_103_147_357_0",
+          "link": "/product/483522"
+        },
+        {
+          "product_sku": "483522",
+          "variation_sku": "304463",
+          "name": "View, Grey",
+          "has_parent_sku": false,
+          "swatch_image": "https://www.lazysuzy.com/cnb/images-new/choice_349zmweb_swatch_custom_thumbnail200201060500choice_349zm.jpgchoice_349zm.jpg",
+          "image": "https://www.lazysuzy.com/cnb/images-new/isimageCrateitem_103_147_349_0item_103_147_349_0",
+          "link": "/product/483522"
+        },
+        {
+          "product_sku": "483522",
+          "variation_sku": "304463",
+          "name": "View, Otter",
+          "has_parent_sku": false,
+          "swatch_image": "https://www.lazysuzy.com/cnb/images-new/choice_351zmweb_swatch_custom_thumbnail200201060500choice_351zm.jpgchoice_351zm.jpg",
+          "image": "https://www.lazysuzy.com/cnb/images-new/isimageCrateitem_103_147_351_0item_103_147_351_0",
+          "link": "/product/483522"
+        },
+        {
+          "product_sku": "483522",
+          "variation_sku": "304463",
+          "name": "View, Pewter",
+          "has_parent_sku": false,
+          "swatch_image": "https://www.lazysuzy.com/cnb/images-new/choice_352zmweb_swatch_custom_thumbnail200201060500choice_352zm.jpgchoice_352zm.jpg",
+          "image": "https://www.lazysuzy.com/cnb/images-new/isimageCrateitem_103_147_352_0item_103_147_352_0",
+          "link": "/product/483522"
+        },
+        {
+          "product_sku": "483522",
+          "variation_sku": "304463",
+          "name": "View, Black",
+          "has_parent_sku": false,
+          "swatch_image": "https://www.lazysuzy.com/cnb/images-new/choice_358zmweb_swatch_custom_thumbnail200201060500choice_358zm.jpgchoice_358zm.jpg",
+          "image": "https://www.lazysuzy.com/cnb/images-new/isimageCrateitem_103_147_358_0item_103_147_358_0",
+          "link": "/product/483522"
+        },
+        {
+          "product_sku": "483522",
+          "variation_sku": "304463",
+          "name": "View, Nile",
+          "has_parent_sku": false,
+          "swatch_image": "https://www.lazysuzy.com/cnb/images-new/choice_356zmweb_swatch_custom_thumbnail200201060500choice_356zm.jpgchoice_356zm.jpg",
+          "image": "https://www.lazysuzy.com/cnb/images-new/isimageCrateitem_103_147_356_0item_103_147_356_0",
+          "link": "/product/483522"
+        },
+        {
+          "product_sku": "483522",
+          "variation_sku": "304463",
+          "name": "View, Navy",
+          "has_parent_sku": false,
+          "swatch_image": "https://www.lazysuzy.com/cnb/images-new/choice_350zmweb_swatch_custom_thumbnail200201060500choice_350zm.jpgchoice_350zm.jpg",
+          "image": "https://www.lazysuzy.com/cnb/images-new/isimageCrateitem_103_147_350_0item_103_147_350_0",
+          "link": "/product/483522"
+        },
+        {
+          "product_sku": "483522",
+          "variation_sku": "304463",
+          "name": "Taft, Cobalt",
+          "has_parent_sku": false,
+          "swatch_image": "https://www.lazysuzy.com/cnb/images-new/choice_399zmweb_swatch_custom_thumbnail200201060500choice_399zm.jpgchoice_399zm.jpg",
+          "image": "https://www.lazysuzy.com/cnb/images-new/isimageCrateitem_103_147_399_0item_103_147_399_0",
+          "link": "/product/483522"
+        },
+        {
+          "product_sku": "483522",
+          "variation_sku": "304463",
+          "name": "View, Berry",
+          "has_parent_sku": false,
+          "swatch_image": "https://www.lazysuzy.com/cnb/images-new/choice_348zmweb_swatch_custom_thumbnail200201060500choice_348zm.jpgchoice_348zm.jpg",
+          "image": "https://www.lazysuzy.com/cnb/images-new/isimageCrateitem_103_147_348_0item_103_147_348_0",
+          "link": "/product/483522"
+        },
+        {
+          "product_sku": "483522",
+          "variation_sku": "304463",
+          "name": "View, Brandy",
+          "has_parent_sku": false,
+          "swatch_image": "https://www.lazysuzy.com/cnb/images-new/choice_1836zmweb_swatch_custom_thumbnail200201060500choice_1836zm.jpgchoice_1836zm.jpg",
+          "image": "https://www.lazysuzy.com/cnb/images-new/isimageCrateitem_103_147_1836_0item_103_147_1836_0",
+          "link": "/product/483522"
+        }
+      ]
+    },
+    {
+      "id": 1,
+      "sku": "528244",
+      "is_new": false,
+      "site": "CB2",
+      "name": "Breton White Metal Sofa",
+      "product_url": "https://cb2.com/breton-white-metal-sofa/s528244",
+      "product_detail_url": "https://www.lazysuzy.com/product/528244",
+      "is_price": "699",
+      "was_price": "999",
+      "percent_discount": "30.03",
+      "model_code": "",
+      "color": "",
+      "collection": "",
+      "condition": "",
+      "main_image": "https://www.lazysuzy.com/cb2/images/isimageCB2BretonSofaWhiteSHS18_1x1BretonSofaWhiteSHS18_1x1",
+      "reviews": 54,
+      "rating": 4.6111,
+      "wishlisted": false,
+      "variations": []
+    },
+    {
+      "id": 1,
+      "sku": "267345",
+      "is_new": false,
+      "site": "CB2",
+      "name": "Breton Black Metal Sofa",
+      "product_url": "https://cb2.com/breton-black-metal-sofa/s267345",
+      "product_detail_url": "https://www.lazysuzy.com/product/267345",
+      "is_price": "999",
+      "was_price": "999",
+      "percent_discount": "0.00",
+      "model_code": "",
+      "color": "",
+      "collection": "",
+      "condition": "",
+      "main_image": "https://www.lazysuzy.com/cb2/images/isimageCB2BretonSofaSHS17_1x1BretonSofaSHS17_1x1",
+      "reviews": 54,
+      "rating": 4.6111,
+      "wishlisted": false,
+      "variations": []
+    },
+    {
+      "id": 1,
+      "sku": "360170",
+      "is_new": false,
+      "site": "CB2",
+      "name": "Lenyx Saddle Leather Sofa",
+      "product_url": "https://cb2.com/lenyx-saddle-leather-sofa/s360170",
+      "product_detail_url": "https://www.lazysuzy.com/product/360170",
+      "is_price": "2499",
+      "was_price": "2499",
+      "percent_discount": "0.00",
+      "model_code": "",
+      "color": "",
+      "collection": "",
+      "condition": "",
+      "main_image": "https://www.lazysuzy.com/cb2/images/isimageCB2LenyxSofaLthrSaddleSHF19_1x1LenyxSofaLthrSaddleSHF19_1x1",
+      "reviews": 46,
+      "rating": 4.7609,
+      "wishlisted": false,
+      "variations": [
+        {
+          "product_sku": "360170",
+          "variation_sku": "360170",
+          "name": "Bello, Saddle",
+          "has_parent_sku": true,
+          "swatch_image": "https://www.lazysuzy.com/cb2/images/choice_1313zmweb_swatch_custom_thumbnail200114072543choice_1313zm.jpgchoice_1313zm.jpg",
+          "image": "https://www.lazysuzy.com/cb2/images/isimageCB2item_587_146_1313_0item_587_146_1313_0",
+          "link": "/product/360170"
+        },
+        {
+          "product_sku": "360170",
+          "variation_sku": "386528",
+          "name": "Bello, Black",
+          "has_parent_sku": false,
+          "swatch_image": "https://www.lazysuzy.com/cb2/images/choice_1307zmweb_swatch_custom_thumbnail200114072543choice_1307zm.jpgchoice_1307zm.jpg",
+          "image": "https://www.lazysuzy.com/cb2/images/isimageCB2item_587_146_1307_0item_587_146_1307_0",
+          "link": "/product/360170"
+        },
+        {
+          "product_sku": "360170",
+          "variation_sku": "360181",
+          "name": "Bello, Grey",
+          "has_parent_sku": true,
+          "swatch_image": "https://www.lazysuzy.com/cb2/images/choice_1308zmweb_swatch_custom_thumbnail200114072543choice_1308zm.jpgchoice_1308zm.jpg",
+          "image": "https://www.lazysuzy.com/cb2/images/isimageCB2item_587_146_1308_0item_587_146_1308_0",
+          "link": "/product/360181"
+        }
+      ]
+    },
+    {
+      "id": 5,
+      "sku": "221013",
+      "is_new": false,
+      "site": "Crate & Barrel",
+      "name": "Axis II 2-Seat Sofa",
+      "product_url": "https://www.crateandbarrel.com/axis-ii-2-seat-sofa/s221013",
+      "product_detail_url": "https://www.lazysuzy.com/product/221013",
+      "is_price": "1899",
+      "was_price": "1899",
+      "percent_discount": "0.00",
+      "model_code": "",
+      "color": "Blue,Grey,Red,Tan",
+      "collection": "",
+      "condition": "",
+      "main_image": "https://www.lazysuzy.com/cnb/images-new/isimageCrateAxisII2StSofaNickelSHF19_1x1AxisII2StSofaNickelSHF19_1x1",
+      "reviews": 62,
+      "rating": 4.4194,
+      "wishlisted": false,
+      "variations": [
+        {
+          "product_sku": "221013",
+          "variation_sku": "221013",
+          "name": "Douglas, Nickel",
+          "has_parent_sku": true,
+          "swatch_image": "https://www.lazysuzy.com/cnb/images-new/choice_238zmweb_swatch_custom_thumbnail200201060507choice_238zm.jpgchoice_238zm.jpg",
+          "image": "https://www.lazysuzy.com/cnb/images-new/isimageCrateitem_13_147_238_115item_13_147_238_115",
+          "link": "/product/221013"
+        },
+        {
+          "product_sku": "221013",
+          "variation_sku": "220978",
+          "name": "Douglas, Coffee",
+          "has_parent_sku": true,
+          "swatch_image": "https://www.lazysuzy.com/cnb/images-new/choice_234zmweb_swatch_custom_thumbnail200201060507choice_234zm.jpgchoice_234zm.jpg",
+          "image": "https://www.lazysuzy.com/cnb/images-new/isimageCrateitem_13_147_234_115item_13_147_234_115",
+          "link": "/product/220978"
+        },
+        {
+          "product_sku": "221013",
+          "variation_sku": "482485",
+          "name": "Douglas, Charcoal",
+          "has_parent_sku": true,
+          "swatch_image": "https://www.lazysuzy.com/cnb/images-new/choice_233zmweb_swatch_custom_thumbnail200201060507choice_233zm.jpgchoice_233zm.jpg",
+          "image": "https://www.lazysuzy.com/cnb/images-new/isimageCrateitem_13_147_233_115item_13_147_233_115",
+          "link": "/product/482485"
+        },
+        {
+          "product_sku": "221013",
+          "variation_sku": "230758",
+          "name": "Douglas, Lace",
+          "has_parent_sku": false,
+          "swatch_image": "https://www.lazysuzy.com/cnb/images-new/choice_237zmweb_swatch_custom_thumbnail200201060507choice_237zm.jpgchoice_237zm.jpg",
+          "image": "https://www.lazysuzy.com/cnb/images-new/isimageCrateitem_13_147_237_115item_13_147_237_115",
+          "link": "/product/221013"
+        },
+        {
+          "product_sku": "221013",
+          "variation_sku": "230758",
+          "name": "Douglas, Pumice",
+          "has_parent_sku": false,
+          "swatch_image": "https://www.lazysuzy.com/cnb/images-new/choice_240zmweb_swatch_custom_thumbnail200201060507choice_240zm.jpgchoice_240zm.jpg",
+          "image": "https://www.lazysuzy.com/cnb/images-new/isimageCrateitem_13_147_240_115item_13_147_240_115",
+          "link": "/product/221013"
+        },
+        {
+          "product_sku": "221013",
+          "variation_sku": "230758",
+          "name": "Taft, Pearl",
+          "has_parent_sku": false,
+          "swatch_image": "https://www.lazysuzy.com/cnb/images-new/choice_401zmweb_swatch_custom_thumbnail200201060500choice_401zm.jpgchoice_401zm.jpg",
+          "image": "https://www.lazysuzy.com/cnb/images-new/isimageCrateitem_13_147_401_115item_13_147_401_115",
+          "link": "/product/221013"
+        },
+        {
+          "product_sku": "221013",
+          "variation_sku": "230758",
+          "name": "Douglas, Camel",
+          "has_parent_sku": false,
+          "swatch_image": "https://www.lazysuzy.com/cnb/images-new/choice_232zmweb_swatch_custom_thumbnail200201060507choice_232zm.jpgchoice_232zm.jpg",
+          "image": "https://www.lazysuzy.com/cnb/images-new/isimageCrateitem_13_147_232_115item_13_147_232_115",
+          "link": "/product/221013"
+        },
+        {
+          "product_sku": "221013",
+          "variation_sku": "230758",
+          "name": "Douglas, Peat",
+          "has_parent_sku": false,
+          "swatch_image": "https://www.lazysuzy.com/cnb/images-new/choice_239zmweb_swatch_custom_thumbnail200201060507choice_239zm.jpgchoice_239zm.jpg",
+          "image": "https://www.lazysuzy.com/cnb/images-new/isimageCrateitem_13_147_239_115item_13_147_239_115",
+          "link": "/product/221013"
+        },
+        {
+          "product_sku": "221013",
+          "variation_sku": "230758",
+          "name": "Taft, Heather",
+          "has_parent_sku": false,
+          "swatch_image": "https://www.lazysuzy.com/cnb/images-new/choice_400zmweb_swatch_custom_thumbnail200201060500choice_400zm.jpgchoice_400zm.jpg",
+          "image": "https://www.lazysuzy.com/cnb/images-new/isimageCrateitem_13_147_400_115item_13_147_400_115",
+          "link": "/product/221013"
+        },
+        {
+          "product_sku": "221013",
+          "variation_sku": "230758",
+          "name": "Taft, Truffle",
+          "has_parent_sku": false,
+          "swatch_image": "https://www.lazysuzy.com/cnb/images-new/choice_403zmweb_swatch_custom_thumbnail200201060500choice_403zm.jpgchoice_403zm.jpg",
+          "image": "https://www.lazysuzy.com/cnb/images-new/isimageCrateitem_13_147_403_115item_13_147_403_115",
+          "link": "/product/221013"
+        },
+        {
+          "product_sku": "221013",
+          "variation_sku": "230758",
+          "name": "Taft, Cement",
+          "has_parent_sku": false,
+          "swatch_image": "https://www.lazysuzy.com/cnb/images-new/choice_398zmweb_swatch_custom_thumbnail200201060500choice_398zm.jpgchoice_398zm.jpg",
+          "image": "https://www.lazysuzy.com/cnb/images-new/isimageCrateitem_13_147_398_115item_13_147_398_115",
+          "link": "/product/221013"
+        },
+        {
+          "product_sku": "221013",
+          "variation_sku": "230758",
+          "name": "Douglas, Ice",
+          "has_parent_sku": false,
+          "swatch_image": "https://www.lazysuzy.com/cnb/images-new/choice_235zmweb_swatch_custom_thumbnail200201060507choice_235zm.jpgchoice_235zm.jpg",
+          "image": "https://www.lazysuzy.com/cnb/images-new/isimageCrateitem_13_147_235_115item_13_147_235_115",
+          "link": "/product/221013"
+        },
+        {
+          "product_sku": "221013",
+          "variation_sku": "230758",
+          "name": "Taft, Steel",
+          "has_parent_sku": false,
+          "swatch_image": "https://www.lazysuzy.com/cnb/images-new/choice_402zmweb_swatch_custom_thumbnail200201060500choice_402zm.jpgchoice_402zm.jpg",
+          "image": "https://www.lazysuzy.com/cnb/images-new/isimageCrateitem_13_147_402_115item_13_147_402_115",
+          "link": "/product/221013"
+        },
+        {
+          "product_sku": "221013",
+          "variation_sku": "230758",
+          "name": "Douglas, Indigo",
+          "has_parent_sku": false,
+          "swatch_image": "https://www.lazysuzy.com/cnb/images-new/choice_236zmweb_swatch_custom_thumbnail200201060507choice_236zm.jpgchoice_236zm.jpg",
+          "image": "https://www.lazysuzy.com/cnb/images-new/isimageCrateitem_13_147_236_115item_13_147_236_115",
+          "link": "/product/221013"
+        },
+        {
+          "product_sku": "221013",
+          "variation_sku": "230758",
+          "name": "Taft, Cobalt",
+          "has_parent_sku": false,
+          "swatch_image": "https://www.lazysuzy.com/cnb/images-new/choice_399zmweb_swatch_custom_thumbnail200201060500choice_399zm.jpgchoice_399zm.jpg",
+          "image": "https://www.lazysuzy.com/cnb/images-new/isimageCrateitem_13_147_399_115item_13_147_399_115",
+          "link": "/product/221013"
+        }
+      ]
+    },
+    {
+      "id": 1,
+      "sku": "360415",
+      "is_new": false,
+      "site": "CB2",
+      "name": "Savile Black Leather Tufted Sofa",
+      "product_url": "https://cb2.com/savile-black-leather-tufted-sofa/s360415",
+      "product_detail_url": "https://www.lazysuzy.com/product/360415",
+      "is_price": "2499",
+      "was_price": "2499",
+      "percent_discount": "0.00",
+      "model_code": "",
+      "color": "",
+      "collection": "",
+      "condition": "",
+      "main_image": "https://www.lazysuzy.com/cb2/images/isimageCB2SavileSofaLeatherBlackSHF17_1x1SavileSofaLeatherBlackSHF17_1x1",
+      "reviews": 48,
+      "rating": 4.6458,
+      "wishlisted": false,
+      "variations": [
+        {
+          "product_sku": "360415",
+          "variation_sku": "360415",
+          "name": "Bello, Black",
+          "has_parent_sku": true,
+          "swatch_image": "https://www.lazysuzy.com/cb2/images/choice_1307zmweb_swatch_custom_thumbnail200114052345choice_1307zm.jpgchoice_1307zm.jpg",
+          "image": "https://www.lazysuzy.com/cb2/images/isimageCB2item_585_146_1307_0item_585_146_1307_0",
+          "link": "/product/360415"
+        },
+        {
+          "product_sku": "360415",
+          "variation_sku": "360401",
+          "name": "Bello, Saddle",
+          "has_parent_sku": true,
+          "swatch_image": "https://www.lazysuzy.com/cb2/images/choice_1313zmweb_swatch_custom_thumbnail200114052345choice_1313zm.jpgchoice_1313zm.jpg",
+          "image": "https://www.lazysuzy.com/cb2/images/isimageCB2item_585_146_1313_0item_585_146_1313_0",
+          "link": "/product/360401"
+        },
+        {
+          "product_sku": "360415",
+          "variation_sku": "385995",
+          "name": "Bello, Grey",
+          "has_parent_sku": false,
+          "swatch_image": "https://www.lazysuzy.com/cb2/images/choice_1308zmweb_swatch_custom_thumbnail200114052345choice_1308zm.jpgchoice_1308zm.jpg",
+          "image": "https://www.lazysuzy.com/cb2/images/isimageCB2item_585_146_1308_0item_585_146_1308_0",
+          "link": "/product/360415"
+        }
+      ]
+    },
+    {
+      "id": 1,
+      "sku": "235054",
+      "is_new": false,
+      "site": "CB2",
+      "name": "Piazza Sofa",
+      "product_url": "https://cb2.com/piazza-sofa/s235054",
+      "product_detail_url": "https://www.lazysuzy.com/product/235054",
+      "is_price": "1399",
+      "was_price": "1399",
+      "percent_discount": "0.00",
+      "model_code": "",
+      "color": "",
+      "collection": "",
+      "condition": "",
+      "main_image": "https://www.lazysuzy.com/cb2/images/isimageCB2PiazzaSofaSnowS15_1x1PiazzaSofaSnowS15_1x1",
+      "reviews": 70,
+      "rating": 4.1571,
+      "wishlisted": false,
+      "variations": [
+        {
+          "product_sku": "235054",
+          "variation_sku": "235054",
+          "name": "Lindy, Snow",
+          "has_parent_sku": true,
+          "swatch_image": "https://www.lazysuzy.com/cb2/images/choice_684zmweb_swatch_custom_thumbnail200114052530choice_684zm.jpgchoice_684zm.jpg",
+          "image": "https://www.lazysuzy.com/cb2/images/isimageCB2item_173_146_684_0item_173_146_684_0",
+          "link": "/product/235054"
+        },
+        {
+          "product_sku": "235054",
+          "variation_sku": "407257",
+          "name": "Dark Grey, Madrid",
+          "has_parent_sku": true,
+          "swatch_image": "https://www.lazysuzy.com/cb2/images/choice_1297zmweb_swatch_custom_thumbnail200114052537choice_1297zm.jpgchoice_1297zm.jpg",
+          "image": "https://www.lazysuzy.com/cb2/images/isimageCB2item_173_146_1297_0item_173_146_1297_0",
+          "link": "/product/407257"
+        },
+        {
+          "product_sku": "235054",
+          "variation_sku": "341729",
+          "name": "Angel, Pewter",
+          "has_parent_sku": false,
+          "swatch_image": "https://www.lazysuzy.com/cb2/images/choice_640zmweb_swatch_custom_thumbnail200114052532choice_640zm.jpgchoice_640zm.jpg",
+          "image": "https://www.lazysuzy.com/cb2/images/isimageCB2item_173_146_640_0item_173_146_640_0",
+          "link": "/product/235054"
+        },
+        {
+          "product_sku": "235054",
+          "variation_sku": "341729",
+          "name": "Bella, Bayoux",
+          "has_parent_sku": false,
+          "swatch_image": "https://www.lazysuzy.com/cb2/images/choice_645zmweb_swatch_custom_thumbnail200114052532choice_645zm.jpgchoice_645zm.jpg",
+          "image": "https://www.lazysuzy.com/cb2/images/isimageCB2item_173_146_645_0item_173_146_645_0",
+          "link": "/product/235054"
+        },
+        {
+          "product_sku": "235054",
+          "variation_sku": "341729",
+          "name": "Bella, Smoke",
+          "has_parent_sku": false,
+          "swatch_image": "https://www.lazysuzy.com/cb2/images/choice_647zmweb_swatch_custom_thumbnail200114052532choice_647zm.jpgchoice_647zm.jpg",
+          "image": "https://www.lazysuzy.com/cb2/images/isimageCB2item_173_146_647_0item_173_146_647_0",
+          "link": "/product/235054"
+        },
+        {
+          "product_sku": "235054",
+          "variation_sku": "341729",
+          "name": "Bella, Storm",
+          "has_parent_sku": false,
+          "swatch_image": "https://www.lazysuzy.com/cb2/images/choice_648zmweb_swatch_custom_thumbnail200114052532choice_648zm.jpgchoice_648zm.jpg",
+          "image": "https://www.lazysuzy.com/cb2/images/isimageCB2item_173_146_648_0item_173_146_648_0",
+          "link": "/product/235054"
+        },
+        {
+          "product_sku": "235054",
+          "variation_sku": "341729",
+          "name": "Curious, Linen",
+          "has_parent_sku": false,
+          "swatch_image": "https://www.lazysuzy.com/cb2/images/choice_2019zmweb_swatch_custom_thumbnail200114052532choice_2019zm.jpgchoice_2019zm.jpg",
+          "image": "https://www.lazysuzy.com/cb2/images/isimageCB2item_173_146_2019_0item_173_146_2019_0",
+          "link": "/product/235054"
+        },
+        {
+          "product_sku": "235054",
+          "variation_sku": "341729",
+          "name": "Pinstripe, Charcoal",
+          "has_parent_sku": false,
+          "swatch_image": "https://www.lazysuzy.com/cb2/images/choice_1353zmweb_swatch_custom_thumbnail200114052532choice_1353zm.jpgchoice_1353zm.jpg",
+          "image": "https://www.lazysuzy.com/cb2/images/isimageCB2item_173_146_1353_0item_173_146_1353_0",
+          "link": "/product/235054"
+        },
+        {
+          "product_sku": "235054",
+          "variation_sku": "341729",
+          "name": "Deauville, Dune",
+          "has_parent_sku": false,
+          "swatch_image": "https://www.lazysuzy.com/cb2/images/choice_1906zmweb_swatch_custom_thumbnail200114052532choice_1906zm.jpgchoice_1906zm.jpg",
+          "image": "https://www.lazysuzy.com/cb2/images/isimageCB2item_173_146_1906_0item_173_146_1906_0",
+          "link": "/product/235054"
+        },
+        {
+          "product_sku": "235054",
+          "variation_sku": "341729",
+          "name": "Deauville, Stone",
+          "has_parent_sku": false,
+          "swatch_image": "https://www.lazysuzy.com/cb2/images/choice_663zmweb_swatch_custom_thumbnail200114052530choice_663zm.jpgchoice_663zm.jpg",
+          "image": "https://www.lazysuzy.com/cb2/images/isimageCB2item_173_146_663_0item_173_146_663_0",
+          "link": "/product/235054"
+        },
+        {
+          "product_sku": "235054",
+          "variation_sku": "341729",
+          "name": "Ellyn, Cloud",
+          "has_parent_sku": false,
+          "swatch_image": "https://www.lazysuzy.com/cb2/images/choice_665zmweb_swatch_custom_thumbnail200114052532choice_665zm.jpgchoice_665zm.jpg",
+          "image": "https://www.lazysuzy.com/cb2/images/isimageCB2item_173_146_665_0item_173_146_665_0",
+          "link": "/product/235054"
+        },
+        {
+          "product_sku": "235054",
+          "variation_sku": "341729",
+          "name": "Essence, Oyster",
+          "has_parent_sku": false,
+          "swatch_image": "https://www.lazysuzy.com/cb2/images/choice_666zmweb_swatch_custom_thumbnail200114052532choice_666zm.jpgchoice_666zm.jpg",
+          "image": "https://www.lazysuzy.com/cb2/images/isimageCB2item_173_146_666_0item_173_146_666_0",
+          "link": "/product/235054"
+        },
+        {
+          "product_sku": "235054",
+          "variation_sku": "341729",
+          "name": "Essence, Sea Salt",
+          "has_parent_sku": false,
+          "swatch_image": "https://www.lazysuzy.com/cb2/images/choice_667zmweb_swatch_custom_thumbnail200114052532choice_667zm.jpgchoice_667zm.jpg",
+          "image": "https://www.lazysuzy.com/cb2/images/isimageCB2item_173_146_667_0item_173_146_667_0",
+          "link": "/product/235054"
+        },
+        {
+          "product_sku": "235054",
+          "variation_sku": "341729",
+          "name": "Finley II, Pepper",
+          "has_parent_sku": false,
+          "swatch_image": "https://www.lazysuzy.com/cb2/images/choice_669zmweb_swatch_custom_thumbnail200114052532choice_669zm.jpgchoice_669zm.jpg",
+          "image": "https://www.lazysuzy.com/cb2/images/isimageCB2item_173_146_669_0item_173_146_669_0",
+          "link": "/product/235054"
+        },
+        {
+          "product_sku": "235054",
+          "variation_sku": "341729",
+          "name": "Giorgio, Denim",
+          "has_parent_sku": false,
+          "swatch_image": "https://www.lazysuzy.com/cb2/images/choice_670zmweb_swatch_custom_thumbnail200114052532choice_670zm.jpgchoice_670zm.jpg",
+          "image": "https://www.lazysuzy.com/cb2/images/isimageCB2item_173_146_670_0item_173_146_670_0",
+          "link": "/product/235054"
+        },
+        {
+          "product_sku": "235054",
+          "variation_sku": "341729",
+          "name": "Hanson, Almond",
+          "has_parent_sku": false,
+          "swatch_image": "https://www.lazysuzy.com/cb2/images/choice_1206zmweb_swatch_custom_thumbnail200114052532choice_1206zm.jpgchoice_1206zm.jpg",
+          "image": "https://www.lazysuzy.com/cb2/images/isimageCB2item_173_146_1206_0item_173_146_1206_0",
+          "link": "/product/235054"
+        },
+        {
+          "product_sku": "235054",
+          "variation_sku": "341729",
+          "name": "Hanson, Concrete",
+          "has_parent_sku": false,
+          "swatch_image": "https://www.lazysuzy.com/cb2/images/choice_671zmweb_swatch_custom_thumbnail200114052532choice_671zm.jpgchoice_671zm.jpg",
+          "image": "https://www.lazysuzy.com/cb2/images/isimageCB2item_173_146_671_0item_173_146_671_0",
+          "link": "/product/235054"
+        },
+        {
+          "product_sku": "235054",
+          "variation_sku": "341729",
+          "name": "Hanson, Sapphire",
+          "has_parent_sku": false,
+          "swatch_image": "https://www.lazysuzy.com/cb2/images/choice_672zmweb_swatch_custom_thumbnail200114052532choice_672zm.jpgchoice_672zm.jpg",
+          "image": "https://www.lazysuzy.com/cb2/images/isimageCB2item_173_146_672_0item_173_146_672_0",
+          "link": "/product/235054"
+        },
+        {
+          "product_sku": "235054",
+          "variation_sku": "341729",
+          "name": "Hatch, Charcoal",
+          "has_parent_sku": false,
+          "swatch_image": "https://www.lazysuzy.com/cb2/images/choice_1919zmweb_swatch_custom_thumbnail200114052532choice_1919zm.jpgchoice_1919zm.jpg",
+          "image": "https://www.lazysuzy.com/cb2/images/isimageCB2item_173_146_1919_0item_173_146_1919_0",
+          "link": "/product/235054"
+        },
+        {
+          "product_sku": "235054",
+          "variation_sku": "341729",
+          "name": "Hatch, Platinum",
+          "has_parent_sku": false,
+          "swatch_image": "https://www.lazysuzy.com/cb2/images/choice_1898zmweb_swatch_custom_thumbnail200114052530choice_1898zm.jpgchoice_1898zm.jpg",
+          "image": "https://www.lazysuzy.com/cb2/images/isimageCB2item_173_146_1898_0item_173_146_1898_0",
+          "link": "/product/235054"
+        },
+        {
+          "product_sku": "235054",
+          "variation_sku": "341729",
+          "name": "Klein II, Atomic",
+          "has_parent_sku": false,
+          "swatch_image": "https://www.lazysuzy.com/cb2/images/choice_677zmweb_swatch_custom_thumbnail200114052530choice_677zm.jpgchoice_677zm.jpg",
+          "image": "https://www.lazysuzy.com/cb2/images/isimageCB2item_173_146_677_0item_173_146_677_0",
+          "link": "/product/235054"
+        },
+        {
+          "product_sku": "235054",
+          "variation_sku": "341729",
+          "name": "Lexi, Salt And Pepper",
+          "has_parent_sku": false,
+          "swatch_image": "https://www.lazysuzy.com/cb2/images/choice_681zmweb_swatch_custom_thumbnail200114052532choice_681zm.jpgchoice_681zm.jpg",
+          "image": "https://www.lazysuzy.com/cb2/images/isimageCB2item_173_146_681_0item_173_146_681_0",
+          "link": "/product/235054"
+        },
+        {
+          "product_sku": "235054",
+          "variation_sku": "341729",
+          "name": "Tess, Carbon",
+          "has_parent_sku": false,
+          "swatch_image": "https://www.lazysuzy.com/cb2/images/choice_308zmweb_swatch_custom_thumbnail200114052532choice_308zm.jpgchoice_308zm.jpg",
+          "image": "https://www.lazysuzy.com/cb2/images/isimageCB2item_173_146_308_0item_173_146_308_0",
+          "link": "/product/235054"
+        },
+        {
+          "product_sku": "235054",
+          "variation_sku": "341729",
+          "name": "Tess, Peacock",
+          "has_parent_sku": false,
+          "swatch_image": "https://www.lazysuzy.com/cb2/images/choice_704zmweb_swatch_custom_thumbnail200114052532choice_704zm.jpgchoice_704zm.jpg",
+          "image": "https://www.lazysuzy.com/cb2/images/isimageCB2item_173_146_704_0item_173_146_704_0",
+          "link": "/product/235054"
+        },
+        {
+          "product_sku": "235054",
+          "variation_sku": "341729",
+          "name": "Vibe, Smokey",
+          "has_parent_sku": false,
+          "swatch_image": "https://www.lazysuzy.com/cb2/images/choice_705zmweb_swatch_custom_thumbnail200114052532choice_705zm.jpgchoice_705zm.jpg",
+          "image": "https://www.lazysuzy.com/cb2/images/isimageCB2item_173_146_705_0item_173_146_705_0",
+          "link": "/product/235054"
+        }
+      ]
+    },
+    {
+      "id": 1,
+      "sku": "670895",
+      "is_new": false,
+      "site": "CB2",
+      "name": "Logan Grey Boucle Sofa",
+      "product_url": "https://cb2.com/logan-grey-boucle-sofa/s670895",
+      "product_detail_url": "https://www.lazysuzy.com/product/670895",
+      "is_price": "1599",
+      "was_price": "1599",
+      "percent_discount": "0.00",
+      "model_code": "",
+      "color": "",
+      "collection": "",
+      "condition": "",
+      "main_image": "https://www.lazysuzy.com/cb2/images/isimageCB2LoganGreySofaSHF18_1x1LoganGreySofaSHF18_1x1",
+      "reviews": 26,
+      "rating": 5,
+      "wishlisted": false,
+      "variations": []
+    },
+    {
+      "id": 1,
+      "sku": "212242",
+      "is_new": false,
+      "site": "CB2",
+      "name": "District 2-Piece Sectional Sofa",
+      "product_url": "https://cb2.com/district-2-piece-sectional-sofa/s212242",
+      "product_detail_url": "https://www.lazysuzy.com/product/212242",
+      "is_price": "1999",
+      "was_price": "1999",
+      "percent_discount": "0.00",
+      "model_code": "",
+      "color": "",
+      "collection": "",
+      "condition": "",
+      "main_image": "https://www.lazysuzy.com/cb2/images/isimageCB2District2pcSctRAChsSfS15District2pcSctRAChsSfS15",
+      "reviews": 42,
+      "rating": 4.619,
+      "wishlisted": false,
+      "variations": [
+        {
+          "product_sku": "212242",
+          "variation_sku": "212242",
+          "name": "Vibe, Smokey",
+          "has_parent_sku": true,
+          "swatch_image": "https://www.lazysuzy.com/cb2/images/choice_705zmweb_swatch_custom_thumbnail200116072459choice_705zm.jpgchoice_705zm.jpg",
+          "image": "https://www.lazysuzy.com/cb2/images/isimageCB2item_324_23_705_0item_324_23_705_0",
+          "link": "/product/212242"
+        },
+        {
+          "product_sku": "212242",
+          "variation_sku": "678014",
+          "name": "Bloce, Grey",
+          "has_parent_sku": false,
+          "swatch_image": "https://www.lazysuzy.com/cb2/images/choice_1628zmweb_swatch_custom_thumbnail200116072456choice_1628zm.jpgchoice_1628zm.jpg",
+          "image": "https://www.lazysuzy.com/cb2/images/isimageCB2item_324_23_1628_0item_324_23_1628_0",
+          "link": "/product/212242"
+        }
+      ]
+    },
+    {
+      "id": 1,
+      "sku": "628628",
+      "is_new": false,
+      "site": "CB2",
+      "name": "Tropez Black and White Stripe Sofa",
+      "product_url": "https://cb2.com/tropez-black-and-white-stripe-sofa/s628628",
+      "product_detail_url": "https://www.lazysuzy.com/product/628628",
+      "is_price": "1249",
+      "was_price": "1249",
+      "percent_discount": "0.00",
+      "model_code": "",
+      "color": "",
+      "collection": "",
+      "condition": "",
+      "main_image": "https://www.lazysuzy.com/cb2/images/isimageCB2TropezSofaBlackWhiteStripeSHS16_1x1TropezSofaBlackWhiteStripeSHS16_1x1",
+      "reviews": 49,
+      "rating": 4.4286,
+      "wishlisted": false,
+      "variations": [
+        {
+          "product_sku": "628628",
+          "variation_sku": "628628",
+          "name": "Black and White",
+          "has_parent_sku": true,
+          "swatch_image": "https://www.lazysuzy.com/cb2/images/TropezSofaBlackWhiteStripeS16_zmGRweb_HWGrouperThumb200114072622TropezSofaBlackWhiteStripeS16_zmGR.jpgTropezSofaBlackWhiteStripeS16_zmGR.jpg",
+          "image": "https://www.lazysuzy.com/cb2/images/isimageCB2TropezSofaBlackWhiteStripeSHS16_1x1TropezSofaBlackWhiteStripeSHS16_1x1",
+          "link": "/product/628628"
+        },
+        {
+          "product_sku": "628628",
+          "variation_sku": "628615",
+          "name": "Natural",
+          "has_parent_sku": true,
+          "swatch_image": "https://www.lazysuzy.com/cb2/images/TropezSofaNaturalS16_zmGRweb_HWGrouperThumb200114072622TropezSofaNaturalS16_zmGR.jpgTropezSofaNaturalS16_zmGR.jpg",
+          "image": "https://www.lazysuzy.com/cb2/images/isimageCB2TropezSofaNaturalSHS16_1x1TropezSofaNaturalSHS16_1x1",
+          "link": "/product/628615"
+        }
+      ]
+    },
+    {
+      "id": 1,
+      "sku": "628615",
+      "is_new": false,
+      "site": "CB2",
+      "name": "Tropez Natural Sofa",
+      "product_url": "https://cb2.com/tropez-natural-sofa/s628615",
+      "product_detail_url": "https://www.lazysuzy.com/product/628615",
+      "is_price": "1199",
+      "was_price": "1199",
+      "percent_discount": "0.00",
+      "model_code": "",
+      "color": "",
+      "collection": "",
+      "condition": "",
+      "main_image": "https://www.lazysuzy.com/cb2/images/isimageCB2TropezSofaNaturalSHS16_1x1TropezSofaNaturalSHS16_1x1",
+      "reviews": 49,
+      "rating": 4.4286,
+      "wishlisted": false,
+      "variations": [
+        {
+          "product_sku": "628615",
+          "variation_sku": "628628",
+          "name": "Black and White",
+          "has_parent_sku": true,
+          "swatch_image": "https://www.lazysuzy.com/cb2/images/TropezSofaBlackWhiteStripeS16_zmGRweb_HWGrouperThumb200114072622TropezSofaBlackWhiteStripeS16_zmGR.jpgTropezSofaBlackWhiteStripeS16_zmGR.jpg",
+          "image": "https://www.lazysuzy.com/cb2/images/isimageCB2TropezSofaBlackWhiteStripeSHS16_1x1TropezSofaBlackWhiteStripeSHS16_1x1",
+          "link": "/product/628628"
+        },
+        {
+          "product_sku": "628615",
+          "variation_sku": "628615",
+          "name": "Natural",
+          "has_parent_sku": true,
+          "swatch_image": "https://www.lazysuzy.com/cb2/images/TropezSofaNaturalS16_zmGRweb_HWGrouperThumb200114072622TropezSofaNaturalS16_zmGR.jpgTropezSofaNaturalS16_zmGR.jpg",
+          "image": "https://www.lazysuzy.com/cb2/images/isimageCB2TropezSofaNaturalSHS16_1x1TropezSofaNaturalSHS16_1x1",
+          "link": "/product/628615"
+        }
+      ]
+    },
+    {
+      "id": 5,
+      "sku": "230812",
+      "is_new": false,
+      "site": "Crate & Barrel",
+      "name": "Axis II 3-Seat Sofa",
+      "product_url": "https://www.crateandbarrel.com/axis-ii-3-seat-sofa/s230812",
+      "product_detail_url": "https://www.lazysuzy.com/product/230812",
+      "is_price": "1999",
+      "was_price": "1999",
+      "percent_discount": "0.00",
+      "model_code": "",
+      "color": "Green,Grey,Red,Tan",
+      "collection": "",
+      "condition": "",
+      "main_image": "https://www.lazysuzy.com/cnb/images-new/isimageCrateAxisII3StSofaQSLNickelSHF19_1x1AxisII3StSofaQSLNickelSHF19_1x1",
+      "reviews": 33,
+      "rating": 4.7273,
+      "wishlisted": false,
+      "variations": [
+        {
+          "product_sku": "230812",
+          "variation_sku": "230812",
+          "name": "Douglas, Nickel",
+          "has_parent_sku": true,
+          "swatch_image": "https://www.lazysuzy.com/cnb/images-new/choice_238zmweb_swatch_custom_thumbnail200201060507choice_238zm.jpgchoice_238zm.jpg",
+          "image": "https://www.lazysuzy.com/cnb/images-new/isimageCrateitem_13_151_238_115item_13_151_238_115",
+          "link": "/product/230812"
+        },
+        {
+          "product_sku": "230812",
+          "variation_sku": "230812",
+          "name": "Douglas, Lace",
+          "has_parent_sku": true,
+          "swatch_image": "https://www.lazysuzy.com/cnb/images-new/choice_237zmweb_swatch_custom_thumbnail200201060507choice_237zm.jpgchoice_237zm.jpg",
+          "image": "https://www.lazysuzy.com/cnb/images-new/isimageCrateitem_13_151_237_115item_13_151_237_115",
+          "link": "/product/230812"
+        },
+        {
+          "product_sku": "230812",
+          "variation_sku": "230812",
+          "name": "Douglas, Pumice",
+          "has_parent_sku": true,
+          "swatch_image": "https://www.lazysuzy.com/cnb/images-new/choice_240zmweb_swatch_custom_thumbnail200201060507choice_240zm.jpgchoice_240zm.jpg",
+          "image": "https://www.lazysuzy.com/cnb/images-new/isimageCrateitem_13_151_240_115item_13_151_240_115",
+          "link": "/product/230812"
+        },
+        {
+          "product_sku": "230812",
+          "variation_sku": "230812",
+          "name": "Taft, Pearl",
+          "has_parent_sku": true,
+          "swatch_image": "https://www.lazysuzy.com/cnb/images-new/choice_401zmweb_swatch_custom_thumbnail200201060500choice_401zm.jpgchoice_401zm.jpg",
+          "image": "https://www.lazysuzy.com/cnb/images-new/isimageCrateitem_13_151_401_115item_13_151_401_115",
+          "link": "/product/230812"
+        },
+        {
+          "product_sku": "230812",
+          "variation_sku": "230812",
+          "name": "Douglas, Camel",
+          "has_parent_sku": true,
+          "swatch_image": "https://www.lazysuzy.com/cnb/images-new/choice_232zmweb_swatch_custom_thumbnail200201060507choice_232zm.jpgchoice_232zm.jpg",
+          "image": "https://www.lazysuzy.com/cnb/images-new/isimageCrateitem_13_151_232_115item_13_151_232_115",
+          "link": "/product/230812"
+        },
+        {
+          "product_sku": "230812",
+          "variation_sku": "230812",
+          "name": "Douglas, Peat",
+          "has_parent_sku": true,
+          "swatch_image": "https://www.lazysuzy.com/cnb/images-new/choice_239zmweb_swatch_custom_thumbnail200201060507choice_239zm.jpgchoice_239zm.jpg",
+          "image": "https://www.lazysuzy.com/cnb/images-new/isimageCrateitem_13_151_239_115item_13_151_239_115",
+          "link": "/product/230812"
+        },
+        {
+          "product_sku": "230812",
+          "variation_sku": "230812",
+          "name": "Douglas, Coffee",
+          "has_parent_sku": true,
+          "swatch_image": "https://www.lazysuzy.com/cnb/images-new/choice_234zmweb_swatch_custom_thumbnail200201060507choice_234zm.jpgchoice_234zm.jpg",
+          "image": "https://www.lazysuzy.com/cnb/images-new/isimageCrateitem_13_151_234_115item_13_151_234_115",
+          "link": "/product/230812"
+        },
+        {
+          "product_sku": "230812",
+          "variation_sku": "230812",
+          "name": "Taft, Heather",
+          "has_parent_sku": true,
+          "swatch_image": "https://www.lazysuzy.com/cnb/images-new/choice_400zmweb_swatch_custom_thumbnail200201060500choice_400zm.jpgchoice_400zm.jpg",
+          "image": "https://www.lazysuzy.com/cnb/images-new/isimageCrateitem_13_151_400_115item_13_151_400_115",
+          "link": "/product/230812"
+        },
+        {
+          "product_sku": "230812",
+          "variation_sku": "230812",
+          "name": "Taft, Truffle",
+          "has_parent_sku": true,
+          "swatch_image": "https://www.lazysuzy.com/cnb/images-new/choice_403zmweb_swatch_custom_thumbnail200201060500choice_403zm.jpgchoice_403zm.jpg",
+          "image": "https://www.lazysuzy.com/cnb/images-new/isimageCrateitem_13_151_403_115item_13_151_403_115",
+          "link": "/product/230812"
+        },
+        {
+          "product_sku": "230812",
+          "variation_sku": "230812",
+          "name": "Taft, Cement",
+          "has_parent_sku": true,
+          "swatch_image": "https://www.lazysuzy.com/cnb/images-new/choice_398zmweb_swatch_custom_thumbnail200201060500choice_398zm.jpgchoice_398zm.jpg",
+          "image": "https://www.lazysuzy.com/cnb/images-new/isimageCrateitem_13_151_398_115item_13_151_398_115",
+          "link": "/product/230812"
+        },
+        {
+          "product_sku": "230812",
+          "variation_sku": "230812",
+          "name": "Douglas, Ice",
+          "has_parent_sku": true,
+          "swatch_image": "https://www.lazysuzy.com/cnb/images-new/choice_235zmweb_swatch_custom_thumbnail200201060507choice_235zm.jpgchoice_235zm.jpg",
+          "image": "https://www.lazysuzy.com/cnb/images-new/isimageCrateitem_13_151_235_115item_13_151_235_115",
+          "link": "/product/230812"
+        },
+        {
+          "product_sku": "230812",
+          "variation_sku": "230812",
+          "name": "Douglas, Charcoal",
+          "has_parent_sku": true,
+          "swatch_image": "https://www.lazysuzy.com/cnb/images-new/choice_233zmweb_swatch_custom_thumbnail200201060507choice_233zm.jpgchoice_233zm.jpg",
+          "image": "https://www.lazysuzy.com/cnb/images-new/isimageCrateitem_13_151_233_115item_13_151_233_115",
+          "link": "/product/230812"
+        },
+        {
+          "product_sku": "230812",
+          "variation_sku": "230812",
+          "name": "Taft, Steel",
+          "has_parent_sku": true,
+          "swatch_image": "https://www.lazysuzy.com/cnb/images-new/choice_402zmweb_swatch_custom_thumbnail200201060500choice_402zm.jpgchoice_402zm.jpg",
+          "image": "https://www.lazysuzy.com/cnb/images-new/isimageCrateitem_13_151_402_115item_13_151_402_115",
+          "link": "/product/230812"
+        },
+        {
+          "product_sku": "230812",
+          "variation_sku": "230812",
+          "name": "Douglas, Indigo",
+          "has_parent_sku": true,
+          "swatch_image": "https://www.lazysuzy.com/cnb/images-new/choice_236zmweb_swatch_custom_thumbnail200201060507choice_236zm.jpgchoice_236zm.jpg",
+          "image": "https://www.lazysuzy.com/cnb/images-new/isimageCrateitem_13_151_236_115item_13_151_236_115",
+          "link": "/product/230812"
+        },
+        {
+          "product_sku": "230812",
+          "variation_sku": "230812",
+          "name": "Taft, Cobalt",
+          "has_parent_sku": true,
+          "swatch_image": "https://www.lazysuzy.com/cnb/images-new/choice_399zmweb_swatch_custom_thumbnail200201060500choice_399zm.jpgchoice_399zm.jpg",
+          "image": "https://www.lazysuzy.com/cnb/images-new/isimageCrateitem_13_151_399_115item_13_151_399_115",
+          "link": "/product/230812"
+        }
+      ]
+    },
+    {
+      "id": 5,
+      "sku": "236327",
+      "is_new": false,
+      "site": "Crate & Barrel",
+      "name": "Rochelle Midcentury Modern Sofa",
+      "product_url": "https://www.crateandbarrel.com/rochelle-sofa/s236327",
+      "product_detail_url": "https://www.lazysuzy.com/product/236327",
+      "is_price": "1799.97",
+      "was_price": "2199",
+      "percent_discount": "18.15",
+      "model_code": "",
+      "color": "",
+      "collection": "",
+      "condition": "",
+      "main_image": "https://www.lazysuzy.com/cnb/images-new/isimageCrateRochelleSofaJettySHS15_1x1RochelleSofaJettySHS15_1x1",
+      "reviews": 30,
+      "rating": 4.7667,
+      "wishlisted": false,
+      "variations": []
+    }
+  ]
+}
