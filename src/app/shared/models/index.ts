@@ -1,1 +1,1 @@
-export * from './nav.interface';
+export * from './department.interface';
