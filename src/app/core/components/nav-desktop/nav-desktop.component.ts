@@ -8,7 +8,7 @@ import { ICategory, IDepartment } from './../../../shared/models';
   styleUrls: ['./nav-desktop.component.less'],
 })
 export class NavDesktopComponent implements OnInit {
-  logoPath: string = 'assets/images/dark_logo_transparent.png';
+  logoPath: string = 'assets/images/color_logo_transparent.png';
   departments: IDepartment[] = MOCK_DEPARTMENTS;
   accountActions: ICategory[] = MOCK_ACCOUNT_ACTIONS;
   ngOnInit() {}
