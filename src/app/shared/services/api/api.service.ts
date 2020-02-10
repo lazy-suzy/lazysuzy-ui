@@ -10,13 +10,13 @@ export class ApiService {
   constructor(private httpService: HttpService) {}
 
   getProducts(
+    department: string,
     category: string,
-    subCategory: string,
     page = 0
   ): Observable<IProductsPayload> {
     const filters = '';
     const sortTypes = '';
-    const endpoint = `${category}/${subCategory}`;
+    const endpoint = `${department}/${category}`;
     const url = env.useLocalJson
       ? `${env.JSON_BASE_HREF}${endpoint}`
       : `${env.API_BASE_HREF}${endpoint}?filters=${filters}&sort_type=${sortTypes}&pageno=${page}`;

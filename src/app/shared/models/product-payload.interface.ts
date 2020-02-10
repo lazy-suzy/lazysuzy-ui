@@ -18,12 +18,12 @@ export interface IProductPayload {
   rating: number;
   wishlisted: boolean;
   variations: any[];
-  description: string[];
-  dimension: IDimension;
-  thumb: string[];
-  features: string[];
-  on_server_images: string[];
-  department_info: IDepartmentInfo[];
+  description?: string[];
+  dimension?: IDimension;
+  thumb?: string[];
+  features?: string[];
+  on_server_images?: string[];
+  department_info?: IDepartmentInfo[];
 }
 
 interface IDepartmentInfo {
