@@ -1,22 +1,10 @@
-<mat-toolbar class="fixed">
-    <mat-toolbar-row class="flex justify-between">
-        <div class="flex justify-around w-75">
-            <a routerLink="/" routerLinkActive="active" class="no-underline flex items-center mr3">
-                <img class="w4 pointer grow" [src]="logoPath" alt="Lazy Suzy Home">
-            </a>
-            <ng-container *ngFor="let department of departments; let i = index">
-                <span class="grow pointer ph2 f5"
-                    [matMenuTriggerFor]="departmentMenu">{{ department.display | titlecase }}</span>
-                <mat-menu #departmentMenu="matMenu">
-                    <a *ngFor="let category of department.categories" [routerLink]="category.route"
-                        routerLinkActive="active" class="no-underline">
-                        <button mat-menu-item>{{ category.display | titlecase }}</button>
-                    </a>
-                </mat-menu>
-            </ng-container>
-        </div>
+<mat-toolbar class="fixed bg-transparent">
+    <mat-toolbar-row class="header flex justify-between ph2">
+        <a routerLink="/" routerLinkActive="active" class="no-underline flex items-center">
+            <img class="w4 pointer grow" [src]="logoPath" alt="Lazy Suzy Home">
+        </a>
         <div class="mr3 flex items-center">
-            <mat-icon class="grow pointer" aria-hidden="false" aria-label="Account" [matMenuTriggerFor]="accountMenu">
+            <mat-icon class="account-icon pointer" aria-hidden="false" aria-label="Account" [matMenuTriggerFor]="accountMenu">
                 account_circle</mat-icon>
             <mat-menu #accountMenu="matMenu">
                 <a *ngFor="let action of accountActions" [routerLink]="action.route" routerLinkActive="active"
@@ -25,5 +13,17 @@
                 </a>
             </mat-menu>
         </div>
+    </mat-toolbar-row>
+    <mat-toolbar-row class="flex justify-around w-75">
+        <ng-container *ngFor="let department of departments; let i = index">
+            <span class="grow pointer ph2 f5"
+                [matMenuTriggerFor]="departmentMenu">{{ department.display | titlecase }}</span>
+            <mat-menu #departmentMenu="matMenu">
+                <a *ngFor="let category of department.category" [routerLink]="category.route" routerLinkActive="active"
+                    class="no-underline">
+                    <button mat-menu-item>{{ category.display | titlecase }}</button>
+                </a>
+            </mat-menu>
+        </ng-container>
     </mat-toolbar-row>
 </mat-toolbar>
