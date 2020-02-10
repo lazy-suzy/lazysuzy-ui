@@ -19,7 +19,7 @@
             <span class="grow pointer ph2 f5"
                 [matMenuTriggerFor]="departmentMenu">{{ department.display | titlecase }}</span>
             <mat-menu #departmentMenu="matMenu">
-                <a *ngFor="let category of department.category" [routerLink]="category.route" routerLinkActive="active"
+                <a *ngFor="let category of department.categories" [routerLink]="category.route" routerLinkActive="active"
                     class="no-underline">
                     <button mat-menu-item>{{ category.display | titlecase }}</button>
                 </a>
