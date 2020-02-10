@@ -1,0 +1,64 @@
+{
+  "id": 1,
+  "sku": "637819",
+  "is_new": false,
+  "site": "CB2",
+  "name": "Channel Suede Office Chair",
+  "product_url": "https://cb2.com/channel-suede-office-chair/s637819",
+  "product_detail_url": "https://www.lazysuzy.com/product/637819",
+  "is_price": "799",
+  "was_price": "799",
+  "percent_discount": "0.00",
+  "model_code": "",
+  "color": "",
+  "collection": "",
+  "condition": "",
+  "main_image": "https://www.lazysuzy.com/cb2/images/isimageCB2ChannelSuedeOfficeChairSHF18_1x1ChannelSuedeOfficeChairSHF18_1x1",
+  "reviews": 2,
+  "rating": 5,
+  "wishlisted": false,
+  "variations": [],
+  "description": [
+    "Retro roller. It's all happening \u2013 your to-do list, that is. Designed by Mark Daniel of Slate Design, buttery suede office chair with pleated channels sits atop brushed brass base. Gas lift and casters make it easy to adjust height and placement. Learn about Mark Daniel on our blog. CB2 exclusive."
+  ],
+  "dimension": { "error": "Syntax error" },
+  "thumb": [
+    "https://www.cb2.com/is/image/CB2/ChannelSuedeOfficeChairSHF18_1x1"
+  ],
+  "features": [
+    "Designed by Mark Daniel of Slate Design",
+    "Suede",
+    "Brushed brass base",
+    "Wipe clean; do not use abrasive cleaners",
+    "Made in Taiwan"
+  ],
+  "on_server_images": [
+    "https://www.lazysuzy.com/cb2/images/ChannelSuedeOfficeChairSHF18_16x9web_zoom_furn_hero190410160815channel-suede-office-chair.jpgchannel-suede-office-chair.jpg",
+    "https://www.lazysuzy.com/cb2/images/ChannelSuedeOfficeChairJL19web_zoom_furn_colormap200117085000ChannelSuedeOfficeChairJL19.jpgChannelSuedeOfficeChairJL19.jpg",
+    "https://www.lazysuzy.com/cb2/images/DahliaMarbleDeskChannelNV18web_zoom_furn_colormap200117072449DahliaMarbleDeskChannelNV18.jpgDahliaMarbleDeskChannelNV18.jpg",
+    "https://www.lazysuzy.com/cb2/images/PeekabooDeskOrsayJL18web_zoom_furn_colormap200117072718PeekabooDeskOrsayJL18.jpgPeekabooDeskOrsayJL18.jpg",
+    "https://www.lazysuzy.com/cb2/images/ChannelSuedeOfficeChairF18web_zoom_furn_colormap200117085000ChannelSuedeOfficeChairF18.jpgChannelSuedeOfficeChairF18.jpg",
+    "https://www.lazysuzy.com/cb2/images/ChannelSuedeOfficeChair3QFF18web_zoom_furn_colormap200117085000ChannelSuedeOfficeChair3QFF18.jpgChannelSuedeOfficeChair3QFF18.jpg",
+    "https://www.lazysuzy.com/cb2/images/ChannelSuedeOfficeChairSDF18web_zoom_furn_colormap200117085000ChannelSuedeOfficeChairSDF18.jpgChannelSuedeOfficeChairSDF18.jpg",
+    "https://www.lazysuzy.com/cb2/images/ChannelSuedeOfficeChairAVF18web_zoom_furn_colormap200117085000ChannelSuedeOfficeChairAVF18.jpgChannelSuedeOfficeChairAVF18.jpg",
+    "https://www.lazysuzy.com/cb2/images/ChannelSuedeOfficeChair3QBF18web_zoom_furn_colormap200117085000ChannelSuedeOfficeChair3QBF18.jpgChannelSuedeOfficeChair3QBF18.jpg"
+  ],
+  "department_info": [
+    {
+      "department_name": "Living",
+      "department_url": "/products/living",
+      "category_name": "Chairs",
+      "category_url": "/products/living/chairs",
+      "sub_category_name": "Chaise",
+      "sub_category_url": "/products/living/chairs/chaise"
+    },
+    {
+      "department_name": "Office",
+      "department_url": "/products/office",
+      "category_name": "Chairs",
+      "category_url": "/products/office/chairs",
+      "sub_category_name": "",
+      "sub_category_url": "/products/office/chairs/"
+    }
+  ]
+}
