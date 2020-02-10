@@ -1,6 +1,6 @@
-import { IMenuItem } from './../shared/models';
+import { ICategory } from './../shared/models';
 
-export const MOCK_ACCOUNT_ACTIONS: IMenuItem[] = [
+export const MOCK_ACCOUNT_ACTIONS: ICategory[] = [
   {
     display: 'login',
     route: '/login',
