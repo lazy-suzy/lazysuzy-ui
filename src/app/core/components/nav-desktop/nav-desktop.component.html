@@ -1,10 +1,11 @@
-<mat-toolbar class="fixed bg-transparent">
+<mat-toolbar class="bg-transparent">
     <mat-toolbar-row class="header flex justify-between ph2">
         <a routerLink="/" routerLinkActive="active" class="no-underline flex items-center">
             <img class="w4 pointer grow" [src]="logoPath" alt="Lazy Suzy Home">
         </a>
         <div class="mr3 flex items-center">
-            <mat-icon class="account-icon pointer" aria-hidden="false" aria-label="Account" [matMenuTriggerFor]="accountMenu">
+            <mat-icon class="account-icon pointer" aria-hidden="false" aria-label="Account"
+                [matMenuTriggerFor]="accountMenu">
                 account_circle</mat-icon>
             <mat-menu #accountMenu="matMenu">
                 <a *ngFor="let action of accountActions" [routerLink]="action.route" routerLinkActive="active"
@@ -19,8 +20,8 @@
             <span class="grow pointer ph2 f5"
                 [matMenuTriggerFor]="departmentMenu">{{ department.display | titlecase }}</span>
             <mat-menu #departmentMenu="matMenu">
-                <a *ngFor="let category of department.categories" [routerLink]="category.route" routerLinkActive="active"
-                    class="no-underline">
+                <a *ngFor="let category of department.categories" [routerLink]="category.route"
+                    routerLinkActive="active" class="no-underline">
                     <button mat-menu-item>{{ category.display | titlecase }}</button>
                 </a>
             </mat-menu>
