@@ -1,5 +1,6 @@
-import { ApiService } from './../../../shared/services/api/api.service';
 import { Component, OnInit } from '@angular/core';
+import { MOCK_PRODUCTS } from './../../../mocks';
+import { IProductPayload } from './../../../shared/models';
 
 @Component({
   selector: 'app-products',
@@ -7,12 +8,7 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./products.component.less'],
 })
 export class ProductsComponent implements OnInit {
-  // constructor(private apiService: ApiService) {}
+  products: IProductPayload[] = MOCK_PRODUCTS;
 
-  ngOnInit(): void {
-    // this.apiService.getProducts('living', 'chairs');
-    // category: string,
-    // subCategory: string,
-    // page = 0
-  }
+  ngOnInit(): void {}
 }
