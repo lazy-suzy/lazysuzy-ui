@@ -1,4 +1,4 @@
-export interface IProductPaylod {
+export interface IProductPayload {
   id: number;
   sku: string;
   is_new: boolean;
