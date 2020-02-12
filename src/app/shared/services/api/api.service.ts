@@ -14,14 +14,12 @@ export class ApiService {
     category: string,
     page = 0
   ): Observable<IProductsPayload> {
-    console.log('hit')
     const filters = '';
     const sortTypes = '';
     const endpoint = `products/${department}/${category}`;
     const url = env.useLocalJson
       ? `${env.JSON_BASE_HREF}${endpoint}`
       : `${env.API_BASE_HREF}${endpoint}?filters=${filters}&sort_type=${sortTypes}&pageno=${page}`;
-      console.log(url);
     return this.httpService.get(url);
   }
 
