@@ -1,0 +1,88 @@
+// Main colors
+@primary-color: #ffcc00;
+@secondary-color: #0c1c31;
+@text-subtle: #606060;
+@border-color: #f2f4f3;
+@brown-text-color: #b76e79;
+@yellow-text-color: #fefce0;
+@background-color: #fbfbfb;
+@dropdown-background-color: #f7f6f7;
+
+.main-container {
+  text-align: center;
+}
+.searchbar {
+  &.sb-body {
+    top: 40vh;
+  }
+  width: 50%;
+  max-width: 551px;
+  margin: auto;
+  display: flex;
+
+  .col-form {
+    flex-grow: 1;
+  }
+  .search-icon {
+    max-width: 46px;
+    color: @primary-color;
+    background: @secondary-color;
+    border: 0;
+    .material-icons {
+      font-size: 30px;
+      height: 30px;
+      width: 30px;
+    }
+  }
+
+  .form-control[type='search'] {
+    outline: none !important;
+    box-shadow: none !important;
+    height: 48px;
+    width: 100%;
+    padding: 5px 10px;
+    border: 2px solid @border-color;
+    border-right-width: 0;
+  }
+}
+
+@media only screen and (max-width: 768px) {
+  .searchbar {
+    height: 34px !important;
+    border: 1px solid #ccc !important;
+    left: 0 !important;
+    right: 0;
+    width: auto;
+    border-radius: 5px;
+    z-index: 10;
+    margin: 5px;
+
+    &:not(.open) {
+      display: none;
+    }
+    .card-body {
+      .search-icon {
+        font-size: 18px !important;
+      }
+
+      .form-control[type='search'] {
+        padding-top: 0px;
+        padding-bottom: 0px;
+        max-height: 24px;
+        line-height: 1;
+        font-size: 14px;
+        width: 100%;
+      }
+      .btn[type='submit'] {
+        width: auto;
+        border: none;
+        background-color: #0c1c31;
+        border-top-left-radius: 0;
+        border-bottom-left-radius: 0;
+        position: relative;
+        right: -15px;
+        height: 30px;
+      }
+    }
+  }
+}
