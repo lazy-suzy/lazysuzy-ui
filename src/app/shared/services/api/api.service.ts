@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { environment as env } from 'src/environments/environment';
-import { HttpService } from '..';
+import { HttpService } from '../http/http.service';
 import { IProductsPayload, IProductPayload } from './../../models';
 @Injectable({
   providedIn: 'root',
@@ -10,16 +10,18 @@ export class ApiService {
   constructor(private httpService: HttpService) {}
 
   getProducts(
+    department: string,
     category: string,
-    subCategory: string,
     page = 0
   ): Observable<IProductsPayload> {
+    console.log('hit')
     const filters = '';
     const sortTypes = '';
-    const endpoint = `${category}/${subCategory}`;
+    const endpoint = `products/${department}/${category}`;
     const url = env.useLocalJson
       ? `${env.JSON_BASE_HREF}${endpoint}`
       : `${env.API_BASE_HREF}${endpoint}?filters=${filters}&sort_type=${sortTypes}&pageno=${page}`;
+      console.log(url);
     return this.httpService.get(url);
   }
 
