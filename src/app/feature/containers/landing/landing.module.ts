@@ -1,11 +1,11 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { CoreModule } from '../../../core/core.module';
 import { LandingComponent } from './landing.component';
-import { MatIconModule } from '@angular/material/icon';
 
 const DECLARATIONS = [LandingComponent];
 
-const MODULES = [CommonModule, MatIconModule];
+const MODULES = [CommonModule, CoreModule];
 
 @NgModule({
   declarations: [...DECLARATIONS],
