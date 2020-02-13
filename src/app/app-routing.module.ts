@@ -5,7 +5,7 @@ import { LandingComponent, ProductsComponent } from './feature/containers';
 const routes: Routes = [
   { path: '', component: LandingComponent, pathMatch: 'full' },
   {
-    path: 'products/:category',
+    path: 'products/:department/:category',
     component: ProductsComponent,
     pathMatch: 'full',
   },
