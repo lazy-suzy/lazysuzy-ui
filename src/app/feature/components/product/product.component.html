@@ -1,1 +1,15 @@
-<span>{{ product.name}}</span>
+<mat-card>
+    <img [src]="product.main_image" [alt]="product.name" class="pointer">
+    <div class="flex justify-between">
+        <span>{{ product.site }}</span>
+        <div class="flex items-center">
+            <span>{{ product.reviews }}</span>
+            <mat-icon *ngFor="let icon of starIcons" class="yellow">{{ icon }}</mat-icon>
+        </div>
+    </div>
+    <span>{{ product.name }}</span>
+    <div class="flex justify-between">
+        <span class="dark-red">${{ product.is_price }}</span>
+        <span class="strike">${{ product.was_price }}</span>
+    </div>
+</mat-card>

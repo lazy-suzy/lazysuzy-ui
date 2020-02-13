@@ -6,43 +6,43 @@ export const MOCK_DEPARTMENTS: IDepartment[] = [
     categories: [
       {
         display: 'sofa',
-        route: '/products/sofa',
+        route: '/products/living/sofa',
       },
       {
         display: 'sectionals',
-        route: '/products/sectionals',
+        route: '/products/living/sectionals',
       },
       {
         display: 'sleeper & daybeds',
-        route: '/products/sleeper-daybeds',
+        route: '/products/living/sleeper-daybeds',
       },
       {
         display: 'loveseat',
-        route: '/products/loveseat',
+        route: '/products/living/loveseat',
       },
       {
         display: 'chairs',
-        route: '/products/chairs',
+        route: '/products/living/chairs',
       },
       {
         display: 'benches',
-        route: '/products/benches',
+        route: '/products/living/benches',
       },
       {
         display: 'ottomans',
-        route: '/products/ottomans',
+        route: '/products/living/ottomans',
       },
       {
         display: 'tables',
-        route: '/products/tables',
+        route: '/products/living/tables',
       },
       {
         display: 'bookcase & cabinets',
-        route: '/products/bookcase-cabinets',
+        route: '/products/living/bookcase-cabinets',
       },
       {
         display: 'gaming',
-        route: '/products/gaming',
+        route: '/products/living/gaming',
       },
     ],
   },
@@ -88,15 +88,15 @@ export const MOCK_DEPARTMENTS: IDepartment[] = [
     categories: [
       {
         display: 'seating',
-        route: '/products/seating',
+        route: '/products/hallway/seating',
       },
       {
         display: 'tables',
-        route: '/products/tables',
+        route: '/products/hallway/tables',
       },
       {
         display: 'storage',
-        route: '/products/storage',
+        route: '/products/hallway/storage',
       },
     ],
   },
@@ -105,31 +105,31 @@ export const MOCK_DEPARTMENTS: IDepartment[] = [
     categories: [
       {
         display: 'tables',
-        route: '/products/tables',
+        route: '/products/dining/tables',
       },
       {
         display: 'chairs',
-        route: '/products/chairs',
+        route: '/products/dining/chairs',
       },
       {
         display: 'benches',
-        route: '/products/benches',
+        route: '/products/dining/benches',
       },
       {
         display: 'stools',
-        route: '/products/stools',
+        route: '/products/dining/stools',
       },
       {
         display: 'storage',
-        route: '/products/storage',
+        route: '/products/dining/storage',
       },
       {
         display: 'bar',
-        route: '/products/bar',
+        route: '/products/dining/bar',
       },
       {
         display: 'sets',
-        route: '/products/sets',
+        route: '/products/dining/sets',
       },
     ],
   },
@@ -138,15 +138,15 @@ export const MOCK_DEPARTMENTS: IDepartment[] = [
     categories: [
       {
         display: 'desk & tables',
-        route: '/products/desk-tables',
+        route: '/products/office/desk-tables',
       },
       {
         display: 'chairs',
-        route: '/products/chairs',
+        route: '/products/office/chairs',
       },
       {
         display: 'bookcase & shelves',
-        route: '/products/bookcase-shelves',
+        route: '/products/office/bookcase-shelves',
       },
     ],
   },
@@ -155,15 +155,15 @@ export const MOCK_DEPARTMENTS: IDepartment[] = [
     categories: [
       {
         display: 'laundry',
-        route: '/products/laundry',
+        route: '/products/bath/laundry',
       },
       {
         display: 'cabinets',
-        route: '/products/cabinets',
+        route: '/products/bath/cabinets',
       },
       {
         display: 'shelving',
-        route: '/products/shelving',
+        route: '/products/bath/shelving',
       },
     ],
   },
@@ -172,43 +172,43 @@ export const MOCK_DEPARTMENTS: IDepartment[] = [
     categories: [
       {
         display: 'sofa',
-        route: '/products/sofa',
+        route: '/products/outdoor/sofa',
       },
       {
         display: 'sectionals',
-        route: '/products/sectionals',
+        route: '/products/outdoor/sectionals',
       },
       {
         display: 'chairs',
-        route: '/products/chairs',
+        route: '/products/outdoor/chairs',
       },
       {
         display: 'bench',
-        route: '/products/bench',
+        route: '/products/outdoor/bench',
       },
       {
         display: 'ottomans & stools',
-        route: '/products/ottomans-stools',
+        route: '/products/outdoor/ottomans-stools',
       },
       {
         display: 'papasan & swings',
-        route: '/products/papasan-swings',
+        route: '/products/outdoor/papasan-swings',
       },
       {
         display: 'cushions',
-        route: '/products/cushions',
+        route: '/products/outdoor/cushions',
       },
       {
         display: 'tables',
-        route: '/products/tables',
+        route: '/products/outdoor/tables',
       },
       {
         display: 'sets',
-        route: '/products/sets',
+        route: '/products/outdoor/sets',
       },
       {
         display: 'accessories',
-        route: '/products/accessories',
+        route: '/products/outdoor/accessories',
       },
     ],
   },
@@ -217,19 +217,19 @@ export const MOCK_DEPARTMENTS: IDepartment[] = [
     categories: [
       {
         display: 'beds',
-        route: '/products/beds',
+        route: '/products/kids/beds',
       },
       {
         display: 'chairs',
-        route: '/products/chairs',
+        route: '/products/kids/chairs',
       },
       {
         display: 'tables',
-        route: '/products/tables',
+        route: '/products/kids/tables',
       },
       {
         display: 'storage',
-        route: '/products/storage',
+        route: '/products/kids/storage',
       },
     ],
   },
@@ -238,15 +238,15 @@ export const MOCK_DEPARTMENTS: IDepartment[] = [
     categories: [
       {
         display: 'mirrors',
-        route: '/products/mirrors',
+        route: '/products/decor/mirrors',
       },
       {
         display: 'lighting',
-        route: '/products/lighting',
+        route: '/products/decor/lighting',
       },
       {
         display: 'rugs',
-        route: '/products/rugs',
+        route: '/products/decor/rugs',
       },
     ],
   },
