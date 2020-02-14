@@ -9,4 +9,8 @@ export class SearchComponent implements OnInit {
   constructor() {}
 
   ngOnInit() {}
+  openSearchPage(f) {
+    console.log(f);
+    window.location.href = `/search?query=${f.value.query}`;
+  }
 }
