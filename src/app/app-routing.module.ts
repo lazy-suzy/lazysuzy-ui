@@ -1,10 +1,16 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { LandingComponent, ProductsComponent } from './feature/containers';
+import {
+  LandingComponent,
+  ProductsComponent,
+  SearchComponent,
+  WishlistComponent
+} from './feature/containers';
 
 const routes: Routes = [
   { path: '', component: LandingComponent, pathMatch: 'full' },
-  { path: 'search', component: LandingComponent, pathMatch: 'full' },
+  { path: 'search', component: SearchComponent, pathMatch: 'full' },
+  { path: 'wishlist', component: WishlistComponent, pathMatch: 'full' },
   {
     path: 'products/:department/:category',
     component: ProductsComponent,
