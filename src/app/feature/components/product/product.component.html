@@ -1,4 +1,4 @@
-<mat-card>
+<mat-card (click)="openDialog()">
     <img [src]="product.main_image" [alt]="product.name" class="pointer">
     <div class="flex justify-between">
         <span>{{ product.site }}</span>
