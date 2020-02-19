@@ -1,18 +1,21 @@
 <ng-container *ngIf="product">
-    <div class="flex w-100 justify-between items-end">
+    <div class="flex w-100 justify-between items-end mb2">
         <div class="flex items-end">
             <p class="f4 mr4 mb0 b">{{ product.site }}</p>
             <p class="f4 mb0">{{ product.name }}</p>
         </div>
-        <div class="flex">
-            <span class="dark-red mr3">${{ product.is_price }}</span>
-            <span class="strike">${{ product.was_price }}</span>
-        </div>
+        <button mat-raised-button class="bg-red"><a [href]="product.product_url" class="no-underline yellow">View
+                Details</a></button>
     </div>
     <div class="flex mb3">
         <div class="flex overflow-scroll h-50">
             <img *ngFor="let image of product.thumb" [src]="image" class="w5 br2 mh2">
         </div>
+    </div>
+
+    <div class="flex mb2">
+        <span class="dark-red mr3">${{ product.is_price }}</span>
+        <span class="strike">${{ product.was_price }}</span>
     </div>
 
     <div class="mb2">

@@ -5,10 +5,11 @@ import { MatDialogModule } from '@angular/material/dialog';
 import { MatIconModule } from '@angular/material/icon';
 import { ProductDetailsComponent } from './../product-details/product-details.component';
 import { ProductComponent } from './product.component';
+import {MatButtonModule} from '@angular/material/button';
 
 const DECLARATIONS = [ProductComponent, ProductDetailsComponent];
 
-const MODULES = [CommonModule, MatCardModule, MatIconModule, MatDialogModule];
+const MODULES = [CommonModule, MatCardModule, MatIconModule, MatDialogModule, MatButtonModule];
 
 const COMPONENTS = [ProductDetailsComponent];
 
