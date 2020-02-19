@@ -25,8 +25,8 @@ export class ApiService {
 
   getProduct(id: string): Observable<IProductPayload> {
     const url = env.useLocalJson
-      ? `${env.JSON_BASE_HREF}/product/${id}`
-      : `${env.API_BASE_HREF}/product/${id}`;
+      ? `${env.JSON_BASE_HREF}product/${id}`
+      : `${env.API_BASE_HREF}product/${id}`;
     return this.httpService.get(url);
   }
 }

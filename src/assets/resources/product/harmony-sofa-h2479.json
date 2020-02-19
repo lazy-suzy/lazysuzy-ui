@@ -1,0 +1,2578 @@
+{
+  "id": 3,
+  "sku": "harmony-sofa-h2479",
+  "is_new": false,
+  "site": "West Elm",
+  "name": "Harmony Sofa (82\")",
+  "product_url": "https://www.westelm.com/products/harmony-sofa-h2479/",
+  "product_detail_url": "https://www.lazysuzy.com/product/harmony-sofa-h2479",
+  "is_price": "1359.2-1679.2",
+  "was_price": "1359.2-2099",
+  "percent_discount": "0.00",
+  "model_code": null,
+  "color": "brown,gray,blue,green,pink,black,natural,silver,orange,red,beige,white,tan",
+  "collection": "Harmony Upholstered Collection",
+  "condition": "![](https://www.westelm.com/weimgs/ab/images/i/202003/0074/images/pip/dream-\npip/icon-flat-rate-deli",
+  "main_image": "https://www.lazysuzy.com/westelm/westelm_images/harmony-sofa-h2479_main.jpg",
+  "reviews": 0,
+  "rating": 0,
+  "wishlisted": false,
+  "variations": [
+    {
+      "product_sku": "harmony-sofa-h2479",
+      "variation_sku": "1865336",
+      "name": "Iron, Basketweave",
+      "features": {
+        "color": "Iron",
+        "shape": "Extra Deep (47&quot;)",
+        "fabric": "Basketweave",
+        "delivery": "Made to Order (ships in 7+ weeks)"
+      },
+      "has_parent_sku": false,
+      "image": "https://www.lazysuzy.com/westelm/westelm_images/harmony-sofa-h2479-1865336_sku-img.jpg",
+      "link": "/product/harmony-sofa-h2479",
+      "swatch_image": "https://www.lazysuzy.com/westelm/westelm_images/201939_0013_img31l.jpg",
+      "price": "1799",
+      "was_price": "1799"
+    },
+    {
+      "product_sku": "harmony-sofa-h2479",
+      "variation_sku": "494093",
+      "name": "Granite, Twill",
+      "features": {
+        "color": "Granite",
+        "shape": "Extra Deep (47&quot;)",
+        "fabric": "Twill",
+        "delivery": "Made to Order (ships in 7+ weeks)"
+      },
+      "has_parent_sku": false,
+      "image": "https://www.lazysuzy.com/westelm/westelm_images/harmony-sofa-h2479-494093_sku-img.jpg",
+      "link": "/product/harmony-sofa-h2479",
+      "swatch_image": "https://www.lazysuzy.com/westelm/westelm_images/201939_0013_img54l.jpg",
+      "price": "1439.2",
+      "was_price": "1799"
+    },
+    {
+      "product_sku": "harmony-sofa-h2479",
+      "variation_sku": "1897776",
+      "name": "Mink, Marled Microfiber",
+      "features": {
+        "color": "Mink",
+        "shape": "Extra Deep (47&quot;)",
+        "fabric": "Marled Microfiber",
+        "delivery": "Made to Order (ships in 7+ weeks)"
+      },
+      "has_parent_sku": false,
+      "image": "https://www.lazysuzy.com/westelm/westelm_images/harmony-sofa-h2479-1897776_sku-img.jpg",
+      "link": "/product/harmony-sofa-h2479",
+      "swatch_image": "https://www.lazysuzy.com/westelm/westelm_images/201939_0013_img68l.jpg",
+      "price": "1899",
+      "was_price": "1899"
+    },
+    {
+      "product_sku": "harmony-sofa-h2479",
+      "variation_sku": "9785279",
+      "name": "Metal, Chunky Basketweave",
+      "features": {
+        "color": "Metal",
+        "shape": "Extra Deep (47&quot;)",
+        "fabric": "Chunky Basketweave",
+        "delivery": "Made to Order (ships in 7+ weeks)"
+      },
+      "has_parent_sku": false,
+      "image": "https://www.lazysuzy.com/westelm/westelm_images/harmony-sofa-h2479-9785279_sku-img.jpg",
+      "link": "/product/harmony-sofa-h2479",
+      "swatch_image": "https://www.lazysuzy.com/westelm/westelm_images/201939_0013_img69l.jpg",
+      "price": "1519.2",
+      "was_price": "1899"
+    },
+    {
+      "product_sku": "harmony-sofa-h2479",
+      "variation_sku": "7375497",
+      "name": "Frost Gray, Chenille Tweed",
+      "features": {
+        "color": "Frost Gray",
+        "shape": "Extra Deep (47&quot;)",
+        "fabric": "Chenille Tweed",
+        "delivery": "Made to Order (ships in 7+ weeks)"
+      },
+      "has_parent_sku": false,
+      "image": "https://www.lazysuzy.com/westelm/westelm_images/harmony-sofa-h2479-7375497_sku-img.jpg",
+      "link": "/product/harmony-sofa-h2479",
+      "swatch_image": "https://www.lazysuzy.com/westelm/westelm_images/201939_0013_img72l.jpg",
+      "price": "1519.2",
+      "was_price": "1899"
+    },
+    {
+      "product_sku": "harmony-sofa-h2479",
+      "variation_sku": "9052304",
+      "name": "Granite, Chunky Basketweave",
+      "features": {
+        "color": "Granite",
+        "shape": "Standard (41&quot;)",
+        "fabric": "Chunky Basketweave",
+        "delivery": "Made to Order (ships in 7+ weeks)"
+      },
+      "has_parent_sku": false,
+      "image": "https://www.lazysuzy.com/westelm/westelm_images/harmony-sofa-h2479-9052304_sku-img.jpg",
+      "link": "/product/harmony-sofa-h2479",
+      "swatch_image": "https://www.lazysuzy.com/westelm/westelm_images/201939_0013_img79l.jpg",
+      "price": "1899",
+      "was_price": "1899"
+    },
+    {
+      "product_sku": "harmony-sofa-h2479",
+      "variation_sku": "6383417",
+      "name": "Wheat, Twill",
+      "features": {
+        "color": "Wheat",
+        "shape": "Standard (41&quot;)",
+        "fabric": "Twill",
+        "delivery": "Made to Order (ships in 7+ weeks)"
+      },
+      "has_parent_sku": false,
+      "image": "https://www.lazysuzy.com/westelm/westelm_images/harmony-sofa-h2479-6383417_sku-img.jpg",
+      "link": "/product/harmony-sofa-h2479",
+      "swatch_image": "https://www.lazysuzy.com/westelm/westelm_images/201939_0013_img88l.jpg",
+      "price": "1359.2",
+      "was_price": "1699"
+    },
+    {
+      "product_sku": "harmony-sofa-h2479",
+      "variation_sku": "3430697",
+      "name": "Ash Gray, Marled Microfiber",
+      "features": {
+        "color": "Ash Gray",
+        "shape": "Standard (41&quot;)",
+        "fabric": "Marled Microfiber",
+        "delivery": "Made to Order (ships in 7+ weeks)"
+      },
+      "has_parent_sku": false,
+      "image": "https://www.lazysuzy.com/westelm/westelm_images/harmony-sofa-h2479-3430697_sku-img.jpg",
+      "link": "/product/harmony-sofa-h2479",
+      "swatch_image": "https://www.lazysuzy.com/westelm/westelm_images/201939_0013_img91l.jpg",
+      "price": "1439.2",
+      "was_price": "1799"
+    },
+    {
+      "product_sku": "harmony-sofa-h2479",
+      "variation_sku": "7070906",
+      "name": "Slate, Chenille Tweed",
+      "features": {
+        "color": "Slate",
+        "shape": "Standard (41&quot;)",
+        "fabric": "Chenille Tweed",
+        "delivery": "Made to Order (ships in 7+ weeks)"
+      },
+      "has_parent_sku": false,
+      "image": "https://www.lazysuzy.com/westelm/westelm_images/harmony-sofa-h2479-7070906_sku-img.jpg",
+      "link": "/product/harmony-sofa-h2479",
+      "swatch_image": "https://www.lazysuzy.com/westelm/westelm_images/201939_0014_img15l.jpg",
+      "price": "1439.2",
+      "was_price": "1799"
+    },
+    {
+      "product_sku": "harmony-sofa-h2479",
+      "variation_sku": "8831763",
+      "name": "Feather Gray, Heathered Crosshatch",
+      "features": {
+        "color": "Feather Gray",
+        "shape": "Extra Deep (47&quot;)",
+        "fabric": "Heathered Crosshatch",
+        "delivery": "Made to Order (ships in 7+ weeks)"
+      },
+      "has_parent_sku": false,
+      "image": "https://www.lazysuzy.com/westelm/westelm_images/harmony-sofa-h2479-8831763_sku-img.jpg",
+      "link": "/product/harmony-sofa-h2479",
+      "swatch_image": "https://www.lazysuzy.com/westelm/westelm_images/201939_0014_img1l.jpg",
+      "price": "1439.2",
+      "was_price": "1799"
+    },
+    {
+      "product_sku": "harmony-sofa-h2479",
+      "variation_sku": "4275989",
+      "name": "Feather Gray, Retro Weave",
+      "features": {
+        "color": "Feather Gray",
+        "shape": "Extra Deep (47&quot;)",
+        "fabric": "Retro Weave",
+        "delivery": "Made to Order (ships in 7+ weeks)"
+      },
+      "has_parent_sku": false,
+      "image": "https://www.lazysuzy.com/westelm/westelm_images/harmony-sofa-h2479-4275989_sku-img.jpg",
+      "link": "/product/harmony-sofa-h2479",
+      "swatch_image": "https://www.lazysuzy.com/westelm/westelm_images/201939_0014_img65l.jpg",
+      "price": "1439.2",
+      "was_price": "1799"
+    },
+    {
+      "product_sku": "harmony-sofa-h2479",
+      "variation_sku": "1224197",
+      "name": "Slate, Chunky Basketweave",
+      "features": {
+        "color": "Slate",
+        "shape": "Extra Deep (47&quot;)",
+        "fabric": "Chunky Basketweave",
+        "delivery": "Made to Order (ships in 7+ weeks)"
+      },
+      "has_parent_sku": false,
+      "image": "https://www.lazysuzy.com/westelm/westelm_images/harmony-sofa-h2479-1224197_sku-img.jpg",
+      "link": "/product/harmony-sofa-h2479",
+      "swatch_image": "https://www.lazysuzy.com/westelm/westelm_images/201939_0014_img67l.jpg",
+      "price": "1519.2",
+      "was_price": "1899"
+    },
+    {
+      "product_sku": "harmony-sofa-h2479",
+      "variation_sku": "6495255",
+      "name": "Salt + Pepper, Tweed",
+      "features": {
+        "color": "Salt + Pepper",
+        "shape": "Standard (41&quot;)",
+        "fabric": "Tweed",
+        "delivery": "Made to Order (ships in 7+ weeks)"
+      },
+      "has_parent_sku": false,
+      "image": "https://www.lazysuzy.com/westelm/westelm_images/harmony-sofa-h2479-6495255_sku-img.jpg",
+      "link": "/product/harmony-sofa-h2479",
+      "swatch_image": "https://www.lazysuzy.com/westelm/westelm_images/201939_0014_img73l.jpg",
+      "price": "1519.2",
+      "was_price": "1899"
+    },
+    {
+      "product_sku": "harmony-sofa-h2479",
+      "variation_sku": "3862051",
+      "name": "Feather Gray, Basket Slub",
+      "features": {
+        "color": "Feather Gray",
+        "shape": "Extra Deep (47&quot;)",
+        "fabric": "Basket Slub",
+        "delivery": "Made to Order (ships in 7+ weeks)"
+      },
+      "has_parent_sku": false,
+      "image": "https://www.lazysuzy.com/westelm/westelm_images/harmony-sofa-h2479-3862051_sku-img.jpg",
+      "link": "/product/harmony-sofa-h2479",
+      "swatch_image": "https://www.lazysuzy.com/westelm/westelm_images/201939_0014_img91l.jpg",
+      "price": "1519.2",
+      "was_price": "1899"
+    },
+    {
+      "product_sku": "harmony-sofa-h2479",
+      "variation_sku": "9047890",
+      "name": "Otter, Performance Velvet",
+      "features": {
+        "color": "Otter",
+        "shape": "Standard (41&quot;)",
+        "fabric": "Performance Velvet",
+        "delivery": "Made to Order (ships in 7+ weeks)"
+      },
+      "has_parent_sku": false,
+      "image": "https://www.lazysuzy.com/westelm/westelm_images/harmony-sofa-h2479-9047890_sku-img.jpg",
+      "link": "/product/harmony-sofa-h2479",
+      "swatch_image": "https://www.lazysuzy.com/westelm/westelm_images/201939_0014_img97l.jpg",
+      "price": "1359.2",
+      "was_price": "1699"
+    },
+    {
+      "product_sku": "harmony-sofa-h2479",
+      "variation_sku": "9036930",
+      "name": "Feather Gray, Chenille Tweed",
+      "features": {
+        "color": "Feather Gray",
+        "shape": "Standard (41&quot;)",
+        "fabric": "Chenille Tweed",
+        "delivery": "In Stock (ships in 2 - 4 weeks)"
+      },
+      "has_parent_sku": false,
+      "image": "https://www.lazysuzy.com/westelm/westelm_images/harmony-sofa-h2479-9036930_sku-img.jpg",
+      "link": "/product/harmony-sofa-h2479",
+      "swatch_image": "https://www.lazysuzy.com/westelm/westelm_images/201939_0014_img9l.jpg",
+      "price": "1799",
+      "was_price": "1799"
+    },
+    {
+      "product_sku": "harmony-sofa-h2479",
+      "variation_sku": "7347343",
+      "name": "Natural, Linen Weave",
+      "features": {
+        "color": "Natural",
+        "shape": "Extra Deep (47&quot;)",
+        "fabric": "Linen Weave",
+        "delivery": "Made to Order (ships in 7+ weeks)"
+      },
+      "has_parent_sku": false,
+      "image": "https://www.lazysuzy.com/westelm/westelm_images/harmony-sofa-h2479-7347343_sku-img.jpg",
+      "link": "/product/harmony-sofa-h2479",
+      "swatch_image": "https://www.lazysuzy.com/westelm/westelm_images/201939_0015_img19l.jpg",
+      "price": "1519.2",
+      "was_price": "1899"
+    },
+    {
+      "product_sku": "harmony-sofa-h2479",
+      "variation_sku": "9044236",
+      "name": "Dusty Sky, Boucle",
+      "features": {
+        "color": "Dusty Sky",
+        "shape": "Standard (41&quot;)",
+        "fabric": "Boucle",
+        "delivery": "Made to Order (ships in 7+ weeks)"
+      },
+      "has_parent_sku": false,
+      "image": "https://www.lazysuzy.com/westelm/westelm_images/harmony-sofa-h2479-9044236_sku-img.jpg",
+      "link": "/product/harmony-sofa-h2479",
+      "swatch_image": "https://www.lazysuzy.com/westelm/westelm_images/201939_0015_img2l.jpg",
+      "price": "1799",
+      "was_price": "1799"
+    },
+    {
+      "product_sku": "harmony-sofa-h2479",
+      "variation_sku": "1898758",
+      "name": "Hazy Taupe, Linen Weave",
+      "features": {
+        "color": "Hazy Taupe",
+        "shape": "Extra Deep (47&quot;)",
+        "fabric": "Linen Weave",
+        "delivery": "Made to Order (ships in 7+ weeks)"
+      },
+      "has_parent_sku": false,
+      "image": "https://www.lazysuzy.com/westelm/westelm_images/harmony-sofa-h2479-1898758_sku-img.jpg",
+      "link": "/product/harmony-sofa-h2479",
+      "swatch_image": "https://www.lazysuzy.com/westelm/westelm_images/201939_0015_img30l.jpg",
+      "price": "1999",
+      "was_price": "1999"
+    },
+    {
+      "product_sku": "harmony-sofa-h2479",
+      "variation_sku": "6810368",
+      "name": "Cement, Heathered Tweed",
+      "features": {
+        "color": "Cement",
+        "shape": "Standard (41&quot;)",
+        "fabric": "Heathered Tweed",
+        "delivery": "Made to Order (ships in 7+ weeks)"
+      },
+      "has_parent_sku": false,
+      "image": "https://www.lazysuzy.com/westelm/westelm_images/harmony-sofa-h2479-6810368_sku-img.jpg",
+      "link": "/product/harmony-sofa-h2479",
+      "swatch_image": "https://www.lazysuzy.com/westelm/westelm_images/201939_0015_img3l.jpg",
+      "price": "1439.2",
+      "was_price": "1799"
+    },
+    {
+      "product_sku": "harmony-sofa-h2479",
+      "variation_sku": "215923",
+      "name": "Marine, Heathered Tweed",
+      "features": {
+        "color": "Marine",
+        "shape": "Extra Deep (47&quot;)",
+        "fabric": "Heathered Tweed",
+        "delivery": "Made to Order (ships in 7+ weeks)"
+      },
+      "has_parent_sku": false,
+      "image": "https://www.lazysuzy.com/westelm/westelm_images/harmony-sofa-h2479-215923_sku-img.jpg",
+      "link": "/product/harmony-sofa-h2479",
+      "swatch_image": "https://www.lazysuzy.com/westelm/westelm_images/201939_0015_img44l.jpg",
+      "price": "1519.2",
+      "was_price": "1899"
+    },
+    {
+      "product_sku": "harmony-sofa-h2479",
+      "variation_sku": "1897128",
+      "name": "Granite, Heathered Tweed",
+      "features": {
+        "color": "Granite",
+        "shape": "Extra Deep (47&quot;)",
+        "fabric": "Heathered Tweed",
+        "delivery": "In Stock (ships in 2 - 4 weeks)"
+      },
+      "has_parent_sku": false,
+      "image": "https://www.lazysuzy.com/westelm/westelm_images/harmony-sofa-h2479-1897128_sku-img.jpg",
+      "link": "/product/harmony-sofa-h2479",
+      "swatch_image": "https://www.lazysuzy.com/westelm/westelm_images/201939_0015_img45l.jpg",
+      "price": "1899",
+      "was_price": "1899"
+    },
+    {
+      "product_sku": "harmony-sofa-h2479",
+      "variation_sku": "9041976",
+      "name": "Charcoal, Boucle",
+      "features": {
+        "color": "Charcoal",
+        "shape": "Standard (41&quot;)",
+        "fabric": "Boucle",
+        "delivery": "Made to Order (ships in 7+ weeks)"
+      },
+      "has_parent_sku": false,
+      "image": "https://www.lazysuzy.com/westelm/westelm_images/harmony-sofa-h2479-9041976_sku-img.jpg",
+      "link": "/product/harmony-sofa-h2479",
+      "swatch_image": "https://www.lazysuzy.com/westelm/westelm_images/201939_0015_img76l.jpg",
+      "price": "1799",
+      "was_price": "1799"
+    },
+    {
+      "product_sku": "harmony-sofa-h2479",
+      "variation_sku": "9041828",
+      "name": "Noir, Nordic Weave",
+      "features": {
+        "color": "Noir",
+        "shape": "Standard (41&quot;)",
+        "fabric": "Nordic Weave",
+        "delivery": "Made to Order (ships in 7+ weeks)"
+      },
+      "has_parent_sku": false,
+      "image": "https://www.lazysuzy.com/westelm/westelm_images/harmony-sofa-h2479-9041828_sku-img.jpg",
+      "link": "/product/harmony-sofa-h2479",
+      "swatch_image": "https://www.lazysuzy.com/westelm/westelm_images/201939_0015_img87l.jpg",
+      "price": "1799",
+      "was_price": "1799"
+    },
+    {
+      "product_sku": "harmony-sofa-h2479",
+      "variation_sku": "3148278",
+      "name": "Eucalyptus, Heathered Weave",
+      "features": {
+        "color": "Eucalyptus",
+        "shape": "Extra Deep (47&quot;)",
+        "fabric": "Heathered Weave",
+        "delivery": "Made to Order (ships in 7+ weeks)"
+      },
+      "has_parent_sku": false,
+      "image": "https://www.lazysuzy.com/westelm/westelm_images/harmony-sofa-h2479-3148278_sku-img.jpg",
+      "link": "/product/harmony-sofa-h2479",
+      "swatch_image": "https://www.lazysuzy.com/westelm/westelm_images/201939_0015_img88l.jpg",
+      "price": "1519.2",
+      "was_price": "1899"
+    },
+    {
+      "product_sku": "harmony-sofa-h2479",
+      "variation_sku": "8274434",
+      "name": "Cayenne, Heathered Weave",
+      "features": {
+        "color": "Cayenne",
+        "shape": "Extra Deep (47&quot;)",
+        "fabric": "Heathered Weave",
+        "delivery": "Made to Order (ships in 7+ weeks)"
+      },
+      "has_parent_sku": false,
+      "image": "https://www.lazysuzy.com/westelm/westelm_images/harmony-sofa-h2479-8274434_sku-img.jpg",
+      "link": "/product/harmony-sofa-h2479",
+      "swatch_image": "https://www.lazysuzy.com/westelm/westelm_images/201939_0015_img90l.jpg",
+      "price": "1519.2",
+      "was_price": "1899"
+    },
+    {
+      "product_sku": "harmony-sofa-h2479",
+      "variation_sku": "1865745",
+      "name": "Putty Gray, Basketweave",
+      "features": {
+        "color": "Putty Gray",
+        "shape": "Extra Deep (47&quot;)",
+        "fabric": "Basketweave",
+        "delivery": "Made to Order (ships in 7+ weeks)"
+      },
+      "has_parent_sku": false,
+      "image": "https://www.lazysuzy.com/westelm/westelm_images/harmony-sofa-h2479-1865745_sku-img.jpg",
+      "link": "/product/harmony-sofa-h2479",
+      "swatch_image": "https://www.lazysuzy.com/westelm/westelm_images/201939_0015_img94l.jpg",
+      "price": "1799",
+      "was_price": "1799"
+    },
+    {
+      "product_sku": "harmony-sofa-h2479",
+      "variation_sku": "2011503",
+      "name": "Nightshade, Chenille Tweed",
+      "features": {
+        "color": "Nightshade",
+        "shape": "Extra Deep (47&quot;)",
+        "fabric": "Chenille Tweed",
+        "delivery": "Made to Order (ships in 7+ weeks)"
+      },
+      "has_parent_sku": false,
+      "image": "https://www.lazysuzy.com/westelm/westelm_images/harmony-sofa-h2479-2011503_sku-img.jpg",
+      "link": "/product/harmony-sofa-h2479",
+      "swatch_image": "https://www.lazysuzy.com/westelm/westelm_images/201939_0016_img32l.jpg",
+      "price": "1519.2",
+      "was_price": "1899"
+    },
+    {
+      "product_sku": "harmony-sofa-h2479",
+      "variation_sku": "9052270",
+      "name": "Burnt Orange, Chunky Basketweave",
+      "features": {
+        "color": "Burnt Orange",
+        "shape": "Standard (41&quot;)",
+        "fabric": "Chunky Basketweave",
+        "delivery": "Made to Order (ships in 7+ weeks)"
+      },
+      "has_parent_sku": false,
+      "image": "https://www.lazysuzy.com/westelm/westelm_images/harmony-sofa-h2479-9052270_sku-img.jpg",
+      "link": "/product/harmony-sofa-h2479",
+      "swatch_image": "https://www.lazysuzy.com/westelm/westelm_images/201939_0016_img42l.jpg",
+      "price": "1899",
+      "was_price": "1899"
+    },
+    {
+      "product_sku": "harmony-sofa-h2479",
+      "variation_sku": "6029955",
+      "name": "Blue Stone, Basket Slub",
+      "features": {
+        "color": "Blue Stone",
+        "shape": "Extra Deep (47&quot;)",
+        "fabric": "Basket Slub",
+        "delivery": "Made to Order (ships in 7+ weeks)"
+      },
+      "has_parent_sku": false,
+      "image": "https://www.lazysuzy.com/westelm/westelm_images/harmony-sofa-h2479-6029955_sku-img.jpg",
+      "link": "/product/harmony-sofa-h2479",
+      "swatch_image": "https://www.lazysuzy.com/westelm/westelm_images/201939_0016_img47l.jpg",
+      "price": "1519.2",
+      "was_price": "1899"
+    },
+    {
+      "product_sku": "harmony-sofa-h2479",
+      "variation_sku": "9052577",
+      "name": "Olive, Pebble Weave",
+      "features": {
+        "color": "Olive",
+        "shape": "Standard (41&quot;)",
+        "fabric": "Pebble Weave",
+        "delivery": "Made to Order (ships in 7+ weeks)"
+      },
+      "has_parent_sku": false,
+      "image": "https://www.lazysuzy.com/westelm/westelm_images/harmony-sofa-h2479-9052577_sku-img.jpg",
+      "link": "/product/harmony-sofa-h2479",
+      "swatch_image": "https://www.lazysuzy.com/westelm/westelm_images/201939_0016_img50l.jpg",
+      "price": "1899",
+      "was_price": "1899"
+    },
+    {
+      "product_sku": "harmony-sofa-h2479",
+      "variation_sku": "1897888",
+      "name": "Arctic, Nordic Weave",
+      "features": {
+        "color": "Arctic",
+        "shape": "Extra Deep (47&quot;)",
+        "fabric": "Nordic Weave",
+        "delivery": "Made to Order (ships in 7+ weeks)"
+      },
+      "has_parent_sku": false,
+      "image": "https://www.lazysuzy.com/westelm/westelm_images/harmony-sofa-h2479-1897888_sku-img.jpg",
+      "link": "/product/harmony-sofa-h2479",
+      "swatch_image": "https://www.lazysuzy.com/westelm/westelm_images/201939_0016_img5l.jpg",
+      "price": "1899",
+      "was_price": "1899"
+    },
+    {
+      "product_sku": "harmony-sofa-h2479",
+      "variation_sku": "1898589",
+      "name": "Cayenne, Linen Weave",
+      "features": {
+        "color": "Cayenne",
+        "shape": "Extra Deep (47&quot;)",
+        "fabric": "Linen Weave",
+        "delivery": "Made to Order (ships in 7+ weeks)"
+      },
+      "has_parent_sku": false,
+      "image": "https://www.lazysuzy.com/westelm/westelm_images/harmony-sofa-h2479-1898589_sku-img.jpg",
+      "link": "/product/harmony-sofa-h2479",
+      "swatch_image": "https://www.lazysuzy.com/westelm/westelm_images/201939_0016_img66l.jpg",
+      "price": "1999",
+      "was_price": "1999"
+    },
+    {
+      "product_sku": "harmony-sofa-h2479",
+      "variation_sku": "6415157",
+      "name": "Stone, Performance Velvet",
+      "features": {
+        "color": "Stone",
+        "shape": "Extra Deep (47&quot;)",
+        "fabric": "Performance Velvet",
+        "delivery": "Made to Order (ships in 7+ weeks)"
+      },
+      "has_parent_sku": false,
+      "image": "https://www.lazysuzy.com/westelm/westelm_images/harmony-sofa-h2479-6415157_sku-img.jpg",
+      "link": "/product/harmony-sofa-h2479",
+      "swatch_image": "https://www.lazysuzy.com/westelm/westelm_images/201939_0016_img90l.jpg",
+      "price": "1439.2",
+      "was_price": "1799"
+    },
+    {
+      "product_sku": "harmony-sofa-h2479",
+      "variation_sku": "4306769",
+      "name": "Charcoal, Chunky Basketweave",
+      "features": {
+        "color": "Charcoal",
+        "shape": "Extra Deep (47&quot;)",
+        "fabric": "Chunky Basketweave",
+        "delivery": "Made to Order (ships in 7+ weeks)"
+      },
+      "has_parent_sku": false,
+      "image": "https://www.lazysuzy.com/westelm/westelm_images/harmony-sofa-h2479-4306769_sku-img.jpg",
+      "link": "/product/harmony-sofa-h2479",
+      "swatch_image": "https://www.lazysuzy.com/westelm/westelm_images/201939_0016_img99l.jpg",
+      "price": "1519.2",
+      "was_price": "1899"
+    },
+    {
+      "product_sku": "harmony-sofa-h2479",
+      "variation_sku": "873472",
+      "name": "Chili, Basket Slub",
+      "features": {
+        "color": "Chili",
+        "shape": "Extra Deep (47&quot;)",
+        "fabric": "Basket Slub",
+        "delivery": "Made to Order (ships in 7+ weeks)"
+      },
+      "has_parent_sku": false,
+      "image": "https://www.lazysuzy.com/westelm/westelm_images/harmony-sofa-h2479-873472_sku-img.jpg",
+      "link": "/product/harmony-sofa-h2479",
+      "swatch_image": "https://www.lazysuzy.com/westelm/westelm_images/201939_0017_img29l.jpg",
+      "price": "1519.2",
+      "was_price": "1899"
+    },
+    {
+      "product_sku": "harmony-sofa-h2479",
+      "variation_sku": "9050969",
+      "name": "Nightshade, Mod Weave",
+      "features": {
+        "color": "Nightshade",
+        "shape": "Standard (41&quot;)",
+        "fabric": "Mod Weave",
+        "delivery": "Made to Order (ships in 7+ weeks)"
+      },
+      "has_parent_sku": false,
+      "image": "https://www.lazysuzy.com/westelm/westelm_images/harmony-sofa-h2479-9050969_sku-img.jpg",
+      "link": "/product/harmony-sofa-h2479",
+      "swatch_image": "https://www.lazysuzy.com/westelm/westelm_images/201939_0017_img40l.jpg",
+      "price": "1899",
+      "was_price": "1899"
+    },
+    {
+      "product_sku": "harmony-sofa-h2479",
+      "variation_sku": "9291917",
+      "name": "Dusty Teal, Worn Velvet",
+      "features": {
+        "color": "Dusty Teal",
+        "shape": "Extra Deep (47&quot;)",
+        "fabric": "Worn Velvet",
+        "delivery": "Made to Order (ships in 7+ weeks)"
+      },
+      "has_parent_sku": false,
+      "image": "https://www.lazysuzy.com/westelm/westelm_images/harmony-sofa-h2479-9291917_sku-img.jpg",
+      "link": "/product/harmony-sofa-h2479",
+      "swatch_image": "https://www.lazysuzy.com/westelm/westelm_images/201939_0017_img53l.jpg",
+      "price": "1999",
+      "was_price": "1999"
+    },
+    {
+      "product_sku": "harmony-sofa-h2479",
+      "variation_sku": "4941815",
+      "name": "Sapphire, Chunky Basketweave",
+      "features": {
+        "color": "Sapphire",
+        "shape": "Extra Deep (47&quot;)",
+        "fabric": "Chunky Basketweave",
+        "delivery": "Made to Order (ships in 7+ weeks)"
+      },
+      "has_parent_sku": false,
+      "image": "https://www.lazysuzy.com/westelm/westelm_images/harmony-sofa-h2479-4941815_sku-img.jpg",
+      "link": "/product/harmony-sofa-h2479",
+      "swatch_image": "https://www.lazysuzy.com/westelm/westelm_images/201939_0017_img71l.jpg",
+      "price": "1519.2",
+      "was_price": "1899"
+    },
+    {
+      "product_sku": "harmony-sofa-h2479",
+      "variation_sku": "1914212",
+      "name": "Feather Gray, Mod Weave",
+      "features": {
+        "color": "Feather Gray",
+        "shape": "Extra Deep (47&quot;)",
+        "fabric": "Mod Weave",
+        "delivery": "Made to Order (ships in 7+ weeks)"
+      },
+      "has_parent_sku": false,
+      "image": "https://www.lazysuzy.com/westelm/westelm_images/harmony-sofa-h2479-1914212_sku-img.jpg",
+      "link": "/product/harmony-sofa-h2479",
+      "swatch_image": "https://www.lazysuzy.com/westelm/westelm_images/201939_0017_img9l.jpg",
+      "price": "1999",
+      "was_price": "1999"
+    },
+    {
+      "product_sku": "harmony-sofa-h2479",
+      "variation_sku": "7736054",
+      "name": "Ink Blue, Performance Velvet",
+      "features": {
+        "color": "Ink Blue",
+        "shape": "Standard (41&quot;)",
+        "fabric": "Performance Velvet",
+        "delivery": "Made to Order (ships in 5 - 7 weeks)"
+      },
+      "has_parent_sku": false,
+      "image": "https://www.lazysuzy.com/westelm/westelm_images/harmony-sofa-h2479-7736054_sku-img.jpg",
+      "link": "/product/harmony-sofa-h2479",
+      "swatch_image": "https://www.lazysuzy.com/westelm/westelm_images/201939_0018_img100l.jpg",
+      "price": "1359.2",
+      "was_price": "1699"
+    },
+    {
+      "product_sku": "harmony-sofa-h2479",
+      "variation_sku": "1763691",
+      "name": "Granite, Marled Microfiber",
+      "features": {
+        "color": "Granite",
+        "shape": "Standard (41&quot;)",
+        "fabric": "Marled Microfiber",
+        "delivery": "Made to Order (ships in 7+ weeks)"
+      },
+      "has_parent_sku": false,
+      "image": "https://www.lazysuzy.com/westelm/westelm_images/harmony-sofa-h2479-1763691_sku-img.jpg",
+      "link": "/product/harmony-sofa-h2479",
+      "swatch_image": "https://www.lazysuzy.com/westelm/westelm_images/201939_0018_img10l.jpg",
+      "price": "1799",
+      "was_price": "1799"
+    },
+    {
+      "product_sku": "harmony-sofa-h2479",
+      "variation_sku": "6871490",
+      "name": "Oyster, Eco Weave",
+      "features": {
+        "color": "Oyster",
+        "shape": "Standard (41&quot;)",
+        "fabric": "Eco Weave",
+        "delivery": "In Stock (ships in 2 - 4 weeks)"
+      },
+      "has_parent_sku": false,
+      "image": "https://www.lazysuzy.com/westelm/westelm_images/harmony-sofa-h2479-6871490_sku-img.jpg",
+      "link": "/product/harmony-sofa-h2479",
+      "swatch_image": "https://www.lazysuzy.com/westelm/westelm_images/201939_0018_img24l.jpg",
+      "price": "1599.2",
+      "was_price": "1999"
+    },
+    {
+      "product_sku": "harmony-sofa-h2479",
+      "variation_sku": "4831593",
+      "name": "Natural, Performance Basketweave",
+      "features": {
+        "color": "Natural",
+        "shape": "Standard (41&quot;)",
+        "fabric": "Performance Basketweave",
+        "delivery": "Made to Order (ships in 7+ weeks)"
+      },
+      "has_parent_sku": false,
+      "image": "https://www.lazysuzy.com/westelm/westelm_images/harmony-sofa-h2479-4831593_sku-img.jpg",
+      "link": "/product/harmony-sofa-h2479",
+      "swatch_image": "https://www.lazysuzy.com/westelm/westelm_images/201939_0018_img26l.jpg",
+      "price": "1439.2",
+      "was_price": "1799"
+    },
+    {
+      "product_sku": "harmony-sofa-h2479",
+      "variation_sku": "5607538",
+      "name": "Charcoal, Heathered Tweed",
+      "features": {
+        "color": "Charcoal",
+        "shape": "Standard (41&quot;)",
+        "fabric": "Heathered Tweed",
+        "delivery": "Made to Order (ships in 7+ weeks)"
+      },
+      "has_parent_sku": false,
+      "image": "https://www.lazysuzy.com/westelm/westelm_images/harmony-sofa-h2479-5607538_sku-img.jpg",
+      "link": "/product/harmony-sofa-h2479",
+      "swatch_image": "https://www.lazysuzy.com/westelm/westelm_images/201939_0018_img31l.jpg",
+      "price": "1439.2",
+      "was_price": "1799"
+    },
+    {
+      "product_sku": "harmony-sofa-h2479",
+      "variation_sku": "6835841",
+      "name": "Indigo, Yarn Dyed Linen Weave",
+      "features": {
+        "color": "Indigo",
+        "shape": "Standard (41&quot;)",
+        "fabric": "Yarn Dyed Linen Weave",
+        "delivery": "Made to Order (ships in 7+ weeks)"
+      },
+      "has_parent_sku": false,
+      "image": "https://www.lazysuzy.com/westelm/westelm_images/harmony-sofa-h2479-6835841_sku-img.jpg",
+      "link": "/product/harmony-sofa-h2479",
+      "swatch_image": "https://www.lazysuzy.com/westelm/westelm_images/201939_0018_img3l.jpg",
+      "price": "1439.2",
+      "was_price": "1799"
+    },
+    {
+      "product_sku": "harmony-sofa-h2479",
+      "variation_sku": "5367892",
+      "name": "Moss, Performance Velvet",
+      "features": {
+        "color": "Moss",
+        "shape": "Extra Deep (47&quot;)",
+        "fabric": "Performance Velvet",
+        "delivery": "Made to Order (ships in 7+ weeks)"
+      },
+      "has_parent_sku": false,
+      "image": "https://www.lazysuzy.com/westelm/westelm_images/harmony-sofa-h2479-5367892_sku-img.jpg",
+      "link": "/product/harmony-sofa-h2479",
+      "swatch_image": "https://www.lazysuzy.com/westelm/westelm_images/201939_0018_img61l.jpg",
+      "price": "1439.2",
+      "was_price": "1799"
+    },
+    {
+      "product_sku": "harmony-sofa-h2479",
+      "variation_sku": "8068754",
+      "name": "Aegean Blue, Pebble Weave",
+      "features": {
+        "color": "Aegean Blue",
+        "shape": "Extra Deep (47&quot;)",
+        "fabric": "Pebble Weave",
+        "delivery": "Made to Order (ships in 7+ weeks)"
+      },
+      "has_parent_sku": false,
+      "image": "https://www.lazysuzy.com/westelm/westelm_images/harmony-sofa-h2479-8068754_sku-img.jpg",
+      "link": "/product/harmony-sofa-h2479",
+      "swatch_image": "https://www.lazysuzy.com/westelm/westelm_images/201939_0018_img69l.jpg",
+      "price": "1599.2",
+      "was_price": "1999"
+    },
+    {
+      "product_sku": "harmony-sofa-h2479",
+      "variation_sku": "9233948",
+      "name": "Desert Sunset, Basket Slub",
+      "features": {
+        "color": "Desert Sunset",
+        "shape": "Extra Deep (47&quot;)",
+        "fabric": "Basket Slub",
+        "delivery": "Made to Order (ships in 7+ weeks)"
+      },
+      "has_parent_sku": false,
+      "image": "https://www.lazysuzy.com/westelm/westelm_images/harmony-sofa-h2479-9233948_sku-img.jpg",
+      "link": "/product/harmony-sofa-h2479",
+      "swatch_image": "https://www.lazysuzy.com/westelm/westelm_images/201939_0018_img77l.jpg",
+      "price": "1519.2",
+      "was_price": "1899"
+    },
+    {
+      "product_sku": "harmony-sofa-h2479",
+      "variation_sku": "4715795",
+      "name": "Gravel, Twill",
+      "features": {
+        "color": "Gravel",
+        "shape": "Extra Deep (47&quot;)",
+        "fabric": "Twill",
+        "delivery": "Made to Order (ships in 7+ weeks)"
+      },
+      "has_parent_sku": false,
+      "image": "https://www.lazysuzy.com/westelm/westelm_images/harmony-sofa-h2479-4715795_sku-img.jpg",
+      "link": "/product/harmony-sofa-h2479",
+      "swatch_image": "https://www.lazysuzy.com/westelm/westelm_images/201939_0018_img85l.jpg",
+      "price": "1439.2",
+      "was_price": "1799"
+    },
+    {
+      "product_sku": "harmony-sofa-h2479",
+      "variation_sku": "1407986",
+      "name": "Natural, Heathered Crosshatch",
+      "features": {
+        "color": "Natural",
+        "shape": "Standard (41&quot;)",
+        "fabric": "Heathered Crosshatch",
+        "delivery": "Made to Order (ships in 7+ weeks)"
+      },
+      "has_parent_sku": false,
+      "image": "https://www.lazysuzy.com/westelm/westelm_images/harmony-sofa-h2479-1407986_sku-img.jpg",
+      "link": "/product/harmony-sofa-h2479",
+      "swatch_image": "https://www.lazysuzy.com/westelm/westelm_images/201939_0018_img90l.jpg",
+      "price": "1359.2",
+      "was_price": "1699"
+    },
+    {
+      "product_sku": "harmony-sofa-h2479",
+      "variation_sku": "9040549",
+      "name": "Lake, Heathered Tweed",
+      "features": {
+        "color": "Lake",
+        "shape": "Standard (41&quot;)",
+        "fabric": "Heathered Tweed",
+        "delivery": "Made to Order (ships in 7+ weeks)"
+      },
+      "has_parent_sku": false,
+      "image": "https://www.lazysuzy.com/westelm/westelm_images/harmony-sofa-h2479-9040549_sku-img.jpg",
+      "link": "/product/harmony-sofa-h2479",
+      "swatch_image": "https://www.lazysuzy.com/westelm/westelm_images/201939_0019_img15l.jpg",
+      "price": "1799",
+      "was_price": "1799"
+    },
+    {
+      "product_sku": "harmony-sofa-h2479",
+      "variation_sku": "8371664",
+      "name": "Aegean Blue, Chunky Basketweave",
+      "features": {
+        "color": "Aegean Blue",
+        "shape": "Extra Deep (47&quot;)",
+        "fabric": "Chunky Basketweave",
+        "delivery": "Made to Order (ships in 7+ weeks)"
+      },
+      "has_parent_sku": false,
+      "image": "https://www.lazysuzy.com/westelm/westelm_images/harmony-sofa-h2479-8371664_sku-img.jpg",
+      "link": "/product/harmony-sofa-h2479",
+      "swatch_image": "https://www.lazysuzy.com/westelm/westelm_images/201939_0019_img17l.jpg",
+      "price": "1519.2",
+      "was_price": "1899"
+    },
+    {
+      "product_sku": "harmony-sofa-h2479",
+      "variation_sku": "9036828",
+      "name": "Raisin, Basketweave",
+      "features": {
+        "color": "Raisin",
+        "shape": "Standard (41&quot;)",
+        "fabric": "Basketweave",
+        "delivery": "Made to Order (ships in 7+ weeks)"
+      },
+      "has_parent_sku": false,
+      "image": "https://www.lazysuzy.com/westelm/westelm_images/harmony-sofa-h2479-9036828_sku-img.jpg",
+      "link": "/product/harmony-sofa-h2479",
+      "swatch_image": "https://www.lazysuzy.com/westelm/westelm_images/201939_0019_img20l.jpg",
+      "price": "1799",
+      "was_price": "1799"
+    },
+    {
+      "product_sku": "harmony-sofa-h2479",
+      "variation_sku": "7670246",
+      "name": "Asphalt, Tweed",
+      "features": {
+        "color": "Asphalt",
+        "shape": "Extra Deep (47&quot;)",
+        "fabric": "Tweed",
+        "delivery": "Made to Order (ships in 7+ weeks)"
+      },
+      "has_parent_sku": false,
+      "image": "https://www.lazysuzy.com/westelm/westelm_images/harmony-sofa-h2479-7670246_sku-img.jpg",
+      "link": "/product/harmony-sofa-h2479",
+      "swatch_image": "https://www.lazysuzy.com/westelm/westelm_images/201939_0019_img39l.jpg",
+      "price": "1999",
+      "was_price": "1999"
+    },
+    {
+      "product_sku": "harmony-sofa-h2479",
+      "variation_sku": "418840",
+      "name": "Feather Gray, Deco Weave",
+      "features": {
+        "color": "Feather Gray",
+        "shape": "Standard (41&quot;)",
+        "fabric": "Deco Weave",
+        "delivery": "Made to Order (ships in 7+ weeks)"
+      },
+      "has_parent_sku": false,
+      "image": "https://www.lazysuzy.com/westelm/westelm_images/harmony-sofa-h2479-418840_sku-img.jpg",
+      "link": "/product/harmony-sofa-h2479",
+      "swatch_image": "https://www.lazysuzy.com/westelm/westelm_images/201939_0019_img57l.jpg",
+      "price": "1359.2",
+      "was_price": "1699"
+    },
+    {
+      "product_sku": "harmony-sofa-h2479",
+      "variation_sku": "182249",
+      "name": "Indigo, Twill",
+      "features": {
+        "color": "Indigo",
+        "shape": "Extra Deep (47&quot;)",
+        "fabric": "Twill",
+        "delivery": "Made to Order (ships in 7+ weeks)"
+      },
+      "has_parent_sku": false,
+      "image": "https://www.lazysuzy.com/westelm/westelm_images/harmony-sofa-h2479-182249_sku-img.jpg",
+      "link": "/product/harmony-sofa-h2479",
+      "swatch_image": "https://www.lazysuzy.com/westelm/westelm_images/201939_0019_img88l.jpg",
+      "price": "1439.2",
+      "was_price": "1799"
+    },
+    {
+      "product_sku": "harmony-sofa-h2479",
+      "variation_sku": "9454285",
+      "name": "Stone, Twill",
+      "features": {
+        "color": "Stone",
+        "shape": "Standard (41&quot;)",
+        "fabric": "Twill",
+        "delivery": "Made to Order (ships in 7+ weeks)"
+      },
+      "has_parent_sku": false,
+      "image": "https://www.lazysuzy.com/westelm/westelm_images/harmony-sofa-h2479-9454285_sku-img.jpg",
+      "link": "/product/harmony-sofa-h2479",
+      "swatch_image": "https://www.lazysuzy.com/westelm/westelm_images/201939_0020_img23l.jpg",
+      "price": "1359.2",
+      "was_price": "1699"
+    },
+    {
+      "product_sku": "harmony-sofa-h2479",
+      "variation_sku": "3409376",
+      "name": "Heather Gray, Marled Microfiber",
+      "features": {
+        "color": "Heather Gray",
+        "shape": "Standard (41&quot;)",
+        "fabric": "Marled Microfiber",
+        "delivery": "Made to Order (ships in 7+ weeks)"
+      },
+      "has_parent_sku": false,
+      "image": "https://www.lazysuzy.com/westelm/westelm_images/harmony-sofa-h2479-3409376_sku-img.jpg",
+      "link": "/product/harmony-sofa-h2479",
+      "swatch_image": "https://www.lazysuzy.com/westelm/westelm_images/201939_0020_img24l.jpg",
+      "price": "1439.2",
+      "was_price": "1799"
+    },
+    {
+      "product_sku": "harmony-sofa-h2479",
+      "variation_sku": "1897177",
+      "name": "Leek, Heathered Tweed",
+      "features": {
+        "color": "Leek",
+        "shape": "Extra Deep (47&quot;)",
+        "fabric": "Heathered Tweed",
+        "delivery": "Made to Order (ships in 7+ weeks)"
+      },
+      "has_parent_sku": false,
+      "image": "https://www.lazysuzy.com/westelm/westelm_images/harmony-sofa-h2479-1897177_sku-img.jpg",
+      "link": "/product/harmony-sofa-h2479",
+      "swatch_image": "https://www.lazysuzy.com/westelm/westelm_images/201939_0020_img26l.jpg",
+      "price": "1899",
+      "was_price": "1899"
+    },
+    {
+      "product_sku": "harmony-sofa-h2479",
+      "variation_sku": "9052221",
+      "name": "Gray, Brushed Heathered Cotton",
+      "features": {
+        "color": "Gray",
+        "shape": "Standard (41&quot;)",
+        "fabric": "Brushed Heathered Cotton",
+        "delivery": "Made to Order (ships in 7+ weeks)"
+      },
+      "has_parent_sku": false,
+      "image": "https://www.lazysuzy.com/westelm/westelm_images/harmony-sofa-h2479-9052221_sku-img.jpg",
+      "link": "/product/harmony-sofa-h2479",
+      "swatch_image": "https://www.lazysuzy.com/westelm/westelm_images/201939_0020_img36l.jpg",
+      "price": "1799",
+      "was_price": "1799"
+    },
+    {
+      "product_sku": "harmony-sofa-h2479",
+      "variation_sku": "8974480",
+      "name": "Dark Olive, Twill",
+      "features": {
+        "color": "Dark Olive",
+        "shape": "Standard (41&quot;)",
+        "fabric": "Twill",
+        "delivery": "Made to Order (ships in 7+ weeks)"
+      },
+      "has_parent_sku": false,
+      "image": "https://www.lazysuzy.com/westelm/westelm_images/harmony-sofa-h2479-8974480_sku-img.jpg",
+      "link": "/product/harmony-sofa-h2479",
+      "swatch_image": "https://www.lazysuzy.com/westelm/westelm_images/201940_0007_img15l.jpg",
+      "price": "1699",
+      "was_price": "1699"
+    },
+    {
+      "product_sku": "harmony-sofa-h2479",
+      "variation_sku": "9714828",
+      "name": "Slate, Heathered Crosshatch",
+      "features": {
+        "color": "Slate",
+        "shape": "Extra Deep (47&quot;)",
+        "fabric": "Heathered Crosshatch",
+        "delivery": "Made to Order (ships in 7+ weeks)"
+      },
+      "has_parent_sku": false,
+      "image": "https://www.lazysuzy.com/westelm/westelm_images/harmony-sofa-h2479-9714828_sku-img.jpg",
+      "link": "/product/harmony-sofa-h2479",
+      "swatch_image": "https://www.lazysuzy.com/westelm/westelm_images/201940_0009_img44l.jpg",
+      "price": "1439.2",
+      "was_price": "1799"
+    },
+    {
+      "product_sku": "harmony-sofa-h2479",
+      "variation_sku": "3914860",
+      "name": "Forest, Distressed Velvet",
+      "features": {
+        "color": "Forest",
+        "shape": "Extra Deep (47&quot;)",
+        "fabric": "Distressed Velvet",
+        "delivery": "Made to Order (ships in 7+ weeks)"
+      },
+      "has_parent_sku": false,
+      "image": "https://www.lazysuzy.com/westelm/westelm_images/harmony-sofa-h2479-3914860_sku-img.jpg",
+      "link": "/product/harmony-sofa-h2479",
+      "swatch_image": "https://www.lazysuzy.com/westelm/westelm_images/201940_0009_img75l.jpg",
+      "price": "1519.2",
+      "was_price": "1899"
+    },
+    {
+      "product_sku": "harmony-sofa-h2479",
+      "variation_sku": "3828683",
+      "name": "Flannel, Performance Tweed",
+      "features": {
+        "color": "Flannel",
+        "shape": "Standard (41&quot;)",
+        "fabric": "Performance Tweed",
+        "delivery": "In Stock (ships in 2 - 4 weeks)"
+      },
+      "has_parent_sku": false,
+      "image": "https://www.lazysuzy.com/westelm/westelm_images/harmony-sofa-h2479-3828683_sku-img.jpg",
+      "link": "/product/harmony-sofa-h2479",
+      "swatch_image": "https://www.lazysuzy.com/westelm/westelm_images/201940_0011_img21l.jpg",
+      "price": "1699",
+      "was_price": "1699"
+    },
+    {
+      "product_sku": "harmony-sofa-h2479",
+      "variation_sku": "7348572",
+      "name": "Evergreen, Astor Velvet",
+      "features": {
+        "color": "Evergreen",
+        "shape": "Extra Deep (47&quot;)",
+        "fabric": "Astor Velvet",
+        "delivery": "Made to Order (ships in 7+ weeks)"
+      },
+      "has_parent_sku": false,
+      "image": "https://www.lazysuzy.com/westelm/westelm_images/harmony-sofa-h2479-7348572_sku-img.jpg",
+      "link": "/product/harmony-sofa-h2479",
+      "swatch_image": "https://www.lazysuzy.com/westelm/westelm_images/201940_0013_img11l.jpg",
+      "price": "1679.2",
+      "was_price": "2099"
+    },
+    {
+      "product_sku": "harmony-sofa-h2479",
+      "variation_sku": "5037414",
+      "name": "Oyster, Eco Weave",
+      "features": {
+        "color": "Oyster",
+        "shape": "Standard (41&quot;)",
+        "fabric": "Eco Weave",
+        "delivery": "Made to Order (ships in 7+ weeks)"
+      },
+      "has_parent_sku": false,
+      "image": "https://www.lazysuzy.com/westelm/westelm_images/harmony-sofa-h2479-5037414_sku-img.jpg",
+      "link": "/product/harmony-sofa-h2479",
+      "swatch_image": "https://www.lazysuzy.com/westelm/westelm_images/201940_0019_img10l.jpg",
+      "price": "1679.2",
+      "was_price": "2099"
+    },
+    {
+      "product_sku": "harmony-sofa-h2479",
+      "variation_sku": "2622109",
+      "name": "Frost Gray, Astor Velvet",
+      "features": {
+        "color": "Frost Gray",
+        "shape": "Standard (41&quot;)",
+        "fabric": "Astor Velvet",
+        "delivery": "Made to Order (ships in 7+ weeks)"
+      },
+      "has_parent_sku": false,
+      "image": "https://www.lazysuzy.com/westelm/westelm_images/harmony-sofa-h2479-2622109_sku-img.jpg",
+      "link": "/product/harmony-sofa-h2479",
+      "swatch_image": "https://www.lazysuzy.com/westelm/westelm_images/201940_0020_img54l.jpg",
+      "price": "1519.2",
+      "was_price": "1899"
+    },
+    {
+      "product_sku": "harmony-sofa-h2479",
+      "variation_sku": "865820",
+      "name": "Shelter Blue, Yarn Dyed Linen Weave",
+      "features": {
+        "color": "Shelter Blue",
+        "shape": "Standard (41&quot;)",
+        "fabric": "Yarn Dyed Linen Weave",
+        "delivery": "Made to Order (ships in 7+ weeks)"
+      },
+      "has_parent_sku": false,
+      "image": "https://www.lazysuzy.com/westelm/westelm_images/harmony-sofa-h2479-865820_sku-img.jpg",
+      "link": "/product/harmony-sofa-h2479",
+      "swatch_image": "https://www.lazysuzy.com/westelm/westelm_images/201940_0024_img31l.jpg",
+      "price": "1439.2",
+      "was_price": "1799"
+    },
+    {
+      "product_sku": "harmony-sofa-h2479",
+      "variation_sku": "9052213",
+      "name": "Grapefruit, Brushed Heathered Cotton",
+      "features": {
+        "color": "Grapefruit",
+        "shape": "Standard (41&quot;)",
+        "fabric": "Brushed Heathered Cotton",
+        "delivery": "Made to Order (ships in 7+ weeks)"
+      },
+      "has_parent_sku": false,
+      "image": "https://www.lazysuzy.com/westelm/westelm_images/harmony-sofa-h2479-9052213_sku-img.jpg",
+      "link": "/product/harmony-sofa-h2479",
+      "swatch_image": "https://www.lazysuzy.com/westelm/westelm_images/201940_0028_img23l.jpg",
+      "price": "1799",
+      "was_price": "1799"
+    },
+    {
+      "product_sku": "harmony-sofa-h2479",
+      "variation_sku": "8174882",
+      "name": "Regal Blue, Twill",
+      "features": {
+        "color": "Regal Blue",
+        "shape": "Standard (41&quot;)",
+        "fabric": "Twill",
+        "delivery": "Made to Order (ships in 7+ weeks)"
+      },
+      "has_parent_sku": false,
+      "image": "https://www.lazysuzy.com/westelm/westelm_images/harmony-sofa-h2479-8174882_sku-img.jpg",
+      "link": "/product/harmony-sofa-h2479",
+      "swatch_image": "https://www.lazysuzy.com/westelm/westelm_images/201940_0028_img39l.jpg",
+      "price": "1359.2",
+      "was_price": "1699"
+    },
+    {
+      "product_sku": "harmony-sofa-h2479",
+      "variation_sku": "9613987",
+      "name": "Iron, Twill",
+      "features": {
+        "color": "Iron",
+        "shape": "Extra Deep (47&quot;)",
+        "fabric": "Twill",
+        "delivery": "Made to Order (ships in 7+ weeks)"
+      },
+      "has_parent_sku": false,
+      "image": "https://www.lazysuzy.com/westelm/westelm_images/harmony-sofa-h2479-9613987_sku-img.jpg",
+      "link": "/product/harmony-sofa-h2479",
+      "swatch_image": "https://www.lazysuzy.com/westelm/westelm_images/201940_0030_img39l.jpg",
+      "price": "1799",
+      "was_price": "1799"
+    },
+    {
+      "product_sku": "harmony-sofa-h2479",
+      "variation_sku": "9052742",
+      "name": "Platinum, Shadow Weave",
+      "features": {
+        "color": "Platinum",
+        "shape": "Standard (41&quot;)",
+        "fabric": "Shadow Weave",
+        "delivery": "Made to Order (ships in 7+ weeks)"
+      },
+      "has_parent_sku": false,
+      "image": "https://www.lazysuzy.com/westelm/westelm_images/harmony-sofa-h2479-9052742_sku-img.jpg",
+      "link": "/product/harmony-sofa-h2479",
+      "swatch_image": "https://www.lazysuzy.com/westelm/westelm_images/201940_0030_img51l.jpg",
+      "price": "1899",
+      "was_price": "1899"
+    },
+    {
+      "product_sku": "harmony-sofa-h2479",
+      "variation_sku": "9870851",
+      "name": "Platinum, Twill",
+      "features": {
+        "color": "Platinum",
+        "shape": "Standard (41&quot;)",
+        "fabric": "Twill",
+        "delivery": "Made to Order (ships in 7+ weeks)"
+      },
+      "has_parent_sku": false,
+      "image": "https://www.lazysuzy.com/westelm/westelm_images/harmony-sofa-h2479-9870851_sku-img.jpg",
+      "link": "/product/harmony-sofa-h2479",
+      "swatch_image": "https://www.lazysuzy.com/westelm/westelm_images/201940_0038_img79l.jpg",
+      "price": "1699",
+      "was_price": "1699"
+    },
+    {
+      "product_sku": "harmony-sofa-h2479",
+      "variation_sku": "2047446",
+      "name": "Blue Stone, Basket Slub",
+      "features": {
+        "color": "Blue Stone",
+        "shape": "Standard (41&quot;)",
+        "fabric": "Basket Slub",
+        "delivery": "Made to Order (ships in 7+ weeks)"
+      },
+      "has_parent_sku": false,
+      "image": "https://www.lazysuzy.com/westelm/westelm_images/harmony-sofa-h2479-2047446_sku-img.jpg",
+      "link": "/product/harmony-sofa-h2479",
+      "swatch_image": "https://www.lazysuzy.com/westelm/westelm_images/201940_0039_img84l.jpg",
+      "price": "1999",
+      "was_price": "1999"
+    },
+    {
+      "product_sku": "harmony-sofa-h2479",
+      "variation_sku": "1898597",
+      "name": "Doe, Linen Weave",
+      "features": {
+        "color": "Doe",
+        "shape": "Extra Deep (47&quot;)",
+        "fabric": "Linen Weave",
+        "delivery": "Made to Order (ships in 7+ weeks)"
+      },
+      "has_parent_sku": false,
+      "image": "https://www.lazysuzy.com/westelm/westelm_images/harmony-sofa-h2479-1898597_sku-img.jpg",
+      "link": "/product/harmony-sofa-h2479",
+      "swatch_image": "https://www.lazysuzy.com/westelm/westelm_images/201940_0044_img41l.jpg",
+      "price": "1999",
+      "was_price": "1999"
+    },
+    {
+      "product_sku": "harmony-sofa-h2479",
+      "variation_sku": "1898618",
+      "name": "Dusty Blue, Linen Weave",
+      "features": {
+        "color": "Dusty Blue",
+        "shape": "Extra Deep (47&quot;)",
+        "fabric": "Linen Weave",
+        "delivery": "Made to Order (ships in 7+ weeks)"
+      },
+      "has_parent_sku": false,
+      "image": "https://www.lazysuzy.com/westelm/westelm_images/harmony-sofa-h2479-1898618_sku-img.jpg",
+      "link": "/product/harmony-sofa-h2479",
+      "swatch_image": "https://www.lazysuzy.com/westelm/westelm_images/201940_0045_img10l.jpg",
+      "price": "1999",
+      "was_price": "1999"
+    },
+    {
+      "product_sku": "harmony-sofa-h2479",
+      "variation_sku": "3825424",
+      "name": "Charcoal, Performance Slub",
+      "features": {
+        "color": "Charcoal",
+        "shape": "Standard (41&quot;)",
+        "fabric": "Performance Slub",
+        "delivery": "Made to Order (ships in 7+ weeks)"
+      },
+      "has_parent_sku": false,
+      "image": "https://www.lazysuzy.com/westelm/westelm_images/harmony-sofa-h2479-3825424_sku-img.jpg",
+      "link": "/product/harmony-sofa-h2479",
+      "swatch_image": "https://www.lazysuzy.com/westelm/westelm_images/201940_0047_img62l.jpg",
+      "price": "1799",
+      "was_price": "1799"
+    },
+    {
+      "product_sku": "harmony-sofa-h2479",
+      "variation_sku": "6071127",
+      "name": "Light Pink, Distressed Velvet",
+      "features": {
+        "color": "Light Pink",
+        "shape": "Standard (41&quot;)",
+        "fabric": "Distressed Velvet",
+        "delivery": "Made to Order (ships in 7+ weeks)"
+      },
+      "has_parent_sku": false,
+      "image": "https://www.lazysuzy.com/westelm/westelm_images/harmony-sofa-h2479-6071127_sku-img.jpg",
+      "link": "/product/harmony-sofa-h2479",
+      "swatch_image": "https://www.lazysuzy.com/westelm/westelm_images/201940_0053_img17l.jpg",
+      "price": "1439.2",
+      "was_price": "1799"
+    },
+    {
+      "product_sku": "harmony-sofa-h2479",
+      "variation_sku": "9998913",
+      "name": "Ink Blue, Astor Velvet",
+      "features": {
+        "color": "Ink Blue",
+        "shape": "Extra Deep (47&quot;)",
+        "fabric": "Astor Velvet",
+        "delivery": "Made to Order (ships in 7+ weeks)"
+      },
+      "has_parent_sku": false,
+      "image": "https://www.lazysuzy.com/westelm/westelm_images/harmony-sofa-h2479-9998913_sku-img.jpg",
+      "link": "/product/harmony-sofa-h2479",
+      "swatch_image": "https://www.lazysuzy.com/westelm/westelm_images/201940_0053_img21l.jpg",
+      "price": "1679.2",
+      "was_price": "2099"
+    },
+    {
+      "product_sku": "harmony-sofa-h2479",
+      "variation_sku": "769843",
+      "name": "Teal, Twill",
+      "features": {
+        "color": "Teal",
+        "shape": "Standard (41&quot;)",
+        "fabric": "Twill",
+        "delivery": "Made to Order (ships in 7+ weeks)"
+      },
+      "has_parent_sku": false,
+      "image": "https://www.lazysuzy.com/westelm/westelm_images/harmony-sofa-h2479-769843_sku-img.jpg",
+      "link": "/product/harmony-sofa-h2479",
+      "swatch_image": "https://www.lazysuzy.com/westelm/westelm_images/201940_0053_img64l.jpg",
+      "price": "1359.2",
+      "was_price": "1699"
+    },
+    {
+      "product_sku": "harmony-sofa-h2479",
+      "variation_sku": "7546990",
+      "name": "Nickel, Astor Velvet",
+      "features": {
+        "color": "Nickel",
+        "shape": "Standard (41&quot;)",
+        "fabric": "Astor Velvet",
+        "delivery": "Made to Order (ships in 7+ weeks)"
+      },
+      "has_parent_sku": false,
+      "image": "https://www.lazysuzy.com/westelm/westelm_images/harmony-sofa-h2479-7546990_sku-img.jpg",
+      "link": "/product/harmony-sofa-h2479",
+      "swatch_image": "https://www.lazysuzy.com/westelm/westelm_images/201940_0054_img81l.jpg",
+      "price": "1519.2",
+      "was_price": "1899"
+    },
+    {
+      "product_sku": "harmony-sofa-h2479",
+      "variation_sku": "3872618",
+      "name": "Chili, Basket Slub",
+      "features": {
+        "color": "Chili",
+        "shape": "Standard (41&quot;)",
+        "fabric": "Basket Slub",
+        "delivery": "Made to Order (ships in 7+ weeks)"
+      },
+      "has_parent_sku": false,
+      "image": "https://www.lazysuzy.com/westelm/westelm_images/harmony-sofa-h2479-3872618_sku-img.jpg",
+      "link": "/product/harmony-sofa-h2479",
+      "swatch_image": "https://www.lazysuzy.com/westelm/westelm_images/201940_0056_img86l.jpg",
+      "price": "1999",
+      "was_price": "1999"
+    },
+    {
+      "product_sku": "harmony-sofa-h2479",
+      "variation_sku": "1864250",
+      "name": "Hazy Taupe, Basketweave",
+      "features": {
+        "color": "Hazy Taupe",
+        "shape": "Extra Deep (47&quot;)",
+        "fabric": "Basketweave",
+        "delivery": "Made to Order (ships in 7+ weeks)"
+      },
+      "has_parent_sku": false,
+      "image": "https://www.lazysuzy.com/westelm/westelm_images/harmony-sofa-h2479-1864250_sku-img.jpg",
+      "link": "/product/harmony-sofa-h2479",
+      "swatch_image": "https://www.lazysuzy.com/westelm/westelm_images/201940_0058_img74l.jpg",
+      "price": "1799",
+      "was_price": "1799"
+    },
+    {
+      "product_sku": "harmony-sofa-h2479",
+      "variation_sku": "6755364",
+      "name": "Rust, Distressed Velvet",
+      "features": {
+        "color": "Rust",
+        "shape": "Extra Deep (47&quot;)",
+        "fabric": "Distressed Velvet",
+        "delivery": "Made to Order (ships in 7+ weeks)"
+      },
+      "has_parent_sku": false,
+      "image": "https://www.lazysuzy.com/westelm/westelm_images/harmony-sofa-h2479-6755364_sku-img.jpg",
+      "link": "/product/harmony-sofa-h2479",
+      "swatch_image": "https://www.lazysuzy.com/westelm/westelm_images/201940_0066_img6l.jpg",
+      "price": "1519.2",
+      "was_price": "1899"
+    },
+    {
+      "product_sku": "harmony-sofa-h2479",
+      "variation_sku": "9041794",
+      "name": "Indigo, Nordic Weave",
+      "features": {
+        "color": "Indigo",
+        "shape": "Standard (41&quot;)",
+        "fabric": "Nordic Weave",
+        "delivery": "Made to Order (ships in 7+ weeks)"
+      },
+      "has_parent_sku": false,
+      "image": "https://www.lazysuzy.com/westelm/westelm_images/harmony-sofa-h2479-9041794_sku-img.jpg",
+      "link": "/product/harmony-sofa-h2479",
+      "swatch_image": "https://www.lazysuzy.com/westelm/westelm_images/201940_0070_img16l.jpg",
+      "price": "1799",
+      "was_price": "1799"
+    },
+    {
+      "product_sku": "harmony-sofa-h2479",
+      "variation_sku": "7116665",
+      "name": "Wasabi, Plush Velvet",
+      "features": {
+        "color": "Wasabi",
+        "shape": "Standard (41&quot;)",
+        "fabric": "Plush Velvet",
+        "delivery": "Made to Order (ships in 7+ weeks)"
+      },
+      "has_parent_sku": false,
+      "image": "https://www.lazysuzy.com/westelm/westelm_images/harmony-sofa-h2479-7116665_sku-img.jpg",
+      "link": "/product/harmony-sofa-h2479",
+      "swatch_image": "https://www.lazysuzy.com/westelm/westelm_images/201940_0073_img4l.jpg",
+      "price": "1359.2",
+      "was_price": "1699"
+    },
+    {
+      "product_sku": "harmony-sofa-h2479",
+      "variation_sku": "7518520",
+      "name": "Rosette, Chenille Tweed",
+      "features": {
+        "color": "Rosette",
+        "shape": "Standard (41&quot;)",
+        "fabric": "Chenille Tweed",
+        "delivery": "Made to Order (ships in 7+ weeks)"
+      },
+      "has_parent_sku": false,
+      "image": "https://www.lazysuzy.com/westelm/westelm_images/harmony-sofa-h2479-7518520_sku-img.jpg",
+      "link": "/product/harmony-sofa-h2479",
+      "swatch_image": "https://www.lazysuzy.com/westelm/westelm_images/201940_0075_img54l.jpg",
+      "price": "1439.2",
+      "was_price": "1799"
+    },
+    {
+      "product_sku": "harmony-sofa-h2479",
+      "variation_sku": "6900921",
+      "name": "Feather Gray, Deco Weave",
+      "features": {
+        "color": "Feather Gray",
+        "shape": "Extra Deep (47&quot;)",
+        "fabric": "Deco Weave",
+        "delivery": "Made to Order (ships in 7+ weeks)"
+      },
+      "has_parent_sku": false,
+      "image": "https://www.lazysuzy.com/westelm/westelm_images/harmony-sofa-h2479-6900921_sku-img.jpg",
+      "link": "/product/harmony-sofa-h2479",
+      "swatch_image": "https://www.lazysuzy.com/westelm/westelm_images/201940_0078_img23l.jpg",
+      "price": "1439.2",
+      "was_price": "1799"
+    },
+    {
+      "product_sku": "harmony-sofa-h2479",
+      "variation_sku": "9186292",
+      "name": "Midnight, Basket Slub",
+      "features": {
+        "color": "Midnight",
+        "shape": "Extra Deep (47&quot;)",
+        "fabric": "Basket Slub",
+        "delivery": "Made to Order (ships in 7+ weeks)"
+      },
+      "has_parent_sku": false,
+      "image": "https://www.lazysuzy.com/westelm/westelm_images/harmony-sofa-h2479-9186292_sku-img.jpg",
+      "link": "/product/harmony-sofa-h2479",
+      "swatch_image": "https://www.lazysuzy.com/westelm/westelm_images/201940_0079_img49l.jpg",
+      "price": "1519.2",
+      "was_price": "1899"
+    },
+    {
+      "product_sku": "harmony-sofa-h2479",
+      "variation_sku": "8094418",
+      "name": "Stone White, Yarn Dyed Linen Weave",
+      "features": {
+        "color": "Stone White",
+        "shape": "Standard (41&quot;)",
+        "fabric": "Yarn Dyed Linen Weave",
+        "delivery": "Made to Order (ships in 7+ weeks)"
+      },
+      "has_parent_sku": false,
+      "image": "https://www.lazysuzy.com/westelm/westelm_images/harmony-sofa-h2479-8094418_sku-img.jpg",
+      "link": "/product/harmony-sofa-h2479",
+      "swatch_image": "https://www.lazysuzy.com/westelm/westelm_images/201940_0079_img70l.jpg",
+      "price": "1799",
+      "was_price": "1799"
+    },
+    {
+      "product_sku": "harmony-sofa-h2479",
+      "variation_sku": "2547748",
+      "name": "Dark Gray, Mod Weave",
+      "features": {
+        "color": "Dark Gray",
+        "shape": "Extra Deep (47&quot;)",
+        "fabric": "Mod Weave",
+        "delivery": "Made to Order (ships in 7+ weeks)"
+      },
+      "has_parent_sku": false,
+      "image": "https://www.lazysuzy.com/westelm/westelm_images/harmony-sofa-h2479-2547748_sku-img.jpg",
+      "link": "/product/harmony-sofa-h2479",
+      "swatch_image": "https://www.lazysuzy.com/westelm/westelm_images/201940_0080_img4l.jpg",
+      "price": "1999",
+      "was_price": "1999"
+    },
+    {
+      "product_sku": "harmony-sofa-h2479",
+      "variation_sku": "9387904",
+      "name": "Dark Horseradish, Basket Slub",
+      "features": {
+        "color": "Dark Horseradish",
+        "shape": "Extra Deep (47&quot;)",
+        "fabric": "Basket Slub",
+        "delivery": "Made to Order (ships in 7+ weeks)"
+      },
+      "has_parent_sku": false,
+      "image": "https://www.lazysuzy.com/westelm/westelm_images/harmony-sofa-h2479-9387904_sku-img.jpg",
+      "link": "/product/harmony-sofa-h2479",
+      "swatch_image": "https://www.lazysuzy.com/westelm/westelm_images/201940_0085_img13l.jpg",
+      "price": "1519.2",
+      "was_price": "1899"
+    },
+    {
+      "product_sku": "harmony-sofa-h2479",
+      "variation_sku": "4615038",
+      "name": "Ink Blue, Distressed Velvet",
+      "features": {
+        "color": "Ink Blue",
+        "shape": "Extra Deep (47&quot;)",
+        "fabric": "Distressed Velvet",
+        "delivery": "Made to Order (ships in 7+ weeks)"
+      },
+      "has_parent_sku": false,
+      "image": "https://www.lazysuzy.com/westelm/westelm_images/harmony-sofa-h2479-4615038_sku-img.jpg",
+      "link": "/product/harmony-sofa-h2479",
+      "swatch_image": "https://www.lazysuzy.com/westelm/westelm_images/201940_0091_img43l.jpg",
+      "price": "1519.2",
+      "was_price": "1899"
+    },
+    {
+      "product_sku": "harmony-sofa-h2479",
+      "variation_sku": "4360276",
+      "name": "Mint, Twill",
+      "features": {
+        "color": "Mint",
+        "shape": "Standard (41&quot;)",
+        "fabric": "Twill",
+        "delivery": "Made to Order (ships in 7+ weeks)"
+      },
+      "has_parent_sku": false,
+      "image": "https://www.lazysuzy.com/westelm/westelm_images/harmony-sofa-h2479-4360276_sku-img.jpg",
+      "link": "/product/harmony-sofa-h2479",
+      "swatch_image": "https://www.lazysuzy.com/westelm/westelm_images/201940_0092_img51l.jpg",
+      "price": "1359.2",
+      "was_price": "1699"
+    },
+    {
+      "product_sku": "harmony-sofa-h2479",
+      "variation_sku": "1269289",
+      "name": "Shadow, Performance Velvet",
+      "features": {
+        "color": "Shadow",
+        "shape": "Standard (41&quot;)",
+        "fabric": "Performance Velvet",
+        "delivery": "Made to Order (ships in 7+ weeks)"
+      },
+      "has_parent_sku": false,
+      "image": "https://www.lazysuzy.com/westelm/westelm_images/harmony-sofa-h2479-1269289_sku-img.jpg",
+      "link": "/product/harmony-sofa-h2479",
+      "swatch_image": "https://www.lazysuzy.com/westelm/westelm_images/201940_0093_img20l.jpg",
+      "price": "1359.2",
+      "was_price": "1699"
+    },
+    {
+      "product_sku": "harmony-sofa-h2479",
+      "variation_sku": "6239314",
+      "name": "Regal Blue, Linen Weave",
+      "features": {
+        "color": "Regal Blue",
+        "shape": "Extra Deep (47&quot;)",
+        "fabric": "Linen Weave",
+        "delivery": "Made to Order (ships in 7+ weeks)"
+      },
+      "has_parent_sku": false,
+      "image": "https://www.lazysuzy.com/westelm/westelm_images/harmony-sofa-h2479-6239314_sku-img.jpg",
+      "link": "/product/harmony-sofa-h2479",
+      "swatch_image": "https://www.lazysuzy.com/westelm/westelm_images/201940_0094_img75l.jpg",
+      "price": "1899",
+      "was_price": "1899"
+    },
+    {
+      "product_sku": "harmony-sofa-h2479",
+      "variation_sku": "2906616",
+      "name": "Stone, Deco Weave",
+      "features": {
+        "color": "Stone",
+        "shape": "Standard (41&quot;)",
+        "fabric": "Deco Weave",
+        "delivery": "Made to Order (ships in 7+ weeks)"
+      },
+      "has_parent_sku": false,
+      "image": "https://www.lazysuzy.com/westelm/westelm_images/harmony-sofa-h2479-2906616_sku-img.jpg",
+      "link": "/product/harmony-sofa-h2479",
+      "swatch_image": "https://www.lazysuzy.com/westelm/westelm_images/201940_0095_img34l.jpg",
+      "price": "1359.2",
+      "was_price": "1699"
+    },
+    {
+      "product_sku": "harmony-sofa-h2479",
+      "variation_sku": "2094752",
+      "name": "Iron, Astor Velvet",
+      "features": {
+        "color": "Iron",
+        "shape": "Standard (41&quot;)",
+        "fabric": "Astor Velvet",
+        "delivery": "Made to Order (ships in 7+ weeks)"
+      },
+      "has_parent_sku": false,
+      "image": "https://www.lazysuzy.com/westelm/westelm_images/harmony-sofa-h2479-2094752_sku-img.jpg",
+      "link": "/product/harmony-sofa-h2479",
+      "swatch_image": "https://www.lazysuzy.com/westelm/westelm_images/201940_0100_img40l.jpg",
+      "price": "1519.2",
+      "was_price": "1899"
+    },
+    {
+      "product_sku": "harmony-sofa-h2479",
+      "variation_sku": "894465",
+      "name": "Slate, Astor Velvet",
+      "features": {
+        "color": "Slate",
+        "shape": "Standard (41&quot;)",
+        "fabric": "Astor Velvet",
+        "delivery": "Made to Order (ships in 7+ weeks)"
+      },
+      "has_parent_sku": false,
+      "image": "https://www.lazysuzy.com/westelm/westelm_images/harmony-sofa-h2479-894465_sku-img.jpg",
+      "link": "/product/harmony-sofa-h2479",
+      "swatch_image": "https://www.lazysuzy.com/westelm/westelm_images/201940_0110_img1l.jpg",
+      "price": "1599.2",
+      "was_price": "1999"
+    },
+    {
+      "product_sku": "harmony-sofa-h2479",
+      "variation_sku": "5064029",
+      "name": "Lagoon, Astor Velvet",
+      "features": {
+        "color": "Lagoon",
+        "shape": "Standard (41&quot;)",
+        "fabric": "Astor Velvet",
+        "delivery": "Made to Order (ships in 7+ weeks)"
+      },
+      "has_parent_sku": false,
+      "image": "https://www.lazysuzy.com/westelm/westelm_images/harmony-sofa-h2479-5064029_sku-img.jpg",
+      "link": "/product/harmony-sofa-h2479",
+      "swatch_image": "https://www.lazysuzy.com/westelm/westelm_images/201940_0112_img44l.jpg",
+      "price": "1519.2",
+      "was_price": "1899"
+    },
+    {
+      "product_sku": "harmony-sofa-h2479",
+      "variation_sku": "3630350",
+      "name": "Black Indigo, Twill",
+      "features": {
+        "color": "Black Indigo",
+        "shape": "Standard (41&quot;)",
+        "fabric": "Twill",
+        "delivery": "Made to Order (ships in 7+ weeks)"
+      },
+      "has_parent_sku": false,
+      "image": "https://www.lazysuzy.com/westelm/westelm_images/harmony-sofa-h2479-3630350_sku-img.jpg",
+      "link": "/product/harmony-sofa-h2479",
+      "swatch_image": "https://www.lazysuzy.com/westelm/westelm_images/201940_0117_img63l.jpg",
+      "price": "1359.2",
+      "was_price": "1699"
+    },
+    {
+      "product_sku": "harmony-sofa-h2479",
+      "variation_sku": "2706105",
+      "name": "Olive, Distressed Velvet",
+      "features": {
+        "color": "Olive",
+        "shape": "Standard (41&quot;)",
+        "fabric": "Distressed Velvet",
+        "delivery": "Made to Order (ships in 7+ weeks)"
+      },
+      "has_parent_sku": false,
+      "image": "https://www.lazysuzy.com/westelm/westelm_images/harmony-sofa-h2479-2706105_sku-img.jpg",
+      "link": "/product/harmony-sofa-h2479",
+      "swatch_image": "https://www.lazysuzy.com/westelm/westelm_images/201940_0119_img56l.jpg",
+      "price": "1439.2",
+      "was_price": "1799"
+    },
+    {
+      "product_sku": "harmony-sofa-h2479",
+      "variation_sku": "8433098",
+      "name": "Steel Blue, Astor Velvet",
+      "features": {
+        "color": "Steel Blue",
+        "shape": "Standard (41&quot;)",
+        "fabric": "Astor Velvet",
+        "delivery": "Made to Order (ships in 7+ weeks)"
+      },
+      "has_parent_sku": false,
+      "image": "https://www.lazysuzy.com/westelm/westelm_images/harmony-sofa-h2479-8433098_sku-img.jpg",
+      "link": "/product/harmony-sofa-h2479",
+      "swatch_image": "https://www.lazysuzy.com/westelm/westelm_images/201940_0128_img87l.jpg",
+      "price": "1519.2",
+      "was_price": "1899"
+    },
+    {
+      "product_sku": "harmony-sofa-h2479",
+      "variation_sku": "1898527",
+      "name": "Blue Stone, Linen Weave",
+      "features": {
+        "color": "Blue Stone",
+        "shape": "Extra Deep (47&quot;)",
+        "fabric": "Linen Weave",
+        "delivery": "Made to Order (ships in 7+ weeks)"
+      },
+      "has_parent_sku": false,
+      "image": "https://www.lazysuzy.com/westelm/westelm_images/harmony-sofa-h2479-1898527_sku-img.jpg",
+      "link": "/product/harmony-sofa-h2479",
+      "swatch_image": "https://www.lazysuzy.com/westelm/westelm_images/201940_0130_img12l.jpg",
+      "price": "1999",
+      "was_price": "1999"
+    },
+    {
+      "product_sku": "harmony-sofa-h2479",
+      "variation_sku": "6871008",
+      "name": "Pewter, Eco Weave",
+      "features": {
+        "color": "Pewter",
+        "shape": "Standard (41&quot;)",
+        "fabric": "Eco Weave",
+        "delivery": "In Stock (ships in 2 - 4 weeks)"
+      },
+      "has_parent_sku": false,
+      "image": "https://www.lazysuzy.com/westelm/westelm_images/harmony-sofa-h2479-6871008_sku-img.jpg",
+      "link": "/product/harmony-sofa-h2479",
+      "swatch_image": "https://www.lazysuzy.com/westelm/westelm_images/201940_0130_img47l.jpg",
+      "price": "1699",
+      "was_price": "1699"
+    },
+    {
+      "product_sku": "harmony-sofa-h2479",
+      "variation_sku": "8727461",
+      "name": "Oatmeal, Pebble Weave",
+      "features": {
+        "color": "Oatmeal",
+        "shape": "Extra Deep (47&quot;)",
+        "fabric": "Pebble Weave",
+        "delivery": "Made to Order (ships in 7+ weeks)"
+      },
+      "has_parent_sku": false,
+      "image": "https://www.lazysuzy.com/westelm/westelm_images/harmony-sofa-h2479-8727461_sku-img.jpg",
+      "link": "/product/harmony-sofa-h2479",
+      "swatch_image": "https://www.lazysuzy.com/westelm/westelm_images/201940_0132_img22l.jpg",
+      "price": "1599.2",
+      "was_price": "1999"
+    },
+    {
+      "product_sku": "harmony-sofa-h2479",
+      "variation_sku": "6657380",
+      "name": "Stone, Astor Velvet",
+      "features": {
+        "color": "Stone",
+        "shape": "Extra Deep (47&quot;)",
+        "fabric": "Astor Velvet",
+        "delivery": "Made to Order (ships in 7+ weeks)"
+      },
+      "has_parent_sku": false,
+      "image": "https://www.lazysuzy.com/westelm/westelm_images/harmony-sofa-h2479-6657380_sku-img.jpg",
+      "link": "/product/harmony-sofa-h2479",
+      "swatch_image": "https://www.lazysuzy.com/westelm/westelm_images/201940_0139_img17l.jpg",
+      "price": "1599.2",
+      "was_price": "1999"
+    },
+    {
+      "product_sku": "harmony-sofa-h2479",
+      "variation_sku": "2197525",
+      "name": "Light Taupe, Distressed Velvet",
+      "features": {
+        "color": "Light Taupe",
+        "shape": "Standard (41&quot;)",
+        "fabric": "Distressed Velvet",
+        "delivery": "In Stock (ships in 2 - 4 weeks)"
+      },
+      "has_parent_sku": false,
+      "image": "https://www.lazysuzy.com/westelm/westelm_images/harmony-sofa-h2479-2197525_sku-img.jpg",
+      "link": "/product/harmony-sofa-h2479",
+      "swatch_image": "https://www.lazysuzy.com/westelm/westelm_images/201940_0139_img70l.jpg",
+      "price": "1439.2",
+      "was_price": "1799"
+    },
+    {
+      "product_sku": "harmony-sofa-h2479",
+      "variation_sku": "8857586",
+      "name": "Natural, Yarn Dyed Linen Weave",
+      "features": {
+        "color": "Natural",
+        "shape": "Extra Deep (47&quot;)",
+        "fabric": "Yarn Dyed Linen Weave",
+        "delivery": "Made to Order (ships in 7+ weeks)"
+      },
+      "has_parent_sku": false,
+      "image": "https://www.lazysuzy.com/westelm/westelm_images/harmony-sofa-h2479-8857586_sku-img.jpg",
+      "link": "/product/harmony-sofa-h2479",
+      "swatch_image": "https://www.lazysuzy.com/westelm/westelm_images/201940_0141_img39l.jpg",
+      "price": "1519.2",
+      "was_price": "1899"
+    },
+    {
+      "product_sku": "harmony-sofa-h2479",
+      "variation_sku": "81027",
+      "name": "Regal Blue, Yarn Dyed Linen Weave",
+      "features": {
+        "color": "Regal Blue",
+        "shape": "Standard (41&quot;)",
+        "fabric": "Yarn Dyed Linen Weave",
+        "delivery": "Made to Order (ships in 7+ weeks)"
+      },
+      "has_parent_sku": false,
+      "image": "https://www.lazysuzy.com/westelm/westelm_images/harmony-sofa-h2479-81027_sku-img.jpg",
+      "link": "/product/harmony-sofa-h2479",
+      "swatch_image": "https://www.lazysuzy.com/westelm/westelm_images/201940_0143_img63l.jpg",
+      "price": "1439.2",
+      "was_price": "1799"
+    },
+    {
+      "product_sku": "harmony-sofa-h2479",
+      "variation_sku": "5150093",
+      "name": "Dusty Blush, Yarn Dyed Linen Weave",
+      "features": {
+        "color": "Dusty Blush",
+        "shape": "Standard (41&quot;)",
+        "fabric": "Yarn Dyed Linen Weave",
+        "delivery": "Made to Order (ships in 7+ weeks)"
+      },
+      "has_parent_sku": false,
+      "image": "https://www.lazysuzy.com/westelm/westelm_images/harmony-sofa-h2479-5150093_sku-img.jpg",
+      "link": "/product/harmony-sofa-h2479",
+      "swatch_image": "https://www.lazysuzy.com/westelm/westelm_images/201940_0143_img94l.jpg",
+      "price": "1439.2",
+      "was_price": "1799"
+    },
+    {
+      "product_sku": "harmony-sofa-h2479",
+      "variation_sku": "8564847",
+      "name": "Dusty Blush, Luster Velvet",
+      "features": {
+        "color": "Dusty Blush",
+        "shape": "Standard (41&quot;)",
+        "fabric": "Luster Velvet",
+        "delivery": "Made to Order (ships in 7+ weeks)"
+      },
+      "has_parent_sku": false,
+      "image": "https://www.lazysuzy.com/westelm/westelm_images/harmony-sofa-h2479-8564847_sku-img.jpg",
+      "link": "/product/harmony-sofa-h2479",
+      "swatch_image": "https://www.lazysuzy.com/westelm/westelm_images/201940_0144_img53l.jpg",
+      "price": "1519.2",
+      "was_price": "1899"
+    },
+    {
+      "product_sku": "harmony-sofa-h2479",
+      "variation_sku": "3340461",
+      "name": "Lagoon, Performance Velvet",
+      "features": {
+        "color": "Lagoon",
+        "shape": "Extra Deep (47&quot;)",
+        "fabric": "Performance Velvet",
+        "delivery": "Made to Order (ships in 7+ weeks)"
+      },
+      "has_parent_sku": false,
+      "image": "https://www.lazysuzy.com/westelm/westelm_images/harmony-sofa-h2479-3340461_sku-img.jpg",
+      "link": "/product/harmony-sofa-h2479",
+      "swatch_image": "https://www.lazysuzy.com/westelm/westelm_images/201940_0150_img20l.jpg",
+      "price": "1439.2",
+      "was_price": "1799"
+    },
+    {
+      "product_sku": "harmony-sofa-h2479",
+      "variation_sku": "5745102",
+      "name": "Sapphire, Basket Slub",
+      "features": {
+        "color": "Sapphire",
+        "shape": "Standard (41&quot;)",
+        "fabric": "Basket Slub",
+        "delivery": "Made to Order (ships in 7+ weeks)"
+      },
+      "has_parent_sku": false,
+      "image": "https://www.lazysuzy.com/westelm/westelm_images/harmony-sofa-h2479-5745102_sku-img.jpg",
+      "link": "/product/harmony-sofa-h2479",
+      "swatch_image": "https://www.lazysuzy.com/westelm/westelm_images/201940_0150_img70l.jpg",
+      "price": "1999",
+      "was_price": "1999"
+    },
+    {
+      "product_sku": "harmony-sofa-h2479",
+      "variation_sku": "1155397",
+      "name": "Steel Gray, Yarn Dyed Linen Weave",
+      "features": {
+        "color": "Steel Gray",
+        "shape": "Extra Deep (47&quot;)",
+        "fabric": "Yarn Dyed Linen Weave",
+        "delivery": "Made to Order (ships in 7+ weeks)"
+      },
+      "has_parent_sku": false,
+      "image": "https://www.lazysuzy.com/westelm/westelm_images/harmony-sofa-h2479-1155397_sku-img.jpg",
+      "link": "/product/harmony-sofa-h2479",
+      "swatch_image": "https://www.lazysuzy.com/westelm/westelm_images/201940_0151_img31l.jpg",
+      "price": "1519.2",
+      "was_price": "1899"
+    },
+    {
+      "product_sku": "harmony-sofa-h2479",
+      "variation_sku": "8044102",
+      "name": "Rust, Astor Velvet",
+      "features": {
+        "color": "Rust",
+        "shape": "Extra Deep (47&quot;)",
+        "fabric": "Astor Velvet",
+        "delivery": "Made to Order (ships in 7+ weeks)"
+      },
+      "has_parent_sku": false,
+      "image": "https://www.lazysuzy.com/westelm/westelm_images/harmony-sofa-h2479-8044102_sku-img.jpg",
+      "link": "/product/harmony-sofa-h2479",
+      "swatch_image": "https://www.lazysuzy.com/westelm/westelm_images/201940_0157_img35l.jpg",
+      "price": "1599.2",
+      "was_price": "1999"
+    },
+    {
+      "product_sku": "harmony-sofa-h2479",
+      "variation_sku": "3950010",
+      "name": "Frost Gray, Yarn Dyed Linen Weave",
+      "features": {
+        "color": "Frost Gray",
+        "shape": "Standard (41&quot;)",
+        "fabric": "Yarn Dyed Linen Weave",
+        "delivery": "Made to Order (ships in 7+ weeks)"
+      },
+      "has_parent_sku": false,
+      "image": "https://www.lazysuzy.com/westelm/westelm_images/harmony-sofa-h2479-3950010_sku-img.jpg",
+      "link": "/product/harmony-sofa-h2479",
+      "swatch_image": "https://www.lazysuzy.com/westelm/westelm_images/201940_0157_img88l.jpg",
+      "price": "1799",
+      "was_price": "1799"
+    },
+    {
+      "product_sku": "harmony-sofa-h2479",
+      "variation_sku": "9043936",
+      "name": "Chili, Boucle",
+      "features": {
+        "color": "Chili",
+        "shape": "Standard (41&quot;)",
+        "fabric": "Boucle",
+        "delivery": "Made to Order (ships in 7+ weeks)"
+      },
+      "has_parent_sku": false,
+      "image": "https://www.lazysuzy.com/westelm/westelm_images/harmony-sofa-h2479-9043936_sku-img.jpg",
+      "link": "/product/harmony-sofa-h2479",
+      "swatch_image": "https://www.lazysuzy.com/westelm/westelm_images/201940_0158_img36l.jpg",
+      "price": "1799",
+      "was_price": "1799"
+    },
+    {
+      "product_sku": "harmony-sofa-h2479",
+      "variation_sku": "8407162",
+      "name": "Olive, Distressed Velvet",
+      "features": {
+        "color": "Olive",
+        "shape": "Extra Deep (47&quot;)",
+        "fabric": "Distressed Velvet",
+        "delivery": "Made to Order (ships in 7+ weeks)"
+      },
+      "has_parent_sku": false,
+      "image": "https://www.lazysuzy.com/westelm/westelm_images/harmony-sofa-h2479-8407162_sku-img.jpg",
+      "link": "/product/harmony-sofa-h2479",
+      "swatch_image": "https://www.lazysuzy.com/westelm/westelm_images/201940_0160_img12l.jpg",
+      "price": "1519.2",
+      "was_price": "1899"
+    },
+    {
+      "product_sku": "harmony-sofa-h2479",
+      "variation_sku": "1391026",
+      "name": "Natural, Performance Washed Canvas",
+      "features": {
+        "color": "Natural",
+        "shape": "Standard (41&quot;)",
+        "fabric": "Performance Washed Canvas",
+        "delivery": "Made to Order (ships in 7+ weeks)"
+      },
+      "has_parent_sku": false,
+      "image": "https://www.lazysuzy.com/westelm/westelm_images/harmony-sofa-h2479-1391026_sku-img.jpg",
+      "link": "/product/harmony-sofa-h2479",
+      "swatch_image": "https://www.lazysuzy.com/westelm/westelm_images/201940_0160_img96l.jpg",
+      "price": "1519.2",
+      "was_price": "1899"
+    },
+    {
+      "product_sku": "harmony-sofa-h2479",
+      "variation_sku": "2940667",
+      "name": "Dove Gray, Performance Velvet",
+      "features": {
+        "color": "Dove Gray",
+        "shape": "Standard (41&quot;)",
+        "fabric": "Performance Velvet",
+        "delivery": "Made to Order (ships in 5 - 7 weeks)"
+      },
+      "has_parent_sku": false,
+      "image": "https://www.lazysuzy.com/westelm/westelm_images/harmony-sofa-h2479-2940667_sku-img.jpg",
+      "link": "/product/harmony-sofa-h2479",
+      "swatch_image": "https://www.lazysuzy.com/westelm/westelm_images/201940_0162_img96l.jpg",
+      "price": "1359.2",
+      "was_price": "1699"
+    },
+    {
+      "product_sku": "harmony-sofa-h2479",
+      "variation_sku": "5901268",
+      "name": "Feather Gray, Performance Washed Canvas",
+      "features": {
+        "color": "Feather Gray",
+        "shape": "Extra Deep (47&quot;)",
+        "fabric": "Performance Washed Canvas",
+        "delivery": "Made to Order (ships in 7+ weeks)"
+      },
+      "has_parent_sku": false,
+      "image": "https://www.lazysuzy.com/westelm/westelm_images/harmony-sofa-h2479-5901268_sku-img.jpg",
+      "link": "/product/harmony-sofa-h2479",
+      "swatch_image": "https://www.lazysuzy.com/westelm/westelm_images/201941_0124_img30l.jpg",
+      "price": "1599.2",
+      "was_price": "1999"
+    },
+    {
+      "product_sku": "harmony-sofa-h2479",
+      "variation_sku": "5301449",
+      "name": "Mineral Gray, Distressed Velvet",
+      "features": {
+        "color": "Mineral Gray",
+        "shape": "Extra Deep (47&quot;)",
+        "fabric": "Distressed Velvet",
+        "delivery": "Made to Order (ships in 5 - 7 weeks)"
+      },
+      "has_parent_sku": false,
+      "image": "https://www.lazysuzy.com/westelm/westelm_images/harmony-sofa-h2479-5301449_sku-img.jpg",
+      "link": "/product/harmony-sofa-h2479",
+      "swatch_image": "https://www.lazysuzy.com/westelm/westelm_images/201947_0003_img1l.jpg",
+      "price": "1519.2",
+      "was_price": "1899"
+    },
+    {
+      "product_sku": "harmony-sofa-h2479",
+      "variation_sku": "8799213",
+      "name": "Angora Beige, Luxe Boucle",
+      "features": {
+        "color": "Angora Beige",
+        "shape": "Standard (41&quot;)",
+        "fabric": "Luxe Boucle",
+        "delivery": "Made to Order (ships in 7+ weeks)"
+      },
+      "has_parent_sku": false,
+      "image": "https://www.lazysuzy.com/westelm/westelm_images/harmony-sofa-h2479-8799213_sku-img.jpg",
+      "link": "/product/harmony-sofa-h2479",
+      "swatch_image": "https://www.lazysuzy.com/westelm/westelm_images/201949_0003_img20l.jpg",
+      "price": "1439.2",
+      "was_price": "1799"
+    },
+    {
+      "product_sku": "harmony-sofa-h2479",
+      "variation_sku": "5246628",
+      "name": "Shelter Blue, Performance Yarn Dyed Linen Weave",
+      "features": {
+        "color": "Shelter Blue",
+        "shape": "Standard (41&quot;)",
+        "fabric": "Performance Yarn Dyed Linen Weave",
+        "delivery": "Made to Order (ships in 7+ weeks)"
+      },
+      "has_parent_sku": false,
+      "image": "https://www.lazysuzy.com/westelm/westelm_images/harmony-sofa-h2479-5246628_sku-img.jpg",
+      "link": "/product/harmony-sofa-h2479",
+      "swatch_image": "https://www.lazysuzy.com/westelm/westelm_images/201949_0004_img11l.jpg",
+      "price": "1519.2",
+      "was_price": "1899"
+    },
+    {
+      "product_sku": "harmony-sofa-h2479",
+      "variation_sku": "3272891",
+      "name": "Pewter Gray, Performance Basket Slub",
+      "features": {
+        "color": "Pewter Gray",
+        "shape": "Standard (41&quot;)",
+        "fabric": "Performance Basket Slub",
+        "delivery": "Made to Order (ships in 7+ weeks)"
+      },
+      "has_parent_sku": false,
+      "image": "https://www.lazysuzy.com/westelm/westelm_images/harmony-sofa-h2479-3272891_sku-img.jpg",
+      "link": "/product/harmony-sofa-h2479",
+      "swatch_image": "https://www.lazysuzy.com/westelm/westelm_images/201949_0004_img55l.jpg",
+      "price": "1519.2",
+      "was_price": "1899"
+    },
+    {
+      "product_sku": "harmony-sofa-h2479",
+      "variation_sku": "7439892",
+      "name": "Frost Gray, Performance Yarn Dyed Linen Weave",
+      "features": {
+        "color": "Frost Gray",
+        "shape": "Extra Deep (47&quot;)",
+        "fabric": "Performance Yarn Dyed Linen Weave",
+        "delivery": "Made to Order (ships in 7+ weeks)"
+      },
+      "has_parent_sku": false,
+      "image": "https://www.lazysuzy.com/westelm/westelm_images/harmony-sofa-h2479-7439892_sku-img.jpg",
+      "link": "/product/harmony-sofa-h2479",
+      "swatch_image": "https://www.lazysuzy.com/westelm/westelm_images/201949_0004_img60l.jpg",
+      "price": "1599.2",
+      "was_price": "1999"
+    },
+    {
+      "product_sku": "harmony-sofa-h2479",
+      "variation_sku": "3488326",
+      "name": "Stone White, Performance Yarn Dyed Linen Weave",
+      "features": {
+        "color": "Stone White",
+        "shape": "Standard (41&quot;)",
+        "fabric": "Performance Yarn Dyed Linen Weave",
+        "delivery": "Made to Order (ships in 7+ weeks)"
+      },
+      "has_parent_sku": false,
+      "image": "https://www.lazysuzy.com/westelm/westelm_images/harmony-sofa-h2479-3488326_sku-img.jpg",
+      "link": "/product/harmony-sofa-h2479",
+      "swatch_image": "https://www.lazysuzy.com/westelm/westelm_images/201949_0004_img67l.jpg",
+      "price": "1519.2",
+      "was_price": "1899"
+    },
+    {
+      "product_sku": "harmony-sofa-h2479",
+      "variation_sku": "7009889",
+      "name": "Indigo, Performance Yarn Dyed Linen Weave",
+      "features": {
+        "color": "Indigo",
+        "shape": "Extra Deep (47&quot;)",
+        "fabric": "Performance Yarn Dyed Linen Weave",
+        "delivery": "Made to Order (ships in 7+ weeks)"
+      },
+      "has_parent_sku": false,
+      "image": "https://www.lazysuzy.com/westelm/westelm_images/harmony-sofa-h2479-7009889_sku-img.jpg",
+      "link": "/product/harmony-sofa-h2479",
+      "swatch_image": "https://www.lazysuzy.com/westelm/westelm_images/201949_0004_img70l.jpg",
+      "price": "1599.2",
+      "was_price": "1999"
+    },
+    {
+      "product_sku": "harmony-sofa-h2479",
+      "variation_sku": "6536513",
+      "name": "Silver Gray, Chenille Tweed",
+      "features": {
+        "color": "Silver Gray",
+        "shape": "Extra Deep (47&quot;)",
+        "fabric": "Chenille Tweed",
+        "delivery": "Made to Order (ships in 7+ weeks)"
+      },
+      "has_parent_sku": false,
+      "image": "https://www.lazysuzy.com/westelm/westelm_images/harmony-sofa-h2479-6536513_sku-img.jpg",
+      "link": "/product/harmony-sofa-h2479",
+      "swatch_image": "https://www.lazysuzy.com/westelm/westelm_images/201949_0005_img23l.jpg",
+      "price": "1519.2",
+      "was_price": "1899"
+    },
+    {
+      "product_sku": "harmony-sofa-h2479",
+      "variation_sku": "8652959",
+      "name": "Black + White, Luxe Boucle",
+      "features": {
+        "color": "Black + White",
+        "shape": "Extra Deep (47&quot;)",
+        "fabric": "Luxe Boucle",
+        "delivery": "Made to Order (ships in 7+ weeks)"
+      },
+      "has_parent_sku": false,
+      "image": "https://www.lazysuzy.com/westelm/westelm_images/harmony-sofa-h2479-8652959_sku-img.jpg",
+      "link": "/product/harmony-sofa-h2479",
+      "swatch_image": "https://www.lazysuzy.com/westelm/westelm_images/201949_0005_img26l.jpg",
+      "price": "1519.2",
+      "was_price": "1899"
+    },
+    {
+      "product_sku": "harmony-sofa-h2479",
+      "variation_sku": "5196249",
+      "name": "Stone White, Luxe Boucle",
+      "features": {
+        "color": "Stone White",
+        "shape": "Standard (41&quot;)",
+        "fabric": "Luxe Boucle",
+        "delivery": "Made to Order (ships in 7+ weeks)"
+      },
+      "has_parent_sku": false,
+      "image": "https://www.lazysuzy.com/westelm/westelm_images/harmony-sofa-h2479-5196249_sku-img.jpg",
+      "link": "/product/harmony-sofa-h2479",
+      "swatch_image": "https://www.lazysuzy.com/westelm/westelm_images/201949_0005_img4l.jpg",
+      "price": "1439.2",
+      "was_price": "1799"
+    },
+    {
+      "product_sku": "harmony-sofa-h2479",
+      "variation_sku": "8533646",
+      "name": "Irongate, Chenille Tweed",
+      "features": {
+        "color": "Irongate",
+        "shape": "Extra Deep (47&quot;)",
+        "fabric": "Chenille Tweed",
+        "delivery": "Made to Order (ships in 7+ weeks)"
+      },
+      "has_parent_sku": false,
+      "image": "https://www.lazysuzy.com/westelm/westelm_images/harmony-sofa-h2479-8533646_sku-img.jpg",
+      "link": "/product/harmony-sofa-h2479",
+      "swatch_image": "https://www.lazysuzy.com/westelm/westelm_images/201949_0005_img7l.jpg",
+      "price": "1519.2",
+      "was_price": "1899"
+    },
+    {
+      "product_sku": "harmony-sofa-h2479",
+      "variation_sku": "5826828",
+      "name": "Pink Grapefruit, Astor Velvet",
+      "features": {
+        "color": "Pink Grapefruit",
+        "shape": "Standard (41&quot;)",
+        "fabric": "Astor Velvet",
+        "delivery": "Made to Order (ships in 7+ weeks)"
+      },
+      "has_parent_sku": false,
+      "image": "https://www.lazysuzy.com/westelm/westelm_images/harmony-sofa-h2479-5826828_sku-img.jpg",
+      "link": "/product/harmony-sofa-h2479",
+      "swatch_image": "https://www.lazysuzy.com/westelm/westelm_images/201950_0003_img79l.jpg",
+      "price": "1519.2",
+      "was_price": "1899"
+    },
+    {
+      "product_sku": "harmony-sofa-h2479",
+      "variation_sku": "9601122",
+      "name": "Pewter, Chenille Tweed",
+      "features": {
+        "color": "Pewter",
+        "shape": "Extra Deep (47&quot;)",
+        "fabric": "Chenille Tweed",
+        "delivery": "Made to Order (ships in 7+ weeks)"
+      },
+      "has_parent_sku": false,
+      "image": "https://www.lazysuzy.com/westelm/westelm_images/harmony-sofa-h2479-9601122_sku-img.jpg",
+      "link": "/product/harmony-sofa-h2479",
+      "swatch_image": "https://www.lazysuzy.com/westelm/westelm_images/201951_0005_img31l.jpg",
+      "price": "1519.2",
+      "was_price": "1899"
+    },
+    {
+      "product_sku": "harmony-sofa-h2479",
+      "variation_sku": "9969832",
+      "name": "Saffron, Astor Velvet",
+      "features": {
+        "color": "Saffron",
+        "shape": "Standard (41&quot;)",
+        "fabric": "Astor Velvet",
+        "delivery": "Made to Order (ships in 7+ weeks)"
+      },
+      "has_parent_sku": false,
+      "image": "https://www.lazysuzy.com/westelm/westelm_images/harmony-sofa-h2479-9969832_sku-img.jpg",
+      "link": "/product/harmony-sofa-h2479",
+      "swatch_image": "https://www.lazysuzy.com/westelm/westelm_images/201951_0018_img2l.jpg",
+      "price": "1519.2",
+      "was_price": "1899"
+    },
+    {
+      "product_sku": "harmony-sofa-h2479",
+      "variation_sku": "2019203",
+      "name": "Oatmeal, Performance Coastal Linen",
+      "features": {
+        "color": "Oatmeal",
+        "shape": "Extra Deep (47&quot;)",
+        "fabric": "Performance Coastal Linen",
+        "delivery": "Made to Order (ships in 7+ weeks)"
+      },
+      "has_parent_sku": false,
+      "image": "https://www.lazysuzy.com/westelm/westelm_images/harmony-sofa-h2479-2019203_sku-img.jpg",
+      "link": "/product/harmony-sofa-h2479",
+      "swatch_image": "https://www.lazysuzy.com/westelm/westelm_images/201951_0018_img30l.jpg",
+      "price": "1679.2",
+      "was_price": "2099"
+    },
+    {
+      "product_sku": "harmony-sofa-h2479",
+      "variation_sku": "6535054",
+      "name": "Black Indigo, Performance Twill",
+      "features": {
+        "color": "Black Indigo",
+        "shape": "Extra Deep (47&quot;)",
+        "fabric": "Performance Twill",
+        "delivery": "Made to Order (ships in 7+ weeks)"
+      },
+      "has_parent_sku": false,
+      "image": "https://www.lazysuzy.com/westelm/westelm_images/harmony-sofa-h2479-6535054_sku-img.jpg",
+      "link": "/product/harmony-sofa-h2479",
+      "swatch_image": "https://www.lazysuzy.com/westelm/westelm_images/201952_0002_img6l.jpg",
+      "price": "1599.2",
+      "was_price": "1999"
+    },
+    {
+      "product_sku": "harmony-sofa-h2479",
+      "variation_sku": "5019543",
+      "name": "Granite, Performance Twill",
+      "features": {
+        "color": "Granite",
+        "shape": "Extra Deep (47&quot;)",
+        "fabric": "Performance Twill",
+        "delivery": "Made to Order (ships in 7+ weeks)"
+      },
+      "has_parent_sku": false,
+      "image": "https://www.lazysuzy.com/westelm/westelm_images/harmony-sofa-h2479-5019543_sku-img.jpg",
+      "link": "/product/harmony-sofa-h2479",
+      "swatch_image": "https://www.lazysuzy.com/westelm/westelm_images/201952_0003_img27l.jpg",
+      "price": "1599.2",
+      "was_price": "1999"
+    },
+    {
+      "product_sku": "harmony-sofa-h2479",
+      "variation_sku": "3751353",
+      "name": "Midnight, Performance Basket Slub",
+      "features": {
+        "color": "Midnight",
+        "shape": "Extra Deep (47&quot;)",
+        "fabric": "Performance Basket Slub",
+        "delivery": "Made to Order (ships in 7+ weeks)"
+      },
+      "has_parent_sku": false,
+      "image": "https://www.lazysuzy.com/westelm/westelm_images/harmony-sofa-h2479-3751353_sku-img.jpg",
+      "link": "/product/harmony-sofa-h2479",
+      "swatch_image": "https://www.lazysuzy.com/westelm/westelm_images/201952_0003_img29l.jpg",
+      "price": "1599.2",
+      "was_price": "1999"
+    },
+    {
+      "product_sku": "harmony-sofa-h2479",
+      "variation_sku": "978179",
+      "name": "Teal, Performance Twill",
+      "features": {
+        "color": "Teal",
+        "shape": "Standard (41&quot;)",
+        "fabric": "Performance Twill",
+        "delivery": "Made to Order (ships in 7+ weeks)"
+      },
+      "has_parent_sku": false,
+      "image": "https://www.lazysuzy.com/westelm/westelm_images/harmony-sofa-h2479-978179_sku-img.jpg",
+      "link": "/product/harmony-sofa-h2479",
+      "swatch_image": "https://www.lazysuzy.com/westelm/westelm_images/201952_0003_img42l.jpg",
+      "price": "1439.2",
+      "was_price": "1799"
+    },
+    {
+      "product_sku": "harmony-sofa-h2479",
+      "variation_sku": "5132333",
+      "name": "Feather Gray, Performance Basket Slub",
+      "features": {
+        "color": "Feather Gray",
+        "shape": "Standard (41&quot;)",
+        "fabric": "Performance Basket Slub",
+        "delivery": "Made to Order (ships in 7+ weeks)"
+      },
+      "has_parent_sku": false,
+      "image": "https://www.lazysuzy.com/westelm/westelm_images/harmony-sofa-h2479-5132333_sku-img.jpg",
+      "link": "/product/harmony-sofa-h2479",
+      "swatch_image": "https://www.lazysuzy.com/westelm/westelm_images/201952_0003_img43l.jpg",
+      "price": "1519.2",
+      "was_price": "1899"
+    },
+    {
+      "product_sku": "harmony-sofa-h2479",
+      "variation_sku": "645054",
+      "name": "Dark Horseradish, Performance Basket Slub",
+      "features": {
+        "color": "Dark Horseradish",
+        "shape": "Standard (41&quot;)",
+        "fabric": "Performance Basket Slub",
+        "delivery": "Made to Order (ships in 7+ weeks)"
+      },
+      "has_parent_sku": false,
+      "image": "https://www.lazysuzy.com/westelm/westelm_images/harmony-sofa-h2479-645054_sku-img.jpg",
+      "link": "/product/harmony-sofa-h2479",
+      "swatch_image": "https://www.lazysuzy.com/westelm/westelm_images/201952_0003_img46l.jpg",
+      "price": "1519.2",
+      "was_price": "1899"
+    },
+    {
+      "product_sku": "harmony-sofa-h2479",
+      "variation_sku": "4900662",
+      "name": "Stone, Performance Twill",
+      "features": {
+        "color": "Stone",
+        "shape": "Standard (41&quot;)",
+        "fabric": "Performance Twill",
+        "delivery": "Made to Order (ships in 7+ weeks)"
+      },
+      "has_parent_sku": false,
+      "image": "https://www.lazysuzy.com/westelm/westelm_images/harmony-sofa-h2479-4900662_sku-img.jpg",
+      "link": "/product/harmony-sofa-h2479",
+      "swatch_image": "https://www.lazysuzy.com/westelm/westelm_images/201952_0003_img77l.jpg",
+      "price": "1519.2",
+      "was_price": "1899"
+    },
+    {
+      "product_sku": "harmony-sofa-h2479",
+      "variation_sku": "1376285",
+      "name": "Pebble Stone, Performance Coastal Linen",
+      "features": {
+        "color": "Pebble Stone",
+        "shape": "Standard (41&quot;)",
+        "fabric": "Performance Coastal Linen",
+        "delivery": "Made to Order (ships in 7+ weeks)"
+      },
+      "has_parent_sku": false,
+      "image": "https://www.lazysuzy.com/westelm/westelm_images/harmony-sofa-h2479-1376285_sku-img.jpg",
+      "link": "/product/harmony-sofa-h2479",
+      "swatch_image": "https://www.lazysuzy.com/westelm/westelm_images/202001_0009_img49l.jpg",
+      "price": "1599.2",
+      "was_price": "1999"
+    },
+    {
+      "product_sku": "harmony-sofa-h2479",
+      "variation_sku": "841344",
+      "name": "Platinum, Linen Weave",
+      "features": {
+        "color": "Platinum",
+        "shape": "Standard (41&quot;)",
+        "fabric": "Linen Weave",
+        "delivery": "Made to Order (ships in 7+ weeks)"
+      },
+      "has_parent_sku": false,
+      "image": "https://www.lazysuzy.com/westelm/westelm_images/harmony-sofa-h2479-841344_sku-img.jpg",
+      "link": "/product/harmony-sofa-h2479",
+      "swatch_image": "https://www.lazysuzy.com/westelm/westelm_images/202007_0005_img4l.jpg",
+      "price": "1799",
+      "was_price": "1799"
+    },
+    {
+      "product_sku": "harmony-sofa-h2479",
+      "variation_sku": "7500985",
+      "name": "Stone, Chunky Basketweave",
+      "features": {
+        "color": "Stone",
+        "shape": "Extra Deep (47&quot;)",
+        "fabric": "Chunky Basketweave",
+        "delivery": "Made to Order (ships in 7+ weeks)"
+      },
+      "has_parent_sku": false,
+      "image": "https://www.lazysuzy.com/westelm/westelm_images/harmony-sofa-h2479-7500985_sku-img.jpg",
+      "link": "/product/harmony-sofa-h2479",
+      "swatch_image": "https://www.lazysuzy.com/westelm/westelm_images/202008_0006_img77l.jpg",
+      "price": "1519.2",
+      "was_price": "1899"
+    }
+  ],
+  "description": [
+    "Harmony is our most comfortable sofa ever, thanks to its deep seat, plush cushions and go-anywhere lumbar and throw pillows. Made for sprawling out or curling up, its low, clean-lined frame has reinforced joinery and comes in your choice of depth: standard or extra deep."
+  ],
+  "dimension": [],
+  "thumb": [
+    "https://www.westelm.com/weimgs/ab/images/wcm/products/201940/0725/img68o.jpg",
+    "https://www.westelm.com/weimgs/ab/images/i/202003/0074/images/pip/hero-placeholder-white.png",
+    "https://www.westelm.com/weimgs/ab/images/i/202003/0074/images/pip/hero-placeholder.png",
+    "https://www.westelm.com/weimgs/ab/images/wcm/products/201945/0001/harmony-down-filled-sofa-82-1-o.jpg",
+    "https://www.westelm.com/weimgs/ab/images/wcm/products/201940/0484/harmony-down-filled-sofa-82-o.jpg"
+  ],
+  "features": [
+    "** Choose your sofa depth: Standard (41\") or Extra Deep (47\").",
+    "*   Engineered hardwood frame with slot + tenon joinery.",
+    "*   Solid wood legs in a Dark Walnut finish (removable).",
+    "*   All wood is kiln-dried to prevent warping. ",
+    "*   High-gauge sinuous springs provide cushion support. ",
+    "*   Seat cushions have fiber-wrapped, high-resiliency polyurethane foam cores.",
+    "*   Back cushions are 50% polyester fiber, 45% duck feather and 5% duck down in down-proof ticking.",
+    "*   Reversible cushions (Astor Velvet excluded) with zip-off covers.",
+    "*   Loose lumbar and throw pillows (included).",
+    "*   Make sure it fits! See our guide on <a href='http://www.westelm.com/shop/design-lab/measuring-delivery-design-lab'> measuring for delivery </a> .",
+    "*   Assembled in the USA.",
+    " show more"
+  ],
+  "on_server_images": [
+    "https://www.lazysuzy.com/westelm/westelm_images/harmony-sofa-h2479_1.jpg",
+    "https://www.lazysuzy.com/westelm/westelm_images/harmony-sofa-h2479_4.jpg",
+    "https://www.lazysuzy.com/westelm/westelm_images/harmony-sofa-h2479_5.jpg"
+  ],
+  "department_info": [
+    {
+      "department_name": "Living",
+      "department_url": "/products/living",
+      "category_name": "Sofas",
+      "category_url": "/products/living/sofa",
+      "sub_category_name": "",
+      "sub_category_url": "/products/living/sofa/"
+    }
+  ]
+}

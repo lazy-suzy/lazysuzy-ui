@@ -37,7 +37,7 @@ export class ProductComponent implements OnInit {
     const dialogRef = this.dialog.open(ProductDetailsComponent, {
       width: '80%',
       height: '80%',
-      data: { product: this.product },
+      data: { sku: this.product.sku },
     });
 
     dialogRef.afterClosed().subscribe(result => {
