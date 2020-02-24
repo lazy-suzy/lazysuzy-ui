@@ -12,14 +12,16 @@ export class ApiService {
   getProducts(
     department: string,
     category: string,
+    filters = '',
     page = 0
   ): Observable<IProductsPayload> {
-    const filters = '';
     const sortTypes = '';
     const endpoint = `products/${department}/${category}`;
     const url = env.useLocalJson
       ? `${env.JSON_BASE_HREF}${endpoint}`
       : `${env.API_BASE_HREF}${endpoint}?filters=${filters}&sort_type=${sortTypes}&pageno=${page}`;
+    console.log(url);
+
     return this.httpService.get(url);
   }
 
