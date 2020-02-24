@@ -1,0 +1,52 @@
+<ng-container *ngIf="product">
+    <div class="flex w-100 justify-between items-end mb2">
+        <div class="flex items-end">
+            <p class="f4 mr4 mb0 b">{{ product.site }}</p>
+            <p class="f4 mb0">{{ product.name }}</p>
+        </div>
+        <button mat-raised-button class="bg-red"><a [href]="product.product_url" class="no-underline yellow">View
+                Details</a></button>
+    </div>
+    <div class="flex mb3">
+        <div class="flex overflow-scroll h-50">
+            <img *ngFor="let image of product.thumb" [src]="image" class="w5 br2 mh2">
+        </div>
+    </div>
+
+    <div class="flex mb2">
+        <span class="dark-red mr3">${{ product.is_price }}</span>
+        <span class="strike">${{ product.was_price }}</span>
+    </div>
+
+    <div class="mb2">
+        <span class="b">More Options</span>
+        <div class="mt1">
+            <img *ngFor="let variation of product.variations" [src]="variation.swatch_image" [alt]="variation.name"
+                class="w2 mr1">
+        </div>
+    </div>
+
+    <div class="mb2">
+        <span class="b">Overview</span>
+        <div class="mt1" [innerHTML]="product.description"></div>
+    </div>
+
+    <div *ngIf="product.features?.length" class="mb2">
+        <span class="b">Feature</span>
+        <div *ngFor="let feature of product.features" class="mt1">
+            <div [innerHTML]="feature"></div>
+        </div>
+    </div>
+
+    <div *ngIf="product.dimension?.length" class="mb2">
+        <span class="b">Dimension</span>
+        <div class="mt1 list">
+            <div *ngFor="let dimension of product.dimension" class="flex flex-column">
+                <span>{{ dimension.description }}</span>
+                <span>Width: {{ dimension.width }}</span>
+                <span>Depth: {{ dimension.depth }}</span>
+                <span>Height: {{ dimension.height }}</span>
+            </div>
+        </div>
+    </div>
+</ng-container>

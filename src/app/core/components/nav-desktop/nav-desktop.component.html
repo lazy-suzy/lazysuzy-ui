@@ -16,7 +16,7 @@
         </div>
     </mat-toolbar-row>
     <mat-toolbar-row class="flex justify-around w-75">
-        <ng-container *ngFor="let department of departments; let i = index">
+        <ng-container *ngFor="let department of departments">
             <span class="grow pointer ph2 f5"
                 [matMenuTriggerFor]="departmentMenu">{{ department.display | titlecase }}</span>
             <mat-menu #departmentMenu="matMenu">
