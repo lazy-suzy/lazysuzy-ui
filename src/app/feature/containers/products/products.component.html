@@ -1,3 +1,6 @@
-<div class="flex flex-wrap justify-center ph3">
-    <app-product *ngFor="let product of products" [product]="product" class="w-20-ns ma3"></app-product>
+<div class="flex flex-column">
+    <app-product-filters (setFilters)="onSetFilters($event)"></app-product-filters>
+    <div class="flex flex-wrap justify-between ph4-ns">
+        <app-product *ngFor="let product of products" [product]="product" class="w-20-ns ma3"></app-product>
+    </div>
 </div>
