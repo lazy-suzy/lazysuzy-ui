@@ -1,11 +1,11 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
-import { ProductModule } from './../../components';
+import { ProductFiltersModule, ProductModule } from './../../components';
 import { ProductsComponent } from './products.component';
 
 const DECLARATIONS = [ProductsComponent];
 
-const MODULES = [CommonModule, ProductModule];
+const MODULES = [CommonModule, ProductModule, ProductFiltersModule];
 
 @NgModule({
   declarations: [...DECLARATIONS],

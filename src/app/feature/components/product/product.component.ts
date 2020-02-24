@@ -1,6 +1,7 @@
-import { MOCK_PRODUCT } from './../../../mocks';
+import { ProductDetailsComponent } from './../product-details/product-details.component';
 import { IProductPayload } from './../../../shared/models';
 import { Component, OnInit, Input } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
 
 @Component({
   selector: 'app-product',
@@ -10,6 +11,8 @@ import { Component, OnInit, Input } from '@angular/core';
 export class ProductComponent implements OnInit {
   @Input() product: IProductPayload;
   starIcons: string[] = new Array();
+
+  constructor(public dialog: MatDialog) {}
 
   ngOnInit(): void {
     this.setRating();
@@ -28,5 +31,17 @@ export class ProductComponent implements OnInit {
         this.starIcons.push('star_outline');
       }
     }
+  }
+
+  openDialog(): void {
+    const dialogRef = this.dialog.open(ProductDetailsComponent, {
+      width: '80%',
+      height: '80%',
+      data: { sku: this.product.sku },
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      // console.log('The dialog was closed');
+    });
   }
 }

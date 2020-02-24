@@ -9,6 +9,7 @@ const MODULES = [CommonModule, MatIconModule];
 
 @NgModule({
   declarations: [...DECLARATIONS],
-  imports: [...MODULES]
+  imports: [...MODULES],
+  exports: [...DECLARATIONS, ...MODULES]
 })
 export class SearchProductModule {}

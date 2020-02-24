@@ -51,35 +51,35 @@ export const MOCK_DEPARTMENTS: IDepartment[] = [
     categories: [
       {
         display: 'beds',
-        route: '/products/beds',
+        route: '/products/bedroom/beds',
       },
       {
         display: 'headboard',
-        route: '/products/headboard',
+        route: '/products/bedroom/headboard',
       },
       {
         display: 'mattresses',
-        route: '/products/mattresses',
+        route: '/products/bedroom/mattresses',
       },
       {
         display: 'storage',
-        route: '/products/storage',
+        route: '/products/bedroom/storage',
       },
       {
         display: 'nightstands',
-        route: '/products/nightstands',
+        route: '/products/bedroom/nightstands',
       },
       {
         display: 'benches',
-        route: '/products/benches',
+        route: '/products/bedroom/benches',
       },
       {
         display: 'ottomans & Stools',
-        route: '/products/ottomans-stools',
+        route: '/products/bedroom/ottomans-stools',
       },
       {
         display: 'vanity',
-        route: '/products/vanity',
+        route: '/products/bedroom/vanity',
       },
     ],
   },

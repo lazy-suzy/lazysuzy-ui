@@ -17,17 +17,18 @@ export class SearchProductComponent implements OnInit {
   }
 
   setRating(): void {
-    // let starCount: number = Math.round(this.product.rating * 2) / 2;
-    // while (starCount > 0.5) {
-    //   this.starIcons.push('star');
-    //   starCount -= 1;
-    // }
-    // if (starCount && this.starIcons.length < 5) {
-    //   this.starIcons.push('star_half');
-    // } else if (this.starIcons.length < 5) {
-    //   while (this.starIcons.length < 5) {
-    //     this.starIcons.push('star_outline');
-    //   }
-    // }
+    console.log(this.product);
+    let starCount: number = Math.round(parseFloat(this.product.rating) * 2) / 2;
+    while (starCount > 0.5) {
+      this.starIcons.push('star');
+      starCount -= 1;
+    }
+    if (starCount && this.starIcons.length < 5) {
+      this.starIcons.push('star_half');
+    } else if (this.starIcons.length < 5) {
+      while (this.starIcons.length < 5) {
+        this.starIcons.push('star_outline');
+      }
+    }
   }
 }

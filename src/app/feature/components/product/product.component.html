@@ -1,28 +1,22 @@
-<div class="ls-product-div">
-  <a
-    href="https://lazysuzy.com/product/{{ product.sku }}"
-    class="product-detail-modal js-detail-modal"
-    data-href="/product/{{ product.sku }}"
-  >
-    <div class="ls-product">
-      <img
-        class="prod-img img-fluid"
-        [src]="product.main_image"
-        [alt]="product.name"
-      />
+<div class="ls-product-div" (click)="openDialog()">
+  <div class="ls-product">
+    <img
+      class="prod-img img-fluid"
+      [src]="product.main_image"
+      [alt]="product.name"
+    />
 
-      <div *ngIf="product.wishlisted; else elseBlock">
-        <div class="tile-icon wishlist-icon">
-          <mat-icon>favorite </mat-icon>
-        </div>
+    <div *ngIf="product.wishlisted; else elseBlock">
+      <div class="tile-icon wishlist-icon">
+        <mat-icon>favorite </mat-icon>
       </div>
-      <ng-template #elseBlock>
-        <div class="tile-icon wishlist-icon">
-          <mat-icon>favorite_border </mat-icon>
-        </div>
-      </ng-template>
     </div>
-  </a>
+    <ng-template #elseBlock>
+      <div class="tile-icon wishlist-icon">
+        <mat-icon>favorite_border </mat-icon>
+      </div>
+    </ng-template>
+  </div>
   <div class="prod-info">
     <span class="site">
       <span *ngIf="product.is_new" class="new-tag"><strong>NEW</strong></span>

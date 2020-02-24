@@ -45,6 +45,7 @@ export class SearchComponent implements OnInit {
       .subscribe((payload: ISearchProductsPayload) => {
         const { hits } = payload.hits;
         this.products = hits.map((hit: any) => hit._source);
+        console.log(this.products);
       });
   }
 }

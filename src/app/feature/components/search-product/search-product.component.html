@@ -1,32 +1,26 @@
-<div class="ls-product-div">
-  <!-- <a
-    href="https://lazysuzy.com/product/{{ product.sku }}"
-    class="product-detail-modal js-detail-modal"
-    data-href="/product/{{ product.sku }}"
-  >
-    <div class="ls-product">
-      <img
-        class="prod-img img-fluid"
-        [src]="product.main_image"
-        [alt]="product.name"
-      />
+<div class="ls-product-div" (click)="openDialog()">
+  <div class="ls-product">
+    <img
+      class="prod-img img-fluid"
+      [src]="product.main_product_images"
+      [alt]="product.name"
+    />
 
-      <div *ngIf="product.wishlisted; else elseBlock">
-        <div class="tile-icon wishlist-icon">
-          <mat-icon>favorite </mat-icon>
-        </div>
+    <div *ngIf="product.wishlisted; else elseBlock">
+      <div class="tile-icon wishlist-icon">
+        <mat-icon>favorite </mat-icon>
       </div>
-      <ng-template #elseBlock>
-        <div class="tile-icon wishlist-icon">
-          <mat-icon>favorite_border </mat-icon>
-        </div>
-      </ng-template>
     </div>
-  </a>
+    <ng-template #elseBlock>
+      <div class="tile-icon wishlist-icon">
+        <mat-icon>favorite_border </mat-icon>
+      </div>
+    </ng-template>
+  </div>
   <div class="prod-info">
     <span class="site">
       <span *ngIf="product.is_new" class="new-tag"><strong>NEW</strong></span>
-      {{ product.site }}
+      {{ product.site_name }}
     </span>
     <div
       *ngIf="product.reviews != null && product.reviews != 0"
@@ -42,14 +36,9 @@
   </div>
   <div class="name">{{ product.name }}</div>
   <div class="prices">
-    <span
-      class="{{
-        (product.is_price !== product.was_price && 'cprice sale') || 'cprice'
-      }}"
-      >${{ product.is_price }}</span
-    >
-    <span *ngIf="product.is_price !== product.was_price" class="oldprice">
-      ${{ product.was_price }}
+    <span>${{ product.min_price }}</span>
+    <span *ngIf="product.min_price !== product.max_price">
+      - ${{ product.max_price }}
     </span>
-  </div> -->
+  </div>
 </div>
