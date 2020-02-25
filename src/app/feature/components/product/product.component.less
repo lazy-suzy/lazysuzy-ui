@@ -1,3 +1,203 @@
-.mat-card {
-    min-height: 20rem;
+@body-bg: #f8fafc;
+@body-bg-option: #fffffa;
+
+// Typography
+@font-family-sans-serif: 'Marcellus SC', sans-serif;
+@font-size-base: 0.9rem;
+@line-height-base: 1.6;
+
+// Colors
+@blue: #3490dc;
+@indigo: #6574cd;
+@purple: #9561e2;
+@pink: #f66d9b;
+@red: #e3342f;
+@orange: #f6993f;
+@yellow: #ffed4a;
+@green: #38c172;
+@teal: #4dc0b5;
+@cyan: #6cb2eb;
+@white: #ffffff;
+@off-white: #ffffffba;
+@golden: #e4cd00;
+@grey: #d6d6d6;
+@facebook: #3b5998;
+@category-bg: #21334b;
+@products-bg: #ffcc00;
+@product-price: #b76e79;
+@icons-color: #929292;
+
+// Main colors
+@primary-color: #ffcc00;
+@secondary-color: #0c1c31;
+@text-subtle: #606060;
+@border-color: #f2f4f3;
+@brown-text-color: #b76e79;
+@yellow-text-color: #fefce0;
+@background-color: #fbfbfb;
+@dropdown-background-color: #f7f6f7;
+
+// Font colors
+@font-color-black: @secondary-color;
+
+// Values
+@navbar-height: 72px;
+@navbar-height-mobile: 33px;
+
+////////////Listing specific
+@listing-top-ctrl-height: 45px;
+@listing-top-ctrl-icon-height: 25px;
+
+.ls-product-div {
+  padding: 0px 10px;
+  text-align: left;
+  margin-bottom: 40px;
+  cursor: pointer;
+  @include make-col(1, 4);
+
+  .prod-info {
+    margin-bottom: 5px;
+  }
+  .new-tag {
+    display: inline-block;
+    margin-right: 5px;
+    color: @brown-text-color;
+  }
+  .site {
+    color: @text-subtle;
+  }
+  .rating-container {
+    height: 20px;
+    float: right;
+
+    .rating {
+      height: 20px;
+      background-repeat: no-repeat;
+      display: inline-block;
+      vertical-align: middle;
+      .mat-icon {
+        font-size: 18px;
+        height: 18px;
+        width: 18px;
+      }
+    }
+
+    .total-ratings {
+      vertical-align: middle;
+      font-size: 12px;
+    }
+  }
+
+  .name {
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    width: 100%;
+    margin-bottom: 5px;
+    overflow: hidden;
+  }
+  .prices {
+    .cprice {
+      color: @secondary-color;
+      margin-right: 10px;
+      &.sale {
+        color: @product-price;
+      }
+    }
+
+    .oldprice {
+      text-decoration: line-through;
+    }
+  }
+
+  .ls-product {
+    position: relative;
+    margin-bottom: 5px;
+    background-repeat: no-repeat;
+    background-position: bottom;
+    .variation-img {
+      position: absolute;
+      bottom: 0px;
+      z-index: 1;
+      left: 0;
+    }
+
+    .prod-info {
+      position: absolute;
+      bottom: 0px;
+      padding: 5px;
+      width: 100%;
+      background-color: rgba(0, 0, 0, 0.4);
+      height: 25px;
+      text-align: left;
+      font-size: 14px;
+      line-height: 14px;
+      z-index: 100;
+      color: @white;
+    }
+    .tile-icon {
+      position: absolute;
+      z-index: 50;
+      color: @icons-color;
+      top: 10px;
+      margin: 0 10px;
+      font-size: 20px;
+    }
+    .wishlist-icon {
+      right: 0px;
+      &.marked {
+        .icon {
+          font-weight: 900;
+        }
+      }
+    }
+    .multiple-variants-icon {
+      right: 40px;
+    }
+
+    .name {
+      font-weight: bold;
+      font-size: 18px;
+      text-align: center;
+    }
+  }
+
+  @media only screen and (max-width: 768px) {
+    .new-tag {
+      position: absolute;
+      top: 0;
+      left: 0;
+      z-index: 2;
+      background: #ffffffba;
+      padding: 2px 6px;
+    }
+    &.item-3 {
+      @include make-col(1, 3);
+
+      .tile-icon {
+        margin: 0 10px;
+        font-size: 14px;
+      }
+      .prod-info {
+        font-size: 12px;
+      }
+    }
+
+    &.item-2 {
+      @include make-col(1, 2);
+    }
+
+    &.item-1 {
+      @include make-col(1, 1);
+
+      .tile-icon {
+        font-size: 30px;
+      }
+
+      .prod-info {
+        height: 40px;
+        font-size: 22px;
+        line-height: 30px;
+      }
+    }
+  }
 }
