@@ -1,3 +1,15 @@
-<div>
-  <app-search></app-search>
+<div class="homepage">
+  <div class="main-container">
+    <app-search class="section"></app-search>
+    <div class="section">
+      <h2 class="section-title">Browse by Room</h2>
+      <div class="flex flex-wrap justify-center ph3">
+        <app-room
+          *ngFor="let department of departments"
+          [department]="department"
+          class="w-20-ns ma3"
+        ></app-room>
+      </div>
+    </div>
+  </div>
 </div>

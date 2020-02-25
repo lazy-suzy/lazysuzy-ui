@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { MOCK_DEPARTMENTS } from './../../../mocks';
+import { IDepartment } from './../../../shared/models';
 
 @Component({
   selector: 'app-landing',
@@ -6,10 +8,8 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./landing.component.less']
 })
 export class LandingComponent implements OnInit {
+  departments: IDepartment[] = MOCK_DEPARTMENTS;
+  constructor() {}
 
-  constructor() { }
-
-  ngOnInit() {
-  }
-
+  ngOnInit() {}
 }

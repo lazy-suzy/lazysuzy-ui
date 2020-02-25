@@ -9,6 +9,6 @@ const MODULES = [CommonModule, ProductsModule, LandingModule];
 @NgModule({
   declarations: [...DECLARATIONS],
   imports: [...MODULES],
-  exports: [...DECLARATIONS, ...MODULES],
+  exports: [...DECLARATIONS, ...MODULES]
 })
 export class FeatureModule {}
