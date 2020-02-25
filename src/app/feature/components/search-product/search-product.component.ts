@@ -1,4 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
+import { ProductDetailsComponent } from './../product-details/product-details.component';
 import { ISearchProduct } from './../../../shared/models';
 
 @Component({
@@ -10,9 +12,11 @@ export class SearchProductComponent implements OnInit {
   @Input() product: ISearchProduct;
   starIcons: string[] = new Array();
 
-  constructor() {}
+  constructor(public dialog: MatDialog) {}
 
   ngOnInit(): void {
+    this.product.main_product_images =
+      '//www.lazysuzy.com' + this.product.main_product_images;
     this.setRating();
   }
 
@@ -30,5 +34,17 @@ export class SearchProductComponent implements OnInit {
         this.starIcons.push('star_outline');
       }
     }
+  }
+
+  openDialog(): void {
+    const dialogRef = this.dialog.open(ProductDetailsComponent, {
+      width: '80%',
+      height: '80%',
+      data: { sku: this.product.product_sku }
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      // console.log('The dialog was closed');
+    });
   }
 }
