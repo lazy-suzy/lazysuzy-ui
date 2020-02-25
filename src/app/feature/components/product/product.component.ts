@@ -6,11 +6,13 @@ import { MatDialog } from '@angular/material/dialog';
 @Component({
   selector: 'app-product',
   templateUrl: './product.component.html',
-  styleUrls: ['./product.component.less'],
+  styleUrls: ['./product.component.less']
 })
 export class ProductComponent implements OnInit {
   @Input() product: IProductPayload;
   starIcons: string[] = new Array();
+  variationImage: string = '';
+  isVariationImageVisible: boolean = false;
 
   constructor(public dialog: MatDialog) {}
 
@@ -37,11 +39,36 @@ export class ProductComponent implements OnInit {
     const dialogRef = this.dialog.open(ProductDetailsComponent, {
       width: '80%',
       height: '80%',
-      data: { sku: this.product.sku },
+      data: { sku: this.product.sku }
     });
 
     dialogRef.afterClosed().subscribe(result => {
       // console.log('The dialog was closed');
     });
+  }
+
+  openSwatchDialog(variation): void {
+    const dialogRef = this.dialog.open(ProductDetailsComponent, {
+      width: '80%',
+      height: '80%',
+      data: {
+        sku: variation.has_parent_sku
+          ? variation.variation_sku
+          : variation.product_sku
+      }
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      // console.log('The dialog was closed');
+    });
+  }
+  showVariationImage(imageUrl): void {
+    this.variationImage = imageUrl;
+    this.isVariationImageVisible = true;
+  }
+
+  hideVariationImage(): void {
+    this.variationImage = '';
+    this.isVariationImageVisible = false;
   }
 }

@@ -1,11 +1,17 @@
-<div class="ls-product-div" (click)="openDialog()">
-  <div class="ls-product">
+<div class="ls-product-div">
+  <div class="ls-product" (click)="openDialog()">
     <img
-      class="prod-img img-fluid"
+      class="{{ isVariationImageVisible ? 'prod-img' : 'prod-img show' }}"
       [src]="product.main_image"
       [alt]="product.name"
     />
-
+    <img
+      class="{{
+        isVariationImageVisible ? 'variation-img show' : 'variation-img'
+      }}"
+      [src]="variationImage || product.main_image"
+      [alt]="product.name"
+    />
     <div *ngIf="product.wishlisted; else elseBlock">
       <div class="tile-icon wishlist-icon">
         <mat-icon>favorite </mat-icon>
@@ -45,5 +51,23 @@
     <span *ngIf="product.is_price !== product.was_price" class="oldprice">
       ${{ product.was_price }}
     </span>
+  </div>
+  <div class="swatch-list">
+    <div
+      *ngFor="let variation of product.variations | slice: 0:6"
+      class="swatch-item"
+      (click)="openSwatchDialog(variation)"
+    >
+      <img
+        *ngIf="variation.swatch_image"
+        class="carousel-img img-fluid"
+        [src]="variation.swatch_image"
+        (mouseover)="showVariationImage(variation.image)"
+        (mouseout)="hideVariationImage()"
+      />
+    </div>
+    <div (click)="openDialog()" *ngIf="product.variations.length > 6">
+      + more
+    </div>
   </div>
 </div>
