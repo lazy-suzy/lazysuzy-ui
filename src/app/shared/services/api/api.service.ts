@@ -5,10 +5,10 @@ import { HttpService } from '../http/http.service';
 import {
   IProductsPayload,
   IProductPayload,
-  ISearchProductsPayload
+  ISearchProductsPayload,
 } from './../../models';
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class ApiService {
   constructor(private httpService: HttpService) {}
@@ -24,8 +24,6 @@ export class ApiService {
     const url = env.useLocalJson
       ? `${env.JSON_BASE_HREF}${endpoint}`
       : `${env.API_BASE_HREF}${endpoint}?filters=${filters}&sort_type=${sortTypes}&pageno=${page}`;
-    console.log(url);
-
     return this.httpService.get(url);
   }
 
