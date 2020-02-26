@@ -1,19 +1,25 @@
 <mat-toolbar>
-    <mat-toolbar-row class="flex justify-around">
-
-
-        <ng-container *ngFor="let filter of productFilters">
-            <span class="flex items-center grow pointer ph2 f5">
-                <span [matMenuTriggerFor]="filterMenu">{{ filter.display | titlecase }}</span>
-                <div class="ml2 arrow-down"></div>
-            </span>
-            <mat-menu #filterMenu="matMenu">
-                <mat-checkbox *ngFor="let option of filter.options; let i = index" [value]="filter.options[i].value"
-                    (change)="onCheckChange($event, filter.display)">
-                    {{ filter.options[i].display }}</mat-checkbox>
-            </mat-menu>
-        </ng-container>
-
-
-    </mat-toolbar-row>
+  <mat-toolbar-row class="flex justify-around">
+    <ng-container *ngFor="let filter of objectKeys(productFilters)">
+      <span class="flex items-center grow pointer ph2 f5">
+        <span [matMenuTriggerFor]="filterMenu">{{ filter }}</span>
+        <div class="ml2 arrow-down"></div>
+      </span>
+      <mat-menu #filterMenu="matMenu">
+        <div *ngIf="filter === 'price'; else elseBlock">
+          Price menu
+        </div>
+        <ng-template #elseBlock>
+          <div *ngFor="let option of productFilters[filter]">
+            <mat-checkbox
+              [value]="option.value"
+              (change)="onCheckChange($event, filter)"
+            >
+              {{ option.name }}</mat-checkbox
+            >
+          </div>
+        </ng-template>
+      </mat-menu>
+    </ng-container>
+  </mat-toolbar-row>
 </mat-toolbar>

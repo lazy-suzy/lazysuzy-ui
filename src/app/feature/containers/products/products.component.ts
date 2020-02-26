@@ -1,17 +1,22 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Subscription } from 'rxjs';
-import { IProductPayload, IProductsPayload } from './../../../shared/models';
+import {
+  IProductPayload,
+  IProductsPayload,
+  IFilterData
+} from './../../../shared/models';
 import { ApiService } from './../../../shared/services';
 import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-products',
   templateUrl: './products.component.html',
-  styleUrls: ['./products.component.less'],
+  styleUrls: ['./products.component.less']
 })
 export class ProductsComponent implements OnInit, OnDestroy {
   productsSubscription: Subscription;
   products: IProductPayload[];
+  productFilters: IFilterData;
   department: string;
   category: string;
   filters = '';
@@ -24,6 +29,8 @@ export class ProductsComponent implements OnInit, OnDestroy {
       .getProducts(this.department, this.category)
       .subscribe((payload: IProductsPayload) => {
         this.products = payload.products;
+        delete payload.filterData.category;
+        this.productFilters = payload.filterData;
       });
   }
 
