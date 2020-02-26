@@ -37,24 +37,20 @@ export class ProductsComponent implements OnInit, OnDestroy {
     this.category = urlParams[2];
   }
 
-  onSetFilters(e) {
-    this.buildFilters(e);
+  onSetFilters(e): void {
+    const filters = this.buildFilters(e);
     this.productsSubscription = this.apiService
-      .getProducts(this.department, this.category, this.filters)
+      .getProducts(this.department, this.category, filters)
       .subscribe((payload: IProductsPayload) => {
         this.products = payload.products;
       });
   }
 
-  buildFilters(event: string) {
+  buildFilters(event: string): string {
+    let tempFilters = '';
     for (let [filter, options] of Object.entries(event)) {
-      if (options.length) {
-        if (this.filters[filter]) {
-          console.log(this.filters[filter]);
-        } else {
-          this.filters = `${filter}:${options}`;
-        }
-      }
+      tempFilters += options.length ? `${filter}:${options};` : `${filter}:;`;
     }
+    return tempFilters;
   }
 }
