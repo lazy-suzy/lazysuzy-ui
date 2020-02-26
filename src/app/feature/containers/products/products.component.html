@@ -2,7 +2,7 @@
   <app-product-filters
     (setFilters)="onSetFilters($event)"
   ></app-product-filters>
-  <div class="flex flex-wrap justify-between ph4-ns">
+  <div class="flex flex-wrap justify-between">
     <app-product
       *ngFor="let product of products"
       [product]="product"
