@@ -14,8 +14,60 @@ mat-icon.account-icon {
   color: #ffcc00;
 }
 
-.department-link {
+.header-link {
+  color: #ffcc00;
+  margin-right: 15px;
+  text-decoration: none;
+}
+.header-link * {
+  vertical-align: text-bottom;
+}
+.top-navbar {
+  padding: 15px 0;
+  margin-bottom: 10px;
+  font-size: 18px;
+}
+
+.department-name {
+  position: relative;
+
+  .category-menu {
+    position: absolute;
+    z-index: 100;
+    background: #ffffff;
+    display: none;
+    padding: 0;
+    margin: 0;
+    border: 1px solid #f2f4f3;
+    border-radius: 4px;
+    text-align: left;
+    width: 275px;
+
+    li {
+      display: block;
+      border-bottom: 1px solid #f2f4f3;
+
+      &:last-child {
+        border: none;
+      }
+
+      a {
+        color: #0c1c31;
+        padding: 7px 15px;
+        display: block;
+
+        &:hover {
+          color: #ffcc00;
+        }
+      }
+    }
+  }
   &:hover {
-    background: #ffcc00;
+    div {
+      background: #ffcc00;
+    }
+    .category-menu {
+      display: block;
+    }
   }
 }

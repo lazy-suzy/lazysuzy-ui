@@ -30,6 +30,31 @@ export interface IProduct {
   variations: (IVariationA | IVariationsB)[];
 }
 
+export interface ISearchProductsPayload {
+  took: number;
+  timed_out: boolean;
+  _shards: Object;
+  hits: any;
+}
+
+export interface ISearchProduct {
+  main_product_images: string;
+  min_price: number;
+  '@version': string;
+  max_price: number;
+  price: string;
+  reviews: number;
+  color: string;
+  '@timestamp': Date;
+  product_url: string;
+  product_sku: string;
+  rating: string;
+  name: string;
+  site: string;
+  product_name: Object;
+  site_name: string;
+}
+
 export interface IVariationsB {
   product_sku: string;
   variation_sku: string;

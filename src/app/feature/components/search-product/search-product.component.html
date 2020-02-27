@@ -1,0 +1,37 @@
+<div class="ls-product-div" (click)="openDialog()">
+  <div class="ls-product">
+    <img class="prod-img img-fluid" [src]="product.main_product_images" [alt]="product.name" />
+
+    <div *ngIf="product.wishlisted; else elseBlock">
+      <div class="tile-icon wishlist-icon">
+        <mat-icon>favorite</mat-icon>
+      </div>
+    </div>
+    <ng-template #elseBlock>
+      <div class="tile-icon wishlist-icon">
+        <mat-icon>favorite_border</mat-icon>
+      </div>
+    </ng-template>
+  </div>
+  <div class="prod-info">
+    <span class="site">
+      <span *ngIf="product.is_new" class="new-tag"><strong>NEW</strong></span>
+      {{ product.site_name }}
+    </span>
+    <div *ngIf="product.reviews != null && product.reviews != 0" class="rating-container">
+      <span class="total-ratings">{{ product.reviews }}</span>
+      <div class="rating">
+        <mat-icon *ngFor="let icon of starIcons" class="yellow">
+          {{ icon }}
+        </mat-icon>
+      </div>
+    </div>
+  </div>
+  <div class="name">{{ product.name }}</div>
+  <div class="prices">
+    <span>${{ product.min_price }}</span>
+    <span *ngIf="product.min_price !== product.max_price">
+      - ${{ product.max_price }}
+    </span>
+  </div>
+</div>
