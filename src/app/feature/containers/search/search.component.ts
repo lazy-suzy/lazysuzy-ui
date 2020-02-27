@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Subscription } from 'rxjs';
 import {
   ISearchProductsPayload,
-  ISearchProduct
+  ISearchProduct,
 } from './../../../shared/models';
 import { ApiService } from './../../../shared/services';
 import { Router, ActivatedRoute } from '@angular/router';
@@ -10,7 +10,7 @@ import { Router, ActivatedRoute } from '@angular/router';
 @Component({
   selector: 'app-search',
   templateUrl: './search.component.html',
-  styleUrls: ['./search.component.less']
+  styleUrls: ['./search.component.less'],
 })
 export class SearchComponent implements OnInit {
   query: string;
@@ -35,17 +35,21 @@ export class SearchComponent implements OnInit {
       query: {
         match: {
           name: {
-            query: this.query + '*'
-          }
-        }
-      }
+            query: this.query + '*',
+          },
+        },
+      },
     });
+
     this.productsSubscription = this.apiService
       .getSearchProducts(queryString)
       .subscribe((payload: ISearchProductsPayload) => {
         const { hits } = payload.hits;
         this.products = hits.map((hit: any) => hit._source);
-        console.log(this.products);
       });
+  }
+
+  ngOnDestroy(): void {
+    this.productsSubscription.unsubscribe();
   }
 }

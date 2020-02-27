@@ -1,16 +1,14 @@
 import { Component, OnInit } from '@angular/core';
-
+import { Router } from '@angular/router';
 @Component({
   selector: 'app-search-bar',
   templateUrl: './search-bar.component.html',
-  styleUrls: ['./search-bar.component.less']
+  styleUrls: ['./search-bar.component.less'],
 })
-export class SearchBarComponent implements OnInit {
-  constructor() {}
+export class SearchBarComponent {
+  constructor(private router: Router) {}
 
-  ngOnInit() {}
-  openSearchPage(f) {
-    console.log(f);
-    window.location.href = `/search?query=${f.value.query}`;
+  openSearch(form): void {
+    this.router.navigateByUrl(`/search?query=${form.value.query}`);
   }
 }

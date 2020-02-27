@@ -1,29 +1,13 @@
 <div class="homepage">
   <div class="main-container">
     <h1>Browse and Search America's top Home brands in one go.</h1>
-    <form
-      #f="ngForm"
-      (ngSubmit)="openSearchPage(f)"
-      role="form"
-      class="searchbar"
-    >
+    <form #form="ngForm" role="form" class="searchbar">
       <div class="col-form">
-        <input
-          class="form-control"
-          ngModel
-          name="query"
-          type="search"
-          placeholder="Try 'White Chair'"
-        />
+        <input class="form-control" ngModel name="query" type="search" placeholder='Try "White Chair"' />
       </div>
-      <button class="btn search-icon" type="submit">
-        <mat-icon
-          class="account-icon pointer"
-          aria-hidden="false"
-          aria-label="Search"
-        >
-          search</mat-icon
-        >
+      <button class="btn search-icon" (click)="openSearch(form)">
+        <mat-icon class="account-icon pointer" aria-hidden="false" aria-label="Search">
+          search</mat-icon>
       </button>
     </form>
   </div>
