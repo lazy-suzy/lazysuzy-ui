@@ -2,12 +2,12 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { IProductPayload, IProductsPayload } from './../../../shared/models';
 import { ApiService } from './../../../shared/services';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-products',
   templateUrl: './products.component.html',
-  styleUrls: ['./products.component.less'],
+  styleUrls: ['./products.component.less']
 })
 export class ProductsComponent implements OnInit, OnDestroy {
   productsSubscription: Subscription;
@@ -16,15 +16,20 @@ export class ProductsComponent implements OnInit, OnDestroy {
   category: string;
   filters = '';
 
-  constructor(private apiService: ApiService, private router: Router) {}
+  constructor(
+    private apiService: ApiService,
+    private router: Router,
+    private activeRoute: ActivatedRoute
+  ) {}
 
   ngOnInit(): void {
     this.getParams();
-    this.productsSubscription = this.apiService
-      .getProducts(this.department, this.category)
-      .subscribe((payload: IProductsPayload) => {
-        this.products = payload.products;
-      });
+    this.activeRoute.params.subscribe(routeParams => {
+      this.department = routeParams.department;
+      this.category = routeParams.category;
+      this.loadProducts();
+    });
+    this.loadProducts();
   }
 
   ngOnDestroy(): void {
@@ -35,6 +40,14 @@ export class ProductsComponent implements OnInit, OnDestroy {
     const urlParams: string[] = this.router.url.split('/').slice(1);
     this.department = urlParams[1];
     this.category = urlParams[2];
+  }
+
+  loadProducts(): void {
+    this.productsSubscription = this.apiService
+      .getProducts(this.department, this.category)
+      .subscribe((payload: IProductsPayload) => {
+        this.products = payload.products;
+      });
   }
 
   onSetFilters(e): void {
