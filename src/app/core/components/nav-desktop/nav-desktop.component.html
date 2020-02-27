@@ -8,9 +8,11 @@
       <img class="w4 pointer grow" [src]="logoPath" alt="Lazy Suzy Home" />
     </a>
     <div class="mr3 flex items-center">
+
       <a routerLink="/wishlist" class="header-link pointer">
         <mat-icon aria-hidden="false">favorite_border </mat-icon> My saved items
       </a>
+
       <mat-icon
         class="account-icon pointer"
         aria-hidden="false"
@@ -31,21 +33,26 @@
       </mat-menu>
     </div>
   </mat-toolbar-row>
-  <mat-toolbar-row class="flex justify-around w-75">
-    <ng-container *ngFor="let department of departments">
-      <span class="grow pointer ph2 f5" [matMenuTriggerFor]="departmentMenu">{{
-        department.display | titlecase
-      }}</span>
-      <mat-menu #departmentMenu="matMenu">
-        <a
-          *ngFor="let category of department.categories"
-          [routerLink]="category.route"
-          routerLinkActive="active"
-          class="no-underline"
-        >
-          <button mat-menu-item>{{ category.display | titlecase }}</button>
-        </a>
-      </mat-menu>
-    </ng-container>
-  </mat-toolbar-row>
+
 </mat-toolbar>
+<div class="top-navbar flex justify-around w-75">
+  <ng-container *ngFor="let department of departments">
+    <div class="department-name">
+      <div class="grow pointer pa2">
+        {{ department.display | titlecase }}
+      </div>
+      <ul class="category-menu">
+        <li *ngFor="let category of department.categories">
+          <a
+            [routerLink]="category.route"
+            routerLinkActive="active"
+            class="no-underline"
+          >
+            {{ category.display | titlecase }}
+          </a>
+        </li>
+      </ul>
+    </div>
+  </ng-container>
+</div>
+

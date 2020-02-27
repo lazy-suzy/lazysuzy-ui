@@ -49,7 +49,7 @@
 @listing-top-ctrl-icon-height: 25px;
 
 .ls-product-div {
-  padding: 0px 10px;
+  padding: 0px 15px;
   text-align: left;
   margin-bottom: 40px;
   cursor: pointer;
@@ -114,11 +114,22 @@
     margin-bottom: 5px;
     background-repeat: no-repeat;
     background-position: bottom;
+    background-image: url('/assets/images/final.gif');
+    .prod-img {
+      visibility: hidden;
+      &.show {
+        visibility: unset;
+      }
+    }
     .variation-img {
       position: absolute;
       bottom: 0px;
       z-index: 1;
       left: 0;
+      display: none;
+      &.show {
+        display: block;
+      }
     }
 
     .prod-info {
@@ -158,6 +169,20 @@
       font-weight: bold;
       font-size: 18px;
       text-align: center;
+    }
+  }
+  .swatch-list {
+    display: flex;
+    margin: 10px 0;
+    align-items: center;
+
+    .swatch-item {
+      width: 35px;
+      margin-right: 5px;
+
+      img {
+        height: 35px;
+      }
     }
   }
 
