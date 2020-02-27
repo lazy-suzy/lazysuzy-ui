@@ -8,9 +8,11 @@
       <img class="w4 pointer grow" [src]="logoPath" alt="Lazy Suzy Home" />
     </a>
     <div class="mr3 flex items-center">
+
       <a routerLink="/wishlist" class="header-link pointer">
         <mat-icon aria-hidden="false">favorite_border </mat-icon> My saved items
       </a>
+
       <mat-icon
         class="account-icon pointer"
         aria-hidden="false"
@@ -31,6 +33,7 @@
       </mat-menu>
     </div>
   </mat-toolbar-row>
+
 </mat-toolbar>
 <div class="top-navbar flex justify-around w-75">
   <ng-container *ngFor="let department of departments">
@@ -52,3 +55,4 @@
     </div>
   </ng-container>
 </div>
+
