@@ -7,7 +7,7 @@ import {
   ISortType
 } from './../../../shared/models';
 import { ApiService } from './../../../shared/services';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-products',
@@ -24,20 +24,20 @@ export class ProductsComponent implements OnInit, OnDestroy {
   filters = '';
   sortTypeList: ISortType[];
 
-  constructor(private apiService: ApiService, private router: Router) {}
+  constructor(
+    private apiService: ApiService,
+    private router: Router,
+    private activeRoute: ActivatedRoute
+  ) {}
 
   ngOnInit(): void {
     this.getParams();
-
-    this.productsSubscription = this.apiService
-      .getProducts(this.department, this.category)
-      .subscribe((payload: IProductsPayload) => {
-        this.products = payload.products;
-        delete payload.filterData.category;
-        this.productFilters = payload.filterData;
-        this.sortTypeList = payload.sortType;
-        this.total_count = payload.total;
-      });
+    this.activeRoute.params.subscribe(routeParams => {
+      this.department = routeParams.department;
+      this.category = routeParams.category;
+      this.loadProducts();
+    });
+    this.loadProducts();
   }
 
   ngOnDestroy(): void {
@@ -48,6 +48,18 @@ export class ProductsComponent implements OnInit, OnDestroy {
     const urlParams: string[] = this.router.url.split('/').slice(1);
     this.department = urlParams[1];
     this.category = urlParams[2];
+  }
+
+  loadProducts(): void {
+    this.productsSubscription = this.apiService
+      .getProducts(this.department, this.category)
+      .subscribe((payload: IProductsPayload) => {
+        this.products = payload.products;
+        delete payload.filterData.category;
+        this.productFilters = payload.filterData;
+        this.sortTypeList = payload.sortType;
+        this.total_count = payload.total;
+      });
   }
 
   onSetFilters(e): void {
