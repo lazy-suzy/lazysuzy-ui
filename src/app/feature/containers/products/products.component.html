@@ -1,13 +1,22 @@
 <div class="flex flex-column">
-  <app-product-filters
-    [productFilters]="productFilters"
-    (setFilters)="onSetFilters($event)"
-  ></app-product-filters>
-  <div class="flex flex-wrap justify-between ph4-ns">
+  <h4 class="category-title">{{ category }}</h4>
+  <mat-toolbar>
+    <mat-toolbar-row class="flex justify-around">
+      <app-product-filters
+        [productFilters]="productFilters"
+        (setFilters)="onSetFilters($event)"
+        class="flex justify-start w-75"
+      ></app-product-filters>
+      <div>{{ total_count }} Results</div>
+      <app-sort-type [sortTypeList]="sortTypeList"> </app-sort-type>
+    </mat-toolbar-row>
+  </mat-toolbar>
+
+  <div class="flex flex-wrap justify-between">
     <app-product
       *ngFor="let product of products"
       [product]="product"
-      class="w-20-ns ma3"
+      class="w-25-ns"
     ></app-product>
   </div>
 </div>

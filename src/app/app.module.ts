@@ -15,13 +15,13 @@ const MODULES = [
   AppRoutingModule,
   CoreModule,
   FeatureModule,
-  SharedModule,
+  SharedModule
 ];
 
 @NgModule({
   declarations: [AppComponent],
   imports: [...MODULES],
   providers: [],
-  bootstrap: [AppComponent],
+  bootstrap: [AppComponent]
 })
 export class AppModule {}

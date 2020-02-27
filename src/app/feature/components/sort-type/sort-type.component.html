@@ -1,0 +1,10 @@
+<div class="flex items-center">
+  <span [matMenuTriggerFor]="beforeMenu">Recommended</span>
+  <div class="ml2 arrow-down"></div>
+</div>
+
+<mat-menu #beforeMenu="matMenu" xPosition="before">
+  <button *ngFor="let type of sortTypeList" mat-menu-item>
+    {{ type.name }}
+  </button>
+</mat-menu>
