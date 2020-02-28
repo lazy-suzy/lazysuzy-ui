@@ -1,12 +1,12 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { MatIconModule } from '@angular/material/icon';
-import { MatMenuModule } from '@angular/material/menu';
+import { MatSelectModule } from '@angular/material';
 import { SortTypeComponent } from './sort-type.component';
 
 const DECLARATIONS = [SortTypeComponent];
 
-const MODULES = [CommonModule, MatMenuModule, MatIconModule];
+const MODULES = [CommonModule, MatSelectModule, MatIconModule];
 
 @NgModule({
   declarations: [...DECLARATIONS],

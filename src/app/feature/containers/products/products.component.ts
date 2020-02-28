@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit, OnDestroy, HostListener } from '@angular/core';
 import { Subscription } from 'rxjs';
 import {
   IProductPayload,
@@ -16,13 +16,20 @@ import { Router, ActivatedRoute } from '@angular/router';
 })
 export class ProductsComponent implements OnInit, OnDestroy {
   productsSubscription: Subscription;
+  routeSubscription: Subscription;
   products: IProductPayload[];
   productFilters: IFilterData;
   department: string;
   category: string;
   total_count: number = 0;
   filters = '';
+  sortType = '';
   sortTypeList: ISortType[];
+  pageNo: number = 0;
+  topPosToStartShowing = 300;
+  isIconShow: boolean = false;
+  isProductFetching: boolean = false;
+  spinner: string = 'assets/images/spinner.gif';
 
   constructor(
     private apiService: ApiService,
@@ -32,7 +39,8 @@ export class ProductsComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.getParams();
-    this.activeRoute.params.subscribe(routeParams => {
+    this.getParamsFromQuery();
+    this.routeSubscription = this.activeRoute.params.subscribe(routeParams => {
       this.department = routeParams.department;
       this.category = routeParams.category;
       this.loadProducts();
@@ -42,36 +50,74 @@ export class ProductsComponent implements OnInit, OnDestroy {
 
   ngOnDestroy(): void {
     this.productsSubscription.unsubscribe();
+    this.routeSubscription.unsubscribe();
   }
 
   getParams(): void {
     const urlParams: string[] = this.router.url.split('/').slice(1);
     this.department = urlParams[1];
-    this.category = urlParams[2];
+    this.category = urlParams[2].split('?')[1];
+  }
+  getParamsFromQuery(): void {
+    this.activeRoute.queryParams.subscribe(params => {
+      this.filters = params['filters'] || '';
+      this.pageNo = params['pageNo'] || 0;
+      this.sortType = params['sortType'] || '';
+    });
   }
 
   loadProducts(): void {
+    this.pageNo = 0;
+    this.isProductFetching = true;
     this.productsSubscription = this.apiService
-      .getProducts(this.department, this.category)
+      .getProducts(this.department, this.category, this.filters, this.sortType)
       .subscribe((payload: IProductsPayload) => {
         this.products = payload.products;
         delete payload.filterData.category;
         this.productFilters = payload.filterData;
         this.sortTypeList = payload.sortType;
         this.total_count = payload.total;
+        this.updateQueryString();
+        this.isProductFetching = false;
       });
   }
 
+  updateQueryString(): void {
+    this.router.navigate([], {
+      relativeTo: this.activeRoute,
+      queryParams: {
+        filters: this.filters,
+        sortType: this.sortType,
+        pageNo: this.pageNo
+      },
+      queryParamsHandling: 'merge' // remove to replace all query params by provided
+    });
+  }
+
   onSetFilters(e): void {
-    const filters = this.buildFilters(e);
+    this.filters = this.buildFilters(e);
+    this.loadProducts();
+  }
+
+  onSetSortType(e): void {
+    this.sortType = e;
+    this.loadProducts();
+  }
+
+  onScroll() {
+    this.pageNo += 1;
+    this.isProductFetching = true;
     this.productsSubscription = this.apiService
-      .getProducts(this.department, this.category, filters)
+      .getProducts(
+        this.department,
+        this.category,
+        this.filters,
+        this.sortType,
+        this.pageNo
+      )
       .subscribe((payload: IProductsPayload) => {
-        this.products = payload.products;
-        this.total_count = payload.total;
-        delete payload.filterData.category;
-        this.productFilters = payload.filterData;
-        this.sortTypeList = payload.sortType;
+        this.products = [...this.products, ...payload.products];
+        this.isProductFetching = false;
       });
   }
 
@@ -85,5 +131,22 @@ export class ProductsComponent implements OnInit, OnDestroy {
       }
     }
     return tempFilters;
+  }
+  @HostListener('window:scroll')
+  checkScroll() {
+    const scrollPosition =
+      window.pageYOffset ||
+      document.documentElement.scrollTop ||
+      document.body.scrollTop ||
+      0;
+    this.isIconShow = scrollPosition >= this.topPosToStartShowing;
+  }
+
+  gotoTop() {
+    window.scroll({
+      top: 0,
+      left: 0,
+      behavior: 'smooth'
+    });
   }
 }

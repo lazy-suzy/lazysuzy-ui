@@ -65,6 +65,19 @@ export class ProductFiltersComponent {
     this.setFilters.emit(this.activeFilters);
   }
 
+  clearFilters() {
+    this.activeFilters = {
+      brand: [],
+      price_from: 0,
+      price_to: 0,
+      type: [],
+      color: []
+    };
+    delete this.activeFilters.price_from;
+    delete this.activeFilters.price_to;
+    this.setFilters.emit(this.activeFilters);
+  }
+
   onValueChange() {
     this.activeFilters.price_from = this.minValue;
     this.activeFilters.price_to = this.maxValue;
