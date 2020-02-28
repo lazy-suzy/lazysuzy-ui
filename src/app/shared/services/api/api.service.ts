@@ -5,10 +5,10 @@ import { HttpService } from '../http/http.service';
 import {
   IProductsPayload,
   IProductPayload,
-  ISearchProductsPayload,
+  ISearchProductsPayload
 } from './../../models';
 @Injectable({
-  providedIn: 'root',
+  providedIn: 'root'
 })
 export class ApiService {
   constructor(private httpService: HttpService) {}
@@ -17,13 +17,13 @@ export class ApiService {
     department: string,
     category: string,
     filters = '',
+    sortType = '',
     page = 0
   ): Observable<IProductsPayload> {
-    const sortTypes = '';
     const endpoint = `products/${department}/${category}`;
     const url = env.useLocalJson
       ? `${env.JSON_BASE_HREF}${endpoint}`
-      : `${env.API_BASE_HREF}${endpoint}?filters=${filters}&sort_type=${sortTypes}&pageno=${page}`;
+      : `${env.API_BASE_HREF}${endpoint}?filters=${filters}&sort_type=${sortType}&pageno=${page}`;
     return this.httpService.get(url);
   }
 

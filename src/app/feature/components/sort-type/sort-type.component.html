@@ -1,0 +1,9 @@
+<div class="flex items-center">
+  <mat-form-field>
+    <mat-select [(value)]="default" (selectionChange)="sortChanged($event)">
+      <mat-option *ngFor="let type of sortTypeList" [value]="type.value">{{
+        type.name
+      }}</mat-option>
+    </mat-select>
+  </mat-form-field>
+</div>

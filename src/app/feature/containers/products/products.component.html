@@ -1,12 +1,47 @@
 <div class="flex flex-column">
-  <app-product-filters
-    (setFilters)="onSetFilters($event)"
-  ></app-product-filters>
-  <div class="flex flex-wrap justify-between">
+  <h4 class="category-title">{{ category }}</h4>
+  <mat-toolbar>
+    <mat-toolbar-row class="flex justify-around">
+      <app-product-filters
+        [productFilters]="productFilters"
+        (setFilters)="onSetFilters($event)"
+        class="flex justify-start w-75"
+      ></app-product-filters>
+      <div>{{ total_count }} Results</div>
+      <app-sort-type
+        [sortTypeList]="sortTypeList"
+        (setSortType)="onSetSortType($event)"
+      >
+      </app-sort-type>
+    </mat-toolbar-row>
+  </mat-toolbar>
+
+  <div
+    class="flex flex-wrap justify-between"
+    infiniteScroll
+    [infiniteScrollDistance]="2"
+    [infiniteScrollThrottle]="50"
+    (scrolled)="onScroll()"
+  >
     <app-product
       *ngFor="let product of products"
       [product]="product"
-      class="w-25-ns mb3"
+      class="w-25-ns"
     ></app-product>
   </div>
 </div>
+<img *ngIf="isProductFetching" [src]="spinner" class="loader" />
+<button
+  class="scroll-to-btn f6 dib white bg-near-black"
+  *ngIf="isIconShow"
+  (click)="gotoTop()"
+>
+  <mat-icon
+    class="account-icon pointer"
+    aria-hidden="false"
+    aria-label="Account"
+    [matMenuTriggerFor]="accountMenu"
+  >
+    arrow_upward</mat-icon
+  >
+</button>

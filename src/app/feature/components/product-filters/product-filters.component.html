@@ -1,19 +1,36 @@
-<mat-toolbar>
-    <mat-toolbar-row class="flex justify-around">
-
-
-        <ng-container *ngFor="let filter of productFilters">
-            <span class="flex items-center grow pointer ph2 f5">
-                <span [matMenuTriggerFor]="filterMenu">{{ filter.display | titlecase }}</span>
-                <div class="ml2 arrow-down"></div>
-            </span>
-            <mat-menu #filterMenu="matMenu">
-                <mat-checkbox *ngFor="let option of filter.options; let i = index" [value]="filter.options[i].value"
-                    (change)="onCheckChange($event, filter.display)">
-                    {{ filter.options[i].display }}</mat-checkbox>
-            </mat-menu>
-        </ng-container>
-
-
-    </mat-toolbar-row>
-</mat-toolbar>
+<ng-container *ngFor="let filter of objectKeys(productFilters)">
+  <span class="flex items-center grow pointer ph3 f5">
+    <span [matMenuTriggerFor]="filterMenu" class="filter-name">{{
+      filter
+    }}</span>
+    <div class="ml2 arrow-down"></div>
+  </span>
+  <mat-menu #filterMenu="matMenu">
+    <div class="price-menu" *ngIf="filter === 'price'; else elseBlock">
+      <ng5-slider
+        [(value)]="minValue"
+        [(highValue)]="maxValue"
+        [options]="silderOptions"
+        (userChangeEnd)="onValueChange()"
+      ></ng5-slider>
+    </div>
+    <ng-template #elseBlock>
+      <div *ngFor="let option of productFilters[filter]">
+        <mat-checkbox
+          class="pa2 menu-item"
+          *ngIf="option.enabled"
+          [checked]="option.checked"
+          [value]="option.value"
+          (change)="onCheckChange($event, filter)"
+        >
+          {{ option.name }}</mat-checkbox
+        >
+      </div>
+    </ng-template>
+  </mat-menu>
+</ng-container>
+<span
+  class="flex items-center pointer f6 fw6 db black link dim"
+  (click)="clearFilters()"
+  >Clear All</span
+>
