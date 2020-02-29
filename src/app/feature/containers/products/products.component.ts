@@ -105,6 +105,9 @@ export class ProductsComponent implements OnInit, OnDestroy {
   }
 
   onScroll() {
+    if (this.isProductFetching) {
+      return;
+    }
     this.pageNo += 1;
     this.isProductFetching = true;
 
