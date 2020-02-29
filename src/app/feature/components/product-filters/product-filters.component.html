@@ -1,36 +1,46 @@
 <ng-container *ngFor="let filter of objectKeys(productFilters)">
-  <span class="flex items-center grow pointer ph3 f5">
-    <span [matMenuTriggerFor]="filterMenu" class="filter-name">{{
-      filter
-    }}</span>
+  <div class="flex items-center pa3 mr1 filter">
+    <span
+      class="filter-name grow pointer {{
+        filter !== 'price'
+          ? activeFilters[filter].length > 0
+            ? 'active'
+            : ''
+          : isPriceChanged
+          ? 'active'
+          : ''
+      }}"
+      >{{ filter }}</span
+    >
     <div class="ml2 arrow-down"></div>
-  </span>
-  <mat-menu #filterMenu="matMenu">
-    <div class="price-menu" *ngIf="filter === 'price'; else elseBlock">
-      <ng5-slider
-        [(value)]="minValue"
-        [(highValue)]="maxValue"
-        [options]="silderOptions"
-        (userChangeEnd)="onValueChange()"
-      ></ng5-slider>
-    </div>
-    <ng-template #elseBlock>
-      <div *ngFor="let option of productFilters[filter]">
-        <mat-checkbox
-          class="pa2 menu-item"
-          *ngIf="option.enabled"
-          [checked]="option.checked"
-          [value]="option.value"
-          (change)="onCheckChange($event, filter)"
-        >
-          {{ option.name }}</mat-checkbox
-        >
+    <div class="filter-options">
+      <div class="price-menu" *ngIf="filter === 'price'; else elseBlock">
+        <ng5-slider
+          [(value)]="minValue"
+          [(highValue)]="maxValue"
+          [options]="silderOptions"
+          (userChangeEnd)="onValueChange()"
+        ></ng5-slider>
       </div>
-    </ng-template>
-  </mat-menu>
+      <ng-template #elseBlock>
+        <div *ngFor="let option of productFilters[filter]">
+          <mat-checkbox
+            class="pa2 menu-item"
+            *ngIf="option.enabled"
+            [checked]="option.checked"
+            [value]="option.value"
+            (change)="onCheckChange($event, filter)"
+          >
+            {{ option.name }}</mat-checkbox
+          >
+        </div>
+      </ng-template>
+    </div>
+  </div>
 </ng-container>
 <span
   class="flex items-center pointer f6 fw6 db black link dim"
+  *ngIf="isClearAllVisible"
   (click)="clearFilters()"
   >Clear All</span
 >

@@ -1,4 +1,5 @@
-import { Component, EventEmitter, Output, Input } from '@angular/core';
+import { Component, EventEmitter, Output, Input, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 import { Options } from 'ng5-slider';
 import { IFilterData } from 'src/app/shared/models';
 
@@ -11,6 +12,7 @@ export class ProductFiltersComponent {
   @Output() setFilters = new EventEmitter<any>();
   @Input() productFilters: IFilterData;
   objectKeys = Object.keys;
+  isClearAllVisible = false;
   activeFilters = {
     brand: [],
     price_from: 0,
@@ -18,6 +20,7 @@ export class ProductFiltersComponent {
     type: [],
     color: []
   };
+  isPriceChanged: boolean = false;
   minValue: number = 100;
   maxValue: number = 600;
   silderOptions: Options = {
@@ -28,9 +31,17 @@ export class ProductFiltersComponent {
     }
   };
 
+  constructor(private activeRoute: ActivatedRoute) {}
+
+  ngOnInit() {
+    this.activeRoute.queryParams.subscribe(params => {
+      this.isClearAllVisible = params['filters'] !== '';
+    });
+  }
+
   ngOnChanges(change: any) {
     this.productFilters = change.productFilters.currentValue;
-    if (this.productFilters) {
+    if (this.productFilters && !this.isPriceChanged) {
       this.minValue = this.productFilters.price.from;
       this.maxValue = this.productFilters.price.to;
       this.silderOptions = {
@@ -42,6 +53,15 @@ export class ProductFiltersComponent {
       };
       this.activeFilters.price_from = this.minValue;
       this.activeFilters.price_to = this.maxValue;
+      this.activeFilters.brand = this.productFilters.brand
+        .filter(brand => brand.checked)
+        .map(brand => brand.value);
+      this.activeFilters.type = this.productFilters.type
+        .filter(type => type.checked)
+        .map(type => type.value);
+      this.activeFilters.color = this.productFilters.color
+        .filter(color => color.checked)
+        .map(color => color.value);
     }
   }
 
@@ -61,6 +81,9 @@ export class ProductFiltersComponent {
     ) {
       delete this.activeFilters.price_from;
       delete this.activeFilters.price_to;
+      this.isPriceChanged = false;
+    } else {
+      this.isPriceChanged = true;
     }
     this.setFilters.emit(this.activeFilters);
   }
@@ -75,12 +98,14 @@ export class ProductFiltersComponent {
     };
     delete this.activeFilters.price_from;
     delete this.activeFilters.price_to;
+    this.isPriceChanged = false;
     this.setFilters.emit(this.activeFilters);
   }
 
   onValueChange() {
     this.activeFilters.price_from = this.minValue;
     this.activeFilters.price_to = this.maxValue;
+    this.isPriceChanged = true;
     this.setFilters.emit(this.activeFilters);
   }
 }

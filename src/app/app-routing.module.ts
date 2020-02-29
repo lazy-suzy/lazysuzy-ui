@@ -4,13 +4,19 @@ import {
   LandingComponent,
   ProductsComponent,
   SearchComponent,
-  WishlistComponent
+  WishlistComponent,
+  CategoriesComponent
 } from './feature/containers';
 
 const routes: Routes = [
   { path: '', component: LandingComponent, pathMatch: 'full' },
   { path: 'search', component: SearchComponent },
   { path: 'wishlist', component: WishlistComponent, pathMatch: 'full' },
+  {
+    path: 'products/:department',
+    component: CategoriesComponent,
+    pathMatch: 'full'
+  },
   {
     path: 'products/:department/:category',
     component: ProductsComponent,

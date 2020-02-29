@@ -1,20 +1,18 @@
 <div class="flex flex-column">
   <h4 class="category-title">{{ category }}</h4>
-  <mat-toolbar>
-    <mat-toolbar-row class="flex justify-around">
-      <app-product-filters
-        [productFilters]="productFilters"
-        (setFilters)="onSetFilters($event)"
-        class="flex justify-start w-75"
-      ></app-product-filters>
-      <div>{{ total_count }} Results</div>
-      <app-sort-type
-        [sortTypeList]="sortTypeList"
-        (setSortType)="onSetSortType($event)"
-      >
-      </app-sort-type>
-    </mat-toolbar-row>
-  </mat-toolbar>
+  <div class="filter-panel flex justify-around items-center">
+    <app-product-filters
+      [productFilters]="productFilters"
+      (setFilters)="onSetFilters($event)"
+      class="flex justify-start w-75"
+    ></app-product-filters>
+    <div>{{ total_count }} Results</div>
+    <app-sort-type
+      [sortTypeList]="sortTypeList"
+      (setSortType)="onSetSortType($event)"
+    >
+    </app-sort-type>
+  </div>
 
   <div
     class="flex flex-wrap justify-between"

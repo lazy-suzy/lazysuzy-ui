@@ -6,3 +6,5 @@ export * from './search/search.module';
 export * from './search/search.component';
 export * from './wishlist/wishlist.module';
 export * from './wishlist/wishlist.component';
+export * from './categories/categories.module';
+export * from './categories/categories.component';

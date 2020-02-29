@@ -61,7 +61,7 @@ export class ProductsComponent implements OnInit, OnDestroy {
   getParamsFromQuery(): void {
     this.activeRoute.queryParams.subscribe(params => {
       this.filters = params['filters'] || '';
-      this.pageNo = params['pageNo'] || 0;
+      this.pageNo = parseInt(params['pageNo']) || 0;
       this.sortType = params['sortType'] || '';
     });
   }
@@ -107,6 +107,7 @@ export class ProductsComponent implements OnInit, OnDestroy {
   onScroll() {
     this.pageNo += 1;
     this.isProductFetching = true;
+
     this.productsSubscription = this.apiService
       .getProducts(
         this.department,
@@ -118,6 +119,7 @@ export class ProductsComponent implements OnInit, OnDestroy {
       .subscribe((payload: IProductsPayload) => {
         this.products = [...this.products, ...payload.products];
         this.isProductFetching = false;
+        this.updateQueryString();
       });
   }
 

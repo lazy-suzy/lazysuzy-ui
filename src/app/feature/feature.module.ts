@@ -4,7 +4,8 @@ import {
   LandingModule,
   ProductsModule,
   SearchModule,
-  WishlistModule
+  WishlistModule,
+  CategoriesModule
 } from './containers';
 
 const DECLARATIONS = [];
@@ -14,7 +15,8 @@ const MODULES = [
   ProductsModule,
   LandingModule,
   SearchModule,
-  WishlistModule
+  WishlistModule,
+  CategoriesModule
 ];
 
 @NgModule({
