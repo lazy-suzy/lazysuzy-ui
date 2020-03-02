@@ -1,1 +1,14 @@
-<p>categories works!</p>
+<div class="flex flex-wrap">
+  <div *ngFor="let category of categories" class="w-25-ns category-text">
+    <a class="category-text" [routerLink]="category.link">
+      <img
+        class="category-img"
+        src="{{ category.image }}?v=1.0.0"
+        alt="{{ category.category }}"
+      />
+      <div>
+        <span>{{ category.category }}</span>
+      </div>
+    </a>
+  </div>
+</div>

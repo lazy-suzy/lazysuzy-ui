@@ -53,4 +53,10 @@ export class ApiService {
       : `${env.API_BASE_HREF}${endpoint}?filters=${filters}&sort_type=${sortTypes}&pageno=${page}`;
     return this.httpService.get(url);
   }
+
+  getCategories(department: string): Observable<ISearchProductsPayload> {
+    const endpoint = `categories/${department}`;
+    const url = `${env.API_BASE_HREF}${endpoint}`;
+    return this.httpService.get(url);
+  }
 }
