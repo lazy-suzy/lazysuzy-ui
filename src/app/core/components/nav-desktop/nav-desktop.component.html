@@ -3,6 +3,7 @@
     <a routerLink="/" routerLinkActive="active" class="no-underline flex items-center">
       <img class="w4 pointer grow" [src]="logoPath" alt="Lazy Suzy Home" />
     </a>
+    <app-search-bar *ngIf = "notHome" class="section"></app-search-bar>
     <div class="mr3 flex items-center">
 
       <a routerLink="/wishlist" class="flex items-center header-link pointer">
@@ -13,7 +14,7 @@
       <mat-icon class="account-icon pointer" aria-hidden="false" aria-label="Account" [matMenuTriggerFor]="accountMenu">
         account_circle</mat-icon>
       <mat-menu #accountMenu="matMenu">
-        <a *ngFor="let action of accountActions" [routerLink]="action.route" routerLinkActive="active"
+        <a *ngFor="let action of departments" [routerLink]="action.route" routerLinkActive="active"
           class="no-underline">
           <button mat-menu-item>{{ action.display | titlecase }}</button>
         </a>
