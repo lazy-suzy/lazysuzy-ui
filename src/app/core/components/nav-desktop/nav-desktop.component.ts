@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { MOCK_ACCOUNT_ACTIONS, MOCK_DEPARTMENTS } from './../../../mocks';
 import { ICategory, IDepartment } from './../../../shared/models';
 

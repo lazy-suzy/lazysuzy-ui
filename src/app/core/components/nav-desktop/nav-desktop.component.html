@@ -1,33 +1,20 @@
 <mat-toolbar class="bg-transparent">
   <mat-toolbar-row class="header flex justify-between ph2">
-    <a
-      routerLink="/"
-      routerLinkActive="active"
-      class="no-underline flex items-center"
-    >
+    <a routerLink="/" routerLinkActive="active" class="no-underline flex items-center">
       <img class="w4 pointer grow" [src]="logoPath" alt="Lazy Suzy Home" />
     </a>
     <div class="mr3 flex items-center">
 
-      <a routerLink="/wishlist" class="header-link pointer">
-        <mat-icon aria-hidden="false">favorite_border </mat-icon> My saved items
+      <a routerLink="/wishlist" class="flex items-center header-link pointer">
+        <mat-icon aria-hidden="false">favorite_border</mat-icon>
+        <span class="ml2">My saved items</span>
       </a>
 
-      <mat-icon
-        class="account-icon pointer"
-        aria-hidden="false"
-        aria-label="Account"
-        [matMenuTriggerFor]="accountMenu"
-      >
-        account_circle</mat-icon
-      >
+      <mat-icon class="account-icon pointer" aria-hidden="false" aria-label="Account" [matMenuTriggerFor]="accountMenu">
+        account_circle</mat-icon>
       <mat-menu #accountMenu="matMenu">
-        <a
-          *ngFor="let action of accountActions"
-          [routerLink]="action.route"
-          routerLinkActive="active"
-          class="no-underline"
-        >
+        <a *ngFor="let action of accountActions" [routerLink]="action.route" routerLinkActive="active"
+          class="no-underline">
           <button mat-menu-item>{{ action.display | titlecase }}</button>
         </a>
       </mat-menu>
@@ -43,11 +30,7 @@
       </div>
       <ul class="category-menu">
         <li *ngFor="let category of department.categories">
-          <a
-            [routerLink]="category.route"
-            routerLinkActive="active"
-            class="no-underline"
-          >
+          <a [routerLink]="category.route" routerLinkActive="active" class="no-underline">
             {{ category.display | titlecase }}
           </a>
         </li>
@@ -55,4 +38,3 @@
     </div>
   </ng-container>
 </div>
-
