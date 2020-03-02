@@ -1,4 +1,11 @@
-<app-nav-desktop class=""></app-nav-desktop>
+<ng-container *ngIf="isHandset; else isBrowser">
+    <app-nav-mobile></app-nav-mobile>
+</ng-container>
+<ng-template #isBrowser>
+    <app-nav-desktop></app-nav-desktop>
+</ng-template>
+
+
 <div class="mh4">
     <router-outlet></router-outlet>
 </div>
