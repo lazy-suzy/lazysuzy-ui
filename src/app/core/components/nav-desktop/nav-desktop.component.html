@@ -14,7 +14,7 @@
       <mat-icon class="account-icon pointer" aria-hidden="false" aria-label="Account" [matMenuTriggerFor]="accountMenu">
         account_circle</mat-icon>
       <mat-menu #accountMenu="matMenu">
-        <a *ngFor="let action of accountActions" [routerLink]="action.route" routerLinkActive="active"
+        <a *ngFor="let action of departments" [routerLink]="action.route" routerLinkActive="active"
           class="no-underline">
           <button mat-menu-item>{{ action.display | titlecase }}</button>
         </a>

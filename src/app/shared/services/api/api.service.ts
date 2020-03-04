@@ -5,7 +5,8 @@ import { HttpService } from '../http/http.service';
 import {
   IProductsPayload,
   IProductPayload,
-  ISearchProductsPayload
+  ISearchProductsPayload,
+  IDepartment
 } from './../../models';
 @Injectable({
   providedIn: 'root'
@@ -31,6 +32,14 @@ export class ApiService {
     const url = env.useLocalJson
       ? `${env.JSON_BASE_HREF}product/${id}`
       : `${env.API_BASE_HREF}product/${id}`;
+    return this.httpService.get(url);
+  }
+
+  getAllDepartments(): Observable<IDepartment> {
+    const endpoint = `all-departments`;
+    const url = env.useLocalJson
+      ? `${env.JSON_BASE_HREF}${endpoint}`
+      : `${env.API_BASE_HREF}${endpoint}`;
     return this.httpService.get(url);
   }
 
