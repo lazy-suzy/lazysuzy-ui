@@ -8,9 +8,8 @@ import { ApiService } from './../../../shared/services';
 @Component({
   selector: 'app-nav-desktop',
   templateUrl: './nav-desktop.component.html',
-  styleUrls: ['./nav-desktop.component.less'],
+  styleUrls: ['./nav-desktop.component.less']
 })
-
 export class NavDesktopComponent {
   logoPath: string = 'assets/images/color_logo_transparent.png';
   departments: IAllDepartment[];
@@ -18,7 +17,9 @@ export class NavDesktopComponent {
   checkHomeRoute: Subscription;
 
   constructor(
-     private router: Router, private location: Location, private apiService: ApiService
+    private router: Router,
+    private location: Location,
+    private apiService: ApiService
   ) {
     this.checkHomeRoute = router.events.subscribe(val => {
       this.notHome = location.path() !== '';
@@ -30,15 +31,11 @@ export class NavDesktopComponent {
     this.checkHomeRoute.unsubscribe();
   }
 
-  ngOnInit(): void {
-  
-  }
+  ngOnInit(): void {}
 
   getDepartments() {
-    this.apiService.getAllDepartments()
-    .subscribe((payload: any) => {
+    this.apiService.getAllDepartments().subscribe((payload: any) => {
       this.departments = payload.all_departments;
     });
   }
-
 }
