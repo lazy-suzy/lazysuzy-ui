@@ -1,18 +1,45 @@
 <div class="flex flex-column">
-  <h4 class="category-title">{{ category }}</h4>
-  <div class="filter-panel flex justify-around items-center">
-    <app-product-filters
-      [productFilters]="productFilters"
-      (setFilters)="onSetFilters($event)"
-      class="flex justify-start w-75"
-    ></app-product-filters>
-    <div>{{ total_count }} Results</div>
-    <app-sort-type
-      [sortTypeList]="sortTypeList"
-      (setSortType)="onSetSortType($event)"
-    >
-    </app-sort-type>
-  </div>
+  <ng-container *ngIf="isHandset">
+    <div class="{{showBar === true?'mobile-filter-panel fixed':'mobile-filter-panel'}}" (scroll)="checkScroll">
+      <!-- <app-product-filter-mobile class="filter-icons"></app-product-filter-mobile> -->
+      <span class="icon-container">
+          <mat-icon aria-hidden="false" aria-label="Filter">
+              filter_list
+          </mat-icon>
+          <span class="icon-title">Filter</span>
+      </span>
+      <span class="icon-container">
+          <mat-icon aria-hidden="false" aria-label="toggle">
+              view_module
+          </mat-icon>
+          <span class="icon-title">Toggle</span>
+      </span>
+      <span class="icon-container">
+          <mat-icon aria-hidden="false" aria-label="Sort">
+              import_export
+          </mat-icon>
+          <span class="icon-title">Sort</span>
+      </span>
+      <!-- <app-product-sort-mobile  class="filter-icons"></app-product-sort-mobile> -->
+    </div>
+  </ng-container>
+  
+  <ng-container *ngIf="!isHandset">
+    <h4 class="category-title">{{ category }}</h4>
+    <div class="filter-panel flex justify-around items-center">
+          <app-product-filters
+          [productFilters]="productFilters"
+          (setFilters)="onSetFilters($event)"
+          class="flex justify-start w-75"
+        ></app-product-filters>
+        <div>{{ total_count }} Results</div>
+        <app-sort-type
+          [sortTypeList]="sortTypeList"
+          (setSortType)="onSetSortType($event)"
+        >
+        </app-sort-type>
+    </div>
+  </ng-container> 
 
   <div
     class="flex flex-wrap justify-between"
@@ -21,11 +48,20 @@
     [infiniteScrollThrottle]="50"
     (scrolled)="onScroll()"
   >
-    <app-product
+    <ng-container *ngIf="isHandset">
+      <app-product-mobile 
       *ngFor="let product of products"
       [product]="product"
-      class="w-25-ns"
-    ></app-product>
+      class="w-50"
+      ></app-product-mobile>
+    </ng-container>
+    <ng-container  *ngIf="!isHandset">
+      <app-product
+      *ngFor="let product of products"
+      [product]="product"
+      class="w-25-ns "
+      ></app-product>
+    </ng-container>
   </div>
 </div>
 <img *ngIf="isProductFetching" [src]="spinner" class="loader" />

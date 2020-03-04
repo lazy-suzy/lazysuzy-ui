@@ -1,6 +1,6 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Subscription } from 'rxjs';
-import { ICategory } from './../../../shared/models';
+import { IAllCategory } from './../../../shared/models';
 import { ApiService } from './../../../shared/services';
 import { Router, ActivatedRoute } from '@angular/router';
 
@@ -13,7 +13,7 @@ export class CategoriesComponent implements OnInit {
   routeSubscription: Subscription;
   categorySubscription: Subscription;
   department: string;
-  categories: any;
+  categories: IAllCategory[];
   constructor(
     private apiService: ApiService,
     private router: Router,

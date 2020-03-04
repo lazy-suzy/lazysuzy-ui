@@ -1,5 +1,4 @@
 import { Component, OnInit, OnDestroy, HostListener } from '@angular/core';
-import { Subscription } from 'rxjs';
 import {
   IProductPayload,
   IProductsPayload,
@@ -8,6 +7,8 @@ import {
 } from './../../../shared/models';
 import { ApiService } from './../../../shared/services';
 import { Router, ActivatedRoute } from '@angular/router';
+import { Observable, Subscription } from 'rxjs';
+import { BreakpointState, Breakpoints, BreakpointObserver } from '@angular/cdk/layout';
 
 @Component({
   selector: 'app-products',
@@ -27,19 +28,34 @@ export class ProductsComponent implements OnInit, OnDestroy {
   sortTypeList: ISortType[];
   pageNo: number = 0;
   topPosToStartShowing = 300;
+  fixFilterBar = 150;
   isIconShow: boolean = false;
+  showBar: boolean = false;
   isProductFetching: boolean = false;
   spinner: string = 'assets/images/spinner.gif';
+
+  bpObserver: Observable<BreakpointState> = this.breakpointObserver.observe(
+    Breakpoints.Handset
+  );
+
+  bpSubscription: Subscription;
+  isHandset: boolean;
 
   constructor(
     private apiService: ApiService,
     private router: Router,
-    private activeRoute: ActivatedRoute
+    private activeRoute: ActivatedRoute,
+    private breakpointObserver: BreakpointObserver
   ) {}
 
   ngOnInit(): void {
     this.getParams();
     this.getParamsFromQuery();
+    this.bpSubscription = this.bpObserver.subscribe(
+      (handset: BreakpointState) => {
+        this.isHandset = handset.matches;
+      }
+    );
     this.routeSubscription = this.activeRoute.params.subscribe(routeParams => {
       this.department = routeParams.department;
       this.category = routeParams.category;
@@ -51,6 +67,7 @@ export class ProductsComponent implements OnInit, OnDestroy {
   ngOnDestroy(): void {
     this.productsSubscription.unsubscribe();
     this.routeSubscription.unsubscribe();
+    this.bpSubscription.unsubscribe();
   }
 
   getParams(): void {
@@ -145,6 +162,7 @@ export class ProductsComponent implements OnInit, OnDestroy {
       document.body.scrollTop ||
       0;
     this.isIconShow = scrollPosition >= this.topPosToStartShowing;
+    this.showBar = scrollPosition >= this.fixFilterBar;
   }
 
   gotoTop() {
@@ -154,4 +172,6 @@ export class ProductsComponent implements OnInit, OnDestroy {
       behavior: 'smooth'
     });
   }
+ 
 }
+
