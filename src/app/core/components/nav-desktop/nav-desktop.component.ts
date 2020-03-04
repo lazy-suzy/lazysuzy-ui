@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { Location } from '@angular/common';
 import { Subscription } from 'rxjs';
-import { IAllDepartment } from '../../../shared/models/all-department.interface';
+import { IAllDepartment } from '../../../shared/models';
 import { ApiService } from './../../../shared/services';
 
 @Component({
