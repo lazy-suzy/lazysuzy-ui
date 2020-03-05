@@ -52,10 +52,11 @@ export class ProductsComponent implements OnInit, OnDestroy {
 
   onSetFilters(e): void {
     const filters = this.buildFilters(e);
+    console.log("filters", filters);
     this.productsSubscription = this.apiService
       .getProducts(this.department, this.category, filters)
       .subscribe((payload: IProductsPayload) => {
-        this.products = payload.products;
+        this.products = payload.products;                                                                                           
       });
   }
 

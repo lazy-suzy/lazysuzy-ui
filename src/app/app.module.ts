@@ -15,7 +15,7 @@ const MODULES = [
   AppRoutingModule,
   CoreModule,
   FeatureModule,
-  SharedModule,
+  SharedModule
 ];
 
 @NgModule({
