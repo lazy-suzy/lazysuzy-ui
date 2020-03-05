@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Output, Input, EventEmitter } from '@angular/core';
+import { ISortType } from 'src/app/shared/models';
 
 @Component({
   selector: 'app-product-sort-mobile',
@@ -6,10 +7,21 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./product-sort-mobile.component.less']
 })
 export class ProductSortMobileComponent implements OnInit {
+  @Output() setSortToggle = new EventEmitter<any>();
+  @Output() setSortType = new EventEmitter<any>();
+  @Input() sortTypeList: ISortType[];
+  default: string = 'recommended';
 
-  constructor() { }
+  constructor() {}
 
-  ngOnInit() {
+  ngOnInit() {}
+
+  sortChanged(event, value) {
+    event.value = value;
+    this.setSortType.emit(event.value);
   }
 
+  closeSort() {
+    this.setSortToggle.emit();
+  }
 }

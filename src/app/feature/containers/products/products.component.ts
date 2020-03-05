@@ -33,7 +33,9 @@ export class ProductsComponent implements OnInit, OnDestroy {
   showBar: boolean = false;
   isProductFetching: boolean = false;
   spinner: string = 'assets/images/spinner.gif';
-
+  showMobileFilter: boolean = false;
+  showMobileSort: boolean = false;
+  productsInRow: number = 2;
   bpObserver: Observable<BreakpointState> = this.breakpointObserver.observe(
     Breakpoints.Handset
   );
@@ -121,6 +123,14 @@ export class ProductsComponent implements OnInit, OnDestroy {
     this.loadProducts();
   }
 
+  onSetMobileToggle($e) : void {
+    this.toggleMobileFilter();
+  }
+
+  onSetSortToggle($e) : void {
+    this.toggleMobileSort();
+  }
+
   onScroll() {
     if (this.isProductFetching) {
       return;
@@ -154,6 +164,7 @@ export class ProductsComponent implements OnInit, OnDestroy {
     }
     return tempFilters;
   }
+
   @HostListener('window:scroll')
   checkScroll() {
     const scrollPosition =
@@ -172,6 +183,21 @@ export class ProductsComponent implements OnInit, OnDestroy {
       behavior: 'smooth'
     });
   }
- 
+
+  toggleMobileFilter() {
+    this.showMobileFilter = !this.showMobileFilter;
+  }
+
+  toggleMobileSort() {
+    this.showMobileSort = !this.showMobileSort;
+  }
+
+  toggleMobileView() {
+    if (this.productsInRow === 3) {
+      this.productsInRow = 1;
+    } else {
+      this.productsInRow += 1;
+    }
+  }
 }
 

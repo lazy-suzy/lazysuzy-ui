@@ -102,7 +102,7 @@ export class ProductFiltersComponent {
     this.setFilters.emit(this.activeFilters);
   }
 
-  onValueChange() {
+  onPriceChange() {
     this.activeFilters.price_from = this.minValue;
     this.activeFilters.price_to = this.maxValue;
     this.isPriceChanged = true;

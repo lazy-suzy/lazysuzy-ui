@@ -1,6 +1,6 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Subscription } from 'rxjs';
-import { IAllCategory } from './../../../shared/models';
+import { IAllCategory } from '../../../shared/models/all-department.interface';
 import { ApiService } from './../../../shared/services';
 import { Router, ActivatedRoute } from '@angular/router';
 
