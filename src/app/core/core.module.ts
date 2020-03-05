@@ -7,7 +7,7 @@ import { BannerModule } from './components/banner/banner.module';
 
 const DECLARATIONS = [];
 
-const MODULES = [CommonModule, NavDesktopModule, FooterModule, SearchBarModule, BrandFooterModule, BannerModule];
+const MODULES = [CommonModule, NavDesktopModule, FooterModule, SearchBarModule, BrandFooterModule, BannerModule, NavMobileModule];
 
 @NgModule({
   declarations: [...DECLARATIONS],
