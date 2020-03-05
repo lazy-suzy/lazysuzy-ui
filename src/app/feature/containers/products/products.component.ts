@@ -114,30 +114,8 @@ export class ProductsComponent implements OnInit, OnDestroy {
   }
 
   onSetFilters(e): void {
-    this.filters = this.buildFilters(e);
-    this.loadProducts();
-  }
-
-  onSetSortType(e): void {
-    this.sortType = e;
-    this.loadProducts();
-  }
-
-  onSetMobileToggle($e) : void {
-    this.toggleMobileFilter();
-  }
-
-  onSetSortToggle($e) : void {
-    this.toggleMobileSort();
-  }
-
-  onScroll() {
-    if (this.isProductFetching) {
-      return;
-    }
-    this.pageNo += 1;
-    this.isProductFetching = true;
-
+    const filters = this.buildFilters(e);
+    console.log("filters", filters);
     this.productsSubscription = this.apiService
       .getProducts(
         this.department,
@@ -147,9 +125,7 @@ export class ProductsComponent implements OnInit, OnDestroy {
         this.pageNo
       )
       .subscribe((payload: IProductsPayload) => {
-        this.products = [...this.products, ...payload.products];
-        this.isProductFetching = false;
-        this.updateQueryString();
+        this.products = payload.products;                                                                                           
       });
   }
 

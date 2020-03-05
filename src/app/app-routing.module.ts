@@ -7,6 +7,8 @@ import {
   WishlistComponent,
   CategoriesComponent
 } from './feature/containers';
+import { SeeAllArrivalsComponent } from './feature/components/see-all-arrivals/see-all-arrivals.component';
+
 
 const routes: Routes = [
   { path: '', component: LandingComponent, pathMatch: 'full' },
@@ -21,7 +23,10 @@ const routes: Routes = [
     path: 'products/:department/:category',
     component: ProductsComponent,
     pathMatch: 'full'
-  }
+  },
+  { path: 'seeAllArrivals', component: SeeAllArrivalsComponent, pathMatch: 'full'},
+  { path: 'seeAllTopdeals', component: SeeAllArrivalsComponent, pathMatch: 'full'},
+  { path: 'seeAllBestsellers', component: SeeAllArrivalsComponent, pathMatch: 'full'}
 ];
 
 @NgModule({

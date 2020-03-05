@@ -5,8 +5,11 @@ import {
   ProductsModule,
   SearchModule,
   WishlistModule,
-  CategoriesModule
 } from './containers';
+import { SeeAllArrivalsComponent } from './components/see-all-arrivals/see-all-arrivals.component';
+import { SeeAllTopDealsComponent } from './components/see-all-top-deals/see-all-top-deals.component';
+import { SeeAllBestSellersComponent } from './components/see-all-best-sellers/see-all-best-sellers.component';
+
 
 const DECLARATIONS = [];
 
@@ -16,11 +19,10 @@ const MODULES = [
   LandingModule,
   SearchModule,
   WishlistModule,
-  CategoriesModule
 ];
 
 @NgModule({
-  declarations: [...DECLARATIONS],
+  declarations: [...DECLARATIONS, SeeAllArrivalsComponent, SeeAllTopDealsComponent, SeeAllBestSellersComponent],
   imports: [...MODULES],
   exports: [...DECLARATIONS, ...MODULES]
 })

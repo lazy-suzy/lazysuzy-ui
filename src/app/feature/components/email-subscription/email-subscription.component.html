@@ -1,0 +1,14 @@
+<div class="col-md-12 emailForm">
+    <form [formGroup]="emailForm" (submit)="onSubmit(emailForm.value)">
+        <div class="form-group">
+            <h3 class="email-text">Get new deals and styles, in your inbox first</h3>
+            <div class="row">
+                <input type="email" formControlName="email" name="email" class="form-control" id="email"
+                    placeholder="Enter your email address">
+                &nbsp;
+                <button class="btn btn-dark" type="submit" [disabled]="!emailForm.valid">Submit</button>
+            </div>
+        </div>
+
+    </form>
+</div>

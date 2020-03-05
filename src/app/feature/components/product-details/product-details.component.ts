@@ -23,9 +23,10 @@ export class ProductDetailsComponent implements OnInit {
       .getProduct(this.data.sku)
       .subscribe((payload: IProductPayload) => {
         this.product = payload;
+        console.log("product details", this.product)
       });
-  }
 
+    }
   ngOnDestroy(): void {
     this.productSubscription.unsubscribe();
   }
