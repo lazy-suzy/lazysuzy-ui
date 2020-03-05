@@ -6,7 +6,7 @@
 </div>
 <div *ngIf="newProducts">
     <button type="button" class="btn btn-sm btn-dark" (click)="seeAll()">See all</button>
-    <p-carousel [value]="newProducts" [numVisible]="4" [numScroll]="3">
+    <p-carousel class="new-arrivals-slider" [value]="newProducts" [numVisible]="4" [numScroll]="4" [autoplayInterval]="3000" [circular]="true" [responsiveOptions]="responsiveOptions">
         <ng-template let-data pTemplate="item">
             <div class="product">
                 <a target="_blank" href="{{data.product_detail_url}}">

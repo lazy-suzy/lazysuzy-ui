@@ -1,7 +1,8 @@
 <h2 class="section-title">Browse by Room</h2>
 
-<div class="browse-by-room-section row">
-  <div class="image-cards col-md-3" *ngFor="let data of departments">
+<div class="browse-by-room-section container-fluid">
+  <div class="row">
+  <div class="image-cards col-md-3 col-sm-6" *ngFor="let data of departments">
         <button type="button" class="btn btn-light btn-living">
             <img class="img"
                     [src]="data.image"
@@ -9,5 +10,6 @@
           <span class="span-living badge badge-secondary">{{data.department}}</span>
         </button>
   </div>
-           
+</div>
+
 </div>

@@ -12,4 +12,4 @@ export class NavDesktopComponent {
   logoPath: string = 'assets/images/color_logo_transparent.png';
   departments: IDepartment[] = MOCK_DEPARTMENTS;
   accountActions: ICategory[] = MOCK_ACCOUNT_ACTIONS;
-}
+} 

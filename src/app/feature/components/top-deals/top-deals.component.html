@@ -1,11 +1,11 @@
 <div class="top-deals">
     <h2 class="title-top-deals">Top Deals</h2>
-    <div *ngIf="!topDeals">
-        <img src="../../../../assets/images/three-dots.svg" width="60" height="46" alt="">
+        <div *ngIf="!topDeals">
+        <img class="loader" src="../../../../assets/images/three-dots.svg" width="60" height="46" alt="">
     </div>
     <div *ngIf="topDeals">
         <button type="button" class="btn btn-sm btn-dark" (click)="seeAll()">See All</button>
-        <p-carousel [value]="topDeals" [numVisible]="4" [numScroll]="3" [autoplayInterval]="3000" [circular]="true">
+        <p-carousel [value]="topDeals" [numVisible]="4" [numScroll]="4" [autoplayInterval]="3000" [responsiveOptions]="responsiveOptions" [circular]="true">
             <ng-template let-data pTemplate="item">
                 <div class="product">
                     <a target="_blank" href="{{data.product_detail_url}}">

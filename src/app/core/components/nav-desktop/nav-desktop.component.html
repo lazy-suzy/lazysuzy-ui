@@ -1,11 +1,17 @@
+
+
+
 <mat-toolbar class="bg-transparent">
+   
+  
   <mat-toolbar-row class="header flex justify-between ph2">
+
     <a
       routerLink="/"
       routerLinkActive="active"
       class="no-underline flex items-center"
     >
-      <img class="w4 pointer grow" [src]="logoPath" alt="Lazy Suzy Home" />
+      <img class="w4 pointer grow title-image" [src]="logoPath" alt="Lazy Suzy Home" />
     </a>
     <div class="mr3 flex items-center">
 
@@ -35,7 +41,7 @@
   </mat-toolbar-row>
 
 </mat-toolbar>
-<div class="top-navbar flex justify-around w-75">
+<div class="top-navbar flex justify-around ">
   <ng-container *ngFor="let department of departments">
     <div class="department-name">
       <div class="grow pointer pa2">

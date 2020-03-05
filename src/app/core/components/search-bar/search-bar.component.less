@@ -42,11 +42,11 @@ h1{
   .col-form {
     flex-grow: 1;
   }
-  .search-icon {
-    max-width: 46px;
-    color: @primary-color;
-    background: @secondary-color;
-    border: 0;
+  // .search-icon {
+  //   max-width: 46px;
+  //   color: @primary-color;
+  //   background: @secondary-color;
+  //   border: 0;
     .material-icons {
       font-size: 30px;
       height: 30px;
@@ -65,7 +65,7 @@ h1{
     font-size: 30px;
     font-weight: 600;
   }
-}
+
 
 .search-button{
   position: relative;
@@ -91,31 +91,50 @@ input::placeholder{
 }
 
 @media only screen and (max-width: 768px) {
+  .search-title{
+    font-size: 14px;
+  }
+
+  .search-container{
+    margin-top: 25%;
+    margin-bottom: 20%;
+  }
   .searchbar {
     height: 34px !important;
-    border: 1px solid #ccc !important;
+    // border: 1px solid #ccc !important;
     left: 0 !important;
     right: 0;
     width: auto;
     border-radius: 5px;
     z-index: 10;
     margin: 5px;
-
-    &:not(.open) {
-      display: none;
+    input::placeholder{
+      font-size: 12px;
     }
-    .card-body {
+    // &:not(.open) {
+    //   display: none;
+    // }
+    
       .search-icon {
         font-size: 18px !important;
+        position: relative;
+        bottom: 5px;
+      }
+      .search-button{
+        position: relative;
+        bottom: 27px;
+        height: 75%;
+        right: 32px;
       }
 
       .form-control[type='search'] {
         padding-top: 0px;
         padding-bottom: 0px;
-        max-height: 24px;
+        margin-left: 6%;
+        max-height: 30px;
         line-height: 1;
         font-size: 14px;
-        width: 100%;
+        width: 85%;
       }
       .btn[type='submit'] {
         width: auto;
@@ -127,6 +146,6 @@ input::placeholder{
         right: -15px;
         height: 30px;
       }
-    }
+    
   }
 }

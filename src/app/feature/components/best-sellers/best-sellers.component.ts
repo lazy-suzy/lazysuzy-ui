@@ -9,7 +9,26 @@ import { Router } from '@angular/router';
 })
 export class BestSellersComponent implements OnInit {
   bestSellers: any;
-  constructor(private apiService: ApiService, private router: Router) { }
+  responsiveOptions: any;
+  constructor(private apiService: ApiService, private router: Router) { 
+    this.responsiveOptions = [
+      {
+          breakpoint: '1024px',
+          numVisible: 3,
+          numScroll: 3
+      },
+      {
+          breakpoint: '768px',
+          numVisible: 1,
+          numScroll: 1
+      },
+      {
+          breakpoint: '560px',
+          numVisible: 1,
+          numScroll: 1
+      }
+  ];
+  }
 
   ngOnInit() {
     this.getBestSellers();

@@ -1,8 +1,5 @@
-<div *ngIf="!bannerData">
-        <img src="../../../../assets/images/three-dots.svg" width="60" height="46" alt="">
-    </div>
-<div class="bannerCarousel" *ngIf="bannerData">
-    <p-carousel [value]="bannerData" [numVisible]="1" [numScroll]="1" [autoplayInterval]="8000" [circular]="true">
+<div >
+    <p-carousel class="bannerCarousel" [value]="bannerData" [numVisible]="1" [numScroll]="1" [autoplayInterval]="8000" [circular]="true">
         <ng-template let-data pTemplate="item">
             <div class="product">
                 <a target="_blank" href="{{data.link}}">
@@ -11,17 +8,4 @@
             </div>
         </ng-template>
     </p-carousel>
-
 </div>
-
-
-<!-- <div id="owl-example" class="owl-carousel">
-
-     <div class="owl-slide1 row">
-            <img class="img"
-                src="https://ae01.alicdn.com/kf/HTB1woc.JpXXXXX4aXXXq6xXFXXXy/5-Pcs-New-Hot-Large-HD-With-Superman-Cartoon-Giants-Canvas-Print-Painting-For-Living-Room.jpg"
-                alt="living" (click)="living()">
-               
-    </div>  -->
-
-<!-- </div> -->
