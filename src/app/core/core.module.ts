@@ -1,4 +1,4 @@
-import { NavDesktopModule, FooterModule, SearchBarModule, NavMobileModule } from './components';
+import { NavDesktopModule, FooterModule, NavMobileModule } from './components';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { SearchBarModule } from './components/search-bar/search-bar.module';
