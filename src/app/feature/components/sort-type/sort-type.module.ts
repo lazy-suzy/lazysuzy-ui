@@ -13,4 +13,5 @@ const MODULES = [CommonModule, MatSelectModule, MatIconModule];
   imports: [...MODULES],
   exports: [...DECLARATIONS, ...MODULES]
 })
+
 export class SortTypeModule {}

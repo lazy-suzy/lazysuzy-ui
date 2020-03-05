@@ -8,7 +8,8 @@ import {
   ProductFiltersModule,
   ProductModule,
   SortTypeModule,
-} from './../../components';
+} from "./../../components";
+
 import { ProductsComponent } from './products.component';
 import { ProductMobileModule } from '../../components/product-mobile/product-mobile.module';
 import { ProductFilterMobileModule } from '../../components/product-filter-mobile/product-filter-mobile.module';
