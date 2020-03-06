@@ -8,7 +8,11 @@ import {
 import { ApiService } from './../../../shared/services';
 import { Router, ActivatedRoute } from '@angular/router';
 import { Observable, Subscription } from 'rxjs';
-import { BreakpointState, Breakpoints, BreakpointObserver } from '@angular/cdk/layout';
+import {
+  BreakpointState,
+  Breakpoints,
+  BreakpointObserver
+} from '@angular/cdk/layout';
 
 @Component({
   selector: 'app-products',
@@ -114,8 +118,30 @@ export class ProductsComponent implements OnInit, OnDestroy {
   }
 
   onSetFilters(e): void {
-    const filters = this.buildFilters(e);
-    console.log("filters", filters);
+    this.filters = this.buildFilters(e);
+    this.loadProducts();
+  }
+
+  onSetSortType(e): void {
+    this.sortType = e;
+    this.loadProducts();
+  }
+
+  onSetMobileToggle($e): void {
+    this.toggleMobileFilter();
+  }
+
+  onSetSortToggle($e): void {
+    this.toggleMobileSort();
+  }
+
+  onScroll() {
+    if (this.isProductFetching) {
+      return;
+    }
+    this.pageNo += 1;
+    this.isProductFetching = true;
+
     this.productsSubscription = this.apiService
       .getProducts(
         this.department,
@@ -125,7 +151,7 @@ export class ProductsComponent implements OnInit, OnDestroy {
         this.pageNo
       )
       .subscribe((payload: IProductsPayload) => {
-        this.products = payload.products;                                                                                           
+        this.products = payload.products;
       });
   }
 
@@ -176,4 +202,3 @@ export class ProductsComponent implements OnInit, OnDestroy {
     }
   }
 }
-
