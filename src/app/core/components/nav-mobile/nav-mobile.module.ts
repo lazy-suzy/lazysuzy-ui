@@ -8,6 +8,7 @@ import {
   MatButtonModule,
 } from '@angular/material';
 import { RouterModule } from '@angular/router';
+import { SearchBarModule } from '../search-bar/search-bar.module';
 
 const DECLARATIONS = [NavMobileComponent];
 
@@ -18,11 +19,12 @@ const MODULES = [
   MatIconModule,
   MatMenuModule,
   RouterModule,
+  SearchBarModule
 ];
 
 @NgModule({
   declarations: [...DECLARATIONS],
   imports: [...MODULES],
-  exports: [...DECLARATIONS, ...MODULES],
+exports: [...DECLARATIONS, ...MODULES],
 })
 export class NavMobileModule {}

@@ -16,6 +16,7 @@ export class NavMobileComponent {
   menuVisible = false;
   mobileMenuContainer;
   showDepartment;
+  showSearchComponent: boolean = false;
 
   constructor(private apiService: ApiService, private router: Router) {
     this.getDepartments();
@@ -42,5 +43,9 @@ export class NavMobileComponent {
       return;
     }
     this.showDepartment = dept;
+  }
+
+  showSearchBar() {
+    this.showSearchComponent = !this.showSearchComponent;
   }
 }

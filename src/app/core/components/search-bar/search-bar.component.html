@@ -1,14 +1,24 @@
 <div class="homepage">
   <div class="main-container search-container">
-    <h1>Search America's top Home brands in one go</h1>
     <form #form="ngForm" role="form" class="searchbar">
       <div class="col-form">
         <span>
-        <input class="form-control search-input" ngModel name="query" type="search" placeholder='Enter your search term here' />
-        <button type="button"  class="btn btn-warning search-button" (click)="openSearch(form)">
-          <i class="fas fa-search"></i>
-        </button>
-      </span>
+          <input
+            class="form-control search-input"
+            ngModel
+            name="query"
+            type="search"
+            placeholder="Enter your search term here"
+          />
+          <button
+            type="button"
+            class="btn btn-warning search-button"
+            (click)="openSearch(form)"
+          >
+            <i class="fas fa-search"></i>
+          </button>
+        </span>
       </div>
     </form>
+  </div>
 </div>

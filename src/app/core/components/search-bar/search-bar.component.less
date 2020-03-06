@@ -13,17 +13,12 @@
   text-align: center;
 }
 
-.search-container{
+.search-container {
   margin-top: 10%;
   margin-bottom: 8%;
 }
 
-h1{
-  font-weight: 800;
-  font-size: 55px;
-}
-
-.seacrh-input{
+.seacrh-input {
   height: 95% !important;
   width: 100%;
   position: relative;
@@ -67,24 +62,23 @@ h1{
   }
 }
 
-.search-button{
+.search-button {
   position: relative;
-    bottom: 60px;
-    height: 50%;
-    width: 10%;
-    float: right;
-    color: #f7c107;
-    background: white;
-    border: none;
-    margin-right: 1%;
-    
+  bottom: 60px;
+  height: 50%;
+  width: 10%;
+  float: right;
+  color: #f7c107;
+  background: white;
+  border: none;
+  margin-right: 1%;
 }
 
-.fa-search{
-      font-size: 30px;
+.fa-search {
+  font-size: 30px;
 }
 
-input::placeholder{
+input::placeholder {
   color: @input-field-color;
   font-size: 25px;
   font-weight: 600;
@@ -101,32 +95,28 @@ input::placeholder{
     z-index: 10;
     margin: 5px;
 
-    &:not(.open) {
-      display: none;
+    .search-icon {
+      font-size: 18px !important;
+      height: 35px;
     }
-    .card-body {
-      .search-icon {
-        font-size: 18px !important;
-      }
 
-      .form-control[type='search'] {
-        padding-top: 0px;
-        padding-bottom: 0px;
-        max-height: 24px;
-        line-height: 1;
-        font-size: 14px;
-        width: 100%;
-      }
-      .btn[type='submit'] {
-        width: auto;
-        border: none;
-        background-color: #0c1c31;
-        border-top-left-radius: 0;
-        border-bottom-left-radius: 0;
-        position: relative;
-        right: -15px;
-        height: 30px;
-      }
+    .form-control[type='search'] {
+      padding-top: 0px;
+      padding-bottom: 0px;
+      line-height: 1;
+      font-size: 14px;
+      height: 35px;
+      width: 100%;
+    }
+    .btn[type='submit'] {
+      width: auto;
+      border: none;
+      background-color: #0c1c31;
+      border-top-left-radius: 0;
+      border-bottom-left-radius: 0;
+      position: relative;
+      right: -15px;
+      height: 30px;
     }
   }
 }
