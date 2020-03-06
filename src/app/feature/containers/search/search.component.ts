@@ -72,10 +72,12 @@ export class SearchComponent implements OnInit {
         }
       }
     });
+
     this.productsSubscription = this.apiService
       .getSearchProducts(queryString)
-      .subscribe((payload: IProductsPayload) => {
-        this.products = payload.products;
+      .subscribe((payload: ISearchProductsPayload) => {
+        const { hits } = payload.hits;
+        this.products = hits.map((hit: any) => hit._source);
       });
   }
 

@@ -117,7 +117,7 @@ export class ApiService {
     return this.httpService.get(url);
   }
 
-  getSearchProducts(search_query: string): Observable<IProductsPayload> {
+  getSearchProducts(search_query: string): Observable<ISearchProductsPayload> {
     const endpoint = `products/_search`;
     const url = `${env.ES_API_BASE_HREF}${endpoint}?source=${search_query}&source_content_type=application%2Fjson`;
     return this.httpService.get(url);
