@@ -1,0 +1,49 @@
+<div class="flex items-center justify-between header">
+  <ng-container>
+      <button mat-icon-button id="side-nav-btn" (click)="showMenu()" class="fixed top-0 z-99">
+          <mat-icon class="account-icon">menu</mat-icon>
+      </button>
+      <div id="mobileMenuContainer" class="mobile-menu-container {{menuVisible?'show':'hide'}}">
+          <ul class="department-container">
+              <li *ngFor="let department of departments" class="department-list" > 
+                  <span (click)="showDepartmentChild(department.department)">
+                      <a class="department-title {{showDepartment === department.department?'active':'none'}}">
+                          {{ department.department | titlecase }} 
+                      </a>
+                      <mat-icon class="department-list-icon" *ngIf="showDepartment !== department.department" aria-hidden="false" aria-label="Search">
+                              chevron_right
+                      </mat-icon>
+                      <mat-icon class="department-list-icon active" *ngIf="showDepartment === department.department" aria-hidden="false" aria-label="Search">
+                              expand_more
+                      </mat-icon>
+                  </span>
+                  <ul class="category-container {{showDepartment === department.department?'show':'hide'}}">
+                      <li *ngFor="let category of department.categories" class="category-list" >
+                          <a class="category-title" [routerLink]="category.link">{{category.category}} </a>
+                      </li>
+                  </ul>
+              </li>
+          </ul>
+      </div>
+  </ng-container>
+
+  <a
+    routerLink="/"
+    routerLinkActive="active"
+    class="no-underline flex items-center"
+  >
+    <img class="w4 grow" [src]="logoPath" alt="Lazy Suzy Home" />
+  </a>
+
+  <div class="flex">
+    <mat-icon class="account-icon" aria-hidden="false" (click)="showSearchBar()">search</mat-icon>
+    <mat-icon class="account-icon" aria-hidden="false" aria-label="Account">
+      account_circle</mat-icon
+    >
+    <a routerLink="/wishlist" class="flex items-center header-link">
+      <mat-icon aria-hidden="false">favorite_border</mat-icon>
+    </a>
+  </div>
+  <app-search-bar *ngIf="showSearchComponent" class="section"></app-search-bar>
+
+</div>

@@ -1,5 +1,4 @@
-import { FooterModule } from './components/footer/footer.module';
-import { NavDesktopModule } from './components/nav-desktop/nav-desktop.module';
+import { NavDesktopModule, FooterModule, NavMobileModule } from './components';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { SearchBarModule } from './components/search-bar/search-bar.module';
@@ -8,11 +7,11 @@ import { BannerModule } from './components/banner/banner.module';
 
 const DECLARATIONS = [];
 
-const MODULES = [CommonModule, NavDesktopModule, FooterModule, SearchBarModule, BrandFooterModule, BannerModule];
+const MODULES = [CommonModule, NavDesktopModule, FooterModule, SearchBarModule, BrandFooterModule, BannerModule, NavMobileModule];
 
 @NgModule({
   declarations: [...DECLARATIONS],
   imports: [...MODULES],
-  exports: [...DECLARATIONS, ...MODULES]
+  exports: [...DECLARATIONS, ...MODULES],
 })
 export class CoreModule {}

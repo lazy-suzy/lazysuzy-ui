@@ -13,7 +13,7 @@
       </div>
     </ng-template>
   </div>
-  <div class="prod-info">
+  <div class="prod-info" *ngIf="!isHandset">
     <span class="site">
       <span *ngIf="product.is_new" class="new-tag"><strong>NEW</strong></span>
       {{ product.site_name }}

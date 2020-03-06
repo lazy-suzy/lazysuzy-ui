@@ -22,6 +22,6 @@ const MODULES = [
   declarations: [AppComponent],
   imports: [...MODULES],
   providers: [],
-  bootstrap: [AppComponent],
+  bootstrap: [AppComponent]
 })
 export class AppModule {}

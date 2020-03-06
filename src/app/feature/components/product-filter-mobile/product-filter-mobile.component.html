@@ -1,0 +1,70 @@
+<div class="mobile-filter-container" >
+    <div class="mobile-filter-bar">
+        <span class="back-icon" (click)="closeFilters()">
+            <mat-icon aria-hidden="false" aria-label="Arrow_Back">
+                arrow_back
+            </mat-icon>
+        </span>
+        <span class="container-title">
+            Filters
+        </span>
+        <span class="clear-all" (click)="clearFilters()">
+            Clear All
+        </span>
+    </div>
+    <div class="mobile-filter-content-container">
+        <div class="content-row">
+            <div class="w-25 tabs-col">
+                <div class="filter-tabs">
+                    <ul class="filter-list">
+                        <li *ngFor="let filter of objectKeys(productFilters)" class="filter-item {{activeTab === filter?'active': ''}} {{disableTab(filter)?'disabledTab':''}}" (click)="selectTab(filter)">
+                            {{filter|uppercase}}
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="w-75 content-col">
+                <div class="total-results">
+                    <button class="filter-results-button" (click)="closeFilters()">
+                        <div class='lds-ellipsis' *ngIf="isProductFetching; else showResult"><div></div><div></div><div></div><div></div></div>
+                        <ng-template #showResult>
+                            <span>See {{totalCount}} products </span>
+                        </ng-template>
+                        
+                    </button>
+                </div>
+                <div class="filter-content">
+                    <div class="clear-btn {{clearOptionVisible[activeTab]?'visible':'invisible'}}" (click)="clearBtn(activeTab)">
+                        clear
+                    </div>
+                    <ul *ngFor="let filter of productFilters | keyvalue" class="filters-list-container {{activeTab === filter.key && activeTab !== 'price'?'show': 'hide'}}">
+                        <li  *ngFor="let option of activeFilterTabData" 
+                        class="filters-list"
+                        >
+                            <label class="filter-label">
+                                <mat-checkbox
+                                class="pa2 menu-item"
+                                *ngIf="option.enabled"
+                                [checked]="option.checked"
+                                [value]="option.value"
+                                (change)="onCheckChange($event, filter.key)"
+                                >
+                                {{ option.name }}
+                                </mat-checkbox>
+                                
+                            </label>
+                        </li>
+                    </ul>
+                    <div *ngIf="activeTab === 'price'">
+                        <ng5-slider
+                        [(value)]="minValue"
+                        [(highValue)]="maxValue"
+                        [options]="silderOptions"
+                        (userChangeEnd)="onPriceChange()"
+                        ></ng5-slider>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

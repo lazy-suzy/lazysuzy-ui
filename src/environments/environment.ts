@@ -4,6 +4,5 @@ export const environment = {
   APP_NAME: 'LazySuzy',
   JSON_BASE_HREF: 'assets/resources/',
   API_BASE_HREF: 'http://staging.lazysuzy.com/api/',
-  BASE_HREF: 'http://staging.lazysuzy.com',
-  ES_API_BASE_HREF: 'https://www.lazysuzy.com/api/'
+  ES_API_BASE_HREF: 'https://www.lazysuzy.com:9200/'
 };

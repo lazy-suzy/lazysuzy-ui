@@ -13,10 +13,11 @@
     >
       <img class="w4 pointer grow title-image" [src]="logoPath" alt="Lazy Suzy Home" />
     </a>
+    <app-search-bar *ngIf="notHome" class="section"></app-search-bar>
     <div class="mr3 flex items-center">
-
-      <a routerLink="/wishlist" class="header-link pointer">
-        <mat-icon aria-hidden="false">favorite_border </mat-icon> My saved items
+      <a routerLink="/wishlist" class="flex items-center header-link pointer">
+        <mat-icon aria-hidden="false">favorite_border</mat-icon>
+        <span class="ml2">My saved items</span>
       </a>
 
       <mat-icon
@@ -29,8 +30,7 @@
       >
       <mat-menu #accountMenu="matMenu">
         <a
-          *ngFor="let action of accountActions"
-          [routerLink]="action.route"
+          *ngFor="let action of departments"
           routerLinkActive="active"
           class="no-underline"
         >
@@ -39,26 +39,24 @@
       </mat-menu>
     </div>
   </mat-toolbar-row>
-
 </mat-toolbar>
 <div class="top-navbar flex justify-around ">
   <ng-container *ngFor="let department of departments">
     <div class="department-name">
-      <div class="grow pointer pa2">
-        {{ department.display | titlecase }}
+      <div class="grow pointer pa2" [routerLink]="department.link">
+        {{ department.department | titlecase }}
       </div>
       <ul class="category-menu">
         <li *ngFor="let category of department.categories">
           <a
-            [routerLink]="category.route"
+            [routerLink]="category.link"
             routerLinkActive="active"
             class="no-underline"
           >
-            {{ category.display | titlecase }}
+            {{ category.category | titlecase }}
           </a>
         </li>
       </ul>
     </div>
   </ng-container>
 </div>
-

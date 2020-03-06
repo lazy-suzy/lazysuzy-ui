@@ -6,10 +6,11 @@ import {
   IProductsPayload,
   IProductPayload,
   ISearchProductsPayload,
+  IDepartment
 } from './../../models';
 import { MOCK_PRODUCT_FILTERS } from 'src/app/mocks';
 @Injectable({
-  providedIn: 'root',
+  providedIn: 'root'
 })
 export class ApiService {
   constructor(private httpService: HttpService) {}
@@ -22,7 +23,7 @@ export class ApiService {
       : `${env.ES_API_BASE_HREF}${endpoint}`;
       // : `${env.ES_API_BASE_HREF}${endpoint}?filters=${filters}&pageno=${page}`;
     return this.httpService.get(url);
-  } 
+  }
 
   getTopDeals(filters = '', page = 0):  Observable<IProductsPayload> {
     const endpoint = `products/all?sale=true`;
@@ -41,7 +42,7 @@ export class ApiService {
     return this.httpService.get(url);
   }
 
-  getEmail(email = '', url = ''){
+  getEmail(email = '', url = '') {
     const endpoint = 'subscribe';
     const path = env.useLocalJson
     ? `${env.JSON_BASE_HREF}${endpoint}`
@@ -59,34 +60,34 @@ export class ApiService {
   browseRoom() {
     const endpoint = 'all-departments';
     const url = env.useLocalJson
-    ? `${env.JSON_BASE_HREF}${endpoint}`
-    : `${env.ES_API_BASE_HREF}${endpoint}?home=true`;
+      ? `${env.JSON_BASE_HREF}${endpoint}`
+      : `${env.ES_API_BASE_HREF}${endpoint}?home=true`;
     return this.httpService.get(url);
   }
 
-  bannerData(){
-    const endpoint = "banners";
+  bannerData() {
+    const endpoint = 'banners';
     const url = env.useLocalJson
-    ? `${env.JSON_BASE_HREF}${endpoint}`
-    : `${env.API_BASE_HREF}${endpoint}`
+      ? `${env.JSON_BASE_HREF}${endpoint}`
+      : `${env.API_BASE_HREF}${endpoint}`;
     return this.httpService.get(url);
   }
 
-  seeAllArrivals(total){
-    console.log("total", total);
-    const endpoint = "products/all";
+  seeAllArrivals(total) {
+    console.log('total', total);
+    const endpoint = 'products/all';
     const url = env.useLocalJson
-    ? `${env.JSON_BASE_HREF}${endpoint}`
-    : `${env.ES_API_BASE_HREF}${endpoint}?new=true&limit=${total}`;
+      ? `${env.JSON_BASE_HREF}${endpoint}`
+      : `${env.ES_API_BASE_HREF}${endpoint}?new=true&limit=${total}`;
     return this.httpService.get(url);
   }
 
-  seeAllDeals(total){
-    console.log("total", total);
-    const endpoint = "products/all";
+  seeAllDeals(total) {
+    console.log('total', total);
+    const endpoint = 'products/all';
     const url = env.useLocalJson
-    ? `${env.JSON_BASE_HREF}${endpoint}`
-    : `${env.ES_API_BASE_HREF}${endpoint}?sale=true&limit=${total}`;
+      ? `${env.JSON_BASE_HREF}${endpoint}`
+      : `${env.ES_API_BASE_HREF}${endpoint}?sale=true&limit=${total}`;
     return this.httpService.get(url);
   }
 
@@ -94,13 +95,13 @@ export class ApiService {
     department: string,
     category: string,
     filters = '',
+    sortType = '',
     page = 0
   ): Observable<IProductsPayload> {
-    const sortTypes = '';
     const endpoint = `products/${department}/${category}`;
     const url = env.useLocalJson
       ? `${env.JSON_BASE_HREF}${endpoint}`
-      : `${env.API_BASE_HREF}${endpoint}?filters=${filters}&sort_type=${sortTypes}&pageno=${page}`;
+      : `${env.API_BASE_HREF}${endpoint}?filters=${filters}&sort_type=${sortType}&pageno=${page}`;
     return this.httpService.get(url);
   }
 
@@ -108,6 +109,14 @@ export class ApiService {
     const url = env.useLocalJson
       ? `${env.JSON_BASE_HREF}product/${id}`
       : `${env.API_BASE_HREF}product/${id}`;
+    return this.httpService.get(url);
+  }
+
+  getAllDepartments(): Observable<IDepartment> {
+    const endpoint = `all-departments`;
+    const url = env.useLocalJson
+      ? `${env.JSON_BASE_HREF}${endpoint}`
+      : `${env.API_BASE_HREF}${endpoint}`;
     return this.httpService.get(url);
   }
 
@@ -128,6 +137,12 @@ export class ApiService {
     const url = env.useLocalJson
       ? `${env.JSON_BASE_HREF}${endpoint}`
       : `${env.API_BASE_HREF}${endpoint}?filters=${filters}&sort_type=${sortTypes}&pageno=${page}`;
+    return this.httpService.get(url);
+  }
+
+  getCategories(department: string): Observable<ISearchProductsPayload> {
+    const endpoint = `categories/${department}`;
+    const url = `${env.API_BASE_HREF}${endpoint}`;
     return this.httpService.get(url);
   }
 }

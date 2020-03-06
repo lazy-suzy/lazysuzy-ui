@@ -1,0 +1,25 @@
+<div class="mobile-filter-container" >
+    <div class="mobile-filter-bar">
+        <span class="back-icon" (click)="closeSort()">
+            <mat-icon aria-hidden="false" aria-label="Arrow_Back">
+                arrow_back
+            </mat-icon>
+        </span>
+        <span class="container-title">
+            Sort
+        </span>
+        <!-- <span class="clear-all">
+            <a>Clear All</a>
+        </span> -->
+    </div>
+    <div class="mobile-filter-content-container">
+        <div class="sort-filter-input" *ngFor="let type of sortTypeList" (click)="sortChanged($event, type.value)">
+            <label class="sort-label">
+                {{type.name}}
+                <span class="float-right">
+                    <input type="radio" [checked]="type.enabled">
+                </span>
+            </label>
+        </div>
+    </div>
+</div>

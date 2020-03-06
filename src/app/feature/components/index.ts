@@ -8,3 +8,6 @@ export * from './top-deals/top-deals.module';
 export * from './best-sellers/best-sellers.module';
 export * from './best-sellers/best-sellers.module';
 export * from './create-your-style/create-your-style.module';
+export * from "./sort-type/sort-type.module";
+export * from "./product-mobile/product-mobile.module";
+
