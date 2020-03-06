@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Subscription } from 'rxjs';
 import {
-  ISearchProductsPayload,
-  ISearchProduct,
+  IProductsPayload,
+  IProduct
 } from './../../../shared/models';
 import { ApiService } from './../../../shared/services';
 import { Router, ActivatedRoute } from '@angular/router';
@@ -17,7 +17,7 @@ export class SearchComponent implements OnInit {
   iPageNo: number;
   iLimit: number;
   productsSubscription: Subscription;
-  products: ISearchProduct[];
+  products: IProduct[];
 
   constructor(
     private apiService: ApiService,
@@ -27,6 +27,18 @@ export class SearchComponent implements OnInit {
 
   ngOnInit(): void {
     this.query = this.route.snapshot.queryParamMap.get('query');
+    this.getQueryResult();
+    this.route.queryParams.subscribe(params => {
+      this.query = params['query'] || '';
+      this.getQueryResult();
+    });
+  }
+
+  ngOnDestroy(): void {
+    this.productsSubscription.unsubscribe();
+  }
+
+  getQueryResult() {
     this.iPageNo = 0;
     this.iLimit = 24;
     const queryString = JSON.stringify({
@@ -40,16 +52,10 @@ export class SearchComponent implements OnInit {
         },
       },
     });
-
     this.productsSubscription = this.apiService
       .getSearchProducts(queryString)
-      .subscribe((payload: ISearchProductsPayload) => {
-        const { hits } = payload.hits;
-        this.products = hits.map((hit: any) => hit._source);
+      .subscribe((payload: IProductsPayload) => {
+        this.products = payload.products;
       });
-  }
-
-  ngOnDestroy(): void {
-    this.productsSubscription.unsubscribe();
   }
 }

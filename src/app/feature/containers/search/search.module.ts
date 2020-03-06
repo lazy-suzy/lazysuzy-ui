@@ -1,12 +1,12 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { SearchProductModule } from './../../components';
+import { ProductModule, ProductMobileModule } from './../../components';
 
 import { SearchComponent } from './search.component';
 
 const DECLARATIONS = [SearchComponent];
 
-const MODULES = [CommonModule, SearchProductModule];
+const MODULES = [CommonModule, ProductModule, ProductMobileModule];
 
 @NgModule({
   declarations: [...DECLARATIONS],

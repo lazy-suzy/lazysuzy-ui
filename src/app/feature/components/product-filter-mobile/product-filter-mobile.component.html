@@ -25,7 +25,7 @@
             </div>
             <div class="w-75 content-col">
                 <div class="total-results">
-                    <button class="filter-results-button">
+                    <button class="filter-results-button" (click)="closeFilters()">
                         <div class='lds-ellipsis' *ngIf="isProductFetching; else showResult"><div></div><div></div><div></div><div></div></div>
                         <ng-template #showResult>
                             <span>See {{totalCount}} products </span>

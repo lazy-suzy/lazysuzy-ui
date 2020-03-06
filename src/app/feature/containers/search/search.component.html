@@ -1,8 +1,8 @@
 <h4>Search results for: {{ query }}</h4>
 <div class="flex flex-wrap justify-center ph3">
-  <app-search-product
+  <app-product
     *ngFor="let product of products"
     [product]="product"
     class="w-20-ns ma3"
-  ></app-search-product>
+  ></app-product>
 </div>
