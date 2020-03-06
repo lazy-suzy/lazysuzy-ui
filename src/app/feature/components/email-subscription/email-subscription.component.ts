@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators, FormArray } from "@angular/forms";
 import { ApiService } from 'src/app/shared/services';
+import {MessageService} from "primeng/api";
 
 @Component({
   selector: 'app-email-subscription',
@@ -9,7 +10,9 @@ import { ApiService } from 'src/app/shared/services';
 })
 export class EmailSubscriptionComponent implements OnInit {
   emailForm: FormGroup;
-  constructor(private apiService: ApiService, private formBuilder: FormBuilder) { }
+  emailSubmitted = false;
+  response: any;
+  constructor(private apiService: ApiService, private formBuilder: FormBuilder, private messageService: MessageService) { }
 
   ngOnInit() {
     this.emailForm = this.formBuilder.group({
@@ -21,9 +24,19 @@ export class EmailSubscriptionComponent implements OnInit {
   }
   onSubmit(value: any){
     console.log("email submitted________", value);
+    if(value.length > 0){
     this.apiService.getEmail().subscribe((res) =>{
       console.log("response", res);
+      this.emailSubmitted = true;
     })
   }
+  else{
+    this.messageService.add({
+      severity: "error",
+      summary: "Error message",
+      detail: "Please enter valid email!"
+    });
+  }
+}
 
 }

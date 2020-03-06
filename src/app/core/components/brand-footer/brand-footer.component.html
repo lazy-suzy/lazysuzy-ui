@@ -4,10 +4,7 @@
             15,000+ items from top home brands. one search & done.
         </h3>
     </div>
-    <br>
     <span class="brands" *ngFor="let data of brands">
-        <a target="_blank" href="{{data.url}}">
-            <img class="image" src={{data.logo}} alt="Brand Image">
-        </a>
+        <img class="image" src={{data.logo}} alt="Brand Image">
     </span>
 </div>

@@ -19,6 +19,7 @@ export class ApiService {
     const endpoint = `products/all`;
     const url = env.useLocalJson
       ? `${env.JSON_BASE_HREF}${endpoint}`
+      // : `${env.ES_API_BASE_HREF}${endpoint}`;
       : `${env.ES_API_BASE_HREF}${endpoint}?filters=${filters}&pageno=${page}`;
     return this.httpService.get(url);
   } 

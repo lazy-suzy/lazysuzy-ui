@@ -21,9 +21,9 @@ export class LandingComponent implements OnInit{
   constructor(private apiService: ApiService,  private formBuilder: FormBuilder) {}
   
   ngOnInit() {
-    this.getNewArrivals();
-    this.getTopDeals();
-    this.getBestSellers();
+    // this.getNewArrivals();
+    // this.getTopDeals();
+    // this.getBestSellers();
 
     this.emailForm = this.formBuilder.group({
       email: [
@@ -61,7 +61,7 @@ export class LandingComponent implements OnInit{
   onSubmit(value: any){
     console.log("email submitted________", value);
     this.apiService.getEmail().subscribe((res) =>{
-      console.log("response", res);
+      // console.log("response", res);
     })
   }
 

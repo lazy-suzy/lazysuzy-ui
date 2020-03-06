@@ -7,7 +7,6 @@
 @yellow-text-color: #fefce0;
 @background-color: #fbfbfb;
 @dropdown-background-color: #f7f6f7;
-@input-field-color: #ff003482;
 
 .main-container {
   text-align: center;
@@ -23,11 +22,16 @@ h1{
   font-size: 55px;
 }
 
-.seacrh-input{
-  height: 95% !important;
-  width: 100%;
-  position: relative;
-  right: 12px;
+// .seacrh-input{
+//   height: 95% !important;
+//   width: 100%;
+//   position: relative;
+//   right: 12px;
+// }
+
+.search-input-before::placeholder{
+  font-size: 25px;
+  color: @text-subtle;
 }
 
 .searchbar {
@@ -61,12 +65,12 @@ h1{
     width: 100%;
     padding: 5px 35px;
     border: 2px solid @border-color;
-    color: @input-field-color;
+    color: @text-subtle;
     font-size: 30px;
     font-weight: 600;
   }
 
-
+  
 .search-button{
   position: relative;
     bottom: 60px;
@@ -80,12 +84,22 @@ h1{
     
 }
 
+.search-button-before{
+  position: relative;
+  bottom: 63px;
+  height: 55%;
+  width: 10%;
+  float: right;
+  color: #f7c107;
+  border: none;
+}
+
 .fa-search{
       font-size: 30px;
 }
 
-input::placeholder{
-  color: @input-field-color;
+.search-input::placeholder{
+  color: #b76e79;
   font-size: 25px;
   font-weight: 600;
 }
@@ -108,7 +122,7 @@ input::placeholder{
     border-radius: 5px;
     z-index: 10;
     margin: 5px;
-    input::placeholder{
+    .search-input::placeholder{
       font-size: 12px;
     }
     // &:not(.open) {
@@ -124,6 +138,13 @@ input::placeholder{
         position: relative;
         bottom: 27px;
         height: 75%;
+        right: 32px;
+      }
+
+      .search-button{
+        position: relative;
+        bottom: 30px;
+        height: 80%;
         right: 32px;
       }
 

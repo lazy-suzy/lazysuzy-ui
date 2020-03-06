@@ -2,6 +2,8 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { EmailSubscriptionComponent } from './email-subscription.component';
 import { ReactiveFormsModule } from '@angular/forms';
+import {ToastModule} from 'primeng/toast';
+import { MessageService } from 'primeng/api';
 
 
 
@@ -9,8 +11,10 @@ import { ReactiveFormsModule } from '@angular/forms';
   declarations: [EmailSubscriptionComponent],
   imports: [
     CommonModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    ToastModule,
   ],
-  exports: [EmailSubscriptionComponent, CommonModule, ReactiveFormsModule]
+  providers: [MessageService],
+  exports: [EmailSubscriptionComponent,ToastModule, CommonModule, ReactiveFormsModule]
 })
 export class EmailSubscriptionModule { }

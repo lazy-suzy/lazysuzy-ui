@@ -2,14 +2,21 @@
 
 <div class="browse-by-room-section container-fluid">
   <div class="row">
-  <div class="image-cards col-md-3 col-sm-6" *ngFor="let data of departments">
-        <button type="button" class="btn btn-light btn-living">
+    <div class="content-item col-md-3 col-sm-6" *ngFor="let data of departments">
+      <!-- <button type="button" class="btn btn-light btn-living">
             <img class="img"
                     [src]="data.image"
                     routerLink="{{data.link}}">
           <span class="span-living badge badge-secondary">{{data.department}}</span>
-        </button>
+        </button> -->
+
+      <div class="pic">
+        <a target="_blank">
+          <img class="img" [src]="data.image" routerLink="{{data.link}}">
+        </a>
+    </div>
+        <span class="badge">{{data.department}}</span>
+    </div>
   </div>
-</div>
 
 </div>

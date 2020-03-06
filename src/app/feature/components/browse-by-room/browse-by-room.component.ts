@@ -10,6 +10,7 @@ import { environment} from './../../../../environments/environment';
 })
 export class BrowseByRoomComponent implements OnInit {
   departments: any;
+  ref = environment.BASE_HREF;
 
   constructor(private apiService: ApiService, private router: Router) { }
 
@@ -23,7 +24,7 @@ export class BrowseByRoomComponent implements OnInit {
       this.departments = res['all_departments'];
       this.departments = this.departments.filter(function(val){
         if(val['department'] != 'Decor'){
-          val.link = environment.API_BASE_HREF+val.link;
+          val.link = environment.BASE_HREF+val.link;
           return val;
         }
       })

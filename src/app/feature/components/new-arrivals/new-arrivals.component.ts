@@ -44,6 +44,7 @@ export class NewArrivalsComponent implements OnInit {
        this.newProducts = this.newArrivals.products;
        
        console.log("new products>>>>>>>>>>>>>>", this.newProducts)
+      
      });
  }
 
