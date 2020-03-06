@@ -16,16 +16,16 @@ export class ApiService {
 
   getNewArrivals(filters = '', page = 0):  Observable<IProductsPayload> {
     console.log("new arrival filter in srevice", filters);
-    const endpoint = `products/all`;
+    const endpoint = `products/all?new=true`;
     const url = env.useLocalJson
       ? `${env.JSON_BASE_HREF}${endpoint}`
-      // : `${env.ES_API_BASE_HREF}${endpoint}`;
-      : `${env.ES_API_BASE_HREF}${endpoint}?filters=${filters}&pageno=${page}`;
+      : `${env.ES_API_BASE_HREF}${endpoint}`;
+      // : `${env.ES_API_BASE_HREF}${endpoint}?filters=${filters}&pageno=${page}`;
     return this.httpService.get(url);
   } 
 
   getTopDeals(filters = '', page = 0):  Observable<IProductsPayload> {
-    const endpoint = `products/all`;
+    const endpoint = `products/all?sale=true`;
     const url = env.useLocalJson
       ? `${env.JSON_BASE_HREF}${endpoint}`
       : `${env.ES_API_BASE_HREF}${endpoint}?filters=${filters}&pageno=${page}`;
@@ -33,10 +33,11 @@ export class ApiService {
   }
 
   getBestSellers(filters = '', page = 0):  Observable<IProductsPayload> {
-    const endpoint = `products/all`;
+    const endpoint = `products/all?bestseller=true`;
     const url = env.useLocalJson
       ? `${env.JSON_BASE_HREF}${endpoint}`
-      : `${env.ES_API_BASE_HREF}${endpoint}?filters=${filters}&pageno=${page}`;
+      : `${env.ES_API_BASE_HREF}${endpoint}`;
+      // : `${env.ES_API_BASE_HREF}${endpoint}?filters=${filters}&pageno=${page}`;
     return this.httpService.get(url);
   }
 
@@ -44,7 +45,8 @@ export class ApiService {
     const endpoint = 'subscribe';
     const path = env.useLocalJson
     ? `${env.JSON_BASE_HREF}${endpoint}`
-    : `${env.ES_API_BASE_HREF}${endpoint}?email=${email}&url=${url}`;
+    : `${env.ES_API_BASE_HREF}${endpoint}`;
+    // : `${env.ES_API_BASE_HREF}${endpoint}?email=${email}&url=${url}`;
     return this.httpService.get(path);
   }
   getBrands(): Observable<IProductPayload> {

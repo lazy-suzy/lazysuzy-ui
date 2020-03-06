@@ -7,22 +7,95 @@ body {
 }
 body {
   margin: 0;
-  font-family: 'Fenix', Roboto, 'Helvetica Neue', sans-serif;
+  font-family: "Fenix", Roboto, "Helvetica Neue", sans-serif;
 }
-.bannerCarousel .ui-carousel-prev{ left: 45px; z-index: 9;}
+.bannerCarousel .ui-carousel-prev {
+  left: 45px;
+  z-index: 9;
+}
 
-.bannerCarousel .ui-carousel-next{ right: 45px;}
+.bannerCarousel .ui-carousel-next {
+  right: 45px;
+}
 
-.bannerCarousel .ui-carousel-content{ width: 110%; position: relative; left: -58px;}
+.bannerCarousel .ui-carousel-content {
+  width: 110%;
+  position: relative;
+  left: -58px;
+}
 
-.new-arrivals-slider .ui-carousel .ui-helper-reset,.top-deals .ui-carousel .ui-helper-reset,
-.best-sellers .ui-carousel .ui-helper-reset { display: none;}
+.new-arrivals-slider .ui-carousel .ui-helper-reset,
+.top-deals .ui-carousel .ui-helper-reset,
+.best-sellers .ui-carousel .ui-helper-reset {
+  display: none;
+}
 
-.new-arrivals-slider .ui-button, .top-deals .ui-button, .best-sellers .ui-button{ margin-top: -7% !important ; }
+.new-arrivals-slider .ui-carousel-next,
+.top-deals .ui-carousel-next,
+.best-sellers .ui-carousel-next {
+  margin-top: -7% !important ;
+  right: 44px;
+  z-index: 10;
+}
 
-@media(max-width:767px){
-.ui-carousel-dots-container {display: none;}
-.new-arrivals-slider .ui-button, .top-deals .ui-button, .best-sellers .ui-button { margin-top: -30% !important ;}
-.bannerCarousel .ui-button {font-size: 6px!important;}
+.new-arrivals-slider .ui-carousel-prev,
+  .top-deals .ui-carousel-prev,
+  .best-sellers .ui-carousel-prev {
+    margin-top: -7% !important ;
+    left: 40px;
+    z-index: 10;
+  }
 
+@media (max-width: 767px) {
+  .ui-carousel-dots-container {
+    display: none;
+  }
+
+  .new-arrivals-slider .ui-carousel-prev,
+  .top-deals .ui-carousel-prev,
+  .best-sellers .ui-carousel-prev {
+    position: relative;
+    left: -43%;
+    bottom: -170px;
+    z-index: 10;
+  }
+  .new-arrivals-slider .ui-carousel-next,
+  .top-deals .ui-carousel-next,
+  .best-sellers .ui-carousel-next {
+    position: relative;
+    bottom: 215px;
+    right: lef;
+    left: 118px;
+    z-index: 10;
+  }
+
+  .new-arrivals-slider .ui-carousel-container,
+  .top-deals .ui-carousel-container,
+  .best-sellers .ui-carousel-container {
+    display: contents;
+  }
+
+  .bannerCarousel .ui-button {
+    font-size: 6px !important;
+  }
+
+  .bannerCarousel .ui-carousel-content {
+    width: 127%;
+    margin-left: 5%;
+  }
+
+  .bannerCarousel .ui-carousel-prev {
+    left: 20px;
+    z-index: 9;
+  }
+
+  .bannerCarousel .ui-carousel-next {
+    right: 20px;
+  }
+}
+
+@media (max-width: 576px) {
+  .browse-by-room-section .content-item {
+    width: 49% !important;
+  }
 }

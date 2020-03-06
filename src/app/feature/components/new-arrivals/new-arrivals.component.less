@@ -13,6 +13,9 @@
 
 .product{padding-right: 2%; padding-top: 2%;}
 
+
+.product_name{ width: 100%; overflow: hidden; display: inline-block; text-overflow: ellipsis; white-space: nowrap;}
+
 .title-new-arrivals{ font-weight: 500; float: left ; margin-left: 5%;}
 
 .current-price{ color: @button-color; font-size: 15px;}
@@ -22,13 +25,12 @@
 
 
 @media only screen and (max-width: 768px){
+    .new-arrivals-heading{ margin-top: 2%;}
 
     .title-new-arrivals{ font-size: 22px; font-weight: 700;}
 
-    .btn{ font-size: 16px; background: @button-backgroud; border: none; color: @button-color; padding: 0%;}
+    .btn{ font-size: 16px; background: @button-backgroud; border: none; color: @button-color; padding: 0%; float: right;}
 
     .body .ui-helper-reset{ visibility: hidden;}
-
-    
 
 }
