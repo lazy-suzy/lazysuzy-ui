@@ -52,22 +52,23 @@
       ${{ product.was_price }}
     </span>
   </div>
-  <div class="swatch-list">
-    <div
-      *ngFor="let variation of product.variations | slice: 0:6"
-      class="swatch-item"
-      (click)="openSwatchDialog(variation)"
-    >
-      <img
-        *ngIf="variation.swatch_image"
-        class="carousel-img img-fluid"
-        [src]="variation.swatch_image"
-        (mouseover)="showVariationImage(variation.image)"
-        (mouseout)="hideVariationImage()"
-      />
+    <div class="swatch-list">
+      <div
+        *ngFor="let variation of product.variations | slice: 0:numbOfSwatchItems"
+        class="swatch-item"
+        (click)="openSwatchDialog(variation)"
+      >
+        <img
+          *ngIf="variation.swatch_image"
+          class="carousel-img img-fluid"
+          [src]="variation.swatch_image"
+          (mouseover)="showVariationImage(variation.image)"
+          (mouseout)="hideVariationImage()"
+        />
+      </div>
+      <div (click)="openDialog()" *ngIf="product.variations.length > numbOfSwatchItems">
+        + more
+      </div>
     </div>
-    <div (click)="openDialog()" *ngIf="product.variations.length > 6">
-      + more
-    </div>
-  </div>
+  
 </div>

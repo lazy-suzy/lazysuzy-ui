@@ -20,7 +20,7 @@ export class ApiService {
     const endpoint = `products/all`;
     const url = env.useLocalJson
       ? `${env.JSON_BASE_HREF}${endpoint}`
-      : `${env.ES_API_BASE_HREF}${endpoint}?filters=${filters}&pageno=${page}`;
+      : `${env.API_BASE_HREF}${endpoint}?filters=${filters}&pageno=${page}`;
     return this.httpService.get(url);
   }
 
@@ -28,7 +28,7 @@ export class ApiService {
     const endpoint = `products/all`;
     const url = env.useLocalJson
       ? `${env.JSON_BASE_HREF}${endpoint}`
-      : `${env.ES_API_BASE_HREF}${endpoint}?filters=${filters}&pageno=${page}`;
+      : `${env.API_BASE_HREF}${endpoint}?filters=${filters}&pageno=${page}`;
     return this.httpService.get(url);
   }
 
@@ -36,7 +36,7 @@ export class ApiService {
     const endpoint = `products/all`;
     const url = env.useLocalJson
       ? `${env.JSON_BASE_HREF}${endpoint}`
-      : `${env.ES_API_BASE_HREF}${endpoint}?filters=${filters}&pageno=${page}`;
+      : `${env.API_BASE_HREF}${endpoint}?filters=${filters}&pageno=${page}`;
     return this.httpService.get(url);
   }
 
@@ -44,7 +44,7 @@ export class ApiService {
     const endpoint = 'subscribe';
     const path = env.useLocalJson
       ? `${env.JSON_BASE_HREF}${endpoint}`
-      : `${env.ES_API_BASE_HREF}${endpoint}?email=${email}&url=${url}`;
+      : `${env.API_BASE_HREF}${endpoint}?email=${email}&url=${url}`;
     return this.httpService.get(path);
   }
   getBrands(): Observable<IProductPayload> {
@@ -58,7 +58,7 @@ export class ApiService {
     const endpoint = 'all-departments';
     const url = env.useLocalJson
       ? `${env.JSON_BASE_HREF}${endpoint}`
-      : `${env.ES_API_BASE_HREF}${endpoint}?home=true`;
+      : `${env.API_BASE_HREF}${endpoint}?home=true`;
     return this.httpService.get(url);
   }
 
@@ -75,7 +75,7 @@ export class ApiService {
     const endpoint = 'products/all';
     const url = env.useLocalJson
       ? `${env.JSON_BASE_HREF}${endpoint}`
-      : `${env.ES_API_BASE_HREF}${endpoint}?new=true&limit=${total}`;
+      : `${env.API_BASE_HREF}${endpoint}?new=true&limit=${total}`;
     return this.httpService.get(url);
   }
 
@@ -84,7 +84,20 @@ export class ApiService {
     const endpoint = 'products/all';
     const url = env.useLocalJson
       ? `${env.JSON_BASE_HREF}${endpoint}`
-      : `${env.ES_API_BASE_HREF}${endpoint}?sale=true&limit=${total}`;
+      : `${env.API_BASE_HREF}${endpoint}?sale=true&limit=${total}`;
+    return this.httpService.get(url);
+  }
+  getAllProducts(
+    trend: string,
+    total: number,
+    filters = '',
+    sortType = '',
+    page = 0
+  ): Observable<IProductsPayload> {
+    const endpoint = `products/all`;
+    const url = env.useLocalJson
+      ? `${env.JSON_BASE_HREF}${endpoint}`
+      : `${env.API_BASE_HREF}${endpoint}?${trend}=true&limit=${total}&filters=${filters}&sort_type=${sortType}&pageno=${page}`;
     return this.httpService.get(url);
   }
 

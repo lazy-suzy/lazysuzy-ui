@@ -15,37 +15,38 @@ import {
 } from '@angular/cdk/layout';
 
 @Component({
-  selector: 'app-products',
-  templateUrl: './products.component.html',
-  styleUrls: ['./products.component.less']
+  selector: 'app-all-products',
+  templateUrl: './all-products.component.html',
+  styleUrls: ['./all-products.component.less']
 })
-export class ProductsComponent implements OnInit, OnDestroy {
+export class AllProductsComponent implements OnInit {
   productsSubscription: Subscription;
   routeSubscription: Subscription;
   products: IProductPayload[];
   productFilters: IFilterData;
-  department: string;
+  trend: string;
   category: string;
-  total_count: number = 0;
+  total_count = 0;
   filters = '';
   sortType = '';
   sortTypeList: ISortType[];
-  pageNo: number = 0;
+  pageNo = 0;
   topPosToStartShowing = 300;
   fixFilterBar = 150;
-  isIconShow: boolean = false;
-  showBar: boolean = false;
-  isProductFetching: boolean = false;
-  spinner: string = 'assets/images/spinner.gif';
-  showMobileFilter: boolean = false;
-  showMobileSort: boolean = false;
-  productsInRow: number = 2;
+  isIconShow = false;
+  showBar = false;
+  isProductFetching = false;
+  spinner = 'assets/images/spinner.gif';
+  showMobileFilter = false;
+  showMobileSort = false;
+  productsInRow = 2;
   bpObserver: Observable<BreakpointState> = this.breakpointObserver.observe(
     Breakpoints.Handset
   );
 
   bpSubscription: Subscription;
-  isHandset: boolean;
+  isHandset: boolean = false;
+  total: number = 24;
 
   constructor(
     private apiService: ApiService,
@@ -55,19 +56,12 @@ export class ProductsComponent implements OnInit, OnDestroy {
   ) {}
 
   ngOnInit(): void {
-    this.getParams();
     this.getParamsFromQuery();
     this.bpSubscription = this.bpObserver.subscribe(
       (handset: BreakpointState) => {
         this.isHandset = handset.matches;
       }
     );
-    this.routeSubscription = this.activeRoute.params.subscribe(routeParams => {
-      this.department = routeParams.department;
-      this.category = routeParams.category;
-      this.loadProducts();
-    });
-    this.loadProducts();
   }
 
   ngOnDestroy(): void {
@@ -76,16 +70,17 @@ export class ProductsComponent implements OnInit, OnDestroy {
     this.bpSubscription.unsubscribe();
   }
 
-  getParams(): void {
-    const urlParams: string[] = this.router.url.split('/').slice(1);
-    this.department = urlParams[1];
-    this.category = urlParams[2].split('?')[1];
-  }
   getParamsFromQuery(): void {
     this.activeRoute.queryParams.subscribe(params => {
-      this.filters = params['filters'] || '';
-      this.pageNo = parseInt(params['pageNo']) || 0;
-      this.sortType = params['sortType'] || '';
+      this.filters = params.filters || '';
+      this.pageNo = parseInt(params.pageNo) || 0;
+      this.sortType = params.sortType || '';
+      Object.keys(params).map(key => {
+        if (key === 'new' || key === 'bestseller' || key === 'sale') {
+          this.trend = key;
+        }
+      });
+      this.loadProducts();
     });
   }
 
@@ -93,10 +88,9 @@ export class ProductsComponent implements OnInit, OnDestroy {
     this.pageNo = 0;
     this.isProductFetching = true;
     this.productsSubscription = this.apiService
-      .getProducts(this.department, this.category, this.filters, this.sortType)
+      .getAllProducts(this.trend, this.total, this.filters, this.sortType)
       .subscribe((payload: IProductsPayload) => {
         this.products = payload.products;
-        delete payload.filterData.category;
         this.productFilters = payload.filterData;
         this.sortTypeList = payload.sortType;
         this.total_count = payload.total;
@@ -111,7 +105,8 @@ export class ProductsComponent implements OnInit, OnDestroy {
       queryParams: {
         filters: this.filters,
         sortType: this.sortType,
-        pageNo: this.pageNo
+        pageNo: this.pageNo,
+        [this.trend]: true
       },
       queryParamsHandling: 'merge' // remove to replace all query params by provided
     });
@@ -143,9 +138,9 @@ export class ProductsComponent implements OnInit, OnDestroy {
     this.isProductFetching = true;
 
     this.productsSubscription = this.apiService
-      .getProducts(
-        this.department,
-        this.category,
+      .getAllProducts(
+        this.trend,
+        this.total,
         this.filters,
         this.sortType,
         this.pageNo
@@ -159,7 +154,7 @@ export class ProductsComponent implements OnInit, OnDestroy {
 
   buildFilters(event: string): string {
     let tempFilters = '';
-    for (let [filter, options] of Object.entries(event)) {
+    for (const [filter, options] of Object.entries(event)) {
       if (filter === 'price_from' || filter === 'price_to') {
         tempFilters += `${filter}:${options};`;
       } else {

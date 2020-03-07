@@ -25,6 +25,6 @@ export class TopDealsComponent implements OnInit {
 
   seeAll(){
     console.log("showing all dadta");
-    this.router.navigate(['/seeAllTopdeals']);
+    this.router.navigate(['/allProducts/top']);
   }
 }

@@ -10,7 +10,13 @@ import { IFilterData } from 'src/app/shared/models';
 })
 export class ProductFiltersComponent {
   @Output() setFilters = new EventEmitter<any>();
-  @Input() productFilters: IFilterData;
+  @Input() productFilters: IFilterData = {
+    brand: [],
+    type: [],
+    color: [],
+    category: [],
+    price: { from: 0, min: 0, max: 0, to: 0 }
+  };
   objectKeys = Object.keys;
   isClearAllVisible = false;
   activeFilters = {
@@ -18,7 +24,8 @@ export class ProductFiltersComponent {
     price_from: 0,
     price_to: 0,
     type: [],
-    color: []
+    color: [],
+    category: []
   };
   isPriceChanged: boolean = false;
   minValue: number = 100;
@@ -40,28 +47,30 @@ export class ProductFiltersComponent {
   }
 
   ngOnChanges(change: any) {
-    this.productFilters = change.productFilters.currentValue;
-    if (this.productFilters && !this.isPriceChanged) {
-      this.minValue = this.productFilters.price.from;
-      this.maxValue = this.productFilters.price.to;
-      this.silderOptions = {
-        floor: this.productFilters.price.min,
-        ceil: this.productFilters.price.max,
-        translate: (value: number): string => {
-          return '$' + value;
-        }
-      };
-      this.activeFilters.price_from = this.minValue;
-      this.activeFilters.price_to = this.maxValue;
-      this.activeFilters.brand = this.productFilters.brand
-        .filter(brand => brand.checked)
-        .map(brand => brand.value);
-      this.activeFilters.type = this.productFilters.type
-        .filter(type => type.checked)
-        .map(type => type.value);
-      this.activeFilters.color = this.productFilters.color
-        .filter(color => color.checked)
-        .map(color => color.value);
+    if (change.productFilters.currentValue !== undefined) {
+      this.productFilters = change.productFilters.currentValue;
+      if (this.productFilters && !this.isPriceChanged) {
+        this.minValue = this.productFilters.price.from;
+        this.maxValue = this.productFilters.price.to;
+        this.silderOptions = {
+          floor: this.productFilters.price.min,
+          ceil: this.productFilters.price.max,
+          translate: (value: number): string => {
+            return '$' + value;
+          }
+        };
+        this.activeFilters.price_from = this.minValue;
+        this.activeFilters.price_to = this.maxValue;
+        this.activeFilters.brand = this.productFilters.brand
+          .filter(brand => brand.checked)
+          .map(brand => brand.value);
+        this.activeFilters.type = this.productFilters.type
+          .filter(type => type.checked)
+          .map(type => type.value);
+        this.activeFilters.color = this.productFilters.color
+          .filter(color => color.checked)
+          .map(color => color.value);
+      }
     }
   }
 
@@ -94,7 +103,8 @@ export class ProductFiltersComponent {
       price_from: 0,
       price_to: 0,
       type: [],
-      color: []
+      color: [],
+      category: []
     };
     delete this.activeFilters.price_from;
     delete this.activeFilters.price_to;

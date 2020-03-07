@@ -23,6 +23,6 @@ export class BestSellersComponent implements OnInit {
 
   seeAll(){
     console.log("showing all dadta");
-    this.router.navigate(['/seeAllArrivals']);
+    this.router.navigate(['/allProducts/best']);
   }
 }

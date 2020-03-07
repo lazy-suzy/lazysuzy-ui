@@ -81,7 +81,7 @@ export interface IFilterData {
   price: Price;
   type: Brand[];
   color: Color[];
-  category?: any;
+  category?: Category[];
 }
 
 export interface Color {
@@ -105,6 +105,13 @@ export interface Brand {
   enabled: boolean;
   checked: boolean;
   count: number;
+}
+
+export interface Category {
+  name: string;
+  value: string;
+  enabled: boolean;
+  checked: boolean;
 }
 
 export interface ISortType {
