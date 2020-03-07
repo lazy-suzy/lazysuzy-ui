@@ -16,6 +16,7 @@ export class BrowseByRoomComponent implements OnInit {
 
   ngOnInit() {
     this.onClick();
+    console.log("in browse by room", )
   }
   onClick(){
     console.log("in_________")
@@ -23,7 +24,7 @@ export class BrowseByRoomComponent implements OnInit {
       console.log("response", res)
       this.departments = res['all_departments'];
       this.departments = this.departments.filter(function(val){
-        if(val['department'] != 'Decor'){
+        if(val['department'] != 'Decor' && val['department'] != ''){
           val.link = environment.BASE_HREF+val.link;
           return val;
         }

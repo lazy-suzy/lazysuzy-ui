@@ -20,7 +20,7 @@ export class ApiService {
     const endpoint = `products/all?new=true`;
     const url = env.useLocalJson
       ? `${env.JSON_BASE_HREF}${endpoint}`
-      : `${env.ES_API_BASE_HREF}${endpoint}`;
+      : `${env.API_BASE_HREF}${endpoint}`;
       // : `${env.ES_API_BASE_HREF}${endpoint}?filters=${filters}&pageno=${page}`;
     return this.httpService.get(url);
   }
@@ -29,7 +29,7 @@ export class ApiService {
     const endpoint = `products/all?sale=true`;
     const url = env.useLocalJson
       ? `${env.JSON_BASE_HREF}${endpoint}`
-      : `${env.ES_API_BASE_HREF}${endpoint}?filters=${filters}&pageno=${page}`;
+      : `${env.API_BASE_HREF}${endpoint}?filters=${filters}&pageno=${page}`;
     return this.httpService.get(url);
   }
 
@@ -37,7 +37,7 @@ export class ApiService {
     const endpoint = `products/all?bestseller=true`;
     const url = env.useLocalJson
       ? `${env.JSON_BASE_HREF}${endpoint}`
-      : `${env.ES_API_BASE_HREF}${endpoint}`;
+      : `${env.API_BASE_HREF}${endpoint}`;
       // : `${env.ES_API_BASE_HREF}${endpoint}?filters=${filters}&pageno=${page}`;
     return this.httpService.get(url);
   }
@@ -58,10 +58,10 @@ export class ApiService {
   }
 
   browseRoom() {
-    const endpoint = 'all-departments';
+    const endpoint = 'all-departments?home=true';
     const url = env.useLocalJson
-      ? `${env.JSON_BASE_HREF}${endpoint}`
-      : `${env.ES_API_BASE_HREF}${endpoint}?home=true`;
+      ? `${env.JSON_BASE_HREF}${endpoint} `
+      : `${env.API_BASE_HREF}${endpoint}`;
     return this.httpService.get(url);
   }
 
