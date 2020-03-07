@@ -12,26 +12,33 @@
   </div>
 </div>
 <div
-  class="flex flex-wrap justify-center ph3"
-  *ngIf="isHandset; else isDesktop"
+  infiniteScroll
+  [infiniteScrollDistance]="2"
+  [infiniteScrollThrottle]="50"
+  (scrolled)="onScroll()"
 >
-  <app-search-product
-    *ngFor="let product of products"
-    [product]="product"
-    [ngClass]="{
-      'w-50': productsInRow === 2,
-      'w-33': productsInRow === 3,
-      'w-100': productsInRow === 1
-    }"
-  ></app-search-product>
-</div>
-
-<ng-template #isDesktop>
-  <div class="flex flex-wrap justify-center ph3">
+  <div
+    class="flex flex-wrap justify-center ph3"
+    *ngIf="isHandset; else isDesktop"
+  >
     <app-search-product
       *ngFor="let product of products"
       [product]="product"
-      class="w-20-ns ma3"
+      [ngClass]="{
+        'w-50': productsInRow === 2,
+        'w-33': productsInRow === 3,
+        'w-100': productsInRow === 1
+      }"
     ></app-search-product>
   </div>
-</ng-template>
+
+  <ng-template #isDesktop>
+    <div class="flex flex-wrap justify-center ph3">
+      <app-search-product
+        *ngFor="let product of products"
+        [product]="product"
+        class="w-20-ns ma3"
+      ></app-search-product>
+    </div>
+  </ng-template>
+</div>

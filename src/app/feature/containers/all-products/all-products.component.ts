@@ -71,7 +71,7 @@ export class AllProductsComponent implements OnInit {
   }
 
   getParamsFromQuery(): void {
-    this.activeRoute.queryParams.subscribe(params => {
+    this.routeSubscription = this.activeRoute.queryParams.subscribe(params => {
       this.filters = params.filters || '';
       this.pageNo = parseInt(params.pageNo) || 0;
       this.sortType = params.sortType || '';
