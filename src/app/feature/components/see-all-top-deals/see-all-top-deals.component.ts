@@ -15,18 +15,14 @@ topDeals: any;
     this.apiService
      .getTopDeals()
      .subscribe((res) => {
-       console.log("response", res)
       this.total = res.total
-      console.log("total from old", this.total);
       this.seeAll();
 
      });
   }
   seeAll(){
-
     this.apiService.seeAllDeals(this.total).subscribe((res)=>{
       this.topDeals = res['products'];
-      console.log("deals",this.topDeals);
     })
   }
 

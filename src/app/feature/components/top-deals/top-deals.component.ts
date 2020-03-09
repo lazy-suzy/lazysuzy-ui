@@ -37,12 +37,10 @@ export class TopDealsComponent implements OnInit {
   getTopDeals(): void{
     this.apiService.getTopDeals().subscribe((res) =>{
       this.topDeals = res.products;
-      console.log("top deals_________", this.topDeals);
     });
   }
 
   seeAll(){
-    console.log("showing all dadta");
     this.router.navigate(['/seeAllTopdeals']);
   }
 }

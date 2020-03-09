@@ -36,12 +36,10 @@ export class BestSellersComponent implements OnInit {
   getBestSellers(): void{
     this.apiService.getBestSellers().subscribe((res)=>{
       this.bestSellers = res.products;
-      console.log("best sellers_________", this.bestSellers);
     })
   }
 
   seeAll(){
-    console.log("showing all dadta");
     this.router.navigate(['/seeAllArrivals']);
   }
 }

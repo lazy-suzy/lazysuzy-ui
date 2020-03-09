@@ -16,20 +16,17 @@ export class BrowseByRoomComponent implements OnInit {
 
   ngOnInit() {
     this.onClick();
-    console.log("in browse by room", )
   }
   onClick(){
-    console.log("in_________")
     this.apiService.browseRoom().subscribe((res: any) => {
-      console.log("response", res)
       this.departments = res['all_departments'];
       this.departments = this.departments.filter(function(val){
         if(val['department'] != 'Decor' && val['department'] != ''){
-          val.link = environment.BASE_HREF+val.link;
           return val;
         }
       })
-      console.log("departmnet___________", this.departments);
+      console.log("departments+++++++++++++++", this.departments);
+
     })
     
   }

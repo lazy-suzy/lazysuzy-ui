@@ -18,7 +18,6 @@ bannerData: any;
   ngOnInit() {
     this.apiService.bannerData().subscribe((res)=>{
     this.bannerData  = res;
-    console.log("banner data", this.bannerData);
     })
     
   }

@@ -12,13 +12,10 @@ export class SeeAllArrivalsComponent implements OnInit {
   constructor(private apiService: ApiService) { }
 
   ngOnInit() {
-  console.log("see all____________________");
   this.apiService
      .getNewArrivals()
      .subscribe((res) => {
-       console.log("response", res)
       this.total = res.total
-      console.log("total from old", this.total);
       this.seeAll();
 
      });
@@ -27,7 +24,6 @@ export class SeeAllArrivalsComponent implements OnInit {
 
     this.apiService.seeAllArrivals(this.total).subscribe((res)=>{
       this.newArrivals = res['products'];
-      console.log("arivals",this.newArrivals);
     })
   }
 

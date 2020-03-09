@@ -18,7 +18,7 @@ import { trigger, transition, animate, style } from '@angular/animations'
   ]
 })
 export class CreateYourStyleComponent implements OnInit {
-
+  videoSource : string = "https://lazysuzy.com/vd/lz-landing-design.mp4";
   constructor() { }
 
   ngOnInit() {

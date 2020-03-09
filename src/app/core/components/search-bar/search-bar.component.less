@@ -17,17 +17,10 @@
   margin-bottom: 8%;
 }
 
-h1{
+.search-title{
   font-weight: 800;
   font-size: 55px;
 }
-
-// .seacrh-input{
-//   height: 95% !important;
-//   width: 100%;
-//   position: relative;
-//   right: 12px;
-// }
 
 .search-input-before::placeholder{
   font-size: 25px;
@@ -46,11 +39,7 @@ h1{
   .col-form {
     flex-grow: 1;
   }
-  // .search-icon {
-  //   max-width: 46px;
-  //   color: @primary-color;
-  //   background: @secondary-color;
-  //   border: 0;
+
     .material-icons {
       font-size: 30px;
       height: 30px;
@@ -104,17 +93,20 @@ h1{
 }
 
 @media only screen and (max-width: 768px) {
+
+
   .search-title{
     font-size: 14px;
+    padding-top: 8%;
   }
 
   .search-container{
-    margin-top: 25%;
     margin-bottom: 20%;
+    margin-top: -10%;
+    padding-top: 15%;
   }
   .searchbar {
     height: 34px !important;
-    // border: 1px solid #ccc !important;
     left: 0 !important;
     right: 0;
     width: auto;
@@ -128,10 +120,7 @@ h1{
     .search-input-before::placeholder{
       font-size: 12px;
     }
-    // &:not(.open) {
-    //   display: none;
-    // }
-    
+     
       .search-icon {
         font-size: 18px !important;
         position: relative;

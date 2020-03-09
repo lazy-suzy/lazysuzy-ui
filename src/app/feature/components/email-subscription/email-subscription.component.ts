@@ -23,20 +23,16 @@ export class EmailSubscriptionComponent implements OnInit {
     });
   }
   onSubmit(value: any){
-    console.log("email submitted________", value.email);
     if(value.email.length > 0){
-      console.log("in if", value.email.length);
     this.apiService.getEmail().subscribe((res) =>{
-      console.log("response", res);
       this.emailSubmitted = true;
     })
   }
   else{
-    console.log("in else", value.email.length);
     this.messageService.add({
       severity: "error",
       summary: "Error message",
-      detail: "Please enter valid email !"
+      detail: "Please enter valid email!"
     });
   }
 }

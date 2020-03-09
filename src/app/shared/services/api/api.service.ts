@@ -16,7 +16,6 @@ export class ApiService {
   constructor(private httpService: HttpService) {}
 
   getNewArrivals(filters = '', page = 0):  Observable<IProductsPayload> {
-    console.log("new arrival filter in srevice", filters);
     const endpoint = `products/all?new=true`;
     const url = env.useLocalJson
       ? `${env.JSON_BASE_HREF}${endpoint}`
@@ -74,7 +73,6 @@ export class ApiService {
   }
 
   seeAllArrivals(total) {
-    console.log('total', total);
     const endpoint = 'products/all';
     const url = env.useLocalJson
       ? `${env.JSON_BASE_HREF}${endpoint}`
@@ -83,7 +81,6 @@ export class ApiService {
   }
 
   seeAllDeals(total) {
-    console.log('total', total);
     const endpoint = 'products/all';
     const url = env.useLocalJson
       ? `${env.JSON_BASE_HREF}${endpoint}`
