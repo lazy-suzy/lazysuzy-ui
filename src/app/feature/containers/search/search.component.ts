@@ -26,7 +26,7 @@ export class SearchComponent implements OnInit {
   bpObserver: Observable<BreakpointState> = this.breakpointObserver.observe(
     Breakpoints.Handset
   );
-
+  total_count: number = 0;
   bpSubscription: Subscription;
   isHandset: boolean;
   productsInRow: number = 2;
@@ -78,6 +78,7 @@ export class SearchComponent implements OnInit {
       .getSearchProducts(queryString)
       .subscribe((payload: ISearchProductsPayload) => {
         const { hits } = payload.hits;
+        this.total_count = hits.length;
         this.products = hits.map((hit: any) => hit._source);
       });
   }

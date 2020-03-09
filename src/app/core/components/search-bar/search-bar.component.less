@@ -17,12 +17,12 @@
   margin-bottom: 8%;
 }
 
-.search-title{
+.search-title {
   font-weight: 800;
   font-size: 55px;
 }
 
-.search-input-before::placeholder{
+.search-input-before::placeholder {
   font-size: 25px;
   color: @text-subtle;
 }
@@ -40,67 +40,54 @@
     flex-grow: 1;
   }
 
-    .material-icons {
-      font-size: 30px;
-      height: 30px;
-      width: 30px;
-    }
-  }
-
-  .form-control[type='search'] {
-    outline: none !important;
-    box-shadow: none !important;
-    height: 65px;
-    width: 100%;
-    padding: 5px 35px;
-    border: 2px solid @border-color;
-    color: @text-subtle;
+  .material-icons {
     font-size: 30px;
-    font-weight: 600;
+    height: 30px;
+    width: 30px;
   }
+}
 
-  
-.search-button{
+.form-control[type='search'] {
+  outline: none !important;
+  box-shadow: none !important;
+  height: 55px;
+  width: 100%;
+  padding: 5px 35px;
+  border: 2px solid @border-color;
+  color: @text-subtle;
+  font-size: 30px;
+  font-weight: 600;
+}
+
+.search-button {
   position: relative;
-  bottom: 60px;
-  height: 50%;
+  bottom: 50px;
+  height: 45%;
   width: 10%;
   float: right;
   color: #f7c107;
   background: white;
   border: none;
-  margin-right: 1%;
+  margin-right: 10px;
 }
 
-.search-button-before{
-  position: relative;
-  bottom: 63px;
-  height: 55%;
-  width: 10%;
-  float: right;
-  color: #f7c107;
-  border: none;
+.fa-search {
+  font-size: 28px;
 }
 
-.fa-search{
-      font-size: 30px;
-}
-
-.search-input::placeholder{
+.search-input::placeholder {
   color: #b76e79;
   font-size: 25px;
   font-weight: 600;
 }
 
 @media only screen and (max-width: 768px) {
-
-
-  .search-title{
+  .search-title {
     font-size: 14px;
     padding-top: 8%;
   }
 
-  .search-container{
+  .search-container {
     margin-bottom: 20%;
     margin-top: -10%;
     padding-top: 15%;
@@ -113,52 +100,70 @@
     border-radius: 5px;
     z-index: 10;
     margin: 5px;
-    .search-input::placeholder{
+    .search-input::placeholder {
       font-size: 12px;
     }
 
-    .search-input-before::placeholder{
-      font-size: 12px;
+    .form-control[type='search'] {
+      padding-top: 0px;
+      padding-bottom: 0px;
+      line-height: 1;
+      font-size: 14px;
+      padding: 0 10px;
+      height: 40px;
+      width: 100%;
     }
-     
-      .search-icon {
-        font-size: 18px !important;
-        position: relative;
-        bottom: 3px;
+    .search-button {
+      width: 10%;
+      bottom: 35px;
+      border: none;
+      background-color: #ffffff;
+      border-top-left-radius: 0;
+      border-bottom-left-radius: 0;
+      position: relative;
+      height: 30px;
+      i {
+        font-size: 18px;
       }
-      .search-button-before{
-        position: relative;
-        bottom: 30px;
-        height: 75%;
-        right: 30px;
-      }
+    }
 
-      .search-button{
-        position: relative;
-        bottom: 30px;
-        height: 80%;
-        right: 32px;
-      }
+    .search-icon {
+      font-size: 18px !important;
+      position: relative;
+      bottom: 3px;
+    }
+    .search-button-before {
+      position: relative;
+      bottom: 30px;
+      height: 75%;
+      right: 30px;
+    }
 
-      .form-control[type='search'] {
-        padding-top: 0px;
-        padding-bottom: 0px;
-        margin-left: 6%;
-        max-height: 30px;
-        line-height: 1;
-        font-size: 14px;
-        width: 85%;
-      }
-      .btn[type='submit'] {
-        width: auto;
-        border: none;
-        background-color: #0c1c31;
-        border-top-left-radius: 0;
-        border-bottom-left-radius: 0;
-        position: relative;
-        right: 0px;
-        height: 30px;
-      }
-    
+    .search-button {
+      position: relative;
+      bottom: 30px;
+      height: 80%;
+      right: 32px;
+    }
+
+    .form-control[type='search'] {
+      padding-top: 0px;
+      padding-bottom: 0px;
+      margin-left: 6%;
+      max-height: 30px;
+      line-height: 1;
+      font-size: 14px;
+      width: 85%;
+    }
+    .btn[type='submit'] {
+      width: auto;
+      border: none;
+      background-color: #0c1c31;
+      border-top-left-radius: 0;
+      border-bottom-left-radius: 0;
+      position: relative;
+      right: 0px;
+      height: 30px;
+    }
   }
 }

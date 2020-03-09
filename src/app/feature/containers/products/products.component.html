@@ -71,6 +71,7 @@
       <app-product-mobile
         *ngFor="let product of products"
         [product]="product"
+        [productsInRow]="productsInRow"
         [ngClass]="{
           'w-50': productsInRow === 2,
           'w-33': productsInRow === 3,
@@ -87,6 +88,11 @@
       ></app-product>
     </ng-container>
   </div>
+  <app-subscribe
+    [category]="category"
+    class="tc {{ checkProductsLength < 1 ? '' : 'dn' }}"
+  >
+  </app-subscribe>
 </div>
 <img *ngIf="isProductFetching" [src]="spinner" class="loader" />
 <button

@@ -10,6 +10,7 @@ import { MatDialog } from '@angular/material/dialog';
 })
 export class ProductMobileComponent implements OnInit {
   @Input() product: IProductPayload;
+  @Input() productsInRow: number;
 
   constructor() { }
 

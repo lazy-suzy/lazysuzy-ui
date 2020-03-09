@@ -83,7 +83,6 @@ export class AllProductsComponent implements OnInit {
       this.loadProducts();
     });
   }
-
   loadProducts(): void {
     this.pageNo = 0;
     this.isProductFetching = true;
@@ -173,6 +172,11 @@ export class AllProductsComponent implements OnInit {
       0;
     this.isIconShow = scrollPosition >= this.topPosToStartShowing;
     this.showBar = scrollPosition >= this.fixFilterBar;
+    if (this.isIconShow) {
+      setTimeout(function() {
+        this.isIconShow = false;
+      }, 5000);
+    }
   }
 
   gotoTop() {

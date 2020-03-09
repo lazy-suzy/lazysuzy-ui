@@ -1,0 +1,54 @@
+.subscription-box-container {
+    padding: 20px;
+    border-top: 1px solid #d6d6d6;
+    border-bottom: 1px solid #d6d6d6;
+    margin: 20px 0;
+    font-size: 20px;
+    color:#21334b;
+    .subscription-box {
+        display: flex;
+        justify-content: center;
+        .subscription-text {
+            margin: 0 10px;
+        }
+        input {
+            padding: 6px;
+            font-size: 14px;
+            min-width: 220px;
+        }
+        .error-msg {
+            font-size: 14px;
+            color: #ff0000;
+        }
+        .button-container {
+            padding: 1px 0;
+            border-radius: 1px;
+            .submit-button {
+                color: #ffcc00;
+                background-color: #21334b;
+                border: none;
+                padding: 5px;
+            }
+        }
+    }
+}
+
+@media only screen and (max-width: 768px) {
+    .subscription-box-container{
+        .subscription-box{
+            display: block;
+            .subscriber-form {
+                justify-content: center;
+            }
+            .subscription-text {
+                font-size: 14px;
+            }
+        }
+        .none {
+            display: none;
+        }
+    }
+    .success-msg{
+        font-size: 14px;
+    }
+}

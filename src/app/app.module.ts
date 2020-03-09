@@ -7,6 +7,8 @@ import { CoreModule } from './core/core.module';
 import { FeatureModule } from './feature/feature.module';
 import { SharedModule } from './shared/shared.module';
 import { HttpClientModule } from '@angular/common/http';
+import { AngularFontAwesomeModule } from 'angular-font-awesome';
+import { FormsModule } from '@angular/forms';
 
 const MODULES = [
   BrowserModule,
@@ -15,7 +17,9 @@ const MODULES = [
   AppRoutingModule,
   CoreModule,
   FeatureModule,
-  SharedModule
+  SharedModule,
+  AngularFontAwesomeModule,
+  FormsModule
 ];
 
 @NgModule({

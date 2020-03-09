@@ -43,7 +43,7 @@ export class ProductsComponent implements OnInit, OnDestroy {
   bpObserver: Observable<BreakpointState> = this.breakpointObserver.observe(
     Breakpoints.Handset
   );
-
+  checkProductsLength: number = 1;
   bpSubscription: Subscription;
   isHandset: boolean;
 
@@ -96,6 +96,7 @@ export class ProductsComponent implements OnInit, OnDestroy {
       .getProducts(this.department, this.category, this.filters, this.sortType)
       .subscribe((payload: IProductsPayload) => {
         this.products = payload.products;
+        this.checkProductsLength = payload.products.length;
         delete payload.filterData.category;
         this.productFilters = payload.filterData;
         this.sortTypeList = payload.sortType;
@@ -152,6 +153,7 @@ export class ProductsComponent implements OnInit, OnDestroy {
       )
       .subscribe((payload: IProductsPayload) => {
         this.products = [...this.products, ...payload.products];
+        this.checkProductsLength = payload.products.length;
         this.updateQueryString();
         this.isProductFetching = false;
       });
@@ -178,6 +180,11 @@ export class ProductsComponent implements OnInit, OnDestroy {
       0;
     this.isIconShow = scrollPosition >= this.topPosToStartShowing;
     this.showBar = scrollPosition >= this.fixFilterBar;
+    if (this.isIconShow) {
+      setTimeout(function() {
+        this.isIconShow = false;
+      }, 5000);
+    }
   }
 
   gotoTop() {
