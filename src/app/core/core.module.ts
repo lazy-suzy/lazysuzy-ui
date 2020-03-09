@@ -24,7 +24,9 @@ const MODULES = [
   AboutusModule,
   PrivacyPolicyModule,
   TermsOfServiceModule,
-  FooterMobileModule
+  FooterMobileModule,
+  BrandFooterModule,
+  BannerModule
 ];
 
 @NgModule({

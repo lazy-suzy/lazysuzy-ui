@@ -1,8 +1,8 @@
-<div class="search-result-title-bar" *ngIf="isHandset">
+<div class="search-result-title-bar">
   <h4 class="w-70 m-3">
     Search results for: <span class="search-term">{{ query }}</span>
   </h4>
-  <div class="w-30">
+  <div class="w-30" *ngIf="isHandset">
     <span class="icon-container" (click)="toggleMobileView()">
       <mat-icon aria-hidden="false" aria-label="toggle">
         view_module
@@ -17,37 +17,30 @@
   [infiniteScrollThrottle]="50"
   (scrolled)="onScroll()"
 >
-  <app-search-product
-    *ngFor="let product of products"
-    [product]="product"
-    [ngClass]="{
-      'w-50': productsInRow === 2,
-      'w-33': productsInRow === 3,
-      'w-100': productsInRow === 1
-    }"
-  ></app-search-product>
-</div>
-
-<ng-template #isDesktop>
-  <div class="tr w-100 results-text">
-    <span >
-      {{total_count}} Results
-    </span>
-  </div>
-  <div class="flex flex-wrap justify-center">
+  <div
+    class="flex flex-wrap justify-center ph3"
+    *ngIf="isHandset; else isDesktop"
+  >
     <app-search-product
       *ngFor="let product of products"
       [product]="product"
-      class="w-25-ns"
+      [ngClass]="{
+        'w-50': productsInRow === 2,
+        'w-33': productsInRow === 3,
+        'w-100': productsInRow === 1
+      }"
     ></app-search-product>
   </div>
 
   <ng-template #isDesktop>
-    <div class="flex flex-wrap justify-center ph3">
+    <div class="tr w-100 results-text">
+      <span> {{ total_count }} Results </span>
+    </div>
+    <div class="flex flex-wrap justify-center">
       <app-search-product
         *ngFor="let product of products"
         [product]="product"
-        class="w-20-ns ma3"
+        class="w-25-ns"
       ></app-search-product>
     </div>
   </ng-template>
