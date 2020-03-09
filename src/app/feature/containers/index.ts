@@ -8,3 +8,5 @@ export * from './wishlist/wishlist.module';
 export * from './wishlist/wishlist.component';
 export * from './categories/categories.module';
 export * from './categories/categories.component';
+export * from './all-products/all-products.module';
+export * from './all-products/all-products.component';

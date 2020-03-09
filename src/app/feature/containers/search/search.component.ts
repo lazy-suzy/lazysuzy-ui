@@ -30,6 +30,7 @@ export class SearchComponent implements OnInit {
   bpSubscription: Subscription;
   isHandset: boolean;
   productsInRow: number = 2;
+  isProductFetching: boolean = false;
 
   constructor(
     private apiService: ApiService,
@@ -78,6 +79,37 @@ export class SearchComponent implements OnInit {
       .subscribe((payload: ISearchProductsPayload) => {
         const { hits } = payload.hits;
         this.products = hits.map((hit: any) => hit._source);
+      });
+  }
+
+  onScroll() {
+    if (this.isProductFetching) {
+      return;
+    }
+    this.iPageNo += 1;
+    this.isProductFetching = true;
+
+    const queryString = JSON.stringify({
+      from: this.iPageNo * this.iLimit,
+      size: this.iLimit,
+      query: {
+        match: {
+          name: {
+            query: this.query + '*'
+          }
+        }
+      }
+    });
+
+    this.productsSubscription = this.apiService
+      .getSearchProducts(queryString)
+      .subscribe((payload: ISearchProductsPayload) => {
+        const { hits } = payload.hits;
+        this.products = [
+          ...this.products,
+          ...hits.map((hit: any) => hit._source)
+        ];
+        this.isProductFetching = false;
       });
   }
 

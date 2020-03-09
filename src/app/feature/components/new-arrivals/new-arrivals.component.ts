@@ -46,7 +46,7 @@ export class NewArrivalsComponent implements OnInit {
  }
 
  seeAll(){
-   this.router.navigate(['/seeAllArrivals']);
+   this.router.navigate(['/allProducts/new']);
  }
 
 

@@ -2,6 +2,8 @@ import { ProductDetailsComponent } from './../product-details/product-details.co
 import { IProductPayload } from './../../../shared/models';
 import { Component, OnInit, Input } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
+import { Observable, Subscription } from 'rxjs';
+import { BreakpointState, Breakpoints, BreakpointObserver } from '@angular/cdk/layout';
 
 @Component({
   selector: 'app-product',
@@ -13,11 +15,30 @@ export class ProductComponent implements OnInit {
   starIcons: string[] = new Array();
   variationImage: string = '';
   isVariationImageVisible: boolean = false;
+  bpObserver: Observable<BreakpointState> = this.breakpointObserver.observe(
+    Breakpoints.Handset
+  );
 
-  constructor(public dialog: MatDialog) {}
+  bpSubscription: Subscription;
+  numbOfSwatchItems: number;
+
+  constructor(public dialog: MatDialog, private breakpointObserver: BreakpointObserver) {}
 
   ngOnInit(): void {
     this.setRating();
+    this.bpSubscription = this.breakpointObserver
+    .observe([Breakpoints.Small])
+    .subscribe((state: BreakpointState) => {
+      if (state.matches) {
+        this.numbOfSwatchItems = 3;
+      } else {
+        this.numbOfSwatchItems = 6;
+      }
+    });
+  }
+
+  ngOnDestroy(): void {
+    this.bpSubscription.unsubscribe();
   }
 
   setRating(): void {

@@ -6,7 +6,7 @@
 </ng-template>
 
 
-<div class="mh4 content-height">
+<div class="{{isHandset?'': 'mh4 '}} content-height">
     <router-outlet></router-outlet>
 </div>
 <app-footer class="footer-display bg-dark-gray w-100"></app-footer>
