@@ -1,26 +1,36 @@
-<div class="best-sellers">
-    <h2 class="title-best-sellers">Best Sellers</h2>
-    <div *ngIf="!bestSellers">
-        <img src="../../../../assets/images/three-dots.svg" width="60" height="46" alt="">
+<div class="row best-sellers">
+        <div class="col-md-2 best-sellers-heading">
+            <h2 class="title-best-sellers">Top rated best sellers</h2>
+            <button type="button" class="btn btn-sm btn-dark" (click)="seeAll()">See all</button>
+        </div>
+    
+        <div class="col-md-10">
+            <div *ngIf="!bestSellers">
+                <img src="../../../../assets/images/three-dots.svg" width="60" height="46" alt="">
+            </div>
+            <div *ngIf="bestSellers">
+                <p-carousel class="top-deal-slider" [value]="bestSellers" [numVisible]="4" [numScroll]="1"
+                    [responsiveOptions]="responsiveOptions">
+                    <ng-template let-data pTemplate="item">
+                        <div class="product">
+                            <a target="_blank" href="{{data.product_detail_url}}">
+                                <img class="product_image" src={{data.main_image}} alt="Owl Image">
+                            </a>
+                            <div class="product_detail">
+                                <span class="product_brand">{{data.site}}</span>
+                                <br>
+                                <span class="product_name">{{data.name}}</span>
+                                <br>
+                                <span *ngIf="data.is_price == data.was_price" class="current-price">${{data.is_price}}</span>
+                                <span *ngIf="!(data.is_price == data.was_price)" class="current-price">${{data.is_price}} &nbsp; <s class="old-price">
+                                        ${{data.was_price}}</s></span>
+                            </div>
+                        </div>
+                    </ng-template>
+                </p-carousel>
+            </div>
+        </div>
     </div>
-    <div *ngIf="bestSellers">
-        <button type="button" class="btn btn-sm btn-dark">See All</button>
-        <p-carousel [value]="bestSellers" [numVisible]="4" [numScroll]="3" [autoplayInterval]="3000" [circular]="true">
-            <ng-template let-data pTemplate="item">
-                <div class="product">
-                    <a target="_blank" href="{{data.product_detail_url}}">
-                        <img class="product_image" src={{data.main_image}} alt="Owl Image">
-                    </a>
-                    <div class="product_detail">
-                        <span>{{data.site}}</span>
-                        <br>
-                        <span style="color: grey;">{{data.name}}</span>
-                        <br>
-                        <span style="color: blue;">${{data.is_price}} &nbsp; <s style="color: red;">
-                                ${{data.was_price}}</s></span>
-                    </div>
-                </div>
-            </ng-template>
-        </p-carousel>
-    </div>
-</div>
+
+
+

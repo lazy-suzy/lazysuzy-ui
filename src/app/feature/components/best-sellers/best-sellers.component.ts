@@ -9,7 +9,26 @@ import { Router } from '@angular/router';
 })
 export class BestSellersComponent implements OnInit {
   bestSellers: any;
-  constructor(private apiService: ApiService, private router: Router) { }
+  responsiveOptions: any;
+  constructor(private apiService: ApiService, private router: Router) { 
+    this.responsiveOptions = [
+      {
+          breakpoint: '1024px',
+          numVisible: 3,
+          numScroll: 3
+      },
+      {
+          breakpoint: '768px',
+          numVisible: 1,
+          numScroll: 1
+      },
+      {
+          breakpoint: '560px',
+          numVisible: 1,
+          numScroll: 1
+      }
+  ];
+  }
 
   ngOnInit() {
     this.getBestSellers();
@@ -17,12 +36,10 @@ export class BestSellersComponent implements OnInit {
   getBestSellers(): void{
     this.apiService.getBestSellers().subscribe((res)=>{
       this.bestSellers = res.products;
-      console.log("best sellers_________", this.bestSellers);
     })
   }
 
   seeAll(){
-    console.log("showing all dadta");
     this.router.navigate(['/allProducts/best']);
   }
 }

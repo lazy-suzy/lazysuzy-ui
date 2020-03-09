@@ -27,7 +27,11 @@ export class BrandFooterComponent implements OnInit {
 getbrands(){
   this.apiService.getBrands().subscribe((res)=>{
     this.brands = res;
-    console.log("brands______________", this.brands);
+    this.brands = this.brands.filter(function(val){
+      if(val['value'] != 'potterybarn'){
+        return val;
+      }
+    })
   })
 }
 }

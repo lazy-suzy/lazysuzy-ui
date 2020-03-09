@@ -24,6 +24,8 @@ mat-icon.account-icon {
 }
 .top-navbar {
   padding: 15px 0;
+  padding-left: 6%;
+  padding-right: 5%;
   margin-bottom: 10px;
   font-size: 18px;
 }
@@ -76,6 +78,26 @@ mat-icon.account-icon {
   }
 }
 
-.pointer {
-  outline: none;
+@media screen and (max-width: 480px) { 
+  .mat-toolbar-row{
+    height: 56px;
+    width: 105%;
+  }
+
+  .header-link{
+    display: none;
+  }
+
+  .top-navbar{
+    overflow: scroll;  
+    padding: 0%;
+  }
+
+  .department-name{
+    width: 10000px;
+  }
+
+  .justify-around{
+    justify-content: flex-start ;
+  height: 55px; }
 }

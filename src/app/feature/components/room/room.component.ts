@@ -21,7 +21,6 @@ export class RoomComponent implements OnInit {
   constructor() {}
   
   ngOnInit() {
-    // console.log("department", this.department);
     this.category = this.department;
   //   this.category1.push(this.category)
   //   console.log("categories_________", this.category1)

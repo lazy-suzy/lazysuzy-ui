@@ -1,16 +1,22 @@
-.Create-text{
- 
-        margin-top: 2%;
-        margin-left: 1rem;
-        font-size: 35px;
-        font-weight: 700;
-        font-family: "Fenix", Roboto, "Helvetica Neue", sans-serif;
-        color: #ff003499;
-      
+@heading-color: #b76e79;
+
+.video-text{
+    margin-top: 8%;
+}
+
+.create-text{
+    font-size: 31px;
+    font-weight: 700;
+    text-align: left;
+    font-family: "Fenix", Roboto, "Helvetica Neue", sans-serif;
+    color: @heading-color;
+    margin-left: 3%;  
 }
 
 .sub-text{
     color: #5c5858;
+    margin-top: 5%;
+    margin-right: 35%;
 }
 
 video{
@@ -18,4 +24,13 @@ video{
     height: 100%;
     margin: 0;
     padding: 0;
+    position: relative;
+    right: 160px;
+}
+
+@media(max-width:767px){
+    .Create-text{ font-size: 28px; text-align: left; margin-top: 0%; margin-right: 2%;}
+    .sub-text{ font-size: 20px; margin-top: 2%; text-align: left; width: 98%; margin-left: 3%;}
+    .video-text{ margin-top: 0%;} 
+    video{  width: 108% !important; right: 15px;}
 }

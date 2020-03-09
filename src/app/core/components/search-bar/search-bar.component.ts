@@ -6,10 +6,13 @@ import { Router } from '@angular/router';
   styleUrls: ['./search-bar.component.less'],
 })
 export class SearchBarComponent {
+  textChange: boolean = false;
   constructor(private router: Router) {}
 
   openSearch(form): void {
     if(form.value.query.length > 0)
     this.router.navigateByUrl(`/search?query=${form.value.query}`);
-}
+    else
+    this.textChange = true;
+  }
 }

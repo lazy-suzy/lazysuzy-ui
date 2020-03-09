@@ -15,25 +15,24 @@ import { MOCK_PRODUCT_FILTERS } from 'src/app/mocks';
 export class ApiService {
   constructor(private httpService: HttpService) {}
 
-  getNewArrivals(filters = '', page = 0): Observable<IProductsPayload> {
-    console.log('new arrival filter in srevice', filters);
-    const endpoint = `products/all`;
+  getNewArrivals(filters = '', page = 0):  Observable<IProductsPayload> {
+    const endpoint = `products/all?new=true`;
     const url = env.useLocalJson
       ? `${env.JSON_BASE_HREF}${endpoint}`
       : `${env.API_BASE_HREF}${endpoint}?filters=${filters}&pageno=${page}`;
     return this.httpService.get(url);
   }
 
-  getTopDeals(filters = '', page = 0): Observable<IProductsPayload> {
-    const endpoint = `products/all`;
+  getTopDeals(filters = '', page = 0):  Observable<IProductsPayload> {
+    const endpoint = `products/all?sale=true`;
     const url = env.useLocalJson
       ? `${env.JSON_BASE_HREF}${endpoint}`
       : `${env.API_BASE_HREF}${endpoint}?filters=${filters}&pageno=${page}`;
     return this.httpService.get(url);
   }
 
-  getBestSellers(filters = '', page = 0): Observable<IProductsPayload> {
-    const endpoint = `products/all`;
+  getBestSellers(filters = '', page = 0):  Observable<IProductsPayload> {
+    const endpoint = `products/all?bestseller=true`;
     const url = env.useLocalJson
       ? `${env.JSON_BASE_HREF}${endpoint}`
       : `${env.API_BASE_HREF}${endpoint}?filters=${filters}&pageno=${page}`;
@@ -55,7 +54,7 @@ export class ApiService {
   }
 
   browseRoom() {
-    const endpoint = 'all-departments';
+    const endpoint = 'all-departments?home=true';
     const url = env.useLocalJson
       ? `${env.JSON_BASE_HREF}${endpoint}`
       : `${env.API_BASE_HREF}${endpoint}?home=true`;
@@ -71,7 +70,6 @@ export class ApiService {
   }
 
   seeAllArrivals(total) {
-    console.log('total', total);
     const endpoint = 'products/all';
     const url = env.useLocalJson
       ? `${env.JSON_BASE_HREF}${endpoint}`
@@ -80,7 +78,6 @@ export class ApiService {
   }
 
   seeAllDeals(total) {
-    console.log('total', total);
     const endpoint = 'products/all';
     const url = env.useLocalJson
       ? `${env.JSON_BASE_HREF}${endpoint}`
