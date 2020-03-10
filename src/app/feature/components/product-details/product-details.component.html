@@ -26,7 +26,7 @@
         </div>
     </div>
 
-    <div class="mb2">
+    <div class="mb2" *ngIf="product.description">
         <span class="b">Overview</span>
         <div class="mt1" [innerHTML]="product.description"></div>
     </div>
@@ -46,6 +46,7 @@
                 <span>Width: {{ dimension.width }}</span>
                 <span>Depth: {{ dimension.depth }}</span>
                 <span>Height: {{ dimension.height }}</span>
+                <br/>
             </div>
         </div>
     </div>

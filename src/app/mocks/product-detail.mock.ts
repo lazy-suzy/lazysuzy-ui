@@ -4090,7 +4090,7 @@ const MOCK_PRODUCT_DETAIL: IProductDetail = {
     '*   Leg height: 2.5".',
     '*   Removable legs.',
     ' 86” EXTRA DEEP SOFA    ',
-    '* Overall product dimensions: 86"w x 47"d x 34"h.',
+    '* Overall product b: 86"w x 47"d x 34"h.',
     '*   Interior seat width: 76".',
     '*   Seat depth: 30".',
     '*   Seat height: 20".',

@@ -16,26 +16,26 @@ export class ApiService {
   constructor(private httpService: HttpService) {}
 
   getNewArrivals(filters = '', page = 0):  Observable<IProductsPayload> {
-    const endpoint = `products/all?new=true`;
+    const endpoint = `products/all`;
     const url = env.useLocalJson
       ? `${env.JSON_BASE_HREF}${endpoint}`
-      : `${env.API_BASE_HREF}${endpoint}?filters=${filters}&pageno=${page}`;
+      : `${env.API_BASE_HREF}${endpoint}?new=true`;
     return this.httpService.get(url);
   }
 
   getTopDeals(filters = '', page = 0):  Observable<IProductsPayload> {
-    const endpoint = `products/all?sale=true`;
+    const endpoint = `products/all`;
     const url = env.useLocalJson
       ? `${env.JSON_BASE_HREF}${endpoint}`
-      : `${env.API_BASE_HREF}${endpoint}?filters=${filters}&pageno=${page}`;
+      : `${env.API_BASE_HREF}${endpoint}?sale=true`;
     return this.httpService.get(url);
   }
 
   getBestSellers(filters = '', page = 0):  Observable<IProductsPayload> {
-    const endpoint = `products/all?bestseller=true`;
+    const endpoint = `products/all`;
     const url = env.useLocalJson
       ? `${env.JSON_BASE_HREF}${endpoint}`
-      : `${env.API_BASE_HREF}${endpoint}?filters=${filters}&pageno=${page}`;
+      : `${env.API_BASE_HREF}${endpoint}?bestseller=true`;
     return this.httpService.get(url);
   }
 
@@ -57,7 +57,7 @@ export class ApiService {
     const endpoint = 'all-departments?home=true';
     const url = env.useLocalJson
       ? `${env.JSON_BASE_HREF}${endpoint}`
-      : `${env.API_BASE_HREF}${endpoint}?home=true`;
+      : `${env.API_BASE_HREF}${endpoint}`;
     return this.httpService.get(url);
   }
 
@@ -153,6 +153,11 @@ export class ApiService {
     return this.httpService.get(url);
   }
 
+  login(data) {
+    const endpoint = `api/login/${data.email}/${data.password}`;
+    const url = `${env.API_BASE_HREF}${endpoint}`;
+    return this.httpService.post(url, '');
+  }
   subscription(URL,email):Observable<string> {
     const endpoint = `subscribe`;
     const url = `${env.ES_API_BASE_HREF}${endpoint}?url=${URL}&email=${email}`;

@@ -33,15 +33,19 @@ export class NewArrivalsComponent implements OnInit {
 
   ngOnInit() {
     this.getNewArrivals();
+
   }
   getNewArrivals(): void {
-    this.apiService.getNewArrivals().subscribe(res => {
-      this.newArrivals = res;
-      this.newProducts = this.newArrivals.products;
-    });
-  }
+    this.apiService
+     .getNewArrivals()
+     .subscribe((res) => {
+       this.newArrivals = res;
+       this.newProducts = this.newArrivals.products;
+     });
+ }
 
-  seeAll() {
-    this.router.navigate(['/allProducts/new']);
-  }
+ seeAll(){
+   this.router.navigate(['/seeAllArrivals']);
+ }
+
 }

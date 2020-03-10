@@ -40,7 +40,9 @@ export class TopDealsComponent implements OnInit {
     });
   }
 
-  seeAll() {
-    this.router.navigate(['/allProducts/top']);
+  seeAll(){
+    // this.router.navigate(['/allProducts/top']);
+    this.router.navigate(['/seeAllTopdeals']);
+
   }
 }

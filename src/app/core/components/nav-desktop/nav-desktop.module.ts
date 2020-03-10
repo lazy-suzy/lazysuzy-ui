@@ -9,7 +9,31 @@ import { RouterModule } from '@angular/router';
 import { NavDesktopComponent } from './nav-desktop.component';
 import { SearchBarModule } from '../search-bar/search-bar.module';
 
+import {
+  SocialLoginModule,
+  AuthServiceConfig,
+  GoogleLoginProvider,
+  FacebookLoginProvider,
+} from "angular-6-social-login";
+
 const DECLARATIONS = [NavDesktopComponent, ];
+
+export function getAuthServiceConfigs() {
+  let config = new AuthServiceConfig(
+      [
+        {
+          id: GoogleLoginProvider.PROVIDER_ID,
+          provider: new GoogleLoginProvider("840582405192-fkr4bq3fp5q5doe386kkfikeie1ggn0p.apps.googleusercontent.com")
+        },
+        {
+          id: FacebookLoginProvider.PROVIDER_ID,
+          provider: new FacebookLoginProvider("545201916109098")
+        },
+      ]
+  );
+  return config;
+}
+ 
 
 const MODULES = [
   CommonModule,
@@ -18,12 +42,19 @@ const MODULES = [
   MatMenuModule,
   MatButtonModule,
   MatIconModule,
-  SearchBarModule
+  SearchBarModule,
+  SocialLoginModule
 ];
 
 @NgModule({
   declarations: [...DECLARATIONS],
   imports: [...MODULES],
-exports: [...DECLARATIONS, ...MODULES],
+  exports: [...DECLARATIONS, ...MODULES],
+  providers: [
+  {
+    provide: AuthServiceConfig,
+    useFactory: getAuthServiceConfigs
+  }
+  ],
 })
 export class NavDesktopModule {}
