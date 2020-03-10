@@ -56,16 +56,15 @@ body {
   .best-sellers .ui-carousel-prev {
     position: relative;
     left: -43%;
-    bottom: -170px;
+    bottom: -210px;
     z-index: 10;
   }
   .new-arrivals-slider .ui-carousel-next,
   .top-deals .ui-carousel-next,
   .best-sellers .ui-carousel-next {
     position: relative;
-    bottom: 215px;
-    right: lef;
-    left: 118px;
+    bottom: 240px;
+    left: 142px;
     z-index: 10;
   }
 
@@ -80,8 +79,8 @@ body {
   }
 
   .bannerCarousel .ui-carousel-content {
-    width: 127%;
-    margin-left: 5%;
+    width: 109%;
+    margin-left: 12%;
   }
 
   .bannerCarousel .ui-carousel-prev {
@@ -98,4 +97,19 @@ body {
   .browse-by-room-section .content-item {
     width: 49% !important;
   }
+}
+
+
+
+@media(min-width:1280px){
+  body{overflow-x: hidden;}
+  .bannerCarousel .ui-carousel-item .product a .product_image{width: 100% !important; } 
+  .bannerCarousel .ui-carousel-next.ui-button{ right: 3%;}
+}
+
+@media(max-width:767px){
+  .brand-footer .black.brands .brand-box{margin-left: 10px !important;}
+  .brand-footer{margin-left: 0 !important;}
+  .brands{display: contents; }
+  .brands img{margin:0 !important; width: 30% !important;}
 }

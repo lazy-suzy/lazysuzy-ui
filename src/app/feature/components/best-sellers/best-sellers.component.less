@@ -1,6 +1,7 @@
 @button-backgroud: white;
 @button-color: #b76e79;
-@brand-old: grey;
+@brand-old: #898989;
+@heading-color:  #0c1c31;
 
 .best-sellers {
   padding-top: 2%;
@@ -11,7 +12,7 @@
 }
 
 .btn{color: @button-color; background: @button-backgroud; 
-    font-size: 20px; font-size: 20px; width: 45%; border: none; font-weight: 600;}
+    font-size: 18px; border: none;}
 
 .product_detail {
   text-align: left;
@@ -29,38 +30,55 @@
   display: inline-block;
   text-overflow: ellipsis;
   white-space: nowrap;
+  color: @heading-color;
+  font-weight: 600;
 }
 
 .title-best-sellers {
-  font-weight: 500;
-  float: left;
-  margin-left: 18%;
+  font-weight: 700;
+  font-size: 26px;
+  width: 150%;
+  text-align: left;
+  color: @heading-color;
 }
 
 .current-price {
   color: @button-color;
   font-size: 15px;
+  font-weight: 600;
 }
 
 .old-price,
 .product_brand {
-  color: grey;
+  color: @brand-old;
   font-size: 15px;
 }
 
 @media only screen and (max-width: 768px) {
+  .best-sellers-heading{
+    margin-bottom: -5%;
+  }
+
   .title-best-sellers {
-    font-size: 22px;
+    font-size: 25px;
     font-weight: 700;
-    margin-left: 16%;
+    float: left;
+    padding-left: 3%;
+    margin-bottom: -10%;
   }
 
   .btn {
-    font-size: 16px;
+    font-size: 22px;
     background: @button-backgroud;
     border: none;
     color: @button-color;
-    padding: 0%;
+    float: right;
+    padding-right: 5%;
+  }
+
+  .product_name{
+    font-size: 16px;
+    font-weight: 600;
   }
 
   .body .ui-helper-reset {
