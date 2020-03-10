@@ -16,7 +16,9 @@ export class ProductDetailsComponent implements OnInit {
   constructor(
     @Inject(MAT_DIALOG_DATA) public data: any,
     private apiService: ApiService
-  ) {}
+  ) {
+    //console.log("product detial")
+  }
 
   ngOnInit(): void {
     this.productSubscription = this.apiService

@@ -35,6 +35,7 @@ export class NewArrivalsComponent implements OnInit {
 
   ngOnInit() {
     this.getNewArrivals();
+
   }
   getNewArrivals(): void {
     this.apiService
@@ -46,7 +47,7 @@ export class NewArrivalsComponent implements OnInit {
  }
 
  seeAll(){
-   this.router.navigate(['/allProducts/new']);
+   this.router.navigate(['/seeAllArrivals']);
  }
 
 
