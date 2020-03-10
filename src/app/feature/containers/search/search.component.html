@@ -1,8 +1,8 @@
 <div class="search-result-title-bar">
-  <h4 class="w-50">
+  <h4 class="w-70 m-3">
     Search results for: <span class="search-term">{{ query }}</span>
   </h4>
-  <div class="w-50" *ngIf="isHandset">
+  <div class="w-30" *ngIf="isHandset">
     <span class="icon-container" (click)="toggleMobileView()">
       <mat-icon aria-hidden="false" aria-label="toggle">
         view_module
@@ -33,11 +33,14 @@
   </div>
 
   <ng-template #isDesktop>
-    <div class="flex flex-wrap justify-center ph3">
+    <div class="tr w-100 results-text">
+      <span> {{ total_count }} Results </span>
+    </div>
+    <div class="flex flex-wrap justify-center">
       <app-search-product
         *ngFor="let product of products"
         [product]="product"
-        class="w-20-ns ma3"
+        class="w-25-ns"
       ></app-search-product>
     </div>
   </ng-template>

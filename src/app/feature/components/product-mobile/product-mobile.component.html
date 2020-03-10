@@ -24,7 +24,7 @@
         <span
           class="{{
             (product.is_price !== product.was_price && 'cprice sale') || 'cprice'
-          }}"
+          }} {{productsInRow < 3?'': 'dn'}}"
           >${{ product.is_price  }}
         </span>
       </div>

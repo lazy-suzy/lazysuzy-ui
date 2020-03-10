@@ -8,11 +8,21 @@ import {
   CategoriesComponent,
   AllProductsComponent
 } from './feature/containers';
+import {
+  AboutusComponent,
+  TermsOfServiceComponent,
+  PrivacyPolicyComponent
+} from './core/components';
+
 import { SeeAllArrivalsComponent } from './feature/components/see-all-arrivals/see-all-arrivals.component';
 
 const routes: Routes = [
   { path: '', component: LandingComponent, pathMatch: 'full' },
   { path: 'search', component: SearchComponent },
+  { path: 'aboutus', component: AboutusComponent },
+  { path: 'termsofservice', component: TermsOfServiceComponent },
+  { path: 'privacypolicy', component: PrivacyPolicyComponent },
+
   { path: 'wishlist', component: WishlistComponent, pathMatch: 'full' },
   {
     path: 'products/all',

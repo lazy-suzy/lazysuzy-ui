@@ -1,16 +1,27 @@
-
-
-<div class="white mh3 footer">
-    <div class="row">
-        <div class="col-md-6 footer-content">
-            <p>© 2020 LazySuzy</p>
-        </div>
-        <div class="col-md-6 pull-right text-right footer-content">
-                <span><a class="link white" href="">Privacy Policy</a> </span>
-                <span><a class="link white" href="">Terms of Service</a> </span>
-        </div>
+<div class="flex justify-between items-center white mh3">
+  <p>© 2020 LazySuzy</p>
+  <div class="w-25 mv1 tr">
+    <div class="mv1 db">
+      Connect with Us
+      <a
+        target="_blank"
+        class="link white"
+        href="//www.facebook.com/shoplazysuzy"
+      >
+        <i class="fab fa-facebook-f"></i>
+      </a>
     </div>
-    <!-- <div class="w-25 flex justify-around">
+    <div class="flex fr">
+      <a class="link white" [routerLink]="['/privacypolicy']"
+        >Privacy Policy
+      </a>
+      <span>&nbsp; | &nbsp;</span>
+      <a class="link white" [routerLink]="['/termsofservice']"
+        >Terms of Service</a
+      >
+    </div>
+  </div>
+  <!-- <div class="w-25 flex justify-around">
         
     </div> -->
 </div>

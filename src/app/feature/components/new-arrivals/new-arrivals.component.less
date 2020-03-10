@@ -2,6 +2,7 @@
 @button-color: #b76e79;
 @brand-old: grey;
 
+
 .new-arrivals{ padding-top: 2%;}
 
 .new-arrivals-heading{ margin-top: 5%;}
@@ -21,16 +22,31 @@
 .current-price{ color: @button-color; font-size: 15px;}
 
 .old-price,
-.product_brand{color: grey; font-size: 15px}
+.product_brand {
+  color: grey;
+  font-size: 15px;
+}
 
+@media only screen and (max-width: 768px) {
+  .new-arrivals-heading {
+    margin-top: 2%;
+  }
 
-@media only screen and (max-width: 768px){
-    .new-arrivals-heading{ margin-top: 2%;}
+  .title-new-arrivals {
+    font-size: 22px;
+    font-weight: 700;
+  }
 
-    .title-new-arrivals{ font-size: 22px; font-weight: 700;}
+  .btn {
+    font-size: 16px;
+    background: @button-backgroud;
+    border: none;
+    color: @button-color;
+    padding: 0%;
+    float: right;
+  }
 
-    .btn{ font-size: 16px; background: @button-backgroud; border: none; color: @button-color; padding: 0%; float: right;}
-
-    .body .ui-helper-reset{ visibility: hidden;}
-
+  .body .ui-helper-reset {
+    visibility: hidden;
+  }
 }

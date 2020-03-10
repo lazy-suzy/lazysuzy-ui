@@ -158,5 +158,10 @@ export class ApiService {
     const endpoint = `api/login/${data.email}/${data.password}`;
     const url = `${env.API_BASE_HREF}${endpoint}`;
     return this.httpService.post(url, '');
+
+  subscription(URL,email):Observable<string> {
+    const endpoint = `subscribe`;
+    const url = `${env.ES_API_BASE_HREF}${endpoint}?url=${URL}&email=${email}`;
+    return this.httpService.get(url);
   }
 }

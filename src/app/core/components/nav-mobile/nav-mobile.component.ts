@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { MOCK_ACCOUNT_ACTIONS, MOCK_DEPARTMENTS } from 'src/app/mocks';
 import { ApiService } from './../../../shared/services';
-import { Router} from '@angular/router';
+import { Router, NavigationEnd} from '@angular/router';
 import { IAllDepartment } from '../../../shared/models/all-department.interface';
 
 @Component({
@@ -20,6 +20,11 @@ export class NavMobileComponent {
 
   constructor(private apiService: ApiService, private router: Router) {
     this.getDepartments();
+    router.events.subscribe((val) => {
+      if (val instanceof NavigationEnd) {
+        this.menuVisible = false;
+      }
+     });
   }
 
   setIndex(index: number) {
