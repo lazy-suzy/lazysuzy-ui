@@ -42,5 +42,5 @@ export class BestSellersComponent implements OnInit {
   seeAll(){
     // this.router.navigate(['/allProducts/best']);
     this.router.navigate(['/seeAllBestsellers']);
-
+  }
 }

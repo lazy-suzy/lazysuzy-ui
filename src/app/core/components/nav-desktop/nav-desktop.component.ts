@@ -21,8 +21,8 @@ export class NavDesktopComponent {
   departments: IAllDepartment[];
   notHome: Boolean;
   checkHomeRoute: Subscription;
-  email: [""];
-  password: [""];
+  email : any;
+  password: any;
 
   constructor(
     private router: Router,
@@ -95,7 +95,7 @@ export class NavDesktopComponent {
       socialPlatformProvider = FacebookLoginProvider.PROVIDER_ID;
     }else if(socialPlatform == "google"){
       socialPlatformProvider = GoogleLoginProvider.PROVIDER_ID;
-    } 
+    } else{ return; }
     
     this.socialAuthService.signIn(socialPlatformProvider).then(
       (userData) => {

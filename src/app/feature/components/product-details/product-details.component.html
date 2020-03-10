@@ -19,7 +19,7 @@
     </div>
 
     <div class="mb2">
-        <span class="b">More Options11</span>
+        <span class="b">More Options</span>
         <div class="mt1">
             <img *ngFor="let variation of product.variations" [src]="variation.swatch_image" [alt]="variation.name"
                 class="w2 mr1">
@@ -42,7 +42,7 @@
         <span class="b">Dimension</span>
         <div class="mt1 list">
             <div *ngFor="let dimension of product.dimension" class="flex flex-column">
-                <span><b>{{ dimension.description }}</b></span>
+                <span>{{ dimension.description }}</span>
                 <span>Width: {{ dimension.width }}</span>
                 <span>Depth: {{ dimension.depth }}</span>
                 <span>Height: {{ dimension.height }}</span>
