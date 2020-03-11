@@ -21,7 +21,6 @@ export class ProductComponent implements OnInit {
 
   bpSubscription: Subscription;
   numbOfSwatchItems: number;
-
   constructor(public dialog: MatDialog, private breakpointObserver: BreakpointObserver) {}
 
   ngOnInit(): void {
@@ -59,10 +58,10 @@ export class ProductComponent implements OnInit {
   openDialog(): void {
     const dialogRef = this.dialog.open(ProductDetailsComponent, {
       width: '80%',
-      height: '80%',
+      height: '100%',
       data: { sku: this.product.sku }
     });
-
+    
     dialogRef.afterClosed().subscribe(result => {
     });
   }
@@ -70,14 +69,14 @@ export class ProductComponent implements OnInit {
   openSwatchDialog(variation): void {
     const dialogRef = this.dialog.open(ProductDetailsComponent, {
       width: '80%',
-      height: '80%',
+      height: '100%',
+      panelClass: 'product-details-dialog-container',
       data: {
         sku: variation.has_parent_sku
           ? variation.variation_sku
           : variation.product_sku
       }
     });
-
     dialogRef.afterClosed().subscribe(result => {
     });
   }

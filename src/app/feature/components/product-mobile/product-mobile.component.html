@@ -1,5 +1,5 @@
 <div class="ls-product-div">
-    <div class="ls-product" [routerLink]="product.product_detail_url">
+    <div class="ls-product" [routerLink]="['/product/'+product.sku]">
       <img
         class="{{ isVariationImageVisible ? 'prod-img' : 'prod-img show' }}"
         [src]="product.main_image"
