@@ -54,10 +54,10 @@ export class ApiService {
   }
 
   browseRoom() {
-    const endpoint = 'all-departments?home=true';
+    const endpoint = 'all-departments';
     const url = env.useLocalJson
       ? `${env.JSON_BASE_HREF}${endpoint}`
-      : `${env.API_BASE_HREF}${endpoint}`;
+      : `${env.API_BASE_HREF}${endpoint}?home=true`;
     return this.httpService.get(url);
   }
 

@@ -7,35 +7,25 @@
     >
       <img class="w4 pointer grow title-image" [src]="logoPath" alt="Lazy Suzy Home" />
     </a>
-    <app-search-bar *ngIf="notHome" class="section"></app-search-bar>
+    <!-- <app-search-bar *ngIf="notHome" class="section"></app-search-bar> -->
     <div class="mr3 flex items-center">
       <a class="header-link" [routerLink]="['/aboutus']" >The Lazy Story</a>
       <a routerLink="/wishlist" class="flex items-center header-link pointer">
         <mat-icon aria-hidden="false">favorite_border</mat-icon>
         <span class="ml2">My saved items</span>
       </a>
-
-      <mat-icon
-        class="account-icon pointer"
-        aria-hidden="false"
-        aria-label="Account"
-        [matMenuTriggerFor]="accountMenu"
-      >
-        account_circle</mat-icon
-      >
+      <mat-icon class="account-icon pointer" aria-hidden="false" aria-label="Account" [matMenuTriggerFor]="accountMenu">
+          account_circle</mat-icon>
       <mat-menu #accountMenu="matMenu">
-        <!-- <a
-          *ngFor="let action of departments"
-          routerLinkActive="active"
-          class="no-underline"
-        >
-        
-          <button mat-menu-item>{{ action.display | titlecase }}</button>
-        </a> -->
-        <span (mouseleave)="closeMyMenu()">
-            <button mat-menu-item data-toggle="modal" data-target="#signInModal">Sign In</button>
-            <button mat-menu-item data-toggle="modal" data-target="#signUpModal">Sign Up</button>
-        </span>
+          <a
+              *ngFor="let action of departments"
+              routerLinkActive="active"
+              class="no-underline"
+            >
+            
+              <button mat-menu-item>{{ action.display | titlecase }}</button>
+            </a>
+         
       </mat-menu>
     </div>
   </mat-toolbar-row>
@@ -61,100 +51,4 @@
   </ng-container>
 </div>
 
-<!--SignIn Modal -->
-<div class="modal fade" id="signInModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog opacity-animate" role="document">
-      <div class="modal-content">
-        <div class="modal-title">
-          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-              <span aria-hidden="true">&times;</span>
-          </button>
-          <h5 class="modal-heading" id="signInModalLabel">Hey, Star Stuff!</h5>
-          <br>
-          <div class="socialButtons">
-            <button type="button" class="btn btn-primary facebookBtn" (click)="socialSignIn('facebook')" style="background: #3b5998;">
-              <i class="fab fa-facebook-f">&nbsp;<b>Continue with Facebook</b></i>
-            </button>
-            <br>
-            <button type="button" class="btn btn-light googleBtn" (click)="socialSignIn('google')">
-              <i class="fab fa-google">&nbsp;<b>Continue with Google</b></i>
-            </button>
-          </div>
-            <hr>
-        </div>
 
-        <div class="modal-body">
-          <span class="span-line">Not Feeling Social?</span>
-          <br>
-          <form role="form" (submit)="login()">
-          <!-- <form role="form"> -->
-            <div class="formGroup">
-              
-              <input type="email" class="form-control text-input" name="email" placeholder="Email" required [(ngModel)]="email" />
-              <br>
-              <input type="password" class="form-control text-input" name="password" placeholder="Password" required [(ngModel)]="password" />
-              <br>
-              <button type="submit" class="form-control btn btn-dark submit">Login</button>
-              <br>
-              <a class="resetPassword" routerLink="/forgotpassword">Reset Password</a>
-            </div>
-          </form>
-        </div>
-
-        <div class="modal-footer">
-            <span class="footer-content">Not a member yet?&nbsp;
-            <button class="btn btn-sm btn-light signUpLink" data-toggle="modal" data-target="#signUpModal" data-dismiss="modal">Join Now.</button></span>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <!--SignUp Modal -->
-<div class="modal fade" id="signUpModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog opacity-animate" role="document">
-        <div class="modal-content">
-          <div class="modal-title">
-            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                <span aria-hidden="true">&times;</span>
-            </button>
-            <h5 class="signup-modal-heading" id="signInModalLabel">Hey, Star Stuff!</h5>
-            <br>
-            <div class="socialButtons">
-              <button type="button" class="btn btn-primary facebookBtn" style="background: #3b5998;">
-                <i class="fab fa-facebook-f">&nbsp;<b>Continue with Facebook</b></i>
-              </button>
-              <br>
-              <button type="button" class="btn btn-light googleBtn">
-                <i class="fab fa-google">&nbsp;<b>Continue with Google</b></i>
-              </button>
-            </div>
-              <hr>
-          </div>
-  
-          <div class="modal-body">
-            <span class="span-line">Not Feeling Social?</span>
-            <br>
-            <!-- <form role="form" (submit)="login()"> -->
-            <form role="form">
-              <div class="signUpformGroup">
-                  <input type="name" class="form-control text-input" name="name" placeholder="Name" required [(ngModel)]="name" />
-                  <br>
-                <input type="email" class="form-control text-input" name="email" placeholder="Email" required [(ngModel)]="email" />
-                <br>
-                <input type="password" class="form-control text-input" name="password" placeholder="Password" required [(ngModel)]="password" />
-                <br>
-                <button type="submit" class="form-control btn btn-dark submit">Login</button>
-                <br>
-                <a class="resetPassword" routerLink="/forgotpassword">Reset Password</a>
-              </div>
-            </form>
-          </div>
-  
-          <div class="modal-footer">
-              <span class="signup-footer-content">Already Joined&nbsp;
-                  <button class="btn btn-sm btn-light signUpLink" data-toggle="modal" data-target="#signInModal" data-dismiss="modal">Sign In.</button>
-              </span>
-          </div>
-        </div>
-      </div>
-  </div>

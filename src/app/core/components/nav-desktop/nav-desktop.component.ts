@@ -5,11 +5,6 @@ import { Subscription } from 'rxjs';
 import { IAllDepartment } from '../../../shared/models';
 import { ApiService } from './../../../shared/services';
 import { MessageService } from "primeng/api";
-import {
-  AuthService,
-  FacebookLoginProvider,
-  GoogleLoginProvider
-} from 'angular-6-social-login';
 
 @Component({
   selector: 'app-nav-desktop',
@@ -23,13 +18,12 @@ export class NavDesktopComponent {
   checkHomeRoute: Subscription;
   email : any;
   password: any;
-
-  constructor(
+ constructor(
     private router: Router,
     private location: Location,
     private apiService: ApiService,
     private messageService: MessageService,
-    private socialAuthService: AuthService
+  
   ) 
   {
     this.checkHomeRoute = router.events.subscribe(val => {
@@ -53,7 +47,6 @@ export class NavDesktopComponent {
     this.apiService
       .login(user)
       .subscribe(res => {
-        console.log("loggge din_", res)
         if (res["data"]) {
           // this.apiService.storeUserData(res["token"]);
           // localStorage.setItem("admin_id", res["data"]["id"]);
@@ -89,18 +82,5 @@ export class NavDesktopComponent {
   }
 
 
-  public socialSignIn(socialPlatform : string) {
-    let socialPlatformProvider;
-    if(socialPlatform == "facebook"){
-      socialPlatformProvider = FacebookLoginProvider.PROVIDER_ID;
-    }else if(socialPlatform == "google"){
-      socialPlatformProvider = GoogleLoginProvider.PROVIDER_ID;
-    } else{ return; }
-    
-    this.socialAuthService.signIn(socialPlatformProvider).then(
-      (userData) => {
-        console.log(socialPlatform+" sign in data : " , userData);
-      }
-    );
-  }
+  
 }

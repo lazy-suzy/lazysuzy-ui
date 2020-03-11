@@ -1,49 +1,58 @@
 @button-backgroud: white;
 @button-color: #b76e79;
-@brand-old: grey;
+@brand-old: #898989;
+@heading-color:  #0c1c31;
 
 
-.new-arrivals{ padding-top: 2%;}
+.new-arrivals{ padding-top: 10%;}
 
 .new-arrivals-heading{ margin-top: 5%;}
 
 .btn{color: @button-color; background: @button-backgroud; 
-    font-size: 20px; font-size: 20px; width: 45%; border: none; font-weight: 600;}
+    font-size: 18px; border: none;}
 
 .product_detail{ text-align: left;  margin-top: 3%;}
 
 .product{padding-right: 2%; padding-top: 2%;}
 
+.product_name{ width: 100%; overflow: hidden;color: @heading-color;
+  font-weight: 600; display: inline-block; text-overflow: ellipsis; white-space: nowrap;}
 
-.product_name{ width: 100%; overflow: hidden; display: inline-block; text-overflow: ellipsis; white-space: nowrap;}
+.title-new-arrivals{ font-weight: 700; color: @heading-color;}
 
-.title-new-arrivals{ font-weight: 500; float: left ; margin-left: 5%;}
-
-.current-price{ color: @button-color; font-size: 15px;}
+.current-price{ color: @button-color; font-size: 15px; font-weight: 600;}
 
 .old-price,
 .product_brand {
-  color: grey;
+  color: @brand-old;
   font-size: 15px;
 }
 
 @media only screen and (max-width: 768px) {
-  .new-arrivals-heading {
-    margin-top: 2%;
+ 
+  .new-arrivals-heading{
+    margin-bottom: -5%;
   }
 
   .title-new-arrivals {
-    font-size: 22px;
+    font-size: 25px;
     font-weight: 700;
+    float: left;
+    padding-left: 3%;
   }
 
   .btn {
-    font-size: 16px;
+    font-size: 22px;
     background: @button-backgroud;
     border: none;
     color: @button-color;
-    padding: 0%;
     float: right;
+    padding-right: 5%;
+  }
+
+  .product_name{
+    font-size: 16px;
+    font-weight: 600;
   }
 
   .body .ui-helper-reset {

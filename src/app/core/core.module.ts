@@ -12,6 +12,7 @@ import {
 } from './components';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { AuthModule } from './components/auth/auth.module';
 
 const DECLARATIONS = [];
 
@@ -26,7 +27,8 @@ const MODULES = [
   TermsOfServiceModule,
   FooterMobileModule,
   BrandFooterModule,
-  BannerModule
+  BannerModule,
+  AuthModule
 ];
 
 @NgModule({
