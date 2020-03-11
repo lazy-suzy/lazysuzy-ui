@@ -13,7 +13,7 @@ import {
   TermsOfServiceComponent,
   PrivacyPolicyComponent
 } from './core/components';
-
+import {ProductDetailsMobileComponent} from './feature/components';
 import { SeeAllArrivalsComponent } from './feature/components/see-all-arrivals/see-all-arrivals.component';
 
 const routes: Routes = [
@@ -39,7 +39,11 @@ const routes: Routes = [
     component: ProductsComponent,
     pathMatch: 'full'
   },
-
+  {
+    path: 'product/:product',
+    component: ProductDetailsMobileComponent,
+    pathMatch: 'full'
+  },
   {
     path: 'seeAllArrivals',
     component: SeeAllArrivalsComponent,
