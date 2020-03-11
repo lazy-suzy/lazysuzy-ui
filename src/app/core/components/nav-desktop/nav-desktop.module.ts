@@ -8,6 +8,7 @@ import { MatToolbarModule } from '@angular/material/toolbar';
 import { RouterModule } from '@angular/router';
 import { NavDesktopComponent } from './nav-desktop.component';
 import { SearchBarModule } from '../search-bar/search-bar.module';
+import { AuthModule } from '../auth/auth.module';
 
 const DECLARATIONS = [NavDesktopComponent, ];
 
@@ -19,6 +20,7 @@ const MODULES = [
   MatButtonModule,
   MatIconModule,
   SearchBarModule,
+  AuthModule
  
 ];
 

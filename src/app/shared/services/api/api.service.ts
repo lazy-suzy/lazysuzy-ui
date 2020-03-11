@@ -69,21 +69,7 @@ export class ApiService {
     return this.httpService.get(url);
   }
 
-  seeAllArrivals(total) {
-    const endpoint = 'products/all';
-    const url = env.useLocalJson
-      ? `${env.JSON_BASE_HREF}${endpoint}`
-      : `${env.API_BASE_HREF}${endpoint}?new=true&limit=${total}`;
-    return this.httpService.get(url);
-  }
-
-  seeAllDeals(total) {
-    const endpoint = 'products/all';
-    const url = env.useLocalJson
-      ? `${env.JSON_BASE_HREF}${endpoint}`
-      : `${env.API_BASE_HREF}${endpoint}?sale=true&limit=${total}`;
-    return this.httpService.get(url);
-  }
+  
   getAllProducts(
     trend: string,
     total: number,

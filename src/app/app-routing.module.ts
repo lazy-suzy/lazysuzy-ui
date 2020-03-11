@@ -14,7 +14,6 @@ import {
   PrivacyPolicyComponent
 } from './core/components';
 import {ProductDetailsMobileComponent} from './feature/components';
-import { SeeAllArrivalsComponent } from './feature/components/see-all-arrivals/see-all-arrivals.component';
 
 const routes: Routes = [
   { path: '', component: LandingComponent, pathMatch: 'full' },
@@ -42,21 +41,6 @@ const routes: Routes = [
   {
     path: 'product/:product',
     component: ProductDetailsMobileComponent,
-    pathMatch: 'full'
-  },
-  {
-    path: 'seeAllArrivals',
-    component: SeeAllArrivalsComponent,
-    pathMatch: 'full'
-  },
-  {
-    path: 'seeAllTopdeals',
-    component: SeeAllArrivalsComponent,
-    pathMatch: 'full'
-  },
-  {
-    path: 'seeAllBestsellers',
-    component: SeeAllArrivalsComponent,
     pathMatch: 'full'
   }
 ];
