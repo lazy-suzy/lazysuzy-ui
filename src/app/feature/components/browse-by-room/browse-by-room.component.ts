@@ -25,8 +25,6 @@ export class BrowseByRoomComponent implements OnInit {
           return val;
         }
       })
-      console.log("departments+++++++++++++++", this.departments);
-
     })
     
   }

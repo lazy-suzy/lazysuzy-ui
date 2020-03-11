@@ -47,7 +47,6 @@ export class NavDesktopComponent {
     this.apiService
       .login(user)
       .subscribe(res => {
-        console.log("loggge din_", res)
         if (res["data"]) {
           // this.apiService.storeUserData(res["token"]);
           // localStorage.setItem("admin_id", res["data"]["id"]);
