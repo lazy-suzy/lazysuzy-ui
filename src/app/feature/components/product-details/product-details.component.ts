@@ -1,4 +1,4 @@
-import { Component, Inject, OnInit } from '@angular/core';
+import { Component, Inject, OnInit} from '@angular/core';
 import { MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { Subscription } from 'rxjs';
 import { IProductPayload } from 'src/app/shared/models';
@@ -17,7 +17,6 @@ export class ProductDetailsComponent implements OnInit {
     @Inject(MAT_DIALOG_DATA) public data: any,
     private apiService: ApiService
   ) {
-    //console.log("product detial")
   }
 
   ngOnInit(): void {

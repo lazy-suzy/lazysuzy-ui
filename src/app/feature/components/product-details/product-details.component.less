@@ -1,3 +1,136 @@
 .mat-raised-button.mat-button-base {
   background-color: #0c1c31;
 }
+
+.product-details-container {
+  position: relative;
+  .modal-hr {
+    margin-top: 0.5rem;
+    margin-bottom: 0.5rem;
+    border: 0;
+    border-top: 1px solid #0c1c31;
+  }
+  
+  .gallery-container{
+    overflow: auto;
+    max-height: 100vh;
+    &::-webkit-scrollbar {
+        width: 10px;
+    }
+    &::-webkit-scrollbar-track {
+        box-shadow: inset 0 0 5px grey;
+        border-radius: 10px;
+    }
+    &::-webkit-scrollbar-thumb {
+        background: #ffcc00;
+        border-radius: 10px;
+    }
+
+    &::-webkit-scrollbar-thumb:hover {
+        background: #ffcc00ba;
+    }
+  }
+
+  .product-details-container {
+
+    .wishlist-container {
+      display: flex;
+      margin: 5px 0;
+    }
+
+    .price-container {
+      font-size: 24px;
+      position: relative;
+      display: flex;
+      padding-bottom: .5rem;
+      .product-price {
+        color: #b76e79;
+      }
+      .view-details-btn {
+        position: absolute;
+        right: 0;
+      }
+    }
+
+    .variations-container {
+      max-height: 180px;
+      overflow-y: auto;
+      padding: .5rem 0;
+      &::-webkit-scrollbar {
+        width: 10px;
+      }
+      &::-webkit-scrollbar-track {
+          box-shadow: inset 0 0 5px grey;
+          border-radius: 10px;
+      }
+      &::-webkit-scrollbar-thumb {
+          background: #ffcc00;
+          border-radius: 10px;
+      }
+
+      &::-webkit-scrollbar-thumb:hover {
+          background: #ffcc00ba;
+      }
+      .variation-options {
+        display: flex;
+        flex-wrap: wrap;
+        .variation-img-box{
+          margin: 5px;
+          [data-title] {
+            position: relative;
+            cursor: pointer;
+            font-size: 18px;
+            vertical-align: middle;
+            &:hover::before {
+              content: attr(data-title);
+              position: absolute;
+              bottom: -40px;
+              display: inline-block;
+              padding: 3px 6px;
+              border-radius: 2px;
+              background: #000;
+              color: #fff;
+              font-size: 12px;
+              font-family: sans-serif;
+              white-space: nowrap;
+              min-width: 50px;
+              text-align: center;
+              z-index: 1;
+            }
+          }
+          .variation-img{
+            width: 40px;
+            height: 40px;
+          }
+        }
+      }
+    }
+
+    .product-description-container {
+      overflow-y: auto;
+      max-height: 300px;
+      &::-webkit-scrollbar {
+        width: 10px;
+      }
+      &::-webkit-scrollbar-track {
+          box-shadow: inset 0 0 5px grey;
+          border-radius: 10px;
+      }
+      &::-webkit-scrollbar-thumb {
+          background: #ffcc00;
+          border-radius: 10px;
+      }
+
+      &::-webkit-scrollbar-thumb:hover {
+          background: #ffcc00ba;
+      }
+    }
+  }
+}
+.close-icon{
+  position: absolute;
+  right: -20px;
+  top: -20px;
+  background-color: transparent;
+  border: none;
+}
