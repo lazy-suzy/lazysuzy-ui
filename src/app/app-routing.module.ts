@@ -13,7 +13,7 @@ import {
   TermsOfServiceComponent,
   PrivacyPolicyComponent
 } from './core/components';
-import {ProductDetailsMobileComponent} from './feature/components';
+import { ProductDetailsMobileComponent } from './feature/components';
 
 const routes: Routes = [
   { path: '', component: LandingComponent, pathMatch: 'full' },

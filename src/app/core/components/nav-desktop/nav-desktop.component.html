@@ -7,12 +7,12 @@
     >
       <img class="w4 pointer grow title-image" [src]="logoPath" alt="Lazy Suzy Home" />
     </a>
-    <!-- <app-search-bar *ngIf="notHome" class="section"></app-search-bar> -->
+    <app-search-bar *ngIf="notHome" class="section" [notHome]="notHome"></app-search-bar>
     <div class="mr3 flex items-center">
-      <a class="header-link" [routerLink]="['/aboutus']" >The Lazy Story</a>
+      <a class="header-link header-font" [routerLink]="['/aboutus']" >The Lazy Story</a>
       <a routerLink="/wishlist" class="flex items-center header-link pointer">
         <mat-icon aria-hidden="false">favorite_border</mat-icon>
-        <span class="ml2">My saved items</span>
+        <span class="ml2 header-font">Saved items</span>
       </a>
       <mat-icon class="account-icon pointer" aria-hidden="false" aria-label="Account" [matMenuTriggerFor]="accountMenu">
           account_circle</mat-icon>

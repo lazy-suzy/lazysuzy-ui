@@ -24,7 +24,7 @@ export class NavDesktopComponent {
     private apiService: ApiService,
     private messageService: MessageService,
   
-  ) 
+  )
   {
     this.checkHomeRoute = router.events.subscribe(val => {
       this.notHome = location.path() !== '';

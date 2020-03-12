@@ -17,7 +17,6 @@
   margin-bottom: 8%;
 }
 
-
 .search-input-before::placeholder {
   font-size: 25px;
   color: @text-subtle;
@@ -42,7 +41,9 @@
     width: 30px;
   }
 }
-
+.header-container {
+  margin-top: 15px;
+}
 .form-control[type='search'] {
   outline: none !important;
   box-shadow: none !important;
@@ -57,20 +58,19 @@
 
 .search-button {
   position: relative;
-  bottom: 50px;
-  height: 45%;
-  width: 10%;
+  bottom: 65px;
+  height: 60%;
+  width: 12%;
   float: right;
   color: #f7c107;
-  background: white;
+  background: #0c1c31;
   border: none;
-  margin-right: 10px;
 }
 
 .search-button-before {
   position: relative;
-  bottom: 63px;
-  height: 55%;
+  bottom: 65px;
+  height: 60%;
   width: 12%;
   float: right;
   color: #f7c107;
@@ -87,10 +87,17 @@
   font-size: 25px;
   font-weight: 600;
 }
-
+.header-searchbar{
+  height: 55px !important;
+  padding: 5px 15px !important;
+}
+.header-search-button {
+  bottom: 55px;
+  height: 57%;
+  color: #0c1c31;
+  background-color: #f7c107;
+}
 @media only screen and (max-width: 768px) {
- 
-
   .search-container {
     margin-bottom: 20%;
     margin-top: -10%;
@@ -119,18 +126,13 @@
     }
     .search-button-before {
       position: relative;
-      bottom: 34px;
-      height: 95%;
+      bottom: 35px;
+      height: 100%;
       right: 40px;
     }
-
-    .search-button {
-      position: relative;
-      bottom: 30px;
-      height: 80%;
-      right: 32px;
+    .header-search-button {
+      height: 100%;
     }
-
     .form-control[type='search'] {
       padding-top: 0px;
       padding-bottom: 0px;
@@ -143,21 +145,23 @@
       width: 75%;
     }
     .search-button {
-      width: 10%;
-      bottom: 35px;
+      width: 12%;
+      bottom: 30px;
       border: none;
-      background-color: #ffffff;
       border-top-left-radius: 0;
       border-bottom-left-radius: 0;
       position: relative;
+      i {
+        font-size: 18px;
+      }
       // right: 0px;
       // height: 30px;
       // i {
       //   font-size: 18px;
       // }
-      right:  36px;
-      height: 30px;
-      bottom: 32px;
+      right: 36px;
+      height: 35px;
+      bottom: 35px;
     }
   }
 }

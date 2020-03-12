@@ -3,6 +3,8 @@ import { MOCK_ACCOUNT_ACTIONS, MOCK_DEPARTMENTS } from 'src/app/mocks';
 import { ApiService } from './../../../shared/services';
 import { Router, NavigationEnd} from '@angular/router';
 import { IAllDepartment } from '../../../shared/models/all-department.interface';
+import { Subscription } from 'rxjs';
+import { Location } from '@angular/common';
 
 @Component({
   selector: 'app-nav-mobile',
@@ -17,14 +19,23 @@ export class NavMobileComponent {
   mobileMenuContainer;
   showDepartment;
   showSearchComponent: boolean = false;
+  notHome: Boolean;
+  checkHomeRoute: Subscription;
 
-  constructor(private apiService: ApiService, private router: Router) {
+  constructor(private apiService: ApiService, private router: Router, private location: Location,) {
     this.getDepartments();
     router.events.subscribe((val) => {
       if (val instanceof NavigationEnd) {
         this.menuVisible = false;
       }
      });
+    this.checkHomeRoute = router.events.subscribe(val => {
+      this.notHome = location.path() !== '';
+    });
+  }
+
+  ngOnDestroy(): void {
+    this.checkHomeRoute.unsubscribe();
   }
 
   setIndex(index: number) {
