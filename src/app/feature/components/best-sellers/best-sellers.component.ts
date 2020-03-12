@@ -40,7 +40,6 @@ export class BestSellersComponent implements OnInit {
   }
 
   seeAll(){
-    // this.router.navigate(['/allProducts/best']);
-    this.router.navigate(['/seeAllBestsellers']);
+    this.router.navigateByUrl('/products/all?bestseller=true');
   }
 }

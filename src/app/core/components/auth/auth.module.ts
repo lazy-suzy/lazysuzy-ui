@@ -4,7 +4,6 @@ import { AuthComponent } from './auth.component';
 import { MatButtonModule } from '@angular/material/button';
 import { MatMenuModule } from '@angular/material/menu';
 import { MatIconModule } from '@angular/material/icon';
-
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { SocialLoginModule, AuthServiceConfig, GoogleLoginProvider, FacebookLoginProvider,} from "angular-6-social-login";
 import { FormsModule } from '@angular/forms';
