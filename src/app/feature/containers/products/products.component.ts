@@ -1,11 +1,15 @@
 import { Component, OnInit, OnDestroy, HostListener } from '@angular/core';
+import { Location } from '@angular/common';
 import {
   IProductPayload,
   IProductsPayload,
   IFilterData,
   ISortType
 } from './../../../shared/models';
-import { ApiService } from './../../../shared/services';
+import { MatDialog } from '@angular/material/dialog';
+import { ProductDetailsComponent } from './../../components';
+import { ApiService, UtilsService } from './../../../shared/services';
+import { SCROLL_ICON_SHOW_DURATION } from './../../../shared/constants';
 import { Router, ActivatedRoute } from '@angular/router';
 import { Observable, Subscription } from 'rxjs';
 import {
@@ -40,6 +44,7 @@ export class ProductsComponent implements OnInit, OnDestroy {
   showMobileFilter: boolean = false;
   showMobileSort: boolean = false;
   productsInRow: number = 2;
+  modalSku: string = '';
   bpObserver: Observable<BreakpointState> = this.breakpointObserver.observe(
     Breakpoints.Handset
   );
@@ -48,10 +53,13 @@ export class ProductsComponent implements OnInit, OnDestroy {
   isHandset: boolean;
 
   constructor(
+    public dialog: MatDialog,
     private apiService: ApiService,
     private router: Router,
+    private location: Location,
     private activeRoute: ActivatedRoute,
-    private breakpointObserver: BreakpointObserver
+    private breakpointObserver: BreakpointObserver,
+    private utilsService: UtilsService
   ) {}
 
   ngOnInit(): void {
@@ -68,6 +76,10 @@ export class ProductsComponent implements OnInit, OnDestroy {
       this.loadProducts();
     });
     this.loadProducts();
+    this.modalSku = this.activeRoute.snapshot.queryParamMap.get('modal_sku');
+    if (this.modalSku) {
+      this.utilsService.openMatDialog(this.modalSku);
+    }
   }
 
   ngOnDestroy(): void {
@@ -180,10 +192,11 @@ export class ProductsComponent implements OnInit, OnDestroy {
       0;
     this.isIconShow = scrollPosition >= this.topPosToStartShowing;
     this.showBar = scrollPosition >= this.fixFilterBar;
+    const _self = this;
     if (this.isIconShow) {
       setTimeout(function() {
-        this.isIconShow = false;
-      }, 5000);
+        _self.isIconShow = false;
+      }, SCROLL_ICON_SHOW_DURATION);
     }
   }
 

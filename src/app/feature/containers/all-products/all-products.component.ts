@@ -6,6 +6,7 @@ import {
   ISortType
 } from './../../../shared/models';
 import { ApiService } from './../../../shared/services';
+import { SCROLL_ICON_SHOW_DURATION } from './../../../shared/constants';
 import { Router, ActivatedRoute } from '@angular/router';
 import { Observable, Subscription } from 'rxjs';
 import {
@@ -172,10 +173,11 @@ export class AllProductsComponent implements OnInit {
       0;
     this.isIconShow = scrollPosition >= this.topPosToStartShowing;
     this.showBar = scrollPosition >= this.fixFilterBar;
+    const _self = this;
     if (this.isIconShow) {
       setTimeout(function() {
-        this.isIconShow = false;
-      }, 5000);
+        _self.isIconShow = false;
+      }, SCROLL_ICON_SHOW_DURATION);
     }
   }
 

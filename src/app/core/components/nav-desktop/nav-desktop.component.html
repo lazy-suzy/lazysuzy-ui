@@ -31,7 +31,7 @@
     </div>
   </mat-toolbar-row>
 </mat-toolbar>
-<div class="top-navbar flex justify-around ">
+<div class="top-navbar flex justify-around " *ngIf="notHome">
   <ng-container *ngFor="let department of departments">
     <div class="department-name">
       <div class="grow pointer pa2" [routerLink]="department.link">

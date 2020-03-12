@@ -23,7 +23,7 @@ export class SubscribeComponent implements OnInit {
   submit(data) {
     if (this.EMAIL_REGEX.test(data)) {
       this.invalidEmail = false;
-      let url = this.route.url ;
+      let url = window.location.href.split('?')[0] ;
       this.apiService
       .subscription(url, data)
       .subscribe((payload: any) => {

@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ApiService } from './../../../shared/services';
+import { ApiService, UtilsService } from './../../../shared/services';
 import { Router } from '@angular/router';
 
 @Component({
@@ -11,7 +11,7 @@ export class NewArrivalsComponent implements OnInit {
   newArrivals: any;
   newProducts: any;
   responsiveOptions: any;
-  constructor(private apiService: ApiService, private router: Router) {
+  constructor(private apiService: ApiService, private router: Router, private utilsService: UtilsService) {
     this.responsiveOptions = [
       {
         breakpoint: '1024px',
@@ -41,11 +41,14 @@ export class NewArrivalsComponent implements OnInit {
      .subscribe((res) => {
        this.newArrivals = res;
        this.newProducts = this.newArrivals.products;
-     });
- }
+      });
+  }
 
- seeAll(){
-   this.router.navigateByUrl('/products/all?new=true');
- }
+  seeAll(){
+    this.router.navigateByUrl('/products/all?new=true');
+  }
 
+  openDialog(sku) {
+    this.utilsService.openMatDialog(sku);
+  }
 }

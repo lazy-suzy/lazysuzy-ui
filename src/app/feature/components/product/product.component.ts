@@ -3,8 +3,13 @@ import { IProductPayload } from './../../../shared/models';
 import { Component, OnInit, Input } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { Observable, Subscription } from 'rxjs';
-import { BreakpointState, Breakpoints, BreakpointObserver } from '@angular/cdk/layout';
-
+import {
+  BreakpointState,
+  Breakpoints,
+  BreakpointObserver
+} from '@angular/cdk/layout';
+import { Location } from '@angular/common';
+import { Router, ActivatedRoute } from '@angular/router';
 @Component({
   selector: 'app-product',
   templateUrl: './product.component.html',
@@ -15,25 +20,36 @@ export class ProductComponent implements OnInit {
   starIcons: string[] = new Array();
   variationImage: string = '';
   isVariationImageVisible: boolean = false;
+  modalSku: any;
   bpObserver: Observable<BreakpointState> = this.breakpointObserver.observe(
     Breakpoints.Handset
   );
 
   bpSubscription: Subscription;
   numbOfSwatchItems: number;
-  constructor(public dialog: MatDialog, private breakpointObserver: BreakpointObserver) {}
+  activeRouteSubscription: Subscription;
+  constructor(
+    public dialog: MatDialog,
+    private breakpointObserver: BreakpointObserver,
+    private location: Location,
+    private router: Router,
+    private activeRoute: ActivatedRoute
+  ) {}
 
   ngOnInit(): void {
     this.setRating();
     this.bpSubscription = this.breakpointObserver
-    .observe([Breakpoints.Small])
-    .subscribe((state: BreakpointState) => {
-      if (state.matches) {
-        this.numbOfSwatchItems = 3;
-      } else {
-        this.numbOfSwatchItems = 6;
-      }
-    });
+      .observe([Breakpoints.Small])
+      .subscribe((state: BreakpointState) => {
+        if (state.matches) {
+          this.numbOfSwatchItems = 3;
+        } else {
+          this.numbOfSwatchItems = 6;
+        }
+      });
+    // this.activeRouteSubscription = this.activeRoute.queryParams.subscribe(params => {
+
+    // });
   }
 
   ngOnDestroy(): void {
@@ -61,8 +77,11 @@ export class ProductComponent implements OnInit {
       height: '100%',
       data: { sku: this.product.sku }
     });
-    
+    dialogRef.afterOpened().subscribe(result => {
+      this.location.go(`product/${this.product.sku}`);
+    });
     dialogRef.afterClosed().subscribe(result => {
+      this.location.back();
     });
   }
 
@@ -77,8 +96,8 @@ export class ProductComponent implements OnInit {
           : variation.product_sku
       }
     });
-    dialogRef.afterClosed().subscribe(result => {
-    });
+
+    dialogRef.afterClosed().subscribe(result => {});
   }
   showVariationImage(imageUrl): void {
     this.variationImage = imageUrl;

@@ -90,7 +90,8 @@
   </div>
   <app-subscribe
     [category]="category"
-    class="tc {{ checkProductsLength < 1 ? '' : 'dn' }}"
+    *ngIf="!isProductFetching"
+    class="tc"
   >
   </app-subscribe>
 </div>

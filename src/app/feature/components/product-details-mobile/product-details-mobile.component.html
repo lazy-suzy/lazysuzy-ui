@@ -1,4 +1,4 @@
-<div class="images-container">
+<div class="images-container" #gallery>
     <div class="images">
         <img *ngFor="let image of product.thumb" [src]="image" class="prod-img">
     </div>
@@ -28,9 +28,12 @@
         </button>
     </div>
     <hr class="modal-hr">
-    <div class="variation-container">
+    <div class="variation-container" *ngIf="variationsExist">
         <div class="variation-options">
-            <div class="variation" *ngFor="let variation of product.variations">
+            <div class="variation" *ngFor="let variation of product.variations; let i = index"
+                (click)="selectedVariation(variation, i, gallery)"
+                [class.activeVariation]="selectedIndex === i" 
+            >
                 <a>
                     <img [src]="variation.swatch_image" [alt]="variation.name" class="variant-image">
                 </a>

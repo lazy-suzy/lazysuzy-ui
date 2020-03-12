@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ApiService } from './../../../shared/services';
+import { ApiService, UtilsService } from './../../../shared/services';
 import { Router } from '@angular/router';
 
 @Component({
@@ -10,7 +10,7 @@ import { Router } from '@angular/router';
 export class BestSellersComponent implements OnInit {
   bestSellers: any;
   responsiveOptions: any;
-  constructor(private apiService: ApiService, private router: Router) {
+  constructor(private apiService: ApiService, private router: Router, private utilsService: UtilsService) {
     this.responsiveOptions = [
       {
         breakpoint: '1024px',
@@ -41,5 +41,9 @@ export class BestSellersComponent implements OnInit {
 
   seeAll(){
     this.router.navigateByUrl('/products/all?bestseller=true');
+  }
+
+  openDialog(sku) {
+    this.utilsService.openMatDialog(sku);
   }
 }

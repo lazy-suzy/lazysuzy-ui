@@ -5,7 +5,7 @@
             <mat-icon>close </mat-icon>
         </button>
         <div class="fl w-50 pa2">
-            <div class="flex flex-column gallery-container">
+            <div class="flex flex-column gallery-container" #gallery>
                 <img *ngFor="let image of product.thumb" [src]="image" class="br2 mh2">
             </div>
         </div>
@@ -35,13 +35,15 @@
                     </a>
                 </button>
             </div>
-
             <hr class="modal-hr">
         
-            <div class="variations-container">
+            <div class="variations-container" *ngIf="variationsExist">
                 <span class="b">More Options</span>
                 <div class="variation-options">
-                    <div *ngFor="let variation of product.variations" class="variation-img-box">
+                    <div *ngFor="let variation of product.variations; let i = index" class="variation-img-box" 
+                        (click)="selectedVariation(variation, i, gallery)"
+                        [class.active]="selectedIndex === i" 
+                    >
                         <a>
                             <span data-title="{{variation.name}}">
                                 <img [src]="variation.swatch_image" [alt]="variation.name" class="variation-img">
@@ -54,21 +56,21 @@
             <hr class="modal-hr">    
 
             <div class="product-description-container">
-                <div class="mb2" *ngIf="product.description">
+                <div class="mb2" *ngIf="descriptionExist">
                     <span class="b">Overview</span>
                     <div class="mt1" [innerHTML]="product.description"></div>
-                    <hr class="modal-hr">
                 </div>
             
-                <div *ngIf="product.features?.length" class="mb2">
+                <div *ngIf="featuresExist" class="mb2">
+                    <hr class="modal-hr">                    
                     <span class="b">Feature</span>
                     <div *ngFor="let feature of product.features" class="mt1">
                         <div [innerHTML]="feature"></div>
                     </div>
-                    <hr class="modal-hr">
                 </div>
             
-                <div *ngIf="product.dimension?.length" class="mb2">
+                <div *ngIf="dimensionsExist" class="mb2">
+                    <hr class="modal-hr">
                     <span class="b">Dimension</span>
                     <div class="mt1 list">
                         <div *ngFor="let dimension of product.dimension" class="flex flex-column">
@@ -79,7 +81,6 @@
                             <br/>
                         </div>
                     </div>
-                    <hr class="modal-hr">
                 </div>
             </div>
         </div>
