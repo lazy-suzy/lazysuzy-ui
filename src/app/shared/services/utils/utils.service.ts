@@ -7,8 +7,7 @@ import { Location } from '@angular/common';
   providedIn: 'root'
 })
 export class UtilsService {
-
-  constructor(public dialog: MatDialog, private location: Location) { }
+  constructor(public dialog: MatDialog, private location: Location) {}
 
   checkDataLength(data) {
     return data.length > 0;
@@ -18,7 +17,8 @@ export class UtilsService {
     const dialogRef = this.dialog.open(ProductDetailsComponent, {
       width: '80%',
       height: '100%',
-      data: { sku: modalSku }
+      data: { sku: modalSku },
+      panelClass: 'product-details-dialog-container'
     });
     dialogRef.afterOpened().subscribe(result => {
       this.location.go(`product/${modalSku}`);
@@ -32,7 +32,8 @@ export class UtilsService {
     const dialogRef = this.dialog.open(ProductDetailsComponent, {
       width: '80%',
       height: '100%',
-      data: { sku: modalSku }
+      data: { sku: modalSku },
+      panelClass: 'product-details-dialog-container'
     });
     dialogRef.afterOpened().subscribe(result => {
       this.location.replaceState(`product/${modalSku}`);

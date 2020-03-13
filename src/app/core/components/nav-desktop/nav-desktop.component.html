@@ -14,20 +14,7 @@
         <mat-icon aria-hidden="false">favorite_border</mat-icon>
         <span class="ml2 header-font">Saved items</span>
       </a>
-      <mat-icon class="account-icon pointer" aria-hidden="false" aria-label="Account" [matMenuTriggerFor]="accountMenu">
-          account_circle</mat-icon>
-      <mat-menu #accountMenu="matMenu">
-          <a
-              *ngFor="let action of departments"
-              routerLinkActive="active"
-              class="no-underline"
-            >
-            
-              <button mat-menu-item>{{ action.display | titlecase }}</button>
-            </a>
-            
-         
-      </mat-menu>
+        <app-auth class="account-icon"></app-auth>
     </div>
   </mat-toolbar-row>
 </mat-toolbar>

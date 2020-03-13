@@ -75,7 +75,8 @@ export class ProductComponent implements OnInit {
     const dialogRef = this.dialog.open(ProductDetailsComponent, {
       width: '80%',
       height: '100%',
-      data: { sku: this.product.sku }
+      data: { sku: this.product.sku },
+      panelClass: 'product-details-dialog-container'
     });
     dialogRef.afterOpened().subscribe(result => {
       this.location.go(`product/${this.product.sku}`);

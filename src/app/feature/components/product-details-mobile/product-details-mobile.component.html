@@ -1,6 +1,6 @@
 <div class="images-container" #gallery>
     <div class="images">
-        <img *ngFor="let image of product.thumb" [src]="image" class="prod-img">
+        <img *ngFor="let image of items; index as i" [src]="image.data.src" (click)="openLightbox(i)" class="prod-img">
     </div>
 </div>
 <div class="product-content">
@@ -55,14 +55,21 @@
                     <li [innerHTML]="feature"></li>
                 </ul>
             </div>
-            <div *ngIf="dimensionExist" class="{{activeTab === 'dimensions'?'':'dn'}} dimension-container">
-                <div *ngFor="let dimension of product.dimension" class="fl w-50 pa2">
-                    <div class="dimension-title">{{ dimension.description }}</div>
-                    <div>Width: {{ dimension.width }}</div>
-                    <div>Depth: {{ dimension.depth }}</div>
-                    <div>Height: {{ dimension.height }}</div>
-                    <br/>
+            <div *ngIf="dimensionExist" class="{{activeTab === 'dimensions'?'':'dn'}}">
+                <div *ngIf="isArray(product.dimension); else showDimensions" class="dimension-container">
+                    <div *ngFor="let dimension of product.dimension" class="fl w-50 pa2">
+                        <div class="dimension-title">{{ dimension.description }}</div>
+                        <div>Width: {{ dimension.width }}</div>
+                        <div>Depth: {{ dimension.depth }}</div>
+                        <div>Height: {{ dimension.height }}</div>
+                        <br/>
+                    </div>
                 </div>
+                <ng-template #showDimensions>
+                    <div>
+                        {{product.dimension}}
+                    </div>
+                </ng-template>
             </div>
         </div>
     </div>

@@ -1,88 +1,112 @@
 <ng-container *ngIf="product">
-    
-    <div class="product-details-container">
-        <button class="close-icon" (click)="closeMatDialog()" mat-dialog-close>
-            <mat-icon>close </mat-icon>
-        </button>
-        <div class="fl w-50 pa2">
-            <div class="flex flex-column gallery-container" #gallery>
-                <img *ngFor="let image of product.thumb" [src]="image" class="br2 mh2">
-            </div>
-        </div>
-        <div class="fl w-50 pa2 product-details-container">
-            <div class="flex w-100 justify-between items-end">
-                <h2 class="mb0">{{ product.site }}</h2>
-                <div *ngIf="product.wishlisted; else elseBlock">
-                    <div class="tile-icon wishlist-icon wishlist-container">
-                        <mat-icon>favorite </mat-icon> <span>Saved</span>
-                    </div>
-                </div>
-                <ng-template #elseBlock>
-                <div class="tile-icon wishlist-icon wishlist-container">
-                    <mat-icon>favorite_border </mat-icon><span> Save</span>
-                </div>
-                </ng-template>
-                
-            </div>
-            <h4 class="mb0">{{ product.name }}</h4>    
-        
-            <div class="price-container">
-                <span class="product-price mr3">${{ product.is_price }}</span>
-                <span class="strike">${{ product.was_price }}</span>
-                <button mat-raised-button class="bg-red view-details-btn">
-                    <a [href]="product.product_url" class="no-underline yellow">
-                        View Details
-                    </a>
-                </button>
-            </div>
-            <hr class="modal-hr">
-        
-            <div class="variations-container" *ngIf="variationsExist">
-                <span class="b">More Options</span>
-                <div class="variation-options">
-                    <div *ngFor="let variation of product.variations; let i = index" class="variation-img-box" 
-                        (click)="selectedVariation(variation, i, gallery)"
-                        [class.active]="selectedIndex === i" 
-                    >
-                        <a>
-                            <span data-title="{{variation.name}}">
-                                <img [src]="variation.swatch_image" [alt]="variation.name" class="variation-img">
-                            </span>
-                        </a>
-                    </div>
-                </div>
-            </div>
-
-            <hr class="modal-hr">    
-
-            <div class="product-description-container">
-                <div class="mb2" *ngIf="descriptionExist">
-                    <span class="b">Overview</span>
-                    <div class="mt1" [innerHTML]="product.description"></div>
-                </div>
-            
-                <div *ngIf="featuresExist" class="mb2">
-                    <hr class="modal-hr">                    
-                    <span class="b">Feature</span>
-                    <div *ngFor="let feature of product.features" class="mt1">
-                        <div [innerHTML]="feature"></div>
-                    </div>
-                </div>
-            
-                <div *ngIf="dimensionsExist" class="mb2">
-                    <hr class="modal-hr">
-                    <span class="b">Dimension</span>
-                    <div class="mt1 list">
-                        <div *ngFor="let dimension of product.dimension" class="flex flex-column">
-                            <span>{{ dimension.description }}</span>
-                            <span>Width: {{ dimension.width }}</span>
-                            <span>Depth: {{ dimension.depth }}</span>
-                            <span>Height: {{ dimension.height }}</span>
-                            <br/>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
+  <div class="product-details-container">
+    <button class="close-icon" (click)="closeMatDialog()" mat-dialog-close>
+      <mat-icon>close </mat-icon>
+    </button>
+    <div class="fl w-50">
+      <div class="flex flex-column gallery-container" #gallery>
+        <img
+          *ngFor="let image of items; index as i"
+          [src]="image.data.src"
+          (click)="openLightbox(i)"
+          class="br2"
+        />
+      </div>
     </div>
+    <div class="fl w-50 pa3 product-details-container">
+      <div class="flex w-100 justify-between items-end">
+        <h2 class="mb0">{{ product.site }}</h2>
+        <div *ngIf="product.wishlisted; else elseBlock">
+          <div class="tile-icon wishlist-icon wishlist-container">
+            <mat-icon>favorite </mat-icon> <span>Saved</span>
+          </div>
+        </div>
+        <ng-template #elseBlock>
+          <div class="tile-icon wishlist-icon wishlist-container">
+            <mat-icon>favorite_border </mat-icon><span> Save</span>
+          </div>
+        </ng-template>
+      </div>
+      <h4 class="mb0">{{ product.name }}</h4>
+
+      <div class="price-container">
+        <span class="product-price mr3">${{ product.is_price }}</span>
+        <span class="strike">${{ product.was_price }}</span>
+        <button mat-raised-button class="bg-red view-details-btn">
+          <a [href]="product.product_url" class="no-underline yellow">
+            View Details
+          </a>
+        </button>
+      </div>
+      <hr class="modal-hr" *ngIf="variationsExist" />
+
+      <div class="variations-container" *ngIf="variationsExist">
+        <span class="title">More Options</span>
+        <div class="variation-options">
+          <div
+            *ngFor="let variation of product.variations; let i = index"
+            class="variation-img-box"
+            (click)="selectedVariation(variation, i, gallery)"
+            [class.active]="selectedIndex === i"
+          >
+            <a>
+              <span data-title="{{ variation.name }}">
+                <img
+                  [src]="variation.swatch_image"
+                  [alt]="variation.name"
+                  class="variation-img"
+                />
+              </span>
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <hr class="modal-hr" />
+
+      <div
+        class="product-description-container {{
+          variationsExist ? '' : 'full-height'
+        }}"
+      >
+        <div class="mb2" *ngIf="descriptionExist">
+          <span class="title">Overview</span>
+          <div class="mt1" [innerHTML]="product.description"></div>
+        </div>
+
+        <div *ngIf="featuresExist" class="mb2">
+          <hr class="modal-hr" />
+          <span class="title">Feature</span>
+          <div *ngFor="let feature of product.features" class="mt1">
+            <div [innerHTML]="feature"></div>
+          </div>
+        </div>
+
+        <div *ngIf="dimensionExist" class="mb2">
+          <hr class="modal-hr" />
+          <span class="title">Dimension</span>
+          <div
+            class="mt1"
+            *ngIf="isArray(product.dimension); else showDimensions"
+          >
+            <div
+              *ngFor="let dimension of product.dimension"
+              class="fl w-50 pa2"
+            >
+              <div class="dimension-title">{{ dimension.description }}</div>
+              <div>Width: {{ dimension.width }}</div>
+              <div>Depth: {{ dimension.depth }}</div>
+              <div>Height: {{ dimension.height }}</div>
+              <br />
+            </div>
+          </div>
+          <ng-template #showDimensions>
+            <div>
+              {{ product.dimension }}
+            </div>
+          </ng-template>
+        </div>
+      </div>
+    </div>
+  </div>
 </ng-container>

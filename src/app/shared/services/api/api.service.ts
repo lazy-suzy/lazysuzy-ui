@@ -140,13 +140,20 @@ export class ApiService {
   }
 
   login(data) {
-    const endpoint = `api/login/${data.email}/${data.password}`;
+    const endpoint = `login`;
     const url = `${env.API_BASE_HREF}${endpoint}`;
-    return this.httpService.post(url, '');
+    return this.httpService.post(url, data);
   }
+
   subscription(URL,email):Observable<string> {
     const endpoint = `subscribe`;
     const url = `${env.API_BASE_HREF}${endpoint}?url=${URL}&email=${email}`;
     return this.httpService.get(url);
+  }
+
+  signup(data) {
+    const endpoint = `register`;
+    const url = `${env.API_BASE_HREF}${endpoint}`;
+    return this.httpService.post(url, data);
   }
 }
