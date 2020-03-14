@@ -17,7 +17,7 @@ export class WishlistComponent implements OnInit {
 
   ngOnInit(): void {
     this.productsSubscription = this.apiService
-      .getProducts('living', 'chairs')
+      .getWishlistProducts()
       .subscribe((payload: IProductsPayload) => {
         this.products = payload.products;
       });

@@ -6,6 +6,7 @@ import {
 } from 'angular-6-social-login';
 import { CookieService } from 'ngx-cookie-service';
 import { ApiService } from 'src/app/shared/services';
+import { environment as env } from 'src/environments/environment';
 
 @Component({
   selector: 'app-auth',
@@ -14,9 +15,14 @@ import { ApiService } from 'src/app/shared/services';
 })
 export class AuthComponent implements OnInit {
   @ViewChild('closeLoginModal', { static: false }) closeLoginModal: ElementRef;
+  @ViewChild('closeSignupModal', { static: false }) closeSignupModal: ElementRef;
 
   userCookie: string;
   user: any;
+  googleRedirect = env.GOOGLE_LINK;
+  facebookRedirect = env.FACEBOOK_LINK;
+  error: boolean = false;
+  errorMsg: string;
   constructor(
     private socialAuthService: AuthService,
     private apiService: ApiService,
@@ -48,25 +54,54 @@ export class AuthComponent implements OnInit {
   }
 
   login(email, password) {
-    const formData: any = new FormData();
-    formData.append('email', email);
-    formData.append('password', password);
-    this.apiService.login(formData).subscribe((payload: any) => {
-      this.cookie.set('token', payload.success.token);
-      localStorage.setItem('user', JSON.stringify(payload.user));
-      this.closeLoginModal.nativeElement.click();
-      this.fetchUser();
-    });
+    if (password.length < 8) {
+      this.error = true;
+      this.errorMsg = 'Password must contain 8 characters';
+    } else {
+      this.error = false;
+      const formData: any = new FormData();
+      formData.append('email', email);
+      formData.append('password', password);
+      this.apiService.login(formData).subscribe((payload: any) => {
+        if(payload.success) {
+          this.error = false;
+          this.cookie.set('token', payload.success.token);
+          localStorage.setItem('user', JSON.stringify(payload.user));
+          this.closeLoginModal.nativeElement.click();
+          this.fetchUser();
+        } else {
+          this.error = true;
+          this.errorMsg = payload.error;
+        }
+      });
+    }
   }
 
   signup(name, email, password) {
-    var formData: any = new FormData();
-    formData.append('name', name);
-    formData.append('email', email);
-    formData.append('password', password);
-    this.apiService.signup(formData).subscribe((payload: any) => {
-      console.log(payload);
-    });
+    if(password.length < 8) {
+      this.error = true;
+      this.errorMsg = 'Password must contain 8 characters';
+    } else {
+      this.error = false;
+      var formData: any = new FormData();
+      formData.append('name', name);
+      formData.append('email', email);
+      formData.append('password', password);
+      formData.append('c_password', password);
+      this.apiService.signup(formData).subscribe((payload: any) => {
+        if(payload.success) {
+          this.error = false;
+          this.cookie.set('token', payload.success.token);
+          localStorage.setItem('user', JSON.stringify(payload.success.user));
+          this.closeSignupModal.nativeElement.click();
+          this.fetchUser();
+        } else {
+          this.error = true;
+          this.errorMsg = payload.error.email;
+        }
+      });
+    }
+    
   }
 
   logout() {

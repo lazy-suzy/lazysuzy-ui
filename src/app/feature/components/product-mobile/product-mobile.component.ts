@@ -2,6 +2,7 @@ import { ProductDetailsComponent } from './../product-details/product-details.co
 import { IProductPayload } from './../../../shared/models';
 import { Component, OnInit, Input } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
+import { ApiService } from 'src/app/shared/services';
 
 @Component({
   selector: 'app-product-mobile',
@@ -12,9 +13,16 @@ export class ProductMobileComponent implements OnInit {
   @Input() product: IProductPayload;
   @Input() productsInRow: number;
 
-  constructor() { }
+  constructor(private apiService: ApiService) { }
 
   ngOnInit() {
   }
+  wishlistProduct(sku, mark, event) {
+    event.stopPropagation();
+    this.apiService
+      .wishlistProduct(sku, mark)
+      .subscribe((payload: any) =>{
 
+      })
+  }
 }

@@ -18,12 +18,12 @@
         <h2 class="mb0">{{ product.site }}</h2>
         <div *ngIf="product.wishlisted; else elseBlock">
           <div class="tile-icon wishlist-icon wishlist-container">
-            <mat-icon>favorite </mat-icon> <span>Saved</span>
+            <mat-icon (click)="wishlistProduct(product.sku, false)" >favorite </mat-icon> <span>Saved</span>
           </div>
         </div>
         <ng-template #elseBlock>
           <div class="tile-icon wishlist-icon wishlist-container">
-            <mat-icon>favorite_border </mat-icon><span> Save</span>
+            <mat-icon (click)="wishlistProduct(product.sku, true)">favorite_border </mat-icon><span> Save</span>
           </div>
         </ng-template>
       </div>
@@ -73,7 +73,6 @@
           <span class="title">Overview</span>
           <div class="mt1" [innerHTML]="product.description"></div>
         </div>
-
         <div *ngIf="featuresExist" class="mb2">
           <hr class="modal-hr" />
           <span class="title">Feature</span>

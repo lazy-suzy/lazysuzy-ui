@@ -14,12 +14,12 @@
     />
     <div *ngIf="product.wishlisted; else elseBlock">
       <div class="tile-icon wishlist-icon">
-        <mat-icon>favorite </mat-icon>
+        <mat-icon (click)="wishlistProduct(product.sku, false, $event)">favorite </mat-icon>
       </div>
     </div>
     <ng-template #elseBlock>
       <div class="tile-icon wishlist-icon">
-        <mat-icon>favorite_border </mat-icon>
+        <mat-icon (click)="wishlistProduct(product.sku, true, $event)">favorite_border </mat-icon>
       </div>
     </ng-template>
   </div>

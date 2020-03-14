@@ -5,10 +5,10 @@ import {
   ProductsModule,
   SearchModule,
   WishlistModule,
-  CategoriesComponent
+  CategoriesComponent,
+  AllProductsComponent
 } from './containers';
-import { AllProductsComponent } from './containers/all-products/all-products.component';
-import { ProductDetailsMobileComponent } from './components/product-details-mobile/product-details-mobile.component';
+import { AuthSuccessComponent, ProductDetailsMobileComponent } from './components';
 
 const DECLARATIONS = [];
 
@@ -25,9 +25,10 @@ const MODULES = [
     ...DECLARATIONS,
     CategoriesComponent,
     AllProductsComponent,
-    ProductDetailsMobileComponent
+    ProductDetailsMobileComponent,
+    AuthSuccessComponent
   ],
   imports: [...MODULES],
-  exports: [...DECLARATIONS, ...MODULES]
+exports: [...DECLARATIONS, ...MODULES]
 })
 export class FeatureModule {}

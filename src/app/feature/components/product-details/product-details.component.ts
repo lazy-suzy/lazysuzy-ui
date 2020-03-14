@@ -72,7 +72,16 @@ export class ProductDetailsComponent implements OnInit {
       container.scrollTop = 0;
     }
   }
-  isArray(obj: any) {
-    return Array.isArray(obj);
+  isArray(obj : any ) {
+    return Array.isArray(obj)
   }
+
+  wishlistProduct(sku, mark) {
+    this.apiService
+      .wishlistProduct(sku, mark)
+      .subscribe((payload: any) =>{
+
+      })
+  }
+
 }

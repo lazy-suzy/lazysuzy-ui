@@ -119,17 +119,15 @@ export class ApiService {
     return this.httpService.get(url);
   }
 
-  getWishlistProducts(
-    department: string,
-    category: string,
-    page = 0
-  ): Observable<IProductsPayload> {
-    const filters = '';
-    const sortTypes = '';
-    const endpoint = `products/${department}/${category}`;
-    const url = env.useLocalJson
-      ? `${env.JSON_BASE_HREF}${endpoint}`
-      : `${env.API_BASE_HREF}${endpoint}?filters=${filters}&sort_type=${sortTypes}&pageno=${page}`;
+  getWishlistProducts(): Observable<IProductsPayload> {
+    // const filters = '';
+    // const sortTypes = '';
+    // const endpoint = `products/${department}/${category}`;
+    const endpoint = `wishlist`;
+    const url = `${env.API_BASE_HREF}${endpoint}`;
+    // env.useLocalJson
+    //   ? `${env.JSON_BASE_HREF}${endpoint}`
+    //   : `${env.API_BASE_HREF}${endpoint}?filters=${filters}&sort_type=${sortTypes}&pageno=${page}`;
     return this.httpService.get(url);
   }
 
@@ -151,9 +149,26 @@ export class ApiService {
     return this.httpService.get(url);
   }
 
+  wishlistProduct(sku, mark) {
+    let endpoint;
+    if (mark) {
+      endpoint = `mark/favourite/${sku}`;
+    } else {
+      endpoint = `unmark/favourite/${sku}`;
+    }
+    const url = `${env.API_BASE_HREF}${endpoint}`;
+    return this.httpService.get(url);
+  }
+
   signup(data) {
     const endpoint = `register`;
     const url = `${env.API_BASE_HREF}${endpoint}`;
     return this.httpService.post(url, data);
+  }
+
+  getAuthData() {
+    const endpoint = `self`;
+    const url = `${env.API_BASE_HREF}${endpoint}`;
+    return this.httpService.get(url);
   }
 }

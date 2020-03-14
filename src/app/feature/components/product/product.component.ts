@@ -10,6 +10,7 @@ import {
 } from '@angular/cdk/layout';
 import { Location } from '@angular/common';
 import { Router, ActivatedRoute } from '@angular/router';
+import { ApiService } from 'src/app/shared/services';
 @Component({
   selector: 'app-product',
   templateUrl: './product.component.html',
@@ -33,7 +34,8 @@ export class ProductComponent implements OnInit {
     private breakpointObserver: BreakpointObserver,
     private location: Location,
     private router: Router,
-    private activeRoute: ActivatedRoute
+    private activeRoute: ActivatedRoute,
+    private apiService: ApiService
   ) {}
 
   ngOnInit(): void {
@@ -109,4 +111,14 @@ export class ProductComponent implements OnInit {
     this.variationImage = '';
     this.isVariationImageVisible = false;
   }
+
+  wishlistProduct(sku, mark, event) {
+    event.stopPropagation();
+    this.apiService
+      .wishlistProduct(sku, mark)
+      .subscribe((payload: any) =>{
+
+      })
+  }
+
 }

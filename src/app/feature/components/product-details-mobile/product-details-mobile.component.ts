@@ -104,11 +104,20 @@ export class ProductDetailsMobileComponent implements OnInit {
     }
   }
 
+  wishlistProduct(sku, mark) {
+    this.apiService
+      .wishlistProduct(sku, mark)
+      .subscribe((payload: any) =>{
+
+      })
+  }
+
   openLightbox(index: number) {
     this.lightbox.open(index, this.galleryId, {
       panelClass: 'fullscreen'
     });
   }
+
   isArray(obj: any) {
     return Array.isArray(obj);
   }

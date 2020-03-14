@@ -13,3 +13,5 @@ export * from './product-mobile/product-mobile.module';
 export * from './product-details-mobile/product-details-mobile.module';
 export * from './product-details-mobile/product-details-mobile.component';
 export * from './product-details/product-details.component';
+export * from './auth-success/auth-success.component';
+export * from './auth-success/auth-success.module';

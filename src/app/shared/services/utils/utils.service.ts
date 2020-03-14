@@ -2,12 +2,12 @@ import { Injectable } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { ProductDetailsComponent } from 'src/app/feature/components';
 import { Location } from '@angular/common';
-
 @Injectable({
   providedIn: 'root'
 })
 export class UtilsService {
-  constructor(public dialog: MatDialog, private location: Location) {}
+
+  constructor(public dialog: MatDialog, private location: Location) { }
 
   checkDataLength(data) {
     return data.length > 0;
@@ -42,4 +42,5 @@ export class UtilsService {
       this.location.back();
     });
   }
+
 }

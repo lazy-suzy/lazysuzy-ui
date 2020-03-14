@@ -1,111 +1,221 @@
-<mat-icon class="account-icon pointer mt2" aria-hidden="false" *ngIf="!userCookie" aria-label="Account" [matMenuTriggerFor]="accountMenu">
-        account_circle</mat-icon>
+<mat-icon
+  class="account-icon pointer mt2"
+  aria-hidden="false"
+  *ngIf="!userCookie"
+  aria-label="Account"
+  [matMenuTriggerFor]="accountMenu"
+>
+  account_circle</mat-icon
+>
 <mat-menu #accountMenu="matMenu">
-      <span (mouseleave)="closeMyMenu()">
-      <button mat-menu-item data-toggle="modal" data-target="#signInModal">Sign In</button>
-      <button mat-menu-item data-toggle="modal" data-target="#signUpModal">Sign Up</button>
-    </span>
+  <span (mouseleave)="closeMyMenu()">
+    <button mat-menu-item data-toggle="modal" data-target="#signInModal">
+      Sign In
+    </button>
+    <button mat-menu-item data-toggle="modal" data-target="#signUpModal">
+      Sign Up
+    </button>
+  </span>
 </mat-menu>
-<span class="profile-name" *ngIf="userCookie"[matMenuTriggerFor]="optionsMenu">
-    {{user.name}}
+<span class="profile-name" *ngIf="userCookie" [matMenuTriggerFor]="optionsMenu">
+  {{ user.name }}
 </span>
 <mat-menu #optionsMenu="matMenu">
   <span (mouseleave)="closeMyMenu()">
-  <button mat-menu-item (click)="logout()">Logout</button>
+    <button mat-menu-item (click)="logout()">Logout</button>
   </span>
 </mat-menu>
 <!--SignIn Modal -->
-<div class="modal fade" id="signInModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div
+  class="modal fade"
+  id="signInModal"
+  tabindex="-1"
+  role="dialog"
+  aria-labelledby="exampleModalLabel"
+  aria-hidden="true"
+>
   <div class="modal-dialog opacity-animate" role="document">
     <div class="modal-content">
       <div class="modal-title">
-        <button type="button" class="close" data-dismiss="modal" #closeLoginModal aria-label="Close">
-            <span aria-hidden="true">&times;</span>
+        <button
+          type="button"
+          class="close"
+          data-dismiss="modal"
+          #closeLoginModal
+          aria-label="Close"
+        >
+          <span aria-hidden="true">&times;</span>
         </button>
         <h5 class="modal-heading" id="signInModalLabel">Hey, Star Stuff!</h5>
-        <br>
+        <br />
         <div class="socialButtons">
-          <button type="button" class="btn btn-primary facebookBtn" (click)="socialSignIn('facebook')" style="background: #3b5998;">
-            <i class="fab fa-facebook-f">&nbsp;<b>Continue with Facebook</b></i>
+          <button type="button" class="btn btn-primary facebookBtn"  style="background: #3b5998;">
+            <a [href]="facebookRedirect" class="white">
+              <i class="fab fa-facebook-f" >&nbsp;<b>Continue with Facebook</b></i>
+            </a>
           </button>
           <br>
-          <button type="button" class="btn btn-light googleBtn" (click)="socialSignIn('google')">
-            <i class="fab fa-google">&nbsp;<b>Continue with Google</b></i>
+          <button type="button" class="btn btn-light googleBtn" >
+            <a [href]="googleRedirect" class="black">
+              <i class="fab fa-google" >&nbsp;<b>Continue with Google</b></i>
+            </a>
           </button>
         </div>
-          <hr>
+        <hr />
       </div>
 
       <div class="modal-body">
-        <span class="span-line">Not Feeling Social?</span>
-        <br>
-        <form role="form" (submit)="login(email,password)">
-        <!-- <form role="form"> -->
+        <div class="span-line text-center">Not Feeling Social?</div>
+        <br />
+        <form role="form" (submit)="login(email, password)">
+          <!-- <form role="form"> -->
           <div class="formGroup">
-            
-            <input type="email" class="form-control text-input" name="email" placeholder="Email" required [(ngModel)]="email" />
-            
-            <input type="password" class="form-control text-input password" name="password" placeholder="Password" required [(ngModel)]="password" />
-            <br>
-            <button type="submit" class="form-control btn btn-dark submit">Login</button>
-            <br>
-            <a class="resetPassword" routerLink="/forgotpassword">Reset Password</a>
+            <input
+              type="email"
+              class="form-control text-input"
+              name="email"
+              placeholder="Email"
+              required
+              [(ngModel)]="email"
+            />
+
+            <input
+              type="password"
+              class="form-control text-input password"
+              name="password"
+              placeholder="Password"
+              required
+              [(ngModel)]="password"
+            />
+            <span class="error-msg {{ error ? 'visible' : 'invisible' }}">{{
+              errorMsg
+            }}</span>
+            <button type="submit" class="form-control btn btn-dark submit">
+              Login
+            </button>
+            <br />
+            <a class="resetPassword" routerLink="/forgotpassword"
+              >Reset Password</a
+            >
           </div>
         </form>
       </div>
 
       <div class="modal-footer">
-          <span class="footer-content">Not a member yet?&nbsp;
-          <button class="btn btn-sm btn-light signUpLink" data-toggle="modal" data-target="#signUpModal" data-dismiss="modal">Join Now.</button></span>
+        <span class="footer-content"
+          >Not a member yet?&nbsp;
+          <button
+            class="btn btn-sm btn-light signUpLink"
+            data-toggle="modal"
+            data-target="#signUpModal"
+            data-dismiss="modal"
+          >
+            Join Now.
+          </button></span
+        >
       </div>
     </div>
   </div>
 </div>
-    
-      <!--SignUp Modal -->
-<div class="modal fade" id="signUpModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+
+<!--SignUp Modal -->
+<div
+  class="modal fade"
+  id="signUpModal"
+  tabindex="-1"
+  role="dialog"
+  aria-labelledby="exampleModalLabel"
+  aria-hidden="true"
+>
   <div class="modal-dialog opacity-animate" role="document">
     <div class="modal-content">
       <div class="modal-title">
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
+        <button
+          type="button"
+          class="close"
+          data-dismiss="modal"
+          aria-label="Close"
+          #closeSignupModal
+        >
+          <span aria-hidden="true">&times;</span>
         </button>
-        <h5 class="signup-modal-heading" id="signInModalLabel">Hey, Star Stuff!</h5>
-        <br>
+        <h5 class="signup-modal-heading" id="signInModalLabel">
+          Hey, Star Stuff!
+        </h5>
+        <br />
         <div class="socialButtons">
-          <button type="button" class="btn btn-primary facebookBtn" style="background: #3b5998;">
+          <button
+            type="button"
+            class="btn btn-primary facebookBtn"
+            style="background: #3b5998;"
+          >
             <i class="fab fa-facebook-f">&nbsp;<b>Continue with Facebook</b></i>
           </button>
-          <br>
+          <br />
           <button type="button" class="btn btn-light googleBtn">
             <i class="fab fa-google">&nbsp;<b>Continue with Google</b></i>
           </button>
         </div>
-          <hr>
+        <hr />
       </div>
 
       <div class="modal-body">
-        <span class="span-line">Not Feeling Social?</span>
-        <br>
-        <form role="form" (submit)="signup(name,email,password)">
+        <div class="span-line text-center">Not Feeling Social?</div>
+        <br />
+        <form role="form" (submit)="signup(name, email, password)">
           <div class="signUpformGroup">
-              <input type="name" class="form-control text-input" name="name" placeholder="Name" required [(ngModel)]="name" />
-              <br>
-            <input type="email" class="form-control text-input" name="email" placeholder="Email" required [(ngModel)]="email" />
-            <br>
-            <input type="password" class="form-control text-input" name="password" placeholder="Password" required [(ngModel)]="password" />
-            <br>
-            <button type="submit" class="form-control btn btn-dark submit">Login</button>
-            <br>
-            <a class="resetPassword" routerLink="/forgotpassword">Reset Password</a>
+            <input
+              type="name"
+              class="form-control text-input"
+              name="name"
+              placeholder="Name"
+              required
+              [(ngModel)]="name"
+            />
+            <br />
+            <input
+              type="email"
+              class="form-control text-input"
+              name="email"
+              placeholder="Email"
+              required
+              [(ngModel)]="email"
+            />
+            <br />
+            <input
+              type="password"
+              class="form-control text-input"
+              name="password"
+              placeholder="Password"
+              required
+              [(ngModel)]="password"
+            />
+            <span class="error-msg {{ error ? 'visible' : 'invisible' }}">{{
+              errorMsg
+            }}</span>
+            <button type="submit" class="form-control btn btn-dark submit">
+              Signup
+            </button>
+            <br />
+            <a class="resetPassword" routerLink="/forgotpassword"
+              >Reset Password</a
+            >
           </div>
         </form>
       </div>
 
       <div class="modal-footer">
-          <span class="signup-footer-content">Already Joined&nbsp;
-              <button class="btn btn-sm btn-light signUpLink" data-toggle="modal" data-target="#signInModal" data-dismiss="modal">Sign In.</button>
-          </span>
+        <span class="signup-footer-content"
+          >Already Joined&nbsp;
+          <button
+            class="btn btn-sm btn-light signUpLink"
+            data-toggle="modal"
+            data-target="#signInModal"
+            data-dismiss="modal"
+          >
+            Sign In.
+          </button>
+        </span>
       </div>
     </div>
   </div>
