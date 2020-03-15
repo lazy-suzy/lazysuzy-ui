@@ -1,6 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { ApiService, UtilsService } from 'src/app/shared/services';
 import { Router } from '@angular/router';
+import { Carousel } from 'primeng/carousel';
 
 @Component({
   selector: 'app-top-deals',
@@ -10,7 +11,13 @@ import { Router } from '@angular/router';
 export class TopDealsComponent implements OnInit {
   topDeals: any;
   responsiveOptions: any;
-  constructor(private apiService: ApiService, private router: Router, private utilsService: UtilsService) {
+  @Input() isHandset: boolean = false;
+
+  constructor(
+    private apiService: ApiService,
+    private router: Router,
+    private utilsService: UtilsService
+  ) {
     this.responsiveOptions = [
       {
         breakpoint: '1024px',
@@ -28,6 +35,7 @@ export class TopDealsComponent implements OnInit {
         numScroll: 1
       }
     ];
+    Carousel.prototype.changePageOnTouch = (e, diff) => {};
   }
 
   ngOnInit() {
@@ -40,11 +48,13 @@ export class TopDealsComponent implements OnInit {
     });
   }
 
-  seeAll(){
+  seeAll() {
     this.router.navigateByUrl('/products/all?sale=true');
   }
 
   openDialog(sku) {
-    this.utilsService.openMatDialog(sku);
+    this.isHandset
+      ? this.router.navigateByUrl(`/product/${sku}`)
+      : this.utilsService.openMatDialog(sku);
   }
 }

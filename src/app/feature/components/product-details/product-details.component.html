@@ -1,6 +1,6 @@
 <ng-container *ngIf="product">
   <div class="product-details-container">
-    <button class="close-icon" (click)="closeMatDialog()" mat-dialog-close>
+    <button class="close-icon" mat-dialog-close>
       <mat-icon>close </mat-icon>
     </button>
     <div class="fl w-50">
@@ -18,12 +18,17 @@
         <h2 class="mb0">{{ product.site }}</h2>
         <div *ngIf="product.wishlisted; else elseBlock">
           <div class="tile-icon wishlist-icon wishlist-container">
-            <mat-icon (click)="wishlistProduct(product.sku, false)" >favorite </mat-icon> <span>Saved</span>
+            <mat-icon (click)="wishlistProduct(product.sku, false)"
+              >favorite
+            </mat-icon>
+            <span>Saved</span>
           </div>
         </div>
         <ng-template #elseBlock>
           <div class="tile-icon wishlist-icon wishlist-container">
-            <mat-icon (click)="wishlistProduct(product.sku, true)">favorite_border </mat-icon><span> Save</span>
+            <mat-icon (click)="wishlistProduct(product.sku, true)"
+              >favorite_border </mat-icon
+            ><span> Save</span>
           </div>
         </ng-template>
       </div>

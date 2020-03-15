@@ -1,76 +1,121 @@
 <div class="images-container" #gallery>
-    <div class="images">
-        <img *ngFor="let image of items; index as i" [src]="image.data.src" (click)="openLightbox(i)" class="prod-img">
-    </div>
+  <div class="images">
+    <img
+      *ngFor="let image of items; index as i"
+      [src]="image.data.src"
+      (click)="openLightbox(i)"
+      class="prod-img"
+    />
+  </div>
 </div>
 <div class="product-content">
-    <div class="flex">
-        <div class="product-name">{{ product.name }}</div>
-        <div *ngIf="product.wishlisted; else elseBlock">
-            <div class="tile-icon wishlist-icon wishlist-container">
-                <mat-icon (click)="wishlistProduct(product.sku, false)">favorite </mat-icon> 
-            </div>
-        </div>
-        <ng-template #elseBlock>
-        <div class="tile-icon wishlist-icon wishlist-container">
-            <mat-icon (click)="wishlistProduct(product.sku, true)">favorite_border </mat-icon>
-        </div>
-        </ng-template>
+  <div class="flex">
+    <div class="product-name">{{ product.name }}</div>
+    <div *ngIf="product && product.wishlisted; else elseBlock">
+      <div class="tile-icon wishlist-icon wishlist-container">
+        <mat-icon (click)="wishlistProduct(product.sku, false)"
+          >favorite
+        </mat-icon>
+      </div>
     </div>
-    <div class="product-site">{{ product.site}}</div>
-    <div class="price-container">
-        <span class="product-price mr3">${{ product.is_price }}</span>
-        <span class="strike">${{ product.was_price }}</span>
-        <button mat-raised-button class="view-details-btn">
-            <a [href]="product.product_url" class="no-underline yellow">
-                View Details
-            </a>
-        </button>
+    <ng-template #elseBlock>
+      <div class="tile-icon wishlist-icon wishlist-container">
+        <mat-icon (click)="wishlistProduct(product.sku, true)"
+          >favorite_border
+        </mat-icon>
+      </div>
+    </ng-template>
+  </div>
+  <div class="product-site">{{ product.site }}</div>
+  <div class="price-container">
+    <span class="product-price mr3">${{ product.is_price }}</span>
+    <span class="strike">${{ product.was_price }}</span>
+    <button mat-raised-button class="view-details-btn">
+      <a [href]="product.product_url" class="no-underline yellow">
+        View Details
+      </a>
+    </button>
+  </div>
+  <hr class="modal-hr" />
+  <div class="variation-container" *ngIf="variationsExist">
+    <div class="variation-options">
+      <div
+        class="variation"
+        *ngFor="let variation of product.variations; let i = index"
+        (click)="selectedVariation(variation, i, gallery)"
+        [class.activeVariation]="selectedIndex === i"
+      >
+        <a>
+          <img
+            [src]="variation.swatch_image"
+            [alt]="variation.name"
+            class="variant-image"
+          />
+        </a>
+      </div>
     </div>
-    <hr class="modal-hr">
-    <div class="variation-container" *ngIf="variationsExist">
-        <div class="variation-options">
-            <div class="variation" *ngFor="let variation of product.variations; let i = index"
-                (click)="selectedVariation(variation, i, gallery)"
-                [class.activeVariation]="selectedIndex === i" 
-            >
-                <a>
-                    <img [src]="variation.swatch_image" [alt]="variation.name" class="variant-image">
-                </a>
-            </div>
-        </div>
-    </div>
-    <div>
-        <ul class="description-menu">
-            <li (click)="selectTab('desc')" *ngIf="descriptionExist" class="{{activeTab === 'desc'?'active':'bg-white'}}"><a class="nav-link">Description</a></li>
-            <li (click)="selectTab('features')" *ngIf="featuresExist" class="{{activeTab === 'features'?'active':'bg-white'}}"><a class="nav-link">Features</a></li>
-            <li (click)="selectTab('dimensions')" *ngIf="dimensionExist" class="{{activeTab === 'dimensions'?'active':'bg-white'}}"><a class="nav-link">Dimensions</a></li>
+  </div>
+  <div>
+    <ul class="description-menu">
+      <li
+        (click)="selectTab('desc')"
+        *ngIf="descriptionExist"
+        class="{{ activeTab === 'desc' ? 'active' : 'bg-white' }}"
+      >
+        <a class="nav-link">Description</a>
+      </li>
+      <li
+        (click)="selectTab('features')"
+        *ngIf="featuresExist"
+        class="{{ activeTab === 'features' ? 'active' : 'bg-white' }}"
+      >
+        <a class="nav-link">Features</a>
+      </li>
+      <li
+        (click)="selectTab('dimensions')"
+        *ngIf="dimensionExist"
+        class="{{ activeTab === 'dimensions' ? 'active' : 'bg-white' }}"
+      >
+        <a class="nav-link">Dimensions</a>
+      </li>
+    </ul>
+    <div class="menu-content">
+      <div
+        *ngIf="descriptionExist"
+        class="{{ activeTab === 'desc' ? '' : 'dn' }}"
+      >
+        <div [innerHTML]="product.description"></div>
+      </div>
+      <div
+        *ngIf="featuresExist"
+        class="{{ activeTab === 'features' ? '' : 'dn' }}"
+      >
+        <ul *ngFor="let feature of product.features" class="mt1 pl3">
+          <li [innerHTML]="feature"></li>
         </ul>
-        <div class="menu-content">
-            <div *ngIf="descriptionExist" class="{{activeTab === 'desc'?'':'dn'}}">
-                <div [innerHTML]="product.description" ></div>
-            </div>
-            <div *ngIf="featuresExist" class="{{activeTab === 'features'?'':'dn'}}">
-                <ul *ngFor="let feature of product.features" class="mt1 pl3">
-                    <li [innerHTML]="feature"></li>
-                </ul>
-            </div>
-            <div *ngIf="dimensionExist" class="{{activeTab === 'dimensions'?'':'dn'}}">
-                <div *ngIf="isArray(product.dimension); else showDimensions" class="dimension-container">
-                    <div *ngFor="let dimension of product.dimension" class="fl w-50 pa2">
-                        <div class="dimension-title">{{ dimension.description }}</div>
-                        <div>Width: {{ dimension.width }}</div>
-                        <div>Depth: {{ dimension.depth }}</div>
-                        <div>Height: {{ dimension.height }}</div>
-                        <br/>
-                    </div>
-                </div>
-                <ng-template #showDimensions>
-                    <div>
-                        {{product.dimension}}
-                    </div>
-                </ng-template>
-            </div>
+      </div>
+      <div
+        *ngIf="dimensionExist"
+        class="{{ activeTab === 'dimensions' ? '' : 'dn' }}"
+      >
+        <div
+          *ngIf="isArray(product.dimension); else showDimensions"
+          class="dimension-container"
+        >
+          <div *ngFor="let dimension of product.dimension" class="fl w-50 pa2">
+            <div class="dimension-title">{{ dimension.description }}</div>
+            <div>Width: {{ dimension.width }}</div>
+            <div>Depth: {{ dimension.depth }}</div>
+            <div>Height: {{ dimension.height }}</div>
+            <br />
+          </div>
         </div>
+        <ng-template #showDimensions>
+          <div>
+            {{ product.dimension }}
+          </div>
+        </ng-template>
+      </div>
     </div>
+  </div>
 </div>

@@ -1,6 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { ApiService, UtilsService } from './../../../shared/services';
 import { Router } from '@angular/router';
+import { Carousel } from 'primeng/carousel';
 
 @Component({
   selector: 'app-new-arrivals',
@@ -11,7 +12,13 @@ export class NewArrivalsComponent implements OnInit {
   newArrivals: any;
   newProducts: any;
   responsiveOptions: any;
-  constructor(private apiService: ApiService, private router: Router, private utilsService: UtilsService) {
+
+  @Input() isHandset: boolean = false;
+  constructor(
+    private apiService: ApiService,
+    private router: Router,
+    private utilsService: UtilsService
+  ) {
     this.responsiveOptions = [
       {
         breakpoint: '1024px',
@@ -29,26 +36,26 @@ export class NewArrivalsComponent implements OnInit {
         numScroll: 1
       }
     ];
+    Carousel.prototype.changePageOnTouch = (e, diff) => {};
   }
 
   ngOnInit() {
     this.getNewArrivals();
-
   }
   getNewArrivals(): void {
-    this.apiService
-     .getNewArrivals()
-     .subscribe((res) => {
-       this.newArrivals = res;
-       this.newProducts = this.newArrivals.products;
-      });
+    this.apiService.getNewArrivals().subscribe(res => {
+      this.newArrivals = res;
+      this.newProducts = this.newArrivals.products;
+    });
   }
 
-  seeAll(){
+  seeAll() {
     this.router.navigateByUrl('/products/all?new=true');
   }
 
   openDialog(sku) {
-    this.utilsService.openMatDialog(sku);
+    this.isHandset
+      ? this.router.navigateByUrl(`/product/${sku}`)
+      : this.utilsService.openMatDialog(sku);
   }
 }

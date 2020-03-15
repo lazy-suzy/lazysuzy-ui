@@ -6,10 +6,10 @@
       <app-browse-by-room></app-browse-by-room>
       <app-banner></app-banner>
       <app-brand-footer></app-brand-footer>
-      <app-new-arrivals></app-new-arrivals>
-      <app-top-deals></app-top-deals>
-      <app-create-your-style></app-create-your-style>
-      <app-best-sellers></app-best-sellers>
+      <app-new-arrivals [isHandset]="isHandset"></app-new-arrivals>
+      <app-top-deals [isHandset]="isHandset"></app-top-deals>
+      <!-- <app-create-your-style></app-create-your-style> -->
+      <app-best-sellers [isHandset]="isHandset"></app-best-sellers>
       <app-email-subscription></app-email-subscription>
     </div>
   </div>

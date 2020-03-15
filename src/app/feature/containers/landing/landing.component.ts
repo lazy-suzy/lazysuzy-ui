@@ -1,67 +1,51 @@
-import { Component, OnInit, AfterContentChecked } from '@angular/core';
-// import { MOCK_DEPARTMENTS } from './../../../mocks';
-// import { IDepartment } from './../../../shared/models';
-import { FormBuilder, FormGroup, Validators, FormArray } from "@angular/forms";
+import { Component, OnInit, Output } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ApiService } from './../../../shared/services';
+import { Observable, Subscription } from 'rxjs';
+import {
+  BreakpointState,
+  Breakpoints,
+  BreakpointObserver
+} from '@angular/cdk/layout';
 
 @Component({
   selector: 'app-landing',
   templateUrl: './landing.component.html',
   styleUrls: ['./landing.component.less']
 })
-export class LandingComponent implements OnInit{
+export class LandingComponent implements OnInit {
   // departments: IDepartment[] = MOCK_DEPARTMENTS;
- 
+
   newArrivals: any;
   newProducts: any;
   totalArrivals: any;
   topDeals: any;
   bestSellers: any;
   emailForm: FormGroup;
-  constructor(private apiService: ApiService,  private formBuilder: FormBuilder) {}
-  
+  bpObserver: Observable<BreakpointState> = this.breakpointObserver.observe(
+    Breakpoints.Handset
+  );
+
+  bpSubscription: Subscription;
+  isHandset: boolean = false;
+  constructor(
+    private apiService: ApiService,
+    private formBuilder: FormBuilder,
+    private breakpointObserver: BreakpointObserver
+  ) {}
+
   ngOnInit() {
-    // this.getNewArrivals();
-    // this.getTopDeals();
-    // this.getBestSellers();
-
     this.emailForm = this.formBuilder.group({
-      email: [
-        "",
-        [Validators.required, Validators.email]
-      ]
+      email: ['', [Validators.required, Validators.email]]
     });
+    this.bpSubscription = this.bpObserver.subscribe(
+      (handset: BreakpointState) => {
+        this.isHandset = handset.matches;
+      }
+    );
   }
 
-  getNewArrivals(): void {
-     this.apiService
-      .getNewArrivals()
-      .subscribe((res) => {
-        this.newArrivals = res;
-        this.newProducts = this.newArrivals.products;
-      });
+  onSubmit(value: any) {
+    this.apiService.getEmail().subscribe(res => {});
   }
-
-  getTopDeals(): void{
-    this.apiService.getTopDeals().subscribe((res) =>{
-      this.topDeals = res.products;
-    });
-  }
-
-  getBestSellers(): void{
-    this.apiService.getBestSellers().subscribe((res)=>{
-      this.bestSellers = res.products;
-    })
-  }
-
-  onSubmit(value: any){
-    this.apiService.getEmail().subscribe((res) =>{
-    })
-  }
-
 }
-
-
-  
-
-

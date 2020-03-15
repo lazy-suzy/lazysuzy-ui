@@ -4,14 +4,9 @@ import { NewArrivalsComponent } from './new-arrivals.component';
 import { CarouselModule } from 'primeng/carousel';
 import { RouterModule } from '@angular/router';
 
-
 @NgModule({
   declarations: [NewArrivalsComponent],
-  imports: [
-    CommonModule,
-    CarouselModule,
-    RouterModule
-  ],
+  imports: [CommonModule, CarouselModule, RouterModule],
   exports: [NewArrivalsComponent, CarouselModule, CommonModule]
 })
-export class NewArrivalsModule { }
+export class NewArrivalsModule {}
