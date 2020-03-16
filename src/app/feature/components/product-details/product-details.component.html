@@ -36,7 +36,13 @@
 
       <div class="price-container">
         <span class="product-price mr3">${{ product.is_price }}</span>
-        <span class="strike">${{ product.was_price }}</span>
+
+        <span
+          class="strike {{
+            product.is_price !== product.was_price ? '' : 'dn'
+          }}"
+          >${{ product.was_price }}</span
+        >
         <button mat-raised-button class="bg-red view-details-btn">
           <a [href]="product.product_url" class="no-underline yellow">
             View Details
@@ -114,4 +120,8 @@
     </div>
   </div>
 </ng-container>
-<img *ngIf="isProductFetching; else showDetails" [src]="spinner" class="loader" />
+<img
+  *ngIf="isProductFetching; else showDetails"
+  [src]="spinner"
+  class="loader"
+/>
