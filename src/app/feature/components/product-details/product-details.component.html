@@ -1,4 +1,4 @@
-<ng-container *ngIf="product">
+<ng-container *ngIf="!isProductFetching">
   <div class="product-details-container">
     <button class="close-icon" mat-dialog-close>
       <mat-icon>close </mat-icon>
@@ -114,3 +114,4 @@
     </div>
   </div>
 </ng-container>
+<img *ngIf="isProductFetching; else showDetails" [src]="spinner" class="loader" />

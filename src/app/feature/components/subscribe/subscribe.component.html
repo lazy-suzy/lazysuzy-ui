@@ -1,7 +1,10 @@
 <div class="subscription-box-container">
     <div class="subscription-box {{!showSuccessMsg?'':'none'}}">
         <div class="subscription-text">
-            Be the first to see new styles & deals on {{category}}
+            <span *ngIf="!homePage; else home">Be the first to see new styles & deals on {{category}}</span>
+            <ng-template #home>
+                <span>New deals & styles, in your inbox first</span>
+            </ng-template>
         </div>
         <div class="subscriber-form flex">
             <div>

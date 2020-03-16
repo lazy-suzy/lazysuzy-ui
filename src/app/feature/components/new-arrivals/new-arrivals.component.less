@@ -28,26 +28,27 @@
   font-size: 15px;
 }
 
-@media only screen and (max-width: 768px) {
- 
+@media only screen and (max-width: 876px) {
   .new-arrivals-heading{
-    margin-bottom: -5%;
+    padding: 0;
+    h2 {
+      margin-left: -10px;
+    }
   }
 
   .title-new-arrivals {
     font-size: 25px;
     font-weight: 700;
     float: left;
-    padding-left: 3%;
+    padding-left: 0%;
   }
 
   .btn {
-    font-size: 22px;
+    font-size: 16px;
     background: @button-backgroud;
     border: none;
     color: @button-color;
     float: right;
-    padding-right: 5%;
   }
 
   .product{
@@ -65,5 +66,20 @@
 
   .body .ui-helper-reset {
     visibility: hidden;
+  }
+}
+@media only screen and (max-width: 767px) {
+  .title-new-arrivals {
+    padding-left: 3%;
+  }
+  .new-arrivals-heading{
+    padding: 0 15px;
+    h2, button {
+      margin-left: 0;
+    }
+  }
+  .btn {
+    font-size: 22px;
+    padding-right: 5%;
   }
 }

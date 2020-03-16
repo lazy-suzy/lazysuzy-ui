@@ -37,11 +37,9 @@
 
   <div class="flex">
     <mat-icon class="account-icon" *ngIf="notHome" aria-hidden="false" (click)="showSearchBar()">search</mat-icon>
-    <mat-icon class="account-icon" aria-hidden="false" aria-label="Account">
-      account_circle</mat-icon
-    >
+    <app-auth class="account-menu"></app-auth>
     <a routerLink="/wishlist" class="flex items-center header-link">
-      <mat-icon aria-hidden="false">favorite_border</mat-icon>
+      <mat-icon class="account-icon" aria-hidden="false">favorite_border</mat-icon>
     </a>
   </div>
   <app-search-bar *ngIf="showSearchComponent" class="section" [notHome]="notHome"></app-search-bar>

@@ -9,6 +9,7 @@ import {
 } from '@angular/material';
 import { RouterModule } from '@angular/router';
 import { SearchBarModule } from '../search-bar/search-bar.module';
+import { AuthModule } from '../auth/auth.module';
 
 const DECLARATIONS = [NavMobileComponent];
 
@@ -19,7 +20,8 @@ const MODULES = [
   MatIconModule,
   MatMenuModule,
   RouterModule,
-  SearchBarModule
+  SearchBarModule,
+  AuthModule
 ];
 
 @NgModule({

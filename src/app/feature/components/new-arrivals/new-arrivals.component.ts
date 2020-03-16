@@ -27,8 +27,8 @@ export class NewArrivalsComponent implements OnInit {
       },
       {
         breakpoint: '768px',
-        numVisible: 1,
-        numScroll: 1
+        numVisible: 2,
+        numScroll: 2
       },
       {
         breakpoint: '560px',

@@ -55,23 +55,23 @@ body {
   .ui-carousel-dots-container {
     display: none;
   }
-
+  .ui-carousel-container {
+    position: relative;
+  }
   .new-arrivals-slider .ui-carousel-prev,
   .top-deals .ui-carousel-prev,
   .best-sellers .ui-carousel-prev {
-    margin-top: -6% !important ;
-    position: relative;
-    left: -42.5%;
-    bottom: -210px;
+    position: absolute;
+    left: 25px;
+    bottom: 55%;
     z-index: 10;
   }
   .new-arrivals-slider .ui-carousel-next,
   .top-deals .ui-carousel-next,
   .best-sellers .ui-carousel-next {
-    margin-top: -7% !important ;
-    position: relative;
-    bottom: 252px;
-    left: 153px;
+    position: absolute;
+    bottom: 55%;
+    left: 90%;
     z-index: 10;
   }
 
@@ -87,7 +87,7 @@ body {
 
   .bannerCarousel .ui-carousel-content {
     width: 105%;
-    margin-left: 12%;
+    margin-left: 6%;
   }
 
   .bannerCarousel .ui-carousel-prev {
@@ -97,6 +97,9 @@ body {
 
   .bannerCarousel .ui-carousel-next {
     right: 20px;
+  }
+  .brand-footer {
+    margin-left: 0 !important;
   }
 }
 
@@ -119,20 +122,31 @@ body {
 }
 
 @media (max-width: 767px) {
+  
   .brand-footer .black.brands .brand-box {
     margin-left: 10px !important;
     margin-top: 4% !important;
   }
+  .bannerCarousel .ui-carousel-content {
+    margin-left: 12%;
+  }
   .brand-box {
     margin-top: 4% !important;
-  }
-  .brand-footer {
-    margin-left: 0 !important;
   }
   .brands {
     display: contents;
   }
   .brands img {
     margin: 0 !important;
+  }
+  .new-arrivals-slider .ui-carousel-next,
+  .top-deals .ui-carousel-next,
+  .best-sellers .ui-carousel-next {
+    left: 85%;
+  }
+  .new-arrivals-slider .ui-carousel-prev,
+  .top-deals .ui-carousel-prev,
+  .best-sellers .ui-carousel-prev {
+    left: 20px;
   }
 }

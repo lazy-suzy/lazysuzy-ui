@@ -24,6 +24,7 @@ export class ProductDetailsMobileComponent implements OnInit {
   dimensionExist: boolean = false;
   featuresExist: boolean = false;
   descriptionExist: boolean = false;
+  spinner: string = 'assets/images/spinner.gif';
   bpObserver: Observable<BreakpointState> = this.breakpointObserver.observe(
     Breakpoints.Handset
   );
@@ -33,6 +34,8 @@ export class ProductDetailsMobileComponent implements OnInit {
   isHandset: boolean;
   variationsExist: boolean;
   selectedIndex: any;
+  isProductFetching: boolean = false;
+
   constructor(
     private router: Router,
     private activeRoute: ActivatedRoute,
@@ -53,6 +56,7 @@ export class ProductDetailsMobileComponent implements OnInit {
   }
 
   loadProduct() {
+    this.isProductFetching = true;
     this.routeSubscription = this.activeRoute.params.subscribe(routeParams => {
       this.productSku = routeParams.product;
     });
@@ -81,6 +85,7 @@ export class ProductDetailsMobileComponent implements OnInit {
           item => new ImageItem({ src: item })
         );
         galleryRef.load(this.items);
+        this.isProductFetching = false;
       });
   }
   ngOnDestroy(): void {

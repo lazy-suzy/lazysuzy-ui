@@ -55,29 +55,32 @@
   font-size: 15px;
 }
 
-@media only screen and (max-width: 768px) {
-  .top-deals-heading {
-    margin-bottom: -5%;
+@media only screen and (max-width: 876px) {
+  .top-deals-heading{
+    padding: 0;
   }
 
   .title-top-deals {
     font-size: 25px;
     font-weight: 700;
     float: left;
-    padding-left: 3%;
+    padding-left: 0%;
   }
 
   .btn {
-    font-size: 22px;
+    font-size: 16px;
     background: @button-backgroud;
     border: none;
     color: @button-color;
     float: right;
-    padding-right: 5%;
   }
 
   .product{
     padding-right: 0%;
+  }
+
+  .product_detail{
+    margin-left: 2%;
   }
 
   .product_name{
@@ -89,3 +92,16 @@
     visibility: hidden;
   }
 }
+@media only screen and (max-width: 767px) {
+  .title-top-deals {
+    padding-left: 3%;
+  }
+  .top-deals-heading{
+    padding: 0 15px;
+  }
+  .btn {
+    font-size: 22px;
+    padding-right: 5%;
+  }
+}
+

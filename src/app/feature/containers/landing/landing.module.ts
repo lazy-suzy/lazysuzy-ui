@@ -9,12 +9,13 @@ import { FormsModule, ReactiveFormsModule} from  '@angular/forms';
 import { NewArrivalsModule } from './../../components';
 import { BestSellersModule } from '../../components/best-sellers/best-sellers.module';
 import { EmailSubscriptionModule } from '../../components/email-subscription/email-subscription.module';
+import { SubscribeModule } from '../../components/subscribe/subscribe.module';
 
 
 const DECLARATIONS = [LandingComponent];
 
 const MODULES = [CommonModule, CoreModule, RoomModule, OwlModule, BrowseByRoomModule, NewArrivalsModule,
-  FormsModule ,TopDealsModule,CreateYourStyleModule, EmailSubscriptionModule, BestSellersModule, ReactiveFormsModule];
+  FormsModule ,TopDealsModule,CreateYourStyleModule, EmailSubscriptionModule, BestSellersModule, ReactiveFormsModule, SubscribeModule];
 
 @NgModule({
   declarations: [...DECLARATIONS],

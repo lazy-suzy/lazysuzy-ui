@@ -21,6 +21,9 @@ export class ProductDetailsComponent implements OnInit {
   variationsExist: boolean;
   galleryId = 'myLightbox';
   items: GalleryItem[];
+  isProductFetching: boolean = false;
+  spinner: string = 'assets/images/spinner.gif';
+
   constructor(
     @Inject(MAT_DIALOG_DATA) public data: any,
     private apiService: ApiService,
@@ -30,10 +33,16 @@ export class ProductDetailsComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
+    this.isProductFetching = true;
     this.productSubscription = this.apiService
       .getProduct(this.data.sku)
       .subscribe((payload: IProductPayload) => {
         this.product = payload;
+        const galleryRef = this.gallery.ref(this.galleryId);
+        this.items = this.product.on_server_images.map(
+          item => new ImageItem({ src: item })
+        );
+        galleryRef.load(this.items);
         this.dimensionExist = this.utils.checkDataLength(
           this.product.dimension
         );
@@ -44,11 +53,7 @@ export class ProductDetailsComponent implements OnInit {
         this.variationsExist = this.utils.checkDataLength(
           this.product.variations
         );
-        const galleryRef = this.gallery.ref(this.galleryId);
-        this.items = this.product.on_server_images.map(
-          item => new ImageItem({ src: item })
-        );
-        galleryRef.load(this.items);
+        this.isProductFetching = false;
       });
   }
 

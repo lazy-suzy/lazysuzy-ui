@@ -9,6 +9,7 @@ import { Router } from '@angular/router';
 })
 export class SubscribeComponent implements OnInit {
   @Input() category: string;
+  @Input() homePage: boolean;
   email: string;
   invalidEmail: boolean = false;
   showSuccessMsg: boolean = false;
@@ -27,11 +28,11 @@ export class SubscribeComponent implements OnInit {
       this.apiService
       .subscription(url, data)
       .subscribe((payload: any) => {
-        if (payload.status === 'success') {
-          this.showSuccessMsg = true;
-        } else
         if (payload.status === "We already have your email. Thanks!") {
           this.subscriberExists = true;
+        } else
+        if (payload.status === 'success') {
+          this.showSuccessMsg = true;
         }
       });
     } else {
