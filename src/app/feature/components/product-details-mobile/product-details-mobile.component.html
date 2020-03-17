@@ -18,7 +18,7 @@
   <div class="product-content">
     <div class="flex">
       <div class="product-name">{{ product.name }}</div>
-      <div *ngIf="product && product.wishlisted; else elseBlock">
+      <!-- <div *ngIf="product && product.wishlisted; else elseBlock">
         <div class="tile-icon wishlist-icon wishlist-container">
           <mat-icon (click)="wishlistProduct(product.sku, false)"
             >favorite
@@ -31,7 +31,7 @@
             >favorite_border
           </mat-icon>
         </div>
-      </ng-template>
+      </ng-template> -->
     </div>
     <div class="product-site">{{ product.site }}</div>
     <div class="price-container">

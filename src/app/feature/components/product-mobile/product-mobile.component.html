@@ -1,16 +1,16 @@
 <div class="ls-product-div">
-    <div class="ls-product" [routerLink]="['/product/'+product.sku]">
-      <img
-        class="{{ isVariationImageVisible ? 'prod-img' : 'prod-img show' }}"
-        [src]="product.main_image"
-        [alt]="product.name"
-      />
-      <div *ngIf="product.variations.length">
-        <div class="tile-icon variation-icon">
-          <mat-icon>filter_none </mat-icon>
-        </div>
+  <div class="ls-product" [routerLink]="['/product/' + product.sku]">
+    <img
+      class="{{ isVariationImageVisible ? 'prod-img' : 'prod-img show' }}"
+      [src]="product.main_image"
+      [alt]="product.name"
+    />
+    <div *ngIf="product.variations.length">
+      <div class="tile-icon variation-icon">
+        <mat-icon>filter_none </mat-icon>
       </div>
-      <div *ngIf="product.wishlisted; else elseBlock">
+    </div>
+    <!-- <div *ngIf="product.wishlisted; else elseBlock">
         <div class="tile-icon wishlist-icon">
           <mat-icon (click)="wishlistProduct(product.sku, false, $event)">favorite </mat-icon>
         </div>
@@ -19,21 +19,24 @@
         <div class="tile-icon wishlist-icon">
           <mat-icon (click)="wishlistProduct(product.sku, true, $event)">favorite_border </mat-icon>
         </div>
-      </ng-template>
-      <div class="prices">
-        <span
-          class="{{
-            (product.is_price !== product.was_price && 'cprice sale') || 'cprice'
-          }} {{productsInRow < 3?'': 'dn'}}"
-          >${{ product.is_price  }}
-        </span>
-      </div>
-      <div class="discount-percentage">
-        <span *ngIf="product.percent_discount > 0" class="percentage-box {{product.percent_discount >19 ?'orange-bg':'yellow-bg'}}">
-            {{product.percent_discount | number:'1.0-0'}}%
-        </span>
-      </div>
+      </ng-template> -->
+    <div class="prices">
+      <span
+        class="{{
+          (product.is_price !== product.was_price && 'cprice sale') || 'cprice'
+        }} {{ productsInRow < 3 ? '' : 'dn' }}"
+        >${{ product.is_price }}
+      </span>
     </div>
-    
+    <div class="discount-percentage">
+      <span
+        *ngIf="product.percent_discount > 0"
+        class="percentage-box {{
+          product.percent_discount > 19 ? 'orange-bg' : 'yellow-bg'
+        }}"
+      >
+        {{ product.percent_discount | number: '1.0-0' }}%
+      </span>
+    </div>
+  </div>
 </div>
-  
