@@ -6,7 +6,7 @@
 </ng-template>
 
 
-<div class="{{isHandset?'': 'mh4 '}} content-height">
+<div class="content-height">
     <router-outlet></router-outlet>
 </div>
 <ng-container *ngIf="isHandset; else isDesktop">

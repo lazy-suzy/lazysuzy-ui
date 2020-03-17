@@ -10,18 +10,18 @@ body {
   font-family: 'Fenix', Roboto, 'Helvetica Neue', sans-serif;
 }
 .bannerCarousel .ui-carousel-prev {
-  left: 45px;
+  left: 25px;
   z-index: 9;
 }
 
 .bannerCarousel .ui-carousel-next {
-  right: 45px;
+  right: 25px;
 }
 
 .bannerCarousel .ui-carousel-content {
-  width: 110%;
+  // width: 110%;
   position: relative;
-  left: -58px;
+  // left: -58px;
 }
 
 .new-arrivals-slider .ui-carousel .ui-helper-reset,
@@ -51,9 +51,16 @@ body {
   padding: 0;
 }
 
+.banner .ui-carousel-items-content {
+  width: 101%;
+  margin: 0 -3rem;
+}
 @media (max-width: 876px) {
   .ui-carousel-dots-container {
     display: none;
+  }
+  .banner .ui-carousel-items-content {
+    width: 105%;
   }
   .ui-carousel-container {
     position: relative;
@@ -86,17 +93,17 @@ body {
   }
 
   .bannerCarousel .ui-carousel-content {
-    width: 105%;
-    margin-left: 6%;
+    // width: 105%;
+    // margin-left: 6%;
   }
 
   .bannerCarousel .ui-carousel-prev {
-    left: 20px;
+    left: 10px;
     z-index: 9;
   }
 
   .bannerCarousel .ui-carousel-next {
-    right: 20px;
+    right: 10px;
   }
   .brand-footer {
     margin-left: 0 !important;
@@ -122,13 +129,15 @@ body {
 }
 
 @media (max-width: 767px) {
-  
+  .banner .ui-carousel-items-content {
+    margin: 0 -1.5rem;
+  }
   .brand-footer .black.brands .brand-box {
     margin-left: 10px !important;
     margin-top: 4% !important;
   }
   .bannerCarousel .ui-carousel-content {
-    margin-left: 12%;
+    // margin-left: 12%;
   }
   .brand-box {
     margin-top: 4% !important;

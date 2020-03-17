@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
+import { Component, OnInit, ViewChild, ElementRef, Input } from '@angular/core';
 import {
   AuthService,
   FacebookLoginProvider,
@@ -16,13 +16,14 @@ import { environment as env } from 'src/environments/environment';
 export class AuthComponent implements OnInit {
   @ViewChild('closeLoginModal', { static: false }) closeLoginModal: ElementRef;
   @ViewChild('closeSignupModal', { static: false }) closeSignupModal: ElementRef;
-
+  @Input() handset: boolean;
   userCookie: string;
   user: any;
   googleRedirect = env.GOOGLE_LINK;
   facebookRedirect = env.FACEBOOK_LINK;
   error: boolean = false;
   errorMsg: string;
+  thanksMsg: boolean = false;
   constructor(
     private socialAuthService: AuthService,
     private apiService: ApiService,
@@ -93,15 +94,21 @@ export class AuthComponent implements OnInit {
           this.error = false;
           this.cookie.set('token', payload.success.token);
           localStorage.setItem('user', JSON.stringify(payload.success.user));
-          this.closeSignupModal.nativeElement.click();
+          this.thanksMsg = true;
+          const self = this;
+          setTimeout(function(){
+            self.closeSignupModal.nativeElement.click();
+          }, 2000);
           this.fetchUser();
-        } else {
-          this.error = true;
-          this.errorMsg = payload.error.email;
         }
-      });
+      }, (error: any) => {
+        if (error.error.error.email) {
+          this.error = true;
+          this.errorMsg = 'This email already exists';
+        }
+      }
+      );
     }
-    
   }
 
   logout() {

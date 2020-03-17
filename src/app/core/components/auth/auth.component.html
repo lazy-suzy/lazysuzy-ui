@@ -1,13 +1,23 @@
-<mat-icon
-  class="account-icon pointer mt2"
+<div class="flex">
+  <mat-icon
+  class="account-icon pointer"
   aria-hidden="false"
-  *ngIf="!userCookie"
+  *ngIf="!userCookie; else userName"
   aria-label="Account"
-  [matMenuTriggerFor]="accountMenu"
->
+  data-target="#signUpModal"
+  data-toggle="modal"
+  >
   account_circle</mat-icon
->
-<mat-menu #accountMenu="matMenu">
+  >
+  <span *ngIf="!handset" class="signup-link ml1">Sign Up</span>
+</div>
+<ng-template #userName>
+  <span class="profile-name" [matMenuTriggerFor]="optionsMenu">
+    {{ user.name }}
+  </span>
+</ng-template>
+
+<!-- <mat-menu #accountMenu="matMenu">
   <span (mouseleave)="closeMyMenu()">
     <button mat-menu-item data-toggle="modal" data-target="#signInModal">
       Sign In
@@ -16,15 +26,13 @@
       Sign Up
     </button>
   </span>
-</mat-menu>
-<span class="profile-name" *ngIf="userCookie" [matMenuTriggerFor]="optionsMenu">
-  {{ user.name }}
-</span>
+</mat-menu>-->
+
 <mat-menu #optionsMenu="matMenu">
   <span (mouseleave)="closeMyMenu()">
     <button mat-menu-item (click)="logout()">Logout</button>
   </span>
-</mat-menu>
+</mat-menu> 
 <!--SignIn Modal -->
 <div
   class="modal fade"
@@ -208,16 +216,12 @@
             <button type="submit" class="form-control btn btn-dark submit">
               Signup
             </button>
-            <br />
-            <a class="resetPassword" routerLink="/forgotpassword"
-              >Reset Password</a
-            >
           </div>
         </form>
       </div>
 
       <div class="modal-footer">
-        <span class="signup-footer-content"
+        <span class="signup-footer-content {{thanksMsg?'dn':''}}"
           >Already Joined&nbsp;
           <button
             class="btn btn-sm btn-light signUpLink"
@@ -228,6 +232,11 @@
             Sign In.
           </button>
         </span>
+        <div class="tc w-100 {{thanksMsg?'':'dn'}}">
+          <span>
+            Thanks for signing up
+          </span>
+        </div>
       </div>
     </div>
   </div>
