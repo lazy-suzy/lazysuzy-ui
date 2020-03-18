@@ -1,20 +1,36 @@
-<div class="flex">
-  <mat-icon
-  class="account-icon pointer"
-  aria-hidden="false"
+<div
+  class="flex"
   *ngIf="!userCookie; else userName"
-  aria-label="Account"
   data-target="#signUpModal"
   data-toggle="modal"
+>
+  <mat-icon
+    class="account-icon pointer"
+    aria-hidden="false"
+    aria-label="Account"
   >
-  account_circle</mat-icon
+    account_circle</mat-icon
   >
-  <span *ngIf="!handset" class="signup-link ml1">Sign Up</span>
+  <span *ngIf="!handset" class="signup-link ml1 pointer">Sign Up</span>
 </div>
 <ng-template #userName>
-  <span class="profile-name" [matMenuTriggerFor]="optionsMenu">
+  <span
+    class="profile-name"
+    *ngIf="!handset; else showIcon"
+    [matMenuTriggerFor]="optionsMenu"
+  >
     {{ user.name }}
   </span>
+  <ng-template #showIcon>
+    <mat-icon
+      class="account-icon pointer"
+      aria-hidden="false"
+      aria-label="Account"
+      [matMenuTriggerFor]="optionsMenu"
+    >
+      account_circle</mat-icon
+    >
+  </ng-template>
 </ng-template>
 
 <!-- <mat-menu #accountMenu="matMenu">
@@ -32,7 +48,7 @@
   <span (mouseleave)="closeMyMenu()">
     <button mat-menu-item (click)="logout()">Logout</button>
   </span>
-</mat-menu> 
+</mat-menu>
 <!--SignIn Modal -->
 <div
   class="modal fade"
@@ -221,7 +237,7 @@
       </div>
 
       <div class="modal-footer">
-        <span class="signup-footer-content {{thanksMsg?'dn':''}}"
+        <span class="signup-footer-content {{ thanksMsg ? 'dn' : '' }}"
           >Already Joined&nbsp;
           <button
             class="btn btn-sm btn-light signUpLink"
@@ -232,7 +248,7 @@
             Sign In.
           </button>
         </span>
-        <div class="tc w-100 {{thanksMsg?'':'dn'}}">
+        <div class="tc w-100 {{ thanksMsg ? '' : 'dn' }}">
           <span>
             Thanks for signing up
           </span>

@@ -17,6 +17,7 @@ export class ProductSortMobileComponent implements OnInit {
   ngOnInit() {}
 
   sortChanged(event, value) {
+    this.closeSort();
     event.value = value;
     this.setSortType.emit(event.value);
   }

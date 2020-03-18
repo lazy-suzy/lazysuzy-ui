@@ -12,7 +12,15 @@
       }}"
       >{{ filter }}</span
     >
-    <div class="ml2 arrow-down"></div>
+    <div class="ml2 arrow-down {{
+      filter !== 'price'
+        ? activeFilters[filter].length > 0
+          ? 'active'
+          : ''
+        : isPriceChanged
+        ? 'active'
+        : ''
+    }}"></div>
     <div class="filter-options">
       <div class="price-menu" *ngIf="filter === 'price'; else elseBlock">
         <ng5-slider

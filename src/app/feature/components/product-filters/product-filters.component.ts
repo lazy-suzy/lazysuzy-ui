@@ -85,8 +85,8 @@ export class ProductFiltersComponent {
       this.activeFilters[filter] = optionsArr;
     }
     if (
-      this.minValue === this.productFilters.price.from &&
-      this.maxValue === this.productFilters.price.to
+      Math.round(this.minValue) === this.productFilters.price.from &&
+      Math.round(this.maxValue) === this.productFilters.price.to
     ) {
       delete this.activeFilters.price_from;
       delete this.activeFilters.price_to;
