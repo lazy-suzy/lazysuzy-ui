@@ -15,7 +15,8 @@ import { environment as env } from 'src/environments/environment';
 })
 export class AuthComponent implements OnInit {
   @ViewChild('closeLoginModal', { static: false }) closeLoginModal: ElementRef;
-  @ViewChild('closeSignupModal', { static: false }) closeSignupModal: ElementRef;
+  @ViewChild('closeSignupModal', { static: false })
+  closeSignupModal: ElementRef;
   @Input() handset: boolean;
   userCookie: string;
   user: any;
@@ -64,7 +65,7 @@ export class AuthComponent implements OnInit {
       formData.append('email', email);
       formData.append('password', password);
       this.apiService.login(formData).subscribe((payload: any) => {
-        if(payload.success) {
+        if (payload.success) {
           this.error = false;
           this.cookie.set('token', payload.success.token);
           localStorage.setItem('user', JSON.stringify(payload.user));
@@ -79,7 +80,7 @@ export class AuthComponent implements OnInit {
   }
 
   signup(name, email, password) {
-    if(password.length < 8) {
+    if (password.length < 8) {
       this.error = true;
       this.errorMsg = 'Password must contain 8 characters';
     } else {
@@ -89,30 +90,32 @@ export class AuthComponent implements OnInit {
       formData.append('email', email);
       formData.append('password', password);
       formData.append('c_password', password);
-      this.apiService.signup(formData).subscribe((payload: any) => {
-        if(payload.success) {
-          this.error = false;
-          this.cookie.set('token', payload.success.token);
-          localStorage.setItem('user', JSON.stringify(payload.success.user));
-          this.thanksMsg = true;
-          const self = this;
-          setTimeout(function(){
-            self.closeSignupModal.nativeElement.click();
-          }, 2000);
-          this.fetchUser();
+      this.apiService.signup(formData).subscribe(
+        (payload: any) => {
+          if (payload.success) {
+            this.error = false;
+            this.cookie.set('token', payload.success.token);
+            localStorage.setItem('user', JSON.stringify(payload.success.user));
+            this.thanksMsg = true;
+            const self = this;
+            setTimeout(function() {
+              self.closeSignupModal.nativeElement.click();
+            }, 2000);
+            this.fetchUser();
+          }
+        },
+        (error: any) => {
+          if (error.error.error.email) {
+            this.error = true;
+            this.errorMsg = 'This email already exists';
+          }
         }
-      }, (error: any) => {
-        if (error.error.error.email) {
-          this.error = true;
-          this.errorMsg = 'This email already exists';
-        }
-      }
       );
     }
   }
 
   logout() {
-    this.cookie.delete('token');
+    this.cookie.set('token', '');
     localStorage.removeItem('user');
     this.fetchUser();
   }
