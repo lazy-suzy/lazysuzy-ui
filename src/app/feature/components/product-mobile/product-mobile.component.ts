@@ -13,16 +13,13 @@ export class ProductMobileComponent implements OnInit {
   @Input() product: IProductPayload;
   @Input() productsInRow: number;
 
-  constructor(private apiService: ApiService) { }
+  constructor(private apiService: ApiService) {}
 
-  ngOnInit() {
-  }
+  ngOnInit() {}
   wishlistProduct(sku, mark, event) {
     event.stopPropagation();
-    this.apiService
-      .wishlistProduct(sku, mark)
-      .subscribe((payload: any) =>{
-
-      })
+    this.apiService.wishlistProduct(sku, mark).subscribe((payload: any) => {
+      this.product.wishlisted = mark;
+    });
   }
 }
