@@ -1,5 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
+import { HttpHeaders } from '@angular/common/http';
+import { CookieService } from 'ngx-cookie-service';
 import { environment as env } from 'src/environments/environment';
 import { HttpService } from '../http/http.service';
 import {
@@ -13,9 +15,12 @@ import { MOCK_PRODUCT_FILTERS } from 'src/app/mocks';
   providedIn: 'root'
 })
 export class ApiService {
-  constructor(private httpService: HttpService) {}
+  constructor(
+    private httpService: HttpService,
+    private cookie: CookieService
+  ) {}
 
-  getNewArrivals(filters = '', page = 0):  Observable<IProductsPayload> {
+  getNewArrivals(filters = '', page = 0): Observable<IProductsPayload> {
     const endpoint = `products/all`;
     const url = env.useLocalJson
       ? `${env.JSON_BASE_HREF}${endpoint}`
@@ -23,7 +28,7 @@ export class ApiService {
     return this.httpService.get(url);
   }
 
-  getTopDeals(filters = '', page = 0):  Observable<IProductsPayload> {
+  getTopDeals(filters = '', page = 0): Observable<IProductsPayload> {
     const endpoint = `products/all`;
     const url = env.useLocalJson
       ? `${env.JSON_BASE_HREF}${endpoint}`
@@ -31,7 +36,7 @@ export class ApiService {
     return this.httpService.get(url);
   }
 
-  getBestSellers(filters = '', page = 0):  Observable<IProductsPayload> {
+  getBestSellers(filters = '', page = 0): Observable<IProductsPayload> {
     const endpoint = `products/all`;
     const url = env.useLocalJson
       ? `${env.JSON_BASE_HREF}${endpoint}`
@@ -69,7 +74,6 @@ export class ApiService {
     return this.httpService.get(url);
   }
 
-  
   getAllProducts(
     trend: string,
     total: number,
@@ -125,10 +129,14 @@ export class ApiService {
     // const endpoint = `products/${department}/${category}`;
     const endpoint = `wishlist`;
     const url = `${env.API_BASE_HREF}${endpoint}`;
+    const headers = new HttpHeaders({
+      'Content-Type': 'application/json',
+      Authorization: `Bearer ${this.cookie.get('token')}`
+    });
     // env.useLocalJson
     //   ? `${env.JSON_BASE_HREF}${endpoint}`
     //   : `${env.API_BASE_HREF}${endpoint}?filters=${filters}&sort_type=${sortTypes}&pageno=${page}`;
-    return this.httpService.get(url);
+    return this.httpService.get(url, headers);
   }
 
   getCategories(department: string): Observable<ISearchProductsPayload> {
@@ -143,7 +151,7 @@ export class ApiService {
     return this.httpService.post(url, data);
   }
 
-  subscription(URL,email):Observable<string> {
+  subscription(URL, email): Observable<string> {
     const endpoint = `subscribe`;
     const url = `${env.API_BASE_HREF}${endpoint}?url=${URL}&email=${email}`;
     return this.httpService.get(url);
@@ -157,7 +165,11 @@ export class ApiService {
       endpoint = `unmark/favourite/${sku}`;
     }
     const url = `${env.API_BASE_HREF}${endpoint}`;
-    return this.httpService.get(url);
+    const headers = new HttpHeaders({
+      'Content-Type': 'application/json',
+      Authorization: `Bearer ${this.cookie.get('token')}`
+    });
+    return this.httpService.get(url, headers);
   }
 
   signup(data) {
