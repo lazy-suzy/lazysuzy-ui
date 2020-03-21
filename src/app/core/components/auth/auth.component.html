@@ -3,6 +3,7 @@
   *ngIf="!userCookie; else userName"
   data-target="#signUpModal"
   data-toggle="modal"
+  #signupBtn
 >
   <mat-icon
     class="account-icon pointer"
@@ -97,7 +98,7 @@
       <div class="modal-body">
         <div class="span-line text-center">Not Feeling Social?</div>
         <br />
-        <form role="form" (submit)="login(email, password)">
+        <form role="form" (submit)="login($event, email, password)">
           <!-- <form role="form"> -->
           <div class="formGroup">
             <input
@@ -198,7 +199,7 @@
       <div class="modal-body">
         <div class="span-line text-center">Not Feeling Social?</div>
         <br />
-        <form role="form" (submit)="signup(name, email, password)">
+        <form role="form" (submit)="signup($event, name, email, password)">
           <div class="signUpformGroup">
             <input
               type="name"

@@ -4,6 +4,7 @@ import { HttpHeaders } from '@angular/common/http';
 import { CookieService } from 'ngx-cookie-service';
 import { environment as env } from 'src/environments/environment';
 import { HttpService } from '../http/http.service';
+import { UtilsService } from '../utils/utils.service';
 import {
   IProductsPayload,
   IProductPayload,
@@ -11,13 +12,16 @@ import {
   IDepartment
 } from './../../models';
 import { MOCK_PRODUCT_FILTERS } from 'src/app/mocks';
+import { forkJoin } from 'rxjs'; // RxJS 6 syntax
+
 @Injectable({
   providedIn: 'root'
 })
 export class ApiService {
   constructor(
     private httpService: HttpService,
-    private cookie: CookieService
+    private cookie: CookieService,
+    private utils: UtilsService
   ) {}
 
   getNewArrivals(filters = '', page = 0): Observable<IProductsPayload> {
@@ -102,6 +106,23 @@ export class ApiService {
     return this.httpService.get(url);
   }
 
+  getMultiplePageProducts(
+    department: string,
+    category: string,
+    filters = '',
+    sortType = '',
+    page: number
+  ): Observable<any> {
+    const httpCalls = [];
+    const endpoint = `products/${department}/${category}`;
+    for (let i = 0; i <= page; i++) {
+      const url = env.useLocalJson
+        ? `${env.JSON_BASE_HREF}${endpoint}`
+        : `${env.API_BASE_HREF}${endpoint}?filters=${filters}&sort_type=${sortType}&pageno=${i}`;
+      httpCalls.push(this.httpService.get(url));
+    }
+    return forkJoin(httpCalls);
+  }
   getProduct(id: string): Observable<IProductPayload> {
     const url = env.useLocalJson
       ? `${env.JSON_BASE_HREF}product/${id}`
@@ -164,10 +185,16 @@ export class ApiService {
     } else {
       endpoint = `unmark/favourite/${sku}`;
     }
+    const token = this.cookie.get('token');
+    if (!token) {
+      // trigger signup window
+      this.utils.openSignup();
+    }
     const url = `${env.API_BASE_HREF}${endpoint}`;
+
     const headers = new HttpHeaders({
       'Content-Type': 'application/json',
-      Authorization: `Bearer ${this.cookie.get('token')}`
+      Authorization: `Bearer ${token}`
     });
     return this.httpService.get(url, headers);
   }

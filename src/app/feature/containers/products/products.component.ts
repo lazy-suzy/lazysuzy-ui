@@ -48,7 +48,6 @@ export class ProductsComponent implements OnInit, OnDestroy {
   bpObserver: Observable<BreakpointState> = this.breakpointObserver.observe(
     Breakpoints.Handset
   );
-  checkProductsLength: number = 1;
   bpSubscription: Subscription;
   isHandset: boolean;
 
@@ -73,9 +72,8 @@ export class ProductsComponent implements OnInit, OnDestroy {
     this.routeSubscription = this.activeRoute.params.subscribe(routeParams => {
       this.department = routeParams.department;
       this.category = routeParams.category;
-      this.loadProducts();
+      this.checkPage();
     });
-    this.loadProducts();
     this.modalSku = this.activeRoute.snapshot.queryParamMap.get('modal_sku');
     if (this.modalSku) {
       this.utilsService.openMatDialog(this.modalSku);
@@ -101,6 +99,27 @@ export class ProductsComponent implements OnInit, OnDestroy {
     });
   }
 
+  checkPage() {
+    if(this.pageNo > 0) {
+      this.isProductFetching = true;
+      this.apiService.getMultiplePageProducts(this.department, this.category, this.filters, this.sortType, this.pageNo)
+      .subscribe(response => {
+        let allProducts = [];
+        for(let i = 0; i < response.length; i++) {
+          allProducts = [...allProducts, ...response[i].products];
+        }
+        this.products = allProducts;
+        this.updateQueryString();
+        this.total_count = response[0].total;
+        delete response[0].filterData.category;
+        this.productFilters = response[0].filterData;
+        this.sortTypeList = response[0].sortType;
+        this.isProductFetching = false;
+      });
+    } else {
+      this.loadProducts();
+    }
+  }
   loadProducts(): void {
     this.pageNo = 0;
     this.isProductFetching = true;
@@ -108,7 +127,6 @@ export class ProductsComponent implements OnInit, OnDestroy {
       .getProducts(this.department, this.category, this.filters, this.sortType)
       .subscribe((payload: IProductsPayload) => {
         this.products = payload.products;
-        this.checkProductsLength = payload.products.length;
         delete payload.filterData.category;
         this.productFilters = payload.filterData;
         this.sortTypeList = payload.sortType;
@@ -165,7 +183,6 @@ export class ProductsComponent implements OnInit, OnDestroy {
       )
       .subscribe((payload: IProductsPayload) => {
         this.products = [...this.products, ...payload.products];
-        this.checkProductsLength = payload.products.length;
         this.updateQueryString();
         this.isProductFetching = false;
       });

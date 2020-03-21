@@ -1,13 +1,28 @@
-import { Injectable } from '@angular/core';
+import { Injectable, ElementRef } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { ProductDetailsComponent } from 'src/app/feature/components';
 import { Location } from '@angular/common';
+import { Router, ActivatedRoute } from '@angular/router';
+
 @Injectable({
   providedIn: 'root'
 })
 export class UtilsService {
+  signupRef: ElementRef;
+  constructor(
+    public dialog: MatDialog,
+    private location: Location,
+    private router: Router,
+    private activeRoute: ActivatedRoute
+  ) {}
 
-  constructor(public dialog: MatDialog, private location: Location) { }
+  setSignupRef(ref) {
+    this.signupRef = ref;
+  }
+
+  openSignup() {
+    this.signupRef.nativeElement.click();
+  }
 
   checkDataLength(data) {
     return data.length > 0;
@@ -24,7 +39,9 @@ export class UtilsService {
       this.location.go(`product/${modalSku}`);
     });
     dialogRef.afterClosed().subscribe(result => {
-      this.location.back();
+      const params = { ...this.activeRoute.snapshot.queryParams };
+      delete params.modal_sku;
+      this.router.navigate([], { queryParams: params });
     });
   }
 
@@ -39,8 +56,10 @@ export class UtilsService {
       this.location.replaceState(`product/${modalSku}`);
     });
     dialogRef.afterClosed().subscribe(result => {
-      this.location.back();
+      this.dialog.closeAll();
+      const params = { ...this.activeRoute.snapshot.queryParams };
+      delete params.modal_sku;
+      this.router.navigate([], { queryParams: params });
     });
   }
-
 }
