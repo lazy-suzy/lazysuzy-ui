@@ -41,7 +41,11 @@
         >${{ product.was_price }}</span
       >
       <button mat-raised-button class="view-details-btn">
-        <a [href]="product.product_url" class="no-underline yellow">
+        <a
+          (click)="openLink($event, product.product_url)"
+          [href]="product.product_url"
+          class="tr-viewDetails no-underline yellow"
+        >
           View Details
         </a>
       </button>

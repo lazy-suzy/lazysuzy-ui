@@ -86,4 +86,11 @@ export class ProductDetailsComponent implements OnInit {
       this.product.wishlisted = mark;
     });
   }
+
+  openLink(event, url) {
+    event.preventDefault();
+    if (typeof vglnk) {
+      vglnk.open(url);
+    }
+  }
 }

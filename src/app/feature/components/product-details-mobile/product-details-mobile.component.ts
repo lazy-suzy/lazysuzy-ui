@@ -124,4 +124,11 @@ export class ProductDetailsMobileComponent implements OnInit {
   isArray(obj: any) {
     return Array.isArray(obj);
   }
+
+  openLink(event, url) {
+    event.preventDefault();
+    if (typeof vglnk) {
+      vglnk.open(url);
+    }
+  }
 }
