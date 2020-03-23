@@ -86,13 +86,13 @@
       >
         <div class="mb2" *ngIf="descriptionExist">
           <span class="title">Overview</span>
-          <div class="mt1" [innerHTML]="product.description"></div>
+          <div class="mt1" [innerHTML]="description"></div>
         </div>
         <div *ngIf="featuresExist" class="mb2">
           <hr class="modal-hr" />
           <span class="title">Feature</span>
-          <div *ngFor="let feature of product.features" class="mt1">
-            <div [innerHTML]="feature"></div>
+          <div class="mt1">
+            <div [innerHTML]="features"></div>
           </div>
         </div>
 

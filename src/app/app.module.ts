@@ -13,6 +13,7 @@ import { CookieService } from 'ngx-cookie-service';
 import { GalleryModule } from  '@ngx-gallery/core';
 import { LightboxModule } from  '@ngx-gallery/lightbox';
 import { LIGHTBOX_CONFIG } from '@ngx-gallery/lightbox';
+import { MarkdownModule } from 'ngx-markdown';
 
 
 const MODULES = [
@@ -26,7 +27,8 @@ const MODULES = [
   AngularFontAwesomeModule,
   FormsModule,
   GalleryModule,
-  LightboxModule
+  LightboxModule,
+  MarkdownModule.forRoot(),
 ];
 
 @NgModule({

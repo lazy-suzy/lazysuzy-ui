@@ -35,6 +35,8 @@ export class ProductDetailsMobileComponent implements OnInit {
   variationsExist: boolean;
   selectedIndex: any;
   isProductFetching: boolean = false;
+  description: any;
+  features: any;
 
   constructor(
     private router: Router,
@@ -64,6 +66,8 @@ export class ProductDetailsMobileComponent implements OnInit {
       .getProduct(this.productSku)
       .subscribe((payload: IProductPayload) => {
         this.product = payload;
+        this.description = this.utils.compileMarkdown(this.product.description);
+        this.features = this.utils.compileMarkdown(this.product.features);
         this.dimensionExist = this.utils.checkDataLength(
           this.product.dimension
         );

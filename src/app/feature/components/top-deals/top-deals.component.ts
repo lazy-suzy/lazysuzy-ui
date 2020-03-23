@@ -55,6 +55,6 @@ export class TopDealsComponent implements OnInit {
   openDialog(sku) {
     this.isHandset
       ? this.router.navigateByUrl(`/product/${sku}`)
-      : this.utilsService.openMatDialog(sku);
+      : this.utilsService.homepageMatDialog(sku);
   }
 }

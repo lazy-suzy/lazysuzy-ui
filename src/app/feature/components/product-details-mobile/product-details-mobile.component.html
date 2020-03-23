@@ -98,15 +98,15 @@
           *ngIf="descriptionExist"
           class="{{ activeTab === 'desc' ? '' : 'dn' }}"
         >
-          <div [innerHTML]="product.description"></div>
+          <div [innerHTML]="description"></div>
         </div>
         <div
           *ngIf="featuresExist"
           class="{{ activeTab === 'features' ? '' : 'dn' }}"
         >
-          <ul *ngFor="let feature of product.features" class="mt1 pl3">
-            <li [innerHTML]="feature"></li>
-          </ul>
+          <div class="mt1 pl3">
+            <div [innerHTML]="features"></div>
+          </div>
         </div>
         <div
           *ngIf="dimensionExist"

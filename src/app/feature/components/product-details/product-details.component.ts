@@ -23,6 +23,8 @@ export class ProductDetailsComponent implements OnInit {
   items: GalleryItem[];
   isProductFetching: boolean = false;
   spinner: string = 'assets/images/spinner.gif';
+  description: any;
+  features: any;
 
   constructor(
     @Inject(MAT_DIALOG_DATA) public data: any,
@@ -43,6 +45,8 @@ export class ProductDetailsComponent implements OnInit {
           item => new ImageItem({ src: item })
         );
         galleryRef.load(this.items);
+        this.description = this.utils.compileMarkdown(this.product.description);
+        this.features = this.utils.compileMarkdown(this.product.features);
         this.dimensionExist = this.utils.checkDataLength(
           this.product.dimension
         );
