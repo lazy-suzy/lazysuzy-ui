@@ -1,1 +1,1 @@
-export const SCROLL_ICON_SHOW_DURATION = 5000;
+export const SCROLL_ICON_SHOW_DURATION = 8000;

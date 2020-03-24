@@ -7,8 +7,17 @@ body {
 }
 body {
   margin: 0;
-  font-family: 'Fenix', Roboto, 'Helvetica Neue', sans-serif;
+  font-family: 'Lato', sans-serif;
 }
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: 'Open Sans', sans-serif;
+}
+
 .bannerCarousel .ui-carousel-prev {
   left: 25px;
   z-index: 9;
@@ -65,6 +74,12 @@ body {
   .ui-carousel-container {
     position: relative;
   }
+  .new-arrivals-slider .ui-carousel-items-container,
+  .top-deals .ui-carousel-items-container,
+  .best-sellers .ui-carousel-items-container {
+    overflow-y: scroll;
+  }
+
   .new-arrivals-slider .ui-carousel-prev,
   .top-deals .ui-carousel-prev,
   .best-sellers .ui-carousel-prev {
@@ -139,9 +154,9 @@ body {
   .bannerCarousel .ui-carousel-content {
     // margin-left: 12%;
   }
-  .brand-box {
-    margin-top: 4% !important;
-  }
+  // .brand-box {
+  //   margin-top: 4% !important;
+  // }
   .brands {
     display: contents;
   }

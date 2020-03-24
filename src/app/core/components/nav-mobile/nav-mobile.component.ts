@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { MOCK_ACCOUNT_ACTIONS, MOCK_DEPARTMENTS } from 'src/app/mocks';
 import { ApiService } from './../../../shared/services';
-import { Router, NavigationEnd} from '@angular/router';
+import { Router, NavigationEnd } from '@angular/router';
 import { IAllDepartment } from '../../../shared/models/all-department.interface';
 import { Subscription } from 'rxjs';
 import { Location } from '@angular/common';
@@ -9,7 +9,7 @@ import { Location } from '@angular/common';
 @Component({
   selector: 'app-nav-mobile',
   templateUrl: './nav-mobile.component.html',
-  styleUrls: ['./nav-mobile.component.less'],
+  styleUrls: ['./nav-mobile.component.less']
 })
 export class NavMobileComponent {
   logoPath: string = 'assets/images/color_logo_transparent.png';
@@ -22,13 +22,17 @@ export class NavMobileComponent {
   notHome: Boolean;
   checkHomeRoute: Subscription;
 
-  constructor(private apiService: ApiService, private router: Router, private location: Location,) {
+  constructor(
+    private apiService: ApiService,
+    private router: Router,
+    private location: Location
+  ) {
     this.getDepartments();
-    router.events.subscribe((val) => {
+    router.events.subscribe(val => {
       if (val instanceof NavigationEnd) {
         this.menuVisible = false;
       }
-     });
+    });
     this.checkHomeRoute = router.events.subscribe(val => {
       this.notHome = location.path() !== '';
     });
@@ -39,12 +43,11 @@ export class NavMobileComponent {
   }
 
   setIndex(index: number) {
-      this.selectedIndex = index;
+    this.selectedIndex = index;
   }
 
   getDepartments() {
-    this.apiService.getAllDepartments()
-    .subscribe((payload: any) => {
+    this.apiService.getAllDepartments().subscribe((payload: any) => {
       this.departments = payload.all_departments;
     });
   }
@@ -54,7 +57,7 @@ export class NavMobileComponent {
   }
 
   showDepartmentChild(dept) {
-    if(dept === this.showDepartment) {
+    if (dept === this.showDepartment) {
       this.showDepartment = undefined;
       return;
     }
@@ -63,5 +66,9 @@ export class NavMobileComponent {
 
   showSearchBar() {
     this.showSearchComponent = !this.showSearchComponent;
+  }
+
+  onSearchComplete() {
+    this.showSearchComponent = false;
   }
 }

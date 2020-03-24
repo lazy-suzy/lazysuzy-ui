@@ -1,30 +1,61 @@
 <div class="flex items-center justify-between header">
   <ng-container>
-      <button mat-icon-button id="side-nav-btn" (click)="showMenu()" class="fixed top-0 z-99">
-          <mat-icon class="account-icon">menu</mat-icon>
-      </button>
-      <div id="mobileMenuContainer" class="mobile-menu-container {{menuVisible?'show':'hide'}}">
-          <ul class="department-container">
-              <li *ngFor="let department of departments" class="department-list" > 
-                  <span (click)="showDepartmentChild(department.department)">
-                      <a class="department-title {{showDepartment === department.department?'active':'none'}}">
-                          {{ department.department | titlecase }} 
-                      </a>
-                      <mat-icon class="department-list-icon" *ngIf="showDepartment !== department.department" aria-hidden="false" aria-label="Search">
-                              chevron_right
-                      </mat-icon>
-                      <mat-icon class="department-list-icon active" *ngIf="showDepartment === department.department" aria-hidden="false" aria-label="Search">
-                              expand_more
-                      </mat-icon>
-                  </span>
-                  <ul class="category-container {{showDepartment === department.department?'show':'hide'}}">
-                      <li *ngFor="let category of department.categories" class="category-list" >
-                          <a class="category-title" [routerLink]="category.link">{{category.category}} </a>
-                      </li>
-                  </ul>
-              </li>
+    <button
+      mat-icon-button
+      id="side-nav-btn"
+      (click)="showMenu()"
+      class="fixed top-0 z-99"
+    >
+      <mat-icon class="account-icon">menu</mat-icon>
+    </button>
+    <div
+      id="mobileMenuContainer"
+      class="mobile-menu-container {{ menuVisible ? 'show' : 'hide' }}"
+    >
+      <ul class="department-container">
+        <li *ngFor="let department of departments" class="department-list">
+          <span (click)="showDepartmentChild(department.department)">
+            <a
+              class="department-title {{
+                showDepartment === department.department ? 'active' : 'none'
+              }}"
+            >
+              {{ department.department | titlecase }}
+            </a>
+            <mat-icon
+              class="department-list-icon"
+              *ngIf="showDepartment !== department.department"
+              aria-hidden="false"
+              aria-label="Search"
+            >
+              chevron_right
+            </mat-icon>
+            <mat-icon
+              class="department-list-icon active"
+              *ngIf="showDepartment === department.department"
+              aria-hidden="false"
+              aria-label="Search"
+            >
+              expand_more
+            </mat-icon>
+          </span>
+          <ul
+            class="category-container {{
+              showDepartment === department.department ? 'show' : 'hide'
+            }}"
+          >
+            <li
+              *ngFor="let category of department.categories"
+              class="category-list"
+            >
+              <a class="category-title" [routerLink]="category.link"
+                >{{ category.category }}
+              </a>
+            </li>
           </ul>
-      </div>
+        </li>
+      </ul>
+    </div>
   </ng-container>
 
   <a
@@ -36,12 +67,24 @@
   </a>
 
   <div class="flex">
-    <mat-icon class="account-icon" *ngIf="notHome" aria-hidden="false" (click)="showSearchBar()">search</mat-icon>
-    <app-auth class="account-menu"[handset]="true"></app-auth>
+    <mat-icon
+      class="account-icon"
+      *ngIf="notHome"
+      aria-hidden="false"
+      (click)="showSearchBar()"
+      >search</mat-icon
+    >
+    <app-auth class="account-menu" [handset]="true"></app-auth>
     <a routerLink="/wishlist" class="flex items-center header-link">
-      <mat-icon class="account-icon" aria-hidden="false">favorite_border</mat-icon>
+      <mat-icon class="account-icon" aria-hidden="false"
+        >favorite_border</mat-icon
+      >
     </a>
   </div>
-  <app-search-bar *ngIf="showSearchComponent" class="section" [notHome]="notHome"></app-search-bar>
-
+  <app-search-bar
+    (searchComplete)="onSearchComplete($event)"
+    *ngIf="showSearchComponent"
+    class="section"
+    [notHome]="notHome"
+  ></app-search-bar>
 </div>

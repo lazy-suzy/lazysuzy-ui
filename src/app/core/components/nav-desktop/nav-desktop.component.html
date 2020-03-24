@@ -5,20 +5,30 @@
       routerLinkActive="active"
       class="no-underline flex items-center"
     >
-      <img class="w4 pointer grow title-image" [src]="logoPath" alt="Lazy Suzy Home" />
+      <img
+        class="w4 pointer grow title-image"
+        [src]="logoPath"
+        alt="Lazy Suzy Home"
+      />
     </a>
-    <app-search-bar *ngIf="notHome" class="section" [notHome]="notHome"></app-search-bar>
+    <app-search-bar
+      *ngIf="notHome"
+      class="section"
+      [notHome]="notHome"
+    ></app-search-bar>
     <div class="mr3 flex items-center">
-      <a class="header-link header-font" [routerLink]="['/aboutus']" >The Lazy Story</a>
+      <a class="header-link header-font" [routerLink]="['/aboutus']"
+        >The Lazy Story</a
+      >
       <a routerLink="/wishlist" class="flex items-center header-link pointer">
         <mat-icon aria-hidden="false">favorite_border</mat-icon>
         <span class="ml2 header-font">Saved items</span>
       </a>
-        <app-auth class="account-icon header-font" [handset]="false"></app-auth>
+      <app-auth class="account-icon header-font" [handset]="false"></app-auth>
     </div>
   </mat-toolbar-row>
 </mat-toolbar>
-<div class="top-navbar flex justify-around " *ngIf="notHome">
+<div class="top-navbar flex justify-left " *ngIf="notHome">
   <ng-container *ngFor="let department of departments">
     <div class="department-name">
       <div class="grow pointer pa2" [routerLink]="department.link">
@@ -38,5 +48,3 @@
     </div>
   </ng-container>
 </div>
-
-

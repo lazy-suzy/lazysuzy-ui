@@ -1,124 +1,126 @@
 .images-container {
+  height: 230px;
+  overflow-x: auto;
+  margin: 5px 0;
+
+  .images {
+    overflow-x: scroll;
+    overflow-y: hidden;
     height: 230px;
-    overflow-x: auto;
-    margin: 5px 0;
-    
-    .images {
-        overflow-x: scroll;
-        overflow-y: hidden;
-        height: 230px;
-        white-space: nowrap;
-        &::-webkit-scrollbar {
-            width: 10px;
-        }
-        &::-webkit-scrollbar-track {
-            box-shadow: inset 0 0 5px grey;
-            border-radius: 10px;
-        }
-        &::-webkit-scrollbar-thumb {
-            background: #ffcc00;
-            border-radius: 10px;
-        }
-    
-        &::-webkit-scrollbar-thumb:hover {
-            background: #ffcc00ba;
-        }
-        .prod-img {
-            max-height: 100%;
-            display: inline-block;
-        }
+    white-space: nowrap;
+    &::-webkit-scrollbar {
+      width: 10px;
     }
+    &::-webkit-scrollbar-track {
+      box-shadow: inset 0 0 5px grey;
+      border-radius: 10px;
+    }
+    &::-webkit-scrollbar-thumb {
+      background: #ffcc00;
+      border-radius: 10px;
+    }
+
+    &::-webkit-scrollbar-thumb:hover {
+      background: #ffcc00ba;
+    }
+    .prod-img {
+      max-height: 100%;
+      display: inline-block;
+    }
+  }
 }
 .loader {
-    position: fixed;
-    z-index: 1;
-    top: 50%;
-    left: 50%;
-    transform: translateX(-50%) translateY(-50%);
+  position: fixed;
+  z-index: 1;
+  top: 50%;
+  left: 50%;
+  transform: translateX(-50%) translateY(-50%);
 }
 .modal-hr {
-    margin-top: 0.5rem;
-    margin-bottom: 0.5rem;
-    border: 0;
-    border-top: 1px solid #0c1c31;
+  margin-top: 0.5rem;
+  margin-bottom: 0.5rem;
+  border: 0;
+  border-top: 1px solid #0c1c31;
 }
 
 .product-content {
-    padding: 10px;
-    .product-name {
-        font-size: 20px;
+  padding: 10px;
+  .product-name {
+    font-size: 20px;
+  }
+  .product-site {
+    font-size: 14px;
+  }
+  .wishlist-container {
+    display: flex;
+    position: absolute;
+    right: 10px;
+  }
+  .price-container {
+    font-size: 24px;
+    position: relative;
+    display: flex;
+    padding-bottom: 0.5rem;
+    .product-price {
+      color: #b76e79;
     }
-    .product-site {
-        font-size: 14px;
+    .view-details-btn {
+      position: absolute;
+      right: 0;
+      background-color: #0c1c31;
+      color: #ffcc00;
     }
-    .wishlist-container {
-        display: flex;
-        position: absolute;
-        right: 10px;    
-    }  
-    .price-container {
-        font-size: 24px;
-        position: relative;
-        display: flex;
-        padding-bottom: .5rem;
-        .product-price {
-          color: #b76e79;
+  }
+  .variation-container {
+    max-width: 375px;
+    overflow-x: scroll;
+    overflow: auto;
+    .variation-options {
+      display: flex;
+      flex-wrap: nowrap;
+      padding: 5px 0 10px 0;
+      width: 375px;
+      .variation {
+        margin: 5px;
+        .variant-image {
+          max-width: 30px;
+          height: 30px;
         }
-        .view-details-btn {
-          position: absolute;
-          right: 0;
-          background-color: #0c1c31;
-          color: #ffcc00;
-        }
+      }
     }
-    .variation-container {
-        max-width: 375px;
-        overflow-x: scroll;
-        overflow: auto;
-        .variation-options{
-            display: flex;
-            flex-wrap: nowrap;
-            padding: 5px 0 10px 0;
-            width: 375px;
-            .variation{
-                margin: 5px;
-                .variant-image {
-                    max-width: 30px;
-                    height: 30px
-                }
-            }
-        }
+  }
+  .description-menu {
+    padding: 0;
+    display: flex;
+    list-style: none;
+    margin-bottom: 0;
+    .nav-link {
+      padding: 8px 16px;
+      border: 1px solid #cccccc;
+      border-bottom-width: 0;
     }
-    .description-menu {
-        padding-left: 10px;
-        display: flex;
-        list-style: none;
-        margin-bottom: 0;
-        .nav-link {
-            padding: 8px 16px;
-        }
-        .active{
-            background-color: #f8fafc;
-        }
-        .bg-white {
-            background-color: #ffffff;
-        }
+    .active {
+      background-color: #f8fafc;
     }
-    .menu-content {
-        background-color: #f8fafc;
-        padding: 18px;
-        .dimension-container{
-            min-height: 75vh;
-            .dimension-title {
-                font-size: 18px;
-                font-weight: bold;
-            }
-        }
+    .bg-white {
+      background-color: #ffffff;
     }
+  }
+  .menu-content {
+    background-color: #f8fafc;
+    padding: 18px;
+    .dimension-container {
+      min-height: 75vh;
+      .dimension-title {
+        font-size: 18px;
+        font-weight: bold;
+      }
+    }
+  }
 }
 
 .activeVariation {
-    -webkit-box-shadow: 0px 0px 3px 2px #ffcc00;
-    -moz-box-shadow: 0px 0px 3px 2px #ffcc00;
-    box-shadow: 0px 0px 3px 2px #ffcc00;
+  -webkit-box-shadow: 0px 0px 3px 2px #ffcc00;
+  -moz-box-shadow: 0px 0px 3px 2px #ffcc00;
+  box-shadow: 0px 0px 3px 2px #ffcc00;
 }

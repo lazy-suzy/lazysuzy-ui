@@ -1,26 +1,32 @@
 <div class="subscription-box-container">
-    <div class="subscription-box {{!showSuccessMsg?'':'none'}}">
-        <div class="subscription-text">
-            <span *ngIf="!homePage; else home">Be the first to see new styles & deals on {{category}}</span>
-            <ng-template #home>
-                <span>New deals & styles, in your inbox first</span>
-            </ng-template>
-        </div>
-        <div class="subscriber-form flex">
-            <div>
-                <input type="text" placeholder="Email Address" [(ngModel)]="email">
-                <div class="error-msg {{invalidEmail?'':'dn'}}">Please enter a valid email</div>
-                <div class="error-msg {{subscriberExists?'':'dn'}}">We already have your email. Thanks!</div>
-
-            </div>
-            <div class="button-container">
-                <button class="submit-button" (click)="submit(email)">Submit</button>
-            </div>
-        </div>
+  <div class="subscription-box {{ !showSuccessMsg ? '' : 'dn' }}">
+    <div class="subscription-text">
+      <span *ngIf="!homePage; else home"
+        >Be the first to see new styles & deals on {{ category }}</span
+      >
+      <ng-template #home>
+        <span>New deals & styles, in your inbox first</span>
+      </ng-template>
     </div>
-    <div class="{{!showSuccessMsg?'dn':''}}">
-        <span class="success-msg">
-            Thanks for signing up. You'll be the first to receive updates about new collections, top brands and exclusive products.
-        </span>
+    <div class="subscriber-form flex">
+      <div>
+        <input type="text" placeholder="Email Address" [(ngModel)]="email" />
+        <div class="error-msg {{ invalidEmail ? '' : 'dn' }}">
+          Please enter a valid email
+        </div>
+        <div class="error-msg {{ subscriberExists ? '' : 'dn' }}">
+          We already have your email. Thanks!
+        </div>
+      </div>
+      <div class="button-container">
+        <button class="submit-button" (click)="submit(email)">Submit</button>
+      </div>
     </div>
-</div>                                          
+  </div>
+  <div class="{{ !showSuccessMsg ? 'dn' : '' }}">
+    <span class="success-msg">
+      Thanks for signing up. You'll be the first to receive updates about new
+      collections, top brands and exclusive products.
+    </span>
+  </div>
+</div>

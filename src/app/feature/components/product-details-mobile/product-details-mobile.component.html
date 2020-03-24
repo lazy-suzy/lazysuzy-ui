@@ -16,7 +16,7 @@
     </div>
   </div>
   <div class="product-content">
-    <div class="flex">
+    <div class="flex justify-between">
       <div class="product-name">{{ product.name }}</div>
       <div *ngIf="product && product.wishlisted; else elseBlock">
         <div class="tile-icon wishlist-icon wishlist-container">

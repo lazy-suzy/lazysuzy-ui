@@ -118,4 +118,14 @@ export class ProductFiltersComponent {
     this.isPriceChanged = true;
     this.setFilters.emit(this.activeFilters);
   }
+
+  disableTab(filter) {
+    if (filter !== 'price') {
+      return this.productFilters[filter].filter(data => data.enabled).length === 0;
+    } else {
+      return false;
+    }
+  }
+
+  
 }

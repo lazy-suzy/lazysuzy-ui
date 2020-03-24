@@ -50,8 +50,7 @@
   height: 65px;
   width: 100%;
   padding: 5px 35px;
-  border: 2px solid @border-color;
-  color: @text-subtle;
+  color: @secondary-color;
   font-size: 30px;
   font-weight: 600;
 }
@@ -88,13 +87,17 @@
   font-weight: 600;
 }
 
-.header-searchbar {
-  height: 55px !important;
-  padding: 5px 15px !important;
+.header-searchbar.form-control {
+  height: 45px;
+  padding: 5px 15px;
+  font-size: 20px;
+  &::placeholder {
+    font-size: 20px;
+  }
 }
 .header-search-button {
-  bottom: 55px;
-  height: 57%;
+  bottom: 45px;
+  height: 45px;
   color: #0c1c31;
   background-color: #f7c107;
 }
