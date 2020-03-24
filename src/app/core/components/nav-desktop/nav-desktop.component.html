@@ -17,12 +17,15 @@
       [notHome]="notHome"
     ></app-search-bar>
     <div class="mr3 flex items-center">
-      <a class="header-link header-font" [routerLink]="['/aboutus']"
+      <a
+        *ngIf="!isTablet"
+        class="header-link header-font"
+        [routerLink]="['/aboutus']"
         >The Lazy Story</a
       >
       <a routerLink="/wishlist" class="flex items-center header-link pointer">
         <mat-icon aria-hidden="false">favorite_border</mat-icon>
-        <span class="ml2 header-font">Saved items</span>
+        <span class="ml2 header-font" *ngIf="!isTablet">Saved items</span>
       </a>
       <app-auth class="account-icon header-font" [handset]="false"></app-auth>
     </div>

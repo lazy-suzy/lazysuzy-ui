@@ -1,5 +1,4 @@
 import { Component } from '@angular/core';
-import { MOCK_ACCOUNT_ACTIONS, MOCK_DEPARTMENTS } from 'src/app/mocks';
 import { ApiService } from './../../../shared/services';
 import { Router, NavigationEnd } from '@angular/router';
 import { IAllDepartment } from '../../../shared/models/all-department.interface';
