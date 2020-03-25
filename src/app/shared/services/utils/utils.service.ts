@@ -3,7 +3,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { ProductDetailsComponent } from 'src/app/feature/components';
 import { Location } from '@angular/common';
 import { Router, ActivatedRoute } from '@angular/router';
-import { MarkdownService} from 'ngx-markdown';
+import { MarkdownService } from 'ngx-markdown';
 
 @Injectable({
   providedIn: 'root'
@@ -11,9 +11,13 @@ import { MarkdownService} from 'ngx-markdown';
 export class UtilsService {
   signupRef: ElementRef;
 
-  constructor(public dialog: MatDialog, private location: Location,
-    private router:Router, private activeRoute: ActivatedRoute, private markdownService: MarkdownService
-  ) { }
+  constructor(
+    public dialog: MatDialog,
+    private location: Location,
+    private router: Router,
+    private activeRoute: ActivatedRoute,
+    private markdownService: MarkdownService
+  ) {}
 
   setSignupRef(ref) {
     this.signupRef = ref;
@@ -22,7 +26,6 @@ export class UtilsService {
   openSignup() {
     this.signupRef.nativeElement.click();
   }
-
 
   checkDataLength(data) {
     return data.length > 0;
@@ -78,9 +81,7 @@ export class UtilsService {
     });
   }
 
-
   compileMarkdown(data) {
-    return this.markdownService.compile(data.join('\n'));
+    return this.markdownService.compile(data.join('<br/>'));
   }
-
 }

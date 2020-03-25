@@ -34,7 +34,7 @@
 <div class="top-navbar flex justify-left " *ngIf="notHome">
   <ng-container *ngFor="let department of departments">
     <div class="department-name">
-      <div class="grow pointer pa2" [routerLink]="department.link">
+      <div class=" pointer pa2" [routerLink]="department.link">
         {{ department.department | titlecase }}
       </div>
       <ul class="category-menu">

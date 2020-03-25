@@ -3,7 +3,12 @@ import { MatDialog } from '@angular/material/dialog';
 import { ProductDetailsComponent } from './../product-details/product-details.component';
 import { ISearchProduct } from './../../../shared/models';
 import { Observable, Subscription } from 'rxjs';
-import { BreakpointState, Breakpoints, BreakpointObserver } from '@angular/cdk/layout';
+import {
+  BreakpointState,
+  Breakpoints,
+  BreakpointObserver
+} from '@angular/cdk/layout';
+import { ApiService } from 'src/app/shared/services';
 
 @Component({
   selector: 'app-search-product',
@@ -18,8 +23,12 @@ export class SearchProductComponent implements OnInit {
   bpObserver: Observable<BreakpointState> = this.breakpointObserver.observe(
     Breakpoints.Handset
   );
-  
-  constructor(public dialog: MatDialog, private breakpointObserver: BreakpointObserver ) {}
+
+  constructor(
+    public dialog: MatDialog,
+    private breakpointObserver: BreakpointObserver,
+    private apiService: ApiService
+  ) {}
 
   ngOnInit(): void {
     this.product.main_product_images =
@@ -58,7 +67,13 @@ export class SearchProductComponent implements OnInit {
       data: { sku: this.product.product_sku }
     });
 
-    dialogRef.afterClosed().subscribe(result => {
+    dialogRef.afterClosed().subscribe(result => {});
+  }
+
+  wishlistProduct(sku, mark, event) {
+    event.stopPropagation();
+    this.apiService.wishlistProduct(sku, mark).subscribe((payload: any) => {
+      // this.product.wishlisted = mark;
     });
   }
 }
