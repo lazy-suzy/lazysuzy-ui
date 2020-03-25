@@ -67,19 +67,22 @@
   </a>
 
   <div class="flex">
-    <mat-icon
-      class="account-icon"
-      *ngIf="notHome"
-      aria-hidden="false"
-      (click)="showSearchBar()"
-      >search</mat-icon
-    >
-    <app-auth class="account-menu" [handset]="true"></app-auth>
-    <a routerLink="/wishlist" class="flex items-center header-link">
+    <div class="header-link">
+      <mat-icon
+        class="account-icon "
+        *ngIf="notHome"
+        aria-hidden="false"
+        (click)="showSearchBar()"
+        >search</mat-icon
+      >
+    </div>
+
+    <span (click)="isLoggedIn($event)" class="flex items-center header-link">
       <mat-icon class="account-icon" aria-hidden="false"
         >favorite_border</mat-icon
       >
-    </a>
+    </span>
+    <app-auth class="account-menu" [handset]="true"></app-auth>
   </div>
   <app-search-bar
     (searchComplete)="onSearchComplete($event)"

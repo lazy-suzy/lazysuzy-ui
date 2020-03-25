@@ -23,10 +23,13 @@
         [routerLink]="['/aboutus']"
         >The Lazy Story</a
       >
-      <a routerLink="/wishlist" class="flex items-center header-link pointer">
+      <span
+        (click)="isLoggedIn($event)"
+        class="flex items-center header-link pointer"
+      >
         <mat-icon aria-hidden="false">favorite_border</mat-icon>
         <span class="ml2 header-font" *ngIf="!isTablet">Saved items</span>
-      </a>
+      </span>
       <app-auth class="account-icon header-font" [handset]="false"></app-auth>
     </div>
   </mat-toolbar-row>

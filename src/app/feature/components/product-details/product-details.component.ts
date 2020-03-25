@@ -55,7 +55,9 @@ export class ProductDetailsComponent implements OnInit {
           this.product.description
         );
         this.variationsExist = this.utils.checkDataLength(
-          this.product.variations
+          this.product.variations.filter(
+            variation => variation.swatch_image !== null
+          )
         );
         this.isProductFetching = false;
       });
