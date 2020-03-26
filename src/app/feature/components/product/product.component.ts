@@ -10,7 +10,7 @@ import {
 } from '@angular/cdk/layout';
 import { Location } from '@angular/common';
 import { Router, ActivatedRoute } from '@angular/router';
-import { ApiService } from 'src/app/shared/services';
+import { ApiService, UtilsService } from 'src/app/shared/services';
 @Component({
   selector: 'app-product',
   templateUrl: './product.component.html',
@@ -35,7 +35,8 @@ export class ProductComponent implements OnInit {
     private location: Location,
     private router: Router,
     private activeRoute: ActivatedRoute,
-    private apiService: ApiService
+    private apiService: ApiService,
+    private utilsService: UtilsService
   ) {}
 
   ngOnInit(): void {
@@ -74,33 +75,13 @@ export class ProductComponent implements OnInit {
   }
 
   openDialog(): void {
-    const dialogRef = this.dialog.open(ProductDetailsComponent, {
-      width: '80%',
-      height: '100%',
-      data: { sku: this.product.sku },
-      panelClass: 'product-details-dialog-container'
-    });
-    dialogRef.afterOpened().subscribe(result => {
-      this.location.go(`product/${this.product.sku}`);
-    });
-    dialogRef.afterClosed().subscribe(result => {
-      this.location.back();
-    });
+    this.utilsService.openMatDialog(this.product.sku);
   }
 
   openSwatchDialog(variation): void {
-    const dialogRef = this.dialog.open(ProductDetailsComponent, {
-      width: '80%',
-      height: '100%',
-      panelClass: 'product-details-dialog-container',
-      data: {
-        sku: variation.has_parent_sku
-          ? variation.variation_sku
-          : variation.product_sku
-      }
-    });
-
-    dialogRef.afterClosed().subscribe(result => {});
+    this.utilsService.openMatDialog(
+      variation.has_parent_sku ? variation.variation_sku : variation.product_sku
+    );
   }
   showVariationImage(imageUrl): void {
     this.variationImage = imageUrl;

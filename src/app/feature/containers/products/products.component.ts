@@ -7,7 +7,6 @@ import {
   ISortType
 } from './../../../shared/models';
 import { MatDialog } from '@angular/material/dialog';
-import { ProductDetailsComponent } from './../../components';
 import { ApiService, UtilsService } from './../../../shared/services';
 import { SCROLL_ICON_SHOW_DURATION } from './../../../shared/constants';
 import { Router, ActivatedRoute } from '@angular/router';
@@ -100,22 +99,29 @@ export class ProductsComponent implements OnInit, OnDestroy {
   }
 
   checkPage() {
-    if(this.pageNo > 0) {
+    if (this.pageNo > 0) {
       this.isProductFetching = true;
-      this.apiService.getMultiplePageProducts(this.department, this.category, this.filters, this.sortType, this.pageNo)
-      .subscribe(response => {
-        let allProducts = [];
-        for(let i = 0; i < response.length; i++) {
-          allProducts = [...allProducts, ...response[i].products];
-        }
-        this.products = allProducts;
-        this.updateQueryString();
-        this.total_count = response[0].total;
-        delete response[0].filterData.category;
-        this.productFilters = response[0].filterData;
-        this.sortTypeList = response[0].sortType;
-        this.isProductFetching = false;
-      });
+      this.apiService
+        .getMultiplePageProducts(
+          this.department,
+          this.category,
+          this.filters,
+          this.sortType,
+          this.pageNo
+        )
+        .subscribe(response => {
+          let allProducts = [];
+          for (let i = 0; i < response.length; i++) {
+            allProducts = [...allProducts, ...response[i].products];
+          }
+          this.products = allProducts;
+          this.updateQueryString();
+          this.total_count = response[0].total;
+          delete response[0].filterData.category;
+          this.productFilters = response[0].filterData;
+          this.sortTypeList = response[0].sortType;
+          this.isProductFetching = false;
+        });
     } else {
       this.loadProducts();
     }

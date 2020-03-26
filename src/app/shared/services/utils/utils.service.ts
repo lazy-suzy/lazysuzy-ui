@@ -43,8 +43,12 @@ export class UtilsService {
     });
     dialogRef.afterClosed().subscribe(result => {
       const params = { ...this.activeRoute.snapshot.queryParams };
-      delete params.modal_sku;
-      this.router.navigate([], { queryParams: params });
+      if (params.modal_sku) {
+        delete params.modal_sku;
+        this.router.navigate([], { queryParams: params });
+      } else {
+        this.location.back();
+      }
     });
   }
 
@@ -56,13 +60,21 @@ export class UtilsService {
       panelClass: 'product-details-dialog-container'
     });
     dialogRef.afterOpened().subscribe(result => {
-      this.location.replaceState(`product/${modalSku}`);
+      this.location.replaceState(
+        `product/${modalSku}`,
+        '',
+        this.location.getState()
+      );
     });
     dialogRef.afterClosed().subscribe(result => {
       this.dialog.closeAll();
       const params = { ...this.activeRoute.snapshot.queryParams };
-      delete params.modal_sku;
-      this.router.navigate([], { queryParams: params });
+      if (params.modal_sku) {
+        delete params.modal_sku;
+        this.router.navigate([], { queryParams: params });
+      } else {
+        this.location.back();
+      }
     });
   }
 
