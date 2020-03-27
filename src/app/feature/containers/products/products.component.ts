@@ -102,7 +102,7 @@ export class ProductsComponent implements OnInit, OnDestroy {
   checkPage() {
     if (this.pageNo > 0) {
       this.isProductFetching = true;
-      this.apiService
+      this.productsSubscription = this.apiService
         .getMultiplePageProducts(
           this.department,
           this.category,
@@ -149,7 +149,11 @@ export class ProductsComponent implements OnInit, OnDestroy {
     params = params.set('sortType', this.sortType);
     params = params.set('pageNo', this.pageNo.toString());
 
-    this.location.replaceState(window.location.pathname, params.toString());
+    this.location.replaceState(
+      window.location.pathname,
+      params.toString(),
+      this.location.getState()
+    );
   }
 
   onSetFilters(e): void {

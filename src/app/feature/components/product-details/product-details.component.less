@@ -1,6 +1,7 @@
 .mat-raised-button.mat-button-base {
   background-color: #0c1c31;
 }
+
 .loader {
   position: fixed;
   z-index: 1;
@@ -8,8 +9,10 @@
   left: 50%;
   transform: translateX(-50%) translateY(-50%);
 }
+
 .product-details-container {
   position: relative;
+
   .modal-hr {
     margin-top: 0.5rem;
     margin-bottom: 0.5rem;
@@ -20,13 +23,16 @@
   .gallery-container {
     overflow: auto;
     max-height: 100vh;
+
     &::-webkit-scrollbar {
       width: 10px;
     }
+
     &::-webkit-scrollbar-track {
       box-shadow: inset 0 0 5px grey;
       border-radius: 10px;
     }
+
     &::-webkit-scrollbar-thumb {
       background: #ffcc00;
       border-radius: 10px;
@@ -51,12 +57,24 @@
       font-size: 24px;
       position: relative;
       display: flex;
+
       .product-price {
         color: #b76e79;
       }
+
       .view-details-btn {
         position: absolute;
         right: 0;
+
+        a {
+          color: #ffcc00;
+        }
+
+        a:hover {
+          text-decoration: none;
+          color: #ffcc00;
+
+        }
       }
     }
 
@@ -64,13 +82,16 @@
       max-height: 175px;
       overflow-y: auto;
       padding-bottom: 0.5rem;
+
       &::-webkit-scrollbar {
         width: 10px;
       }
+
       &::-webkit-scrollbar-track {
         box-shadow: inset 0 0 5px grey;
         border-radius: 10px;
       }
+
       &::-webkit-scrollbar-thumb {
         background: #ffcc00;
         border-radius: 10px;
@@ -79,16 +100,20 @@
       &::-webkit-scrollbar-thumb:hover {
         background: #ffcc00ba;
       }
+
       .variation-options {
         display: flex;
         flex-wrap: wrap;
+
         .variation-img-box {
           margin: 5px;
+
           [data-title] {
             position: relative;
             cursor: pointer;
             font-size: 18px;
             vertical-align: middle;
+
             &:hover::before {
               content: attr(data-title);
               position: absolute;
@@ -106,6 +131,7 @@
               z-index: 1;
             }
           }
+
           .variation-img {
             width: 40px;
             height: 40px;
@@ -117,13 +143,16 @@
     .product-description-container {
       overflow-y: auto;
       max-height: calc(100vh - 330px);
+
       &::-webkit-scrollbar {
         width: 10px;
       }
+
       &::-webkit-scrollbar-track {
         box-shadow: inset 0 0 5px grey;
         border-radius: 10px;
       }
+
       &::-webkit-scrollbar-thumb {
         background: #ffcc00;
         border-radius: 10px;
@@ -132,11 +161,13 @@
       &::-webkit-scrollbar-thumb:hover {
         background: #ffcc00ba;
       }
+
       .dimension-title {
         font-size: 18px;
         font-weight: bold;
       }
     }
+
     .full-height {
       max-height: calc(100vh - 120px);
     }
