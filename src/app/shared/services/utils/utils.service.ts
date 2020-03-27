@@ -39,7 +39,7 @@ export class UtilsService {
       panelClass: 'product-details-dialog-container'
     });
     dialogRef.afterOpened().subscribe(result => {
-      this.location.go(`product/${modalSku}`);
+      this.location.go(`product/${modalSku}`, '', this.location.getState());
     });
     dialogRef.afterClosed().subscribe(result => {
       const params = { ...this.activeRoute.snapshot.queryParams };
