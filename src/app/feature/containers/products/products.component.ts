@@ -1,5 +1,6 @@
 import { Component, OnInit, OnDestroy, HostListener } from '@angular/core';
 import { Location } from '@angular/common';
+import { HttpParams } from '@angular/common/http';
 import {
   IProductPayload,
   IProductsPayload,
@@ -143,15 +144,12 @@ export class ProductsComponent implements OnInit, OnDestroy {
   }
 
   updateQueryString(): void {
-    this.router.navigate([], {
-      relativeTo: this.activeRoute,
-      queryParams: {
-        filters: this.filters,
-        sortType: this.sortType,
-        pageNo: this.pageNo
-      },
-      queryParamsHandling: 'merge' // remove to replace all query params by provided
-    });
+    let params = new HttpParams();
+    params = params.set('filters', this.filters);
+    params = params.set('sortType', this.sortType);
+    params = params.set('pageNo', this.pageNo.toString());
+
+    this.location.replaceState(window.location.pathname, params.toString());
   }
 
   onSetFilters(e): void {
