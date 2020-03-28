@@ -13,7 +13,10 @@ import {
   TermsOfServiceComponent,
   PrivacyPolicyComponent
 } from './core/components';
-import { ProductDetailsMobileComponent, AuthSuccessComponent} from './feature/components';
+import {
+  ProductDetailsMobileComponent,
+  AuthSuccessComponent
+} from './feature/components';
 
 const routes: Routes = [
   { path: '', component: LandingComponent, pathMatch: 'full' },
@@ -51,7 +54,9 @@ const routes: Routes = [
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes)],
+  imports: [
+    RouterModule.forRoot(routes, { scrollPositionRestoration: 'enabled' })
+  ],
   exports: [RouterModule]
 })
 export class AppRoutingModule {}

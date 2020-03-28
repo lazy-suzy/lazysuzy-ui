@@ -29,10 +29,13 @@
         [routerLink]="['/aboutus']"
         >The Lazy Story</a
       >
-      <a routerLink="/wishlist" class="flex items-center header-link pointer">
+      <span
+        (click)="isLoggedIn($event)"
+        class="flex items-center header-link pointer"
+      >
         <mat-icon aria-hidden="false">favorite_border</mat-icon>
         <span class="ml2 header-font" *ngIf="!isTablet">Saved items</span>
-      </a>
+      </span>
       <app-auth class="account-icon header-font" [handset]="false"></app-auth>
     </div>
   </mat-toolbar-row>
@@ -40,7 +43,7 @@
 <div class="top-navbar flex justify-left " *ngIf="notHome">
   <ng-container *ngFor="let department of departments">
     <div class="department-name">
-      <div class="grow pointer pa2" [routerLink]="department.link">
+      <div class=" pointer pa2" [routerLink]="department.link">
         {{ department.department | titlecase }}
       </div>
       <ul class="category-menu">

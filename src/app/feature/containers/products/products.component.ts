@@ -1,5 +1,6 @@
 import { Component, OnInit, OnDestroy, HostListener } from '@angular/core';
 import { Location } from '@angular/common';
+import { HttpParams } from '@angular/common/http';
 import {
   IProductPayload,
   IProductsPayload,
@@ -7,7 +8,6 @@ import {
   ISortType
 } from './../../../shared/models';
 import { MatDialog } from '@angular/material/dialog';
-import { ProductDetailsComponent } from './../../components';
 import { ApiService, UtilsService } from './../../../shared/services';
 import { SCROLL_ICON_SHOW_DURATION } from './../../../shared/constants';
 import { Router, ActivatedRoute } from '@angular/router';
@@ -100,22 +100,29 @@ export class ProductsComponent implements OnInit, OnDestroy {
   }
 
   checkPage() {
-    if(this.pageNo > 0) {
+    if (this.pageNo > 0) {
       this.isProductFetching = true;
-      this.apiService.getMultiplePageProducts(this.department, this.category, this.filters, this.sortType, this.pageNo)
-      .subscribe(response => {
-        let allProducts = [];
-        for(let i = 0; i < response.length; i++) {
-          allProducts = [...allProducts, ...response[i].products];
-        }
-        this.products = allProducts;
-        this.updateQueryString();
-        this.total_count = response[0].total;
-        delete response[0].filterData.category;
-        this.productFilters = response[0].filterData;
-        this.sortTypeList = response[0].sortType;
-        this.isProductFetching = false;
-      });
+      this.productsSubscription = this.apiService
+        .getMultiplePageProducts(
+          this.department,
+          this.category,
+          this.filters,
+          this.sortType,
+          this.pageNo
+        )
+        .subscribe(response => {
+          let allProducts = [];
+          for (let i = 0; i < response.length; i++) {
+            allProducts = [...allProducts, ...response[i].products];
+          }
+          this.products = allProducts;
+          this.updateQueryString();
+          this.total_count = response[0].total;
+          delete response[0].filterData.category;
+          this.productFilters = response[0].filterData;
+          this.sortTypeList = response[0].sortType;
+          this.isProductFetching = false;
+        });
     } else {
       this.loadProducts();
     }
@@ -137,15 +144,16 @@ export class ProductsComponent implements OnInit, OnDestroy {
   }
 
   updateQueryString(): void {
-    this.router.navigate([], {
-      relativeTo: this.activeRoute,
-      queryParams: {
-        filters: this.filters,
-        sortType: this.sortType,
-        pageNo: this.pageNo
-      },
-      queryParamsHandling: 'merge' // remove to replace all query params by provided
-    });
+    let params = new HttpParams();
+    params = params.set('filters', this.filters);
+    params = params.set('sortType', this.sortType);
+    params = params.set('pageNo', this.pageNo.toString());
+
+    this.location.replaceState(
+      window.location.pathname,
+      params.toString(),
+      this.location.getState()
+    );
   }
 
   onSetFilters(e): void {

@@ -47,7 +47,7 @@
           <a
             (click)="openLink($event, product.product_url)"
             [href]="product.product_url"
-            class="tr-viewDetails no-underline yellow"
+            class="tr-viewDetails no-underline"
           >
             View Details
           </a>
@@ -100,7 +100,7 @@
           <hr class="modal-hr" />
           <span class="title">Dimension</span>
           <div
-            class="mt1"
+            class="mt1 flex flex-wrap"
             *ngIf="isArray(product.dimension); else showDimensions"
           >
             <div
@@ -108,9 +108,15 @@
               class="fl w-50 pa2"
             >
               <div class="dimension-title">{{ dimension.description }}</div>
-              <div>Width: {{ dimension.width }}</div>
-              <div>Depth: {{ dimension.depth }}</div>
-              <div>Height: {{ dimension.height }}</div>
+              <div *ngIf="dimension.width > 0">
+                Width: {{ dimension.width }}
+              </div>
+              <div *ngIf="dimension.depth > 0">
+                Depth: {{ dimension.depth }}
+              </div>
+              <div *ngIf="dimension.height > 0">
+                Height: {{ dimension.height }}
+              </div>
               <br />
             </div>
           </div>

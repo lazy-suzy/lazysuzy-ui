@@ -1,36 +1,57 @@
 <div class="row best-sellers">
-        <div class="col-md-1 best-sellers-heading">
-            <h2 class="title-best-sellers">top rated best sellers</h2>
-            <button type="button" class="btn btn-sm btn-dark" (click)="seeAll()" >see all</button>
-        </div>
-    
-        <div class="col-md-11">
-            <div *ngIf="!bestSellers">
-                <img src="../../../../assets/images/three-dots.svg" width="60" height="46" alt="">
-            </div>
-            <div *ngIf="bestSellers">
-                <p-carousel class="top-deal-slider" [value]="bestSellers" [numVisible]="4" [numScroll]="1"
-                    [responsiveOptions]="responsiveOptions">
-                    <ng-template let-data pTemplate="item">
-                        <div class="product">
-                            <a (click)="openDialog(data.sku)">
-                                <img class="product_image" src={{data.main_image}} alt="Owl Image">
-                            </a>
-                            <div class="product_detail">
-                                <span class="product_brand">{{data.site}}</span>
-                                <br>
-                                <span class="product_name">{{data.name}}</span>
-                                <br>
-                                <span *ngIf="data.is_price == data.was_price" class="current-price">${{data.is_price}}</span>
-                                <span *ngIf="!(data.is_price == data.was_price)" class="current-price">${{data.is_price}} &nbsp; <s class="old-price">
-                                        ${{data.was_price}}</s></span>
-                            </div>
-                        </div>
-                    </ng-template>
-                </p-carousel>
-            </div>
-        </div>
+  <div class="col-md-1 best-sellers-heading">
+    <h2 class="title-best-sellers">best sellers</h2>
+    <button type="button" class="btn btn-sm btn-dark" (click)="seeAll()">
+      see all
+    </button>
+  </div>
+
+  <div class="col-md-11">
+    <div *ngIf="!bestSellers">
+      <img
+        src="../../../../assets/images/three-dots.svg"
+        width="60"
+        height="46"
+        alt=""
+      />
     </div>
-
-
-
+    <div *ngIf="bestSellers">
+      <p-carousel
+        class="top-deal-slider"
+        [value]="bestSellers"
+        [numVisible]="4"
+        [numScroll]="1"
+        [responsiveOptions]="responsiveOptions"
+      >
+        <ng-template let-data pTemplate="item">
+          <div class="product">
+            <a (click)="openDialog(data.sku)">
+              <img
+                class="product_image"
+                src="{{ data.main_image }}"
+                alt="Owl Image"
+              />
+            </a>
+            <div class="product_detail">
+              <span class="product_brand">{{ data.site }}</span>
+              <br />
+              <span class="product_name">{{ data.name }}</span>
+              <br />
+              <span
+                *ngIf="data.is_price == data.was_price"
+                class="current-price"
+                >${{ data.is_price }}</span
+              >
+              <span
+                *ngIf="!(data.is_price == data.was_price)"
+                class="current-price"
+                >${{ data.is_price }} &nbsp;
+                <s class="old-price"> ${{ data.was_price }}</s></span
+              >
+            </div>
+          </div>
+        </ng-template>
+      </p-carousel>
+    </div>
+  </div>
+</div>

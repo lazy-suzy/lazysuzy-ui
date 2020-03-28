@@ -3,8 +3,9 @@ import { Router } from '@angular/router';
 import { Location } from '@angular/common';
 import { Subscription } from 'rxjs';
 import { IAllDepartment } from '../../../shared/models';
-import { ApiService } from './../../../shared/services';
+import { ApiService, UtilsService } from './../../../shared/services';
 import { MessageService } from 'primeng/api';
+import { CookieService } from 'ngx-cookie-service';
 
 @Component({
   selector: 'app-nav-desktop',
@@ -22,8 +23,10 @@ export class NavDesktopComponent {
   constructor(
     private router: Router,
     private location: Location,
+    private utils: UtilsService,
     private apiService: ApiService,
-    private messageService: MessageService
+    private messageService: MessageService,
+    private cookie: CookieService
   ) {
     this.checkHomeRoute = router.events.subscribe(val => {
       this.notHome = location.path() !== '';
@@ -69,6 +72,17 @@ export class NavDesktopComponent {
         summary: ' Error Message',
         detail: 'Please Enter Email and Password'
       });
+    }
+  }
+
+  isLoggedIn(event) {
+    event.preventDefault();
+    event.stopPropagation();
+
+    if (this.cookie.get('token')) {
+      this.router.navigateByUrl('/wishlist');
+    } else {
+      this.utils.openSignup();
     }
   }
 

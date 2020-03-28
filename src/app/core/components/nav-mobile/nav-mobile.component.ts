@@ -1,10 +1,10 @@
 import { Component } from '@angular/core';
-import { ApiService } from './../../../shared/services';
+import { ApiService, UtilsService } from './../../../shared/services';
 import { Router, NavigationEnd } from '@angular/router';
 import { IAllDepartment } from '../../../shared/models/all-department.interface';
 import { Subscription } from 'rxjs';
 import { Location } from '@angular/common';
-
+import { CookieService } from 'ngx-cookie-service';
 @Component({
   selector: 'app-nav-mobile',
   templateUrl: './nav-mobile.component.html',
@@ -23,11 +23,13 @@ export class NavMobileComponent {
 
   constructor(
     private apiService: ApiService,
+    private utils: UtilsService,
+    private cookie: CookieService,
     private router: Router,
     private location: Location
   ) {
     this.getDepartments();
-    router.events.subscribe(val => {
+    this.router.events.subscribe(val => {
       if (val instanceof NavigationEnd) {
         this.menuVisible = false;
       }
@@ -69,5 +71,16 @@ export class NavMobileComponent {
 
   onSearchComplete() {
     this.showSearchComponent = false;
+  }
+
+  isLoggedIn(event) {
+    event.preventDefault();
+    event.stopPropagation();
+
+    if (this.cookie.get('token')) {
+      this.router.navigateByUrl('/wishlist');
+    } else {
+      this.utils.openSignup();
+    }
   }
 }
