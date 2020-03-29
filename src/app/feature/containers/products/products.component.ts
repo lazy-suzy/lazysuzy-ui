@@ -8,7 +8,7 @@ import {
   ISortType
 } from './../../../shared/models';
 import { MatDialog } from '@angular/material/dialog';
-import { ApiService, UtilsService } from './../../../shared/services';
+import { ApiService, UtilsService, CacheService } from './../../../shared/services';
 import { SCROLL_ICON_SHOW_DURATION } from './../../../shared/constants';
 import { Router, ActivatedRoute } from '@angular/router';
 import { Observable, Subscription } from 'rxjs';
@@ -50,6 +50,7 @@ export class ProductsComponent implements OnInit, OnDestroy {
   );
   bpSubscription: Subscription;
   isHandset: boolean;
+  scrollToProductSKU: any = '';
 
   constructor(
     public dialog: MatDialog,
@@ -58,7 +59,8 @@ export class ProductsComponent implements OnInit, OnDestroy {
     private location: Location,
     private activeRoute: ActivatedRoute,
     private breakpointObserver: BreakpointObserver,
-    private utilsService: UtilsService
+    private utilsService: UtilsService,
+    public cacheService: CacheService
   ) {}
 
   ngOnInit(): void {
@@ -126,7 +128,15 @@ export class ProductsComponent implements OnInit, OnDestroy {
     } else {
       this.loadProducts();
     }
+
+    //Code for cached product sku
+    if (this.cacheService.data.useCache) {
+      this.scrollToProductSKU = this.cacheService.data.productSku;
+      this.cacheService.data.useCache = false;
+      console.log("Code for scrolling to the product sku comes here.");
+    }
   }
+
   loadProducts(): void {
     this.pageNo = 0;
     this.isProductFetching = true;
