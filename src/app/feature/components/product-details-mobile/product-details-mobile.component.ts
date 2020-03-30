@@ -135,7 +135,7 @@ export class ProductDetailsMobileComponent implements OnInit {
   openLink(event, url) {
     event.preventDefault();
     if (typeof vglnk) {
-      vglnk.open(url);
+      vglnk.open(url, '_blank');
     }
   }
 }

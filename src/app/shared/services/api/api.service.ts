@@ -205,9 +205,16 @@ export class ApiService {
     return this.httpService.post(url, data);
   }
 
-  getAuthData() {
-    const endpoint = `self`;
+  getAuthToken(access_token) {
+    const endpoint = `oauth/token`;
     const url = `${env.API_BASE_HREF}${endpoint}`;
-    return this.httpService.get(url);
+    const data = {
+      access_token,
+      client_id: 11,
+      client_secret: 'qVBaGC2G2qxa55VlbFRMrnPrjJGcRB98HFo8YoE4',
+      grant_type: 'social',
+      provider: 'google'
+    };
+    return this.httpService.post(url, data);
   }
 }

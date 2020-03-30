@@ -87,7 +87,7 @@
           </button>
           <br />
           <button type="button" class="btn btn-light googleBtn">
-            <a [href]="googleRedirect" class="black">
+            <a (click)="socialSignIn('google')" class="black">
               <i class="fab fa-google">&nbsp;<b>Continue with Google</b></i>
             </a>
           </button>
@@ -188,7 +188,7 @@
           </button>
           <br />
           <button type="button" class="btn btn-light googleBtn">
-            <a [href]="googleRedirect" class="black">
+            <a (click)="socialSignIn('google')" class="black">
               <i class="fab fa-google">&nbsp;<b>Continue with Google</b></i>
             </a>
           </button>

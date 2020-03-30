@@ -14,75 +14,76 @@
       </div>
     </div>
     <div class="fl w-50 pa3 product-details-container">
-      <div class="flex w-100 justify-between items-end">
-        <h2 class="mb0">{{ product.site }}</h2>
-        <div *ngIf="product.wishlisted; else elseBlock">
-          <div class="tile-icon wishlist-icon wishlist-container">
-            <mat-icon (click)="wishlistProduct(product.sku, false)"
-              >favorite
-            </mat-icon>
-            <span>Saved</span>
+      <div #topContainer>
+        <div class="flex w-100 justify-between items-end">
+          <h2 class="mb0">{{ product.site }}</h2>
+          <div *ngIf="product.wishlisted; else elseBlock">
+            <div class="tile-icon wishlist-icon wishlist-container">
+              <mat-icon (click)="wishlistProduct(product.sku, false)"
+                >favorite
+              </mat-icon>
+              <span>Saved</span>
+            </div>
           </div>
+          <ng-template #elseBlock>
+            <div class="tile-icon wishlist-icon wishlist-container">
+              <mat-icon (click)="wishlistProduct(product.sku, true)"
+                >favorite_border </mat-icon
+              ><span> Save</span>
+            </div>
+          </ng-template>
         </div>
-        <ng-template #elseBlock>
-          <div class="tile-icon wishlist-icon wishlist-container">
-            <mat-icon (click)="wishlistProduct(product.sku, true)"
-              >favorite_border </mat-icon
-            ><span> Save</span>
-          </div>
-        </ng-template>
-      </div>
-      <h4 class="mb0">{{ product.name }}</h4>
+        <h4>{{ product.name }}</h4>
 
-      <div class="price-container">
-        <span class="product-price mr3">${{ product.is_price }}</span>
+        <div class="price-container">
+          <span class="product-price mr3">${{ product.is_price }}</span>
 
-        <span
-          class="strike {{
-            product.is_price !== product.was_price ? '' : 'dn'
-          }}"
-          >${{ product.was_price }}</span
-        >
-        <button mat-raised-button class="bg-red view-details-btn">
-          <a
-            (click)="openLink($event, product.product_url)"
-            [href]="product.product_url"
-            class="tr-viewDetails no-underline"
+          <span
+            class="strike {{
+              product.is_price !== product.was_price ? '' : 'dn'
+            }}"
+            >${{ product.was_price }}</span
           >
-            View Details
-          </a>
-        </button>
-      </div>
-      <hr class="modal-hr" *ngIf="variationsExist" />
-
-      <div class="variations-container" *ngIf="variationsExist">
-        <span class="title">More Options</span>
-        <div class="variation-options">
-          <div
-            *ngFor="let variation of product.variations; let i = index"
-            class="variation-img-box"
-            (click)="selectedVariation(variation, i, gallery)"
-            [class.active]="selectedIndex === i"
-          >
-            <a>
-              <span data-title="{{ variation.name }}">
-                <img
-                  [src]="variation.swatch_image"
-                  [alt]="variation.name"
-                  class="variation-img"
-                />
-              </span>
+          <button mat-raised-button class="bg-red view-details-btn">
+            <a
+              (click)="openLink($event, product.product_url)"
+              [href]="product.product_url"
+              class="tr-viewDetails no-underline"
+            >
+              View Details
             </a>
+          </button>
+        </div>
+        <hr class="modal-hr" *ngIf="variationsExist" />
+        <div class="variations-container" *ngIf="variationsExist">
+          <span class="title">More Options</span>
+          <div class="variation-options">
+            <div
+              *ngFor="let variation of product.variations; let i = index"
+              class="variation-img-box"
+              (click)="selectedVariation(variation, i, gallery)"
+              [class.active]="selectedIndex === i"
+            >
+              <a>
+                <span data-title="{{ variation.name }}">
+                  <img
+                    [src]="variation.swatch_image"
+                    [alt]="variation.name"
+                    class="variation-img"
+                  />
+                </span>
+              </a>
+            </div>
           </div>
         </div>
+        <hr class="modal-hr" />
       </div>
-
-      <hr class="modal-hr" />
 
       <div
         class="product-description-container {{
           variationsExist ? '' : 'full-height'
         }}"
+        [ngStyle]="getMaxHeight()"
       >
         <div class="mb2" *ngIf="descriptionExist">
           <span class="title">Overview</span>

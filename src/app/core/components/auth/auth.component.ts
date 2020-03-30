@@ -3,7 +3,7 @@ import {
   AuthService,
   FacebookLoginProvider,
   GoogleLoginProvider
-} from 'angular-6-social-login';
+} from 'angularx-social-login';
 import { CookieService } from 'ngx-cookie-service';
 import { ApiService, UtilsService } from 'src/app/shared/services';
 import { environment as env } from 'src/environments/environment';
@@ -62,7 +62,18 @@ export class AuthComponent implements OnInit {
       return;
     }
 
-    this.socialAuthService.signIn(socialPlatformProvider).then(userData => {});
+    this.socialAuthService.signIn(socialPlatformProvider).then(userData => {
+      console.log(userData);
+      this.apiService
+        .getAuthToken(userData.authToken)
+        .subscribe((payload: any) => {
+          this.cookie.set('token', `Bearer ${payload.access_token}`);
+          localStorage.setItem('user', JSON.stringify(userData));
+          this.fetchUser();
+          this.closeLoginModal.nativeElement.click();
+          this.closeSignupModal.nativeElement.click();
+        });
+    });
   }
 
   validateForm(email, password) {

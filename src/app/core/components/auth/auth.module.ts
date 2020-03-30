@@ -5,26 +5,33 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatMenuModule } from '@angular/material/menu';
 import { MatIconModule } from '@angular/material/icon';
 import { MatToolbarModule } from '@angular/material/toolbar';
-import { SocialLoginModule, AuthServiceConfig, GoogleLoginProvider, FacebookLoginProvider,} from "angular-6-social-login";
+import {
+  SocialLoginModule,
+  AuthServiceConfig,
+  GoogleLoginProvider,
+  FacebookLoginProvider
+} from 'angularx-social-login';
 import { FormsModule } from '@angular/forms';
 
 export function getAuthServiceConfigs() {
-  let config = new AuthServiceConfig(
-      [
-        {
-          id: GoogleLoginProvider.PROVIDER_ID,
-          provider: new GoogleLoginProvider("840582405192-fkr4bq3fp5q5doe386kkfikeie1ggn0p.apps.googleusercontent.com")
-        },
-        {
-          id: FacebookLoginProvider.PROVIDER_ID,
-          provider: new FacebookLoginProvider("545201916109098")
-        },
-      ]
-  );
+  const googleLoginOptions = {
+    scope: 'email'
+  };
+  let config = new AuthServiceConfig([
+    {
+      id: GoogleLoginProvider.PROVIDER_ID,
+      provider: new GoogleLoginProvider(
+        '937636462062-ineivis8h85l6ib4bc53r31moo7t4bdp.apps.googleusercontent.com',
+        googleLoginOptions
+      )
+    },
+    {
+      id: FacebookLoginProvider.PROVIDER_ID,
+      provider: new FacebookLoginProvider('545201916109098')
+    }
+  ]);
   return config;
 }
-
-
 
 @NgModule({
   declarations: [AuthComponent],
@@ -43,6 +50,6 @@ export function getAuthServiceConfigs() {
       provide: AuthServiceConfig,
       useFactory: getAuthServiceConfigs
     }
-    ],
+  ]
 })
-export class AuthModule { }
+export class AuthModule {}

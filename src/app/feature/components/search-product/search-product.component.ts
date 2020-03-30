@@ -1,4 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
+import { Router } from '@angular/router';
 import { MatDialog } from '@angular/material/dialog';
 import { ProductDetailsComponent } from './../product-details/product-details.component';
 import { ISearchProduct } from './../../../shared/models';
@@ -27,7 +28,8 @@ export class SearchProductComponent implements OnInit {
   constructor(
     public dialog: MatDialog,
     private breakpointObserver: BreakpointObserver,
-    private apiService: ApiService
+    private apiService: ApiService,
+    private router: Router
   ) {}
 
   ngOnInit(): void {
@@ -61,13 +63,17 @@ export class SearchProductComponent implements OnInit {
   }
 
   openDialog(): void {
-    const dialogRef = this.dialog.open(ProductDetailsComponent, {
-      width: '80%',
-      height: '80%',
-      data: { sku: this.product.product_sku }
-    });
+    if (this.isHandset) {
+      this.router.navigateByUrl(`/product/${this.product.product_sku}`);
+    } else {
+      const dialogRef = this.dialog.open(ProductDetailsComponent, {
+        width: '80%',
+        height: '80%',
+        data: { sku: this.product.product_sku }
+      });
 
-    dialogRef.afterClosed().subscribe(result => {});
+      dialogRef.afterClosed().subscribe(result => {});
+    }
   }
 
   wishlistProduct(sku, mark, event) {
