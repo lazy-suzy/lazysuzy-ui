@@ -67,7 +67,7 @@ export class AuthComponent implements OnInit {
       this.apiService
         .getAuthToken(userData.authToken)
         .subscribe((payload: any) => {
-          this.cookie.set('token', `Bearer ${payload.access_token}`);
+          this.cookie.set('token', `${payload.access_token}`);
           localStorage.setItem('user', JSON.stringify(userData));
           this.fetchUser();
           this.closeLoginModal.nativeElement.click();
