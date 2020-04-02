@@ -33,11 +33,11 @@
     </div>
 
     <div *ngIf="isHandset" class="banner">
-        <p-carousel class="bannerCarousel" [value]="topDeals" [numVisible]="1" [numScroll]="1" [autoplayInterval]="8000" [circular]="true">
+        <p-carousel class="bannerCarousel" [value]="topDeals" [numVisible]="3" [numScroll]="1" [autoplayInterval]="8000" [circular]="true">
             <ng-template let-data pTemplate="item">
                 <div class="product">
                     <a (click)="openDialog(data.sku)">
-                        <img class="product_image" style="max-height: 108px;" src={{data.main_image}} alt="Owl Image">
+                        <img class="product_image" src={{data.main_image}} alt="Owl Image">
                     </a>
                     <div class="product_detail">
                         <span class="product_brand">{{data.site}}</span>
