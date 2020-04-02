@@ -141,8 +141,8 @@
 
     .product-description-container {
       overflow-y: auto;
-      padding: 10px 0;
-      max-height: calc(100vh - 330px);
+      transition: all 0.3s 0s ease-in-out;
+      max-height: 0px;
 
       &::-webkit-scrollbar {
         width: 10px;
@@ -161,15 +161,14 @@
       &::-webkit-scrollbar-thumb:hover {
         background: #ffcc00ba;
       }
+      hr {
+        border-color: #aab7b6;
+      }
 
       .dimension-title {
         font-size: 18px;
         font-weight: bold;
       }
-    }
-
-    .full-height {
-      max-height: calc(100vh - 120px);
     }
   }
 }

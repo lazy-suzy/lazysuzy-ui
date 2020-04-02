@@ -81,11 +81,11 @@
 
       <div
         class="product-description-container {{
-          variationsExist ? '' : 'full-height'
+          variationsExist ? 'show' : 'hide'
         }}"
         [ngStyle]="getMaxHeight()"
       >
-        <div class="mb2" *ngIf="descriptionExist">
+        <div class="mb2 pt-1" *ngIf="descriptionExist">
           <span class="title">Overview</span>
           <div class="mt1" [innerHTML]="description"></div>
         </div>
@@ -101,7 +101,7 @@
           <hr class="modal-hr" />
           <span class="title">Dimension</span>
           <div
-            class="mt1 flex flex-wrap"
+            class="mt1 pb1 flex flex-wrap"
             *ngIf="isArray(product.dimension); else showDimensions"
           >
             <div
@@ -122,7 +122,7 @@
             </div>
           </div>
           <ng-template #showDimensions>
-            <div>
+            <div class="pb1">
               {{ product.dimension }}
             </div>
           </ng-template>
