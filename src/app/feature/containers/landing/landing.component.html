@@ -1,32 +1,37 @@
 <div class="homepage">
   <div class="main-container">
+    
     <h1 class="search-title">Search America's top Home brands in one go</h1>
+    
     <app-search-bar class="section"></app-search-bar>
+    
     <div class="section">
+
       <div class="mh2 pad-h">
         <app-browse-by-room></app-browse-by-room>
       </div>
 
       <app-banner></app-banner>
+
       <div class="mh2">
         <app-brand-footer></app-brand-footer>
       </div>
+
       <div class="mh2 pad-h">
-        <app-new-arrivals
-          *ngIf="!isHandset"
-          [isHandset]="isHandset"
-        ></app-new-arrivals>
-        <app-top-deals
-          *ngIf="!isHandset"
-          [isHandset]="isHandset"
-        ></app-top-deals>
-        <!-- <app-create-your-style></app-create-your-style> -->
-        <app-best-sellers
-          *ngIf="!isHandset"
-          [isHandset]="isHandset"
-        ></app-best-sellers>
+        <app-new-arrivals *ngIf="!isHandset" [isHandset]="isHandset"></app-new-arrivals>
+        <app-top-deals *ngIf="!isHandset" [isHandset]="isHandset"></app-top-deals>
+        <app-best-sellers *ngIf="!isHandset" [isHandset]="isHandset"></app-best-sellers>
       </div>
+
+      <div class="mh2 pad-h">
+        <app-new-arrivals *ngIf="isHandset" [isHandset]="isHandset"></app-new-arrivals>
+        <app-top-deals *ngIf="isHandset" [isHandset]="isHandset"></app-top-deals>
+        <app-best-sellers *ngIf="isHandset" [isHandset]="isHandset"></app-best-sellers>
+      </div>
+
       <app-subscribe [homePage]="true"></app-subscribe>
+
     </div>
   </div>
+
 </div>
