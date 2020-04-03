@@ -11,7 +11,7 @@ import { IFilterData, IProductFilterOption, IProductFilter, IProductsPayload } f
 export class ProductFilterMobileComponent implements OnInit {
   @Output() setMobileToggle = new EventEmitter<any>();
   @Output() setFilters = new EventEmitter<any>();
-  @Input() productFilters: IFilterData;
+  @Input() productFilters: any;
   @Input() totalCount: number;
   @Input() isProductFetching: boolean;
   objectKeys = Object.keys;

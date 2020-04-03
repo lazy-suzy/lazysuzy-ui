@@ -3,10 +3,11 @@ import { CommonModule } from '@angular/common';
 import { ProductModule } from './../../components';
 
 import { WishlistComponent } from './wishlist.component';
+import { MatIconModule } from '@angular/material/icon';
 
 const DECLARATIONS = [WishlistComponent];
 
-const MODULES = [CommonModule, ProductModule];
+const MODULES = [CommonModule, ProductModule, MatIconModule];
 
 @NgModule({
   declarations: [...DECLARATIONS],

@@ -5,14 +5,15 @@ import { NgModule } from '@angular/core';
 
 import { Ng5SliderModule } from 'ng5-slider';
 import { ProductFiltersComponent } from './product-filters.component';
-
+import { MatIconModule } from '@angular/material/icon';
 const DECLARATIONS = [ProductFiltersComponent];
 
 const MODULES = [
   CommonModule,
   MatMenuModule,
   MatCheckboxModule,
-  Ng5SliderModule
+  Ng5SliderModule,
+  MatIconModule
 ];
 
 @NgModule({

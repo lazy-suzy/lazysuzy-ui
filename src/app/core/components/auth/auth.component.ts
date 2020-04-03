@@ -52,6 +52,10 @@ export class AuthComponent implements OnInit {
     }
   }
 
+  closeMyMenu() {
+
+  }
+
   public socialSignIn(socialPlatform: string) {
     let socialPlatformProvider;
     if (socialPlatform == 'facebook') {
