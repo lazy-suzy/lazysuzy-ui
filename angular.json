@@ -33,7 +33,9 @@
               "node_modules/primeng/resources/primeng.min.css",
               "src/custom-theme.scss",
               "src/styles.less",
-              "node_modules/tachyons/css/tachyons.min.css"
+              "node_modules/tachyons/css/tachyons.min.css",
+              "node_modules/owl.carousel/dist/assets/owl.carousel.css",
+              "node_modules/owl.carousel/dist/assets/owl.theme.default.css"
 
             ],
             "scripts": [

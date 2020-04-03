@@ -34,6 +34,7 @@
     "ngx-cookie-service": "^3.0.2",
     "ngx-infinite-scroll": "^8.0.1",
     "ngx-markdown": "^8.0.0",
+    "ngx-owl-carousel": "^2.0.7",
     "primeicons": "^2.0.0",
     "primeng": "^9.0.0",
     "rxjs": "~6.4.0",
