@@ -29,6 +29,7 @@ export class ProductDetailsComponent implements OnInit {
   galleryId = 'myLightbox';
   items: GalleryItem[];
   isProductFetching: boolean = false;
+  showDetails: boolean = false;
   spinner: string = 'assets/images/spinner.gif';
   description: any;
   features: any;

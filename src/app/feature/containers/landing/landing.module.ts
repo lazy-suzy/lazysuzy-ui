@@ -3,7 +3,6 @@ import { CommonModule } from '@angular/common';
 import { CoreModule } from '../../../core/core.module';
 import { RoomModule, BrowseByRoomModule, TopDealsModule, CreateYourStyleModule } from './../../components';
 import { LandingComponent } from './landing.component';
-import { OwlModule } from 'ngx-owl-carousel';
 import { CarouselModule } from 'primeng/carousel';
 import { FormsModule, ReactiveFormsModule} from  '@angular/forms';
 import { NewArrivalsModule } from './../../components';
@@ -14,7 +13,7 @@ import { SubscribeModule } from '../../components/subscribe/subscribe.module';
 
 const DECLARATIONS = [LandingComponent];
 
-const MODULES = [CommonModule, CoreModule, RoomModule, OwlModule, BrowseByRoomModule, NewArrivalsModule,
+const MODULES = [CommonModule, CoreModule, RoomModule, BrowseByRoomModule, NewArrivalsModule,
   FormsModule ,TopDealsModule,CreateYourStyleModule, EmailSubscriptionModule, BestSellersModule, ReactiveFormsModule, SubscribeModule];
 
 @NgModule({

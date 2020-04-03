@@ -13,6 +13,8 @@ export class ProductMobileComponent implements OnInit {
   @Input() product: IProductPayload;
   @Input() productsInRow: number;
 
+  isVariationImageVisible:boolean = false;
+
   constructor(private apiService: ApiService) {}
 
   ngOnInit() {}
