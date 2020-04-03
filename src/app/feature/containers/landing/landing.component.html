@@ -26,8 +26,10 @@
 
       <div class="">
         <app-new-arrivals *ngIf="isHandset" [isHandset]="isHandset"></app-new-arrivals>
-        <!-- <app-top-deals *ngIf="isHandset" [isHandset]="isHandset"></app-top-deals> -->
-        <!-- <app-best-sellers *ngIf="isHandset" [isHandset]="isHandset"></app-best-sellers> -->
+        <app-new-arrivals *ngIf="isHandset" [isHandset]="isHandset"></app-new-arrivals>
+        <app-new-arrivals *ngIf="isHandset" [isHandset]="isHandset"></app-new-arrivals>
+        <!-- <app-top-deals *ngIf="isHandset" [isHandset]="isHandset"></app-top-deals>
+        <app-best-sellers *ngIf="isHandset" [isHandset]="isHandset"></app-best-sellers> -->
       </div>
 
       <app-subscribe [homePage]="true"></app-subscribe>

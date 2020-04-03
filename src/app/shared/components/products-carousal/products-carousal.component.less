@@ -1,0 +1,27 @@
+.item{
+  transition:.4s ease all;
+  margin:0 20px;
+  transform:scale(.8);
+}
+@media(max-width:1000px){
+  .item{margin:0; transform:scale(.9)}
+}
+.active .item{
+  transform:scale(1);
+}
+
+.owl-item {
+    -webkit-backface-visibility: hidden;
+    -webkit-transform: translateZ(0) scale(1.0, 1.0);
+}
+
+.inner{position:absolute; bottom:30px; left:0; right:0; text-align:center;}
+.inner a{color:#fff; text-decoration:none; border-bottom:2px solid rgba(255,255,255,0.5); transition:.3s ease border-color}
+.inner a:hover{border-color:#fff;}
+.black .inner a{color:#000; border-color:rgba(0,0,0,0.4)}
+.black .inner a:hover{border-color:#000;}
+
+.owl-carousel:after{content:""; display:block; position:absolute; width:8%; top:0; bottom:0; left:50%; margin-left:-4%; pointer-events: none; background:url(https://s3-us-west-2.amazonaws.com/s.cdpn.io/43033/aett_logo_slider.png) no-repeat center 50%; background-size:100% auto;
+}
+
+.owl-controls{position:absolute; margin-top:300px;}

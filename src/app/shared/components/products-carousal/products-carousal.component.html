@@ -1,0 +1,12 @@
+<owl-carousel [options]="carousalOptions" [carouselClasses]="['owl-carousel']">
+
+  <div class="item" *ngFor="let image of images;let i = index">
+    <a href="#">
+      <img src="{{image}}" alt="" />
+      <div class="inner">
+        <a href="#">The Erling Bag</a>
+      </div>
+    </a>
+  </div>
+
+</owl-carousel>

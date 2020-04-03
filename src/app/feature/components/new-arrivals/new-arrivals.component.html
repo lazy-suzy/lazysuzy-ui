@@ -35,56 +35,7 @@
 </div>
 
 <div *ngIf="isHandset" class="banner">
-  
-  <div class="owl-carousel-holder">
-    <div class="slider-image-section">
-        <h2>Banner Slider Using Owl Casrousel</h2>
-        <owl-carousel
-            [options]="mySlideOptions"
-            [items]="images"
-            [carouselClasses]="['owl-theme', 'sliding']"
-        >
-            <div class="item" *ngFor="let image of mySlideImages;let i = index">
-                <div>
-                    <img src={{image}}/>
-                </div>
-            </div>
-        </owl-carousel>
-    </div>
-    <hr/>
-    <div class="carousel-section">
-            <h2>Image Carousel Using Owl Casrousel</h2>
-            <owl-carousel
-                [options]="myCarouselOptions"
-                [items]="images"
-            >
-                <div class="item" *ngFor="let image of myCarouselImages;let i = index">
-                    <div>
-                        <img src={{image}}/>
-                    </div>
-                </div>
-            </owl-carousel>
-    </div>
-</div>
 
-  <!-- <p-carousel class="bannerCarousel" [value]="newProducts" [numVisible]="3" [numScroll]="1" [autoplayInterval]="8000"
-    [circular]="true">
-    <ng-template let-data pTemplate="item">
-      <div class="product">
-        <a (click)="openDialog(data.sku)">
-          <img class="product_image" src="{{ data.main_image }}" alt="Owl Image" />
-        </a>
-        <div class="product_detail">
-          <span class="product_brand">{{ data.site }}</span>
-          <br />
-          <span class="product_name">{{ data.name }}</span>
-          <br />
-          <span *ngIf="data.is_price == data.was_price" class="current-price">${{ data.is_price }}</span>
-          <span *ngIf="!(data.is_price == data.was_price)" class="current-price">${{ data.is_price }} &nbsp;
-            <s class="old-price"> ${{ data.was_price }}</s></span>
-        </div>
-      </div>
-    </ng-template>
-  </p-carousel> -->
+  <app-products-carousal></app-products-carousal>
 
 </div>
