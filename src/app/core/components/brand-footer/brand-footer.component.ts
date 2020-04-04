@@ -18,6 +18,8 @@ import { trigger, transition, useAnimation, style, animate } from '@angular/anim
 })
 export class BrandFooterComponent implements OnInit {
 
+  fade : any;
+
   constructor(private apiService: ApiService) { }
   brands: any;
 

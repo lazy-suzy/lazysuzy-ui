@@ -28,6 +28,9 @@ export class UtilsService {
   }
 
   checkDataLength(data) {
+    if (Array.isArray[data]) {
+      return data.length > 0 && data[0].length > 0;
+    }
     return data.length > 0;
   }
 

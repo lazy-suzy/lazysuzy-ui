@@ -53,6 +53,8 @@ export interface ISearchProduct {
   site: string;
   product_name: Object;
   site_name: string;
+  is_new: boolean;
+  wishlisted: boolean;
 }
 
 export interface IVariationsB {

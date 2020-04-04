@@ -83,7 +83,7 @@
   }
 
   .product_detail {
-    margin-left: 2%;
+    margin-left: 5%;
   }
 
   .product_name {
@@ -107,3 +107,40 @@
     padding-right: 5%;
   }
 }
+
+
+.banner {
+  width: 85%;
+  margin: 40px 40px 40px 40px;
+}
+
+.bannerCarousel {
+  padding-top: 3%;
+}
+
+.bannerCarousel .ui-button {
+  margin: 0 !important;
+}
+
+@media (max-width: 767px) {
+  .bannerCarousel .ui-button {
+    font-size: 6px !important;
+  }
+}
+
+:host {
+  ::ng-deep 
+  
+  .ui-carousel-prev{
+    display: none !important;
+    }
+}
+
+:host {
+  ::ng-deep 
+  
+  .ui-carousel-next{
+    display: none !important;
+    }
+}
+

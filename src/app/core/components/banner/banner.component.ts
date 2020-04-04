@@ -10,7 +10,9 @@ import { Router, ActivatedRoute } from '@angular/router';
   styleUrls: ['./banner.component.less']
 })
 export class BannerComponent implements OnInit {
-bannerData: any;
+  
+  bannerData: any;
+  isBanner:boolean = true;
 
  constructor(private apiService: ApiService, private router: Router,
   private activeRoute: ActivatedRoute){}  

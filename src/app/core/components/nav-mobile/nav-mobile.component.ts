@@ -69,7 +69,7 @@ export class NavMobileComponent {
     this.showSearchComponent = !this.showSearchComponent;
   }
 
-  onSearchComplete() {
+  onSearchComplete(e) {
     this.showSearchComponent = false;
   }
 

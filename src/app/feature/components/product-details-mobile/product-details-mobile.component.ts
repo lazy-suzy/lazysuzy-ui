@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { IProductPayload } from 'src/app/shared/models';
-import { ApiService, UtilsService } from 'src/app/shared/services';
+import { ApiService, UtilsService, CacheService } from 'src/app/shared/services';
 import { Observable, Subscription } from 'rxjs';
 import {
   BreakpointState,
@@ -45,7 +45,8 @@ export class ProductDetailsMobileComponent implements OnInit {
     private utils: UtilsService,
     private breakpointObserver: BreakpointObserver,
     public gallery: Gallery,
-    public lightbox: Lightbox
+    public lightbox: Lightbox,
+    public cacheService: CacheService
   ) {}
 
   ngOnInit() {
@@ -61,6 +62,8 @@ export class ProductDetailsMobileComponent implements OnInit {
     this.isProductFetching = true;
     this.routeSubscription = this.activeRoute.params.subscribe(routeParams => {
       this.productSku = routeParams.product;
+      this.cacheService.data.productSku = this.productSku;
+      this.cacheService.data.useCache = true;
     });
     this.productSubscription = this.apiService
       .getProduct(this.productSku)
@@ -132,7 +135,7 @@ export class ProductDetailsMobileComponent implements OnInit {
   openLink(event, url) {
     event.preventDefault();
     if (typeof vglnk) {
-      vglnk.open(url);
+      vglnk.open(url, '_blank');
     }
   }
 }

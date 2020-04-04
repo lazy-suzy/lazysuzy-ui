@@ -1,4 +1,4 @@
-<div class="row best-sellers">
+<div *ngIf="!isHandset" class="row best-sellers">
   <div class="col-md-1 best-sellers-heading">
     <h2 class="title-best-sellers">best sellers</h2>
     <button type="button" class="btn btn-sm btn-dark" (click)="seeAll()">
@@ -55,3 +55,8 @@
     </div>
   </div>
 </div>
+
+<div *ngIf="isHandset" class="banner">
+  <app-products-carousal [data]="bestSellers" (updates)="handleEvtProductCarousal($event)"></app-products-carousal>
+</div>
+

@@ -1,4 +1,10 @@
-import { Component, Inject, OnInit } from '@angular/core';
+import {
+  Component,
+  Inject,
+  OnInit,
+  ViewChild,
+  ElementRef
+} from '@angular/core';
 import { MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { Subscription } from 'rxjs';
 import { IProductPayload } from 'src/app/shared/models';
@@ -12,6 +18,7 @@ import { Lightbox } from '@ngx-gallery/lightbox';
   styleUrls: ['./product-details.component.less']
 })
 export class ProductDetailsComponent implements OnInit {
+  @ViewChild('topContainer', { static: false }) topContainer: ElementRef;
   product: IProductPayload;
   productSubscription: Subscription;
   selectedIndex: number;
@@ -22,6 +29,7 @@ export class ProductDetailsComponent implements OnInit {
   galleryId = 'myLightbox';
   items: GalleryItem[];
   isProductFetching: boolean = false;
+  showDetails: boolean = false;
   spinner: string = 'assets/images/spinner.gif';
   description: any;
   features: any;
@@ -96,7 +104,12 @@ export class ProductDetailsComponent implements OnInit {
   openLink(event, url) {
     event.preventDefault();
     if (typeof vglnk) {
-      vglnk.open(url);
+      vglnk.open(url, '_blank');
     }
+  }
+  getMaxHeight() {
+    const topHeight =
+      this.topContainer && (this.topContainer.nativeElement.offsetHeight || 0);
+    return { 'max-height': `calc(100vh - ${topHeight + 12}px)` };
   }
 }

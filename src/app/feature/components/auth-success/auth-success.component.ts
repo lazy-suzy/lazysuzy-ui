@@ -9,15 +9,9 @@ import { Subscription } from 'rxjs';
 })
 export class AuthSuccessComponent implements OnInit {
   userDataSubscription: Subscription;
-  constructor(private apiservice: ApiService) { }
+  constructor(private apiservice: ApiService) {}
 
-  ngOnInit() {
-    this.userDataSubscription = this.apiservice
-      .getAuthData()
-      .subscribe((payload:any) => {
-
-      });
-  }
+  ngOnInit() {}
 
   ngOnDestroy(): void {
     this.userDataSubscription.unsubscribe();
