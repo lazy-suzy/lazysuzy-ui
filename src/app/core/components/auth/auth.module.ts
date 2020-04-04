@@ -17,6 +17,11 @@ export function getAuthServiceConfigs() {
   const googleLoginOptions = {
     scope: 'email'
   };
+  const fbLoginOptions = {
+    scope: 'email',
+    return_scopes: true,
+    enable_profile_selector: true
+  };
   let config = new AuthServiceConfig([
     {
       id: GoogleLoginProvider.PROVIDER_ID,
@@ -27,7 +32,7 @@ export function getAuthServiceConfigs() {
     },
     {
       id: FacebookLoginProvider.PROVIDER_ID,
-      provider: new FacebookLoginProvider('128412724729505')
+      provider: new FacebookLoginProvider('128412724729505', fbLoginOptions)
     }
   ]);
   return config;
