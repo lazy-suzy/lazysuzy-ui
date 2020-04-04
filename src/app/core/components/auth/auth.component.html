@@ -79,7 +79,7 @@
             class="btn btn-primary facebookBtn"
             style="background: #3b5998;"
           >
-            <a [href]="facebookRedirect" class="white">
+            <a (click)="socialSignIn('facebook')" class="white">
               <i class="fab fa-facebook-f"
                 >&nbsp;<b>Continue with Facebook</b></i
               >
@@ -182,7 +182,7 @@
             class="btn btn-primary facebookBtn"
             style="background: #3b5998;"
           >
-            <a [href]="facebookRedirect" class="white">
+            <a (click)="socialSignIn('facebook')" class="white">
               <i class="fab fa-facebook-f"
                 >&nbsp;<b>Continue with Facebook</b></i
               >

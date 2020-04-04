@@ -189,6 +189,7 @@ export class ApiService {
     if (!token) {
       // trigger signup window
       this.utils.openSignup();
+      return;
     }
     const url = `${env.API_BASE_HREF}${endpoint}`;
 

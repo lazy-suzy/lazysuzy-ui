@@ -1,16 +1,15 @@
 <h2 class="section-title">Browse by Room</h2>
-<br>
-<br>
-<div class="browse-by-room-section container-fluid">
-  <div class="row">
-    <div class="content-item col-md-3 col-sm-6" *ngFor="let data of departments">
-    <div class="pic">
-        <a href={{data.link}}>
-          <img class="img" [src]="data.image" >
+<br />
+<br />
+<div class="browse-by-room-section">
+  <div class="flex flex-wrap">
+    <div class="content-item w-25" *ngFor="let data of departments">
+      <div class="pic">
+        <a href="{{ data.link }}">
+          <img class="img" [src]="data.image" />
         </a>
-    </div>
-        <span class="badge">{{data.department}}</span>
+      </div>
+      <span class="badge">{{ data.department }}</span>
     </div>
   </div>
-
 </div>

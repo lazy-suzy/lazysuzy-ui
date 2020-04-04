@@ -37,7 +37,13 @@ export class ProductsComponent implements OnInit, OnDestroy {
   productsSubscription: Subscription;
   routeSubscription: Subscription;
   products: IProductPayload[];
-  productFilters: IFilterData;
+  productFilters: IFilterData = {
+    brand: [],
+    type: [],
+    color: [],
+    category: [],
+    price: { from: 0, min: 0, max: 0, to: 0 }
+  };
   department: string;
   category: string;
   total_count: number = 0;

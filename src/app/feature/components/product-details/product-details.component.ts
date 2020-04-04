@@ -33,6 +33,7 @@ export class ProductDetailsComponent implements OnInit {
   spinner: string = 'assets/images/spinner.gif';
   description: any;
   features: any;
+  topHeight: Object = { 'max-height': '0' };
 
   constructor(
     @Inject(MAT_DIALOG_DATA) public data: any,
@@ -68,11 +69,19 @@ export class ProductDetailsComponent implements OnInit {
           )
         );
         this.isProductFetching = false;
+        const _self = this;
+        setTimeout(function() {
+          _self.getMaxHeight();
+        }, 1000);
       });
   }
 
   ngOnDestroy(): void {
     this.productSubscription.unsubscribe();
+  }
+
+  ngAfterViewChecked(): void {
+    // this.getMaxHeight();
   }
 
   openLightbox(index: number) {
@@ -110,6 +119,6 @@ export class ProductDetailsComponent implements OnInit {
   getMaxHeight() {
     const topHeight =
       this.topContainer && (this.topContainer.nativeElement.offsetHeight || 0);
-    return { 'max-height': `calc(100vh - ${topHeight + 12}px)` };
+    this.topHeight = { 'max-height': `calc(100vh - ${topHeight + 12}px)` };
   }
 }
