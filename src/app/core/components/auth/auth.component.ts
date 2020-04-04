@@ -52,9 +52,7 @@ export class AuthComponent implements OnInit {
     }
   }
 
-  closeMyMenu() {
-
-  }
+  closeMyMenu() {}
 
   public socialSignIn(socialPlatform: string) {
     let socialPlatformProvider;
@@ -69,7 +67,7 @@ export class AuthComponent implements OnInit {
     this.socialAuthService.signIn(socialPlatformProvider).then(userData => {
       console.log(userData);
       this.apiService
-        .getAuthToken(userData.authToken)
+        .getAuthToken(userData.authToken, socialPlatform)
         .subscribe((payload: any) => {
           this.cookie.set('token', `${payload.access_token}`);
           localStorage.setItem('user', JSON.stringify(userData));

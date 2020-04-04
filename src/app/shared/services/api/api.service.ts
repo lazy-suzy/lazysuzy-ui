@@ -206,7 +206,7 @@ export class ApiService {
     return this.httpService.post(url, data);
   }
 
-  getAuthToken(access_token) {
+  getAuthToken(access_token, provider) {
     const endpoint = `oauth/token`;
     const url = `${env.API_BASE_HREF}${endpoint}`;
     const data = {
@@ -214,7 +214,7 @@ export class ApiService {
       client_id: 11,
       client_secret: 'qVBaGC2G2qxa55VlbFRMrnPrjJGcRB98HFo8YoE4',
       grant_type: 'social',
-      provider: 'google'
+      provider
     };
     return this.httpService.post(url, data);
   }
