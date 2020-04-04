@@ -57,4 +57,8 @@ export class TopDealsComponent implements OnInit {
       ? this.router.navigateByUrl(`/product/${sku}`)
       : this.utilsService.homepageMatDialog(sku);
   }
+
+  handleEvtProductCarousal(e){
+    this.openDialog(e);
+  }
 }

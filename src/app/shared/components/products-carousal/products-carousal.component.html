@@ -1,12 +1,35 @@
-<owl-carousel [options]="carousalOptions" [carouselClasses]="['owl-carousel']">
+<div *ngIf="!isBanner">
+  <owl-carousel [options]="carousalOptions" *ngIf="data?.length" [carouselClasses]="['owl-carousel']">
 
-  <div class="item" *ngFor="let image of images;let i = index">
-    <a href="#">
-      <img src="{{image}}" alt="" />
-      <div class="inner">
-        <a href="#">The Erling Bag</a>
+    <div class="item" *ngFor="let product of data;let i = index">
+      <a (click)="openDialog(product.sku)">
+        <img src="{{product.main_image}}" alt="" />
+        <div class="inner">
+          <span class="product_brand">{{ product.site }}</span>
+          <br />
+          <span class="product_name">{{ product.name }}</span>
+          <br />
+          <span *ngIf="product.is_price == product.was_price" class="current-price">${{ product.is_price }}</span>
+          <span *ngIf="!(product.is_price == product.was_price)" class="current-price">${{ product.is_price }} &nbsp;
+            <s class="old-price"> ${{ product.was_price }}</s></span>
+        </div>
+      </a>
+    </div>
+  
+  </owl-carousel>
+  
+</div>
+
+<div *ngIf="isBanner">
+  <owl-carousel [options]="bannerCarousalOptions" *ngIf="data?.length" [carouselClasses]="['owl-carousel']">  
+
+    <div class="item" *ngFor="let product of data;let i = index">
+      <div class="product">
+        <a href="{{product.link}}">
+            <img class="product_image" src={{product.image}} alt="Owl Image">
+        </a>
       </div>
-    </a>
-  </div>
-
-</owl-carousel>
+    </div>
+  
+  </owl-carousel>  
+</div>
