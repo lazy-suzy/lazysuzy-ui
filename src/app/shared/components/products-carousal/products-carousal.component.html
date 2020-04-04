@@ -21,15 +21,23 @@
 </div>
 
 <div *ngIf="isBanner">
+
   <owl-carousel [options]="bannerCarousalOptions" *ngIf="data?.length" [carouselClasses]="['owl-carousel']">  
 
-    <div class="item" *ngFor="let product of data;let i = index">
+    <div class='item' *ngFor="let product of data;let i = index">
+      <a href="{{product.link}}">
+        <img class='owl-item-bg' src={{product.image}} alt="Owl Image">
+      </a>
+    </div>
+
+    <!-- <div class="item" *ngFor="let product of data;let i = index">
       <div class="product">
         <a href="{{product.link}}">
-            <img class="product_image" src={{product.image}} alt="Owl Image">
+            <img src={{product.image}} alt="Owl Image">
         </a>
       </div>
-    </div>
+    </div> -->
   
   </owl-carousel>  
 </div>
+
