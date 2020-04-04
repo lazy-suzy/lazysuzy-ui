@@ -18,6 +18,15 @@ export class NewArrivalsComponent implements OnInit {
   mySlideOptions = { items: 1, dots: true, nav: false };
   myCarouselOptions = { items: 3, dots: true, nav: true };
 
+  images = [
+    "https://s3-us-west-2.amazonaws.com/s.cdpn.io/43033/slider_bags.jpg",
+    "https://s3-us-west-2.amazonaws.com/s.cdpn.io/43033/slider_book_cover.jpg",
+    "https://s3-us-west-2.amazonaws.com/s.cdpn.io/43033/slider_bags.jpg",
+    "https://s3-us-west-2.amazonaws.com/s.cdpn.io/43033/slider_book_cover.jpg",
+    "https://s3-us-west-2.amazonaws.com/s.cdpn.io/43033/slider_bags.jpg",
+    "https://s3-us-west-2.amazonaws.com/s.cdpn.io/43033/slider_book_cover.jpg"
+  ];
+
   @Input() isHandset: boolean = false;
   constructor(
     private apiService: ApiService,
@@ -64,4 +73,9 @@ export class NewArrivalsComponent implements OnInit {
       ? this.router.navigateByUrl(`/product/${sku}`)
       : this.utilsService.homepageMatDialog(sku);
   }
+
+  handleEvtProductCarousal(e){
+    this.openDialog(e);
+  }
+  
 }

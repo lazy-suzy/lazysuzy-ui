@@ -33,23 +33,6 @@
     </div>
 
     <div *ngIf="isHandset" class="banner">
-        <p-carousel class="bannerCarousel" [value]="topDeals" [numVisible]="3" [numScroll]="1" [autoplayInterval]="8000" [circular]="true">
-            <ng-template let-data pTemplate="item">
-                <div class="product">
-                    <a (click)="openDialog(data.sku)">
-                        <img class="product_image" src={{data.main_image}} alt="Owl Image">
-                    </a>
-                    <div class="product_detail">
-                        <span class="product_brand">{{data.site}}</span>
-                        <br>
-                        <span class="product_name">{{data.name}}</span>
-                        <br>
-                        <span *ngIf="data.is_price == data.was_price" class="current-price">${{data.is_price}}</span>
-                        <span *ngIf="!(data.is_price == data.was_price)" class="current-price">${{data.is_price}} &nbsp; <s class="old-price">
-                                ${{data.was_price}}</s></span>
-                    </div>
-                </div>
-            </ng-template>
-        </p-carousel>
+        <app-products-carousal [data]="topDeals" (updates)="handleEvtProductCarousal($event)"></app-products-carousal>
     </div>
     

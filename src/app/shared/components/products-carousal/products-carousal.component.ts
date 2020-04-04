@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 
 @Component({
   selector: 'app-products-carousal',
@@ -8,29 +8,38 @@ import { Component, OnInit, Input } from '@angular/core';
 export class ProductsCarousalComponent implements OnInit {
 
   carousalOptions = {
-      margin: 10,
-      loop: true,
-      items: 1,
-      stagePadding: 100
+    margin: 10,
+    loop: true,
+    items: 1,
+    dots: true,
+    pagination: true,
+    stagePadding: 100
   };
 
-  images = [
-    "https://s3-us-west-2.amazonaws.com/s.cdpn.io/43033/slider_bags.jpg",
-    "https://s3-us-west-2.amazonaws.com/s.cdpn.io/43033/slider_book_cover.jpg",
-    "https://s3-us-west-2.amazonaws.com/s.cdpn.io/43033/slider_bags.jpg",
-    "https://s3-us-west-2.amazonaws.com/s.cdpn.io/43033/slider_book_cover.jpg",
-    "https://s3-us-west-2.amazonaws.com/s.cdpn.io/43033/slider_bags.jpg",
-    "https://s3-us-west-2.amazonaws.com/s.cdpn.io/43033/slider_book_cover.jpg"
-  ];
-  
+  bannerCarousalOptions = {
+    items: 1,
+    margin: 10,
+    autoplay: true,
+    autoplayTimeout: 8000,
+    autoplayHoverPause: true,
+    dots: true,
+    pagination: true,
+    smartSpeed: 1000,
+    autoplaySpeed: 1000,
+    loop: true,
+    nav: true,
+    navText: false,
+  };
+
+  images = [];
   @Input() data: any = [];
+  @Output() updates: EventEmitter<any> = new EventEmitter();
 
-  constructor(  ) {
-  
-  }
+  @Input() isBanner: boolean = false;
 
-  ngOnInit() {
-  }
+  constructor() { }
+
+  ngOnInit() { }
 
   ngOnChanges(changes: any) {
     if (changes["data"] && (changes["data"].previousValue !== changes["data"].currentValue)) {
@@ -38,6 +47,7 @@ export class ProductsCarousalComponent implements OnInit {
     }
   }
 
-
-
+  openDialog(sku) {
+    this.updates.emit(sku);
+  }
 }
