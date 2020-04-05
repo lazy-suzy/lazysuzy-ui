@@ -1,12 +1,12 @@
-<div class="flex flex-wrap best-sellers">
-  <div class="w-10-ns best-sellers-heading">
+<div *ngIf="!isHandset" class="row best-sellers">
+  <div class="col-md-1 best-sellers-heading">
     <h2 class="title-best-sellers">best sellers</h2>
     <button type="button" class="btn btn-sm btn-dark" (click)="seeAll()">
       see all
     </button>
   </div>
 
-  <div class="w-90">
+  <div class="col-md-11">
     <div *ngIf="!bestSellers">
       <img
         src="../../../../assets/images/three-dots.svg"
@@ -57,8 +57,6 @@
 </div>
 
 <div *ngIf="isHandset" class="banner">
-  <app-products-carousal
-    [data]="bestSellers"
-    (updates)="handleEvtProductCarousal($event)"
-  ></app-products-carousal>
+  <app-products-carousal [data]="bestSellers" (updates)="handleEvtProductCarousal($event)"></app-products-carousal>
 </div>
+

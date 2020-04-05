@@ -1,64 +1,41 @@
-<div class="flex flex-wrap new-arrivals">
-  <div class="w-10-ns new-arrivals-heading">
+<div *ngIf="!isHandset" class="row new-arrivals">
+  <div class="col-md-1 new-arrivals-heading">
     <h2 class="title-new-arrivals">new arrivals</h2>
     <button type="button" class="btn btn-sm btn-dark" (click)="seeAll()">
       see all
     </button>
   </div>
 
-  <div class="w-90-ns">
+  <div class="col-md-11">
     <div *ngIf="!newProducts">
-      <img
-        src="../../../../assets/images/three-dots.svg"
-        width="60"
-        height="46"
-        alt=""
-      />
+      <img src="../../../../assets/images/three-dots.svg" width="60" height="46" alt="" />
     </div>
     <div *ngIf="newProducts">
-      <p-carousel
-        *ngIf="!isHandset"
-        class="new-arrivals-slider"
-        [value]="newProducts"
-        [numVisible]="4"
-        [numScroll]="1"
-        [responsiveOptions]="responsiveOptions"
-      >
+      <p-carousel class="new-arrivals-slider" [value]="newProducts" [numVisible]="4" [numScroll]="1"
+        [responsiveOptions]="responsiveOptions">
         <ng-template let-data pTemplate="item">
           <div class="product">
             <a (click)="openDialog(data.sku)">
-              <img
-                class="product_image"
-                src="{{ data.main_image }}"
-                alt="Owl Image"
-              />
+              <img class="product_image" src="{{ data.main_image }}" alt="Owl Image" />
             </a>
             <div class="product_detail">
               <span class="product_brand">{{ data.site }}</span>
               <br />
               <span class="product_name">{{ data.name }}</span>
               <br />
-              <span
-                *ngIf="data.is_price == data.was_price"
-                class="current-price"
-                >${{ data.is_price }}</span
-              >
-              <span
-                *ngIf="!(data.is_price == data.was_price)"
-                class="current-price"
-                >${{ data.is_price }} &nbsp;
-                <s class="old-price"> ${{ data.was_price }}</s></span
-              >
+              <span *ngIf="data.is_price == data.was_price" class="current-price">${{ data.is_price }}</span>
+              <span *ngIf="!(data.is_price == data.was_price)" class="current-price">${{ data.is_price }} &nbsp;
+                <s class="old-price"> ${{ data.was_price }}</s></span>
             </div>
           </div>
         </ng-template>
       </p-carousel>
-      <div *ngIf="isHandset" class="banner">
-        <app-products-carousal
-          [data]="newProducts"
-          (updates)="handleEvtProductCarousal($event)"
-        ></app-products-carousal>
-      </div>
     </div>
   </div>
+</div>
+
+<div *ngIf="isHandset" class="banner">
+
+  <app-products-carousal [data]="newProducts" (updates)="handleEvtProductCarousal($event)"></app-products-carousal>
+
 </div>
