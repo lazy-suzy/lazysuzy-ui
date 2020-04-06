@@ -6,7 +6,7 @@
       [alt]="product.name"
     />
 
-    <div *ngIf="product.wishlisted; else elseBlock">
+    <!-- <div *ngIf="product.wishlisted; else elseBlock">
       <div class="tile-icon wishlist-icon">
         <mat-icon (click)="wishlistProduct(product.product_sku, false, $event)"
           >favorite</mat-icon
@@ -19,7 +19,7 @@
           >favorite_border</mat-icon
         >
       </div>
-    </ng-template>
+    </ng-template> -->
   </div>
   <div class="prod-info" *ngIf="!isHandset">
     <span class="site">

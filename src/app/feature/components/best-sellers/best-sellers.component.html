@@ -1,4 +1,4 @@
-<div *ngIf="!isHandset" class="row best-sellers">
+<div class="row best-sellers">
   <div class="col-md-1 best-sellers-heading">
     <h2 class="title-best-sellers">best sellers</h2>
     <button type="button" class="btn btn-sm btn-dark" (click)="seeAll()">
@@ -17,6 +17,7 @@
     </div>
     <div *ngIf="bestSellers">
       <p-carousel
+        *ngIf="!isHandset"
         class="top-deal-slider"
         [value]="bestSellers"
         [numVisible]="4"
@@ -52,19 +53,12 @@
           </div>
         </ng-template>
       </p-carousel>
+      <div *ngIf="isHandset">
+        <app-products-carousal
+          [data]="bestSellers"
+          (updates)="handleEvtProductCarousal($event)"
+        ></app-products-carousal>
+      </div>
     </div>
   </div>
-</div>
-
-<div *ngIf="isHandset" class="banner">
-  
-  <div class="" *ngIf="!showLoader">
-    <div class="heading-mobile">best sellers</div>
-    <button type="button" class="button-mobile" (click)="seeAll()">
-      see all
-    </button>
-  </div>
-  <app-loader *ngIf="showLoader"></app-loader>
-  <app-products-carousal *ngIf="!showLoader" [data]="bestSellers" (updates)="handleEvtProductCarousal($event)"></app-products-carousal>
-
 </div>

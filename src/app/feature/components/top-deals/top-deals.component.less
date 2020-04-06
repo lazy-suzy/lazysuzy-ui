@@ -77,7 +77,8 @@
     background: @button-backgroud;
     border: none;
     color: @button-color;
-    float: right;
+    padding: 0 10px;
+    vertical-align: -webkit-baseline-middle;
   }
 
   .product {
@@ -104,15 +105,6 @@
   .top-deals-heading {
     padding: 0 15px;
   }
-  .btn {
-    font-size: 22px;
-    padding-right: 5%;
-  }
-}
-
-.banner {
-  width: 85%;
-  margin: 40px 40px 40px 40px;
 }
 
 .bannerCarousel {
@@ -130,19 +122,15 @@
 }
 
 :host {
-  ::ng-deep 
-  
-  .ui-carousel-prev{
+  ::ng-deep .ui-carousel-prev {
     display: none !important;
-    }
+  }
 }
 
 :host {
-  ::ng-deep 
-  
-  .ui-carousel-next{
+  ::ng-deep .ui-carousel-next {
     display: none !important;
-    }
+  }
 }
 
 .heading-mobile {
@@ -152,4 +140,3 @@
 .button-mobile {
   display: block;
 }
-

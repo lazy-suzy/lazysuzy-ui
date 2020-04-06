@@ -3,10 +3,9 @@ import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 @Component({
   selector: 'app-products-carousal',
   templateUrl: './products-carousal.component.html',
-  styleUrls: ['./products-carousal.component.less'],
+  styleUrls: ['./products-carousal.component.less']
 })
 export class ProductsCarousalComponent implements OnInit {
-
   carousalOptions = {
     margin: 10,
     loop: true,
@@ -14,7 +13,8 @@ export class ProductsCarousalComponent implements OnInit {
     dots: true,
     pagination: true,
     // autoWidth: true,
-    stagePadding: 100
+    stagePadding: 100,
+    singleItem: true
   };
 
   bannerCarousalOptions = {
@@ -29,7 +29,7 @@ export class ProductsCarousalComponent implements OnInit {
     autoplaySpeed: 1000,
     loop: true,
     nav: true,
-    navText: false,
+    navText: false
   };
 
   images = [];
@@ -38,13 +38,16 @@ export class ProductsCarousalComponent implements OnInit {
 
   @Input() isBanner: boolean = false;
 
-  constructor() { }
+  constructor() {}
 
-  ngOnInit() { }
+  ngOnInit() {}
 
   ngOnChanges(changes: any) {
-    if (changes["data"] && (changes["data"].previousValue !== changes["data"].currentValue)) {
-      this.data = changes["data"].currentValue;
+    if (
+      changes['data'] &&
+      changes['data'].previousValue !== changes['data'].currentValue
+    ) {
+      this.data = changes['data'].currentValue;
     }
   }
 

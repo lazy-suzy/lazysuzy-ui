@@ -1,45 +1,64 @@
-<div *ngIf="!isHandset" class="row top-deals">
-        <div class="col-md-1 top-deals-heading">
-            <h2 class="title-top-deals">top deals</h2>
-            <button type="button" class="btn btn-sm btn-dark" (click)="seeAll()">see all</button>
-        </div>
-    
-        <div class="col-md-11">
-            <div *ngIf="!topDeals">
-                <img src="../../../../assets/images/three-dots.svg" width="60" height="46" alt="">
-            </div>
-            <div *ngIf="topDeals">
-                <p-carousel class="top-deal-slider" [value]="topDeals" [numVisible]="4" [numScroll]="1"
-                    [responsiveOptions]="responsiveOptions">
-                    <ng-template let-data pTemplate="item">
-                        <div class="product">
-                            <a (click)="openDialog(data.sku)">
-                                <img class="product_image" src={{data.main_image}} alt="Owl Image">
-                            </a>
-                            <div class="product_detail">
-                                <span class="product_brand">{{data.site}}</span>
-                                <br>
-                                <span class="product_name">{{data.name}}</span>
-                                <br>
-                                <span *ngIf="data.is_price == data.was_price" class="current-price">${{data.is_price}}</span>
-                                <span *ngIf="!(data.is_price == data.was_price)" class="current-price">${{data.is_price}} &nbsp; <s class="old-price">
-                                        ${{data.was_price}}</s></span>
-                            </div>
-                        </div>
-                    </ng-template>
-                </p-carousel>
-            </div>
-        </div>
-    </div>
+<div class="row top-deals">
+  <div class="col-md-1 top-deals-heading">
+    <h2 class="title-top-deals">top deals</h2>
+    <button type="button" class="btn btn-sm btn-dark" (click)="seeAll()">
+      see all
+    </button>
+  </div>
 
-    <div *ngIf="isHandset" class="banner">
-        <div class="" *ngIf="!showLoader">
-            <div class="heading-mobile">top deals</div>
-            <button type="button" class="button-mobile" (click)="seeAll()">
-              see all
-            </button>
-        </div>
-        <app-loader *ngIf="showLoader"></app-loader>
-        <app-products-carousal *ngIf="!showLoader" [data]="topDeals" (updates)="handleEvtProductCarousal($event)"></app-products-carousal>
+  <div class="col-md-11">
+    <div *ngIf="!topDeals">
+      <img
+        src="../../../../assets/images/three-dots.svg"
+        width="60"
+        height="46"
+        alt=""
+      />
     </div>
-      
+    <div *ngIf="topDeals">
+      <p-carousel
+        *ngIf="!isHandset"
+        class="top-deal-slider"
+        [value]="topDeals"
+        [numVisible]="4"
+        [numScroll]="1"
+        [responsiveOptions]="responsiveOptions"
+      >
+        <ng-template let-data pTemplate="item">
+          <div class="product">
+            <a (click)="openDialog(data.sku)">
+              <img
+                class="product_image"
+                src="{{ data.main_image }}"
+                alt="Owl Image"
+              />
+            </a>
+            <div class="product_detail">
+              <span class="product_brand">{{ data.site }}</span>
+              <br />
+              <span class="product_name">{{ data.name }}</span>
+              <br />
+              <span
+                *ngIf="data.is_price == data.was_price"
+                class="current-price"
+                >${{ data.is_price }}</span
+              >
+              <span
+                *ngIf="!(data.is_price == data.was_price)"
+                class="current-price"
+                >${{ data.is_price }} &nbsp;
+                <s class="old-price"> ${{ data.was_price }}</s></span
+              >
+            </div>
+          </div>
+        </ng-template>
+      </p-carousel>
+      <div *ngIf="isHandset">
+        <app-products-carousal
+          [data]="topDeals"
+          (updates)="handleEvtProductCarousal($event)"
+        ></app-products-carousal>
+      </div>
+    </div>
+  </div>
+</div>
