@@ -13,6 +13,7 @@ export class ProductsCarousalComponent implements OnInit {
     items: 1,
     dots: true,
     pagination: true,
+    // autoWidth: true,
     stagePadding: 100
   };
 

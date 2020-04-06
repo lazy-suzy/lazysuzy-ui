@@ -12,6 +12,7 @@ export class TopDealsComponent implements OnInit {
   topDeals: any;
   responsiveOptions: any;
   @Input() isHandset: boolean = false;
+  showLoader = false;
 
   constructor(
     private apiService: ApiService,
@@ -43,8 +44,10 @@ export class TopDealsComponent implements OnInit {
   }
 
   getTopDeals(): void {
+    this.showLoader = true;
     this.apiService.getTopDeals().subscribe(res => {
       this.topDeals = res.products;
+      this.showLoader = false;
     });
   }
 

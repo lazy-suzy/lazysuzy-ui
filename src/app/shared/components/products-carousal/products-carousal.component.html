@@ -33,7 +33,7 @@
   <owl-carousel
     [options]="bannerCarousalOptions"
     *ngIf="data?.length"
-    [carouselClasses]="['owl-carousel']"
+    [carouselClasses]="['owl-carousel', 'owl-theme']"
   >
     <div class="item" *ngFor="let product of data; let i = index">
       <a href="{{ product.link }}">
