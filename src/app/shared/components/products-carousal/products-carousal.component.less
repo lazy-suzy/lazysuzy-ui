@@ -1,9 +1,13 @@
+::ng-deep .owl-theme .owl-dots {
+  top: -30px;
+  position: relative;
+}
 .item {
   transition: 0.4s ease all;
   margin: 0 20px;
   transform: scale(0.8);
 
-  &:hover {
+  &.carousel:hover {
     &::before {
       opacity: 1;
     }
@@ -28,6 +32,9 @@
   .item {
     margin: 0;
     transform: scale(1);
+  }
+  ::ng-deep .owl-theme .owl-dots {
+    top: -15px;
   }
 }
 .active .item {
@@ -54,6 +61,7 @@
     top: 0;
     right: 0;
     color: #b76e79;
+    padding: 10px;
   }
 }
 

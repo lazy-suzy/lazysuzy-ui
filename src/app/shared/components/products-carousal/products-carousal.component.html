@@ -4,28 +4,28 @@
     *ngIf="data?.length"
     [carouselClasses]="['owl-carousel']"
   >
-    <div class="item" *ngFor="let product of data; let i = index">
-      <a [href]="['/product/' + product.sku]">
-        <img src="{{ product.main_image }}" alt="" />
-        <div class="inner">
-          <mat-icon class="launch-icon" aria-hidden="false" aria-label="toggle">
+    <div class="item carousel" *ngFor="let product of data; let i = index">
+      <img src="{{ product.main_image }}" alt="" />
+      <div class="inner">
+        <a class="launch-icon" [href]="['/product/' + product.sku]">
+          <mat-icon aria-hidden="false" aria-label="toggle">
             launch
           </mat-icon>
-          <div class="product_name">{{ product.name }}</div>
-          <div class="product_brand">{{ product.site }}</div>
-          <span
-            *ngIf="product.is_price == product.was_price"
-            class="current-price"
-            >${{ product.is_price }}</span
-          >
-          <span
-            *ngIf="!(product.is_price == product.was_price)"
-            class="current-price"
-            >${{ product.is_price }} &nbsp;
-            <s class="old-price"> ${{ product.was_price }}</s></span
-          >
-        </div>
-      </a>
+        </a>
+        <div class="product_name">{{ product.name }}</div>
+        <div class="product_brand">{{ product.site }}</div>
+        <span
+          *ngIf="product.is_price == product.was_price"
+          class="current-price"
+          >${{ product.is_price }}</span
+        >
+        <span
+          *ngIf="!(product.is_price == product.was_price)"
+          class="current-price"
+          >${{ product.is_price }} &nbsp;
+          <s class="old-price"> ${{ product.was_price }}</s></span
+        >
+      </div>
     </div>
   </owl-carousel>
 </div>
