@@ -57,6 +57,14 @@
 </div>
 
 <div *ngIf="isHandset" class="banner">
-  <app-products-carousal [data]="bestSellers" (updates)="handleEvtProductCarousal($event)"></app-products-carousal>
-</div>
+  
+  <div class="" *ngIf="!showLoader">
+    <div class="heading-mobile">best sellers</div>
+    <button type="button" class="button-mobile" (click)="seeAll()">
+      see all
+    </button>
+  </div>
+  <app-loader *ngIf="showLoader"></app-loader>
+  <app-products-carousal *ngIf="!showLoader" [data]="bestSellers" (updates)="handleEvtProductCarousal($event)"></app-products-carousal>
 
+</div>

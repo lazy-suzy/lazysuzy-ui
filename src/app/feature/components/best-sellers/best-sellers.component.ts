@@ -12,6 +12,7 @@ export class BestSellersComponent implements OnInit {
   bestSellers: any;
   responsiveOptions: any;
   @Input() isHandset: boolean = false;
+  showLoader = false;
 
   constructor(
     private apiService: ApiService,
@@ -42,8 +43,10 @@ export class BestSellersComponent implements OnInit {
     this.getBestSellers();
   }
   getBestSellers(): void {
+    this.showLoader = true;
     this.apiService.getBestSellers().subscribe(res => {
       this.bestSellers = res.products;
+      this.showLoader = false;
     });
   }
 

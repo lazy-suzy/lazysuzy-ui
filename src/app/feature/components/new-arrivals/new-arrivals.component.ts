@@ -17,6 +17,7 @@ export class NewArrivalsComponent implements OnInit {
   myCarouselImages = [1, 2, 3, 4, 5, 6].map((i) => `https://picsum.photos/640/480?image=${i}`);
   mySlideOptions = { items: 1, dots: true, nav: false };
   myCarouselOptions = { items: 3, dots: true, nav: true };
+  showLoader = false;
 
   images = [
     "https://s3-us-west-2.amazonaws.com/s.cdpn.io/43033/slider_bags.jpg",
@@ -58,9 +59,11 @@ export class NewArrivalsComponent implements OnInit {
     this.getNewArrivals();
   }
   getNewArrivals(): void {
+    this.showLoader = true;
     this.apiService.getNewArrivals().subscribe(res => {
       this.newArrivals = res;
       this.newProducts = this.newArrivals.products;
+      this.showLoader = false;
     });
   }
 
