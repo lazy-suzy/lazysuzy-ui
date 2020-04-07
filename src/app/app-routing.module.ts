@@ -20,6 +20,13 @@ import {
 
 const routes: Routes = [
   { path: '', component: LandingComponent, pathMatch: 'full' },
+
+  {
+    path: 'board',
+    loadChildren: "./modules/board/board.module#BoardModule",
+    pathMatch: 'full'
+  },
+
   { path: 'search', component: SearchComponent },
   { path: 'aboutus', component: AboutusComponent },
   { path: 'termsofservice', component: TermsOfServiceComponent },
