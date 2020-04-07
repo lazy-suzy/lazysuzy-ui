@@ -38,6 +38,15 @@
               <br />
               <span class="product_name">{{ data.name }}</span>
               <br />
+              
+              <div class="discount-percentage">
+                <span
+                  *ngIf="data.percent_discount > 0"
+                  [ngClass]="[ data.percent_discount > 30 ? 'discount-gold-top-deals' : 'discount-red-top-deals']"
+                >
+                  {{ data.percent_discount | number: '1.0-0' }}% off
+                </span>
+              </div>
               <span
                 *ngIf="data.is_price == data.was_price"
                 class="current-price"
@@ -56,6 +65,7 @@
       <div *ngIf="isHandset">
         <app-products-carousal
           [data]="topDeals"
+          [nameOfCarousal]="'top-deals'"
           (updates)="handleEvtProductCarousal($event)"
         ></app-products-carousal>
       </div>

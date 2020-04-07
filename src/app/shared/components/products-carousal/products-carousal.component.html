@@ -26,6 +26,15 @@
           <s class="old-price"> ${{ product.was_price }}</s></span
         >
       </div>
+      <div class="discount-percentage" *ngIf="nameOfCarousal=='top-deals'">
+        <span
+          *ngIf="product.percent_discount > 0"
+          [ngClass]="[ product.percent_discount > 30 ? 'discount-gold-top-deals' : 'discount-red-top-deals']"
+        >
+          {{ product.percent_discount | number: '1.0-0' }}% off
+        </span>
+      </div>
+      
     </div>
   </owl-carousel>
 </div>
