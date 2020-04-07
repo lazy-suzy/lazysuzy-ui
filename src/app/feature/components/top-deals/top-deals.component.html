@@ -1,12 +1,12 @@
-<div class="row top-deals">
-  <div class="col-md-1 top-deals-heading">
+<div class="flex flex-wrap top-deals">
+  <div class="{{ isHandset ? 'w-100' : 'w-10-ns' }} top-deals-heading">
     <h2 class="title-top-deals">top deals</h2>
     <button type="button" class="btn btn-sm btn-dark" (click)="seeAll()">
       see all
     </button>
   </div>
 
-  <div class="col-md-11">
+  <div class="{{ isHandset ? 'w-100' : 'w-90-ns' }}">
     <div *ngIf="!topDeals">
       <img
         src="../../../../assets/images/three-dots.svg"

@@ -1,12 +1,12 @@
-<div class="row new-arrivals">
-  <div class="col-md-1 new-arrivals-heading">
+<div class="flex flex-wrap new-arrivals">
+  <div class="{{ isHandset ? 'w-100' : 'w-10-ns' }} new-arrivals-heading">
     <h2 class="title-new-arrivals">new arrivals</h2>
     <button type="button" class="btn btn-sm btn-dark" (click)="seeAll()">
       see all
     </button>
   </div>
 
-  <div class="col-md-11">
+  <div class="{{ isHandset ? 'w-100' : 'w-90-ns' }}">
     <div *ngIf="!newProducts">
       <img
         src="../../../../assets/images/three-dots.svg"
