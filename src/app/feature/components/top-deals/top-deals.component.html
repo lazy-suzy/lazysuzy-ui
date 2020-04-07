@@ -42,7 +42,7 @@
               <div class="discount-percentage">
                 <span
                   *ngIf="data.percent_discount > 0"
-                  [ngClass]="[ data.percent_discount > 30 ? 'discount-gold-top-deals' : 'discount-red-top-deals']"
+                  [ngClass]="[ data.percent_discount > 30 ? 'discount-red-top-deals' : 'discount-gold-top-deals']"
                 >
                   {{ data.percent_discount | number: '1.0-0' }}% off
                 </span>
