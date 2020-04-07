@@ -37,6 +37,7 @@ export class ProductsCarousalComponent implements OnInit {
   @Output() updates: EventEmitter<any> = new EventEmitter();
 
   @Input() isBanner: boolean = false;
+  @Input() nameOfCarousal: string = '';
 
   constructor() {}
 
