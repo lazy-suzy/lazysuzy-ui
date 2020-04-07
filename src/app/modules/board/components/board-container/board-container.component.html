@@ -1,4 +1,6 @@
-<body class="gray-bg">
+<app-loader *ngIf="showLoader"></app-loader>
+
+<body class="gray-bg" *ngIf="!showLoader">
     <div>
         <div class="header container-fluid">
             <div class="row">

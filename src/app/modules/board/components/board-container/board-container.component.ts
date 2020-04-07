@@ -9,15 +9,20 @@ import * as $ from 'jquery';
 })
 export class BoardContainerComponent implements OnInit {
 
+  showLoader: boolean = false;
+
   constructor(public boardService: BoardService) { }
 
   ngOnInit(): void {
-    
+
     //Jquery is available to be used as $
     console.log('Jquery is available' + $);
 
     //Sample Http Call
-    this.boardService.getSomeDataSample();
+    this.showLoader = true;
+    this.boardService.getSomeDataSample().subscribe(s => {
+      this.showLoader = false;
+    });
   }
 
 }
