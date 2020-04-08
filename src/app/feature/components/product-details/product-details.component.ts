@@ -15,7 +15,7 @@ import { Lightbox } from '@ngx-gallery/lightbox';
 @Component({
   selector: 'app-product-details',
   templateUrl: './product-details.component.html',
-  styleUrls: ['./product-details.component.less']
+  styleUrls: ['./product-details.component.less'],
 })
 export class ProductDetailsComponent implements OnInit {
   @ViewChild('topContainer', { static: false }) topContainer: ElementRef;
@@ -28,13 +28,17 @@ export class ProductDetailsComponent implements OnInit {
   variationsExist: boolean;
   galleryId = 'myLightbox';
   items: GalleryItem[];
-  isProductFetching: boolean = false;
-  showDetails: boolean = false;
-  spinner: string = 'assets/images/spinner.gif';
+  isProductFetching = false;
+  showDetails = false;
+  spinner = 'assets/images/spinner.gif';
   description: any;
   features: any;
   topHeight: Object = { 'max-height': '0' };
-
+  selectedFeature: number;
+  selectedAttribute: string;
+  selections = {};
+  variations = [];
+  productPrice: string;
   constructor(
     @Inject(MAT_DIALOG_DATA) public data: any,
     private apiService: ApiService,
@@ -68,6 +72,8 @@ export class ProductDetailsComponent implements OnInit {
             variation => variation.swatch_image !== null
           )
         );
+        this.productPrice = this.product.is_price;
+        this.variations = this.product.variations;
         this.isProductFetching = false;
         const _self = this;
         setTimeout(function() {
@@ -120,5 +126,68 @@ export class ProductDetailsComponent implements OnInit {
     const topHeight =
       this.topContainer && (this.topContainer.nativeElement.offsetHeight || 0);
     this.topHeight = { 'max-height': `calc(100vh - ${topHeight + 12}px)` };
+  }
+
+  selectedOption(index, option, type) {
+    this.selectedFeature = index;
+    this.selectedAttribute = option;
+    this.selections[type] = option;
+    this.updateSwatches();
+  }
+
+  onCheckChange(event, option, type) {
+    if (event.target.checked) {
+      if (this.selections[type]) {
+        this.selections[type].push(option);
+      } else {
+        this.selections[type] = [option];
+      }
+    } else {
+      const optionsArr = this.selections[type].filter(
+        (value: string) => value !== option
+      );
+      this.selections[type] = optionsArr;
+      if(this.selections[type].length < 1) {
+        delete this.selections[type];
+      }
+    }
+    this.updateSwatches();
+  }
+
+  updateSwatches() {
+    var _self = this;
+    const filteredSwatches = this.product.variations.filter( function(variation) {
+      if (variation.swatch_image !== null) {
+        return _self.checkSwatchSelection(variation, _self);
+      }
+    });
+
+    const filteredVariations = this.product.variations.filter( function(variation) {
+      return _self.checkSwatchSelection(variation, _self);
+    });
+    if (filteredVariations.length === 1) {
+      this.productPrice = filteredVariations[0].price;
+      const image = new ImageItem({ src: filteredVariations[0].image });
+      this.items.splice(0, 1, image);
+    } else {
+      this.productPrice = this.product.is_price;
+      this.items = this.product.on_server_images.map(
+        item => new ImageItem({ src: item })
+      );
+    }
+    this.variations = filteredSwatches;
+  }
+
+  checkSwatchSelection(variation, _self) {
+    let isValidVariation = true;
+    for (const key in _self.selections) {
+      if (variation.features[key] === _self.selections[key] || _self.selections[key].indexOf(variation.features[key]) > -1) {
+        isValidVariation = true;
+      } else {
+        isValidVariation = false;
+        break;
+      }
+    }
+    return isValidVariation;
   }
 }

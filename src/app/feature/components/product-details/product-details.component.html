@@ -36,7 +36,7 @@
         <h4>{{ product.name }}</h4>
 
         <div class="price-container">
-          <span class="product-price mr3">${{ product.is_price }}</span>
+          <span class="product-price mr3">${{ productPrice }}</span>
 
           <span
             class="strike {{
@@ -59,7 +59,7 @@
           <span class="title">More Options</span>
           <div class="variation-options">
             <div
-              *ngFor="let variation of product.variations; let i = index"
+              *ngFor="let variation of variations; let i = index"
               class="variation-img-box"
               (click)="selectedVariation(variation, i, gallery)"
               [class.active]="selectedIndex === i"
@@ -75,10 +75,32 @@
               </a>
             </div>
           </div>
+          <div class="variant-features-options-container">
+            <div class="variant-feature-content" *ngFor="let item of product.selections | keyvalue">
+              <span>{{item.key | titlecase}}</span>
+              <div class="variant-feature-options" *ngIf="item.value.select_type === 'single_select'; else multiSelect">
+                <div class="variant-feature pointer" (click)="selectedOption(i,option, item.key)" [class.active]="selectedFeature === i && selectedAttribute === option" *ngFor="let option of item.value.options; let i = index;">
+                  {{option}} {{i}}
+                </div>
+              </div>
+              <ng-template #multiSelect>
+                <div>
+                  <label
+                    class="variant-feature-checkbox"
+                    *ngFor="let option of item.value.options"
+                    (change)="onCheckChange($event, option, item.key)"
+                  >
+                    <input type="checkbox" />
+                    {{option}}
+                  </label>
+                </div>
+              </ng-template>
+            </div>
+          </div>
         </div>
         <hr class="modal-hr" />
       </div>
-
+      
       <div
         class="product-description-container {{
           variationsExist ? 'show' : 'hide'
@@ -96,7 +118,6 @@
             <div [innerHTML]="features"></div>
           </div>
         </div>
-
         <div *ngIf="dimensionExist" class="mb2">
           <hr class="modal-hr" />
           <span class="title">Dimension</span>
