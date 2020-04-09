@@ -54,10 +54,10 @@
             </a>
           </button>
         </div>
-        <hr class="modal-hr" *ngIf="variationsExist" />
-        <div class="variations-container" *ngIf="variationsExist">
+        <hr class="modal-hr" *ngIf="variations.length > 0" />
+        <div class="variations-container" *ngIf="variations.length > 0">
           <span class="title">More Options</span>
-          <div class="variation-options">
+          <div class="variation-options" *ngIf="isSwatchExist">
             <div
               *ngFor="let variation of variations; let i = index"
               class="variation-img-box"
@@ -75,32 +75,61 @@
               </a>
             </div>
           </div>
-          <div class="variant-features-options-container">
-            <div class="variant-feature-content" *ngFor="let item of product.selections | keyvalue">
-              <span>{{item.key | titlecase}}</span>
-              <div class="variant-feature-options" *ngIf="item.value.select_type === 'single_select'; else multiSelect">
-                <div class="variant-feature pointer" (click)="selectedOption(i,option, item.key)" [class.active]="selectedFeature === i && selectedAttribute === option" *ngFor="let option of item.value.options; let i = index;">
-                  {{option}} {{i}}
+          <div (click)="clearVariations()">Clear</div>
+          <div class="flex flex-wrap variant-features-options-container">
+            <div
+              class="variant-feature-content"
+              *ngFor="let item of product.selections | keyvalue"
+            >
+              <div
+                class="variant-feature-options"
+                *ngIf="item.value.select_type === 'multi_select'"
+              >
+                <div
+                  class="feature-title pointer flex flex-wrap justify-between"
+                >
+                  <span>{{ item.key | titlecase }}</span>
+                  <span class="arrow-icon"
+                    ><mat-icon>arrow_drop_down</mat-icon></span
+                  >
+                </div>
+                <div class="variant-feature-checkbox">
+                  <div *ngFor="let option of item.value.options">
+                    <mat-checkbox
+                      (change)="onCheckChange($event, option, item.key)"
+                    >
+                      {{ option }}
+                    </mat-checkbox>
+                  </div>
                 </div>
               </div>
-              <ng-template #multiSelect>
-                <div>
-                  <label
-                    class="variant-feature-checkbox"
-                    *ngFor="let option of item.value.options"
-                    (change)="onCheckChange($event, option, item.key)"
-                  >
-                    <input type="checkbox" />
-                    {{option}}
-                  </label>
+            </div>
+            <div
+              class="variant-feature-content"
+              *ngFor="let item of product.selections | keyvalue"
+            >
+              <div
+                class=" variant-feature-options"
+                *ngIf="item.value.select_type === 'single_select'"
+              >
+                <span>{{ item.key | titlecase }}</span>
+                <div
+                  class="variant-feature pointer"
+                  (click)="selectedOption(i, option, item.key)"
+                  [class.active]="
+                    selectedFeature === i && selectedAttribute === option
+                  "
+                  *ngFor="let option of item.value.options; let i = index"
+                >
+                  {{ option }} {{ i }}
                 </div>
-              </ng-template>
+              </div>
             </div>
           </div>
         </div>
         <hr class="modal-hr" />
       </div>
-      
+
       <div
         class="product-description-container {{
           variationsExist ? 'show' : 'hide'

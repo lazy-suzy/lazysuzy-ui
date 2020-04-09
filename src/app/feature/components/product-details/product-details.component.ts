@@ -15,7 +15,7 @@ import { Lightbox } from '@ngx-gallery/lightbox';
 @Component({
   selector: 'app-product-details',
   templateUrl: './product-details.component.html',
-  styleUrls: ['./product-details.component.less'],
+  styleUrls: ['./product-details.component.less']
 })
 export class ProductDetailsComponent implements OnInit {
   @ViewChild('topContainer', { static: false }) topContainer: ElementRef;
@@ -25,7 +25,7 @@ export class ProductDetailsComponent implements OnInit {
   dimensionExist: boolean;
   featuresExist: boolean;
   descriptionExist: boolean;
-  variationsExist: boolean;
+  isSwatchExist: boolean;
   galleryId = 'myLightbox';
   items: GalleryItem[];
   isProductFetching = false;
@@ -67,7 +67,7 @@ export class ProductDetailsComponent implements OnInit {
         this.descriptionExist = this.utils.checkDataLength(
           this.product.description
         );
-        this.variationsExist = this.utils.checkDataLength(
+        this.isSwatchExist = this.utils.checkDataLength(
           this.product.variations.filter(
             variation => variation.swatch_image !== null
           )
@@ -147,22 +147,31 @@ export class ProductDetailsComponent implements OnInit {
         (value: string) => value !== option
       );
       this.selections[type] = optionsArr;
-      if(this.selections[type].length < 1) {
+      if (this.selections[type].length < 1) {
         delete this.selections[type];
       }
     }
     this.updateSwatches();
   }
 
+  clearVariations() {
+    this.selections = {};
+    this.updateSwatches();
+  }
+
   updateSwatches() {
     var _self = this;
-    const filteredSwatches = this.product.variations.filter( function(variation) {
+    const filteredSwatches = this.product.variations.filter(function(
+      variation
+    ) {
       if (variation.swatch_image !== null) {
         return _self.checkSwatchSelection(variation, _self);
       }
     });
 
-    const filteredVariations = this.product.variations.filter( function(variation) {
+    const filteredVariations = this.product.variations.filter(function(
+      variation
+    ) {
       return _self.checkSwatchSelection(variation, _self);
     });
     if (filteredVariations.length === 1) {
@@ -181,7 +190,10 @@ export class ProductDetailsComponent implements OnInit {
   checkSwatchSelection(variation, _self) {
     let isValidVariation = true;
     for (const key in _self.selections) {
-      if (variation.features[key] === _self.selections[key] || _self.selections[key].indexOf(variation.features[key]) > -1) {
+      if (
+        variation.features[key] === _self.selections[key] ||
+        _self.selections[key].indexOf(variation.features[key]) > -1
+      ) {
         isValidVariation = true;
       } else {
         isValidVariation = false;

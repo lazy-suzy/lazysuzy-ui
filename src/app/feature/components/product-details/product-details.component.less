@@ -78,10 +78,8 @@
     }
 
     .variations-container {
-      max-height: 175px;
-      overflow-y: auto;
       padding-bottom: 0.5rem;
-      
+
       &::-webkit-scrollbar {
         width: 10px;
       }
@@ -103,6 +101,8 @@
       .variation-options {
         display: flex;
         flex-wrap: wrap;
+        max-height: 175px;
+        overflow-y: auto;
         .active {
           -webkit-box-shadow: 0px 0px 1px 2px #ffcc00;
           -moz-box-shadow: 0px 0px 1px 2px #ffcc00;
@@ -143,7 +143,18 @@
       }
       .variant-features-options-container {
         .variant-feature-options {
-          display: flex;
+          .feature-title {
+            border: 1px solid #0c1c31;
+            background: #f7f6f6;
+            border-radius: 5px;
+            font-size: 18px;
+            margin-right: 10px;
+            min-width: 180px;
+            .arrow-icon {
+              background-color: #606060;
+              color: #ffffff;
+            }
+          }
           .variant-feature {
             padding: 5px;
             background-color: #f7f6f6;
@@ -160,13 +171,24 @@
             background-color: #606060;
             color: #ffffff;
           }
-        }
-        .variant-feature-checkbox {
-          display: block;
+          .variant-feature-checkbox {
+            display: none;
+            position: absolute;
+            background-color: #fff;
+            padding: 5px;
+            border: 1px solid #f2f4f3;
+            max-height: 410px;
+            overflow: auto;
+          }
+          &:hover {
+            .variant-feature-checkbox {
+              display: block;
+            }
+          }
         }
       }
     }
-    
+
     .product-description-container {
       overflow-y: auto;
       transition: all 0.3s 0s ease-in-out;
@@ -208,6 +230,3 @@
   border: none;
   z-index: 99;
 }
-
-
-
