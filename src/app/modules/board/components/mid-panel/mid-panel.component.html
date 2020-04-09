@@ -1,0 +1,45 @@
+<div class="left-tab-pane">
+  <div class="tab active components tab-0-pad">
+    <div class="flex-grid">
+      <div class="browse-header w-100">
+
+        <div *ngIf="selectedItem.value === 'Select'">
+
+          <app-select></app-select>
+
+        </div>
+
+        <div *ngIf="selectedItem.value === 'Browse'">
+
+          <app-browse (updatesFromBrowse)="handleUpdatesFromBrowse($event)" (addProduct)="handleAddProductToBoardUpdates($event)"></app-browse>
+
+        </div>
+
+        <div *ngIf="selectedItem.value === 'Add'">
+
+          <app-add></app-add>
+
+        </div>
+
+        <div *ngIf="selectedItem.value === 'Favorites'">
+
+          <app-favorites></app-favorites>
+
+        </div>
+
+        <div *ngIf="selectedItem.value === 'Text'">
+
+          <app-text></app-text>
+
+        </div>
+
+        <div *ngIf="selectedItem.value === 'Board'">
+
+          <app-board></app-board>
+
+        </div>
+
+      </div>
+    </div>
+  </div>
+</div>

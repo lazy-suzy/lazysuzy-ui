@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import * as fb from './fb.min.js';
 
 @Component({
   selector: 'app-canvas',
@@ -7,9 +8,14 @@ import { Component, OnInit } from '@angular/core';
 })
 export class CanvasComponent implements OnInit {
 
-  constructor() {}
+  constructor() { }
 
   ngOnInit(): void {
+    // console.log(fb);
+  }
+
+  addProductToBoard(product) {
+    console.log("Printing from canvas", product);
   }
 
 }

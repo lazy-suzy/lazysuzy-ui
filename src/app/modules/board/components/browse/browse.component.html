@@ -1,0 +1,184 @@
+<div class="browse-header">
+    <div class="item-search-bar">
+        <div class="input-group">
+            <input type="text" class="form-control" id="inlineFormInputGroupUsername" placeholder="Search">
+            <div class="input-group-append">
+                <div class="input-group-text icon">
+                    <i class="mdi mdi-magnify" aria-hidden="true"></i>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="browse-title">
+        <i class="mdi mdi-chevron-left" aria-hidden="true"></i>
+        <h5 class="title js-category-title">
+
+            Sofas
+        </h5>
+    </div>
+    <div class="browse-filter">
+        <!-- <div class="browse-filter-item" data-type="new">New</div>
+      <div class="browse-filter-item" data-type="sale">Sale</div>
+      <div class="browse-filter-item" data-type="top">Best Sellers</div> -->
+        <div class="icon filter-icon">
+            <i class="mdi mdi-filter" aria-hidden="true"></i>
+        </div>
+        <div class="clear-all d-none d-lg-block">Clear All</div>
+        <div class="filter-bar-container">
+            <div class="filter-bar js-filter-section" id="desktop-filter">
+                <div class="tabs">
+                    <ul class="nav flex-column">
+                        <li class="nav-item ">
+                            <a class="nav-link dropdown-toggle" href="#brand">brand</a>
+                        </li>
+                        <li class="nav-item ">
+                            <a class="nav-link dropdown-toggle" href="#price">price</a>
+                        </li>
+                        <li class="nav-item ">
+                            <a class="nav-link dropdown-toggle" href="#color">color</a>
+                        </li>
+                    </ul>
+                </div>
+                <div id="brand" class="tab-pane filter active" data-filter="brand">
+                    <div class="clear-filter">
+                        <label for="brand" class="mb-0">Clear</label>
+                    </div>
+                    <div>
+                        <ul class="item-list">
+                            <li class="filter-item" href="#"><label class="filter-label"><input type="checkbox"
+                                        value="cb2" belongsto="CB2"><span class="checkmark"></span><span
+                                        class="text">CB2</span></label></li>
+                            <li class="filter-item" href="#"><label class="filter-label"><input type="checkbox"
+                                        value="cab" belongsto="Crate &amp; Barrel"><span class="checkmark"></span><span
+                                        class="text">Crate &amp; Barrel</span></label></li>
+                            <li class="filter-item" href="#"><label class="filter-label"><input type="checkbox"
+                                        value="pier1" belongsto="Pier 1"><span class="checkmark"></span><span
+                                        class="text">Pier 1</span></label></li>
+                            <li class="filter-item" href="#"><label class="filter-label"><input type="checkbox"
+                                        value="westelm" belongsto="West Elm"><span class="checkmark"></span><span
+                                        class="text">West Elm</span></label></li>
+                            <li class="filter-item" href="#"><label class="filter-label"><input type="checkbox"
+                                        value="nw" belongsto="World Market"><span class="checkmark"></span><span
+                                        class="text">World Market</span></label></li>
+                        </ul>
+                    </div>
+                </div>
+                <div id="price" class="tab-pane filter " data-filter="price">
+                    <div class="clear-filter">
+                        <label for="price" class="mb-0">Clear</label>
+                    </div>
+                    <div>
+                        <ul class="item-list">
+                            <li class="filter-item" href="#"><span class="irs irs--sharp js-irs-0"><span
+                                        class="irs"><span class="irs-line" tabindex="0"></span><span
+                                            class="irs-min">$0</span><span class="irs-max">$9,896</span><span
+                                            class="irs-from">0</span><span class="irs-to">0</span><span
+                                            class="irs-single">0</span></span><span class="irs-grid"></span><span
+                                        class="irs-bar"></span><span class="irs-shadow shadow-from"></span><span
+                                        class="irs-shadow shadow-to"></span><span
+                                        class="irs-handle from"><i></i><i></i><i></i></span><span
+                                        class="irs-handle to"><i></i><i></i><i></i></span></span><input
+                                    class="price-range-slider irs-hidden-input" id="priceRangeSlider" name="price_range"
+                                    value="" tabindex="-1" readonly=""></li>
+                        </ul>
+                    </div>
+                </div>
+                <div id="type" class="tab-pane filter " data-filter="type">
+                    <div class="clear-filter">
+                        <label for="type" class="mb-0">Clear</label>
+                    </div>
+                    <div>
+                        <ul class="item-list">
+                        </ul>
+                    </div>
+                </div>
+                <div id="color" class="tab-pane filter " data-filter="color">
+                    <div class="clear-filter">
+                        <label for="color" class="mb-0">Clear</label>
+                    </div>
+                    <div>
+                        <ul class="item-list">
+                            <li class="filter-item" href="#"><label class="filter-label"><input type="checkbox"
+                                        value="black" belongsto="Black"><span class="checkmark"></span><span
+                                        class="text">Black</span></label></li>
+                            <li class="filter-item" href="#"><label class="filter-label"><input type="checkbox"
+                                        value="blue" belongsto="Blue"><span class="checkmark"></span><span
+                                        class="text">Blue</span></label></li>
+                            <li class="filter-item" href="#"><label class="filter-label"><input type="checkbox"
+                                        value="brown" belongsto="Brown"><span class="checkmark"></span><span
+                                        class="text">Brown</span></label></li>
+                            <li class="filter-item" href="#"><label class="filter-label"><input type="checkbox"
+                                        value="clear" belongsto="Clear"><span class="checkmark"></span><span
+                                        class="text">Clear</span></label></li>
+                            <li class="filter-item" href="#"><label class="filter-label"><input type="checkbox"
+                                        value="copper" belongsto="Copper"><span class="checkmark"></span><span
+                                        class="text">Copper</span></label></li>
+                            <li class="filter-item" href="#"><label class="filter-label"><input type="checkbox"
+                                        value="gold" belongsto="Gold"><span class="checkmark"></span><span
+                                        class="text">Gold</span></label></li>
+                            <li class="filter-item" href="#"><label class="filter-label"><input type="checkbox"
+                                        value="green" belongsto="Green"><span class="checkmark"></span><span
+                                        class="text">Green</span></label></li>
+                            <li class="filter-item" href="#"><label class="filter-label"><input type="checkbox"
+                                        value="grey" belongsto="Grey"><span class="checkmark"></span><span
+                                        class="text">Grey</span></label></li>
+                            <li class="filter-item" href="#"><label class="filter-label"><input type="checkbox"
+                                        value="multicolor" belongsto="Multicolor"><span class="checkmark"></span><span
+                                        class="text">Multicolor</span></label></li>
+                            <li class="filter-item" href="#"><label class="filter-label"><input type="checkbox"
+                                        value="pink" belongsto="Pink"><span class="checkmark"></span><span
+                                        class="text">Pink</span></label></li>
+                            <li class="filter-item" href="#"><label class="filter-label"><input type="checkbox"
+                                        value="purple" belongsto="Purple"><span class="checkmark"></span><span
+                                        class="text">Purple</span></label></li>
+                            <li class="filter-item" href="#"><label class="filter-label"><input type="checkbox"
+                                        value="red" belongsto="Red"><span class="checkmark"></span><span
+                                        class="text">Red</span></label></li>
+                            <li class="filter-item" href="#"><label class="filter-label"><input type="checkbox"
+                                        value="silver" belongsto="Silver"><span class="checkmark"></span><span
+                                        class="text">Silver</span></label></li>
+                            <li class="filter-item" href="#"><label class="filter-label"><input type="checkbox"
+                                        value="tan" belongsto="Tan"><span class="checkmark"></span><span
+                                        class="text">Tan</span></label></li>
+                            <li class="filter-item" href="#"><label class="filter-label"><input type="checkbox"
+                                        value="white" belongsto="White"><span class="checkmark"></span><span
+                                        class="text">White</span></label></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- <div class="clear-all d-none d-md-block d-lg-none">Clear All</div> -->
+    </div>
+</div>
+
+<div class="browse-filter">
+    <!-- <div class="browse-filter-item" data-type="new">New</div>
+    <div class="browse-filter-item" data-type="sale">Sale</div>
+    <div class="browse-filter-item" data-type="top">Best Sellers</div> -->
+    <div class="icon filter-icon">
+        <i class="mdi mdi-filter" aria-hidden="true"></i>
+    </div>
+    <div class="clear-all d-none d-lg-block">Clear All</div>
+    <div class="filter-bar-container">
+        <div class="filter-bar js-filter-section" id="desktop-filter"></div>
+    </div>
+    <!-- <div class="clear-all d-none d-md-block d-lg-none">Clear All</div> -->
+</div>
+
+<app-loader *ngIf="showLoader"></app-loader>
+
+<div class="products">
+    <div class="flex-grid">
+        <div class="flex-grid-item" *ngFor="let product of products">
+            <div class="product-image" type="default">
+                <img src={{product.main_image}} />
+            </div>
+        </div>
+    </div>
+    <div class="text-center">
+        <button class="btn red-button js-load-more">
+            Load more
+        </button>
+    </div>
+</div>

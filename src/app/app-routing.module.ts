@@ -19,10 +19,10 @@ import {
 } from './feature/components';
 
 const routes: Routes = [
-  { path: '', component: LandingComponent, pathMatch: 'full' },
+  { path: 'test', component: LandingComponent, pathMatch: 'full' },
 
   {
-    path: 'board',
+    path: '',
     loadChildren: "./modules/board/board.module#BoardModule",
     pathMatch: 'full'
   },

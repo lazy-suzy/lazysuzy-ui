@@ -1,6 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { BoardService } from 'src/app/shared/services/board/board.service';
 import * as $ from 'jquery';
+import { MidPanelComponent } from '../mid-panel/mid-panel.component';
+import { CanvasComponent } from '../canvas/canvas.component';
 
 @Component({
   selector: 'app-board-container',
@@ -10,19 +12,31 @@ import * as $ from 'jquery';
 export class BoardContainerComponent implements OnInit {
 
   showLoader: boolean = false;
+  selectedItem = null;
+
+  @ViewChild('midpanel', { static: true }) midpanel?: MidPanelComponent;
+  @ViewChild('canvas', { static: false }) canvas?: CanvasComponent;
 
   constructor(public boardService: BoardService) { }
 
   ngOnInit(): void {
-
-    //Jquery is available to be used as $
-    console.log('Jquery is available' + $);
 
     //Sample Http Call
     this.showLoader = true;
     this.boardService.getSomeDataSample().subscribe(s => {
       this.showLoader = false;
     });
+  }
+
+  handleMidPanelUpdates(event){
+  }
+
+  handleBoardSideNavUpdates(event){
+    this.selectedItem = event;
+  }
+
+  handleAddProduct(event){
+    this.canvas.addProductToBoard(event);
   }
 
 }

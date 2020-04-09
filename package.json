@@ -24,6 +24,8 @@
     "@ng-bootstrap/ng-bootstrap": "^6.0.0",
     "@ngx-gallery/core": "^5.0.0-beta.0",
     "@ngx-gallery/lightbox": "^5.0.0-beta.0",
+    "@types/dropzone": "^5.5.2",
+    "@types/owl.carousel": "^2.3.1",
     "angular-font-awesome": "^3.1.2",
     "angularx-social-login": "^2.2.1",
     "font-awesome": "^4.7.0",

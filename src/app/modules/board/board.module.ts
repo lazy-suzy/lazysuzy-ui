@@ -5,8 +5,26 @@ import { CanvasComponent } from './components/canvas/canvas.component';
 import { BoardContainerComponent } from './components/board-container/board-container.component';
 import { BoardSideNavComponent } from './components/board-side-nav/board-side-nav.component';
 import { LoaderModule } from 'src/app/shared/components/loader/loader.module';
+import { SelectComponent } from './components/select/select.component';
+import { MidPanelComponent } from './components/mid-panel/mid-panel.component';
+import { TextComponent } from './components/text/text.component';
+import { BrowseComponent } from './components/browse/browse.component';
+import { FavoritesComponent } from './components/favorites/favorites.component';
+import { BoardComponent } from './components/board/board.component';
+import { AddComponent } from './components/add/add.component';
 
-const DECLARATIONS = [CanvasComponent, BoardContainerComponent, BoardSideNavComponent];
+const DECLARATIONS = [
+  BoardContainerComponent,
+  MidPanelComponent,
+  BoardSideNavComponent,
+  SelectComponent,
+  TextComponent,
+  BrowseComponent,
+  FavoritesComponent,
+  BoardComponent,
+  CanvasComponent,
+  AddComponent
+];
 
 const MODULES = [CommonModule, BoardRoutingModule, LoaderModule];
 
