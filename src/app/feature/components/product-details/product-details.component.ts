@@ -136,7 +136,7 @@ export class ProductDetailsComponent implements OnInit {
   }
 
   onCheckChange(event, option, type) {
-    if (event.target.checked) {
+    if (event.source.checked) {
       if (this.selections[type]) {
         this.selections[type].push(option);
       } else {
