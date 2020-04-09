@@ -7,6 +7,7 @@ import { MatCheckboxModule } from '@angular/material/checkbox';
 import { ProductDetailsComponent } from './../product-details/product-details.component';
 import { ProductComponent } from './product.component';
 import { MatButtonModule } from '@angular/material/button';
+import { VariationsModule } from '../variations/variations.module';
 
 const DECLARATIONS = [ProductComponent, ProductDetailsComponent];
 
@@ -16,7 +17,8 @@ const MODULES = [
   MatIconModule,
   MatDialogModule,
   MatButtonModule,
-  MatCheckboxModule
+  MatCheckboxModule,
+  VariationsModule
 ];
 
 const COMPONENTS = [ProductDetailsComponent];

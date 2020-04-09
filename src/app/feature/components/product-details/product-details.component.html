@@ -56,7 +56,7 @@
         </div>
         <hr class="modal-hr" *ngIf="variations.length > 0" />
         <div class="variations-container" *ngIf="variations.length > 0">
-          <span class="title">More Options</span>
+          <span class="title">Options</span>
           <div class="variation-options" *ngIf="isSwatchExist">
             <div
               *ngFor="let variation of variations; let i = index"
@@ -75,7 +75,7 @@
               </a>
             </div>
           </div>
-          <div (click)="clearVariations()">Clear</div>
+          <div class="clear-btn" (click)="clearVariations()">Clear</div>
           <div class="flex flex-wrap variant-features-options-container">
             <div
               class="variant-feature-content"
@@ -88,7 +88,7 @@
                 <div
                   class="feature-title pointer flex flex-wrap justify-between"
                 >
-                  <span>{{ item.key | titlecase }}</span>
+                  <h5>{{ item.key | titlecase }}</h5>
                   <span class="arrow-icon"
                     ><mat-icon>arrow_drop_down</mat-icon></span
                   >
@@ -104,6 +104,8 @@
                 </div>
               </div>
             </div>
+          </div>
+          <div class=" variant-features-options-container">
             <div
               class="variant-feature-content"
               *ngFor="let item of product.selections | keyvalue"
@@ -112,16 +114,18 @@
                 class=" variant-feature-options"
                 *ngIf="item.value.select_type === 'single_select'"
               >
-                <span>{{ item.key | titlecase }}</span>
-                <div
-                  class="variant-feature pointer"
-                  (click)="selectedOption(i, option, item.key)"
-                  [class.active]="
-                    selectedFeature === i && selectedAttribute === option
-                  "
-                  *ngFor="let option of item.value.options; let i = index"
-                >
-                  {{ option }} {{ i }}
+                <h5>{{ item.key | titlecase }}</h5>
+                <div class="flex flex-wrap">
+                  <div
+                    class="variant-feature pointer w-third"
+                    (click)="selectedOption(i, option, item.key)"
+                    [class.active]="
+                      selectedFeature === i && selectedAttribute === option
+                    "
+                    *ngFor="let option of item.value.options; let i = index"
+                  >
+                    {{ option }}
+                  </div>
                 </div>
               </div>
             </div>
