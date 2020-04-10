@@ -1,4 +1,4 @@
-<ng-container *ngFor="let filter of objectKeys(productFilters)">
+<ng-container *ngFor="let filter of objectKeys(productFilters||{})">
   <div class="flex items-center pa3 mr1 filter {{disableTab(filter)?'display-none':''}}">
     <span
       class="filter-name grow pointer {{
