@@ -21,6 +21,9 @@ import { PanelModule } from 'primeng/panel';
 import { PanelMenuModule } from 'primeng/panelmenu';
 import { ToolbarComponent } from './components/toolbar/toolbar.component';
 import { MatTabsModule } from '@angular/material/tabs';
+import { BrowsefilterComponent } from './components/browse-filter/browse-filter.component';
+import { MaterialModule } from 'src/app/shared/material-module';
+import { MultiSelectModule } from 'primeng/multiselect';
 
 const DECLARATIONS = [
   BoardContainerComponent,
@@ -33,7 +36,8 @@ const DECLARATIONS = [
   BoardComponent,
   CanvasComponent,
   AddComponent,
-  ToolbarComponent
+  ToolbarComponent,
+  BrowsefilterComponent
 ];
 
 const MODULES = [
@@ -48,7 +52,9 @@ const MODULES = [
   OverlayPanelModule,
   PanelModule,
   PanelMenuModule,
-  MatTabsModule
+  MatTabsModule,
+  MaterialModule,
+  MultiSelectModule
 ];
 
 @NgModule({

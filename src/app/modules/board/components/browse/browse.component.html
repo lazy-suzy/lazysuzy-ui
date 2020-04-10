@@ -12,118 +12,29 @@
     <div class="browse-title">
         <i class="mdi mdi-chevron-left" aria-hidden="true"></i>
         <h5 class="title js-category-title">
-
             Sofas
         </h5>
     </div>
     <div class="browse-filter">
-        <!-- <div class="browse-filter-item" data-type="new">New</div>
-      <div class="browse-filter-item" data-type="sale">Sale</div>
-      <div class="browse-filter-item" data-type="top">Best Sellers</div> -->
-        <div class="icon filter-icon">
-            <i class="mdi mdi-filter" aria-hidden="true"></i>
-        </div>
-        <div class="clear-all d-none d-lg-block">Clear All</div>
         <div class="filter-bar-container">
             <div class="filter-bar js-filter-section" id="desktop-filter">
                 <div class="tabs">
 
-                    <p-overlayPanel #op [appendTo]="'body'">
+                    <p-overlayPanel [showTransitionOptions]="'200ms'" [hideTransitionOptions]="'200ms'" [dismissable]="false" [showCloseIcon]="true" #op1 [appendTo]="'body'">
                         <ng-template pTemplate>
-                            <img src="https://via.placeholder.com/150/0000FF/808080?Text=WebsiteBuilders.com"
-                                alt="Galleria 1" />
+                            <app-browse-filter></app-browse-filter>
                         </ng-template>
                     </p-overlayPanel>
-
-                    <button type="text" pButton label="Custom Target" (click)="op.show($event, actualTarget)"></button>
-                    <div #actualTarget>Brand</div>
-
-                    <p-overlayPanel #op1 [appendTo]="'body'">
-                        <ng-template pTemplate>
-                            <img src="https://via.placeholder.com/150/FF0000/FFFFFF?Text=WebsiteBuilders.com"
-                                alt="Galleria 1" />
-                        </ng-template>
-                    </p-overlayPanel>
-
-                    <button type="text" pButton label="Custom Target"
-                        (click)="op1.show($event, actualTarget1)"></button>
-                    <div #actualTarget1>Price</div>
-
-                    <p-overlayPanel #op2 [appendTo]="'body'">
-                        <ng-template pTemplate>
-                            <mat-form-field [formGroup]='filterForm' fxFlex>
-                                <mat-label>Brand</mat-label>
-                                <mat-select class="example-margin" formControlName="brand" placeholder="Brand">
-                                    <mat-option *ngFor="let brand of mockDataForProducts" [value]="brand?.value">
-                                        {{ brand?.DisplayDesc }}
-                                    </mat-option>
-                                </mat-select>
-                                <br />
-                                <mat-label>Price</mat-label>
-                                <mat-slider class="example-margin" formControlName="price" [min]="min" [max]="max"
-                                    (input)="someValue = $event.value" [value]="someValue">
-                                </mat-slider>
-                                <br />
-                                <mat-label>Color</mat-label>
-                                <mat-select class="example-margin" formControlName="color" placeholder="Color">
-                                    <mat-option *ngFor="let color of mockDataForColor" [value]="color?.value">
-                                        {{ color?.DisplayDesc }}
-                                    </mat-option>
-                                </mat-select>
-                            </mat-form-field>
-                        </ng-template>
-                    </p-overlayPanel>
-
-                    <button type="text" pButton label="Custom Target" (mouseenter)="op2.show($event)"
-                        (click)="op2.show($event, actualTarget2)"></button>
-                    <div #actualTarget2>Color</div>
-
-                    <!-- <p-overlayPanel #op1>
-                        <ng-template pTemplate>
-                            <img src="https://via.placeholder.com/150" alt="Galleria 1" />
-                        </ng-template>
-                    </p-overlayPanel> -->
-
-                    <!-- <mat-form-field [formGroup]='filterForm' fxFlex>
-                        <mat-label>Brand</mat-label>
-                        <mat-select class="example-margin" formControlName="brand" placeholder="Brand">
-                            <mat-option *ngFor="let brand of mockDataForProducts" [value]="brand?.value">
-                                {{ brand?.DisplayDesc }}
-                            </mat-option>
-                        </mat-select>
-                        <br />
-                        <mat-label>Price</mat-label>
-                        <mat-slider class="example-margin" formControlName="price" [min]="min" [max]="max"
-                            (input)="someValue = $event.value" [value]="someValue">
-                        </mat-slider>
-                        <br />
-                        <mat-label>Color</mat-label>
-                        <mat-select class="example-margin" formControlName="color" placeholder="Color">
-                            <mat-option *ngFor="let color of mockDataForColor" [value]="color?.value">
-                                {{ color?.DisplayDesc }}
-                            </mat-option>
-                        </mat-select>
-                    </mat-form-field> -->
+                    
+                    <button type="text" pButton class="btn btn-primary" label="Custom Target"
+                        (click)="op1.show($event, actualTarget1)">Filters</button>
+                    <div #actualTarget1></div>                    
 
                 </div>
             </div>
         </div>
-        <!-- <div class="clear-all d-none d-md-block d-lg-none">Clear All</div> -->
+        <div class="clear-all d-none d-md-block">Clear All</div>
     </div>
-</div>
-
-<div class="browse-filter">
-    <!-- <div class="browse-filter-item" data-type="new">New</div>
-    <div class="browse-filter-item" data-type="sale">Sale</div>
-    <div class="browse-filter-item" data-type="top">Best Sellers</div> -->
-    <div class="icon filter-icon">
-        <i class="mdi mdi-filter" aria-hidden="true"></i>
-    </div>
-    <div class="clear-all d-none d-lg-block">Clear All</div>
-    <div class="filter-bar-container">
-        <div class="filter-bar js-filter-section" id="desktop-filter"></div>
-    </div>
-    <!-- <div class="clear-all d-none d-md-block d-lg-none">Clear All</div> -->
 </div>
 
 <app-loader *ngIf="showLoader"></app-loader>

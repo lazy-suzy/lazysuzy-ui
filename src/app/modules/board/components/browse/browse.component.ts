@@ -48,22 +48,6 @@ export class BrowseComponent implements OnInit {
       this.products = s.products;
       this.showLoader = false;
     });
-    this.createForm();
-  }
-
-  createForm() {
-    this.filterForm = this.fb.group({
-      brand: this.mockDataForProducts,
-      price: 0,
-      color: this.mockDataForColor
-    });
-    this.filterForm.valueChanges.subscribe(val => {
-      debugger;
-    });
-  }
-
-  addProductToBoard(product) {
-    this.addProduct.emit(product);
   }
 
 }
