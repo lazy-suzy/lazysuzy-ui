@@ -1,0 +1,14 @@
+<div *ngIf="data.length" class="products">
+    <div *ngFor="let product of data" class="flex-grid">
+        <div class="flex-grid-item">
+            {{product?.name}}
+            <div class="product-image">
+                <img src="https://via.placeholder.com/150" />
+            </div>
+        </div>
+    </div>
+</div>
+
+<div *ngIf="!data.length">
+    No products found.
+</div>

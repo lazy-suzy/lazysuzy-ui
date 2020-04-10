@@ -1,0 +1,8 @@
+<h1 mat-dialog-title>Hi {{data.name}}</h1>
+<div mat-dialog-content>
+    <stepper-overview-example></stepper-overview-example>
+</div>
+<div mat-dialog-actions>
+    <button mat-button (click)="onNoClick()">No Thanks</button>
+    <button mat-button (click)="onYesClick()" cdkFocusInitial>Ok</button>
+</div>

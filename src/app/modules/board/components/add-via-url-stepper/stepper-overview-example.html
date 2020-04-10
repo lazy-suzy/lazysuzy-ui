@@ -1,0 +1,20 @@
+<mat-horizontal-stepper [linear]="isLinear" #stepper>
+  <mat-step [stepControl]="stepOne">
+    <app-step-two></app-step-two>
+
+  </mat-step>
+  <mat-step [stepControl]="stepTwo">
+    <app-step-one></app-step-one>    
+    <button mat-button matStepperPrevious>Back</button>
+    <button mat-button (click)="stepper.reset()">Reset</button>
+  </mat-step>
+</mat-horizontal-stepper>
+
+<div class="diagnostics">
+  {{this.formService.mainForm.value | json}}
+  <!-- <div *ngFor="let key of keys()">
+    <span *ngIf="myForm[key]">
+      <b>{{key}}</b>: {{myForm[key]}}
+    </span>
+  </div> -->
+</div>

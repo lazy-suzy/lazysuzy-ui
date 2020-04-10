@@ -24,6 +24,12 @@ import { MatTabsModule } from '@angular/material/tabs';
 import { BrowsefilterComponent } from './components/browse-filter/browse-filter.component';
 import { MaterialModule } from 'src/app/shared/material-module';
 import { MultiSelectModule } from 'primeng/multiselect';
+import { AddViaUrlComponent } from './components/add-via-url/add-via-url.component';
+import { StepperOverviewExample } from './components/add-via-url-stepper/stepper-overview-example';
+import { StepOneComponent } from './components/add-via-url-stepper/step-one/step-one.component';
+import { StepTwoComponent } from './components/add-via-url-stepper/step-two/step-two.component';
+import { TextInputComponent } from './components/add-via-url-stepper/text-input/text-input.component';
+import { BoardProductsComponent } from './components/board-products/board-products.component';
 
 const DECLARATIONS = [
   BoardContainerComponent,
@@ -37,7 +43,13 @@ const DECLARATIONS = [
   CanvasComponent,
   AddComponent,
   ToolbarComponent,
-  BrowsefilterComponent
+  BrowsefilterComponent,
+  AddViaUrlComponent,
+  StepperOverviewExample,
+  StepOneComponent,
+  StepTwoComponent,
+  TextInputComponent,
+  BoardProductsComponent
 ];
 
 const MODULES = [
@@ -60,6 +72,9 @@ const MODULES = [
 @NgModule({
   declarations: [...DECLARATIONS],
   imports: [...MODULES],
-  exports: [...DECLARATIONS, ...MODULES]
+  exports: [...DECLARATIONS, ...MODULES],
+  entryComponents: [
+    AddViaUrlComponent
+  ]
 })
 export class BoardModule { }

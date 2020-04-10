@@ -1,4 +1,3 @@
-
 <div class="catalog-content">
     <form class="icon lg add-new dz-clickable">
         <div class="dropzone-previews dz-message">
@@ -6,15 +5,19 @@
         </div>
     </form>
     <div class="mb-3">
-        <span class="add-new-url js-addUrl">Or add via URL</span>
+        <span class="add-new-url" (click)="openDialog()">Or add via URL</span>
         <span class="add-new-url-msg"><i class="mdi mdi-information" aria-hidden="true"></i> Must
             be .jpg or .png file</span>
     </div>
     <div class="d-flex mb-3">
         <mat-tab-group>
-            <mat-tab label="My Items"> Content 1 </mat-tab>
-            <mat-tab label="All Uploads"> Content 2 </mat-tab>
-          </mat-tab-group>
+            <mat-tab label="My Items">
+                <app-board-products [data]="myItems"></app-board-products>
+            </mat-tab>
+            <mat-tab label="All Uploads">
+                <app-board-products [data]="allUploads"></app-board-products>
+            </mat-tab>
+        </mat-tab-group>
     </div>
     <div class="items-board active">
         <div class="flex-grid">
@@ -26,4 +29,3 @@
         </div>
     </div>
 </div>
-
