@@ -11,13 +11,13 @@
 
         <div *ngIf="selectedItem.value === 'Browse'">
 
-          <app-browse (updatesFromBrowse)="handleUpdatesFromBrowse($event)" (addProduct)="handleAddProductToBoardUpdates($event)"></app-browse>
+          <app-browse (updatesFromBrowse)="handleUpdatesFromBrowse($event)" (previewProduct)="handlePreviewProductToBoardUpdates($event)"></app-browse>
 
         </div>
 
         <div *ngIf="selectedItem.value === 'Add'">
 
-          <app-add></app-add>
+          <app-add (previewProduct)="handlePreviewProductToBoardUpdates($event)"></app-add>
 
         </div>
 
@@ -41,5 +41,11 @@
 
       </div>
     </div>
+  </div>
+</div>
+
+<div class="static-bottom-panel-wrapper" *ngIf="productForPreview" style="z-index: 9999999;">
+  <div class="static-bottom-panel selected">
+    <app-product-preview [data]="productForPreview" (clearProductPreview)="handleClearProductPreview($event)" (addProductBoard)="handleAddProductBoardPreview($event)"></app-product-preview>
   </div>
 </div>

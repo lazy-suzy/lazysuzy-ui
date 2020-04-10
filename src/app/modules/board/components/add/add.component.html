@@ -12,10 +12,10 @@
     <div class="d-flex mb-3">
         <mat-tab-group>
             <mat-tab label="My Items">
-                <app-board-products [data]="myItems"></app-board-products>
+                <app-board-products [products]="myItems" (previewProduct)="handlePreviewProduct($event)"></app-board-products>
             </mat-tab>
             <mat-tab label="All Uploads">
-                <app-board-products [data]="allUploads"></app-board-products>
+                <app-board-products [products]="allUploads" (previewProduct)="handlePreviewProduct($event)"></app-board-products>
             </mat-tab>
         </mat-tab-group>
     </div>

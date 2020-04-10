@@ -35,7 +35,7 @@ export class BrowseComponent implements OnInit {
   max = 10000;
 
   @Output() updatesFromBrowse: EventEmitter<any> = new EventEmitter();
-  @Output() addProduct: EventEmitter<any> = new EventEmitter();
+  @Output() previewProduct: EventEmitter<any> = new EventEmitter();
 
   constructor(
     private apiService: ApiService,
@@ -46,8 +46,13 @@ export class BrowseComponent implements OnInit {
     this.showLoader = true;
     this.apiService.getBrowseTabData('201').subscribe((s: any) => {
       this.products = s.products;
+      debugger;
       this.showLoader = false;
     });
+  }
+
+  handlePreviewProduct(product){
+    this.previewProduct.emit(product);
   }
 
 }

@@ -1,14 +1,10 @@
-<div *ngIf="data.length" class="products">
-    <div *ngFor="let product of data" class="flex-grid">
-        <div class="flex-grid-item">
-            {{product?.name}}
-            <div class="product-image">
-                <img src="https://via.placeholder.com/150" />
+<div class="products">
+    <div class="flex-grid">
+        <div class="flex-grid-item" *ngFor="let product of products">
+            <!-- {{product|json}} -->
+            <div class="product-image" type="default" (click)="previewProductFn(product)">
+                <img src={{product.main_image}}/>
             </div>
         </div>
     </div>
-</div>
-
-<div *ngIf="!data.length">
-    No products found.
 </div>

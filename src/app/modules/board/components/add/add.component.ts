@@ -1,7 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { ApiService } from 'src/app/shared/services';
 import { MatDialog } from '@angular/material';
 import { AddViaUrlComponent } from '../add-via-url/add-via-url.component';
+import { mockProductsAdd } from './mock-products-add';
 
 // import * as dropzone from 'dropzone';
 
@@ -17,6 +18,7 @@ export class AddComponent implements OnInit {
   name: string;
   allUploads = [];
   myItems = [];
+  @Output() previewProduct: EventEmitter<any> = new EventEmitter();
 
   constructor(
     private apiService: ApiService,
@@ -27,9 +29,9 @@ export class AddComponent implements OnInit {
 
   ngOnInit(): void {
     this.apiService.getCustomProducts().subscribe((s: any) => {
-      this.customProducts = [...s];
-      this.allUploads = [...s];
-      this.myItems = [...s];
+      this.customProducts = [...mockProductsAdd];
+      this.allUploads = [...mockProductsAdd];
+      this.myItems = [...mockProductsAdd];
     });
   }
 
@@ -47,6 +49,10 @@ export class AddComponent implements OnInit {
       console.log('The dialog was closed');
       this.animal = result;
     });
+  }
+
+  handlePreviewProduct(product) {
+    this.previewProduct.emit(product);
   }
 
 }

@@ -28,7 +28,7 @@
                     
                     <button type="text" pButton class="btn btn-primary" label="Custom Target"
                         (click)="op1.show($event, actualTarget1)">Filters</button>
-                    <div #actualTarget1></div>                    
+                    <div #actualTarget1></div>
 
                 </div>
             </div>
@@ -39,10 +39,12 @@
 
 <app-loader *ngIf="showLoader"></app-loader>
 
-<div class="products">
+<app-board-products [products]="products" (previewProduct)="handlePreviewProduct($event)"></app-board-products>
+
+<!-- <div class="products">
     <div class="flex-grid">
         <div class="flex-grid-item" *ngFor="let product of products">
-            <div class="product-image" type="default">
+            <div class="product-image" type="default" (click)="previewProductFn(product)">
                 <img src={{product.main_image}} />
             </div>
         </div>
@@ -52,4 +54,4 @@
             Load more
         </button>
     </div>
-</div>
+</div> -->

@@ -11,6 +11,7 @@ export class MidPanelComponent implements OnInit {
   @Input() data: any = [];
   @Output() updates: EventEmitter<any> = new EventEmitter();
   @Output() addProduct: EventEmitter<any> = new EventEmitter();
+  productForPreview = null;
 
   constructor() { }
 
@@ -29,8 +30,16 @@ export class MidPanelComponent implements OnInit {
     this.updates.emit($event);
   }
 
-  handleAddProductToBoardUpdates(product) {
+  handlePreviewProductToBoardUpdates(product) {
+    this.productForPreview = { ...product };
+  }
+
+  handleAddProductBoardPreview(product) {
     this.addProduct.emit(product);
+  }
+
+  handleClearProductPreview(product) {
+    this.productForPreview = null;
   }
 
 }

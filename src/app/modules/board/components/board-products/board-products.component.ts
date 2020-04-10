@@ -7,17 +7,22 @@ import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 })
 export class BoardProductsComponent implements OnInit {
 
-  @Input() data: any = [];
+  @Input() products: any = [];
   @Output() updates: EventEmitter<any> = new EventEmitter();
+  @Output() previewProduct: EventEmitter<any> = new EventEmitter();
 
   constructor() { }
 
   ngOnInit() { }
 
   ngOnChanges(changes: any) {
-    if (changes['data'] && changes['data'].previousValue !== changes['data'].currentValue) {
-      this.data = changes['data'].currentValue || [];
+    if (changes['products'] && changes['products'].previousValue !== changes['products'].currentValue) {
+      this.products = changes['products'].currentValue || [];
     }
+  }
+
+  previewProductFn(product) {
+    this.previewProduct.emit(product);
   }
 
 }
