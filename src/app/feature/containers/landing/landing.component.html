@@ -4,24 +4,17 @@
 
     <app-search-bar class="section"></app-search-bar>
 
-    <div class="section">
-      <div>
-        <app-browse-by-room></app-browse-by-room>
-      </div>
+    <app-browse-by-room></app-browse-by-room>
 
-      <app-banner></app-banner>
+    <app-banner [isHandset]="isHandset"></app-banner>
 
-      <div>
-        <app-brand-footer></app-brand-footer>
-      </div>
+    <app-brand-footer></app-brand-footer>
 
-      <div [class]="isHandset ? '' : 'mh2'">
-        <app-new-arrivals [isHandset]="isHandset"></app-new-arrivals>
-        <app-top-deals [isHandset]="isHandset"></app-top-deals>
-        <app-best-sellers [isHandset]="isHandset"></app-best-sellers>
-      </div>
-
-      <app-subscribe [homePage]="true"></app-subscribe>
+    <div [class]="isHandset ? '' : 'mh2'">
+      <app-new-arrivals [isHandset]="isHandset"></app-new-arrivals>
+      <app-top-deals [isHandset]="isHandset"></app-top-deals>
+      <app-best-sellers [isHandset]="isHandset"></app-best-sellers>
     </div>
+    <app-subscribe [homePage]="true"></app-subscribe>
   </div>
 </div>

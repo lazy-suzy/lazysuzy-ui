@@ -104,6 +104,7 @@ export class AllProductsComponent implements OnInit {
 
   updateQueryString(): void {
     let params = new HttpParams();
+    params = params.set(this.trend, 'true');
     params = params.set('filters', this.filters);
     params = params.set('sortType', this.sortType);
     params = params.set('pageNo', this.pageNo.toString());

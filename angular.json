@@ -36,7 +36,6 @@
               "node_modules/tachyons/css/tachyons.min.css",
               "node_modules/owl.carousel/dist/assets/owl.carousel.css",
               "node_modules/owl.carousel/dist/assets/owl.theme.default.css"
-
             ],
             "scripts": [
               "node_modules/marked/lib/marked.js",

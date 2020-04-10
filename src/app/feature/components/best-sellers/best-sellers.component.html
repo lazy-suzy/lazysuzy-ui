@@ -1,12 +1,12 @@
-<div class="row best-sellers">
-  <div class="col-md-1 best-sellers-heading">
+<div class="flex flex-wrap best-sellers">
+  <div class="{{ isHandset ? 'w-100' : 'w-10-ns' }} best-sellers-heading">
     <h2 class="title-best-sellers">best sellers</h2>
     <button type="button" class="btn btn-sm btn-dark" (click)="seeAll()">
       see all
     </button>
   </div>
 
-  <div class="col-md-11">
+  <div class="{{ isHandset ? 'w-100' : 'w-90-ns' }}">
     <div *ngIf="!bestSellers">
       <img
         src="../../../../assets/images/three-dots.svg"

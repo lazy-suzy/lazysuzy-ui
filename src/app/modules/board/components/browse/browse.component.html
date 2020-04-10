@@ -27,124 +27,84 @@
         <div class="filter-bar-container">
             <div class="filter-bar js-filter-section" id="desktop-filter">
                 <div class="tabs">
-                    <ul class="nav flex-column">
-                        <li class="nav-item ">
-                            <a class="nav-link dropdown-toggle" href="#brand">brand</a>
-                        </li>
-                        <li class="nav-item ">
-                            <a class="nav-link dropdown-toggle" href="#price">price</a>
-                        </li>
-                        <li class="nav-item ">
-                            <a class="nav-link dropdown-toggle" href="#color">color</a>
-                        </li>
-                    </ul>
-                </div>
-                <div id="brand" class="tab-pane filter active" data-filter="brand">
-                    <div class="clear-filter">
-                        <label for="brand" class="mb-0">Clear</label>
-                    </div>
-                    <div>
-                        <ul class="item-list">
-                            <li class="filter-item" href="#"><label class="filter-label"><input type="checkbox"
-                                        value="cb2" belongsto="CB2"><span class="checkmark"></span><span
-                                        class="text">CB2</span></label></li>
-                            <li class="filter-item" href="#"><label class="filter-label"><input type="checkbox"
-                                        value="cab" belongsto="Crate &amp; Barrel"><span class="checkmark"></span><span
-                                        class="text">Crate &amp; Barrel</span></label></li>
-                            <li class="filter-item" href="#"><label class="filter-label"><input type="checkbox"
-                                        value="pier1" belongsto="Pier 1"><span class="checkmark"></span><span
-                                        class="text">Pier 1</span></label></li>
-                            <li class="filter-item" href="#"><label class="filter-label"><input type="checkbox"
-                                        value="westelm" belongsto="West Elm"><span class="checkmark"></span><span
-                                        class="text">West Elm</span></label></li>
-                            <li class="filter-item" href="#"><label class="filter-label"><input type="checkbox"
-                                        value="nw" belongsto="World Market"><span class="checkmark"></span><span
-                                        class="text">World Market</span></label></li>
-                        </ul>
-                    </div>
-                </div>
-                <div id="price" class="tab-pane filter " data-filter="price">
-                    <div class="clear-filter">
-                        <label for="price" class="mb-0">Clear</label>
-                    </div>
-                    <div>
-                        <ul class="item-list">
-                            <li class="filter-item" href="#"><span class="irs irs--sharp js-irs-0"><span
-                                        class="irs"><span class="irs-line" tabindex="0"></span><span
-                                            class="irs-min">$0</span><span class="irs-max">$9,896</span><span
-                                            class="irs-from">0</span><span class="irs-to">0</span><span
-                                            class="irs-single">0</span></span><span class="irs-grid"></span><span
-                                        class="irs-bar"></span><span class="irs-shadow shadow-from"></span><span
-                                        class="irs-shadow shadow-to"></span><span
-                                        class="irs-handle from"><i></i><i></i><i></i></span><span
-                                        class="irs-handle to"><i></i><i></i><i></i></span></span><input
-                                    class="price-range-slider irs-hidden-input" id="priceRangeSlider" name="price_range"
-                                    value="" tabindex="-1" readonly=""></li>
-                        </ul>
-                    </div>
-                </div>
-                <div id="type" class="tab-pane filter " data-filter="type">
-                    <div class="clear-filter">
-                        <label for="type" class="mb-0">Clear</label>
-                    </div>
-                    <div>
-                        <ul class="item-list">
-                        </ul>
-                    </div>
-                </div>
-                <div id="color" class="tab-pane filter " data-filter="color">
-                    <div class="clear-filter">
-                        <label for="color" class="mb-0">Clear</label>
-                    </div>
-                    <div>
-                        <ul class="item-list">
-                            <li class="filter-item" href="#"><label class="filter-label"><input type="checkbox"
-                                        value="black" belongsto="Black"><span class="checkmark"></span><span
-                                        class="text">Black</span></label></li>
-                            <li class="filter-item" href="#"><label class="filter-label"><input type="checkbox"
-                                        value="blue" belongsto="Blue"><span class="checkmark"></span><span
-                                        class="text">Blue</span></label></li>
-                            <li class="filter-item" href="#"><label class="filter-label"><input type="checkbox"
-                                        value="brown" belongsto="Brown"><span class="checkmark"></span><span
-                                        class="text">Brown</span></label></li>
-                            <li class="filter-item" href="#"><label class="filter-label"><input type="checkbox"
-                                        value="clear" belongsto="Clear"><span class="checkmark"></span><span
-                                        class="text">Clear</span></label></li>
-                            <li class="filter-item" href="#"><label class="filter-label"><input type="checkbox"
-                                        value="copper" belongsto="Copper"><span class="checkmark"></span><span
-                                        class="text">Copper</span></label></li>
-                            <li class="filter-item" href="#"><label class="filter-label"><input type="checkbox"
-                                        value="gold" belongsto="Gold"><span class="checkmark"></span><span
-                                        class="text">Gold</span></label></li>
-                            <li class="filter-item" href="#"><label class="filter-label"><input type="checkbox"
-                                        value="green" belongsto="Green"><span class="checkmark"></span><span
-                                        class="text">Green</span></label></li>
-                            <li class="filter-item" href="#"><label class="filter-label"><input type="checkbox"
-                                        value="grey" belongsto="Grey"><span class="checkmark"></span><span
-                                        class="text">Grey</span></label></li>
-                            <li class="filter-item" href="#"><label class="filter-label"><input type="checkbox"
-                                        value="multicolor" belongsto="Multicolor"><span class="checkmark"></span><span
-                                        class="text">Multicolor</span></label></li>
-                            <li class="filter-item" href="#"><label class="filter-label"><input type="checkbox"
-                                        value="pink" belongsto="Pink"><span class="checkmark"></span><span
-                                        class="text">Pink</span></label></li>
-                            <li class="filter-item" href="#"><label class="filter-label"><input type="checkbox"
-                                        value="purple" belongsto="Purple"><span class="checkmark"></span><span
-                                        class="text">Purple</span></label></li>
-                            <li class="filter-item" href="#"><label class="filter-label"><input type="checkbox"
-                                        value="red" belongsto="Red"><span class="checkmark"></span><span
-                                        class="text">Red</span></label></li>
-                            <li class="filter-item" href="#"><label class="filter-label"><input type="checkbox"
-                                        value="silver" belongsto="Silver"><span class="checkmark"></span><span
-                                        class="text">Silver</span></label></li>
-                            <li class="filter-item" href="#"><label class="filter-label"><input type="checkbox"
-                                        value="tan" belongsto="Tan"><span class="checkmark"></span><span
-                                        class="text">Tan</span></label></li>
-                            <li class="filter-item" href="#"><label class="filter-label"><input type="checkbox"
-                                        value="white" belongsto="White"><span class="checkmark"></span><span
-                                        class="text">White</span></label></li>
-                        </ul>
-                    </div>
+
+                    <p-overlayPanel #op [appendTo]="'body'">
+                        <ng-template pTemplate>
+                            <img src="https://via.placeholder.com/150/0000FF/808080?Text=WebsiteBuilders.com"
+                                alt="Galleria 1" />
+                        </ng-template>
+                    </p-overlayPanel>
+
+                    <button type="text" pButton label="Custom Target" (click)="op.show($event, actualTarget)"></button>
+                    <div #actualTarget>Brand</div>
+
+                    <p-overlayPanel #op1 [appendTo]="'body'">
+                        <ng-template pTemplate>
+                            <img src="https://via.placeholder.com/150/FF0000/FFFFFF?Text=WebsiteBuilders.com"
+                                alt="Galleria 1" />
+                        </ng-template>
+                    </p-overlayPanel>
+
+                    <button type="text" pButton label="Custom Target"
+                        (click)="op1.show($event, actualTarget1)"></button>
+                    <div #actualTarget1>Price</div>
+
+                    <p-overlayPanel #op2 [appendTo]="'body'">
+                        <ng-template pTemplate>
+                            <mat-form-field [formGroup]='filterForm' fxFlex>
+                                <mat-label>Brand</mat-label>
+                                <mat-select class="example-margin" formControlName="brand" placeholder="Brand">
+                                    <mat-option *ngFor="let brand of mockDataForProducts" [value]="brand?.value">
+                                        {{ brand?.DisplayDesc }}
+                                    </mat-option>
+                                </mat-select>
+                                <br />
+                                <mat-label>Price</mat-label>
+                                <mat-slider class="example-margin" formControlName="price" [min]="min" [max]="max"
+                                    (input)="someValue = $event.value" [value]="someValue">
+                                </mat-slider>
+                                <br />
+                                <mat-label>Color</mat-label>
+                                <mat-select class="example-margin" formControlName="color" placeholder="Color">
+                                    <mat-option *ngFor="let color of mockDataForColor" [value]="color?.value">
+                                        {{ color?.DisplayDesc }}
+                                    </mat-option>
+                                </mat-select>
+                            </mat-form-field>
+                        </ng-template>
+                    </p-overlayPanel>
+
+                    <button type="text" pButton label="Custom Target" (mouseenter)="op2.show($event)"
+                        (click)="op2.show($event, actualTarget2)"></button>
+                    <div #actualTarget2>Color</div>
+
+                    <!-- <p-overlayPanel #op1>
+                        <ng-template pTemplate>
+                            <img src="https://via.placeholder.com/150" alt="Galleria 1" />
+                        </ng-template>
+                    </p-overlayPanel> -->
+
+                    <!-- <mat-form-field [formGroup]='filterForm' fxFlex>
+                        <mat-label>Brand</mat-label>
+                        <mat-select class="example-margin" formControlName="brand" placeholder="Brand">
+                            <mat-option *ngFor="let brand of mockDataForProducts" [value]="brand?.value">
+                                {{ brand?.DisplayDesc }}
+                            </mat-option>
+                        </mat-select>
+                        <br />
+                        <mat-label>Price</mat-label>
+                        <mat-slider class="example-margin" formControlName="price" [min]="min" [max]="max"
+                            (input)="someValue = $event.value" [value]="someValue">
+                        </mat-slider>
+                        <br />
+                        <mat-label>Color</mat-label>
+                        <mat-select class="example-margin" formControlName="color" placeholder="Color">
+                            <mat-option *ngFor="let color of mockDataForColor" [value]="color?.value">
+                                {{ color?.DisplayDesc }}
+                            </mat-option>
+                        </mat-select>
+                    </mat-form-field> -->
+
                 </div>
             </div>
         </div>

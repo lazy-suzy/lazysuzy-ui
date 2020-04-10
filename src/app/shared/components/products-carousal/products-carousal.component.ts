@@ -9,11 +9,11 @@ export class ProductsCarousalComponent implements OnInit {
   carousalOptions = {
     margin: 10,
     loop: true,
-    items: 1,
+    items: 1.25,
     dots: true,
     pagination: true,
     // autoWidth: true,
-    stagePadding: 100,
+    // stagePadding: 100,
     singleItem: true
   };
 
@@ -37,6 +37,7 @@ export class ProductsCarousalComponent implements OnInit {
   @Output() updates: EventEmitter<any> = new EventEmitter();
 
   @Input() isBanner: boolean = false;
+  @Input() nameOfCarousal: string = '';
 
   constructor() {}
 

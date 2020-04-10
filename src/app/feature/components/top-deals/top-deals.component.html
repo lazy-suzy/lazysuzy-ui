@@ -1,12 +1,12 @@
-<div class="row top-deals">
-  <div class="col-md-1 top-deals-heading">
+<div class="flex flex-wrap top-deals">
+  <div class="{{ isHandset ? 'w-100' : 'w-10-ns' }} top-deals-heading">
     <h2 class="title-top-deals">top deals</h2>
     <button type="button" class="btn btn-sm btn-dark" (click)="seeAll()">
       see all
     </button>
   </div>
 
-  <div class="col-md-11">
+  <div class="{{ isHandset ? 'w-100' : 'w-90-ns' }}">
     <div *ngIf="!topDeals">
       <img
         src="../../../../assets/images/three-dots.svg"
@@ -38,6 +38,18 @@
               <br />
               <span class="product_name">{{ data.name }}</span>
               <br />
+
+              <div
+                *ngIf="data.percent_discount > 0"
+                class="discount-percentage"
+                [ngClass]="[
+                  data.percent_discount > 30
+                    ? 'discount-red-top-deals'
+                    : 'discount-gold-top-deals'
+                ]"
+              >
+                {{ data.percent_discount | number: '1.0-0' }}% off
+              </div>
               <span
                 *ngIf="data.is_price == data.was_price"
                 class="current-price"
@@ -56,6 +68,7 @@
       <div *ngIf="isHandset">
         <app-products-carousal
           [data]="topDeals"
+          [nameOfCarousal]="'top-deals'"
           (updates)="handleEvtProductCarousal($event)"
         ></app-products-carousal>
       </div>

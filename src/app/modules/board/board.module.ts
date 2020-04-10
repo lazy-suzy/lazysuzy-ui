@@ -12,6 +12,15 @@ import { BrowseComponent } from './components/browse/browse.component';
 import { FavoritesComponent } from './components/favorites/favorites.component';
 import { BoardComponent } from './components/board/board.component';
 import { AddComponent } from './components/add/add.component';
+import { MatSelectModule } from '@angular/material/select'
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { MatSliderModule } from '@angular/material/slider';
+import { MatInputModule } from '@angular/material/input';
+import { OverlayPanelModule } from 'primeng/overlaypanel';
+import { PanelModule } from 'primeng/panel';
+import { PanelMenuModule } from 'primeng/panelmenu';
+import { ToolbarComponent } from './components/toolbar/toolbar.component';
+import { MatTabsModule } from '@angular/material/tabs';
 
 const DECLARATIONS = [
   BoardContainerComponent,
@@ -23,10 +32,24 @@ const DECLARATIONS = [
   FavoritesComponent,
   BoardComponent,
   CanvasComponent,
-  AddComponent
+  AddComponent,
+  ToolbarComponent
 ];
 
-const MODULES = [CommonModule, BoardRoutingModule, LoaderModule];
+const MODULES = [
+  CommonModule,
+  BoardRoutingModule,
+  LoaderModule,
+  MatSelectModule,
+  FormsModule,
+  ReactiveFormsModule,
+  MatSliderModule,
+  MatInputModule,
+  OverlayPanelModule,
+  PanelModule,
+  PanelMenuModule,
+  MatTabsModule
+];
 
 @NgModule({
   declarations: [...DECLARATIONS],
