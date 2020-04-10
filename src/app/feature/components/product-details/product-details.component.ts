@@ -26,6 +26,7 @@ export class ProductDetailsComponent implements OnInit {
   featuresExist: boolean;
   descriptionExist: boolean;
   isSwatchExist: boolean;
+  isVariationExist: boolean;
   galleryId = 'myLightbox';
   items: GalleryItem[];
   isProductFetching = false;
@@ -38,6 +39,7 @@ export class ProductDetailsComponent implements OnInit {
   selectedAttribute: string;
   selections = {};
   variations = [];
+  swatches = [];
   productPrice: string;
   constructor(
     @Inject(MAT_DIALOG_DATA) public data: any,
@@ -67,13 +69,15 @@ export class ProductDetailsComponent implements OnInit {
         this.descriptionExist = this.utils.checkDataLength(
           this.product.description
         );
-        this.isSwatchExist = this.utils.checkDataLength(
-          this.product.variations.filter(
-            variation => variation.swatch_image !== null
-          )
+        this.swatches = this.product.variations.filter(
+          variation => variation.swatch_image !== null
         );
+        this.isSwatchExist = this.utils.checkDataLength(this.swatches);
         this.productPrice = this.product.is_price;
         this.variations = this.product.variations;
+        this.isVariationExist = this.utils.checkDataLength(
+          this.product.variations
+        );
         this.isProductFetching = false;
         const _self = this;
         setTimeout(function() {
@@ -161,9 +165,7 @@ export class ProductDetailsComponent implements OnInit {
 
   updateSwatches() {
     var _self = this;
-    const filteredSwatches = this.product.variations.filter(function(
-      variation
-    ) {
+    this.swatches = this.product.variations.filter(function(variation) {
       if (variation.swatch_image !== null) {
         return _self.checkSwatchSelection(variation, _self);
       }
@@ -177,14 +179,15 @@ export class ProductDetailsComponent implements OnInit {
     if (filteredVariations.length === 1) {
       this.productPrice = filteredVariations[0].price;
       const image = new ImageItem({ src: filteredVariations[0].image });
-      this.items.splice(0, 1, image);
+      this.items.splice(0, 0, image);
     } else {
       this.productPrice = this.product.is_price;
       this.items = this.product.on_server_images.map(
         item => new ImageItem({ src: item })
       );
     }
-    this.variations = filteredSwatches;
+    this.variations = filteredVariations;
+    this.getMaxHeight();
   }
 
   checkSwatchSelection(variation, _self) {
@@ -192,7 +195,7 @@ export class ProductDetailsComponent implements OnInit {
     for (const key in _self.selections) {
       if (
         variation.features[key] === _self.selections[key] ||
-        _self.selections[key].indexOf(variation.features[key]) > -1
+        _self.selections[key].includes(variation.features[key])
       ) {
         isValidVariation = true;
       } else {
