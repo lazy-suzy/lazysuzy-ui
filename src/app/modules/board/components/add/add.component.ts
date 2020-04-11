@@ -24,7 +24,6 @@ export class AddComponent implements OnInit {
     private apiService: ApiService,
     public dialog: MatDialog
   ) {
-    // console.log(dropzone);
   }
 
   ngOnInit(): void {
@@ -46,7 +45,6 @@ export class AddComponent implements OnInit {
     });
 
     dialogRef.afterClosed().subscribe(result => {
-      console.log('The dialog was closed');
       this.animal = result;
     });
   }

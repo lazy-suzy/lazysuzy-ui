@@ -46,7 +46,6 @@ export class BrowseComponent implements OnInit {
     this.showLoader = true;
     this.apiService.getBrowseTabData('201').subscribe((s: any) => {
       this.products = s.products;
-      debugger;
       this.showLoader = false;
     });
   }
