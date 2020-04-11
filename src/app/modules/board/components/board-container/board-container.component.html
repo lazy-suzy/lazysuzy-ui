@@ -28,7 +28,12 @@
 
             <app-board-side-nav (updates)="handleBoardSideNavUpdates($event)"></app-board-side-nav>
 
-            <app-mid-panel #midpanel [selectedItem]="selectedItem" (updates)="handleMidPanelUpdates($event)" (addProduct)="handleAddProduct($event)">
+            <app-mid-panel 
+                #midpanel
+                [selectedItem]="selectedItem"
+                (updates)="handleMidPanelUpdates($event)"
+                (addProduct)="handleAddProduct($event)"
+                (textActions)="handleTextActions($event)">
             </app-mid-panel>
              
         </div>

@@ -29,7 +29,7 @@
 
         <div *ngIf="selectedItem.value === 'Text'">
 
-          <app-text></app-text>
+          <app-text (updates)="handleUpdatesFromText($event)"></app-text>
 
         </div>
 

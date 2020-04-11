@@ -23,4 +23,9 @@ export class CanvasComponent implements OnInit {
     alert("This is printed from canvas, it means canvas component is able to recieve inputs from the board and can do its work when its integrated.");
   }
 
+  handleTextActions(action) {
+    console.log("Printing from canvas", action);
+    alert("This is printed from canvas, it means canvas component is able to recieve inputs from the board and can do its work when its integrated.");
+  }
+
 }

@@ -18,11 +18,10 @@ export class BoardContainerComponent implements OnInit {
   @ViewChild('midpanel', { static: true }) midpanel?: MidPanelComponent;
   @ViewChild('canvas', { static: false }) canvas?: CanvasComponent;
   @ViewChild('toolbar', { static: false }) toolbar?: ToolbarComponent;
-  
+
   constructor(public boardService: BoardService) { }
 
   ngOnInit(): void {
-
     //Sample Http Call
     this.showLoader = true;
     this.boardService.getSomeDataSample().subscribe(s => {
@@ -30,8 +29,7 @@ export class BoardContainerComponent implements OnInit {
     });
   }
 
-  handleMidPanelUpdates(event) {
-  }
+  handleMidPanelUpdates(event) { }
 
   handleBoardSideNavUpdates(event) {
     this.selectedItem = event;
@@ -42,8 +40,11 @@ export class BoardContainerComponent implements OnInit {
   }
 
   handleToolbarActions(event) {
-    debugger;
     this.canvas.handleToolboxActions(event);
+  }
+
+  handleTextActions(event) {
+    this.canvas.handleTextActions(event);
   }
 
 }

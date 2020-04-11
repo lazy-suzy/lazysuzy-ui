@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { ApiService } from 'src/app/shared/services';
 
 @Component({
@@ -7,6 +7,8 @@ import { ApiService } from 'src/app/shared/services';
   styleUrls: ['./text.component.less']
 })
 export class TextComponent implements OnInit {
+
+  @Output() updates: EventEmitter<any> = new EventEmitter();
 
   allFonts = [{
     name: 'Helvetica',
@@ -31,6 +33,10 @@ export class TextComponent implements OnInit {
 
   constructor(private apiService: ApiService) { }
 
-  ngOnInit(): void {}
+  ngOnInit(): void { }
+
+  selectFont(font) {
+    this.updates.emit(font);
+  }
 
 }

@@ -9,8 +9,11 @@ export class MidPanelComponent implements OnInit {
 
   @Input() selectedItem: any = [];
   @Input() data: any = [];
+  
   @Output() updates: EventEmitter<any> = new EventEmitter();
   @Output() addProduct: EventEmitter<any> = new EventEmitter();
+  @Output() textActions: EventEmitter<any> = new EventEmitter();
+  
   productForPreview = null;
 
   constructor() { }
@@ -36,6 +39,10 @@ export class MidPanelComponent implements OnInit {
 
   handleAddProductBoardPreview(product) {
     this.addProduct.emit(product);
+  }
+
+  handleUpdatesFromText(event) {
+    this.textActions.emit(event);
   }
 
   handleClearProductPreview(product) {
