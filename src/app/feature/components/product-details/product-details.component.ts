@@ -35,6 +35,7 @@ export class ProductDetailsComponent implements OnInit {
   spinner = 'assets/images/spinner.gif';
   description: any;
   features: any;
+  variations = [];
   topHeight: Object = { 'max-height': '0' };
   productPrice: string;
   constructor(
@@ -74,6 +75,8 @@ export class ProductDetailsComponent implements OnInit {
         this.isVariationExist = this.utils.checkDataLength(
           this.product.variations
         );
+        this.productPrice = this.product.is_price;
+        this.variations = this.product.variations;
         this.isProductFetching = false;
         const _self = this;
         setTimeout(function() {
