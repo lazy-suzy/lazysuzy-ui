@@ -1,5 +1,5 @@
-import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import { NgModule } from "@angular/core";
+import { CommonModule } from "@angular/common";
 import { ProductsCarousalComponent } from './components/products-carousal/products-carousal.component';
 import { OwlModule } from 'ngx-owl-carousel';
 import { LoaderModule } from './components/loader/loader.module';
