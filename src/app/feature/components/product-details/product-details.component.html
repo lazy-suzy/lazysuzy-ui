@@ -36,7 +36,7 @@
         <h4>{{ product.name }}</h4>
 
         <div class="price-container">
-          <span class="product-price mr3">${{ product.is_price }}</span>
+          <span class="product-price mr3">${{ productPrice }}</span>
 
           <span
             class="strike {{
@@ -54,29 +54,7 @@
             </a>
           </button>
         </div>
-        <hr class="modal-hr" *ngIf="variationsExist" />
-        <div class="variations-container" *ngIf="variationsExist">
-          <span class="title">More Options</span>
-          <div class="variation-options">
-            <div
-              *ngFor="let variation of product.variations; let i = index"
-              class="variation-img-box"
-              (click)="selectedVariation(variation, i, gallery)"
-              [class.active]="selectedIndex === i"
-            >
-              <a>
-                <span data-title="{{ variation.name }}">
-                  <img
-                    [src]="variation.swatch_image"
-                    [alt]="variation.name"
-                    class="variation-img"
-                  />
-                </span>
-              </a>
-            </div>
-          </div>
-        </div>
-        <hr class="modal-hr" />
+        <hr class="modal-hr" *ngIf="isVariationExist" />
       </div>
 
       <div
@@ -85,6 +63,16 @@
         }}"
         [ngStyle]="topHeight"
       >
+        <div class="variations-container" *ngIf="isVariationExist">
+          <app-variations
+            [variations]="product.variations"
+            [isSwatchExist]="isSwatchExist"
+            [inputSelections]="product.selections"
+            (setPrice)="onSetPrice($event)"
+            (setImage)="onSetImage($event)"
+          ></app-variations>
+        </div>
+        <hr class="modal-hr" />
         <div class="mb2 pt-1" *ngIf="descriptionExist">
           <span class="title">Overview</span>
           <div class="mt1" [innerHTML]="description"></div>

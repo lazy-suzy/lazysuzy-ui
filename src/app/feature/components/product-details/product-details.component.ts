@@ -19,13 +19,15 @@ import { Lightbox } from '@ngx-gallery/lightbox';
 })
 export class ProductDetailsComponent implements OnInit {
   @ViewChild('topContainer', { static: false }) topContainer: ElementRef;
+  @ViewChild('gallery', { static: false }) galleryContainer: ElementRef;
   product: IProductPayload;
   productSubscription: Subscription;
   selectedIndex: number;
   dimensionExist: boolean;
   featuresExist: boolean;
   descriptionExist: boolean;
-  variationsExist: boolean;
+  isSwatchExist: boolean;
+  isVariationExist: boolean;
   galleryId = 'myLightbox';
   items: GalleryItem[];
   isProductFetching: boolean = false;
@@ -33,6 +35,8 @@ export class ProductDetailsComponent implements OnInit {
   spinner: string = 'assets/images/spinner.gif';
   description: any;
   features: any;
+  productPrice: string;
+  variations = [];
   topHeight: Object = { 'max-height': '0' };
 
   constructor(
@@ -63,11 +67,16 @@ export class ProductDetailsComponent implements OnInit {
         this.descriptionExist = this.utils.checkDataLength(
           this.product.description
         );
-        this.variationsExist = this.utils.checkDataLength(
+        this.isSwatchExist = this.utils.checkDataLength(
           this.product.variations.filter(
             variation => variation.swatch_image !== null
           )
         );
+        this.productPrice = this.product.is_price;
+        this.isVariationExist = this.utils.checkDataLength(
+          this.product.variations
+        );
+        this.variations = this.product.variations;
         this.isProductFetching = false;
         const _self = this;
         setTimeout(function() {
@@ -120,5 +129,18 @@ export class ProductDetailsComponent implements OnInit {
     const topHeight =
       this.topContainer && (this.topContainer.nativeElement.offsetHeight || 0);
     this.topHeight = { 'max-height': `calc(100vh - ${topHeight + 12}px)` };
+  }
+  onSetImage(src): void {
+    this.galleryContainer.nativeElement.scrollTop = 0;
+    this.items = this.product.on_server_images.map(
+      item => new ImageItem({ src: item })
+    );
+    if (src) {
+      const image = new ImageItem({ src });
+      this.items.splice(0, 0, image);
+    }
+  }
+  onSetPrice(price): void {
+    this.productPrice = price || this.product.is_price;
   }
 }

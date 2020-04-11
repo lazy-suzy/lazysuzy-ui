@@ -1,0 +1,76 @@
+<span class="title">Options</span>
+<div class="variation-options" *ngIf="isSwatchExist">
+  <div
+    *ngFor="let variation of swatches; let i = index"
+    class="variation-img-box"
+    (click)="selectedVariation(variation, i)"
+    [class.active]="selectedIndex === i"
+  >
+    <a>
+      <span data-title="{{ variation.name }}">
+        <img
+          [src]="variation.swatch_image"
+          [alt]="variation.name"
+          class="variation-img"
+        />
+      </span>
+    </a>
+  </div>
+  <div *ngIf="variations.length === 0">
+    No product available, please change/clear options
+  </div>
+</div>
+<div class="clear-btn" (click)="clearVariations()">Clear</div>
+<div class="flex flex-wrap variant-features-options-container">
+  <div
+    class="variant-feature-content"
+    *ngFor="let item of inputSelections | keyvalue"
+  >
+    <div
+      class="variant-feature-options"
+      *ngIf="item.value.select_type === 'multi_select'"
+    >
+      <div class="feature-title pointer flex flex-wrap justify-between">
+        <h5>{{ item.key | titlecase }}</h5>
+        <span class="arrow-icon"><mat-icon>arrow_drop_down</mat-icon></span>
+      </div>
+      <div class="variant-feature-checkbox">
+        <div *ngFor="let option of item.value.options">
+          <mat-checkbox
+            (change)="onCheckChange($event, option, item.key)"
+            [checked]="
+              selections[item.key] && selections[item.key].includes(option)
+            "
+          >
+            {{ option }}
+          </mat-checkbox>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class=" variant-features-options-container">
+  <div
+    class="variant-feature-content"
+    *ngFor="let item of inputSelections | keyvalue"
+  >
+    <div
+      class=" variant-feature-options"
+      *ngIf="item.value.select_type === 'single_select'"
+    >
+      <h5>{{ item.key | titlecase }}</h5>
+      <div class="flex flex-wrap">
+        <div
+          class="variant-feature pointer w-30"
+          (click)="selectedOption(option, item.key)"
+          [class.active]="
+            selections[item.key] && selections[item.key] === option
+          "
+          *ngFor="let option of item.value.options"
+        >
+          {{ option }}
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
