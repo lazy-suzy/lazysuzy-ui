@@ -53,16 +53,12 @@
           </div>
         </ng-template>
       </p-carousel>
-      <<<<<<< HEAD
-      <div *ngIf="isHandset" class="banner">
-        <app-products-carousal =======
-        <div *ngIf="isHandset">
-          <app-products-carousal *ngIf="!showLoader"
-            >>>>>>> master [data]="newProducts"
-            (updates)="handleEvtProductCarousal($event)"
-            ></app-products-carousal
-          >
-        </div>
+      <div *ngIf="isHandset">
+        <app-products-carousal
+          *ngIf="!showLoader"
+          [data]="newProducts"
+          (updates)="handleEvtProductCarousal($event)"
+        ></app-products-carousal>
       </div>
     </div>
   </div>

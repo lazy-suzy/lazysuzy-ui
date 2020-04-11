@@ -19,24 +19,22 @@ import { Lightbox } from '@ngx-gallery/lightbox';
 })
 export class ProductDetailsComponent implements OnInit {
   @ViewChild('topContainer', { static: false }) topContainer: ElementRef;
-  @ViewChild('gallery', { static: false }) galleryContainer: ElementRef;
   product: IProductPayload;
   productSubscription: Subscription;
   selectedIndex: number;
   dimensionExist: boolean;
   featuresExist: boolean;
   descriptionExist: boolean;
-  isSwatchExist: boolean;
-  isVariationExist: boolean;
+  variationsExist: boolean;
   galleryId = 'myLightbox';
   items: GalleryItem[];
-  isProductFetching = false;
-  showDetails = false;
-  spinner = 'assets/images/spinner.gif';
+  isProductFetching: boolean = false;
+  showDetails: boolean = false;
+  spinner: string = 'assets/images/spinner.gif';
   description: any;
   features: any;
   topHeight: Object = { 'max-height': '0' };
-  productPrice: string;
+
   constructor(
     @Inject(MAT_DIALOG_DATA) public data: any,
     private apiService: ApiService,
@@ -65,14 +63,10 @@ export class ProductDetailsComponent implements OnInit {
         this.descriptionExist = this.utils.checkDataLength(
           this.product.description
         );
-        this.isSwatchExist = this.utils.checkDataLength(
+        this.variationsExist = this.utils.checkDataLength(
           this.product.variations.filter(
             variation => variation.swatch_image !== null
           )
-        );
-        this.productPrice = this.product.is_price;
-        this.isVariationExist = this.utils.checkDataLength(
-          this.product.variations
         );
         this.isProductFetching = false;
         const _self = this;
@@ -96,6 +90,16 @@ export class ProductDetailsComponent implements OnInit {
     });
   }
 
+  selectedVariation(variation, index, container) {
+    if (variation.has_parent_sku) {
+      this.utils.openVariationDialog(variation.variation_sku);
+    } else {
+      const image = new ImageItem({ src: variation.image });
+      this.items.splice(0, 1, image);
+      this.selectedIndex = index;
+      container.scrollTop = 0;
+    }
+  }
   isArray(obj: any) {
     return Array.isArray(obj);
   }
@@ -116,19 +120,5 @@ export class ProductDetailsComponent implements OnInit {
     const topHeight =
       this.topContainer && (this.topContainer.nativeElement.offsetHeight || 0);
     this.topHeight = { 'max-height': `calc(100vh - ${topHeight + 12}px)` };
-  }
-
-  onSetImage(src): void {
-    this.galleryContainer.nativeElement.scrollTop = 0;
-    this.items = this.product.on_server_images.map(
-      item => new ImageItem({ src: item })
-    );
-    if (src) {
-      const image = new ImageItem({ src });
-      this.items.splice(0, 0, image);
-    }
-  }
-  onSetPrice(price): void {
-    this.productPrice = price || this.product.is_price;
   }
 }
