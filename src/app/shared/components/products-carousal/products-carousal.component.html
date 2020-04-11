@@ -47,10 +47,12 @@
     *ngIf="data?.length"
     [carouselClasses]="['owl-carousel', 'owl-theme']"
   >
-    <div class="item" *ngFor="let product of data; let i = index">
-      <a href="{{ product.link }}">
-        <img class="owl-item-bg" src="{{ product.image }}" alt="Owl Image" />
-      </a>
-    </div>
+    <a
+      class="item"
+      *ngFor="let product of data; let i = index"
+      href="{{ product.link }}"
+    >
+      <img class="owl-item-bg" src="{{ product.image }}" alt="Owl Image" />
+    </a>
   </owl-carousel>
 </div>
