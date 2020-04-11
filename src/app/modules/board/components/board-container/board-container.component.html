@@ -33,36 +33,51 @@
              
         </div>
 
-        <div class="main-content container-fluid">
-            <div class="row">
-                <div class="col-md-12 tool-bar-holder">
+        <div class="main-content container-fluid">
+            <div class="row">
+                <div class="col-md-12 tool-bar-holder">
+                    
                     <app-toolbar></app-toolbar>
-                    <div class="canvas-content">
-                        <div class="d-flex">
-                            <div class="canvas-title-bar">
-                                <div class="canvas-icons">
+
+                    <div class="canvas-content">
+                        <div class="d-flex" style="visibility: visible;">
+                            <div class="canvas-title-bar">
+                                <div class="canvas-icons">
+                                    <!-- <a data-title="Edit Board Settings">
+                          <i
+                            class="mdi mdi-settings js-open-config"
+                            aria-hidden="true"
+                          ></i>
+                        </a> -->
                                 </div>
                             </div>
-                            <div class="w-38">
-                                <input class="form-control board-title" placeholder="Board title"  />
+                            <div class="w-38">
+                                <input class="form-control board-title" placeholder="Board title">
                             </div>
                         </div>
-                        <div class="canvas">
-                            <div id="canvas-droparea">
-                                <app-canvas id="canvas-area" class="main-content container-fluid" #canvas>
-                                </app-canvas>
+                        <div class="canvas">
+                            <div id="canvas-droparea">
+                                <div class="canvas-inner-container"
+                                    style="width: 912px; height: 512.36px; position: relative; user-select: none;">
+                                    <canvas id="canvas-area"
+                                        style="border: 1px solid black; position: absolute; width: 912px; height: 512.36px; left: 0px; top: 0px; touch-action: none; user-select: none;"
+                                        class="lower-canvas" width="912" height="512"></canvas><canvas
+                                        class="upper-canvas " width="912" height="512"
+                                        style="border: 1px solid black; position: absolute; width: 912px; height: 512.36px; left: 0px; top: 0px; touch-action: none; user-select: none; cursor: default;"></canvas>
+                                </div>
                             </div>
                         </div>
-                        <div class="col-sm-2 col-5 state-icons d-lg-none">
-                            <i class="mdi mdi-magnify-minus" onclick="zoomOut()" aria-hidden="true"></i>
-                            <i class="mdi mdi-magnify-plus" onclick="zoomIn()" aria-hidden="true"></i>
-                            <i class="mdi mdi-undo" onclick="undo()" aria-hidden="true"></i>
-                            <i class="mdi mdi-redo" onclick="redo()" aria-hidden="true"></i>
+                        <div class="col-sm-2 col-5 state-icons d-lg-none">
+                            <i class="mdi mdi-magnify-minus" onclick="zoomOut()" aria-hidden="true"></i>
+                            <i class="mdi mdi-magnify-plus" onclick="zoomIn()" aria-hidden="true"></i>
+                            <i class="mdi mdi-undo" onclick="undo()" aria-hidden="true"></i>
+                            <i class="mdi mdi-redo" onclick="redo()" aria-hidden="true"></i>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
 
+       
     </div>
 </div>
