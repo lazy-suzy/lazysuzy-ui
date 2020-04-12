@@ -1,7 +1,12 @@
 <div class="example-container">
     <form [formGroup]="filterForm">
 
-        <p-multiSelect [options]="productsDropdown" formControlName="brand" [(ngModel)]="selectedProductsDropdown">
+        <p-multiSelect
+            [options]="productsDropdown"
+            formControlName="brand"
+            [(ngModel)]="selectedProductsDropdown"
+            [defaultLabel]="'Choose by Brand'"
+            [style]="{'width': '180px'}">
             <ng-template let-value pTemplate="selectedItems">
                 <div *ngFor="let val of value" class="ui-multiselected-item-token ui-corner-all">
                     <img src="https://via.placeholder.com/150"
@@ -21,20 +26,18 @@
 
         <div appearance="fill">
             <mat-label>Price</mat-label>
-            <mat-slider 
-                class="example-margin"
-                formControlName="price"
-                [min]="min"
-                [max]="max"
-                (input)="someValue = $event.value"
-                [value]="someValue"
-                thumbLabel
-                [displayWith]="formatLabel"
+            <mat-slider class="example-margin" formControlName="price" [min]="min" [max]="max"
+                (input)="someValue = $event.value" [value]="someValue" thumbLabel [displayWith]="formatLabel"
                 tickInterval="auto">
             </mat-slider>
         </div>
 
-        <p-multiSelect [options]="productsColors" formControlName="color" [(ngModel)]="selectedProductsColor">
+        <p-multiSelect
+            [options]="productsColors"
+            formControlName="color"
+            [(ngModel)]="selectedProductsColor"
+            [defaultLabel]="'Choose by color'"
+            [style]="{'width': '180px'}">
             <ng-template let-value pTemplate="selectedProductsColor">
                 <div *ngFor="let val of value" class="ui-multiselected-item-token ui-corner-all">
                     <img src="https://via.placeholder.com/150"
@@ -51,5 +54,11 @@
             </ng-template>
         </p-multiSelect>
         <p>{{selectedProductsColor}}</p>
+
+        <button type="button" (click)="applyFilters()" class="btn btn-primary">
+            Go
+        </button>
     </form>
+
+    <app-loader *ngIf="showLoader" [showProgressBar]="'true'"></app-loader>
 </div>

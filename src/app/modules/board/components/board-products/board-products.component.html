@@ -1,7 +1,6 @@
 <div class="products">
     <div class="flex-grid">
         <div class="flex-grid-item" *ngFor="let product of products">
-            <!-- {{product|json}} -->
             <div class="product-image" type="default" (click)="previewProductFn(product)">
                 <img src={{product.main_image}}/>
             </div>

@@ -1,11 +1,21 @@
 <form [formGroup]="step">
-      <ng-template matStepLabel>Fill out your address</ng-template>
-      <mat-form-field>
-        <input matInput placeholder="Address" formControlName="address" required>
-      </mat-form-field>
-      <!-- {{stepTwo.value.address}} -->
-      <div>
-        <button mat-button matStepperPrevious>Back</button>
-        <button mat-button matStepperNext>Next</button>
-      </div>
-    </form>
+  <ng-template matStepLabel>Add Image</ng-template>
+  <mat-form-field>
+    <input matInput placeholder="Product Title" formControlName="productTitle" required>
+  </mat-form-field>
+  <mat-form-field>
+    <input matInput placeholder="Price" formControlName="price" required>
+  </mat-form-field>
+  <mat-form-field>
+    <input matInput placeholder="Product Listing Url" formControlName="productListingUrl" required>
+  </mat-form-field>
+  <mat-form-field>
+    <input matInput placeholder="Additional Tags" formControlName="additionalTags" required>
+  </mat-form-field>
+  <!-- <mat-form-field>
+    <mat-checkbox color="primary" formControlName="keepPrivate">Keep Private</mat-checkbox>
+  </mat-form-field> -->
+</form>
+
+<button mat-button (click)="cancelAddImgViaUrl()">Cancel</button>
+<button mat-button (click)="saveAddViaUrl()">Add</button>

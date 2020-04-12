@@ -1,6 +1,9 @@
-import { Component, OnInit, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter, ViewChild } from '@angular/core';
 import { ApiService } from 'src/app/shared/services';
 import { FormBuilder } from '@angular/forms';
+import { MidPanelComponent } from '../mid-panel/mid-panel.component';
+import { BrowsefilterComponent } from '../browse-filter/browse-filter.component';
+import { OverlayPanel } from 'primeng/overlaypanel/public_api';
 
 @Component({
   selector: 'app-browse',
@@ -33,6 +36,7 @@ export class BrowseComponent implements OnInit {
   someValue = 0;
   min = 0;
   max = 10000;
+  @ViewChild('browsefilter', { static: false }) browsefilter?: OverlayPanel;
 
   @Output() updatesFromBrowse: EventEmitter<any> = new EventEmitter();
   @Output() previewProduct: EventEmitter<any> = new EventEmitter();
@@ -50,7 +54,13 @@ export class BrowseComponent implements OnInit {
     });
   }
 
-  handlePreviewProduct(product){
+  handleUpdatesFromFilter(event) {
+    if (event.name === 'TOGGLE_FILTER_OVERLAY' && !event.value) {
+      this.browsefilter.hide();
+    }
+  }
+
+  handlePreviewProduct(product) {
     this.previewProduct.emit(product);
   }
 

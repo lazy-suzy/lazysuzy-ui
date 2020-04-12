@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ApiService } from 'src/app/shared/services';
+import { BoardService } from 'src/app/shared/services/board/board.service';
 
 @Component({
   selector: 'app-board',
@@ -7,15 +8,16 @@ import { ApiService } from 'src/app/shared/services';
   styleUrls: ['./board.component.less']
 })
 export class BoardComponent implements OnInit {
-  
-  boardProducts = [];
 
-  constructor(private apiService: ApiService) { }
+  currentBoardProducts = [];
+
+  constructor(
+    private boardService: BoardService
+  ) { }
 
   ngOnInit(): void {
-    this.apiService.getCustomProducts().subscribe((s: any) => {
-      this.boardProducts = s;
-    });
+    this.boardService.initBoard('');
+    this.currentBoardProducts = this.boardService.currentBoardProducts;
   }
 
 }

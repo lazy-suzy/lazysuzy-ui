@@ -4,6 +4,7 @@ import { DefaultBoardSettings } from 'src/app/modules/board/constants/board-defa
 import { ApiService } from '../api/api.service';
 import { of } from 'rxjs';
 import { delay } from 'rxjs/operators';
+import { allBoardsMock, allUploadsMock, myUploadsMock, addViaUrlResponse } from './mockboards';
 
 @Injectable({
     providedIn: 'root'
@@ -12,30 +13,52 @@ export class BoardService {
 
     settings: IBoardSettings;
 
+    allBoards = [];
+    currentBoard = {};
+    currentBoardProducts = [];
+    myUploads = [];
+    allUploads = [];
+
     constructor(public apiService: ApiService) { }
 
-    initDefaultSettings() {
-        this.settings = { ...DefaultBoardSettings };
+    initBoard(boardId) {
+        this.allUploads = [...allUploadsMock];
+        this.allBoards = [...allBoardsMock];
+        this.myUploads = [...myUploadsMock];
+        this.currentBoard = this.allBoards[0]; 
+        this.currentBoardProducts = this.extractBoardItems(this.currentBoard);
     }
 
-    getSomeDataSample() {
-        return this.apiService.getBrands();
+    extractBoardItems(board) {
+        let state = JSON.parse(board.state);
+        let objects = state.objects.map(ele => {
+          return ele.referenceObject || {};
+        });
+        return objects;
+      }
+
+    getSomeDataSample(payload) {
+        return this.apiService.getAllBoards(payload);
+    }
+
+    getAllBoards(payload) {
+        this.allBoards = [...allBoardsMock];
+        this.currentBoard = allBoardsMock[0];
+        return of(allBoardsMock).pipe(delay(5000));
+        // return this.apiService.getAllBoards(payload);
     }
 
     getProductsDropdown() {
         let cars = [
             { label: 'Audi', value: 'Audi' },
             { label: 'BMW', value: 'BMW' },
-            { label: 'Fiat', value: 'Fiat' },
-            { label: 'Ford', value: 'Ford' },
-            { label: 'Honda', value: 'Honda' },
-            { label: 'Jaguar', value: 'Jaguar' },
-            { label: 'Mercedes', value: 'Mercedes' },
-            { label: 'Renault', value: 'Renault' },
-            { label: 'VW', value: 'VW' },
             { label: 'Volvo', value: 'Volvo' },
         ];
         return of(cars).pipe(delay(5000));
+    }
+
+    saveAddViaUrl(payload) {
+        return of(addViaUrlResponse).pipe(delay(5000));
     }
 
 }

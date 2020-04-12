@@ -1,6 +1,6 @@
-import { Component, OnInit } from '@angular/core';
-import {FormBuilder, FormGroup, Validators} from '@angular/forms';
-import {FormService} from '../form.service'
+import { Component, OnInit, Output, EventEmitter } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormService } from '../form.service'
 
 @Component({
   selector: 'app-step-two',
@@ -8,20 +8,41 @@ import {FormService} from '../form.service'
   styleUrls: ['./step-two.component.css']
 })
 export class StepTwoComponent implements OnInit {
-  
-  step: FormGroup
+
+  step: FormGroup;
+
+  @Output() stepperUpdates: EventEmitter<any> = new EventEmitter();
 
   constructor(
     private _formBuilder: FormBuilder,
     private formService: FormService
   ) {
     this.step = this._formBuilder.group({
-      address: ['', Validators.required]
+      productTitle: ['', Validators.required],
+      price: ['', Validators.required],
+      productListingUrl: ['', Validators.required],
+      additionalTags: ['', Validators.required],
+      keepPrivate: [false],
     });
     this.formService.stepReady(this.step, 'two')
   }
 
-  ngOnInit() {
+  ngOnInit() { }
+
+  cancelAddImgViaUrl() {
+    const payload = {
+      name:'cancel',
+      data: {}
+    };
+    this.stepperUpdates.emit(payload);
+  }
+
+  saveAddViaUrl() {
+    const payload = {
+      name:'save',
+      data: {}
+    };
+    this.stepperUpdates.emit(payload);
   }
 
 }

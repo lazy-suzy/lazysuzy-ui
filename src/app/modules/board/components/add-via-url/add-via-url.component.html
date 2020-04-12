@@ -1,8 +1,9 @@
-<h1 mat-dialog-title>Hi {{data.name}}</h1>
+<button class="close" mat-button (click)="onNoClick()">X</button>
 <div mat-dialog-content>
-    <stepper-overview-example></stepper-overview-example>
+    <stepper-overview-example (stepperUpdates)="handleStepperUpdates($event)"></stepper-overview-example>
+    <app-loader [showProgressBar]="loaderTypeProgress" *ngIf="showLoader"></app-loader>
 </div>
-<div mat-dialog-actions>
+<!-- <div mat-dialog-actions>
     <button mat-button (click)="onNoClick()">No Thanks</button>
     <button mat-button (click)="onYesClick()" cdkFocusInitial>Ok</button>
-</div>
+</div> -->

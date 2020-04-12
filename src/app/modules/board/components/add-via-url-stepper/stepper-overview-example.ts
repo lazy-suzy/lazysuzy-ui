@@ -1,17 +1,19 @@
-import {Component} from '@angular/core';
-import {FormGroup, FormBuilder} from '@angular/forms';
-import {FormService} from './form.service';
- 
+import { Component, Output, EventEmitter } from '@angular/core';
+import { FormGroup, FormBuilder } from '@angular/forms';
+import { FormService } from './form.service';
+
 @Component({
   selector: 'stepper-overview-example',
   templateUrl: 'stepper-overview-example.html',
   styleUrls: ['stepper-overview-example.css'],
-  providers: [ FormService ]
+  providers: [FormService]
 })
 export class StepperOverviewExample {
-  
+
   isLinear = false;
-  myForm: Array<string>
+  myForm: Array<string>;
+
+  @Output() stepperUpdates: EventEmitter<any> = new EventEmitter();
 
   constructor(
     public formService: FormService,
@@ -20,7 +22,8 @@ export class StepperOverviewExample {
     this.myForm = this.formService.mainForm.value
   }
 
-  keys() : Array<string> {
-    return Object.keys(this.myForm);
+  handleStepperUpdates(event) {
+    this.stepperUpdates.emit(event);
   }
+
 }

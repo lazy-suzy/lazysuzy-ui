@@ -22,11 +22,7 @@ export class BoardContainerComponent implements OnInit {
   constructor(public boardService: BoardService) { }
 
   ngOnInit(): void {
-    //Sample Http Call
-    this.showLoader = true;
-    this.boardService.getSomeDataSample().subscribe(s => {
-      this.showLoader = false;
-    });
+    this.boardService.initBoard('');
   }
 
   handleMidPanelUpdates(event) { }

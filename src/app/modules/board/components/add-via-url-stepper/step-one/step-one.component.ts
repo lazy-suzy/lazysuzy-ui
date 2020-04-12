@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
-import {FormBuilder, FormGroup, Validators} from '@angular/forms';
-import {FormService} from '../form.service'
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormService } from '../form.service'
 
 @Component({
   selector: 'app-step-one',
@@ -16,15 +16,9 @@ export class StepOneComponent {
     private formService: FormService
   ) {
     this.step = this._formBuilder.group({
-      firstName: ['', Validators.required],
-      lastName: ['', Validators.required],
-      extraName: ''
+      imageUrl: ['', Validators.required]
     });
     this.formService.stepReady(this.step, 'one')
-  }
-
-  change(title){
-    this.step.patchValue({ extraName: title})
   }
 
 }

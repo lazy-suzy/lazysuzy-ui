@@ -236,4 +236,14 @@ export class ApiService {
     };
     return this.httpService.post(url, data);
   }
+
+  getAllBoards(payload): Observable<IProductPayload> {
+    const url = `${env.API_BASE_HREF}board`;
+    return this.httpService.post(url,{
+      'operation':'select',
+      'entity':'board',
+      'data':5,
+      'Buser_id':1
+    });
+  }
 }

@@ -10,6 +10,7 @@ export class BoardProductsComponent implements OnInit {
   @Input() products: any = [];
   @Output() updates: EventEmitter<any> = new EventEmitter();
   @Output() previewProduct: EventEmitter<any> = new EventEmitter();
+  @Input() modifyPath: any = false;
 
   constructor() { }
 
@@ -17,7 +18,17 @@ export class BoardProductsComponent implements OnInit {
 
   ngOnChanges(changes: any) {
     if (changes['products'] && changes['products'].previousValue !== changes['products'].currentValue) {
-      this.products = changes['products'].currentValue || [];
+      let products = changes['products'].currentValue || [];
+      if (this.modifyPath) {
+        products = products.map(pro => {
+          return {
+            ...pro,
+            main_image: `http://board.lazysuzy.com/${pro.path}`
+          };
+        });
+      }
+      this.products = [...products] || [];
+
     }
   }
 

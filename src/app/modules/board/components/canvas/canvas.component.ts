@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import * as fb from './fb.min.js';
+import { BoardService } from 'src/app/shared/services/board/board.service.js';
 
 @Component({
   selector: 'app-canvas',
@@ -8,10 +9,18 @@ import * as fb from './fb.min.js';
 })
 export class CanvasComponent implements OnInit {
 
-  constructor() { }
+  currentBoard = {};
+  currentBoardProducts = [];
+
+  constructor(
+    private boardService: BoardService
+  ) {  }
 
   ngOnInit(): void {
-  }
+    debugger;
+    this.currentBoard = { ...this.boardService.currentBoard };
+    this.currentBoardProducts = [...this.boardService.currentBoardProducts];
+   }
 
   addProductToBoard(product) {
     console.log("Printing from canvas", product);

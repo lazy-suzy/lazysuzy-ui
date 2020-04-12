@@ -11,12 +11,10 @@ export class BrowsefilterComponent implements OnInit {
 
   showLoader: boolean = false;
   filterForm: any;
+
   someValue = 0;
   min = 0;
   max = 10000;
-
-  @Output() updatesFromBrowse: EventEmitter<any> = new EventEmitter();
-  @Output() addProduct: EventEmitter<any> = new EventEmitter();
 
   productsDropdown: any[];
   selectedProductsDropdown: any[] = [];
@@ -24,22 +22,22 @@ export class BrowsefilterComponent implements OnInit {
   productsColors: any[];
   selectedProductsColor: any[] = [];
 
+  @Output() updatesFromFilter: EventEmitter<any> = new EventEmitter();
+  @Output() addProduct: EventEmitter<any> = new EventEmitter();
+
   constructor(
     private fb: FormBuilder,
     private boardService: BoardService
   ) {
-    this.boardService.getProductsDropdown().subscribe(s => {
-      this.productsDropdown = s;
-    });
-    this.boardService.getProductsDropdown().subscribe(s => {
-      this.productsColors = s;
-    });
   }
 
   ngOnInit(): void {
-    this.showLoader = true;
     this.createForm();
-    this.showLoader = false;
+    this.showLoader = true;
+    this.boardService.getProductsDropdown().subscribe(s => {
+      this.productsDropdown = s;
+      this.showLoader = false;
+    });
   }
 
   formatLabel(value: number | null) {
@@ -62,6 +60,18 @@ export class BrowsefilterComponent implements OnInit {
 
   addProductToBoard(product) {
     this.addProduct.emit(product);
+  }
+
+  applyFilters() {
+    console.log('applyFilters');
+    this.showLoader = true;
+    this.boardService.saveAddViaUrl(event).subscribe(s => {
+      this.showLoader = false;
+      this.updatesFromFilter.emit({
+        name: 'TOGGLE_FILTER_OVERLAY',
+        value: false
+      });
+    });
   }
 
 }

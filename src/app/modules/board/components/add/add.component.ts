@@ -1,8 +1,7 @@
 import { Component, OnInit, Output, EventEmitter } from '@angular/core';
-import { ApiService } from 'src/app/shared/services';
 import { MatDialog } from '@angular/material';
 import { AddViaUrlComponent } from '../add-via-url/add-via-url.component';
-import { mockProductsAdd } from './mock-products-add';
+import { BoardService } from 'src/app/shared/services/board/board.service';
 
 // import * as dropzone from 'dropzone';
 
@@ -13,39 +12,38 @@ import { mockProductsAdd } from './mock-products-add';
 })
 export class AddComponent implements OnInit {
 
-  customProducts = [];
-  animal: string;
-  name: string;
+  myUploads = [];
   allUploads = [];
   myItems = [];
+
   @Output() previewProduct: EventEmitter<any> = new EventEmitter();
 
   constructor(
-    private apiService: ApiService,
-    public dialog: MatDialog
-  ) {
-  }
+    public dialog: MatDialog,
+    private boardService: BoardService
+  ) { }
 
   ngOnInit(): void {
-    this.apiService.getCustomProducts().subscribe((s: any) => {
-      this.customProducts = [...mockProductsAdd];
-      this.allUploads = [...mockProductsAdd];
-      this.myItems = [...mockProductsAdd];
-    });
+    this.myUploads = [...this.boardService.myUploads];
+    this.allUploads = [...this.boardService.allUploads];
   }
-
 
   openDialog(): void {
     const dialogRef = this.dialog.open(AddViaUrlComponent, {
       width: '450px',
       data: {
-        name: this.name,
-        animal: this.animal
+        name: '',
+        panelClass: 'my-dialog',
       }
     });
 
     dialogRef.afterClosed().subscribe(result => {
-      this.animal = result;
+      let myUploads = this.boardService.myUploads;
+      let allUploads = this.boardService.allUploads;
+      this.boardService.myUploads = [...myUploads, result];
+      this.boardService.allUploads = [...allUploads, result];
+      this.myUploads = [...this.boardService.myUploads];
+      this.allUploads = [...this.boardService.allUploads];
     });
   }
 
