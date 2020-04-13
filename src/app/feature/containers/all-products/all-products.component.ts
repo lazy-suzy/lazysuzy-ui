@@ -7,7 +7,7 @@ import {
   IFilterData,
   ISortType
 } from './../../../shared/models';
-import { ApiService } from './../../../shared/services';
+import { ApiService, CacheService } from './../../../shared/services';
 import { SCROLL_ICON_SHOW_DURATION } from './../../../shared/constants';
 import { Router, ActivatedRoute } from '@angular/router';
 import { Observable, Subscription } from 'rxjs';
@@ -50,13 +50,15 @@ export class AllProductsComponent implements OnInit {
   bpSubscription: Subscription;
   isHandset: boolean = false;
   total: number = 24;
+  scrollToProductSKU: string = '';
 
   constructor(
     private apiService: ApiService,
     private router: Router,
     private location: Location,
     private activeRoute: ActivatedRoute,
-    private breakpointObserver: BreakpointObserver
+    private breakpointObserver: BreakpointObserver,
+    public cacheService: CacheService
   ) {}
 
   ngOnInit(): void {
@@ -87,6 +89,45 @@ export class AllProductsComponent implements OnInit {
       this.loadProducts();
     });
   }
+  checkPage() {
+    if (this.pageNo > 0) {
+      this.isProductFetching = true;
+      this.productsSubscription = this.apiService
+        .getMultiplePageAllProducts(
+          this.trend,
+          this.total,
+          this.filters,
+          this.sortType,
+          this.pageNo
+        )
+        .subscribe(response => {
+          let allProducts = [];
+          for (let i = 0; i < response.length; i++) {
+            allProducts = [...allProducts, ...response[i].products];
+          }
+          this.products = allProducts;
+          this.updateQueryString();
+          this.total_count = response[0].total;
+          this.productFilters = response[0].filterData;
+          this.sortTypeList = response[0].sortType;
+          this.isProductFetching = false;
+          if (this.cacheService.data.useCache) {
+            this.scrollToProductSKU = this.cacheService.data.productSku;
+            this.cacheService.data.useCache = false;
+            setTimeout(() => {
+              // this.productElement.nativeElement.getElementById
+              let el = document.getElementById(this.scrollToProductSKU);
+              window.scrollTo(0, el.offsetTop - 200);
+            }, 500);
+          }
+        });
+    } else {
+      this.loadProducts();
+    }
+
+    //Code for cached product sku
+  }
+
   loadProducts(): void {
     this.pageNo = 0;
     this.isProductFetching = true;
