@@ -71,6 +71,7 @@
       <app-product-mobile
         *ngFor="let product of products"
         [product]="product"
+        [productsInRow]="productsInRow"
         [ngClass]="{
           'w-50': productsInRow === 2,
           'w-33': productsInRow === 3,
