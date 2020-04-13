@@ -31,6 +31,7 @@ import { StepTwoComponent } from './components/add-via-url-stepper/step-two/step
 import { TextInputComponent } from './components/add-via-url-stepper/text-input/text-input.component';
 import { BoardProductsComponent } from './components/board-products/board-products.component';
 import { AppProductPreviewComponent } from './components/product-preview/product-preview.component';
+import { FileUploadModule } from 'ng2-file-upload';
 
 const DECLARATIONS = [
   BoardContainerComponent,
@@ -68,7 +69,8 @@ const MODULES = [
   PanelMenuModule,
   MatTabsModule,
   MaterialModule,
-  MultiSelectModule
+  MultiSelectModule,
+  FileUploadModule
 ];
 
 @NgModule({

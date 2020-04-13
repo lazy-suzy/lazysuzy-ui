@@ -1,8 +1,21 @@
 <div class="catalog-content">
     <form class="icon lg add-new dz-clickable">
-        <div class="dropzone-previews dz-message">
+        <!-- <div class="dropzone-previews dz-message"
+            ng2FileDrop
+            multiple
+            [ngClass]="{'nv-file-over': hasBaseDropZoneOver}"
+            (onFileDrop)="onFileSelected($event)">
             Click to Upload or Drag &amp; Drop Here
-        </div>
+        </div> -->
+        <input
+            class="dropzone-previews dz-message"
+            type="file"
+            #fileInput
+            ng2FileSelect
+            ng2FileDrop
+            multiple
+            (onFileDrop)="onFileSelected($event)"
+            (onFileSelected)="onFileSelected($event)" />
     </form>
     <div class="mb-3">
         <span class="add-new-url" (click)="openDialog()">Or add via URL</span>

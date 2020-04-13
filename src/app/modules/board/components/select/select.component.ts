@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ApiService } from 'src/app/shared/services';
+import { mockProductsAdd } from '../add/mock-products-add';
 
 @Component({
   selector: 'app-select',
