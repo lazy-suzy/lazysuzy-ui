@@ -1,4 +1,3 @@
-
 <div class="homepage">
   <div class="main-container">
     <!-- <h1 class="search-title">Search America's top Home brands in one go</h1> -->
@@ -7,18 +6,23 @@
       <div class="mh2 pad-h">
         <div class="categories-section container-fluid">
           <div class="row">
-            <div class="content-item col-md-3 col-sm-6" *ngFor="let category of categories">
-            <div class="pic">
+            <div
+              class="content-item col-md-3 col-sm-6"
+              *ngFor="let category of categories"
+            >
+              <div class="pic">
                 <a [routerLink]="category.link">
-                  <img class="img" src="{{category.image+ '?v=1.0.0'}}" alt="{{ category.category }}">
+                  <img
+                    class="img"
+                    src="{{ category.image + '?v=1.0.0' }}"
+                    alt="{{ category.category }}"
+                  />
                 </a>
-            </div>
-                <span class="badge">{{category.category}}</span>
+              </div>
+              <div class="badge">{{ category.category }}</div>
             </div>
           </div>
-        
         </div>
-        
       </div>
     </div>
   </div>

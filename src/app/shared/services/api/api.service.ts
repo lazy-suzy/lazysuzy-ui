@@ -104,7 +104,7 @@ export class ApiService {
     for (let i = 0; i <= page; i++) {
       const url = env.useLocalJson
         ? `${env.JSON_BASE_HREF}${endpoint}`
-        : `${env.API_BASE_HREF}${endpoint}?${trend}=true&limit=${total}&filters=${filters}&sort_type=${sortType}&pageno=${page}`;
+        : `${env.API_BASE_HREF}${endpoint}?${trend}=true&limit=${total}&filters=${filters}&sort_type=${sortType}&pageno=${i}`;
       httpCalls.push(this.httpService.get(url));
     }
     return forkJoin(httpCalls);

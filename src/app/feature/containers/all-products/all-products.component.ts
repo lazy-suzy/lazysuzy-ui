@@ -86,7 +86,7 @@ export class AllProductsComponent implements OnInit {
           this.trend = key;
         }
       });
-      this.loadProducts();
+      this.checkPage();
     });
   }
   checkPage() {
@@ -150,7 +150,11 @@ export class AllProductsComponent implements OnInit {
     params = params.set('sortType', this.sortType);
     params = params.set('pageNo', this.pageNo.toString());
 
-    this.location.replaceState(window.location.pathname, params.toString());
+    this.location.replaceState(
+      window.location.pathname,
+      params.toString(),
+      this.location.getState()
+    );
   }
 
   onSetFilters(e): void {
