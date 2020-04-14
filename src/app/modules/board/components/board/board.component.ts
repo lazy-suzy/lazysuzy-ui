@@ -17,7 +17,7 @@ export class BoardComponent implements OnInit {
 
   ngOnInit(): void {
     this.boardService.initBoard('');
-    this.currentBoardProducts = this.boardService.currentBoardProducts;
+    this.currentBoardProducts = this.boardService.state.currentBoardProducts;
   }
 
 }
