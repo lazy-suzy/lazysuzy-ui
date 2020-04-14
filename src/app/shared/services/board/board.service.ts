@@ -14,12 +14,6 @@ export class BoardService {
 
     settings: IBoardSettings;
 
-    allBoards = [];
-    currentBoard = {};
-    currentBoardProducts = [];
-    myUploads = [];
-    allUploads = [];
-
     state: any = {
         allBoards: [],
         currentBoard: {},
@@ -36,11 +30,11 @@ export class BoardService {
     constructor(public apiService: ApiService) { }
 
     initBoard(boardId) {
-        this.allUploads = [...allUploadsMock];
-        this.allBoards = [...allBoardsMock];
-        this.myUploads = [...myUploadsMock];
-        this.currentBoard = this.allBoards[0];
-        this.currentBoardProducts = this.extractBoardItems(this.currentBoard);
+        this.state.allUploads = [...allUploadsMock];
+        this.state.allBoards = [...allBoardsMock];
+        this.state.myUploads = [...myUploadsMock];
+        this.state.currentBoard = this.state.allBoards[0];
+        this.state.currentBoardProducts = this.extractBoardItems(this.state.currentBoard);
         this.state = {
             ...this.state
         };
@@ -67,8 +61,8 @@ export class BoardService {
     }
 
     getAllBoards(payload) {
-        this.allBoards = [...allBoardsMock];
-        this.currentBoard = allBoardsMock[0];
+        this.state.allBoards = [...allBoardsMock];
+        this.state.currentBoard = allBoardsMock[0];
         return of(allBoardsMock).pipe(delay(5000));
         // return this.apiService.getAllBoards(payload);
     }
@@ -83,15 +77,6 @@ export class BoardService {
 
     setFilterData(category, filterData) {
         this.state.filterData = { ...filterData };
-    }
-
-    getProductsDropdown() {
-        let cars = [
-            { label: 'Audi', value: 'Audi' },
-            { label: 'BMW', value: 'BMW' },
-            { label: 'Volvo', value: 'Volvo' },
-        ];
-        return of(cars).pipe(delay(5000));
     }
 
     saveAddViaUrl(payload) {

@@ -30,8 +30,8 @@ export class AddComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    this.myUploads = [...this.boardService.myUploads];
-    this.allUploads = [...this.boardService.allUploads];
+    this.myUploads = [...this.boardService.state.myUploads];
+    this.allUploads = [...this.boardService.state.allUploads];
 
     this.uploader.onBeforeUploadItem = (item: FileItem) => {
       item.withCredentials = false;
@@ -54,12 +54,12 @@ export class AddComponent implements OnInit {
     });
 
     dialogRef.afterClosed().subscribe(result => {
-      let myUploads = this.boardService.myUploads;
-      let allUploads = this.boardService.allUploads;
-      this.boardService.myUploads = [...myUploads, result];
-      this.boardService.allUploads = [...allUploads, result];
-      this.myUploads = [...this.boardService.myUploads];
-      this.allUploads = [...this.boardService.allUploads];
+      let myUploads = this.boardService.state.myUploads;
+      let allUploads = this.boardService.state.allUploads;
+      this.boardService.state.myUploads = [...myUploads, result];
+      this.boardService.state.allUploads = [...allUploads, result];
+      this.myUploads = [...this.boardService.state.myUploads];
+      this.allUploads = [...this.boardService.state.allUploads];
     });
   }
 

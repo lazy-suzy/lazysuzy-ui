@@ -1,21 +1,7 @@
 <div class="catalog-content">
     <form class="icon lg add-new dz-clickable">
-        <!-- <div class="dropzone-previews dz-message"
-            ng2FileDrop
-            multiple
-            [ngClass]="{'nv-file-over': hasBaseDropZoneOver}"
-            (onFileDrop)="onFileSelected($event)">
-            Click to Upload or Drag &amp; Drop Here
-        </div> -->
-        <input
-            class="dropzone-previews dz-message"
-            type="file"
-            #fileInput
-            ng2FileSelect
-            ng2FileDrop
-            multiple
-            (onFileDrop)="onFileSelected($event)"
-            (onFileSelected)="onFileSelected($event)" />
+        <input class="dropzone-previews dz-message" type="file" #fileInput ng2FileSelect ng2FileDrop multiple
+            (onFileDrop)="onFileSelected($event)" (onFileSelected)="onFileSelected($event)" />
     </form>
     <div class="mb-3">
         <span class="add-new-url" (click)="openDialog()">Or add via URL</span>
@@ -25,10 +11,12 @@
     <div class="d-flex mb-3">
         <mat-tab-group>
             <mat-tab label="My Items">
-                <app-board-products [modifyPath]="'true'" [products]="myUploads" (previewProduct)="handlePreviewProduct($event)"></app-board-products>
+                <app-board-products [modifyPath]="'true'" [products]="myUploads"
+                    (previewProduct)="handlePreviewProduct($event)"></app-board-products>
             </mat-tab>
             <mat-tab label="All Uploads">
-                <app-board-products [modifyPath]="'true'" [products]="allUploads" (previewProduct)="handlePreviewProduct($event)"></app-board-products>
+                <app-board-products [modifyPath]="'true'" [products]="allUploads"
+                    (previewProduct)="handlePreviewProduct($event)"></app-board-products>
             </mat-tab>
         </mat-tab-group>
     </div>

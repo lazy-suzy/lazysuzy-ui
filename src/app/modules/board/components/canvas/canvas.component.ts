@@ -24,8 +24,8 @@ export class CanvasComponent implements OnInit {
     this.boardService.getBoardStateObs()
     .pipe(takeUntil(this.unsubscribe$))
     .subscribe(state => {
-      this.currentBoard = { ...this.boardService.currentBoard };
-      this.currentBoardProducts = [...this.boardService.currentBoardProducts];
+      this.currentBoard = { ...this.boardService.state.currentBoard };
+      this.currentBoardProducts = [...this.boardService.state.currentBoardProducts];
     });
   }
 
