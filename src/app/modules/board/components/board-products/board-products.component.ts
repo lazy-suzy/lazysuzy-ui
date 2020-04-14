@@ -20,6 +20,7 @@ export class BoardProductsComponent implements OnInit {
     if (changes['products'] && changes['products'].previousValue !== changes['products'].currentValue) {
       let products = changes['products'].currentValue || [];
       if (this.modifyPath) {
+        debugger;
         products = products.map(pro => {
           return {
             ...pro,

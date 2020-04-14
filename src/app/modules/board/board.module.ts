@@ -32,6 +32,7 @@ import { TextInputComponent } from './components/add-via-url-stepper/text-input/
 import { BoardProductsComponent } from './components/board-products/board-products.component';
 import { AppProductPreviewComponent } from './components/product-preview/product-preview.component';
 import { FileUploadModule } from 'ng2-file-upload';
+import { CanvasNewComponent } from './components/canvas-new/canvas-new.component';
 
 const DECLARATIONS = [
   BoardContainerComponent,
@@ -52,7 +53,8 @@ const DECLARATIONS = [
   StepTwoComponent,
   TextInputComponent,
   BoardProductsComponent,
-  AppProductPreviewComponent
+  AppProductPreviewComponent,
+  CanvasNewComponent
 ];
 
 const MODULES = [

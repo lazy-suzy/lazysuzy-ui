@@ -11,11 +11,11 @@ import * as Handlebars from 'handlebars/dist/cjs/handlebars';
 import * as _can from './canvas.js';
 
 @Component({
-  selector: 'app-canvas',
-  templateUrl: './canvas.component.html',
-  styleUrls: ['./canvas.component.less']
+  selector: 'app-canvas-new',
+  templateUrl: './canvas-new.component.html',
+  styleUrls: ['./canvas-new.component.less']
 })
-export class CanvasComponent implements OnInit {
+export class CanvasNewComponent implements OnInit {
 
   canvas: any;
   initCanvas = false;
@@ -34,9 +34,6 @@ export class CanvasComponent implements OnInit {
     this.canvas = new fb.Canvas('canvas');
     this.canvas.add(new fb.Text('Hello From Canvas!!'));
     console.log($);
-    _can.zoomIn();
-
-debugger;
 
     // 
 
