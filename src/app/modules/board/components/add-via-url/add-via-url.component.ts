@@ -34,9 +34,9 @@ export class AddViaUrlComponent implements OnInit {
     if (payload.name === 'cancel') {
       this.onNoClick();
     }
-    else if (payload.name === 'save') {
+    else if (payload.name === 'add-image-via-url') {
       this.showLoader = true;
-      this.boardService.saveAddViaUrl(event).subscribe(res => {
+      this.boardService.saveAddViaUrl(payload.data).subscribe(res => {
         this.showLoader = false;
         this.onYesClick(res);
       });

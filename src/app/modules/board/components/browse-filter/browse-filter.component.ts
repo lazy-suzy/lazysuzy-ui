@@ -16,38 +16,49 @@ export class BrowsefilterComponent implements OnInit {
   min = 0;
   max = 10000;
 
-  productsDropdown: any[];
-  selectedProductsDropdown: any[] = [];
+  brandsDropdown: any[];
+  selectedbrandsDropdown: any[] = [];
 
   productsColors: any[];
   selectedProductsColor: any[] = [];
 
+  filterData: any = [];
   @Output() updatesFromFilter: EventEmitter<any> = new EventEmitter();
   @Output() addProduct: EventEmitter<any> = new EventEmitter();
 
   constructor(
     private fb: FormBuilder,
     private boardService: BoardService
-  ) {
-  }
+  ) { }
 
   ngOnInit(): void {
     this.createForm();
-    this.showLoader = true;
-    this.boardService.getProductsDropdown().subscribe(s => {
-      this.productsDropdown = s;
-      this.showLoader = false;
-    });
   }
 
-  formatLabel(value: number | null) {
-    if (!value) {
-      return 0;
-    }
-    return value;
+  convertFilterDataForPlugin(brand, color) {
+    let brands = (brand || []).map(ele => {
+      return {
+        ...ele,
+        label: ele.name,
+      };
+    });
+    let colors = (color || []).map(ele => {
+      return {
+        ...ele,
+        label: ele.name,
+      };
+    });
+    return {
+      brands: brands,
+      colors: colors
+    };
   }
 
   createForm() {
+    this.filterData = { ...(this.boardService.state.filterData || {}) };
+    const result = this.convertFilterDataForPlugin(this.filterData.brand, this.filterData.color);
+    this.brandsDropdown = [...result.brands];
+    this.productsColors = [...result.colors];
     this.filterForm = this.fb.group({
       brand: [],
       price: 0,
@@ -56,6 +67,13 @@ export class BrowsefilterComponent implements OnInit {
     this.filterForm.valueChanges.subscribe(val => {
       console.log("value", val);
     });
+  }
+
+  formatLabel(value: number | null) {
+    if (!value) {
+      return 0;
+    }
+    return value;
   }
 
   addProductToBoard(product) {

@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { FormGroup, FormBuilder, FormControl } from '@angular/forms';
+import { FormGroup, FormBuilder } from '@angular/forms';
 import { Observable, Subject } from 'rxjs';
 
 @Injectable()
@@ -12,28 +12,35 @@ export class FormService {
   stepTwo: Observable<FormGroup> = this.stepTwoSource.asObservable();
 
   mainForm: FormGroup = this._formBuilder.group({
-    firstName: '',
-    lastName: '',
-    extraName: '',
-    address: ''
-  })
+    imageUrl: '',
+    productTitle: '',
+    price: '',
+    productListingUrl: '',
+    additionalTags: '',
+    keepPrivate: ''
+  });
 
   constructor(
     private _formBuilder: FormBuilder
   ) {
     this.stepOne.subscribe(form =>
       form.valueChanges.subscribe(val => {
-        this.mainForm.value.firstName = val.firstName
-        this.mainForm.value.lastName = val.lastName
-        this.mainForm.value.extraName = val.extraName
+        this.mainForm.value.imageUrl = val.imageUrl
       })
     )
     this.stepTwo.subscribe(form =>
       form.valueChanges.subscribe(val => {
-        // console.log(val)
-        this.mainForm.value.address = val.address
+        this.mainForm.value.productTitle = val.productTitle;
+        this.mainForm.value.price = val.price;
+        this.mainForm.value.productListingUrl = val.productListingUrl;
+        this.mainForm.value.additionalTags = val.additionalTags;
+        this.mainForm.value.keepPrivate = val.keepPrivate;
       })
     )
+  }
+
+  getAddViaUrlValues() {
+    return this.mainForm.value;
   }
 
   stepReady(form: FormGroup, part) {

@@ -26,7 +26,8 @@ export class BoardService {
         currentBoardProducts: [],
         myUploads: [],
         allUploads: [],
-        selectedCategory: null
+        selectedCategory: null,
+        filterData: {}
     };
 
     private boardState: BehaviorSubject<any> = new BehaviorSubject(this.state);
@@ -80,6 +81,10 @@ export class BoardService {
         return this.apiService.getAllDepartments();
     }
 
+    setFilterData(category, filterData) {
+        this.state.filterData = { ...filterData };
+    }
+
     getProductsDropdown() {
         let cars = [
             { label: 'Audi', value: 'Audi' },
@@ -90,11 +95,13 @@ export class BoardService {
     }
 
     saveAddViaUrl(payload) {
+        //TO ASK MIKE
         return of(addViaUrlResponse).pipe(delay(5000));
     }
 
     uploadFileManual(payload) {
         // return this.apiService.getAllBoards(payload);
+        //TO ASK MIKE
         return of(addViaUrlResponse).pipe(delay(5000));
     }
 

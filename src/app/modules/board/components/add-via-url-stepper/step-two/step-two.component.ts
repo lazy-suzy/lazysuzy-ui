@@ -38,9 +38,10 @@ export class StepTwoComponent implements OnInit {
   }
 
   saveAddViaUrl() {
+    const data = this.formService.getAddViaUrlValues();
     const payload = {
-      name:'save',
-      data: {}
+      name:'add-image-via-url',
+      data: data
     };
     this.stepperUpdates.emit(payload);
   }
