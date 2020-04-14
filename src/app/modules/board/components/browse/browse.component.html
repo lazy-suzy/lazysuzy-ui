@@ -20,12 +20,14 @@
             <div class="filter-bar js-filter-section" id="desktop-filter">
                 <div class="tabs">
 
-                    <p-overlayPanel [showTransitionOptions]="'200ms'" #browsefilter [hideTransitionOptions]="'200ms'" [dismissable]="false" [showCloseIcon]="true" #op1 [appendTo]="'body'">
+                    <p-overlayPanel [showTransitionOptions]="'200ms'" #browsefilter [hideTransitionOptions]="'200ms'"
+                        [dismissable]="false" [showCloseIcon]="true" #op1 [appendTo]="'body'">
                         <ng-template pTemplate>
-                            <app-browse-filter (updatesFromFilter)="handleUpdatesFromFilter($event)"></app-browse-filter>
+                            <app-browse-filter (updatesFromFilter)="handleUpdatesFromFilter($event)">
+                            </app-browse-filter>
                         </ng-template>
                     </p-overlayPanel>
-                    
+
                     <button type="text" pButton class="btn btn-primary" label="Custom Target"
                         (click)="op1.show($event, actualTarget1)">Filters</button>
                     <div #actualTarget1></div>
@@ -39,4 +41,5 @@
 
 <app-loader *ngIf="showLoader"></app-loader>
 
-<app-board-products [products]="products" *ngIf="!showLoader" (previewProduct)="handlePreviewProduct($event)"></app-board-products>
+<app-board-products [products]="products" *ngIf="!showLoader" (previewProduct)="handlePreviewProduct($event)">
+</app-board-products>

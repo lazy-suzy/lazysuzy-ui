@@ -33,6 +33,9 @@ export class BoardContainerComponent implements OnInit {
 
   handleBoardSideNavUpdates(event) {
     this.selectedItem = event;
+    if (event.value == 'Select') {
+      this.boardService.state.selectedCategory = null;
+    }
   }
 
   handleAddProduct(event) {

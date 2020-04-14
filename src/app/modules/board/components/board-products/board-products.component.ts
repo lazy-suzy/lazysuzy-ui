@@ -23,6 +23,8 @@ export class BoardProductsComponent implements OnInit {
         products = products.map(pro => {
           return {
             ...pro,
+            // To ask MIKE
+            // main_image: `https://www.lazysuzy.com/${pro.path}`
             main_image: `http://board.lazysuzy.com/${pro.path}`
           };
         });

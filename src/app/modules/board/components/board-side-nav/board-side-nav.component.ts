@@ -1,5 +1,6 @@
 import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { SideNavItems } from './sidenavitems';
+import { BoardService } from 'src/app/shared/services/board/board.service';
 
 @Component({
   selector: 'app-board-side-nav',
@@ -15,8 +16,8 @@ export class BoardSideNavComponent implements OnInit {
 
   @Output() updates: EventEmitter<any> = new EventEmitter();
 
-  constructor() {}
-  
+  constructor(private boardService: BoardService) { }
+
   ngOnInit(): void {
     this.selectSideBarItem({
       name: 'Select',

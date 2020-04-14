@@ -1,7 +1,7 @@
 <div class="left-tabs">
     <ul class="nav nav-tabs flex-column">
         <li *ngFor="let sideItem of sideBarItems;"
-        (click)="selectSideBarItem(sideItem)" class="nav-item">
+        (click)="selectSideBarItem(sideItem)" [ngClass]="boardService.state.selectedCategory == null  && sideItem?.value == 'Browse' ? 'disable-browse' : ''" class="nav-item">
             <div class="nav-link" [class.active]="sideItem?.value === selected?.value">
                 {{sideItem?.label}}
             </div>
