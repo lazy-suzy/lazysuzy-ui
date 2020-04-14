@@ -1,9 +1,12 @@
 <div class="products">
-    <div class="flex-grid">
+    <div class="flex-grid" *ngIf="products.length">
         <div class="flex-grid-item" *ngFor="let product of products">
             <div class="product-image" type="default" (click)="previewProductFn(product)">
                 <img src={{product.main_image}}/>
             </div>
         </div>
+    </div>
+    <div *ngIf="!products.length">
+        No Products found. Try another category.
     </div>
 </div>

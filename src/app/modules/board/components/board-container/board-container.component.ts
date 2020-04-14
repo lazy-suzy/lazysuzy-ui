@@ -25,7 +25,11 @@ export class BoardContainerComponent implements OnInit {
     this.boardService.initBoard('');
   }
 
-  handleMidPanelUpdates(event) { }
+  handleMidPanelUpdates(event) {
+    if (event.name === 'GO_TO') {
+      this.handleBoardSideNavUpdates(event.payload);
+    }
+  }
 
   handleBoardSideNavUpdates(event) {
     this.selectedItem = event;
@@ -41,6 +45,15 @@ export class BoardContainerComponent implements OnInit {
 
   handleTextActions(event) {
     this.canvas.handleTextActions(event);
+  }
+
+  handleUpdateSelect(event) {
+    this.boardService.setCategory(event);
+    this.selectedItem = {
+      name: 'Browse',
+      label: 'Browse',
+      value: 'Browse'
+    };
   }
 
 }

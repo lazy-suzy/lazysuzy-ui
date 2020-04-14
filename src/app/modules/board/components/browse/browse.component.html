@@ -9,10 +9,10 @@
             </div>
         </div>
     </div>
-    <div class="browse-title">
+    <div class="browse-title" (click)="handleGoToSelect($event)">
         <i class="mdi mdi-chevron-left" aria-hidden="true"></i>
         <h5 class="title js-category-title">
-            Sofas
+            {{selectedCategory?.category}}
         </h5>
     </div>
     <div class="browse-filter">
@@ -39,19 +39,4 @@
 
 <app-loader *ngIf="showLoader"></app-loader>
 
-<app-board-products [products]="products" (previewProduct)="handlePreviewProduct($event)"></app-board-products>
-
-<!-- <div class="products">
-    <div class="flex-grid">
-        <div class="flex-grid-item" *ngFor="let product of products">
-            <div class="product-image" type="default" (click)="previewProductFn(product)">
-                <img src={{product.main_image}} />
-            </div>
-        </div>
-    </div>
-    <div class="text-center">
-        <button class="btn red-button js-load-more">
-            Load more
-        </button>
-    </div>
-</div> -->
+<app-board-products [products]="products" *ngIf="!showLoader" (previewProduct)="handlePreviewProduct($event)"></app-board-products>

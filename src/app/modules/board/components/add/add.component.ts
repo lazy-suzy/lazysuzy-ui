@@ -77,7 +77,6 @@ export class AddComponent implements OnInit {
     const file: File = event[0];
     this.boardService.uploadFileManual(file).subscribe(res => {
       console.log("Response here");
-      debugger;
       this.showLoader = false;
     });
   }

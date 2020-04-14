@@ -9,11 +9,12 @@ export class MidPanelComponent implements OnInit {
 
   @Input() selectedItem: any = [];
   @Input() data: any = [];
-  
+
   @Output() updates: EventEmitter<any> = new EventEmitter();
   @Output() addProduct: EventEmitter<any> = new EventEmitter();
   @Output() textActions: EventEmitter<any> = new EventEmitter();
-  
+  @Output() updatesFromSelect: EventEmitter<any> = new EventEmitter();
+
   productForPreview = null;
 
   constructor() { }
@@ -47,6 +48,21 @@ export class MidPanelComponent implements OnInit {
 
   handleClearProductPreview(product) {
     this.productForPreview = null;
+  }
+
+  handleGoToSelect(event) {
+    this.updates.emit({
+      name: 'GO_TO',
+      payload: {
+        name: 'Select',
+        label: 'Select',
+        value: 'Select'
+      }
+    });
+  }
+
+  handleGoToCategory(event) {
+    this.updatesFromSelect.emit(event);
   }
 
 }

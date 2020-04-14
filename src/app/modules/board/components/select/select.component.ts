@@ -1,6 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { ApiService } from 'src/app/shared/services';
 import { mockProductsAdd } from '../add/mock-products-add';
+import { BoardService } from 'src/app/shared/services/board/board.service';
 
 @Component({
   selector: 'app-select',
@@ -8,18 +9,24 @@ import { mockProductsAdd } from '../add/mock-products-add';
   styleUrls: ['./select.component.less']
 })
 export class SelectComponent implements OnInit {
-  
+
   allDepartments = [];
   showLoader: boolean = false;
 
-  constructor(private apiService: ApiService) { }
+  @Output() goToCategory: EventEmitter<any> = new EventEmitter();
+
+  constructor(private boardService: BoardService) { }
 
   ngOnInit(): void {
     this.showLoader = true;
-    this.apiService.getAllDepartments().subscribe((s: any) => {
+    this.boardService.getAllDepartments().subscribe((s: any) => {
       this.allDepartments = s;
       this.showLoader = false;
     });
+  }
+
+  handleSelectCategory(event) {
+    this.goToCategory.emit(event);
   }
 
 }
