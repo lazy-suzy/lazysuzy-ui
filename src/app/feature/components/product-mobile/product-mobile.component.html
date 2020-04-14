@@ -31,6 +31,14 @@
         }} {{ productsInRow < 3 ? '' : 'dn' }}"
         >${{ product.is_price }}
       </span>
+      <span
+        class="strike {{
+          product.is_price !== product.was_price && productsInRow < 3
+            ? ''
+            : 'dn'
+        }}"
+        >${{ product.was_price }}</span
+      >
     </div>
     <div class="discount-percentage">
       <span

@@ -97,6 +97,13 @@ export class UtilsService {
   }
 
   compileMarkdown(data) {
-    return this.markdownService.compile(data.join('<br/>'));
+    let mergedData = '';
+    for (let item of data) {
+      mergedData = `${mergedData}${
+        item.indexOf('</h6>') > -1 ? '\n' : ''
+      }${item}\n${item.indexOf('</h6>') > -1 ? '\n' : ''}`;
+    }
+    console.log(mergedData);
+    return this.markdownService.compile(mergedData);
   }
 }

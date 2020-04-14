@@ -4,7 +4,7 @@ import { UtilsService } from 'src/app/shared/services';
 @Component({
   selector: 'app-variations',
   templateUrl: './variations.component.html',
-  styleUrls: ['./variations.component.less']
+  styleUrls: ['./variations.component.less'],
 })
 export class VariationsComponent implements OnInit {
   @Output() setImage = new EventEmitter<any>();
@@ -14,15 +14,19 @@ export class VariationsComponent implements OnInit {
   @Input() isSwatchExist = false;
   swatches = [];
   filteredVariations = [];
+  swatchFilter = [];
   selections = {};
   selectedIndex: number;
+  priceData = {
+    price: '',
+    wasPrice: '',
+  };
+
   constructor(private utils: UtilsService) {}
 
   ngOnInit() {
     this.filteredVariations = this.variations;
-    this.swatches = this.variations.filter(
-      variation => variation.swatch_image !== null
-    );
+    this.filterSwatches(this.variations);
   }
 
   selectedVariation(variation, index: number) {
@@ -30,12 +34,17 @@ export class VariationsComponent implements OnInit {
       this.utils.openVariationDialog(variation.variation_sku);
     } else {
       this.selectedIndex = index;
+      this.priceData = {
+        price: variation.price,
+        wasPrice: variation.was_price,
+      };
+      this.setPrice.emit(this.priceData);
       this.setImage.emit(variation.image);
     }
   }
 
   selectedOption(option: string, type: string) {
-    if (this.selections[type] == option) {
+    if (this.selections[type] === option) {
       delete this.selections[type];
     } else {
       this.selections[type] = option;
@@ -65,25 +74,34 @@ export class VariationsComponent implements OnInit {
 
   clearVariations() {
     this.selections = {};
+    this.priceData = {
+      price: null,
+      wasPrice: null,
+    };
     this.updateSwatches();
+    this.selectedIndex = null;
   }
 
   updateSwatches() {
-    var _self = this;
-    this.swatches = this.variations.filter(function(variation) {
+    const _self = this;
+    const selectedBasedSwatches = this.variations.filter(function (variation) {
       if (variation.swatch_image !== null) {
         return _self.checkSwatchSelection(variation, _self);
       }
     });
-
-    this.filteredVariations = this.variations.filter(function(variation) {
+    this.filterSwatches(selectedBasedSwatches);
+    this.filteredVariations = this.variations.filter(function (variation) {
       return _self.checkSwatchSelection(variation, _self);
     });
     if (this.filteredVariations.length === 1) {
-      this.setPrice.emit(this.filteredVariations[0].price);
+      this.priceData = {
+        price: this.filteredVariations[0].price,
+        wasPrice: this.filteredVariations[0].was_price,
+      };
+      this.setPrice.emit(this.priceData);
       this.setImage.emit(this.filteredVariations[0].image);
     } else {
-      this.setPrice.emit('');
+      this.setPrice.emit(this.priceData);
       this.setImage.emit('');
     }
   }
@@ -102,5 +120,26 @@ export class VariationsComponent implements OnInit {
       }
     }
     return isValidVariation;
+  }
+
+  filterSwatches(variations) {
+    var _self = this;
+    this.swatchFilter = [];
+    this.swatches = variations.filter(function (variation) {
+      let isValidSwatch;
+      if (variation.swatch_image !== null) {
+        if (
+          !_self.swatchFilter.includes(variation.swatch_image) || _self.swatchFilter.length === 0
+        ) {
+          _self.swatchFilter.push(variation.swatch_image);
+          isValidSwatch = true;
+        } else {
+          isValidSwatch = false;
+        }
+      } else {
+        isValidSwatch = false;
+      }
+      return isValidSwatch;
+    });
   }
 }

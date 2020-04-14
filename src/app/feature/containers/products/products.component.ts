@@ -66,7 +66,7 @@ export class ProductsComponent implements OnInit, OnDestroy {
   );
   bpSubscription: Subscription;
   isHandset: boolean;
-  scrollToProductSKU: any = '';
+  scrollToProductSKU: string = '';
 
   constructor(
     public dialog: MatDialog,

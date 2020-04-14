@@ -1,4 +1,5 @@
 <span class="title">Options</span>
+<span class="clear-btn" (click)="clearVariations()">Clear</span>
 <div class="variation-options" *ngIf="isSwatchExist">
   <div
     *ngFor="let variation of swatches; let i = index"
@@ -20,7 +21,6 @@
     No product available, please change/clear options
   </div>
 </div>
-<div class="clear-btn" (click)="clearVariations()">Clear</div>
 <div class="flex flex-wrap variant-features-options-container">
   <div
     class="variant-feature-content"
