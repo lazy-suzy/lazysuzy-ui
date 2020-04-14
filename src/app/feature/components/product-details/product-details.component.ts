@@ -36,6 +36,7 @@ export class ProductDetailsComponent implements OnInit {
   description: any;
   features: any;
   productPrice: string;
+  productWasPrice: string;
   variations = [];
   topHeight: Object = { 'max-height': '0' };
 
@@ -73,6 +74,7 @@ export class ProductDetailsComponent implements OnInit {
           )
         );
         this.productPrice = this.product.is_price;
+        this.productWasPrice = this.product.was_price;
         this.isVariationExist = this.utils.checkDataLength(
           this.product.variations
         );
@@ -140,7 +142,8 @@ export class ProductDetailsComponent implements OnInit {
       this.items.splice(0, 0, image);
     }
   }
-  onSetPrice(price): void {
-    this.productPrice = price || this.product.is_price;
+  onSetPrice(priceData): void {
+    this.productPrice = priceData.price || this.product.is_price;
+    this.productWasPrice = priceData.wasPrice || this.product.was_price;
   }
 }

@@ -40,9 +40,9 @@
 
           <span
             class="strike {{
-              product.is_price !== product.was_price ? '' : 'dn'
+              productPrice !== productWasPrice ? '' : 'dn'
             }}"
-            >${{ product.was_price }}</span
+            >${{productWasPrice }}</span
           >
           <button mat-raised-button class="bg-red view-details-btn">
             <a
