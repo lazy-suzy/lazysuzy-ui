@@ -35,10 +35,10 @@
     </div>
     <div class="product-site">{{ product.site }}</div>
     <div class="price-container">
-      <span class="product-price mr3">${{ product.is_price }}</span>
+      <span class="product-price mr3">${{ productPrice }}</span>
       <span
-        class="strike {{ product.is_price !== product.was_price ? '' : 'dn' }}"
-        >${{ product.was_price }}</span
+        class="strike {{ productPrice !== productWasPrice ? '' : 'dn' }}"
+        >${{ productWasPrice }}</span
       >
       <button mat-raised-button class="view-details-btn">
         <a
@@ -52,10 +52,12 @@
     </div>
     <hr class="modal-hr" />
     <div class="variation-container" *ngIf="variationsExist">
+      <span class="title">Options</span>
+      <span class="clear-btn" (click)="clearVariations()">Clear</span>
       <div class="variation-options">
         <div
           class="variation"
-          *ngFor="let variation of product.variations; let i = index"
+          *ngFor="let variation of swatches; let i = index"
           (click)="selectedVariation(variation, i, gallery)"
           [class.activeVariation]="selectedIndex === i"
         >
@@ -67,8 +69,19 @@
             />
           </a>
         </div>
+        <div *ngIf="swatches.length === 0">
+          No product available, please change/clear options
+        </div>
       </div>
     </div>
+    <app-variations
+            [variations]="product.variations"
+            [isSwatchExist]="isSwatchExist"
+            [inputSelections]="product.selections"
+            (setPrice)="onSetPrice($event)"
+            (setImage)="onSetImage($event)"
+            (setSwatches)="setSwatches($event)"
+          ></app-variations>
     <div>
       <ul class="description-menu">
         <li

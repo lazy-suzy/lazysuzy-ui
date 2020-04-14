@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { IProductPayload } from 'src/app/shared/models';
 import { ApiService, UtilsService, CacheService } from 'src/app/shared/services';
@@ -10,12 +10,15 @@ import {
 } from '@angular/cdk/layout';
 import { Gallery, GalleryItem, ImageItem } from '@ngx-gallery/core';
 import { Lightbox } from '@ngx-gallery/lightbox';
+import { VariationsComponent } from '../variations/variations.component';
+
 @Component({
   selector: 'app-product-details-mobile',
   templateUrl: './product-details-mobile.component.html',
   styleUrls: ['./product-details-mobile.component.less']
 })
 export class ProductDetailsMobileComponent implements OnInit {
+  @ViewChild(VariationsComponent, { static: false }) child: VariationsComponent;
   productSku: any;
   routeSubscription: any;
   product: IProductPayload;
@@ -37,7 +40,15 @@ export class ProductDetailsMobileComponent implements OnInit {
   isProductFetching: boolean = false;
   description: any;
   features: any;
-
+  productPrice: string;
+  productWasPrice: string;
+  variations = [];
+  swatches = [];
+  selectedSwatch = {
+    swatch_image: null,
+    price: '',
+    wasPrice: ''
+  };
   constructor(
     private router: Router,
     private activeRoute: ActivatedRoute,
@@ -87,6 +98,9 @@ export class ProductDetailsMobileComponent implements OnInit {
             { queryParams: { modal_sku: this.product.sku } }
           );
         }
+        this.swatches = this.product.variations;
+        this.productPrice = this.product.is_price;
+        this.productWasPrice = this.product.was_price;
         const galleryRef = this.gallery.ref(this.galleryId);
         this.items = this.product.on_server_images.map(
           item => new ImageItem({ src: item })
@@ -109,8 +123,14 @@ export class ProductDetailsMobileComponent implements OnInit {
       this.router.navigate([`/product/${variation.variation_sku}`]);
       this.loadProduct();
     } else {
-      const image = new ImageItem({ src: variation.image });
-      this.items.splice(0, 1, image);
+      this.selectedSwatch = {
+        swatch_image: variation.swatch_image,
+        price: variation.price,
+        wasPrice: variation.was_price
+      };
+      this.productPrice = variation.price;
+      this.productWasPrice = variation.was_price;
+      this.onSetImage(variation.image);
       this.selectedIndex = index;
       container.scrollLeft = 0;
     }
@@ -137,5 +157,49 @@ export class ProductDetailsMobileComponent implements OnInit {
     if (typeof vglnk) {
       vglnk.open(url, '_blank');
     }
+  }
+  onSetImage(src): void {
+    // this.galleryContainer.nativeElement.scrollTop = 0;
+    this.items = this.product.on_server_images.map(
+      item => new ImageItem({ src: item })
+    );
+    if (src) {
+      const image = new ImageItem({ src });
+      this.items.splice(0, 0, image);
+    }
+  }
+  onSetPrice(priceData): void {
+    this.productPrice = priceData.price || this.product.is_price;
+    this.productWasPrice = priceData.wasPrice || this.product.was_price;
+  }
+  setSwatches(updatedSwatches): void {
+    this.swatches = updatedSwatches;
+    if (this.selectedSwatch.swatch_image && this.swatches.some(data => data.swatch_image === this.selectedSwatch.swatch_image)) {
+      this.productPrice = this.selectedSwatch.price;
+      this.productWasPrice = this.selectedSwatch.wasPrice;
+    } else {
+      this.selectedSwatch = {
+        swatch_image: null,
+        price: '',
+        wasPrice: ''
+      };
+      this.productPrice = this.product.is_price;
+      this.productWasPrice = this.product.was_price;
+      this.selectedIndex = null;
+    }
+  }
+  clearVariations() {
+    this.selectedSwatch = {
+      swatch_image: null,
+      price: '',
+      wasPrice: ''
+    };
+    this.productPrice = this.product.is_price;
+    this.productWasPrice = this.product.was_price;
+    this.selectedIndex = null;
+    this.items = this.product.on_server_images.map(
+      item => new ImageItem({ src: item })
+    );
+    this.child.clearVariations();
   }
 }
