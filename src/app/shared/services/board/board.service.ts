@@ -30,14 +30,18 @@ export class BoardService {
     constructor(public apiService: ApiService) { }
 
     initBoard(boardId) {
-        this.state.allUploads = [...allUploadsMock];
-        this.state.allBoards = [...allBoardsMock];
-        this.state.myUploads = [...myUploadsMock];
-        this.state.currentBoard = this.state.allBoards[0];
-        this.state.currentBoardProducts = this.extractBoardItems(this.state.currentBoard);
-        this.state = {
-            ...this.state
-        };
+
+        //To Ask Mike
+        this.getAllBoards({}).subscribe(s => {
+            this.state.allUploads = [...allUploadsMock];
+            this.state.allBoards = [...allBoardsMock];
+            this.state.myUploads = [...myUploadsMock];
+            this.state.currentBoard = this.state.allBoards[0];
+            this.state.currentBoardProducts = this.extractBoardItems(this.state.currentBoard);
+            this.state = {
+                ...this.state
+            };
+        });
     }
 
     getBoardStateObs(): Observable<any> {
@@ -56,11 +60,12 @@ export class BoardService {
         return objects;
     }
 
-    getSomeDataSample(payload) {
+    getSomeDataSample1(payload) {
         return this.apiService.getAllBoards(payload);
     }
 
     getAllBoards(payload) {
+        //TO ASK MIKE
         this.state.allBoards = [...allBoardsMock];
         this.state.currentBoard = allBoardsMock[0];
         return of(allBoardsMock).pipe(delay(5000));

@@ -21,7 +21,7 @@ export class AddComponent implements OnInit {
 
   showLoader = false;
   loaderTypeProgress = true;
- 
+
   @Output() previewProduct: EventEmitter<any> = new EventEmitter();
 
   constructor(
@@ -50,7 +50,8 @@ export class AddComponent implements OnInit {
       data: {
         name: '',
         panelClass: 'my-dialog',
-      }
+      },
+      disableClose: true
     });
 
     dialogRef.afterClosed().subscribe(result => {
