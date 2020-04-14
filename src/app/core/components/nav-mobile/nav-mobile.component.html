@@ -14,7 +14,7 @@
     >
       <ul class="department-container">
         <li *ngFor="let department of departments" class="department-list">
-          <span (click)="showDepartmentChild(department.department)">
+          <div (click)="showDepartmentChild(department.department)">
             <a
               class="department-title {{
                 showDepartment === department.department ? 'active' : 'none'
@@ -38,7 +38,7 @@
             >
               expand_more
             </mat-icon>
-          </span>
+          </div>
           <ul
             class="category-container {{
               showDepartment === department.department ? 'show' : 'hide'

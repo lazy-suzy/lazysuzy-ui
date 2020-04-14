@@ -93,6 +93,24 @@ export class ApiService {
     return this.httpService.get(url);
   }
 
+  getMultiplePageAllProducts(
+    trend: string,
+    total: number,
+    filters = '',
+    sortType = '',
+    page: number
+  ): Observable<any> {
+    const httpCalls = [];
+    const endpoint = `products/all`;
+    for (let i = 0; i <= page; i++) {
+      const url = env.useLocalJson
+        ? `${env.JSON_BASE_HREF}${endpoint}`
+        : `${env.API_BASE_HREF}${endpoint}?${trend}=true&limit=${total}&filters=${filters}&sort_type=${sortType}&pageno=${i}`;
+      httpCalls.push(this.httpService.get(url));
+    }
+    return forkJoin(httpCalls);
+  }
+
   getProducts(
     department: string,
     category: string,
@@ -124,6 +142,7 @@ export class ApiService {
     }
     return forkJoin(httpCalls);
   }
+
   getProduct(id: string): Observable<IProductPayload> {
     const url = env.useLocalJson
       ? `${env.JSON_BASE_HREF}product/${id}`
