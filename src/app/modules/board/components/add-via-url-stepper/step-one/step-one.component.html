@@ -4,6 +4,6 @@
     <input matInput placeholder="Image Url" formControlName="imageUrl" required>
   </mat-form-field>
   <div>
-    <button mat-button matStepperNext>Next</button>
+    <button [disabled]="!step.valid" mat-button matStepperNext>Next</button>
   </div>
 </form>

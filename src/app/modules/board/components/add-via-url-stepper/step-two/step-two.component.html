@@ -18,4 +18,4 @@
 </form>
 
 <button mat-button (click)="cancelAddImgViaUrl()">Cancel</button>
-<button mat-button (click)="saveAddViaUrl()">Add</button>
+<button mat-button [disabled]="!step.valid" (click)="saveAddViaUrl()">Add</button>
