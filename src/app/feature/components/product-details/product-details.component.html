@@ -52,7 +52,7 @@
             </a>
           </button>
         </div>
-        <hr class="modal-hr" *ngIf="isVariationExist" />
+        <hr class="modal-hr" *ngIf="isSwatchExist" />
       </div>
 
       <div
@@ -61,39 +61,14 @@
         }}"
         [ngStyle]="topHeight"
       >
-        <div class="variations-container pr2" *ngIf="isVariationExist">
-          <span class="title">Options</span>
-          <span class="clear-btn" (click)="clearVariations()">Clear</span>
-          <div class="variation-options" *ngIf="isSwatchExist">
-            <div
-              *ngFor="let variation of swatches; let i = index"
-              class="variation-img-box"
-              (click)="selectedVariation(variation, i)"
-              [class.active]="selectedIndex === i"
-            >
-              <a>
-                <span data-title="{{ variation.name }}">
-                  <img
-                    [src]="variation.swatch_image"
-                    [alt]="variation.name"
-                    class="variation-img"
-                  />
-                </span>
-              </a>
-            </div>
-            <div *ngIf="swatches.length === 0">
-              No product available, please change/clear options
-            </div>
-          </div>
-          <app-variations
-            [variations]="product.variations"
-            [isSwatchExist]="isSwatchExist"
-            [inputSelections]="product.selections"
-            (setPrice)="onSetPrice($event)"
-            (setImage)="onSetImage($event)"
-            (setSwatches)="setSwatches($event)"
-          ></app-variations>
-        </div>
+        <app-variations
+          *ngIf="isVariationExist"
+          [variations]="product.variations"
+          [isSwatchExist]="isSwatchExist"
+          [inputSelections]="product.selections"
+          (setPrice)="onSetPrice($event)"
+          (setImage)="onSetImage($event)"
+        ></app-variations>
         <hr class="modal-hr" />
         <div class="mb2 pt-1" *ngIf="descriptionExist">
           <span class="title">Overview</span>

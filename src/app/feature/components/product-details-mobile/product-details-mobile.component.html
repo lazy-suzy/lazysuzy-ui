@@ -49,30 +49,7 @@
         </a>
       </button>
     </div>
-    <hr class="modal-hr" />
-    <div class="variation-container" *ngIf="variationsExist">
-      <span class="title">Options</span>
-      <span class="clear-btn" (click)="clearVariations()">Clear</span>
-      <div class="variation-options">
-        <div
-          class="variation"
-          *ngFor="let variation of swatches; let i = index"
-          (click)="selectedVariation(variation, i, gallery)"
-          [class.activeVariation]="selectedIndex === i"
-        >
-          <a>
-            <img
-              [src]="variation.swatch_image"
-              [alt]="variation.name"
-              class="variant-image"
-            />
-          </a>
-        </div>
-        <div *ngIf="swatches.length === 0">
-          No product available, please change/clear options
-        </div>
-      </div>
-    </div>
+    <hr class="modal-hr" *ngIf="isSwatchExist"/>
     <app-variations
       *ngIf="variationsExist"
       [variations]="product.variations"

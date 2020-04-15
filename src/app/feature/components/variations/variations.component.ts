@@ -14,7 +14,6 @@ import {
 export class VariationsComponent implements OnInit {
   @Output() setImage = new EventEmitter<any>();
   @Output() setPrice = new EventEmitter<any>();
-  @Output() setSwatches = new EventEmitter<any>();
   @Input() variations = [];
   @Input() inputSelections = {};
   @Input() isSwatchExist = false;
@@ -34,11 +33,13 @@ export class VariationsComponent implements OnInit {
   bpSubscription: Subscription;
   isHandset: boolean;
   selectionOptions = {};
-  dummy = [];
-  constructor(
-    private utils: UtilsService,
-    private breakpointObserver: BreakpointObserver
-  ) {}
+  selectedSwatch = {
+    image: '',
+    swatch_image: null,
+    price: '',
+    wasPrice: ''
+  };
+  constructor(private utils: UtilsService, private breakpointObserver: BreakpointObserver) {}
 
   ngOnInit() {
     this.bpSubscription = this.bpObserver.subscribe(
@@ -67,19 +68,25 @@ export class VariationsComponent implements OnInit {
   ngOnDestroy(): void {
     this.bpSubscription.unsubscribe();
   }
-  // selectedVariation(variation, index: number) {
-  //   if (variation.has_parent_sku) {
-  //     this.utils.openVariationDialog(variation.variation_sku);
-  //   } else {
-  //     this.selectedIndex = index;
-  //     this.priceData = {
-  //       price: variation.price,
-  //       wasPrice: variation.was_price,
-  //     };
-  //     this.setPrice.emit(this.priceData);
-  //     this.setImage.emit(variation.image);
-  //   }
-  // }
+  selectedVariation(variation, index: number) {
+    if (variation.has_parent_sku) {
+      this.utils.openVariationDialog(variation.variation_sku);
+    } else {
+      this.selectedSwatch = {
+        image: variation.image,
+        swatch_image: variation.swatch_image,
+        price: variation.price,
+        wasPrice: variation.was_price
+      };
+      this.selectedIndex = index;
+      this.priceData = {
+        price: variation.price,
+        wasPrice: variation.was_price,
+      };
+      this.setPrice.emit(this.priceData);
+      this.setImage.emit(variation.image);
+    }
+  }
 
   selectedOption(option: string, type: string) {
     if (this.selections[type] === option) {
@@ -112,7 +119,11 @@ export class VariationsComponent implements OnInit {
 
   clearVariations() {
     this.selections = {};
+    this.selectedIndex = null;
+    this.setPrice.emit('');
+    this.setImage.emit('');
     this.filterSwatches(this.variations);
+
   }
 
   updateSwatches() {
@@ -133,6 +144,8 @@ export class VariationsComponent implements OnInit {
       };
       this.setPrice.emit(this.priceData);
       this.setImage.emit(this.filteredVariations[0].image);
+    } else {
+      this.checkSwatchActive();
     }
   }
 
@@ -190,6 +203,27 @@ export class VariationsComponent implements OnInit {
         }
       }
     }
-    this.setSwatches.emit(this.swatches);
+  }
+  checkSwatchActive() {
+    if (this.selectedSwatch.swatch_image && this.swatches.some(data => data.swatch_image === this.selectedSwatch.swatch_image)) {
+      this.priceData = {
+        price: this.selectedSwatch.price,
+        wasPrice: this.selectedSwatch.wasPrice,
+      };
+      this.setPrice.emit(this.priceData);
+      this.setImage.emit(this.selectedSwatch.image);
+      // console.log(this.selectedSwatch.swatch_image);
+
+    } else {
+      this.selectedSwatch = {
+        image: '',
+        swatch_image: null,
+        price: '',
+        wasPrice: ''
+      };
+      this.setPrice.emit('');
+      this.setImage.emit('');
+      this.selectedIndex = null;
+    }
   }
 }

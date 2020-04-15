@@ -83,7 +83,6 @@ export class ProductDetailsComponent implements OnInit {
             variation => variation.swatch_image !== null
           )
         );
-        this.swatches = this.product.variations;
         this.productPrice = this.product.is_price;
         this.productWasPrice = this.product.was_price;
         this.isVariationExist = this.utils.checkDataLength(
@@ -112,22 +111,22 @@ export class ProductDetailsComponent implements OnInit {
     });
   }
 
-  selectedVariation(variation, index, container) {
-    if (variation.has_parent_sku) {
-      this.utils.openVariationDialog(variation.variation_sku);
-    } else {
-      this.selectedSwatch = {
-        swatch_image: variation.swatch_image,
-        price: variation.price,
-        wasPrice: variation.was_price
-      };
-      this.productPrice = variation.price;
-      this.productWasPrice = variation.was_price;
-      this.onSetImage(variation.image);
-      this.selectedIndex = index;
-      container.scrollTop = 0;
-    }
-  }
+  // selectedVariation(variation, index, container) {
+  //   if (variation.has_parent_sku) {
+  //     this.utils.openVariationDialog(variation.variation_sku);
+  //   } else {
+  //     this.selectedSwatch = {
+  //       swatch_image: variation.swatch_image,
+  //       price: variation.price,
+  //       wasPrice: variation.was_price
+  //     };
+  //     this.productPrice = variation.price;
+  //     this.productWasPrice = variation.was_price;
+  //     this.onSetImage(variation.image);
+  //     this.selectedIndex = index;
+  //     container.scrollTop = 0;
+  //   }
+  // }
   isArray(obj: any) {
     return Array.isArray(obj);
   }
@@ -162,43 +161,5 @@ export class ProductDetailsComponent implements OnInit {
   onSetPrice(priceData): void {
     this.productPrice = priceData.price || this.product.is_price;
     this.productWasPrice = priceData.wasPrice || this.product.was_price;
-  }
-  setSwatches(updatedSwatches): void {
-    this.swatches = updatedSwatches;
-    if (
-      this.selectedSwatch.swatch_image &&
-      this.swatches.some(
-        data => data.swatch_image === this.selectedSwatch.swatch_image
-      )
-    ) {
-      this.productPrice = this.selectedSwatch.price;
-      this.productWasPrice = this.selectedSwatch.wasPrice;
-    } else {
-      this.selectedSwatch = {
-        swatch_image: null,
-        price: '',
-        wasPrice: ''
-      };
-      this.productPrice = this.product.is_price;
-      this.productWasPrice = this.product.was_price;
-      this.items = this.product.on_server_images.map(
-        item => new ImageItem({ src: item })
-      );
-      this.selectedIndex = null;
-    }
-  }
-  clearVariations() {
-    this.selectedSwatch = {
-      swatch_image: null,
-      price: '',
-      wasPrice: ''
-    };
-    this.productPrice = this.product.is_price;
-    this.productWasPrice = this.product.was_price;
-    this.items = this.product.on_server_images.map(
-      item => new ImageItem({ src: item })
-    );
-    this.selectedIndex = null;
-    this.child.clearVariations();
   }
 }

@@ -41,6 +41,7 @@ export class ProductDetailsMobileComponent implements OnInit {
   isHandset: boolean;
   variationsExist: boolean;
   selectedIndex: any;
+  isSwatchExist: boolean;
   isProductFetching: boolean = false;
   description: any;
   features: any;
@@ -92,6 +93,11 @@ export class ProductDetailsMobileComponent implements OnInit {
         this.featuresExist = this.utils.checkDataLength(this.product.features);
         this.descriptionExist = this.utils.checkDataLength(
           this.product.description
+        );
+        this.isSwatchExist = this.utils.checkDataLength(
+          this.product.variations.filter(
+            variation => variation.swatch_image !== null
+          )
         );
         this.variationsExist = this.utils.checkDataLength(
           this.product.variations
@@ -175,43 +181,5 @@ export class ProductDetailsMobileComponent implements OnInit {
   onSetPrice(priceData): void {
     this.productPrice = priceData.price || this.product.is_price;
     this.productWasPrice = priceData.wasPrice || this.product.was_price;
-  }
-  setSwatches(updatedSwatches): void {
-    this.swatches = updatedSwatches;
-    if (
-      this.selectedSwatch.swatch_image &&
-      this.swatches.some(
-        data => data.swatch_image === this.selectedSwatch.swatch_image
-      )
-    ) {
-      this.productPrice = this.selectedSwatch.price;
-      this.productWasPrice = this.selectedSwatch.wasPrice;
-    } else {
-      this.selectedSwatch = {
-        swatch_image: null,
-        price: '',
-        wasPrice: ''
-      };
-      this.items = this.product.on_server_images.map(
-        item => new ImageItem({ src: item })
-      );
-      this.productPrice = this.product.is_price;
-      this.productWasPrice = this.product.was_price;
-      this.selectedIndex = null;
-    }
-  }
-  clearVariations() {
-    this.selectedSwatch = {
-      swatch_image: null,
-      price: '',
-      wasPrice: ''
-    };
-    this.productPrice = this.product.is_price;
-    this.productWasPrice = this.product.was_price;
-    this.selectedIndex = null;
-    this.items = this.product.on_server_images.map(
-      item => new ImageItem({ src: item })
-    );
-    this.child.clearVariations();
   }
 }
