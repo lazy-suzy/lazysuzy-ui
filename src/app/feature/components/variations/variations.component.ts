@@ -135,7 +135,10 @@ export class VariationsComponent implements OnInit {
         return _self.checkSwatchSelection(variation, _self);
       }
     });
-    selectedBasedSwatches.length && this.filterSwatches(selectedBasedSwatches);
+    selectedBasedSwatches.length &&
+      _self.selectedSwatch.swatch_image &&
+      this.filterSwatches(selectedBasedSwatches);
+
     this.filteredVariations = this.variations.filter(function(variation) {
       if (_self.selectedSwatch.swatch_image) {
         return (
