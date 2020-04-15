@@ -1,6 +1,11 @@
 import { Component, OnInit, Input, EventEmitter, Output } from '@angular/core';
 import { UtilsService } from 'src/app/shared/services';
-
+import { Observable, Subscription } from 'rxjs';
+import {
+  BreakpointState,
+  Breakpoints,
+  BreakpointObserver
+} from '@angular/cdk/layout';
 @Component({
   selector: 'app-variations',
   templateUrl: './variations.component.html',
@@ -13,6 +18,9 @@ export class VariationsComponent implements OnInit {
   @Input() variations = [];
   @Input() inputSelections = {};
   @Input() isSwatchExist = false;
+  bpObserver: Observable<BreakpointState> = this.breakpointObserver.observe(
+    Breakpoints.Handset
+  );
   swatches = [];
   filteredVariations = [];
   swatchFilter = [];
@@ -23,14 +31,42 @@ export class VariationsComponent implements OnInit {
     wasPrice: ''
   };
   selectionsExist: boolean;
-  constructor(private utils: UtilsService) {}
+  bpSubscription: Subscription;
+  isHandset: boolean;
+  selectionOptions = {};
+  dummy = [];
+  constructor(
+    private utils: UtilsService,
+    private breakpointObserver: BreakpointObserver
+  ) {}
 
   ngOnInit() {
+    this.bpSubscription = this.bpObserver.subscribe(
+      (handset: BreakpointState) => {
+        this.isHandset = handset.matches;
+      }
+    );
     this.selectionsExist = Object.keys(this.inputSelections)[0] !== 'type';
+    if (this.selectionsExist) {
+      for (const key in this.inputSelections) {
+        const value = this.inputSelections[key];
+        for (const object in value) {
+          const newObject = JSON.stringify(value[object]);
+          const options = JSON.parse(newObject);
+          if (Array.isArray(options)) {
+            for (let i = 0; i < options.length; i++) {
+              this.selectionOptions[options[i]] = true;
+            }
+          }
+        }
+      }
+    }
     this.filteredVariations = this.variations;
     this.filterSwatches(this.variations);
   }
-
+  ngOnDestroy(): void {
+    this.bpSubscription.unsubscribe();
+  }
   // selectedVariation(variation, index: number) {
   //   if (variation.has_parent_sku) {
   //     this.utils.openVariationDialog(variation.variation_sku);
@@ -97,8 +133,6 @@ export class VariationsComponent implements OnInit {
       };
       this.setPrice.emit(this.priceData);
       this.setImage.emit(this.filteredVariations[0].image);
-    } else {
-      this.setImage.emit('');
     }
   }
 
@@ -119,25 +153,43 @@ export class VariationsComponent implements OnInit {
   }
 
   filterSwatches(variations) {
-    var _self = this;
+    let _self = this;
     this.swatchFilter = [];
     this.swatches = variations.filter(function(variation) {
       let isValidSwatch;
-      if (variation.swatch_image !== null) {
-        if (
-          !_self.swatchFilter.includes(variation.swatch_image) ||
-          _self.swatchFilter.length === 0
-        ) {
-          _self.swatchFilter.push(variation.swatch_image);
-          isValidSwatch = true;
-        } else {
-          isValidSwatch = false;
-        }
+      if (
+        !_self.swatchFilter.includes(variation.swatch_image) ||
+        _self.swatchFilter.length === 0
+      ) {
+        _self.swatchFilter.push(variation.swatch_image);
+        isValidSwatch = true;
       } else {
         isValidSwatch = false;
       }
       return isValidSwatch;
     });
+    if (this.selectionsExist) {
+      for (const keys in this.selectionOptions) {
+        this.selectionOptions[keys] = false;
+      }
+      for (const key in this.swatches) {
+        const value = this.swatches[key];
+        for (const object in value) {
+          const newObject = JSON.stringify(value[object]);
+          const options = JSON.parse(newObject);
+          if (typeof options === 'object' && options !== null) {
+            for (const features in options) {
+              const feature = options[features];
+              if (feature && feature.charAt(0) !== '#') {
+                if (this.selectionOptions.hasOwnProperty(feature)) {
+                  this.selectionOptions[feature] = true;
+                }
+              }
+            }
+          }
+        }
+      }
+    }
     this.setSwatches.emit(this.swatches);
   }
 }

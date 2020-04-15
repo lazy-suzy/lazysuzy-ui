@@ -165,13 +165,6 @@ export class ProductDetailsComponent implements OnInit {
   }
   setSwatches(updatedSwatches): void {
     this.swatches = updatedSwatches;
-    console.log(
-      this.swatches.some(
-        data => data.swatch_image === this.selectedSwatch.swatch_image
-      )
-    );
-    console.log(this.swatches);
-    console.log(this.selectedSwatch.swatch_image);
     if (
       this.selectedSwatch.swatch_image &&
       this.swatches.some(
@@ -188,6 +181,9 @@ export class ProductDetailsComponent implements OnInit {
       };
       this.productPrice = this.product.is_price;
       this.productWasPrice = this.product.was_price;
+      this.items = this.product.on_server_images.map(
+        item => new ImageItem({ src: item })
+      );
       this.selectedIndex = null;
     }
   }

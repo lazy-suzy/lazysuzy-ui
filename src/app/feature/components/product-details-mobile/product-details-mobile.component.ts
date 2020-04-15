@@ -1,7 +1,11 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { IProductPayload } from 'src/app/shared/models';
-import { ApiService, UtilsService, CacheService } from 'src/app/shared/services';
+import {
+  ApiService,
+  UtilsService,
+  CacheService
+} from 'src/app/shared/services';
 import { Observable, Subscription } from 'rxjs';
 import {
   BreakpointState,
@@ -174,7 +178,12 @@ export class ProductDetailsMobileComponent implements OnInit {
   }
   setSwatches(updatedSwatches): void {
     this.swatches = updatedSwatches;
-    if (this.selectedSwatch.swatch_image && this.swatches.some(data => data.swatch_image === this.selectedSwatch.swatch_image)) {
+    if (
+      this.selectedSwatch.swatch_image &&
+      this.swatches.some(
+        data => data.swatch_image === this.selectedSwatch.swatch_image
+      )
+    ) {
       this.productPrice = this.selectedSwatch.price;
       this.productWasPrice = this.selectedSwatch.wasPrice;
     } else {
@@ -183,6 +192,9 @@ export class ProductDetailsMobileComponent implements OnInit {
         price: '',
         wasPrice: ''
       };
+      this.items = this.product.on_server_images.map(
+        item => new ImageItem({ src: item })
+      );
       this.productPrice = this.product.is_price;
       this.productWasPrice = this.product.was_price;
       this.selectedIndex = null;

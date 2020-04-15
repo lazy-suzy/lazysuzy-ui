@@ -36,8 +36,7 @@
     <div class="product-site">{{ product.site }}</div>
     <div class="price-container">
       <span class="product-price mr3">${{ productPrice }}</span>
-      <span
-        class="strike {{ productPrice !== productWasPrice ? '' : 'dn' }}"
+      <span class="strike {{ productPrice !== productWasPrice ? '' : 'dn' }}"
         >${{ productWasPrice }}</span
       >
       <button mat-raised-button class="view-details-btn">
@@ -75,14 +74,15 @@
       </div>
     </div>
     <app-variations
-            [variations]="product.variations"
-            [isSwatchExist]="isSwatchExist"
-            [inputSelections]="product.selections"
-            (setPrice)="onSetPrice($event)"
-            (setImage)="onSetImage($event)"
-            (setSwatches)="setSwatches($event)"
-          ></app-variations>
-    <div>
+      *ngIf="variationsExist"
+      [variations]="product.variations"
+      [isSwatchExist]="isSwatchExist"
+      [inputSelections]="product.selections"
+      (setPrice)="onSetPrice($event)"
+      (setImage)="onSetImage($event)"
+      (setSwatches)="setSwatches($event)"
+    ></app-variations>
+    <div class="pv2">
       <ul class="description-menu">
         <li
           (click)="selectTab('desc')"

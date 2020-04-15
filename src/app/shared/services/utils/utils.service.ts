@@ -103,7 +103,6 @@ export class UtilsService {
         item.indexOf('</h6>') > -1 ? '\n' : ''
       }${item}\n${item.indexOf('</h6>') > -1 ? '\n' : ''}`;
     }
-    console.log(mergedData);
     return this.markdownService.compile(mergedData);
   }
 }
