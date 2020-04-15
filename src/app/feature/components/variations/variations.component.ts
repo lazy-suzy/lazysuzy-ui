@@ -39,7 +39,10 @@ export class VariationsComponent implements OnInit {
     price: '',
     wasPrice: ''
   };
-  constructor(private utils: UtilsService, private breakpointObserver: BreakpointObserver) {}
+  constructor(
+    private utils: UtilsService,
+    private breakpointObserver: BreakpointObserver
+  ) {}
 
   ngOnInit() {
     this.bpSubscription = this.bpObserver.subscribe(
@@ -81,7 +84,7 @@ export class VariationsComponent implements OnInit {
       this.selectedIndex = index;
       this.priceData = {
         price: variation.price,
-        wasPrice: variation.was_price,
+        wasPrice: variation.was_price
       };
       this.setPrice.emit(this.priceData);
       this.setImage.emit(variation.image);
@@ -123,7 +126,6 @@ export class VariationsComponent implements OnInit {
     this.setPrice.emit('');
     this.setImage.emit('');
     this.filterSwatches(this.variations);
-
   }
 
   updateSwatches() {
@@ -133,11 +135,21 @@ export class VariationsComponent implements OnInit {
         return _self.checkSwatchSelection(variation, _self);
       }
     });
-    this.filterSwatches(selectedBasedSwatches);
+    selectedBasedSwatches.length && this.filterSwatches(selectedBasedSwatches);
     this.filteredVariations = this.variations.filter(function(variation) {
+      if (_self.selectedSwatch.swatch_image) {
+        return (
+          _self.checkSwatchSelection(variation, _self) &&
+          variation.swatch_image === _self.selectedSwatch.swatch_image
+        );
+      }
       return _self.checkSwatchSelection(variation, _self);
     });
-    if (this.filteredVariations.length === 1) {
+
+    if (
+      this.filteredVariations.length === 1 ||
+      this.selectedSwatch.swatch_image
+    ) {
       this.priceData = {
         price: this.filteredVariations[0].price,
         wasPrice: this.filteredVariations[0].was_price
@@ -185,8 +197,8 @@ export class VariationsComponent implements OnInit {
       for (const keys in this.selectionOptions) {
         this.selectionOptions[keys] = false;
       }
-      for (const key in this.swatches) {
-        const value = this.swatches[key];
+      for (const key in variations) {
+        const value = variations[key];
         for (const object in value) {
           const newObject = JSON.stringify(value[object]);
           const options = JSON.parse(newObject);
@@ -205,15 +217,18 @@ export class VariationsComponent implements OnInit {
     }
   }
   checkSwatchActive() {
-    if (this.selectedSwatch.swatch_image && this.swatches.some(data => data.swatch_image === this.selectedSwatch.swatch_image)) {
+    if (
+      this.selectedSwatch.swatch_image &&
+      this.swatches.some(
+        data => data.swatch_image === this.selectedSwatch.swatch_image
+      )
+    ) {
       this.priceData = {
         price: this.selectedSwatch.price,
-        wasPrice: this.selectedSwatch.wasPrice,
+        wasPrice: this.selectedSwatch.wasPrice
       };
       this.setPrice.emit(this.priceData);
       this.setImage.emit(this.selectedSwatch.image);
-      // console.log(this.selectedSwatch.swatch_image);
-
     } else {
       this.selectedSwatch = {
         image: '',

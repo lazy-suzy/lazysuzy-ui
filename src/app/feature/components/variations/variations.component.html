@@ -1,13 +1,13 @@
-<ng-container *ngIf="isHandset; else isBrowser">
-  <div class="variation-container" *ngIf="isSwatchExist">
+<ng-container *ngIf="isHandset && isSwatchExist; else isBrowser">
+  <div class="variation-container">
     <span class="title">Options</span>
     <span class="clear-btn" (click)="clearVariations()">Clear</span>
-    <div class="variation-options">
+    <div class="variation-options" *ngIf="isSwatchExist">
       <div
         class="variation"
         *ngFor="let variation of swatches; let i = index"
         (click)="selectedVariation(variation, i)"
-        [class.activeVariation]="selectedIndex === i"
+        [class.active]="variation.swatch_image === selectedSwatch.swatch_image"
       >
         <a>
           <img
@@ -22,7 +22,7 @@
       </div>
     </div>
   </div>
-  <mat-expansion-panel *ngIf="selectionsExist && isSwatchExist">
+  <mat-expansion-panel *ngIf="selectionsExist">
     <mat-expansion-panel-header>
       <mat-panel-title class="title">
         More
@@ -51,7 +51,7 @@
                 [disabled]="!selectionOptions[option]"
                 class="options"
               >
-               {{ option }}
+                {{ option }}
               </mat-checkbox>
             </div>
           </div>
@@ -67,7 +67,7 @@
           class=" variant-feature-options"
           *ngIf="item.value.select_type === 'single_select'"
         >
-          <h6 class="selection-title"> Select {{ item.key | titlecase }}</h6>
+          <h6 class="selection-title">Select {{ item.key | titlecase }}</h6>
           <div class="flex flex-wrap">
             <div
               class="variant-feature options pointer w-30 {{
@@ -82,7 +82,7 @@
                 'w-40': item.value.options.length % 2 === 0
               }"
             >
-             {{ option }}
+              {{ option }}
             </div>
           </div>
         </div>
@@ -92,15 +92,15 @@
 </ng-container>
 
 <ng-template #isBrowser>
-  <div class="variations-container pr2" *ngIf="isSwatchExist">
+  <div class="variations-container pr2">
     <span class="title">Options</span>
     <span class="clear-btn" (click)="clearVariations()">Clear</span>
-    <div class="variation-options">
+    <div class="variation-options" *ngIf="isSwatchExist">
       <div
         *ngFor="let variation of swatches; let i = index"
         class="variation-img-box"
         (click)="selectedVariation(variation, i)"
-        [class.active]="selectedIndex === i"
+        [class.active]="variation.swatch_image === selectedSwatch.swatch_image"
       >
         <a>
           <span data-title="{{ variation.name }}">
@@ -139,7 +139,7 @@
                 [disabled]="!selectionOptions[option]"
                 class="options"
               >
-               {{ option }}
+                {{ option }}
               </mat-checkbox>
             </div>
           </div>
@@ -158,14 +158,16 @@
           <h6 class="selection-title">Select {{ item.key | titlecase }}</h6>
           <div class="flex flex-wrap">
             <div
-              class="variant-feature options pointer w-30 {{selectionOptions[option]?'':'disabledTab'}}"
+              class="variant-feature options pointer w-30 {{
+                selectionOptions[option] ? '' : 'disabledTab'
+              }}"
               (click)="selectedOption(option, item.key)"
               [class.active]="
                 selections[item.key] && selections[item.key] === option
               "
               *ngFor="let option of item.value.options"
               [ngClass]="{
-                'w-40': item.value.options.length % 2 === 0 
+                'w-40': item.value.options.length % 2 === 0
               }"
             >
               {{ option }}
