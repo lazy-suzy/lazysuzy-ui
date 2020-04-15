@@ -65,8 +65,16 @@ export class VariationsComponent implements OnInit {
         }
       }
     }
+    const _self = this;
     this.filteredVariations = this.variations;
-    this.filterSwatches(this.variations);
+
+    this.swatches = this.variations
+      .filter(function(variation) {
+        return variation.swatch_image !== null;
+      })
+      .filter(function(variation) {
+        return _self.filterDuplicateSwatches(variation, _self);
+      });
   }
   ngOnDestroy(): void {
     this.bpSubscription.unsubscribe();
@@ -88,6 +96,7 @@ export class VariationsComponent implements OnInit {
       };
       this.setPrice.emit(this.priceData);
       this.setImage.emit(variation.image);
+      this.filterSwatches();
     }
   }
 
@@ -125,19 +134,28 @@ export class VariationsComponent implements OnInit {
     this.selectedIndex = null;
     this.setPrice.emit('');
     this.setImage.emit('');
-    this.filterSwatches(this.variations);
+    this.selectedSwatch = {
+      image: '',
+      swatch_image: null,
+      price: '',
+      wasPrice: ''
+    };
+    this.filterSwatches();
   }
 
   updateSwatches() {
     const _self = this;
-    const selectedBasedSwatches = this.variations.filter(function(variation) {
-      if (variation.swatch_image !== null) {
-        return _self.checkSwatchSelection(variation, _self);
-      }
-    });
-    selectedBasedSwatches.length &&
-      _self.selectedSwatch.swatch_image &&
-      this.filterSwatches(selectedBasedSwatches);
+    _self.swatchFilter = [];
+
+    this.swatches = this.variations
+      .filter(function(variation) {
+        if (variation.swatch_image !== null) {
+          return _self.checkSwatchSelection(variation, _self);
+        }
+      })
+      .filter(function(variation) {
+        return _self.filterDuplicateSwatches(variation, _self);
+      });
 
     this.filteredVariations = this.variations.filter(function(variation) {
       if (_self.selectedSwatch.swatch_image) {
@@ -180,42 +198,44 @@ export class VariationsComponent implements OnInit {
     return isValidVariation;
   }
 
-  filterSwatches(variations) {
-    let _self = this;
-    this.swatchFilter = [];
-    this.swatches = variations.filter(function(variation) {
-      let isValidSwatch;
-      if (
-        !_self.swatchFilter.includes(variation.swatch_image) ||
-        _self.swatchFilter.length === 0
-      ) {
-        _self.swatchFilter.push(variation.swatch_image);
-        isValidSwatch = true;
-      } else {
-        isValidSwatch = false;
-      }
-      return isValidSwatch;
-    });
-    if (this.selectionsExist) {
+  filterDuplicateSwatches(variation, _self) {
+    let isValidSwatch;
+    if (
+      !_self.swatchFilter.includes(variation.swatch_image) ||
+      _self.swatchFilter.length === 0
+    ) {
+      _self.swatchFilter.push(variation.swatch_image);
+      isValidSwatch = true;
+    } else {
+      isValidSwatch = false;
+    }
+    return isValidSwatch;
+  }
+
+  filterSwatches() {
+    let variations = this.filteredVariations;
+    if (this.selectionsExist && this.selectedSwatch.swatch_image) {
       for (const keys in this.selectionOptions) {
         this.selectionOptions[keys] = false;
       }
       for (const key in variations) {
         const value = variations[key];
-        for (const object in value) {
-          const newObject = JSON.stringify(value[object]);
-          const options = JSON.parse(newObject);
-          if (typeof options === 'object' && options !== null) {
-            for (const features in options) {
-              const feature = options[features];
-              if (feature && feature.charAt(0) !== '#') {
-                if (this.selectionOptions.hasOwnProperty(feature)) {
-                  this.selectionOptions[feature] = true;
-                }
-              }
+        const options = value.features;
+        for (const features in options) {
+          const feature = options[features];
+          if (feature && feature.charAt(0) !== '#') {
+            if (
+              this.selectionOptions.hasOwnProperty(feature) &&
+              value.swatch_image === this.selectedSwatch.swatch_image
+            ) {
+              this.selectionOptions[feature] = true;
             }
           }
         }
+      }
+    } else {
+      for (const keys in this.selectionOptions) {
+        this.selectionOptions[keys] = true;
       }
     }
   }
