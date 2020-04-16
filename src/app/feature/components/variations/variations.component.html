@@ -38,7 +38,10 @@
           *ngIf="item.value.select_type === 'multi_select'"
         >
           <div class="feature-title pointer flex flex-wrap justify-between">
-            <h6 class="selection-title">Select {{ item.key | titlecase }}</h6>
+            <h6 class="selection-title">
+              Select
+              {{ item.key == 'color_group' ? 'Color' : (item.key | titlecase) }}
+            </h6>
             <span class="arrow-icon"><mat-icon>arrow_drop_down</mat-icon></span>
           </div>
           <div class="variant-feature-checkbox">
@@ -126,7 +129,10 @@
           *ngIf="item.value.select_type === 'multi_select'"
         >
           <div class="feature-title pointer flex flex-wrap justify-between">
-            <h6 class="selection-title">Select {{ item.key | titlecase }}</h6>
+            <h6 class="selection-title">
+              Select
+              {{ item.key == 'color_group' ? 'Color' : (item.key | titlecase) }}
+            </h6>
             <span class="arrow-icon"><mat-icon>arrow_drop_down</mat-icon></span>
           </div>
           <div class="variant-feature-checkbox">

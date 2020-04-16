@@ -96,6 +96,7 @@ export class VariationsComponent implements OnInit {
       };
       this.setPrice.emit(this.priceData);
       this.setImage.emit(variation.image);
+      this.updateSwatches();
       this.filterSwatches();
     }
   }
@@ -213,7 +214,7 @@ export class VariationsComponent implements OnInit {
   }
 
   filterSwatches() {
-    let variations = this.filteredVariations;
+    let variations = this.variations;
     if (this.selectionsExist && this.selectedSwatch.swatch_image) {
       for (const keys in this.selectionOptions) {
         this.selectionOptions[keys] = false;
