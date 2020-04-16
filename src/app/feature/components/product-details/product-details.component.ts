@@ -50,6 +50,7 @@ export class ProductDetailsComponent implements OnInit {
     price: '',
     wasPrice: ''
   };
+  galleryRef = this.gallery.ref(this.galleryId);
   constructor(
     @Inject(MAT_DIALOG_DATA) public data: any,
     private apiService: ApiService,
@@ -64,11 +65,10 @@ export class ProductDetailsComponent implements OnInit {
       .getProduct(this.data.sku)
       .subscribe((payload: IProductPayload) => {
         this.product = payload;
-        const galleryRef = this.gallery.ref(this.galleryId);
         this.items = this.product.on_server_images.map(
           item => new ImageItem({ src: item })
         );
-        galleryRef.load(this.items);
+        this.galleryRef.load(this.items);
         this.description = this.utils.compileMarkdown(this.product.description);
         this.features = this.utils.compileMarkdown(this.product.features);
         this.dimensionExist = this.utils.checkDataLength(
@@ -157,6 +157,7 @@ export class ProductDetailsComponent implements OnInit {
       const image = new ImageItem({ src });
       this.items.splice(0, 0, image);
     }
+    this.galleryRef.load(this.items);
   }
   onSetPrice(priceData): void {
     this.productPrice = priceData.price || this.product.is_price;

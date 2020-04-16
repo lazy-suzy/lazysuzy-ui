@@ -142,6 +142,7 @@ export class VariationsComponent implements OnInit {
       wasPrice: ''
     };
     this.filterSwatches();
+    this.updateSwatches();
   }
 
   updateSwatches() {

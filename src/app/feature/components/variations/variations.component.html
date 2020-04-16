@@ -70,7 +70,7 @@
           class=" variant-feature-options"
           *ngIf="item.value.select_type === 'single_select'"
         >
-          <h6 class="selection-title">Select {{ item.key | titlecase }}</h6>
+          <h6 class="selection-title">Select {{ item.key.replace('_', ' ') | titlecase }}</h6>
           <div class="flex flex-wrap">
             <div
               class="variant-feature options pointer w-30 {{
@@ -84,8 +84,8 @@
               [ngClass]="{
                 'w-40': item.value.options.length % 2 === 0
               }"
+              [innerHTML]='option'
             >
-              {{ option }}
             </div>
           </div>
         </div>
@@ -161,7 +161,7 @@
           class=" variant-feature-options"
           *ngIf="item.value.select_type === 'single_select'"
         >
-          <h6 class="selection-title">Select {{ item.key | titlecase }}</h6>
+          <h6 class="selection-title" >Select {{ item.key.replace('_', ' ')  | titlecase }}</h6>
           <div class="flex flex-wrap">
             <div
               class="variant-feature options pointer w-30 {{
@@ -175,8 +175,8 @@
               [ngClass]="{
                 'w-40': item.value.options.length % 2 === 0
               }"
+              [innerHTML]='option'
             >
-              {{ option }}
             </div>
           </div>
         </div>
