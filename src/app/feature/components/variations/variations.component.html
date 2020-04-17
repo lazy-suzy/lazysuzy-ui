@@ -4,11 +4,21 @@
     <span class="clear-btn" (click)="clearVariations()">Clear</span>
     <div class="variation-options" *ngIf="isSwatchExist">
       <div
-        class="variation {{!variation.hasOwnProperty('enabled') || variation.enabled?'':'disabledImage'}}"
+        class="variation {{
+          !variation.hasOwnProperty('enabled') || variation.enabled
+            ? ''
+            : 'disabledImage'
+        }}"
         *ngFor="let variation of swatches; let i = index"
         [class.active]="variation.swatch_image === selectedSwatch.swatch_image"
       >
-        <a class="{{!variation.hasOwnProperty('enabled') || variation.enabled?'':'disabledTab'}}">
+        <a
+          class="{{
+            !variation.hasOwnProperty('enabled') || variation.enabled
+              ? ''
+              : 'disabledTab'
+          }}"
+        >
           <img
             [src]="variation.swatch_image"
             [alt]="variation.name"
@@ -86,7 +96,6 @@
               [ngClass]="{
                 'w-50': item.value.options.length % 2 === 0
               }"
-              [innerHTML]="option"
             >
               <div
                 class="variant-feature options pointer  {{
@@ -113,10 +122,20 @@
     <div class="variation-options" *ngIf="isSwatchExist">
       <div
         *ngFor="let variation of swatches; let i = index"
-        class="variation-img-box {{!variation.hasOwnProperty('enabled') || variation.enabled?'':'disabledImage'}}"
+        class="variation-img-box {{
+          !variation.hasOwnProperty('enabled') || variation.enabled
+            ? ''
+            : 'disabledImage'
+        }}"
         [class.active]="variation.swatch_image === selectedSwatch.swatch_image"
       >
-        <a class="{{!variation.hasOwnProperty('enabled') || variation.enabled?'':'disabledTab'}}">
+        <a
+          class="{{
+            !variation.hasOwnProperty('enabled') || variation.enabled
+              ? ''
+              : 'disabledTab'
+          }}"
+        >
           <span data-title="{{ variation.name }}">
             <img
               [src]="variation.swatch_image"
@@ -187,7 +206,6 @@
               [ngClass]="{
                 'w-50': item.value.options.length % 2 === 0
               }"
-              [innerHTML]="option"
             >
               <div
                 class="variant-feature options pointer {{
