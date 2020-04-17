@@ -54,6 +54,7 @@ export class ProductDetailsMobileComponent implements OnInit {
     price: '',
     wasPrice: ''
   };
+  galleryRef = this.gallery.ref(this.galleryId);
   constructor(
     private router: Router,
     private activeRoute: ActivatedRoute,
@@ -111,11 +112,10 @@ export class ProductDetailsMobileComponent implements OnInit {
         this.swatches = this.product.variations;
         this.productPrice = this.product.is_price;
         this.productWasPrice = this.product.was_price;
-        const galleryRef = this.gallery.ref(this.galleryId);
         this.items = this.product.on_server_images.map(
           item => new ImageItem({ src: item })
         );
-        galleryRef.load(this.items);
+        this.galleryRef.load(this.items);
         this.isProductFetching = false;
       });
   }
@@ -177,6 +177,7 @@ export class ProductDetailsMobileComponent implements OnInit {
       const image = new ImageItem({ src });
       this.items.splice(0, 0, image);
     }
+    this.galleryRef.load(this.items);
   }
   onSetPrice(priceData): void {
     this.productPrice = priceData.price || this.product.is_price;
