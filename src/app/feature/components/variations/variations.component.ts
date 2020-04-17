@@ -39,6 +39,7 @@ export class VariationsComponent implements OnInit {
     price: '',
     wasPrice: ''
   };
+  previousSwatch;
   constructor(
     private utils: UtilsService,
     private breakpointObserver: BreakpointObserver
@@ -148,17 +149,25 @@ export class VariationsComponent implements OnInit {
   updateSwatches() {
     const _self = this;
     _self.swatchFilter = [];
-
-    this.swatches = this.variations
-      .filter(function(variation) {
-        if (variation.swatch_image !== null) {
-          return _self.checkSwatchSelection(variation, _self);
-        }
+    const filteredSwatches = [] = this.variations
+      .map(function(variation) {
+        return {...variation, enabled: _self.checkSwatchSelection( variation, _self)};
       })
       .filter(function(variation) {
+        if (variation.swatch_image !== null) {
         return _self.filterDuplicateSwatches(variation, _self);
+        }
       });
-
+    this.swatches = [];
+    for (const variation of filteredSwatches) {
+      if (
+        this.swatchFilter.includes(variation.swatch_image) && this.previousSwatch.swatch_image === variation.swatch_image
+      ) {
+        this.swatches.pop();
+      }
+      this.swatches.push(variation);
+      this.previousSwatch = variation;
+    }
     this.filteredVariations = this.variations.filter(function(variation) {
       if (_self.selectedSwatch.swatch_image) {
         return (
@@ -208,12 +217,19 @@ export class VariationsComponent implements OnInit {
     ) {
       _self.swatchFilter.push(variation.swatch_image);
       isValidSwatch = true;
+      _self.previousSwatch = variation;
     } else {
-      isValidSwatch = false;
+      if (variation.hasOwnProperty('enabled') && !_self.previousSwatch.enabled && variation.enabled) {
+        isValidSwatch = true;
+        _self.swatchFilter.pop();
+        _self.swatchFilter.push(variation.swatch_image);
+        _self.previousSwatch = variation;
+      } else {
+        isValidSwatch = false;
+      }
     }
     return isValidSwatch;
   }
-
   filterSwatches() {
     let variations = this.variations;
     if (this.selectionsExist && this.selectedSwatch.swatch_image) {

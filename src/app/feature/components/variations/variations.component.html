@@ -4,16 +4,16 @@
     <span class="clear-btn" (click)="clearVariations()">Clear</span>
     <div class="variation-options" *ngIf="isSwatchExist">
       <div
-        class="variation"
+        class="variation {{!variation.hasOwnProperty('enabled') || variation.enabled?'':'disabledImage'}}"
         *ngFor="let variation of swatches; let i = index"
-        (click)="selectedVariation(variation, i)"
         [class.active]="variation.swatch_image === selectedSwatch.swatch_image"
       >
-        <a>
+        <a class="{{!variation.hasOwnProperty('enabled') || variation.enabled?'':'disabledTab'}}">
           <img
             [src]="variation.swatch_image"
             [alt]="variation.name"
             class="variant-image"
+            (click)="selectedVariation(variation, i)"
           />
         </a>
       </div>
@@ -86,6 +86,7 @@
               [ngClass]="{
                 'w-50': item.value.options.length % 2 === 0
               }"
+              [innerHTML]="option"
             >
               <div
                 class="variant-feature options pointer  {{
@@ -112,16 +113,16 @@
     <div class="variation-options" *ngIf="isSwatchExist">
       <div
         *ngFor="let variation of swatches; let i = index"
-        class="variation-img-box"
-        (click)="selectedVariation(variation, i)"
+        class="variation-img-box {{!variation.hasOwnProperty('enabled') || variation.enabled?'':'disabledImage'}}"
         [class.active]="variation.swatch_image === selectedSwatch.swatch_image"
       >
-        <a>
+        <a class="{{!variation.hasOwnProperty('enabled') || variation.enabled?'':'disabledTab'}}">
           <span data-title="{{ variation.name }}">
             <img
               [src]="variation.swatch_image"
               [alt]="variation.name"
               class="variation-img"
+              (click)="selectedVariation(variation, i)"
             />
           </span>
         </a>
@@ -186,6 +187,7 @@
               [ngClass]="{
                 'w-50': item.value.options.length % 2 === 0
               }"
+              [innerHTML]="option"
             >
               <div
                 class="variant-feature options pointer {{
