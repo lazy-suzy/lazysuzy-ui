@@ -39,7 +39,7 @@ export class ProductDetailsMobileComponent implements OnInit {
   items: GalleryItem[];
   bpSubscription: Subscription;
   isHandset: boolean;
-  variationsExist: boolean;
+  isVariationExist: boolean;
   selectedIndex: any;
   isSwatchExist: boolean;
   isProductFetching: boolean = false;
@@ -99,7 +99,7 @@ export class ProductDetailsMobileComponent implements OnInit {
             variation => variation.swatch_image !== null
           )
         );
-        this.variationsExist = this.utils.checkDataLength(
+        this.isVariationExist = this.utils.checkDataLength(
           this.product.variations
         );
         if (!this.isHandset) {

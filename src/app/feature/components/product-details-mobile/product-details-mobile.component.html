@@ -34,11 +34,11 @@
       </ng-template>
     </div>
     <div class="product-site">{{ product.site }}</div>
-    <div class="price-container">
-      <span class="product-price mr3">${{ productPrice }}</span>
-      <span class="strike {{ productPrice !== productWasPrice ? '' : 'dn' }}"
-        >${{ productWasPrice }}</span
-      >
+    <div class="price-container flex flex-wrap">
+      <div class="product-price mr3">${{ productPrice }}</div>
+      <div class="strike {{ productPrice !== productWasPrice ? '' : 'dn' }}">
+        ${{ productWasPrice }}
+      </div>
       <button mat-raised-button class="view-details-btn">
         <a
           (click)="openLink($event, product.product_url)"
@@ -49,9 +49,9 @@
         </a>
       </button>
     </div>
-    <hr class="modal-hr" *ngIf="isSwatchExist"/>
+    <hr class="modal-hr" *ngIf="isVariationExist" />
     <app-variations
-      *ngIf="variationsExist"
+      *ngIf="isVariationExist"
       [variations]="product.variations"
       [isSwatchExist]="isSwatchExist"
       [inputSelections]="product.selections"
@@ -59,6 +59,7 @@
       (setImage)="onSetImage($event)"
       (setSwatches)="setSwatches($event)"
     ></app-variations>
+    <hr class="modal-hr" />
     <div class="pv2">
       <ul class="description-menu">
         <li
