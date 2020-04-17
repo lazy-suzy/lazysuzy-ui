@@ -39,10 +39,8 @@
           <span class="product-price mr3">${{ productPrice }}</span>
 
           <span
-            class="strike {{
-              productPrice !== productWasPrice ? '' : 'dn'
-            }}"
-            >${{productWasPrice }}</span
+            class="strike {{ productPrice !== productWasPrice ? '' : 'dn' }}"
+            >${{ productWasPrice }}</span
           >
           <button mat-raised-button class="bg-red view-details-btn">
             <a
@@ -54,7 +52,7 @@
             </a>
           </button>
         </div>
-        <hr class="modal-hr" *ngIf="isVariationExist" />
+        <hr class="modal-hr mt-3" *ngIf="isVariationExist" />
       </div>
 
       <div
@@ -63,15 +61,14 @@
         }}"
         [ngStyle]="topHeight"
       >
-        <div class="variations-container" *ngIf="isVariationExist">
-          <app-variations
-            [variations]="product.variations"
-            [isSwatchExist]="isSwatchExist"
-            [inputSelections]="product.selections"
-            (setPrice)="onSetPrice($event)"
-            (setImage)="onSetImage($event)"
-          ></app-variations>
-        </div>
+        <app-variations
+          *ngIf="isVariationExist"
+          [variations]="product.variations"
+          [isSwatchExist]="isSwatchExist"
+          [inputSelections]="product.selections"
+          (setPrice)="onSetPrice($event)"
+          (setImage)="onSetImage($event)"
+        ></app-variations>
         <hr class="modal-hr" />
         <div class="mb2 pt-1" *ngIf="descriptionExist">
           <span class="title">Overview</span>

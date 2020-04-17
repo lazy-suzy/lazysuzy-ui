@@ -1,7 +1,11 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { IProductPayload } from 'src/app/shared/models';
-import { ApiService, UtilsService, CacheService } from 'src/app/shared/services';
+import {
+  ApiService,
+  UtilsService,
+  CacheService
+} from 'src/app/shared/services';
 import { Observable, Subscription } from 'rxjs';
 import {
   BreakpointState,
@@ -10,12 +14,15 @@ import {
 } from '@angular/cdk/layout';
 import { Gallery, GalleryItem, ImageItem } from '@ngx-gallery/core';
 import { Lightbox } from '@ngx-gallery/lightbox';
+import { VariationsComponent } from '../variations/variations.component';
+
 @Component({
   selector: 'app-product-details-mobile',
   templateUrl: './product-details-mobile.component.html',
   styleUrls: ['./product-details-mobile.component.less']
 })
 export class ProductDetailsMobileComponent implements OnInit {
+  @ViewChild(VariationsComponent, { static: false }) child: VariationsComponent;
   productSku: any;
   routeSubscription: any;
   product: IProductPayload;
@@ -32,12 +39,21 @@ export class ProductDetailsMobileComponent implements OnInit {
   items: GalleryItem[];
   bpSubscription: Subscription;
   isHandset: boolean;
-  variationsExist: boolean;
+  isVariationExist: boolean;
   selectedIndex: any;
+  isSwatchExist: boolean;
   isProductFetching: boolean = false;
   description: any;
   features: any;
-
+  productPrice: string;
+  productWasPrice: string;
+  variations = [];
+  selectedSwatch = {
+    swatch_image: null,
+    price: '',
+    wasPrice: ''
+  };
+  galleryRef = this.gallery.ref(this.galleryId);
   constructor(
     private router: Router,
     private activeRoute: ActivatedRoute,
@@ -78,7 +94,12 @@ export class ProductDetailsMobileComponent implements OnInit {
         this.descriptionExist = this.utils.checkDataLength(
           this.product.description
         );
-        this.variationsExist = this.utils.checkDataLength(
+        this.isSwatchExist = this.utils.checkDataLength(
+          this.product.variations.filter(
+            variation => variation.swatch_image !== null
+          )
+        );
+        this.isVariationExist = this.utils.checkDataLength(
           this.product.variations
         );
         if (!this.isHandset) {
@@ -87,11 +108,15 @@ export class ProductDetailsMobileComponent implements OnInit {
             { queryParams: { modal_sku: this.product.sku } }
           );
         }
-        const galleryRef = this.gallery.ref(this.galleryId);
+        this.variations = this.product.variations.sort((a, b) =>
+          a.name > b.name ? 1 : -1
+        );
+        this.productPrice = this.product.is_price;
+        this.productWasPrice = this.product.was_price;
         this.items = this.product.on_server_images.map(
           item => new ImageItem({ src: item })
         );
-        galleryRef.load(this.items);
+        this.galleryRef.load(this.items);
         this.isProductFetching = false;
       });
   }
@@ -109,8 +134,14 @@ export class ProductDetailsMobileComponent implements OnInit {
       this.router.navigate([`/product/${variation.variation_sku}`]);
       this.loadProduct();
     } else {
-      const image = new ImageItem({ src: variation.image });
-      this.items.splice(0, 1, image);
+      this.selectedSwatch = {
+        swatch_image: variation.swatch_image,
+        price: variation.price,
+        wasPrice: variation.was_price
+      };
+      this.productPrice = variation.price;
+      this.productWasPrice = variation.was_price;
+      this.onSetImage(variation.image);
       this.selectedIndex = index;
       container.scrollLeft = 0;
     }
@@ -137,5 +168,20 @@ export class ProductDetailsMobileComponent implements OnInit {
     if (typeof vglnk) {
       vglnk.open(url, '_blank');
     }
+  }
+  onSetImage(src): void {
+    // this.galleryContainer.nativeElement.scrollTop = 0;
+    this.items = this.product.on_server_images.map(
+      item => new ImageItem({ src: item })
+    );
+    if (src) {
+      const image = new ImageItem({ src });
+      this.items.splice(0, 0, image);
+    }
+    this.galleryRef.load(this.items);
+  }
+  onSetPrice(priceData): void {
+    this.productPrice = priceData.price || this.product.is_price;
+    this.productWasPrice = priceData.wasPrice || this.product.was_price;
   }
 }

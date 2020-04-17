@@ -11,7 +11,7 @@ import { IProductPayload } from 'src/app/shared/models';
 import { ApiService, UtilsService } from 'src/app/shared/services';
 import { Gallery, GalleryItem, ImageItem } from '@ngx-gallery/core';
 import { Lightbox } from '@ngx-gallery/lightbox';
-
+import { VariationsComponent } from '../variations/variations.component';
 @Component({
   selector: 'app-product-details',
   templateUrl: './product-details.component.html',
@@ -20,6 +20,7 @@ import { Lightbox } from '@ngx-gallery/lightbox';
 export class ProductDetailsComponent implements OnInit {
   @ViewChild('topContainer', { static: false }) topContainer: ElementRef;
   @ViewChild('gallery', { static: false }) galleryContainer: ElementRef;
+  @ViewChild(VariationsComponent, { static: false }) child: VariationsComponent;
   product: IProductPayload;
   productSubscription: Subscription;
   selectedIndex: number;
@@ -39,7 +40,17 @@ export class ProductDetailsComponent implements OnInit {
   productWasPrice: string;
   variations = [];
   topHeight: Object = { 'max-height': '0' };
-
+  swatches = [];
+  priceData = {
+    price: '',
+    wasPrice: ''
+  };
+  selectedSwatch = {
+    swatch_image: null,
+    price: '',
+    wasPrice: ''
+  };
+  galleryRef = this.gallery.ref(this.galleryId);
   constructor(
     @Inject(MAT_DIALOG_DATA) public data: any,
     private apiService: ApiService,
@@ -54,11 +65,10 @@ export class ProductDetailsComponent implements OnInit {
       .getProduct(this.data.sku)
       .subscribe((payload: IProductPayload) => {
         this.product = payload;
-        const galleryRef = this.gallery.ref(this.galleryId);
         this.items = this.product.on_server_images.map(
           item => new ImageItem({ src: item })
         );
-        galleryRef.load(this.items);
+        this.galleryRef.load(this.items);
         this.description = this.utils.compileMarkdown(this.product.description);
         this.features = this.utils.compileMarkdown(this.product.features);
         this.dimensionExist = this.utils.checkDataLength(
@@ -78,7 +88,9 @@ export class ProductDetailsComponent implements OnInit {
         this.isVariationExist = this.utils.checkDataLength(
           this.product.variations
         );
-        this.variations = this.product.variations;
+        this.variations = this.product.variations.sort((a, b) =>
+          a.name > b.name ? 1 : -1
+        );
         this.isProductFetching = false;
         const _self = this;
         setTimeout(function() {
@@ -101,16 +113,22 @@ export class ProductDetailsComponent implements OnInit {
     });
   }
 
-  selectedVariation(variation, index, container) {
-    if (variation.has_parent_sku) {
-      this.utils.openVariationDialog(variation.variation_sku);
-    } else {
-      const image = new ImageItem({ src: variation.image });
-      this.items.splice(0, 1, image);
-      this.selectedIndex = index;
-      container.scrollTop = 0;
-    }
-  }
+  // selectedVariation(variation, index, container) {
+  //   if (variation.has_parent_sku) {
+  //     this.utils.openVariationDialog(variation.variation_sku);
+  //   } else {
+  //     this.selectedSwatch = {
+  //       swatch_image: variation.swatch_image,
+  //       price: variation.price,
+  //       wasPrice: variation.was_price
+  //     };
+  //     this.productPrice = variation.price;
+  //     this.productWasPrice = variation.was_price;
+  //     this.onSetImage(variation.image);
+  //     this.selectedIndex = index;
+  //     container.scrollTop = 0;
+  //   }
+  // }
   isArray(obj: any) {
     return Array.isArray(obj);
   }
@@ -141,6 +159,7 @@ export class ProductDetailsComponent implements OnInit {
       const image = new ImageItem({ src });
       this.items.splice(0, 0, image);
     }
+    this.galleryRef.load(this.items);
   }
   onSetPrice(priceData): void {
     this.productPrice = priceData.price || this.product.is_price;

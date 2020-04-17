@@ -34,12 +34,11 @@
       </ng-template>
     </div>
     <div class="product-site">{{ product.site }}</div>
-    <div class="price-container">
-      <span class="product-price mr3">${{ product.is_price }}</span>
-      <span
-        class="strike {{ product.is_price !== product.was_price ? '' : 'dn' }}"
-        >${{ product.was_price }}</span
-      >
+    <div class="price-container flex flex-wrap">
+      <div class="product-price mr3">${{ productPrice }}</div>
+      <div class="strike {{ productPrice !== productWasPrice ? '' : 'dn' }}">
+        ${{ productWasPrice }}
+      </div>
       <button mat-raised-button class="view-details-btn">
         <a
           (click)="openLink($event, product.product_url)"
@@ -50,26 +49,18 @@
         </a>
       </button>
     </div>
+    <hr class="modal-hr mt-3" *ngIf="isVariationExist" />
+    <app-variations
+      *ngIf="isVariationExist"
+      [variations]="variations"
+      [isSwatchExist]="isSwatchExist"
+      [inputSelections]="product.selections"
+      (setPrice)="onSetPrice($event)"
+      (setImage)="onSetImage($event)"
+      (setSwatches)="setSwatches($event)"
+    ></app-variations>
     <hr class="modal-hr" />
-    <div class="variation-container" *ngIf="variationsExist">
-      <div class="variation-options">
-        <div
-          class="variation"
-          *ngFor="let variation of product.variations; let i = index"
-          (click)="selectedVariation(variation, i, gallery)"
-          [class.activeVariation]="selectedIndex === i"
-        >
-          <a>
-            <img
-              [src]="variation.swatch_image"
-              [alt]="variation.name"
-              class="variant-image"
-            />
-          </a>
-        </div>
-      </div>
-    </div>
-    <div>
+    <div class="pv2">
       <ul class="description-menu">
         <li
           (click)="selectTab('desc')"
