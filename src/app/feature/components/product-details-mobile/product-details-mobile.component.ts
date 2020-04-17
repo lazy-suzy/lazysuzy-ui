@@ -48,7 +48,6 @@ export class ProductDetailsMobileComponent implements OnInit {
   productPrice: string;
   productWasPrice: string;
   variations = [];
-  swatches = [];
   selectedSwatch = {
     swatch_image: null,
     price: '',
@@ -109,7 +108,9 @@ export class ProductDetailsMobileComponent implements OnInit {
             { queryParams: { modal_sku: this.product.sku } }
           );
         }
-        this.swatches = this.product.variations;
+        this.variations = this.product.variations.sort((a, b) =>
+          a.name > b.name ? 1 : -1
+        );
         this.productPrice = this.product.is_price;
         this.productWasPrice = this.product.was_price;
         this.items = this.product.on_server_images.map(

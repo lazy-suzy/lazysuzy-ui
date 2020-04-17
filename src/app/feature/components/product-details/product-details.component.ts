@@ -88,7 +88,9 @@ export class ProductDetailsComponent implements OnInit {
         this.isVariationExist = this.utils.checkDataLength(
           this.product.variations
         );
-        this.variations = this.product.variations;
+        this.variations = this.product.variations.sort((a, b) =>
+          a.name > b.name ? 1 : -1
+        );
         this.isProductFetching = false;
         const _self = this;
         setTimeout(function() {

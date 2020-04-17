@@ -52,7 +52,7 @@
     <hr class="modal-hr mt-3" *ngIf="isVariationExist" />
     <app-variations
       *ngIf="isVariationExist"
-      [variations]="product.variations"
+      [variations]="variations"
       [isSwatchExist]="isSwatchExist"
       [inputSelections]="product.selections"
       (setPrice)="onSetPrice($event)"
