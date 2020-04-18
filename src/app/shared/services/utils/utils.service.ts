@@ -24,6 +24,7 @@ export class UtilsService {
   }
 
   openSignup() {
+    this.dialog.closeAll();
     this.signupRef.nativeElement.click();
   }
 

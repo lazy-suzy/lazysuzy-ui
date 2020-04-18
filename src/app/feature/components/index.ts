@@ -15,3 +15,7 @@ export * from './product-details-mobile/product-details-mobile.component';
 export * from './product-details/product-details.component';
 export * from './auth-success/auth-success.component';
 export * from './auth-success/auth-success.module';
+export * from './sets/sets.component';
+export * from './sets/sets.module';
+export * from './redirect/redirect.component';
+export * from './redirect/redirect.module';

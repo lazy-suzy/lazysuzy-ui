@@ -39,7 +39,7 @@
       <div class="strike {{ productPrice !== productWasPrice ? '' : 'dn' }}">
         ${{ productWasPrice }}
       </div>
-      <button mat-raised-button class="view-details-btn">
+      <button mat-raised-button class="view-details-btn" *ngIf="!product.redirect">
         <a
           (click)="openLink($event, product.product_url)"
           [href]="product.product_url"
@@ -49,9 +49,16 @@
         </a>
       </button>
     </div>
-    <hr class="modal-hr mt-3" *ngIf="isVariationExist" />
+    <hr class="modal-hr mt-3" *ngIf="isVariationExist||product.set || product.redirect"/>
+    <app-redirect 
+      *ngIf="product.redirect"
+      [redirectUrl]="product.redirect_url"
+      [redirectDetails]="product.redirect_details"
+      [category]="product.department_info[0].category_name"
+      [categoryUrl]="product.department_info[0].category_url"
+    ></app-redirect>
     <app-variations
-      *ngIf="isVariationExist"
+      *ngIf="isVariationExist && !product.redirect"
       [variations]="variations"
       [isSwatchExist]="isSwatchExist"
       [inputSelections]="product.selections"
@@ -59,6 +66,12 @@
       (setImage)="onSetImage($event)"
       (setSwatches)="setSwatches($event)"
     ></app-variations>
+    <app-sets 
+      *ngIf="product.set" 
+      [sets] = "product.set"
+      [brand] = "product.site"
+      >
+    </app-sets>
     <hr class="modal-hr" />
     <div class="pv2">
       <ul class="description-menu">

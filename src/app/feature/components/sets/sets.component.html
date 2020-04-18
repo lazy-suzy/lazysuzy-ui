@@ -1,0 +1,10 @@
+<div>
+    <span class="title">Options</span>
+    <div class="sets-container" *ngFor="let item of sets">
+        <a class="" href="{{item.link}}"><i class="fas fa-external-link-alt"></i></a>
+        <span class="w-50-ns w-40"> {{item.name}} </span>
+        <span class="price w-10-ns {{ item.price !== item.was_price ? '' : 'invisible' }}">${{item.price}}</span>
+        <span class="was-price w-10 {{ item.price !== item.was_price ? 'strike' : '' }}">${{item.was_price}}</span>
+        <span class="brand-button"><a class="" href="{{item.link}}">View at {{brand}}</a></span>
+    </div>
+</div>

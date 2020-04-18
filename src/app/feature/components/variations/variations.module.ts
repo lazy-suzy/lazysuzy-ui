@@ -4,10 +4,10 @@ import { VariationsComponent } from './variations.component';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatIconModule } from '@angular/material/icon';
 import {MatExpansionModule} from '@angular/material/expansion';
-
+import { SetsModule } from '../sets/sets.module';
 const DECLARATIONS = [VariationsComponent];
 
-const MODULES = [CommonModule, MatCheckboxModule, MatIconModule, MatExpansionModule];
+const MODULES = [CommonModule, MatCheckboxModule, MatIconModule, MatExpansionModule, SetsModule];
 
 @NgModule({
   declarations: [...DECLARATIONS],

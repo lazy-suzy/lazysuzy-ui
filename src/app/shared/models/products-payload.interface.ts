@@ -24,8 +24,12 @@ export interface IProduct {
   collection: string;
   condition: string;
   main_image: string;
+  set: any[];
   reviews: number;
   rating: number;
+  redirect: boolean;
+  redirect_url: string;
+  redirect_details: {};
   wishlisted: boolean;
   variations: (IVariationA | IVariationsB)[];
 }

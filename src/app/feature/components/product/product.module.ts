@@ -8,6 +8,7 @@ import { ProductDetailsComponent } from './../product-details/product-details.co
 import { ProductComponent } from './product.component';
 import { MatButtonModule } from '@angular/material/button';
 import { VariationsModule } from '../variations/variations.module';
+import { RedirectModule } from '../redirect/redirect.module';
 
 const DECLARATIONS = [ProductComponent, ProductDetailsComponent];
 
@@ -18,7 +19,8 @@ const MODULES = [
   MatDialogModule,
   MatButtonModule,
   MatCheckboxModule,
-  VariationsModule
+  VariationsModule,
+  RedirectModule
 ];
 
 const COMPONENTS = [ProductDetailsComponent];
@@ -27,6 +29,6 @@ const COMPONENTS = [ProductDetailsComponent];
   declarations: [...DECLARATIONS],
   entryComponents: [...COMPONENTS],
   imports: [...MODULES],
-  exports: [...DECLARATIONS, ...MODULES]
+exports: [...DECLARATIONS, ...MODULES]
 })
 export class ProductModule {}
