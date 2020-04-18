@@ -51,7 +51,8 @@ export class VariationsComponent implements OnInit {
         this.isHandset = handset.matches;
       }
     );
-    this.selectionsExist = Object.keys(this.inputSelections)[0] !== 'type';
+    this.selectionsExist =
+      this.inputSelections && Object.keys(this.inputSelections)[0] !== 'type';
     if (this.selectionsExist) {
       for (const key in this.inputSelections) {
         const value = this.inputSelections[key];
@@ -149,19 +150,23 @@ export class VariationsComponent implements OnInit {
   updateSwatches() {
     const _self = this;
     _self.swatchFilter = [];
-    const filteredSwatches = [] = this.variations
+    const filteredSwatches = ([] = this.variations
       .map(function(variation) {
-        return {...variation, enabled: _self.checkSwatchSelection( variation, _self)};
+        return {
+          ...variation,
+          enabled: _self.checkSwatchSelection(variation, _self)
+        };
       })
       .filter(function(variation) {
         if (variation.swatch_image !== null) {
-        return _self.filterDuplicateSwatches(variation, _self);
+          return _self.filterDuplicateSwatches(variation, _self);
         }
-      });
+      }));
     this.swatches = [];
     for (const variation of filteredSwatches) {
       if (
-        this.swatchFilter.includes(variation.swatch_image) && this.previousSwatch.swatch_image === variation.swatch_image
+        this.swatchFilter.includes(variation.swatch_image) &&
+        this.previousSwatch.swatch_image === variation.swatch_image
       ) {
         this.swatches.pop();
       }
@@ -219,7 +224,11 @@ export class VariationsComponent implements OnInit {
       isValidSwatch = true;
       _self.previousSwatch = variation;
     } else {
-      if (variation.hasOwnProperty('enabled') && !_self.previousSwatch.enabled && variation.enabled) {
+      if (
+        variation.hasOwnProperty('enabled') &&
+        !_self.previousSwatch.enabled &&
+        variation.enabled
+      ) {
         isValidSwatch = true;
         _self.swatchFilter.pop();
         _self.swatchFilter.push(variation.swatch_image);
