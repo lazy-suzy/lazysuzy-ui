@@ -9,9 +9,14 @@ export class SetsComponent implements OnInit {
   @Input() sets = [];
   @Input() brand: string;
 
-  constructor() { }
+  constructor() {}
 
-  ngOnInit() {
+  ngOnInit() {}
+
+  openLink(event, url) {
+    event.preventDefault();
+    if (typeof vglnk) {
+      vglnk.open(url, '_blank');
+    }
   }
-
 }
