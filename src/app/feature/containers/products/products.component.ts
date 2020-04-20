@@ -46,6 +46,8 @@ export class ProductsComponent implements OnInit, OnDestroy {
   };
   department: string;
   category: string;
+  categoryTitle: string;
+  emailTitle: string;
   total_count: number = 0;
   filters = '';
   sortType = '';
@@ -134,6 +136,8 @@ export class ProductsComponent implements OnInit, OnDestroy {
           for (let i = 0; i < response.length; i++) {
             allProducts = [...allProducts, ...response[i].products];
           }
+          this.categoryTitle = response[0].seo_data.page_title;
+          this.emailTitle = response[0].seo_data.email_title;
           this.products = allProducts;
           this.updateQueryString();
           this.total_count = response[0].total;
@@ -164,6 +168,8 @@ export class ProductsComponent implements OnInit, OnDestroy {
     this.productsSubscription = this.apiService
       .getProducts(this.department, this.category, this.filters, this.sortType)
       .subscribe((payload: IProductsPayload) => {
+        this.categoryTitle = payload.seo_data.page_title;
+        this.emailTitle = payload.seo_data.email_title;
         this.products = payload.products;
         delete payload.filterData.category;
         this.productFilters = payload.filterData;

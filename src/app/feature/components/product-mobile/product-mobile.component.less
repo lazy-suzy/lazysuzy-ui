@@ -33,6 +33,8 @@
       background: #ffffffba;
       color: #0c1c31;
       white-space: nowrap;
+      overflow: hidden;
+      max-width: 100%;
 
       .sale {
         color: @product-price;
@@ -42,7 +44,7 @@
     .discount-percentage {
       position: absolute;
       right: 0;
-      padding: 1px 0;
+      padding: 0;
       margin: 0;
       bottom: 0;
       color: #ffffff;
@@ -50,6 +52,7 @@
 
       .percentage-box {
         padding: 2px;
+        display: inline-block;
       }
     }
   }
