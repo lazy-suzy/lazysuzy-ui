@@ -1,0 +1,13 @@
+<div class="page" *ngIf="page && page.acf">
+  <h1 class="title" [innerHTML]="page.acf.title"></h1>
+  <h2 class="description" [innerHTML]="page.acf.description"></h2>
+  <ul class="posts" *ngIf="posts">
+    <li class="post" *ngFor="let post of posts">
+      <a class="post-link" [routerLink]="['/blog/' + post.slug]">
+        <div *ngIf="post.acf.image" class="post-image" [ngStyle]="{'background-image': 'url(' + post.acf.image.sizes.large + ')'}"></div>
+        <div *ngIf="post.acf.title" class="post-title" [innerHTML]="post.acf.title"></div>
+        <div *ngIf="post.acf.description" class="post-description" [innerHTML]="post.acf.description"></div>
+      </a>
+    </li>
+  </ul>
+</div>

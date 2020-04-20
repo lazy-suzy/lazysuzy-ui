@@ -1,0 +1,19 @@
+<div *ngIf="post && post.acf" class="page">
+  <div class="inner">
+    <a class="back" [routerLink]="'/blog'">Back</a>
+    <h1 *ngIf="post.acf.title" class="title" [innerHTML]="post.acf.title"></h1>
+    <div class="image-wrapper">
+      <img *ngIf="post.acf.image" class="image" src="{{ post.acf.image.sizes.large }}" />
+    </div>
+    <h1 *ngIf="post.acf.description" class="description" [innerHTML]="post.acf.description"></h1>
+  </div>
+  <div class="content-wrapper">
+    <div
+      *ngFor="let content of post.acf.content"
+      class="content"
+      [ngClass]="content.acf_fc_layout">
+      <div *ngIf="content.acf_fc_layout === 'text'" class="content-text"><div class="inner" [innerHTML]="content.text"></div></div>
+      <img *ngIf="content.acf_fc_layout === 'image'" class="content-image" [src]="content.image.sizes.large" />
+    </div>
+  </div>
+</div>

@@ -242,7 +242,7 @@ export class ApiService {
   }
 
   getPosts(): Observable<any[]> {
-    return this.httpService.get<any[]>('http://www.oxygenna.com/wp-json/wp/v2/posts?_embed', {
+    return this.httpService.get<any[]>('https://psimonmyway.com/wp-json/wp/v2/posts?_embed', {
       params: {
         per_page: '6'
       }

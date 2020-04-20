@@ -60,7 +60,7 @@ const routes: Routes = [
   },
 
   {
-    path: '',
+    path: 'blog',
     loadChildren: () => import('./feature/blog/blog/blog.module').then(m => m.BlogModule)
   }
 ];

@@ -1,0 +1,40 @@
+<!-- <div class="left-tabs">
+    <ul class="nav nav-tabs flex-column">
+        <li *ngFor="let post of posts$ | async"
+        (click)="selectSideBarItem(post)" class="nav-item">
+            <div class="nav-link" [class.active]="post?.value === selected?.value">
+                {{post.acf.rendered}}
+                <div class="date">{{post.title.modified_gmt}}</div>
+            </div>
+        </li>
+    </ul>
+</div> -->
+
+<nav>
+    <div class="centre">
+        <h4>Blog</h4>
+        <ul class="clearfix">
+
+            <li *ngFor="let post of posts$ | async" (click)="selectSideBarItem(post)">
+                <!-- {{post|json}} -->
+                <h3>
+                    <a>{{post.title.rendered}}</a>
+                </h3>
+                <!-- <div class="date">{{post.acf.date}}</div> -->
+            </li>
+
+        </ul>
+    </div>
+</nav>
+
+<main>
+
+    <article *ngIf="selectedPost">
+
+        <h2>M Theory</h2>
+
+        <div [innerHTML]="selectedPost.content.rendered"></div>
+
+    </article>
+
+</main>
