@@ -11,7 +11,6 @@ import { IProductPayload } from 'src/app/shared/models';
 import { ApiService, UtilsService } from 'src/app/shared/services';
 import { Gallery, GalleryItem, ImageItem } from '@ngx-gallery/core';
 import { Lightbox } from '@ngx-gallery/lightbox';
-import { VariationsComponent } from '../variations/variations.component';
 @Component({
   selector: 'app-product-details',
   templateUrl: './product-details.component.html',
@@ -20,7 +19,6 @@ import { VariationsComponent } from '../variations/variations.component';
 export class ProductDetailsComponent implements OnInit {
   @ViewChild('topContainer', { static: false }) topContainer: ElementRef;
   @ViewChild('gallery', { static: false }) galleryContainer: ElementRef;
-  @ViewChild(VariationsComponent, { static: false }) child: VariationsComponent;
   product: IProductPayload;
   productSubscription: Subscription;
   selectedIndex: number;

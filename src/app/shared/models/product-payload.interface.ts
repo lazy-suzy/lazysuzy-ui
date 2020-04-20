@@ -18,6 +18,10 @@ export interface IProductPayload {
   rating: number;
   wishlisted: boolean;
   variations: any[];
+  set: any[];
+  redirect: boolean;
+  redirect_url: string;
+  redirect_details: {};
   description?: string[];
   dimension?: IDimension;
   thumb?: string[];

@@ -1,0 +1,31 @@
+.redirect-container {
+  font-size: 16px;
+  margin-bottom: 16px;
+  .pointer {
+    cursor: pointer;
+  }
+  .suggested-container {
+    border: 2px solid #dbdbdb;
+    margin: 10px 10px 10px 0;
+    .suggested-content {
+      padding: 8px 16px;
+      .alternative-text {
+        padding: 12px;
+        width: 25%;
+        color: #b76e79;
+      }
+      .alternative-option {
+        padding: 12px 8px;
+        color: #000000;
+      }
+    }
+  }
+}
+.underline-none:hover {
+  text-decoration: none;
+}
+@media (max-width: 767px) {
+  .alternative-text {
+    width: 100% !important;
+  }
+}

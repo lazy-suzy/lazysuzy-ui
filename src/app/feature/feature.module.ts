@@ -28,7 +28,7 @@ const MODULES = [
     CategoriesComponent,
     AllProductsComponent,
     ProductDetailsMobileComponent,
-    AuthSuccessComponent
+    AuthSuccessComponent,
   ],
   imports: [...MODULES],
 exports: [...DECLARATIONS, ...MODULES]

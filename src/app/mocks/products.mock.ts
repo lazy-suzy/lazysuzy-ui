@@ -21,6 +21,10 @@ export const MOCK_PRODUCTS: IProductPayload[] = [
     reviews: 1078,
     rating: 4.73,
     wishlisted: false,
+    set: null,
+    redirect: false,
+    redirect_url: null,
+    redirect_details: {},
     variations: [
       {
         time_taken: 0.0011179447174072266,
@@ -297,6 +301,10 @@ export const MOCK_PRODUCTS: IProductPayload[] = [
     reviews: 1078,
     rating: 4.73,
     wishlisted: false,
+    set: null,
+    redirect: false,
+    redirect_url: null,
+    redirect_details: {},
     variations: [
       {
         time_taken: 0.000988006591796875,
@@ -573,6 +581,10 @@ export const MOCK_PRODUCTS: IProductPayload[] = [
     reviews: 1078,
     rating: 4.73,
     wishlisted: false,
+    set:null,
+    redirect: false,
+  redirect_url: null,
+  redirect_details: {},
     variations: [
       {
         time_taken: 0.0009860992431640625,
@@ -849,6 +861,10 @@ export const MOCK_PRODUCTS: IProductPayload[] = [
     reviews: 1069,
     rating: 4.73,
     wishlisted: false,
+    set:null,
+    redirect: false,
+  redirect_url: null,
+  redirect_details: {},
     variations: [
       {
         time_taken: 0.0009500980377197266,
@@ -1124,6 +1140,10 @@ export const MOCK_PRODUCTS: IProductPayload[] = [
     reviews: 1078,
     rating: 4.73,
     wishlisted: false,
+    set:null,
+    redirect: false,
+  redirect_url: null,
+  redirect_details: {},
     variations: [
       {
         time_taken: 0.0009570121765136719,
@@ -1400,6 +1420,10 @@ export const MOCK_PRODUCTS: IProductPayload[] = [
     reviews: 303,
     rating: 4.67,
     wishlisted: false,
+    set:null,
+    redirect: false,
+  redirect_url: null,
+  redirect_details: {},
     variations: [
       {
         time_taken: 0.0005450248718261719,
@@ -1467,6 +1491,10 @@ export const MOCK_PRODUCTS: IProductPayload[] = [
     reviews: 1078,
     rating: 4.73,
     wishlisted: false,
+    set:null,
+    redirect: false,
+  redirect_url: null,
+  redirect_details: {},
     variations: [
       {
         time_taken: 0.0009410381317138672,
@@ -1743,6 +1771,10 @@ export const MOCK_PRODUCTS: IProductPayload[] = [
     reviews: 1078,
     rating: 4.73,
     wishlisted: false,
+    set:null,
+    redirect: false,
+  redirect_url: null,
+  redirect_details: {},
     variations: [
       {
         time_taken: 0.0009899139404296875,
@@ -2019,6 +2051,10 @@ export const MOCK_PRODUCTS: IProductPayload[] = [
     reviews: 1078,
     rating: 4.73,
     wishlisted: false,
+    set:null,
+    redirect: false,
+  redirect_url: null,
+  redirect_details: {},
     variations: [
       {
         time_taken: 0.0009510517120361328,
@@ -2295,6 +2331,10 @@ export const MOCK_PRODUCTS: IProductPayload[] = [
     reviews: 1078,
     rating: 4.73,
     wishlisted: false,
+    set: null,
+    redirect: false,
+  redirect_url: null,
+  redirect_details: {},
     variations: [
       {
         time_taken: 0.0009529590606689453,

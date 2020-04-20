@@ -1,0 +1,48 @@
+.sets-container {
+  font-size: 14px;
+  display: flex;
+  width: 100%;
+  position: relative;
+  margin: 5px 0;
+  span {
+    padding: 1px 5px;
+    color: #0d1c31;
+  }
+  i {
+    padding: 5px 0;
+    color: #b76e79;
+  }
+  .price {
+    color: #b76e79;
+  }
+  .brand-button {
+    background-color: #0d1c31;
+    padding: 1px 10px;
+    border-radius: 5px;
+    position: absolute;
+    right: 10px;
+    a {
+      color: #faca37;
+      &:hover {
+        text-decoration: none;
+      }
+    }
+  }
+}
+.title {
+  font-size: 22px;
+}
+@media (max-width: 767px) {
+  .sets-container {
+    span {
+      padding: 1px 2px;
+    }
+    .price {
+      width: 13%;
+    }
+    .brand-button {
+      right: 0;
+      padding: 1px 5px;
+    }
+  }
+}

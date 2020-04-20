@@ -44,7 +44,7 @@
   </ng-container>
 
   <ng-container *ngIf="!isHandset">
-    <h4 class="category-title">{{ category }}</h4>
+    <h4 class="category-title">{{ categoryTitle }}</h4>
     <div class="filter-panel flex justify-around items-center">
       <app-product-filters
         [productFilters]="productFilters"
@@ -61,7 +61,7 @@
   </ng-container>
 
   <div
-    class="flex flex-wrap justify-between"
+    class="flex flex-wrap"
     infiniteScroll
     [infiniteScrollDistance]="2"
     [infiniteScrollThrottle]="50"
@@ -89,7 +89,7 @@
     </ng-container>
   </div>
   <app-subscribe
-    [category]="category"
+    [category]="emailTitle"
     [homePage]="false"
     *ngIf="!isProductFetching"
     class="tc"

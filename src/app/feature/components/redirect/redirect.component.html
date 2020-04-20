@@ -1,0 +1,39 @@
+<div class="redirect-container">
+  <div>Sorry, this item is currently unavailable.</div>
+  <div>
+    <span class="link underline blue pointer" (click)="openSignup()"
+      >Sign up</span
+    >
+    to be alerted when it becomes available.
+  </div>
+  <div
+    class="suggested-container"
+    *ngIf="redirectUrl && redirectUrl.length > 0; else showCategory"
+  >
+    <a href="{{ redirectUrl }}" class="underline-none">
+      <div class="suggested-content flex flex-wrap items-center">
+        <div class=" alternative-text">Suggested Alternative</div>
+        <img class="w-10-ns w-20" [src]="redirectDetails.main_image" />
+        <div class="w-60-ns alternative-option w-80">
+          <div>{{ redirectDetails.name }}</div>
+          <div>
+            <span>${{ redirectDetails.price }}</span>
+            <span
+              class="strike pl2 {{
+                redirectDetails.price !== redirectDetails.was_price ? '' : 'dn'
+              }}"
+              >${{ redirectDetails.was_price }}</span
+            >
+          </div>
+        </div>
+      </div>
+    </a>
+  </div>
+  <ng-template #showCategory>
+    In the meantime, see more
+    <a class="link underline blue pointer" href="{{ categoryUrl }}"
+      >{{ category }} here</a
+    >.
+  </ng-template>
+</div>
+<!--  -->
