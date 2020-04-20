@@ -241,6 +241,14 @@ export class ApiService {
     return this.httpService.post(url, data);
   }
 
+  getPosts(): Observable<any[]> {
+    return this.httpService.get<any[]>('http://www.oxygenna.com/wp-json/wp/v2/posts?_embed', {
+      params: {
+        per_page: '6'
+      }
+    });
+  }
+
   getAuthToken(access_token, provider) {
     const endpoint = `oauth/token`;
     const url = `${env.API_BASE_HREF}${endpoint}`;

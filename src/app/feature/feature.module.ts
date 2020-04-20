@@ -9,6 +9,7 @@ import {
   AllProductsComponent
 } from './containers';
 import { AuthSuccessComponent, ProductDetailsMobileComponent } from './components';
+import { BlogModule } from './blog/blog/blog.module';
 
 const DECLARATIONS = [];
 
@@ -17,7 +18,8 @@ const MODULES = [
   ProductsModule,
   LandingModule,
   SearchModule,
-  WishlistModule
+  WishlistModule,
+  BlogModule
 ];
 
 @NgModule({

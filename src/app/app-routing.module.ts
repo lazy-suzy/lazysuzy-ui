@@ -57,6 +57,11 @@ const routes: Routes = [
     path: 'authSuccess',
     component: AuthSuccessComponent,
     pathMatch: 'full'
+  },
+
+  {
+    path: '',
+    loadChildren: () => import('./feature/blog/blog/blog.module').then(m => m.BlogModule)
   }
 ];
 
