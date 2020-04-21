@@ -1,0 +1,87 @@
+<div class="auth-dialog">
+  <button class="close-icon" mat-dialog-close>
+    <mat-icon>close </mat-icon>
+  </button>
+  <div class="modal-title">
+    <h5 class="modal-heading">
+      Hey, Star Stuff!
+    </h5>
+    <br />
+    <div class="social-btn">
+      <button
+        type="button"
+        class="btn btn-primary facebookBtn white"
+        style="background: #3b5998;"
+        (click)="socialSignIn('facebook')"
+      >
+        <i class="fab fa-facebook-f">&nbsp;<b>Continue with Facebook</b></i>
+      </button>
+      <br />
+      <button
+        type="button"
+        class="btn btn-light googleBtn black"
+        (click)="socialSignIn('google')"
+      >
+        <i class="fab fa-google">&nbsp;<b>Continue with Google</b></i>
+      </button>
+    </div>
+
+    <hr />
+  </div>
+
+  <div class="modal-body">
+    <div class="span-line text-center">Not Feeling Social?</div>
+    <br />
+    <form role="form" (submit)="signup($event, name, email, password)">
+      <div class="form-group">
+        <input
+          type="name"
+          class="form-control text-input"
+          name="name"
+          placeholder="Name"
+          required
+          [(ngModel)]="name"
+        />
+        <br />
+        <input
+          type="email"
+          class="form-control text-input"
+          name="email"
+          placeholder="Email"
+          required
+          [(ngModel)]="email"
+        />
+        <br />
+        <input
+          type="password"
+          class="form-control text-input"
+          name="password"
+          placeholder="Password"
+          required
+          [(ngModel)]="password"
+        />
+        <span class="error-msg {{ error ? 'visible' : 'invisible' }}">{{
+          errorMsg
+        }}</span>
+        <button type="submit" class="form-control submit-btn">
+          Signup
+        </button>
+      </div>
+    </form>
+    <hr />
+  </div>
+
+  <div class="modal-footer">
+    <span class="signup-footer-content {{ thanksMsg ? 'dn' : '' }}"
+      >Already Joined&nbsp;
+      <button class="btn-sm" (click)="openSigninDialog()">
+        Sign In
+      </button>
+    </span>
+    <div class="tc w-100 {{ thanksMsg ? '' : 'dn' }}">
+      <span>
+        Thanks for signing up
+      </span>
+    </div>
+  </div>
+</div>

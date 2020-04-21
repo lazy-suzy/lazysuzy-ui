@@ -11,3 +11,5 @@ export * from './privacy-policy/privacy-policy.module';
 export * from './terms-of-service/terms-of-service.module';
 export * from './brand-footer/brand-footer.module';
 export * from './banner/banner.module';
+export * from './signin/signin.component';
+export * from './signup/signup.component';

@@ -1,6 +1,7 @@
 import { Injectable, ElementRef } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { ProductDetailsComponent } from 'src/app/feature/components';
+import { SigninComponent, SignupComponent } from 'src/app/core/components';
 import { Location } from '@angular/common';
 import { Router, ActivatedRoute } from '@angular/router';
 import { MarkdownService } from 'ngx-markdown';
@@ -26,6 +27,10 @@ export class UtilsService {
   openSignup() {
     this.dialog.closeAll();
     this.signupRef.nativeElement.click();
+  }
+
+  closeDialogs() {
+    this.dialog.closeAll();
   }
 
   checkDataLength(data) {
@@ -94,6 +99,22 @@ export class UtilsService {
     });
     dialogRef.afterClosed().subscribe(result => {
       this.location.go(``);
+    });
+  }
+
+  openSignupDialog(width: string = '40%') {
+    this.dialog.closeAll();
+    return this.dialog.open(SignupComponent, {
+      width,
+      panelClass: 'auth-dialog-container'
+    });
+  }
+
+  openSigninDialog(width: string = '40%') {
+    this.dialog.closeAll();
+    return this.dialog.open(SigninComponent, {
+      width,
+      panelClass: 'auth-dialog-container'
     });
   }
 
