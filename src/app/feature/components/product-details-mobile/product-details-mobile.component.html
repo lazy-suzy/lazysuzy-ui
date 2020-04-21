@@ -39,7 +39,11 @@
       <div class="strike {{ productPrice !== productWasPrice ? '' : 'dn' }}">
         ${{ productWasPrice }}
       </div>
-      <button mat-raised-button class="view-details-btn" *ngIf="!product.redirect">
+      <button
+        mat-raised-button
+        class="view-details-btn"
+        *ngIf="!product.redirect"
+      >
         <a
           (click)="openLink($event, product.product_url)"
           [href]="product.product_url"
@@ -49,8 +53,11 @@
         </a>
       </button>
     </div>
-    <hr class="modal-hr mt-3" *ngIf="isVariationExist||product.set || product.redirect"/>
-    <app-redirect 
+    <hr
+      class="modal-hr mt-3"
+      *ngIf="isVariationExist || product.set || product.redirect"
+    />
+    <app-redirect
       *ngIf="product.redirect"
       [redirectUrl]="product.redirect_url"
       [redirectDetails]="product.redirect_details"
@@ -66,11 +73,7 @@
       (setImage)="onSetImage($event)"
       (setSwatches)="setSwatches($event)"
     ></app-variations>
-    <app-sets 
-      *ngIf="product.set" 
-      [sets] = "product.set"
-      [brand] = "product.site"
-      >
+    <app-sets *ngIf="product.set" [sets]="product.set" [brand]="product.site">
     </app-sets>
     <hr class="modal-hr" />
     <div class="pv2">
@@ -80,21 +83,21 @@
           *ngIf="descriptionExist"
           class="{{ activeTab === 'desc' ? 'active' : 'bg-white' }}"
         >
-          <a class="nav-link">Description</a>
+          <span class="nav-link">Description</span>
         </li>
         <li
           (click)="selectTab('features')"
           *ngIf="featuresExist"
           class="{{ activeTab === 'features' ? 'active' : 'bg-white' }}"
         >
-          <a class="nav-link">Features</a>
+          <span class="nav-link">Features</span>
         </li>
         <li
           (click)="selectTab('dimensions')"
           *ngIf="dimensionExist"
           class="{{ activeTab === 'dimensions' ? 'active' : 'bg-white' }}"
         >
-          <a class="nav-link">Dimensions</a>
+          <span class="nav-link">Dimensions</span>
         </li>
       </ul>
       <div class="menu-content">

@@ -16,7 +16,7 @@
     <div class="fl w-50 pa3 product-details-container">
       <div #topContainer>
         <div class="flex w-100 justify-between items-end">
-          <h2 class="mb0">{{ product.site }}</h2>
+          <h2 class="ma0">{{ product.site }}</h2>
           <div *ngIf="product.wishlisted; else elseBlock">
             <div class="tile-icon wishlist-icon wishlist-container">
               <mat-icon (click)="wishlistProduct(product.sku, false)"
@@ -63,7 +63,7 @@
       </div>
 
       <div
-        class="product-description-container {{ variationsExist ? '' : 'dn' }}"
+        class="product-description-container {{ isVariationExist ? '' : 'dn' }}"
         [ngStyle]="topHeight"
       >
         <app-redirect
