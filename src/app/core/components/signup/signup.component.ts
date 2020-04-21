@@ -84,10 +84,11 @@ export class SignupComponent implements OnInit {
           if (payload.success) {
             this.error = false;
             this.thanksMsg = true;
-            this.eventService.fetchUser(payload.success.token, payload.user);
-            setTimeout(function() {
-              this.utils.closeDialogs();
-            }, 2000);
+            this.eventService.fetchUser(
+              payload.success.token,
+              payload.success.user
+            );
+            this.utils.closeDialogs();
           }
         },
         (error: any) => {
@@ -106,6 +107,6 @@ export class SignupComponent implements OnInit {
   }
 
   openSigninDialog() {
-    this.utils.openSigninDialog(this.isHandset ? '80%' : '40%');
+    this.utils.openSigninDialog(this.isHandset ? '80%' : '35%');
   }
 }

@@ -96,6 +96,6 @@ export class SigninComponent implements OnInit {
   }
 
   openSignupDialog() {
-    this.utils.openSigninDialog(this.isHandset ? '80%' : '40%');
+    this.utils.openSigninDialog(this.isHandset ? '80%' : '35%');
   }
 }

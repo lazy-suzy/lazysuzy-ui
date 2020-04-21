@@ -102,19 +102,21 @@ export class UtilsService {
     });
   }
 
-  openSignupDialog(width: string = '40%') {
+  openSignupDialog(width: string = '35%') {
     this.dialog.closeAll();
     return this.dialog.open(SignupComponent, {
       width,
-      panelClass: 'auth-dialog-container'
+      panelClass: 'auth-dialog-container',
+      autoFocus: false
     });
   }
 
-  openSigninDialog(width: string = '40%') {
+  openSigninDialog(width: string = '35%') {
     this.dialog.closeAll();
     return this.dialog.open(SigninComponent, {
       width,
-      panelClass: 'auth-dialog-container'
+      panelClass: 'auth-dialog-container',
+      autoFocus: false
     });
   }
 
