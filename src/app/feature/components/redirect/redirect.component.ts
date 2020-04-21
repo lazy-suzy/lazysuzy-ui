@@ -11,12 +11,11 @@ export class RedirectComponent implements OnInit {
   @Input() category: string;
   @Input() categoryUrl: string;
 
-  constructor( private utils: UtilsService) { }
+  constructor(private utils: UtilsService) {}
 
-  ngOnInit() {
-  }
+  ngOnInit() {}
 
   openSignup() {
-    this.utils.openSignup();
+    this.utils.openSignupDialog();
   }
 }

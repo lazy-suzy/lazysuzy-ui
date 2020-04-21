@@ -56,6 +56,7 @@ export class AuthComponent implements OnInit {
       );
       this.eventEmitterService.socialSubs = this.eventEmitterService.invokeSocialLogin.subscribe(
         platform => {
+          debugger;
           this.socialSignIn(platform);
         }
       );
@@ -76,6 +77,7 @@ export class AuthComponent implements OnInit {
   closeMyMenu() {}
 
   public socialSignIn(socialPlatform: string) {
+    debugger;
     let socialPlatformProvider;
     if (socialPlatform == 'facebook') {
       socialPlatformProvider = FacebookLoginProvider.PROVIDER_ID;

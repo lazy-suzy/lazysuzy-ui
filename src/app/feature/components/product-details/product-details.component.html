@@ -63,9 +63,7 @@
       </div>
 
       <div
-        class="product-description-container {{
-          variationsExist ? 'show' : 'hide'
-        }}"
+        class="product-description-container {{ variationsExist ? '' : 'dn' }}"
         [ngStyle]="topHeight"
       >
         <app-redirect
