@@ -63,10 +63,6 @@ export class AuthComponent implements OnInit {
     }
   }
 
-  ngAfterViewInit() {
-    this.utils.setSignupRef(this.signupBtn);
-  }
-
   fetchUser() {
     this.userCookie = this.cookie.get('token');
     if (this.userCookie) {

@@ -207,7 +207,7 @@ export class ApiService {
     const token = this.cookie.get('token');
     if (!token) {
       // trigger signup window
-      this.utils.openSignupDialog();
+      this.utils.openSignupDialog(undefined, true);
       return;
     }
     const url = `${env.API_BASE_HREF}${endpoint}`;

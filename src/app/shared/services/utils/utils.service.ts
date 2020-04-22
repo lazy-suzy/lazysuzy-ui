@@ -20,15 +20,6 @@ export class UtilsService {
     private markdownService: MarkdownService
   ) {}
 
-  setSignupRef(ref) {
-    this.signupRef = ref;
-  }
-
-  openSignup() {
-    this.dialog.closeAll();
-    this.signupRef.nativeElement.click();
-  }
-
   closeDialogs() {
     this.dialog.closeAll();
   }
@@ -102,8 +93,8 @@ export class UtilsService {
     });
   }
 
-  openSignupDialog(width: string = '35%') {
-    this.dialog.closeAll();
+  openSignupDialog(width: string = '35%', isClose = false) {
+    !isClose && this.dialog.closeAll();
     return this.dialog.open(SignupComponent, {
       width,
       panelClass: 'auth-dialog-container',
