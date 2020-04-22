@@ -5,10 +5,10 @@ import {
   ProductsModule,
   SearchModule,
   WishlistModule,
-  CategoriesComponent,
-  AllProductsComponent
+  AllProductsModule,
+  CategoriesModule
 } from './containers';
-import { AuthSuccessComponent, ProductDetailsMobileComponent } from './components';
+import { ProductDetailsMobileModule } from './components';
 
 const DECLARATIONS = [];
 
@@ -17,18 +17,15 @@ const MODULES = [
   ProductsModule,
   LandingModule,
   SearchModule,
-  WishlistModule
+  WishlistModule,
+  AllProductsModule,
+  CategoriesModule,
+  ProductDetailsMobileModule
 ];
 
 @NgModule({
-  declarations: [
-    ...DECLARATIONS,
-    CategoriesComponent,
-    AllProductsComponent,
-    ProductDetailsMobileComponent,
-    AuthSuccessComponent,
-  ],
+  declarations: [...DECLARATIONS],
   imports: [...MODULES],
-exports: [...DECLARATIONS, ...MODULES]
+  exports: [...DECLARATIONS, ...MODULES]
 })
 export class FeatureModule {}

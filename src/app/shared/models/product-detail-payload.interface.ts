@@ -17,6 +17,11 @@ export interface IProductDetail {
   reviews: number;
   rating: number;
   wishlisted: boolean;
+  set: any[];
+  selections: any;
+  redirect: boolean;
+  redirect_url: string;
+  redirect_details: {};
   variations: Variation[];
   description: string[];
   dimension: Dimension[];

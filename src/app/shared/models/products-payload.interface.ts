@@ -18,7 +18,7 @@ export interface IProduct {
   product_detail_url: string;
   is_price: string;
   was_price: string;
-  percent_discount: string;
+  percent_discount: number;
   model_code: string;
   color: string;
   collection: string;
