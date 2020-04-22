@@ -1,194 +1,193 @@
 .mobile-filter-container {
-    position: absolute;
-    top: 0;
-    z-index: 999;
-    left: 0;
-    background-color: #0c1c31;
-    width: 100%;
+  position: absolute;
+  top: 0;
+  z-index: 999;
+  left: 0;
+  background-color: #0c1c31;
+  width: 100%;
 
-    .mobile-filter-bar {
-        padding: 10px;
-        color: #ffffff;
-        text-align: center;
-        font-size: 20px;
+  .mobile-filter-bar {
+    padding: 10px;
+    color: #ffffff;
+    text-align: center;
+    font-size: 20px;
 
-        .back-icon {
-            float: left;
-            margin-left: 10px;
-        }
-
-        .clear-all {
-            float: right;
-            font-size: 12px;
-            margin: 5px;
-        }
-    }   
-
-    .mobile-filter-content-container {
-        height: 100vh;
-        background-color: #ffffff;
-
-        .content-row {
-            display: flex;
-            .tabs-col {
-                padding: 0 0 10px 0;
-                background-color: #d6d6d6;
-                height: 90vh;
-                .filter-tabs{
-                    text-align: left;
-                }
-                .filter-list {
-                    padding: 0;
-                    margin: 0;
-                    .filter-item {
-                        list-style: none;
-                        padding: 1rem 0.5rem 1rem 1rem;
-                        color: #0c1c31;
-                        font-size: 14px;
-                    }
-                    .active {
-                        background-color: #ffffff;
-                        color: #b76e79 !important;
-                    }
-                    .disabledTab {
-                        opacity: 0.4;
-                        pointer-events: none;
-                    }
-                }
-            }
-            .content-col {
-                max-height: 80vh;
-                overflow: scroll;
-                .total-results{
-                    color: #ffcc00;
-                    text-align: center;
-                    position: fixed;
-                    bottom: 0;
-                    font-size: 18px;
-                    left: 0;
-                    right: 0;
-                    border: 1px solid #d3d3d3;
-                    background-color: #e9ecef;
-                    padding: 5px 5px;
-                    .filter-results-button {
-                        width: 100%;
-                        background-color: #ffcc00;
-                        border: none;
-                        padding: 10px;
-                    }
-                }
-                .filter-content {
-                    padding-right: 20px;
-                    .clear-btn {
-                        text-align: right;
-                        padding: 10px 15px;
-                        color: #999999;
-                    }
-                    .filters-list-container{
-                        margin: 0;
-                        .filters-list {
-                            list-style: none;
-                            margin-right: 10px;
-                            padding: 1px 0;
-                            color: #0c1c31;
-                            .filter-label {
-                                display: block;
-                                position: relative;
-                                margin: 10px;
-                                cursor: pointer;
-                                ::ng-deep.mat-checkbox-inner-container{
-                                    position: absolute;
-                                    right: 0;
-                                }
-                            }
-                        }
-                    }
-                    
-                }
-            }
-        }
+    .back-icon {
+      float: left;
+      margin-left: 10px;
     }
 
+    .clear-all {
+      float: right;
+      font-size: 12px;
+      margin: 5px;
+    }
+  }
+
+  .mobile-filter-content-container {
+    height: 100vh;
+    background-color: #ffffff;
+
+    .content-row {
+      display: flex;
+      .tabs-col {
+        padding: 0 0 10px 0;
+        background-color: #d6d6d6;
+        height: 90vh;
+        .filter-tabs {
+          text-align: left;
+        }
+        .filter-list {
+          padding: 0;
+          margin: 0;
+          .filter-item {
+            list-style: none;
+            padding: 1rem 0.5rem 1rem 1rem;
+            color: #0c1c31;
+            font-size: 14px;
+          }
+          .active {
+            background-color: #ffffff;
+            color: #b76e79 !important;
+          }
+          .disabledTab {
+            opacity: 0.4;
+            pointer-events: none;
+          }
+        }
+      }
+      .content-col {
+        max-height: 80vh;
+        overflow: scroll;
+        .total-results {
+          color: #ffcc00;
+          text-align: center;
+          position: fixed;
+          bottom: 0;
+          font-size: 18px;
+          left: 0;
+          right: 0;
+          border: 1px solid #d3d3d3;
+          background-color: #e9ecef;
+          padding: 5px 5px;
+          .filter-results-button {
+            width: 100%;
+            background-color: #ffcc00;
+            border: none;
+            padding: 10px;
+            color: #0c1c31;
+          }
+        }
+        .filter-content {
+          padding-right: 20px;
+          .clear-btn {
+            text-align: right;
+            padding: 10px 15px;
+            color: #999999;
+          }
+          .filters-list-container {
+            margin: 0;
+            .filters-list {
+              list-style: none;
+              margin-right: 10px;
+              padding: 1px 0;
+              color: #0c1c31;
+              .filter-label {
+                display: block;
+                position: relative;
+                margin: 10px;
+                cursor: pointer;
+                ::ng-deep.mat-checkbox-inner-container {
+                  position: absolute;
+                  right: 0;
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
 }
 
 .show {
-    display: block;
+  display: block;
 }
 
 .hide {
-    display: none;
+  display: none;
 }
 
 .visible {
-    visibility: visible;
+  visibility: visible;
 }
 
 .invisible {
-    visibility: hidden;
+  visibility: hidden;
 }
 ::ng-deep .mat-checkbox-checked .mat-checkbox-background {
-    background-color: #ffcc00 !important;
+  background-color: #ffcc00 !important;
 }
 
 ::ng-deep .ng5-slider {
-    .ng5-slider-selection,
-    .ng5-slider-pointer {
-        background-color: #ffcc00 !important;
-    }
+  .ng5-slider-selection,
+  .ng5-slider-pointer {
+    background-color: #ffcc00 !important;
+  }
 }
 
 .lds-ellipsis {
-    display: inline-block;
-    position: relative;
-    width: 90px;
-    height: 15px;
+  display: inline-block;
+  position: relative;
+  width: 90px;
+  height: 15px;
+}
+.lds-ellipsis div {
+  position: absolute;
+  top: 5px;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #fff;
+  animation-timing-function: cubic-bezier(0, 1, 1, 0);
+}
+.lds-ellipsis div:nth-child(1) {
+  left: 8px;
+  animation: lds-ellipsis1 0.6s infinite;
+}
+.lds-ellipsis div:nth-child(2) {
+  left: 8px;
+  animation: lds-ellipsis2 0.6s infinite;
+}
+.lds-ellipsis div:nth-child(3) {
+  left: 32px;
+  animation: lds-ellipsis2 0.6s infinite;
+}
+.lds-ellipsis div:nth-child(4) {
+  left: 56px;
+  animation: lds-ellipsis3 0.6s infinite;
+}
+@keyframes lds-ellipsis1 {
+  0% {
+    transform: scale(0);
   }
-  .lds-ellipsis div {
-    position: absolute;
-    top: 5px;
-    width: 8px;
-    height: 8px;
-    border-radius: 50%;
-    background: #fff;
-    animation-timing-function: cubic-bezier(0, 1, 1, 0);
+  100% {
+    transform: scale(1);
   }
-  .lds-ellipsis div:nth-child(1) {
-    left: 8px;
-    animation: lds-ellipsis1 0.6s infinite;
+}
+@keyframes lds-ellipsis3 {
+  0% {
+    transform: scale(1);
   }
-  .lds-ellipsis div:nth-child(2) {
-    left: 8px;
-    animation: lds-ellipsis2 0.6s infinite;
+  100% {
+    transform: scale(0);
   }
-  .lds-ellipsis div:nth-child(3) {
-    left: 32px;
-    animation: lds-ellipsis2 0.6s infinite;
+}
+@keyframes lds-ellipsis2 {
+  0% {
+    transform: translate(0, 0);
   }
-  .lds-ellipsis div:nth-child(4) {
-    left: 56px;
-    animation: lds-ellipsis3 0.6s infinite;
+  100% {
+    transform: translate(24px, 0);
   }
-  @keyframes lds-ellipsis1 {
-    0% {
-      transform: scale(0);
-    }
-    100% {
-      transform: scale(1);
-    }
-  }
-  @keyframes lds-ellipsis3 {
-    0% {
-      transform: scale(1);
-    }
-    100% {
-      transform: scale(0);
-    }
-  }
-  @keyframes lds-ellipsis2 {
-    0% {
-      transform: translate(0, 0);
-    }
-    100% {
-      transform: translate(24px, 0);
-    }
-  }
+}
