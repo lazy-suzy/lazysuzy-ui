@@ -10,12 +10,13 @@ export class RedirectComponent implements OnInit {
   @Input() redirectDetails = {};
   @Input() category: string;
   @Input() categoryUrl: string;
+  @Input() isHandset: boolean;
 
   constructor(private utils: UtilsService) {}
 
   ngOnInit() {}
 
   openSignup() {
-    this.utils.openSignupDialog();
+    this.utils.openSignupDialog(this.isHandset);
   }
 }

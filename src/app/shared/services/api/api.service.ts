@@ -197,7 +197,7 @@ export class ApiService {
     return this.httpService.get(url);
   }
 
-  wishlistProduct(sku, mark) {
+  wishlistProduct(sku, mark, isHandset: boolean) {
     let endpoint;
     if (mark) {
       endpoint = `mark/favourite/${sku}`;
@@ -207,7 +207,7 @@ export class ApiService {
     const token = this.cookie.get('token');
     if (!token) {
       // trigger signup window
-      this.utils.openSignupDialog(undefined, true);
+      this.utils.openSignupDialog(isHandset, true);
       return;
     }
     const url = `${env.API_BASE_HREF}${endpoint}`;

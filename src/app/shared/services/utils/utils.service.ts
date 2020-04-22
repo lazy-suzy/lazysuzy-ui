@@ -93,10 +93,12 @@ export class UtilsService {
     });
   }
 
-  openSignupDialog(width: string = '35%', isClose = false) {
+  openSignupDialog(isHandset: boolean = false, isClose = false) {
+    const width = isHandset ? '100%' : '35%';
     !isClose && this.dialog.closeAll();
     return this.dialog.open(SignupComponent, {
       width,
+
       panelClass: 'auth-dialog-container',
       autoFocus: false
     });

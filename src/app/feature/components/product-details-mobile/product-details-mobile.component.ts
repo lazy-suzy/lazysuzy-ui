@@ -148,9 +148,11 @@ export class ProductDetailsMobileComponent implements OnInit {
   }
 
   wishlistProduct(sku, mark) {
-    this.apiService.wishlistProduct(sku, mark).subscribe((payload: any) => {
-      this.product.wishlisted = mark;
-    });
+    this.apiService
+      .wishlistProduct(sku, mark, true)
+      .subscribe((payload: any) => {
+        this.product.wishlisted = mark;
+      });
   }
 
   openLightbox(index: number) {

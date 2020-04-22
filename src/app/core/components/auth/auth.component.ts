@@ -103,7 +103,7 @@ export class AuthComponent implements OnInit {
   }
 
   openSignupDialog() {
-    this.utils.openSignupDialog(this.isHandset ? '80%' : '35%');
+    this.utils.openSignupDialog(this.isHandset);
   }
 
   logout() {

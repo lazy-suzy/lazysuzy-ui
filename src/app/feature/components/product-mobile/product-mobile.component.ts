@@ -13,15 +13,17 @@ export class ProductMobileComponent implements OnInit {
   @Input() product: IProductPayload;
   @Input() productsInRow: number;
 
-  isVariationImageVisible:boolean = false;
+  isVariationImageVisible: boolean = false;
 
   constructor(private apiService: ApiService) {}
 
   ngOnInit() {}
   wishlistProduct(sku, mark, event) {
     event.stopPropagation();
-    this.apiService.wishlistProduct(sku, mark).subscribe((payload: any) => {
-      this.product.wishlisted = mark;
-    });
+    this.apiService
+      .wishlistProduct(sku, mark, true)
+      .subscribe((payload: any) => {
+        this.product.wishlisted = mark;
+      });
   }
 }

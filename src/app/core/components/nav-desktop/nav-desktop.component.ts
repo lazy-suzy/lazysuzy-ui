@@ -82,7 +82,7 @@ export class NavDesktopComponent {
     if (this.cookie.get('token')) {
       this.router.navigateByUrl('/wishlist');
     } else {
-      this.utils.openSignupDialog('80%');
+      this.utils.openSignupDialog(false);
     }
   }
 
