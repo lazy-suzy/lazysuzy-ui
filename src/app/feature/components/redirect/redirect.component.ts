@@ -7,16 +7,21 @@ import { UtilsService } from '../../../shared/services/utils/utils.service';
 })
 export class RedirectComponent implements OnInit {
   @Input() redirectUrl: string;
-  @Input() redirectDetails = {};
+  @Input() redirectDetails = {
+    main_image: '',
+    name: '',
+    price: '',
+    was_price: ''
+  };
   @Input() category: string;
   @Input() categoryUrl: string;
+  @Input() isHandset: boolean;
 
-  constructor( private utils: UtilsService) { }
+  constructor(private utils: UtilsService) {}
 
-  ngOnInit() {
-  }
+  ngOnInit() {}
 
   openSignup() {
-    this.utils.openSignup();
+    this.utils.openSignupDialog(this.isHandset);
   }
 }

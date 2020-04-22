@@ -7,7 +7,7 @@ import {
 } from '@angular/core';
 import { MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { Subscription } from 'rxjs';
-import { IProductPayload } from 'src/app/shared/models';
+import { IProductPayload, IProductDetail } from 'src/app/shared/models';
 import { ApiService, UtilsService } from 'src/app/shared/services';
 import { Gallery, GalleryItem, ImageItem } from '@ngx-gallery/core';
 import { Lightbox } from '@ngx-gallery/lightbox';
@@ -19,7 +19,7 @@ import { Lightbox } from '@ngx-gallery/lightbox';
 export class ProductDetailsComponent implements OnInit {
   @ViewChild('topContainer', { static: false }) topContainer: ElementRef;
   @ViewChild('gallery', { static: false }) galleryContainer: ElementRef;
-  product: IProductPayload;
+  product: IProductDetail;
   productSubscription: Subscription;
   selectedIndex: number;
   dimensionExist: boolean;
@@ -61,7 +61,7 @@ export class ProductDetailsComponent implements OnInit {
     this.isProductFetching = true;
     this.productSubscription = this.apiService
       .getProduct(this.data.sku)
-      .subscribe((payload: IProductPayload) => {
+      .subscribe((payload: IProductDetail) => {
         this.product = payload;
         this.items = this.product.on_server_images.map(
           item => new ImageItem({ src: item })
@@ -132,9 +132,11 @@ export class ProductDetailsComponent implements OnInit {
   }
 
   wishlistProduct(sku, mark) {
-    this.apiService.wishlistProduct(sku, mark).subscribe((payload: any) => {
-      this.product.wishlisted = mark;
-    });
+    this.apiService
+      .wishlistProduct(sku, mark, false)
+      .subscribe((payload: any) => {
+        this.product.wishlisted = mark;
+      });
   }
 
   openLink(event, url) {

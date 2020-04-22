@@ -1,6 +1,7 @@
 import { Injectable, ElementRef } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { ProductDetailsComponent } from 'src/app/feature/components';
+import { SigninComponent, SignupComponent } from 'src/app/core/components';
 import { Location } from '@angular/common';
 import { Router, ActivatedRoute } from '@angular/router';
 import { MarkdownService } from 'ngx-markdown';
@@ -19,13 +20,8 @@ export class UtilsService {
     private markdownService: MarkdownService
   ) {}
 
-  setSignupRef(ref) {
-    this.signupRef = ref;
-  }
-
-  openSignup() {
+  closeDialogs() {
     this.dialog.closeAll();
-    this.signupRef.nativeElement.click();
   }
 
   checkDataLength(data) {
@@ -94,6 +90,26 @@ export class UtilsService {
     });
     dialogRef.afterClosed().subscribe(result => {
       this.location.go(``);
+    });
+  }
+
+  openSignupDialog(isHandset: boolean = false, isClose = false) {
+    const width = isHandset ? '100%' : '35%';
+    !isClose && this.dialog.closeAll();
+    return this.dialog.open(SignupComponent, {
+      width,
+
+      panelClass: 'auth-dialog-container',
+      autoFocus: false
+    });
+  }
+
+  openSigninDialog(width: string = '35%') {
+    this.dialog.closeAll();
+    return this.dialog.open(SigninComponent, {
+      width,
+      panelClass: 'auth-dialog-container',
+      autoFocus: false
     });
   }
 

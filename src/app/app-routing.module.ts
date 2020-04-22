@@ -13,10 +13,7 @@ import {
   TermsOfServiceComponent,
   PrivacyPolicyComponent
 } from './core/components';
-import {
-  ProductDetailsMobileComponent,
-  AuthSuccessComponent
-} from './feature/components';
+import { ProductDetailsMobileComponent } from './feature/components';
 
 const routes: Routes = [
   { path: '', component: LandingComponent, pathMatch: 'full' },
@@ -54,12 +51,6 @@ const routes: Routes = [
     pathMatch: 'full'
   },
   {
-    path: 'authSuccess',
-    component: AuthSuccessComponent,
-    pathMatch: 'full'
-  },
-
-  {
     path: 'blog',
     loadChildren: () => import('./feature/blog/blog/blog.module').then(m => m.BlogModule)
   }
@@ -71,4 +62,4 @@ const routes: Routes = [
   ],
   exports: [RouterModule]
 })
-export class AppRoutingModule {}
+export class AppRoutingModule { }

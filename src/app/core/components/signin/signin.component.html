@@ -1,0 +1,75 @@
+<div class="auth-dialog">
+  <button class="close-icon" mat-dialog-close>
+    <mat-icon>close </mat-icon>
+  </button>
+  <div class="modal-title">
+    <h5 class="modal-heading">Hey, Star Stuff!</h5>
+    <br />
+    <div class="social-btn">
+      <button
+        type="button"
+        class="btn btn-primary facebookBtn white"
+        style="background: #3b5998;"
+        (click)="socialSignIn('facebook')"
+      >
+        <i class="fab fa-facebook-f">&nbsp;</i>Continue with Facebook
+      </button>
+      <br />
+      <button
+        type="button"
+        class="btn btn-light googleBtn black"
+        (click)="socialSignIn('google')"
+      >
+        <i class="fab fa-google">&nbsp;</i>Continue with Google
+      </button>
+    </div>
+
+    <hr />
+  </div>
+
+  <div class="modal-body">
+    <div class="span-line text-center">Not Feeling Social?</div>
+    <br />
+    <form role="form" (submit)="login($event, email, password)">
+      <div class="form-group">
+        <input
+          type="email"
+          class="form-control "
+          name="email"
+          placeholder="Email"
+          required
+          [(ngModel)]="email"
+        />
+        <br />
+        <input
+          type="password"
+          class="form-control  password"
+          name="password"
+          placeholder="Password"
+          required
+          [(ngModel)]="password"
+        />
+        <span class="error-msg {{ error ? 'visible' : 'invisible' }}">{{
+          errorMsg
+        }}</span>
+        <button type="submit" class="form-control submit-btn">
+          Login
+        </button>
+        <br />
+        <a class="resetPassword" href="http://lazysuzy.com:8081/password/reset"
+          >Reset Password</a
+        >
+      </div>
+    </form>
+    <hr />
+  </div>
+
+  <div class="modal-footer">
+    <span class="footer-content"
+      >Not a member yet?&nbsp;
+      <button class="btn-sm" (click)="openSignupDialog()">
+        Join Now
+      </button></span
+    >
+  </div>
+</div>

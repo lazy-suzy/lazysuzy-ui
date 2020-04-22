@@ -95,8 +95,10 @@ export class ProductComponent implements OnInit {
 
   wishlistProduct(sku, mark, event) {
     event.stopPropagation();
-    this.apiService.wishlistProduct(sku, mark).subscribe((payload: any) => {
-      this.product.wishlisted = mark;
-    });
+    this.apiService
+      .wishlistProduct(sku, mark, false)
+      .subscribe((payload: any) => {
+        this.product.wishlisted = mark;
+      });
   }
 }

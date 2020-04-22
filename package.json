@@ -41,7 +41,7 @@
     "ngx-owl-carousel": "^2.0.7",
     "owl.carousel": "^2.3.4",
     "primeicons": "^2.0.0",
-    "primeng": "^9.0.0",
+    "primeng": "8.1.1",
     "rxjs": "~6.4.0",
     "tslib": "^1.9.0",
     "zone.js": "~0.9.1"

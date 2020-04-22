@@ -1,6 +1,4 @@
-import { IProductPayload } from './../shared/models';
-
-export const MOCK_PRODUCT: IProductPayload = {
+export const MOCK_PRODUCT = {
   id: 2,
   sku: '2759995',
   is_new: false,
@@ -15,11 +13,7 @@ export const MOCK_PRODUCT: IProductPayload = {
   model_code: 'Navy',
   color: 'blue',
   collection: 'Chas',
-  set: null,
   condition: '',
-  redirect: false,
-  redirect_url: null,
-  redirect_details: {},
   main_image: 'https://www.lazysuzy.com/Pier-1/pier1_images/2759995_main.jpg',
   reviews: 1078,
   rating: 4.73,
@@ -34,7 +28,7 @@ export const MOCK_PRODUCT: IProductPayload = {
       image: 'https://www.lazysuzy.com/Pier-1/pier1_images/2739505_main.jpg',
       link: '/product/2739505',
       swatch_image:
-        'https://www.lazysuzy.com/Pier-1/pier1_images/2739505_main.jpg',
+        'https://www.lazysuzy.com/Pier-1/pier1_images/2739505_main.jpg'
     },
     {
       time_taken: 0.0011179447174072266,
@@ -45,7 +39,7 @@ export const MOCK_PRODUCT: IProductPayload = {
       image: 'https://www.lazysuzy.com/Pier-1/pier1_images/2536461_main.jpg',
       link: '/product/2536461',
       swatch_image:
-        'https://www.lazysuzy.com/Pier-1/pier1_images/2536461_main.jpg',
+        'https://www.lazysuzy.com/Pier-1/pier1_images/2536461_main.jpg'
     },
     {
       time_taken: 0.0011179447174072266,
@@ -56,7 +50,7 @@ export const MOCK_PRODUCT: IProductPayload = {
       image: 'https://www.lazysuzy.com/Pier-1/pier1_images/2443389_main.jpg',
       link: '/product/2443389',
       swatch_image:
-        'https://www.lazysuzy.com/Pier-1/pier1_images/2443389_main.jpg',
+        'https://www.lazysuzy.com/Pier-1/pier1_images/2443389_main.jpg'
     },
     {
       time_taken: 0.0011179447174072266,
@@ -67,7 +61,7 @@ export const MOCK_PRODUCT: IProductPayload = {
       image: 'https://www.lazysuzy.com/Pier-1/pier1_images/2655501_main.jpg',
       link: '/product/2655501',
       swatch_image:
-        'https://www.lazysuzy.com/Pier-1/pier1_images/2655501_main.jpg',
+        'https://www.lazysuzy.com/Pier-1/pier1_images/2655501_main.jpg'
     },
     {
       time_taken: 0.0011179447174072266,
@@ -78,7 +72,7 @@ export const MOCK_PRODUCT: IProductPayload = {
       image: 'https://www.lazysuzy.com/Pier-1/pier1_images/3478541_main.jpg',
       link: '/product/3478541',
       swatch_image:
-        'https://www.lazysuzy.com/Pier-1/pier1_images/3478541_main.jpg',
+        'https://www.lazysuzy.com/Pier-1/pier1_images/3478541_main.jpg'
     },
     {
       time_taken: 0.0011179447174072266,
@@ -89,7 +83,7 @@ export const MOCK_PRODUCT: IProductPayload = {
       image: 'https://www.lazysuzy.com/Pier-1/pier1_images/3201222_main.jpg',
       link: '/product/3201222',
       swatch_image:
-        'https://www.lazysuzy.com/Pier-1/pier1_images/3201222_main.jpg',
+        'https://www.lazysuzy.com/Pier-1/pier1_images/3201222_main.jpg'
     },
     {
       time_taken: 0.0011179447174072266,
@@ -100,7 +94,7 @@ export const MOCK_PRODUCT: IProductPayload = {
       image: 'https://www.lazysuzy.com/Pier-1/pier1_images/4127472_main.jpg',
       link: '/product/4127472',
       swatch_image:
-        'https://www.lazysuzy.com/Pier-1/pier1_images/4127472_main.jpg',
+        'https://www.lazysuzy.com/Pier-1/pier1_images/4127472_main.jpg'
     },
     {
       time_taken: 0.0011179447174072266,
@@ -111,7 +105,7 @@ export const MOCK_PRODUCT: IProductPayload = {
       image: 'https://www.lazysuzy.com/Pier-1/pier1_images/2800179_main.jpg',
       link: '/product/2800179',
       swatch_image:
-        'https://www.lazysuzy.com/Pier-1/pier1_images/2800179_main.jpg',
+        'https://www.lazysuzy.com/Pier-1/pier1_images/2800179_main.jpg'
     },
     {
       time_taken: 0.0011179447174072266,
@@ -122,7 +116,7 @@ export const MOCK_PRODUCT: IProductPayload = {
       image: 'https://www.lazysuzy.com/Pier-1/pier1_images/3134254_main.jpg',
       link: '/product/3134254',
       swatch_image:
-        'https://www.lazysuzy.com/Pier-1/pier1_images/3134254_main.jpg',
+        'https://www.lazysuzy.com/Pier-1/pier1_images/3134254_main.jpg'
     },
     {
       time_taken: 0.0011179447174072266,
@@ -133,7 +127,7 @@ export const MOCK_PRODUCT: IProductPayload = {
       image: 'https://www.lazysuzy.com/Pier-1/pier1_images/3001806_main.jpg',
       link: '/product/3001806',
       swatch_image:
-        'https://www.lazysuzy.com/Pier-1/pier1_images/3001806_main.jpg',
+        'https://www.lazysuzy.com/Pier-1/pier1_images/3001806_main.jpg'
     },
     {
       time_taken: 0.0011179447174072266,
@@ -144,7 +138,7 @@ export const MOCK_PRODUCT: IProductPayload = {
       image: 'https://www.lazysuzy.com/Pier-1/pier1_images/3990600_main.jpg',
       link: '/product/3990600',
       swatch_image:
-        'https://www.lazysuzy.com/Pier-1/pier1_images/3990600_main.jpg',
+        'https://www.lazysuzy.com/Pier-1/pier1_images/3990600_main.jpg'
     },
     {
       time_taken: 0.0011179447174072266,
@@ -155,7 +149,7 @@ export const MOCK_PRODUCT: IProductPayload = {
       image: 'https://www.lazysuzy.com/Pier-1/pier1_images/3259724_main.jpg',
       link: '/product/3259724',
       swatch_image:
-        'https://www.lazysuzy.com/Pier-1/pier1_images/3259724_main.jpg',
+        'https://www.lazysuzy.com/Pier-1/pier1_images/3259724_main.jpg'
     },
     {
       time_taken: 0.0011179447174072266,
@@ -166,7 +160,7 @@ export const MOCK_PRODUCT: IProductPayload = {
       image: 'https://www.lazysuzy.com/Pier-1/pier1_images/3259802_main.jpg',
       link: '/product/3259802',
       swatch_image:
-        'https://www.lazysuzy.com/Pier-1/pier1_images/3259802_main.jpg',
+        'https://www.lazysuzy.com/Pier-1/pier1_images/3259802_main.jpg'
     },
     {
       time_taken: 0.0011179447174072266,
@@ -177,7 +171,7 @@ export const MOCK_PRODUCT: IProductPayload = {
       image: 'https://www.lazysuzy.com/Pier-1/pier1_images/3707184_main.jpg',
       link: '/product/3707184',
       swatch_image:
-        'https://www.lazysuzy.com/Pier-1/pier1_images/3707184_main.jpg',
+        'https://www.lazysuzy.com/Pier-1/pier1_images/3707184_main.jpg'
     },
     {
       time_taken: 0.0011179447174072266,
@@ -188,7 +182,7 @@ export const MOCK_PRODUCT: IProductPayload = {
       image: 'https://www.lazysuzy.com/Pier-1/pier1_images/3282889_main.jpg',
       link: '/product/3282889',
       swatch_image:
-        'https://www.lazysuzy.com/Pier-1/pier1_images/3282889_main.jpg',
+        'https://www.lazysuzy.com/Pier-1/pier1_images/3282889_main.jpg'
     },
     {
       time_taken: 0.0011179447174072266,
@@ -199,7 +193,7 @@ export const MOCK_PRODUCT: IProductPayload = {
       image: 'https://www.lazysuzy.com/Pier-1/pier1_images/3182710_main.jpg',
       link: '/product/3182710',
       swatch_image:
-        'https://www.lazysuzy.com/Pier-1/pier1_images/3182710_main.jpg',
+        'https://www.lazysuzy.com/Pier-1/pier1_images/3182710_main.jpg'
     },
     {
       time_taken: 0.0011179447174072266,
@@ -210,7 +204,7 @@ export const MOCK_PRODUCT: IProductPayload = {
       image: 'https://www.lazysuzy.com/Pier-1/pier1_images/3990613_main.jpg',
       link: '/product/3990613',
       swatch_image:
-        'https://www.lazysuzy.com/Pier-1/pier1_images/3990613_main.jpg',
+        'https://www.lazysuzy.com/Pier-1/pier1_images/3990613_main.jpg'
     },
     {
       time_taken: 0.0011179447174072266,
@@ -221,7 +215,7 @@ export const MOCK_PRODUCT: IProductPayload = {
       image: 'https://www.lazysuzy.com/Pier-1/pier1_images/3449383_main.jpg',
       link: '/product/3449383',
       swatch_image:
-        'https://www.lazysuzy.com/Pier-1/pier1_images/3449383_main.jpg',
+        'https://www.lazysuzy.com/Pier-1/pier1_images/3449383_main.jpg'
     },
     {
       time_taken: 0.0011179447174072266,
@@ -232,7 +226,7 @@ export const MOCK_PRODUCT: IProductPayload = {
       image: 'https://www.lazysuzy.com/Pier-1/pier1_images/3281016_main.jpg',
       link: '/product/3281016',
       swatch_image:
-        'https://www.lazysuzy.com/Pier-1/pier1_images/3281016_main.jpg',
+        'https://www.lazysuzy.com/Pier-1/pier1_images/3281016_main.jpg'
     },
     {
       time_taken: 0.0011179447174072266,
@@ -243,7 +237,7 @@ export const MOCK_PRODUCT: IProductPayload = {
       image: 'https://www.lazysuzy.com/Pier-1/pier1_images/4127522_main.jpg',
       link: '/product/4127522',
       swatch_image:
-        'https://www.lazysuzy.com/Pier-1/pier1_images/4127522_main.jpg',
+        'https://www.lazysuzy.com/Pier-1/pier1_images/4127522_main.jpg'
     },
     {
       time_taken: 0.0011179447174072266,
@@ -254,7 +248,7 @@ export const MOCK_PRODUCT: IProductPayload = {
       image: 'https://www.lazysuzy.com/Pier-1/pier1_images/2800216_main.jpg',
       link: '/product/2800216',
       swatch_image:
-        'https://www.lazysuzy.com/Pier-1/pier1_images/2800216_main.jpg',
+        'https://www.lazysuzy.com/Pier-1/pier1_images/2800216_main.jpg'
     },
     {
       time_taken: 0.0011179447174072266,
@@ -265,7 +259,7 @@ export const MOCK_PRODUCT: IProductPayload = {
       image: 'https://www.lazysuzy.com/Pier-1/pier1_images/4127510_main.jpg',
       link: '/product/4127510',
       swatch_image:
-        'https://www.lazysuzy.com/Pier-1/pier1_images/4127510_main.jpg',
+        'https://www.lazysuzy.com/Pier-1/pier1_images/4127510_main.jpg'
     },
     {
       time_taken: 0.0011179447174072266,
@@ -276,7 +270,7 @@ export const MOCK_PRODUCT: IProductPayload = {
       image: 'https://www.lazysuzy.com/Pier-1/pier1_images/3458265_main.jpg',
       link: '/product/3458265',
       swatch_image:
-        'https://www.lazysuzy.com/Pier-1/pier1_images/3458265_main.jpg',
-    },
-  ],
+        'https://www.lazysuzy.com/Pier-1/pier1_images/3458265_main.jpg'
+    }
+  ]
 };

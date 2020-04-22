@@ -10,11 +10,11 @@ import { HttpClientModule } from '@angular/common/http';
 import { AngularFontAwesomeModule } from 'angular-font-awesome';
 import { FormsModule } from '@angular/forms';
 import { CookieService } from 'ngx-cookie-service';
-import { GalleryModule } from  '@ngx-gallery/core';
-import { LightboxModule } from  '@ngx-gallery/lightbox';
+import { GalleryModule } from '@ngx-gallery/core';
+import { LightboxModule } from '@ngx-gallery/lightbox';
 import { LIGHTBOX_CONFIG } from '@ngx-gallery/lightbox';
 import { MarkdownModule } from 'ngx-markdown';
-
+import { EventEmitterService } from './shared/services/events/event-emitter.service';
 
 const MODULES = [
   BrowserModule,
@@ -28,13 +28,15 @@ const MODULES = [
   FormsModule,
   GalleryModule,
   LightboxModule,
-  MarkdownModule.forRoot(),
+  MarkdownModule.forRoot()
 ];
 
 @NgModule({
   declarations: [AppComponent],
   imports: [...MODULES],
-  providers: [CookieService,
+  providers: [
+    CookieService,
+    EventEmitterService,
     {
       provide: LIGHTBOX_CONFIG,
       useValue: {

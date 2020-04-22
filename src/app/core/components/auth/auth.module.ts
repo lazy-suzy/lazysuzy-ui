@@ -1,17 +1,21 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { AuthComponent } from './auth.component';
+import { MatDialogModule } from '@angular/material/dialog';
 import { MatButtonModule } from '@angular/material/button';
 import { MatMenuModule } from '@angular/material/menu';
 import { MatIconModule } from '@angular/material/icon';
 import { MatToolbarModule } from '@angular/material/toolbar';
+import { FormsModule } from '@angular/forms';
 import {
   SocialLoginModule,
   AuthServiceConfig,
   GoogleLoginProvider,
   FacebookLoginProvider
 } from 'angularx-social-login';
-import { FormsModule } from '@angular/forms';
+
+import { SigninComponent } from '../signin/signin.component';
+import { SignupComponent } from '../signup/signup.component';
 
 export function getAuthServiceConfigs() {
   const googleLoginOptions = {
@@ -38,18 +42,21 @@ export function getAuthServiceConfigs() {
   return config;
 }
 
+const COMPONENTS = [SignupComponent, SigninComponent];
 @NgModule({
-  declarations: [AuthComponent],
+  declarations: [AuthComponent, SigninComponent, SignupComponent],
   imports: [
     CommonModule,
-    SocialLoginModule,
     MatToolbarModule,
     MatMenuModule,
     MatButtonModule,
     MatIconModule,
-    FormsModule
+    FormsModule,
+    MatDialogModule,
+    SocialLoginModule
   ],
-  exports: [AuthComponent, CommonModule, SocialLoginModule],
+  exports: [AuthComponent, CommonModule],
+  entryComponents: [...COMPONENTS],
   providers: [
     {
       provide: AuthServiceConfig,

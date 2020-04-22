@@ -15,13 +15,13 @@
       <ul class="department-container">
         <li *ngFor="let department of departments" class="department-list">
           <div (click)="showDepartmentChild(department.department)">
-            <a
+            <span
               class="department-title {{
                 showDepartment === department.department ? 'active' : 'none'
               }}"
             >
               {{ department.department | titlecase }}
-            </a>
+            </span>
             <mat-icon
               class="department-list-icon"
               *ngIf="showDepartment !== department.department"
@@ -82,7 +82,7 @@
         >favorite_border</mat-icon
       >
     </span>
-    <app-auth class="account-menu" [handset]="true"></app-auth>
+    <app-auth class="account-menu" [isHandset]="true"></app-auth>
   </div>
   <app-search-bar
     (searchComplete)="onSearchComplete($event)"

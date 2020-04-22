@@ -78,8 +78,10 @@ export class SearchProductComponent implements OnInit {
 
   wishlistProduct(sku, mark, event) {
     event.stopPropagation();
-    this.apiService.wishlistProduct(sku, mark).subscribe((payload: any) => {
-      // this.product.wishlisted = mark;
-    });
+    this.apiService
+      .wishlistProduct(sku, mark, this.isHandset)
+      .subscribe((payload: any) => {
+        // this.product.wishlisted = mark;
+      });
   }
 }
