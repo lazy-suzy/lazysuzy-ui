@@ -9,7 +9,8 @@ import {
   IProductsPayload,
   IProductPayload,
   ISearchProductsPayload,
-  IDepartment
+  IDepartment,
+  IProductDetail
 } from './../../models';
 import { MOCK_PRODUCT_FILTERS } from 'src/app/mocks';
 import { forkJoin } from 'rxjs'; // RxJS 6 syntax
@@ -142,7 +143,7 @@ export class ApiService {
     return forkJoin(httpCalls);
   }
 
-  getProduct(id: string): Observable<IProductPayload> {
+  getProduct(id: string): Observable<IProductDetail> {
     const url = env.useLocalJson
       ? `${env.JSON_BASE_HREF}product/${id}`
       : `${env.API_BASE_HREF}product/${id}`;

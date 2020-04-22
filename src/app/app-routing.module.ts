@@ -13,10 +13,7 @@ import {
   TermsOfServiceComponent,
   PrivacyPolicyComponent
 } from './core/components';
-import {
-  ProductDetailsMobileComponent,
-  AuthSuccessComponent
-} from './feature/components';
+import { ProductDetailsMobileComponent } from './feature/components';
 
 const routes: Routes = [
   { path: '', component: LandingComponent, pathMatch: 'full' },
@@ -44,11 +41,6 @@ const routes: Routes = [
   {
     path: 'product/:product',
     component: ProductDetailsMobileComponent,
-    pathMatch: 'full'
-  },
-  {
-    path: 'authSuccess',
-    component: AuthSuccessComponent,
     pathMatch: 'full'
   }
 ];

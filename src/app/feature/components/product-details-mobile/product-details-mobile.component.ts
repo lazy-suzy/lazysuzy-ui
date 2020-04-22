@@ -1,6 +1,6 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
-import { IProductPayload } from 'src/app/shared/models';
+import { IProductPayload, IProductDetail } from 'src/app/shared/models';
 import {
   ApiService,
   UtilsService,
@@ -25,7 +25,7 @@ export class ProductDetailsMobileComponent implements OnInit {
   @ViewChild(VariationsComponent, { static: false }) child: VariationsComponent;
   productSku: any;
   routeSubscription: any;
-  product: IProductPayload;
+  product: IProductDetail;
   productSubscription: Subscription;
   activeTab: string = 'desc';
   dimensionExist: boolean = false;
@@ -83,7 +83,7 @@ export class ProductDetailsMobileComponent implements OnInit {
     });
     this.productSubscription = this.apiService
       .getProduct(this.productSku)
-      .subscribe((payload: IProductPayload) => {
+      .subscribe((payload: IProductDetail) => {
         this.product = payload;
         this.description = this.utils.compileMarkdown(this.product.description);
         this.features = this.utils.compileMarkdown(this.product.features);

@@ -1,6 +1,4 @@
-import { IProductDetail } from "../shared/models";
-
-const MOCK_PRODUCT_DETAIL: IProductDetail = {
+const MOCK_PRODUCT_DETAIL = {
   id: 3,
   sku: 'harris-sofa-86-h4613',
   is_new: false,
@@ -30,7 +28,7 @@ const MOCK_PRODUCT_DETAIL: IProductDetail = {
         color: 'Dove Gray',
         shape: 'Standard (40&quot;)',
         fabric: 'Performance Velvet',
-        delivery: 'Made to Order (ships in 5 - 7 weeks)',
+        delivery: 'Made to Order (ships in 5 - 7 weeks)'
       },
       has_parent_sku: false,
       image:
@@ -39,7 +37,7 @@ const MOCK_PRODUCT_DETAIL: IProductDetail = {
       swatch_image:
         'https://www.lazysuzy.com/westelm/westelm_images/201939_0016_img6l.jpg',
       price: '879.2',
-      was_price: '1099',
+      was_price: '1099'
     },
     {
       product_sku: 'harris-sofa-86-h4613',
@@ -49,7 +47,7 @@ const MOCK_PRODUCT_DETAIL: IProductDetail = {
         color: 'Ink Blue',
         shape: 'Standard (40&quot;)',
         fabric: 'Performance Velvet',
-        delivery: 'Made to Order (ships in 7+ weeks)',
+        delivery: 'Made to Order (ships in 7+ weeks)'
       },
       has_parent_sku: false,
       image:
@@ -58,7 +56,7 @@ const MOCK_PRODUCT_DETAIL: IProductDetail = {
       swatch_image:
         'https://www.lazysuzy.com/westelm/westelm_images/201939_0018_img100l.jpg',
       price: '879.2',
-      was_price: '1099',
+      was_price: '1099'
     },
     {
       product_sku: 'harris-sofa-86-h4613',
@@ -68,7 +66,7 @@ const MOCK_PRODUCT_DETAIL: IProductDetail = {
         color: 'Ink Blue',
         shape: 'Extra Deep (47&quot;)',
         fabric: 'Performance Velvet',
-        delivery: 'Made to Order (ships in 7+ weeks)',
+        delivery: 'Made to Order (ships in 7+ weeks)'
       },
       has_parent_sku: false,
       image:
@@ -77,7 +75,7 @@ const MOCK_PRODUCT_DETAIL: IProductDetail = {
       swatch_image:
         'https://www.lazysuzy.com/westelm/westelm_images/201939_0018_img100l.jpg',
       price: '959.2',
-      was_price: '1199',
+      was_price: '1199'
     },
     {
       product_sku: 'harris-sofa-86-h4613',
@@ -87,7 +85,7 @@ const MOCK_PRODUCT_DETAIL: IProductDetail = {
         color: 'Dove Gray',
         shape: 'Extra Deep (47&quot;)',
         fabric: 'Performance Velvet',
-        delivery: 'Made to Order (ships in 7+ weeks)',
+        delivery: 'Made to Order (ships in 7+ weeks)'
       },
       has_parent_sku: false,
       image:
@@ -96,7 +94,7 @@ const MOCK_PRODUCT_DETAIL: IProductDetail = {
       swatch_image:
         'https://www.lazysuzy.com/westelm/westelm_images/201939_0016_img6l.jpg',
       price: '959.2',
-      was_price: '1199',
+      was_price: '1199'
     },
     {
       product_sku: 'harris-sofa-86-h4613',
@@ -106,7 +104,7 @@ const MOCK_PRODUCT_DETAIL: IProductDetail = {
         color: 'Lagoon',
         shape: 'Standard (40&quot;)',
         fabric: 'Performance Velvet',
-        delivery: 'Made to Order (ships in 7+ weeks)',
+        delivery: 'Made to Order (ships in 7+ weeks)'
       },
       has_parent_sku: false,
       image:
@@ -115,7 +113,7 @@ const MOCK_PRODUCT_DETAIL: IProductDetail = {
       swatch_image:
         'https://www.lazysuzy.com/westelm/westelm_images/201939_0020_img22l.jpg',
       price: '879.2',
-      was_price: '1099',
+      was_price: '1099'
     },
     {
       product_sku: 'harris-sofa-86-h4613',
@@ -125,7 +123,7 @@ const MOCK_PRODUCT_DETAIL: IProductDetail = {
         color: 'Lagoon',
         shape: 'Extra Deep (47&quot;)',
         fabric: 'Performance Velvet',
-        delivery: 'Made to Order (ships in 7+ weeks)',
+        delivery: 'Made to Order (ships in 7+ weeks)'
       },
       has_parent_sku: false,
       image:
@@ -134,7 +132,7 @@ const MOCK_PRODUCT_DETAIL: IProductDetail = {
       swatch_image:
         'https://www.lazysuzy.com/westelm/westelm_images/201939_0020_img22l.jpg',
       price: '959.2',
-      was_price: '1199',
+      was_price: '1199'
     },
     {
       product_sku: 'harris-sofa-86-h4613',
@@ -144,7 +142,7 @@ const MOCK_PRODUCT_DETAIL: IProductDetail = {
         color: 'Shadow',
         shape: 'Standard (40&quot;)',
         fabric: 'Performance Velvet',
-        delivery: 'Made to Order (ships in 7+ weeks)',
+        delivery: 'Made to Order (ships in 7+ weeks)'
       },
       has_parent_sku: false,
       image:
@@ -153,7 +151,7 @@ const MOCK_PRODUCT_DETAIL: IProductDetail = {
       swatch_image:
         'https://www.lazysuzy.com/westelm/westelm_images/201940_0093_img20l.jpg',
       price: '879.2',
-      was_price: '1099',
+      was_price: '1099'
     },
     {
       product_sku: 'harris-sofa-86-h4613',
@@ -163,7 +161,7 @@ const MOCK_PRODUCT_DETAIL: IProductDetail = {
         color: 'Shadow',
         shape: 'Extra Deep (47&quot;)',
         fabric: 'Performance Velvet',
-        delivery: 'Made to Order (ships in 7+ weeks)',
+        delivery: 'Made to Order (ships in 7+ weeks)'
       },
       has_parent_sku: false,
       image:
@@ -172,7 +170,7 @@ const MOCK_PRODUCT_DETAIL: IProductDetail = {
       swatch_image:
         'https://www.lazysuzy.com/westelm/westelm_images/201940_0093_img20l.jpg',
       price: '959.2',
-      was_price: '1199',
+      was_price: '1199'
     },
     {
       product_sku: 'harris-sofa-86-h4613',
@@ -182,7 +180,7 @@ const MOCK_PRODUCT_DETAIL: IProductDetail = {
         color: 'Stone',
         shape: 'Standard (40&quot;)',
         fabric: 'Performance Velvet',
-        delivery: 'Made to Order (ships in 7+ weeks)',
+        delivery: 'Made to Order (ships in 7+ weeks)'
       },
       has_parent_sku: false,
       image:
@@ -191,7 +189,7 @@ const MOCK_PRODUCT_DETAIL: IProductDetail = {
       swatch_image:
         'https://www.lazysuzy.com/westelm/westelm_images/201939_0016_img90l.jpg',
       price: '879.2',
-      was_price: '1099',
+      was_price: '1099'
     },
     {
       product_sku: 'harris-sofa-86-h4613',
@@ -201,7 +199,7 @@ const MOCK_PRODUCT_DETAIL: IProductDetail = {
         color: 'Stone',
         shape: 'Extra Deep (47&quot;)',
         fabric: 'Performance Velvet',
-        delivery: 'Made to Order (ships in 7+ weeks)',
+        delivery: 'Made to Order (ships in 7+ weeks)'
       },
       has_parent_sku: false,
       image:
@@ -210,7 +208,7 @@ const MOCK_PRODUCT_DETAIL: IProductDetail = {
       swatch_image:
         'https://www.lazysuzy.com/westelm/westelm_images/201939_0016_img90l.jpg',
       price: '959.2',
-      was_price: '1199',
+      was_price: '1199'
     },
     {
       product_sku: 'harris-sofa-86-h4613',
@@ -220,7 +218,7 @@ const MOCK_PRODUCT_DETAIL: IProductDetail = {
         color: 'Moss',
         shape: 'Standard (40&quot;)',
         fabric: 'Performance Velvet',
-        delivery: 'Made to Order (ships in 7+ weeks)',
+        delivery: 'Made to Order (ships in 7+ weeks)'
       },
       has_parent_sku: false,
       image:
@@ -229,7 +227,7 @@ const MOCK_PRODUCT_DETAIL: IProductDetail = {
       swatch_image:
         'https://www.lazysuzy.com/westelm/westelm_images/201939_0018_img61l.jpg',
       price: '879.2',
-      was_price: '1099',
+      was_price: '1099'
     },
     {
       product_sku: 'harris-sofa-86-h4613',
@@ -239,7 +237,7 @@ const MOCK_PRODUCT_DETAIL: IProductDetail = {
         color: 'Moss',
         shape: 'Extra Deep (47&quot;)',
         fabric: 'Performance Velvet',
-        delivery: 'Made to Order (ships in 7+ weeks)',
+        delivery: 'Made to Order (ships in 7+ weeks)'
       },
       has_parent_sku: false,
       image:
@@ -248,7 +246,7 @@ const MOCK_PRODUCT_DETAIL: IProductDetail = {
       swatch_image:
         'https://www.lazysuzy.com/westelm/westelm_images/201939_0018_img61l.jpg',
       price: '959.2',
-      was_price: '1199',
+      was_price: '1199'
     },
     {
       product_sku: 'harris-sofa-86-h4613',
@@ -258,7 +256,7 @@ const MOCK_PRODUCT_DETAIL: IProductDetail = {
         color: 'Otter',
         shape: 'Standard (40&quot;)',
         fabric: 'Performance Velvet',
-        delivery: 'Made to Order (ships in 7+ weeks)',
+        delivery: 'Made to Order (ships in 7+ weeks)'
       },
       has_parent_sku: false,
       image:
@@ -267,7 +265,7 @@ const MOCK_PRODUCT_DETAIL: IProductDetail = {
       swatch_image:
         'https://www.lazysuzy.com/westelm/westelm_images/201939_0014_img97l.jpg',
       price: '879.2',
-      was_price: '1099',
+      was_price: '1099'
     },
     {
       product_sku: 'harris-sofa-86-h4613',
@@ -277,7 +275,7 @@ const MOCK_PRODUCT_DETAIL: IProductDetail = {
         color: 'Otter',
         shape: 'Extra Deep (47&quot;)',
         fabric: 'Performance Velvet',
-        delivery: 'Made to Order (ships in 7+ weeks)',
+        delivery: 'Made to Order (ships in 7+ weeks)'
       },
       has_parent_sku: false,
       image:
@@ -286,7 +284,7 @@ const MOCK_PRODUCT_DETAIL: IProductDetail = {
       swatch_image:
         'https://www.lazysuzy.com/westelm/westelm_images/201939_0014_img97l.jpg',
       price: '959.2',
-      was_price: '1199',
+      was_price: '1199'
     },
     {
       product_sku: 'harris-sofa-86-h4613',
@@ -296,7 +294,7 @@ const MOCK_PRODUCT_DETAIL: IProductDetail = {
         color: 'Light Taupe',
         shape: 'Standard (40&quot;)',
         fabric: 'Distressed Velvet',
-        delivery: 'Made to Order (ships in 7+ weeks)',
+        delivery: 'Made to Order (ships in 7+ weeks)'
       },
       has_parent_sku: false,
       image:
@@ -305,7 +303,7 @@ const MOCK_PRODUCT_DETAIL: IProductDetail = {
       swatch_image:
         'https://www.lazysuzy.com/westelm/westelm_images/201940_0139_img70l.jpg',
       price: '959.2',
-      was_price: '1199',
+      was_price: '1199'
     },
     {
       product_sku: 'harris-sofa-86-h4613',
@@ -315,7 +313,7 @@ const MOCK_PRODUCT_DETAIL: IProductDetail = {
         color: 'Light Taupe',
         shape: 'Extra Deep (47&quot;)',
         fabric: 'Distressed Velvet',
-        delivery: 'Made to Order (ships in 7+ weeks)',
+        delivery: 'Made to Order (ships in 7+ weeks)'
       },
       has_parent_sku: false,
       image:
@@ -324,7 +322,7 @@ const MOCK_PRODUCT_DETAIL: IProductDetail = {
       swatch_image:
         'https://www.lazysuzy.com/westelm/westelm_images/201940_0139_img70l.jpg',
       price: '1039.2',
-      was_price: '1299',
+      was_price: '1299'
     },
     {
       product_sku: 'harris-sofa-86-h4613',
@@ -334,7 +332,7 @@ const MOCK_PRODUCT_DETAIL: IProductDetail = {
         color: 'Dusty Blush',
         shape: 'Standard (40&quot;)',
         fabric: 'Astor Velvet',
-        delivery: 'Made to Order (ships in 7+ weeks)',
+        delivery: 'Made to Order (ships in 7+ weeks)'
       },
       has_parent_sku: false,
       image:
@@ -343,7 +341,7 @@ const MOCK_PRODUCT_DETAIL: IProductDetail = {
       swatch_image:
         'https://www.lazysuzy.com/westelm/westelm_images/201940_0023_img29l.jpg',
       price: '1039.2',
-      was_price: '1299',
+      was_price: '1299'
     },
     {
       product_sku: 'harris-sofa-86-h4613',
@@ -353,7 +351,7 @@ const MOCK_PRODUCT_DETAIL: IProductDetail = {
         color: 'Dusty Blush',
         shape: 'Extra Deep (47&quot;)',
         fabric: 'Astor Velvet',
-        delivery: 'Made to Order (ships in 7+ weeks)',
+        delivery: 'Made to Order (ships in 7+ weeks)'
       },
       has_parent_sku: false,
       image:
@@ -362,7 +360,7 @@ const MOCK_PRODUCT_DETAIL: IProductDetail = {
       swatch_image:
         'https://www.lazysuzy.com/westelm/westelm_images/201940_0023_img29l.jpg',
       price: '1119.2',
-      was_price: '1399',
+      was_price: '1399'
     },
     {
       product_sku: 'harris-sofa-86-h4613',
@@ -372,7 +370,7 @@ const MOCK_PRODUCT_DETAIL: IProductDetail = {
         color: 'Evergreen',
         shape: 'Standard (40&quot;)',
         fabric: 'Astor Velvet',
-        delivery: 'Made to Order (ships in 7+ weeks)',
+        delivery: 'Made to Order (ships in 7+ weeks)'
       },
       has_parent_sku: false,
       image:
@@ -381,7 +379,7 @@ const MOCK_PRODUCT_DETAIL: IProductDetail = {
       swatch_image:
         'https://www.lazysuzy.com/westelm/westelm_images/201940_0013_img11l.jpg',
       price: '1299',
-      was_price: '1299',
+      was_price: '1299'
     },
     {
       product_sku: 'harris-sofa-86-h4613',
@@ -391,7 +389,7 @@ const MOCK_PRODUCT_DETAIL: IProductDetail = {
         color: 'Evergreen',
         shape: 'Extra Deep (47&quot;)',
         fabric: 'Astor Velvet',
-        delivery: 'Made to Order (ships in 7+ weeks)',
+        delivery: 'Made to Order (ships in 7+ weeks)'
       },
       has_parent_sku: false,
       image:
@@ -400,7 +398,7 @@ const MOCK_PRODUCT_DETAIL: IProductDetail = {
       swatch_image:
         'https://www.lazysuzy.com/westelm/westelm_images/201940_0013_img11l.jpg',
       price: '1399',
-      was_price: '1399',
+      was_price: '1399'
     },
     {
       product_sku: 'harris-sofa-86-h4613',
@@ -410,7 +408,7 @@ const MOCK_PRODUCT_DETAIL: IProductDetail = {
         color: 'Frost Gray',
         shape: 'Standard (40&quot;)',
         fabric: 'Astor Velvet',
-        delivery: 'Made to Order (ships in 7+ weeks)',
+        delivery: 'Made to Order (ships in 7+ weeks)'
       },
       has_parent_sku: false,
       image:
@@ -419,7 +417,7 @@ const MOCK_PRODUCT_DETAIL: IProductDetail = {
       swatch_image:
         'https://www.lazysuzy.com/westelm/westelm_images/201940_0020_img54l.jpg',
       price: '1039.2',
-      was_price: '1299',
+      was_price: '1299'
     },
     {
       product_sku: 'harris-sofa-86-h4613',
@@ -429,7 +427,7 @@ const MOCK_PRODUCT_DETAIL: IProductDetail = {
         color: 'Frost Gray',
         shape: 'Extra Deep (47&quot;)',
         fabric: 'Astor Velvet',
-        delivery: 'Made to Order (ships in 7+ weeks)',
+        delivery: 'Made to Order (ships in 7+ weeks)'
       },
       has_parent_sku: false,
       image:
@@ -438,7 +436,7 @@ const MOCK_PRODUCT_DETAIL: IProductDetail = {
       swatch_image:
         'https://www.lazysuzy.com/westelm/westelm_images/201940_0020_img54l.jpg',
       price: '1119.2',
-      was_price: '1399',
+      was_price: '1399'
     },
     {
       product_sku: 'harris-sofa-86-h4613',
@@ -448,7 +446,7 @@ const MOCK_PRODUCT_DETAIL: IProductDetail = {
         color: 'Ink Blue',
         shape: 'Standard (40&quot;)',
         fabric: 'Astor Velvet',
-        delivery: 'Made to Order (ships in 7+ weeks)',
+        delivery: 'Made to Order (ships in 7+ weeks)'
       },
       has_parent_sku: false,
       image:
@@ -457,7 +455,7 @@ const MOCK_PRODUCT_DETAIL: IProductDetail = {
       swatch_image:
         'https://www.lazysuzy.com/westelm/westelm_images/201940_0053_img21l.jpg',
       price: '1039.2',
-      was_price: '1299',
+      was_price: '1299'
     },
     {
       product_sku: 'harris-sofa-86-h4613',
@@ -467,7 +465,7 @@ const MOCK_PRODUCT_DETAIL: IProductDetail = {
         color: 'Ink Blue',
         shape: 'Extra Deep (47&quot;)',
         fabric: 'Astor Velvet',
-        delivery: 'Made to Order (ships in 7+ weeks)',
+        delivery: 'Made to Order (ships in 7+ weeks)'
       },
       has_parent_sku: false,
       image:
@@ -476,7 +474,7 @@ const MOCK_PRODUCT_DETAIL: IProductDetail = {
       swatch_image:
         'https://www.lazysuzy.com/westelm/westelm_images/201940_0053_img21l.jpg',
       price: '1119.2',
-      was_price: '1399',
+      was_price: '1399'
     },
     {
       product_sku: 'harris-sofa-86-h4613',
@@ -486,7 +484,7 @@ const MOCK_PRODUCT_DETAIL: IProductDetail = {
         color: 'Iron',
         shape: 'Standard (40&quot;)',
         fabric: 'Astor Velvet',
-        delivery: 'Made to Order (ships in 7+ weeks)',
+        delivery: 'Made to Order (ships in 7+ weeks)'
       },
       has_parent_sku: false,
       image:
@@ -495,7 +493,7 @@ const MOCK_PRODUCT_DETAIL: IProductDetail = {
       swatch_image:
         'https://www.lazysuzy.com/westelm/westelm_images/201940_0100_img40l.jpg',
       price: '1039.2',
-      was_price: '1299',
+      was_price: '1299'
     },
     {
       product_sku: 'harris-sofa-86-h4613',
@@ -505,7 +503,7 @@ const MOCK_PRODUCT_DETAIL: IProductDetail = {
         color: 'Iron',
         shape: 'Extra Deep (47&quot;)',
         fabric: 'Astor Velvet',
-        delivery: 'Made to Order (ships in 7+ weeks)',
+        delivery: 'Made to Order (ships in 7+ weeks)'
       },
       has_parent_sku: false,
       image:
@@ -514,7 +512,7 @@ const MOCK_PRODUCT_DETAIL: IProductDetail = {
       swatch_image:
         'https://www.lazysuzy.com/westelm/westelm_images/201940_0100_img40l.jpg',
       price: '1119.2',
-      was_price: '1399',
+      was_price: '1399'
     },
     {
       product_sku: 'harris-sofa-86-h4613',
@@ -524,7 +522,7 @@ const MOCK_PRODUCT_DETAIL: IProductDetail = {
         color: 'Lagoon',
         shape: 'Standard (40&quot;)',
         fabric: 'Astor Velvet',
-        delivery: 'Made to Order (ships in 7+ weeks)',
+        delivery: 'Made to Order (ships in 7+ weeks)'
       },
       has_parent_sku: false,
       image:
@@ -533,7 +531,7 @@ const MOCK_PRODUCT_DETAIL: IProductDetail = {
       swatch_image:
         'https://www.lazysuzy.com/westelm/westelm_images/201940_0112_img44l.jpg',
       price: '1039.2',
-      was_price: '1299',
+      was_price: '1299'
     },
     {
       product_sku: 'harris-sofa-86-h4613',
@@ -543,7 +541,7 @@ const MOCK_PRODUCT_DETAIL: IProductDetail = {
         color: 'Lagoon',
         shape: 'Extra Deep (47&quot;)',
         fabric: 'Astor Velvet',
-        delivery: 'Made to Order (ships in 7+ weeks)',
+        delivery: 'Made to Order (ships in 7+ weeks)'
       },
       has_parent_sku: false,
       image:
@@ -552,7 +550,7 @@ const MOCK_PRODUCT_DETAIL: IProductDetail = {
       swatch_image:
         'https://www.lazysuzy.com/westelm/westelm_images/201940_0112_img44l.jpg',
       price: '1119.2',
-      was_price: '1399',
+      was_price: '1399'
     },
     {
       product_sku: 'harris-sofa-86-h4613',
@@ -562,7 +560,7 @@ const MOCK_PRODUCT_DETAIL: IProductDetail = {
         color: 'Nickel',
         shape: 'Standard (40&quot;)',
         fabric: 'Astor Velvet',
-        delivery: 'Made to Order (ships in 7+ weeks)',
+        delivery: 'Made to Order (ships in 7+ weeks)'
       },
       has_parent_sku: false,
       image:
@@ -571,7 +569,7 @@ const MOCK_PRODUCT_DETAIL: IProductDetail = {
       swatch_image:
         'https://www.lazysuzy.com/westelm/westelm_images/201940_0054_img81l.jpg',
       price: '1039.2',
-      was_price: '1299',
+      was_price: '1299'
     },
     {
       product_sku: 'harris-sofa-86-h4613',
@@ -581,7 +579,7 @@ const MOCK_PRODUCT_DETAIL: IProductDetail = {
         color: 'Nickel',
         shape: 'Extra Deep (47&quot;)',
         fabric: 'Astor Velvet',
-        delivery: 'Made to Order (ships in 7+ weeks)',
+        delivery: 'Made to Order (ships in 7+ weeks)'
       },
       has_parent_sku: false,
       image:
@@ -590,7 +588,7 @@ const MOCK_PRODUCT_DETAIL: IProductDetail = {
       swatch_image:
         'https://www.lazysuzy.com/westelm/westelm_images/201940_0054_img81l.jpg',
       price: '1119.2',
-      was_price: '1399',
+      was_price: '1399'
     },
     {
       product_sku: 'harris-sofa-86-h4613',
@@ -600,7 +598,7 @@ const MOCK_PRODUCT_DETAIL: IProductDetail = {
         color: 'Pink Grapefruit',
         shape: 'Standard (40&quot;)',
         fabric: 'Astor Velvet',
-        delivery: 'Made to Order (ships in 7+ weeks)',
+        delivery: 'Made to Order (ships in 7+ weeks)'
       },
       has_parent_sku: false,
       image:
@@ -609,7 +607,7 @@ const MOCK_PRODUCT_DETAIL: IProductDetail = {
       swatch_image:
         'https://www.lazysuzy.com/westelm/westelm_images/201950_0003_img79l.jpg',
       price: '1039.2',
-      was_price: '1299',
+      was_price: '1299'
     },
     {
       product_sku: 'harris-sofa-86-h4613',
@@ -619,7 +617,7 @@ const MOCK_PRODUCT_DETAIL: IProductDetail = {
         color: 'Pink Grapefruit',
         shape: 'Extra Deep (47&quot;)',
         fabric: 'Astor Velvet',
-        delivery: 'Made to Order (ships in 7+ weeks)',
+        delivery: 'Made to Order (ships in 7+ weeks)'
       },
       has_parent_sku: false,
       image:
@@ -628,7 +626,7 @@ const MOCK_PRODUCT_DETAIL: IProductDetail = {
       swatch_image:
         'https://www.lazysuzy.com/westelm/westelm_images/201950_0003_img79l.jpg',
       price: '1119.2',
-      was_price: '1399',
+      was_price: '1399'
     },
     {
       product_sku: 'harris-sofa-86-h4613',
@@ -638,7 +636,7 @@ const MOCK_PRODUCT_DETAIL: IProductDetail = {
         color: 'Rust',
         shape: 'Standard (40&quot;)',
         fabric: 'Astor Velvet',
-        delivery: 'Made to Order (ships in 7+ weeks)',
+        delivery: 'Made to Order (ships in 7+ weeks)'
       },
       has_parent_sku: false,
       image:
@@ -647,7 +645,7 @@ const MOCK_PRODUCT_DETAIL: IProductDetail = {
       swatch_image:
         'https://www.lazysuzy.com/westelm/westelm_images/201940_0157_img35l.jpg',
       price: '1039.2',
-      was_price: '1299',
+      was_price: '1299'
     },
     {
       product_sku: 'harris-sofa-86-h4613',
@@ -657,7 +655,7 @@ const MOCK_PRODUCT_DETAIL: IProductDetail = {
         color: 'Rust',
         shape: 'Extra Deep (47&quot;)',
         fabric: 'Astor Velvet',
-        delivery: 'Made to Order (ships in 7+ weeks)',
+        delivery: 'Made to Order (ships in 7+ weeks)'
       },
       has_parent_sku: false,
       image:
@@ -666,7 +664,7 @@ const MOCK_PRODUCT_DETAIL: IProductDetail = {
       swatch_image:
         'https://www.lazysuzy.com/westelm/westelm_images/201940_0157_img35l.jpg',
       price: '1119.2',
-      was_price: '1399',
+      was_price: '1399'
     },
     {
       product_sku: 'harris-sofa-86-h4613',
@@ -676,7 +674,7 @@ const MOCK_PRODUCT_DETAIL: IProductDetail = {
         color: 'Saffron',
         shape: 'Standard (40&quot;)',
         fabric: 'Astor Velvet',
-        delivery: 'Made to Order (ships in 7+ weeks)',
+        delivery: 'Made to Order (ships in 7+ weeks)'
       },
       has_parent_sku: false,
       image:
@@ -685,7 +683,7 @@ const MOCK_PRODUCT_DETAIL: IProductDetail = {
       swatch_image:
         'https://www.lazysuzy.com/westelm/westelm_images/201951_0018_img2l.jpg',
       price: '1039.2',
-      was_price: '1299',
+      was_price: '1299'
     },
     {
       product_sku: 'harris-sofa-86-h4613',
@@ -695,7 +693,7 @@ const MOCK_PRODUCT_DETAIL: IProductDetail = {
         color: 'Saffron',
         shape: 'Extra Deep (47&quot;)',
         fabric: 'Astor Velvet',
-        delivery: 'Made to Order (ships in 7+ weeks)',
+        delivery: 'Made to Order (ships in 7+ weeks)'
       },
       has_parent_sku: false,
       image:
@@ -704,7 +702,7 @@ const MOCK_PRODUCT_DETAIL: IProductDetail = {
       swatch_image:
         'https://www.lazysuzy.com/westelm/westelm_images/201951_0018_img2l.jpg',
       price: '1119.2',
-      was_price: '1399',
+      was_price: '1399'
     },
     {
       product_sku: 'harris-sofa-86-h4613',
@@ -714,7 +712,7 @@ const MOCK_PRODUCT_DETAIL: IProductDetail = {
         color: 'Slate',
         shape: 'Standard (40&quot;)',
         fabric: 'Astor Velvet',
-        delivery: 'Made to Order (ships in 7+ weeks)',
+        delivery: 'Made to Order (ships in 7+ weeks)'
       },
       has_parent_sku: false,
       image:
@@ -723,7 +721,7 @@ const MOCK_PRODUCT_DETAIL: IProductDetail = {
       swatch_image:
         'https://www.lazysuzy.com/westelm/westelm_images/201940_0110_img1l.jpg',
       price: '1039.2',
-      was_price: '1299',
+      was_price: '1299'
     },
     {
       product_sku: 'harris-sofa-86-h4613',
@@ -733,7 +731,7 @@ const MOCK_PRODUCT_DETAIL: IProductDetail = {
         color: 'Slate',
         shape: 'Extra Deep (47&quot;)',
         fabric: 'Astor Velvet',
-        delivery: 'Made to Order (ships in 7+ weeks)',
+        delivery: 'Made to Order (ships in 7+ weeks)'
       },
       has_parent_sku: false,
       image:
@@ -742,7 +740,7 @@ const MOCK_PRODUCT_DETAIL: IProductDetail = {
       swatch_image:
         'https://www.lazysuzy.com/westelm/westelm_images/201940_0110_img1l.jpg',
       price: '1119.2',
-      was_price: '1399',
+      was_price: '1399'
     },
     {
       product_sku: 'harris-sofa-86-h4613',
@@ -752,7 +750,7 @@ const MOCK_PRODUCT_DETAIL: IProductDetail = {
         color: 'Steel Blue',
         shape: 'Standard (40&quot;)',
         fabric: 'Astor Velvet',
-        delivery: 'Made to Order (ships in 7+ weeks)',
+        delivery: 'Made to Order (ships in 7+ weeks)'
       },
       has_parent_sku: false,
       image:
@@ -761,7 +759,7 @@ const MOCK_PRODUCT_DETAIL: IProductDetail = {
       swatch_image:
         'https://www.lazysuzy.com/westelm/westelm_images/201940_0128_img87l.jpg',
       price: '1039.2',
-      was_price: '1299',
+      was_price: '1299'
     },
     {
       product_sku: 'harris-sofa-86-h4613',
@@ -771,7 +769,7 @@ const MOCK_PRODUCT_DETAIL: IProductDetail = {
         color: 'Steel Blue',
         shape: 'Extra Deep (47&quot;)',
         fabric: 'Astor Velvet',
-        delivery: 'Made to Order (ships in 7+ weeks)',
+        delivery: 'Made to Order (ships in 7+ weeks)'
       },
       has_parent_sku: false,
       image:
@@ -780,7 +778,7 @@ const MOCK_PRODUCT_DETAIL: IProductDetail = {
       swatch_image:
         'https://www.lazysuzy.com/westelm/westelm_images/201940_0128_img87l.jpg',
       price: '1119.2',
-      was_price: '1399',
+      was_price: '1399'
     },
     {
       product_sku: 'harris-sofa-86-h4613',
@@ -790,7 +788,7 @@ const MOCK_PRODUCT_DETAIL: IProductDetail = {
         color: 'Stone',
         shape: 'Standard (40&quot;)',
         fabric: 'Astor Velvet',
-        delivery: 'Made to Order (ships in 7+ weeks)',
+        delivery: 'Made to Order (ships in 7+ weeks)'
       },
       has_parent_sku: false,
       image:
@@ -799,7 +797,7 @@ const MOCK_PRODUCT_DETAIL: IProductDetail = {
       swatch_image:
         'https://www.lazysuzy.com/westelm/westelm_images/201940_0139_img17l.jpg',
       price: '1039.2',
-      was_price: '1299',
+      was_price: '1299'
     },
     {
       product_sku: 'harris-sofa-86-h4613',
@@ -809,7 +807,7 @@ const MOCK_PRODUCT_DETAIL: IProductDetail = {
         color: 'Stone',
         shape: 'Extra Deep (47&quot;)',
         fabric: 'Astor Velvet',
-        delivery: 'Made to Order (ships in 7+ weeks)',
+        delivery: 'Made to Order (ships in 7+ weeks)'
       },
       has_parent_sku: false,
       image:
@@ -818,7 +816,7 @@ const MOCK_PRODUCT_DETAIL: IProductDetail = {
       swatch_image:
         'https://www.lazysuzy.com/westelm/westelm_images/201940_0139_img17l.jpg',
       price: '1119.2',
-      was_price: '1399',
+      was_price: '1399'
     },
     {
       product_sku: 'harris-sofa-86-h4613',
@@ -828,7 +826,7 @@ const MOCK_PRODUCT_DETAIL: IProductDetail = {
         color: 'Blue Stone',
         shape: 'Standard (40&quot;)',
         fabric: 'Basket Slub',
-        delivery: 'Made to Order (ships in 7+ weeks)',
+        delivery: 'Made to Order (ships in 7+ weeks)'
       },
       has_parent_sku: false,
       image:
@@ -837,7 +835,7 @@ const MOCK_PRODUCT_DETAIL: IProductDetail = {
       swatch_image:
         'https://www.lazysuzy.com/westelm/westelm_images/201940_0039_img84l.jpg',
       price: '959.2',
-      was_price: '1199',
+      was_price: '1199'
     },
     {
       product_sku: 'harris-sofa-86-h4613',
@@ -847,7 +845,7 @@ const MOCK_PRODUCT_DETAIL: IProductDetail = {
         color: 'Blue Stone',
         shape: 'Extra Deep (47&quot;)',
         fabric: 'Basket Slub',
-        delivery: 'Made to Order (ships in 7+ weeks)',
+        delivery: 'Made to Order (ships in 7+ weeks)'
       },
       has_parent_sku: false,
       image:
@@ -856,7 +854,7 @@ const MOCK_PRODUCT_DETAIL: IProductDetail = {
       swatch_image:
         'https://www.lazysuzy.com/westelm/westelm_images/201940_0039_img84l.jpg',
       price: '1039.2',
-      was_price: '1299',
+      was_price: '1299'
     },
     {
       product_sku: 'harris-sofa-86-h4613',
@@ -866,7 +864,7 @@ const MOCK_PRODUCT_DETAIL: IProductDetail = {
         color: 'Chili',
         shape: 'Standard (40&quot;)',
         fabric: 'Basket Slub',
-        delivery: 'Made to Order (ships in 7+ weeks)',
+        delivery: 'Made to Order (ships in 7+ weeks)'
       },
       has_parent_sku: false,
       image:
@@ -875,7 +873,7 @@ const MOCK_PRODUCT_DETAIL: IProductDetail = {
       swatch_image:
         'https://www.lazysuzy.com/westelm/westelm_images/201940_0056_img86l.jpg',
       price: '959.2',
-      was_price: '1199',
+      was_price: '1199'
     },
     {
       product_sku: 'harris-sofa-86-h4613',
@@ -885,7 +883,7 @@ const MOCK_PRODUCT_DETAIL: IProductDetail = {
         color: 'Chili',
         shape: 'Extra Deep (47&quot;)',
         fabric: 'Basket Slub',
-        delivery: 'Made to Order (ships in 7+ weeks)',
+        delivery: 'Made to Order (ships in 7+ weeks)'
       },
       has_parent_sku: false,
       image:
@@ -894,7 +892,7 @@ const MOCK_PRODUCT_DETAIL: IProductDetail = {
       swatch_image:
         'https://www.lazysuzy.com/westelm/westelm_images/201940_0056_img86l.jpg',
       price: '1039.2',
-      was_price: '1299',
+      was_price: '1299'
     },
     {
       product_sku: 'harris-sofa-86-h4613',
@@ -904,7 +902,7 @@ const MOCK_PRODUCT_DETAIL: IProductDetail = {
         color: 'Dark Horseradish',
         shape: 'Standard (40&quot;)',
         fabric: 'Basket Slub',
-        delivery: 'Made to Order (ships in 7+ weeks)',
+        delivery: 'Made to Order (ships in 7+ weeks)'
       },
       has_parent_sku: false,
       image:
@@ -913,7 +911,7 @@ const MOCK_PRODUCT_DETAIL: IProductDetail = {
       swatch_image:
         'https://www.lazysuzy.com/westelm/westelm_images/201940_0085_img13l.jpg',
       price: '959.2',
-      was_price: '1199',
+      was_price: '1199'
     },
     {
       product_sku: 'harris-sofa-86-h4613',
@@ -923,7 +921,7 @@ const MOCK_PRODUCT_DETAIL: IProductDetail = {
         color: 'Dark Horseradish',
         shape: 'Extra Deep (47&quot;)',
         fabric: 'Basket Slub',
-        delivery: 'Made to Order (ships in 7+ weeks)',
+        delivery: 'Made to Order (ships in 7+ weeks)'
       },
       has_parent_sku: false,
       image:
@@ -932,7 +930,7 @@ const MOCK_PRODUCT_DETAIL: IProductDetail = {
       swatch_image:
         'https://www.lazysuzy.com/westelm/westelm_images/201940_0085_img13l.jpg',
       price: '1039.2',
-      was_price: '1299',
+      was_price: '1299'
     },
     {
       product_sku: 'harris-sofa-86-h4613',
@@ -942,7 +940,7 @@ const MOCK_PRODUCT_DETAIL: IProductDetail = {
         color: 'Desert Sunset',
         shape: 'Standard (40&quot;)',
         fabric: 'Basket Slub',
-        delivery: 'Made to Order (ships in 7+ weeks)',
+        delivery: 'Made to Order (ships in 7+ weeks)'
       },
       has_parent_sku: false,
       image:
@@ -951,7 +949,7 @@ const MOCK_PRODUCT_DETAIL: IProductDetail = {
       swatch_image:
         'https://www.lazysuzy.com/westelm/westelm_images/201940_0049_img67l.jpg',
       price: '959.2',
-      was_price: '1199',
+      was_price: '1199'
     },
     {
       product_sku: 'harris-sofa-86-h4613',
@@ -961,7 +959,7 @@ const MOCK_PRODUCT_DETAIL: IProductDetail = {
         color: 'Desert Sunset',
         shape: 'Extra Deep (47&quot;)',
         fabric: 'Basket Slub',
-        delivery: 'Made to Order (ships in 7+ weeks)',
+        delivery: 'Made to Order (ships in 7+ weeks)'
       },
       has_parent_sku: false,
       image:
@@ -970,7 +968,7 @@ const MOCK_PRODUCT_DETAIL: IProductDetail = {
       swatch_image:
         'https://www.lazysuzy.com/westelm/westelm_images/201940_0049_img67l.jpg',
       price: '1039.2',
-      was_price: '1299',
+      was_price: '1299'
     },
     {
       product_sku: 'harris-sofa-86-h4613',
@@ -980,7 +978,7 @@ const MOCK_PRODUCT_DETAIL: IProductDetail = {
         color: 'Feather Gray',
         shape: 'Standard (40&quot;)',
         fabric: 'Basket Slub',
-        delivery: 'Made to Order (ships in 7+ weeks)',
+        delivery: 'Made to Order (ships in 7+ weeks)'
       },
       has_parent_sku: false,
       image:
@@ -989,7 +987,7 @@ const MOCK_PRODUCT_DETAIL: IProductDetail = {
       swatch_image:
         'https://www.lazysuzy.com/westelm/westelm_images/201940_0162_img4l.jpg',
       price: '959.2',
-      was_price: '1199',
+      was_price: '1199'
     },
     {
       product_sku: 'harris-sofa-86-h4613',
@@ -999,7 +997,7 @@ const MOCK_PRODUCT_DETAIL: IProductDetail = {
         color: 'Feather Gray',
         shape: 'Extra Deep (47&quot;)',
         fabric: 'Basket Slub',
-        delivery: 'Made to Order (ships in 7+ weeks)',
+        delivery: 'Made to Order (ships in 7+ weeks)'
       },
       has_parent_sku: false,
       image:
@@ -1008,7 +1006,7 @@ const MOCK_PRODUCT_DETAIL: IProductDetail = {
       swatch_image:
         'https://www.lazysuzy.com/westelm/westelm_images/201940_0162_img4l.jpg',
       price: '1039.2',
-      was_price: '1299',
+      was_price: '1299'
     },
     {
       product_sku: 'harris-sofa-86-h4613',
@@ -1018,7 +1016,7 @@ const MOCK_PRODUCT_DETAIL: IProductDetail = {
         color: 'Midnight',
         shape: 'Standard (40&quot;)',
         fabric: 'Basket Slub',
-        delivery: 'Made to Order (ships in 7+ weeks)',
+        delivery: 'Made to Order (ships in 7+ weeks)'
       },
       has_parent_sku: false,
       image:
@@ -1027,7 +1025,7 @@ const MOCK_PRODUCT_DETAIL: IProductDetail = {
       swatch_image:
         'https://www.lazysuzy.com/westelm/westelm_images/201940_0079_img49l.jpg',
       price: '959.2',
-      was_price: '1199',
+      was_price: '1199'
     },
     {
       product_sku: 'harris-sofa-86-h4613',
@@ -1037,7 +1035,7 @@ const MOCK_PRODUCT_DETAIL: IProductDetail = {
         color: 'Midnight',
         shape: 'Extra Deep (47&quot;)',
         fabric: 'Basket Slub',
-        delivery: 'Made to Order (ships in 7+ weeks)',
+        delivery: 'Made to Order (ships in 7+ weeks)'
       },
       has_parent_sku: false,
       image:
@@ -1046,7 +1044,7 @@ const MOCK_PRODUCT_DETAIL: IProductDetail = {
       swatch_image:
         'https://www.lazysuzy.com/westelm/westelm_images/201940_0079_img49l.jpg',
       price: '1039.2',
-      was_price: '1299',
+      was_price: '1299'
     },
     {
       product_sku: 'harris-sofa-86-h4613',
@@ -1056,7 +1054,7 @@ const MOCK_PRODUCT_DETAIL: IProductDetail = {
         color: 'Sapphire',
         shape: 'Standard (40&quot;)',
         fabric: 'Basket Slub',
-        delivery: 'Made to Order (ships in 7+ weeks)',
+        delivery: 'Made to Order (ships in 7+ weeks)'
       },
       has_parent_sku: false,
       image:
@@ -1065,7 +1063,7 @@ const MOCK_PRODUCT_DETAIL: IProductDetail = {
       swatch_image:
         'https://www.lazysuzy.com/westelm/westelm_images/201940_0150_img70l.jpg',
       price: '959.2',
-      was_price: '1199',
+      was_price: '1199'
     },
     {
       product_sku: 'harris-sofa-86-h4613',
@@ -1075,7 +1073,7 @@ const MOCK_PRODUCT_DETAIL: IProductDetail = {
         color: 'Sapphire',
         shape: 'Extra Deep (47&quot;)',
         fabric: 'Basket Slub',
-        delivery: 'Made to Order (ships in 7+ weeks)',
+        delivery: 'Made to Order (ships in 7+ weeks)'
       },
       has_parent_sku: false,
       image:
@@ -1084,7 +1082,7 @@ const MOCK_PRODUCT_DETAIL: IProductDetail = {
       swatch_image:
         'https://www.lazysuzy.com/westelm/westelm_images/201940_0150_img70l.jpg',
       price: '1039.2',
-      was_price: '1299',
+      was_price: '1299'
     },
     {
       product_sku: 'harris-sofa-86-h4613',
@@ -1094,7 +1092,7 @@ const MOCK_PRODUCT_DETAIL: IProductDetail = {
         color: 'Feather Gray',
         shape: 'Standard (40&quot;)',
         fabric: 'Chenille Tweed',
-        delivery: 'Made to Order (ships in 7+ weeks)',
+        delivery: 'Made to Order (ships in 7+ weeks)'
       },
       has_parent_sku: false,
       image:
@@ -1103,7 +1101,7 @@ const MOCK_PRODUCT_DETAIL: IProductDetail = {
       swatch_image:
         'https://www.lazysuzy.com/westelm/westelm_images/201940_0022_img51l.jpg',
       price: '959.2',
-      was_price: '1199',
+      was_price: '1199'
     },
     {
       product_sku: 'harris-sofa-86-h4613',
@@ -1113,7 +1111,7 @@ const MOCK_PRODUCT_DETAIL: IProductDetail = {
         color: 'Feather Gray',
         shape: 'Extra Deep (47&quot;)',
         fabric: 'Chenille Tweed',
-        delivery: 'Made to Order (ships in 7+ weeks)',
+        delivery: 'Made to Order (ships in 7+ weeks)'
       },
       has_parent_sku: false,
       image:
@@ -1122,7 +1120,7 @@ const MOCK_PRODUCT_DETAIL: IProductDetail = {
       swatch_image:
         'https://www.lazysuzy.com/westelm/westelm_images/201940_0023_img55l.jpg',
       price: '1039.2',
-      was_price: '1299',
+      was_price: '1299'
     },
     {
       product_sku: 'harris-sofa-86-h4613',
@@ -1132,7 +1130,7 @@ const MOCK_PRODUCT_DETAIL: IProductDetail = {
         color: 'Frost Gray',
         shape: 'Standard (40&quot;)',
         fabric: 'Chenille Tweed',
-        delivery: 'Made to Order (ships in 7+ weeks)',
+        delivery: 'Made to Order (ships in 7+ weeks)'
       },
       has_parent_sku: false,
       image:
@@ -1141,7 +1139,7 @@ const MOCK_PRODUCT_DETAIL: IProductDetail = {
       swatch_image:
         'https://www.lazysuzy.com/westelm/westelm_images/201940_0023_img55l.jpg',
       price: '959.2',
-      was_price: '1199',
+      was_price: '1199'
     },
     {
       product_sku: 'harris-sofa-86-h4613',
@@ -1151,7 +1149,7 @@ const MOCK_PRODUCT_DETAIL: IProductDetail = {
         color: 'Frost Gray',
         shape: 'Extra Deep (47&quot;)',
         fabric: 'Chenille Tweed',
-        delivery: 'Made to Order (ships in 7+ weeks)',
+        delivery: 'Made to Order (ships in 7+ weeks)'
       },
       has_parent_sku: false,
       image:
@@ -1160,7 +1158,7 @@ const MOCK_PRODUCT_DETAIL: IProductDetail = {
       swatch_image:
         'https://www.lazysuzy.com/westelm/westelm_images/201940_0023_img55l.jpg',
       price: '1039.2',
-      was_price: '1299',
+      was_price: '1299'
     },
     {
       product_sku: 'harris-sofa-86-h4613',
@@ -1170,7 +1168,7 @@ const MOCK_PRODUCT_DETAIL: IProductDetail = {
         color: 'Irongate',
         shape: 'Standard (40&quot;)',
         fabric: 'Chenille Tweed',
-        delivery: 'Made to Order (ships in 7+ weeks)',
+        delivery: 'Made to Order (ships in 7+ weeks)'
       },
       has_parent_sku: false,
       image:
@@ -1179,7 +1177,7 @@ const MOCK_PRODUCT_DETAIL: IProductDetail = {
       swatch_image:
         'https://www.lazysuzy.com/westelm/westelm_images/201949_0005_img7l.jpg',
       price: '959.2',
-      was_price: '1199',
+      was_price: '1199'
     },
     {
       product_sku: 'harris-sofa-86-h4613',
@@ -1189,7 +1187,7 @@ const MOCK_PRODUCT_DETAIL: IProductDetail = {
         color: 'Irongate',
         shape: 'Extra Deep (47&quot;)',
         fabric: 'Chenille Tweed',
-        delivery: 'Made to Order (ships in 7+ weeks)',
+        delivery: 'Made to Order (ships in 7+ weeks)'
       },
       has_parent_sku: false,
       image:
@@ -1198,7 +1196,7 @@ const MOCK_PRODUCT_DETAIL: IProductDetail = {
       swatch_image:
         'https://www.lazysuzy.com/westelm/westelm_images/201949_0005_img7l.jpg',
       price: '1039.2',
-      was_price: '1299',
+      was_price: '1299'
     },
     {
       product_sku: 'harris-sofa-86-h4613',
@@ -1208,7 +1206,7 @@ const MOCK_PRODUCT_DETAIL: IProductDetail = {
         color: 'Nightshade',
         shape: 'Standard (40&quot;)',
         fabric: 'Chenille Tweed',
-        delivery: 'Made to Order (ships in 7+ weeks)',
+        delivery: 'Made to Order (ships in 7+ weeks)'
       },
       has_parent_sku: false,
       image:
@@ -1217,7 +1215,7 @@ const MOCK_PRODUCT_DETAIL: IProductDetail = {
       swatch_image:
         'https://www.lazysuzy.com/westelm/westelm_images/201940_0081_img34l.jpg',
       price: '959.2',
-      was_price: '1199',
+      was_price: '1199'
     },
     {
       product_sku: 'harris-sofa-86-h4613',
@@ -1227,7 +1225,7 @@ const MOCK_PRODUCT_DETAIL: IProductDetail = {
         color: 'Nightshade',
         shape: 'Extra Deep (47&quot;)',
         fabric: 'Chenille Tweed',
-        delivery: 'Made to Order (ships in 7+ weeks)',
+        delivery: 'Made to Order (ships in 7+ weeks)'
       },
       has_parent_sku: false,
       image:
@@ -1236,7 +1234,7 @@ const MOCK_PRODUCT_DETAIL: IProductDetail = {
       swatch_image:
         'https://www.lazysuzy.com/westelm/westelm_images/201940_0081_img34l.jpg',
       price: '1039.2',
-      was_price: '1299',
+      was_price: '1299'
     },
     {
       product_sku: 'harris-sofa-86-h4613',
@@ -1246,7 +1244,7 @@ const MOCK_PRODUCT_DETAIL: IProductDetail = {
         color: 'Pewter',
         shape: 'Standard (40&quot;)',
         fabric: 'Chenille Tweed',
-        delivery: 'Made to Order (ships in 7+ weeks)',
+        delivery: 'Made to Order (ships in 7+ weeks)'
       },
       has_parent_sku: false,
       image:
@@ -1255,7 +1253,7 @@ const MOCK_PRODUCT_DETAIL: IProductDetail = {
       swatch_image:
         'https://www.lazysuzy.com/westelm/westelm_images/201951_0005_img31l.jpg',
       price: '959.2',
-      was_price: '1199',
+      was_price: '1199'
     },
     {
       product_sku: 'harris-sofa-86-h4613',
@@ -1265,7 +1263,7 @@ const MOCK_PRODUCT_DETAIL: IProductDetail = {
         color: 'Pewter',
         shape: 'Extra Deep (47&quot;)',
         fabric: 'Chenille Tweed',
-        delivery: 'Made to Order (ships in 7+ weeks)',
+        delivery: 'Made to Order (ships in 7+ weeks)'
       },
       has_parent_sku: false,
       image:
@@ -1274,7 +1272,7 @@ const MOCK_PRODUCT_DETAIL: IProductDetail = {
       swatch_image:
         'https://www.lazysuzy.com/westelm/westelm_images/201951_0005_img31l.jpg',
       price: '1039.2',
-      was_price: '1299',
+      was_price: '1299'
     },
     {
       product_sku: 'harris-sofa-86-h4613',
@@ -1284,7 +1282,7 @@ const MOCK_PRODUCT_DETAIL: IProductDetail = {
         color: 'Rosette',
         shape: 'Standard (40&quot;)',
         fabric: 'Chenille Tweed',
-        delivery: 'Made to Order (ships in 7+ weeks)',
+        delivery: 'Made to Order (ships in 7+ weeks)'
       },
       has_parent_sku: false,
       image:
@@ -1293,7 +1291,7 @@ const MOCK_PRODUCT_DETAIL: IProductDetail = {
       swatch_image:
         'https://www.lazysuzy.com/westelm/westelm_images/201940_0075_img54l.jpg',
       price: '959.2',
-      was_price: '1199',
+      was_price: '1199'
     },
     {
       product_sku: 'harris-sofa-86-h4613',
@@ -1303,7 +1301,7 @@ const MOCK_PRODUCT_DETAIL: IProductDetail = {
         color: 'Rosette',
         shape: 'Extra Deep (47&quot;)',
         fabric: 'Chenille Tweed',
-        delivery: 'Made to Order (ships in 7+ weeks)',
+        delivery: 'Made to Order (ships in 7+ weeks)'
       },
       has_parent_sku: false,
       image:
@@ -1312,7 +1310,7 @@ const MOCK_PRODUCT_DETAIL: IProductDetail = {
       swatch_image:
         'https://www.lazysuzy.com/westelm/westelm_images/201940_0075_img54l.jpg',
       price: '1039.2',
-      was_price: '1299',
+      was_price: '1299'
     },
     {
       product_sku: 'harris-sofa-86-h4613',
@@ -1322,7 +1320,7 @@ const MOCK_PRODUCT_DETAIL: IProductDetail = {
         color: 'Silver Gray',
         shape: 'Standard (40&quot;)',
         fabric: 'Chenille Tweed',
-        delivery: 'Made to Order (ships in 7+ weeks)',
+        delivery: 'Made to Order (ships in 7+ weeks)'
       },
       has_parent_sku: false,
       image:
@@ -1331,7 +1329,7 @@ const MOCK_PRODUCT_DETAIL: IProductDetail = {
       swatch_image:
         'https://www.lazysuzy.com/westelm/westelm_images/201949_0005_img23l.jpg',
       price: '959.2',
-      was_price: '1199',
+      was_price: '1199'
     },
     {
       product_sku: 'harris-sofa-86-h4613',
@@ -1341,7 +1339,7 @@ const MOCK_PRODUCT_DETAIL: IProductDetail = {
         color: 'Silver Gray',
         shape: 'Extra Deep (47&quot;)',
         fabric: 'Chenille Tweed',
-        delivery: 'Made to Order (ships in 7+ weeks)',
+        delivery: 'Made to Order (ships in 7+ weeks)'
       },
       has_parent_sku: false,
       image:
@@ -1350,7 +1348,7 @@ const MOCK_PRODUCT_DETAIL: IProductDetail = {
       swatch_image:
         'https://www.lazysuzy.com/westelm/westelm_images/201949_0005_img23l.jpg',
       price: '1039.2',
-      was_price: '1299',
+      was_price: '1299'
     },
     {
       product_sku: 'harris-sofa-86-h4613',
@@ -1360,7 +1358,7 @@ const MOCK_PRODUCT_DETAIL: IProductDetail = {
         color: 'Slate',
         shape: 'Standard (40&quot;)',
         fabric: 'Chenille Tweed',
-        delivery: 'Made to Order (ships in 7+ weeks)',
+        delivery: 'Made to Order (ships in 7+ weeks)'
       },
       has_parent_sku: false,
       image:
@@ -1369,7 +1367,7 @@ const MOCK_PRODUCT_DETAIL: IProductDetail = {
       swatch_image:
         'https://www.lazysuzy.com/westelm/westelm_images/201940_0101_img70l.jpg',
       price: '959.2',
-      was_price: '1199',
+      was_price: '1199'
     },
     {
       product_sku: 'harris-sofa-86-h4613',
@@ -1379,7 +1377,7 @@ const MOCK_PRODUCT_DETAIL: IProductDetail = {
         color: 'Slate',
         shape: 'Extra Deep (47&quot;)',
         fabric: 'Chenille Tweed',
-        delivery: 'Made to Order (ships in 7+ weeks)',
+        delivery: 'Made to Order (ships in 7+ weeks)'
       },
       has_parent_sku: false,
       image:
@@ -1388,7 +1386,7 @@ const MOCK_PRODUCT_DETAIL: IProductDetail = {
       swatch_image:
         'https://www.lazysuzy.com/westelm/westelm_images/201940_0101_img70l.jpg',
       price: '1039.2',
-      was_price: '1299',
+      was_price: '1299'
     },
     {
       product_sku: 'harris-sofa-86-h4613',
@@ -1398,7 +1396,7 @@ const MOCK_PRODUCT_DETAIL: IProductDetail = {
         color: 'Aegean Blue',
         shape: 'Standard (40&quot;)',
         fabric: 'Chunky Basketweave',
-        delivery: 'Made to Order (ships in 7+ weeks)',
+        delivery: 'Made to Order (ships in 7+ weeks)'
       },
       has_parent_sku: false,
       image:
@@ -1407,7 +1405,7 @@ const MOCK_PRODUCT_DETAIL: IProductDetail = {
       swatch_image:
         'https://www.lazysuzy.com/westelm/westelm_images/201940_0095_img14l.jpg',
       price: '959.2',
-      was_price: '1199',
+      was_price: '1199'
     },
     {
       product_sku: 'harris-sofa-86-h4613',
@@ -1417,7 +1415,7 @@ const MOCK_PRODUCT_DETAIL: IProductDetail = {
         color: 'Aegean Blue',
         shape: 'Extra Deep (47&quot;)',
         fabric: 'Chunky Basketweave',
-        delivery: 'Made to Order (ships in 7+ weeks)',
+        delivery: 'Made to Order (ships in 7+ weeks)'
       },
       has_parent_sku: false,
       image:
@@ -1426,7 +1424,7 @@ const MOCK_PRODUCT_DETAIL: IProductDetail = {
       swatch_image:
         'https://www.lazysuzy.com/westelm/westelm_images/201940_0100_img58l.jpg',
       price: '1039.2',
-      was_price: '1299',
+      was_price: '1299'
     },
     {
       product_sku: 'harris-sofa-86-h4613',
@@ -1436,7 +1434,7 @@ const MOCK_PRODUCT_DETAIL: IProductDetail = {
         color: 'Charcoal',
         shape: 'Standard (40&quot;)',
         fabric: 'Chunky Basketweave',
-        delivery: 'Made to Order (ships in 7+ weeks)',
+        delivery: 'Made to Order (ships in 7+ weeks)'
       },
       has_parent_sku: false,
       image:
@@ -1445,7 +1443,7 @@ const MOCK_PRODUCT_DETAIL: IProductDetail = {
       swatch_image:
         'https://www.lazysuzy.com/westelm/westelm_images/201940_0100_img58l.jpg',
       price: '959.2',
-      was_price: '1199',
+      was_price: '1199'
     },
     {
       product_sku: 'harris-sofa-86-h4613',
@@ -1455,7 +1453,7 @@ const MOCK_PRODUCT_DETAIL: IProductDetail = {
         color: 'Charcoal',
         shape: 'Extra Deep (47&quot;)',
         fabric: 'Chunky Basketweave',
-        delivery: 'Made to Order (ships in 7+ weeks)',
+        delivery: 'Made to Order (ships in 7+ weeks)'
       },
       has_parent_sku: false,
       image:
@@ -1464,7 +1462,7 @@ const MOCK_PRODUCT_DETAIL: IProductDetail = {
       swatch_image:
         'https://www.lazysuzy.com/westelm/westelm_images/201940_0133_img71l.jpg',
       price: '1039.2',
-      was_price: '1299',
+      was_price: '1299'
     },
     {
       product_sku: 'harris-sofa-86-h4613',
@@ -1474,7 +1472,7 @@ const MOCK_PRODUCT_DETAIL: IProductDetail = {
         color: 'Metal',
         shape: 'Standard (40&quot;)',
         fabric: 'Chunky Basketweave',
-        delivery: 'Made to Order (ships in 7+ weeks)',
+        delivery: 'Made to Order (ships in 7+ weeks)'
       },
       has_parent_sku: false,
       image:
@@ -1483,7 +1481,7 @@ const MOCK_PRODUCT_DETAIL: IProductDetail = {
       swatch_image:
         'https://www.lazysuzy.com/westelm/westelm_images/201940_0133_img71l.jpg',
       price: '959.2',
-      was_price: '1199',
+      was_price: '1199'
     },
     {
       product_sku: 'harris-sofa-86-h4613',
@@ -1493,7 +1491,7 @@ const MOCK_PRODUCT_DETAIL: IProductDetail = {
         color: 'Metal',
         shape: 'Extra Deep (47&quot;)',
         fabric: 'Chunky Basketweave',
-        delivery: 'Made to Order (ships in 7+ weeks)',
+        delivery: 'Made to Order (ships in 7+ weeks)'
       },
       has_parent_sku: false,
       image:
@@ -1502,7 +1500,7 @@ const MOCK_PRODUCT_DETAIL: IProductDetail = {
       swatch_image:
         'https://www.lazysuzy.com/westelm/westelm_images/201940_0050_img39l.jpg',
       price: '1039.2',
-      was_price: '1299',
+      was_price: '1299'
     },
     {
       product_sku: 'harris-sofa-86-h4613',
@@ -1512,7 +1510,7 @@ const MOCK_PRODUCT_DETAIL: IProductDetail = {
         color: 'Slate',
         shape: 'Standard (40&quot;)',
         fabric: 'Chunky Basketweave',
-        delivery: 'Made to Order (ships in 7+ weeks)',
+        delivery: 'Made to Order (ships in 7+ weeks)'
       },
       has_parent_sku: false,
       image:
@@ -1521,7 +1519,7 @@ const MOCK_PRODUCT_DETAIL: IProductDetail = {
       swatch_image:
         'https://www.lazysuzy.com/westelm/westelm_images/201940_0050_img39l.jpg',
       price: '959.2',
-      was_price: '1199',
+      was_price: '1199'
     },
     {
       product_sku: 'harris-sofa-86-h4613',
@@ -1531,7 +1529,7 @@ const MOCK_PRODUCT_DETAIL: IProductDetail = {
         color: 'Slate',
         shape: 'Extra Deep (47&quot;)',
         fabric: 'Chunky Basketweave',
-        delivery: 'Made to Order (ships in 7+ weeks)',
+        delivery: 'Made to Order (ships in 7+ weeks)'
       },
       has_parent_sku: false,
       image:
@@ -1540,7 +1538,7 @@ const MOCK_PRODUCT_DETAIL: IProductDetail = {
       swatch_image:
         'https://www.lazysuzy.com/westelm/westelm_images/201935_0031_img96l.jpg',
       price: '1039.2',
-      was_price: '1299',
+      was_price: '1299'
     },
     {
       product_sku: 'harris-sofa-86-h4613',
@@ -1550,7 +1548,7 @@ const MOCK_PRODUCT_DETAIL: IProductDetail = {
         color: 'Stone',
         shape: 'Standard (40&quot;)',
         fabric: 'Chunky Basketweave',
-        delivery: 'Made to Order (ships in 7+ weeks)',
+        delivery: 'Made to Order (ships in 7+ weeks)'
       },
       has_parent_sku: false,
       image:
@@ -1559,7 +1557,7 @@ const MOCK_PRODUCT_DETAIL: IProductDetail = {
       swatch_image:
         'https://www.lazysuzy.com/westelm/westelm_images/201935_0031_img96l.jpg',
       price: '959.2',
-      was_price: '1199',
+      was_price: '1199'
     },
     {
       product_sku: 'harris-sofa-86-h4613',
@@ -1569,7 +1567,7 @@ const MOCK_PRODUCT_DETAIL: IProductDetail = {
         color: 'Stone',
         shape: 'Extra Deep (47&quot;)',
         fabric: 'Chunky Basketweave',
-        delivery: 'Made to Order (ships in 7+ weeks)',
+        delivery: 'Made to Order (ships in 7+ weeks)'
       },
       has_parent_sku: false,
       image:
@@ -1578,7 +1576,7 @@ const MOCK_PRODUCT_DETAIL: IProductDetail = {
       swatch_image:
         'https://www.lazysuzy.com/westelm/westelm_images/201940_0095_img14l.jpg',
       price: '1039.2',
-      was_price: '1299',
+      was_price: '1299'
     },
     {
       product_sku: 'harris-sofa-86-h4613',
@@ -1588,7 +1586,7 @@ const MOCK_PRODUCT_DETAIL: IProductDetail = {
         color: 'Feather Gray',
         shape: 'Standard (40&quot;)',
         fabric: 'Deco Weave',
-        delivery: 'Made to Order (ships in 7+ weeks)',
+        delivery: 'Made to Order (ships in 7+ weeks)'
       },
       has_parent_sku: false,
       image:
@@ -1597,7 +1595,7 @@ const MOCK_PRODUCT_DETAIL: IProductDetail = {
       swatch_image:
         'https://www.lazysuzy.com/westelm/westelm_images/201940_0078_img23l.jpg',
       price: '879.2',
-      was_price: '1099',
+      was_price: '1099'
     },
     {
       product_sku: 'harris-sofa-86-h4613',
@@ -1607,7 +1605,7 @@ const MOCK_PRODUCT_DETAIL: IProductDetail = {
         color: 'Feather Gray',
         shape: 'Extra Deep (47&quot;)',
         fabric: 'Deco Weave',
-        delivery: 'Made to Order (ships in 7+ weeks)',
+        delivery: 'Made to Order (ships in 7+ weeks)'
       },
       has_parent_sku: false,
       image:
@@ -1616,7 +1614,7 @@ const MOCK_PRODUCT_DETAIL: IProductDetail = {
       swatch_image:
         'https://www.lazysuzy.com/westelm/westelm_images/201940_0095_img34l.jpg',
       price: '959.2',
-      was_price: '1199',
+      was_price: '1199'
     },
     {
       product_sku: 'harris-sofa-86-h4613',
@@ -1626,7 +1624,7 @@ const MOCK_PRODUCT_DETAIL: IProductDetail = {
         color: 'Stone',
         shape: 'Standard (40&quot;)',
         fabric: 'Deco Weave',
-        delivery: 'Made to Order (ships in 7+ weeks)',
+        delivery: 'Made to Order (ships in 7+ weeks)'
       },
       has_parent_sku: false,
       image:
@@ -1635,7 +1633,7 @@ const MOCK_PRODUCT_DETAIL: IProductDetail = {
       swatch_image:
         'https://www.lazysuzy.com/westelm/westelm_images/201940_0095_img34l.jpg',
       price: '879.2',
-      was_price: '1099',
+      was_price: '1099'
     },
     {
       product_sku: 'harris-sofa-86-h4613',
@@ -1645,7 +1643,7 @@ const MOCK_PRODUCT_DETAIL: IProductDetail = {
         color: 'Stone',
         shape: 'Extra Deep (47&quot;)',
         fabric: 'Deco Weave',
-        delivery: 'Made to Order (ships in 7+ weeks)',
+        delivery: 'Made to Order (ships in 7+ weeks)'
       },
       has_parent_sku: false,
       image:
@@ -1654,7 +1652,7 @@ const MOCK_PRODUCT_DETAIL: IProductDetail = {
       swatch_image:
         'https://www.lazysuzy.com/westelm/westelm_images/201940_0078_img23l.jpg',
       price: '959.2',
-      was_price: '1199',
+      was_price: '1199'
     },
     {
       product_sku: 'harris-sofa-86-h4613',
@@ -1664,7 +1662,7 @@ const MOCK_PRODUCT_DETAIL: IProductDetail = {
         color: 'Forest',
         shape: 'Standard (40&quot;)',
         fabric: 'Distressed Velvet',
-        delivery: 'Made to Order (ships in 7+ weeks)',
+        delivery: 'Made to Order (ships in 7+ weeks)'
       },
       has_parent_sku: false,
       image:
@@ -1673,7 +1671,7 @@ const MOCK_PRODUCT_DETAIL: IProductDetail = {
       swatch_image:
         'https://www.lazysuzy.com/westelm/westelm_images/201940_0009_img75l.jpg',
       price: '959.2',
-      was_price: '1199',
+      was_price: '1199'
     },
     {
       product_sku: 'harris-sofa-86-h4613',
@@ -1683,7 +1681,7 @@ const MOCK_PRODUCT_DETAIL: IProductDetail = {
         color: 'Forest',
         shape: 'Extra Deep (47&quot;)',
         fabric: 'Distressed Velvet',
-        delivery: 'Made to Order (ships in 7+ weeks)',
+        delivery: 'Made to Order (ships in 7+ weeks)'
       },
       has_parent_sku: false,
       image:
@@ -1692,7 +1690,7 @@ const MOCK_PRODUCT_DETAIL: IProductDetail = {
       swatch_image:
         'https://www.lazysuzy.com/westelm/westelm_images/201940_0009_img75l.jpg',
       price: '1039.2',
-      was_price: '1299',
+      was_price: '1299'
     },
     {
       product_sku: 'harris-sofa-86-h4613',
@@ -1702,7 +1700,7 @@ const MOCK_PRODUCT_DETAIL: IProductDetail = {
         color: 'Ink Blue',
         shape: 'Standard (40&quot;)',
         fabric: 'Distressed Velvet',
-        delivery: 'Made to Order (ships in 7+ weeks)',
+        delivery: 'Made to Order (ships in 7+ weeks)'
       },
       has_parent_sku: false,
       image:
@@ -1711,7 +1709,7 @@ const MOCK_PRODUCT_DETAIL: IProductDetail = {
       swatch_image:
         'https://www.lazysuzy.com/westelm/westelm_images/201940_0091_img43l.jpg',
       price: '959.2',
-      was_price: '1199',
+      was_price: '1199'
     },
     {
       product_sku: 'harris-sofa-86-h4613',
@@ -1721,7 +1719,7 @@ const MOCK_PRODUCT_DETAIL: IProductDetail = {
         color: 'Ink Blue',
         shape: 'Extra Deep (47&quot;)',
         fabric: 'Distressed Velvet',
-        delivery: 'Made to Order (ships in 7+ weeks)',
+        delivery: 'Made to Order (ships in 7+ weeks)'
       },
       has_parent_sku: false,
       image:
@@ -1730,7 +1728,7 @@ const MOCK_PRODUCT_DETAIL: IProductDetail = {
       swatch_image:
         'https://www.lazysuzy.com/westelm/westelm_images/201940_0091_img43l.jpg',
       price: '1039.2',
-      was_price: '1299',
+      was_price: '1299'
     },
     {
       product_sku: 'harris-sofa-86-h4613',
@@ -1740,7 +1738,7 @@ const MOCK_PRODUCT_DETAIL: IProductDetail = {
         color: 'Light Pink',
         shape: 'Standard (40&quot;)',
         fabric: 'Distressed Velvet',
-        delivery: 'Made to Order (ships in 7+ weeks)',
+        delivery: 'Made to Order (ships in 7+ weeks)'
       },
       has_parent_sku: false,
       image:
@@ -1749,7 +1747,7 @@ const MOCK_PRODUCT_DETAIL: IProductDetail = {
       swatch_image:
         'https://www.lazysuzy.com/westelm/westelm_images/201940_0053_img17l.jpg',
       price: '959.2',
-      was_price: '1199',
+      was_price: '1199'
     },
     {
       product_sku: 'harris-sofa-86-h4613',
@@ -1759,7 +1757,7 @@ const MOCK_PRODUCT_DETAIL: IProductDetail = {
         color: 'Light Pink',
         shape: 'Extra Deep (47&quot;)',
         fabric: 'Distressed Velvet',
-        delivery: 'Made to Order (ships in 7+ weeks)',
+        delivery: 'Made to Order (ships in 7+ weeks)'
       },
       has_parent_sku: false,
       image:
@@ -1768,7 +1766,7 @@ const MOCK_PRODUCT_DETAIL: IProductDetail = {
       swatch_image:
         'https://www.lazysuzy.com/westelm/westelm_images/201940_0053_img17l.jpg',
       price: '1039.2',
-      was_price: '1299',
+      was_price: '1299'
     },
     {
       product_sku: 'harris-sofa-86-h4613',
@@ -1778,7 +1776,7 @@ const MOCK_PRODUCT_DETAIL: IProductDetail = {
         color: 'Mineral Gray',
         shape: 'Standard (40&quot;)',
         fabric: 'Distressed Velvet',
-        delivery: 'Made to Order (ships in 7+ weeks)',
+        delivery: 'Made to Order (ships in 7+ weeks)'
       },
       has_parent_sku: false,
       image:
@@ -1787,7 +1785,7 @@ const MOCK_PRODUCT_DETAIL: IProductDetail = {
       swatch_image:
         'https://www.lazysuzy.com/westelm/westelm_images/201947_0003_img1l.jpg',
       price: '959.2',
-      was_price: '1199',
+      was_price: '1199'
     },
     {
       product_sku: 'harris-sofa-86-h4613',
@@ -1797,7 +1795,7 @@ const MOCK_PRODUCT_DETAIL: IProductDetail = {
         color: 'Mineral Gray',
         shape: 'Extra Deep (47&quot;)',
         fabric: 'Distressed Velvet',
-        delivery: 'Made to Order (ships in 7+ weeks)',
+        delivery: 'Made to Order (ships in 7+ weeks)'
       },
       has_parent_sku: false,
       image:
@@ -1806,7 +1804,7 @@ const MOCK_PRODUCT_DETAIL: IProductDetail = {
       swatch_image:
         'https://www.lazysuzy.com/westelm/westelm_images/201947_0003_img1l.jpg',
       price: '1039.2',
-      was_price: '1299',
+      was_price: '1299'
     },
     {
       product_sku: 'harris-sofa-86-h4613',
@@ -1816,7 +1814,7 @@ const MOCK_PRODUCT_DETAIL: IProductDetail = {
         color: 'Olive',
         shape: 'Standard (40&quot;)',
         fabric: 'Distressed Velvet',
-        delivery: 'Made to Order (ships in 7+ weeks)',
+        delivery: 'Made to Order (ships in 7+ weeks)'
       },
       has_parent_sku: false,
       image:
@@ -1825,7 +1823,7 @@ const MOCK_PRODUCT_DETAIL: IProductDetail = {
       swatch_image:
         'https://www.lazysuzy.com/westelm/westelm_images/201940_0119_img56l.jpg',
       price: '959.2',
-      was_price: '1199',
+      was_price: '1199'
     },
     {
       product_sku: 'harris-sofa-86-h4613',
@@ -1835,7 +1833,7 @@ const MOCK_PRODUCT_DETAIL: IProductDetail = {
         color: 'Olive',
         shape: 'Extra Deep (47&quot;)',
         fabric: 'Distressed Velvet',
-        delivery: 'Made to Order (ships in 7+ weeks)',
+        delivery: 'Made to Order (ships in 7+ weeks)'
       },
       has_parent_sku: false,
       image:
@@ -1844,7 +1842,7 @@ const MOCK_PRODUCT_DETAIL: IProductDetail = {
       swatch_image:
         'https://www.lazysuzy.com/westelm/westelm_images/201940_0119_img56l.jpg',
       price: '1039.2',
-      was_price: '1299',
+      was_price: '1299'
     },
     {
       product_sku: 'harris-sofa-86-h4613',
@@ -1854,7 +1852,7 @@ const MOCK_PRODUCT_DETAIL: IProductDetail = {
         color: 'Rust',
         shape: 'Standard (40&quot;)',
         fabric: 'Distressed Velvet',
-        delivery: 'Made to Order (ships in 7+ weeks)',
+        delivery: 'Made to Order (ships in 7+ weeks)'
       },
       has_parent_sku: false,
       image:
@@ -1863,7 +1861,7 @@ const MOCK_PRODUCT_DETAIL: IProductDetail = {
       swatch_image:
         'https://www.lazysuzy.com/westelm/westelm_images/201940_0066_img6l.jpg',
       price: '959.2',
-      was_price: '1199',
+      was_price: '1199'
     },
     {
       product_sku: 'harris-sofa-86-h4613',
@@ -1873,7 +1871,7 @@ const MOCK_PRODUCT_DETAIL: IProductDetail = {
         color: 'Rust',
         shape: 'Extra Deep (47&quot;)',
         fabric: 'Distressed Velvet',
-        delivery: 'Made to Order (ships in 7+ weeks)',
+        delivery: 'Made to Order (ships in 7+ weeks)'
       },
       has_parent_sku: false,
       image:
@@ -1882,7 +1880,7 @@ const MOCK_PRODUCT_DETAIL: IProductDetail = {
       swatch_image:
         'https://www.lazysuzy.com/westelm/westelm_images/201940_0066_img6l.jpg',
       price: '1039.2',
-      was_price: '1299',
+      was_price: '1299'
     },
     {
       product_sku: 'harris-sofa-86-h4613',
@@ -1892,7 +1890,7 @@ const MOCK_PRODUCT_DETAIL: IProductDetail = {
         color: 'Oyster',
         shape: 'Standard (40&quot;)',
         fabric: 'Eco Weave',
-        delivery: 'Made to Order (ships in 7+ weeks)',
+        delivery: 'Made to Order (ships in 7+ weeks)'
       },
       has_parent_sku: false,
       image:
@@ -1901,7 +1899,7 @@ const MOCK_PRODUCT_DETAIL: IProductDetail = {
       swatch_image:
         'https://www.lazysuzy.com/westelm/westelm_images/201940_0019_img10l.jpg',
       price: '1119.2',
-      was_price: '1399',
+      was_price: '1399'
     },
     {
       product_sku: 'harris-sofa-86-h4613',
@@ -1911,7 +1909,7 @@ const MOCK_PRODUCT_DETAIL: IProductDetail = {
         color: 'Oyster',
         shape: 'Extra Deep (47&quot;)',
         fabric: 'Eco Weave',
-        delivery: 'Made to Order (ships in 7+ weeks)',
+        delivery: 'Made to Order (ships in 7+ weeks)'
       },
       has_parent_sku: false,
       image:
@@ -1920,7 +1918,7 @@ const MOCK_PRODUCT_DETAIL: IProductDetail = {
       swatch_image:
         'https://www.lazysuzy.com/westelm/westelm_images/201940_0019_img10l.jpg',
       price: '1199.2',
-      was_price: '1499',
+      was_price: '1499'
     },
     {
       product_sku: 'harris-sofa-86-h4613',
@@ -1930,7 +1928,7 @@ const MOCK_PRODUCT_DETAIL: IProductDetail = {
         color: 'Pewter',
         shape: 'Standard (40&quot;)',
         fabric: 'Eco Weave',
-        delivery: 'Made to Order (ships in 7+ weeks)',
+        delivery: 'Made to Order (ships in 7+ weeks)'
       },
       has_parent_sku: false,
       image:
@@ -1939,7 +1937,7 @@ const MOCK_PRODUCT_DETAIL: IProductDetail = {
       swatch_image:
         'https://www.lazysuzy.com/westelm/westelm_images/201940_0130_img47l.jpg',
       price: '1399',
-      was_price: '1399',
+      was_price: '1399'
     },
     {
       product_sku: 'harris-sofa-86-h4613',
@@ -1949,7 +1947,7 @@ const MOCK_PRODUCT_DETAIL: IProductDetail = {
         color: 'Feather Gray',
         shape: 'Standard (40&quot;)',
         fabric: 'Heathered Crosshatch',
-        delivery: 'Made to Order (ships in 7+ weeks)',
+        delivery: 'Made to Order (ships in 7+ weeks)'
       },
       has_parent_sku: false,
       image:
@@ -1958,7 +1956,7 @@ const MOCK_PRODUCT_DETAIL: IProductDetail = {
       swatch_image:
         'https://www.lazysuzy.com/westelm/westelm_images/201940_0034_img54l.jpg',
       price: '879.2',
-      was_price: '1099',
+      was_price: '1099'
     },
     {
       product_sku: 'harris-sofa-86-h4613',
@@ -1968,7 +1966,7 @@ const MOCK_PRODUCT_DETAIL: IProductDetail = {
         color: 'Feather Gray',
         shape: 'Extra Deep (47&quot;)',
         fabric: 'Heathered Crosshatch',
-        delivery: 'Made to Order (ships in 7+ weeks)',
+        delivery: 'Made to Order (ships in 7+ weeks)'
       },
       has_parent_sku: false,
       image:
@@ -1977,7 +1975,7 @@ const MOCK_PRODUCT_DETAIL: IProductDetail = {
       swatch_image:
         'https://www.lazysuzy.com/westelm/westelm_images/201940_0034_img54l.jpg',
       price: '959.2',
-      was_price: '1199',
+      was_price: '1199'
     },
     {
       product_sku: 'harris-sofa-86-h4613',
@@ -1987,7 +1985,7 @@ const MOCK_PRODUCT_DETAIL: IProductDetail = {
         color: 'Natural',
         shape: 'Standard (40&quot;)',
         fabric: 'Heathered Crosshatch',
-        delivery: 'Made to Order (ships in 7+ weeks)',
+        delivery: 'Made to Order (ships in 7+ weeks)'
       },
       has_parent_sku: false,
       image:
@@ -1996,7 +1994,7 @@ const MOCK_PRODUCT_DETAIL: IProductDetail = {
       swatch_image:
         'https://www.lazysuzy.com/westelm/westelm_images/201940_0051_img38l.jpg',
       price: '879.2',
-      was_price: '1099',
+      was_price: '1099'
     },
     {
       product_sku: 'harris-sofa-86-h4613',
@@ -2006,7 +2004,7 @@ const MOCK_PRODUCT_DETAIL: IProductDetail = {
         color: 'Natural',
         shape: 'Extra Deep (47&quot;)',
         fabric: 'Heathered Crosshatch',
-        delivery: 'Made to Order (ships in 7+ weeks)',
+        delivery: 'Made to Order (ships in 7+ weeks)'
       },
       has_parent_sku: false,
       image:
@@ -2015,7 +2013,7 @@ const MOCK_PRODUCT_DETAIL: IProductDetail = {
       swatch_image:
         'https://www.lazysuzy.com/westelm/westelm_images/201940_0051_img38l.jpg',
       price: '959.2',
-      was_price: '1199',
+      was_price: '1199'
     },
     {
       product_sku: 'harris-sofa-86-h4613',
@@ -2025,7 +2023,7 @@ const MOCK_PRODUCT_DETAIL: IProductDetail = {
         color: 'Cement',
         shape: 'Standard (40&quot;)',
         fabric: 'Heathered Tweed',
-        delivery: 'Made to Order (ships in 7+ weeks)',
+        delivery: 'Made to Order (ships in 7+ weeks)'
       },
       has_parent_sku: false,
       image:
@@ -2034,7 +2032,7 @@ const MOCK_PRODUCT_DETAIL: IProductDetail = {
       swatch_image:
         'https://www.lazysuzy.com/westelm/westelm_images/201940_0121_img18l.jpg',
       price: '959.2',
-      was_price: '1199',
+      was_price: '1199'
     },
     {
       product_sku: 'harris-sofa-86-h4613',
@@ -2044,7 +2042,7 @@ const MOCK_PRODUCT_DETAIL: IProductDetail = {
         color: 'Cement',
         shape: 'Extra Deep (47&quot;)',
         fabric: 'Heathered Tweed',
-        delivery: 'Made to Order (ships in 7+ weeks)',
+        delivery: 'Made to Order (ships in 7+ weeks)'
       },
       has_parent_sku: false,
       image:
@@ -2053,7 +2051,7 @@ const MOCK_PRODUCT_DETAIL: IProductDetail = {
       swatch_image:
         'https://www.lazysuzy.com/westelm/westelm_images/201940_0015_img9l.jpg',
       price: '1039.2',
-      was_price: '1299',
+      was_price: '1299'
     },
     {
       product_sku: 'harris-sofa-86-h4613',
@@ -2063,7 +2061,7 @@ const MOCK_PRODUCT_DETAIL: IProductDetail = {
         color: 'Charcoal',
         shape: 'Standard (40&quot;)',
         fabric: 'Heathered Tweed',
-        delivery: 'Made to Order (ships in 7+ weeks)',
+        delivery: 'Made to Order (ships in 7+ weeks)'
       },
       has_parent_sku: false,
       image:
@@ -2072,7 +2070,7 @@ const MOCK_PRODUCT_DETAIL: IProductDetail = {
       swatch_image:
         'https://www.lazysuzy.com/westelm/westelm_images/201940_0146_img8l.jpg',
       price: '959.2',
-      was_price: '1199',
+      was_price: '1199'
     },
     {
       product_sku: 'harris-sofa-86-h4613',
@@ -2082,7 +2080,7 @@ const MOCK_PRODUCT_DETAIL: IProductDetail = {
         color: 'Charcoal',
         shape: 'Extra Deep (47&quot;)',
         fabric: 'Heathered Tweed',
-        delivery: 'Made to Order (ships in 7+ weeks)',
+        delivery: 'Made to Order (ships in 7+ weeks)'
       },
       has_parent_sku: false,
       image:
@@ -2091,7 +2089,7 @@ const MOCK_PRODUCT_DETAIL: IProductDetail = {
       swatch_image:
         'https://www.lazysuzy.com/westelm/westelm_images/201940_0121_img18l.jpg',
       price: '1039.2',
-      was_price: '1299',
+      was_price: '1299'
     },
     {
       product_sku: 'harris-sofa-86-h4613',
@@ -2101,7 +2099,7 @@ const MOCK_PRODUCT_DETAIL: IProductDetail = {
         color: 'Marine',
         shape: 'Standard (40&quot;)',
         fabric: 'Heathered Tweed',
-        delivery: 'Made to Order (ships in 7+ weeks)',
+        delivery: 'Made to Order (ships in 7+ weeks)'
       },
       has_parent_sku: false,
       image:
@@ -2110,7 +2108,7 @@ const MOCK_PRODUCT_DETAIL: IProductDetail = {
       swatch_image:
         'https://www.lazysuzy.com/westelm/westelm_images/201940_0015_img9l.jpg',
       price: '959.2',
-      was_price: '1199',
+      was_price: '1199'
     },
     {
       product_sku: 'harris-sofa-86-h4613',
@@ -2120,7 +2118,7 @@ const MOCK_PRODUCT_DETAIL: IProductDetail = {
         color: 'Marine',
         shape: 'Extra Deep (47&quot;)',
         fabric: 'Heathered Tweed',
-        delivery: 'Made to Order (ships in 7+ weeks)',
+        delivery: 'Made to Order (ships in 7+ weeks)'
       },
       has_parent_sku: false,
       image:
@@ -2129,7 +2127,7 @@ const MOCK_PRODUCT_DETAIL: IProductDetail = {
       swatch_image:
         'https://www.lazysuzy.com/westelm/westelm_images/201940_0146_img8l.jpg',
       price: '1039.2',
-      was_price: '1299',
+      was_price: '1299'
     },
     {
       product_sku: 'harris-sofa-86-h4613',
@@ -2139,7 +2137,7 @@ const MOCK_PRODUCT_DETAIL: IProductDetail = {
         color: 'Cayenne',
         shape: 'Standard (40&quot;)',
         fabric: 'Heathered Weave',
-        delivery: 'Made to Order (ships in 7+ weeks)',
+        delivery: 'Made to Order (ships in 7+ weeks)'
       },
       has_parent_sku: false,
       image:
@@ -2148,7 +2146,7 @@ const MOCK_PRODUCT_DETAIL: IProductDetail = {
       swatch_image:
         'https://www.lazysuzy.com/westelm/westelm_images/201940_0072_img79l.jpg',
       price: '959.2',
-      was_price: '1199',
+      was_price: '1199'
     },
     {
       product_sku: 'harris-sofa-86-h4613',
@@ -2158,7 +2156,7 @@ const MOCK_PRODUCT_DETAIL: IProductDetail = {
         color: 'Cayenne',
         shape: 'Extra Deep (47&quot;)',
         fabric: 'Heathered Weave',
-        delivery: 'Made to Order (ships in 7+ weeks)',
+        delivery: 'Made to Order (ships in 7+ weeks)'
       },
       has_parent_sku: false,
       image:
@@ -2167,7 +2165,7 @@ const MOCK_PRODUCT_DETAIL: IProductDetail = {
       swatch_image:
         'https://www.lazysuzy.com/westelm/westelm_images/201940_0072_img79l.jpg',
       price: '1039.2',
-      was_price: '1299',
+      was_price: '1299'
     },
     {
       product_sku: 'harris-sofa-86-h4613',
@@ -2177,7 +2175,7 @@ const MOCK_PRODUCT_DETAIL: IProductDetail = {
         color: 'Eucalyptus',
         shape: 'Standard (40&quot;)',
         fabric: 'Heathered Weave',
-        delivery: 'Made to Order (ships in 7+ weeks)',
+        delivery: 'Made to Order (ships in 7+ weeks)'
       },
       has_parent_sku: false,
       image:
@@ -2186,7 +2184,7 @@ const MOCK_PRODUCT_DETAIL: IProductDetail = {
       swatch_image:
         'https://www.lazysuzy.com/westelm/westelm_images/201940_0025_img64l.jpg',
       price: '959.2',
-      was_price: '1199',
+      was_price: '1199'
     },
     {
       product_sku: 'harris-sofa-86-h4613',
@@ -2196,7 +2194,7 @@ const MOCK_PRODUCT_DETAIL: IProductDetail = {
         color: 'Eucalyptus',
         shape: 'Extra Deep (47&quot;)',
         fabric: 'Heathered Weave',
-        delivery: 'Made to Order (ships in 7+ weeks)',
+        delivery: 'Made to Order (ships in 7+ weeks)'
       },
       has_parent_sku: false,
       image:
@@ -2205,7 +2203,7 @@ const MOCK_PRODUCT_DETAIL: IProductDetail = {
       swatch_image:
         'https://www.lazysuzy.com/westelm/westelm_images/201940_0025_img64l.jpg',
       price: '1039.2',
-      was_price: '1299',
+      was_price: '1299'
     },
     {
       product_sku: 'harris-sofa-86-h4613',
@@ -2215,7 +2213,7 @@ const MOCK_PRODUCT_DETAIL: IProductDetail = {
         color: 'Celestial Blue',
         shape: 'Standard (40&quot;)',
         fabric: 'Luster Velvet',
-        delivery: 'Made to Order (ships in 7+ weeks)',
+        delivery: 'Made to Order (ships in 7+ weeks)'
       },
       has_parent_sku: false,
       image:
@@ -2224,7 +2222,7 @@ const MOCK_PRODUCT_DETAIL: IProductDetail = {
       swatch_image:
         'https://www.lazysuzy.com/westelm/westelm_images/201940_0122_img62l.jpg',
       price: '1039.2',
-      was_price: '1299',
+      was_price: '1299'
     },
     {
       product_sku: 'harris-sofa-86-h4613',
@@ -2234,7 +2232,7 @@ const MOCK_PRODUCT_DETAIL: IProductDetail = {
         color: 'Dusty Blush',
         shape: 'Standard (40&quot;)',
         fabric: 'Luster Velvet',
-        delivery: 'Made to Order (ships in 7+ weeks)',
+        delivery: 'Made to Order (ships in 7+ weeks)'
       },
       has_parent_sku: false,
       image:
@@ -2243,7 +2241,7 @@ const MOCK_PRODUCT_DETAIL: IProductDetail = {
       swatch_image:
         'https://www.lazysuzy.com/westelm/westelm_images/201940_0144_img53l.jpg',
       price: '1039.2',
-      was_price: '1299',
+      was_price: '1299'
     },
     {
       product_sku: 'harris-sofa-86-h4613',
@@ -2253,7 +2251,7 @@ const MOCK_PRODUCT_DETAIL: IProductDetail = {
         color: 'Angora Beige',
         shape: 'Standard (40&quot;)',
         fabric: 'Luxe Boucle',
-        delivery: 'Made to Order (ships in 7+ weeks)',
+        delivery: 'Made to Order (ships in 7+ weeks)'
       },
       has_parent_sku: false,
       image:
@@ -2262,7 +2260,7 @@ const MOCK_PRODUCT_DETAIL: IProductDetail = {
       swatch_image:
         'https://www.lazysuzy.com/westelm/westelm_images/201949_0003_img20l.jpg',
       price: '959.2',
-      was_price: '1199',
+      was_price: '1199'
     },
     {
       product_sku: 'harris-sofa-86-h4613',
@@ -2272,7 +2270,7 @@ const MOCK_PRODUCT_DETAIL: IProductDetail = {
         color: 'Angora Beige',
         shape: 'Extra Deep (47&quot;)',
         fabric: 'Luxe Boucle',
-        delivery: 'Made to Order (ships in 7+ weeks)',
+        delivery: 'Made to Order (ships in 7+ weeks)'
       },
       has_parent_sku: false,
       image:
@@ -2281,7 +2279,7 @@ const MOCK_PRODUCT_DETAIL: IProductDetail = {
       swatch_image:
         'https://www.lazysuzy.com/westelm/westelm_images/201949_0003_img20l.jpg',
       price: '1039.2',
-      was_price: '1299',
+      was_price: '1299'
     },
     {
       product_sku: 'harris-sofa-86-h4613',
@@ -2291,7 +2289,7 @@ const MOCK_PRODUCT_DETAIL: IProductDetail = {
         color: 'Black + White',
         shape: 'Standard (40&quot;)',
         fabric: 'Luxe Boucle',
-        delivery: 'Made to Order (ships in 7+ weeks)',
+        delivery: 'Made to Order (ships in 7+ weeks)'
       },
       has_parent_sku: false,
       image:
@@ -2300,7 +2298,7 @@ const MOCK_PRODUCT_DETAIL: IProductDetail = {
       swatch_image:
         'https://www.lazysuzy.com/westelm/westelm_images/201949_0005_img26l.jpg',
       price: '959.2',
-      was_price: '1199',
+      was_price: '1199'
     },
     {
       product_sku: 'harris-sofa-86-h4613',
@@ -2310,7 +2308,7 @@ const MOCK_PRODUCT_DETAIL: IProductDetail = {
         color: 'Black + White',
         shape: 'Extra Deep (47&quot;)',
         fabric: 'Luxe Boucle',
-        delivery: 'Made to Order (ships in 7+ weeks)',
+        delivery: 'Made to Order (ships in 7+ weeks)'
       },
       has_parent_sku: false,
       image:
@@ -2319,7 +2317,7 @@ const MOCK_PRODUCT_DETAIL: IProductDetail = {
       swatch_image:
         'https://www.lazysuzy.com/westelm/westelm_images/201949_0005_img26l.jpg',
       price: '1039.2',
-      was_price: '1299',
+      was_price: '1299'
     },
     {
       product_sku: 'harris-sofa-86-h4613',
@@ -2329,7 +2327,7 @@ const MOCK_PRODUCT_DETAIL: IProductDetail = {
         color: 'Stone White',
         shape: 'Standard (40&quot;)',
         fabric: 'Luxe Boucle',
-        delivery: 'Made to Order (ships in 7+ weeks)',
+        delivery: 'Made to Order (ships in 7+ weeks)'
       },
       has_parent_sku: false,
       image:
@@ -2338,7 +2336,7 @@ const MOCK_PRODUCT_DETAIL: IProductDetail = {
       swatch_image:
         'https://www.lazysuzy.com/westelm/westelm_images/201949_0005_img4l.jpg',
       price: '959.2',
-      was_price: '1199',
+      was_price: '1199'
     },
     {
       product_sku: 'harris-sofa-86-h4613',
@@ -2348,7 +2346,7 @@ const MOCK_PRODUCT_DETAIL: IProductDetail = {
         color: 'Stone White',
         shape: 'Extra Deep (47&quot;)',
         fabric: 'Luxe Boucle',
-        delivery: 'Made to Order (ships in 7+ weeks)',
+        delivery: 'Made to Order (ships in 7+ weeks)'
       },
       has_parent_sku: false,
       image:
@@ -2357,7 +2355,7 @@ const MOCK_PRODUCT_DETAIL: IProductDetail = {
       swatch_image:
         'https://www.lazysuzy.com/westelm/westelm_images/201949_0005_img4l.jpg',
       price: '1039.2',
-      was_price: '1299',
+      was_price: '1299'
     },
     {
       product_sku: 'harris-sofa-86-h4613',
@@ -2367,7 +2365,7 @@ const MOCK_PRODUCT_DETAIL: IProductDetail = {
         color: 'Ash Gray',
         shape: 'Standard (40&quot;)',
         fabric: 'Marled Microfiber',
-        delivery: 'Made to Order (ships in 7+ weeks)',
+        delivery: 'Made to Order (ships in 7+ weeks)'
       },
       has_parent_sku: false,
       image:
@@ -2376,7 +2374,7 @@ const MOCK_PRODUCT_DETAIL: IProductDetail = {
       swatch_image:
         'https://www.lazysuzy.com/westelm/westelm_images/201940_0077_img30l.jpg',
       price: '959.2',
-      was_price: '1199',
+      was_price: '1199'
     },
     {
       product_sku: 'harris-sofa-86-h4613',
@@ -2386,7 +2384,7 @@ const MOCK_PRODUCT_DETAIL: IProductDetail = {
         color: 'Ash Gray',
         shape: 'Extra Deep (47&quot;)',
         fabric: 'Marled Microfiber',
-        delivery: 'Made to Order (ships in 7+ weeks)',
+        delivery: 'Made to Order (ships in 7+ weeks)'
       },
       has_parent_sku: false,
       image:
@@ -2395,7 +2393,7 @@ const MOCK_PRODUCT_DETAIL: IProductDetail = {
       swatch_image:
         'https://www.lazysuzy.com/westelm/westelm_images/201940_0024_img79l.jpg',
       price: '1039.2',
-      was_price: '1299',
+      was_price: '1299'
     },
     {
       product_sku: 'harris-sofa-86-h4613',
@@ -2405,7 +2403,7 @@ const MOCK_PRODUCT_DETAIL: IProductDetail = {
         color: 'Granite',
         shape: 'Standard (40&quot;)',
         fabric: 'Marled Microfiber',
-        delivery: 'Made to Order (ships in 7+ weeks)',
+        delivery: 'Made to Order (ships in 7+ weeks)'
       },
       has_parent_sku: false,
       image:
@@ -2414,7 +2412,7 @@ const MOCK_PRODUCT_DETAIL: IProductDetail = {
       swatch_image:
         'https://www.lazysuzy.com/westelm/westelm_images/201940_0013_img64l.jpg',
       price: '959.2',
-      was_price: '1199',
+      was_price: '1199'
     },
     {
       product_sku: 'harris-sofa-86-h4613',
@@ -2424,7 +2422,7 @@ const MOCK_PRODUCT_DETAIL: IProductDetail = {
         color: 'Heather Gray',
         shape: 'Standard (40&quot;)',
         fabric: 'Marled Microfiber',
-        delivery: 'Made to Order (ships in 7+ weeks)',
+        delivery: 'Made to Order (ships in 7+ weeks)'
       },
       has_parent_sku: false,
       image:
@@ -2433,7 +2431,7 @@ const MOCK_PRODUCT_DETAIL: IProductDetail = {
       swatch_image:
         'https://www.lazysuzy.com/westelm/westelm_images/201940_0024_img79l.jpg',
       price: '959.2',
-      was_price: '1199',
+      was_price: '1199'
     },
     {
       product_sku: 'harris-sofa-86-h4613',
@@ -2443,7 +2441,7 @@ const MOCK_PRODUCT_DETAIL: IProductDetail = {
         color: 'Heather Gray',
         shape: 'Extra Deep (47&quot;)',
         fabric: 'Marled Microfiber',
-        delivery: 'Made to Order (ships in 7+ weeks)',
+        delivery: 'Made to Order (ships in 7+ weeks)'
       },
       has_parent_sku: false,
       image:
@@ -2452,7 +2450,7 @@ const MOCK_PRODUCT_DETAIL: IProductDetail = {
       swatch_image:
         'https://www.lazysuzy.com/westelm/westelm_images/201940_0077_img30l.jpg',
       price: '1039.2',
-      was_price: '1299',
+      was_price: '1299'
     },
     {
       product_sku: 'harris-sofa-86-h4613',
@@ -2462,7 +2460,7 @@ const MOCK_PRODUCT_DETAIL: IProductDetail = {
         color: 'Aegean Blue',
         shape: 'Standard (40&quot;)',
         fabric: 'Pebble Weave',
-        delivery: 'Made to Order (ships in 7+ weeks)',
+        delivery: 'Made to Order (ships in 7+ weeks)'
       },
       has_parent_sku: false,
       image:
@@ -2471,7 +2469,7 @@ const MOCK_PRODUCT_DETAIL: IProductDetail = {
       swatch_image:
         'https://www.lazysuzy.com/westelm/westelm_images/201940_0140_img84l.jpg',
       price: '1039.2',
-      was_price: '1299',
+      was_price: '1299'
     },
     {
       product_sku: 'harris-sofa-86-h4613',
@@ -2481,7 +2479,7 @@ const MOCK_PRODUCT_DETAIL: IProductDetail = {
         color: 'Aegean Blue',
         shape: 'Extra Deep (47&quot;)',
         fabric: 'Pebble Weave',
-        delivery: 'Made to Order (ships in 7+ weeks)',
+        delivery: 'Made to Order (ships in 7+ weeks)'
       },
       has_parent_sku: false,
       image:
@@ -2490,7 +2488,7 @@ const MOCK_PRODUCT_DETAIL: IProductDetail = {
       swatch_image:
         'https://www.lazysuzy.com/westelm/westelm_images/201952_0003_img29l.jpg',
       price: '1119.2',
-      was_price: '1399',
+      was_price: '1399'
     },
     {
       product_sku: 'harris-sofa-86-h4613',
@@ -2500,7 +2498,7 @@ const MOCK_PRODUCT_DETAIL: IProductDetail = {
         color: 'Oatmeal',
         shape: 'Standard (40&quot;)',
         fabric: 'Pebble Weave',
-        delivery: 'Made to Order (ships in 7+ weeks)',
+        delivery: 'Made to Order (ships in 7+ weeks)'
       },
       has_parent_sku: false,
       image:
@@ -2509,7 +2507,7 @@ const MOCK_PRODUCT_DETAIL: IProductDetail = {
       swatch_image:
         'https://www.lazysuzy.com/westelm/westelm_images/201940_0132_img22l.jpg',
       price: '1039.2',
-      was_price: '1299',
+      was_price: '1299'
     },
     {
       product_sku: 'harris-sofa-86-h4613',
@@ -2519,7 +2517,7 @@ const MOCK_PRODUCT_DETAIL: IProductDetail = {
         color: 'Oatmeal',
         shape: 'Extra Deep (47&quot;)',
         fabric: 'Pebble Weave',
-        delivery: 'Made to Order (ships in 7+ weeks)',
+        delivery: 'Made to Order (ships in 7+ weeks)'
       },
       has_parent_sku: false,
       image:
@@ -2528,7 +2526,7 @@ const MOCK_PRODUCT_DETAIL: IProductDetail = {
       swatch_image:
         'https://www.lazysuzy.com/westelm/westelm_images/201952_0003_img46l.jpg',
       price: '1119.2',
-      was_price: '1399',
+      was_price: '1399'
     },
     {
       product_sku: 'harris-sofa-86-h4613',
@@ -2538,7 +2536,7 @@ const MOCK_PRODUCT_DETAIL: IProductDetail = {
         color: 'Dark Horseradish',
         shape: 'Standard (40&quot;)',
         fabric: 'Performance Basket Slub',
-        delivery: 'Made to Order (ships in 7+ weeks)',
+        delivery: 'Made to Order (ships in 7+ weeks)'
       },
       has_parent_sku: false,
       image:
@@ -2547,7 +2545,7 @@ const MOCK_PRODUCT_DETAIL: IProductDetail = {
       swatch_image:
         'https://www.lazysuzy.com/westelm/westelm_images/201952_0003_img46l.jpg',
       price: '1039.2',
-      was_price: '1299',
+      was_price: '1299'
     },
     {
       product_sku: 'harris-sofa-86-h4613',
@@ -2557,7 +2555,7 @@ const MOCK_PRODUCT_DETAIL: IProductDetail = {
         color: 'Dark Horseradish',
         shape: 'Extra Deep (47&quot;)',
         fabric: 'Performance Basket Slub',
-        delivery: 'Made to Order (ships in 7+ weeks)',
+        delivery: 'Made to Order (ships in 7+ weeks)'
       },
       has_parent_sku: false,
       image:
@@ -2566,7 +2564,7 @@ const MOCK_PRODUCT_DETAIL: IProductDetail = {
       swatch_image:
         'https://www.lazysuzy.com/westelm/westelm_images/201952_0003_img46l.jpg',
       price: '1119.2',
-      was_price: '1399',
+      was_price: '1399'
     },
     {
       product_sku: 'harris-sofa-86-h4613',
@@ -2576,7 +2574,7 @@ const MOCK_PRODUCT_DETAIL: IProductDetail = {
         color: 'Feather Gray',
         shape: 'Standard (40&quot;)',
         fabric: 'Performance Basket Slub',
-        delivery: 'Made to Order (ships in 7+ weeks)',
+        delivery: 'Made to Order (ships in 7+ weeks)'
       },
       has_parent_sku: false,
       image:
@@ -2585,7 +2583,7 @@ const MOCK_PRODUCT_DETAIL: IProductDetail = {
       swatch_image:
         'https://www.lazysuzy.com/westelm/westelm_images/201952_0003_img43l.jpg',
       price: '1039.2',
-      was_price: '1299',
+      was_price: '1299'
     },
     {
       product_sku: 'harris-sofa-86-h4613',
@@ -2595,7 +2593,7 @@ const MOCK_PRODUCT_DETAIL: IProductDetail = {
         color: 'Feather Gray',
         shape: 'Extra Deep (47&quot;)',
         fabric: 'Performance Basket Slub',
-        delivery: 'Made to Order (ships in 7+ weeks)',
+        delivery: 'Made to Order (ships in 7+ weeks)'
       },
       has_parent_sku: false,
       image:
@@ -2604,7 +2602,7 @@ const MOCK_PRODUCT_DETAIL: IProductDetail = {
       swatch_image:
         'https://www.lazysuzy.com/westelm/westelm_images/201952_0003_img43l.jpg',
       price: '1119.2',
-      was_price: '1399',
+      was_price: '1399'
     },
     {
       product_sku: 'harris-sofa-86-h4613',
@@ -2614,7 +2612,7 @@ const MOCK_PRODUCT_DETAIL: IProductDetail = {
         color: 'Midnight',
         shape: 'Standard (40&quot;)',
         fabric: 'Performance Basket Slub',
-        delivery: 'Made to Order (ships in 7+ weeks)',
+        delivery: 'Made to Order (ships in 7+ weeks)'
       },
       has_parent_sku: false,
       image:
@@ -2623,7 +2621,7 @@ const MOCK_PRODUCT_DETAIL: IProductDetail = {
       swatch_image:
         'https://www.lazysuzy.com/westelm/westelm_images/201952_0003_img29l.jpg',
       price: '1039.2',
-      was_price: '1299',
+      was_price: '1299'
     },
     {
       product_sku: 'harris-sofa-86-h4613',
@@ -2633,7 +2631,7 @@ const MOCK_PRODUCT_DETAIL: IProductDetail = {
         color: 'Midnight',
         shape: 'Extra Deep (47&quot;)',
         fabric: 'Performance Basket Slub',
-        delivery: 'Made to Order (ships in 7+ weeks)',
+        delivery: 'Made to Order (ships in 7+ weeks)'
       },
       has_parent_sku: false,
       image:
@@ -2642,7 +2640,7 @@ const MOCK_PRODUCT_DETAIL: IProductDetail = {
       swatch_image:
         'https://www.lazysuzy.com/westelm/westelm_images/201952_0003_img29l.jpg',
       price: '1119.2',
-      was_price: '1399',
+      was_price: '1399'
     },
     {
       product_sku: 'harris-sofa-86-h4613',
@@ -2652,7 +2650,7 @@ const MOCK_PRODUCT_DETAIL: IProductDetail = {
         color: 'Pewter Gray',
         shape: 'Standard (40&quot;)',
         fabric: 'Performance Basket Slub',
-        delivery: 'Made to Order (ships in 7+ weeks)',
+        delivery: 'Made to Order (ships in 7+ weeks)'
       },
       has_parent_sku: false,
       image:
@@ -2661,7 +2659,7 @@ const MOCK_PRODUCT_DETAIL: IProductDetail = {
       swatch_image:
         'https://www.lazysuzy.com/westelm/westelm_images/201949_0004_img55l.jpg',
       price: '1039.2',
-      was_price: '1299',
+      was_price: '1299'
     },
     {
       product_sku: 'harris-sofa-86-h4613',
@@ -2671,7 +2669,7 @@ const MOCK_PRODUCT_DETAIL: IProductDetail = {
         color: 'Pewter Gray',
         shape: 'Extra Deep (47&quot;)',
         fabric: 'Performance Basket Slub',
-        delivery: 'Made to Order (ships in 7+ weeks)',
+        delivery: 'Made to Order (ships in 7+ weeks)'
       },
       has_parent_sku: false,
       image:
@@ -2680,7 +2678,7 @@ const MOCK_PRODUCT_DETAIL: IProductDetail = {
       swatch_image:
         'https://www.lazysuzy.com/westelm/westelm_images/201949_0004_img55l.jpg',
       price: '1119.2',
-      was_price: '1399',
+      was_price: '1399'
     },
     {
       product_sku: 'harris-sofa-86-h4613',
@@ -2690,7 +2688,7 @@ const MOCK_PRODUCT_DETAIL: IProductDetail = {
         color: 'Metal',
         shape: 'Standard (40&quot;)',
         fabric: 'Performance Basketweave',
-        delivery: 'Made to Order (ships in 7+ weeks)',
+        delivery: 'Made to Order (ships in 7+ weeks)'
       },
       has_parent_sku: false,
       image:
@@ -2699,7 +2697,7 @@ const MOCK_PRODUCT_DETAIL: IProductDetail = {
       swatch_image:
         'https://www.lazysuzy.com/westelm/westelm_images/201940_0007_img61l.jpg',
       price: '959.2',
-      was_price: '1199',
+      was_price: '1199'
     },
     {
       product_sku: 'harris-sofa-86-h4613',
@@ -2709,7 +2707,7 @@ const MOCK_PRODUCT_DETAIL: IProductDetail = {
         color: 'Metal',
         shape: 'Extra Deep (47&quot;)',
         fabric: 'Performance Basketweave',
-        delivery: 'Made to Order (ships in 7+ weeks)',
+        delivery: 'Made to Order (ships in 7+ weeks)'
       },
       has_parent_sku: false,
       image:
@@ -2718,7 +2716,7 @@ const MOCK_PRODUCT_DETAIL: IProductDetail = {
       swatch_image:
         'https://www.lazysuzy.com/westelm/westelm_images/201940_0007_img61l.jpg',
       price: '1039.2',
-      was_price: '1299',
+      was_price: '1299'
     },
     {
       product_sku: 'harris-sofa-86-h4613',
@@ -2728,7 +2726,7 @@ const MOCK_PRODUCT_DETAIL: IProductDetail = {
         color: 'Natural',
         shape: 'Standard (40&quot;)',
         fabric: 'Performance Basketweave',
-        delivery: 'Made to Order (ships in 7+ weeks)',
+        delivery: 'Made to Order (ships in 7+ weeks)'
       },
       has_parent_sku: false,
       image:
@@ -2737,7 +2735,7 @@ const MOCK_PRODUCT_DETAIL: IProductDetail = {
       swatch_image:
         'https://www.lazysuzy.com/westelm/westelm_images/201940_0018_img39l.jpg',
       price: '959.2',
-      was_price: '1199',
+      was_price: '1199'
     },
     {
       product_sku: 'harris-sofa-86-h4613',
@@ -2747,7 +2745,7 @@ const MOCK_PRODUCT_DETAIL: IProductDetail = {
         color: 'Natural',
         shape: 'Extra Deep (47&quot;)',
         fabric: 'Performance Basketweave',
-        delivery: 'Made to Order (ships in 7+ weeks)',
+        delivery: 'Made to Order (ships in 7+ weeks)'
       },
       has_parent_sku: false,
       image:
@@ -2756,7 +2754,7 @@ const MOCK_PRODUCT_DETAIL: IProductDetail = {
       swatch_image:
         'https://www.lazysuzy.com/westelm/westelm_images/201940_0018_img39l.jpg',
       price: '1039.2',
-      was_price: '1299',
+      was_price: '1299'
     },
     {
       product_sku: 'harris-sofa-86-h4613',
@@ -2766,7 +2764,7 @@ const MOCK_PRODUCT_DETAIL: IProductDetail = {
         color: 'Oatmeal',
         shape: 'Standard (40&quot;)',
         fabric: 'Performance Coastal Linen',
-        delivery: 'Made to Order (ships in 7+ weeks)',
+        delivery: 'Made to Order (ships in 7+ weeks)'
       },
       has_parent_sku: false,
       image:
@@ -2775,7 +2773,7 @@ const MOCK_PRODUCT_DETAIL: IProductDetail = {
       swatch_image:
         'https://www.lazysuzy.com/westelm/westelm_images/201951_0018_img30l.jpg',
       price: '1119.2',
-      was_price: '1399',
+      was_price: '1399'
     },
     {
       product_sku: 'harris-sofa-86-h4613',
@@ -2785,7 +2783,7 @@ const MOCK_PRODUCT_DETAIL: IProductDetail = {
         color: 'Oatmeal',
         shape: 'Extra Deep (47&quot;)',
         fabric: 'Performance Coastal Linen',
-        delivery: 'Made to Order (ships in 7+ weeks)',
+        delivery: 'Made to Order (ships in 7+ weeks)'
       },
       has_parent_sku: false,
       image:
@@ -2794,7 +2792,7 @@ const MOCK_PRODUCT_DETAIL: IProductDetail = {
       swatch_image:
         'https://www.lazysuzy.com/westelm/westelm_images/201951_0018_img30l.jpg',
       price: '1199.2',
-      was_price: '1499',
+      was_price: '1499'
     },
     {
       product_sku: 'harris-sofa-86-h4613',
@@ -2804,7 +2802,7 @@ const MOCK_PRODUCT_DETAIL: IProductDetail = {
         color: 'Pebble Stone',
         shape: 'Standard (40&quot;)',
         fabric: 'Performance Coastal Linen',
-        delivery: 'Made to Order (ships in 7+ weeks)',
+        delivery: 'Made to Order (ships in 7+ weeks)'
       },
       has_parent_sku: false,
       image:
@@ -2813,7 +2811,7 @@ const MOCK_PRODUCT_DETAIL: IProductDetail = {
       swatch_image:
         'https://www.lazysuzy.com/westelm/westelm_images/202001_0009_img49l.jpg',
       price: '1119.2',
-      was_price: '1399',
+      was_price: '1399'
     },
     {
       product_sku: 'harris-sofa-86-h4613',
@@ -2823,7 +2821,7 @@ const MOCK_PRODUCT_DETAIL: IProductDetail = {
         color: 'Pebble Stone',
         shape: 'Extra Deep (47&quot;)',
         fabric: 'Performance Coastal Linen',
-        delivery: 'Made to Order (ships in 7+ weeks)',
+        delivery: 'Made to Order (ships in 7+ weeks)'
       },
       has_parent_sku: false,
       image:
@@ -2832,7 +2830,7 @@ const MOCK_PRODUCT_DETAIL: IProductDetail = {
       swatch_image:
         'https://www.lazysuzy.com/westelm/westelm_images/202001_0009_img49l.jpg',
       price: '1199.2',
-      was_price: '1499',
+      was_price: '1499'
     },
     {
       product_sku: 'harris-sofa-86-h4613',
@@ -2842,7 +2840,7 @@ const MOCK_PRODUCT_DETAIL: IProductDetail = {
         color: 'Black Indigo',
         shape: 'Standard (40&quot;)',
         fabric: 'Performance Twill',
-        delivery: 'Made to Order (ships in 7+ weeks)',
+        delivery: 'Made to Order (ships in 7+ weeks)'
       },
       has_parent_sku: false,
       image:
@@ -2851,7 +2849,7 @@ const MOCK_PRODUCT_DETAIL: IProductDetail = {
       swatch_image:
         'https://www.lazysuzy.com/westelm/westelm_images/201952_0002_img6l.jpg',
       price: '959.2',
-      was_price: '1199',
+      was_price: '1199'
     },
     {
       product_sku: 'harris-sofa-86-h4613',
@@ -2861,7 +2859,7 @@ const MOCK_PRODUCT_DETAIL: IProductDetail = {
         color: 'Black Indigo',
         shape: 'Extra Deep (47&quot;)',
         fabric: 'Performance Twill',
-        delivery: 'Made to Order (ships in 7+ weeks)',
+        delivery: 'Made to Order (ships in 7+ weeks)'
       },
       has_parent_sku: false,
       image:
@@ -2870,7 +2868,7 @@ const MOCK_PRODUCT_DETAIL: IProductDetail = {
       swatch_image:
         'https://www.lazysuzy.com/westelm/westelm_images/201940_0117_img63l.jpg',
       price: '1039.2',
-      was_price: '1299',
+      was_price: '1299'
     },
     {
       product_sku: 'harris-sofa-86-h4613',
@@ -2880,7 +2878,7 @@ const MOCK_PRODUCT_DETAIL: IProductDetail = {
         color: 'Granite',
         shape: 'Standard (40&quot;)',
         fabric: 'Performance Twill',
-        delivery: 'Made to Order (ships in 7+ weeks)',
+        delivery: 'Made to Order (ships in 7+ weeks)'
       },
       has_parent_sku: false,
       image:
@@ -2889,7 +2887,7 @@ const MOCK_PRODUCT_DETAIL: IProductDetail = {
       swatch_image:
         'https://www.lazysuzy.com/westelm/westelm_images/201952_0003_img27l.jpg',
       price: '959.2',
-      was_price: '1199',
+      was_price: '1199'
     },
     {
       product_sku: 'harris-sofa-86-h4613',
@@ -2899,7 +2897,7 @@ const MOCK_PRODUCT_DETAIL: IProductDetail = {
         color: 'Granite',
         shape: 'Extra Deep (47&quot;)',
         fabric: 'Performance Twill',
-        delivery: 'Made to Order (ships in 7+ weeks)',
+        delivery: 'Made to Order (ships in 7+ weeks)'
       },
       has_parent_sku: false,
       image:
@@ -2908,7 +2906,7 @@ const MOCK_PRODUCT_DETAIL: IProductDetail = {
       swatch_image:
         'https://www.lazysuzy.com/westelm/westelm_images/201939_0013_img54l.jpg',
       price: '1039.2',
-      was_price: '1299',
+      was_price: '1299'
     },
     {
       product_sku: 'harris-sofa-86-h4613',
@@ -2918,7 +2916,7 @@ const MOCK_PRODUCT_DETAIL: IProductDetail = {
         color: 'Stone',
         shape: 'Standard (40&quot;)',
         fabric: 'Performance Twill',
-        delivery: 'Made to Order (ships in 7+ weeks)',
+        delivery: 'Made to Order (ships in 7+ weeks)'
       },
       has_parent_sku: false,
       image:
@@ -2927,7 +2925,7 @@ const MOCK_PRODUCT_DETAIL: IProductDetail = {
       swatch_image:
         'https://www.lazysuzy.com/westelm/westelm_images/201952_0003_img77l.jpg',
       price: '959.2',
-      was_price: '1199',
+      was_price: '1199'
     },
     {
       product_sku: 'harris-sofa-86-h4613',
@@ -2937,7 +2935,7 @@ const MOCK_PRODUCT_DETAIL: IProductDetail = {
         color: 'Stone',
         shape: 'Extra Deep (47&quot;)',
         fabric: 'Performance Twill',
-        delivery: 'Made to Order (ships in 7+ weeks)',
+        delivery: 'Made to Order (ships in 7+ weeks)'
       },
       has_parent_sku: false,
       image:
@@ -2946,7 +2944,7 @@ const MOCK_PRODUCT_DETAIL: IProductDetail = {
       swatch_image:
         'https://www.lazysuzy.com/westelm/westelm_images/201939_0020_img23l.jpg',
       price: '1039.2',
-      was_price: '1299',
+      was_price: '1299'
     },
     {
       product_sku: 'harris-sofa-86-h4613',
@@ -2956,7 +2954,7 @@ const MOCK_PRODUCT_DETAIL: IProductDetail = {
         color: 'Teal',
         shape: 'Standard (40&quot;)',
         fabric: 'Performance Twill',
-        delivery: 'Made to Order (ships in 7+ weeks)',
+        delivery: 'Made to Order (ships in 7+ weeks)'
       },
       has_parent_sku: false,
       image:
@@ -2965,7 +2963,7 @@ const MOCK_PRODUCT_DETAIL: IProductDetail = {
       swatch_image:
         'https://www.lazysuzy.com/westelm/westelm_images/201952_0003_img42l.jpg',
       price: '959.2',
-      was_price: '1199',
+      was_price: '1199'
     },
     {
       product_sku: 'harris-sofa-86-h4613',
@@ -2975,7 +2973,7 @@ const MOCK_PRODUCT_DETAIL: IProductDetail = {
         color: 'Teal',
         shape: 'Extra Deep (47&quot;)',
         fabric: 'Performance Twill',
-        delivery: 'Made to Order (ships in 7+ weeks)',
+        delivery: 'Made to Order (ships in 7+ weeks)'
       },
       has_parent_sku: false,
       image:
@@ -2984,7 +2982,7 @@ const MOCK_PRODUCT_DETAIL: IProductDetail = {
       swatch_image:
         'https://www.lazysuzy.com/westelm/westelm_images/201940_0053_img64l.jpg',
       price: '1039.2',
-      was_price: '1299',
+      was_price: '1299'
     },
     {
       product_sku: 'harris-sofa-86-h4613',
@@ -2994,7 +2992,7 @@ const MOCK_PRODUCT_DETAIL: IProductDetail = {
         color: 'Feather Gray',
         shape: 'Standard (40&quot;)',
         fabric: 'Performance Washed Canvas',
-        delivery: 'Made to Order (ships in 7+ weeks)',
+        delivery: 'Made to Order (ships in 7+ weeks)'
       },
       has_parent_sku: false,
       image:
@@ -3003,7 +3001,7 @@ const MOCK_PRODUCT_DETAIL: IProductDetail = {
       swatch_image:
         'https://www.lazysuzy.com/westelm/westelm_images/201941_0124_img30l.jpg',
       price: '1039.2',
-      was_price: '1299',
+      was_price: '1299'
     },
     {
       product_sku: 'harris-sofa-86-h4613',
@@ -3013,7 +3011,7 @@ const MOCK_PRODUCT_DETAIL: IProductDetail = {
         color: 'Feather Gray',
         shape: 'Extra Deep (47&quot;)',
         fabric: 'Performance Washed Canvas',
-        delivery: 'Made to Order (ships in 7+ weeks)',
+        delivery: 'Made to Order (ships in 7+ weeks)'
       },
       has_parent_sku: false,
       image:
@@ -3022,7 +3020,7 @@ const MOCK_PRODUCT_DETAIL: IProductDetail = {
       swatch_image:
         'https://www.lazysuzy.com/westelm/westelm_images/201949_0004_img60l.jpg',
       price: '1119.2',
-      was_price: '1399',
+      was_price: '1399'
     },
     {
       product_sku: 'harris-sofa-86-h4613',
@@ -3032,7 +3030,7 @@ const MOCK_PRODUCT_DETAIL: IProductDetail = {
         color: 'Natural',
         shape: 'Standard (40&quot;)',
         fabric: 'Performance Washed Canvas',
-        delivery: 'Made to Order (ships in 7+ weeks)',
+        delivery: 'Made to Order (ships in 7+ weeks)'
       },
       has_parent_sku: false,
       image:
@@ -3041,7 +3039,7 @@ const MOCK_PRODUCT_DETAIL: IProductDetail = {
       swatch_image:
         'https://www.lazysuzy.com/westelm/westelm_images/201940_0160_img96l.jpg',
       price: '1039.2',
-      was_price: '1299',
+      was_price: '1299'
     },
     {
       product_sku: 'harris-sofa-86-h4613',
@@ -3051,7 +3049,7 @@ const MOCK_PRODUCT_DETAIL: IProductDetail = {
         color: 'Natural',
         shape: 'Extra Deep (47&quot;)',
         fabric: 'Performance Washed Canvas',
-        delivery: 'Made to Order (ships in 7+ weeks)',
+        delivery: 'Made to Order (ships in 7+ weeks)'
       },
       has_parent_sku: false,
       image:
@@ -3060,7 +3058,7 @@ const MOCK_PRODUCT_DETAIL: IProductDetail = {
       swatch_image:
         'https://www.lazysuzy.com/westelm/westelm_images/201949_0004_img70l.jpg',
       price: '1119.2',
-      was_price: '1399',
+      was_price: '1399'
     },
     {
       product_sku: 'harris-sofa-86-h4613',
@@ -3070,7 +3068,7 @@ const MOCK_PRODUCT_DETAIL: IProductDetail = {
         color: 'Frost Gray',
         shape: 'Standard (40&quot;)',
         fabric: 'Performance Yarn Dyed Linen Weave',
-        delivery: 'Made to Order (ships in 7+ weeks)',
+        delivery: 'Made to Order (ships in 7+ weeks)'
       },
       has_parent_sku: false,
       image:
@@ -3079,7 +3077,7 @@ const MOCK_PRODUCT_DETAIL: IProductDetail = {
       swatch_image:
         'https://www.lazysuzy.com/westelm/westelm_images/201940_0157_img88l.jpg',
       price: '1039.2',
-      was_price: '1299',
+      was_price: '1299'
     },
     {
       product_sku: 'harris-sofa-86-h4613',
@@ -3089,7 +3087,7 @@ const MOCK_PRODUCT_DETAIL: IProductDetail = {
         color: 'Frost Gray',
         shape: 'Extra Deep (47&quot;)',
         fabric: 'Performance Yarn Dyed Linen Weave',
-        delivery: 'Made to Order (ships in 7+ weeks)',
+        delivery: 'Made to Order (ships in 7+ weeks)'
       },
       has_parent_sku: false,
       image:
@@ -3098,7 +3096,7 @@ const MOCK_PRODUCT_DETAIL: IProductDetail = {
       swatch_image:
         'https://www.lazysuzy.com/westelm/westelm_images/201949_0004_img60l.jpg',
       price: '1119.2',
-      was_price: '1399',
+      was_price: '1399'
     },
     {
       product_sku: 'harris-sofa-86-h4613',
@@ -3108,7 +3106,7 @@ const MOCK_PRODUCT_DETAIL: IProductDetail = {
         color: 'Indigo',
         shape: 'Standard (40&quot;)',
         fabric: 'Performance Yarn Dyed Linen Weave',
-        delivery: 'Made to Order (ships in 7+ weeks)',
+        delivery: 'Made to Order (ships in 7+ weeks)'
       },
       has_parent_sku: false,
       image:
@@ -3117,7 +3115,7 @@ const MOCK_PRODUCT_DETAIL: IProductDetail = {
       swatch_image:
         'https://www.lazysuzy.com/westelm/westelm_images/201949_0004_img70l.jpg',
       price: '1039.2',
-      was_price: '1299',
+      was_price: '1299'
     },
     {
       product_sku: 'harris-sofa-86-h4613',
@@ -3127,7 +3125,7 @@ const MOCK_PRODUCT_DETAIL: IProductDetail = {
         color: 'Indigo',
         shape: 'Extra Deep (47&quot;)',
         fabric: 'Performance Yarn Dyed Linen Weave',
-        delivery: 'Made to Order (ships in 7+ weeks)',
+        delivery: 'Made to Order (ships in 7+ weeks)'
       },
       has_parent_sku: false,
       image:
@@ -3136,7 +3134,7 @@ const MOCK_PRODUCT_DETAIL: IProductDetail = {
       swatch_image:
         'https://www.lazysuzy.com/westelm/westelm_images/201949_0004_img70l.jpg',
       price: '1119.2',
-      was_price: '1399',
+      was_price: '1399'
     },
     {
       product_sku: 'harris-sofa-86-h4613',
@@ -3146,7 +3144,7 @@ const MOCK_PRODUCT_DETAIL: IProductDetail = {
         color: 'Shelter Blue',
         shape: 'Standard (40&quot;)',
         fabric: 'Performance Yarn Dyed Linen Weave',
-        delivery: 'Made to Order (ships in 7+ weeks)',
+        delivery: 'Made to Order (ships in 7+ weeks)'
       },
       has_parent_sku: false,
       image:
@@ -3155,7 +3153,7 @@ const MOCK_PRODUCT_DETAIL: IProductDetail = {
       swatch_image:
         'https://www.lazysuzy.com/westelm/westelm_images/201949_0004_img11l.jpg',
       price: '1039.2',
-      was_price: '1299',
+      was_price: '1299'
     },
     {
       product_sku: 'harris-sofa-86-h4613',
@@ -3165,7 +3163,7 @@ const MOCK_PRODUCT_DETAIL: IProductDetail = {
         color: 'Shelter Blue',
         shape: 'Extra Deep (47&quot;)',
         fabric: 'Performance Yarn Dyed Linen Weave',
-        delivery: 'Made to Order (ships in 7+ weeks)',
+        delivery: 'Made to Order (ships in 7+ weeks)'
       },
       has_parent_sku: false,
       image:
@@ -3174,7 +3172,7 @@ const MOCK_PRODUCT_DETAIL: IProductDetail = {
       swatch_image:
         'https://www.lazysuzy.com/westelm/westelm_images/201949_0004_img11l.jpg',
       price: '1119.2',
-      was_price: '1399',
+      was_price: '1399'
     },
     {
       product_sku: 'harris-sofa-86-h4613',
@@ -3184,7 +3182,7 @@ const MOCK_PRODUCT_DETAIL: IProductDetail = {
         color: 'Stone White',
         shape: 'Extra Deep (47&quot;)',
         fabric: 'Performance Yarn Dyed Linen Weave',
-        delivery: 'Made to Order (ships in 7+ weeks)',
+        delivery: 'Made to Order (ships in 7+ weeks)'
       },
       has_parent_sku: false,
       image:
@@ -3193,7 +3191,7 @@ const MOCK_PRODUCT_DETAIL: IProductDetail = {
       swatch_image:
         'https://www.lazysuzy.com/westelm/westelm_images/201949_0004_img67l.jpg',
       price: '1119.2',
-      was_price: '1399',
+      was_price: '1399'
     },
     {
       product_sku: 'harris-sofa-86-h4613',
@@ -3203,7 +3201,7 @@ const MOCK_PRODUCT_DETAIL: IProductDetail = {
         color: 'White',
         shape: 'Standard (40&quot;)',
         fabric: 'Performance Yarn Dyed Linen Weave',
-        delivery: 'Made to Order (ships in 7+ weeks)',
+        delivery: 'Made to Order (ships in 7+ weeks)'
       },
       has_parent_sku: false,
       image:
@@ -3212,7 +3210,7 @@ const MOCK_PRODUCT_DETAIL: IProductDetail = {
       swatch_image:
         'https://www.lazysuzy.com/westelm/westelm_images/201949_0004_img67l.jpg',
       price: '1039.2',
-      was_price: '1299',
+      was_price: '1299'
     },
     {
       product_sku: 'harris-sofa-86-h4613',
@@ -3222,7 +3220,7 @@ const MOCK_PRODUCT_DETAIL: IProductDetail = {
         color: 'Wasabi',
         shape: 'Extra Deep (47&quot;)',
         fabric: 'Plush Velvet',
-        delivery: 'Made to Order (ships in 7+ weeks)',
+        delivery: 'Made to Order (ships in 7+ weeks)'
       },
       has_parent_sku: false,
       image:
@@ -3231,7 +3229,7 @@ const MOCK_PRODUCT_DETAIL: IProductDetail = {
       swatch_image:
         'https://www.lazysuzy.com/westelm/westelm_images/201940_0073_img4l.jpg',
       price: '959.2',
-      was_price: '1199',
+      was_price: '1199'
     },
     {
       product_sku: 'harris-sofa-86-h4613',
@@ -3241,7 +3239,7 @@ const MOCK_PRODUCT_DETAIL: IProductDetail = {
         color: 'Feather Gray',
         shape: 'Standard (40&quot;)',
         fabric: 'Retro Weave',
-        delivery: 'Made to Order (ships in 7+ weeks)',
+        delivery: 'Made to Order (ships in 7+ weeks)'
       },
       has_parent_sku: false,
       image:
@@ -3250,7 +3248,7 @@ const MOCK_PRODUCT_DETAIL: IProductDetail = {
       swatch_image:
         'https://www.lazysuzy.com/westelm/westelm_images/201940_0051_img65l.jpg',
       price: '879.2',
-      was_price: '1099',
+      was_price: '1099'
     },
     {
       product_sku: 'harris-sofa-86-h4613',
@@ -3260,7 +3258,7 @@ const MOCK_PRODUCT_DETAIL: IProductDetail = {
         color: 'Salt + Pepper',
         shape: 'Standard (40&quot;)',
         fabric: 'Tweed',
-        delivery: 'Made to Order (ships in 7+ weeks)',
+        delivery: 'Made to Order (ships in 7+ weeks)'
       },
       has_parent_sku: false,
       image:
@@ -3269,7 +3267,7 @@ const MOCK_PRODUCT_DETAIL: IProductDetail = {
       swatch_image:
         'https://www.lazysuzy.com/westelm/westelm_images/201940_0131_img79l.jpg',
       price: '1039.2',
-      was_price: '1299',
+      was_price: '1299'
     },
     {
       product_sku: 'harris-sofa-86-h4613',
@@ -3279,7 +3277,7 @@ const MOCK_PRODUCT_DETAIL: IProductDetail = {
         color: 'Salt + Pepper',
         shape: 'Extra Deep (47&quot;)',
         fabric: 'Tweed',
-        delivery: 'Made to Order (ships in 7+ weeks)',
+        delivery: 'Made to Order (ships in 7+ weeks)'
       },
       has_parent_sku: false,
       image:
@@ -3288,7 +3286,7 @@ const MOCK_PRODUCT_DETAIL: IProductDetail = {
       swatch_image:
         'https://www.lazysuzy.com/westelm/westelm_images/201940_0131_img79l.jpg',
       price: '1119.2',
-      was_price: '1399',
+      was_price: '1399'
     },
     {
       product_sku: 'harris-sofa-86-h4613',
@@ -3298,7 +3296,7 @@ const MOCK_PRODUCT_DETAIL: IProductDetail = {
         color: 'Black Indigo',
         shape: 'Standard (40&quot;)',
         fabric: 'Twill',
-        delivery: 'Made to Order (ships in 7+ weeks)',
+        delivery: 'Made to Order (ships in 7+ weeks)'
       },
       has_parent_sku: false,
       image:
@@ -3307,7 +3305,7 @@ const MOCK_PRODUCT_DETAIL: IProductDetail = {
       swatch_image:
         'https://www.lazysuzy.com/westelm/westelm_images/201940_0117_img63l.jpg',
       price: '879.2',
-      was_price: '1099',
+      was_price: '1099'
     },
     {
       product_sku: 'harris-sofa-86-h4613',
@@ -3317,7 +3315,7 @@ const MOCK_PRODUCT_DETAIL: IProductDetail = {
         color: 'Black Indigo',
         shape: 'Extra Deep (47&quot;)',
         fabric: 'Twill',
-        delivery: 'Made to Order (ships in 7+ weeks)',
+        delivery: 'Made to Order (ships in 7+ weeks)'
       },
       has_parent_sku: false,
       image:
@@ -3326,7 +3324,7 @@ const MOCK_PRODUCT_DETAIL: IProductDetail = {
       swatch_image:
         'https://www.lazysuzy.com/westelm/westelm_images/201940_0117_img63l.jpg',
       price: '959.2',
-      was_price: '1199',
+      was_price: '1199'
     },
     {
       product_sku: 'harris-sofa-86-h4613',
@@ -3336,7 +3334,7 @@ const MOCK_PRODUCT_DETAIL: IProductDetail = {
         color: 'Dark Horseradish',
         shape: 'Standard (40&quot;)',
         fabric: 'Twill',
-        delivery: 'Made to Order (ships in 7+ weeks)',
+        delivery: 'Made to Order (ships in 7+ weeks)'
       },
       has_parent_sku: false,
       image:
@@ -3345,7 +3343,7 @@ const MOCK_PRODUCT_DETAIL: IProductDetail = {
       swatch_image:
         'https://www.lazysuzy.com/westelm/westelm_images/201940_0087_img91l.jpg',
       price: '879.2',
-      was_price: '1099',
+      was_price: '1099'
     },
     {
       product_sku: 'harris-sofa-86-h4613',
@@ -3355,7 +3353,7 @@ const MOCK_PRODUCT_DETAIL: IProductDetail = {
         color: 'Granite',
         shape: 'Standard (40&quot;)',
         fabric: 'Twill',
-        delivery: 'Made to Order (ships in 7+ weeks)',
+        delivery: 'Made to Order (ships in 7+ weeks)'
       },
       has_parent_sku: false,
       image:
@@ -3364,7 +3362,7 @@ const MOCK_PRODUCT_DETAIL: IProductDetail = {
       swatch_image:
         'https://www.lazysuzy.com/westelm/westelm_images/201940_0049_img83l.jpg',
       price: '879.2',
-      was_price: '1099',
+      was_price: '1099'
     },
     {
       product_sku: 'harris-sofa-86-h4613',
@@ -3374,7 +3372,7 @@ const MOCK_PRODUCT_DETAIL: IProductDetail = {
         color: 'Granite',
         shape: 'Extra Deep (47&quot;)',
         fabric: 'Twill',
-        delivery: 'Made to Order (ships in 7+ weeks)',
+        delivery: 'Made to Order (ships in 7+ weeks)'
       },
       has_parent_sku: false,
       image:
@@ -3383,7 +3381,7 @@ const MOCK_PRODUCT_DETAIL: IProductDetail = {
       swatch_image:
         'https://www.lazysuzy.com/westelm/westelm_images/201940_0049_img83l.jpg',
       price: '959.2',
-      was_price: '1199',
+      was_price: '1199'
     },
     {
       product_sku: 'harris-sofa-86-h4613',
@@ -3393,7 +3391,7 @@ const MOCK_PRODUCT_DETAIL: IProductDetail = {
         color: 'Gravel',
         shape: 'Standard (40&quot;)',
         fabric: 'Twill',
-        delivery: 'Made to Order (ships in 7+ weeks)',
+        delivery: 'Made to Order (ships in 7+ weeks)'
       },
       has_parent_sku: false,
       image:
@@ -3402,7 +3400,7 @@ const MOCK_PRODUCT_DETAIL: IProductDetail = {
       swatch_image:
         'https://www.lazysuzy.com/westelm/westelm_images/201940_0143_img50l.jpg',
       price: '879.2',
-      was_price: '1099',
+      was_price: '1099'
     },
     {
       product_sku: 'harris-sofa-86-h4613',
@@ -3412,7 +3410,7 @@ const MOCK_PRODUCT_DETAIL: IProductDetail = {
         color: 'Gravel',
         shape: 'Extra Deep (47&quot;)',
         fabric: 'Twill',
-        delivery: 'Made to Order (ships in 7+ weeks)',
+        delivery: 'Made to Order (ships in 7+ weeks)'
       },
       has_parent_sku: false,
       image:
@@ -3421,7 +3419,7 @@ const MOCK_PRODUCT_DETAIL: IProductDetail = {
       swatch_image:
         'https://www.lazysuzy.com/westelm/westelm_images/201940_0143_img50l.jpg',
       price: '959.2',
-      was_price: '1199',
+      was_price: '1199'
     },
     {
       product_sku: 'harris-sofa-86-h4613',
@@ -3431,7 +3429,7 @@ const MOCK_PRODUCT_DETAIL: IProductDetail = {
         color: 'Indigo',
         shape: 'Standard (40&quot;)',
         fabric: 'Twill',
-        delivery: 'Made to Order (ships in 7+ weeks)',
+        delivery: 'Made to Order (ships in 7+ weeks)'
       },
       has_parent_sku: false,
       image:
@@ -3440,7 +3438,7 @@ const MOCK_PRODUCT_DETAIL: IProductDetail = {
       swatch_image:
         'https://www.lazysuzy.com/westelm/westelm_images/201940_0104_img2l.jpg',
       price: '879.2',
-      was_price: '1099',
+      was_price: '1099'
     },
     {
       product_sku: 'harris-sofa-86-h4613',
@@ -3450,7 +3448,7 @@ const MOCK_PRODUCT_DETAIL: IProductDetail = {
         color: 'Indigo',
         shape: 'Extra Deep (47&quot;)',
         fabric: 'Twill',
-        delivery: 'Made to Order (ships in 7+ weeks)',
+        delivery: 'Made to Order (ships in 7+ weeks)'
       },
       has_parent_sku: false,
       image:
@@ -3459,7 +3457,7 @@ const MOCK_PRODUCT_DETAIL: IProductDetail = {
       swatch_image:
         'https://www.lazysuzy.com/westelm/westelm_images/201940_0104_img2l.jpg',
       price: '959.2',
-      was_price: '1199',
+      was_price: '1199'
     },
     {
       product_sku: 'harris-sofa-86-h4613',
@@ -3469,7 +3467,7 @@ const MOCK_PRODUCT_DETAIL: IProductDetail = {
         color: 'Iron',
         shape: 'Standard (40&quot;)',
         fabric: 'Twill',
-        delivery: 'Made to Order (ships in 7+ weeks)',
+        delivery: 'Made to Order (ships in 7+ weeks)'
       },
       has_parent_sku: false,
       image:
@@ -3478,7 +3476,7 @@ const MOCK_PRODUCT_DETAIL: IProductDetail = {
       swatch_image:
         'https://www.lazysuzy.com/westelm/westelm_images/201940_0030_img39l.jpg',
       price: '879.2',
-      was_price: '1099',
+      was_price: '1099'
     },
     {
       product_sku: 'harris-sofa-86-h4613',
@@ -3488,7 +3486,7 @@ const MOCK_PRODUCT_DETAIL: IProductDetail = {
         color: 'Mint',
         shape: 'Standard (40&quot;)',
         fabric: 'Twill',
-        delivery: 'Made to Order (ships in 7+ weeks)',
+        delivery: 'Made to Order (ships in 7+ weeks)'
       },
       has_parent_sku: false,
       image:
@@ -3497,7 +3495,7 @@ const MOCK_PRODUCT_DETAIL: IProductDetail = {
       swatch_image:
         'https://www.lazysuzy.com/westelm/westelm_images/201940_0092_img51l.jpg',
       price: '879.2',
-      was_price: '1099',
+      was_price: '1099'
     },
     {
       product_sku: 'harris-sofa-86-h4613',
@@ -3507,7 +3505,7 @@ const MOCK_PRODUCT_DETAIL: IProductDetail = {
         color: 'Mint',
         shape: 'Extra Deep (47&quot;)',
         fabric: 'Twill',
-        delivery: 'Made to Order (ships in 7+ weeks)',
+        delivery: 'Made to Order (ships in 7+ weeks)'
       },
       has_parent_sku: false,
       image:
@@ -3516,7 +3514,7 @@ const MOCK_PRODUCT_DETAIL: IProductDetail = {
       swatch_image:
         'https://www.lazysuzy.com/westelm/westelm_images/201940_0092_img51l.jpg',
       price: '959.2',
-      was_price: '1199',
+      was_price: '1199'
     },
     {
       product_sku: 'harris-sofa-86-h4613',
@@ -3526,7 +3524,7 @@ const MOCK_PRODUCT_DETAIL: IProductDetail = {
         color: 'Platinum',
         shape: 'Standard (40&quot;)',
         fabric: 'Twill',
-        delivery: 'Made to Order (ships in 7+ weeks)',
+        delivery: 'Made to Order (ships in 7+ weeks)'
       },
       has_parent_sku: false,
       image:
@@ -3535,7 +3533,7 @@ const MOCK_PRODUCT_DETAIL: IProductDetail = {
       swatch_image:
         'https://www.lazysuzy.com/westelm/westelm_images/201940_0038_img79l.jpg',
       price: '879.2',
-      was_price: '1099',
+      was_price: '1099'
     },
     {
       product_sku: 'harris-sofa-86-h4613',
@@ -3545,7 +3543,7 @@ const MOCK_PRODUCT_DETAIL: IProductDetail = {
         color: 'Platinum',
         shape: 'Extra Deep (47&quot;)',
         fabric: 'Twill',
-        delivery: 'Made to Order (ships in 7+ weeks)',
+        delivery: 'Made to Order (ships in 7+ weeks)'
       },
       has_parent_sku: false,
       image:
@@ -3554,7 +3552,7 @@ const MOCK_PRODUCT_DETAIL: IProductDetail = {
       swatch_image:
         'https://www.lazysuzy.com/westelm/westelm_images/201940_0038_img79l.jpg',
       price: '959.2',
-      was_price: '1199',
+      was_price: '1199'
     },
     {
       product_sku: 'harris-sofa-86-h4613',
@@ -3564,7 +3562,7 @@ const MOCK_PRODUCT_DETAIL: IProductDetail = {
         color: 'Regal Blue',
         shape: 'Standard (40&quot;)',
         fabric: 'Twill',
-        delivery: 'Made to Order (ships in 7+ weeks)',
+        delivery: 'Made to Order (ships in 7+ weeks)'
       },
       has_parent_sku: false,
       image:
@@ -3573,7 +3571,7 @@ const MOCK_PRODUCT_DETAIL: IProductDetail = {
       swatch_image:
         'https://www.lazysuzy.com/westelm/westelm_images/201940_0028_img39l.jpg',
       price: '879.2',
-      was_price: '1099',
+      was_price: '1099'
     },
     {
       product_sku: 'harris-sofa-86-h4613',
@@ -3583,7 +3581,7 @@ const MOCK_PRODUCT_DETAIL: IProductDetail = {
         color: 'Regal Blue',
         shape: 'Extra Deep (47&quot;)',
         fabric: 'Twill',
-        delivery: 'Made to Order (ships in 7+ weeks)',
+        delivery: 'Made to Order (ships in 7+ weeks)'
       },
       has_parent_sku: false,
       image:
@@ -3592,7 +3590,7 @@ const MOCK_PRODUCT_DETAIL: IProductDetail = {
       swatch_image:
         'https://www.lazysuzy.com/westelm/westelm_images/201940_0028_img39l.jpg',
       price: '959.2',
-      was_price: '1199',
+      was_price: '1199'
     },
     {
       product_sku: 'harris-sofa-86-h4613',
@@ -3602,7 +3600,7 @@ const MOCK_PRODUCT_DETAIL: IProductDetail = {
         color: 'Stone',
         shape: 'Standard (40&quot;)',
         fabric: 'Twill',
-        delivery: 'Made to Order (ships in 7+ weeks)',
+        delivery: 'Made to Order (ships in 7+ weeks)'
       },
       has_parent_sku: false,
       image:
@@ -3611,7 +3609,7 @@ const MOCK_PRODUCT_DETAIL: IProductDetail = {
       swatch_image:
         'https://www.lazysuzy.com/westelm/westelm_images/201940_0145_img47l.jpg',
       price: '879.2',
-      was_price: '1099',
+      was_price: '1099'
     },
     {
       product_sku: 'harris-sofa-86-h4613',
@@ -3621,7 +3619,7 @@ const MOCK_PRODUCT_DETAIL: IProductDetail = {
         color: 'Stone',
         shape: 'Extra Deep (47&quot;)',
         fabric: 'Twill',
-        delivery: 'Made to Order (ships in 7+ weeks)',
+        delivery: 'Made to Order (ships in 7+ weeks)'
       },
       has_parent_sku: false,
       image:
@@ -3630,7 +3628,7 @@ const MOCK_PRODUCT_DETAIL: IProductDetail = {
       swatch_image:
         'https://www.lazysuzy.com/westelm/westelm_images/201940_0145_img47l.jpg',
       price: '959.2',
-      was_price: '1199',
+      was_price: '1199'
     },
     {
       product_sku: 'harris-sofa-86-h4613',
@@ -3640,7 +3638,7 @@ const MOCK_PRODUCT_DETAIL: IProductDetail = {
         color: 'Teal',
         shape: 'Standard (40&quot;)',
         fabric: 'Twill',
-        delivery: 'Made to Order (ships in 7+ weeks)',
+        delivery: 'Made to Order (ships in 7+ weeks)'
       },
       has_parent_sku: false,
       image:
@@ -3649,7 +3647,7 @@ const MOCK_PRODUCT_DETAIL: IProductDetail = {
       swatch_image:
         'https://www.lazysuzy.com/westelm/westelm_images/201940_0053_img64l.jpg',
       price: '879.2',
-      was_price: '1099',
+      was_price: '1099'
     },
     {
       product_sku: 'harris-sofa-86-h4613',
@@ -3659,7 +3657,7 @@ const MOCK_PRODUCT_DETAIL: IProductDetail = {
         color: 'Teal',
         shape: 'Extra Deep (47&quot;)',
         fabric: 'Twill',
-        delivery: 'Made to Order (ships in 7+ weeks)',
+        delivery: 'Made to Order (ships in 7+ weeks)'
       },
       has_parent_sku: false,
       image:
@@ -3668,7 +3666,7 @@ const MOCK_PRODUCT_DETAIL: IProductDetail = {
       swatch_image:
         'https://www.lazysuzy.com/westelm/westelm_images/201940_0053_img64l.jpg',
       price: '959.2',
-      was_price: '1199',
+      was_price: '1199'
     },
     {
       product_sku: 'harris-sofa-86-h4613',
@@ -3678,7 +3676,7 @@ const MOCK_PRODUCT_DETAIL: IProductDetail = {
         color: 'Wheat',
         shape: 'Standard (40&quot;)',
         fabric: 'Twill',
-        delivery: 'Made to Order (ships in 7+ weeks)',
+        delivery: 'Made to Order (ships in 7+ weeks)'
       },
       has_parent_sku: false,
       image:
@@ -3687,7 +3685,7 @@ const MOCK_PRODUCT_DETAIL: IProductDetail = {
       swatch_image:
         'https://www.lazysuzy.com/westelm/westelm_images/201940_0106_img86l.jpg',
       price: '879.2',
-      was_price: '1099',
+      was_price: '1099'
     },
     {
       product_sku: 'harris-sofa-86-h4613',
@@ -3697,7 +3695,7 @@ const MOCK_PRODUCT_DETAIL: IProductDetail = {
         color: 'Wheat',
         shape: 'Extra Deep (47&quot;)',
         fabric: 'Twill',
-        delivery: 'Made to Order (ships in 7+ weeks)',
+        delivery: 'Made to Order (ships in 7+ weeks)'
       },
       has_parent_sku: false,
       image:
@@ -3706,7 +3704,7 @@ const MOCK_PRODUCT_DETAIL: IProductDetail = {
       swatch_image:
         'https://www.lazysuzy.com/westelm/westelm_images/201940_0106_img86l.jpg',
       price: '959.2',
-      was_price: '1199',
+      was_price: '1199'
     },
     {
       product_sku: 'harris-sofa-86-h4613',
@@ -3716,7 +3714,7 @@ const MOCK_PRODUCT_DETAIL: IProductDetail = {
         color: 'Dusty Blush',
         shape: 'Standard (40&quot;)',
         fabric: 'Yarn Dyed Linen Weave',
-        delivery: 'Made to Order (ships in 7+ weeks)',
+        delivery: 'Made to Order (ships in 7+ weeks)'
       },
       has_parent_sku: false,
       image:
@@ -3725,7 +3723,7 @@ const MOCK_PRODUCT_DETAIL: IProductDetail = {
       swatch_image:
         'https://www.lazysuzy.com/westelm/westelm_images/201940_0143_img94l.jpg',
       price: '1199',
-      was_price: '1199',
+      was_price: '1199'
     },
     {
       product_sku: 'harris-sofa-86-h4613',
@@ -3735,7 +3733,7 @@ const MOCK_PRODUCT_DETAIL: IProductDetail = {
         color: 'Dusty Blush',
         shape: 'Extra Deep (47&quot;)',
         fabric: 'Yarn Dyed Linen Weave',
-        delivery: 'Made to Order (ships in 7+ weeks)',
+        delivery: 'Made to Order (ships in 7+ weeks)'
       },
       has_parent_sku: false,
       image:
@@ -3744,7 +3742,7 @@ const MOCK_PRODUCT_DETAIL: IProductDetail = {
       swatch_image:
         'https://www.lazysuzy.com/westelm/westelm_images/201940_0143_img94l.jpg',
       price: '1039.2',
-      was_price: '1299',
+      was_price: '1299'
     },
     {
       product_sku: 'harris-sofa-86-h4613',
@@ -3754,7 +3752,7 @@ const MOCK_PRODUCT_DETAIL: IProductDetail = {
         color: 'Frost Gray',
         shape: 'Standard (40&quot;)',
         fabric: 'Yarn Dyed Linen Weave',
-        delivery: 'Made to Order (ships in 7+ weeks)',
+        delivery: 'Made to Order (ships in 7+ weeks)'
       },
       has_parent_sku: false,
       image:
@@ -3763,7 +3761,7 @@ const MOCK_PRODUCT_DETAIL: IProductDetail = {
       swatch_image:
         'https://www.lazysuzy.com/westelm/westelm_images/201940_0157_img88l.jpg',
       price: '959.2',
-      was_price: '1199',
+      was_price: '1199'
     },
     {
       product_sku: 'harris-sofa-86-h4613',
@@ -3773,7 +3771,7 @@ const MOCK_PRODUCT_DETAIL: IProductDetail = {
         color: 'Frost Gray',
         shape: 'Extra Deep (47&quot;)',
         fabric: 'Yarn Dyed Linen Weave',
-        delivery: 'Made to Order (ships in 7+ weeks)',
+        delivery: 'Made to Order (ships in 7+ weeks)'
       },
       has_parent_sku: false,
       image:
@@ -3782,7 +3780,7 @@ const MOCK_PRODUCT_DETAIL: IProductDetail = {
       swatch_image:
         'https://www.lazysuzy.com/westelm/westelm_images/201940_0157_img88l.jpg',
       price: '1039.2',
-      was_price: '1299',
+      was_price: '1299'
     },
     {
       product_sku: 'harris-sofa-86-h4613',
@@ -3792,7 +3790,7 @@ const MOCK_PRODUCT_DETAIL: IProductDetail = {
         color: 'Indigo',
         shape: 'Standard (40&quot;)',
         fabric: 'Yarn Dyed Linen Weave',
-        delivery: 'Made to Order (ships in 7+ weeks)',
+        delivery: 'Made to Order (ships in 7+ weeks)'
       },
       has_parent_sku: false,
       image:
@@ -3801,7 +3799,7 @@ const MOCK_PRODUCT_DETAIL: IProductDetail = {
       swatch_image:
         'https://www.lazysuzy.com/westelm/westelm_images/201940_0007_img4l.jpg',
       price: '959.2',
-      was_price: '1199',
+      was_price: '1199'
     },
     {
       product_sku: 'harris-sofa-86-h4613',
@@ -3811,7 +3809,7 @@ const MOCK_PRODUCT_DETAIL: IProductDetail = {
         color: 'Indigo',
         shape: 'Extra Deep (47&quot;)',
         fabric: 'Yarn Dyed Linen Weave',
-        delivery: 'Made to Order (ships in 7+ weeks)',
+        delivery: 'Made to Order (ships in 7+ weeks)'
       },
       has_parent_sku: false,
       image:
@@ -3820,7 +3818,7 @@ const MOCK_PRODUCT_DETAIL: IProductDetail = {
       swatch_image:
         'https://www.lazysuzy.com/westelm/westelm_images/201940_0007_img4l.jpg',
       price: '1039.2',
-      was_price: '1299',
+      was_price: '1299'
     },
     {
       product_sku: 'harris-sofa-86-h4613',
@@ -3830,7 +3828,7 @@ const MOCK_PRODUCT_DETAIL: IProductDetail = {
         color: 'Natural',
         shape: 'Standard (40&quot;)',
         fabric: 'Yarn Dyed Linen Weave',
-        delivery: 'Made to Order (ships in 7+ weeks)',
+        delivery: 'Made to Order (ships in 7+ weeks)'
       },
       has_parent_sku: false,
       image:
@@ -3839,7 +3837,7 @@ const MOCK_PRODUCT_DETAIL: IProductDetail = {
       swatch_image:
         'https://www.lazysuzy.com/westelm/westelm_images/201940_0141_img39l.jpg',
       price: '959.2',
-      was_price: '1199',
+      was_price: '1199'
     },
     {
       product_sku: 'harris-sofa-86-h4613',
@@ -3849,7 +3847,7 @@ const MOCK_PRODUCT_DETAIL: IProductDetail = {
         color: 'Natural',
         shape: 'Extra Deep (47&quot;)',
         fabric: 'Yarn Dyed Linen Weave',
-        delivery: 'Made to Order (ships in 7+ weeks)',
+        delivery: 'Made to Order (ships in 7+ weeks)'
       },
       has_parent_sku: false,
       image:
@@ -3858,7 +3856,7 @@ const MOCK_PRODUCT_DETAIL: IProductDetail = {
       swatch_image:
         'https://www.lazysuzy.com/westelm/westelm_images/201940_0141_img39l.jpg',
       price: '1039.2',
-      was_price: '1299',
+      was_price: '1299'
     },
     {
       product_sku: 'harris-sofa-86-h4613',
@@ -3868,7 +3866,7 @@ const MOCK_PRODUCT_DETAIL: IProductDetail = {
         color: 'Platinum',
         shape: 'Standard (40&quot;)',
         fabric: 'Yarn Dyed Linen Weave',
-        delivery: 'Made to Order (ships in 7+ weeks)',
+        delivery: 'Made to Order (ships in 7+ weeks)'
       },
       has_parent_sku: false,
       image:
@@ -3877,7 +3875,7 @@ const MOCK_PRODUCT_DETAIL: IProductDetail = {
       swatch_image:
         'https://www.lazysuzy.com/westelm/westelm_images/201934_0074_img55l.jpg',
       price: '959.2',
-      was_price: '1199',
+      was_price: '1199'
     },
     {
       product_sku: 'harris-sofa-86-h4613',
@@ -3887,7 +3885,7 @@ const MOCK_PRODUCT_DETAIL: IProductDetail = {
         color: 'Platinum',
         shape: 'Extra Deep (47&quot;)',
         fabric: 'Yarn Dyed Linen Weave',
-        delivery: 'Made to Order (ships in 7+ weeks)',
+        delivery: 'Made to Order (ships in 7+ weeks)'
       },
       has_parent_sku: false,
       image:
@@ -3896,7 +3894,7 @@ const MOCK_PRODUCT_DETAIL: IProductDetail = {
       swatch_image:
         'https://www.lazysuzy.com/westelm/westelm_images/201934_0074_img55l.jpg',
       price: '1039.2',
-      was_price: '1299',
+      was_price: '1299'
     },
     {
       product_sku: 'harris-sofa-86-h4613',
@@ -3906,7 +3904,7 @@ const MOCK_PRODUCT_DETAIL: IProductDetail = {
         color: 'Regal Blue',
         shape: 'Standard (40&quot;)',
         fabric: 'Yarn Dyed Linen Weave',
-        delivery: 'Made to Order (ships in 7+ weeks)',
+        delivery: 'Made to Order (ships in 7+ weeks)'
       },
       has_parent_sku: false,
       image:
@@ -3915,7 +3913,7 @@ const MOCK_PRODUCT_DETAIL: IProductDetail = {
       swatch_image:
         'https://www.lazysuzy.com/westelm/westelm_images/201940_0143_img63l.jpg',
       price: '959.2',
-      was_price: '1199',
+      was_price: '1199'
     },
     {
       product_sku: 'harris-sofa-86-h4613',
@@ -3925,7 +3923,7 @@ const MOCK_PRODUCT_DETAIL: IProductDetail = {
         color: 'Regal Blue',
         shape: 'Extra Deep (47&quot;)',
         fabric: 'Yarn Dyed Linen Weave',
-        delivery: 'Made to Order (ships in 7+ weeks)',
+        delivery: 'Made to Order (ships in 7+ weeks)'
       },
       has_parent_sku: false,
       image:
@@ -3934,7 +3932,7 @@ const MOCK_PRODUCT_DETAIL: IProductDetail = {
       swatch_image:
         'https://www.lazysuzy.com/westelm/westelm_images/201940_0143_img63l.jpg',
       price: '1039.2',
-      was_price: '1299',
+      was_price: '1299'
     },
     {
       product_sku: 'harris-sofa-86-h4613',
@@ -3944,7 +3942,7 @@ const MOCK_PRODUCT_DETAIL: IProductDetail = {
         color: 'Shelter Blue',
         shape: 'Standard (40&quot;)',
         fabric: 'Yarn Dyed Linen Weave',
-        delivery: 'Made to Order (ships in 7+ weeks)',
+        delivery: 'Made to Order (ships in 7+ weeks)'
       },
       has_parent_sku: false,
       image:
@@ -3953,7 +3951,7 @@ const MOCK_PRODUCT_DETAIL: IProductDetail = {
       swatch_image:
         'https://www.lazysuzy.com/westelm/westelm_images/201940_0024_img31l.jpg',
       price: '959.2',
-      was_price: '1199',
+      was_price: '1199'
     },
     {
       product_sku: 'harris-sofa-86-h4613',
@@ -3963,7 +3961,7 @@ const MOCK_PRODUCT_DETAIL: IProductDetail = {
         color: 'Shelter Blue',
         shape: 'Extra Deep (47&quot;)',
         fabric: 'Yarn Dyed Linen Weave',
-        delivery: 'Made to Order (ships in 7+ weeks)',
+        delivery: 'Made to Order (ships in 7+ weeks)'
       },
       has_parent_sku: false,
       image:
@@ -3972,7 +3970,7 @@ const MOCK_PRODUCT_DETAIL: IProductDetail = {
       swatch_image:
         'https://www.lazysuzy.com/westelm/westelm_images/201940_0024_img31l.jpg',
       price: '1039.2',
-      was_price: '1299',
+      was_price: '1299'
     },
     {
       product_sku: 'harris-sofa-86-h4613',
@@ -3982,7 +3980,7 @@ const MOCK_PRODUCT_DETAIL: IProductDetail = {
         color: 'Steel Gray',
         shape: 'Standard (40&quot;)',
         fabric: 'Yarn Dyed Linen Weave',
-        delivery: 'Made to Order (ships in 7+ weeks)',
+        delivery: 'Made to Order (ships in 7+ weeks)'
       },
       has_parent_sku: false,
       image:
@@ -3991,7 +3989,7 @@ const MOCK_PRODUCT_DETAIL: IProductDetail = {
       swatch_image:
         'https://www.lazysuzy.com/westelm/westelm_images/201940_0151_img31l.jpg',
       price: '959.2',
-      was_price: '1199',
+      was_price: '1199'
     },
     {
       product_sku: 'harris-sofa-86-h4613',
@@ -4001,7 +3999,7 @@ const MOCK_PRODUCT_DETAIL: IProductDetail = {
         color: 'Steel Gray',
         shape: 'Extra Deep (47&quot;)',
         fabric: 'Yarn Dyed Linen Weave',
-        delivery: 'Made to Order (ships in 7+ weeks)',
+        delivery: 'Made to Order (ships in 7+ weeks)'
       },
       has_parent_sku: false,
       image:
@@ -4010,7 +4008,7 @@ const MOCK_PRODUCT_DETAIL: IProductDetail = {
       swatch_image:
         'https://www.lazysuzy.com/westelm/westelm_images/201940_0151_img31l.jpg',
       price: '1039.2',
-      was_price: '1299',
+      was_price: '1299'
     },
     {
       product_sku: 'harris-sofa-86-h4613',
@@ -4020,7 +4018,7 @@ const MOCK_PRODUCT_DETAIL: IProductDetail = {
         color: 'Stone White',
         shape: 'Standard (40&quot;)',
         fabric: 'Yarn Dyed Linen Weave',
-        delivery: 'Made to Order (ships in 7+ weeks)',
+        delivery: 'Made to Order (ships in 7+ weeks)'
       },
       has_parent_sku: false,
       image:
@@ -4029,7 +4027,7 @@ const MOCK_PRODUCT_DETAIL: IProductDetail = {
       swatch_image:
         'https://www.lazysuzy.com/westelm/westelm_images/201940_0120_img30l.jpg',
       price: '959.2',
-      was_price: '1199',
+      was_price: '1199'
     },
     {
       product_sku: 'harris-sofa-86-h4613',
@@ -4039,7 +4037,7 @@ const MOCK_PRODUCT_DETAIL: IProductDetail = {
         color: 'Stone White',
         shape: 'Extra Deep (47&quot;)',
         fabric: 'Yarn Dyed Linen Weave',
-        delivery: 'Made to Order (ships in 7+ weeks)',
+        delivery: 'Made to Order (ships in 7+ weeks)'
       },
       has_parent_sku: false,
       image:
@@ -4048,8 +4046,8 @@ const MOCK_PRODUCT_DETAIL: IProductDetail = {
       swatch_image:
         'https://www.lazysuzy.com/westelm/westelm_images/201940_0120_img30l.jpg',
       price: '1039.2',
-      was_price: '1299',
-    },
+      was_price: '1299'
+    }
   ],
   description: [
     "Our designers created the Harris Collection with one thing in mind: versatility. Neat, tailored details and a slim, streamlined frame come together to create seating that easily integrates into any style, whether modern, traditional or somewhere in between. Each sofa is assembled in the USA in your choice of standard or extra deep seats, so you can create a piece that's truly perfect for your home.  ",
@@ -4061,14 +4059,14 @@ const MOCK_PRODUCT_DETAIL: IProductDetail = {
     '*   High-gauge sinuous spring and webbed cushion support.',
     '*   Cushions have fiber-wrapped, high-resiliency polyurethane foam cores.',
     '*   Reversible cushions (Astor Velvet excluded) with zip-off covers.',
-    '*   Hand upholstered and assembled in the USA.',
+    '*   Hand upholstered and assembled in the USA.'
   ],
   dimension: [
     {
       ') or e': 'standard (40',
       ').': 'tra deep (47',
-      description: "Choose sofa's overall depth",
-    },
+      description: "Choose sofa's overall depth"
+    }
   ],
   thumb: [
     'https://www.westelm.com/weimgs/rk/images/wcm/products/201944/0066/img82o.jpg',
@@ -4076,7 +4074,7 @@ const MOCK_PRODUCT_DETAIL: IProductDetail = {
     'https://www.westelm.com/weimgs/rk/images/wcm/products/201940/0282/harris-sofa-76-o.jpg',
     'https://www.westelm.com/weimgs/rk/images/wcm/products/201940/0560/limited-edition-expressionist-vases-o.jpg',
     'https://www.westelm.com/weimgs/rk/images/wcm/products/201940/0619/harris-sofa-86-o.jpg',
-    'https://www.westelm.com/weimgs/rk/images/wcm/products/201951/0051/light-rods-led-floor-lamp-o.jpg',
+    'https://www.westelm.com/weimgs/rk/images/wcm/products/201951/0051/light-rods-led-floor-lamp-o.jpg'
   ],
   features: [
     "<span style= 'font-family:Fenix; font-weight: bold'>DETAILED SPECIFICATIONS</span>",
@@ -4112,7 +4110,7 @@ const MOCK_PRODUCT_DETAIL: IProductDetail = {
     "<span style= 'font-family:Fenix; font-weight: bold'>ASSEMBLY INSTRUCTIONS</span>",
     ' Assembled upon delivery via White Glove Service.  ',
     "<span style= 'font-family:Fenix; font-weight: bold'>CARE</span>",
-    ' Spot clean with a damp cloth or sponge; blot to remove excess water; air dry. Blot spills immediately with a clean colorfast towel or sponge. To prevent fading, keep fabric out of direct sunlight. Vacuum crevices.',
+    ' Spot clean with a damp cloth or sponge; blot to remove excess water; air dry. Blot spills immediately with a clean colorfast towel or sponge. To prevent fading, keep fabric out of direct sunlight. Vacuum crevices.'
   ],
   on_server_images: [
     'https://www.lazysuzy.com/westelm/westelm_images/harris-sofa-86-h4613_1.jpg',
@@ -4120,7 +4118,7 @@ const MOCK_PRODUCT_DETAIL: IProductDetail = {
     'https://www.lazysuzy.com/westelm/westelm_images/harris-sofa-86-h4613_3.jpg',
     'https://www.lazysuzy.com/westelm/westelm_images/harris-sofa-86-h4613_4.jpg',
     'https://www.lazysuzy.com/westelm/westelm_images/harris-sofa-86-h4613_5.jpg',
-    'https://www.lazysuzy.com/westelm/westelm_images/harris-sofa-86-h4613_6.jpg',
+    'https://www.lazysuzy.com/westelm/westelm_images/harris-sofa-86-h4613_6.jpg'
   ],
   department_info: [
     {
@@ -4129,7 +4127,7 @@ const MOCK_PRODUCT_DETAIL: IProductDetail = {
       category_name: 'Sofas',
       category_url: '/products/living/sofa',
       sub_category_name: '',
-      sub_category_url: '/products/living/sofa/',
-    },
-  ],
+      sub_category_url: '/products/living/sofa/'
+    }
+  ]
 };
