@@ -1,40 +1,15 @@
-<!-- <div class="left-tabs">
-    <ul class="nav nav-tabs flex-column">
-        <li *ngFor="let post of posts$ | async"
-        (click)="selectSideBarItem(post)" class="nav-item">
-            <div class="nav-link" [class.active]="post?.value === selected?.value">
-                {{post.acf.rendered}}
-                <div class="date">{{post.title.modified_gmt}}</div>
-            </div>
-        </li>
-    </ul>
-</div> -->
-
-<nav>
-    <div class="centre">
-        <h4>Blog</h4>
-        <ul class="clearfix">
-
-            <li *ngFor="let post of posts$ | async" (click)="selectSideBarItem(post)">
-                <!-- {{post|json}} -->
-                <h3>
-                    <a>{{post.title.rendered}}</a>
-                </h3>
-                <!-- <div class="date">{{post.acf.date}}</div> -->
-            </li>
-
-        </ul>
-    </div>
-</nav>
-
-<main>
-
-    <article *ngIf="selectedPost">
-
-        <h2>M Theory</h2>
-
-        <div [innerHTML]="selectedPost.content.rendered"></div>
-
-    </article>
-
-</main>
+<section>
+    <mat-card *ngFor=" let post of posts$ | async">
+        <mat-card-content routerLink="{{post.id}}">
+            <!-- {{post|json}} -->
+            <img src="{{post.image}}" alt="{{post.title}}">
+            <h2>{{post.title}}</h2>
+            <p><small>By: {{post.author}} <br>~{{post.published.toDate() | date: 'fullDate'}}</small></p>
+        </mat-card-content>
+        <mat-card-actions align="end">
+            <button mat-icon-button (click)="delete(post.id)">
+                <mat-icon>delete</mat-icon>
+            </button>
+        </mat-card-actions>
+    </mat-card>
+</section>
