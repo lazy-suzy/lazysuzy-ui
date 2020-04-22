@@ -1,0 +1,45 @@
+<div class="browse-header">
+    <div class="item-search-bar">
+        <div class="input-group">
+            <input type="text" class="form-control" id="inlineFormInputGroupUsername" placeholder="Search">
+            <div class="input-group-append">
+                <div class="input-group-text icon">
+                    <i class="mdi mdi-magnify" aria-hidden="true"></i>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="browse-title" (click)="handleGoToSelect($event)">
+        <i class="mdi mdi-chevron-left" aria-hidden="true"></i>
+        <h5 class="title js-category-title">
+            {{selectedCategory?.category}}
+        </h5>
+    </div>
+    <div class="browse-filter">
+        <div class="filter-bar-container">
+            <div class="filter-bar js-filter-section" id="desktop-filter">
+                <div class="tabs">
+
+                    <p-overlayPanel [showTransitionOptions]="'200ms'" #browsefilter [hideTransitionOptions]="'200ms'"
+                        [dismissable]="false" [showCloseIcon]="true" #op1 [appendTo]="'body'">
+                        <ng-template pTemplate>
+                            <app-browse-filter (updatesFromFilter)="handleUpdatesFromFilter($event)">
+                            </app-browse-filter>
+                        </ng-template>
+                    </p-overlayPanel>
+
+                    <button type="text" pButton class="btn btn-primary" label="Custom Target"
+                        (click)="op1.show($event, actualTarget1)">Filters</button>
+                    <div #actualTarget1></div>
+
+                </div>
+            </div>
+        </div>
+        <div class="clear-all d-none d-md-block">Clear All</div>
+    </div>
+</div>
+
+<app-loader *ngIf="showLoader"></app-loader>
+
+<app-board-products [products]="products" *ngIf="!showLoader" (previewProduct)="handlePreviewProduct($event)">
+</app-board-products>

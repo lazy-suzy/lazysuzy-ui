@@ -1,0 +1,64 @@
+<div class="example-container">
+    <form [formGroup]="filterForm">
+
+        <p-multiSelect
+            [options]="brandsDropdown"
+            formControlName="brand"
+            [(ngModel)]="selectedProductsDropdown"
+            [defaultLabel]="'Choose by Brand'"
+            [style]="{'width': '180px'}">
+            <ng-template let-value pTemplate="selectedItems">
+                <div *ngFor="let val of value" class="ui-multiselected-item-token ui-corner-all">
+                    <img src="https://via.placeholder.com/150"
+                        style="width:20px;vertical-align:middle;margin-right:.5em" />
+                    <span>{{val}}</span>
+                </div>
+                <span *ngIf="!value || value.length === 0"
+                    class="ui-multiselected-empty-token ui-corner-all">Choose</span>
+            </ng-template>
+            <ng-template let-product pTemplate="item">
+                <img src="https://via.placeholder.com/150"
+                    style="width:24px;display:inline-block;vertical-align:middle" />
+                <div style="font-size:14px;float:right;margin-top:4px">{{product.label}}</div>
+            </ng-template>
+        </p-multiSelect>
+        <p>{{selectedProductsDropdown}}</p>
+
+        <div appearance="fill">
+            <mat-label>Price</mat-label>
+            <mat-slider class="example-margin" formControlName="price" [min]="min" [max]="max"
+                (input)="someValue = $event.value" [value]="someValue" thumbLabel [displayWith]="formatLabel"
+                tickInterval="auto">
+            </mat-slider>
+        </div>
+
+        <p-multiSelect
+            [options]="productsColors"
+            formControlName="color"
+            [(ngModel)]="selectedProductsColor"
+            [defaultLabel]="'Choose by color'"
+            [style]="{'width': '180px'}">
+            <ng-template let-value pTemplate="selectedProductsColor">
+                <div *ngFor="let val of value" class="ui-multiselected-item-token ui-corner-all">
+                    <img src="https://via.placeholder.com/150"
+                        style="width:20px;vertical-align:middle;margin-right:.5em" />
+                    <span>{{val}}</span>
+                </div>
+                <span *ngIf="!value || value.length === 0"
+                    class="ui-multiselected-empty-token ui-corner-all">Choose</span>
+            </ng-template>
+            <ng-template let-color pTemplate="item">
+                <img src="https://via.placeholder.com/150"
+                    style="width:24px;display:inline-block;vertical-align:middle" />
+                <div style="font-size:14px;float:right;margin-top:4px">{{color.label}}</div>
+            </ng-template>
+        </p-multiSelect>
+        <p>{{selectedProductsColor}}</p>
+
+        <button type="button" (click)="applyFilters()" class="btn btn-primary">
+            Go
+        </button>
+    </form>
+
+    <app-loader *ngIf="showLoader" [showProgressBar]="'true'"></app-loader>
+</div>

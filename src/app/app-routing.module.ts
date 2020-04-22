@@ -17,6 +17,13 @@ import { ProductDetailsMobileComponent } from './feature/components';
 
 const routes: Routes = [
   { path: '', component: LandingComponent, pathMatch: 'full' },
+
+  {
+    path: 'board',
+    loadChildren: "./modules/board/board.module#BoardModule",
+    pathMatch: 'full'
+  },
+
   { path: 'search', component: SearchComponent },
   { path: 'aboutus', component: AboutusComponent },
   { path: 'termsofservice', component: TermsOfServiceComponent },
@@ -42,6 +49,10 @@ const routes: Routes = [
     path: 'product/:product',
     component: ProductDetailsMobileComponent,
     pathMatch: 'full'
+  },
+  {
+    path: 'blog',
+    loadChildren: () => import('./feature/blog/blog/blog.module').then(m => m.BlogModule)
   }
 ];
 
@@ -51,4 +62,4 @@ const routes: Routes = [
   ],
   exports: [RouterModule]
 })
-export class AppRoutingModule {}
+export class AppRoutingModule { }

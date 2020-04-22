@@ -36,12 +36,13 @@
               "node_modules/tachyons/css/tachyons.min.css",
               "node_modules/owl.carousel/dist/assets/owl.carousel.css",
               "node_modules/owl.carousel/dist/assets/owl.theme.default.css"
-
             ],
             "scripts": [
               "node_modules/marked/lib/marked.js",
               "node_modules/jquery/dist/jquery.min.js",
-              "node_modules/owl.carousel/dist/owl.carousel.min.js"
+              "node_modules/owl.carousel/dist/owl.carousel.min.js",
+              "src/app/modules/board/components/canvas/fb.min.js",
+              "src/app/modules/board/components/add/dropzone.min.js"
             ]
           },
           "configurations": {
