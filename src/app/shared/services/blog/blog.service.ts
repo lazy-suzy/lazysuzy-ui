@@ -6,8 +6,14 @@ import { ApiService } from '../api/api.service';
 })
 export class BlogService {
 
-  constructor(private apiService: ApiService) { }
+  blogs = [];
 
-  ngOnInit() {}
+  constructor() { }
+
+  ngOnInit() { }
+
+  setBlogItems(blogs) {
+    this.blogs = [...blogs];
+  }
 
 }

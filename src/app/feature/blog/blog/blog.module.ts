@@ -5,13 +5,13 @@ import { RouterModule } from '@angular/router';
 import { SharedModule } from 'src/app/shared/shared.module';
 import { BlogRoutingModule } from './blog-routing.module';
 import { BlogComponent } from './components/blog/blog.component';
-import { PagePostComponent } from './components/page-post/page-post.component';
 import { BlogContainerComponent } from './components/blog-container/blog-container.component';
+import { PagePostsComponent } from './components/page-posts/page-posts.component';
 
 @NgModule({
   declarations: [
     BlogComponent,
-    PagePostComponent,
+    PagePostsComponent,
     BlogContainerComponent
   ],
   imports: [

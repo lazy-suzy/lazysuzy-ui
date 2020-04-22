@@ -1,41 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
-import { ApiService } from 'src/app/shared/services';
-
-export const SideNavItems = [
-  {
-    name: 'Select',
-    label: 'Select',
-    value: 'Select'
-  },
-  {
-    name: 'Browse',
-    label: 'Browse',
-    value: 'Browse'
-  },
-  {
-    name: 'Add',
-    label: 'Add',
-    value: 'Add'
-  },
-  {
-    name: 'Favorites',
-    label: 'Favourites',
-    value: 'Favorites'
-  },
-  {
-    name: 'Text',
-    label: 'Text',
-    value: 'Text'
-  },
-  {
-    name: 'Board',
-    label: 'Board',
-    value: 'Board'
-  }
-];
-
+import { ApiService, CacheService } from 'src/app/shared/services';
+import { BlogService } from 'src/app/shared/services/blog/blog.service';
 
 @Component({
   selector: 'app-blog',
@@ -46,24 +13,26 @@ export class BlogComponent implements OnInit {
 
   posts$: Observable<any[]>;
   selectedPost: any;
+  showLoader = false;
 
   constructor(
     private apiService: ApiService,
+    private blogService: BlogService,
     private router: Router,
   ) { }
 
   ngOnInit() {
+    this.showLoader = true;
     this.posts$ = this.apiService.getPosts();
     this.posts$.subscribe(s => {
       console.log(s);
+      this.blogService.setBlogItems(s);
+      this.showLoader = false;
     });
   }
 
-  selectSideBarItem(post) {
-    console.log(post);
-    this.selectedPost = {...post};
-    let id = post.id;
-    // this.router.navigate([`/blog/${id}`]);
+  goToPost(id) {
+    this.router.navigate([`/blog/${id}`]);
   }
 
 }

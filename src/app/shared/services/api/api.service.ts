@@ -250,6 +250,10 @@ export class ApiService {
     });
   }
 
+  getPostById(id): Observable<any[]> {
+    return this.httpService.get<any[]>(`https://psimonmyway.com/wp-json/wp/v2/posts/${id}`);
+  }
+
   getAuthToken(access_token, provider) {
     const endpoint = `oauth/token`;
     const url = `${env.API_BASE_HREF}${endpoint}`;

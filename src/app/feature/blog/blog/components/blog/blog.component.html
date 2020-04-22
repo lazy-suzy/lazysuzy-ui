@@ -1,15 +1,25 @@
-<section>
-    <mat-card *ngFor=" let post of posts$ | async">
-        <mat-card-content routerLink="{{post.id}}">
-            <!-- {{post|json}} -->
-            <img src="{{post.image}}" alt="{{post.title}}">
-            <h2>{{post.title}}</h2>
-            <p><small>By: {{post.author}} <br>~{{post.published.toDate() | date: 'fullDate'}}</small></p>
-        </mat-card-content>
-        <mat-card-actions align="end">
-            <button mat-icon-button (click)="delete(post.id)">
-                <mat-icon>delete</mat-icon>
-            </button>
-        </mat-card-actions>
-    </mat-card>
-</section>
+<div *ngIf="!showLoader">
+    <h1 class="align-center">Home Musings</h1>
+    <h2 class="align-center">Our Blog</h2>
+    <section>
+        <mat-card *ngFor=" let post of blogService?.blogs">
+            <mat-card-content routerLink="{{post.id}}">
+                <!-- {{post|json}} -->
+                <img src="./../../../../../../assets/images/Mirrors.png" alt="{{post.title}}">
+                <small>{{post.date | date: 'fullDate'}}</small> <br />
+                <h4>{{post?.title?.rendered}}</h4>
+                <small>By: {{post.author}} <br></small>
+            </mat-card-content>
+            <mat-card-actions align="start">
+                <button mat-icon-button (click)="goToPost(post.id)">
+                    Read More
+                </button>
+            </mat-card-actions>
+        </mat-card>
+    </section>
+
+</div>
+
+<div class="spinner">
+    <app-loader *ngIf="showLoader"></app-loader>
+</div>
