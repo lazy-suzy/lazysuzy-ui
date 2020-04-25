@@ -4,7 +4,7 @@
         <p-multiSelect
             [options]="brandsDropdown"
             formControlName="brand"
-            [(ngModel)]="selectedProductsDropdown"
+            [(ngModel)]="selectedbrandsDropdown"
             [defaultLabel]="'Choose by Brand'"
             [style]="{'width': '180px'}">
             <ng-template let-value pTemplate="selectedItems">
@@ -22,7 +22,7 @@
                 <div style="font-size:14px;float:right;margin-top:4px">{{product.label}}</div>
             </ng-template>
         </p-multiSelect>
-        <p>{{selectedProductsDropdown}}</p>
+        <p>{{selectedbrandsDropdown}}</p>
 
         <div appearance="fill">
             <mat-label>Price</mat-label>

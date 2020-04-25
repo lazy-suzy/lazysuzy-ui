@@ -16,7 +16,7 @@ export class BoardSideNavComponent implements OnInit {
 
   @Output() updates: EventEmitter<any> = new EventEmitter();
 
-  constructor(private boardService: BoardService) { }
+  constructor(public boardService: BoardService) { }
 
   ngOnInit(): void {
     this.selectSideBarItem({

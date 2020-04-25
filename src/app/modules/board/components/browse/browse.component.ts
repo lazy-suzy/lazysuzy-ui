@@ -1,5 +1,5 @@
 import { Component, OnInit, Output, EventEmitter, ViewChild } from '@angular/core';
-import { OverlayPanel } from 'primeng/overlaypanel/public_api';
+// import { OverlayPanel } from 'primeng/overlaypanel/public_api';
 import { BoardService } from 'src/app/shared/services/board/board.service';
 
 @Component({
@@ -19,7 +19,7 @@ export class BrowseComponent implements OnInit {
 
   selectedCategory = null;
 
-  @ViewChild('browsefilter', { static: false }) browsefilter?: OverlayPanel;
+  // @ViewChild('browsefilter', { static: false }) browsefilter?: OverlayPanel;
   @Output() updatesFromBrowse: EventEmitter<any> = new EventEmitter();
   @Output() goToSelect: EventEmitter<any> = new EventEmitter();
   @Output() previewProduct: EventEmitter<any> = new EventEmitter();
@@ -44,7 +44,7 @@ export class BrowseComponent implements OnInit {
 
   handleUpdatesFromFilter(event) {
     if (event.name === 'TOGGLE_FILTER_OVERLAY' && !event.value) {
-      this.browsefilter.hide();
+      // this.browsefilter.hide();
     }
   }
 

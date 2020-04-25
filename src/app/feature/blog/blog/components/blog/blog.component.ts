@@ -17,7 +17,7 @@ export class BlogComponent implements OnInit {
 
   constructor(
     private apiService: ApiService,
-    private blogService: BlogService,
+    public blogService: BlogService,
     private router: Router,
   ) { }
 

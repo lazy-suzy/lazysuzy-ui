@@ -49,7 +49,7 @@
             </span>
             <span class="image-icons" data-title="Duplicate" (click)="action('duplicate')" style=""><i
                     class="mdi mdi-content-copy" aria-hidden="true"></i></span>
-            <span data-title="Crop" (click)="handleCrop()" class="image-icons" style=""><i class="mdi mdi-crop"
+            <span data-title="Crop" (click)="handleCrop1()" class="image-icons" style=""><i class="mdi mdi-crop"
                     aria-hidden="true"></i></span>
             <span class="image-icons" data-title="Flip" (click)="action('flip')" style="">
                 <i class="mdi mdi-autorenew" aria-hidden="true"></i>
@@ -74,7 +74,7 @@
         <button class="btn" (click)="handleCrop(false)">
             <i class="mdi mdi-undo" aria-hidden="true"></i> Cancel
         </button>
-        <button class="btn" (click)="handleCrop(false, true)">
+        <button class="btn" (click)="handleCrop(false)">
             <i class="mdi mdi-minus" aria-hidden="true"></i> Revert
         </button>
     </div>
