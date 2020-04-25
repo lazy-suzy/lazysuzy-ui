@@ -27,7 +27,7 @@
     <div class="blog-header">
       <div class="blog-cover">
         <div class="blog-author">
-          <h3>Author</h3>
+          <h3>{{currentBlog?.x_author}}</h3>
         </div>
       </div>
     </div>
@@ -42,15 +42,12 @@
       </div>
       <div class="blog-tags">
         <ul>
-          <li><a href="#">css</a></li>
-          <li><a href="#">web design</a></li>
-          <li><a href="#">codepen</a></li>
-          <li><a href="https://twitter.com/russbeye">twitter</a></li>
+          <li><a *ngFor="let tag of currentBlog?.x_tags">{{tag}}</a></li>
         </ul>
       </div>
     </div>
 
-    <div class="blog-footer">
+    <!-- <div class="blog-footer">
       <ul>
         <li class="published-date">2 days ago</li>
         <li class="comments"><a href="#"><svg class="icon-bubble">
@@ -62,7 +59,7 @@
             </svg><span class="numero">1</span></a>
         </li>
       </ul>
-    </div>
+    </div> -->
 
   </div>
 

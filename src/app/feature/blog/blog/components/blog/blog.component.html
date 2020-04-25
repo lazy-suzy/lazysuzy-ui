@@ -5,13 +5,15 @@
         <mat-card *ngFor=" let post of blogService?.blogs">
             <mat-card-content routerLink="{{post.id}}">
                 <!-- {{post|json}} -->
-                <img src="./../../../../../../assets/images/Mirrors.png" alt="{{post.title}}">
+                <img *ngIf="!post.better_featured_image" src="./../../../../../../assets/images/Mirrors.png" alt="{{post.title}}">
+                
+                <img *ngIf="post.better_featured_image" [src]="post.better_featured_image.source_url" alt="{{post.title}}">
                 <small>{{post.date | date: 'fullDate'}}</small> <br />
                 <h4>{{post?.title?.rendered}}</h4>
-                <small>By: {{post.author}} <br></small>
+                <small>By: {{post.x_author}} <br></small>
             </mat-card-content>
             <mat-card-actions align="start">
-                <button mat-icon-button (click)="goToPost(post.id)">
+                <button mat-icon-button (click)="goToPost(post.slug)">
                     Read More
                 </button>
             </mat-card-actions>
