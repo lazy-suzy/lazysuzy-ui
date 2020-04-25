@@ -41,7 +41,7 @@
       </div>
       <button
         mat-raised-button
-        class="view-details-btn"
+        class="bg-red view-details-btn"
         *ngIf="!product.redirect"
       >
         <a
@@ -72,6 +72,7 @@
       [inputSelections]="product.selections"
       (setPrice)="onSetPrice($event)"
       (setImage)="onSetImage($event)"
+      (reload)="onVariationChange()"
     ></app-variations>
     <app-sets *ngIf="product.set" [sets]="product.set" [brand]="product.site">
     </app-sets>

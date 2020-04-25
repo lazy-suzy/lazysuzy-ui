@@ -132,7 +132,6 @@ export class ProductDetailsMobileComponent implements OnInit {
   selectedVariation(variation, index, container) {
     if (variation.has_parent_sku) {
       this.router.navigate([`/product/${variation.variation_sku}`]);
-      this.loadProduct();
     } else {
       this.selectedSwatch = {
         swatch_image: variation.swatch_image,
@@ -146,7 +145,9 @@ export class ProductDetailsMobileComponent implements OnInit {
       container.scrollLeft = 0;
     }
   }
-
+  onVariationChange() {
+    this.loadProduct();
+  }
   wishlistProduct(sku, mark) {
     this.apiService
       .wishlistProduct(sku, mark, true)
