@@ -32,7 +32,7 @@ export class ToolbarComponent implements OnInit {
     this.emitActions(evt);
   }
 
-  
+
 
   zoomIn() {
     const evt = {
@@ -69,6 +69,10 @@ export class ToolbarComponent implements OnInit {
       payload: param
     };
     this.emitActions(evt);
+  }
+
+  handleCrop1() {
+
   }
 
   emitActions(evt) {
