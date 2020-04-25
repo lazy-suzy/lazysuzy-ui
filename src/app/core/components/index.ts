@@ -13,3 +13,5 @@ export * from './brand-footer/brand-footer.module';
 export * from './banner/banner.module';
 export * from './signin/signin.component';
 export * from './signup/signup.component';
+export * from './auth/auth.module';
+export * from './auth/auth.component';

@@ -10,6 +10,7 @@ import {
 } from './containers';
 import { ProductDetailsMobileModule } from './components';
 import { BlogModule } from './blog/blog/blog.module';
+import { AuthContainerComponent } from './containers/auth-container/auth-container.component';
 
 const DECLARATIONS = [];
 
@@ -22,7 +23,8 @@ const MODULES = [
   AllProductsModule,
   CategoriesModule,
   ProductDetailsMobileModule,
-  BlogModule
+  BlogModule,
+  AuthContainerComponent
 ];
 
 @NgModule({
