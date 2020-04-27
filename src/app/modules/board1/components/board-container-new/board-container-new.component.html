@@ -1,0 +1,15 @@
+<div class="parent-wrapper">
+    <div class="parent">
+        <div class="child1">
+            <app-board-side-nav (updates)="handleBoardSideNavUpdates($event)"></app-board-side-nav>
+        </div>
+        <div class="child2">
+            <router-outlet></router-outlet>
+        </div>
+        <div class="child3">
+            <app-toolbar #toolbar (toolbarActions)="handleToolbarActions($event)"></app-toolbar>
+
+            <app-canvas #canvas></app-canvas>
+        </div>
+    </div>
+</div>

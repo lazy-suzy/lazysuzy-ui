@@ -1,0 +1,53 @@
+<!-- <app-loader *ngIf="showLoader"></app-loader>
+
+<div class="gray-bg" *ngIf="!showLoader">
+    <div>
+
+        <div class="left-panel">
+            <div class="d-lg-none">
+                <div class="toggle-icon">
+                    <i class="mdi mdi-plus" aria-hidden="true"></i>
+                </div>
+            </div>
+
+            <div class="mobile-filter">
+                <div class="filter-header">
+                    <div class="filter-title">
+                        Filters
+                    </div>
+                    <div class="clear-all-btn">
+                        Clear All
+                        <i class="mdi mdi-arrow-up-bold filter-bar-arrow" aria-hidden="true"></i>
+                    </div>
+                    <div class="close-btn js-filter-close">
+                        <i class="mdi mdi-arrow-left" aria-hidden="true"></i>
+                    </div>
+                </div>
+                <div class="filter-section" id="mobile-filter"></div>
+            </div>
+
+            <app-board-side-nav (updates)="handleBoardSideNavUpdates($event)"></app-board-side-nav>
+
+            <app-mid-panel 
+                #midpanel
+                [selectedItem]="selectedItem"
+                (updates)="handleMidPanelUpdates($event)"
+                (addProduct)="handleAddProduct($event)"
+                (textActions)="handleTextActions($event)"
+                (updatesFromSelect)="handleUpdateSelect($event)">
+            </app-mid-panel>
+             
+        </div>
+
+        <div class="main-content container-fluid">
+            <div class="row">
+                <div class="col-md-12 tool-bar-holder">
+                    
+                    <app-toolbar #toolbar (toolbarActions)="handleToolbarActions($event)"></app-toolbar>
+
+                    <app-canvas #canvas></app-canvas>
+                </div>
+            </div>
+        </div>
+    </div>
+</div> -->

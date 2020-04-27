@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
-import { IBoardSettings } from 'src/app/modules/board/models/board.interface';
-import { DefaultBoardSettings } from 'src/app/modules/board/constants/board-default-settings';
+import { IBoardSettings } from 'src/app/modules/board1/models/board.interface';
+import { DefaultBoardSettings } from 'src/app/modules/board1/constants/board-default-settings';
 import { ApiService } from '../api/api.service';
 import { of, Observable, Subject } from 'rxjs';
 import { delay } from 'rxjs/operators';

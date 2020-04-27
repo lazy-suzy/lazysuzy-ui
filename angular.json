@@ -41,8 +41,7 @@
               "node_modules/marked/lib/marked.js",
               "node_modules/jquery/dist/jquery.min.js",
               "node_modules/owl.carousel/dist/owl.carousel.min.js",
-              "src/app/modules/board/components/canvas/fb.min.js",
-              "src/app/modules/board/components/add/dropzone.min.js"
+              "src/app/modules/board/fb.min.js"
             ]
           },
           "configurations": {

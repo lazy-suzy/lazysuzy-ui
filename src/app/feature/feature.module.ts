@@ -9,7 +9,6 @@ import {
   CategoriesModule
 } from './containers';
 import { ProductDetailsMobileModule } from './components';
-import { BlogModule } from './blog/blog/blog.module';
 
 const DECLARATIONS = [];
 
@@ -21,8 +20,7 @@ const MODULES = [
   WishlistModule,
   AllProductsModule,
   CategoriesModule,
-  ProductDetailsMobileModule,
-  BlogModule
+  ProductDetailsMobileModule
 ];
 
 @NgModule({
