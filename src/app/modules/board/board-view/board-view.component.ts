@@ -2,25 +2,16 @@ import { Component, OnInit, HostListener } from '@angular/core';
 import { CookieService } from 'ngx-cookie-service';
 
 import * as $ from 'jquery';
-import { Router } from '@angular/router';
 declare const fb: any;
 
 @Component({
   selector: 'app-board-view',
   templateUrl: './board-view.component.html',
-  styleUrls: ['./board-view.component.less']
+  styleUrls: ['./board-view.component.less', '../board.component.less']
 })
 export class BoardViewComponent implements OnInit {
 
-  selectedItem = null;
-
-  handleBoardSideNavUpdates(event) {
-    debugger;
-    this.selectedItem = {...event};
-    // this.router.navigate([`/board/view/${event.route}`]);
-  }
-
-  constructor(private router: Router,private cookieService: CookieService) { }
+  constructor(private cookieService: CookieService) { }
 
   canvas: any;
   canvasMeta = {

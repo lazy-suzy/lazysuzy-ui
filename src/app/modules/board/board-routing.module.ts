@@ -20,33 +20,6 @@ const routes: Routes = [
     path: boardRoutesNames.BOARD_LIST,
     component: BoardListComponent
   }
-  // {
-  //   path: '',
-  //   component: BoardComponent
-  // },
-  // {
-  //   path: boardRoutesNames.BOARD_LIST,
-  //   component: BoardListComponent
-  // },
-  // {
-  //   path: 'board-landing',
-  //   component: BoardContainerNewComponent,
-  //   children: [
-  //     {
-  //       path: '',
-  //       redirectTo: 'board-select',
-  //       pathMatch: 'full'
-  //     },
-  //     {
-  //       path: 'board-select',
-  //       component: SelectComponent
-  //     },
-  //     {
-  //       path: 'board-text',
-  //       component: TextComponent
-  //     },
-  //   ]
-  // }
 ];
 
 @NgModule({

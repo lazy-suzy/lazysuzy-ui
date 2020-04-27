@@ -80,6 +80,10 @@ export class BoardService {
         return this.apiService.getAllDepartmentsBoard();
     }
 
+    getAllDepartmentsBoard() {
+        return this.apiService.getAllDepartmentsBoard();
+    }
+
     setFilterData(category, filterData) {
         this.state.filterData = { ...filterData };
     }

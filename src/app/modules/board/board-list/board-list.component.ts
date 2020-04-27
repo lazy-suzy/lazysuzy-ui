@@ -10,7 +10,7 @@ import { boardRoutesNames } from '../board.routes.names';
 @Component({
   selector: 'app-board-list',
   templateUrl: './board-list.component.html',
-  styleUrls: ['./board-list.component.less']
+  styleUrls: ['./board-list.component.less', '../board.component.less']
 })
 export class BoardListComponent implements OnInit {
   boards: Board[] = [];

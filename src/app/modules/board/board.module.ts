@@ -9,21 +9,17 @@ import { BoardListComponent } from './board-list/board-list.component';
 import { BoardService } from './board.service';
 import { CookieService } from 'ngx-cookie-service';
 import { BoardRoutingModule } from './board-routing.module';
-import { BoardSideNavComponent } from './board-side-nav/board-side-nav.component';
-import { SharedModule } from 'src/app/shared/shared.module';
 
 @NgModule({
   imports: [
     CommonModule,
-    HttpClientModule,
-    SharedModule,
-    BoardRoutingModule
+    BoardRoutingModule,
+    HttpClientModule
   ],
   declarations: [
     BoardComponent,
     BoardViewComponent,
-    BoardListComponent,
-    BoardSideNavComponent
+    BoardListComponent
   ],
   providers: [BoardService, CookieService]
 })
