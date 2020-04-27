@@ -2,6 +2,7 @@ import { Component, OnInit, HostListener } from '@angular/core';
 import { CookieService } from 'ngx-cookie-service';
 
 import * as $ from 'jquery';
+import { Router } from '@angular/router';
 declare const fb: any;
 
 @Component({
@@ -11,7 +12,15 @@ declare const fb: any;
 })
 export class BoardViewComponent implements OnInit {
 
-  constructor(private cookieService: CookieService) { }
+  selectedItem = null;
+
+  handleBoardSideNavUpdates(event) {
+    debugger;
+    this.selectedItem = {...event};
+    // this.router.navigate([`/board/view/${event.route}`]);
+  }
+
+  constructor(private router: Router,private cookieService: CookieService) { }
 
   canvas: any;
   canvasMeta = {

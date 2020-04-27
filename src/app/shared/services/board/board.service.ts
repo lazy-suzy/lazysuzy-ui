@@ -77,7 +77,7 @@ export class BoardService {
     }
 
     getAllDepartments() {
-        return this.apiService.getAllDepartments();
+        return this.apiService.getAllDepartmentsBoard();
     }
 
     setFilterData(category, filterData) {
