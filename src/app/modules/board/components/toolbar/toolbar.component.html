@@ -1,0 +1,81 @@
+<div class="top-panel row">
+    <div class="col-sm-2  state-icons order-sm-1 ">
+        <i class="mdi mdi-magnify-minus" (click)="zoomOut()" aria-hidden="true"></i>
+        <i class="mdi mdi-magnify-plus" (click)="zoomIn()" aria-hidden="true"></i>
+        <i class="mdi mdi-undo" (click)="undo()" aria-hidden="true"></i>
+        <i class="mdi mdi-redo" (click)="redo()" aria-hidden="true"></i>
+    </div>
+    <div class="">
+        <div class="editor-icons">
+            <select class="js-font-select">
+                <option value="Helvetica" class="helvetica">Helvetica</option>
+                <option value="Times New Roman" class="times-new-roman">Times New Roman</option>
+                <option value="Courier New" class="courier-new">Courier New</option>
+                <option value="Georgia" class="georgia">Georgia</option>
+                <option value="Arial" class="arial" selected="">Arial</option>
+            </select>
+            <select class="js-font-select-size">
+                <option value="8">8</option>
+                <option value="9">9</option>
+                <option value="10">10</option>
+                <option value="11">11</option>
+                <option value="12">12</option>
+                <option value="14" selected="">14</option>
+                <option value="18">18</option>
+                <option value="24">24</option>
+                <option value="30">30</option>
+                <option value="36">36</option>
+                <option value="48">48</option>
+                <option value="60">60</option>
+                <option value="72">72</option>
+                <option value="96">96</option>
+            </select>
+        </div>
+    </div>
+    <div class="col-sm-4 order-sm-3">
+        <div class="item-action-icons">
+            <span data-title="Remove Background" class="image-icons do-transparent" (click)="action('transparent')"
+                style="display: none;">
+                <i class="mdi mdi-auto-fix" aria-hidden="true"></i>
+            </span>
+            <span data-title="Apply Background" class="image-icons undo-transparent" (click)="action('undoTransparent')"
+                style="display: none;">
+                <i class="mdi mdi-format-paint" aria-hidden="true"></i>
+            </span>
+            <span class="background-msg hide">
+                <i class="mdi mdi-arrow-up-bold background-msg-arrow" aria-hidden="true"></i>
+                <i class="mdi mdi-close close-background-msg" aria-hidden="true"></i>
+                Click here to remove background
+            </span>
+            <span class="image-icons" data-title="Duplicate" (click)="action('duplicate')" style=""><i
+                    class="mdi mdi-content-copy" aria-hidden="true"></i></span>
+            <span data-title="Crop" (click)="handleCrop1()" class="image-icons" style=""><i class="mdi mdi-crop"
+                    aria-hidden="true"></i></span>
+            <span class="image-icons" data-title="Flip" (click)="action('flip')" style="">
+                <i class="mdi mdi-autorenew" aria-hidden="true"></i>
+            </span>
+            <span data-title="Send Backward" class="image-icons" (click)="action('sendBackward')" style="">
+                <i class="mdi mdi-arrange-send-backward" aria-hidden="true"></i>
+            </span>
+            <span data-title="Bring Forward" class="image-icons" (click)="action('bringForward')" style="">
+                <i class="mdi mdi-arrange-bring-forward" aria-hidden="true"></i>
+            </span>
+            <span data-title="Delete" class="image-icons" (click)="action('delete')" style="">
+                <i class="mdi mdi-delete" aria-hidden="true"></i>
+            </span>
+        </div>
+    </div>
+</div>
+<div class="top-panel row top-panel-hide crop-toolbar">
+    <div class="col-sm-12 ">
+        <button class="btn" (click)="handleCrop(true)">
+            <i class="mdi mdi-check" aria-hidden="true"></i> Crop
+        </button>
+        <button class="btn" (click)="handleCrop(false)">
+            <i class="mdi mdi-undo" aria-hidden="true"></i> Cancel
+        </button>
+        <button class="btn" (click)="handleCrop(false)">
+            <i class="mdi mdi-minus" aria-hidden="true"></i> Revert
+        </button>
+    </div>
+</div>
