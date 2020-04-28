@@ -43,16 +43,65 @@
           </li>
         </ul>
       </div>
-      
+
       <div class="left-tab-pane">
-        
+
         Selected Tab: {{selectedItem}}
-        
+
         <div *ngIf="selectedItem==='select'" id="select">
           <app-select></app-select>
         </div>
-        
+
         <div *ngIf="selectedItem==='browse'">
+
+          <div class="browse-header">
+            <div class="item-search-bar">
+              <div class="input-group">
+                <input type="text" class="form-control" id="inlineFormInputGroupUsername" placeholder="Search">
+                <div class="input-group-append">
+                  <div class="input-group-text icon">
+                    <i class="mdi mdi-magnify" aria-hidden="true"></i>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="browse-title" (click)="handleGoToSelect($event)">
+              <i class="mdi mdi-chevron-left" aria-hidden="true"></i>
+              <h5 class="title js-category-title">
+                {{selectedCategory?.category}}
+              </h5>
+            </div>
+            <div class="browse-filter">
+              <div class="filter-bar-container">
+                <div class="filter-bar js-filter-section" id="desktop-filter">
+                  <div class="tabs">
+
+                    <p-overlayPanel [showTransitionOptions]="'200ms'" #browsefilter [hideTransitionOptions]="'200ms'"
+                      [dismissable]="false" [showCloseIcon]="true" #op1 [appendTo]="'body'">
+                      <ng-template pTemplate>
+                        <app-browse-filter (updatesFromFilter)="handleUpdatesFromFilter($event)">
+                        </app-browse-filter>
+                      </ng-template>
+                    </p-overlayPanel>
+
+                    <button type="text" pButton class="btn btn-primary" label="Custom Target"
+                      (click)="op1.show($event, actualTarget1)">Filters</button>
+                    <div #actualTarget1></div>
+
+                    <div class="static-bottom-panel-wrapper" *ngIf="productForPreview" style="z-index: 9999999;">
+                      <div class="static-bottom-panel selected">
+                        <app-product-preview [data]="productForPreview"
+                          (clearProductPreview)="handleClearProductPreview($event)"
+                          (addProductBoard)="handleAddProductBoardPreview($event)"></app-product-preview>
+                      </div>
+                    </div>
+
+                  </div>
+                </div>
+              </div>
+              <div class="clear-all d-none d-md-block">Clear All</div>
+            </div>
+          </div>
 
           <div class="text-left w-100">
             <h5 class="title ml-2">Select New Category</h5>
@@ -75,7 +124,7 @@
           Live products
           <div class="flex-grid" *ngIf="remoteProducts.length">
             <div class="flex-grid-item" *ngFor="let product of remoteProducts;index as i">
-              <div class="product-image" attr.data-product="{{i}}" type="default">
+              <div class="product-image" (click)="handleProductPreview(product)" attr.data-product="{{i}}" type="default">
                 <img drop-type="image" draggable="true" src={{product.main_image}} />
               </div>
             </div>
@@ -85,7 +134,7 @@
         <div *ngIf="selectedItem==='board'" id="board" class="tab"></div>
 
         <div *ngIf="selectedItem==='text'" id="text" class="tab">
-          <div>
+          < <div>
             <h5 class="title ml-2">Insert Text</h5>
             <div>
               <div class="text-items ml-2 manual-drop helvetica" drop-type="text" draggable="true">
@@ -104,108 +153,86 @@
                 <span>Arial</span>
               </div>
             </div>
-          </div>
-        </div>
+        </div>>
+      </div>
 
-        <div *ngIf="selectedItem==='favorites'" id="favorites" class="tab">
+      <div *ngIf="selectedItem==='favorites'" id="favorites" class="tab">
+        <div>
+          <h4 class="title">Favorites</h4>
+          <!-- When user is not logged in -->
           <div>
-            <h4 class="title">Favorites</h4>
-            <!-- When user is not logged in -->
-            <div>
-              <a href="#modal" class="js-login-modal">Login</a> to see your
-              saved items
-            </div>
-            <!-- When user is logged in but no items are there-->
-            <div>No favorites found :(</div>
-            <div>Save items to your account to see them here.</div>
-            <!-- When user is logged in and items are there-->
-            <div class="flex-grid">
-              <div class="flex-grid-item">
-                <div class="product-image" data-product="1">
-                  <img src="https://www.lazysuzy.com/Pier-1/pier1_images/3937287_main.jpg" />
-                </div>
-              </div>
-              <div class="flex-grid-item">
-                <div class="product-image" data-product="2">
-                  <img src="https://www.lazysuzy.com/Pier-1/pier1_images/3937311_main.jpg" />
-                </div>
-              </div>
-              <div class="flex-grid-item">
-                <div class="product-image" data-product="3">
-                  <img src="https://www.lazysuzy.com/Pier-1/pier1_images/3937352_main.jpg" />
-                </div>
-              </div>
-            </div>
+            <a href="#modal" class="js-login-modal">Login</a> to see your
+            saved items
           </div>
-          <div class="static-bottom-panel-wrapper">
-            <div class="static-bottom-panel">
-              <div class="product-cont">
-                <div class="image">
-                  <img src="https://www.lazysuzy.com/Pier-1/pier1_images/3937287_main.jpg" />
-                </div>
-                <div class="product-info">
-                  <div class="float-right js-bottom-panel-close">
-                    <i class="mdi mdi-close" aria-hidden="true"></i>
-                  </div>
-                  <div>Gray Jasper Sofa</div>
-                  <div class="brand">World Market</div>
-                  <div class="price">$499.99</div>
-                  <div class="icons">
-                    <div class="icon">
-                      <i class="mdi mdi-plus" aria-hidden="true"></i>
-                    </div>
-                    <div class="icon">
-                      <i class="mdi mdi-cards-heart" aria-hidden="true"></i>
-                    </div>
-                    <div class="icon">
-                      <i class="mdi mdi-open-in-new" aria-hidden="true"></i>
-                    </div>
-                  </div>
-                </div>
+          <!-- When user is logged in but no items are there-->
+          <div>No favorites found :(</div>
+          <div>Save items to your account to see them here.</div>
+          <!-- When user is logged in and items are there-->
+          <div class="flex-grid">
+            <div class="flex-grid-item">
+              <div class="product-image" data-product="1">
+                <img src="https://www.lazysuzy.com/Pier-1/pier1_images/3937287_main.jpg" />
+              </div>
+            </div>
+            <div class="flex-grid-item">
+              <div class="product-image" data-product="2">
+                <img src="https://www.lazysuzy.com/Pier-1/pier1_images/3937311_main.jpg" />
+              </div>
+            </div>
+            <div class="flex-grid-item">
+              <div class="product-image" data-product="3">
+                <img src="https://www.lazysuzy.com/Pier-1/pier1_images/3937352_main.jpg" />
               </div>
             </div>
           </div>
         </div>
-
-        <div *ngIf="selectedItem==='add'" id="add" class="tab">
-          <div class="catalog-content">
-            <form class="icon lg add-new">
-              <div class="dropzone-previews dz-message">
-                Click to Upload or Drag & Drop Here
+        <div class="static-bottom-panel-wrapper">
+          <div class="static-bottom-panel">
+            <div class="product-cont">
+              <div class="image">
+                <img src="https://www.lazysuzy.com/Pier-1/pier1_images/3937287_main.jpg" />
               </div>
-            </form>
-            <div class="mb-3">
-              <span class="add-new-url js-addUrl">Or add via URL</span>
-              <span class="add-new-url-msg"><i class="mdi mdi-information" aria-hidden="true"></i> Must
-                be .jpg or .png file</span>
+              <div class="product-info">
+                <div class="float-right js-bottom-panel-close">
+                  <i class="mdi mdi-close" aria-hidden="true"></i>
+                </div>
+                <div>Gray Jasper Sofa</div>
+                <div class="brand">World Market</div>
+                <div class="price">$499.99</div>
+                <div class="icons">
+                  <div class="icon">
+                    <i class="mdi mdi-plus" aria-hidden="true"></i>
+                  </div>
+                  <div class="icon">
+                    <i class="mdi mdi-cards-heart" aria-hidden="true"></i>
+                  </div>
+                  <div class="icon">
+                    <i class="mdi mdi-open-in-new" aria-hidden="true"></i>
+                  </div>
+                </div>
+              </div>
             </div>
-            <div class="d-flex mb-3">
-              <div class="add-new-title active" href="myItems">My Items</div>
-              <div class="add-new-title" href="allUploads">All Uploads</div>
-            </div>
-            <div class="items-board active" id="myItems">
-              <div class="flex-grid"></div>
-            </div>
-            <div class="items-board" id="allUploads">
-              <div class="flex-grid"></div>
-            </div>
-            <div class="bottom-panel bottom-panel-custom"></div>
           </div>
         </div>
       </div>
+
+      <div *ngIf="selectedItem==='add'">
+        <app-add></app-add>
+      </div>
     </div>
-    <div class="main-content container-fluid">
-      <div class="row">
-        <div class="col-md-12 tool-bar-holder">
-          <div class="top-panel row top-panel-hide">
-            <div class="col-sm-2  state-icons order-sm-1 ">
-              <i class="mdi mdi-magnify-minus" (click)="zoomOut()" aria-hidden="true"></i>
-              <i class="mdi mdi-magnify-plus" (click)="zoomIn()" aria-hidden="true"></i>
-              <i class="mdi mdi-undo" (click)="undo()" aria-hidden="true"></i>
-              <i class="mdi mdi-redo" (click)="redo()" aria-hidden="true"></i>
-            </div>
-            <div class="col-sm-6 text-right order-last order-sm-2 ">
-              <!-- <span data-title="Change color">
+  </div>
+  <div class="main-content container-fluid">
+    <div class="row">
+      <div class="col-md-12 tool-bar-holder">
+        <div class="top-panel row top-panel-hide">
+          <div class="col-sm-2  state-icons order-sm-1 ">
+            <i class="mdi mdi-magnify-minus" (click)="zoomOut()" aria-hidden="true"></i>
+            <i class="mdi mdi-magnify-plus" (click)="zoomIn()" aria-hidden="true"></i>
+            <i class="mdi mdi-undo" (click)="undo()" aria-hidden="true"></i>
+            <i class="mdi mdi-redo" (click)="redo()" aria-hidden="true"></i>
+          </div>
+          <div class="col-sm-6 text-right order-last order-sm-2 ">
+            <!-- <span data-title="Change color">
                   <i class="mdi mdi-format-color-text" aria-hidden="true"></i>
                 </span>
                 <span data-title="Bold">
@@ -220,91 +247,91 @@
                 <span data-title="Uppercase">
                   <i class="mdi mdi-format-letter-case" style="font-size: 1.3em" aria-hidden="true"></i>
                 </span> -->
-              <div class="editor-icons">
-                <select class="js-font-select">
-                  <option value="Helvetica" class="helvetica">Helvetica</option>
-                  <option value="Times New Roman" class="times-new-roman">Times New Roman</option>
-                  <option value="Courier New" class="courier-new">Courier New</option>
-                  <option value="Georgia" class="georgia">Georgia</option>
-                  <option value="Arial" class="arial" selected>Arial</option>
-                </select>
-                <select class="js-font-select-size">
-                  <option value="8">8</option>
-                  <option value="9">9</option>
-                  <option value="10">10</option>
-                  <option value="11">11</option>
-                  <option value="12">12</option>
-                  <option value="14" selected>14</option>
-                  <option value="18">18</option>
-                  <option value="24">24</option>
-                  <option value="30">30</option>
-                  <option value="36">36</option>
-                  <option value="48">48</option>
-                  <option value="60">60</option>
-                  <option value="72">72</option>
-                  <option value="96">96</option>
-                </select>
-                <input type="color" class="js-font-select-color" />
-              </div>
-            </div>
-            <div class="col-sm-4 order-sm-3">
-              <div class="item-action-icons">
-                <span data-title="Remove Background" class="image-icons do-transparent" (click)="action('transparent')">
-                  <i class="mdi mdi-auto-fix" aria-hidden="true"></i>
-                </span>
-                <span data-title="Apply Background" class="image-icons undo-transparent"
-                  (click)="action('undoTransparent')">
-                  <i class="mdi mdi-format-paint" aria-hidden="true"></i>
-                </span>
-                <span class="background-msg hide">
-                  <i class="mdi mdi-arrow-up-bold background-msg-arrow" aria-hidden="true"></i>
-                  <i class="mdi mdi-close close-background-msg" aria-hidden="true"></i>
-                  Click here to remove background
-                </span>
-                <span class="image-icons" data-title="Duplicate" (click)="action('duplicate')"><i
-                    class="mdi mdi-content-copy" aria-hidden="true"></i></span>
-                <span data-title="Crop" (click)="handleCrop()" class="image-icons"><i class="mdi mdi-crop"
-                    aria-hidden="true"></i></span>
-                <span class="image-icons" data-title="Flip" (click)="action('flip')">
-                  <i class="mdi mdi-autorenew" aria-hidden="true"></i>
-                </span>
-                <span data-title="Send Backward" class="image-icons" (click)="action('sendBackward')">
-                  <i class="mdi mdi-arrange-send-backward" aria-hidden="true"></i>
-                </span>
-                <span data-title="Bring Forward" class="image-icons" (click)="action('bringForward')">
-                  <i class="mdi mdi-arrange-bring-forward" aria-hidden="true"></i>
-                </span>
-                <span data-title="Delete" class="image-icons" (click)="action('delete')">
-                  <i class="mdi mdi-delete" aria-hidden="true"></i>
-                </span>
-              </div>
+            <div class="editor-icons">
+              <select class="js-font-select">
+                <option value="Helvetica" class="helvetica">Helvetica</option>
+                <option value="Times New Roman" class="times-new-roman">Times New Roman</option>
+                <option value="Courier New" class="courier-new">Courier New</option>
+                <option value="Georgia" class="georgia">Georgia</option>
+                <option value="Arial" class="arial" selected>Arial</option>
+              </select>
+              <select class="js-font-select-size">
+                <option value="8">8</option>
+                <option value="9">9</option>
+                <option value="10">10</option>
+                <option value="11">11</option>
+                <option value="12">12</option>
+                <option value="14" selected>14</option>
+                <option value="18">18</option>
+                <option value="24">24</option>
+                <option value="30">30</option>
+                <option value="36">36</option>
+                <option value="48">48</option>
+                <option value="60">60</option>
+                <option value="72">72</option>
+                <option value="96">96</option>
+              </select>
+              <input type="color" class="js-font-select-color" />
             </div>
           </div>
-          <div class="top-panel row top-panel-hide crop-toolbar">
-            <div class="col-sm-12 ">
-              <button class="btn" (click)="handleCrop(true)">
-                <i class="mdi mdi-check" aria-hidden="true"></i> Crop
-              </button>
-              <button class="btn" (click)="handleCrop(false)">
-                <i class="mdi mdi-undo" aria-hidden="true"></i> Cancel
-              </button>
-              <button class="btn" (click)="handleCrop(false, true)">
-                <i class="mdi mdi-minus" aria-hidden="true"></i> Revert
-              </button>
+          <div class="col-sm-4 order-sm-3">
+            <div class="item-action-icons">
+              <span data-title="Remove Background" class="image-icons do-transparent" (click)="action('transparent')">
+                <i class="mdi mdi-auto-fix" aria-hidden="true"></i>
+              </span>
+              <span data-title="Apply Background" class="image-icons undo-transparent"
+                (click)="action('undoTransparent')">
+                <i class="mdi mdi-format-paint" aria-hidden="true"></i>
+              </span>
+              <span class="background-msg hide">
+                <i class="mdi mdi-arrow-up-bold background-msg-arrow" aria-hidden="true"></i>
+                <i class="mdi mdi-close close-background-msg" aria-hidden="true"></i>
+                Click here to remove background
+              </span>
+              <span class="image-icons" data-title="Duplicate" (click)="action('duplicate')"><i
+                  class="mdi mdi-content-copy" aria-hidden="true"></i></span>
+              <span data-title="Crop" (click)="handleCrop()" class="image-icons"><i class="mdi mdi-crop"
+                  aria-hidden="true"></i></span>
+              <span class="image-icons" data-title="Flip" (click)="action('flip')">
+                <i class="mdi mdi-autorenew" aria-hidden="true"></i>
+              </span>
+              <span data-title="Send Backward" class="image-icons" (click)="action('sendBackward')">
+                <i class="mdi mdi-arrange-send-backward" aria-hidden="true"></i>
+              </span>
+              <span data-title="Bring Forward" class="image-icons" (click)="action('bringForward')">
+                <i class="mdi mdi-arrange-bring-forward" aria-hidden="true"></i>
+              </span>
+              <span data-title="Delete" class="image-icons" (click)="action('delete')">
+                <i class="mdi mdi-delete" aria-hidden="true"></i>
+              </span>
             </div>
           </div>
-          <div class="top-panel row top-panel-wrapper d-xl-none" data-interval="false">
-            <div class="top-panel-container">
-              <div class="top-panel-scroll-contents editor-icons ml-2" id="canvasPalleteScrollContents">
-                <span class="state-icons order-sm-1 state-icons-hide">
-                  <i class="mdi mdi-magnify-minus" (click)="zoomOut()" aria-hidden="true"></i>
-                  <i class="mdi mdi-magnify-plus" (click)="zoomIn()" aria-hidden="true"></i>
-                  <i class="mdi mdi-undo" (click)="undo()" aria-hidden="true"></i>
-                  <i class="mdi mdi-redo" (click)="redo()" aria-hidden="true"></i>
-                </span>
-                <!-- <input class="js-font-select" type="text"> -->
+        </div>
+        <div class="top-panel row top-panel-hide crop-toolbar">
+          <div class="col-sm-12 ">
+            <button class="btn" (click)="handleCrop(true)">
+              <i class="mdi mdi-check" aria-hidden="true"></i> Crop
+            </button>
+            <button class="btn" (click)="handleCrop(false)">
+              <i class="mdi mdi-undo" aria-hidden="true"></i> Cancel
+            </button>
+            <button class="btn" (click)="handleCrop(false, true)">
+              <i class="mdi mdi-minus" aria-hidden="true"></i> Revert
+            </button>
+          </div>
+        </div>
+        <div class="top-panel row top-panel-wrapper d-xl-none" data-interval="false">
+          <div class="top-panel-container">
+            <div class="top-panel-scroll-contents editor-icons ml-2" id="canvasPalleteScrollContents">
+              <span class="state-icons order-sm-1 state-icons-hide">
+                <i class="mdi mdi-magnify-minus" (click)="zoomOut()" aria-hidden="true"></i>
+                <i class="mdi mdi-magnify-plus" (click)="zoomIn()" aria-hidden="true"></i>
+                <i class="mdi mdi-undo" (click)="undo()" aria-hidden="true"></i>
+                <i class="mdi mdi-redo" (click)="redo()" aria-hidden="true"></i>
+              </span>
+              <!-- <input class="js-font-select" type="text"> -->
 
-                <!-- <span data-title="Change color">
+              <!-- <span data-title="Change color">
                     <i class="mdi mdi-format-color-text" aria-hidden="true"></i>
                   </span>
                   <span data-title="Bold">
@@ -320,83 +347,83 @@
                     <i class="mdi mdi-format-letter-case" aria-hidden="true"></i>
                   </span> -->
 
-                <select class="js-font-select">
-                  <option value="Helvetica" class="helvetica">Helvetica</option>
-                  <option value="Times New Roman" class="times-new-roman">Times New Roman</option>
-                  <option value="Courier New" class="courier-new">Courier New</option>
-                  <option value="Georgia" class="georgia">Georgia</option>
-                  <option value="Arial" class="arial" selected>Arial</option>
-                </select>
-                <select class="js-font-select-size">
-                  <option value="8">8</option>
-                  <option value="9">9</option>
-                  <option value="10">10</option>
-                  <option value="11">11</option>
-                  <option value="12">12</option>
-                  <option value="14" selected>14</option>
-                  <option value="18">18</option>
-                  <option value="24">24</option>
-                  <option value="30">30</option>
-                  <option value="36">36</option>
-                  <option value="48">48</option>
-                  <option value="60">60</option>
-                  <option value="72">72</option>
-                  <option value="96">96</option>
-                </select>
-                <input type="color" class="font-color-picker" />
-                <span data-title="Remove Background" class="image-icons do-transparent" (click)="action('transparent')">
-                  <i class="mdi mdi-auto-fix" aria-hidden="true"></i>
-                </span>
-                <span data-title="Apply Background" class="image-icons undo-transparent"
-                  (click)="action('undoTransparent')">
-                  <i class="mdi mdi-format-paint" aria-hidden="true"></i>
-                </span>
-                <span data-title="Duplicate" (click)="action('duplicate')"><i class="mdi mdi-content-copy"
-                    aria-hidden="true"></i></span>
-                <span data-title="Crop" (click)="handleCrop()" class="image-icons"><i class="mdi mdi-crop"
-                    aria-hidden="true"></i></span>
-                <span data-title="Flip" (click)="action('flip')">
-                  <i class="mdi mdi-autorenew" aria-hidden="true"></i>
-                </span>
-                <span data-title="Send Backward" (click)="action('sendBackward')">
-                  <i class="mdi mdi-arrange-send-backward" aria-hidden="true"></i>
-                </span>
-                <span data-title="Bring Forward" (click)="action('bringForward')">
-                  <i class="mdi mdi-arrange-bring-forward" aria-hidden="true"></i>
-                </span>
-                <span data-title="Delete" (click)="action('delete')">
-                  <i class="mdi mdi-delete" aria-hidden="true"></i>
-                </span>
-              </div>
+              <select class="js-font-select">
+                <option value="Helvetica" class="helvetica">Helvetica</option>
+                <option value="Times New Roman" class="times-new-roman">Times New Roman</option>
+                <option value="Courier New" class="courier-new">Courier New</option>
+                <option value="Georgia" class="georgia">Georgia</option>
+                <option value="Arial" class="arial" selected>Arial</option>
+              </select>
+              <select class="js-font-select-size">
+                <option value="8">8</option>
+                <option value="9">9</option>
+                <option value="10">10</option>
+                <option value="11">11</option>
+                <option value="12">12</option>
+                <option value="14" selected>14</option>
+                <option value="18">18</option>
+                <option value="24">24</option>
+                <option value="30">30</option>
+                <option value="36">36</option>
+                <option value="48">48</option>
+                <option value="60">60</option>
+                <option value="72">72</option>
+                <option value="96">96</option>
+              </select>
+              <input type="color" class="font-color-picker" />
+              <span data-title="Remove Background" class="image-icons do-transparent" (click)="action('transparent')">
+                <i class="mdi mdi-auto-fix" aria-hidden="true"></i>
+              </span>
+              <span data-title="Apply Background" class="image-icons undo-transparent"
+                (click)="action('undoTransparent')">
+                <i class="mdi mdi-format-paint" aria-hidden="true"></i>
+              </span>
+              <span data-title="Duplicate" (click)="action('duplicate')"><i class="mdi mdi-content-copy"
+                  aria-hidden="true"></i></span>
+              <span data-title="Crop" (click)="handleCrop()" class="image-icons"><i class="mdi mdi-crop"
+                  aria-hidden="true"></i></span>
+              <span data-title="Flip" (click)="action('flip')">
+                <i class="mdi mdi-autorenew" aria-hidden="true"></i>
+              </span>
+              <span data-title="Send Backward" (click)="action('sendBackward')">
+                <i class="mdi mdi-arrange-send-backward" aria-hidden="true"></i>
+              </span>
+              <span data-title="Bring Forward" (click)="action('bringForward')">
+                <i class="mdi mdi-arrange-bring-forward" aria-hidden="true"></i>
+              </span>
+              <span data-title="Delete" (click)="action('delete')">
+                <i class="mdi mdi-delete" aria-hidden="true"></i>
+              </span>
             </div>
           </div>
-          <div class="canvas-content">
-            <div class="d-flex">
-              <div class="canvas-title-bar">
-                <div class="canvas-icons">
-                  <a data-title="Edit Board Settings">
-                    <i class="mdi mdi-settings js-open-config" aria-hidden="true"></i>
-                  </a>
-                </div>
-              </div>
-              <div class="w-38">
-                <input class="form-control board-title" placeholder="Board title" />
+        </div>
+        <div class="canvas-content">
+          <div class="d-flex">
+            <div class="canvas-title-bar">
+              <div class="canvas-icons">
+                <a data-title="Edit Board Settings">
+                  <i class="mdi mdi-settings js-open-config" aria-hidden="true"></i>
+                </a>
               </div>
             </div>
-            <div class="canvas">
-              <div id="canvas-droparea">
-                <canvas id="canvas-area" style="border:1px solid black"></canvas>
-              </div>
+            <div class="w-38">
+              <input class="form-control board-title" placeholder="Board title" />
             </div>
-            <div class="col-sm-2 col-5 state-icons d-lg-none">
-              <i class="mdi mdi-magnify-minus" (click)="zoomOut()" aria-hidden="true"></i>
-              <i class="mdi mdi-magnify-plus" (click)="zoomIn()" aria-hidden="true"></i>
-              <i class="mdi mdi-undo" (click)="undo()" aria-hidden="true"></i>
-              <i class="mdi mdi-redo" (click)="redo()" aria-hidden="true"></i>
+          </div>
+          <div class="canvas">
+            <div id="canvas-droparea">
+              <canvas id="canvas-area" style="border:1px solid black"></canvas>
             </div>
+          </div>
+          <div class="col-sm-2 col-5 state-icons d-lg-none">
+            <i class="mdi mdi-magnify-minus" (click)="zoomOut()" aria-hidden="true"></i>
+            <i class="mdi mdi-magnify-plus" (click)="zoomIn()" aria-hidden="true"></i>
+            <i class="mdi mdi-undo" (click)="undo()" aria-hidden="true"></i>
+            <i class="mdi mdi-redo" (click)="redo()" aria-hidden="true"></i>
           </div>
         </div>
       </div>
     </div>
   </div>
+</div>
 </div>

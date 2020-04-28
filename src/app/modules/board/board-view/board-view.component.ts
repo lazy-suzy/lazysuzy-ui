@@ -15,6 +15,7 @@ export class BoardViewComponent implements OnInit {
   selectedItem = 'select';
   selectedCategory = null;
   showLoader = false;
+  productForPreview = null;
 
   constructor(
     private cookieService: CookieService,
@@ -23,12 +24,20 @@ export class BoardViewComponent implements OnInit {
 
   goTo(selectedItem) {
     this.selectedItem = selectedItem;
-    if(selectedItem === 'browse'){
+    if (selectedItem === 'browse') {
       this.getBrowseData();
     }
   }
 
-  getBrowseData(){
+  handleProductPreview(product) {
+    this.productForPreview = { ...product };
+  }
+
+  handleClearProductPreview(product) {
+    this.productForPreview = null;
+  }
+
+  getBrowseData() {
     this.selectedCategory = {
       LS_ID: '201'
     };
