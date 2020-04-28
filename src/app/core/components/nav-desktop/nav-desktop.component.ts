@@ -29,7 +29,8 @@ export class NavDesktopComponent {
     private cookie: CookieService
   ) {
     this.checkHomeRoute = router.events.subscribe(val => {
-      this.notHome = location.path() !== '';
+      // this.notHome = location.path() !== '';
+      this.notHome = (location.path() !== '' && location.path().match(/board/) == null);
     });
     this.getDepartments();
   }
