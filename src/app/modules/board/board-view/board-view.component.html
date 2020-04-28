@@ -73,9 +73,9 @@
           </div>
 
           Live products
-          <div class="flex-grid" *ngIf="products.length">
-            <div class="flex-grid-item" *ngFor="let product of products">
-              <div class="product-image" attr.data-product="{{product.id}}" type="default"
+          <div class="flex-grid" *ngIf="remoteProducts.length">
+            <div class="flex-grid-item" *ngFor="let product of remoteProducts;index as i">
+              <div class="product-image" attr.data-product="{{i}}" type="default"
                 (click)="previewProductFn(product)">
                 <img drop-type="image" draggable="true" src={{product.main_image}} />
               </div>

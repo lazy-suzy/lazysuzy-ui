@@ -14,7 +14,7 @@ export class BoardViewComponent implements OnInit {
 
   selectedItem = 'select';
   selectedCategory = null;
-  products = [];
+  remoteProducts = [];
   showLoader = false;
 
   constructor(
@@ -34,7 +34,7 @@ export class BoardViewComponent implements OnInit {
       LS_ID: '201'
     };
     this.boardService.getBrowseTabData(this.selectedCategory).subscribe((s: any) => {
-      this.products = [...(s.products) || []];
+      this.remoteProducts = [...(s.products) || []];
       this.showLoader = false;
     });
   }
@@ -232,13 +232,6 @@ export class BoardViewComponent implements OnInit {
 
   facebookRedirect = "";
   googleRedirect = "";
-  remoteProducts = [{
-    id: 1,
-    main_image: "https://www.lazysuzy.com/westelm/xbg/aston-leather-sofa-86-5-h4745_11_xbg.png",
-    name: "Test Product",
-    is_price: "$199.99",
-    site: "lazysuzy",
-  }];
 
   @HostListener('window:resize', ['$event'])
   onResize() {
