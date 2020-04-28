@@ -24,103 +24,68 @@
       <div class="left-tabs">
         <ul class="nav nav-tabs flex-column">
           <li class="nav-item">
-            <a class="nav-link active" href="#select">Select</a>
+            <a class="nav-link active" (click)="goTo('select')">Select</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="#browse">Browse</a>
+            <a class="nav-link" (click)="goTo('browse')">Browse</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="#add">Add</a>
+            <a class="nav-link" (click)="goTo('add')">Add</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="#favorites">Favorites</a>
+            <a class="nav-link" (click)="goTo('favorites')">Favorites</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="#text">Text</a>
+            <a class="nav-link" (click)="goTo('text')">Text</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="#board">Board</a>
+            <a class="nav-link" (click)="goTo('board')">Board</a>
           </li>
         </ul>
       </div>
+      
       <div class="left-tab-pane">
-        <div id="select" class="tab active components tab-0-pad">
-          <div class="flex-grid">
-            <div class="browse-header w-100">
-              <div class="item-search-bar">
-                <div class="input-group">
-                  <input type="text" class="form-control" id="inlineFormInputGroupUsername" placeholder="Search" />
-                  <div class="input-group-append">
-                    <div class="input-group-text icon">
-                      <i class="mdi mdi-magnify" aria-hidden="true"></i>
-                    </div>
-                  </div>
+        
+        Selected Tab: {{selectedItem}}
+        
+        <div *ngIf="selectedItem==='select'" id="select">
+          <app-select></app-select>
+        </div>
+        
+        <div *ngIf="selectedItem==='browse'">
+
+          <div class="text-left w-100">
+            <h5 class="title ml-2">Select New Category</h5>
+            <!-- SAMPLE -->
+            Static products
+            <div class="text-items ml-2 manual-drop arial" drop-type="text" draggable="true">
+              <span>Arial</span>
+            </div>
+            <div class="flex-grid">
+              <div class="flex-grid-item">
+                <div class="product-image" data-product="0" type="default">
+                  <img drop-type="image" draggable="true"
+                    src="https://www.lazysuzy.com/westelm/xbg/aston-leather-sofa-86-5-h4745_11_xbg.png">
                 </div>
               </div>
-              <div class="text-left w-100">
-                <h5 class="title ml-2">Select New Category</h5>
-                <!-- SAMPLE -->
-                <div class="text-items ml-2 manual-drop arial" drop-type="text" draggable="true">
-                  <span>Arial</span>
-                </div>
-                <div class="flex-grid">
-                  <div class="flex-grid-item">
-                    <div class="product-image" data-product="0" type="default">
-                      <img drop-type="image" draggable="true"
-                        src="https://www.lazysuzy.com/westelm/xbg/aston-leather-sofa-86-5-h4745_11_xbg.png">
-                    </div>
-                  </div>
-                </div>
-                <!-- SAMPLE -->
+            </div>
+            <!-- SAMPLE -->
+          </div>
+
+          Live products
+          <div class="flex-grid" *ngIf="products.length">
+            <div class="flex-grid-item" *ngFor="let product of products">
+              <div class="product-image" attr.data-product="{{product.id}}" type="default"
+                (click)="previewProductFn(product)">
+                <img drop-type="image" draggable="true" src={{product.main_image}} />
               </div>
             </div>
           </div>
         </div>
-        <div id="browse" class="tab tab-0-pad">
-          <div class="browse-header">
-            <div class="item-search-bar">
-              <div class="input-group">
-                <input type="text" class="form-control" id="inlineFormInputGroupUsername" placeholder="Search" />
-                <div class="input-group-append">
-                  <div class="input-group-text icon">
-                    <i class="mdi mdi-magnify" aria-hidden="true"></i>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div class="browse-title">
-              <i class="mdi mdi-chevron-left" aria-hidden="true"></i>
-              <h5 class="title js-category-title">Sofa</h5>
-            </div>
-            <div class="browse-filter">
-              <!-- <div class="browse-filter-item" data-type="new">New</div>
-                <div class="browse-filter-item" data-type="sale">Sale</div>
-                <div class="browse-filter-item" data-type="top">Best Sellers</div> -->
-              <div class="icon filter-icon">
-                <i class="mdi mdi-filter" aria-hidden="true"></i>
-              </div>
-              <div class="clear-all d-none d-lg-block">Clear All</div>
-              <div class="filter-bar-container">
-                <div class="filter-bar js-filter-section" id="desktop-filter"></div>
-              </div>
-              <!-- <div class="clear-all d-none d-md-block d-lg-none">Clear All</div> -->
-            </div>
-          </div>
 
-          <div class="products">
-            <!-- <img src="./Spinner-1s-100px.gif" class="spinner-loader" /> -->
-            <div class="flex-grid"></div>
-            <div class="text-center">
-              <button class="btn red-button js-load-more">
-                Load more
-              </button>
-            </div>
-          </div>
+        <div *ngIf="selectedItem==='board'" id="board" class="tab"></div>
 
-          <div class="bottom-panel"></div>
-        </div>
-        <div id="board" class="tab"></div>
-        <div id="text" class="tab">
+        <div *ngIf="selectedItem==='text'" id="text" class="tab">
           <div>
             <h5 class="title ml-2">Insert Text</h5>
             <div>
@@ -142,7 +107,8 @@
             </div>
           </div>
         </div>
-        <div id="favorites" class="tab">
+
+        <div *ngIf="selectedItem==='favorites'" id="favorites" class="tab">
           <div>
             <h4 class="title">Favorites</h4>
             <!-- When user is not logged in -->
@@ -201,7 +167,8 @@
             </div>
           </div>
         </div>
-        <div id="add" class="tab">
+
+        <div *ngIf="selectedItem==='add'" id="add" class="tab">
           <div class="catalog-content">
             <form class="icon lg add-new">
               <div class="dropzone-previews dz-message">
@@ -430,371 +397,6 @@
             </div>
           </div>
         </div>
-      </div>
-    </div>
-  </div>
-  <div class="backdrop"></div>
-  <div class="modal add-product-modal">
-    <div class="close-modal close-icon">
-      <i class="mdi mdi-close" aria-hidden="true"></i>
-    </div>
-    <div id="step1" class="step active">
-      <h4>Add Image</h4>
-      <div class="content">
-        <div class="row text-center">
-          <div class="col-sm-6">
-            <button class="btn red-button lg">
-              Upload an Image
-            </button>
-          </div>
-          <div class="col-sm-6">
-            <button target="#step2" class="btn red-button lg js-btn">
-              Add Image by url
-            </button>
-          </div>
-        </div>
-      </div>
-    </div>
-    <div id="step2" class="step">
-      <h4>Add Image</h4>
-      <div class="add-image-form">
-        <div>
-          <input name="url" class="form-control" placeholder="Image url" />
-          <div class="subtle">Must be .png or .jpg</div>
-        </div>
-      </div>
-
-      <div class="row modal-action">
-        <div class="col-6 text-right">
-          <button target="#step1" class="btn btn-cancel js-btn">Back</button>
-        </div>
-        <div class="col-6">
-          <button target="#step3" class="btn red-button js-btn">Next</button>
-        </div>
-        <div class="col-12 step-count subtle text-center">Step 1 of 2</div>
-      </div>
-    </div>
-    <div id="step3" class="step">
-      <h4>Add Image</h4>
-      <div class="add-image-form d-grid">
-        <div class="add-image-input">
-          <input name="name" class="form-control" placeholder="Product Title" />
-        </div>
-        <div class="add-image-input">
-          <input name="price" class="form-control" placeholder="Price" />
-        </div>
-        <div class="add-image-input">
-          <input name="listing_url" class="form-control" placeholder="Product Listing URL" />
-        </div>
-        <div class="add-image-input">
-          <input name="tags" class="form-control" placeholder="Additional Tags" />
-          <div class="subtle">Separate by comma</div>
-        </div>
-        <div class="add-image-input-checkbox">
-          <div>
-            <input name="is_private" type="checkbox" class="keep-private-checkbox" />
-          </div>
-          <div class="ml-1">
-            <span>Keep Private</span>
-          </div>
-        </div>
-      </div>
-
-      <div class="row modal-action">
-        <div class="col-6 text-right">
-          <button target="#step2" class="btn btn-cancel js-btn">Back</button>
-        </div>
-        <div class="col-6">
-          <button class="btn red-button js-btn">Add</button>
-        </div>
-        <div class="col-12 step-count subtle text-center">Step 2 of 2</div>
-      </div>
-    </div>
-  </div>
-  <div class="modal confirmation-modal text-center">
-    <div>
-      Are you sure? This can't be undone.
-    </div>
-    <div class="row modal-action">
-      <div class="col-6 text-right">
-        <button class="btn btn-cancel">DELETE</button>
-      </div>
-      <div class="col-6">
-        <button class="js-close-confirmation-modal btn red-button">
-          CANCEL
-        </button>
-      </div>
-    </div>
-  </div>
-  <div class="modal background-modal text-center">
-    <div>
-      <div class="close-icon js-close-background-modal">
-        <i class="mdi mdi-close" aria-hidden="true"></i>
-      </div>
-      <div class="remove-background text-center">
-        Remove Background
-      </div>
-      <div>
-        <img class="img-modal" src="https://www.lazysuzy.com/Pier-1/pier1_images/2874448_main.jpg" />
-      </div>
-      <div class="row modal-action">
-        <div class="col-6 text-right">
-          <button target="#step3" class="btn btn-cancel js-close-background-modal">
-            Cancel
-          </button>
-        </div>
-        <div class="col-6">
-          <button class="btn red-button">Accept</button>
-        </div>
-      </div>
-    </div>
-  </div>
-  <div class="modal canvas-config pb-0">
-    <div class="row">
-      <div class="col-12">
-        <h4 class="board-header">CREATE NEW BOARD</h4>
-        <h5 class="title ml-2">Select Layout Style</h5>
-      </div>
-      <div class="col-6 ">
-        <div class="canvas-style" target="#board-options-modal">
-          <div class="canvas-layout"></div>
-          <h5>BOARD</h5>
-        </div>
-      </div>
-      <div class="col-6 text-center">
-        <div class="canvas-style" target="#room-options-modal">
-          <div class="canvas-layout canvas-layout-room"></div>
-          <h5>ROOM</h5>
-        </div>
-      </div>
-      <div class="col-12 d-none canvas-options" id="board-options-modal">
-        <h5 class="title ml-2 mt-4">Select Canvas Color</h5>
-        <div class="canvas-pallete">
-          <div class="canvas-pallete-color color-pallete-1"></div>
-          <div class="canvas-pallete-color color-pallete-2"></div>
-          <div class="canvas-pallete-color color-pallete-3"></div>
-          <div class="canvas-pallete-color color-pallete-4"></div>
-          <div class="canvas-pallete-color color-pallete-5"></div>
-          <div class="canvas-pallete-color color-pallete-6"></div>
-        </div>
-        <div class="canvas-pallete">
-          <div class="canvas-pallete-color color-pallete-7"></div>
-          <div class="canvas-pallete-color color-pallete-8"></div>
-          <div class="canvas-pallete-color color-pallete-9"></div>
-          <div class="canvas-pallete-color color-pallete-10"></div>
-          <div class="canvas-pallete-color color-pallete-11"></div>
-          <div class="canvas-pallete-color color-pallete-12"></div>
-        </div>
-        <!-- <h5 class="title ml-1 mt-4">Customize Dimensions</h5>
-          <div class="dimension-wrapper">
-            <div class="dimension-options">
-              <input class="dimension-input" placeholder="Width" value="500">
-              <label class="ml-2">W</label>
-            </div>
-            <div class="dimension-options">
-              <input class="dimension-input" placeholder="Height" value="500">
-              <label class="ml-2">H</label>
-            </div>
-            <div class="dimension-options">px</div>
-          </div> -->
-      </div>
-      <div class="col-12 d-none canvas-options" id="room-options-modal">
-        <!-- <h5 class="title ml-2 mt-4">Select Wall Color</h5>
-          <div class="canvas-pallete-wrapper">
-            <div id="container" class="canvas-pallete-scroll canvas-container" >
-              <div id="canvasPalleteScrollContents" class="canvas-pallete-scroll-contents">
-                  <div  class="canvas-pallete-color color-white" aria-selected="true"></div>
-                  <div  class="canvas-pallete-color color-red"></div>
-                  <div  class="canvas-pallete-color color-black"></div>
-                  <div  class="canvas-pallete-color color-gray"></div>
-                  <div  class="canvas-pallete-color color-blue"></div>
-                  <div  class="canvas-pallete-color color-green"></div>
-                  <div  class="canvas-pallete-color color-white"></div>
-                  <div  class="canvas-pallete-color color-red"></div>
-                  <div  class="canvas-pallete-color color-black"></div>
-                  <div  class="canvas-pallete-color color-gray"></div>
-                  <div  class="canvas-pallete-color color-blue"></div>
-                  <div  class="canvas-pallete-color color-green"></div>
-              </div>
-            </div>
-            <button id="slideBack" class="canvas-scroll js-left-scroll canvas-scroll-left" type="button">
-              <svg class="canvas-scroll-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 551 1024"><path d="M445.44 38.183L-2.53 512l447.97 473.817 85.857-81.173-409.6-433.23v81.172l409.6-433.23L445.44 38.18z"/></svg>
-            </button>
-            <button id="slide" class="canvas-scroll js-right-scroll canvas-scroll-right" type="button">
-              <svg class="canvas-scroll-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 551 1024"><path d="M105.56 985.817L553.53 512 105.56 38.183l-85.857 81.173 409.6 433.23v-81.172l-409.6 433.23 85.856 81.174z"/></svg>
-            </button>
-          </div> -->
-        <h5 class="title ml-2 mt-4">Select Canvas Background</h5>
-        <!-- <h6 class="flooring-options ml-2">Carpet</h6>
-          <div class="canvas-pallete-wrapper">
-            <div id="container2" class="canvas-pallete-scroll canvas-container" >
-              <div id="canvasPalleteScrollContents" class="canvas-pallete-scroll-contents">
-                <img src="./flooring-pattern.jpg" class="canvas-pallete-carpet-patterns">
-                <img src="./flooring-pattern.jpg" class="canvas-pallete-carpet-patterns">
-                <img src="./flooring-pattern.jpg" class="canvas-pallete-carpet-patterns">
-                <img src="./flooring-pattern.jpg" class="canvas-pallete-carpet-patterns">
-                <img src="./flooring-pattern.jpg" class="canvas-pallete-carpet-patterns">
-                <img src="./flooring-pattern.jpg" class="canvas-pallete-carpet-patterns">
-                <img src="./flooring-pattern.jpg" class="canvas-pallete-carpet-patterns">
-                <img src="./flooring-pattern.jpg" class="canvas-pallete-carpet-patterns">
-                <img src="./flooring-pattern.jpg" class="canvas-pallete-carpet-patterns">
-                <img src="./flooring-pattern.jpg" class="canvas-pallete-carpet-patterns">
-                <img src="./flooring-pattern.jpg" class="canvas-pallete-carpet-patterns">
-              </div>
-            </div>
-            <button id="slideBack2" class="canvas-scroll js-left-scroll canvas-scroll-left" type="button">
-              <svg class="canvas-scroll-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 551 1024"><path d="M445.44 38.183L-2.53 512l447.97 473.817 85.857-81.173-409.6-433.23v81.172l409.6-433.23L445.44 38.18z"/></svg>
-            </button>
-            <button id="slide2" class="canvas-scroll js-right-scroll canvas-scroll-right" type="button">
-              <svg class="canvas-scroll-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 551 1024"><path d="M105.56 985.817L553.53 512 105.56 38.183l-85.857 81.173 409.6 433.23v-81.172l-409.6 433.23 85.856 81.174z"/></svg>
-            </button>
-          </div> -->
-        <!-- <h6 class="flooring-options ml-2">Wood</h6> -->
-        <div class="canvas-pallete-wrapper">
-          <div id="container3" class="canvas-pallete-scroll canvas-container">
-            <div id="canvasPalleteScrollContents" class="canvas-pallete-scroll-contents">
-              <!-- <img src="./uploads/floor1.jpg" class="canvas-pallete-wood-patterns" />
-              <img src="./uploads/floor2.jpg" class="canvas-pallete-wood-patterns" />
-              <img src="./uploads/floor3.jpg" class="canvas-pallete-wood-patterns" />
-              <img src="./uploads/floor4.jpg" class="canvas-pallete-wood-patterns" /> -->
-            </div>
-          </div>
-          <!-- <button id="slideBack3" class="canvas-scroll js-left-scroll canvas-scroll-left" type="button">
-              <svg class="canvas-scroll-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 551 1024"><path d="M445.44 38.183L-2.53 512l447.97 473.817 85.857-81.173-409.6-433.23v81.172l409.6-433.23L445.44 38.18z"/></svg>
-            </button>
-            <button id="slide3" class="canvas-scroll js-right-scroll canvas-scroll-right" type="button">
-              <svg class="canvas-scroll-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 551 1024"><path d="M105.56 985.817L553.53 512 105.56 38.183l-85.857 81.173 409.6 433.23v-81.172l-409.6 433.23 85.856 81.174z"/></svg>
-            </button> -->
-        </div>
-        <!-- <h5 class="title ml-1 mt-4">Customize Dimensions</h5>
-              <div class="dimension-wrapper">
-                <div class="dimension-options">
-                  <input class="dimension-input" placeholder="Width" value="500">
-                  <label class="ml-2">W</label>
-                </div>
-                <div class="dimension-options">
-                  <input class="dimension-input" placeholder="Height" value="500">
-                  <label class="ml-2">H</label>
-                </div>
-                <div class="dimension-options">px</div>
-              </div> -->
-      </div>
-    </div>
-    <div class="row modal-action mt-2 mb-2">
-      <div class="col-6 text-right">
-        <button class="btn btn-cancel js-close-config-modal">Cancel</button>
-      </div>
-      <div class="col-6">
-        <button class="btn red-button js-btn-go">Go</button>
-      </div>
-    </div>
-  </div>
-
-  <div class="modal publish-board">
-    <div class="row">
-      <div class="col-12 text-center">
-        <h4 class="board-header m-3">TELL US MORE</h4>
-      </div>
-      <div class="publish-board-input">
-        <div>
-          <input class="form-control" placeholder="Board Name" />
-        </div>
-        <div>
-          <label>Name your board</label>
-        </div>
-      </div>
-      <div class="publish-board-title">
-        <h5 class="board-header">Select Room</h5>
-        <div class="publish-board-options">
-          <div class="publish-board-room-items active">Living</div>
-          <div class="publish-board-room-items">Bedroom</div>
-          <div class="publish-board-room-items">Dining</div>
-          <div class="publish-board-room-items">Office</div>
-          <div class="publish-board-room-items">Nursery/Kids</div>
-          <div class="publish-board-room-items">Other</div>
-        </div>
-      </div>
-      <div class="publish-board-title">
-        <h5 class="board-header">Pick a Style</h5>
-        <div class="publish-board-options">
-          <div class="publish-board-style-items active">Modern</div>
-          <div class="publish-board-style-items">Mid-Century</div>
-          <div class="publish-board-style-items">Contemporary</div>
-          <div class="publish-board-style-items">Traditional</div>
-          <div class="publish-board-style-items">Bohemian</div>
-          <div class="publish-board-style-items">Minimalist</div>
-        </div>
-      </div>
-      <div class="publish-board-title d-flex">
-        <div>
-          <input type="checkbox" class="keep-private-checkbox" />
-        </div>
-        <div class="ml-2">
-          Keep Private
-        </div>
-      </div>
-    </div>
-    <div class="row modal-action mb-3">
-      <div class="col-6 text-right">
-        <button class="btn btn-cancel js-close-publish-board">Cancel</button>
-      </div>
-      <div class="col-6">
-        <a href="./publishBoard.html">
-          <button class="btn red-button">Save</button>
-        </a>
-      </div>
-    </div>
-  </div>
-
-  <div class="modal open-auth">
-    <div class="close-icon js-close-auth">
-      <i class="mdi mdi-close" aria-hidden="true"></i>
-    </div>
-
-    <div class="row">
-      <div class="col-12 text-center">
-        <h5 class="modal-heading" style="margin-top: 5px;" id="signInModalLabel">
-          Hey, Star Stuff!
-        </h5>
-
-        <div class="socialButtons">
-          <button type="button" class="btn btn-primary facebookBtn" style="background: #3b5998;">
-            <a [href]="facebookRedirect" class="white">
-              <i class="fab fa-facebook-f">&nbsp;<b>Continue with Facebook</b></i>
-            </a>
-          </button>
-          <br />
-          <button type="button" class="btn btn-light googleBtn">
-            <a [href]="googleRedirect" class="black">
-              <i class="fab fa-google">&nbsp;<b>Continue with Google</b></i>
-            </a>
-          </button>
-        </div>
-
-        <div class="span-line text-center">Not Feeling Social?</div>
-        <br />
-
-        <form action="" id="signinform">
-          <div class="formGroup">
-            <input type="email" class="form-control text-input" id="txt_email" name="txt_email" placeholder="Username"
-              required />
-            <input type="password" class="form-control text-input password" id="txt_pwd" name="txt_pwd"
-              placeholder="Password" required />
-
-            <button type="submit" class="form-control btn btn-dark submit" id="submitBtn">
-              Login
-            </button>
-            <br />
-            <a class="resetPassword" routerLink="/forgotpassword">Reset Password</a>
-          </div>
-        </form>
-      </div>
-
-      <div class="modal-footer">
-        <span class="footer-content">Not a member yet?&nbsp;
-          <button class="btn btn-sm btn-light js-open-signup" id="signUpLink">
-            Join Now.
-          </button></span>
       </div>
     </div>
   </div>

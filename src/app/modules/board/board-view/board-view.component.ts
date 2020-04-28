@@ -2,6 +2,7 @@ import { Component, OnInit, HostListener } from '@angular/core';
 import { CookieService } from 'ngx-cookie-service';
 
 import * as $ from 'jquery';
+import { BoardService } from 'src/app/shared/services/board/board.service';
 declare const fb: any;
 
 @Component({
@@ -11,7 +12,32 @@ declare const fb: any;
 })
 export class BoardViewComponent implements OnInit {
 
-  constructor(private cookieService: CookieService) { }
+  selectedItem = 'select';
+  selectedCategory = null;
+  products = [];
+  showLoader = false;
+
+  constructor(
+    private cookieService: CookieService,
+    public boardService: BoardService
+  ) { }
+
+  goTo(selectedItem) {
+    this.selectedItem = selectedItem;
+    if(selectedItem === 'browse'){
+      this.getBrowseData();
+    }
+  }
+
+  getBrowseData(){
+    this.selectedCategory = {
+      LS_ID: '201'
+    };
+    this.boardService.getBrowseTabData(this.selectedCategory).subscribe((s: any) => {
+      this.products = [...(s.products) || []];
+      this.showLoader = false;
+    });
+  }
 
   canvas: any;
   canvasMeta = {
