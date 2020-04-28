@@ -1,0 +1,101 @@
+<ng-container *ngIf="isHandset; else isBrowser">
+    <div class="cart-container">
+        <div class="cart-header">
+            <!-- <div class="pink-font">My Cart</div> -->
+            <div class="subtotal-card ma4">
+                <div class="title pv2 flex justify-between">
+                    <div class="blue-font">Subtotal ({{cartProductsLength}} items):</div>
+                    <div class="pink-font"> ${{totalAmount| number : '1.2-2'}}</div>
+                </div>
+                <div class="tc">
+                    <button class="btn-checkout blue-font">
+                        CHECKOUT
+                    </button>
+                </div>
+            </div>
+        </div>
+        <div class="cart-content" *ngFor="let product of cartProducts">
+            <div class="product-card pa4">
+                <div class="flex">
+                    <img class="prod-image" [src]="product.image">
+                    <div class="prod-details w-100 pl4">
+                        <div class="gray-font">{{product.product_sku}}</div>
+                        <div class="blue-font">{{product.product_name}}</div>
+                        <div class="gray-font">
+                            by Brand Name
+                        </div>
+                        <div class="pink-font">${{product.count * product.price}}</div>
+                        
+                    </div>
+                </div>
+                <div class="flex pt3">
+                    <div class="quantity w-25">
+                        <span class="btn-quantity-operation b" (click)="decreaseQuantity()"> - </span>
+                        <span class="value"> {{quantityValue}} </span>
+                        <span class="btn-quantity-operation b" (click)="increaseQuantity()"> + </span>
+                    </div>
+                    <div class="btn-remove gray-font ml4" (click)="removeProduct()">
+                        REMOVE
+                    </div>
+                </div>
+            </div>
+            
+        </div>
+    </div>
+</ng-container>
+<ng-template #isBrowser>
+    <div class="cart-container flex ph5">
+
+        <div class="w-70">
+            <div class="cart-header">
+                <div class="title">
+                    My Cart
+                </div>
+                <div class="tr pb2">
+                    PRICE
+                </div>
+            </div>
+            <div class="cart-content" *ngFor="let product of cartProducts">
+                <div class="product-card flex pv4">
+                    <img class="prod-image" [src]="product.image">
+                    <div class="prod-details w-100 pl5">
+                        <div class="gray-font">{{product.product_sku}}</div>
+                        <div class="flex justify-between product-name pv1">
+                            <div class="blue-font">{{product.product_name}}</div>
+                            <div class="pink-font">${{product.count * product.price}}</div>
+                        </div>
+                        <div class="pb4 gray-font">
+                            by Brand Name
+                        </div>
+                        <span class="select-style pv1">
+                            <select>
+                              <option value="1">1</option>
+                              <option value="2">2</option>
+                              <option value="3">3</option>
+                              <option value="4">4</option>
+                            </select>
+                            <span class="arrow">&#9660;</span>
+                          </span>
+                    
+                        <div class="pt3 gray-font b pointer" (click)="removeProduct(product.product_sku)">
+                            REMOVE
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="w-30 ph3">
+            <div class="subtotal-card">
+                <div class="title pv2 flex justify-between">
+                    <div class="blue-font">Subtotal ({{cartProductsLength}} items):</div>
+                    <div class="pink-font"> ${{totalAmount| number : '1.2-2'}}</div>
+                </div>
+                <div class="tc">
+                    <button class="btn-checkout blue-font">
+                        CHECKOUT
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</ng-template>

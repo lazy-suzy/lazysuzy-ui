@@ -6,6 +6,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { ProductDetailsMobileComponent } from './product-details-mobile.component';
 import { VariationsModule } from '../variations/variations.module';
 import { RedirectModule } from '../redirect/redirect.module';
+import { FormsModule } from '@angular/forms';
 
 const DECLARATIONS = [ProductDetailsMobileComponent];
 
@@ -15,7 +16,8 @@ const MODULES = [
   MatIconModule,
   MatButtonModule,
   VariationsModule,
-  RedirectModule
+  RedirectModule,
+  FormsModule
 ];
 
 @NgModule({

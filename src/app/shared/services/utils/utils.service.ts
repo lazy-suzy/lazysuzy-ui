@@ -1,6 +1,6 @@
 import { Injectable, ElementRef } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
-import { ProductDetailsComponent } from 'src/app/feature/components';
+import { ProductDetailsComponent, ConfirmCartProductComponent } from 'src/app/feature/components';
 import { SigninComponent, SignupComponent } from 'src/app/core/components';
 import { Location } from '@angular/common';
 import { Router, ActivatedRoute } from '@angular/router';
@@ -121,5 +121,29 @@ export class UtilsService {
       }${item}\n${item.indexOf('</h6>') > -1 ? '\n' : ''}`;
     }
     return this.markdownService.compile(mergedData);
+  }
+
+  openAddToCartDialog(modal) {
+    const dialogRef = this.dialog.open(ConfirmCartProductComponent, {
+      width: '60%',
+      height: '80%',
+      data: {
+        ...modal,
+        total: modal.price * modal.quantity
+      },
+      panelClass: 'product-details-dialog-container'
+    });
+    // dialogRef.afterOpened().subscribe(result => {
+    //   this.location.go(`product/${modalSku}`, '', this.location.getState());
+    // });
+    // dialogRef.afterClosed().subscribe(result => {
+    //   const params = { ...this.activeRoute.snapshot.queryParams };
+    //   if (params.modal_sku) {
+    //     delete params.modal_sku;
+    //     this.router.navigate([], { queryParams: params });
+    //   } else {
+    //     this.location.back();
+    //   }
+    // });
   }
 }

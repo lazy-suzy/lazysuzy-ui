@@ -55,7 +55,44 @@
       font-size: 24px;
       position: relative;
       display: flex;
-
+      .select-style {
+        position: absolute;
+        right: 115px;
+        border: 1px solid #606060;
+        width: 80px;
+        border-radius: 3px;
+        overflow: hidden;
+        background-color: #f7f6f6;
+      }
+      .select-style select {
+        padding: 0 8px;
+        width: 100%;
+        border: none;
+        background-color: transparent;
+        -webkit-appearance: none;
+        -moz-appearance: none;
+        appearance: none;
+      }
+      .select-style select:focus {
+        outline: none;
+      }
+      .arrow {
+        position: absolute;
+        right: 0;
+        font-size: 18px;
+        background-color: #606060;
+        color: f7f6f6;
+        line-height: 2;
+        color: #ffffff; 
+      }
+      // select {
+      //   position: absolute;
+      //   right: 22%;
+      //   top: 2px;
+      //   background-color: #f7f6f6;
+      //   width: 15%;
+      //   border-color: #606060;
+      // }
       .product-price {
         color: #b76e79;
       }

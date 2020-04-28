@@ -61,12 +61,44 @@
     position: relative;
     padding-bottom: 0.5rem;
     padding-right: 120px;
+    .select-style {
+      position: absolute;
+      right: 145px;
+      border: 1px solid #606060;
+      width: 80px;
+      border-radius: 3px;
+      overflow: hidden;
+      background-color: #f7f6f6;
+    }
+    .select-style select {
+      padding: 0 8px;
+      width: 100%;
+      border: none;
+      background-color: transparent;
+      -webkit-appearance: none;
+      -moz-appearance: none;
+      appearance: none;
+    }
+    .select-style select:focus {
+      outline: none;
+    }
+    .arrow {
+      position: absolute;
+      right: 0;
+      bottom: -5px;
+      background-color: #606060;
+      color: f7f6f6;
+      line-height: 2;
+      color: #ffffff;
+    }
     .product-price {
       color: #b76e79;
     }
     .view-details-btn {
       position: absolute;
       right: 0;
+      padding: 4px 8px;
+      border: none;
       background-color: #0c1c31;
       color: #ffcc00;
     }

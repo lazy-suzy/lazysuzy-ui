@@ -36,13 +36,15 @@
         <h3>{{ product.name }}</h3>
 
         <div class="price-container">
-          <span class="product-price mr3">${{ productPrice }}</span>
-
-          <span
-            class="strike {{ productPrice !== productWasPrice ? '' : 'dn' }}"
-            >${{ productWasPrice }}</span
-          >
-          <button
+          <div class="w-60">
+            <span class="product-price mr3">${{ productPrice }}</span>
+            <span
+              class="strike {{ productPrice !== productWasPrice ? '' : 'dn' }}"
+              >${{ productWasPrice }}</span
+            >
+          </div>
+          
+          <!-- <button
             mat-raised-button
             class="bg-red view-details-btn"
             *ngIf="!product.redirect"
@@ -53,6 +55,28 @@
               class="tr-viewDetails no-underline"
             >
               View Details
+            </a>
+          </button> -->
+          
+          <span class="select-style">
+            <select [(ngModel)]="quantity">
+              <option value="1">1</option>
+              <option value="2">2</option>
+              <option value="3">3</option>
+              <option value="4">4</option>
+            </select>
+            <span class="arrow">&#9660;</span>
+          </span>
+          <button
+            mat-raised-button
+            class="bg-red view-details-btn"
+            *ngIf="!product.redirect"
+          >
+            <a
+              (click)="openCartModal()"
+              class="tr-viewDetails no-underline"
+            >
+              Add to Cart
             </a>
           </button>
         </div>

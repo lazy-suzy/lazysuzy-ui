@@ -363,6 +363,25 @@ export class ApiService {
     return this.httpService.post(url, data);
   }
 
+  addCartProduct(sku) {
+    const endpoint = 'cart/add/';
+    const url = `${env.STAGING_BASE_HREF}${endpoint}${sku}`;
+    const data = '';
+    return this.httpService.post(url, data);
+  }
+
+  removeCartProduct(sku) {
+    const endpoint = 'cart/remove/';
+    const url = `${env.STAGING_BASE_HREF}${endpoint}${sku}`;
+    const data = '';
+    return this.httpService.post(url, data);
+  }
+
+  getCartProduct() {
+    const endpoint = 'cart';
+    const url = `${env.STAGING_BASE_HREF}${endpoint}`;
+    return this.httpService.get(url);
+  }
   getAllBoards(payload): Observable<IProductPayload> {
     const url = `${env.API_BASE_HREF}board`;
     return this.httpService.post(url, {

@@ -9,7 +9,6 @@ import { RouterModule } from '@angular/router';
 import { NavDesktopComponent } from './nav-desktop.component';
 import { SearchBarModule } from '../search-bar/search-bar.module';
 import { AuthModule } from '../auth/auth.module';
-
 const DECLARATIONS = [NavDesktopComponent, ];
 
 const MODULES = [
@@ -21,13 +20,12 @@ const MODULES = [
   MatIconModule,
   SearchBarModule,
   AuthModule
- 
 ];
 
 @NgModule({
   declarations: [...DECLARATIONS],
   imports: [...MODULES],
-  exports: [...DECLARATIONS, ...MODULES],
+exports: [...DECLARATIONS, ...MODULES],
 
 })
 export class NavDesktopModule {}

@@ -6,7 +6,8 @@ import {
   SearchComponent,
   WishlistComponent,
   CategoriesComponent,
-  AllProductsComponent
+  AllProductsComponent,
+  CartComponent
 } from './feature/containers';
 import {
   AboutusComponent,
@@ -28,7 +29,7 @@ const routes: Routes = [
   { path: 'aboutus', component: AboutusComponent },
   { path: 'termsofservice', component: TermsOfServiceComponent },
   { path: 'privacypolicy', component: PrivacyPolicyComponent },
-
+  { path: 'cart', component: CartComponent },
   { path: 'wishlist', component: WishlistComponent, pathMatch: 'full' },
   {
     path: 'products/all',
@@ -58,7 +59,7 @@ const routes: Routes = [
 
 @NgModule({
   imports: [
-    RouterModule.forRoot(routes, { scrollPositionRestoration: 'enabled' })
+  RouterModule.forRoot(routes, { scrollPositionRestoration: 'enabled' })
   ],
   exports: [RouterModule]
 })

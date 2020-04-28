@@ -6,7 +6,8 @@ import {
   SearchModule,
   WishlistModule,
   AllProductsModule,
-  CategoriesModule
+  CategoriesModule,
+  CartModule
 } from './containers';
 import { ProductDetailsMobileModule } from './components';
 import { BlogModule } from './blog/blog/blog.module';
@@ -22,6 +23,7 @@ const MODULES = [
   AllProductsModule,
   CategoriesModule,
   ProductDetailsMobileModule,
+  CartModule,
   BlogModule
 ];
 

@@ -10,3 +10,5 @@ export * from './categories/categories.module';
 export * from './categories/categories.component';
 export * from './all-products/all-products.module';
 export * from './all-products/all-products.component';
+export * from './cart/cart.component';
+export * from './cart/cart.module';

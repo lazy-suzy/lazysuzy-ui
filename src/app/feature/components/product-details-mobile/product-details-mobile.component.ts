@@ -53,6 +53,7 @@ export class ProductDetailsMobileComponent implements OnInit {
     price: '',
     wasPrice: ''
   };
+  quantity: number = 1;
   galleryRef = this.gallery.ref(this.galleryId);
   constructor(
     private router: Router,
@@ -186,5 +187,24 @@ export class ProductDetailsMobileComponent implements OnInit {
   onSetPrice(priceData): void {
     this.productPrice = priceData.price || this.product.is_price;
     this.productWasPrice = priceData.wasPrice || this.product.was_price;
+  }
+  openCartModal() {
+    const data = {
+      sku: this.productSku,
+      brand: this.product.site,
+      image: this.items[0].data.src,
+      name: this.product.name,
+      price: this.productPrice,
+      quantity: this.quantity
+    };
+    this.apiService.addCartProduct(data.sku).subscribe(
+      (payload: any) => {
+        this.utils.openAddToCartDialog(data);
+      },
+      (error: any) => {
+        console.log(error);
+      }
+    );
+    this.utils.openAddToCartDialog(data);
   }
 }
