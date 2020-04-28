@@ -10,11 +10,14 @@ import { BoardService } from './board.service';
 import { CookieService } from 'ngx-cookie-service';
 import { BoardRoutingModule } from './board-routing.module';
 
+import { KeyboardShortcutsModule } from "ng-keyboard-shortcuts";
+
 @NgModule({
   imports: [
     CommonModule,
     BoardRoutingModule,
-    HttpClientModule
+    HttpClientModule,
+    KeyboardShortcutsModule.forRoot()
   ],
   declarations: [
     BoardComponent,

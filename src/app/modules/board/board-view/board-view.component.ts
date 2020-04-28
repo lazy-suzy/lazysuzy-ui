@@ -1,5 +1,7 @@
-import { Component, OnInit, HostListener } from '@angular/core';
+import { Component, OnInit, AfterViewInit, HostListener } from '@angular/core';
 import { CookieService } from 'ngx-cookie-service';
+import { ShortcutInput } from "ng-keyboard-shortcuts";
+import { boardShortcuts } from './board-view.shortcuts';
 
 import * as $ from 'jquery';
 declare const fb: any;
@@ -9,7 +11,9 @@ declare const fb: any;
   templateUrl: './board-view.component.html',
   styleUrls: ['./board-view.component.less', '../board.component.less']
 })
-export class BoardViewComponent implements OnInit {
+export class BoardViewComponent implements OnInit, AfterViewInit {
+
+  shortcuts: ShortcutInput[] = [];
 
   constructor(private cookieService: CookieService) { }
 
@@ -241,6 +245,14 @@ export class BoardViewComponent implements OnInit {
 
       // initializeTemplates();
     });
+  }
+
+  ngAfterViewInit(): void {
+    Object.keys(boardShortcuts).forEach((i) => { this.shortcuts.push(boardShortcuts[i]) });
+  }
+
+  commandExecute(): void{
+    console.log("command executed");
   }
 
   getConfig = (callback) => {
