@@ -5,7 +5,7 @@ import { BoardService } from 'src/app/shared/services/board/board.service';
 @Component({
   selector: 'app-browse-filter',
   templateUrl: './browse-filter.component.html',
-  styleUrls: ['./browse-filter.component.less']
+  styleUrls: ['./browse-filter.component.less', '../board.component.less']
 })
 export class BrowsefilterComponent implements OnInit {
 

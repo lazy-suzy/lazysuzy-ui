@@ -1,5 +1,6 @@
 import { Component, OnInit, HostListener } from '@angular/core';
 import { CookieService } from 'ngx-cookie-service';
+import { SideNavItems } from './../sidenavitems';
 
 import * as $ from 'jquery';
 import { BoardService } from 'src/app/shared/services/board/board.service';
@@ -16,17 +17,21 @@ export class BoardViewComponent implements OnInit {
   selectedCategory = null;
   showLoader = false;
   productForPreview = null;
+  sideBarItems = SideNavItems;
 
   constructor(
     private cookieService: CookieService,
     public boardService: BoardService
   ) { }
 
-  goTo(selectedItem) {
-    this.selectedItem = selectedItem;
-    if (selectedItem === 'browse') {
+  selectSideBarItem(item) {
+    this.selectedItem = item.value;
+    if (this.selectedItem === 'browse') {
       this.getBrowseData();
     }
+  }
+
+  handleAddProductBoardPreview($event) {
   }
 
   handleProductPreview(product) {
@@ -41,8 +46,15 @@ export class BoardViewComponent implements OnInit {
     this.selectedCategory = {
       LS_ID: '201'
     };
+    this.showLoader = true;
     this.boardService.getBrowseTabData(this.selectedCategory).subscribe((s: any) => {
       this.remoteProducts = [...(s.products) || []];
+      this.remoteProducts = this.remoteProducts.map((ele, i) => {
+        return {
+          ...ele,
+          refId: i
+        };
+      });
       this.showLoader = false;
     });
   }
