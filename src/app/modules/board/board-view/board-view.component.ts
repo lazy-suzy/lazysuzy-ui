@@ -14,7 +14,6 @@ export class BoardViewComponent implements OnInit {
 
   selectedItem = 'select';
   selectedCategory = null;
-  products = [];
   showLoader = false;
 
   constructor(
@@ -34,7 +33,7 @@ export class BoardViewComponent implements OnInit {
       LS_ID: '201'
     };
     this.boardService.getBrowseTabData(this.selectedCategory).subscribe((s: any) => {
-      this.products = [...(s.products) || []];
+      this.remoteProducts = [...(s.products) || []];
       this.showLoader = false;
     });
   }
