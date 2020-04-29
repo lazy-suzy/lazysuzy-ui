@@ -4,7 +4,7 @@ import { BoardService } from 'src/app/shared/services/board/board.service';
 @Component({
   selector: 'app-select',
   templateUrl: './select.component.html',
-  styleUrls: ['./select.component.less']
+  styleUrls: ['./select.component.less', '../board.component.less']
 })
 export class SelectComponent implements OnInit {
 

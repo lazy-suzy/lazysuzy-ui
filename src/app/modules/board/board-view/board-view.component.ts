@@ -1,5 +1,6 @@
 import { Component, OnInit, HostListener } from '@angular/core';
 import { CookieService } from 'ngx-cookie-service';
+import { SideNavItems } from './../sidenavitems';
 
 import * as $ from 'jquery';
 import { BoardService } from 'src/app/shared/services/board/board.service';
@@ -14,27 +15,46 @@ export class BoardViewComponent implements OnInit {
 
   selectedItem = 'select';
   selectedCategory = null;
-  remoteProducts = [];
   showLoader = false;
+  productForPreview = null;
+  sideBarItems = SideNavItems;
 
   constructor(
     private cookieService: CookieService,
     public boardService: BoardService
   ) { }
 
-  goTo(selectedItem) {
-    this.selectedItem = selectedItem;
-    if(selectedItem === 'browse'){
+  selectSideBarItem(item) {
+    this.selectedItem = item.value;
+    if (this.selectedItem === 'browse') {
       this.getBrowseData();
     }
   }
 
-  getBrowseData(){
+  handleAddProductBoardPreview($event) {
+  }
+
+  handleProductPreview(product) {
+    this.productForPreview = { ...product };
+  }
+
+  handleClearProductPreview(product) {
+    this.productForPreview = null;
+  }
+
+  getBrowseData() {
     this.selectedCategory = {
       LS_ID: '201'
     };
+    this.showLoader = true;
     this.boardService.getBrowseTabData(this.selectedCategory).subscribe((s: any) => {
       this.remoteProducts = [...(s.products) || []];
+      this.remoteProducts = this.remoteProducts.map((ele, i) => {
+        return {
+          ...ele,
+          refId: i
+        };
+      });
       this.showLoader = false;
     });
   }
@@ -232,6 +252,13 @@ export class BoardViewComponent implements OnInit {
 
   facebookRedirect = "";
   googleRedirect = "";
+  remoteProducts = [{
+    id: 1,
+    main_image: "https://www.lazysuzy.com/westelm/xbg/aston-leather-sofa-86-5-h4745_11_xbg.png",
+    name: "Test Product",
+    is_price: "$199.99",
+    site: "lazysuzy",
+  }];
 
   @HostListener('window:resize', ['$event'])
   onResize() {
