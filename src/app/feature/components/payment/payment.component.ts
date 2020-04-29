@@ -11,6 +11,7 @@ import {
   Element as StripeElement,
   ElementsOptions
 } from 'ngx-stripe';
+import { ApiService } from 'src/app/shared/services';
 
 @Component({
   selector: 'app-payment',
@@ -26,7 +27,7 @@ export class PaymentComponent implements OnInit {
 
   stripeTest: FormGroup;
 
-  constructor(private fb: FormBuilder, private stripeService: StripeService) {}
+  constructor(private fb: FormBuilder, private stripeService: StripeService, private apiService: ApiService) {}
 
   ngOnInit() {
     this.stripeTest = this.fb.group({
@@ -57,13 +58,24 @@ export class PaymentComponent implements OnInit {
   }
 
   buy() {
-    console.log(this.card);
     const name = this.stripeTest.get('name').value;
     this.stripeService.createToken(this.card, { name }).subscribe(result => {
       if (result.token) {
         // Use the token to create a charge or a customer
         // https://stripe.com/docs/charges
-        console.log(result.token);
+        const data = {
+          token: result.token.id,
+          client_ip: result.token.client_ip,
+          created: result.token.created
+        };
+        this.apiService.postStripeToken(data).subscribe(
+          (payload: any) => {
+            // console.log(payload);
+          },
+          (error: any) => {
+            console.log(error);
+          }
+        );
       } else if (result.error) {
         // Error creating the token
         console.log(result.error.message);

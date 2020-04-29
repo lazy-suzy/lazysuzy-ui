@@ -149,9 +149,4 @@ export class UtilsService {
     //   }
     // });
   }
-
-  closeAllDialog() {
-    this.dialog.closeAll();
-    this.location.go(`/cart`);
-  }
 }

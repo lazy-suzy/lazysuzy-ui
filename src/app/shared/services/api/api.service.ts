@@ -391,4 +391,9 @@ export class ApiService {
       Buser_id: 1
     });
   }
+  postStripeToken(data) {
+    const endpoint = `payment/charge`;
+    const url = `${env.API_BASE_HREF}${endpoint}`;
+    return this.httpService.post(url, data);
+  }
 }
