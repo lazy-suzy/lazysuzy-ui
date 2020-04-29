@@ -29,6 +29,7 @@ import { FileUploadModule } from 'ng2-file-upload';
 import { MatSelectModule } from '@angular/material';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AppProductPreviewComponent } from './product-preview/product-preview.component';
+import { KeyboardShortcutsModule } from "ng-keyboard-shortcuts";
 
 @NgModule({
   imports: [
@@ -54,6 +55,7 @@ import { AppProductPreviewComponent } from './product-preview/product-preview.co
     BoardComponent,
     BoardViewComponent,
     BoardListComponent,
+    BoardPreviewComponent,
     SelectComponent,
     AddComponent,
     AddViaUrlComponent,
