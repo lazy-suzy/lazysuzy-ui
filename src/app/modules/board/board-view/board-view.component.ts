@@ -212,6 +212,7 @@ export class BoardViewComponent implements OnInit {
     name: "Test Product",
     is_price: "$199.99",
     site: "lazysuzy",
+    sku: ""
   }];
 
   @HostListener('window:resize', ['$event'])
@@ -631,6 +632,7 @@ export class BoardViewComponent implements OnInit {
         referenceObjectValue.name = this.appMeta.asset[referenceID].name;
         referenceObjectValue.price = this.appMeta.asset[referenceID].price;
         referenceObjectValue.brand = this.appMeta.asset[referenceID].brand;
+        referenceObjectValue.sku = '';
       } else if (referenceType == 'default') {
         referenceObjectValue.id = this.remoteProducts[referenceID].id;
         referenceObjectValue.isTransparent = 1;
@@ -639,6 +641,7 @@ export class BoardViewComponent implements OnInit {
         referenceObjectValue.name = this.remoteProducts[referenceID].name;
         referenceObjectValue.price = this.remoteProducts[referenceID].is_price;
         referenceObjectValue.brand = this.remoteProducts[referenceID].site;
+        referenceObjectValue.sku = this.remoteProducts[referenceID].sku;
       }
 
       let imageToInsert = new fb.Image(draggedObject[0], {
