@@ -41,10 +41,10 @@
           ${{ productWasPrice }}
         </div>
       </div>
-      <!-- <button
+      <button
         mat-raised-button
         class="bg-red view-details-btn"
-        *ngIf="!product.redirect"
+        *ngIf="!product.in_inventory || !product.redirect"
       >
         <a
           (click)="openLink($event, product.product_url)"
@@ -53,20 +53,17 @@
         >
           View Details
         </a>
-      </button> -->
+      </button>
       <span class="select-style">
         <select [(ngModel)]="quantity">
-          <option value="1">1</option>
-          <option value="2">2</option>
-          <option value="3">3</option>
-          <option value="4">4</option>
+          <option *ngFor="let item of quantityArray" [value]="item.value">{{item.value}}</option>
         </select>
         <span class="arrow">&#9660;</span>
       </span>
       <button
         mat-raised-button
         class="bg-red view-details-btn"
-        *ngIf="!product.redirect"
+        *ngIf="product.in_inventory && product.inventory_product_details.count > 0"
       >
         <a
           (click)="openCartModal()"

@@ -34,8 +34,8 @@ export class ProductDetailsComponent implements OnInit {
   spinner: string = 'assets/images/spinner.gif';
   description: any;
   features: any;
-  productPrice: string;
-  productWasPrice: string;
+  productPrice: any;
+  productWasPrice: any;
   variations = [];
   topHeight: Object = { 'max-height': '0' };
   swatches = [];
@@ -49,6 +49,7 @@ export class ProductDetailsComponent implements OnInit {
     wasPrice: ''
   };
   quantity: number = 1;
+  quantityArray = [];
   galleryRef = this.gallery.ref(this.galleryId);
   constructor(
     @Inject(MAT_DIALOG_DATA) public data: any,
@@ -82,8 +83,16 @@ export class ProductDetailsComponent implements OnInit {
             variation => variation.swatch_image !== null
           )
         );
-        this.productPrice = this.product.is_price;
-        this.productWasPrice = this.product.was_price;
+        if (this.product.in_inventory) {
+          this.productPrice = this.product.inventory_product_details.price;
+          this.productWasPrice = this.product.inventory_product_details.price;
+          for (let i = 1; i <= this.product.inventory_product_details.count; i++) {
+            this.quantityArray.push({value: i});
+          }
+        } else {
+          this.productPrice = this.product.is_price;
+          this.productWasPrice = this.product.was_price;
+        }
         this.isVariationExist = this.utils.checkDataLength(
           this.product.variations
         );

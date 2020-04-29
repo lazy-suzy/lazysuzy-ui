@@ -27,6 +27,11 @@ export interface IProduct {
   set: any[];
   reviews: number;
   rating: number;
+  in_inventory: boolean;
+  inventory_product_details: {
+  price: number,
+  count: number,
+  };
   redirect: boolean;
   redirect_url: string;
   redirect_details: {};
