@@ -48,6 +48,7 @@ import { AppProductPreviewComponent } from './product-preview/product-preview.co
     MatSelectModule,
     FormsModule,
     ReactiveFormsModule,
+    KeyboardShortcutsModule.forRoot()
   ],
   declarations: [
     BoardComponent,
