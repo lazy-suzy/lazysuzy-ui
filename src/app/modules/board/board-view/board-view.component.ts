@@ -1,7 +1,6 @@
 import { Component, OnInit, AfterViewInit, HostListener } from '@angular/core';
 import { CookieService } from 'ngx-cookie-service';
 import { ShortcutInput } from "ng-keyboard-shortcuts";
-import { boardShortcuts } from './board-view.shortcuts';
 
 import * as $ from 'jquery';
 declare const fb: any;
@@ -246,13 +245,165 @@ export class BoardViewComponent implements OnInit, AfterViewInit {
       // initializeTemplates();
     });
   }
-
   ngAfterViewInit(): void {
-    Object.keys(boardShortcuts).forEach((i) => { this.shortcuts.push(boardShortcuts[i]) });
+    this.shortcuts.push(
+      {
+        key: "up",
+        command: e => this.applyShortcut('activeObjectFetchAssign', 'top', -1),
+        preventDefault: true
+      },
+      {
+        key: "down",
+        command: e => this.applyShortcut('activeObjectFetchAssign', 'top', 1),
+        preventDefault: true
+      },
+      {
+        key: "left",
+        command: e => this.applyShortcut('activeObjectFetchAssign', 'left', -1),
+        preventDefault: true
+      },
+      {
+        key: "right",
+        command: e => this.applyShortcut('activeObjectFetchAssign', 'left', 1),
+        preventDefault: true
+      },
+      {
+        key: "shift + up",
+        command: e => this.applyShortcut('activeObjectFetchAssign', 'top', -10),
+        preventDefault: true
+      },
+      {
+        key: "shift + down",
+        command: e => this.applyShortcut('activeObjectFetchAssign', 'top', 10),
+        preventDefault: true
+      },
+      {
+        key: "shift + left",
+        command: e => this.applyShortcut('activeObjectFetchAssign', 'left', -10),
+        preventDefault: true
+      },
+      {
+        key: "shift + right",
+        command: e => this.applyShortcut('activeObjectFetchAssign', 'left', 10),
+        preventDefault: true
+      },
+      {
+        key: "esc",
+        command: e => this.applyShortcut("deselectOrCancel", ''),
+        preventDefault: true
+      },
+      {
+        key: "t",
+        command: e => this.applyShortcut("addText", ''),
+        preventDefault: true
+      },
+      {
+        key: "del",
+        command: e => this.applyShortcut("action", 'delete'),
+        preventDefault: true
+      },
+      {
+        key: ["ctrl + z", "cmd + z"],
+        command: e => this.applyShortcut("direct", 'undo'),
+        preventDefault: true
+      },
+      {
+        key: ["ctrl + y", "cmd + y"],
+        command: e => this.applyShortcut("direct", 'redo'),
+        preventDefault: true
+      },
+      {
+        key: ["ctrl + plus", "cmd + plus", "ctrl + =", "cmd + ="],
+        command: e => this.applyShortcut("direct", 'zoomIn'),
+        preventDefault: true
+      },
+      {
+        key: ["ctrl + -", "cmd + -", "ctrl + _", "cmd + _"],
+        command: e => this.applyShortcut("direct", 'zoomOut'),
+        preventDefault: true
+      },
+      {
+        key: ["ctrl + a", "cmd + a"],
+        command: e => this.applyShortcut("direct", "selectAll"),
+        preventDefault: true
+      },
+      {
+        key: ["ctrl + d", "cmd + d"],
+        command: e => this.applyShortcut("action", "duplicate"),
+        preventDefault: true
+      },
+      {
+        key: ["ctrl + f", "cmd + f"],
+        command: e => this.applyShortcut("action", "flip"),
+        preventDefault: true
+      },
+      {
+        key: ["ctrl + b", "cmd + b"],
+        command: e => this.applyShortcut("toggleBackground", ""),
+        preventDefault: true
+      },
+      {
+        key: ["ctrl + r", "cmd + r"],
+        command: e => this.applyShortcut("initializeCrop", ""),
+        preventDefault: true
+      },
+      {
+        key: ["ctrl + up", "cmd + up"],
+        command: e => this.applyShortcut("action", "bringForward"),
+        preventDefault: true
+      },
+      {
+        key: ["ctrl + down", "cmd + down"],
+        command: e => this.applyShortcut("action", "sendBackward"),
+        preventDefault: true
+      },
+      {
+        key: "enter",
+        command: e => this.applyShortcut("confirmCrop", ""),
+        preventDefault: true
+      },
+    );
+    // Object.keys(boardShortcuts).forEach((i) => { this.shortcuts.push(boardShortcuts[i]) });
   }
 
-  commandExecute(): void{
-    console.log("command executed");
+  applyShortcut = (action, name, value = 0) => {
+    let activeObject = this.canvas.getActiveObject();
+
+    if (action == "deselectOrCancel"){
+      if (this.canvasMeta.flag.cropEnabled)
+        this.handleCrop(false);
+      else
+        this.canvas.discardActiveObject();
+    }
+    else if (action == "action" && activeObject)
+      this.action(name);
+    else if (action == "activeObjectFetchAssign" && activeObject)
+      activeObject.set(name, activeObject[name] + value);
+    else if (action == "direct")
+      this[name]();
+    else if (action == "initializeCrop" && activeObject && activeObject.type == "image")
+    this.handleCrop();
+    else if (action == "confirmCrop" && activeObject && this.canvasMeta.flag.cropEnabled)
+    this.handleCrop(true);
+    else if (action == "toggleBackground" && activeObject) {
+      if ((this.canvasMeta.flag.isCurrentObjectTransparentable &&
+        !this.canvasMeta.flag.isCurrentObjectTransparentSelected) == true)
+        this.action('transparent');
+      else if ((this.canvasMeta.flag.isCurrentObjectTransparentable &&
+        this.canvasMeta.flag.isCurrentObjectTransparentSelected) == true)
+        this.action('undoTransparent');
+    }
+    else if (action == "addText") {
+      let textToInsert = new fb.Textbox("Text", {
+        fontFamily: "Arial",
+        fontSize: 24,
+        fill: "#000000"
+      });
+      textToInsert.setControlsVisibility(this.canvasMeta.value.textControl);
+      this.applyDrop(false, textToInsert);
+    }
+
+    this.canvas.requestRenderAll();
   }
 
   getConfig = (callback) => {
@@ -358,11 +509,7 @@ export class BoardViewComponent implements OnInit, AfterViewInit {
 
     // bind drop area events
     $(this.canvasMeta.identifier.dropArea).bind("drop", (e) => {
-      let draggedObject = $(this.appMeta.identifier.currentDragableObject);
-      let dropType = draggedObject.attr("drop-type");
-      let referenceID = draggedObject.parent().attr('data-product');
-      let referenceType = draggedObject.parent().attr("type");
-      this.handleDrop(e, draggedObject, dropType, referenceID, referenceType);
+
     });
 
     // handle canvas events
@@ -1051,6 +1198,14 @@ export class BoardViewComponent implements OnInit, AfterViewInit {
       this.canvasMeta.currentHistoryIndex++;
       this.updateStateFromHistory();
     }
+  };
+  selectAll = () => {
+    this.canvas.discardActiveObject();
+    let selection = new fb.ActiveSelection(this.canvas.getObjects(), {
+      canvas: this.canvas,
+    });
+    this.canvas.setActiveObject(selection);
+    this.canvas.requestRenderAll();
   };
 
   handleCrop = (action = undefined, secondaryAction = false) => {
