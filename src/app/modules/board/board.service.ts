@@ -26,6 +26,14 @@ export class BoardService {
       );
   }
 
+  getBoardsByID(board_id: number): Observable<Board[]> {
+    return this.http.post<Board[]>(this.apiURL, { operation: 'select', entity: 'board', column: "*", where: { board_id: board_id, is_active: 1 } }, this.httpOptions)
+      .pipe(
+        tap(_ => this.log(`fetched board w/ id=${board_id}`)),
+        catchError(this.handleError<Board[]>('getBoardsByID', []))
+      );
+  }
+
   addBoard(board: Board): Observable<Board> {
     return this.http.post<Board>(this.apiURL, { operation: 'insert', entity: 'board', data: board }, this.httpOptions).pipe(
       tap((newBoard: Board) => this.log(`added board w/ id=${newBoard.board_id}`)),
