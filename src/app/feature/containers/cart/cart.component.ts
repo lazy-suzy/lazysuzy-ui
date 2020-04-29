@@ -24,7 +24,10 @@ export class CartComponent implements OnInit {
   cartProducts = [];
   totalAmount: number = 0;
   cartProductsLength: number;
-  constructor(private breakpointObserver: BreakpointObserver, private apiService: ApiService) {}
+  constructor(
+    private breakpointObserver: BreakpointObserver,
+    private apiService: ApiService
+  ) {}
 
   ngOnInit(): void {
     this.bpSubscription = this.bpObserver.subscribe(
@@ -40,6 +43,7 @@ export class CartComponent implements OnInit {
       (payload: any) => {
         this.cartProducts = payload;
         this.cartProductsLength = this.cartProducts.length;
+        this.totalAmount = 0;
         this.getSubTotal();
       },
       (error: any) => {
@@ -62,7 +66,7 @@ export class CartComponent implements OnInit {
 
   getSubTotal() {
     for (let product of this.cartProducts) {
-      this.totalAmount = this.totalAmount + (product.price * product.count);
+      this.totalAmount = this.totalAmount + product.price * product.count;
     }
   }
 

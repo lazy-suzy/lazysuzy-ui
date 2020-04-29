@@ -82,10 +82,13 @@
         >favorite_border</mat-icon
       >
     </span>
-    <span (click)="isLoggedIn($event)" class="flex items-center header-link">
-      <mat-icon class="account-icon" aria-hidden="false" [routerLink]="['/cart']"
+    <span class="flex items-center header-link">
+      <mat-icon
+        class="account-icon"
+        aria-hidden="false"
+        [routerLink]="['/cart']"
         >shopping_cart</mat-icon
-      >      
+      >
     </span>
     <app-auth class="account-menu" [isHandset]="true"></app-auth>
   </div>

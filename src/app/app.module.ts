@@ -15,6 +15,7 @@ import { LightboxModule } from '@ngx-gallery/lightbox';
 import { LIGHTBOX_CONFIG } from '@ngx-gallery/lightbox';
 import { MarkdownModule } from 'ngx-markdown';
 import { EventEmitterService } from './shared/services/events/event-emitter.service';
+import { NgxStripeModule } from 'ngx-stripe';
 
 const MODULES = [
   BrowserModule,
@@ -28,7 +29,8 @@ const MODULES = [
   FormsModule,
   GalleryModule,
   LightboxModule,
-  MarkdownModule.forRoot()
+  MarkdownModule.forRoot(),
+  NgxStripeModule.forRoot('pk_test_0QKsReaTyej3eaewGR3HWiqZ00CzWWFs34')
 ];
 
 @NgModule({

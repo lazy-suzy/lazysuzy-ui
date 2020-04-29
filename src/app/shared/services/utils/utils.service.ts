@@ -1,6 +1,9 @@
 import { Injectable, ElementRef } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
-import { ProductDetailsComponent, ConfirmCartProductComponent } from 'src/app/feature/components';
+import {
+  ProductDetailsComponent,
+  ConfirmCartProductComponent
+} from 'src/app/feature/components';
 import { SigninComponent, SignupComponent } from 'src/app/core/components';
 import { Location } from '@angular/common';
 import { Router, ActivatedRoute } from '@angular/router';
@@ -145,5 +148,10 @@ export class UtilsService {
     //     this.location.back();
     //   }
     // });
+  }
+
+  closeAllDialog() {
+    this.dialog.closeAll();
+    this.location.go(`/cart`);
   }
 }

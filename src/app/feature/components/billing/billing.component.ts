@@ -6,10 +6,13 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./billing.component.less']
 })
 export class BillingComponent implements OnInit {
+  name: string;
+  address: string;
+  constructor() {}
 
-  constructor() { }
+  ngOnInit() {}
 
-  ngOnInit() {
+  billing(name, address) {
+    console.log(name, address);
   }
-
 }

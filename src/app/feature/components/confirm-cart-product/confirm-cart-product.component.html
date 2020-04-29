@@ -1,30 +1,35 @@
 <div class="container">
-    <button class="close-icon" mat-dialog-close>
-        <mat-icon>close </mat-icon>
-    </button>
-    <div class="header section justify-center">
-        <mat-icon class="check-icon" aria-hidden="false">done</mat-icon>
-        <span>ADDED TO CART</span>
-    </div>
-    <div class="product-section">
-        <div class="product">
-            <div class="w-50-ns w-100 tc">
-                <img [src]="product.image" class="product-image" />
-            </div>
-            <div class="mv5 product-content w-50-ns w-100">
-                <div class="product-desc">
-                    <div class="product-name">{{product.name}}</div>
-                    <div class="product-brand">{{product.brand}}</div>
-                    <div class="product-brand">${{product.total}}</div>
-                </div>
-            </div>
+  <button class="close-icon" mat-dialog-close>
+    <mat-icon>close </mat-icon>
+  </button>
+  <div class="header section justify-center">
+    <mat-icon class="check-icon" aria-hidden="false">done</mat-icon>
+    <span>ADDED TO CART</span>
+  </div>
+  <div class="product-section">
+    <div class="product">
+      <div class="w-50-ns w-100 tc">
+        <img [src]="product.image" class="product-image" />
+      </div>
+      <div class="mv5 product-content w-50-ns w-100">
+        <div class="product-desc">
+          <div class="product-name">{{ product.name }}</div>
+          <div class="product-brand">{{ product.brand }}</div>
+          <div class="product-brand">${{ product.total }}</div>
         </div>
-        <div class="cart-modal-footer">
-            <div class="action-buttons-container">
-                <button class="action-buttons"  mat-dialog-close>Keep Browsing</button>
-                <button class="action-buttons continue-button">Continue to Cart</button>
-            </div>
-        </div>
+      </div>
     </div>
-    
-</div> 
+    <div class="cart-modal-footer">
+      <div class="action-buttons-container">
+        <button class="action-buttons" mat-dialog-close>Keep Browsing</button>
+        <button
+          class="action-buttons continue-button"
+          (click)="closeAllDialogs()"
+          [routerLink]="['/cart']"
+        >
+          Continue to Cart
+        </button>
+      </div>
+    </div>
+  </div>
+</div>

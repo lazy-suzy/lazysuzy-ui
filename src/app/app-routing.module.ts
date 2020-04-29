@@ -14,7 +14,11 @@ import {
   TermsOfServiceComponent,
   PrivacyPolicyComponent
 } from './core/components';
-import { ProductDetailsMobileComponent } from './feature/components';
+import {
+  ProductDetailsMobileComponent,
+  BillingComponent,
+  PaymentComponent
+} from './feature/components';
 
 const routes: Routes = [
   { path: '', component: LandingComponent, pathMatch: 'full' },
@@ -30,6 +34,9 @@ const routes: Routes = [
   { path: 'termsofservice', component: TermsOfServiceComponent },
   { path: 'privacypolicy', component: PrivacyPolicyComponent },
   { path: 'cart', component: CartComponent },
+  // { path: 'billing', component: BillingComponent },
+  { path: 'payment', component: PaymentComponent },
+
   { path: 'wishlist', component: WishlistComponent, pathMatch: 'full' },
   {
     path: 'products/all',
@@ -53,14 +60,15 @@ const routes: Routes = [
   },
   {
     path: 'blog',
-    loadChildren: () => import('./feature/blog/blog/blog.module').then(m => m.BlogModule)
+    loadChildren: () =>
+      import('./feature/blog/blog/blog.module').then(m => m.BlogModule)
   }
 ];
 
 @NgModule({
   imports: [
-  RouterModule.forRoot(routes, { scrollPositionRestoration: 'enabled' })
+    RouterModule.forRoot(routes, { scrollPositionRestoration: 'enabled' })
   ],
   exports: [RouterModule]
 })
-export class AppRoutingModule { }
+export class AppRoutingModule {}

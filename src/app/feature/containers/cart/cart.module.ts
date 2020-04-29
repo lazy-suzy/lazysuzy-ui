@@ -1,14 +1,16 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { CartComponent } from './cart.component';
-import { CartProductsModule } from '../../components';
+import { PaymentModule } from '../../components';
+import { RouterModule } from '@angular/router';
+
 const DECLARATIONS = [CartComponent];
 
-const MODULES = [CommonModule, CartProductsModule];
+const MODULES = [CommonModule, PaymentModule, RouterModule];
 
 @NgModule({
   declarations: [...DECLARATIONS],
   imports: [...MODULES],
-  exports: [...DECLARATIONS, ...MODULES],
+  exports: [...DECLARATIONS, ...MODULES]
 })
 export class CartModule {}

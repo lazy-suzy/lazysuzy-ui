@@ -1,1 +1,15 @@
-<p>payment works!</p>
+<div class="mh4">
+  <h2>PAYMENT</h2>
+  <form
+    novalidate
+    (ngSubmit)="buy()"
+    [formGroup]="stripeTest"
+    class="w-40 ma4 payment-form"
+  >
+    <input type="text" formControlName="name" placeholder="Jane Doe" />
+    <div id="card-element" class="field"></div>
+    <button type="submit">
+      BUY
+    </button>
+  </form>
+</div>
