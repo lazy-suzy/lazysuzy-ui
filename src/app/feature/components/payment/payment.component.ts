@@ -24,7 +24,6 @@ export class PaymentComponent implements OnInit {
 
   // optional parameters
   elementsOptions: ElementsOptions = {};
-
   stripeTest: FormGroup;
 
   constructor(private fb: FormBuilder, private stripeService: StripeService, private apiService: ApiService) {}
@@ -59,7 +58,7 @@ export class PaymentComponent implements OnInit {
 
   buy() {
     const name = this.stripeTest.get('name').value;
-    this.stripeService.createToken(this.card, { name }).subscribe(result => {
+    this.stripeService.createToken(this.card, { name }).subscribe((result: any) => {
       if (result.token) {
         // Use the token to create a charge or a customer
         // https://stripe.com/docs/charges
