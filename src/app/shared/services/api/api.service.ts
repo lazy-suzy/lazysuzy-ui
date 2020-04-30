@@ -363,18 +363,26 @@ export class ApiService {
     return this.httpService.post(url, data);
   }
 
-  addCartProduct(sku) {
-    const endpoint = 'cart/add/';
-    const url = `${env.STAGING_BASE_HREF}${endpoint}${sku}`;
-    const data = '';
-    return this.httpService.post(url, data);
+  addCartProduct(data) {
+    const token = this.cookie.get('token');
+    const headers = new HttpHeaders({
+      'Content-Type': 'application/json',
+      Authorization: `Bearer ${token}`
+    });
+    const endpoint = 'cart/add';
+    const url = `${env.STAGING_BASE_HREF}${endpoint}`;
+    return this.httpService.post(url, data, headers);
   }
 
-  removeCartProduct(sku) {
-    const endpoint = 'cart/remove/';
-    const url = `${env.STAGING_BASE_HREF}${endpoint}${sku}`;
-    const data = '';
-    return this.httpService.post(url, data);
+  removeCartProduct(data) {
+    const token = this.cookie.get('token');
+    const headers = new HttpHeaders({
+      'Content-Type': 'application/json',
+      Authorization: `Bearer ${token}`
+    });
+    const endpoint = 'cart/remove';
+    const url = `${env.STAGING_BASE_HREF}${endpoint}`;
+    return this.httpService.post(url, data, headers);
   }
 
   getCartProduct() {

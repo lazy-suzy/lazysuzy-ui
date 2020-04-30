@@ -26,7 +26,7 @@ export class CartComponent implements OnInit {
   cartProductsLength: number;
   constructor(
     private breakpointObserver: BreakpointObserver,
-    private apiService: ApiService
+    private apiService: ApiService,
   ) {}
 
   ngOnInit(): void {
@@ -56,12 +56,23 @@ export class CartComponent implements OnInit {
     this.bpSubscription.unsubscribe();
   }
 
-  increaseQuantity() {
-    this.quantityValue += 1;
+  increaseQuantity(product) {
+    let postData= {
+      product_sku: product,
+      count: 1,
+    };
+    this.apiService.addCartProduct(postData).subscribe(
+      (payload: any) => {
+        this.getCartProducts();
+      },
+      (error: any) => {
+        console.log(error);
+      }
+    );
   }
 
-  decreaseQuantity() {
-    this.quantityValue -= 1;
+  decreaseQuantity(product) {
+    this.removeCartProduct(product, 1);
   }
 
   getSubTotal() {
@@ -70,8 +81,16 @@ export class CartComponent implements OnInit {
     }
   }
 
-  removeProduct(product) {
-    this.apiService.removeCartProduct(product).subscribe(
+  removeProduct(product, quantity) {
+    this.removeCartProduct(product, quantity);
+  }
+
+  removeCartProduct(product, quantity) {
+    let postData= {
+      product_sku: product,
+      count: quantity,
+    };
+    this.apiService.removeCartProduct(postData).subscribe(
       (payload: any) => {
         this.getCartProducts();
       },

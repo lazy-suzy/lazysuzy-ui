@@ -3,7 +3,8 @@ import {
   FormGroup,
   FormBuilder,
   Validators,
-  ReactiveFormsModule
+  ReactiveFormsModule,
+  FormsModule
 } from '@angular/forms';
 import {
   StripeService,
