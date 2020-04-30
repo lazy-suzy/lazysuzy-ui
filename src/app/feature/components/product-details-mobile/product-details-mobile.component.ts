@@ -206,7 +206,11 @@ export class ProductDetailsMobileComponent implements OnInit {
       price: this.productPrice,
       quantity: this.quantity
     };
-    this.apiService.addCartProduct(data.sku).subscribe(
+    const postData = {
+      product_sku: this.productSku,
+      count: this.quantity
+    };
+    this.apiService.addCartProduct(postData).subscribe(
       (payload: any) => {
         this.utils.openAddToCartDialog(data);
       },

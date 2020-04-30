@@ -24,9 +24,11 @@ export class CartComponent implements OnInit {
   cartProducts = [];
   totalAmount: number = 0;
   cartProductsLength: number;
+  quantity: number = 1;
+  quantityArray = [1, 2, 3, 4, 5];
   constructor(
     private breakpointObserver: BreakpointObserver,
-    private apiService: ApiService,
+    private apiService: ApiService
   ) {}
 
   ngOnInit(): void {
@@ -56,10 +58,10 @@ export class CartComponent implements OnInit {
     this.bpSubscription.unsubscribe();
   }
 
-  increaseQuantity(product) {
-    let postData= {
+  increaseQuantity(product, quantity) {
+    let postData = {
       product_sku: product,
-      count: 1,
+      count: quantity
     };
     this.apiService.addCartProduct(postData).subscribe(
       (payload: any) => {
@@ -71,24 +73,10 @@ export class CartComponent implements OnInit {
     );
   }
 
-  decreaseQuantity(product) {
-    this.removeCartProduct(product, 1);
-  }
-
-  getSubTotal() {
-    for (let product of this.cartProducts) {
-      this.totalAmount = this.totalAmount + product.price * product.count;
-    }
-  }
-
-  removeProduct(product, quantity) {
-    this.removeCartProduct(product, quantity);
-  }
-
-  removeCartProduct(product, quantity) {
-    let postData= {
+  decreaseQuantity(product, quantity) {
+    let postData = {
       product_sku: product,
-      count: quantity,
+      count: quantity
     };
     this.apiService.removeCartProduct(postData).subscribe(
       (payload: any) => {
@@ -98,5 +86,26 @@ export class CartComponent implements OnInit {
         console.log(error);
       }
     );
+  }
+
+  getSubTotal() {
+    for (let product of this.cartProducts) {
+      this.totalAmount =
+        this.totalAmount + product.retail_price * product.count;
+    }
+  }
+
+  removeProduct(product, quantity) {
+    this.decreaseQuantity(product, quantity);
+  }
+
+  onQuantityChanged(product, count) {
+    if (this.quantity >= count) {
+      const updateQuantity = this.quantity - count;
+      this.increaseQuantity(product, updateQuantity);
+    } else {
+      const updateQuantity = count - this.quantity;
+      this.decreaseQuantity(product, updateQuantity);
+    }
   }
 }

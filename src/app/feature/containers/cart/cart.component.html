@@ -23,23 +23,30 @@
           <div class="prod-details w-100 pl4">
             <div class="gray-font">{{ product.product_sku }}</div>
             <div class="blue-font">{{ product.product_name }}</div>
-            <div class="gray-font">
-              by {{product.site}}
-            </div>
+            <div class="gray-font">by {{ product.site }}</div>
             <div class="pink-font">${{ product.count * product.price }}</div>
           </div>
         </div>
         <div class="flex pt3">
           <div class="quantity w-30">
-            <span class="btn-quantity-operation b" (click)="decreaseQuantity(product.product_sku)">
+            <span
+              class="btn-quantity-operation b"
+              (click)="decreaseQuantity(product.product_sku, 1)"
+            >
               -
             </span>
             <span class="value"> {{ product.count }} </span>
-            <span class="btn-quantity-operation b" (click)="increaseQuantity(product.product_sku)">
+            <span
+              class="btn-quantity-operation b"
+              (click)="increaseQuantity(product.product_sku, 1)"
+            >
               +
             </span>
           </div>
-          <div class="btn-remove gray-font ml4" (click)="removeProduct(product.product_sku, product.count)">
+          <div
+            class="btn-remove gray-font ml4"
+            (click)="removeProduct(product.product_sku, product.count)"
+          >
             REMOVE
           </div>
         </div>
@@ -65,24 +72,26 @@
             <div class="gray-font">{{ product.product_sku }}</div>
             <div class="flex justify-between product-name pv1">
               <div class="blue-font">{{ product.product_name }}</div>
-              <div class="pink-font">${{ product.count * product.price }}</div>
+              <div class="pink-font">
+                ${{ product.count * product.retail_price }}
+              </div>
             </div>
-            <div class="pb4 gray-font">
-              by {{product.site}}
-            </div>
+            <div class="pb4 gray-font">by {{ product.site }}</div>
             <span class="select-style pv1">
-              <select>
-                <option value="1">1</option>
-                <option value="2">2</option>
-                <option value="3">3</option>
-                <option value="4">4</option>
+              <select
+                [(ngModel)]="quantity"
+                (change)="onQuantityChanged(product.product_sku, product.count)"
+              >
+                <option *ngFor="let item of quantityArray" [value]="item">{{
+                  item
+                }}</option>
               </select>
               <span class="arrow">&#9660;</span>
             </span>
 
             <div
               class="pt3 gray-font b pointer"
-              (click)="removeProduct(product.product_sku)"
+              (click)="removeProduct(product.product_sku, product.count)"
             >
               REMOVE
             </div>
