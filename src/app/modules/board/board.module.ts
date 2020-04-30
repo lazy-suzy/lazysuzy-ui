@@ -29,6 +29,8 @@ import { FileUploadModule } from 'ng2-file-upload';
 import { MatSelectModule } from '@angular/material';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AppProductPreviewComponent } from './product-preview/product-preview.component';
+import { KeyboardShortcutsModule } from 'ng-keyboard-shortcuts';
+import { CarouselModule } from 'primeng/carousel';
 
 @NgModule({
   imports: [
@@ -48,7 +50,8 @@ import { AppProductPreviewComponent } from './product-preview/product-preview.co
     MatSelectModule,
     FormsModule,
     ReactiveFormsModule,
-    KeyboardShortcutsModule.forRoot()
+    KeyboardShortcutsModule.forRoot(),
+    CarouselModule
   ],
   declarations: [
     BoardComponent,
@@ -59,7 +62,8 @@ import { AppProductPreviewComponent } from './product-preview/product-preview.co
     AddViaUrlComponent,
     StepperOverviewExample,
     BrowsefilterComponent,
-    AppProductPreviewComponent
+    AppProductPreviewComponent,
+    BoardPreviewComponent
   ],
   providers: [BoardService, CookieService]
 })

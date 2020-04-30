@@ -15,8 +15,26 @@
     <div class="col mt-3">
         <div class="text-center h2 font-weight-bold" style="color: #b76e79;"><span>Shop This Look</span></div>
         <!-- <app-products-carousal [data]="boardProducts"></app-products-carousal> -->
+        <div class="banner">
+            <p-carousel
+              class="bannerCarousel"
+              [value]="boardProducts"
+              [numVisible]="1"
+              [numScroll]="1"
+              [autoplayInterval]="8000"
+              [circular]="true"
+            >
+              <ng-template let-data pTemplate="item">
+                <div class="product">
+                  <a href="{{ data.link }}">
+                    <img class="product_image" src="{{ data.main_image }}" alt="Owl Image" />
+                  </a>
+                </div>
+              </ng-template>
+            </p-carousel>
+          </div>          
         <!-- temporary slider to be replaced with component -->
-        <div id="product-slider" class="m-5">
+        <!-- <div id="product-slider" class="m-5">
             <div class="ui-carousel-content">
                 <div class="ui-carousel-container">
                     <div class="ui-carousel-items-content" style="height: auto;">
@@ -35,6 +53,6 @@
                     </div>
                 </div>
             </div>
-        </div>
+        </div> -->
     </div>
 </div>
