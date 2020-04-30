@@ -57,6 +57,7 @@ import { CarouselModule } from 'primeng/carousel';
     BoardComponent,
     BoardViewComponent,
     BoardListComponent,
+    BoardPreviewComponent,
     SelectComponent,
     AddComponent,
     AddViaUrlComponent,

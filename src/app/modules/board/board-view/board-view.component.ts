@@ -1,7 +1,7 @@
 import { Component, OnInit, AfterViewInit, HostListener } from '@angular/core';
 import { CookieService } from 'ngx-cookie-service';
-import { ShortcutInput } from "ng-keyboard-shortcuts";
 import { SideNavItems } from './../sidenavitems';
+import { ShortcutInput } from "ng-keyboard-shortcuts";
 import * as $ from 'jquery';
 import { BoardService } from 'src/app/shared/services/board/board.service';
 declare const fb: any;
