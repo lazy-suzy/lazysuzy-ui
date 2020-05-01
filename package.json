@@ -34,6 +34,7 @@
     "jquery": "^3.4.1",
     "ng-animate": "^0.3.4",
     "ng2-file-upload": "^1.4.0",
+    "ng2-us-states": "^3.0.1",
     "ng5-slider": "^1.2.4",
     "ngx-cookie-service": "^3.0.2",
     "ngx-infinite-scroll": "^8.0.1",

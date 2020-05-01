@@ -1,4 +1,4 @@
-<div class="mh4">
+<!-- <div class="mh4">
   <h2>PAYMENT</h2>
   <form
     novalidate
@@ -12,4 +12,207 @@
       BUY
     </button>
   </form>
+</div> -->
+<div class="pa5-ns pa2 flex-ns">
+  <div class="w-70-ns w-100 ph4-ns">
+    <div class="billing-header pink-font b">
+      Checkout
+    </div>
+    <div class="billing-content">
+      <div class="billing-section">
+        <div class="flex">
+          <div class="step-number">1</div>
+          <div class="section-title">CUSTOMER</div>
+          <div class="edit-btn pointer" *ngIf="!customer" (click)="updateAccordion('customer')">EDIT</div>
+        </div>
+        <div class="section-content pv4 ml5-ns">
+          <div class="section-row">
+            <ng-container *ngIf="customer">
+              <input placeholder="Enter email address" class="email-input" [(ngModel)]="customerEmail">
+              <button class="continue-btn b" (click)="updateAccordion('shipping')">CONTINUE</button>
+            </ng-container>
+          </div>
+        </div>
+      </div>
+      <div class="billing-section">
+        <div class="flex">
+          <div class="step-number">2</div>
+          <div class="section-title">SHIPPING</div>
+          <div class="edit-btn pointer" *ngIf="!shipping" (click)="updateAccordion('shipping')">EDIT</div>
+        </div>
+        <div class="section-content pv4 ml5-ns">
+          <ng-container *ngIf="shipping">
+            <div class="section-row pb4 ">
+              <div class="b">Shipping Address</div>
+              <div class="i">*Required Field</div>
+            </div>
+            <form>
+              <div class="flex pb4">
+                <div class="w-50">
+                  <label class="db">First Name*</label>
+                  <input class="form-input w-90">
+                </div>
+                <div class="w-50">
+                  <label class="db">Last Name*</label>
+                  <input class="form-input w-90">
+                </div>
+              </div>
+              <div class="pb4">
+                <label class="db">Company Name</label>
+                <input class="form-input single-line-input">
+              </div>
+              <div class="w-50 pb4">
+                <label class="db">Phone Number*</label>
+                <input class="form-input w-90">
+              </div>
+              <div class="pb4">
+                <label class="db">Address*</label>
+                <input class="form-input single-line-input">
+              </div>
+              <div class="pb4">
+                <label class="db">Apartment/Home/Building</label>
+                <input class="form-input single-line-input">
+              </div>
+              <div class="pb4">
+                <label class="db">City*</label>
+                <input class="form-input single-line-input">
+              </div>
+              <div class="pb4">
+                <label class="db">Country*</label>
+                <input class="form-input single-line-input" placeholder="USA" disabled>
+              </div>
+              <div class="flex pb4">
+                <div class="w-50">
+                  <label class="db">State*</label>
+                  <select class="form-input w-90 white-bg">
+                    <option *ngFor="let item of statesArray" [value]="item.name">{{item.name}}</option>
+                  </select>
+                </div>
+                <div class="w-50">
+                  <label class="db">Postal Code*</label>
+                  <input class="form-input w-90">
+                </div>
+              </div>
+              <div class="pb4 flex">
+                <input type="checkbox">
+                <div class="ml2">My billing address is the same as my shipping address</div>
+              </div>
+              <div>
+                <button class="continue-btn b pv2" (click)="updateAccordion('billing')">CONTINUE</button>
+              </div>
+            </form>
+        </ng-container>
+        </div>
+      </div>
+      <div class="billing-section">
+        <div class="flex">
+          <div class="step-number">3</div>
+          <div class="section-title">BILLING</div>
+          <div class="edit-btn pointer" *ngIf="!billing" (click)="updateAccordion('billing')">EDIT</div>
+        </div>
+        <div class="section-content pv4 ml5-ns">
+          <ng-container *ngIf="billing">
+            <div class="section-row pb4 ">
+              <div class="b">Billing Address</div>
+              <div class="i">*Required Field</div>
+            </div>
+            <form>
+              <div class="flex pb4">
+                <div class="w-50">
+                  <label class="db">First Name*</label>
+                  <input class="form-input w-90">
+                </div>
+                <div class="w-50">
+                  <label class="db">Last Name*</label>
+                  <input class="form-input w-90">
+                </div>
+              </div>
+              <div class="pb4">
+                <label class="db">Company Name</label>
+                <input class="form-input single-line-input">
+              </div>
+              <div class="w-50 pb4">
+                <label class="db">Phone Number*</label>
+                <input class="form-input w-90">
+              </div>
+              <div class="pb4">
+                <label class="db">Address*</label>
+                <input class="form-input single-line-input">
+              </div>
+              <div class="pb4">
+                <label class="db">Apartment/Home/Building</label>
+                <input class="form-input single-line-input">
+              </div>
+              <div class="pb4">
+                <label class="db">City*</label>
+                <input class="form-input single-line-input">
+              </div>
+              <div class="pb4">
+                <label class="db">Country*</label>
+                <input class="form-input single-line-input" placeholder="USA" disabled>
+              </div>
+              <div class="flex pb4">
+                <div class="w-50">
+                  <label class="db">State*</label>
+                  <select class="form-input w-90 white-bg">
+                    <option *ngFor="let item of statesArray" [value]="item.name">{{item.name}}</option>
+                  </select>
+                </div>
+                <div class="w-50">
+                  <label class="db">Postal Code*</label>
+                  <input class="form-input w-90">
+                </div>
+              </div>
+              <button class="continue-btn b pv2" (click)="updateAccordion('payment')">CONTINUE</button>
+            </form>
+        </ng-container>
+        </div>
+      </div>
+      <div class="flex billing-section">
+        <div class="step-number">4</div>
+        <div class="section-title">PAYMENT</div>
+        <div class="edit-btn pointer" (click)="updateAccordion('payment')" >EDIT</div>
+      </div>
+    </div>
+  </div>
+  <div class="w-30-ns w-100 pa2 mh3-ns">
+    <div class="order-summary-card">
+      <div class="order-details section-border">
+        <div class="b pv2">ORDER SUMMARY</div>
+        <div class="flex pt3 pb4">
+          <div class="w-20">
+  
+          </div>
+          <div class="w-50">
+            <div>Product Name</div>
+            <div>by Brand Name</div>
+          </div>
+          <div class="w-10">
+            1
+          </div>
+          <div class="20">
+            $2000
+          </div>
+        </div>
+      </div>
+      <div class="order-pricing-details section-border">
+        <div class="flex justify-between pv3">
+          <span>SUBTOTAL</span>
+          <span>$400</span>
+        </div>
+        <div class="flex justify-between pb3">
+          <span>Shipping</span>
+          <span>$40</span>
+        </div>
+        <div class="flex justify-between pb3">
+          <span>Tax</span>
+          <span>$40</span>
+        </div>
+      </div>
+      <div class="flex justify-between pt2 pink-font b">
+        <span>TOTAL</span>
+        <span>$480</span>
+      </div>
+    </div>
+  </div>
 </div>
