@@ -1,0 +1,80 @@
+<div class="row" style="padding: 50px 500px">
+    <div class="col-12 text-center">
+        <h4 class="board-header m-3">TELL US MORE</h4>
+    </div>
+    <div class="publish-board-input">
+        <div>
+            <input class="form-control" placeholder="Board Name" [(ngModel)]="boardTitle">
+        </div>
+        <div>
+            <label>Name your board</label>
+        </div>
+    </div>
+    <div class="publish-board-title">
+        <h5 class="board-header">Select Room</h5>
+        <div class="publish-board-options">
+            <div *ngFor="let roomTypeOption of roomTypeOptions; index as i;"  class="publish-board-room-items" (click)="selectRoomType(i)" [class.active]="roomTypeOptionSelected == i">
+                {{roomTypeOption.value}}
+            </div>
+        </div>
+    </div>
+    <div class="publish-board-title">
+        <h5 class="board-header">Pick a Style</h5>
+        <div class="publish-board-options">
+            <div *ngFor="let roomStyleOption of roomStyleOptions; index as i;" class="publish-board-style-items" (click)="selectRoomStyle(i)" [class.active]="roomStyleOptionSelected == i">{{roomStyleOption.value}}</div>
+        </div>
+    </div>
+    <div class="publish-board-title d-flex">
+        <div>
+            <input [(ngModel)]="isPrivate" type="checkbox" class="keep-private-checkbox">
+        </div>
+        <div class="ml-2">
+            Keep Private
+        </div>
+    </div>
+</div>
+<div class="row mb-3">
+    <div class="col-6 text-right">
+        <button (click)="cancelPublishBoard()" class="btn btn-cancel js-close-publish-board">Cancel</button>
+    </div>
+    <div class="col-6">
+        <a>
+            <button (click)="publishBoard()" class="btn red-button">Save</button>
+        </a>
+    </div>
+</div>
+<div class="row mt-5 mb-5" style="background: #b76d79;">
+    <div class="container p-5">
+        <div class="row mb-5">
+            <div class="col-md-12">
+                <h3 class="text-white text-center">Nicely done, you've got style!<br></h3>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-4 pl-5 pr-5">
+                <div class="text-center"><i class="fa fa-share-alt"
+                        style="background: #ffffff;padding: 20px;border-radius: 50%;font-size: 30px;color: #b76d79;"></i>
+                </div>
+                <div class="text-center mt-3">
+                    <h5 class="text-white">Share Board</h5>
+                </div>
+            </div>
+            <div class="col-md-4 pl-5 pr-5">
+                <div class="text-center"><i class="fa fa-share-alt"
+                        style="background: #ffffff;padding: 20px;border-radius: 50%;font-size: 30px;color: #b76d79;"></i>
+                </div>
+                <div class="text-center mt-3">
+                    <h5 class="text-white">Shop Board</h5>
+                </div>
+            </div>
+            <div routerLink="{{boardListLink}}" class="col-md-4 pl-5 pr-5">
+                <div class="text-center"><i class="fa fa-share-alt"
+                        style="background: #ffffff;padding: 20px;border-radius: 50%;font-size: 30px;color: #b76d79;"></i>
+                </div>
+                <div class="text-center mt-3">
+                    <h5 class="text-white">Go to Dashboard</h5>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

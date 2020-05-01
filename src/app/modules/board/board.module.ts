@@ -31,6 +31,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AppProductPreviewComponent } from './product-preview/product-preview.component';
 import { KeyboardShortcutsModule } from 'ng-keyboard-shortcuts';
 import { CarouselModule } from 'primeng/carousel';
+import { BoardPopupComponent } from './board-popup/board-popup.component';
 
 @NgModule({
   imports: [
@@ -64,7 +65,8 @@ import { CarouselModule } from 'primeng/carousel';
     StepperOverviewExample,
     BrowsefilterComponent,
     AppProductPreviewComponent,
-    BoardPreviewComponent
+    BoardPreviewComponent,
+    BoardPopupComponent
   ],
   providers: [BoardService, CookieService]
 })

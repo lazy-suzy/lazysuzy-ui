@@ -4,6 +4,8 @@ import { SideNavItems } from './../sidenavitems';
 import { ShortcutInput } from "ng-keyboard-shortcuts";
 import * as $ from 'jquery';
 import { BoardService } from 'src/app/shared/services/board/board.service';
+import { MatDialog } from '@angular/material';
+import { BoardPopupComponent } from '../board-popup/board-popup.component';
 declare const fb: any;
 
 @Component({
@@ -23,8 +25,23 @@ export class BoardViewComponent implements OnInit, AfterViewInit {
 
   constructor(
     private cookieService: CookieService,
-    public boardService: BoardService
+    private dialog: MatDialog,
+    public boardService: BoardService,
   ) { }
+
+  share() {
+    let dialogRef = this.dialog.open(BoardPopupComponent, {
+      height: '80%',
+      width: '40%',
+    });
+  }
+
+  publish() {
+    let dialogRef = this.dialog.open(BoardPopupComponent, {
+      data: { name: 'austin' },
+      width: '40%',
+    });
+  }
 
   selectSideBarItem(item) {
     this.selectedItem = item.value;

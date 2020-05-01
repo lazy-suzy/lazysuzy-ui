@@ -6,7 +6,7 @@ import { boardRoutesNames } from './board.routes.names';
 import { BoardComponent } from './board.component';
 import { BoardViewComponent } from './board-view/board-view.component';
 import { BoardListComponent } from './board-list/board-list.component';
-import { BoardPreviewComponent } from './board-preview/board-preview.component';
+import { BoardPopupComponent } from './board-popup/board-popup.component';
 
 const routes: Routes = [
   {
@@ -23,7 +23,11 @@ const routes: Routes = [
   },
   {
     path: boardRoutesNames.BOARD_PREVIEW,
-    component: BoardPreviewComponent
+    component: BoardPopupComponent
+  },
+  {
+    path: boardRoutesNames.BOARD_POPUP,
+    component: BoardPopupComponent
   }
 ];
 
