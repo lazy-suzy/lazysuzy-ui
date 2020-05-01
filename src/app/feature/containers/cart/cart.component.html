@@ -24,7 +24,7 @@
             <div class="gray-font">{{ product.product_sku }}</div>
             <div class="blue-font">{{ product.product_name }}</div>
             <div class="gray-font">by {{ product.site }}</div>
-            <div class="pink-font">${{ product.count * product.price }}</div>
+            <div class="pink-font">${{ product.price }}</div>
           </div>
         </div>
         <div class="flex pt3">
@@ -72,20 +72,27 @@
             <div class="gray-font">{{ product.product_sku }}</div>
             <div class="flex justify-between product-name pv1">
               <div class="blue-font">{{ product.product_name }}</div>
-              <div class="pink-font">
-                ${{ product.count * product.retail_price }}
-              </div>
+              <div class="pink-font">${{ product.retail_price }}</div>
             </div>
+            <div class="pb4 gray-font">by {{ product.site }}</div>
             <div class="pb4 gray-font">by {{ product.site }}</div>
             <div class="pb4 gray-font">by {{ product.site }}</div>
             <span class="select-style pv1">
               <select
-                [(ngModel)]="quantity"
-                (change)="onQuantityChanged(product.product_sku, product.count)"
+                (change)="
+                  onQuantityChanged(
+                    product.product_sku,
+                    product.count,
+                    $event.target.value
+                  )
+                "
               >
-                <option *ngFor="let item of quantityArray" [value]="item">{{
-                  item
-                }}</option>
+                <option
+                  *ngFor="let item of quantityArray"
+                  [attr.value]="item"
+                  [attr.selected]="item == product.count ? true : null"
+                  >{{ item }}</option
+                >
               </select>
               <span class="arrow">&#9660;</span>
             </span>
@@ -117,3 +124,4 @@
     </div>
   </div>
 </ng-template>
+<img *ngIf="isProductFetching" [src]="spinner" class="loader" />

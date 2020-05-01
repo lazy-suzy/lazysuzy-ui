@@ -370,7 +370,7 @@ export class ApiService {
       Authorization: `Bearer ${token}`
     });
     const endpoint = 'cart/add';
-    const url = `${env.STAGING_BASE_HREF}${endpoint}`;
+    const url = `${env.API_BASE_HREF}${endpoint}`;
     return this.httpService.post(url, data, headers);
   }
 
@@ -381,13 +381,13 @@ export class ApiService {
       Authorization: `Bearer ${token}`
     });
     const endpoint = 'cart/remove';
-    const url = `${env.STAGING_BASE_HREF}${endpoint}`;
+    const url = `${env.API_BASE_HREF}${endpoint}`;
     return this.httpService.post(url, data, headers);
   }
 
   getCartProduct() {
     const endpoint = 'cart';
-    const url = `${env.STAGING_BASE_HREF}${endpoint}`;
+    const url = `${env.API_BASE_HREF}${endpoint}`;
     return this.httpService.get(url);
   }
   getAllBoards(payload): Observable<IProductPayload> {
@@ -400,8 +400,13 @@ export class ApiService {
     });
   }
   postStripeToken(data) {
+    const token = this.cookie.get('token');
+    const headers = new HttpHeaders({
+      'Content-Type': 'application/json',
+      Authorization: `Bearer ${token}`
+    });
     const endpoint = `payment/charge`;
     const url = `${env.API_BASE_HREF}${endpoint}`;
-    return this.httpService.post(url, data);
+    return this.httpService.post(url, data, headers);
   }
 }

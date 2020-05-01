@@ -26,6 +26,8 @@ export class CartComponent implements OnInit {
   cartProductsLength: number;
   quantity: number = 1;
   quantityArray = [1, 2, 3, 4, 5];
+  isProductFetching: boolean;
+  spinner: string = 'assets/images/spinner.gif';
   constructor(
     private breakpointObserver: BreakpointObserver,
     private apiService: ApiService
@@ -41,10 +43,11 @@ export class CartComponent implements OnInit {
   }
 
   getCartProducts() {
+    this.isProductFetching = true;
     this.apiService.getCartProduct().subscribe(
       (payload: any) => {
         this.cartProducts = payload;
-        this.cartProductsLength = this.cartProducts.length;
+        this.cartProductsLength = 0;
         this.totalAmount = 0;
         this.getSubTotal();
       },
@@ -92,19 +95,21 @@ export class CartComponent implements OnInit {
     for (let product of this.cartProducts) {
       this.totalAmount =
         this.totalAmount + product.retail_price * product.count;
+      this.cartProductsLength = this.cartProductsLength + product.count;
     }
+    this.isProductFetching = false;
   }
 
   removeProduct(product, quantity) {
     this.decreaseQuantity(product, quantity);
   }
 
-  onQuantityChanged(product, count) {
-    if (this.quantity >= count) {
-      const updateQuantity = this.quantity - count;
+  onQuantityChanged(product, count, quantity) {
+    if (quantity >= count) {
+      const updateQuantity = quantity - count;
       this.increaseQuantity(product, updateQuantity);
     } else {
-      const updateQuantity = count - this.quantity;
+      const updateQuantity = count - quantity;
       this.decreaseQuantity(product, updateQuantity);
     }
   }
