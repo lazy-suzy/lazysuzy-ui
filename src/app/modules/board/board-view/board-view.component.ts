@@ -1,9 +1,10 @@
-import { Component, OnInit, AfterViewInit, HostListener } from '@angular/core';
+import { Component, OnInit, AfterViewInit, HostListener, ViewChild } from '@angular/core';
 import { CookieService } from 'ngx-cookie-service';
 import { SideNavItems } from './../sidenavitems';
 import { ShortcutInput } from "ng-keyboard-shortcuts";
 import * as $ from 'jquery';
 import { BoardService } from 'src/app/shared/services/board/board.service';
+import { OverlayPanel } from 'primeng/overlaypanel';
 declare const fb: any;
 
 @Component({
@@ -20,6 +21,7 @@ export class BoardViewComponent implements OnInit, AfterViewInit {
   showLoader = false;
   productForPreview = null;
   sideBarItems = SideNavItems;
+  @ViewChild('browsefilter', { static: false }) browsefilter?: OverlayPanel;
 
   constructor(
     private cookieService: CookieService,
@@ -29,11 +31,21 @@ export class BoardViewComponent implements OnInit, AfterViewInit {
   selectSideBarItem(item) {
     this.selectedItem = item.value;
     if (this.selectedItem === 'browse') {
-      this.getBrowseData();
+      let selCat = this.boardService.getCategory();
+      this.getBrowseData(selCat);
     }
   }
 
-  handleAddProductBoardPreview($event) {
+  handleAddProductBoardPreview($event) { }
+
+  handleSelectCategory($event) {
+    this.boardService.setCategory($event);
+    this.selectSideBarItem({
+      name: 'Browse',
+      label: 'Browse',
+      value: 'browse',
+      route: 'board-browse'
+    });
   }
 
   handleProductPreview(product) {
@@ -44,10 +56,8 @@ export class BoardViewComponent implements OnInit, AfterViewInit {
     this.productForPreview = null;
   }
 
-  getBrowseData() {
-    this.selectedCategory = {
-      LS_ID: '201'
-    };
+  getBrowseData(categ) {
+    this.selectedCategory = categ;
     this.showLoader = true;
     this.boardService.getBrowseTabData(this.selectedCategory).subscribe((s: any) => {
       this.remoteProducts = [...(s.products) || []];
@@ -57,8 +67,15 @@ export class BoardViewComponent implements OnInit, AfterViewInit {
           refId: i
         };
       });
+      this.boardService.setFilterData(this.selectedCategory, s.filterData || {});
       this.showLoader = false;
     });
+  }
+
+  handleUpdatesFromFilter(event) {
+    if (event.name === 'TOGGLE_FILTER_OVERLAY' && !event.value) {
+      this.browsefilter.hide();
+    }
   }
 
   canvas: any;
@@ -415,7 +432,7 @@ export class BoardViewComponent implements OnInit, AfterViewInit {
   applyShortcut = (action, name, value = 0) => {
     let activeObject = this.canvas.getActiveObject();
 
-    if (action == "deselectOrCancel"){
+    if (action == "deselectOrCancel") {
       if (this.canvasMeta.flag.cropEnabled)
         this.handleCrop(false);
       else
@@ -428,9 +445,9 @@ export class BoardViewComponent implements OnInit, AfterViewInit {
     else if (action == "direct")
       this[name]();
     else if (action == "initializeCrop" && activeObject && activeObject.type == "image")
-    this.handleCrop();
+      this.handleCrop();
     else if (action == "confirmCrop" && activeObject && this.canvasMeta.flag.cropEnabled)
-    this.handleCrop(true);
+      this.handleCrop(true);
     else if (action == "toggleBackground" && activeObject) {
       if ((this.canvasMeta.flag.isCurrentObjectTransparentable &&
         !this.canvasMeta.flag.isCurrentObjectTransparentSelected) == true)

@@ -2,13 +2,13 @@ import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { ApiService } from 'src/app/shared/services';
 
 @Component({
-  selector: 'app-text',
-  templateUrl: './text.component.html',
-  styleUrls: ['./text.component.less']
+  selector: 'app-board-text',
+  templateUrl: './board-text.component.html',
+  styleUrls: ['./board-text.component.less', './../../board.component.less']
 })
-export class TextComponent implements OnInit {
+export class BoardTextComponent implements OnInit {
 
-  @Output() updates: EventEmitter<any> = new EventEmitter();
+  @Output() selectFont: EventEmitter<any> = new EventEmitter();
 
   allFonts = [{
     name: 'Helvetica',
@@ -35,8 +35,8 @@ export class TextComponent implements OnInit {
 
   ngOnInit(): void { }
 
-  selectFont(font) {
-    this.updates.emit(font);
+  selectFontFn(font) {
+    this.selectFont.emit(font);
   }
 
 }

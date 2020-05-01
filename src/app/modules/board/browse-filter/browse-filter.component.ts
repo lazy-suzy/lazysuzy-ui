@@ -32,6 +32,7 @@ export class BrowsefilterComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
+    debugger;
     this.createForm();
   }
 
@@ -55,6 +56,7 @@ export class BrowsefilterComponent implements OnInit {
   }
 
   createForm() {
+    debugger;
     this.filterData = { ...(this.boardService.state.filterData || {}) };
     const result = this.convertFilterDataForPlugin(this.filterData.brand, this.filterData.color);
     this.brandsDropdown = [...result.brands];
@@ -83,13 +85,13 @@ export class BrowsefilterComponent implements OnInit {
   applyFilters() {
     console.log('applyFilters');
     this.showLoader = true;
-    this.boardService.saveAddViaUrl(event).subscribe(s => {
-      this.showLoader = false;
-      this.updatesFromFilter.emit({
-        name: 'TOGGLE_FILTER_OVERLAY',
-        value: false
-      });
-    });
+    // this.boardService.saveAddViaUrl(event).subscribe(s => {
+    //   this.showLoader = false;
+    //   this.updatesFromFilter.emit({
+    //     name: 'TOGGLE_FILTER_OVERLAY',
+    //     value: false
+    //   });
+    // });
   }
 
 }

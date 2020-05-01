@@ -9,11 +9,11 @@ const URL = 'https://evening-anchorage-3159.herokuapp.com/api/';
 // import * as dropzone from 'dropzone';
 
 @Component({
-  selector: 'app-add',
+  selector: 'app-board-add',
   templateUrl: './add.component.html',
-  styleUrls: ['./add.component.less']
+  styleUrls: ['./add.component.less', '../board.component.less']
 })
-export class AddComponent implements OnInit {
+export class BoardAddComponent implements OnInit {
 
   myUploads = [];
   allUploads = [];

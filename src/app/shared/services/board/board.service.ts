@@ -1,6 +1,4 @@
 import { Injectable } from '@angular/core';
-import { IBoardSettings } from 'src/app/modules/board1/models/board.interface';
-import { DefaultBoardSettings } from 'src/app/modules/board1/constants/board-default-settings';
 import { ApiService } from '../api/api.service';
 import { of, Observable, Subject } from 'rxjs';
 import { delay } from 'rxjs/operators';
@@ -12,7 +10,7 @@ import { BehaviorSubject } from 'rxjs';
 })
 export class BoardService {
 
-    settings: IBoardSettings;
+    settings: any;
 
     state: any = {
         allBoards: [],
@@ -101,6 +99,10 @@ export class BoardService {
 
     setCategory(category) {
         this.state.selectedCategory = { ...category };
+    }
+
+    getCategory() {
+        return this.state.selectedCategory;
     }
 
     ngOnDestroy() {

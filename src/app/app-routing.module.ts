@@ -16,10 +16,10 @@ import {
 import { ProductDetailsMobileComponent } from './feature/components';
 
 const routes: Routes = [
-  { path: '', component: LandingComponent, pathMatch: 'full' },
+  { path: 'test', component: LandingComponent, pathMatch: 'full' },
 
   {
-    path: 'board',
+    path: '',
     loadChildren: () => import('./modules/board/board.module').then(m => m.BoardModule),
     // pathMatch: 'full'
   },
