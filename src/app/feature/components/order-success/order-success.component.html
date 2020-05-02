@@ -1,0 +1,55 @@
+<div class="pv4-ns ph6-ns pa2">
+    <div class="pink-font ml3-ns b">
+        THANKS FOR YOUR ORDER!
+    </div>
+    <div class="signup-card mv3 w-50-ns">
+        <div class="mv3">
+            Sign Up to keep track of your Order History
+        </div>
+        <div class="flex justify-between mv3">
+            <input placeholder="Password" class="form-input">
+            <button class="register-btn">REGISTER</button>
+        </div>
+    </div>
+    <div class="products-card mv3 w-70-ns">
+        <div class="order-header section pv3">
+            <div class="pb2 flex">
+                <div class="w-20-ns w-40">Order No:</div>
+                <div >{{orderId}}</div>
+            </div>
+            <div class="pb2 flex">
+                <div class="w-20-ns w-40 ">Order Date:</div>
+                <div>{{orderDate}}</div>
+            </div>
+        </div>
+        <div class="order-products pb4 section">
+            <div class="pv3">{{cartProductsLength}} Items</div>
+            <div class="flex-ns justify-between" *ngFor="let item of cartProducts">
+                <div class="w-30-ns pv2 blue-font">
+                    <img [src]="item.image">
+                    <div>{{item.product_name}}</div>
+                    <div>by {{item.site}}</div>
+                    <div>${{item.price}}</div>
+                </div>
+            </div>
+        </div>
+        <div class="order-pricing section pv1 mb3">
+            <div class="flex justify-between pv3">
+                <div class="b">SUBTOTAL:</div>
+                <div>${{subTotalAmount}}</div>
+            </div>
+            <div class="flex justify-between pv2">
+                <div>Shipping</div>
+                <div>${{totalShippingCharge}}</div>
+            </div>
+            <!-- <div class="flex justify-between pv2">
+                <div>Tax</div>
+                <div>$40</div>
+            </div> -->
+            <div class="flex justify-between pink-font b pv3">
+                <div>TOTAL</div>
+                <div>${{totalAmount}}</div>
+            </div>
+        </div>
+    </div>
+</div>

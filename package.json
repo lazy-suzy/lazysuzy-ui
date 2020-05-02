@@ -32,6 +32,7 @@
     "hammerjs": "^2.0.8",
     "handlebars": "^4.7.6",
     "jquery": "^3.4.1",
+    "moment": "^2.25.1",
     "ng-animate": "^0.3.4",
     "ng2-file-upload": "^1.4.0",
     "ng2-us-states": "^3.0.1",

@@ -19,17 +19,40 @@
         <div class="section-content pv4 ml5-ns">
           <div class="section-row">
             <ng-container *ngIf="customer; else customerEmail">
-              <input
-                placeholder="Enter email address"
-                class="email-input"
-                [(ngModel)]="customerData.email"
-              />
-              <button
-                class="continue-btn b"
-                (click)="updateAccordion('shipping')"
+              <form
+                name="email-form"
+                class="flex w-100"
+                (ngSubmit)="
+                  emailForm.form.valid && checkEmailValidation('shipping')
+                "
+                #emailForm="ngForm"
               >
-                CONTINUE
-              </button>
+                <div class="w-50">
+                  <input
+                    placeholder="Enter email address"
+                    type="email"
+                    name="email"
+                    #email="ngModel"
+                    class="form-input w-100"
+                    [(ngModel)]="customerData.email"
+                    required
+                  />
+                  <div
+                    *ngIf="emailForm.submitted && email.invalid"
+                    class="invalid-feedback"
+                  >
+                    <div *ngIf="email.errors.required">Email is required</div>
+                  </div>
+                  <div *ngIf="!isEmailValid" class="invalid-feedback">
+                    <div *ngIf="!isEmailValid">
+                      Email must be a valid email address
+                    </div>
+                  </div>
+                </div>
+                <div class="w-50 tc">
+                  <button class="email-continue-btn b">CONTINUE</button>
+                </div>
+              </form>
             </ng-container>
             <ng-template #customerEmail>
               {{ customerData.email }}
@@ -55,23 +78,47 @@
               <div class="b">Shipping Address</div>
               <div class="i">*Required Field</div>
             </div>
-            <form>
+            <form
+              name="form"
+              (ngSubmit)="f.form.valid && updateAccordion('billing')"
+              #f="ngForm"
+            >
               <div class="flex pb4">
                 <div class="w-50">
                   <label class="db">First Name*</label>
                   <input
                     class="form-input w-90"
                     name="shipping_f_Name"
+                    #shipping_f_Name="ngModel"
                     [(ngModel)]="customerData.shipping_f_Name"
+                    required
                   />
+                  <div
+                    *ngIf="f.submitted && shipping_f_Name.invalid"
+                    class="invalid-feedback"
+                  >
+                    <div *ngIf="shipping_f_Name.errors.required">
+                      First Name is required
+                    </div>
+                  </div>
                 </div>
                 <div class="w-50">
                   <label class="db">Last Name*</label>
                   <input
                     class="form-input w-90"
                     name="shipping_l_Name"
+                    #shipping_l_Name="ngModel"
                     [(ngModel)]="customerData.shipping_l_Name"
+                    required
                   />
+                  <div
+                    *ngIf="f.submitted && shipping_l_Name.invalid"
+                    class="invalid-feedback"
+                  >
+                    <div *ngIf="shipping_l_Name.errors.required">
+                      Last Name is required
+                    </div>
+                  </div>
                 </div>
               </div>
               <div class="pb4">
@@ -87,16 +134,36 @@
                 <input
                   class="form-input w-90"
                   name="shipping_phone"
+                  #shipping_phone="ngModel"
                   [(ngModel)]="customerData.shipping_phone"
+                  required
                 />
+                <div
+                  *ngIf="f.submitted && shipping_phone.invalid"
+                  class="invalid-feedback"
+                >
+                  <div *ngIf="shipping_phone.errors.required">
+                    Phone Number is required
+                  </div>
+                </div>
               </div>
               <div class="pb4">
                 <label class="db">Address*</label>
                 <input
                   class="form-input single-line-input"
                   name="shipping_address_line1"
+                  #shipping_address_line1="ngModel"
                   [(ngModel)]="customerData.shipping_address_line1"
+                  required
                 />
+                <div
+                  *ngIf="f.submitted && shipping_address_line1.invalid"
+                  class="invalid-feedback"
+                >
+                  <div *ngIf="shipping_address_line1.errors.required">
+                    Address is required
+                  </div>
+                </div>
               </div>
               <div class="pb4">
                 <label class="db">Apartment/Home/Building</label>
@@ -111,18 +178,38 @@
                 <input
                   class="form-input single-line-input"
                   name="shipping_city"
+                  #shipping_city="ngModel"
                   [(ngModel)]="customerData.shipping_city"
+                  required
                 />
+                <div
+                  *ngIf="f.submitted && shipping_city.invalid"
+                  class="invalid-feedback"
+                >
+                  <div *ngIf="shipping_city.errors.required">
+                    City is required
+                  </div>
+                </div>
               </div>
               <div class="pb4">
                 <label class="db">Country*</label>
                 <select
                   class="form-input single-line-input white-bg"
+                  #shipping_country="ngModel"
                   name="shipping_country"
                   [(ngModel)]="customerData.shipping_country"
+                  required
                 >
                   <option value="USA">USA</option>
                 </select>
+                <div
+                  *ngIf="f.submitted && shipping_country.invalid"
+                  class="invalid-feedback"
+                >
+                  <div *ngIf="shipping_country.errors.required">
+                    Country is required
+                  </div>
+                </div>
               </div>
               <div class="flex pb4">
                 <div class="w-50">
@@ -130,7 +217,9 @@
                   <select
                     class="form-input w-90 white-bg"
                     name="shipping_state"
+                    #shipping_state="ngModel"
                     [(ngModel)]="customerData.shipping_state"
+                    required
                   >
                     <option
                       *ngFor="let item of statesArray"
@@ -138,14 +227,32 @@
                       >{{ item.name }}</option
                     >
                   </select>
+                  <div
+                    *ngIf="f.submitted && shipping_state.invalid"
+                    class="invalid-feedback"
+                  >
+                    <div *ngIf="shipping_state.errors.required">
+                      State is required
+                    </div>
+                  </div>
                 </div>
                 <div class="w-50">
                   <label class="db">Postal Code*</label>
                   <input
                     class="form-input w-90"
                     name="shipping_zipcode"
+                    #shipping_zipcode="ngModel"
                     [(ngModel)]="customerData.shipping_zipcode"
+                    required
                   />
+                  <div
+                    *ngIf="f.submitted && shipping_zipcode.invalid"
+                    class="invalid-feedback"
+                  >
+                    <div *ngIf="shipping_zipcode.errors.required">
+                      Postal Code is required
+                    </div>
+                  </div>
                 </div>
               </div>
               <div class="pb4 flex">
@@ -162,12 +269,7 @@
                 </div>
               </div>
               <div>
-                <button
-                  class="continue-btn b pv2"
-                  (click)="updateAccordion('billing')"
-                >
-                  CONTINUE
-                </button>
+                <button class="continue-btn b pv2">CONTINUE</button>
               </div>
             </form>
           </ng-container>
@@ -205,23 +307,47 @@
               <div class="b">Billing Address</div>
               <div class="i">*Required Field</div>
             </div>
-            <form>
+            <form
+              name="billing-form"
+              (ngSubmit)="billingForm.form.valid && updateAccordion('payment')"
+              #billingForm="ngForm"
+            >
               <div class="flex pb4">
                 <div class="w-50">
                   <label class="db">First Name*</label>
                   <input
                     class="form-input w-90"
                     name="billing_f_Name"
+                    #billing_f_Name="ngModel"
                     [(ngModel)]="customerData.billing_f_Name"
+                    required
                   />
+                  <div
+                    *ngIf="billingForm.submitted && billing_f_Name.invalid"
+                    class="invalid-feedback"
+                  >
+                    <div *ngIf="billing_f_Name.errors.required">
+                      First Name is required
+                    </div>
+                  </div>
                 </div>
                 <div class="w-50">
                   <label class="db">Last Name*</label>
                   <input
                     class="form-input w-90"
                     name="billing_l_Name"
+                    #billing_l_Name="ngModel"
                     [(ngModel)]="customerData.billing_l_Name"
+                    required
                   />
+                  <div
+                    *ngIf="billingForm.submitted && billing_l_Name.invalid"
+                    class="invalid-feedback"
+                  >
+                    <div *ngIf="billing_l_Name.errors.required">
+                      Last Name is required
+                    </div>
+                  </div>
                 </div>
               </div>
               <div class="pb4">
@@ -237,16 +363,36 @@
                 <input
                   class="form-input w-90"
                   name="billing_phone"
+                  #billing_phone="ngModel"
                   [(ngModel)]="customerData.billing_phone"
+                  required
                 />
+                <div
+                  *ngIf="billingForm.submitted && billing_phone.invalid"
+                  class="invalid-feedback"
+                >
+                  <div *ngIf="billing_phone.errors.required">
+                    Phone Number is required
+                  </div>
+                </div>
               </div>
               <div class="pb4">
                 <label class="db">Address*</label>
                 <input
                   class="form-input single-line-input"
                   name="billing_address_line1"
+                  #billing_address_line1="ngModel"
                   [(ngModel)]="customerData.billing_address_line1"
+                  required
                 />
+                <div
+                  *ngIf="billingForm.submitted && billing_address_line1.invalid"
+                  class="invalid-feedback"
+                >
+                  <div *ngIf="billing_address_line1.errors.required">
+                    Address is required
+                  </div>
+                </div>
               </div>
               <div class="pb4">
                 <label class="db">Apartment/Home/Building</label>
@@ -261,18 +407,38 @@
                 <input
                   class="form-input single-line-input"
                   name="billing_city"
+                  #billing_city="ngModel"
                   [(ngModel)]="customerData.billing_city"
+                  required
                 />
+                <div
+                  *ngIf="billingForm.submitted && billing_city.invalid"
+                  class="invalid-feedback"
+                >
+                  <div *ngIf="billing_city.errors.required">
+                    City is required
+                  </div>
+                </div>
               </div>
               <div class="pb4">
                 <label class="db">Country*</label>
                 <select
                   class="form-input single-line-input white-bg"
+                  #billing_country="ngModel"
                   name="billing_country"
                   [(ngModel)]="customerData.billing_country"
+                  required
                 >
                   <option value="USA">USA</option>
                 </select>
+                <div
+                  *ngIf="billingForm.submitted && billing_country.invalid"
+                  class="invalid-feedback"
+                >
+                  <div *ngIf="billing_country.errors.required">
+                    Country is required
+                  </div>
+                </div>
               </div>
               <div class="flex pb4">
                 <div class="w-50">
@@ -280,7 +446,9 @@
                   <select
                     class="form-input w-90 white-bg"
                     name="billing_state"
+                    #billing_state="ngModel"
                     [(ngModel)]="customerData.billing_state"
+                    required
                   >
                     <option
                       *ngFor="let item of statesArray"
@@ -288,23 +456,36 @@
                       >{{ item.name }}</option
                     >
                   </select>
+                  <div
+                    *ngIf="billingForm.submitted && billing_state.invalid"
+                    class="invalid-feedback"
+                  >
+                    <div *ngIf="billing_state.errors.required">
+                      State is required
+                    </div>
+                  </div>
                 </div>
                 <div class="w-50">
                   <label class="db">Postal Code*</label>
                   <input
                     class="form-input w-90"
                     name="billing_zipcode"
+                    #billing_zipcode="ngModel"
                     [(ngModel)]="customerData.billing_zipcode"
+                    required
                   />
+                  <div
+                    *ngIf="billingForm.submitted && billing_zipcode.invalid"
+                    class="invalid-feedback"
+                  >
+                    <div *ngIf="billing_zipcode.errors.required">
+                      Postal Code is required
+                    </div>
+                  </div>
                 </div>
               </div>
               <div>
-                <button
-                  class="continue-btn b pv2"
-                  (click)="updateAccordion('payment')"
-                >
-                  CONTINUE
-                </button>
+                <button class="continue-btn b pv2">CONTINUE</button>
               </div>
             </form>
           </ng-container>
@@ -344,16 +525,30 @@
             class="w-100 ma4"
           >
             <div class="payment-form">
-              <input
-                type="text"
-                formControlName="name"
-                placeholder="Jane Doe"
-              />
               <div id="card-element" class="field"></div>
             </div>
-            <button class="place-order-btn b pv2 w-100" type="submit">
-              PLACE ORDER
+            <button
+              class="place-order-btn b pv2 w-100 {{
+                isPaymentExecuting ? 'no-pointer-event' : ''
+              }}"
+              type="submit"
+            >
+              <div
+                class="lds-ellipsis"
+                *ngIf="isPaymentExecuting; else showButton"
+              >
+                <div></div>
+                <div></div>
+                <div></div>
+                <div></div>
+              </div>
+              <ng-template #showButton>
+                PLACE ORDER
+              </ng-template>
             </button>
+            <div *ngIf="!isRequiredFieldsPresent" class="invalid-feedback">
+              <div *ngIf="!isRequiredFieldsPresent">{{ cardErrorMsg }}</div>
+            </div>
           </form>
         </div>
       </div>

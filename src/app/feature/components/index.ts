@@ -25,3 +25,5 @@ export * from './payment/payment.component';
 export * from './payment/payment.module';
 export * from './confirm-cart-product/confirm-cart-product.component';
 export * from './confirm-cart-product/confirm-cart-product.module';
+export * from './order-success/order-success.component';
+export * from './order-success/order-success.module';

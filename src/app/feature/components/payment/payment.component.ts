@@ -14,6 +14,7 @@ import {
 } from 'ngx-stripe';
 import { ApiService } from 'src/app/shared/services';
 import { USStateService } from 'ng2-us-states';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-payment',
@@ -44,7 +45,6 @@ export class PaymentComponent implements OnInit {
     name: null,
     token: null,
     ip: null,
-    created: null,
     shipping_f_Name: null,
     shipping_l_Name: null,
     shipping_company_name: null,
@@ -67,13 +67,16 @@ export class PaymentComponent implements OnInit {
     billing_zipcode: null
   };
   isBillingAddressSame: boolean;
-  isLoading: boolean;
-  spinner: string = 'assets/images/spinner.gif';
+  isEmailValid: boolean = true;
+  isRequiredFieldsPresent: boolean = true;
+  isPaymentExecuting: boolean = false;
+  cardErrorMsg: string;
   constructor(
     private fb: FormBuilder,
     private stripeService: StripeService,
     private apiService: ApiService,
-    private usStateService: USStateService
+    private usStateService: USStateService,
+    private router: Router
   ) {
     this.statesArray = this.usStateService.getStates();
   }
@@ -126,39 +129,79 @@ export class PaymentComponent implements OnInit {
         this.subTotalAmount + product.retail_price * product.count;
       this.cartProductsLength = this.cartProductsLength + product.count;
     }
+    if (this.cartProductsLength === 0) {
+      this.router.navigate(['cart']);
+    }
     this.totalShippingCharge =
       this.cartProductsLength * this.perItemShippingCharge;
     this.totalAmount = this.subTotalAmount + this.totalShippingCharge;
   }
   buy() {
-    const name = this.stripeTest.get('name').value;
-    this.isLoading = true;
-    this.stripeService
-      .createToken(this.card, { name })
-      .subscribe((result: any) => {
-        if (result.token) {
-          // Use the token to create a charge or a customer
-          // https://stripe.com/docs/charges
-          this.customerData.token = result.token.id;
-          this.customerData.ip = result.token.client_ip;
-          this.customerData.created = result.token.created;
-          this.apiService.postStripeToken(this.customerData).subscribe(
-            (payload: any) => {
-              console.log(payload);
-              alert(JSON.stringify(payload));
-              this.isLoading = false;
-            },
-            (error: any) => {
-              console.log(error);
-              alert(JSON.stringify(error));
-              this.isLoading = false;
-            }
-          );
-        } else if (result.error) {
-          // Error creating the token
-          console.log(result.error.message);
-        }
-      });
+    let data = this.customerData;
+    let condition =
+      data.email &&
+      data.shipping_f_Name &&
+      data.shipping_l_Name &&
+      data.shipping_address_line1 &&
+      data.shipping_state &&
+      data.shipping_zipcode &&
+      data.shipping_phone &&
+      data.shipping_country &&
+      data.shipping_city &&
+      data.billing_f_Name &&
+      data.billing_l_Name &&
+      data.billing_address_line1 &&
+      data.billing_state &&
+      data.billing_zipcode &&
+      data.billing_phone &&
+      data.billing_country &&
+      data.billing_city;
+    if (condition) {
+      this.isPaymentExecuting = true;
+      // const name = this.stripeTest.get('name').value;
+      const name =
+        this.customerData.billing_f_Name +
+        ' ' +
+        this.customerData.billing_l_Name;
+      this.stripeService
+        .createToken(this.card, { name })
+        .subscribe((result: any) => {
+          if (result.token) {
+            // Use the token to create a charge or a customer
+            // https://stripe.com/docs/charges
+            this.customerData.token = result.token.id;
+            this.customerData.ip = result.token.client_ip;
+            this.apiService.postStripeToken(this.customerData).subscribe(
+              (payload: any) => {
+                console.log(payload);
+                this.isPaymentExecuting = false;
+                this.router.navigate([`order/${payload.order_id}`]);
+              },
+              (error: any) => {
+                console.log(error);
+                this.isPaymentExecuting = false;
+              }
+            );
+          } else if (result.error) {
+            this.isPaymentExecuting = false;
+            // if(result.error === 'Your card number is incomplete.' ||
+            // result.error === "Your card's expiration date is incomplete."
+            // || result.error === "Your card's security code is incomplete."){
+            //   this.isRequiredFieldsPresent = false;
+            //   this.cardErrorMsg = 'Incomplete Card Details';
+            // } else
+            // if (result.error === 'Your card number is invalid.') {
+            //   this.isRequiredFieldsPresent = false;
+            //   this.cardErrorMsg = 'Invalid Card Details';
+            // }
+            // Error creating the token
+            console.log(result.error.message);
+          }
+        });
+    } else {
+      this.isRequiredFieldsPresent = false;
+      this.cardErrorMsg = 'Please fill all the required fields';
+    }
   }
 
   updateAccordion(section) {
@@ -173,6 +216,19 @@ export class PaymentComponent implements OnInit {
     }
   }
 
+  checkEmailValidation() {
+    const emailformat = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(
+      String(this.customerData.email).toLowerCase()
+    );
+    if (!emailformat) {
+      this.customer = true;
+      this.isEmailValid = false;
+    } else {
+      this.shipping = true;
+      this.customer = false;
+      this.isEmailValid = true;
+    }
+  }
   onCheckboxChange(checked) {
     this.isBillingAddressSame = checked;
     if (this.isBillingAddressSame) {

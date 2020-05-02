@@ -11,6 +11,7 @@ import {
 } from './containers';
 import { ProductDetailsMobileModule } from './components';
 import { BlogModule } from './blog/blog/blog.module';
+import { OrderSuccessComponent } from './components/order-success/order-success.component';
 
 const DECLARATIONS = [];
 
@@ -28,7 +29,7 @@ const MODULES = [
 ];
 
 @NgModule({
-  declarations: [...DECLARATIONS],
+  declarations: [...DECLARATIONS, OrderSuccessComponent],
   imports: [...MODULES],
   exports: [...DECLARATIONS, ...MODULES]
 })

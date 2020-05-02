@@ -409,4 +409,9 @@ export class ApiService {
     const url = `${env.API_BASE_HREF}${endpoint}`;
     return this.httpService.post(url, data, headers);
   }
+  getOrderSuccessData(orderId) {
+    const endpoint = `order?order_id=${orderId}`;
+    const url = `${env.API_BASE_HREF}${endpoint}`;
+    return this.httpService.get(url);
+  }
 }

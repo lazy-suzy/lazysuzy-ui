@@ -17,7 +17,8 @@ import {
 import {
   ProductDetailsMobileComponent,
   BillingComponent,
-  PaymentComponent
+  PaymentComponent,
+  OrderSuccessComponent
 } from './feature/components';
 
 const routes: Routes = [
@@ -36,7 +37,7 @@ const routes: Routes = [
   { path: 'cart', component: CartComponent },
   // { path: 'billing', component: BillingComponent },
   { path: 'payment', component: PaymentComponent },
-
+  { path: 'order/:order', component: OrderSuccessComponent },
   { path: 'wishlist', component: WishlistComponent, pathMatch: 'full' },
   {
     path: 'products/all',
