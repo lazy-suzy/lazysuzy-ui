@@ -7,7 +7,7 @@
 
         <ul class="nav nav-tabs flex-column">
           <li *ngFor="let sideItem of sideBarItems;" (click)="selectSideBarItem(sideItem)" class="nav-item">
-            <div class="nav-link" [class.active]="sideItem?.value === selected?.value">
+            <div class="nav-link" [class.active]="sideItem?.value === selectedItem">
               {{sideItem?.label}}
             </div>
           </li>
@@ -19,33 +19,11 @@
 
         Selected Tab: {{selectedItem}}
 
-        <div *ngIf="selectedItem==='select'" id="select">
+        <div *ngIf="selectedItem==='select'">
           <app-select (goToCategory)="handleSelectCategory($event)"></app-select>
         </div>
 
         <div *ngIf="selectedItem==='browse'">
-
-          <div class="browse-header">
-            <div class="browse-filter">
-              <div class="filter-bar-container">
-                <div class="filter-bar js-filter-section" id="desktop-filter">
-                  <div class="tabs">
-
-                    <div class="static-bottom-panel-wrapper" *ngIf="productForPreview" style="z-index: 9999999;">
-                      <div class="static-bottom-panel selected">
-                        <app-product-preview [data]="productForPreview"
-                          (clearProductPreview)="handleClearProductPreview($event)"
-                          (addProductBoard)="handleAddProductBoardPreview($event)">
-                        </app-product-preview>
-                      </div>
-                    </div>
-
-                  </div>
-                </div>
-              </div>
-              <div class="clear-all d-none d-md-block">Clear All</div>
-            </div>
-          </div>
 
           <app-loader *ngIf="showLoader"></app-loader>
 
@@ -54,6 +32,15 @@
             *ngIf="!showLoader"
             (previewProduct)="handleProductPreview($event)">
           </app-board-products>
+
+          <div class="static-bottom-panel-wrapper" *ngIf="productForPreview" style="z-index: 9999999;">
+            <div class="static-bottom-panel selected">
+              <app-product-preview [data]="productForPreview"
+                (clearProductPreview)="handleClearProductPreview($event)"
+                (addProductBoard)="handleAddProductBoardPreview($event)">
+              </app-product-preview>
+            </div>
+          </div>
 
         </div>
 
