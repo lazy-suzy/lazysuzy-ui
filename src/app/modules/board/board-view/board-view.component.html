@@ -6,7 +6,12 @@
       <div class="left-tabs">
 
         <ul class="nav nav-tabs flex-column">
-          <li *ngFor="let sideItem of sideBarItems;" (click)="selectSideBarItem(sideItem)" class="nav-item">
+          <li 
+            *ngFor="let sideItem of sideBarItems;"
+            (click)="selectSideBarItem(sideItem)"
+            [ngClass]="boardService.state.selectedCategory == null  && sideItem?.value == 'browse' ? 'disable-browse' : ''"
+            class="nav-item"
+          >
             <div class="nav-link" [class.active]="sideItem?.value === selectedItem">
               {{sideItem?.label}}
             </div>
@@ -24,6 +29,35 @@
         </div>
 
         <div *ngIf="selectedItem==='browse'">
+
+          <div class="browse-header">
+            <div class="item-search-bar">
+                <div class="input-group">
+                    <input type="text" class="form-control" id="inlineFormInputGroupUsername" placeholder="Search">
+                    <div class="input-group-append">
+                        <div class="input-group-text icon">
+                            <i class="mdi mdi-magnify" aria-hidden="true"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="browse-title" (click)="handleGoToSelect($event)">
+                <i class="mdi mdi-chevron-left" aria-hidden="true"></i>
+                <h5 class="title js-category-title">
+                    {{selectedCategory?.category}}
+                </h5>
+            </div>
+            <div class="browse-filter">
+                <div class="filter-bar-container">
+                    <div class="filter-bar js-filter-section" id="desktop-filter">
+                        <div class="tabs">
+                        </div>
+                    </div>
+                </div>
+                <div class="clear-all d-none d-md-block">Clear All</div>
+            </div>
+        </div>
+        
 
           <app-loader *ngIf="showLoader"></app-loader>
 
@@ -50,6 +84,10 @@
 
         <div *ngIf="selectedItem==='add'">
           <app-board-add (previewProduct)="handlePreviewProductToBoardUpdates($event)"></app-board-add>
+        </div>
+
+        <div *ngIf="selectedItem==='board'">
+          <app-current-board [boardProducts]="remoteProducts"></app-current-board>
         </div>
 
       </div>

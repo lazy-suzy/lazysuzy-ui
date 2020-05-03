@@ -67,8 +67,18 @@ export class BoardViewComponent implements OnInit, AfterViewInit {
           refId: i
         };
       });
-      this.boardService.setFilterData(this.selectedCategory, s.filterData || {});
+      this.boardService.setBoardData(this.remoteProducts,this.selectedCategory, s.filterData || {});
       this.showLoader = false;
+    });
+  }
+
+  handleGoToSelect(event) {
+    this.boardService.resetBoard();
+    this.selectSideBarItem({
+      name: 'Select',
+      label: 'Select',
+      value: 'select',
+      route: 'board-select'
     });
   }
 

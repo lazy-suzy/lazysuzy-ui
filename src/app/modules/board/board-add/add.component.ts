@@ -55,10 +55,8 @@ export class BoardAddComponent implements OnInit {
     });
 
     dialogRef.afterClosed().subscribe(result => {
-      let myUploads = this.boardService.state.myUploads;
-      let allUploads = this.boardService.state.allUploads;
-      this.boardService.state.myUploads = [...myUploads, result];
-      this.boardService.state.allUploads = [...allUploads, result];
+      this.boardService.state.myUploads = [...this.myUploads, result];
+      this.boardService.state.allUploads = [...this.allUploads, result];
       this.myUploads = [...this.boardService.state.myUploads];
       this.allUploads = [...this.boardService.state.allUploads];
     });

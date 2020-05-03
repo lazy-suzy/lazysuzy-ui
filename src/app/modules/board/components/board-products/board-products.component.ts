@@ -19,18 +19,7 @@ export class BoardProductsComponent implements OnInit {
   ngOnChanges(changes: any) {
     if (changes['products'] && changes['products'].previousValue !== changes['products'].currentValue) {
       let products = changes['products'].currentValue || [];
-      // if (this.modifyPath) {
-      //   products = products.map(pro => {
-      //     return {
-      //       ...pro,
-      //       //TO ASK MIKE
-      //       // main_image: `https://www.lazysuzy.com/${pro.path}`
-      //       main_image: `http://board.lazysuzy.com/${pro.path}`
-      //     };
-      //   });
-      // }
       this.products = [...products] || [];
-
     }
   }
 
