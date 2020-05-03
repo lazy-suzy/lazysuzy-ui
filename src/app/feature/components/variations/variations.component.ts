@@ -1,5 +1,6 @@
 import { Component, OnInit, Input, EventEmitter, Output } from '@angular/core';
 import { UtilsService } from 'src/app/shared/services';
+import { Router } from '@angular/router';
 import { Observable, Subscription } from 'rxjs';
 import {
   BreakpointState,
@@ -14,6 +15,7 @@ import {
 export class VariationsComponent implements OnInit {
   @Output() setImage = new EventEmitter<any>();
   @Output() setPrice = new EventEmitter<any>();
+  @Output() reload = new EventEmitter<any>();
   @Input() variations = [];
   @Input() inputSelections = {};
   @Input() isSwatchExist = false;
@@ -41,6 +43,7 @@ export class VariationsComponent implements OnInit {
   };
   previousSwatch;
   constructor(
+    private router: Router,
     private utils: UtilsService,
     private breakpointObserver: BreakpointObserver
   ) {}
@@ -83,7 +86,12 @@ export class VariationsComponent implements OnInit {
   }
   selectedVariation(variation, index: number) {
     if (variation.has_parent_sku) {
-      this.utils.openVariationDialog(variation.variation_sku);
+      if(this.isHandset) {
+        this.router.navigate([`/product/${variation.variation_sku}`]);
+        this.reload.emit();
+      } else {
+        this.utils.openVariationDialog(variation.variation_sku);
+      }
     } else {
       this.selectedSwatch = {
         image: variation.image,

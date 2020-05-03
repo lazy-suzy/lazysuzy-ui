@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { MarkdownModule } from 'ngx-markdown';
 import { MatIconModule } from '@angular/material/icon';
+import { MatButtonModule } from '@angular/material/button';
 import { ProductDetailsMobileComponent } from './product-details-mobile.component';
 import { VariationsModule } from '../variations/variations.module';
 import { RedirectModule } from '../redirect/redirect.module';
@@ -12,6 +13,7 @@ const MODULES = [
   CommonModule,
   MarkdownModule,
   MatIconModule,
+  MatButtonModule,
   VariationsModule,
   RedirectModule
 ];
