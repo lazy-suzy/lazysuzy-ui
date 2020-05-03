@@ -1,6 +1,6 @@
 <app-loader *ngIf="showLoader"></app-loader>
 
-<div class="flex-grid">
+<div *ngIf="!showLoader" class="flex-grid">
     <div class="browse-header w-100">
         <div class="item-search-bar">
             <div class="input-group">

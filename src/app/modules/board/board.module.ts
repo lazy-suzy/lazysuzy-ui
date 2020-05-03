@@ -34,6 +34,7 @@ import { CarouselModule } from 'primeng/carousel';
 import { BoardTextComponent } from './components/board-text/board-text.component';
 import { StepOneComponent } from './board-add/add-via-url-stepper/step-one/step-one.component';
 import { StepTwoComponent } from './board-add/add-via-url-stepper/step-two/step-two.component';
+import { BoardProductsComponent } from './components/board-products/board-products.component';
 
 @NgModule({
   imports: [
@@ -71,7 +72,8 @@ import { StepTwoComponent } from './board-add/add-via-url-stepper/step-two/step-
     BoardTextComponent,
     StepperOverviewExample,
     StepOneComponent,
-    StepTwoComponent
+    StepTwoComponent,
+    BoardProductsComponent
   ],
   entryComponents: [AddViaUrlComponent],
   providers: [BoardService, CookieService]

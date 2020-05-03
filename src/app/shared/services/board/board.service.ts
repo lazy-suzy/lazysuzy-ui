@@ -42,6 +42,11 @@ export class BoardService {
         });
     }
 
+    resetBoardSelectCache() {
+        this.state.selectedCategory = null;
+        this.state.filterData = null;
+    }
+
     getBoardStateObs(): Observable<any> {
         return this.boardState.asObservable();
     }
