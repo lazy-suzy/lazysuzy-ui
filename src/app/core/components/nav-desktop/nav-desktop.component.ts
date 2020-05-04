@@ -1,5 +1,5 @@
 import { Component, Input } from '@angular/core';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 import { Location } from '@angular/common';
 import { Subscription } from 'rxjs';
 import { IAllDepartment } from '../../../shared/models';
@@ -20,13 +20,16 @@ export class NavDesktopComponent {
   checkHomeRoute: Subscription;
   email: any;
   password: any;
+  hideBar: boolean = false;
+
   constructor(
     private router: Router,
     private location: Location,
     private utils: UtilsService,
     private apiService: ApiService,
     private messageService: MessageService,
-    private cookie: CookieService
+    private cookie: CookieService,
+    private activatedRoute: ActivatedRoute
   ) {
     this.checkHomeRoute = router.events.subscribe(val => {
       this.notHome = location.path() !== '';
@@ -38,7 +41,16 @@ export class NavDesktopComponent {
     this.checkHomeRoute.unsubscribe();
   }
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.router.events.subscribe((res) => { 
+      let orderRoute = this.router.url.slice(1, 6);
+      if (this.router.url === '/payment' || orderRoute === 'order') {
+        this.hideBar = true;
+      } else {
+        this.hideBar = false;
+      }
+    });
+  }
 
   login() {
     const user = {

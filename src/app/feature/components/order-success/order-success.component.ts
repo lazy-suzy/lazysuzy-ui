@@ -24,7 +24,6 @@ export class OrderSuccessComponent implements OnInit {
     this.routeSubscription = this.activeRoute.params.subscribe(routeParams => {
       this.orderId = routeParams.order;
     });
-    console.log(this.orderId);
     this.apiService.getOrderSuccessData(this.orderId).subscribe(
       (payload: any) => {
         this.cartProducts = payload.cart;

@@ -1,101 +1,115 @@
-<div class="flex items-center justify-between header">
-  <ng-container>
-    <button
-      mat-icon-button
-      id="side-nav-btn"
-      (click)="showMenu()"
-      class="fixed top-0 z-99"
-    >
-      <mat-icon class="account-icon">menu</mat-icon>
-    </button>
-    <div
-      id="mobileMenuContainer"
-      class="mobile-menu-container {{ menuVisible ? 'show' : 'hide' }}"
-    >
-      <ul class="department-container">
-        <li *ngFor="let department of departments" class="department-list">
-          <div (click)="showDepartmentChild(department.department)">
-            <span
-              class="department-title {{
-                showDepartment === department.department ? 'active' : 'none'
+<ng-container *ngIf="hideBar; else showBar">
+  <div class="flex items-center justify-center header pv2">
+      <a
+        routerLink="/"
+        routerLinkActive="active"
+        class="no-underline flex items-center"
+      >
+        <img class="w4 grow" [src]="logoPath" alt="Lazy Suzy Home" />
+      </a>
+  </div>
+</ng-container>
+<ng-template #showBar>
+  <div class="flex items-center justify-between header">
+    <ng-container>
+      <button
+        mat-icon-button
+        id="side-nav-btn"
+        (click)="showMenu()"
+        class="fixed top-0 z-99"
+      >
+        <mat-icon class="account-icon">menu</mat-icon>
+      </button>
+      <div
+        id="mobileMenuContainer"
+        class="mobile-menu-container {{ menuVisible ? 'show' : 'hide' }}"
+      >
+        <ul class="department-container">
+          <li *ngFor="let department of departments" class="department-list">
+            <div (click)="showDepartmentChild(department.department)">
+              <span
+                class="department-title {{
+                  showDepartment === department.department ? 'active' : 'none'
+                }}"
+              >
+                {{ department.department | titlecase }}
+              </span>
+              <mat-icon
+                class="department-list-icon"
+                *ngIf="showDepartment !== department.department"
+                aria-hidden="false"
+                aria-label="Search"
+              >
+                chevron_right
+              </mat-icon>
+              <mat-icon
+                class="department-list-icon active"
+                *ngIf="showDepartment === department.department"
+                aria-hidden="false"
+                aria-label="Search"
+              >
+                expand_more
+              </mat-icon>
+            </div>
+            <ul
+              class="category-container {{
+                showDepartment === department.department ? 'show' : 'hide'
               }}"
             >
-              {{ department.department | titlecase }}
-            </span>
-            <mat-icon
-              class="department-list-icon"
-              *ngIf="showDepartment !== department.department"
-              aria-hidden="false"
-              aria-label="Search"
-            >
-              chevron_right
-            </mat-icon>
-            <mat-icon
-              class="department-list-icon active"
-              *ngIf="showDepartment === department.department"
-              aria-hidden="false"
-              aria-label="Search"
-            >
-              expand_more
-            </mat-icon>
-          </div>
-          <ul
-            class="category-container {{
-              showDepartment === department.department ? 'show' : 'hide'
-            }}"
-          >
-            <li
-              *ngFor="let category of department.categories"
-              class="category-list"
-            >
-              <a class="category-title" [routerLink]="category.link"
-                >{{ category.category }}
-              </a>
-            </li>
-          </ul>
-        </li>
-      </ul>
+              <li
+                *ngFor="let category of department.categories"
+                class="category-list"
+              >
+                <a class="category-title" [routerLink]="category.link"
+                  >{{ category.category }}
+                </a>
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </div>
+    </ng-container>
+  
+    <a
+      routerLink="/"
+      routerLinkActive="active"
+      class="no-underline flex items-center"
+    >
+      <img class="w4 grow" [src]="logoPath" alt="Lazy Suzy Home" />
+    </a>
+  
+    <div class="flex">
+      <div class="header-link">
+        <mat-icon
+          class="account-icon "
+          *ngIf="notHome"
+          aria-hidden="false"
+          (click)="showSearchBar()"
+          >search</mat-icon
+        >
+      </div>
+  
+      <span (click)="isLoggedIn($event)" class="flex items-center header-link">
+        <mat-icon class="account-icon" aria-hidden="false"
+          >favorite_border</mat-icon
+        >
+      </span>
+      <span class="flex items-center header-link">
+        <mat-icon
+          class="account-icon"
+          aria-hidden="false"
+          [routerLink]="['/cart']"
+          >shopping_cart</mat-icon
+        >
+      </span>
+      <app-auth class="account-menu" [isHandset]="true"></app-auth>
     </div>
-  </ng-container>
+    <app-search-bar
+      (searchComplete)="onSearchComplete($event)"
+      *ngIf="showSearchComponent"
+      class="section"
+      [notHome]="notHome"
+    ></app-search-bar>
+  </div>  
+</ng-template>
 
-  <a
-    routerLink="/"
-    routerLinkActive="active"
-    class="no-underline flex items-center"
-  >
-    <img class="w4 grow" [src]="logoPath" alt="Lazy Suzy Home" />
-  </a>
-
-  <div class="flex">
-    <div class="header-link">
-      <mat-icon
-        class="account-icon "
-        *ngIf="notHome"
-        aria-hidden="false"
-        (click)="showSearchBar()"
-        >search</mat-icon
-      >
-    </div>
-
-    <span (click)="isLoggedIn($event)" class="flex items-center header-link">
-      <mat-icon class="account-icon" aria-hidden="false"
-        >favorite_border</mat-icon
-      >
-    </span>
-    <span class="flex items-center header-link">
-      <mat-icon
-        class="account-icon"
-        aria-hidden="false"
-        [routerLink]="['/cart']"
-        >shopping_cart</mat-icon
-      >
-    </span>
-    <app-auth class="account-menu" [isHandset]="true"></app-auth>
-  </div>
-  <app-search-bar
-    (searchComplete)="onSearchComplete($event)"
-    *ngIf="showSearchComponent"
-    class="section"
-    [notHome]="notHome"
-  ></app-search-bar>
-</div>
