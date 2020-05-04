@@ -43,47 +43,47 @@
               >${{ productWasPrice }}</span
             >
           </div>
-
-          <button
-            mat-raised-button
-            class="bg-red view-details-btn"
-            *ngIf="!product.in_inventory || !product.redirect"
-          >
-            <a
-              (click)="openLink($event, product.product_url)"
-              [href]="product.product_url"
-              class="tr-viewDetails no-underline"
+          <div class="w-40">
+            <button
+              mat-raised-button
+              class="bg-red view-details-btn"
+              *ngIf="!product.in_inventory || !product.redirect"
             >
-              View Details
-            </a>
-          </button>
+              <a
+                (click)="openLink($event, product.product_url)"
+                [href]="product.product_url"
+                class="tr-viewDetails no-underline"
+              >
+                View Details
+              </a>
+            </button>
 
-          <select
-            [(ngModel)]="quantity"
-            #quantitySelector
-            class="quantity-selector"
-            *ngIf="
-              product.in_inventory &&
-              product.inventory_product_details.count > 0
-            "
-          >
-            <option *ngFor="let item of quantityArray" [value]="item.value">{{
-              item.value
-            }}</option>
-          </select>
+            <select
+              [(ngModel)]="quantity"
+              class="quantity-selector w-30 ml2"
+              *ngIf="
+                product.in_inventory &&
+                product.inventory_product_details.count > 0
+              "
+            >
+              <option *ngFor="let item of quantityArray" [value]="item.value">{{
+                item.value
+              }}</option>
+            </select>
 
-          <button
-            mat-raised-button
-            class="bg-red view-details-btn"
-            *ngIf="
-              product.in_inventory &&
-              product.inventory_product_details.count > 0
-            "
-          >
-            <a (click)="openCartModal()" class="tr-viewDetails no-underline">
-              Add to Cart
-            </a>
-          </button>
+            <button
+              mat-raised-button
+              class="bg-red view-details-btn"
+              *ngIf="
+                product.in_inventory &&
+                product.inventory_product_details.count > 0
+              "
+            >
+              <a (click)="openCartModal()" class="tr-viewDetails no-underline">
+                Add to Cart
+              </a>
+            </button>
+          </div>
         </div>
         <hr
           class="modal-hr mt-3"

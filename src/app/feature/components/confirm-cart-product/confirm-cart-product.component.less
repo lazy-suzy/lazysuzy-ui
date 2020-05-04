@@ -16,9 +16,13 @@
             .product-desc {
                 .product-name {
                     font-size: 24px;
+                    color: #0c1c31;
                 }
                 .product-brand {
                     padding: 6px 0;
+                }
+                .font-size-20 {
+                    font-size: 20px;
                 }
             }
             .product-bill {
@@ -38,10 +42,10 @@
         
             .action-buttons {
                 cursor: pointer;
-                padding: 12px 24px;
+                padding: 12px 32px;
                 border: none;
                 border-radius: 2px;
-                margin-right: 12px;
+                margin-right: 16px;
                 -webkit-box-shadow: 0px 0px 3px 0px rgba(0,0,0,0.75);
                 -moz-box-shadow: 0px 0px 3px 0px rgba(0,0,0,0.75);
                 box-shadow: 0px 0px 3px 0px rgba(0,0,0,0.75);
@@ -89,8 +93,16 @@
             bottom: 50px;
         }
         .cart-modal-footer {
-            width: 95%;
+            width: 100%;
             justify-content: center;
+            margin: 0;
+            .action-buttons-container {
+                .action-buttons {
+                    padding: 12px 24px;
+                    margin-left: 8px;
+                    margin-right: 0;
+                }
+            }
         }
     }
     .section {

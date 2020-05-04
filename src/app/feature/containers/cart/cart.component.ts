@@ -5,7 +5,8 @@ import {
   Breakpoints,
   BreakpointObserver
 } from '@angular/cdk/layout';
-import { ApiService } from 'src/app/shared/services';
+import { ApiService, UtilsService } from 'src/app/shared/services';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-cart',
@@ -28,9 +29,12 @@ export class CartComponent implements OnInit {
   quantityArray = [1, 2, 3, 4, 5];
   isProductFetching: boolean;
   spinner: string = 'assets/images/spinner.gif';
+  emptyCart: boolean = true;
   constructor(
     private breakpointObserver: BreakpointObserver,
-    private apiService: ApiService
+    private apiService: ApiService,
+    private utilsService: UtilsService,
+    private router: Router,
   ) {}
 
   ngOnInit(): void {
@@ -48,6 +52,7 @@ export class CartComponent implements OnInit {
       (payload: any) => {
         this.cartProducts = payload;
         this.cartProductsLength = 0;
+        this.emptyCart = this.cartProducts.length === 0;
         this.totalAmount = 0;
         this.getSubTotal();
       },
@@ -112,5 +117,21 @@ export class CartComponent implements OnInit {
       const updateQuantity = count - quantity;
       this.decreaseQuantity(product, updateQuantity);
     }
+  }
+
+  openProductDetail(sku) {
+    this.utilsService.openMatDialog(sku);
+  }
+
+  openProductPage(sku) {
+    this.router.navigate([`product/${sku}`]);
+  }
+
+  openSignupDialog(device) {
+    this.utilsService.openSignupDialog(device);
+  }
+
+  seeMore(category) {
+    this.router.navigateByUrl(`/products/all?${category}=true`);
   }
 }

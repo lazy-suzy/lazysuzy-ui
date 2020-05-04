@@ -11,11 +11,12 @@
       <div class="w-50-ns w-100 tc">
         <img [src]="product.image" class="product-image" />
       </div>
-      <div class="mv5 product-content w-50-ns w-100">
+      <div class="mv5-ns mv4 product-content w-50-ns w-100">
         <div class="product-desc">
           <div class="product-name">{{ product.name }}</div>
-          <div class="product-brand">{{ product.brand }}</div>
-          <div class="product-brand">${{ product.total }}</div>
+          <div class="product-brand">by {{ product.brand }}</div>
+          <div class="product-brand" *ngIf="product.quantity > 1">Items in Cart: {{product.quantity}}</div>
+          <div class="product-brand font-size-20 b">${{ product.total }}</div>
         </div>
       </div>
     </div>
