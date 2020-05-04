@@ -5,6 +5,7 @@ import {
   Breakpoints,
   BreakpointObserver
 } from '@angular/cdk/layout';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-root',
@@ -25,8 +26,8 @@ export class AppComponent {
   tabletSubscription: Subscription;
   isHandset: boolean;
   isTablet: boolean = false;
-
-  constructor(private breakpointObserver: BreakpointObserver) {}
+  hideBar: boolean = false;
+  constructor(private breakpointObserver: BreakpointObserver, private router: Router) {}
 
   ngOnInit(): void {
     this.bpSubscription = this.bpObserver.subscribe(
@@ -39,6 +40,11 @@ export class AppComponent {
         this.isTablet = tablet.matches;
       }
     );
+    this.router.events.subscribe((res) => { 
+      if (this.router.url === '/payment') {
+        this.hideBar = true;
+      }
+    });
   }
 
   ngOnDestroy(): void {

@@ -66,7 +66,8 @@ export class PaymentComponent implements OnInit {
     billing_state: null,
     billing_zipcode: null
   };
-  isBillingAddressSame: boolean;
+  country = 'USA';
+  isBillingAddressSame: boolean = true;
   isEmailValid: boolean = true;
   isRequiredFieldsPresent: boolean = true;
   isPaymentExecuting: boolean = false;
@@ -137,6 +138,8 @@ export class PaymentComponent implements OnInit {
     this.totalAmount = this.subTotalAmount + this.totalShippingCharge;
   }
   buy() {
+    this.customerData.billing_country = 'USA';
+    this.customerData.shipping_country = 'USA';
     let data = this.customerData;
     let condition =
       data.email &&
@@ -175,7 +178,10 @@ export class PaymentComponent implements OnInit {
               (payload: any) => {
                 console.log(payload);
                 this.isPaymentExecuting = false;
-                this.router.navigate([`order/${payload.order_id}`]);
+                this.router.navigate([`order/${payload.order_id}`])
+                .then(() => {
+                  location.reload();
+                });
               },
               (error: any) => {
                 console.log(error);
@@ -209,8 +215,14 @@ export class PaymentComponent implements OnInit {
     this.billing = false;
     this.shipping = false;
     this.payment = false;
-    if (section === 'billing' && this.isBillingAddressSame) {
-      this.payment = true;
+    if (section === 'billing') {
+      this.onCheckboxChange(this.isBillingAddressSame);
+      if ( !this.customerData.billing_f_Name) {
+        this.billing = true;
+      } else
+      if (this.isBillingAddressSame) {
+        this.payment = true;
+      }
     } else {
       this[section] = true;
     }
@@ -242,6 +254,17 @@ export class PaymentComponent implements OnInit {
       this.customerData.billing_country = this.customerData.shipping_country;
       this.customerData.billing_state = this.customerData.shipping_state;
       this.customerData.billing_zipcode = this.customerData.shipping_zipcode;
+    } else {
+      this.customerData.billing_f_Name = '';
+      this.customerData.billing_l_Name = '';
+      this.customerData.billing_company_name = '';
+      this.customerData.billing_phone = '';
+      this.customerData.billing_address_line1 = '';
+      this.customerData.billing_address_line2 = '';
+      this.customerData.billing_city = '';
+      this.customerData.billing_country = '';
+      this.customerData.billing_state = '';
+      this.customerData.billing_zipcode = '';
     }
   }
 }

@@ -1,18 +1,18 @@
-<div class="pa5-ns pa2 flex-ns">
-  <div class="w-70-ns w-100 ph4-ns">
+<div class="ph5-ns pv4-ns pa2 flex-ns">
+  <div class="w-70-ns w-100 ph5-ns">
     <div class="billing-header pink-font b">
       Checkout
     </div>
     <div class="billing-content">
       <div class="billing-section">
-        <div class="flex">
+        <div class="flex pointer" (click)="updateAccordion('customer')">
           <div class="step-number">1</div>
           <div class="section-title">CUSTOMER</div>
           <div
             class="edit-btn pointer"
-            *ngIf="!customer"
+            *ngIf="customerData.email && !customer"
             (click)="updateAccordion('customer')"
-          >
+          > 
             EDIT
           </div>
         </div>
@@ -61,12 +61,12 @@
         </div>
       </div>
       <div class="billing-section">
-        <div class="flex">
+        <div class="flex pointer" (click)="updateAccordion('shipping')">
           <div class="step-number">2</div>
           <div class="section-title">SHIPPING</div>
           <div
             class="edit-btn pointer"
-            *ngIf="!shipping"
+            *ngIf="customerData.shipping_f_Name && !shipping"
             (click)="updateAccordion('shipping')"
           >
             EDIT
@@ -197,10 +197,10 @@
                   class="form-input single-line-input white-bg"
                   #shipping_country="ngModel"
                   name="shipping_country"
-                  [(ngModel)]="customerData.shipping_country"
+                  [(ngModel)]="country"
                   required
                 >
-                  <option value="USA">USA</option>
+                  <option value="USA" selected>USA</option>
                 </select>
                 <div
                   *ngIf="f.submitted && shipping_country.invalid"
@@ -215,7 +215,7 @@
                 <div class="w-50">
                   <label class="db">State*</label>
                   <select
-                    class="form-input w-90 white-bg"
+                    class="form-input w-90 white-bg dropdown-height"
                     name="shipping_state"
                     #shipping_state="ngModel"
                     [(ngModel)]="customerData.shipping_state"
@@ -255,7 +255,7 @@
                   </div>
                 </div>
               </div>
-              <div class="pb4 flex">
+              <div class="pb3 flex">
                 <input
                   type="checkbox"
                   #billingCheckbox
@@ -290,12 +290,12 @@
         </div>
       </div>
       <div class="billing-section">
-        <div class="flex">
+        <div class="flex pointer" (click)="updateAccordion('billing')">
           <div class="step-number">3</div>
           <div class="section-title">BILLING</div>
           <div
             class="edit-btn pointer"
-            *ngIf="!billing"
+            *ngIf="customerData.billing_f_Name && !billing"
             (click)="updateAccordion('billing')"
           >
             EDIT
@@ -312,7 +312,7 @@
               (ngSubmit)="billingForm.form.valid && updateAccordion('payment')"
               #billingForm="ngForm"
             >
-              <div class="flex pb4">
+              <div class="flex pb3">
                 <div class="w-50">
                   <label class="db">First Name*</label>
                   <input
@@ -350,7 +350,7 @@
                   </div>
                 </div>
               </div>
-              <div class="pb4">
+              <div class="pb3">
                 <label class="db">Company Name</label>
                 <input
                   class="form-input single-line-input"
@@ -358,7 +358,7 @@
                   [(ngModel)]="customerData.billing_company_name"
                 />
               </div>
-              <div class="w-50 pb4">
+              <div class="w-50 pb3">
                 <label class="db">Phone Number*</label>
                 <input
                   class="form-input w-90"
@@ -376,7 +376,7 @@
                   </div>
                 </div>
               </div>
-              <div class="pb4">
+              <div class="pb3">
                 <label class="db">Address*</label>
                 <input
                   class="form-input single-line-input"
@@ -394,7 +394,7 @@
                   </div>
                 </div>
               </div>
-              <div class="pb4">
+              <div class="pb3">
                 <label class="db">Apartment/Home/Building</label>
                 <input
                   class="form-input single-line-input"
@@ -402,7 +402,7 @@
                   [(ngModel)]="customerData.billing_address_line2"
                 />
               </div>
-              <div class="pb4">
+              <div class="pb3">
                 <label class="db">City*</label>
                 <input
                   class="form-input single-line-input"
@@ -420,16 +420,16 @@
                   </div>
                 </div>
               </div>
-              <div class="pb4">
+              <div class="pb3">
                 <label class="db">Country*</label>
                 <select
                   class="form-input single-line-input white-bg"
                   #billing_country="ngModel"
                   name="billing_country"
-                  [(ngModel)]="customerData.billing_country"
+                  [(ngModel)]="country"
                   required
                 >
-                  <option value="USA">USA</option>
+                  <option value="USA" selected>USA</option>
                 </select>
                 <div
                   *ngIf="billingForm.submitted && billing_country.invalid"
@@ -440,11 +440,11 @@
                   </div>
                 </div>
               </div>
-              <div class="flex pb4">
+              <div class="flex pb3">
                 <div class="w-50">
                   <label class="db">State*</label>
                   <select
-                    class="form-input w-90 white-bg"
+                    class="form-input w-90 white-bg dropdown-height"
                     name="billing_state"
                     #billing_state="ngModel"
                     [(ngModel)]="customerData.billing_state"
@@ -506,16 +506,16 @@
         </div>
       </div>
       <div class="billing-section">
-        <div class="flex">
+        <div class="flex pointer" (click)="updateAccordion('payment')">
           <div class="step-number">4</div>
           <div class="section-title">PAYMENT</div>
-          <div
+          <!-- <div
             class="edit-btn pointer"
             *ngIf="!payment"
             (click)="updateAccordion('payment')"
           >
             EDIT
-          </div>
+          </div> -->
         </div>
         <div class="mh4 {{ payment ? '' : 'dn' }}">
           <form
@@ -554,7 +554,7 @@
       </div>
     </div>
   </div>
-  <div class="w-30-ns w-100 pa2 mh3-ns">
+  <div class="w-30-ns w-100 pa2 mh5-ns mv3">
     <div class="order-summary-card">
       <div class="order-details section-border">
         <div class="b pv2">ORDER SUMMARY</div>
