@@ -24,11 +24,12 @@ import {
 const routes: Routes = [
   { path: '', component: LandingComponent, pathMatch: 'full' },
 
-  // {
-  //   path: 'board',
-  //   loadChildren: "./modules/board/board.module#BoardModule",
-  //   pathMatch: 'full'
-  // },
+  {
+    path: 'board',
+    loadChildren: () =>
+      import('./modules/board/board.module').then(m => m.BoardModule)
+    // pathMatch: 'full'
+  },
 
   { path: 'search', component: SearchComponent },
   { path: 'aboutus', component: AboutusComponent },
@@ -58,17 +59,18 @@ const routes: Routes = [
     path: 'product/:product',
     component: ProductDetailsMobileComponent,
     pathMatch: 'full'
-  },
-  {
-    path: 'blog',
-    loadChildren: () =>
-      import('./feature/blog/blog/blog.module').then(m => m.BlogModule)
   }
+  // {
+  //   path: 'blog',
+  //   loadChildren: () => import('./feature/blog/blog/blog.module').then(m => m.BlogModule)
+  // }
 ];
 
 @NgModule({
   imports: [
-    RouterModule.forRoot(routes, { scrollPositionRestoration: 'enabled' })
+    RouterModule.forRoot(routes, {
+      scrollPositionRestoration: 'enabled'
+    })
   ],
   exports: [RouterModule]
 })

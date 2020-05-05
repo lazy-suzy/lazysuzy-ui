@@ -36,7 +36,8 @@ export class NavMobileComponent {
       }
     });
     this.checkHomeRoute = router.events.subscribe(val => {
-      this.notHome = location.path() !== '';
+      // this.notHome = location.path() !== '';
+      this.notHome = (location.path() !== '' && location.path().match(/board/) == null);
     });
   }
 
