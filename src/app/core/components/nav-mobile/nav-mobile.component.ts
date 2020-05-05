@@ -37,23 +37,13 @@ export class NavMobileComponent {
     });
     this.checkHomeRoute = router.events.subscribe(val => {
       // this.notHome = location.path() !== '';
-      this.notHome = (location.path() !== '' && location.path().match(/board/) == null);
+      this.notHome =
+        location.path() !== '' && location.path().match(/board/) == null;
     });
   }
 
   ngOnInit(): void {
-    this.router.events.subscribe((res) => {
-      let orderRoute = this.router.url.slice(1, 6);
-      if (this.router.url === '/payment' || orderRoute === 'order') {
-        this.hideBar = true;
-      } else {
-        this.hideBar = false;
-      }
-    });
-  }
-
-  ngOnInit(): void {
-    this.router.events.subscribe((res) => {
+    this.router.events.subscribe(res => {
       let orderRoute = this.router.url.slice(1, 6);
       if (this.router.url === '/payment' || orderRoute === 'order') {
         this.hideBar = true;
