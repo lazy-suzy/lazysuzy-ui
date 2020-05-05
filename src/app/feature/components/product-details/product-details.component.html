@@ -16,7 +16,7 @@
     <div class="fl w-50 pa3 product-details-container">
       <div #topContainer>
         <div class="flex w-100 justify-between items-end">
-          <h2 class="mb1">{{ product.site }}</h2>
+          <span class="mb1">{{ product.site }}</span>
           <div *ngIf="product.wishlisted; else elseBlock">
             <div class="tile-icon wishlist-icon wishlist-container">
               <mat-icon (click)="wishlistProduct(product.sku, false)"

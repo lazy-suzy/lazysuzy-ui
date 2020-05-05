@@ -15,7 +15,12 @@ import {
 import { ApiService } from 'src/app/shared/services';
 import { USStateService } from 'ng2-us-states';
 import { Router } from '@angular/router';
-
+import { Observable, Subscription } from 'rxjs';
+import {
+  BreakpointState,
+  Breakpoints,
+  BreakpointObserver
+} from '@angular/cdk/layout';
 @Component({
   selector: 'app-payment',
   templateUrl: './payment.component.html',
@@ -72,17 +77,29 @@ export class PaymentComponent implements OnInit {
   isRequiredFieldsPresent: boolean = true;
   isPaymentExecuting: boolean = false;
   cardErrorMsg: string;
+  bpObserver: Observable<BreakpointState> = this.breakpointObserver.observe(
+    Breakpoints.Handset
+  );
+  bpSubscription: Subscription;
+  isHandset: boolean;
+
   constructor(
     private fb: FormBuilder,
     private stripeService: StripeService,
     private apiService: ApiService,
     private usStateService: USStateService,
-    private router: Router
+    private router: Router,
+    private breakpointObserver: BreakpointObserver,
   ) {
     this.statesArray = this.usStateService.getStates();
   }
 
   ngOnInit() {
+    this.bpSubscription = this.bpObserver.subscribe(
+      (handset: BreakpointState) => {
+        this.isHandset = handset.matches;
+      }
+    );
     this.stripeTest = this.fb.group({
       name: ['', [Validators.required]]
     });

@@ -25,19 +25,19 @@ export class CartComponent implements OnInit {
   cartProducts = [];
   totalAmount: number = 0;
   cartProductsLength: number;
-  quantity: number = 1;
-  quantityArray = [1, 2, 3, 4, 5];
   isProductFetching: boolean;
   spinner: string = 'assets/images/spinner.gif';
   emptyCart: boolean = true;
+  isCartLoading: boolean;
   constructor(
     private breakpointObserver: BreakpointObserver,
     private apiService: ApiService,
     private utilsService: UtilsService,
-    private router: Router,
+    private router: Router
   ) {}
 
   ngOnInit(): void {
+    this.isCartLoading = true;
     this.bpSubscription = this.bpObserver.subscribe(
       (handset: BreakpointState) => {
         this.isHandset = handset.matches;
@@ -55,6 +55,7 @@ export class CartComponent implements OnInit {
         this.emptyCart = this.cartProducts.length === 0;
         this.totalAmount = 0;
         this.getSubTotal();
+        this.isCartLoading = false;
       },
       (error: any) => {
         console.log(error);
@@ -133,5 +134,9 @@ export class CartComponent implements OnInit {
 
   seeMore(category) {
     this.router.navigateByUrl(`/products/all?${category}=true`);
+  }
+
+  counter(i: number) {
+    return new Array(i);
   }
 }

@@ -52,6 +52,17 @@ export class NavMobileComponent {
     });
   }
 
+  ngOnInit(): void {
+    this.router.events.subscribe((res) => {
+      let orderRoute = this.router.url.slice(1, 6);
+      if (this.router.url === '/payment' || orderRoute === 'order') {
+        this.hideBar = true;
+      } else {
+        this.hideBar = false;
+      }
+    });
+  }
+
   ngOnDestroy(): void {
     this.checkHomeRoute.unsubscribe();
   }
