@@ -1,6 +1,6 @@
 <div
   class="flex"
-  *ngIf="!userCookie; else userName"
+  *ngIf="!userCookie || isCurrentUserGuest(); else userName"
   (click)="openSignupDialog()"
 >
   <mat-icon
