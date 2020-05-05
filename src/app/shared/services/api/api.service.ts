@@ -330,7 +330,10 @@ export class ApiService {
   signup(data) {
     const endpoint = `register`;
     const url = `${env.API_BASE_HREF}${endpoint}`;
-    return this.httpService.post(url, data);
+    const headers = new HttpHeaders({
+      Authorization: `Bearer ${this.cookie.get('token')}`
+    });
+    return this.httpService.post(url, data, headers);
   }
 
   getPosts(): Observable<any[]> {
