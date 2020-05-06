@@ -34,6 +34,7 @@
     "jquery": "^3.4.1",
     "moment": "^2.25.1",
     "ng-animate": "^0.3.4",
+    "ng-keyboard-shortcuts": "^9.0.0",
     "ng2-file-upload": "^1.4.0",
     "ng2-us-states": "^3.0.1",
     "ng5-slider": "^1.2.4",

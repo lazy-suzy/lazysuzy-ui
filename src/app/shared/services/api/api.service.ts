@@ -330,7 +330,10 @@ export class ApiService {
   signup(data) {
     const endpoint = `register`;
     const url = `${env.API_BASE_HREF}${endpoint}`;
-    return this.httpService.post(url, data);
+    const headers = new HttpHeaders({
+      Authorization: `Bearer ${this.cookie.get('token')}`
+    });
+    return this.httpService.post(url, data, headers);
   }
 
   getPosts(): Observable<any[]> {
@@ -390,6 +393,14 @@ export class ApiService {
     const url = `${env.API_BASE_HREF}${endpoint}`;
     return this.httpService.get(url);
   }
+  getAllDepartmentsBoard(): Observable<IDepartment> {
+    const endpoint = `all-departments?board-view=true`;
+    const url = env.useLocalJson
+      ? `${env.JSON_BASE_HREF}${endpoint}`
+      : `${env.API_BASE_HREF}${endpoint}`;
+    return this.httpService.get(url);
+  }
+
   getAllBoards(payload): Observable<IProductPayload> {
     const url = `${env.API_BASE_HREF}board`;
     return this.httpService.post(url, {

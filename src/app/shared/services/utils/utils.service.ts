@@ -14,6 +14,10 @@ import { MarkdownService } from 'ngx-markdown';
 })
 export class UtilsService {
   signupRef: ElementRef;
+  readonly userType = {
+    guest: 0,
+    default: 1
+  };
 
   constructor(
     public dialog: MatDialog,

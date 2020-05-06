@@ -10,7 +10,7 @@ import {
   CartModule
 } from './containers';
 import { ProductDetailsMobileModule } from './components';
-import { BlogModule } from './blog/blog/blog.module';
+// import { BlogModule } from './blog/blog/blog.module';
 import { OrderSuccessComponent } from './components/order-success/order-success.component';
 
 const DECLARATIONS = [];
@@ -24,8 +24,8 @@ const MODULES = [
   AllProductsModule,
   CategoriesModule,
   ProductDetailsMobileModule,
-  CartModule,
-  BlogModule
+  CartModule
+  // BlogModule
 ];
 
 @NgModule({
