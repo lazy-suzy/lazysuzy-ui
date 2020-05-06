@@ -7,8 +7,13 @@
             Sign Up to keep track of your Order History
         </div>
         <div class="flex justify-between mv3">
-            <input placeholder="Password" class="form-input">
-            <button class="register-btn">REGISTER</button>
+            <div class="w-60">
+                <input placeholder="Password" class="form-input" [(ngModel)]="password">
+                <span class="error-msg" *ngIf="showError">Password must contain 8 characters</span>
+            </div>
+            <div class="w-40 tc">
+                <button class="register-btn" (click)="updatePassword()">REGISTER</button>
+            </div>
         </div>
     </div>
     <div class="products-card mv3 w-70-ns">

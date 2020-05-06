@@ -15,7 +15,12 @@ import {
 import { ApiService } from 'src/app/shared/services';
 import { USStateService } from 'ng2-us-states';
 import { Router } from '@angular/router';
-
+import { Observable, Subscription } from 'rxjs';
+import {
+  BreakpointState,
+  Breakpoints,
+  BreakpointObserver
+} from '@angular/cdk/layout';
 @Component({
   selector: 'app-payment',
   templateUrl: './payment.component.html',
@@ -24,7 +29,9 @@ import { Router } from '@angular/router';
 export class PaymentComponent implements OnInit {
   elements: Elements;
   card: StripeElement;
-
+  cardNumber: StripeElement;
+  cardExpiry: StripeElement;
+  cardCvc: StripeElement;
   // optional parameters
   elementsOptions: ElementsOptions = {};
   stripeTest: FormGroup;
@@ -72,17 +79,29 @@ export class PaymentComponent implements OnInit {
   isRequiredFieldsPresent: boolean = true;
   isPaymentExecuting: boolean = false;
   cardErrorMsg: string;
+  bpObserver: Observable<BreakpointState> = this.breakpointObserver.observe(
+    Breakpoints.Handset
+  );
+  bpSubscription: Subscription;
+  isHandset: boolean;
+
   constructor(
     private fb: FormBuilder,
     private stripeService: StripeService,
     private apiService: ApiService,
     private usStateService: USStateService,
-    private router: Router
+    private router: Router,
+    private breakpointObserver: BreakpointObserver,
   ) {
     this.statesArray = this.usStateService.getStates();
   }
 
   ngOnInit() {
+    this.bpSubscription = this.bpObserver.subscribe(
+      (handset: BreakpointState) => {
+        this.isHandset = handset.matches;
+      }
+    );
     this.stripeTest = this.fb.group({
       name: ['', [Validators.required]]
     });
@@ -90,22 +109,60 @@ export class PaymentComponent implements OnInit {
       this.elements = elements;
       // Only mount the element the first time
       if (!this.card) {
-        this.card = this.elements.create('card', {
-          style: {
-            base: {
-              iconColor: '#666EE8',
-              color: '#31325F',
-              lineHeight: '40px',
-              fontWeight: 300,
-              fontFamily: '"Helvetica Neue", Helvetica, sans-serif',
-              fontSize: '18px',
-              '::placeholder': {
-                color: '#CFD7E0'
-              }
-            }
-          }
+        // this.card = this.elements.create('card', {
+        //   style: {
+        //     base: {
+        //       iconColor: '#666EE8',
+        //       color: '#31325F',
+        //       lineHeight: '40px',
+        //       fontWeight: 300,
+        //       fontFamily: '"Helvetica Neue", Helvetica, sans-serif',
+        //       fontSize: '18px',
+        //       '::placeholder': {
+        //         color: '#CFD7E0'
+        //       }
+        //     }
+        //   }
+        // });
+        // this.card.mount('#card-element');
+        let elementStyles = {
+          base: {
+            color: '#32325D',
+            fontWeight: 500,
+            fontFamily: 'Source Code Pro, Consolas, Menlo, monospace',
+            fontSize: '16px',
+            fontSmoothing: 'antialiased',
+            '::placeholder': {
+              color: '#CFD7DF',
+            },
+            ':-webkit-autofill': {
+              color: '#e39f48',
+            },
+          },
+          invalid: {
+            color: '#E25950',
+            '::placeholder': {
+              color: '#FFCCA5',
+            },
+          },
+        };
+        let elementClasses = {
+          focus: 'focused',
+          empty: 'empty',
+          invalid: 'invalid',
+        };
+        this.cardNumber = this.elements.create('cardNumber', {
+          style: elementStyles
         });
-        this.card.mount('#card-element');
+        this.cardNumber.mount('#form-card-number');
+        this.cardExpiry = this.elements.create('cardExpiry', {
+          style: elementStyles
+        });
+        this.cardExpiry.mount('#form-card-expiry');
+        this.cardCvc = this.elements.create('cardCvc', {
+          style: elementStyles
+        });
+        this.cardCvc.mount('#form-card-cvc');
       }
     });
     this.getCartProducts();
@@ -167,21 +224,30 @@ export class PaymentComponent implements OnInit {
         ' ' +
         this.customerData.billing_l_Name;
       this.stripeService
-        .createToken(this.card, { name })
+        .createToken((this.cardNumber, this.cardExpiry, this.cardCvc), { name })
         .subscribe((result: any) => {
           if (result.token) {
+            // console.log(result.token);
             // Use the token to create a charge or a customer
             // https://stripe.com/docs/charges
             this.customerData.token = result.token.id;
             this.customerData.ip = result.token.client_ip;
+            let data = {
+              name: name
+            };
+            this.apiService.userUpdate(data).subscribe(
+              (payload: any) => {
+                localStorage.setItem('user', JSON.stringify(payload.success.user));
+              },
+              (error: any) => {
+                console.log(error);
+              }
+            );
             this.apiService.postStripeToken(this.customerData).subscribe(
               (payload: any) => {
                 console.log(payload);
                 this.isPaymentExecuting = false;
-                this.router.navigate([`order/${payload.order_id}`])
-                .then(() => {
-                  location.reload();
-                });
+                this.router.navigate([`order/${payload.order_id}`]);
               },
               (error: any) => {
                 console.log(error);
@@ -190,16 +256,6 @@ export class PaymentComponent implements OnInit {
             );
           } else if (result.error) {
             this.isPaymentExecuting = false;
-            // if(result.error === 'Your card number is incomplete.' ||
-            // result.error === "Your card's expiration date is incomplete."
-            // || result.error === "Your card's security code is incomplete."){
-            //   this.isRequiredFieldsPresent = false;
-            //   this.cardErrorMsg = 'Incomplete Card Details';
-            // } else
-            // if (result.error === 'Your card number is invalid.') {
-            //   this.isRequiredFieldsPresent = false;
-            //   this.cardErrorMsg = 'Invalid Card Details';
-            // }
             // Error creating the token
             console.log(result.error.message);
           }
@@ -236,6 +292,20 @@ export class PaymentComponent implements OnInit {
       this.customer = true;
       this.isEmailValid = false;
     } else {
+      const localUser: any = localStorage.getItem('user');
+      if (localUser.email !== this.customerData.email) {
+        const data = {
+          email: this.customerData.email
+        };
+        this.apiService.userUpdate(data).subscribe(
+          (payload: any) => {
+            localStorage.setItem('user', JSON.stringify(payload.success.user));
+          },
+          (error: any) => {
+            console.log(error);
+          }
+        );
+      }
       this.shipping = true;
       this.customer = false;
       this.isEmailValid = true;

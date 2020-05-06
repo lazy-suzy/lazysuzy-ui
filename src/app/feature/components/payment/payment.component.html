@@ -1,11 +1,50 @@
-<div class="ph5-ns pv4-ns pa2 flex-ns">
+<div class="ph5-ns pv4-ns pv2 ph4 flex-ns">
+  <div class="w-30-ns w-100 pa2 mh5-ns mv3" *ngIf="isHandset">
+    <div class="order-summary-card">
+      <div class="order-details section-border">
+        <div class="b pv2">ORDER SUMMARY</div>
+        <div class="flex pt3 pb4" *ngFor="let item of cartProducts">
+          <div class="w-20">
+            <img [src]="item.image" class="prod-image" />
+          </div>
+          <div class="w-50">
+            <div>{{ item.product_name }}</div>
+            <div>by {{ item.site }}</div>
+          </div>
+          <div class="w-10 tr">
+            {{ item.count }}
+          </div>
+          <div class="w-20 tr">${{ item.retail_price }}</div>
+        </div>
+      </div>
+      <div class="order-pricing-details section-border">
+        <div class="flex justify-between pv3">
+          <span>SUBTOTAL</span>
+          <span>${{ subTotalAmount }}</span>
+        </div>
+        <div class="flex justify-between pb3">
+          <span>Shipping({{ cartProductsLength }} items)</span>
+          <span>${{ totalShippingCharge }}</span>
+        </div>
+        <!-- <div class="flex justify-between pb3">
+          <span>Tax</span>
+          <span>$40</span>
+        </div> -->
+      </div>
+      <div class="flex justify-between pt2 pink-font b">
+        <span>TOTAL</span>
+        <span>${{ totalAmount }}</span>
+      </div>
+    </div>
+  </div>
+
   <div class="w-70-ns w-100 ph5-ns pv2">
-    <div class="billing-header pink-font b">
+    <div class="billing-header pink-font b" *ngIf="!isHandset">
       Checkout
     </div>
-    <div class="billing-content">
-      <div class="billing-section">
-        <div class="flex pointer" (click)="updateAccordion('customer')">
+    <div class="billing-content pb3">
+      <div class="billing-section border-top">
+        <div class="flex">
           <div class="step-number">1</div>
           <div class="section-title">CUSTOMER</div>
           <div
@@ -16,18 +55,18 @@
             EDIT
           </div>
         </div>
-        <div class="section-content pv4 ml5-ns">
-          <div class="section-row">
+        <div class="section-content pv4-ns pt4 ml5-ns">
+          <div class="section-row ph0-ns ph3">
             <ng-container *ngIf="customer; else customerEmail">
               <form
                 name="email-form"
-                class="flex w-100"
+                class="flex-ns w-100 "
                 (ngSubmit)="
                   emailForm.form.valid && checkEmailValidation('shipping')
                 "
                 #emailForm="ngForm"
               >
-                <div class="w-50">
+                <div class="w-50-ns w-100">
                   <input
                     placeholder="Enter email address"
                     type="email"
@@ -49,7 +88,7 @@
                     </div>
                   </div>
                 </div>
-                <div class="w-50 tc">
+                <div class="w-50-ns tc">
                   <button class="email-continue-btn b">CONTINUE</button>
                 </div>
               </form>
@@ -61,7 +100,7 @@
         </div>
       </div>
       <div class="billing-section">
-        <div class="flex pointer" (click)="updateAccordion('shipping')">
+        <div class="flex pointer">
           <div class="step-number">2</div>
           <div class="section-title">SHIPPING</div>
           <div
@@ -72,7 +111,7 @@
             EDIT
           </div>
         </div>
-        <div class="section-content pv4 ml5-ns">
+        <div class="section-content pv4-ns pt4 ph0-ns ph3 ml5-ns">
           <ng-container *ngIf="shipping; else shippingDetails">
             <div class="section-row pb4 ">
               <div class="b">Shipping Address</div>
@@ -83,11 +122,11 @@
               (ngSubmit)="f.form.valid && updateAccordion('billing')"
               #f="ngForm"
             >
-              <div class="flex pb4">
-                <div class="w-50">
+              <div class="flex-ns pb3">
+                <div class="w-50-ns w-100 pb0-ns pb3">
                   <label class="db">First Name*</label>
                   <input
-                    class="form-input w-90"
+                    class="form-input w-90 w-95"
                     name="shipping_f_Name"
                     #shipping_f_Name="ngModel"
                     [(ngModel)]="customerData.shipping_f_Name"
@@ -102,10 +141,10 @@
                     </div>
                   </div>
                 </div>
-                <div class="w-50">
+                <div class="w-50-ns w-100">
                   <label class="db">Last Name*</label>
                   <input
-                    class="form-input w-90"
+                    class="form-input w-95"
                     name="shipping_l_Name"
                     #shipping_l_Name="ngModel"
                     [(ngModel)]="customerData.shipping_l_Name"
@@ -121,7 +160,7 @@
                   </div>
                 </div>
               </div>
-              <div class="pb4">
+              <div class="pb4-ns pb3">
                 <label class="db">Company Name</label>
                 <input
                   class="form-input single-line-input"
@@ -129,12 +168,13 @@
                   [(ngModel)]="customerData.shipping_company_name"
                 />
               </div>
-              <div class="w-50 pb4">
+              <div class="w-50-ns w-100 pb3">
                 <label class="db">Phone Number*</label>
                 <input
-                  class="form-input w-90"
+                  class="form-input w-90 w-95"
                   name="shipping_phone"
                   #shipping_phone="ngModel"
+                  type="number"
                   [(ngModel)]="customerData.shipping_phone"
                   required
                 />
@@ -147,7 +187,7 @@
                   </div>
                 </div>
               </div>
-              <div class="pb4">
+              <div class="pb3">
                 <label class="db">Address*</label>
                 <input
                   class="form-input single-line-input"
@@ -165,7 +205,7 @@
                   </div>
                 </div>
               </div>
-              <div class="pb4">
+              <div class="pb3">
                 <label class="db">Apartment/Home/Building</label>
                 <input
                   class="form-input single-line-input"
@@ -173,7 +213,7 @@
                   [(ngModel)]="customerData.shipping_address_line2"
                 />
               </div>
-              <div class="pb4">
+              <div class="pb3">
                 <label class="db">City*</label>
                 <input
                   class="form-input single-line-input"
@@ -191,7 +231,7 @@
                   </div>
                 </div>
               </div>
-              <div class="pb4">
+              <div class="pb3">
                 <label class="db">Country*</label>
                 <select
                   class="form-input single-line-input white-bg"
@@ -211,7 +251,7 @@
                   </div>
                 </div>
               </div>
-              <div class="flex pb4">
+              <div class="flex pb3">
                 <div class="w-50">
                   <label class="db">State*</label>
                   <select
@@ -242,6 +282,7 @@
                     class="form-input w-90"
                     name="shipping_zipcode"
                     #shipping_zipcode="ngModel"
+                    type="number"
                     [(ngModel)]="customerData.shipping_zipcode"
                     required
                   />
@@ -290,7 +331,7 @@
         </div>
       </div>
       <div class="billing-section">
-        <div class="flex pointer" (click)="updateAccordion('billing')">
+        <div class="flex pointer">
           <div class="step-number">3</div>
           <div class="section-title">BILLING</div>
           <div
@@ -301,7 +342,7 @@
             EDIT
           </div>
         </div>
-        <div class="section-content pv4 ml5-ns">
+        <div class="section-content pv4-ns pt4 ph0-ns ph3 ml5-ns">
           <ng-container *ngIf="billing; else billingDetails">
             <div class="section-row pb4 ">
               <div class="b">Billing Address</div>
@@ -313,10 +354,10 @@
               #billingForm="ngForm"
             >
               <div class="flex pb3">
-                <div class="w-50">
+                <div class="w-50-ns w-100">
                   <label class="db">First Name*</label>
                   <input
-                    class="form-input w-90"
+                    class="form-input w-90 w-95"
                     name="billing_f_Name"
                     #billing_f_Name="ngModel"
                     [(ngModel)]="customerData.billing_f_Name"
@@ -331,10 +372,10 @@
                     </div>
                   </div>
                 </div>
-                <div class="w-50">
+                <div class="w-50-ns w-100">
                   <label class="db">Last Name*</label>
                   <input
-                    class="form-input w-90"
+                    class="form-input w-90 w-95"
                     name="billing_l_Name"
                     #billing_l_Name="ngModel"
                     [(ngModel)]="customerData.billing_l_Name"
@@ -358,13 +399,14 @@
                   [(ngModel)]="customerData.billing_company_name"
                 />
               </div>
-              <div class="w-50 pb3">
+              <div class="w-50-ns w-100 pb3">
                 <label class="db">Phone Number*</label>
                 <input
-                  class="form-input w-90"
+                  class="form-input w-90 w-95"
                   name="billing_phone"
                   #billing_phone="ngModel"
                   [(ngModel)]="customerData.billing_phone"
+                  type="number"
                   required
                 />
                 <div
@@ -469,6 +511,7 @@
                   <label class="db">Postal Code*</label>
                   <input
                     class="form-input w-90"
+                    type="number"
                     name="billing_zipcode"
                     #billing_zipcode="ngModel"
                     [(ngModel)]="customerData.billing_zipcode"
@@ -506,7 +549,7 @@
         </div>
       </div>
       <div class="billing-section">
-        <div class="flex pointer" (click)="updateAccordion('payment')">
+        <div class="flex pointer pb4">
           <div class="step-number">4</div>
           <div class="section-title">PAYMENT</div>
           <!-- <div
@@ -517,18 +560,37 @@
             EDIT
           </div> -->
         </div>
-        <div class="mh4 {{ payment ? '' : 'dn' }}">
+        <div class="mh4-ns {{ payment ? '' : 'dn' }}">
           <form
             novalidate
             (ngSubmit)="buy()"
             [formGroup]="stripeTest"
-            class="w-100 ma4"
+            class="w-100 ma4-ns mv0-ns mv3"
           >
-            <div class="payment-form">
-              <div id="card-element" class="field"></div>
+            <div class="payment-form mv3-ns">
+              <!-- <div id="card-element" class="field"></div> -->
+              <div class="row">
+                <div class="field">
+                  <label for="example2-card-number" data-tid="elements_examples.form.card_number_label">Card number</label>
+                  <div id="form-card-number" class="input empty"></div>
+                  <div class="baseline"></div>
+                </div>
+              </div>
+              <div class="flex justify-between">
+                <div class="w-40">
+                  <label for="example2-card-expiry" data-tid="elements_examples.form.card_expiry_label">Expiration</label>
+                  <div id="form-card-expiry" class="input empty"></div>
+                  <div class="baseline"></div>
+                </div>
+                <div class="w-40">
+                  <label for="example2-card-cvc" data-tid="elements_examples.form.card_cvc_label">CVC</label>
+                  <div id="form-card-cvc" class="input empty"></div>
+                  <div class="baseline"></div>
+                </div>
+              </div>
             </div>
             <button
-              class="place-order-btn b pv2 w-100 {{
+              class="place-order-btn b pv3 w-100 {{
                 isPaymentExecuting ? 'no-pointer-event' : ''
               }}"
               type="submit"
@@ -554,7 +616,7 @@
       </div>
     </div>
   </div>
-  <div class="w-30-ns w-100 pa2 mh5-ns mv3">
+  <div class="w-30-ns w-100 pa2 mh5-ns mv3" *ngIf="!isHandset">
     <div class="order-summary-card">
       <div class="order-details section-border">
         <div class="b pv2">ORDER SUMMARY</div>

@@ -18,6 +18,8 @@ export class OrderSuccessComponent implements OnInit {
   orderDate;
   orderId;
   routeSubscription: any;
+  password: string;
+  showError: boolean;
   constructor(private apiService: ApiService, private router: Router, private activeRoute: ActivatedRoute) { }
 
   ngOnInit() {
@@ -44,5 +46,23 @@ export class OrderSuccessComponent implements OnInit {
     }
     this.totalShippingCharge = this.cartProductsLength * this.perItemShippingCharge;
     this.totalAmount = this.subTotalAmount + this.totalShippingCharge;
+  }
+  updatePassword() {
+    if (this.password && this.password.length < 8) {
+      this.showError = true;
+    } else {
+      this.showError = false;
+      let data = {
+        password: this.password
+      };
+      this.apiService.userUpdate(data).subscribe(
+        (payload: any) => {
+          localStorage.setItem('user', JSON.stringify(payload.success.user));
+        },
+        (error: any) => {
+          console.log(error);
+        }
+      );
+    }
   }
 }

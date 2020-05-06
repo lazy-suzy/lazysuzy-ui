@@ -390,8 +390,13 @@ export class ApiService {
 
   getCartProduct() {
     const endpoint = 'cart';
+    const token = this.cookie.get('token');
+    const headers = new HttpHeaders({
+      'Content-Type': 'application/json',
+      Authorization: `Bearer ${token}`
+    });
     const url = `${env.API_BASE_HREF}${endpoint}`;
-    return this.httpService.get(url);
+    return this.httpService.get(url, headers);
   }
   getAllDepartmentsBoard(): Observable<IDepartment> {
     const endpoint = `all-departments?board-view=true`;
@@ -424,5 +429,15 @@ export class ApiService {
     const endpoint = `order?order_id=${orderId}`;
     const url = `${env.API_BASE_HREF}${endpoint}`;
     return this.httpService.get(url);
+  }
+  userUpdate(data) {
+    const token = this.cookie.get('token');
+    const headers = new HttpHeaders({
+      'Content-Type': 'application/json',
+      Authorization: `Bearer ${token}`
+    });
+    const endpoint = `user/update`;
+    const url = `${env.API_BASE_HREF}${endpoint}`;
+    return this.httpService.post(url, data, headers);
   }
 }
