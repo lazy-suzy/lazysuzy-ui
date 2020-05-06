@@ -1,4 +1,4 @@
-<div class="ph5-ns pv4-ns pv2 ph4 flex-ns">
+<div class="container flex-ns">
   <div class="w-30-ns w-100 pa2 mh5-ns mv3" *ngIf="isHandset">
     <div class="order-summary-card">
       <div class="order-details section-border">
@@ -18,12 +18,12 @@
         </div>
       </div>
       <div class="order-pricing-details section-border">
-        <div class="flex justify-between pv3">
+        <div class="flex justify-between pv2">
           <span>SUBTOTAL</span>
           <span>${{ subTotalAmount }}</span>
         </div>
-        <div class="flex justify-between pb3">
-          <span>Shipping({{ cartProductsLength }} items)</span>
+        <div class="flex justify-between pb2">
+          <span>Shipping ({{ cartProductsLength }} items)</span>
           <span>${{ totalShippingCharge }}</span>
         </div>
         <!-- <div class="flex justify-between pb3">
@@ -55,7 +55,7 @@
             EDIT
           </div>
         </div>
-        <div class="section-content pv4-ns pt4 ml5-ns">
+        <div class="section-content pv3-ns pt4 ml5-ns">
           <div class="section-row ph0-ns ph3">
             <ng-container *ngIf="customer; else customerEmail">
               <form
@@ -100,7 +100,7 @@
         </div>
       </div>
       <div class="billing-section">
-        <div class="flex pointer">
+        <div class="flex">
           <div class="step-number">2</div>
           <div class="section-title">SHIPPING</div>
           <div
@@ -111,7 +111,7 @@
             EDIT
           </div>
         </div>
-        <div class="section-content pv4-ns pt4 ph0-ns ph3 ml5-ns">
+        <div class="section-content pv3-ns pt4 ph0-ns ph3 ml5-ns">
           <ng-container *ngIf="shipping; else shippingDetails">
             <div class="section-row pb4 ">
               <div class="b">Shipping Address</div>
@@ -144,7 +144,7 @@
                 <div class="w-50-ns w-100">
                   <label class="db">Last Name*</label>
                   <input
-                    class="form-input w-95"
+                    class="form-input w-90 w-95"
                     name="shipping_l_Name"
                     #shipping_l_Name="ngModel"
                     [(ngModel)]="customerData.shipping_l_Name"
@@ -160,7 +160,7 @@
                   </div>
                 </div>
               </div>
-              <div class="pb4-ns pb3">
+              <div class="pb3">
                 <label class="db">Company Name</label>
                 <input
                   class="form-input single-line-input"
@@ -296,7 +296,7 @@
                   </div>
                 </div>
               </div>
-              <div class="pb3 flex">
+              <div class="pb3-ns flex">
                 <input
                   type="checkbox"
                   #billingCheckbox
@@ -310,7 +310,7 @@
                 </div>
               </div>
               <div>
-                <button class="continue-btn b pv2">CONTINUE</button>
+                <button class="continue-btn b pv2 mv3">CONTINUE</button>
               </div>
             </form>
           </ng-container>
@@ -331,7 +331,7 @@
         </div>
       </div>
       <div class="billing-section">
-        <div class="flex pointer">
+        <div class="flex">
           <div class="step-number">3</div>
           <div class="section-title">BILLING</div>
           <div
@@ -342,7 +342,7 @@
             EDIT
           </div>
         </div>
-        <div class="section-content pv4-ns pt4 ph0-ns ph3 ml5-ns">
+        <div class="section-content pv3-ns pt4 ph0-ns ph3 ml5-ns">
           <ng-container *ngIf="billing; else billingDetails">
             <div class="section-row pb4 ">
               <div class="b">Billing Address</div>
@@ -528,7 +528,7 @@
                 </div>
               </div>
               <div>
-                <button class="continue-btn b pv2">CONTINUE</button>
+                <button class="continue-btn b pv2 mv3">CONTINUE</button>
               </div>
             </form>
           </ng-container>
@@ -549,7 +549,7 @@
         </div>
       </div>
       <div class="billing-section">
-        <div class="flex pointer pb4">
+        <div class="flex">
           <div class="step-number">4</div>
           <div class="section-title">PAYMENT</div>
           <!-- <div
@@ -560,6 +560,7 @@
             EDIT
           </div> -->
         </div>
+        <div class="pv3 {{ payment ? 'dn' : '' }}"></div>
         <div class="mh4-ns {{ payment ? '' : 'dn' }}">
           <form
             novalidate
@@ -571,26 +572,38 @@
               <!-- <div id="card-element" class="field"></div> -->
               <div class="row">
                 <div class="field">
-                  <label for="example2-card-number" data-tid="elements_examples.form.card_number_label">Card number</label>
+                  <label
+                    for="example2-card-number"
+                    data-tid="elements_examples.form.card_number_label"
+                    >Card number</label
+                  >
                   <div id="form-card-number" class="input empty"></div>
                   <div class="baseline"></div>
                 </div>
               </div>
               <div class="flex justify-between">
                 <div class="w-40">
-                  <label for="example2-card-expiry" data-tid="elements_examples.form.card_expiry_label">Expiration</label>
+                  <label
+                    for="example2-card-expiry"
+                    data-tid="elements_examples.form.card_expiry_label"
+                    >Expiration</label
+                  >
                   <div id="form-card-expiry" class="input empty"></div>
                   <div class="baseline"></div>
                 </div>
                 <div class="w-40">
-                  <label for="example2-card-cvc" data-tid="elements_examples.form.card_cvc_label">CVC</label>
+                  <label
+                    for="example2-card-cvc"
+                    data-tid="elements_examples.form.card_cvc_label"
+                    >CVC</label
+                  >
                   <div id="form-card-cvc" class="input empty"></div>
                   <div class="baseline"></div>
                 </div>
               </div>
             </div>
             <button
-              class="place-order-btn b pv3 w-100 {{
+              class="place-order-btn b w-100 {{
                 isPaymentExecuting ? 'no-pointer-event' : ''
               }}"
               type="submit"
@@ -617,7 +630,7 @@
     </div>
   </div>
   <div class="w-30-ns w-100 pa2 mh5-ns mv3" *ngIf="!isHandset">
-    <div class="order-summary-card">
+    <div class="order-summary-card" *ngIf="!isLoading">
       <div class="order-details section-border">
         <div class="b pv2">ORDER SUMMARY</div>
         <div class="flex pt3 pb4" *ngFor="let item of cartProducts">
@@ -640,7 +653,7 @@
           <span>${{ subTotalAmount }}</span>
         </div>
         <div class="flex justify-between pb3">
-          <span>Shipping({{ cartProductsLength }} items)</span>
+          <span>Shipping ({{ cartProductsLength }} items)</span>
           <span>${{ totalShippingCharge }}</span>
         </div>
         <!-- <div class="flex justify-between pb3">

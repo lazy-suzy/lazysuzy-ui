@@ -42,6 +42,7 @@ export class PaymentComponent implements OnInit {
   payment = false;
   statesArray = [];
   cartProducts = [];
+  spinner: string = 'assets/images/spinner.gif';
   subTotalAmount: number = 0;
   cartProductsLength: number;
   totalShippingCharge: number;
@@ -84,14 +85,14 @@ export class PaymentComponent implements OnInit {
   );
   bpSubscription: Subscription;
   isHandset: boolean;
-
+  isLoading: boolean = true;
   constructor(
     private fb: FormBuilder,
     private stripeService: StripeService,
     private apiService: ApiService,
     private usStateService: USStateService,
     private router: Router,
-    private breakpointObserver: BreakpointObserver,
+    private breakpointObserver: BreakpointObserver
   ) {
     this.statesArray = this.usStateService.getStates();
   }
@@ -133,23 +134,23 @@ export class PaymentComponent implements OnInit {
             fontSize: '16px',
             fontSmoothing: 'antialiased',
             '::placeholder': {
-              color: '#CFD7DF',
+              color: '#CFD7DF'
             },
             ':-webkit-autofill': {
-              color: '#e39f48',
-            },
+              color: '#e39f48'
+            }
           },
           invalid: {
             color: '#E25950',
             '::placeholder': {
-              color: '#FFCCA5',
-            },
-          },
+              color: '#FFCCA5'
+            }
+          }
         };
         let elementClasses = {
           focus: 'focused',
           empty: 'empty',
-          invalid: 'invalid',
+          invalid: 'invalid'
         };
         this.cardNumber = this.elements.create('cardNumber', {
           style: elementStyles
@@ -189,6 +190,8 @@ export class PaymentComponent implements OnInit {
     }
     if (this.cartProductsLength === 0) {
       this.router.navigate(['cart']);
+    } else {
+      this.isLoading = false;
     }
     this.totalShippingCharge =
       this.cartProductsLength * this.perItemShippingCharge;
@@ -237,7 +240,10 @@ export class PaymentComponent implements OnInit {
             };
             this.apiService.userUpdate(data).subscribe(
               (payload: any) => {
-                localStorage.setItem('user', JSON.stringify(payload.success.user));
+                localStorage.setItem(
+                  'user',
+                  JSON.stringify(payload.success.user)
+                );
               },
               (error: any) => {
                 console.log(error);
@@ -273,10 +279,9 @@ export class PaymentComponent implements OnInit {
     this.payment = false;
     if (section === 'billing') {
       this.onCheckboxChange(this.isBillingAddressSame);
-      if ( !this.customerData.billing_f_Name) {
+      if (!this.customerData.billing_f_Name) {
         this.billing = true;
-      } else
-      if (this.isBillingAddressSame) {
+      } else if (this.isBillingAddressSame) {
         this.payment = true;
       }
     } else {
