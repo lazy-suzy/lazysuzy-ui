@@ -8,7 +8,6 @@ import { Router, ActivatedRoute } from '@angular/router';
   styleUrls: ['./order-success.component.less']
 })
 export class OrderSuccessComponent implements OnInit {
-
   cartProducts = [];
   cartProductsLength: number;
   subTotalAmount: number;
@@ -20,7 +19,11 @@ export class OrderSuccessComponent implements OnInit {
   routeSubscription: any;
   password: string;
   showError: boolean;
-  constructor(private apiService: ApiService, private router: Router, private activeRoute: ActivatedRoute) { }
+  constructor(
+    private apiService: ApiService,
+    private router: Router,
+    private activeRoute: ActivatedRoute
+  ) {}
 
   ngOnInit() {
     this.routeSubscription = this.activeRoute.params.subscribe(routeParams => {
@@ -29,7 +32,9 @@ export class OrderSuccessComponent implements OnInit {
     this.apiService.getOrderSuccessData(this.orderId).subscribe(
       (payload: any) => {
         this.cartProducts = payload.cart;
-        this.orderDate = moment(payload.delivery[0].created_at).format('D MMM, YYYY');
+        this.orderDate = moment(payload.delivery[0].created_at).format(
+          'D MMM, YYYY'
+        );
         this.cartProductsLength = 0;
         this.subTotalAmount = 0;
         this.calculateCartData();
@@ -43,8 +48,9 @@ export class OrderSuccessComponent implements OnInit {
     for (let product of this.cartProducts) {
       this.subTotalAmount = this.subTotalAmount + product.price * product.count;
       this.cartProductsLength = this.cartProductsLength + product.count;
+      this.totalShippingCharge =
+        this.cartProductsLength * this.perItemShippingCharge;
     }
-    this.totalShippingCharge = this.cartProductsLength * this.perItemShippingCharge;
     this.totalAmount = this.subTotalAmount + this.totalShippingCharge;
   }
   updatePassword() {
