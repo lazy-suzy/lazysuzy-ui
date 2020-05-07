@@ -426,9 +426,14 @@ export class ApiService {
     return this.httpService.post(url, data, headers);
   }
   getOrderSuccessData(orderId) {
+    const token = this.cookie.get('token');
+    const headers = new HttpHeaders({
+      'Content-Type': 'application/json',
+      Authorization: `Bearer ${token}`
+    });
     const endpoint = `order?order_id=${orderId}`;
     const url = `${env.API_BASE_HREF}${endpoint}`;
-    return this.httpService.get(url);
+    return this.httpService.get(url, headers);
   }
   userUpdate(data) {
     const token = this.cookie.get('token');

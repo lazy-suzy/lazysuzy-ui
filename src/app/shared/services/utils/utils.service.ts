@@ -132,8 +132,8 @@ export class UtilsService {
 
   openAddToCartDialog(modal) {
     const dialogRef = this.dialog.open(ConfirmCartProductComponent, {
-      width: '55%',
-      height: '63%',
+      width: '50%',
+      height: '53%',
       data: {
         ...modal,
         total: modal.price * modal.quantity

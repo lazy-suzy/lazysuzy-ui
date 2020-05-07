@@ -45,8 +45,7 @@ export class PaymentComponent implements OnInit {
   spinner: string = 'assets/images/spinner.gif';
   subTotalAmount: number = 0;
   cartProductsLength: number;
-  totalShippingCharge: number;
-  perItemShippingCharge = 25;
+  totalShippingCharge: number = 0;
   totalAmount: number;
   customerData = {
     email: null,
@@ -166,6 +165,8 @@ export class PaymentComponent implements OnInit {
         this.cardCvc.mount('#form-card-cvc');
       }
     });
+    const localUser: any = JSON.parse(localStorage.getItem('user') || '{}');
+    this.customerData.email = localUser.email;
     this.getCartProducts();
   }
 
@@ -187,14 +188,14 @@ export class PaymentComponent implements OnInit {
       this.subTotalAmount =
         this.subTotalAmount + product.retail_price * product.count;
       this.cartProductsLength = this.cartProductsLength + product.count;
+
+      this.totalShippingCharge += product.count * product.ship_custom;
     }
     if (this.cartProductsLength === 0) {
       this.router.navigate(['cart']);
     } else {
       this.isLoading = false;
     }
-    this.totalShippingCharge =
-      this.cartProductsLength * this.perItemShippingCharge;
     this.totalAmount = this.subTotalAmount + this.totalShippingCharge;
   }
   buy() {
@@ -221,7 +222,6 @@ export class PaymentComponent implements OnInit {
       data.billing_city;
     if (condition) {
       this.isPaymentExecuting = true;
-      // const name = this.stripeTest.get('name').value;
       const name =
         this.customerData.billing_f_Name +
         ' ' +
@@ -230,15 +230,9 @@ export class PaymentComponent implements OnInit {
         .createToken((this.cardNumber, this.cardExpiry, this.cardCvc), { name })
         .subscribe((result: any) => {
           if (result.token) {
-            // console.log(result.token);
-            // Use the token to create a charge or a customer
-            // https://stripe.com/docs/charges
             this.customerData.token = result.token.id;
             this.customerData.ip = result.token.client_ip;
-            let data = {
-              name: name
-            };
-            this.apiService.userUpdate(data).subscribe(
+            this.apiService.userUpdate({ name }).subscribe(
               (payload: any) => {
                 localStorage.setItem(
                   'user',
@@ -251,12 +245,10 @@ export class PaymentComponent implements OnInit {
             );
             this.apiService.postStripeToken(this.customerData).subscribe(
               (payload: any) => {
-                console.log(payload);
                 this.isPaymentExecuting = false;
                 this.router.navigate([`order/${payload.order_id}`]);
               },
               (error: any) => {
-                console.log(error);
                 this.isPaymentExecuting = false;
               }
             );
@@ -297,7 +289,7 @@ export class PaymentComponent implements OnInit {
       this.customer = true;
       this.isEmailValid = false;
     } else {
-      const localUser: any = localStorage.getItem('user');
+      const localUser: any = JSON.parse(localStorage.getItem('user') || '{}');
       if (localUser.email !== this.customerData.email) {
         const data = {
           email: this.customerData.email
