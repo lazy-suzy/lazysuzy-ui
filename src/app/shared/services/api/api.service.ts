@@ -335,7 +335,7 @@ export class ApiService {
 
   getPosts(): Observable<any[]> {
     return this.httpService.get<any[]>(
-      'https://psimonmyway.com/wp-json/wp/v2/posts?_embed',
+      'http://wordpress.lazysuzy.com/index.php/wp-json/wp/v2/posts?_embed&per_page=100',
       {
         params: {
           per_page: '6'
@@ -346,7 +346,7 @@ export class ApiService {
 
   getPostById(id): Observable<any[]> {
     return this.httpService.get<any[]>(
-      `https://psimonmyway.com/wp-json/wp/v2/posts/${id}`
+      `http://wordpress.lazysuzy.com/index.php/wp-json/wp/v2/posts?slug=${id}`
     );
   }
 

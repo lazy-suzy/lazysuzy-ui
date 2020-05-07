@@ -30,22 +30,7 @@ export class PagePostsComponent implements OnInit {
     this.posts$ = this.apiService.getPostById(this.postId);
     this.posts$.subscribe(s => {
       this.currentBlog = s[0];
-      // let str = this.currentBlog.content.rendered;
-      // let toRemove = [
-      //   '[vc_row]',
-      //   '[vc_column]',
-      //   '[vc_column_text]',
-      //   '[vc_empty_space]',
-      //   '[/vc_row]',
-      //   '[/vc_column]',
-      //   '[/vc_column_text]',
-      //   '[/vc_empty_space]'
-      // ];
-      // toRemove.forEach(txt=>{
-      //   str = str.replace(txt, '');
-      // });
-      // this.currentBlog.content.rendered = str;
-      let x_tags = this.currentBlog.x_tags;
+      let x_tags = this.currentBlog.x_tags || '';
       x_tags = x_tags.split(',');
       this.currentBlog.x_tags = [...x_tags];
       this.showLoader = false;
