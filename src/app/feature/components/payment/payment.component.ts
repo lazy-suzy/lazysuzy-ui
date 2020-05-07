@@ -93,7 +93,9 @@ export class PaymentComponent implements OnInit {
     private router: Router,
     private breakpointObserver: BreakpointObserver
   ) {
-    this.statesArray = this.usStateService.getStates();
+    this.statesArray = this.usStateService
+      .getStates()
+      .filter(state => state.name !== 'Alaska' && state.name !== 'Hawaii');
   }
 
   ngOnInit() {

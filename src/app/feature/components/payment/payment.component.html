@@ -38,7 +38,7 @@
     </div>
   </div>
 
-  <div class="w-70-ns w-100 ph5-ns pv2">
+  <div class="w-60-ns w-100 ph5-ns pv2">
     <div class="billing-header pink-font b" *ngIf="!isHandset">
       Checkout
     </div>
@@ -263,7 +263,7 @@
                   >
                     <option
                       *ngFor="let item of statesArray"
-                      [value]="item.name"
+                      [value]="item.abbreviation"
                       >{{ item.name }}</option
                     >
                   </select>
@@ -653,7 +653,7 @@
           <span>${{ subTotalAmount }}</span>
         </div>
         <div class="flex justify-between pb3">
-          <span>Shipping ({{ cartProductsLength }} items)</span>
+          <span>UPS Ground Shipping ({{ cartProductsLength }} items)</span>
           <span>${{ totalShippingCharge }}</span>
         </div>
         <!-- <div class="flex justify-between pb3">
