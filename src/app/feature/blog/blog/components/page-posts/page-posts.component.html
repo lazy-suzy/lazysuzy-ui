@@ -6,7 +6,7 @@
 <div class="container" *ngIf="!showLoader">
   <div class="wrapper">
     <h1 [innerHTML]="currentBlog?.title?.rendered"></h1>
-    <small>{{currentBlog.date | date: 'fullDate'}}</small>
+    <small style="text-align: center;">{{currentBlog.date | date: 'fullDate'}}</small>
     <article>
       <p [innerHTML]="currentBlog?.content?.rendered">
       </p>
