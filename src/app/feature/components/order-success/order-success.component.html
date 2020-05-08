@@ -2,19 +2,20 @@
     <div class="pink-font ml3-ns b pb2-ns pv2">
         THANKS FOR YOUR ORDER!
     </div>
-    <div class="signup-card mv3 w-50-ns">
-        <div class="mv3">
-            Sign Up to keep track of your Order History
+    <div class="signup-card mv3 w-70-ns" *ngIf="!isLoggedIn">
+        <div class="mv3 gray-font b">
+            Sign Up or Log In to keep track of your Order History
         </div>
-        <div class="flex justify-between mv3">
-            <div class="w-60">
+        <div class="flex-ns justify-center mv3">
+            <div class="w-40-ns">
                 <input placeholder="Password" class="form-input" [(ngModel)]="password">
                 <span class="error-msg" *ngIf="showError">Password must contain 8 characters</span>
             </div>
-            <div class="w-40 tc">
-                <button class="register-btn" (click)="updatePassword()">REGISTER</button>
+            <div class="w-50-ns tc">
+                <button class="register-btn w-70-ns w-100 mt0-ns mt3 b" (click)="updatePassword()">Access LazySuzy Account</button>
             </div>
         </div>
+        <span class="success-msg mh4" *ngIf="showSuccess">User registered</span>
     </div>
     <div class="products-card mv3 w-70-ns">
         <div class="order-header section pv3">
@@ -29,19 +30,19 @@
         </div>
         <div class="order-products pb4 section">
             <div class="pv3">{{cartProductsLength}} Items</div>
-            <div class="flex-ns justify-between" *ngFor="let item of cartProducts">
-                <div class="w-30-ns pv2 blue-font">
+            <div class="flex-ns" *ngFor="let item of cartProducts">
+                <div class="w-33-ns pv2 blue-font">
                     <img [src]="item.image">
                     <div>{{item.product_name}}</div>
-                    <div>by {{item.site}}</div>
+                    <div>by <span class="brand-font">{{item.site}}</span></div>
                     <div>${{item.price}}</div>
                 </div>
             </div>
         </div>
-        <div class="order-pricing section pv1 mb3">
+        <div class="order-pricing section mb3">
             <div class="flex justify-between pv3">
                 <div class="b">SUBTOTAL:</div>
-                <div>${{subTotalAmount}}</div>
+                <div class="b">${{subTotalAmount}}</div>
             </div>
             <div class="flex justify-between pv2">
                 <div>Shipping</div>
@@ -54,6 +55,38 @@
             <div class="flex justify-between pink-font b pv3">
                 <div>TOTAL</div>
                 <div>${{totalAmount}}</div>
+            </div>
+        </div>
+        <div class="order-details section">
+            <div class="flex-ns">
+                <div class="w-50-ns mh4-ns">
+                    <div class="header b">SHIPPING DETAILS</div>
+                    <div class="content ml2 pv2">
+                        <div>{{deliveryData[0].billing_f_Name}} {{deliveryData[0].billing_l_Name}}</div>
+                        <div>{{deliveryData[0].billing_phone | americanNumber:deliveryData[0].billing_phone}}</div>
+                        <div>{{deliveryData[0].billing_address_line1}}</div>
+                        <div>{{deliveryData[0].billing_address_line2}}</div>
+                        <div>{{deliveryData[0].billing_city}}</div>
+                        <div>{{deliveryData[0].billing_state}}, {{deliveryData[0].billing_zipcode}}</div>
+                    </div>
+                </div>
+                <div class="w-50-ns mh4-ns">
+                    <div class="header b">PAYMENT DETAILS</div>
+                    <div class="content ml2 pv2">
+                        <div>XXXX XXXXXX X{{this.cardDetails.last4}}  </div>
+                        <div>EXP: {{this.cardDetails.exp_month}}/{{this.cardDetails.exp_year}}</div>
+                    </div>
+                    <div class="header b">DELIVERY METHOD</div>
+                    <div class="content ml2 pv2">
+                        <div>UPS Ground</div>
+                        <div>Arrives within 4-5 days</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="mv3">
+            <div class="b tc">
+                Please check your inbox for a confirmation email 
             </div>
         </div>
     </div>

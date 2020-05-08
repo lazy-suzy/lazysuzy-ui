@@ -19,8 +19,6 @@ export * from './redirect/redirect.component';
 export * from './redirect/redirect.module';
 export * from './billing/billing.component';
 export * from './billing/billing.module';
-export * from './cart-products/cart-products.component';
-export * from './cart-products/cart-products.module';
 export * from './payment/payment.component';
 export * from './payment/payment.module';
 export * from './confirm-cart-product/confirm-cart-product.component';

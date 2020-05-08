@@ -37,7 +37,7 @@ const routes: Routes = [
   { path: 'privacypolicy', component: PrivacyPolicyComponent },
   { path: 'cart', component: CartComponent },
   // { path: 'billing', component: BillingComponent },
-  { path: 'payment', component: PaymentComponent },
+  { path: 'checkout', component: PaymentComponent },
   { path: 'order/:order', component: OrderSuccessComponent },
   { path: 'wishlist', component: WishlistComponent, pathMatch: 'full' },
   {

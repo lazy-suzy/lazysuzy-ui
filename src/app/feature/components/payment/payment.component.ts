@@ -190,7 +190,6 @@ export class PaymentComponent implements OnInit {
       this.subTotalAmount =
         this.subTotalAmount + product.retail_price * product.count;
       this.cartProductsLength = this.cartProductsLength + product.count;
-
       this.totalShippingCharge += product.count * product.ship_custom;
     }
     if (this.cartProductsLength === 0) {

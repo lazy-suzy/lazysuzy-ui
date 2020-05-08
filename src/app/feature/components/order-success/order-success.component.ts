@@ -9,9 +9,11 @@ import { Router, ActivatedRoute } from '@angular/router';
 })
 export class OrderSuccessComponent implements OnInit {
   cartProducts = [];
+  deliveryData = [];
+  cardDetails = [];
   cartProductsLength: number;
   subTotalAmount: number;
-  totalShippingCharge: number;
+  totalShippingCharge: number = 0;
   totalAmount: number;
   perItemShippingCharge = 25;
   orderDate;
@@ -19,6 +21,8 @@ export class OrderSuccessComponent implements OnInit {
   routeSubscription: any;
   password: string;
   showError: boolean;
+  isLoggedIn: boolean;
+  showSuccess: boolean;
   constructor(
     private apiService: ApiService,
     private router: Router,
@@ -29,9 +33,15 @@ export class OrderSuccessComponent implements OnInit {
     this.routeSubscription = this.activeRoute.params.subscribe(routeParams => {
       this.orderId = routeParams.order;
     });
+    let localData = JSON.parse(localStorage.getItem('user') || '{}');
+    if (localData.user_type === 1) {
+      this.isLoggedIn = true;
+    }
     this.apiService.getOrderSuccessData(this.orderId).subscribe(
       (payload: any) => {
         this.cartProducts = payload.cart;
+        this.deliveryData = payload.delivery;
+        this.cardDetails = payload.payment.card;
         this.orderDate = moment(payload.delivery[0].created_at).format(
           'D MMM, YYYY'
         );
@@ -48,8 +58,7 @@ export class OrderSuccessComponent implements OnInit {
     for (let product of this.cartProducts) {
       this.subTotalAmount = this.subTotalAmount + product.price * product.count;
       this.cartProductsLength = this.cartProductsLength + product.count;
-      this.totalShippingCharge =
-        this.cartProductsLength * this.perItemShippingCharge;
+      this.totalShippingCharge += product.count * product.ship_custom;
     }
     this.totalAmount = this.subTotalAmount + this.totalShippingCharge;
   }
@@ -64,6 +73,11 @@ export class OrderSuccessComponent implements OnInit {
       this.apiService.userUpdate(data).subscribe(
         (payload: any) => {
           localStorage.setItem('user', JSON.stringify(payload.success.user));
+          this.showSuccess = true;
+          const self = this;
+          setTimeout(function(){
+            self.isLoggedIn = true;
+          }, 1000);
         },
         (error: any) => {
           console.log(error);

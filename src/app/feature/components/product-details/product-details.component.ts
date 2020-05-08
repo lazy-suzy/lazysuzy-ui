@@ -142,11 +142,14 @@ export class ProductDetailsComponent implements OnInit {
   }
 
   wishlistProduct(sku, mark) {
-    this.apiService
+    let localData = JSON.parse(localStorage.getItem('user') || '{}');
+    if (localData.email.length > 0) {
+      this.apiService
       .wishlistProduct(sku, mark, false)
       .subscribe((payload: any) => {
         this.product.wishlisted = mark;
       });
+    }
   }
 
   openLink(event, url) {

@@ -1,7 +1,12 @@
 import { Component, EventEmitter, Output, Input, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Options } from 'ng5-slider';
-import { IFilterData, IProductFilterOption, IProductFilter, IProductsPayload } from 'src/app/shared/models';
+import {
+  IFilterData,
+  IProductFilterOption,
+  IProductFilter,
+  IProductsPayload
+} from 'src/app/shared/models';
 
 @Component({
   selector: 'app-product-filter-mobile',
@@ -21,6 +26,7 @@ export class ProductFilterMobileComponent implements OnInit {
     price_from: 0,
     price_to: 0,
     type: [],
+    category: [],
     color: []
   };
   isPriceChanged: boolean = false;
@@ -108,6 +114,7 @@ export class ProductFilterMobileComponent implements OnInit {
       price_from: 0,
       price_to: 0,
       type: [],
+      category: [],
       color: []
     };
     this.clearOptionVisible = {
@@ -136,8 +143,13 @@ export class ProductFilterMobileComponent implements OnInit {
   selectTab(filter) {
     this.activeTab = filter;
     if (filter !== 'price') {
-      this.showClearBtn(this.productFilters[filter].filter(this.ifChecked), filter);
-      this.activeFilterTabData = this.productFilters[filter].filter(this.checkEnabled);
+      this.showClearBtn(
+        this.productFilters[filter].filter(this.ifChecked),
+        filter
+      );
+      this.activeFilterTabData = this.productFilters[filter].filter(
+        this.checkEnabled
+      );
     } else {
       this.activeFilterTabData = null;
     }
@@ -159,14 +171,14 @@ export class ProductFilterMobileComponent implements OnInit {
     return data.checked;
   }
 
-  showClearBtn(data,filter) {
+  showClearBtn(data, filter) {
     this.clearOptionVisible[filter] = data.length > 0;
   }
 
   clearBtn(activeFilter) {
     if (activeFilter === 'price') {
-      this.activeFilters. price_from = 0;
-      this.activeFilters. price_to = 0;
+      this.activeFilters.price_from = 0;
+      this.activeFilters.price_to = 0;
       delete this.activeFilters.price_from;
       delete this.activeFilters.price_to;
       this.isPriceChanged = false;
@@ -176,5 +188,4 @@ export class ProductFilterMobileComponent implements OnInit {
     }
     this.setFilters.emit(this.activeFilters);
   }
-
 }

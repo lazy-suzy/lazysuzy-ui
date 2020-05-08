@@ -45,7 +45,7 @@ export class NavDesktopComponent {
   ngOnInit(): void {
     this.router.events.subscribe((res) => { 
       let orderRoute = this.router.url.slice(1, 6);
-      if (this.router.url === '/payment' || orderRoute === 'order') {
+      if (this.router.url === '/checkout' || orderRoute === 'order') {
         this.hideBar = true;
       } else {
         this.hideBar = false;
@@ -91,8 +91,8 @@ export class NavDesktopComponent {
   isLoggedIn(event) {
     event.preventDefault();
     event.stopPropagation();
-
-    if (this.cookie.get('token')) {
+    let localData = JSON.parse(localStorage.getItem('user') || '{}');
+    if (localData.email.length > 0) {
       this.router.navigateByUrl('/wishlist');
     } else {
       this.utils.openSignupDialog(false);

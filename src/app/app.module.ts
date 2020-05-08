@@ -17,6 +17,7 @@ import { MarkdownModule } from 'ngx-markdown';
 import { EventEmitterService } from './shared/services/events/event-emitter.service';
 import { NgxStripeModule } from 'ngx-stripe';
 import { USStateModule } from 'ng2-us-states';
+import { environment as env } from 'src/environments/environment';
 
 const MODULES = [
   BrowserModule,
@@ -31,7 +32,7 @@ const MODULES = [
   GalleryModule,
   LightboxModule,
   MarkdownModule.forRoot(),
-  NgxStripeModule.forRoot('pk_test_0QKsReaTyej3eaewGR3HWiqZ00CzWWFs34'),
+  NgxStripeModule.forRoot(env.STRIPE_API_KEY),
   USStateModule,
 ];
 

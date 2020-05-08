@@ -29,6 +29,7 @@ export class CartComponent implements OnInit {
   spinner: string = 'assets/images/spinner.gif';
   emptyCart: boolean = true;
   isCartLoading: boolean;
+  isLoggedIn: boolean;
   constructor(
     private breakpointObserver: BreakpointObserver,
     private apiService: ApiService,
@@ -43,6 +44,10 @@ export class CartComponent implements OnInit {
         this.isHandset = handset.matches;
       }
     );
+    let localData = JSON.parse(localStorage.getItem('user') || '{}');
+    if (localData.user_type === 1) {
+      this.isLoggedIn = true;
+    }
     this.getCartProducts();
   }
 

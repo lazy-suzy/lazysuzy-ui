@@ -6,7 +6,7 @@
           Your LazySuzy cart is empty
         </div>
         <div class="tc pt3">
-          <button class="login-btn b" (click)="openSignupDialog(true)">
+          <button class="login-btn b" (click)="openSignupDialog(true)" *ngIf="!isLoggedIn">
             LOG IN or SIGN UP
           </button>
           <div class="other-deals-msg">
@@ -37,7 +37,7 @@
             <div class="tc">
               <button
                 class="btn-checkout blue-font"
-                [routerLink]="['/payment']"
+                [routerLink]="['/checkout']"
               >
                 SECURE CHECKOUT
               </button>
@@ -95,7 +95,7 @@
           Your LazySuzy cart is empty
         </div>
         <div class="flex items-center pt3">
-          <button class="login-btn b" (click)="openSignupDialog(false)">
+          <button class="login-btn b" (click)="openSignupDialog(false)" *ngIf="!isLoggedIn">
             LOG IN or SIGN UP
           </button>
           <div class="other-deals-msg">
@@ -179,7 +179,7 @@
             <div class="tc">
               <button
                 class="btn-checkout blue-font"
-                [routerLink]="['/payment']"
+                [routerLink]="['/checkout']"
               >
                 SECURE CHECKOUT
               </button>

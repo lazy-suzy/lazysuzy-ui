@@ -45,7 +45,7 @@ export class AuthComponent implements OnInit {
 
   ngOnInit() {
     this.createGuestUserIfRequired();
-
+    localStorage.setItem('cart', '0');
     if (this.eventEmitterService.subsVar == undefined) {
       this.eventEmitterService.subsVar = this.eventEmitterService.invokeFetchUser.subscribe(
         payload => {

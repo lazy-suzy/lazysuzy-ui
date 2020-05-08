@@ -4,6 +4,7 @@ import { ProductsCarousalComponent } from './components/products-carousal/produc
 import { OwlModule } from 'ngx-owl-carousel';
 import { LoaderModule } from './components/loader/loader.module';
 import { MaterialModule } from './material-module';
+// import { AmericanNumberPipe } from './pipes/american-number.pipe';
 
 const DECLARATIONS = [ProductsCarousalComponent];
 

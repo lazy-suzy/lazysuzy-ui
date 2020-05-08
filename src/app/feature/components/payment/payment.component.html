@@ -320,13 +320,12 @@
               {{ customerData.shipping_l_Name }}
             </div>
             <div>{{ customerData.shipping_company_name }}</div>
-            <div>{{ customerData.shipping_phone }}</div>
+            <div>{{ customerData.shipping_phone | americanNumber:customerData.shipping_phone}}</div>
             <div>{{ customerData.shipping_address_line1 }}</div>
             <div>{{ customerData.shipping_address_line2 }}</div>
             <div>{{ customerData.shipping_city }}</div>
-            <div>{{ customerData.shipping_state }}</div>
-            <div>{{ customerData.shipping_country }}</div>
-            <div>{{ customerData.shipping_zipcode }}</div>
+            <div>{{ customerData.shipping_state}}, {{ customerData.shipping_zipcode }}</div>
+            <div>{{ country }}</div>
           </ng-template>
         </div>
       </div>
@@ -336,7 +335,7 @@
           <div class="section-title">BILLING</div>
           <div
             class="edit-btn pointer"
-            *ngIf="customerData.billing_f_Name && !billing"
+            *ngIf="customerData.billing_f_Name && !billing && !isBillingAddressSame"
             (click)="updateAccordion('billing')"
           >
             EDIT
@@ -538,13 +537,12 @@
               {{ customerData.billing_l_Name }}
             </div>
             <div>{{ customerData.billing_company_name }}</div>
-            <div>{{ customerData.billing_phone }}</div>
+            <div>{{ customerData.billing_phone | americanNumber:customerData.billing_phone }}</div>
             <div>{{ customerData.billing_address_line1 }}</div>
             <div>{{ customerData.billing_address_line2 }}</div>
             <div>{{ customerData.billing_city }}</div>
-            <div>{{ customerData.billing_state }}</div>
-            <div>{{ customerData.billing_country }}</div>
-            <div>{{ customerData.billing_zipcode }}</div>
+            <div>{{ customerData.billing_state}}, {{ customerData.billing_zipcode }}</div>
+            <div>{{ country }}</div>
           </ng-template>
         </div>
       </div>
