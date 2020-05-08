@@ -22,26 +22,25 @@
         <div class="canvas-preview">
           <img width="100%" class="edit-board" src="{{board.preview}}" />
           <div class="board-card-icons">
-            <span data-title="Edit" (click)="edit(board)">
+            <span data-title="Edit" routerLink="../{{boardViewLink}}/{{board.uuid}}">
               <i class="mdi mdi-pencil" aria-hidden="true"></i>
             </span>
             <span data-title="Delete" (click)="delete(board)">
               <i class="mdi mdi-delete" aria-hidden="true"></i>
             </span>
-            <span data-title="Share" data-action="share">
+            <!-- <span data-title="Share" data-action="share">
               <i class="mdi mdi-share-variant" aria-hidden="true"></i>
-            </span>
-            <span data-title="Duplicate" data-action="duplicate">
+            </span> -->
+            <span data-title="Duplicate" data-action="duplicate" (click)="add(board)">
               <i class="mdi mdi-content-copy" aria-hidden="true"></i>
             </span>
-            <span data-title="Shop" onclick="action('shop')">
+            <span data-title="Shop" routerLink="../{{boardPreviewLink}}/{{board.uuid}}">
               <i class="mdi mdi-cart" aria-hidden="true"></i>
             </span>
           </div>
         </div>
         <div>
           {{board.title}}
-          <!-- ${{item_total}} -->
         </div>
       </div>
     </div>
