@@ -10,5 +10,6 @@ export const environment = {
   API_HREF: 'https://www.lazysuzy.com',
   LIVE_SITE: false,
   GOOGLE_LINK: 'https://www.lazysuzy.com/redirect/google',
-  FACEBOOK_LINK: 'https://www.lazysuzy.com/redirect/facebook'
+  FACEBOOK_LINK: 'https://www.lazysuzy.com/redirect/facebook',
+  STRIPE_API_KEY: 'pk_test_0QKsReaTyej3eaewGR3HWiqZ00CzWWFs34'
 };

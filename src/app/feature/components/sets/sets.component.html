@@ -6,7 +6,12 @@
     ></a>
     <span class="w-60-ns w-50"> {{ item.name }} </span>
 
-    <ng-container *ngIf="item.in_inventory; else isOOS">
+    <ng-container
+      *ngIf="
+        item.in_inventory && item.inventory_product_details.count > 0;
+        else isOOS
+      "
+    >
       <div class="w-50">
         <span class="price w-10-ns">
           ${{ item.inventory_product_details.price }}
