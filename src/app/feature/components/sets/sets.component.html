@@ -24,26 +24,25 @@
     </ng-container>
 
     <ng-template #isOOS>
-      <span
-        class="price w-10-ns {{
-          item.price !== item.was_price ? '' : 'invisible'
-        }}"
-        >${{ item.price }}</span
-      >
-      <span
-        class="was-price w-10 {{
-          item.price !== item.was_price ? 'strike' : ''
-        }}"
-        >${{ item.was_price }}</span
-      >
-      <span class="brand-button"
-        ><a
-          class=""
-          (click)="openLink($event, item.link)"
-          href="{{ item.link }}"
-          >View at {{ brand }}</a
-        ></span
-      >
+      <div class="w-50">
+        <span class="price w-10-ns ">${{ item.price }}</span>
+
+        <span
+          *ngIf="item.price !== item.was_price"
+          class="was-price w-10 {{
+            item.price !== item.was_price ? 'strike' : ''
+          }}"
+          >${{ item.was_price }}</span
+        >
+        <span class="brand-button"
+          ><a
+            class=""
+            (click)="openLink($event, item.link)"
+            href="{{ item.link }}"
+            >View at {{ brand }}</a
+          ></span
+        >
+      </div>
     </ng-template>
   </div>
 </div>
