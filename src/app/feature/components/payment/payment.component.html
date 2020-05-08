@@ -71,9 +71,7 @@
               <form
                 name="email-form"
                 class="flex-ns w-100 "
-                (ngSubmit)="
-                  emailForm.form.valid && checkEmailValidation('shipping')
-                "
+                (ngSubmit)="emailForm.form.valid && checkEmailValidation()"
                 #emailForm="ngForm"
               >
                 <div class="w-50-ns w-100">

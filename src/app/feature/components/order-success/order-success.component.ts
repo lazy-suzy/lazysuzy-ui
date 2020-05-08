@@ -9,8 +9,8 @@ import { Router, ActivatedRoute } from '@angular/router';
 })
 export class OrderSuccessComponent implements OnInit {
   cartProducts = [];
-  deliveryData = [];
-  cardDetails = [];
+  deliveryData: any = [];
+  cardDetails: any = [];
   cartProductsLength: number;
   subTotalAmount: number;
   totalShippingCharge: number = 0;
@@ -75,7 +75,7 @@ export class OrderSuccessComponent implements OnInit {
           localStorage.setItem('user', JSON.stringify(payload.success.user));
           this.showSuccess = true;
           const self = this;
-          setTimeout(function(){
+          setTimeout(function() {
             self.isLoggedIn = true;
           }, 1000);
         },

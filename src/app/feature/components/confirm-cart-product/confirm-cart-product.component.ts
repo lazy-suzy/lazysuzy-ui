@@ -9,16 +9,18 @@ import { Router } from '@angular/router';
   styleUrls: ['./confirm-cart-product.component.less']
 })
 export class ConfirmCartProductComponent implements OnInit {
-  product = {};
-  constructor( @Inject(MAT_DIALOG_DATA) public data: any, private router: Router ) { }
+  product: any = {};
+  constructor(
+    @Inject(MAT_DIALOG_DATA) public data: any,
+    private router: Router
+  ) {}
 
   ngOnInit() {
     this.product = this.data;
   }
 
   closeAllDialogs() {
-    this.router.navigate(['cart'])
-    .then(() => {
+    this.router.navigate(['cart']).then(() => {
       location.reload();
     });
   }

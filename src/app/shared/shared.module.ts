@@ -1,12 +1,12 @@
-import { NgModule } from "@angular/core";
-import { CommonModule } from "@angular/common";
+import { NgModule } from '@angular/core';
+import { CommonModule } from '@angular/common';
 import { ProductsCarousalComponent } from './components/products-carousal/products-carousal.component';
 import { OwlModule } from 'ngx-owl-carousel';
 import { LoaderModule } from './components/loader/loader.module';
 import { MaterialModule } from './material-module';
-// import { AmericanNumberPipe } from './pipes/american-number.pipe';
+import { AmericanNumberPipe } from './pipes/american-number.pipe';
 
-const DECLARATIONS = [ProductsCarousalComponent];
+const DECLARATIONS = [ProductsCarousalComponent, AmericanNumberPipe];
 
 const MODULES = [CommonModule, OwlModule, LoaderModule, MaterialModule];
 

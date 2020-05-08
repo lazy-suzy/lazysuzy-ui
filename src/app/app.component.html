@@ -1,4 +1,4 @@
-<div *ngIf="!hideBar">
+<div>
   <ng-container *ngIf="isHandset; else isBrowser">
     <app-nav-mobile></app-nav-mobile>
   </ng-container>
@@ -10,11 +10,11 @@
 <div class="content-height">
   <router-outlet></router-outlet>
 </div>
-<div *ngIf="!hideBar">
+<div>
   <ng-container *ngIf="isHandset; else isDesktop">
     <app-footer-mobile class="footer-display w-100"></app-footer-mobile>
   </ng-container>
   <ng-template #isDesktop>
     <app-footer class="footer-display w-100"></app-footer>
-  </ng-template>  
+  </ng-template>
 </div>

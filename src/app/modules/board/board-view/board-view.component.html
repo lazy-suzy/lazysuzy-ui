@@ -2,96 +2,111 @@
 <div class="lazysuzy-board">
   <div>
     <div class="left-panel">
-
       <div class="left-tabs">
-
         <ul class="nav nav-tabs flex-column">
-          <li 
-            *ngFor="let sideItem of sideBarItems;"
+          <li
+            *ngFor="let sideItem of sideBarItems"
             (click)="selectSideBarItem(sideItem)"
-            [ngClass]="boardService.state.selectedCategory == null  && sideItem?.value == 'browse' ? 'disable-browse' : ''"
+            [ngClass]="
+              boardService.state.selectedCategory == null &&
+              sideItem?.value == 'browse'
+                ? 'disable-browse'
+                : ''
+            "
             class="nav-item"
           >
-            <div class="nav-link" [class.active]="sideItem?.value === selectedItem">
-              {{sideItem?.label}}
+            <div
+              class="nav-link"
+              [class.active]="sideItem?.value === selectedItem"
+            >
+              {{ sideItem?.label }}
             </div>
           </li>
         </ul>
-
       </div>
 
       <div class="left-tab-pane">
+        Selected Tab: {{ selectedItem }}
 
-        Selected Tab: {{selectedItem}}
-
-        <div *ngIf="selectedItem==='select'">
-          <app-select (goToCategory)="handleSelectCategory($event)"></app-select>
+        <div *ngIf="selectedItem === 'select'">
+          <app-select
+            (goToCategory)="handleSelectCategory($event)"
+          ></app-select>
         </div>
 
-        <div *ngIf="selectedItem==='browse'">
-
+        <div *ngIf="selectedItem === 'browse'">
           <div class="browse-header">
             <div class="item-search-bar">
-                <div class="input-group">
-                    <input type="text" class="form-control" id="inlineFormInputGroupUsername" placeholder="Search">
-                    <div class="input-group-append">
-                        <div class="input-group-text icon">
-                            <i class="mdi mdi-magnify" aria-hidden="true"></i>
-                        </div>
-                    </div>
+              <div class="input-group">
+                <input
+                  type="text"
+                  class="form-control"
+                  id="inlineFormInputGroupUsername"
+                  placeholder="Search"
+                />
+                <div class="input-group-append">
+                  <div class="input-group-text icon">
+                    <i class="mdi mdi-magnify" aria-hidden="true"></i>
+                  </div>
                 </div>
+              </div>
             </div>
             <div class="browse-title" (click)="handleGoToSelect($event)">
-                <i class="mdi mdi-chevron-left" aria-hidden="true"></i>
-                <h5 class="title js-category-title">
-                    {{selectedCategory?.category}}
-                </h5>
+              <i class="mdi mdi-chevron-left" aria-hidden="true"></i>
+              <h5 class="title js-category-title">
+                {{ selectedCategory?.category }}
+              </h5>
             </div>
             <div class="browse-filter">
-                <div class="filter-bar-container">
-                    <div class="filter-bar js-filter-section" id="desktop-filter">
-                        <div class="tabs">
-                        </div>
-                    </div>
+              <div class="filter-bar-container">
+                <div class="filter-bar js-filter-section" id="desktop-filter">
+                  <div class="tabs"></div>
                 </div>
-                <div class="clear-all d-none d-md-block">Clear All</div>
+              </div>
+              <div class="clear-all d-none d-md-block">Clear All</div>
             </div>
-        </div>
-        
+          </div>
 
           <app-loader *ngIf="showLoader"></app-loader>
 
           <app-board-products
             [products]="remoteProducts"
             *ngIf="!showLoader"
-            (previewProduct)="handleProductPreview($event)">
+            (previewProduct)="handleProductPreview($event)"
+          >
           </app-board-products>
 
-          <div class="static-bottom-panel-wrapper" *ngIf="productForPreview" style="z-index: 9999999;">
+          <div
+            class="static-bottom-panel-wrapper"
+            *ngIf="productForPreview"
+            style="z-index: 9999999;"
+          >
             <div class="static-bottom-panel selected">
-              <app-product-preview [data]="productForPreview"
+              <app-product-preview
+                [data]="productForPreview"
                 (clearProductPreview)="handleClearProductPreview($event)"
-                (addProductBoard)="handleAddProductBoardPreview($event)">
+                (addProductBoard)="handleAddProductBoardPreview($event)"
+              >
               </app-product-preview>
             </div>
           </div>
-
         </div>
 
-        <div *ngIf="selectedItem==='text'">
+        <div *ngIf="selectedItem === 'text'">
           <app-board-text></app-board-text>
         </div>
 
-        <div *ngIf="selectedItem==='add'">
-          <app-board-add (previewProduct)="handlePreviewProductToBoardUpdates($event)"></app-board-add>
+        <div *ngIf="selectedItem === 'add'">
+          <!-- <app-board-add (previewProduct)="handlePreviewProductToBoardUpdates($event)"></app-board-add> -->
+          <app-board-add></app-board-add>
         </div>
 
-        <div *ngIf="selectedItem==='board'">
-          <app-current-board [boardProducts]="remoteProducts"></app-current-board>
+        <div *ngIf="selectedItem === 'board'">
+          <app-current-board
+            [boardProducts]="remoteProducts"
+          ></app-current-board>
         </div>
-
       </div>
-
     </div>
   </div>
   <div class="main-content container-fluid">
@@ -99,8 +114,16 @@
       <div class="col-md-12 tool-bar-holder">
         <div class="top-panel row top-panel-hide">
           <div class="col-sm-2  state-icons order-sm-1 ">
-            <i class="mdi mdi-magnify-minus" (click)="zoomOut()" aria-hidden="true"></i>
-            <i class="mdi mdi-magnify-plus" (click)="zoomIn()" aria-hidden="true"></i>
+            <i
+              class="mdi mdi-magnify-minus"
+              (click)="zoomOut()"
+              aria-hidden="true"
+            ></i>
+            <i
+              class="mdi mdi-magnify-plus"
+              (click)="zoomIn()"
+              aria-hidden="true"
+            ></i>
             <i class="mdi mdi-undo" (click)="undo()" aria-hidden="true"></i>
             <i class="mdi mdi-redo" (click)="redo()" aria-hidden="true"></i>
           </div>
@@ -123,8 +146,12 @@
             <div class="editor-icons">
               <select class="js-font-select">
                 <option value="Helvetica" class="helvetica">Helvetica</option>
-                <option value="Times New Roman" class="times-new-roman">Times New Roman</option>
-                <option value="Courier New" class="courier-new">Courier New</option>
+                <option value="Times New Roman" class="times-new-roman"
+                  >Times New Roman</option
+                >
+                <option value="Courier New" class="courier-new"
+                  >Courier New</option
+                >
                 <option value="Georgia" class="georgia">Georgia</option>
                 <option value="Arial" class="arial" selected>Arial</option>
               </select>
@@ -149,32 +176,66 @@
           </div>
           <div class="col-sm-4 order-sm-3">
             <div class="item-action-icons">
-              <span data-title="Remove Background" class="image-icons do-transparent" (click)="action('transparent')">
+              <span
+                data-title="Remove Background"
+                class="image-icons do-transparent"
+                (click)="action('transparent')"
+              >
                 <i class="mdi mdi-auto-fix" aria-hidden="true"></i>
               </span>
-              <span data-title="Apply Background" class="image-icons undo-transparent"
-                (click)="action('undoTransparent')">
+              <span
+                data-title="Apply Background"
+                class="image-icons undo-transparent"
+                (click)="action('undoTransparent')"
+              >
                 <i class="mdi mdi-format-paint" aria-hidden="true"></i>
               </span>
               <span class="background-msg hide">
-                <i class="mdi mdi-arrow-up-bold background-msg-arrow" aria-hidden="true"></i>
-                <i class="mdi mdi-close close-background-msg" aria-hidden="true"></i>
+                <i
+                  class="mdi mdi-arrow-up-bold background-msg-arrow"
+                  aria-hidden="true"
+                ></i>
+                <i
+                  class="mdi mdi-close close-background-msg"
+                  aria-hidden="true"
+                ></i>
                 Click here to remove background
               </span>
-              <span class="image-icons" data-title="Duplicate" (click)="action('duplicate')"><i
-                  class="mdi mdi-content-copy" aria-hidden="true"></i></span>
-              <span data-title="Crop" (click)="handleCrop()" class="image-icons"><i class="mdi mdi-crop"
-                  aria-hidden="true"></i></span>
-              <span class="image-icons" data-title="Flip" (click)="action('flip')">
+              <span
+                class="image-icons"
+                data-title="Duplicate"
+                (click)="action('duplicate')"
+                ><i class="mdi mdi-content-copy" aria-hidden="true"></i
+              ></span>
+              <span data-title="Crop" (click)="handleCrop()" class="image-icons"
+                ><i class="mdi mdi-crop" aria-hidden="true"></i
+              ></span>
+              <span
+                class="image-icons"
+                data-title="Flip"
+                (click)="action('flip')"
+              >
                 <i class="mdi mdi-autorenew" aria-hidden="true"></i>
               </span>
-              <span data-title="Send Backward" class="image-icons" (click)="action('sendBackward')">
+              <span
+                data-title="Send Backward"
+                class="image-icons"
+                (click)="action('sendBackward')"
+              >
                 <i class="mdi mdi-arrange-send-backward" aria-hidden="true"></i>
               </span>
-              <span data-title="Bring Forward" class="image-icons" (click)="action('bringForward')">
+              <span
+                data-title="Bring Forward"
+                class="image-icons"
+                (click)="action('bringForward')"
+              >
                 <i class="mdi mdi-arrange-bring-forward" aria-hidden="true"></i>
               </span>
-              <span data-title="Delete" class="image-icons" (click)="action('delete')">
+              <span
+                data-title="Delete"
+                class="image-icons"
+                (click)="action('delete')"
+              >
                 <i class="mdi mdi-delete" aria-hidden="true"></i>
               </span>
             </div>
@@ -193,12 +254,26 @@
             </button>
           </div>
         </div>
-        <div class="top-panel row top-panel-wrapper d-xl-none" data-interval="false">
+        <div
+          class="top-panel row top-panel-wrapper d-xl-none"
+          data-interval="false"
+        >
           <div class="top-panel-container">
-            <div class="top-panel-scroll-contents editor-icons ml-2" id="canvasPalleteScrollContents">
+            <div
+              class="top-panel-scroll-contents editor-icons ml-2"
+              id="canvasPalleteScrollContents"
+            >
               <span class="state-icons order-sm-1 state-icons-hide">
-                <i class="mdi mdi-magnify-minus" (click)="zoomOut()" aria-hidden="true"></i>
-                <i class="mdi mdi-magnify-plus" (click)="zoomIn()" aria-hidden="true"></i>
+                <i
+                  class="mdi mdi-magnify-minus"
+                  (click)="zoomOut()"
+                  aria-hidden="true"
+                ></i>
+                <i
+                  class="mdi mdi-magnify-plus"
+                  (click)="zoomIn()"
+                  aria-hidden="true"
+                ></i>
                 <i class="mdi mdi-undo" (click)="undo()" aria-hidden="true"></i>
                 <i class="mdi mdi-redo" (click)="redo()" aria-hidden="true"></i>
               </span>
@@ -222,8 +297,12 @@
 
               <select class="js-font-select">
                 <option value="Helvetica" class="helvetica">Helvetica</option>
-                <option value="Times New Roman" class="times-new-roman">Times New Roman</option>
-                <option value="Courier New" class="courier-new">Courier New</option>
+                <option value="Times New Roman" class="times-new-roman"
+                  >Times New Roman</option
+                >
+                <option value="Courier New" class="courier-new"
+                  >Courier New</option
+                >
                 <option value="Georgia" class="georgia">Georgia</option>
                 <option value="Arial" class="arial" selected>Arial</option>
               </select>
@@ -244,17 +323,26 @@
                 <option value="96">96</option>
               </select>
               <input type="color" class="font-color-picker" />
-              <span data-title="Remove Background" class="image-icons do-transparent" (click)="action('transparent')">
+              <span
+                data-title="Remove Background"
+                class="image-icons do-transparent"
+                (click)="action('transparent')"
+              >
                 <i class="mdi mdi-auto-fix" aria-hidden="true"></i>
               </span>
-              <span data-title="Apply Background" class="image-icons undo-transparent"
-                (click)="action('undoTransparent')">
+              <span
+                data-title="Apply Background"
+                class="image-icons undo-transparent"
+                (click)="action('undoTransparent')"
+              >
                 <i class="mdi mdi-format-paint" aria-hidden="true"></i>
               </span>
-              <span data-title="Duplicate" (click)="action('duplicate')"><i class="mdi mdi-content-copy"
-                  aria-hidden="true"></i></span>
-              <span data-title="Crop" (click)="handleCrop()" class="image-icons"><i class="mdi mdi-crop"
-                  aria-hidden="true"></i></span>
+              <span data-title="Duplicate" (click)="action('duplicate')"
+                ><i class="mdi mdi-content-copy" aria-hidden="true"></i
+              ></span>
+              <span data-title="Crop" (click)="handleCrop()" class="image-icons"
+                ><i class="mdi mdi-crop" aria-hidden="true"></i
+              ></span>
               <span data-title="Flip" (click)="action('flip')">
                 <i class="mdi mdi-autorenew" aria-hidden="true"></i>
               </span>
@@ -275,12 +363,18 @@
             <div class="canvas-title-bar">
               <div class="canvas-icons">
                 <a data-title="Edit Board Settings">
-                  <i class="mdi mdi-settings js-open-config" aria-hidden="true"></i>
+                  <i
+                    class="mdi mdi-settings js-open-config"
+                    aria-hidden="true"
+                  ></i>
                 </a>
               </div>
             </div>
             <div class="w-38">
-              <input class="form-control board-title" placeholder="Board title" />
+              <input
+                class="form-control board-title"
+                placeholder="Board title"
+              />
             </div>
           </div>
           <div class="canvas">
@@ -289,8 +383,16 @@
             </div>
           </div>
           <div class="col-sm-2 col-5 state-icons d-lg-none">
-            <i class="mdi mdi-magnify-minus" (click)="zoomOut()" aria-hidden="true"></i>
-            <i class="mdi mdi-magnify-plus" (click)="zoomIn()" aria-hidden="true"></i>
+            <i
+              class="mdi mdi-magnify-minus"
+              (click)="zoomOut()"
+              aria-hidden="true"
+            ></i>
+            <i
+              class="mdi mdi-magnify-plus"
+              (click)="zoomIn()"
+              aria-hidden="true"
+            ></i>
             <i class="mdi mdi-undo" (click)="undo()" aria-hidden="true"></i>
             <i class="mdi mdi-redo" (click)="redo()" aria-hidden="true"></i>
           </div>

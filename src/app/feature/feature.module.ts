@@ -9,9 +9,15 @@ import {
   CategoriesModule,
   CartModule
 } from './containers';
-import { ProductDetailsMobileModule } from './components';
+import { AmericanNumberPipe } from '../shared/pipes/american-number.pipe';
+
+import {
+  ProductDetailsMobileModule,
+  PaymentModule,
+  OrderSuccessModule
+} from './components';
+
 // import { BlogModule } from './blog/blog/blog.module';
-import { OrderSuccessComponent } from './components/order-success/order-success.component';
 
 const DECLARATIONS = [];
 
@@ -24,13 +30,16 @@ const MODULES = [
   AllProductsModule,
   CategoriesModule,
   ProductDetailsMobileModule,
-  CartModule
+  CartModule,
+  PaymentModule,
+  OrderSuccessModule
   // BlogModule
 ];
 
 @NgModule({
-  declarations: [...DECLARATIONS, OrderSuccessComponent],
+  declarations: [...DECLARATIONS],
   imports: [...MODULES],
+  // providers: [AmericanNumberPipe],
   exports: [...DECLARATIONS, ...MODULES]
 })
 export class FeatureModule {}

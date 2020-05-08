@@ -4,15 +4,16 @@ import { PaymentComponent } from './payment.component';
 import { MatIconModule } from '@angular/material';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
-import { AmericanNumberPipe } from '../../../shared/pipes/american-number.pipe';
-const DECLARATIONS = [PaymentComponent, AmericanNumberPipe];
+import { SharedModule } from '../../../shared/shared.module';
+const DECLARATIONS = [PaymentComponent];
 
 const MODULES = [
   CommonModule,
   FormsModule,
   ReactiveFormsModule,
   RouterModule,
-  MatIconModule
+  MatIconModule,
+  SharedModule
 ];
 
 @NgModule({

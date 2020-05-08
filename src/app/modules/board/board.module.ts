@@ -34,6 +34,7 @@ import { CarouselModule } from 'primeng/carousel';
 import { BoardTextComponent } from './components/board-text/board-text.component';
 import { StepOneComponent } from './board-add/add-via-url-stepper/step-one/step-one.component';
 import { StepTwoComponent } from './board-add/add-via-url-stepper/step-two/step-two.component';
+import { TextInputComponent } from './board-add/add-via-url-stepper/text-input/text-input.component';
 import { BoardProductsComponent } from './components/board-products/board-products.component';
 import { CurrentBoardComponent } from './components/current-board/board.component';
 
@@ -62,7 +63,6 @@ import { CurrentBoardComponent } from './components/current-board/board.componen
     BoardComponent,
     BoardViewComponent,
     BoardListComponent,
-    BoardPreviewComponent,
     SelectComponent,
     BoardAddComponent,
     AddViaUrlComponent,
@@ -75,9 +75,10 @@ import { CurrentBoardComponent } from './components/current-board/board.componen
     StepOneComponent,
     StepTwoComponent,
     BoardProductsComponent,
-    CurrentBoardComponent
+    CurrentBoardComponent,
+    TextInputComponent
   ],
   entryComponents: [AddViaUrlComponent],
   providers: [BoardService, CookieService]
 })
-export class BoardModule { }
+export class BoardModule {}

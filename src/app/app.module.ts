@@ -16,7 +16,6 @@ import { LIGHTBOX_CONFIG } from '@ngx-gallery/lightbox';
 import { MarkdownModule } from 'ngx-markdown';
 import { EventEmitterService } from './shared/services/events/event-emitter.service';
 import { NgxStripeModule } from 'ngx-stripe';
-import { USStateModule } from 'ng2-us-states';
 import { environment as env } from 'src/environments/environment';
 
 const MODULES = [
@@ -32,8 +31,7 @@ const MODULES = [
   GalleryModule,
   LightboxModule,
   MarkdownModule.forRoot(),
-  NgxStripeModule.forRoot(env.STRIPE_API_KEY),
-  USStateModule,
+  NgxStripeModule.forRoot(env.STRIPE_API_KEY)
 ];
 
 @NgModule({
