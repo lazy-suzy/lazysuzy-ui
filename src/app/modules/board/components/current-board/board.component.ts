@@ -5,7 +5,7 @@ import { BoardService } from 'src/app/shared/services/board/board.service';
 @Component({
   selector: 'app-current-board',
   templateUrl: './board.component.html',
-  styleUrls: ['./board.component.less']
+  styleUrls: ['./board.component.less', './../../board.component.less']
 })
 export class CurrentBoardComponent implements OnInit {
 

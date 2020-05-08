@@ -1,17 +1,16 @@
 <div id="board" class="tab active">
     <div class="catalog-content">
-        <h4 class="title">Board Items</h4>
+        <h4 class="title mt-3 mb-3">Board Items</h4>
         <div class="catalog-item" *ngFor="let product of boardProducts;let index=index;">
-            <div class="product-tag icon">{{index}}</div>
+            <div class="product-tag icon">{{index + 1}}</div>
             <div>
-                {{product.name}}
                 <div class="row">
                     <div class="col-9">
                         <h5>{{product.name}}</h5>
                         <div class="subtle">{{product.brand}}</div>
                     </div>
                     <div class="col-3 text-right">
-                        <div class="price">$ {{product.price}}</div>
+                        <div class="price">{{product.price}}</div>
                     </div>
                 </div>
             </div>

@@ -22,7 +22,7 @@
 
       <div class="left-tab-pane">
 
-        Selected Tab: {{selectedItem}}
+        <!-- Selected Tab: {{selectedItem}} -->
 
         <div *ngIf="selectedItem==='select'">
           <app-select (goToCategory)="handleSelectCategory($event)"></app-select>
@@ -87,7 +87,7 @@
         </div>
 
         <div *ngIf="selectedItem==='board'">
-          <app-current-board [boardProducts]="remoteProducts"></app-current-board>
+          <app-current-board [boardProducts]="boardPreviewProducts"></app-current-board>
         </div>
 
       </div>

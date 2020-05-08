@@ -38,6 +38,7 @@ export class BoardViewComponent implements OnInit, AfterViewInit {
       let selCat = this.boardService.getCategory();
       this.getBrowseData(selCat);
     }
+    this.handlePreviewMode(this.selectedItem);
   }
 
   handleAddProductBoardPreview($event) { }
@@ -251,41 +252,13 @@ export class BoardViewComponent implements OnInit, AfterViewInit {
       floorPatternElement: ".canvas-pallete-wood-patterns",
 
       manualDrop: ".manual-drop",
-    },
-    template: {
-      privateProduct: {
-        template: "#products",
-        container: "#myItems > .flex-grid",
-        renderer: () => { }
-      },
-      publicProduct: {
-        template: "#products",
-        container: "#allUploads > .flex-grid",
-        renderer: () => { }
-      },
-      productPanel: {
-        template: "#bottom-panel",
-        container: ".bottom-panel-custom",
-        renderer: () => { }
-      },
-      boardItem: {
-        template: "#board-items-template",
-        container: "#board",
-        renderer: () => { }
-      }
     }
   };
 
   facebookRedirect = "";
   googleRedirect = "";
-  remoteProducts = [{
-    id: 1,
-    main_image: "https://www.lazysuzy.com/westelm/xbg/aston-leather-sofa-86-5-h4745_11_xbg.png",
-    name: "Test Product",
-    is_price: "$199.99",
-    site: "lazysuzy",
-    sku: ""
-  }];
+  remoteProducts = [];
+  boardPreviewProducts = [];
 
   @HostListener('window:resize', ['$event'])
   onResize() {
@@ -308,8 +281,6 @@ export class BoardViewComponent implements OnInit, AfterViewInit {
           // this.initializeUploadMethods();
         });
       });
-
-      // initializeTemplates();
     });
   }
   ngAfterViewInit(): void {
@@ -547,13 +518,9 @@ export class BoardViewComponent implements OnInit, AfterViewInit {
     });
 
     // add class for detection
-    // enable
     $(".lazysuzy-board").on('dragstart dragend', (e) => {
       $(e.target).toggleClass(this.appMeta.identifier.currentDragableObject.replace(".", ""));
     });
-
-    // setup of responsive handlers
-    // $(".gray-bg").resize(this.handleResize);
 
     // update canvas center point
     this.updateCanvasCenter();
@@ -683,9 +650,6 @@ export class BoardViewComponent implements OnInit, AfterViewInit {
       this.renderAppMeta();
     });
 
-    // handle board tab or preview mode
-    $(this.appMeta.identifier.tab).click((e) => this.togglePreviewMode(e));
-
     // handle manual add
     $(document).on('click', this.appMeta.identifier.manualDrop, (e) => {
       console.log(e);
@@ -757,14 +721,6 @@ export class BoardViewComponent implements OnInit, AfterViewInit {
     });
     */
   }
-
-  initializeTemplates = () => {
-    // enable
-    // this.appMeta.template.privateProduct.renderer = Handlebars.compile($(this.appMeta.template.privateProduct.template).html());
-    // this.appMeta.template.publicProduct.renderer = Handlebars.compile($(this.appMeta.template.publicProduct.template).html());
-    // this.appMeta.template.productPanel.renderer = Handlebars.compile($(this.appMeta.template.productPanel.template).html());
-    // this.appMeta.template.boardItem.renderer = Handlebars.compile($(this.appMeta.template.boardItem.template).html());
-  };
 
   updateCanvasCenter = () => {
     let center = this.canvas.getCenter();
@@ -1069,51 +1025,50 @@ export class BoardViewComponent implements OnInit, AfterViewInit {
   renderAppMeta = () => {
 
     // enable
-    /*
-    if (this.appMeta.flag.isAssetDirty) {
-      this.appMeta.flag.isAssetDirty = false;
-      $(this.appMeta.template.privateProduct.container).html(
-        this.appMeta.template.privateProduct.renderer({
-          products: this.appMeta.asset
-            .filter(x => x.user_id == this.appMeta.value.userID)
-            .map(x => {
-              return {
-                main_image: this.appMeta.endpoint.uploadsDir + (x.transparent_path ? x.transparent_path : x.path),
-                type: 'custom'
-              };
-            })
-        })
-      );
-      $(this.appMeta.template.publicProduct.container).html(
-        this.appMeta.template.publicProduct.renderer({
-          products: this.appMeta.asset
-            .filter(x => !x.is_private)
-            .map(x => {
-              return {
-                main_image: x.transparent_path ? x.transparent_path : x.path,
-                type: 'custom'
-              };
-            })
-        })
-      );
-    }
+    // if (this.appMeta.flag.isAssetDirty) {
+    //   this.appMeta.flag.isAssetDirty = false;
+    //   $(this.appMeta.template.privateProduct.container).html(
+    //     this.appMeta.template.privateProduct.renderer({
+    //       products: this.appMeta.asset
+    //         .filter(x => x.user_id == this.appMeta.value.userID)
+    //         .map(x => {
+    //           return {
+    //             main_image: this.appMeta.endpoint.uploadsDir + (x.transparent_path ? x.transparent_path : x.path),
+    //             type: 'custom'
+    //           };
+    //         })
+    //     })
+    //   );
+    //   $(this.appMeta.template.publicProduct.container).html(
+    //     this.appMeta.template.publicProduct.renderer({
+    //       products: this.appMeta.asset
+    //         .filter(x => !x.is_private)
+    //         .map(x => {
+    //           return {
+    //             main_image: x.transparent_path ? x.transparent_path : x.path,
+    //             type: 'custom'
+    //           };
+    //         })
+    //     })
+    //   );
+    // }
 
-    if (this.appMeta.flag.isProductPanelDirty) {
-      this.appMeta.flag.isProductPanelDirty = false;
-      $(this.appMeta.template.productPanel.container).html(
-        this.appMeta.template.productPanel.renderer({
-          index: this.appMeta.value.currentSelectedItem,
-          main_image: this.appMeta.asset[this.appMeta.value.currentSelectedItem]
-            .transparent_path
-            ? this.appMeta.asset[this.appMeta.value.currentSelectedItem].transparent_path
-            : this.appMeta.asset[this.appMeta.value.currentSelectedItem].path,
-          type: 'custom',
-          name: this.appMeta.asset[this.appMeta.value.currentSelectedItem].name,
-          site: 'custom',
-          is_price: this.appMeta.asset[this.appMeta.value.currentSelectedItem].price
-        })
-      );
-    }
+    // if (this.appMeta.flag.isProductPanelDirty) {
+    //   this.appMeta.flag.isProductPanelDirty = false;
+    //   $(this.appMeta.template.productPanel.container).html(
+    //     this.appMeta.template.productPanel.renderer({
+    //       index: this.appMeta.value.currentSelectedItem,
+    //       main_image: this.appMeta.asset[this.appMeta.value.currentSelectedItem]
+    //         .transparent_path
+    //         ? this.appMeta.asset[this.appMeta.value.currentSelectedItem].transparent_path
+    //         : this.appMeta.asset[this.appMeta.value.currentSelectedItem].path,
+    //       type: 'custom',
+    //       name: this.appMeta.asset[this.appMeta.value.currentSelectedItem].name,
+    //       site: 'custom',
+    //       is_price: this.appMeta.asset[this.appMeta.value.currentSelectedItem].price
+    //     })
+    //   );
+    // }
 
     if (this.appMeta.flag.isBoardItemDirty) {
       this.appMeta.flag.isBoardItemDirty = false;
@@ -1136,31 +1091,18 @@ export class BoardViewComponent implements OnInit, AfterViewInit {
       });
 
       if (imageObjects.length > 0) {
-        $(this.appMeta.template.boardItem.container).html(
-          this.appMeta.template.boardItem.renderer(
-            imageObjects.map((x, y) => {
-              return {
-                index: y + 1,
-                name: x.referenceObject.name,
-                brand: x.referenceObject.brand,
-                price: x.referenceObject.price
-                  ? '$' + x.referenceObject.price
-                  : ''
-              };
-            })
-          )
-        );
+        this.boardPreviewProducts = imageObjects.map((x, y) => {
+          return {
+            index: y + 1,
+            name: x.referenceObject.name,
+            brand: x.referenceObject.brand,
+            price: x.referenceObject.price
+              ? '$' + x.referenceObject.price
+              : ''
+          };
+        })
       }
     }
-    */
-
-    // if (this.appMeta.flag.isBoardDirty) {
-    //   $('#board .catalog-content').html(
-    //     userBoardTemplate({
-    //       boards: this.appMeta.boards
-    //     })
-    //   );
-    // }
   };
 
   debounce = (func, wait, immediate = false) => {
@@ -1483,12 +1425,10 @@ export class BoardViewComponent implements OnInit, AfterViewInit {
     this.saveHistory();
   };
 
-  togglePreviewMode = e => {
-    let targetLink = $(e.currentTarget).attr('href');
-    let toggle = targetLink == '#board';
-
+  handlePreviewMode = (targetLink) => {
+    let toggle = targetLink == 'board';
     // if a different tab was clicked and preview was enabled or disabled
-    if (targetLink == '#board' || this.appMeta.value.lastVisitedTab == '#board') {
+    if (targetLink == 'board' || this.appMeta.value.lastVisitedTab == 'board') {
       this.appMeta.value.lastVisitedTab = targetLink;
 
       // check if state has changed
