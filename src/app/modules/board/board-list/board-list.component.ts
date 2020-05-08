@@ -1,7 +1,6 @@
+import { DatePipe } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
-
-import { CookieService } from 'ngx-cookie-service';
 
 import { Board } from '../board';
 import { BoardService } from '../board.service';
@@ -14,13 +13,14 @@ import { boardRoutesNames } from '../board.routes.names';
 })
 export class BoardListComponent implements OnInit {
   boards: Board[] = [];
+  boardViewLink = boardRoutesNames.BOARD_VIEW;
+  boardPreviewLink = boardRoutesNames.BOARD_PREVIEW;
 
   constructor(
     private boardService: BoardService,
-    private cookieService: CookieService,
     private router: Router,
-    private activatedRoute: ActivatedRoute
-    ) { }
+    private route: ActivatedRoute
+  ) { }
 
   ngOnInit(): void {
     this.getBoards();
@@ -31,32 +31,25 @@ export class BoardListComponent implements OnInit {
       .subscribe(response => this.boards = response);
   }
 
-  add(title: string = ""): void {
-    title = title.trim();
-    if (!title) { title = 'Untitled Board ' + this.getToday() }
-    this.boardService.addBoard({ title } as Board)
+  add(board: Board = new Board()): void {
+    if (board.title)
+      board.title = 'Copy of ' + board.title;
+    else {
+      var datePipe = new DatePipe('en-US');
+      board.title = "Untitled Board " + datePipe.transform(new Date(), 'MM/dd/yyyy hh:mm:ss');
+    }
+
+    this.boardService.addBoard(board)
       .subscribe(board => {
-        this.boards.push(board);
+        if (board.uuid)
+          this.router.navigate([["..", this.boardViewLink, board.uuid].join('/')], { relativeTo: this.route });
       });
   }
 
-  edit(board: Board): void{
-    this.cookieService.set('board_id', board.board_id.toString());
-    this.router.navigateByUrl("board/" + boardRoutesNames.BOARD_VIEW);
-  }
-
   delete(board: Board): void {
+    board.is_active = false;
     this.boards = this.boards.filter(h => h !== board);
-    this.boardService.deleteBoard(board).subscribe();
-  }
-
-  getToday() {
-    let today = new Date();
-    let dd = String(today.getDate()).padStart(2, '0');
-    let mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
-    let yyyy = today.getFullYear();
-
-    return mm + '/' + dd + '/' + yyyy;
+    this.boardService.updateBoard(board).subscribe();
   }
 
 }

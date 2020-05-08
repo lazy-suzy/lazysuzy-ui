@@ -9,11 +9,11 @@ const URL = 'https://evening-anchorage-3159.herokuapp.com/api/';
 // import * as dropzone from 'dropzone';
 
 @Component({
-  selector: 'app-add',
+  selector: 'app-board-add',
   templateUrl: './add.component.html',
-  styleUrls: ['./add.component.less']
+  styleUrls: ['./add.component.less', '../board.component.less']
 })
-export class AddComponent implements OnInit {
+export class BoardAddComponent implements OnInit {
 
   myUploads = [];
   allUploads = [];
@@ -55,10 +55,8 @@ export class AddComponent implements OnInit {
     });
 
     dialogRef.afterClosed().subscribe(result => {
-      let myUploads = this.boardService.state.myUploads;
-      let allUploads = this.boardService.state.allUploads;
-      this.boardService.state.myUploads = [...myUploads, result];
-      this.boardService.state.allUploads = [...allUploads, result];
+      this.boardService.state.myUploads = [...this.myUploads, result];
+      this.boardService.state.allUploads = [...this.allUploads, result];
       this.myUploads = [...this.boardService.state.myUploads];
       this.allUploads = [...this.boardService.state.allUploads];
     });

@@ -12,9 +12,13 @@
         <mat-tab-group>
             <mat-tab label="My Items">
                 My Items
+                <app-board-products [products]="myUploads"
+                    (previewProduct)="handlePreviewProduct($event)"></app-board-products>
             </mat-tab>
             <mat-tab label="All Uploads">
                 All Uploads
+                <app-board-products [products]="allUploads"
+                    (previewProduct)="handlePreviewProduct($event)"></app-board-products>
             </mat-tab>
         </mat-tab-group>
     </div>

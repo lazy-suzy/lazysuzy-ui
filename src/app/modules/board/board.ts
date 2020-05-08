@@ -1,6 +1,12 @@
-export interface Board {
+export class Board {
   board_id: number;
-  title: string,
-  preview: string
-}
+  uuid: string;
+  state: object;
+  title: string;
+  preview: string;
+  is_active: boolean;
 
+  constructor(values: Object = {}) {
+    Object.assign(this, values);
+  }
+}

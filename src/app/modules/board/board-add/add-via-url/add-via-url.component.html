@@ -1,5 +1,7 @@
+<button mat-icon-button class="close-button" [mat-dialog-close]="true">
+    <mat-icon class="close-icon">close</mat-icon>
+</button>
 <h2 mat-dialog-title>Add Image via URL</h2>
-<button class="close" mat-button (click)="onNoClick()">X</button>
 <div mat-dialog-content>
     <stepper-overview-example (stepperUpdates)="handleStepperUpdates($event)"></stepper-overview-example>
     <app-loader [showProgressBar]="loaderTypeProgress" *ngIf="showLoader"></app-loader>

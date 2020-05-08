@@ -1,11 +1,17 @@
-import { Component, OnInit, AfterViewInit, HostListener } from '@angular/core';
+import { Component, OnInit, AfterViewInit, HostListener, ViewChild } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 import { CookieService } from 'ngx-cookie-service';
 import { SideNavItems } from './../sidenavitems';
 import { ShortcutInput } from "ng-keyboard-shortcuts";
 import * as $ from 'jquery';
-import { BoardService } from 'src/app/shared/services/board/board.service';
+import { Board } from '../board';
+import { Asset } from '../asset';
+import { BoardService } from '../board.service';
+
+import { OverlayPanel } from 'primeng/overlaypanel';
 import { MatDialog } from '@angular/material';
 import { BoardPopupComponent } from '../board-popup/board-popup.component';
+
 declare const fb: any;
 
 @Component({
@@ -22,11 +28,13 @@ export class BoardViewComponent implements OnInit, AfterViewInit {
   showLoader = false;
   productForPreview = null;
   sideBarItems = SideNavItems;
+  @ViewChild('browsefilter', { static: false }) browsefilter?: OverlayPanel;
 
   constructor(
     private cookieService: CookieService,
     private dialog: MatDialog,
     public boardService: BoardService,
+    private route: ActivatedRoute
   ) { }
 
   share() {
@@ -46,11 +54,22 @@ export class BoardViewComponent implements OnInit, AfterViewInit {
   selectSideBarItem(item) {
     this.selectedItem = item.value;
     if (this.selectedItem === 'browse') {
-      this.getBrowseData();
+      let selCat = this.boardService.getCategory();
+      this.getBrowseData(selCat);
     }
+    this.handlePreviewMode(this.selectedItem);
   }
 
-  handleAddProductBoardPreview($event) {
+  handleAddProductBoardPreview($event) { }
+
+  handleSelectCategory($event) {
+    this.boardService.setCategory($event);
+    this.selectSideBarItem({
+      name: 'Browse',
+      label: 'Browse',
+      value: 'browse',
+      route: 'board-browse'
+    });
   }
 
   handleProductPreview(product) {
@@ -61,10 +80,8 @@ export class BoardViewComponent implements OnInit, AfterViewInit {
     this.productForPreview = null;
   }
 
-  getBrowseData() {
-    this.selectedCategory = {
-      LS_ID: '201'
-    };
+  getBrowseData(categ) {
+    this.selectedCategory = categ;
     this.showLoader = true;
     this.boardService.getBrowseTabData(this.selectedCategory).subscribe((s: any) => {
       this.remoteProducts = [...(s.products) || []];
@@ -74,8 +91,25 @@ export class BoardViewComponent implements OnInit, AfterViewInit {
           refId: i
         };
       });
+      this.boardService.setBoardData(this.remoteProducts,this.selectedCategory, s.filterData || {});
       this.showLoader = false;
     });
+  }
+
+  handleGoToSelect(event) {
+    this.boardService.resetBoard();
+    this.selectSideBarItem({
+      name: 'Select',
+      label: 'Select',
+      value: 'select',
+      route: 'board-select'
+    });
+  }
+
+  handleUpdatesFromFilter(event) {
+    if (event.name === 'TOGGLE_FILTER_OVERLAY' && !event.value) {
+      this.browsefilter.hide();
+    }
   }
 
   canvas: any;
@@ -237,56 +271,18 @@ export class BoardViewComponent implements OnInit, AfterViewInit {
       floorPatternElement: ".canvas-pallete-wood-patterns",
 
       manualDrop: ".manual-drop",
-    },
-    template: {
-      privateProduct: {
-        template: "#products",
-        container: "#myItems > .flex-grid",
-        renderer: () => { }
-      },
-      publicProduct: {
-        template: "#products",
-        container: "#allUploads > .flex-grid",
-        renderer: () => { }
-      },
-      productPanel: {
-        template: "#bottom-panel",
-        container: ".bottom-panel-custom",
-        renderer: () => { }
-      },
-      boardItem: {
-        template: "#board-items-template",
-        container: "#board",
-        renderer: () => { }
-      }
-    },
-    endpoint: {
-      // api: "http://localhost/builder-template/server.php",
-      // api: "https://lazysuzy.com/api/board",
-      api: "http://four-nodes.com/projects/lazysuzy/server.php",
-      uploadsDir: "http://four-nodes.com/projects/lazysuzy/",
-      boardView: "myboards.html"
     }
   };
 
   facebookRedirect = "";
   googleRedirect = "";
-  remoteProducts = [{
-    id: 1,
-    main_image: "https://www.lazysuzy.com/westelm/xbg/aston-leather-sofa-86-5-h4745_11_xbg.png",
-    name: "Test Product",
-    is_price: "$199.99",
-    site: "lazysuzy",
-    sku: ""
-  }];
+  remoteProducts = [];
+  boardPreviewProducts = [];
 
   @HostListener('window:resize', ['$event'])
   onResize() {
     this.handleResize();
   }
-  // console.log(this.cookieService.get('board_id'));
-  // this.canvas = new fb.Canvas('canvas-area');
-  // this.canvas.add(new fb.Text('Hello from Canvas!'));
 
   ngOnInit(): void {
     // main entry point
@@ -304,8 +300,6 @@ export class BoardViewComponent implements OnInit, AfterViewInit {
           // this.initializeUploadMethods();
         });
       });
-
-      // initializeTemplates();
     });
   }
   ngAfterViewInit(): void {
@@ -432,7 +426,7 @@ export class BoardViewComponent implements OnInit, AfterViewInit {
   applyShortcut = (action, name, value = 0) => {
     let activeObject = this.canvas.getActiveObject();
 
-    if (action == "deselectOrCancel"){
+    if (action == "deselectOrCancel") {
       if (this.canvasMeta.flag.cropEnabled)
         this.handleCrop(false);
       else
@@ -445,9 +439,9 @@ export class BoardViewComponent implements OnInit, AfterViewInit {
     else if (action == "direct")
       this[name]();
     else if (action == "initializeCrop" && activeObject && activeObject.type == "image")
-    this.handleCrop();
+      this.handleCrop();
     else if (action == "confirmCrop" && activeObject && this.canvasMeta.flag.cropEnabled)
-    this.handleCrop(true);
+      this.handleCrop(true);
     else if (action == "toggleBackground" && activeObject) {
       if ((this.canvasMeta.flag.isCurrentObjectTransparentable &&
         !this.canvasMeta.flag.isCurrentObjectTransparentSelected) == true)
@@ -470,83 +464,67 @@ export class BoardViewComponent implements OnInit, AfterViewInit {
   }
 
   getConfig = (callback) => {
-    $.post(this.appMeta.endpoint.api, {
-      operation: "select",
-      entity: "config"
-    }, (response) => {
-      this.canvasMeta.configuration = response.reduce(function (r, e) {
-        r[e.name] = e.value;
-        return r;
-      }, {});
+    // this.canvasMeta.configuration = response.reduce(function (r, e) {
+    //   r[e.name] = e.value;
+    //   return r;
+    // }, {});
 
-      if (callback)
-        callback();
-    });
+    if (callback)
+      callback();
   };
 
   getBoards = () => {
-    $.post(this.appMeta.endpoint.api, {
-      operation: "select",
-      entity: "board",
-      where: {
-        "user_id": this.appMeta.value.userID,
-        "board_id": this.cookieService.get('board_id')
-      }
-    }, (response) => {
-      let boardFound = false;
-      this.appMeta.board.data = response;
-      this.appMeta.board.data.forEach((boardObject, objectIndex) => {
-        // convert state back to json
-        this.appMeta.board.data[objectIndex].state = JSON.parse(boardObject.state);
-        if (boardObject.board_id == this.cookieService.get('board_id')) {
-          boardFound = true;
-          this.appMeta.board.currentIndex = objectIndex;
-          $(this.appMeta.identifier.boardTitle).val(boardObject.title);
-          this.canvasMeta.currentHistory.push(boardObject.state);
-          this.canvasMeta.currentHistoryIndex++;
-          this.updateStateFromHistory();
+    const uuid = this.route.snapshot.paramMap.get('uuid');
+    this.boardService.getBoardByID(uuid).
+      subscribe(response => {
+        let boardFound = false;
+        this.appMeta.board.data = response;
+        this.appMeta.board.data.forEach((boardObject, objectIndex) => {
+          // convert state back to json
+          this.appMeta.board.data[objectIndex].state = JSON.parse(boardObject.state);
+          if (boardObject.uuid == uuid) {
+            boardFound = true;
+            this.appMeta.board.currentIndex = objectIndex;
+            $(this.appMeta.identifier.boardTitle).val(boardObject.title);
+            this.canvasMeta.currentHistory.push(boardObject.state);
+            this.canvasMeta.currentHistoryIndex++;
+            this.updateStateFromHistory();
+          }
+        });
+
+        // if board does not exist redirect user to board list
+        if (boardFound == false)
+          console.log(this.appMeta.board.data, 'not found');
+        else {
+          if (this.cookieService.get('backgroundColor') && this.cookieService.get('backgroundColor').length > 0) {
+            this.canvas.setBackgroundColor(this.cookieService.get('backgroundColor'), function () {
+              this.canvas.renderAll();
+              this.saveHistory();
+            });
+            this.cookieService.set('backgroundColor', "");
+          }
+          if (this.cookieService.get('backgroundImage') && this.cookieService.get('backgroundImage').length > 0) {
+            fb.Image.fromURL(this.cookieService.get('backgroundImage'), function (img) {
+              img.set({ originX: 'left', originY: 'top', scaleX: this.canvas.width / img.width, scaleY: this.canvas.height / img.height });
+              this.canvas.setBackgroundImage(img, this.canvas.renderAll.bind(this.canvas));
+              this.saveHistory();
+            });
+            this.cookieService.set('backgroundImage', "");
+          }
         }
       });
-
-      // if board does not exist redirect user to board list
-      if (boardFound == false)
-        window.location.replace(this.appMeta.endpoint.boardView);
-      else {
-        if (this.cookieService.get('backgroundColor') && this.cookieService.get('backgroundColor').length > 0) {
-          this.canvas.setBackgroundColor(this.cookieService.get('backgroundColor'), function () {
-            this.canvas.renderAll();
-            this.saveHistory();
-          });
-          this.cookieService.set('backgroundColor', "");
-        }
-        if (this.cookieService.get('backgroundImage') && this.cookieService.get('backgroundImage').length > 0) {
-          fb.Image.fromURL(this.cookieService.get('backgroundImage'), function (img) {
-            img.set({ originX: 'left', originY: 'top', scaleX: this.canvas.width / img.width, scaleY: this.canvas.height / img.height });
-            this.canvas.setBackgroundImage(img, this.canvas.renderAll.bind(this.canvas));
-            this.saveHistory();
-          });
-          this.cookieService.set('backgroundImage', "");
-        }
-      }
-    });
   };
 
   getAssets = () => {
-    $.post(this.appMeta.endpoint.api, {
-      operation: "select",
-      entity: "asset",
-      data: {
-        "user_id": this.appMeta.value.userID
-      },
-      order: "modified_at desc"
-    }, (response) => {
-      if (response.length > 0) {
-        this.appMeta.asset = response;
-        this.appMeta.flag.isAssetDirty = true;
-        this.appMeta.flag.isProductPanelDirty = true;
-        this.renderAppMeta();
-      }
-    });
+    this.boardService.getBoards()
+      .subscribe(response => {
+        if (response.length > 0) {
+          this.appMeta.asset = response;
+          this.appMeta.flag.isAssetDirty = true;
+          this.appMeta.flag.isProductPanelDirty = true;
+          this.renderAppMeta();
+        }
+      });
   };
 
   initializeCanvas = (callback) => {
@@ -559,13 +537,9 @@ export class BoardViewComponent implements OnInit, AfterViewInit {
     });
 
     // add class for detection
-    // enable
     $(".lazysuzy-board").on('dragstart dragend', (e) => {
       $(e.target).toggleClass(this.appMeta.identifier.currentDragableObject.replace(".", ""));
     });
-
-    // setup of responsive handlers
-    // $(".gray-bg").resize(this.handleResize);
 
     // update canvas center point
     this.updateCanvasCenter();
@@ -695,9 +669,6 @@ export class BoardViewComponent implements OnInit, AfterViewInit {
       this.renderAppMeta();
     });
 
-    // handle board tab or preview mode
-    $(this.appMeta.identifier.tab).click((e) => this.togglePreviewMode(e));
-
     // handle manual add
     $(document).on('click', this.appMeta.identifier.manualDrop, (e) => {
       console.log(e);
@@ -769,14 +740,6 @@ export class BoardViewComponent implements OnInit, AfterViewInit {
     });
     */
   }
-
-  initializeTemplates = () => {
-    // enable
-    // this.appMeta.template.privateProduct.renderer = Handlebars.compile($(this.appMeta.template.privateProduct.template).html());
-    // this.appMeta.template.publicProduct.renderer = Handlebars.compile($(this.appMeta.template.publicProduct.template).html());
-    // this.appMeta.template.productPanel.renderer = Handlebars.compile($(this.appMeta.template.productPanel.template).html());
-    // this.appMeta.template.boardItem.renderer = Handlebars.compile($(this.appMeta.template.boardItem.template).html());
-  };
 
   updateCanvasCenter = () => {
     let center = this.canvas.getCenter();
@@ -1030,28 +993,14 @@ export class BoardViewComponent implements OnInit, AfterViewInit {
       console.log(err);
     }
 
-    $.post(
-      this.appMeta.endpoint.api,
-      {
-        operation: 'update',
-        entity: 'board',
-        data: {
-          title: this.appMeta.board.data[this.appMeta.board.currentIndex].title,
-          state: JSON.stringify(this.updateCanvasState()),
-          // state: JSON.stringify(this.canvas.toJSON(this.canvasMeta.value.propertiesToInclude)),
-          preview: previewObject
-        },
-        where: {
-          board_id: this.appMeta.board.data[this.appMeta.board.currentIndex].board_id
-        }
-      },
-      data => {
-        // canvas_boards.unshift(JSON.parse(data));
-        // console.log(canvas_boards);
-        // $('#board .catalog-content').prepend( userBoardTemplate( { boards: canvas_boards[0] } ) );
-        this.canvasMeta.flag.isDirty = false;
-      }
-    );
+    this.boardService.updateBoard(new Board({
+      uuid: this.appMeta.board.data[this.appMeta.board.currentIndex].uuid,
+      title: this.appMeta.board.data[this.appMeta.board.currentIndex].title,
+      state: JSON.stringify(this.updateCanvasState()),
+      preview: previewObject
+    })).subscribe(board => {
+      this.canvasMeta.flag.isDirty = false;
+    });
   };
 
   updateToolbar = () => {
@@ -1095,51 +1044,50 @@ export class BoardViewComponent implements OnInit, AfterViewInit {
   renderAppMeta = () => {
 
     // enable
-    /*
-    if (this.appMeta.flag.isAssetDirty) {
-      this.appMeta.flag.isAssetDirty = false;
-      $(this.appMeta.template.privateProduct.container).html(
-        this.appMeta.template.privateProduct.renderer({
-          products: this.appMeta.asset
-            .filter(x => x.user_id == this.appMeta.value.userID)
-            .map(x => {
-              return {
-                main_image: this.appMeta.endpoint.uploadsDir + (x.transparent_path ? x.transparent_path : x.path),
-                type: 'custom'
-              };
-            })
-        })
-      );
-      $(this.appMeta.template.publicProduct.container).html(
-        this.appMeta.template.publicProduct.renderer({
-          products: this.appMeta.asset
-            .filter(x => !x.is_private)
-            .map(x => {
-              return {
-                main_image: x.transparent_path ? x.transparent_path : x.path,
-                type: 'custom'
-              };
-            })
-        })
-      );
-    }
+    // if (this.appMeta.flag.isAssetDirty) {
+    //   this.appMeta.flag.isAssetDirty = false;
+    //   $(this.appMeta.template.privateProduct.container).html(
+    //     this.appMeta.template.privateProduct.renderer({
+    //       products: this.appMeta.asset
+    //         .filter(x => x.user_id == this.appMeta.value.userID)
+    //         .map(x => {
+    //           return {
+    //             main_image: this.appMeta.endpoint.uploadsDir + (x.transparent_path ? x.transparent_path : x.path),
+    //             type: 'custom'
+    //           };
+    //         })
+    //     })
+    //   );
+    //   $(this.appMeta.template.publicProduct.container).html(
+    //     this.appMeta.template.publicProduct.renderer({
+    //       products: this.appMeta.asset
+    //         .filter(x => !x.is_private)
+    //         .map(x => {
+    //           return {
+    //             main_image: x.transparent_path ? x.transparent_path : x.path,
+    //             type: 'custom'
+    //           };
+    //         })
+    //     })
+    //   );
+    // }
 
-    if (this.appMeta.flag.isProductPanelDirty) {
-      this.appMeta.flag.isProductPanelDirty = false;
-      $(this.appMeta.template.productPanel.container).html(
-        this.appMeta.template.productPanel.renderer({
-          index: this.appMeta.value.currentSelectedItem,
-          main_image: this.appMeta.asset[this.appMeta.value.currentSelectedItem]
-            .transparent_path
-            ? this.appMeta.asset[this.appMeta.value.currentSelectedItem].transparent_path
-            : this.appMeta.asset[this.appMeta.value.currentSelectedItem].path,
-          type: 'custom',
-          name: this.appMeta.asset[this.appMeta.value.currentSelectedItem].name,
-          site: 'custom',
-          is_price: this.appMeta.asset[this.appMeta.value.currentSelectedItem].price
-        })
-      );
-    }
+    // if (this.appMeta.flag.isProductPanelDirty) {
+    //   this.appMeta.flag.isProductPanelDirty = false;
+    //   $(this.appMeta.template.productPanel.container).html(
+    //     this.appMeta.template.productPanel.renderer({
+    //       index: this.appMeta.value.currentSelectedItem,
+    //       main_image: this.appMeta.asset[this.appMeta.value.currentSelectedItem]
+    //         .transparent_path
+    //         ? this.appMeta.asset[this.appMeta.value.currentSelectedItem].transparent_path
+    //         : this.appMeta.asset[this.appMeta.value.currentSelectedItem].path,
+    //       type: 'custom',
+    //       name: this.appMeta.asset[this.appMeta.value.currentSelectedItem].name,
+    //       site: 'custom',
+    //       is_price: this.appMeta.asset[this.appMeta.value.currentSelectedItem].price
+    //     })
+    //   );
+    // }
 
     if (this.appMeta.flag.isBoardItemDirty) {
       this.appMeta.flag.isBoardItemDirty = false;
@@ -1162,31 +1110,18 @@ export class BoardViewComponent implements OnInit, AfterViewInit {
       });
 
       if (imageObjects.length > 0) {
-        $(this.appMeta.template.boardItem.container).html(
-          this.appMeta.template.boardItem.renderer(
-            imageObjects.map((x, y) => {
-              return {
-                index: y + 1,
-                name: x.referenceObject.name,
-                brand: x.referenceObject.brand,
-                price: x.referenceObject.price
-                  ? '$' + x.referenceObject.price
-                  : ''
-              };
-            })
-          )
-        );
+        this.boardPreviewProducts = imageObjects.map((x, y) => {
+          return {
+            index: y + 1,
+            name: x.referenceObject.name,
+            brand: x.referenceObject.brand,
+            price: x.referenceObject.price
+              ? '$' + x.referenceObject.price
+              : ''
+          };
+        })
       }
     }
-    */
-
-    // if (this.appMeta.flag.isBoardDirty) {
-    //   $('#board .catalog-content').html(
-    //     userBoardTemplate({
-    //       boards: this.appMeta.boards
-    //     })
-    //   );
-    // }
   };
 
   debounce = (func, wait, immediate = false) => {
@@ -1458,14 +1393,9 @@ export class BoardViewComponent implements OnInit, AfterViewInit {
           this.canvasMeta.flag.isCurrentObjectTransparentable = false;
           this.canvasMeta.flag.isCurrentObjectTransparentSelected = false;
           this.updateToolbar();
-          $.post(
-            this.appMeta.endpoint.api,
-            {
-              operation: 'transparent',
-              asset_id: activeObject.referenceObject.id,
-              user_id: this.appMeta.value.userID
-            },
-            response => {
+          this.boardService.updateAsset(new Asset({
+            asset_id: activeObject.referenceObject.id,
+          })).subscribe(response => {
               activeObject.referenceObject.transparentPath =
                 response.transparent_path;
               activeObject.setSrc(response.transparent_path, () => {
@@ -1480,8 +1410,7 @@ export class BoardViewComponent implements OnInit, AfterViewInit {
                 this.updateToolbar();
                 this.canvas.renderAll();
               });
-            }
-          );
+            });
         }
         break;
       case 'undoTransparent':
@@ -1515,12 +1444,10 @@ export class BoardViewComponent implements OnInit, AfterViewInit {
     this.saveHistory();
   };
 
-  togglePreviewMode = e => {
-    let targetLink = $(e.currentTarget).attr('href');
-    let toggle = targetLink == '#board';
-
+  handlePreviewMode = (targetLink) => {
+    let toggle = targetLink == 'board';
     // if a different tab was clicked and preview was enabled or disabled
-    if (targetLink == '#board' || this.appMeta.value.lastVisitedTab == '#board') {
+    if (targetLink == 'board' || this.appMeta.value.lastVisitedTab == 'board') {
       this.appMeta.value.lastVisitedTab = targetLink;
 
       // check if state has changed

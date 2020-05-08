@@ -2,33 +2,17 @@
 <div class="lazysuzy-board">
   <div>
     <div class="left-panel">
-      
-      <div class="d-lg-none">
-        <div class="toggle-icon">
-          <i class="mdi mdi-plus" aria-hidden="true"></i>
-        </div>
-      </div>
-      
-      <div class="mobile-filter">
-        <div class="filter-header">
-          <div class="filter-title">
-            Filters
-          </div>
-          <div class="clear-all-btn">
-            Clear All
-            <i class="mdi mdi-arrow-up-bold filter-bar-arrow" aria-hidden="true"></i>
-          </div>
-          <div class="close-btn js-filter-close">
-            <i class="mdi mdi-arrow-left" aria-hidden="true"></i>
-          </div>
-        </div>
-        <div class="filter-section" id="mobile-filter"></div>
-      </div>
-      
+
       <div class="left-tabs">
+
         <ul class="nav nav-tabs flex-column">
-          <li *ngFor="let sideItem of sideBarItems;" (click)="selectSideBarItem(sideItem)" class="nav-item">
-            <div class="nav-link" [class.active]="sideItem?.value === selected?.value">
+          <li 
+            *ngFor="let sideItem of sideBarItems;"
+            (click)="selectSideBarItem(sideItem)"
+            [ngClass]="boardService.state.selectedCategory == null  && sideItem?.value == 'browse' ? 'disable-browse' : ''"
+            class="nav-item"
+          >
+            <div class="nav-link" [class.active]="sideItem?.value === selectedItem">
               {{sideItem?.label}}
             </div>
           </li>
@@ -38,92 +22,72 @@
 
       <div class="left-tab-pane">
 
-        Selected Tab: {{selectedItem}}
+        <!-- Selected Tab: {{selectedItem}} -->
 
-        <div *ngIf="selectedItem==='select'" id="select">
-          <app-select></app-select>
+        <div *ngIf="selectedItem==='select'">
+          <app-select (goToCategory)="handleSelectCategory($event)"></app-select>
         </div>
 
         <div *ngIf="selectedItem==='browse'">
 
           <div class="browse-header">
             <div class="item-search-bar">
-              <div class="input-group">
-                <input type="text" class="form-control" id="inlineFormInputGroupUsername" placeholder="Search">
-                <div class="input-group-append">
-                  <div class="input-group-text icon">
-                    <i class="mdi mdi-magnify" aria-hidden="true"></i>
-                  </div>
+                <div class="input-group">
+                    <input type="text" class="form-control" id="inlineFormInputGroupUsername" placeholder="Search">
+                    <div class="input-group-append">
+                        <div class="input-group-text icon">
+                            <i class="mdi mdi-magnify" aria-hidden="true"></i>
+                        </div>
+                    </div>
                 </div>
-              </div>
             </div>
             <div class="browse-title" (click)="handleGoToSelect($event)">
-              <i class="mdi mdi-chevron-left" aria-hidden="true"></i>
-              <h5 class="title js-category-title">
-                {{selectedCategory?.category}}
-              </h5>
+                <i class="mdi mdi-chevron-left" aria-hidden="true"></i>
+                <h5 class="title js-category-title">
+                    {{selectedCategory?.category}}
+                </h5>
             </div>
             <div class="browse-filter">
-              <div class="filter-bar-container">
-                <div class="filter-bar js-filter-section" id="desktop-filter">
-                  <div class="tabs">
-
-                    <p-overlayPanel [showTransitionOptions]="'200ms'" #browsefilter [hideTransitionOptions]="'200ms'"
-                      [dismissable]="false" [showCloseIcon]="true" #op1 [appendTo]="'body'">
-                      <ng-template pTemplate>
-                        <app-browse-filter (updatesFromFilter)="handleUpdatesFromFilter($event)">
-                        </app-browse-filter>
-                      </ng-template>
-                    </p-overlayPanel>
-
-                    <button type="text" pButton class="btn btn-primary" label="Custom Target"
-                      (click)="op1.show($event, actualTarget1)">Filters</button>
-                    <div #actualTarget1></div>
-
-                    <div class="static-bottom-panel-wrapper" *ngIf="productForPreview" style="z-index: 9999999;">
-                      <div class="static-bottom-panel selected">
-                        <app-product-preview [data]="productForPreview"
-                          (clearProductPreview)="handleClearProductPreview($event)"
-                          (addProductBoard)="handleAddProductBoardPreview($event)">
-                        </app-product-preview>
-                      </div>
+                <div class="filter-bar-container">
+                    <div class="filter-bar js-filter-section" id="desktop-filter">
+                        <div class="tabs">
+                        </div>
                     </div>
-
-                  </div>
                 </div>
-              </div>
-              <div class="clear-all d-none d-md-block">Clear All</div>
+                <div class="clear-all d-none d-md-block">Clear All</div>
+            </div>
+        </div>
+        
+
+          <app-loader *ngIf="showLoader"></app-loader>
+
+          <app-board-products
+            [products]="remoteProducts"
+            *ngIf="!showLoader"
+            (previewProduct)="handleProductPreview($event)">
+          </app-board-products>
+
+          <div class="static-bottom-panel-wrapper" *ngIf="productForPreview" style="z-index: 9999999;">
+            <div class="static-bottom-panel selected">
+              <app-product-preview [data]="productForPreview"
+                (clearProductPreview)="handleClearProductPreview($event)"
+                (addProductBoard)="handleAddProductBoardPreview($event)">
+              </app-product-preview>
             </div>
           </div>
 
-          <div class="text-left w-100">
-            <h5 class="title ml-2">Select New Category</h5>
-            <!-- SAMPLE -->
-            Static products
-            <div class="text-items ml-2 manual-drop arial" drop-type="text" draggable="true">
-              <span>Arial</span>
-            </div>
-            <div class="flex-grid">
-              <div class="flex-grid-item">
-                <div class="product-image" data-product="0" type="default">
-                  <img drop-type="image" draggable="true"
-                    src="https://www.lazysuzy.com/westelm/xbg/aston-leather-sofa-86-5-h4745_11_xbg.png">
-                </div>
-              </div>
-            </div>
-            <!-- SAMPLE -->
-          </div>
+        </div>
 
-          Live products
-          <div class="flex-grid" *ngIf="remoteProducts.length">
-            <div class="flex-grid-item" *ngFor="let product of remoteProducts;index as i">
-              <div class="product-image" (click)="handleProductPreview(product)" attr.data-product="{{product.refId}}"
-                type="default">
-                <img drop-type="image" draggable="true" src={{product.main_image}} />
-              </div>
-            </div>
-          </div>
+        <div *ngIf="selectedItem==='text'">
+          <app-board-text></app-board-text>
+        </div>
 
+        <div *ngIf="selectedItem==='add'">
+          <app-board-add (previewProduct)="handlePreviewProductToBoardUpdates($event)"></app-board-add>
+        </div>
+
+        <div *ngIf="selectedItem==='board'">
+          <app-current-board [boardProducts]="boardPreviewProducts"></app-current-board>
         </div>
 
       </div>

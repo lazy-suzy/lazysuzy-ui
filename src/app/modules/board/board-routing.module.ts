@@ -6,6 +6,7 @@ import { boardRoutesNames } from './board.routes.names';
 import { BoardComponent } from './board.component';
 import { BoardViewComponent } from './board-view/board-view.component';
 import { BoardListComponent } from './board-list/board-list.component';
+import { BoardPreviewComponent } from './board-preview/board-preview.component';
 import { BoardPopupComponent } from './board-popup/board-popup.component';
 
 const routes: Routes = [
@@ -14,7 +15,7 @@ const routes: Routes = [
     component: BoardComponent
   },
   {
-    path: boardRoutesNames.BOARD_VIEW,
+    path: boardRoutesNames.BOARD_VIEW + "/:uuid",
     component: BoardViewComponent
   },
   {
@@ -22,8 +23,8 @@ const routes: Routes = [
     component: BoardListComponent
   },
   {
-    path: boardRoutesNames.BOARD_PREVIEW,
-    component: BoardPopupComponent
+    path: boardRoutesNames.BOARD_PREVIEW + "/:uuid",
+    component: BoardPreviewComponent
   },
   {
     path: boardRoutesNames.BOARD_POPUP,
