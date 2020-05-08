@@ -14,7 +14,7 @@ const routes: Routes = [
     component: BoardComponent
   },
   {
-    path: boardRoutesNames.BOARD_VIEW,
+    path: boardRoutesNames.BOARD_VIEW + "/:uuid",
     component: BoardViewComponent
   },
   {
@@ -22,7 +22,7 @@ const routes: Routes = [
     component: BoardListComponent
   },
   {
-    path: boardRoutesNames.BOARD_PREVIEW,
+    path: boardRoutesNames.BOARD_PREVIEW + "/:uuid",
     component: BoardPreviewComponent
   }
 ];

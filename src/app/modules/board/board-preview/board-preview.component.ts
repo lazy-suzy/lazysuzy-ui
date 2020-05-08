@@ -1,7 +1,9 @@
 import { Component, OnInit, HostListener } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
+
 import { Board } from '../board';
 import { BoardService } from '../board.service';
-import { CookieService } from 'ngx-cookie-service';
+
 declare const fb: any;
 
 @Component({
@@ -13,8 +15,7 @@ export class BoardPreviewComponent implements OnInit {
 
   boards: Board[] = [];
   constructor(
-    private boardService: BoardService,
-    private cookieService: CookieService) { }
+    private boardService: BoardService, private route: ActivatedRoute) { }
 
   boardProducts = [];
   canvas: any;
@@ -47,10 +48,6 @@ export class BoardPreviewComponent implements OnInit {
     value: {
       userID: 1,
       scaleFactor: 0
-    },
-    endpoint: {
-      api: "http://four-nodes.com/projects/lazysuzy/server.php",
-      boardView: "myboards.html"
     }
   };
 
@@ -71,14 +68,15 @@ export class BoardPreviewComponent implements OnInit {
   }
 
   getBoards(): void {
-    this.boardService.getBoardsByID(Number.parseInt(this.cookieService.get('board_id')))
+    const uuid = this.route.snapshot.paramMap.get('uuid');
+    this.boardService.getBoardByID(uuid)
       .subscribe(response => {
         let boardFound = false;
         this.appMeta.board.data = response;
         this.appMeta.board.data.forEach((boardObject, objectIndex) => {
           // convert state back to json
           this.appMeta.board.data[objectIndex].state = JSON.parse(boardObject.state);
-          if (boardObject.board_id == this.cookieService.get('board_id')) {
+          if (boardObject.uuid == uuid) {
             boardFound = true;
             this.appMeta.board.currentIndex = objectIndex;
             this.canvasMeta.currentHistory.push(boardObject.state);
