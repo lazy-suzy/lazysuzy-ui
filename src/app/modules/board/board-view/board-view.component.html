@@ -83,7 +83,7 @@
         </div>
 
         <div *ngIf="selectedItem==='add'">
-          <app-board-add (previewProduct)="handlePreviewProductToBoardUpdates($event)"></app-board-add>
+          <app-board-add [allAssets]="appMeta.asset" [userId]="currentUser.id" (previewProduct)="handlePreviewProductToBoardUpdates($event)"></app-board-add>
         </div>
 
         <div *ngIf="selectedItem==='board'">

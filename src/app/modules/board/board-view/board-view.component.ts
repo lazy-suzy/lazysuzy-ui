@@ -25,12 +25,16 @@ export class BoardViewComponent implements OnInit, AfterViewInit {
   productForPreview = null;
   sideBarItems = SideNavItems;
   @ViewChild('browsefilter', { static: false }) browsefilter?: OverlayPanel;
+  currentUser = null;
 
   constructor(
     private cookieService: CookieService,
     public boardService: BoardService,
     private route: ActivatedRoute
-  ) { }
+  ) { 
+    const user = JSON.parse(localStorage.getItem('user'));
+    this.currentUser = user;
+  }
 
   selectSideBarItem(item) {
     this.selectedItem = item.value;
