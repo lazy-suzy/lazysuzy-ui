@@ -20,6 +20,7 @@ export class BoardProductsComponent implements OnInit {
     if (changes['products'] && changes['products'].previousValue !== changes['products'].currentValue) {
       let products = changes['products'].currentValue || [];
       this.products = [...products] || [];
+      debugger;
     }
   }
 

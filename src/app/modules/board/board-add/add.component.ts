@@ -52,9 +52,6 @@ export class BoardAddComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.myUploads = [...this.boardService.state.myUploads];
-    this.allUploads = [...this.boardService.state.allUploads];
-
     this.uploader.onBeforeUploadItem = (item: FileItem) => {
       item.withCredentials = false;
       // this.uploader.authToken = 'Bearer ' + this.boxTokenResponse.userToken;
