@@ -1,7 +1,8 @@
 import { Component, OnInit, Inject, ViewEncapsulation } from '@angular/core';
 import { ApiService } from 'src/app/shared/services';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
-import { BoardService } from 'src/app/shared/services/board/board.service';
+import { BoardService } from '../../board.service';
+import { Asset } from '../../asset';
 
 @Component({
   selector: 'app-add-via-url',
@@ -36,7 +37,19 @@ export class AddViaUrlComponent implements OnInit {
     }
     else if (payload.name === 'add-image-via-url') {
       this.showLoader = true;
-      this.boardService.saveAddViaUrl(payload.data).subscribe(res => {
+      payload = payload.data;
+      let asset = new Asset({
+        name: payload.productTitle,
+        price: payload.price,
+        brand: 'Custom',
+        // path: payload.imageUrl,
+        // transparent_path: payload.productListingUrl,
+        is_private: payload.keepPrivate,
+        url: payload.imageUrl
+        // file:
+      });
+      this.boardService.addAsset(asset).subscribe(res => {
+        debugger;
         this.showLoader = false;
         this.onYesClick(res);
       });

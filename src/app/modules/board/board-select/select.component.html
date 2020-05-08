@@ -4,7 +4,7 @@
     <div class="browse-header w-100">
         <div class="item-search-bar">
             <div class="input-group">
-                <input type="text" class="form-control" id="inlineFormInputGroupUsername" placeholder="Search">
+                <input type="text" class="form-control" [formControl]="filter" id="inlineFormInputGroupUsername" placeholder="Search">
                 <div class="input-group-append">
                     <div class="input-group-text icon">
                         <i class="mdi mdi-magnify" aria-hidden="true"></i>
@@ -17,7 +17,7 @@
         </div>
     </div>
 
-    <div class="flex-grid-item" (click)="handleSelectCategory(department)" *ngFor="let department of allDepartments">
+    <div class="flex-grid-item" (click)="handleSelectCategory(department)" *ngFor="let department of filteredDepartments">
         <div class="icon lg category-label">
             <i class="mdi mdi-hotel" aria-hidden="true"></i>
             {{department.category}}
