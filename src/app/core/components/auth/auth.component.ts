@@ -121,6 +121,7 @@ export class AuthComponent implements OnInit {
       localStorage.removeItem('user');
       this.fetchUser();
     }
+    window.location.reload();
   }
 
   isCurrentUserGuest(): boolean { return this.user.user_type === this.utils.userType.guest };

@@ -292,8 +292,9 @@
                     class="form-input w-90"
                     name="shipping_zipcode"
                     #shipping_zipcode="ngModel"
-                    type="number"
                     [(ngModel)]="customerData.shipping_zipcode"
+                    maxlength="5"
+                    minlength="5"
                     required
                   />
                   <div
@@ -303,6 +304,14 @@
                     <div *ngIf="shipping_zipcode.errors.required">
                       Postal Code is required
                     </div>
+                  </div>
+                  <div
+                    *ngIf="
+                      f.submitted && customerData.shipping_zipcode.length < 5
+                    "
+                    class="invalid-feedback"
+                  >
+                    Invalid Postal Code
                   </div>
                 </div>
               </div>
@@ -325,25 +334,27 @@
             </form>
           </ng-container>
           <ng-template #shippingDetails>
-            <div>
-              {{ customerData.shipping_f_Name }}
-              {{ customerData.shipping_l_Name }}
+            <div *ngIf="customerData.shipping_f_Name">
+              <div>
+                {{ customerData.shipping_f_Name }}
+                {{ customerData.shipping_l_Name }}
+              </div>
+              <div>{{ customerData.shipping_company_name }}</div>
+              <div>
+                {{
+                  customerData.shipping_phone
+                    | americanNumber: customerData.shipping_phone
+                }}
+              </div>
+              <div>{{ customerData.shipping_address_line1 }}</div>
+              <div>{{ customerData.shipping_address_line2 }}</div>
+              <div>{{ customerData.shipping_city }}</div>
+              <div>
+                {{ customerData.shipping_state }},
+                {{ customerData.shipping_zipcode }}
+              </div>
+              <div>{{ country }}</div>
             </div>
-            <div>{{ customerData.shipping_company_name }}</div>
-            <div>
-              {{
-                customerData.shipping_phone
-                  | americanNumber: customerData.shipping_phone
-              }}
-            </div>
-            <div>{{ customerData.shipping_address_line1 }}</div>
-            <div>{{ customerData.shipping_address_line2 }}</div>
-            <div>{{ customerData.shipping_city }}</div>
-            <div>
-              {{ customerData.shipping_state }},
-              {{ customerData.shipping_zipcode }}
-            </div>
-            <div>{{ country }}</div>
           </ng-template>
         </div>
       </div>
@@ -530,10 +541,11 @@
                   <label class="db">Postal Code*</label>
                   <input
                     class="form-input w-90"
-                    type="number"
                     name="billing_zipcode"
                     #billing_zipcode="ngModel"
                     [(ngModel)]="customerData.billing_zipcode"
+                    maxlength="5"
+                    minlength="5"
                     required
                   />
                   <div
@@ -544,6 +556,15 @@
                       Postal Code is required
                     </div>
                   </div>
+                  <div
+                    *ngIf="
+                      billingForm.submitted &&
+                      customerData.billing_zipcode.length < 5
+                    "
+                    class="invalid-feedback"
+                  >
+                    Invalid Postal Code
+                  </div>
                 </div>
               </div>
               <div>
@@ -552,25 +573,27 @@
             </form>
           </ng-container>
           <ng-template #billingDetails>
-            <div>
-              {{ customerData.billing_f_Name }}
-              {{ customerData.billing_l_Name }}
+            <div *ngIf="customerData.billing_f_Name">
+              <div>
+                {{ customerData.billing_f_Name }}
+                {{ customerData.billing_l_Name }}
+              </div>
+              <div>{{ customerData.billing_company_name }}</div>
+              <div>
+                {{
+                  customerData.billing_phone
+                    | americanNumber: customerData.billing_phone
+                }}
+              </div>
+              <div>{{ customerData.billing_address_line1 }}</div>
+              <div>{{ customerData.billing_address_line2 }}</div>
+              <div>{{ customerData.billing_city }}</div>
+              <div>
+                {{ customerData.billing_state }},
+                {{ customerData.billing_zipcode }}
+              </div>
+              <div>{{ country }}</div>
             </div>
-            <div>{{ customerData.billing_company_name }}</div>
-            <div>
-              {{
-                customerData.billing_phone
-                  | americanNumber: customerData.billing_phone
-              }}
-            </div>
-            <div>{{ customerData.billing_address_line1 }}</div>
-            <div>{{ customerData.billing_address_line2 }}</div>
-            <div>{{ customerData.billing_city }}</div>
-            <div>
-              {{ customerData.billing_state }},
-              {{ customerData.billing_zipcode }}
-            </div>
-            <div>{{ country }}</div>
           </ng-template>
         </div>
       </div>
