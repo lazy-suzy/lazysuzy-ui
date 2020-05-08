@@ -24,13 +24,6 @@ import {
 const routes: Routes = [
   { path: '', component: LandingComponent, pathMatch: 'full' },
 
-  {
-    path: 'board',
-    loadChildren: () =>
-      import('./modules/board/board.module').then(m => m.BoardModule)
-    // pathMatch: 'full'
-  },
-
   { path: 'search', component: SearchComponent },
   { path: 'aboutus', component: AboutusComponent },
   { path: 'termsofservice', component: TermsOfServiceComponent },
