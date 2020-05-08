@@ -13,7 +13,7 @@ import {
   ElementsOptions
 } from 'ngx-stripe';
 import { ApiService } from 'src/app/shared/services';
-import { USStateService } from 'ng2-us-states';
+import { STATE_LIST } from './../../../shared/constants';
 import { Router } from '@angular/router';
 import { Observable, Subscription } from 'rxjs';
 import {
@@ -89,13 +89,10 @@ export class PaymentComponent implements OnInit {
     private fb: FormBuilder,
     private stripeService: StripeService,
     private apiService: ApiService,
-    private usStateService: USStateService,
     private router: Router,
     private breakpointObserver: BreakpointObserver
   ) {
-    this.statesArray = this.usStateService
-      .getStates()
-      .filter(state => state.name !== 'Alaska' && state.name !== 'Hawaii');
+    this.statesArray = STATE_LIST;
   }
 
   ngOnInit() {

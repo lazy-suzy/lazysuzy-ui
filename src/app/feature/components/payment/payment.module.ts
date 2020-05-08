@@ -5,6 +5,7 @@ import { MatIconModule } from '@angular/material';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 import { SharedModule } from '../../../shared/shared.module';
+
 const DECLARATIONS = [PaymentComponent];
 
 const MODULES = [
