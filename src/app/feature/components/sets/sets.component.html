@@ -13,7 +13,7 @@
       "
     >
       <div class="w-50 flex">
-        <span class="price w-40-ns tr">
+        <span class="price w-40-ns w-30 tr">
           ${{ item.inventory_product_details.price }}
         </span>
 
@@ -25,15 +25,16 @@
 
     <ng-template #isOOS>
       <div class="w-50 flex">
-        <div class="w-40-ns flex tr">
-          <span class="price {{
-            item.price !== item.was_price ? 'w-40' : 'w-100'
-          }}">${{ item.price }}</span>
-  
+        <div class="w-40-ns w-30 flex tr">
+          <span
+            class="price {{ item.price !== item.was_price ? 'w-40' : 'w-100' }}"
+            >${{ item.price }}</span
+          >
+
           <span
             class="was-price  {{
               item.price !== item.was_price ? 'strike w-60' : ''
-            }} {{item.price !== item.was_price? '': 'dn'}}"
+            }} {{ item.price !== item.was_price ? '' : 'dn' }}"
             >${{ item.was_price }}</span
           >
         </div>

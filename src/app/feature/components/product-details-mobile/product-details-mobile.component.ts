@@ -4,13 +4,13 @@ import { IProductPayload, IProductDetail } from 'src/app/shared/models';
 import {
   ApiService,
   UtilsService,
-  CacheService
+  CacheService,
 } from 'src/app/shared/services';
 import { Observable, Subscription } from 'rxjs';
 import {
   BreakpointState,
   Breakpoints,
-  BreakpointObserver
+  BreakpointObserver,
 } from '@angular/cdk/layout';
 import { Gallery, GalleryItem, ImageItem } from '@ngx-gallery/core';
 import { Lightbox } from '@ngx-gallery/lightbox';
@@ -19,7 +19,7 @@ import { VariationsComponent } from '../variations/variations.component';
 @Component({
   selector: 'app-product-details-mobile',
   templateUrl: './product-details-mobile.component.html',
-  styleUrls: ['./product-details-mobile.component.less']
+  styleUrls: ['./product-details-mobile.component.less'],
 })
 export class ProductDetailsMobileComponent implements OnInit {
   @ViewChild(VariationsComponent, { static: false }) child: VariationsComponent;
@@ -51,11 +51,12 @@ export class ProductDetailsMobileComponent implements OnInit {
   selectedSwatch = {
     swatch_image: null,
     price: '',
-    wasPrice: ''
+    wasPrice: '',
   };
   quantity: number = 1;
   quantityArray = [];
   galleryRef = this.gallery.ref(this.galleryId);
+  isSetItemInInventory: boolean = false;
   constructor(
     private router: Router,
     private activeRoute: ActivatedRoute,
@@ -78,11 +79,13 @@ export class ProductDetailsMobileComponent implements OnInit {
 
   loadProduct() {
     this.isProductFetching = true;
-    this.routeSubscription = this.activeRoute.params.subscribe(routeParams => {
-      this.productSku = routeParams.product;
-      this.cacheService.data.productSku = this.productSku;
-      this.cacheService.data.useCache = true;
-    });
+    this.routeSubscription = this.activeRoute.params.subscribe(
+      (routeParams) => {
+        this.productSku = routeParams.product;
+        this.cacheService.data.productSku = this.productSku;
+        this.cacheService.data.useCache = true;
+      }
+    );
     this.productSubscription = this.apiService
       .getProduct(this.productSku)
       .subscribe((payload: IProductDetail) => {
@@ -98,7 +101,7 @@ export class ProductDetailsMobileComponent implements OnInit {
         );
         this.isSwatchExist = this.utils.checkDataLength(
           this.product.variations.filter(
-            variation => variation.swatch_image !== null
+            (variation) => variation.swatch_image !== null
           )
         );
         this.isVariationExist = this.utils.checkDataLength(
@@ -116,16 +119,23 @@ export class ProductDetailsMobileComponent implements OnInit {
         if (this.product.in_inventory) {
           this.productPrice = this.product.inventory_product_details.price;
           this.productWasPrice = this.product.inventory_product_details.price;
-          for (let i = 1; i <= this.product.inventory_product_details.count; i++) {
-            this.quantityArray.push({value: i});
+          for (
+            let i = 1;
+            i <= this.product.inventory_product_details.count;
+            i++
+          ) {
+            this.quantityArray.push({ value: i });
           }
         } else {
           this.productPrice = this.product.is_price;
           this.productWasPrice = this.product.was_price;
         }
         this.items = this.product.on_server_images.map(
-          item => new ImageItem({ src: item })
+          (item) => new ImageItem({ src: item })
         );
+        if (this.product.set) {
+          this.checkSetInventory(this.product.set);
+        }
         this.galleryRef.load(this.items);
         this.isProductFetching = false;
       });
@@ -146,7 +156,7 @@ export class ProductDetailsMobileComponent implements OnInit {
       this.selectedSwatch = {
         swatch_image: variation.swatch_image,
         price: variation.price,
-        wasPrice: variation.was_price
+        wasPrice: variation.was_price,
       };
       this.productPrice = variation.price;
       this.productWasPrice = variation.was_price;
@@ -168,7 +178,7 @@ export class ProductDetailsMobileComponent implements OnInit {
 
   openLightbox(index: number) {
     this.lightbox.open(index, this.galleryId, {
-      panelClass: 'fullscreen'
+      panelClass: 'fullscreen',
     });
   }
 
@@ -185,7 +195,7 @@ export class ProductDetailsMobileComponent implements OnInit {
   onSetImage(src): void {
     // this.galleryContainer.nativeElement.scrollTop = 0;
     this.items = this.product.on_server_images.map(
-      item => new ImageItem({ src: item })
+      (item) => new ImageItem({ src: item })
     );
     if (src) {
       const image = new ImageItem({ src });
@@ -204,11 +214,11 @@ export class ProductDetailsMobileComponent implements OnInit {
       image: this.items[0].data.src,
       name: this.product.name,
       price: this.productPrice,
-      quantity: this.quantity
+      quantity: this.quantity,
     };
     const postData = {
       product_sku: this.productSku,
-      count: this.quantity
+      count: this.quantity,
     };
     this.apiService.addCartProduct(postData).subscribe(
       (payload: any) => {
@@ -219,5 +229,12 @@ export class ProductDetailsMobileComponent implements OnInit {
       }
     );
     this.utils.openAddToCartDialog(data);
+  }
+  checkSetInventory(product) {
+    for (let item of product) {
+      if (item.in_inventory) {
+        this.isSetItemInInventory = true;
+      }
+    }
   }
 }

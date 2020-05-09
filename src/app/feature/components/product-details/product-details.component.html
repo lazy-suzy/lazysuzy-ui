@@ -85,16 +85,24 @@
             </button>
           </div>
         </div>
-        <hr
-          class="modal-hr mt-3"
-          *ngIf="isVariationExist || product.set || product.redirect"
-        />
+        <ng-container *ngIf="product.redirect; else allConditions">
+          <hr class="modal-hr mt-3" *ngIf="product.set" />
+        </ng-container>
+        <ng-template #allConditions>
+          <hr class="modal-hr mt-3" *ngIf="isVariationExist || product.set" />
+        </ng-template>
       </div>
 
       <div class="product-description-container" [ngStyle]="topHeight">
         <div *ngIf="!isSetItemInInventory">
           <app-redirect
-            *ngIf="product.redirect"
+            *ngIf="
+              product.redirect &&
+              !(
+                product.in_inventory &&
+                product.inventory_product_details.count > 0
+              )
+            "
             [redirectUrl]="product.redirect_url"
             [redirectDetails]="product.redirect_details"
             [category]="product.department_info[0].category_name"
@@ -111,7 +119,10 @@
           (setPrice)="onSetPrice($event)"
           (setImage)="onSetImage($event)"
         ></app-variations>
-        <hr class="modal-hr mt-3" *ngIf="product.set && !isSetItemInInventory" />
+        <hr
+          class="modal-hr mt-3"
+          *ngIf="product.set && !isSetItemInInventory"
+        />
         <app-sets
           *ngIf="product.set"
           [sets]="product.set"
