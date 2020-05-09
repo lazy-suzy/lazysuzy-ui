@@ -25,7 +25,7 @@
     </ng-container>
     <ng-template #showCart>
       <div class="cart-container">
-        <div class="cart-header">
+        <div class="cart-header pv4">
           <!-- <div class="pink-font">My Cart</div> -->
           <div class="subtotal-card ma4">
             <div class="title pv2 flex justify-between b">
@@ -115,54 +115,56 @@
     <ng-template #showCart>
       <div class="cart-container flex ph5">
         <div class="w-70">
-          <div class="cart-header">
-            <div class="title">
-              My Cart
+          <div class="cart-content-container">
+            <div class="cart-header">
+              <div class="title">
+                My Cart
+              </div>
+              <div class="tr pb2">
+                PRICE
+              </div>
             </div>
-            <div class="tr pb2">
-              PRICE
-            </div>
-          </div>
-          <div class="cart-content" *ngFor="let product of cartProducts">
-            <div class="product-card flex pv4">
-              <img class="prod-image" [src]="product.image" />
-              <div class="prod-details w-100 pl5">
-                <div class="gray-font fs14">{{ product.product_sku }}</div>
-                <div class="flex justify-between product-name pv1">
-                  <div
-                    class="blue-font pointer"
-                    (click)="openProductDetail(product.product_sku)"
-                  >
-                    {{ product.product_name }}
+            <div class="cart-content" *ngFor="let product of cartProducts">
+              <div class="product-card flex pv4">
+                <img class="prod-image" [src]="product.image" />
+                <div class="prod-details w-100 pl5">
+                  <div class="gray-font fs14">{{ product.product_sku }}</div>
+                  <div class="flex justify-between product-name pv1">
+                    <div
+                      class="blue-font pointer"
+                      (click)="openProductDetail(product.product_sku)"
+                    >
+                      {{ product.product_name }}
+                    </div>
+                    <div class="pink-font b">${{ product.retail_price }}</div>
                   </div>
-                  <div class="pink-font b">${{ product.retail_price }}</div>
-                </div>
-                <div class="pb4 gray-font fs14">by {{ product.site }}</div>
-                <select
-                  class="quantity-selector w-30"
-                  (change)="
-                    onQuantityChanged(
-                      product.product_sku,
-                      product.count,
-                      $event.target.value
-                    )
-                  "
-                >
-                  <option
-                    *ngFor="
-                      let item of counter(product.max_available_count);
-                      let i = index
+                  <div class="pb4 gray-font fs14">by {{ product.site }}</div>
+                  <select
+                    class="quantity-selector w-30"
+                    (change)="
+                      onQuantityChanged(
+                        product.product_sku,
+                        product.count,
+                        $event.target.value
+                      )
                     "
-                    [attr.value]="i + 1"
-                    [attr.selected]="i + 1 == product.count ? true : null"
-                    >{{ i + 1 }}</option
                   >
-                </select>
-                <div
-                  class="pt3 gray-font b pointer fs14"
-                  (click)="removeProduct(product.product_sku, product.count)"
-                >
-                  REMOVE
+                    <option
+                      *ngFor="
+                        let item of counter(product.max_available_count);
+                        let i = index
+                      "
+                      [attr.value]="i + 1"
+                      [attr.selected]="i + 1 == product.count ? true : null"
+                      >{{ i + 1 }}</option
+                    >
+                  </select>
+                  <div
+                    class="pt3 gray-font b pointer fs14"
+                    (click)="removeProduct(product.product_sku, product.count)"
+                  >
+                    REMOVE
+                  </div>
                 </div>
               </div>
             </div>

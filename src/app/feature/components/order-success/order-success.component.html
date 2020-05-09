@@ -1,14 +1,15 @@
-<div class="pv4-ns ph6-ns pa2">
+<div class="pv4-ns ph6-ns pa2 tc">
   <div class="pink-font ml3-ns b pb2-ns pv2">
     THANKS FOR YOUR ORDER!
   </div>
-  <div class="signup-card mv3 w-70-ns" *ngIf="!isLoggedIn">
+  <div class="signup-card mv3 w-70-ns tl" *ngIf="!isLoggedIn">
     <div class="mv3 gray-font b">
       Sign Up or Log In to keep track of your Order History
     </div>
     <div class="flex-ns justify-center mv3">
       <div class="w-40-ns">
         <input
+          type="password"
           placeholder="Password"
           class="form-input"
           [(ngModel)]="password"
@@ -28,14 +29,14 @@
     </div>
     <span class="success-msg mh4" *ngIf="showSuccess">User registered</span>
   </div>
-  <div class="products-card mv3 w-70-ns">
+  <div class="products-card mv3 w-70-ns tl">
     <div class="order-header section pv3">
       <div class="pb2 flex">
         <div class="w-20-ns w-40">Order No:</div>
         <div>{{ orderId }}</div>
       </div>
       <div class="pb2 flex">
-        <div class="w-20-ns w-40 ">Order Date:</div>
+        <div class="w-20-ns w-40">Order Date:</div>
         <div>{{ orderDate }}</div>
       </div>
     </div>
@@ -54,7 +55,7 @@
     </div>
     <div class="order-pricing section mb3">
       <div class="flex justify-between pv3">
-        <div class="b">SUBTOTAL:</div>
+        <div class="b">SUBTOTAL</div>
         <div class="b">${{ subTotalAmount }}</div>
       </div>
       <div class="flex justify-between pv2">
@@ -85,127 +86,37 @@
                   | americanNumber: deliveryData[0].billing_phone
               }}
             </div>
-            <<<<<<< HEAD
-          </div>
-          <div class="order-products pb4 section">
-            <div class="pv3">{{ cartProductsLength }} Items</div>
-            <div class="flex-ns">
-              <div
-                class="w-33-ns pv2 blue-font"
-                *ngFor="let item of cartProducts"
-              >
-                <img [src]="item.image" />
-                <div>{{ item.product_name }}</div>
-                <div>
-                  by <span class="brand-font">{{ item.site }}</span>
-                </div>
-                <div>${{ item.price }}</div>
-              </div>
-              =======
-              <div>{{ deliveryData[0].billing_address_line1 }}</div>
-              <div>{{ deliveryData[0].billing_address_line2 }}</div>
-              <div>{{ deliveryData[0].billing_city }}</div>
-              <div>
-                {{ deliveryData[0].billing_state }},
-                {{ deliveryData[0].billing_zipcode }}
-                >>>>>>> master
-              </div>
+
+            <div>{{ deliveryData[0].billing_address_line1 }}</div>
+            <div>{{ deliveryData[0].billing_address_line2 }}</div>
+            <div>{{ deliveryData[0].billing_city }}</div>
+            <div>
+              {{ deliveryData[0].billing_state }},
+              {{ deliveryData[0].billing_zipcode }}
             </div>
           </div>
-          <<<<<<< HEAD
-          <div class="order-pricing section mb3">
-            <div class="flex justify-between pv3">
-              <div class="b">SUBTOTAL:</div>
-              <div class="b">${{ subTotalAmount }}</div>
-            </div>
-            <div class="flex justify-between pv2">
-              <div>Shipping</div>
-              <div>${{ totalShippingCharge }}</div>
-            </div>
-            <!-- <div class="flex justify-between pv2">
-                <div>Tax</div>
-                <div>$40</div>
-            </div> -->
-            <div class="flex justify-between pink-font b pv3">
-              <div>TOTAL</div>
-              <div>${{ totalAmount }}</div>
-              =======
-              <div class="w-50-ns mh4-ns">
-                <div class="header b">PAYMENT DETAILS</div>
-                <div class="content ml2 pv2">
-                  <div>XXXX XXXXXX X{{ cardDetails.last4 }}</div>
-                  <div>
-                    EXP: {{ cardDetails.exp_month }}/{{
-                      this.cardDetails.exp_year
-                    }}
-                    >>>>>>> master
-                  </div>
-                </div>
-                <div class="header b">DELIVERY METHOD</div>
-                <div class="content ml2 pv2">
-                  <div>UPS Ground</div>
-                  <div>Arrives within 4-5 days</div>
-                </div>
-              </div>
-              <<<<<<< HEAD
-              <div class="order-details section">
-                <div class="flex-ns">
-                  <div class="w-50-ns mh4-ns">
-                    <div class="header b">SHIPPING DETAILS</div>
-                    <div class="content ml2 pv2">
-                      <div>
-                        {{ deliveryData[0].billing_f_Name }}
-                        {{ deliveryData[0].billing_l_Name }}
-                      </div>
-                      <div>
-                        {{
-                          deliveryData[0].billing_phone
-                            | americanNumber: deliveryData[0].billing_phone
-                        }}
-                      </div>
-                      <div>{{ deliveryData[0].billing_address_line1 }}</div>
-                      <div>{{ deliveryData[0].billing_address_line2 }}</div>
-                      <div>{{ deliveryData[0].billing_city }}</div>
-                      <div>
-                        {{ deliveryData[0].billing_state }},
-                        {{ deliveryData[0].billing_zipcode }}
-                      </div>
-                    </div>
-                  </div>
-                  <div class="w-50-ns mh4-ns">
-                    <div class="header b">PAYMENT DETAILS</div>
-                    <div class="content ml2 pv2">
-                      <div>XXXX XXXXXX X{{ this.cardDetails.last4 }}</div>
-                      <div>
-                        EXP: {{ this.cardDetails.exp_month }}/{{
-                          this.cardDetails.exp_year
-                        }}
-                      </div>
-                    </div>
-                    <div class="header b">DELIVERY METHOD</div>
-                    <div class="content ml2 pv2">
-                      <div>UPS Ground</div>
-                      <div>Arrives within 4-5 days</div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div class="mv3">
-                <div class="b tc">
-                  Please check your inbox for a confirmation email
-                </div>
-              </div>
-              =======
+        </div>
+
+        <div class="w-50-ns mh4-ns">
+          <div class="header b">PAYMENT DETAILS</div>
+          <div class="content ml2 pv2">
+            <div>XXXX XXXXXX X{{ cardDetails.last4 }}</div>
+            <div>
+              EXP: {{ cardDetails.exp_month }}/{{ this.cardDetails.exp_year }}
             </div>
           </div>
-          <div class="mv3">
-            <div class="b tc">
-              Please check your inbox for a confirmation email
-            </div>
-            >>>>>>> master
+          <div class="header b">DELIVERY METHOD</div>
+          <div class="content ml2 pv2">
+            <div>UPS Ground</div>
+            <div>Arrives within 4-5 days</div>
           </div>
         </div>
       </div>
+    </div>
+  </div>
+  <div class="mv3">
+    <div class="b tc">
+      Please check your inbox for a confirmation email
     </div>
   </div>
 </div>

@@ -322,7 +322,7 @@
                   name="billing_Checkbox"
                   (change)="onCheckboxChange(billingCheckbox.checked)"
                 />
-                <div class="ml2">
+                <div class="ml2" (click)="onCheckboxChange(!billingCheckbox.checked)">
                   My billing address is the same as my shipping address
                 </div>
               </div>
@@ -522,7 +522,7 @@
                   >
                     <option
                       *ngFor="let item of statesArray"
-                      [value]="item.name"
+                      [value]="item.abbreviation"
                       >{{ item.name }}</option
                     >
                   </select>
