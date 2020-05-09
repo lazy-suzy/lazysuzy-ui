@@ -1,8 +1,5 @@
 <div class="catalog-content">
-    <form class="icon lg add-new dz-clickable">
-        <input class="dropzone-previews dz-message" type="file" #fileInput ng2FileSelect ng2FileDrop multiple
-            (onFileDrop)="onFileSelected($event)" (onFileSelected)="onFileSelected($event)" />
-    </form>
+    <app-add-file-upload></app-add-file-upload>
     <div class="mb-3">
         <span class="add-new-url" (click)="openDialog()">Or add via URL</span>
         <span class="add-new-url-msg"><i class="mdi mdi-information" aria-hidden="true"></i> Must
@@ -12,12 +9,12 @@
         <mat-tab-group>
             <mat-tab label="My Items">
                 My Items
-                <app-board-products [products]="myUploads"
+                <app-board-products [products]="myUploads" [isAsset]="'true'"
                     (previewProduct)="handlePreviewProduct($event)"></app-board-products>
             </mat-tab>
             <mat-tab label="All Uploads">
                 All Uploads
-                <app-board-products [products]="allUploads"
+                <app-board-products [products]="allUploads" [isAsset]="'true'"
                     (previewProduct)="handlePreviewProduct($event)"></app-board-products>
             </mat-tab>
         </mat-tab-group>

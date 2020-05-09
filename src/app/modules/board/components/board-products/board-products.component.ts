@@ -8,9 +8,11 @@ import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 export class BoardProductsComponent implements OnInit {
 
   @Input() products: any = [];
+  @Input() modifyPath: any = false;
+  @Input() isAsset: any = false;
+
   @Output() updates: EventEmitter<any> = new EventEmitter();
   @Output() previewProduct: EventEmitter<any> = new EventEmitter();
-  @Input() modifyPath: any = false;
 
   constructor() { }
 
@@ -22,6 +24,24 @@ export class BoardProductsComponent implements OnInit {
       this.products = [...products] || [];
       debugger;
     }
+
+    if (changes['isAsset'] && changes['isAsset'].previousValue !== changes['isAsset'].currentValue) {
+      let isAsset = changes['isAsset'].currentValue || [];
+      this.isAsset = isAsset;
+      if (this.isAsset) {
+        this.products = this.transformAssetToProduct(this.products);
+      }
+    }
+  }
+
+  transformAssetToProduct(assets) {
+    assets = assets.map(ast=>{
+      return {
+        ...ast,
+        main_image:ast.path
+      };
+    })
+    return assets;
   }
 
   previewProductFn(product) {

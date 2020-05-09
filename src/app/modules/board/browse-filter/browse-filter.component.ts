@@ -32,7 +32,6 @@ export class BrowsefilterComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    debugger;
     this.createForm();
   }
 
@@ -56,7 +55,6 @@ export class BrowsefilterComponent implements OnInit {
   }
 
   createForm() {
-    debugger;
     this.filterData = { ...(this.boardService.state.filterData || {}) };
     const result = this.convertFilterDataForPlugin(this.filterData.brand, this.filterData.color);
     this.brandsDropdown = [...result.brands];

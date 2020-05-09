@@ -36,6 +36,8 @@ import { StepOneComponent } from './board-add/add-via-url-stepper/step-one/step-
 import { StepTwoComponent } from './board-add/add-via-url-stepper/step-two/step-two.component';
 import { BoardProductsComponent } from './components/board-products/board-products.component';
 import { CurrentBoardComponent } from './components/current-board/board.component';
+import { AddFileUploadComponent } from './board-add/add-file-upload/add-file-upload.component';
+import { UploadFileDetailsComponent } from './board-add/add-file-upload/upload-file-details/upload-file-details.component';
 
 @NgModule({
   imports: [
@@ -75,9 +77,14 @@ import { CurrentBoardComponent } from './components/current-board/board.componen
     StepOneComponent,
     StepTwoComponent,
     BoardProductsComponent,
-    CurrentBoardComponent
+    CurrentBoardComponent,
+    AddFileUploadComponent,
+    UploadFileDetailsComponent
   ],
-  entryComponents: [AddViaUrlComponent],
+  entryComponents: [
+    AddViaUrlComponent, 
+    UploadFileDetailsComponent
+  ],
   providers: [BoardService, CookieService]
 })
 export class BoardModule { }

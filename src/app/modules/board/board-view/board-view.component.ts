@@ -501,7 +501,7 @@ export class BoardViewComponent implements OnInit, AfterViewInit {
   };
 
   getAssets = () => {
-    this.boardService.getBoards()
+    this.boardService.getAssets()
       .subscribe(response => {
         if (response.length > 0) {
           this.appMeta.asset = response;
