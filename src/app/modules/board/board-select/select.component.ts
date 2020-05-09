@@ -1,5 +1,8 @@
 import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { BoardService } from 'src/app/shared/services/board/board.service';
+import { FormControl } from '@angular/forms';
+import { Observable } from 'rxjs';
+import { debounceTime } from 'rxjs/operators';
 
 @Component({
   selector: 'app-select',
@@ -9,7 +12,10 @@ import { BoardService } from 'src/app/shared/services/board/board.service';
 export class SelectComponent implements OnInit {
 
   allDepartments = [];
+  filteredDepartments = [];
   showLoader: boolean = false;
+  filter: FormControl;
+  filter$: Observable<string>;
 
   @Output() goToCategory: EventEmitter<any> = new EventEmitter();
 
@@ -17,9 +23,15 @@ export class SelectComponent implements OnInit {
 
   ngOnInit(): void {
     this.showLoader = true;
+    this.filter = new FormControl('');
+    this.filter$ = this.filter.valueChanges;
     this.boardService.getAllDepartments().subscribe((s: any) => {
       this.allDepartments = s || [];
+      this.filteredDepartments = [...this.allDepartments];
       this.showLoader = false;
+    });
+    this.filter$.pipe(debounceTime(1000)).subscribe(searchString => {
+      this.filteredDepartments = this.allDepartments.filter((dept) => (dept.category.toLowerCase()).includes(searchString))
     });
   }
 

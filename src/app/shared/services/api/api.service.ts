@@ -366,7 +366,7 @@ export class ApiService {
     return this.httpService.post(url, data);
   }
 
-  getAllDepartmentsBoard(): Observable<IDepartment> {
+  getAllDepartmentsBoard(): Observable<any> {
     const endpoint = `all-departments?board-view=true`;
     const url = env.useLocalJson
       ? `${env.JSON_BASE_HREF}${endpoint}`

@@ -18,8 +18,8 @@ import { environment } from 'src/environments/environment';
 })
 export class BoardService extends SharedBoardService {
 
-  private boardEndpoint = environment.API_BASE_HREF + 'board/';
-  private assetEndpoint = environment.API_BASE_HREF + 'board/asset/';
+  private boardEndpoint = environment.API_BASE_HREF + 'board';
+  private assetEndpoint = environment.API_BASE_HREF + 'board/asset';
   httpOptions = {
     headers: new HttpHeaders({
       'Content-Type': 'application/json',
@@ -40,7 +40,7 @@ export class BoardService extends SharedBoardService {
   }
 
   getBoardByID(board_id: string): Observable<Board[]> {
-    return this.http.get<Board[]>(this.boardEndpoint + board_id, this.httpOptions)
+    return this.http.get<Board[]>(this.boardEndpoint + `/` + board_id, this.httpOptions)
       .pipe(
         tap(_ => this.log(`fetched board w/ id=${board_id}`)),
         catchError(this.handleError<Board[]>('getBoardsByID', []))
@@ -55,7 +55,7 @@ export class BoardService extends SharedBoardService {
   }
 
   updateBoard(board: Board): Observable<Board> {
-    return this.http.post<Board>(this.boardEndpoint + board.uuid, board, this.httpOptions).pipe(
+    return this.http.post<Board>(this.boardEndpoint + `/` + board.uuid, board, this.httpOptions).pipe(
       tap((newBoard: Board) => this.log(`updated board w/ id=${newBoard.board_id}`)),
       catchError(this.handleError<Board>('updateBoard'))
     );
@@ -68,8 +68,16 @@ export class BoardService extends SharedBoardService {
         catchError(this.handleError<Asset[]>('getAssets', []))
       );
   }
+
+  addAsset(asset: Asset): Observable<Asset> {
+    return this.http.post<Asset>(this.assetEndpoint, asset, this.httpOptions).pipe(
+      tap((newAsset: Asset) => this.log(`add asset w/ id=${newAsset.asset_id}`)),
+      catchError(this.handleError<Asset>('addAsset'))
+    );
+  }
+
   updateAsset(asset: Asset): Observable<Asset> {
-    return this.http.post<Asset>(this.assetEndpoint + asset.asset_id, asset, this.httpOptions).pipe(
+    return this.http.post<Asset>(this.assetEndpoint + `/`+ asset.asset_id, asset, this.httpOptions).pipe(
       tap((newAsset: Asset) => this.log(`updated asset w/ id=${newAsset.asset_id}`)),
       catchError(this.handleError<Asset>('updateAsset'))
     );
