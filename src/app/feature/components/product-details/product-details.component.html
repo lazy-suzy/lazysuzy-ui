@@ -47,7 +47,12 @@
             <button
               mat-raised-button
               class="bg-red view-details-btn"
-              *ngIf="!product.in_inventory && !product.redirect"
+              *ngIf="
+                !(
+                  product.in_inventory &&
+                  product.inventory_product_details.count > 0
+                ) && !product.redirect
+              "
             >
               <a
                 (click)="openLink($event, product.product_url)"
