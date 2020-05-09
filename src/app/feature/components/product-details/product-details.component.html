@@ -92,15 +92,17 @@
       </div>
 
       <div class="product-description-container" [ngStyle]="topHeight">
-        <app-redirect
-          *ngIf="product.redirect"
-          [redirectUrl]="product.redirect_url"
-          [redirectDetails]="product.redirect_details"
-          [category]="product.department_info[0].category_name"
-          [categoryUrl]="product.department_info[0].category_url"
-          [isHandset]="false"
-        >
-        </app-redirect>
+        <div *ngIf="!isSetItemInInventory">
+          <app-redirect
+            *ngIf="product.redirect"
+            [redirectUrl]="product.redirect_url"
+            [redirectDetails]="product.redirect_details"
+            [category]="product.department_info[0].category_name"
+            [categoryUrl]="product.department_info[0].category_url"
+            [isHandset]="false"
+          >
+          </app-redirect>
+        </div>
         <app-variations
           *ngIf="isVariationExist && !product.redirect"
           [variations]="product.variations"
@@ -109,7 +111,7 @@
           (setPrice)="onSetPrice($event)"
           (setImage)="onSetImage($event)"
         ></app-variations>
-        <hr class="modal-hr mt-3" *ngIf="product.set && product.redirect" />
+        <hr class="modal-hr mt-3" *ngIf="product.set && !isSetItemInInventory" />
         <app-sets
           *ngIf="product.set"
           [sets]="product.set"

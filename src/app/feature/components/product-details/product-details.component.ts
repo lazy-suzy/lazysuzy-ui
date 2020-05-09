@@ -51,6 +51,7 @@ export class ProductDetailsComponent implements OnInit {
   quantity: number = 1;
   quantityArray = [];
   galleryRef = this.gallery.ref(this.galleryId);
+  isSetItemInInventory: boolean = false;
   constructor(
     @Inject(MAT_DIALOG_DATA) public data: any,
     private apiService: ApiService,
@@ -99,6 +100,9 @@ export class ProductDetailsComponent implements OnInit {
         this.variations = this.product.variations.sort((a, b) =>
           a.name > b.name ? 1 : -1
         );
+        if (this.product.set) {
+          this.checkSetInventory(this.product.set);
+        }
         this.isProductFetching = false;
         const _self = this;
         setTimeout(function() {
@@ -121,6 +125,13 @@ export class ProductDetailsComponent implements OnInit {
     });
   }
 
+  checkSetInventory(product) {
+    for (let item of product) {
+      if (item.in_inventory) {
+        this.isSetItemInInventory = true;
+      }
+    }
+  }
   // selectedVariation(variation, index, container) {
   //   if (variation.has_parent_sku) {
   //     this.utils.openVariationDialog(variation.variation_sku);

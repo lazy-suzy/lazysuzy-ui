@@ -70,6 +70,11 @@ export class ProductFiltersComponent {
         this.activeFilters.color = this.productFilters.color
           .filter(color => color.checked)
           .map(color => color.value);
+        if (this.productFilters.category) {
+          this.activeFilters.category = this.productFilters.category
+          .filter(category => category.checked)
+          .map(category => category.value);
+        }
       }
     }
   }
