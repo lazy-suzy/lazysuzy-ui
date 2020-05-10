@@ -1,4 +1,28 @@
-<div class="row bg-light">
+<div *ngIf="loadedAsEmbed" class="article-dual-column">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-9 text-center">
+                <div class="intro">
+                    <h1 class="text-center">{{appMeta.board.title}}</h1>
+                    <p class="text-center">
+                        <span class="by">by</span>
+                        <a href="">Author Name</a>
+                        <span class="date">{{appMeta.board.updated_at | date:'mediumDate'}}</span>
+                    </p>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div id="canvas-droparea" class="col-md-9 border">
+                <canvas id="canvas-area"></canvas>
+            </div>
+            <div *ngIf="boardProducts.length > 0" class="col-md-3 pl-4">
+                <app-current-board [boardProducts]="boardProducts"></app-current-board>
+            </div>
+        </div>
+    </div>
+</div>
+<div *ngIf="!loadedAsEmbed" class="row bg-light">
     <div class="col col-md-9">
         <div class="m-5" style="background: white;">
             <div id="canvas-droparea">
@@ -7,11 +31,17 @@
         </div>
     </div>
     <div class="col col-md-3">
-        <div class="mt-5"><span class="font-weight-bold h3">Board Title</span></div>
-        <div><span class="font-italic h3 font-weight-normal">Username</span></div>
+        <div *ngIf="!loadedAsEmbed">
+            <div class="mt-5">
+                <span class="font-weight-bold h3">{{appMeta.board.title}}</span>
+            </div>
+            <div>
+                <span class="font-italic h3 font-weight-normal">Username</span>
+            </div>
+        </div>
     </div>
 </div>
-<div *ngIf="boardProducts.length > 0" class="row">
+<div *ngIf="!loadedAsEmbed && boardProducts.length > 0" class="row">
     <div class="col mt-3">
         <div class="text-center h2 font-weight-bold" style="color: #b76e79;"><span>Shop This Look</span></div>
         <!-- <app-products-carousal [data]="boardProducts"></app-products-carousal> -->

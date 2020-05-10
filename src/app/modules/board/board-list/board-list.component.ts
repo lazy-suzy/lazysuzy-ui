@@ -5,6 +5,8 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { Board } from '../board';
 import { BoardService } from '../board.service';
 import { boardRoutesNames } from '../board.routes.names';
+import { BoardPopupComponent } from '../board-popup/board-popup.component';
+import { MatDialog } from '@angular/material';
 
 @Component({
   selector: 'app-board-list',
@@ -19,7 +21,8 @@ export class BoardListComponent implements OnInit {
   constructor(
     private boardService: BoardService,
     private router: Router,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private dialog: MatDialog
   ) { }
 
   ngOnInit(): void {
@@ -50,6 +53,17 @@ export class BoardListComponent implements OnInit {
     board.is_active = false;
     this.boards = this.boards.filter(h => h !== board);
     this.boardService.updateBoard(board).subscribe();
+  }
+
+  share(board: Board): void {
+    this.dialog.open(BoardPopupComponent, {
+      panelClass: 'custom-dialog-container',
+      data: {
+        type: "share",
+        board: board
+      },
+      width: '40%',
+    });
   }
 
 }

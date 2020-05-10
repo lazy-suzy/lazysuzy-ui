@@ -8,9 +8,7 @@ import { boardRoutesNames } from './board.routes.names';
 })
 export class BoardComponent implements OnInit {
 
-  boardViewLink = "./" + boardRoutesNames.BOARD_VIEW;
   boardListLink = "./" + boardRoutesNames.BOARD_LIST;
-  boardPreviewLink = "./" + boardRoutesNames.BOARD_PREVIEW;
 
   constructor() { }
 

@@ -1,5 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Inject, Optional } from '@angular/core';
 import { boardRoutesNames } from '../board.routes.names';
+import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material';
+import { Router, ActivatedRoute } from '@angular/router';
+import { BoardService } from '../board.service';
+import { Board } from '../board';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-board-popup',
@@ -8,26 +13,74 @@ import { boardRoutesNames } from '../board.routes.names';
 })
 export class BoardPopupComponent implements OnInit {
 
-  private boardListLink = "../" + boardRoutesNames.BOARD_LIST;
-
   private roomTypeOptions = [];
   private roomTypeOptionSelected = 0;
 
   private roomStyleOptions = [];
   private roomStyleOptionSelected = 0;
 
-  private isPrivate = false;
-  private boardTitle = "Sample title";
+  private popupShow = {
+    config: false,
+    publish: false,
+    share: false
+  };
 
-  constructor() { }
-  // constructor(@Inject(MAT_DIALOG_DATA) public data: any) { }
+  private board: Board = new Board();
 
-  ngOnInit() {
-    this.getRoomTypeAndStyleOptions();
-    // console.log(this.data);
+  private loadedIndependantly = false;
+  private forceReturnRoute;
+  private boardShareURL;
+  private boardEmbedURL;
+  private boardEmbedCode;
+  private pinterestURL;
+
+  constructor(
+    @Optional() @Inject(MAT_DIALOG_DATA) private data: any,
+    @Optional() private dialogRef: MatDialogRef<BoardPopupComponent>,
+    private router: Router,
+    private route: ActivatedRoute,
+    private boardService: BoardService
+  ) {
+    if (data) {
+      if (data.type) {
+        if (data.type == "publish")
+          this.popupShow.config = true;
+        else if (data.type == "share")
+          this.popupShow.share = true;
+      }
+      if (data.forceReturnRoute)
+        this.forceReturnRoute = data.forceReturnRoute;
+    }
   }
 
-  getRoomTypeAndStyleOptions(): void {
+  ngOnInit() {
+    this.getRoomTypeAndStyleOptions(() => {
+      const uuid = this.route.snapshot.paramMap.get('uuid');
+      if (this.data && this.data.board) {
+        delete this.data.board.state;
+        delete this.data.board.preview;
+        this.setBoard(this.data.board);
+      }
+      else if (uuid) {
+        this.boardService.getBoardByID(uuid)
+          .subscribe(response => {
+            if (response) {
+              this.loadedIndependantly = true;
+              this.popupShow.share = true;
+              this.setBoard(response[0]);
+            }
+          });
+      }
+      else
+        return;
+    });
+
+    if (this.dialogRef)
+      this.dialogRef.beforeClose().subscribe(() => this.forceReturnRoute ? this.router.navigate([[environment.BOARD_BASE_HREF, this.forceReturnRoute].join('/')]) : '');
+
+  }
+
+  getRoomTypeAndStyleOptions(callback): void {
     let roomTypeAndStyleOptions = [{
       code: 111,
       label: "Room",
@@ -96,24 +149,66 @@ export class BoardPopupComponent implements OnInit {
 
     this.roomTypeOptions = roomTypeAndStyleOptions.filter(o => o.label == "Room");
     this.roomStyleOptions = roomTypeAndStyleOptions.filter(o => o.label == "Style");
+
+    if (callback)
+      callback();
   }
 
   selectRoomType(index: number) {
+    this.board.type_room = this.roomTypeOptions[index].code;
     this.roomTypeOptionSelected = index;
   }
   selectRoomStyle(index: number) {
+    this.board.type_style = this.roomStyleOptions[index].code;
     this.roomStyleOptionSelected = index;
   }
 
-  publishBoard() {
-    this.c(this.roomTypeOptions[this.roomTypeOptionSelected], this.roomStyleOptions[this.roomStyleOptionSelected], this.isPrivate, this.boardTitle);
-  }
-  cancelPublishBoard() {
-    // close popup
+  setBoard(board: Board) {
+    this.board = board;
+    this.roomTypeOptions.forEach((o, i) => {
+      if (o.code == this.board.type_room)
+        this.roomTypeOptionSelected = i;
+    });
+    this.roomStyleOptions.forEach((o, i) => {
+      if (o.code == this.board.type_style)
+        this.roomStyleOptionSelected = i;
+    });
+
+    this.boardShareURL = [environment.API_HREF, environment.BOARD_BASE_HREF, boardRoutesNames.BOARD_PREVIEW, board.uuid].join('/');
+    this.boardEmbedURL = [environment.API_HREF, environment.BOARD_BASE_HREF, boardRoutesNames.BOARD_EMBED, board.uuid].join('/');
+    this.boardEmbedCode = `<iframe src="${this.boardEmbedURL}" scrolling="no" frameborder="no" align="center"></iframe>`;
+    this.pinterestURL = `http://pinterest.com/pin/create/button/?url=${this.boardShareURL}&media={imagelink}&description=${this.board.title}`;
   }
 
-  c(...message){
-    console.log("TAG", message);
+  publishBoard() {
+    this.popupShow.config = false;
+    this.boardService.updateBoard(this.board)
+      .subscribe(response => {
+        this.popupShow.publish = true;
+      });
+  }
+
+  handleExit(action, value) {
+    if (this.dialogRef)
+      this.dialogRef.close();
+
+    if (action == "navigate") {
+      if (value == "list")
+        this.router.navigate([[environment.BOARD_BASE_HREF, boardRoutesNames.BOARD_LIST].join('/')]);
+      else if (value == "shop")
+        this.router.navigate([[environment.BOARD_BASE_HREF, boardRoutesNames.BOARD_PREVIEW, this.board.uuid].join('/')]);
+    }
+  }
+
+  closePopup() {
+    if (this.dialogRef)
+      this.dialogRef.close();
+  }
+
+  showShare() {
+    this.popupShow.publish = this.popupShow.config = false;
+    this.popupShow.share = true;
+    this.forceReturnRoute = boardRoutesNames.BOARD_LIST;
   }
 
 }

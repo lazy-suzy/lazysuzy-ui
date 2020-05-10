@@ -4,6 +4,8 @@ export class Board {
   state: object;
   title: string;
   preview: string;
+  type_room: number;
+  type_style: number;
   is_active: boolean;
 
   constructor(values: Object = {}) {

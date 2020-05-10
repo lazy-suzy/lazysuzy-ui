@@ -12,7 +12,7 @@ import { BoardPopupComponent } from './board-popup/board-popup.component';
 const routes: Routes = [
   {
     path: '',
-    component: BoardComponent
+    redirectTo: boardRoutesNames.BOARD_LIST
   },
   {
     path: boardRoutesNames.BOARD_VIEW + "/:uuid",
@@ -29,6 +29,14 @@ const routes: Routes = [
   {
     path: boardRoutesNames.BOARD_POPUP,
     component: BoardPopupComponent
+  },
+  {
+    path: boardRoutesNames.BOARD_POPUP + "/:uuid",
+    component: BoardPopupComponent
+  },
+  {
+    path: boardRoutesNames.BOARD_EMBED + "/:uuid",
+    component: BoardPreviewComponent
   }
 ];
 

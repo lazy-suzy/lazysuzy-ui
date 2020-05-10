@@ -41,18 +41,18 @@ export class BoardViewComponent implements OnInit, AfterViewInit {
     this.currentUser = user;
   }
 
-  share() {
-    let dialogRef = this.dialog.open(BoardPopupComponent, {
-      height: '80%',
+  openPopup(param: string) {
+    const dialogRef = this.dialog.open(BoardPopupComponent, {
+      panelClass: 'custom-dialog-container',
+      data: {
+        type: param,
+        board: this.appMeta.board.data[0]
+      },
       width: '40%',
     });
-  }
-
-  publish() {
-    let dialogRef = this.dialog.open(BoardPopupComponent, {
-      data: { name: 'austin' },
-      width: '40%',
-    });
+    // dialogRef.afterClosed().subscribe(result => {
+    //   console.log('The dialog was closed', result);
+    // });
   }
 
   selectSideBarItem(item) {

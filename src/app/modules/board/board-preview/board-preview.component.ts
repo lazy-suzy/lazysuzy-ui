@@ -13,11 +13,15 @@ declare const fb: any;
 })
 export class BoardPreviewComponent implements OnInit {
 
-  boards: Board[] = [];
+  loadedAsEmbed = false;
   constructor(
-    private boardService: BoardService, private route: ActivatedRoute) { }
+    private boardService: BoardService, private route: ActivatedRoute) {
+    if (route.snapshot['_routerState'].url.match(/embed/))
+      this.loadedAsEmbed = true;
+  }
 
   boardProducts = [];
+  boardState;
   canvas: any;
   canvasMeta = {
     identifier: {
@@ -30,18 +34,12 @@ export class BoardPreviewComponent implements OnInit {
         x: 0,
         y: 0
       },
-      aspectRatio: (16 / 9).toFixed(2),
-      zoomValue: 1
-    },
-    currentHistoryIndex: -1,
-    currentHistory: [],
+      aspectRatio: (16 / 9).toFixed(2)
+    }
   };
   appMeta = {
 
-    board: {
-      data: [],
-      currentIndex: 0,
-    },
+    board: new Board(),
     flag: {
       isBoot: true
     },
@@ -59,48 +57,34 @@ export class BoardPreviewComponent implements OnInit {
   ngOnInit(): void {
     // main entry point
     $(() => {
-      // initialize canvas area and set up all handlers
-      this.initializeCanvas(() => {
-        // get all user boards
-        this.getBoards();
+      this.canvas = new fb.Canvas(this.canvasMeta.identifier.id, {
+        containerClass: this.canvasMeta.identifier.containerArea,
+        preserveObjectStacking: true,
+        width: $(this.canvasMeta.identifier.dropArea).parent().width(),
+        height: $(this.canvasMeta.identifier.dropArea).parent().width() / Number.parseFloat(this.canvasMeta.value.aspectRatio),
+        selection: true
       });
-    });
-  }
-
-  getBoards(): void {
-    const uuid = this.route.snapshot.paramMap.get('uuid');
-    this.boardService.getBoardByID(uuid)
-      .subscribe(response => {
-        let boardFound = false;
-        this.appMeta.board.data = response;
-        this.appMeta.board.data.forEach((boardObject, objectIndex) => {
-          // convert state back to json
-          this.appMeta.board.data[objectIndex].state = JSON.parse(boardObject.state);
-          if (boardObject.uuid == uuid) {
-            boardFound = true;
-            this.appMeta.board.currentIndex = objectIndex;
-            this.canvasMeta.currentHistory.push(boardObject.state);
-            this.canvasMeta.currentHistoryIndex++;
-            this.updateStateFromHistory();
+      
+      // update canvas center point
+      this.updateCanvasCenter();
+      
+      const uuid = this.route.snapshot.paramMap.get('uuid');
+      this.boardService.getBoardByID(uuid)
+        .subscribe(response => {
+          if (response[0]) {
+            this.appMeta.board = response[0];
+            this.boardState = JSON.parse(this.appMeta.board.state.toString());
+            this.canvas.loadFromJSON(this.appMeta.board.state, () => {
+              if (this.appMeta.flag.isBoot) {
+                this.appMeta.flag.isBoot = false;
+                this.enterPreviewMode();
+                this.handleResize(true);
+              }
+            });
           }
         });
-      });
-  }
-
-  initializeCanvas = (callback) => {
-    this.canvas = new fb.Canvas(this.canvasMeta.identifier.id, {
-      containerClass: this.canvasMeta.identifier.containerArea,
-      preserveObjectStacking: true,
-      width: $(this.canvasMeta.identifier.dropArea).parent().width(),
-      height: $(this.canvasMeta.identifier.dropArea).parent().width() / Number.parseFloat(this.canvasMeta.value.aspectRatio),
-      selection: true
     });
-
-    // update canvas center point
-    this.updateCanvasCenter();
-    if (callback)
-      callback();
-  };
+  }
 
   updateCanvasCenter = () => {
     let center = this.canvas.getCenter();
@@ -110,19 +94,9 @@ export class BoardPreviewComponent implements OnInit {
     };
   };
 
-  updateStateFromHistory = () => {
-    return this.canvas.loadFromJSON(this.canvasMeta.currentHistory[this.canvasMeta.currentHistoryIndex], () => {
-      if (this.appMeta.flag.isBoot) {
-        this.appMeta.flag.isBoot = false;
-        this.enterPreviewMode();
-        this.handleResize(true);
-      }
-    });
-  };
-
   handleResize = (forceUpdate = false) => {
     let previousWidth = forceUpdate
-      ? this.appMeta.board.data[this.appMeta.board.currentIndex].state.canvas.width
+      ? this.boardState.canvas.width
       : this.canvas.width;
     let currentWidth = $(this.canvasMeta.identifier.dropArea)
       .parent()
@@ -166,8 +140,10 @@ export class BoardPreviewComponent implements OnInit {
       this.boardProducts.push({
         main_image: object.referenceObject.path ? object.referenceObject.path : "",
         site: object.referenceObject.brand ? object.referenceObject.brand : "",
+        brand: object.referenceObject.brand ? object.referenceObject.brand : "",
         name: object.referenceObject.name ? object.referenceObject.name : "",
         is_price: object.referenceObject.price ? object.referenceObject.price : "",
+        price: object.referenceObject.price ? object.referenceObject.price : "",
         sku: object.referenceObject.sku ? object.referenceObject.sku : ""
       });
       let objectCenter = object.getCenterPoint();

@@ -77,7 +77,7 @@ import { CurrentBoardComponent } from './components/current-board/board.componen
     StepOneComponent,
     StepTwoComponent,
     BoardProductsComponent,
-    CurrentBoardComponent
+    CurrentBoardComponent,
   ],
   entryComponents: [AddViaUrlComponent],
   providers: [BoardService, CookieService]
