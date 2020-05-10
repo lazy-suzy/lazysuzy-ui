@@ -22,7 +22,6 @@ export class BoardProductsComponent implements OnInit {
     if (changes['products'] && changes['products'].previousValue !== changes['products'].currentValue) {
       let products = changes['products'].currentValue || [];
       this.products = [...products] || [];
-      debugger;
     }
 
     if (changes['isAsset'] && changes['isAsset'].previousValue !== changes['isAsset'].currentValue) {
@@ -35,10 +34,12 @@ export class BoardProductsComponent implements OnInit {
   }
 
   transformAssetToProduct(assets) {
-    assets = assets.map(ast=>{
+    assets = assets.map(ast => {
+      const baseImageUrl = '/assets/images/';
       return {
         ...ast,
-        main_image:ast.path
+        // main_image: baseImageUrl + ast.path,
+        main_image: 'https://via.placeholder.com/150'
       };
     })
     return assets;

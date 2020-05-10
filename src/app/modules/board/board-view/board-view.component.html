@@ -83,7 +83,15 @@
         </div>
 
         <div *ngIf="selectedItem==='add'">
-          <app-board-add [allAssets]="appMeta.asset" [userId]="currentUser.id" (previewProduct)="handlePreviewProductToBoardUpdates($event)"></app-board-add>
+          <app-board-add [allAssets]="appMeta.asset" [userId]="currentUser.id" (previewProduct)="handleProductPreview($event)"></app-board-add>
+          <div class="static-bottom-panel-wrapper" *ngIf="productForPreview" style="z-index: 9999999;">
+            <div class="static-bottom-panel selected">
+              <app-product-preview [data]="productForPreview"
+                (clearProductPreview)="handleClearProductPreview($event)"
+                (addProductBoard)="handleAddProductBoardPreview($event)">
+              </app-product-preview>
+            </div>
+          </div>
         </div>
 
         <div *ngIf="selectedItem==='board'">

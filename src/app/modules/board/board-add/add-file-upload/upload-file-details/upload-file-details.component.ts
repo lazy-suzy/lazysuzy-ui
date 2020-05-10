@@ -40,7 +40,7 @@ export class UploadFileDetailsComponent implements OnInit {
 
   cancelAddImgViaUrl() {
     const payload = {
-      name: 'cancel',
+      name: 'cancel-save-image-details',
       data: {}
     };
   }
@@ -49,7 +49,7 @@ export class UploadFileDetailsComponent implements OnInit {
     const data = {}
     const payload = {
       name: 'save-image-details',
-      data: data
+      data: this.step.value
     };
     this.onYesClick(payload);
   }

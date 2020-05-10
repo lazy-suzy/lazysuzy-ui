@@ -31,7 +31,7 @@ export class BoardViewComponent implements OnInit, AfterViewInit {
     private cookieService: CookieService,
     public boardService: BoardService,
     private route: ActivatedRoute
-  ) { 
+  ) {
     const user = JSON.parse(localStorage.getItem('user'));
     this.currentUser = user;
   }
@@ -45,9 +45,10 @@ export class BoardViewComponent implements OnInit, AfterViewInit {
     this.handlePreviewMode(this.selectedItem);
   }
 
-  handleAddProductBoardPreview($event) { }
+  handleAddProductBoardPreview($event) {  }
 
   handleSelectCategory($event) {
+    this.productForPreview = null;
     this.boardService.setCategory($event);
     this.selectSideBarItem({
       name: 'Browse',
@@ -76,7 +77,7 @@ export class BoardViewComponent implements OnInit, AfterViewInit {
           refId: i
         };
       });
-      this.boardService.setBoardData(this.remoteProducts,this.selectedCategory, s.filterData || {});
+      this.boardService.setBoardData(this.remoteProducts, this.selectedCategory, s.filterData || {});
       this.showLoader = false;
     });
   }
@@ -505,6 +506,8 @@ export class BoardViewComponent implements OnInit, AfterViewInit {
       .subscribe(response => {
         if (response.length > 0) {
           this.appMeta.asset = response;
+          console.log("Assets", this.appMeta.asset);
+
           this.appMeta.flag.isAssetDirty = true;
           this.appMeta.flag.isProductPanelDirty = true;
           this.renderAppMeta();
@@ -1381,21 +1384,21 @@ export class BoardViewComponent implements OnInit, AfterViewInit {
           this.boardService.updateAsset(new Asset({
             asset_id: activeObject.referenceObject.id,
           })).subscribe(response => {
-              activeObject.referenceObject.transparentPath =
-                response.transparent_path;
-              activeObject.setSrc(response.transparent_path, () => {
-                activeObject.scaleX =
-                  (dimentionBefore.width * dimentionBefore.scaleX) /
-                  activeObject.width;
-                activeObject.scaleY =
-                  (dimentionBefore.height * dimentionBefore.scaleY) /
-                  activeObject.height;
-                this.canvasMeta.flag.isCurrentObjectTransparentSelected = true;
-                this.canvas.discardActiveObject();
-                this.updateToolbar();
-                this.canvas.renderAll();
-              });
+            activeObject.referenceObject.transparentPath =
+              response.transparent_path;
+            activeObject.setSrc(response.transparent_path, () => {
+              activeObject.scaleX =
+                (dimentionBefore.width * dimentionBefore.scaleX) /
+                activeObject.width;
+              activeObject.scaleY =
+                (dimentionBefore.height * dimentionBefore.scaleY) /
+                activeObject.height;
+              this.canvasMeta.flag.isCurrentObjectTransparentSelected = true;
+              this.canvas.discardActiveObject();
+              this.updateToolbar();
+              this.canvas.renderAll();
             });
+          });
         }
         break;
       case 'undoTransparent':

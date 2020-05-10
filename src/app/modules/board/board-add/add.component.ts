@@ -2,11 +2,6 @@ import { Component, OnInit, Output, EventEmitter, Input } from '@angular/core';
 import { MatDialog } from '@angular/material';
 import { AddViaUrlComponent } from './add-via-url/add-via-url.component';
 import { BoardService } from 'src/app/shared/services/board/board.service';
-import { FileUploader, FileLikeObject, FileItem } from 'ng2-file-upload';
-
-const URL = 'https://evening-anchorage-3159.herokuapp.com/api/';
-
-// import * as dropzone from 'dropzone';
 
 @Component({
   selector: 'app-board-add',
@@ -42,26 +37,32 @@ export class BoardAddComponent implements OnInit {
     this.filterUploads(this.allAssets, this.userId);
   }
 
-  filterUploads(assets,userId){
-    this.myUploads = assets.filter(asst=>{
-      return asst.user_id == userId;
+  filterUploads(assets, userId) {
+    assets = assets.map((ele, i) => {
+      return {
+        ...ele,
+        refId: i
+      };
     });
-    this.allUploads = assets.filter(asst=>{
-      return asst.user_id == userId;
-    });
+    this.myUploads = [...assets];
+    this.allUploads = [...assets];
+
+    //Logic for filtering comes here.
+    // this.myUploads = assets.filter(asst => {
+    //   return asst.user_id == userId;
+    // });
+    // this.allUploads = assets.filter(asst => {
+    //   return asst.user_id == userId;
+    // });
   }
 
-  ngOnInit(): void {
-    this.uploader.onBeforeUploadItem = (item: FileItem) => {
-      item.withCredentials = false;
-      // this.uploader.authToken = 'Bearer ' + this.boxTokenResponse.userToken;
-      // this.uploader.options.additionalParameter = {
-      //   name: item.file.name,
-      //   parent_id: this.parentFolderId
-      // };
-
-    };
+  handleFileUploadSuccess(event) {
+    this.allAssets.push(event.response);
+    // this.allAssets = [...this.allAssets];
+    this.filterUploads(this.allAssets, this.userId);
   }
+
+  ngOnInit(): void {}
 
   openDialog(): void {
     const dialogRef = this.dialog.open(AddViaUrlComponent, {
@@ -83,20 +84,6 @@ export class BoardAddComponent implements OnInit {
 
   handlePreviewProduct(product) {
     this.previewProduct.emit(product);
-  }
-
-  public uploader: FileUploader = new FileUploader({
-    disableMultipart: false,
-    itemAlias: 'attachment',
-    allowedFileType: ['image']
-  });
-
-  public onFileSelected(event: EventEmitter<File[]>) {
-    const file: File = event[0];
-    this.boardService.uploadFileManual(file).subscribe(res => {
-      console.log("Response here");
-      this.showLoader = false;
-    });
   }
 
 }

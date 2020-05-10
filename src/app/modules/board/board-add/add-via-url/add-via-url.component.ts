@@ -49,7 +49,6 @@ export class AddViaUrlComponent implements OnInit {
         // file:
       });
       this.boardService.addAsset(asset).subscribe(res => {
-        debugger;
         this.showLoader = false;
         this.onYesClick(res);
       });

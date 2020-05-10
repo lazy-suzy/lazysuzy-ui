@@ -69,10 +69,10 @@ export class BoardService extends SharedBoardService {
       );
   }
 
-  addAsset(asset: Asset): Observable<Asset> {
-    return this.http.post<Asset>(this.assetEndpoint, asset, this.httpOptions).pipe(
-      tap((newAsset: Asset) => this.log(`add asset w/ id=${newAsset.asset_id}`)),
-      catchError(this.handleError<Asset>('addAsset'))
+  addAsset(asset: any): Observable<any> {
+    return this.http.post<any>(this.assetEndpoint, asset, this.httpOptions).pipe(
+      tap((newAsset: any) => this.log(`add asset w/ id=${newAsset.asset_id}`)),
+      catchError(this.handleError<any>('addAsset'))
     );
   }
 
