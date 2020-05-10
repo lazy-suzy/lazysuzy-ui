@@ -68,6 +68,14 @@
                   "maximumError": "5mb"
                 }
               ]
+            },
+            "testing": {
+              "fileReplacements": [
+                {
+                  "replace": "src/environments/environment.ts",
+                  "with": "src/environments/environment.testing.ts"
+                }
+              ]
             }
           }
         },
@@ -79,6 +87,9 @@
           "configurations": {
             "production": {
               "browserTarget": "lazysuzy-ui:build:production"
+            },
+            "testing": {
+              "browserTarget": "lazysuzy-ui:build:testing"
             }
           }
         },

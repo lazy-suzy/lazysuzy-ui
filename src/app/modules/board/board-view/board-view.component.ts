@@ -5,9 +5,13 @@ import { SideNavItems } from './../sidenavitems';
 import { ShortcutInput } from "ng-keyboard-shortcuts";
 import * as $ from 'jquery';
 import { Board } from '../board';
-import { BoardService } from '../board.service';
-import { OverlayPanel } from 'primeng/overlaypanel';
 import { Asset } from '../asset';
+import { BoardService } from '../board.service';
+
+import { OverlayPanel } from 'primeng/overlaypanel';
+import { MatDialog } from '@angular/material';
+import { BoardPopupComponent } from '../board-popup/board-popup.component';
+
 declare const fb: any;
 
 @Component({
@@ -29,11 +33,26 @@ export class BoardViewComponent implements OnInit, AfterViewInit {
 
   constructor(
     private cookieService: CookieService,
+    private dialog: MatDialog,
     public boardService: BoardService,
     private route: ActivatedRoute
   ) {
     const user = JSON.parse(localStorage.getItem('user'));
     this.currentUser = user;
+  }
+
+  openPopup(param: string) {
+    const dialogRef = this.dialog.open(BoardPopupComponent, {
+      panelClass: 'custom-dialog-container',
+      data: {
+        type: param,
+        board: this.appMeta.board.data[0]
+      },
+      width: '40%',
+    });
+    // dialogRef.afterClosed().subscribe(result => {
+    //   console.log('The dialog was closed', result);
+    // });
   }
 
   selectSideBarItem(item) {
