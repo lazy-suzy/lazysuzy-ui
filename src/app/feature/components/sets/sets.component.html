@@ -1,10 +1,7 @@
 <div>
   <span class="title">Options</span>
   <div class="sets-container" *ngFor="let item of sets">
-    <a href="/product/{{ item.sku }}"
-      ><i class="fas fa-external-link-alt"></i
-    ></a>
-    <span class="w-60-ns w-50"> {{ item.name }} </span>
+    <span class="w-60-ns w-40"> <a [href]="item.link">{{ item.name }}</a>  </span>
 
     <ng-container
       *ngIf="
@@ -12,8 +9,8 @@
         else isOOS
       "
     >
-      <div class="w-50 flex">
-        <span class="price w-40-ns w-30 tr">
+      <div class="w-60 flex">
+        <span class="price w-50-ns w-30 tr">
           ${{ item.inventory_product_details.price }}
         </span>
 
@@ -24,10 +21,10 @@
     </ng-container>
 
     <ng-template #isOOS>
-      <div class="w-50 flex">
-        <div class="w-40-ns w-30 flex tr">
+      <div class="w-60 flex">
+        <div class="w-50-ns w-30 flex tr">
           <span
-            class="price {{ item.price !== item.was_price ? 'w-40' : 'w-100' }}"
+            class="price {{ item.price !== item.was_price ? 'w-40 pad-0' : 'w-100' }}"
             >${{ item.price }}</span
           >
 

@@ -73,33 +73,33 @@
     </div>
     <div class="order-details section">
       <div class="flex-ns">
-        <div class="w-50-ns mh4-ns">
+        <div class="w-50-ns mh4-ns" *ngIf="deliveryData.length > 0">
           <div class="header b">SHIPPING DETAILS</div>
           <div class="content ml2 pv2">
             <div>
-              {{ deliveryData[0].billing_f_Name }}
-              {{ deliveryData[0].billing_l_Name }}
+              {{ deliveryData[0].shipping_f_Name }}
+              {{ deliveryData[0].shipping_l_Name }}
             </div>
             <div>
               {{
-                deliveryData[0].billing_phone
-                  | americanNumber: deliveryData[0].billing_phone
+                deliveryData[0].shipping_phone
+                  | americanNumber: deliveryData[0].shipping_phone
               }}
             </div>
 
-            <div>{{ deliveryData[0].billing_address_line1 }}</div>
-            <div>{{ deliveryData[0].billing_address_line2 }}</div>
-            <div>{{ deliveryData[0].billing_city }}</div>
+            <div>{{ deliveryData[0].shipping_address_line1 }}</div>
+            <div>{{ deliveryData[0].shipping_address_line2 }}</div>
+            <div>{{ deliveryData[0].shipping_city }}</div>
             <div>
-              {{ deliveryData[0].billing_state }},
-              {{ deliveryData[0].billing_zipcode }}
+              {{ deliveryData[0].shipping_state }},
+              {{ deliveryData[0].shipping_zipcode }}
             </div>
           </div>
         </div>
 
         <div class="w-50-ns mh4-ns">
           <div class="header b">PAYMENT DETAILS</div>
-          <div class="content ml2 pv2">
+          <div class="content ml2 pv2" *ngIf="cardDetails.length > 0">
             <div>XXXX XXXXXX X{{ cardDetails.last4 }}</div>
             <div>
               EXP: {{ cardDetails.exp_month }}/{{ cardDetails.exp_year }}
@@ -113,10 +113,10 @@
         </div>
       </div>
     </div>
-  </div>
-  <div class="mv3">
-    <div class="b tc">
-      Please check your inbox for a confirmation email
+    <div class="mv3">
+      <div class="b tc">
+        Please check your inbox for a confirmation email
+      </div>
     </div>
   </div>
 </div>

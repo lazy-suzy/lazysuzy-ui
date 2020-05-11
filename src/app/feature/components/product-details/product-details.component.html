@@ -94,7 +94,7 @@
           <hr class="modal-hr mt-3" *ngIf="product.set" />
         </ng-container>
         <ng-template #allConditions>
-          <hr class="modal-hr mt-3" *ngIf="isVariationExist || product.set" />
+          <hr class="modal-hr mt-3" *ngIf="isVariationExist || product.set.length > 0" />
         </ng-template>
       </div>
 
@@ -124,12 +124,8 @@
           (setPrice)="onSetPrice($event)"
           (setImage)="onSetImage($event)"
         ></app-variations>
-        <hr
-          class="modal-hr mt-3"
-          *ngIf="product.set && !isSetItemInInventory"
-        />
         <app-sets
-          *ngIf="product.set"
+          *ngIf="product.set && product.set.length > 0"
           [sets]="product.set"
           [brand]="product.site"
         ></app-sets>
