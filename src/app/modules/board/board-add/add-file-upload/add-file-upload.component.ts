@@ -43,7 +43,7 @@ export class AddFileUploadComponent {
     });
   }
 
-  handleFileUploadSuccess(){
+  handleFileUploadSuccess() {
     const response = {
       "asset_id": 16,
       "user_id": 1,
@@ -66,14 +66,18 @@ export class AddFileUploadComponent {
     this.hasAnotherDropZoneOver = e;
   }
 
-  clearEverything(){
-    this.uploader.queue.forEach(file=>{
+  clearEverything() {
+    this.uploader.queue.forEach(file => {
       file.remove();
     });
   }
 
   handleUpload() {
     this.openDialog();
+  }
+
+  handleCancelUpload() {
+    this.uploader.clearQueue();
   }
 
   openDialog(): void {
