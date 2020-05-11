@@ -81,15 +81,17 @@ export class BrowsefilterComponent implements OnInit {
   }
 
   applyFilters() {
-    console.log('applyFilters');
-    this.showLoader = true;
-    // this.boardService.saveAddViaUrl(event).subscribe(s => {
-    //   this.showLoader = false;
-    //   this.updatesFromFilter.emit({
-    //     name: 'TOGGLE_FILTER_OVERLAY',
-    //     value: false
-    //   });
-    // });
+    this.updatesFromFilter.emit({
+      name: 'APPLY_FILTERS',
+      payload: {}
+    });
+  }
+
+  cancelFilters(){
+    this.updatesFromFilter.emit({
+      name: 'CANCEL_FILTERS',
+      payload: {}
+    });
   }
 
 }

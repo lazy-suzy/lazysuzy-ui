@@ -52,6 +52,13 @@
                 <div class="filter-bar-container">
                     <div class="filter-bar js-filter-section" id="desktop-filter">
                         <div class="tabs">
+                          <!-- <button (click)='xpandStatus=xpandStatus?false:true'>Filters</button> -->
+                          <mat-expansion-panel [(expanded)]="xpandStatus">
+                            <mat-expansion-panel-header>
+                              <mat-icon>filter_list</mat-icon>
+                              </mat-expansion-panel-header>
+                            <app-browse-filter (updatesFromFilter)="handleFiltersUpdates($event)"></app-browse-filter>
+                          </mat-expansion-panel>
                         </div>
                     </div>
                 </div>

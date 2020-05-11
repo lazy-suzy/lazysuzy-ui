@@ -31,6 +31,7 @@ export class BoardViewComponent implements OnInit, AfterViewInit {
   sideBarItems = SideNavItems;
   @ViewChild('browsefilter', { static: false }) browsefilter?: OverlayPanel;
   currentUser = null;
+  xpandStatus = false;
 
   constructor(
     private cookieService: CookieService,
@@ -73,6 +74,16 @@ export class BoardViewComponent implements OnInit, AfterViewInit {
     }
     this.productForPreview = null;
     this.handlePreviewMode(this.selectedItem);
+  }
+
+  handleFiltersUpdates(event) {
+    if (event.name === 'APPLY_FILTERS') {
+      //Apply filters
+      this.xpandStatus = false;
+    }
+    else if (event.name === 'CANCEL_FILTERS') {
+      this.xpandStatus = false;
+    }
   }
 
   handleAddProductBoardPreview($event) { }
