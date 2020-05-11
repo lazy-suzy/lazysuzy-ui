@@ -3,6 +3,7 @@ import { FileUploader } from 'ng2-file-upload';
 import { MatDialog } from '@angular/material';
 import { UploadFileDetailsComponent } from './upload-file-details/upload-file-details.component';
 import { BoardService } from '../../board.service';
+import { CookieService } from 'ngx-cookie-service';
 
 const URL = 'http://staging.lazysuzy.com:8081/api/board/asset';
 
@@ -19,7 +20,8 @@ export class AddFileUploadComponent {
   @Output() fileUploadedChanges = new EventEmitter<any>();
 
   constructor(
-    public dialog: MatDialog
+    public dialog: MatDialog,
+    private cookie: CookieService
   ) {
     this.initUploader();
   }
@@ -28,7 +30,7 @@ export class AddFileUploadComponent {
     this.uploader = new FileUploader({
       url: URL,
       disableMultipart: false,
-      headers: [{ name: 'Authorization', value: 'Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiIsImp0aSI6IjJhY2ZhYjk5OTljNjAzOTJmZDdiNDcxZjBmNWU4OTc4N2FkY2E5Zjc3NWFjZTEyYzYwMmYyOGZiMmJhMDEyYjZiY2Q1OTg5Yzk3YWNjMjA2In0.eyJhdWQiOiIzIiwianRpIjoiMmFjZmFiOTk5OWM2MDM5MmZkN2I0NzFmMGY1ZTg5Nzg3YWRjYTlmNzc1YWNlMTJjNjAyZjI4ZmIyYmEwMTJiNmJjZDU5ODljOTdhY2MyMDYiLCJpYXQiOjE1ODg5NjM0ODYsIm5iZiI6MTU4ODk2MzQ4NiwiZXhwIjoxNjIwNDk5NDg2LCJzdWIiOiIxMDkiLCJzY29wZXMiOltdfQ.U9fIcMZmXiFgUpTOuJFwJq3JJ6NegfTxhfd7tcEkTf2P9vgbLpZvr2THEuQ9kDv3Cy1G_Ig6c2Vjzh7Jv_eBhUEMrbBc5nAaUklzprU6gBubRWdGeQOAm-iVxvufGCxCoa-8Os_2AfBRONf2Ow3VyB-njQvoBSd9PCOCsoMUgO3Yyz8CaHR9Jd4oZOx7083sNSJmWZKtyA2UuErHvyvLXFbFCU5KAtWtyUunfamhcI7uPYw9HAq-fGKwOWxrzcIe8JLtyWQ2J6rNze_VMaqXFBXCp3_hkh_cmtT9qMZzPyt1DZru6BKkidn1pX2OWtjlhw9-fgWa3lJ2WcQY6Go8RelUFYka-6XIKdBFSVdZPUNACcDH__rFCzuu3rU9rfl22lqN84khO1LmmiBJRAdWcRRPS0XMHsQ9SYHhVeUKboU_LVHI_hXr0xXrxkJMZwT91aVLYLy0XQqmpmCmyOWmIMZgkKEbuFzZkYc94ZlRpRABUjb7kLKbETFqEtG3K_k59n04jlwD7Qf8SE6g9UtIzb7WMgFhdIwCcKTZRk1wqR7xyYQ_g5alsR03GNL_ZnovHRQSCyRWl4n8W0Q1Y6l7MC42ZT8a5VQZgEnvkfNNbnqslqyNe-e0n8YZIQZHkkllP4jbOSRn2f0Nfa1LC_I5zoEG87uyTyt53Ak0HgeCOaQ' }]
+      headers: [{ name: 'Authorization', value: `Bearer ${this.cookie.get('token')}` }]
     });
     this.uploader.onBuildItemForm = (fileItem: any, form: any) => {
       for (let [key, value] of Object.entries(this.currentAsset)) {
