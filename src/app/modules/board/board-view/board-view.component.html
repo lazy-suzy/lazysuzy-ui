@@ -57,7 +57,7 @@
                             <mat-expansion-panel-header>
                               <mat-icon>filter_list</mat-icon>
                               </mat-expansion-panel-header>
-                            <app-browse-filter (updatesFromFilter)="handleFiltersUpdates($event)"></app-browse-filter>
+                            <app-browse-filter [filterData]="filterData" (updatesFromFilter)="handleFiltersUpdates($event)"></app-browse-filter>
                           </mat-expansion-panel>
                         </div>
                     </div>
@@ -66,14 +66,17 @@
             </div>
         </div>
         
-
-          <app-loader class="spinner" *ngIf="showLoader"></app-loader>
-
           <app-board-products
             [products]="remoteProducts"
-            *ngIf="!showLoader"
             (previewProduct)="handleProductPreview($event)">
           </app-board-products>
+
+
+          <button type="button" *ngIf="!showLoader" (click)="loadMore()" class="btn btn-primary">
+            Load More
+          </button>
+
+          <app-loader *ngIf="showLoader"></app-loader>
 
           <div class="static-bottom-panel-wrapper" *ngIf="productForPreview" style="z-index: 9999999;">
             <div class="static-bottom-panel selected">

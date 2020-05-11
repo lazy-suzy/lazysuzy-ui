@@ -29,9 +29,12 @@ export class BoardViewComponent implements OnInit, AfterViewInit {
   showLoader = false;
   productForPreview = null;
   sideBarItems = SideNavItems;
+  filterData: any = {};
+  pageNo = 0;
   @ViewChild('browsefilter', { static: false }) browsefilter?: OverlayPanel;
   currentUser = null;
   xpandStatus = false;
+  appliedFilters = {};
 
   constructor(
     private cookieService: CookieService,
@@ -71,15 +74,22 @@ export class BoardViewComponent implements OnInit, AfterViewInit {
     if (this.selectedItem === 'browse') {
       let selCat = this.boardService.getCategory();
       this.getBrowseData(selCat);
+      this.filterData = {};
+      this.appliedFilters = {};
+      this.pageNo = 0;
+      this.remoteProducts = [];
     }
     this.productForPreview = null;
     this.handlePreviewMode(this.selectedItem);
   }
 
   handleFiltersUpdates(event) {
-    if (event.name === 'APPLY_FILTERS') {
+    if (event.name === 'APPLY_FILTERS' || event.name === 'CLEAR_FILTERS') {
       //Apply filters
       this.xpandStatus = false;
+      this.appliedFilters = event.payload;
+      let selCat = this.boardService.getCategory();
+      this.getBrowseData(selCat);
     }
     else if (event.name === 'CANCEL_FILTERS') {
       this.xpandStatus = false;
@@ -97,6 +107,8 @@ export class BoardViewComponent implements OnInit, AfterViewInit {
       value: 'browse',
       route: 'board-browse'
     });
+    this.xpandStatus = false;
+    this.filterData = {};
   }
 
   handleProductPreview(product) {
@@ -110,17 +122,24 @@ export class BoardViewComponent implements OnInit, AfterViewInit {
   getBrowseData(categ) {
     this.selectedCategory = categ;
     this.showLoader = true;
-    this.boardService.getBrowseTabData(this.selectedCategory).subscribe((s: any) => {
-      this.remoteProducts = [...(s.products) || []];
+    this.boardService.getBrowseTabData(this.selectedCategory, this.appliedFilters, this.pageNo).subscribe((s: any) => {
+      this.remoteProducts = [...this.remoteProducts, ...(s.products || [])];
       this.remoteProducts = this.remoteProducts.map((ele, i) => {
         return {
           ...ele,
           refId: i
         };
       });
+      this.filterData = s.filterData || {};
+      this.pageNo++;
       this.boardService.setBoardData(this.remoteProducts, this.selectedCategory, s.filterData || {});
       this.showLoader = false;
     });
+  }
+
+  loadMore() {
+    let selCat = this.boardService.getCategory();
+    this.getBrowseData(selCat);
   }
 
   handleGoToSelect(event) {
@@ -131,12 +150,6 @@ export class BoardViewComponent implements OnInit, AfterViewInit {
       value: 'select',
       route: 'board-select'
     });
-  }
-
-  handleUpdatesFromFilter(event) {
-    if (event.name === 'TOGGLE_FILTER_OVERLAY' && !event.value) {
-      this.browsefilter.hide();
-    }
   }
 
   canvas: any;

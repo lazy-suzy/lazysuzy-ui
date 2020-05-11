@@ -7,7 +7,7 @@ import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 })
 export class BoardProductsComponent implements OnInit {
 
-  @Input() products: any = [];
+  @Input() products: any = null;
   @Input() modifyPath: any = false;
   @Input() isAsset: any = false;
   productType = 'default';

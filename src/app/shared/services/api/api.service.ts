@@ -14,7 +14,7 @@ import {
 } from './../../models';
 import { MOCK_PRODUCT_FILTERS } from 'src/app/mocks';
 import { forkJoin } from 'rxjs'; // RxJS 6 syntax
-import { delay } from 'rxjs/operators';
+import { delay, filter } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
@@ -24,7 +24,7 @@ export class ApiService {
     private httpService: HttpService,
     private cookie: CookieService,
     private utils: UtilsService
-  ) {}
+  ) { }
 
   getNewArrivals(filters = '', page = 0): Observable<IProductsPayload> {
     const endpoint = `products/all`;
@@ -257,8 +257,8 @@ export class ApiService {
     return of(result).pipe(delay(1000));
   }
 
-  getBrowseTabData(id: string): Observable<any> {
-    const endpoint = `products/all?filters=category:${id}&sort_type=&pageno=0&limit=24&board-view=true`;
+  getBrowseTabData(id: string, appliedFilters, pageNo): Observable<any> {
+    const endpoint = `products/all?filters=category:${id}&sort_type=&pageno=${pageNo || 0}&limit=24&board-view=true`;
     const url = env.useLocalJson
       ? `${env.JSON_BASE_HREF}${endpoint}`
       : `${env.API_BASE_HREF}${endpoint}`;

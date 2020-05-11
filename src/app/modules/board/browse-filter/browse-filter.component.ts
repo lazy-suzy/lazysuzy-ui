@@ -1,6 +1,5 @@
-import { Component, OnInit, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter, Input } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
-import { BoardService } from 'src/app/shared/services/board/board.service';
 
 @Component({
   selector: 'app-browse-filter',
@@ -22,18 +21,35 @@ export class BrowsefilterComponent implements OnInit {
   productsColors: any[];
   selectedProductsColor: any[] = [];
 
-  filterData: any = [];
   @Output() updatesFromFilter: EventEmitter<any> = new EventEmitter();
   @Output() addProduct: EventEmitter<any> = new EventEmitter();
+  @Input() filterData: any = {};
 
   constructor(
-    private fb: FormBuilder,
-    private boardService: BoardService
+    private fb: FormBuilder
   ) { }
 
-  ngOnInit(): void {
-    this.createForm();
+  clearAllFilters() {
+    this.someValue = 0;
+    this.min = 0;
+    this.max = 10000;
+
+    this.brandsDropdown = [];
+    this.selectedbrandsDropdown = [];
+
+    this.productsColors = [];
+    this.selectedProductsColor = [];
   }
+
+  ngOnChanges(changes: any) {
+    if (changes['filterData'] && changes['filterData'].previousValue !== changes['filterData'].currentValue) {
+      let filterData = changes['filterData'].currentValue || [];
+      this.filterData = { ...filterData } || {};
+      this.createForm(this.filterData);
+    }
+  }
+
+  ngOnInit(): void { }
 
   convertFilterDataForPlugin(brand, color) {
     let brands = (brand || []).map(ele => {
@@ -54,9 +70,8 @@ export class BrowsefilterComponent implements OnInit {
     };
   }
 
-  createForm() {
-    this.filterData = { ...(this.boardService.state.filterData || {}) };
-    const result = this.convertFilterDataForPlugin(this.filterData.brand, this.filterData.color);
+  createForm(filterData) {
+    const result = this.convertFilterDataForPlugin(filterData.brand, filterData.color);
     this.brandsDropdown = [...result.brands];
     this.productsColors = [...result.colors];
     this.filterForm = this.fb.group({
@@ -81,15 +96,28 @@ export class BrowsefilterComponent implements OnInit {
   }
 
   applyFilters() {
+    const payload = {
+      selectedbrands: this.selectedbrandsDropdown,
+      selectedProducts: this.selectedProductsColor,
+      price: this.someValue
+    };
     this.updatesFromFilter.emit({
       name: 'APPLY_FILTERS',
+      payload: payload
+    });
+  }
+
+  cancelFilters() {
+    this.updatesFromFilter.emit({
+      name: 'CANCEL_FILTERS',
       payload: {}
     });
   }
 
-  cancelFilters(){
+  clearFilters() {
+    this.clearAllFilters();
     this.updatesFromFilter.emit({
-      name: 'CANCEL_FILTERS',
+      name: 'CLEAR_FILTERS',
       payload: {}
     });
   }
