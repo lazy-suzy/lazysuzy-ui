@@ -120,9 +120,15 @@ export class UtilsService {
     });
   }
 
-  compileMarkdown(data) {
+  compileMarkdown(data, site:string = 'West Elm') {
+    let compileData;
+    if (site !== 'West Elm') {
+      compileData = data.map(item => `*   ${item}`);
+    } else {
+      compileData = data;
+    }
     let mergedData = '';
-    for (let item of data) {
+    for (let item of compileData) {
       mergedData = `${mergedData}${
         item.indexOf('</h6>') > -1 ? '\n' : ''
       }${item}\n${item.indexOf('</h6>') > -1 ? '\n' : ''}`;

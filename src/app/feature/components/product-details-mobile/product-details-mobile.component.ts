@@ -91,7 +91,7 @@ export class ProductDetailsMobileComponent implements OnInit {
       .subscribe((payload: IProductDetail) => {
         this.product = payload;
         this.description = this.utils.compileMarkdown(this.product.description);
-        this.features = this.utils.compileMarkdown(this.product.features);
+        this.features = this.utils.compileMarkdown(this.product.features, this.product.site);
         this.dimensionExist = this.utils.checkDataLength(
           this.product.dimension
         );

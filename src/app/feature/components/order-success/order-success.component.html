@@ -100,9 +100,17 @@
         <div class="w-50-ns mh4-ns">
           <div class="header b">PAYMENT DETAILS</div>
           <div class="content ml2 pv2" *ngIf="cardDetails.length > 0">
+<<<<<<< HEAD
+            <div>XXXX XXXXXX X{{ this.cardDetails.last4 }}</div>
+            <div>
+              EXP: {{ this.cardDetails.exp_month }}/{{
+                this.cardDetails.exp_year
+              }}
+=======
             <div>XXXX XXXXXX X{{ cardDetails.last4 }}</div>
             <div>
               EXP: {{ cardDetails.exp_month }}/{{ cardDetails.exp_year }}
+>>>>>>> tester
             </div>
           </div>
           <div class="header b">DELIVERY METHOD</div>
@@ -119,4 +127,5 @@
       </div>
     </div>
   </div>
+  
 </div>

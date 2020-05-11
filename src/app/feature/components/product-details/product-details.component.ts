@@ -71,7 +71,7 @@ export class ProductDetailsComponent implements OnInit {
         );
         this.galleryRef.load(this.items);
         this.description = this.utils.compileMarkdown(this.product.description);
-        this.features = this.utils.compileMarkdown(this.product.features);
+        this.features = this.utils.compileMarkdown(this.product.features, this.product.site);
         this.dimensionExist = this.utils.checkDataLength(
           this.product.dimension
         );
