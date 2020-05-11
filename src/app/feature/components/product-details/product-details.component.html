@@ -91,10 +91,16 @@
           </div>
         </div>
         <ng-container *ngIf="product.redirect; else allConditions">
-          <hr class="modal-hr mt-3" *ngIf="product.set" />
+          <hr
+            class="modal-hr mt-3"
+            *ngIf="product.set && product.set.length > 0"
+          />
         </ng-container>
         <ng-template #allConditions>
-          <hr class="modal-hr mt-3" *ngIf="isVariationExist || product.set.length > 0" />
+          <hr
+            class="modal-hr mt-3"
+            *ngIf="isVariationExist || (product.set && product.set.length > 0)"
+          />
         </ng-template>
       </div>
 

@@ -83,10 +83,13 @@
       </button>
     </div>
     <ng-container *ngIf="product.redirect; else allConditions">
-      <hr class="modal-hr mt-3" *ngIf="product.set" />
+      <hr class="modal-hr mt-3" *ngIf="product.set && product.set.length > 0" />
     </ng-container>
     <ng-template #allConditions>
-      <hr class="modal-hr mt-3" *ngIf="isVariationExist || product.set.length > 0" />
+      <hr
+        class="modal-hr mt-3"
+        *ngIf="isVariationExist || (product.set && product.set.length > 0)"
+      />
     </ng-template>
     <div *ngIf="!isSetItemInInventory">
       <app-redirect
@@ -111,7 +114,11 @@
       (setImage)="onSetImage($event)"
       (reload)="onVariationChange()"
     ></app-variations>
-    <app-sets *ngIf="product.set && product.set.length > 0" [sets]="product.set" [brand]="product.site">
+    <app-sets
+      *ngIf="product.set && product.set.length > 0"
+      [sets]="product.set"
+      [brand]="product.site"
+    >
     </app-sets>
     <hr class="modal-hr" />
     <div class="pv2">
