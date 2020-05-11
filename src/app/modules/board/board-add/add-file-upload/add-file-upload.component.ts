@@ -4,6 +4,7 @@ import { MatDialog } from '@angular/material';
 import { UploadFileDetailsComponent } from './upload-file-details/upload-file-details.component';
 import { BoardService } from '../../board.service';
 import { CookieService } from 'ngx-cookie-service';
+import { DomSanitizer } from '@angular/platform-browser';
 
 const URL = 'http://staging.lazysuzy.com:8081/api/board/asset';
 
@@ -18,15 +19,18 @@ export class AddFileUploadComponent {
   hasAnotherDropZoneOver: boolean;
   currentAsset: any = {};
   @Output() fileUploadedChanges = new EventEmitter<any>();
+  localImageUrl = null;
 
   constructor(
     public dialog: MatDialog,
-    private cookie: CookieService
+    private cookie: CookieService,
+    public sanitizer: DomSanitizer
   ) {
     this.initUploader();
   }
 
   initUploader() {
+    this.localImageUrl = null;
     this.uploader = new FileUploader({
       url: URL,
       disableMultipart: false,
@@ -37,6 +41,10 @@ export class AddFileUploadComponent {
         form.append(key, value);
       }
     };
+    this.uploader.onAfterAddingFile = (fileItem) => {
+      let url = (window.URL) ? window.URL.createObjectURL(fileItem._file) : (window as any).webkitURL.createObjectURL(fileItem._file);
+      this.localImageUrl = url
+    }
     this.hasAnotherDropZoneOver = false;
     this.uploader.response.subscribe(res => {
       this.handleFileUploadSuccess(res);
@@ -61,6 +69,7 @@ export class AddFileUploadComponent {
     this.uploader.queue.forEach(file => {
       file.remove();
     });
+    // this.localImageUrl = null
   }
 
   handleUpload() {
