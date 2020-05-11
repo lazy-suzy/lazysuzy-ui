@@ -1,7 +1,9 @@
 <div>
   <span class="title">Options</span>
   <div class="sets-container" *ngFor="let item of sets">
-    <span class="w-60-ns w-40"> <a [href]="item.link">{{ item.name }}</a>  </span>
+    <span class="w-60-ns w-40">
+      <a [href]="item.link">{{ item.name }}</a>
+    </span>
 
     <ng-container
       *ngIf="
@@ -10,7 +12,7 @@
       "
     >
       <div class="w-60 flex">
-        <span class="price w-50 justify-end">
+        <span class="price w-60-ns w-50 justify-end tr">
           ${{ item.inventory_product_details.price }}
         </span>
 
@@ -22,11 +24,8 @@
 
     <ng-template #isOOS>
       <div class="w-60 flex">
-        <div class="w-50 flex justify-end">
-          <span
-            class="price "
-            >${{ item.price }}</span
-          >
+        <div class="w-50 w-60-ns flex justify-end">
+          <span class="price">${{ item.price }}</span>
 
           <span
             class="was-price  {{
