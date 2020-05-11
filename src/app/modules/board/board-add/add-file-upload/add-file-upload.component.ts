@@ -39,27 +39,15 @@ export class AddFileUploadComponent {
     };
     this.hasAnotherDropZoneOver = false;
     this.uploader.response.subscribe(res => {
-      // this.handleFileUploadSuccess();
+      this.handleFileUploadSuccess(res);
     });
     this.uploader.onAfterAddingFile = (file) => {
       file.withCredentials = false;
     };
   }
 
-  handleFileUploadSuccess() {
-    const response = {
-      "asset_id": 16,
-      "user_id": 1,
-      "name": "custom",
-      "price": null,
-      "brand": "custom",
-      "path": "uploads\/E52185BD-59C0-0682-6CCF-E2F461AACB0A.jpeg",
-      "transparent_path": null,
-      "is_private": 1,
-      "created_at": "2020-05-10 00:41:09",
-      "modified_at": "2020-05-10 00:41:09",
-      "is_active": 1
-    };
+  handleFileUploadSuccess(res) {
+    const response = JSON.parse(res);
     this.fileUploadedChanges.emit({
       response: response
     });
