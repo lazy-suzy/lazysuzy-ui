@@ -30,7 +30,7 @@ export class AddFileUploadComponent {
     this.uploader = new FileUploader({
       url: URL,
       disableMultipart: false,
-      headers: [{ name: 'Authorization', value: `Bearer ${this.cookie.get('token')}` }]
+      authToken: `Bearer ${this.cookie.get('token')}`,
     });
     this.uploader.onBuildItemForm = (fileItem: any, form: any) => {
       for (let [key, value] of Object.entries(this.currentAsset)) {
@@ -41,6 +41,9 @@ export class AddFileUploadComponent {
     this.uploader.response.subscribe(res => {
       // this.handleFileUploadSuccess();
     });
+    this.uploader.onAfterAddingFile = (file) => {
+      file.withCredentials = false;
+    };
   }
 
   handleFileUploadSuccess() {
