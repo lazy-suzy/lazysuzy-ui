@@ -10,6 +10,7 @@ export class AppProductPreviewComponent implements OnInit {
   @Input() data: any = {};
   @Output() addProductBoard: EventEmitter<any> = new EventEmitter();
   @Output() clearProductPreview: EventEmitter<any> = new EventEmitter();
+  dropType = 'default';
 
   constructor() { }
 
@@ -18,6 +19,9 @@ export class AppProductPreviewComponent implements OnInit {
   ngOnChanges(changes: any) {
     if (changes['data'] && changes['data'].previousValue !== changes['data'].currentValue) {
       this.data = changes['data'].currentValue || {};
+      if(this.data.dropType){
+        this.dropType = this.data.dropType;
+      }
     }
   }
 

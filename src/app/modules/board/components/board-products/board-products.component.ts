@@ -10,6 +10,7 @@ export class BoardProductsComponent implements OnInit {
   @Input() products: any = [];
   @Input() modifyPath: any = false;
   @Input() isAsset: any = false;
+  productType = 'default';
 
   @Output() updates: EventEmitter<any> = new EventEmitter();
   @Output() previewProduct: EventEmitter<any> = new EventEmitter();
@@ -28,6 +29,7 @@ export class BoardProductsComponent implements OnInit {
       let isAsset = changes['isAsset'].currentValue || [];
       this.isAsset = isAsset;
       if (this.isAsset) {
+        this.productType = 'custom';
         this.products = this.transformAssetToProduct(this.products);
       }
     }
@@ -35,11 +37,11 @@ export class BoardProductsComponent implements OnInit {
 
   transformAssetToProduct(assets) {
     assets = assets.map(ast => {
-      const baseImageUrl = '/assets/images/';
+      const imagePath = 'http://staging.lazysuzy.com:8081'+ ast.path;
       return {
         ...ast,
-        // main_image: baseImageUrl + ast.path,
-        main_image: 'https://via.placeholder.com/150'
+        main_image: imagePath,
+        dropType: 'custom'
       };
     })
     return assets;

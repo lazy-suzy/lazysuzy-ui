@@ -10,7 +10,7 @@
         <div class="brand">{{data?.site}}</div>
         <div class="price">{{data?.is_price}}</div>
         <div class="icons">
-            <div class="icon top-tooltip manual-drop" attr.data-product="{{data.refId}}" drop-type="image" type="default"
+            <div class="icon top-tooltip manual-drop" attr.data-product="{{data.refId}}" drop-type="image" attr.type="{{dropType}}"
                 data-title="Add to Board" (click)="addToBoard(data)">
                 <i class="mdi mdi-plus" aria-hidden="true"></i>
             </div>

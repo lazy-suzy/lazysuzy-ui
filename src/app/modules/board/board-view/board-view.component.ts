@@ -71,6 +71,7 @@ export class BoardViewComponent implements OnInit, AfterViewInit {
       let selCat = this.boardService.getCategory();
       this.getBrowseData(selCat);
     }
+    this.productForPreview = null;
     this.handlePreviewMode(this.selectedItem);
   }
 

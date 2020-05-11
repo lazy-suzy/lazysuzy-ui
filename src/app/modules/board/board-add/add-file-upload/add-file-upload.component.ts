@@ -69,6 +69,7 @@ export class AddFileUploadComponent {
     this.uploader.queue.forEach(file => {
       file.remove();
     });
+    // this.uploader.queue.pop();
     // this.localImageUrl = null
   }
 

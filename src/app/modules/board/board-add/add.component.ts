@@ -33,27 +33,23 @@ export class BoardAddComponent implements OnInit {
     if (changes['allAssets'] && changes['allAssets'].previousValue !== changes['allAssets'].currentValue) {
       let allAssets = changes['allAssets'].currentValue || [];
       this.allAssets = [...allAssets] || [];
+      this.allAssets = this.allAssets.map((ele, i) => {
+        return {
+          ...ele,
+          refId: i
+        };
+      });
     }
     this.filterUploads(this.allAssets, this.userId);
   }
 
   filterUploads(assets, userId) {
-    assets = assets.map((ele, i) => {
-      return {
-        ...ele,
-        refId: i
-      };
+    this.myUploads = assets.filter(asst => {
+      return asst.user_id == userId;
     });
-    this.myUploads = [...assets];
-    this.allUploads = [...assets];
-
-    //Logic for filtering comes here.
-    // this.myUploads = assets.filter(asst => {
-    //   return asst.user_id == userId;
-    // });
-    // this.allUploads = assets.filter(asst => {
-    //   return asst.user_id == userId;
-    // });
+    this.allUploads = assets.filter(asst => {
+      return asst.is_private == 0 || asst.user_id == userId;
+    });
   }
 
   handleFileUploadSuccess(event) {
