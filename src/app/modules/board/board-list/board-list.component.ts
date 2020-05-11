@@ -7,6 +7,7 @@ import { BoardService } from '../board.service';
 import { boardRoutesNames } from '../board.routes.names';
 import { BoardPopupComponent } from '../board-popup/board-popup.component';
 import { MatDialog } from '@angular/material';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-board-list',
@@ -64,6 +65,10 @@ export class BoardListComponent implements OnInit {
       },
       width: '40%',
     });
+  }
+
+  getPreviewImagePath(board: Board): string {
+    return environment.API_HREF + board.preview;
   }
 
 }

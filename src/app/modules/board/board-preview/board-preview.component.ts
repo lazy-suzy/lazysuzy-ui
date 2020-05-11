@@ -1,5 +1,5 @@
 import { Component, OnInit, HostListener } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 
 import { Board } from '../board';
 import { BoardService } from '../board.service';
@@ -15,13 +15,14 @@ export class BoardPreviewComponent implements OnInit {
 
   loadedAsEmbed = false;
   constructor(
-    private boardService: BoardService, private route: ActivatedRoute) {
+    private boardService: BoardService, private route: ActivatedRoute, private router: Router) {
     if (route.snapshot['_routerState'].url.match(/embed/))
       this.loadedAsEmbed = true;
   }
 
   boardProducts = [];
   boardState;
+  boardFound = false;
   canvas: any;
   canvasMeta = {
     identifier: {
@@ -69,9 +70,10 @@ export class BoardPreviewComponent implements OnInit {
       this.updateCanvasCenter();
       
       const uuid = this.route.snapshot.paramMap.get('uuid');
-      this.boardService.getBoardByID(uuid)
+      this.boardService.getBoardByID(uuid, true)
         .subscribe(response => {
           if (response[0]) {
+            this.boardFound = true;
             this.appMeta.board = response[0];
             this.boardState = JSON.parse(this.appMeta.board.state.toString());
             this.canvas.loadFromJSON(this.appMeta.board.state, () => {
@@ -82,6 +84,10 @@ export class BoardPreviewComponent implements OnInit {
               }
             });
           }
+
+          if (this.boardFound == false)
+            this.router.navigate(['/']);
+
         });
     });
   }

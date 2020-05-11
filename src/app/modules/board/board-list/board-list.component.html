@@ -20,7 +20,7 @@
     <div *ngFor="let board of boards; index as i;" class="col-sm-3">
       <div class="board-card">
         <div class="canvas-preview">
-          <img width="100%" class="edit-board" src="{{board.preview}}" />
+          <img width="100%" class="edit-board" [src]="getPreviewImagePath(board)" />
           <div class="board-card-icons">
             <span data-title="Edit" routerLink="../{{boardViewLink}}/{{board.uuid}}">
               <i class="mdi mdi-pencil" aria-hidden="true"></i>

@@ -1,5 +1,5 @@
 import { Component, OnInit, AfterViewInit, HostListener, ViewChild } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { CookieService } from 'ngx-cookie-service';
 import { SideNavItems } from './../sidenavitems';
 import { ShortcutInput } from "ng-keyboard-shortcuts";
@@ -11,6 +11,7 @@ import { BoardService } from '../board.service';
 import { OverlayPanel } from 'primeng/overlaypanel';
 import { MatDialog } from '@angular/material';
 import { BoardPopupComponent } from '../board-popup/board-popup.component';
+import { boardRoutesNames } from '../board.routes.names';
 
 declare const fb: any;
 
@@ -35,18 +36,27 @@ export class BoardViewComponent implements OnInit, AfterViewInit {
     private cookieService: CookieService,
     private dialog: MatDialog,
     public boardService: BoardService,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private router: Router
   ) {
     const user = JSON.parse(localStorage.getItem('user'));
     this.currentUser = user;
   }
 
   openPopup(param: string) {
+    if (this.appMeta.board.data[this.appMeta.board.currentIndex].type_privacy == 0) {
+      this.appMeta.board.data[this.appMeta.board.currentIndex].type_privacy = 1;
+      this.boardService.updateBoard(new Board({
+        uuid: this.appMeta.board.data[this.appMeta.board.currentIndex].uuid,
+        type_privacy: 1
+      })).subscribe();
+    }
+
     const dialogRef = this.dialog.open(BoardPopupComponent, {
       panelClass: 'custom-dialog-container',
       data: {
         type: param,
-        board: this.appMeta.board.data[0]
+        board: this.appMeta.board.data[this.appMeta.board.currentIndex]
       },
       width: '40%',
     });
@@ -64,7 +74,7 @@ export class BoardViewComponent implements OnInit, AfterViewInit {
     this.handlePreviewMode(this.selectedItem);
   }
 
-  handleAddProductBoardPreview($event) {  }
+  handleAddProductBoardPreview($event) { }
 
   handleSelectCategory($event) {
     this.productForPreview = null;
@@ -420,6 +430,11 @@ export class BoardViewComponent implements OnInit, AfterViewInit {
         preventDefault: true
       },
       {
+        key: "ctrl + p",
+        command: e => this.openPopup('publish'),
+        preventDefault: true
+      },
+      {
         key: "enter",
         command: e => this.applyShortcut("confirmCrop", ""),
         preventDefault: true
@@ -499,7 +514,7 @@ export class BoardViewComponent implements OnInit, AfterViewInit {
 
         // if board does not exist redirect user to board list
         if (boardFound == false)
-          console.log(this.appMeta.board.data, 'not found');
+          this.router.navigate(["../../" + boardRoutesNames.BOARD_LIST], { relativeTo: this.route });
         else {
           if (this.cookieService.get('backgroundColor') && this.cookieService.get('backgroundColor').length > 0) {
             this.canvas.setBackgroundColor(this.cookieService.get('backgroundColor'), function () {

@@ -39,8 +39,8 @@ export class BoardService extends SharedBoardService {
       );
   }
 
-  getBoardByID(board_id: string): Observable<Board[]> {
-    return this.http.get<Board[]>(this.boardEndpoint + `/` + board_id, this.httpOptions)
+  getBoardByID(board_id: string, previewMode: boolean = false): Observable<Board[]> {
+    return this.http.get<Board[]>(this.boardEndpoint + (previewMode ? '/preview' : '') + `/` + board_id, this.httpOptions)
       .pipe(
         tap(_ => this.log(`fetched board w/ id=${board_id}`)),
         catchError(this.handleError<Board[]>('getBoardsByID', []))

@@ -6,6 +6,7 @@ export class Board {
   preview: string;
   type_room: number;
   type_style: number;
+  type_privacy: number;
   is_active: boolean;
 
   constructor(values: Object = {}) {
