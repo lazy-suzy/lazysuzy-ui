@@ -71,8 +71,11 @@
             (previewProduct)="handleProductPreview($event)">
           </app-board-products>
 
-          <button type="button" *ngIf="!showLoader" (click)="loadMore()" class="btn btn-primary">
+          <button type="button" *ngIf="!showLoader && remoteProducts.length!=0" (click)="loadMore()" class="btn btn-primary">
             Load More
+          </button>
+          <button type="button" *ngIf="!showLoader && remoteProducts.length==0" (click)="loadMore()" class="btn btn-primary">
+            No products.Select another category.
           </button>
 
           <app-loader *ngIf="showLoader"></app-loader>
