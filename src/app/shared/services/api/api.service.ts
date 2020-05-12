@@ -258,7 +258,20 @@ export class ApiService {
   }
 
   getBrowseTabData(id: string, appliedFilters, pageNo): Observable<any> {
-    const endpoint = `products/all?filters=category:${id}&sort_type=&pageno=${pageNo || 0}&limit=24&board-view=true`;
+    let colors = appliedFilters.selectedColors || [];
+    let brands = appliedFilters.selectedbrands || [];
+    let selColorString = '';
+    let selBrandsString = '';
+    if (brands.length) {
+      selBrandsString = brands.toString();
+    }
+    if (colors.length) {
+      selColorString = colors.toString();
+    }
+    let brandQuery = `brand:${selBrandsString}`;
+    let colorQuery = `color:${selColorString}`;
+    let priceQuery = `price_from:0;price_to:${appliedFilters.price|| `10000`}`;
+    const endpoint = `products/all?filters=${brandQuery};${priceQuery};type:;${colorQuery};category:${id}&sort_type=&pageno=${pageNo || 0}&limit=24&board-view=true`;
     const url = env.useLocalJson
       ? `${env.JSON_BASE_HREF}${endpoint}`
       : `${env.API_BASE_HREF}${endpoint}`;

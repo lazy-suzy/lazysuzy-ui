@@ -72,12 +72,13 @@ export class BoardViewComponent implements OnInit, AfterViewInit {
   selectSideBarItem(item) {
     this.selectedItem = item.value;
     if (this.selectedItem === 'browse') {
-      let selCat = this.boardService.getCategory();
-      this.getBrowseData(selCat);
       this.filterData = {};
       this.appliedFilters = {};
       this.pageNo = 0;
       this.remoteProducts = [];
+      let selCat = this.boardService.getCategory();
+      this.getBrowseData(selCat);
+      this.productForPreview = null;
     }
     this.productForPreview = null;
     this.handlePreviewMode(this.selectedItem);
@@ -89,6 +90,7 @@ export class BoardViewComponent implements OnInit, AfterViewInit {
       this.xpandStatus = false;
       this.appliedFilters = event.payload;
       let selCat = this.boardService.getCategory();
+      this.remoteProducts = [...[]];
       this.getBrowseData(selCat);
     }
     else if (event.name === 'CANCEL_FILTERS') {
@@ -99,7 +101,6 @@ export class BoardViewComponent implements OnInit, AfterViewInit {
   handleAddProductBoardPreview($event) { }
 
   handleSelectCategory($event) {
-    this.productForPreview = null;
     this.boardService.setCategory($event);
     this.selectSideBarItem({
       name: 'Browse',
@@ -107,8 +108,6 @@ export class BoardViewComponent implements OnInit, AfterViewInit {
       value: 'browse',
       route: 'board-browse'
     });
-    this.xpandStatus = false;
-    this.filterData = {};
   }
 
   handleProductPreview(product) {

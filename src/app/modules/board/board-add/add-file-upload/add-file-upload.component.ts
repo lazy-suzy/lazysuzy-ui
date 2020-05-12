@@ -51,6 +51,7 @@ export class AddFileUploadComponent {
     });
     this.uploader.onAfterAddingFile = (file) => {
       file.withCredentials = false;
+      this.openDialog();
     };
   }
 

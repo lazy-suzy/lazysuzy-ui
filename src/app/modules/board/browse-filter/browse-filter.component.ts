@@ -98,7 +98,7 @@ export class BrowsefilterComponent implements OnInit {
   applyFilters() {
     const payload = {
       selectedbrands: this.selectedbrandsDropdown,
-      selectedProducts: this.selectedProductsColor,
+      selectedColors: this.selectedProductsColor,
       price: this.someValue
     };
     this.updatesFromFilter.emit({

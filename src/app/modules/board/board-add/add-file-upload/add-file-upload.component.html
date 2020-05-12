@@ -14,17 +14,12 @@
         </div>
 
         <div *ngIf="uploader?.queue?.length">
-            <!-- <img *ngIf="localImageUrl" [src]="sanitizer.bypassSecurityTrustUrl(localImageUrl)"> -->
-            <p>Queue length: {{ uploader?.queue?.length }}</p>
-            <div *ngFor="let item of uploader.queue">
-                <div><strong>{{ item?.file?.name }}</strong></div>
-            </div>
-            <button type="button" class="btn btn-success" *ngIf="uploader.queue.length" (click)="handleUpload()">
+            <!-- <button type="button" class="btn btn-success" *ngIf="uploader.queue.length" (click)="handleUpload()">
                 Upload
             </button>
             <button type="button" class="btn" *ngIf="uploader.queue.length" (click)="handleCancelUpload()">
                 Remove
-            </button>
+            </button> -->
             <div class="progress-bar" role="progressbar" [ngStyle]="{ 'width': uploader.progress + '%' }">
             </div>
         </div>
