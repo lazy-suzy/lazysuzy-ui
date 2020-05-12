@@ -17,7 +17,9 @@
         </span>
 
         <span class="brand-button">
-          <a class="pointer" (click)="openCartModal(item)">Add to cart </a>
+          <a class="pointer" (click)="openCartModal(item)" class="tr-addToCart"
+            >Add to cart
+          </a>
         </span>
       </div>
     </ng-container>
@@ -36,7 +38,7 @@
         </div>
         <span class="brand-button"
           ><a
-            class=""
+            class="tr-viewDetails"
             (click)="openLink($event, item.link)"
             href="{{ item.link }}"
             >View at {{ brand }}</a

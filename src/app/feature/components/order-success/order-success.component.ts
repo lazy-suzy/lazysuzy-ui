@@ -5,7 +5,7 @@ import { Router, ActivatedRoute } from '@angular/router';
 @Component({
   selector: 'app-order-success',
   templateUrl: './order-success.component.html',
-  styleUrls: ['./order-success.component.less']
+  styleUrls: ['./order-success.component.less'],
 })
 export class OrderSuccessComponent implements OnInit {
   cartProducts = [];
@@ -30,9 +30,11 @@ export class OrderSuccessComponent implements OnInit {
   ) {}
 
   ngOnInit() {
-    this.routeSubscription = this.activeRoute.params.subscribe(routeParams => {
-      this.orderId = routeParams.order;
-    });
+    this.routeSubscription = this.activeRoute.params.subscribe(
+      (routeParams) => {
+        this.orderId = routeParams.order;
+      }
+    );
     let localData = JSON.parse(localStorage.getItem('user') || '{}');
     if (localData.user_type === 1) {
       this.isLoggedIn = true;
@@ -67,15 +69,17 @@ export class OrderSuccessComponent implements OnInit {
       this.showError = true;
     } else {
       this.showError = false;
+      const localUser: any = JSON.parse(localStorage.getItem('user') || '{}');
       let data = {
-        password: this.password
+        password: this.password,
+        email: localUser.email,
       };
       this.apiService.userUpdate(data).subscribe(
         (payload: any) => {
           localStorage.setItem('user', JSON.stringify(payload.success.user));
           this.showSuccess = true;
           const self = this;
-          setTimeout(function() {
+          setTimeout(function () {
             self.isLoggedIn = true;
           }, 1000);
         },
