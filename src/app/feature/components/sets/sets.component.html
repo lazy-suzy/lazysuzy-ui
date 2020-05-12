@@ -2,7 +2,7 @@
   <span class="title">Options</span>
   <div class="sets-container" *ngFor="let item of sets">
     <span class="w-60-ns w-40">
-      <a [href]="item.link">{{ item.name }}</a>
+      <a href="/product/{{ item.sku }}">{{ item.name }}</a>
     </span>
 
     <ng-container
