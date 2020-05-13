@@ -10,5 +10,6 @@ export const environment = {
   LIVE_SITE: true,
   GOOGLE_LINK: 'https://www.lazysuzy.com/redirect/google',
   FACEBOOK_LINK: 'https://www.lazysuzy.com/redirect/facebook',
-  BOARD_BASE_HREF: 'board'
+  BOARD_BASE_HREF: 'board',
+  STRIPE_API_KEY: 'pk_test_0QKsReaTyej3eaewGR3HWiqZ00CzWWFs34'
 };
