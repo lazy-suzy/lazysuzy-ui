@@ -1,4 +1,4 @@
-<div>
+<div *ngIf="!isMinimalMode">
   <ng-container *ngIf="isHandset; else isBrowser">
     <app-nav-mobile></app-nav-mobile>
   </ng-container>
@@ -10,7 +10,8 @@
 <div class="content-height">
   <router-outlet></router-outlet>
 </div>
-<div>
+
+<div *ngIf="!isMinimalMode">
   <ng-container *ngIf="isHandset; else isDesktop">
     <app-footer-mobile class="footer-display w-100"></app-footer-mobile>
   </ng-container>

@@ -1,0 +1,27 @@
+<div class="container" style="padding-left: 5px;padding-right: 5px;">
+    <div class="row">
+        <div class="col-md-12">
+
+            <div ng2FileDrop class="upload-container" [ngClass]="{'another-file-over-class': hasAnotherDropZoneOver}"
+                (fileOver)="fileOverAnother($event)" [uploader]="uploader">
+                <div>Drop Images here</div>
+            </div>
+
+            <span class="btn btn-primary btn-file">
+                Browse<input type="file" ng2FileSelect [uploader]="uploader" />
+            </span>
+
+        </div>
+
+        <div *ngIf="uploader?.queue?.length">
+            <!-- <button type="button" class="btn btn-success" *ngIf="uploader.queue.length" (click)="handleUpload()">
+                Upload
+            </button>
+            <button type="button" class="btn" *ngIf="uploader.queue.length" (click)="handleCancelUpload()">
+                Remove
+            </button> -->
+            <div class="progress-bar" role="progressbar" [ngStyle]="{ 'width': uploader.progress + '%' }">
+            </div>
+        </div>
+    </div>
+</div>
