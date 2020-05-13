@@ -108,22 +108,7 @@ export class PaymentComponent implements OnInit {
       this.elements = elements;
       // Only mount the element the first time
       if (!this.card) {
-        // this.card = this.elements.create('card', {
-        //   style: {
-        //     base: {
-        //       iconColor: '#666EE8',
-        //       color: '#31325F',
-        //       lineHeight: '40px',
-        //       fontWeight: 300,
-        //       fontFamily: '"Helvetica Neue", Helvetica, sans-serif',
-        //       fontSize: '18px',
-        //       '::placeholder': {
-        //         color: '#CFD7E0'
-        //       }
-        //     }
-        //   }
-        // });
-        // this.card.mount('#card-element');
+        
         let elementStyles = {
           base: {
             color: '#32325D',
@@ -220,6 +205,7 @@ export class PaymentComponent implements OnInit {
       data.billing_city;
     if (condition) {
       this.isPaymentExecuting = true;
+      this.isRequiredFieldsPresent = true;
       const name =
         this.customerData.billing_f_Name +
         ' ' +
@@ -244,7 +230,13 @@ export class PaymentComponent implements OnInit {
             this.apiService.postStripeToken(this.customerData).subscribe(
               (payload: any) => {
                 this.isPaymentExecuting = false;
-                this.router.navigate([`order/${payload.order_id}`]);
+                if(payload.status==='succeeded'){
+                  this.router.navigate([`order/${payload.order_id}`]);
+                } else {
+                  this.isRequiredFieldsPresent = false
+                  this.cardErrorMsg = payload.errors.message
+                }
+                
               },
               (error: any) => {
                 this.isPaymentExecuting = false;
