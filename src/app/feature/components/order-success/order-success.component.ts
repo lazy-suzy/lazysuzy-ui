@@ -72,7 +72,6 @@ export class OrderSuccessComponent implements OnInit {
       const localUser: any = JSON.parse(localStorage.getItem('user') || '{}');
       let data = {
         password: this.password,
-        email: localUser.email,
       };
       this.apiService.userUpdate(data).subscribe(
         (payload: any) => {
