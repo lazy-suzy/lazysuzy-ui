@@ -296,9 +296,9 @@
         <div class="canvas-content">
           <div class="d-flex">
             <div class="canvas-title-bar">
-              <div class="canvas-icons">
-                <a data-title="Edit Board Settings">
-                  <i class="mdi mdi-settings js-open-config" aria-hidden="true"></i>
+              <div class="canvas-icons" mat-raised-button matTooltip="Edit Board Settings">
+                <a>
+                  <i class="mdi mdi-settings" (click)="openBoardConfig()" aria-hidden="true"></i>
                 </a>
               </div>
             </div>

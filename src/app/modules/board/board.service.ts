@@ -20,19 +20,22 @@ export class BoardService extends SharedBoardService {
 
   private boardEndpoint = environment.API_BASE_HREF + 'board';
   private assetEndpoint = environment.API_BASE_HREF + 'board/asset';
-  httpOptions = {
-    headers: new HttpHeaders({
-      'Content-Type': 'application/json',
-      "Authorization": `Bearer ${this.cookie.get('token')}`
-    })
-  };
 
   constructor(private http: HttpClient, private cookie: CookieService, public apiService: ApiService) {
     super(apiService);
   }
 
+  getHttpOptions() {
+    return {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json',
+        "Authorization": `Bearer ${this.cookie.get('token')}`
+      })
+    };
+  }
+
   getBoards(): Observable<Board[]> {
-    return this.http.get<Board[]>(this.boardEndpoint, this.httpOptions)
+    return this.http.get<Board[]>(this.boardEndpoint, this.getHttpOptions())
       .pipe(
         tap(_ => this.log('fetched boards')),
         catchError(this.handleError<Board[]>('getBoards', []))
@@ -40,7 +43,7 @@ export class BoardService extends SharedBoardService {
   }
 
   getBoardByID(board_id: string, previewMode: boolean = false): Observable<Board[]> {
-    return this.http.get<Board[]>(this.boardEndpoint + (previewMode ? '/preview' : '') + `/` + board_id, this.httpOptions)
+    return this.http.get<Board[]>(this.boardEndpoint + (previewMode ? '/preview' : '') + `/` + board_id, this.getHttpOptions())
       .pipe(
         tap(_ => this.log(`fetched board w/ id=${board_id}`)),
         catchError(this.handleError<Board[]>('getBoardsByID', []))
@@ -48,21 +51,21 @@ export class BoardService extends SharedBoardService {
   }
 
   addBoard(board: Board): Observable<Board> {
-    return this.http.post<Board>(this.boardEndpoint, board, this.httpOptions).pipe(
+    return this.http.post<Board>(this.boardEndpoint, board, this.getHttpOptions()).pipe(
       tap((newBoard: Board) => this.log(`added board w/ id=${newBoard.board_id}`)),
       catchError(this.handleError<Board>('addBoard'))
     );
   }
 
   updateBoard(board: Board): Observable<Board> {
-    return this.http.post<Board>(this.boardEndpoint + `/` + board.uuid, board, this.httpOptions).pipe(
+    return this.http.post<Board>(this.boardEndpoint + `/` + board.uuid, board, this.getHttpOptions()).pipe(
       tap((newBoard: Board) => this.log(`updated board w/ id=${newBoard.board_id}`)),
       catchError(this.handleError<Board>('updateBoard'))
     );
   }
 
   getAssets(): Observable<Asset[]> {
-    return this.http.get<Asset[]>(this.assetEndpoint, this.httpOptions)
+    return this.http.get<Asset[]>(this.assetEndpoint, this.getHttpOptions())
       .pipe(
         tap(_ => this.log('fetched assets')),
         catchError(this.handleError<Asset[]>('getAssets', []))
@@ -70,14 +73,14 @@ export class BoardService extends SharedBoardService {
   }
 
   addAsset(asset: any): Observable<any> {
-    return this.http.post<any>(this.assetEndpoint, asset, this.httpOptions).pipe(
+    return this.http.post<any>(this.assetEndpoint, asset, this.getHttpOptions()).pipe(
       tap((newAsset: any) => this.log(`add asset w/ id=${newAsset.asset_id}`)),
       catchError(this.handleError<any>('addAsset'))
     );
   }
 
   updateAsset(asset: Asset): Observable<Asset> {
-    return this.http.post<Asset>(this.assetEndpoint + `/`+ asset.asset_id, asset, this.httpOptions).pipe(
+    return this.http.post<Asset>(this.assetEndpoint + `/`+ asset.asset_id, asset, this.getHttpOptions()).pipe(
       tap((newAsset: Asset) => this.log(`updated asset w/ id=${newAsset.asset_id}`)),
       catchError(this.handleError<Asset>('updateAsset'))
     );

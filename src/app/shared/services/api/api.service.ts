@@ -271,10 +271,10 @@ export class ApiService {
     let brandQuery = `brand:${selBrandsString}`;
     let colorQuery = `color:${selColorString}`;
     let priceQuery = `price_from:0;price_to:${appliedFilters.price|| `10000`}`;
-    const endpoint = `products/all?filters=${brandQuery};${priceQuery};type:;${colorQuery};category:${id}&sort_type=&pageno=${pageNo || 0}&limit=24&board-view=true`;
+    const endpoint = `products/all`;
     const url = env.useLocalJson
-      ? `${env.JSON_BASE_HREF}${endpoint}`
-      : `${env.API_BASE_HREF}${endpoint}`;
+      ? `${env.JSON_BASE_HREF}${endpoint}.json`
+      : `${env.API_BASE_HREF}${endpoint}?filters=${brandQuery};${priceQuery};type:;${colorQuery};category:${id}&sort_type=&pageno=${pageNo || 0}&limit=24&board-view=true`;
     return this.httpService.get(url);
   }
 
@@ -380,20 +380,10 @@ export class ApiService {
   }
 
   getAllDepartmentsBoard(): Observable<any> {
-    const endpoint = `all-departments?board-view=true`;
+    const endpoint = `all-departments`;
     const url = env.useLocalJson
-      ? `${env.JSON_BASE_HREF}${endpoint}`
-      : `${env.API_BASE_HREF}${endpoint}`;
+      ? `${env.JSON_BASE_HREF}${endpoint}.json`
+      : `${env.API_BASE_HREF}${endpoint}?board-view=true`;
     return this.httpService.get(url);
-  }
-
-  getAllBoards(payload): Observable<IProductPayload> {
-    const url = `${env.API_BASE_HREF}board`;
-    return this.httpService.post(url, {
-      operation: 'select',
-      entity: 'board',
-      data: 5,
-      Buser_id: 1
-    });
   }
 }

@@ -174,8 +174,8 @@ export class BoardPopupComponent implements OnInit {
         this.roomStyleOptionSelected = i;
     });
 
-    this.boardShareURL = [environment.API_HREF, environment.BOARD_BASE_HREF, boardRoutesNames.BOARD_PREVIEW, board.uuid].join('/');
-    this.boardEmbedURL = [environment.API_HREF, environment.BOARD_BASE_HREF, boardRoutesNames.BOARD_EMBED, board.uuid].join('/');
+    this.boardShareURL = [environment.SITE_URL, environment.BOARD_BASE_HREF, boardRoutesNames.BOARD_PREVIEW, board.uuid].join('/');
+    this.boardEmbedURL = [environment.SITE_URL, environment.BOARD_BASE_HREF, boardRoutesNames.BOARD_EMBED, board.uuid].join('/');
     this.boardEmbedCode = `<iframe src="${this.boardEmbedURL}" scrolling="no" frameborder="no" align="center"></iframe>`;
     this.pinterestURL = `http://pinterest.com/pin/create/button/?url=${this.boardShareURL}&media={imagelink}&description=${this.board.title}`;
   }

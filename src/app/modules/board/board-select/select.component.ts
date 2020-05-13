@@ -30,7 +30,7 @@ export class SelectComponent implements OnInit {
       this.filteredDepartments = [...this.allDepartments];
       this.showLoader = false;
     });
-    this.filter$.pipe(debounceTime(1000)).subscribe(searchString => {
+    this.filter$.pipe(debounceTime(200)).subscribe(searchString => {
       this.filteredDepartments = this.allDepartments.filter((dept) => (dept.category.toLowerCase()).includes(searchString))
     });
   }

@@ -7,6 +7,7 @@ import { BoardViewComponent } from './board-view/board-view.component';
 import { BoardListComponent } from './board-list/board-list.component';
 import { BoardPreviewComponent } from './board-preview/board-preview.component';
 import { BoardPopupComponent } from './board-popup/board-popup.component';
+import { BoardPopupConfigComponent } from './board-popup-config/board-popup-config.component';
 import { BoardLoaderComponent } from './board-loader/board-loader.component';
 
 import { BoardService } from './board.service';
@@ -68,6 +69,7 @@ import { UploadFileDetailsComponent } from './board-add/add-file-upload/upload-f
     BoardListComponent,
     BoardPreviewComponent,
     BoardPopupComponent,
+    BoardPopupConfigComponent,
     BoardLoaderComponent,
     SelectComponent,
     BoardAddComponent,

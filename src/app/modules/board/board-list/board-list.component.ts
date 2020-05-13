@@ -68,7 +68,7 @@ export class BoardListComponent implements OnInit {
   }
 
   getPreviewImagePath(board: Board): string {
-    return environment.API_HREF + board.preview;
+    return environment.SITE_URL + board.preview;
   }
 
 }

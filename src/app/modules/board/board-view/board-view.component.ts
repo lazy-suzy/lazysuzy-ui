@@ -11,6 +11,7 @@ import { BoardService } from '../board.service';
 import { OverlayPanel } from 'primeng/overlaypanel';
 import { MatDialog } from '@angular/material';
 import { BoardPopupComponent } from '../board-popup/board-popup.component';
+import { BoardPopupConfigComponent } from '../board-popup-config/board-popup-config.component';
 import { boardRoutesNames } from '../board.routes.names';
 
 declare const fb: any;
@@ -35,6 +36,7 @@ export class BoardViewComponent implements OnInit, AfterViewInit {
   currentUser = null;
   xpandStatus = false;
   appliedFilters = {};
+  showTab;
 
   constructor(
     private cookieService: CookieService,
@@ -67,6 +69,19 @@ export class BoardViewComponent implements OnInit, AfterViewInit {
     // dialogRef.afterClosed().subscribe(result => {
     //   console.log('The dialog was closed', result);
     // });
+  }
+
+  openBoardConfig() {
+    const dialogRef = this.dialog.open(BoardPopupConfigComponent, {
+      panelClass: 'custom-dialog-container',
+      data: {
+        color: this.canvas.backgroundColor,
+        background: this.canvas.backgroundImage ? this.canvas.backgroundImage._element.currentSrc : ""
+      },
+      width: '40%',
+    });
+
+    dialogRef.componentInstance.onChange.subscribe(this.handleConfigChange);
   }
 
   selectSideBarItem(item) {
@@ -579,6 +594,7 @@ export class BoardViewComponent implements OnInit, AfterViewInit {
       preserveObjectStacking: true,
       width: $(this.canvasMeta.identifier.dropArea).parent().width(),
       height: $(this.canvasMeta.identifier.dropArea).parent().width() / Number.parseFloat(this.canvasMeta.value.aspectRatio),
+      backgroundColor: "rgb(255,255,255)",
       selection: true
     });
 
@@ -681,20 +697,6 @@ export class BoardViewComponent implements OnInit, AfterViewInit {
       this.appMeta.value.fontColor = $(e.currentTarget).val().toString();
       this.appMeta.flag.isFontToolbarDirty = true;
       this.updateCurrentObject(true);
-    });
-    $(this.appMeta.identifier.backgroundColorElement).click((e) => {
-      let backgroundColor = $(e.currentTarget).css("background-color");
-      this.canvas.setBackgroundColor(backgroundColor, function () {
-        this.canvas.renderAll();
-        this.saveHistory();
-      });
-    });
-    $(this.appMeta.identifier.floorPatternElement).click((e) => {
-      let src = $(e.currentTarget).attr("src");
-      fb.Image.fromURL(src, function (img) {
-        img.set({ originX: 'left', originY: 'top', scaleX: this.canvas.width / img.width, scaleY: this.canvas.height / img.height });
-        this.canvas.setBackgroundImage(img, this.canvas.renderAll.bind(this.canvas));
-      });
     });
 
     $(this.appMeta.identifier.boardTitle).change((e) => {
@@ -1517,5 +1519,23 @@ export class BoardViewComponent implements OnInit, AfterViewInit {
       this.canvas.renderAll();
     }
   };
+
+  handleConfigChange = (object) => {
+
+    if (object.attribute == 'color'){
+      this.canvas.backgroundImage = "";
+      this.canvas.setBackgroundColor(object.value, () => {
+        this.canvas.renderAll();
+        this.saveHistory();
+      });
+    }
+    else if(object.attribute == 'background'){
+      fb.Image.fromURL(object.value, (img) => {
+        img.set({ originX: 'left', originY: 'top', scaleX: this.canvas.width / img.width, scaleY: this.canvas.height / img.height });
+        this.canvas.setBackgroundImage(img, this.canvas.renderAll.bind(this.canvas));
+      });
+    }
+
+  }
 
 }
