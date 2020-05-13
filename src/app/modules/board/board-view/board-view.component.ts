@@ -13,6 +13,7 @@ import { MatDialog } from '@angular/material';
 import { BoardPopupComponent } from '../board-popup/board-popup.component';
 import { BoardPopupConfigComponent } from '../board-popup-config/board-popup-config.component';
 import { boardRoutesNames } from '../board.routes.names';
+import { Font } from 'ngx-font-picker';
 
 declare const fb: any;
 
@@ -37,6 +38,7 @@ export class BoardViewComponent implements OnInit, AfterViewInit {
   xpandStatus = false;
   appliedFilters = {};
   showTab;
+  fontPickerObject;
 
   constructor(
     private cookieService: CookieService,
@@ -47,6 +49,28 @@ export class BoardViewComponent implements OnInit, AfterViewInit {
   ) {
     const user = JSON.parse(localStorage.getItem('user'));
     this.currentUser = user;
+  }
+
+  public presetFonts = ['Arial', 'Times', 'Courier'];
+  public font: Font = new Font({
+    family: 'Roboto',
+    size: '14px',
+    style: 'regular',
+    styles: ['regular']
+  });
+
+
+  updateFontAndSize(font: Font) {
+    let fontCss = font.getStyles();
+
+    this.appMeta.value.fontFamily = fontCss['font-family'];
+    this.appMeta.value.fontSize = fontCss['font-size'].replace('px', '');
+    this.appMeta.value.fontStyle = fontCss['font-style'];
+    this.appMeta.value.fontWeight = fontCss['font-weight'];
+
+    this.appMeta.flag.isFontToolbarDirty = true;
+    this.updateCurrentObject(true);
+
   }
 
   openPopup(param: string) {
@@ -287,6 +311,8 @@ export class BoardViewComponent implements OnInit, AfterViewInit {
     value: {
       fontFamily: "Arial",
       fontSize: "14",
+      fontStyle: "normal",
+      fontWeight: "normal",
       fontColor: "#000000",
       userID: 1,
       currentSelectedItem: 0,
@@ -547,6 +573,13 @@ export class BoardViewComponent implements OnInit, AfterViewInit {
             $(this.appMeta.identifier.boardTitle).val(boardObject.title);
             this.canvasMeta.currentHistory.push(boardObject.state);
             this.canvasMeta.currentHistoryIndex++;
+
+            boardObject.state.objects.forEach((object) => {
+              if (object.type == "textbox" && this.presetFonts.indexOf(object.fontFamily) === -1) {
+                this.presetFonts.push(object.fontFamily);
+              }
+            });
+            console.log(this.presetFonts)
             this.updateStateFromHistory();
           }
         });
@@ -683,16 +716,6 @@ export class BoardViewComponent implements OnInit, AfterViewInit {
 
   initializeAppMeta = () => {
     // Initialize font values
-    $(this.appMeta.identifier.fontFamily).change((e) => {
-      this.appMeta.value.fontFamily = $(e.currentTarget).val().toString().replace("+", " ");
-      this.appMeta.flag.isFontToolbarDirty = true;
-      this.updateCurrentObject(true);
-    });
-    $(this.appMeta.identifier.fontSize).change((e) => {
-      this.appMeta.value.fontSize = $(e.currentTarget).val().toString();
-      this.appMeta.flag.isFontToolbarDirty = true;
-      this.updateCurrentObject(true);
-    });
     $(this.appMeta.identifier.fontColor).on("input", (e) => {
       this.appMeta.value.fontColor = $(e.currentTarget).val().toString();
       this.appMeta.flag.isFontToolbarDirty = true;
@@ -804,6 +827,8 @@ export class BoardViewComponent implements OnInit, AfterViewInit {
         if (this.appMeta.flag.isFontToolbarDirty) {
           activeObject.set("fontFamily", this.appMeta.value.fontFamily);
           activeObject.set("fontSize", this.appMeta.value.fontSize);
+          activeObject.set("fontStyle", this.appMeta.value.fontStyle);
+          activeObject.set("fontWeight", this.appMeta.value.fontWeight);
           activeObject.set("fill", this.appMeta.value.fontColor);
         }
       } else if (activeObject.type == "image") {
@@ -836,8 +861,13 @@ export class BoardViewComponent implements OnInit, AfterViewInit {
 
     if (activeObject) {
       if (activeObject.type == "textbox") {
-        this.appMeta.value.fontFamily = activeObject.fontFamily;
-        this.appMeta.value.fontSize = activeObject.fontSize;
+        this.font = new Font({
+          family: activeObject.fontFamily,
+          size: activeObject.fontSize + 'px',
+          // style: 'regular',
+          // styles: ['regular']
+        });
+        // console.log(activeObject, this.font);
         this.appMeta.value.fontColor = activeObject.fill;
         this.appMeta.flag.isFontToolbarDirty = true;
         this.canvasMeta.flag.isCurrentObjectText = true;
@@ -1053,12 +1083,6 @@ export class BoardViewComponent implements OnInit, AfterViewInit {
 
   updateToolbar = () => {
     if (this.appMeta.flag.isFontToolbarDirty) {
-      $(this.appMeta.identifier.fontFamily)
-        .val(this.appMeta.value.fontFamily)
-        .attr('selected', "true");
-      $(this.appMeta.identifier.fontSize)
-        .val(this.appMeta.value.fontSize)
-        .attr('selected', "true");
       $(this.appMeta.identifier.fontColor)
         .val(this.appMeta.value.fontColor)
     }

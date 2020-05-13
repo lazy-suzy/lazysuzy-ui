@@ -111,8 +111,9 @@
           <app-current-board [boardProducts]="boardPreviewProducts"></app-current-board>
         </div>
 
+        <div *ngIf="selectedItem==='favorites'"></div>
+        
       </div>
-
     </div>
   </div>
   <div class="main-content container-fluid">
@@ -144,14 +145,14 @@
                   <i class="mdi mdi-format-letter-case" style="font-size: 1.3em" aria-hidden="true"></i>
                 </span> -->
             <div class="editor-icons">
-              <select class="js-font-select">
+              <!-- <select class="js-font-select">
                 <option value="Helvetica" class="helvetica">Helvetica</option>
                 <option value="Times New Roman" class="times-new-roman">Times New Roman</option>
                 <option value="Courier New" class="courier-new">Courier New</option>
                 <option value="Georgia" class="georgia">Georgia</option>
                 <option value="Arial" class="arial" selected>Arial</option>
               </select>
-              <select class="js-font-select-size">
+              <select (click)="test()" class="js-font-select-size">
                 <option value="8">8</option>
                 <option value="9">9</option>
                 <option value="10">10</option>
@@ -166,7 +167,12 @@
                 <option value="60">60</option>
                 <option value="72">72</option>
                 <option value="96">96</option>
-              </select>
+              </select> -->
+              <div class="d-inline" [(fontPicker)]="font" [fpPresetLabel]="'Used fonts'" [fpPresetFonts]="presetFonts" (fontPickerChange)="updateFontAndSize(font)" [fpWidth]="'auto'" [fpPosition]="'bottom'">
+                <div class="action-button dropdown mr-5">
+                  {{font?.family}} {{font?.style | FontStyles}} | {{font?.size}}
+                </div>
+              </div>
               <input type="color" class="js-font-select-color" />
             </div>
           </div>

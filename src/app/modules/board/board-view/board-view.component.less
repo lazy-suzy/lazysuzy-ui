@@ -14,3 +14,20 @@
     margin-left: -50px;
     margin-top: -50px;
 }
+
+.dropdown {
+    position: relative;
+    display: inline-block;
+}
+.dropdown::after {
+    content: '';
+    width: 0;
+    height: 0;
+    border-left: 6px solid transparent;
+    border-right: 6px solid transparent;
+    border-top: 6px solid black;
+    position: absolute;
+    right: -10%;
+    top: 44%;
+    pointer-events: none;
+}
