@@ -41,22 +41,17 @@
           href="http://board.lazysuzy.com/myboards.html"
           >My Board</a
         > -->
-        <a
-          *ngIf="!isTablet"
-          class="header-link header-font"
-          [routerLink]="['/aboutus']"
-          >The Lazy Story</a
-        >
-        <span
-          (click)="isLoggedIn($event)"
-          class="flex items-center header-link pointer"
-        > 
-          <mat-icon aria-hidden="false">favorite_border</mat-icon>
-          <span class="ml2 header-font" *ngIf="!isTablet">Saved items</span>
-        </span>
-        <span class="flex items-center header-link pointer">
+        
+        <span class=" header-link pointer">
           <mat-icon class="ml2" aria-hidden="false" [routerLink]="['/cart']">shopping_cart</mat-icon>
         </span>
+        <span
+          (click)="isLoggedIn($event)"
+          class=" header-link pointer"
+        > 
+          <mat-icon aria-hidden="false">favorite_border</mat-icon>
+        </span>
+        
         <app-auth class="account-icon header-font" [isHandset]="false"></app-auth>
       </div>
     </mat-toolbar-row>

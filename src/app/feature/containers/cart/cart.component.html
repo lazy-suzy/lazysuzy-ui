@@ -6,7 +6,11 @@
           Your LazySuzy cart is empty
         </div>
         <div class="tc pt3">
-          <button class="login-btn b" (click)="openSignupDialog(true)" *ngIf="!isLoggedIn">
+          <button
+            class="login-btn b"
+            (click)="openSignupDialog(true)"
+            *ngIf="!isLoggedIn"
+          >
             LOG IN or SIGN UP
           </button>
           <div class="other-deals-msg">
@@ -95,7 +99,11 @@
           Your LazySuzy cart is empty
         </div>
         <div class="flex items-center pt3">
-          <button class="login-btn b" (click)="openSignupDialog(false)" *ngIf="!isLoggedIn">
+          <button
+            class="login-btn b"
+            (click)="openSignupDialog(false)"
+            *ngIf="!isLoggedIn"
+          >
             LOG IN or SIGN UP
           </button>
           <div class="other-deals-msg">
@@ -136,7 +144,9 @@
                     >
                       {{ product.product_name }}
                     </div>
-                    <div class="pink-font b">${{ product.retail_price }}</div>
+                    <div class="pink-font b">
+                      ${{ product.retail_price | number: '1.2-2' }}
+                    </div>
                   </div>
                   <div class="pb4 gray-font fs14">by {{ product.site }}</div>
                   <select

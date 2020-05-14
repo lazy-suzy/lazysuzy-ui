@@ -49,18 +49,18 @@
           <div>
             by <span class="brand-font">{{ item.site }}</span>
           </div>
-          <div>${{ item.price }}</div>
+          <div>${{ item.price | number: '1.2-2' }}</div>
         </div>
       </div>
     </div>
     <div class="order-pricing section mb3">
       <div class="flex justify-between pv3">
         <div class="b">SUBTOTAL</div>
-        <div class="b">${{ subTotalAmount }}</div>
+        <div class="b">${{ subTotalAmount | number: '1.2-2' }}</div>
       </div>
       <div class="flex justify-between pv2">
         <div>Shipping</div>
-        <div>${{ totalShippingCharge }}</div>
+        <div>${{ totalShippingCharge | number: '1.2-2' }}</div>
       </div>
       <!-- <div class="flex justify-between pv2">
                 <div>Tax</div>
@@ -68,7 +68,7 @@
             </div> -->
       <div class="flex justify-between pink-font b pv3">
         <div>TOTAL</div>
-        <div>${{ totalAmount }}</div>
+        <div>${{ totalAmount | number: '1.2-2' }}</div>
       </div>
     </div>
     <div class="order-details section">

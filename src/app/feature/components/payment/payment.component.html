@@ -11,16 +11,16 @@
             <div>{{ item.product_name }}</div>
             <div>by {{ item.site }}</div>
           </div>
-          <div class="w-10 tr">
+          <div class="w-10 tc">
             {{ item.count }}
           </div>
-          <div class="w-20 tr">${{ item.retail_price }}</div>
+          <div class="w-20 tr">${{ item.retail_price | number: '1.2-2' }}</div>
         </div>
       </div>
       <div class="order-pricing-details section-border">
         <div class="flex justify-between pv2">
           <span>SUBTOTAL</span>
-          <span>${{ subTotalAmount }}</span>
+          <span>${{ subTotalAmount | number: '1.2-2' }}</span>
         </div>
         <div class="flex justify-between pb2">
           <span
@@ -34,7 +34,7 @@
             >
             ({{ cartProductsLength }} items)</span
           >
-          <span>${{ totalShippingCharge }}</span>
+          <span>${{ totalShippingCharge | number: '1.2-2' }}</span>
         </div>
         <!-- <div class="flex justify-between pb3">
           <span>Tax</span>
@@ -43,7 +43,7 @@
       </div>
       <div class="flex justify-between pt2 pink-font b">
         <span>TOTAL</span>
-        <span>${{ totalAmount }}</span>
+        <span>${{ totalAmount | number: '1.2-2' }}</span>
       </div>
     </div>
   </div>
@@ -70,7 +70,7 @@
             <ng-container *ngIf="customer; else customerEmail">
               <form
                 name="email-form"
-                class="flex-ns w-100 "
+                class="flex-ns w-100"
                 (ngSubmit)="emailForm.form.valid && checkEmailValidation()"
                 #emailForm="ngForm"
               >
@@ -121,7 +121,7 @@
         </div>
         <div class="section-content pv3-ns pt4 ph0-ns ph3 ml5-ns">
           <ng-container *ngIf="shipping; else shippingDetails">
-            <div class="section-row pb4 ">
+            <div class="section-row pb4">
               <div class="b">Shipping Address</div>
               <div class="i">*Required Field</div>
             </div>
@@ -322,7 +322,10 @@
                   name="billing_Checkbox"
                   (change)="onCheckboxChange(billingCheckbox.checked)"
                 />
-                <div class="ml2" (click)="onCheckboxChange(!billingCheckbox.checked)">
+                <div
+                  class="ml2"
+                  (click)="onCheckboxChange(!billingCheckbox.checked)"
+                >
                   My billing address is the same as my shipping address
                 </div>
               </div>
@@ -372,7 +375,7 @@
         </div>
         <div class="section-content pv3-ns pt4 ph0-ns ph3 ml5-ns">
           <ng-container *ngIf="billing; else billingDetails">
-            <div class="section-row pb4 ">
+            <div class="section-row pb4">
               <div class="b">Billing Address</div>
               <div class="i">*Required Field</div>
             </div>
@@ -691,13 +694,13 @@
           <div class="w-10 tr">
             {{ item.count }}
           </div>
-          <div class="w-20 tr">${{ item.retail_price }}</div>
+          <div class="w-20 tr">${{ item.retail_price | number: '1.2-2' }}</div>
         </div>
       </div>
       <div class="order-pricing-details section-border">
         <div class="flex justify-between pv3">
           <span>SUBTOTAL</span>
-          <span>${{ subTotalAmount }}</span>
+          <span>${{ subTotalAmount | number: '1.2-2' }}</span>
         </div>
         <div class="flex justify-between pb3">
           <span
@@ -711,7 +714,7 @@
             >
             ({{ cartProductsLength }} items)</span
           >
-          <span>${{ totalShippingCharge }}</span>
+          <span>${{ totalShippingCharge | number: '1.2-2' }}</span>
         </div>
         <!-- <div class="flex justify-between pb3">
           <span>Tax</span>
@@ -720,7 +723,7 @@
       </div>
       <div class="flex justify-between pt2 pink-font b">
         <span>TOTAL</span>
-        <span>${{ totalAmount }}</span>
+        <span>${{ totalAmount | number: '1.2-2' }}</span>
       </div>
     </div>
   </div>

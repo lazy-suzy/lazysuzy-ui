@@ -2,20 +2,20 @@ import { Component, OnInit, ViewChild, ElementRef, Input } from '@angular/core';
 import {
   AuthService,
   FacebookLoginProvider,
-  GoogleLoginProvider
+  GoogleLoginProvider,
 } from 'angularx-social-login';
 import { CookieService } from 'ngx-cookie-service';
 import {
   ApiService,
   UtilsService,
-  EventEmitterService
+  EventEmitterService,
 } from 'src/app/shared/services';
 import { environment as env } from 'src/environments/environment';
 
 @Component({
   selector: 'app-auth',
   templateUrl: './auth.component.html',
-  styleUrls: ['./auth.component.less']
+  styleUrls: ['./auth.component.less'],
 })
 export class AuthComponent implements OnInit {
   @ViewChild('closeLoginModal', { static: false }) closeLoginModal: ElementRef;
@@ -34,6 +34,7 @@ export class AuthComponent implements OnInit {
   email: string = '';
   password: string = '';
   thanksMsg: boolean = false;
+  expiredDate = new Date();
 
   constructor(
     private socialAuthService: AuthService,
@@ -41,21 +42,23 @@ export class AuthComponent implements OnInit {
     private cookie: CookieService,
     private utils: UtilsService,
     private eventEmitterService: EventEmitterService
-  ) {}
+  ) {
+    this.expiredDate.setDate(this.expiredDate.getDate() + 7);
+  }
 
   ngOnInit() {
     this.createGuestUserIfRequired();
     localStorage.setItem('cart', '0');
     if (this.eventEmitterService.subsVar == undefined) {
       this.eventEmitterService.subsVar = this.eventEmitterService.invokeFetchUser.subscribe(
-        payload => {
-          this.cookie.set('token', `${payload.token}`);
+        (payload) => {
+          this.cookie.set('token', `${payload.token}`, undefined, '/');
           localStorage.setItem('user', JSON.stringify(payload.user));
           this.fetchUser();
         }
       );
       this.eventEmitterService.socialSubs = this.eventEmitterService.invokeSocialLogin.subscribe(
-        platform => {
+        (platform) => {
           debugger;
           this.socialSignIn(platform);
         }
@@ -83,12 +86,12 @@ export class AuthComponent implements OnInit {
       return;
     }
 
-    this.socialAuthService.signIn(socialPlatformProvider).then(userData => {
+    this.socialAuthService.signIn(socialPlatformProvider).then((userData) => {
       console.log(userData);
       this.apiService
         .getAuthToken(userData.authToken, socialPlatform)
         .subscribe((payload: any) => {
-          this.cookie.set('token', `${payload.access_token}`);
+          this.cookie.set('token', `${payload.access_token}`, undefined, '/');
           localStorage.setItem('user', JSON.stringify(userData));
           this.fetchUser();
           this.closeLoginModal.nativeElement.click();
@@ -110,13 +113,13 @@ export class AuthComponent implements OnInit {
     // change user type to guest on logout
     let userInLocalStorage = JSON.parse(localStorage.getItem('user'));
 
-    if (userInLocalStorage && userInLocalStorage.hasOwnProperty("user_type")) {
+    if (userInLocalStorage && userInLocalStorage.hasOwnProperty('user_type')) {
       userInLocalStorage.user_type = this.utils.userType.guest;
       localStorage.setItem('user', JSON.stringify(userInLocalStorage));
       this.fetchUser();
     }
     // handling previous version of the database
-    else{
+    else {
       this.cookie.set('token', '');
       localStorage.removeItem('user');
       this.fetchUser();
@@ -124,24 +127,22 @@ export class AuthComponent implements OnInit {
     window.location.reload();
   }
 
-  isCurrentUserGuest(): boolean { return this.user.user_type === this.utils.userType.guest };
+  isCurrentUserGuest(): boolean {
+    return this.user.user_type === this.utils.userType.guest;
+  }
   createGuestUserIfRequired(): void {
     // no trace of user
-    if (!this.cookie.get('token') && !localStorage.getItem('user')){
+    if (!this.cookie.get('token') && !localStorage.getItem('user')) {
       var formData: any = new FormData();
       formData.append('guest', 1);
 
-      this.apiService
-        .signup(formData)
-        .subscribe((payload: any) => {
-          if (payload.success){
-            this.cookie.set('token', payload.success.token);
-            localStorage.setItem('user', JSON.stringify(payload.success.user));
-            this.fetchUser();
-          }
-        });
-    }
-    else
-      this.fetchUser();
-  };
+      this.apiService.signup(formData).subscribe((payload: any) => {
+        if (payload.success) {
+          this.cookie.set('token', payload.success.token, undefined, '/');
+          localStorage.setItem('user', JSON.stringify(payload.success.user));
+          this.fetchUser();
+        }
+      });
+    } else this.fetchUser();
+  }
 }

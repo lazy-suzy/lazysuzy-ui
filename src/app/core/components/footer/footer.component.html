@@ -1,24 +1,41 @@
-<div class="flex justify-between items-center white mh3">
-  <p>© 2020 LazySuzy</p>
+<div class="flex justify-between items-center white mh3 mv2">
+  <div class="flex">
+    <p class="left-link mr2 mv0">© 2020 LazySuzy</p>
+    <a class="link left-link" [routerLink]="['/privacypolicy']"
+      >Privacy Policy
+    </a>
+    <span>&nbsp; | &nbsp;</span>
+    <a class="link left-link" [routerLink]="['/termsofservice']"
+      >Terms of Service</a
+    >
+  </div>
+  <div>
+    <a
+      *ngIf="!isTablet"
+      class="link white white-link"
+      [routerLink]="['/aboutus']"
+    >
+      The Lazy Story
+    </a>
+  </div>
+
   <div class="w-25 mv1 tr">
-    <div class="mv1 db">
-      Connect with Us
-      <a
-        target="_blank"
-        class="link white"
-        href="//www.facebook.com/shoplazysuzy"
-      >
-        <i class="fab fa-facebook-f"></i>
-      </a>
-    </div>
     <div class="flex fr">
-      <a class="link white" [routerLink]="['/privacypolicy']"
-        >Privacy Policy
-      </a>
-      <span>&nbsp; | &nbsp;</span>
-      <a class="link white" [routerLink]="['/termsofservice']"
-        >Terms of Service</a
-      >
+      <div class="mr2">
+        <a class="white white-link" href="mailto:hello@lazysuzy.com">
+          <mat-icon aria-hidden="false">email</mat-icon>
+        </a>
+      </div>
+
+      <div class="">
+        <a
+          target="_blank"
+          class="link white white-link"
+          href="//www.facebook.com/shoplazysuzy"
+        >
+          <i class="fab fa-facebook"></i>
+        </a>
+      </div>
     </div>
   </div>
   <!-- <div class="w-25 flex justify-around">
