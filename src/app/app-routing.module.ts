@@ -20,9 +20,16 @@ import {
   PaymentComponent,
   OrderSuccessComponent
 } from './feature/components';
+import { environment } from 'src/environments/environment';
 
 const routes: Routes = [
   { path: '', component: LandingComponent, pathMatch: 'full' },
+
+  {
+    path: environment.BOARD_BASE_HREF,
+    loadChildren: () => import('./modules/board/board.module').then(m => m.BoardModule),
+    // pathMatch: 'full'
+  },
 
   { path: 'search', component: SearchComponent },
   { path: 'aboutus', component: AboutusComponent },
