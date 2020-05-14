@@ -12,23 +12,9 @@
   >
 </div>
 <ng-template #userName>
-  <span
-    class="profile-name pointer"
-    *ngIf="!isHandset; else showIcon"
-    [matMenuTriggerFor]="optionsMenu"
-  >
-    {{ user.name }}
+  <span class="profile-name pointer" [matMenuTriggerFor]="optionsMenu">
+    {{ initials }}
   </span>
-  <ng-template #showIcon>
-    <mat-icon
-      class="account-icon pointer"
-      aria-hidden="false"
-      aria-label="Account"
-      [matMenuTriggerFor]="optionsMenu"
-    >
-      account_circle</mat-icon
-    >
-  </ng-template>
 </ng-template>
 
 <!-- <mat-menu #accountMenu="matMenu">

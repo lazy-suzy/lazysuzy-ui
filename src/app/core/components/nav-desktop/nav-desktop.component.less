@@ -18,13 +18,22 @@ mat-icon.account-icon {
   color: #ffcc00;
   margin-right: 20px;
   text-decoration: none;
+
+  mat-icon {
+    font-size: 30px;
+    height: 30px;
+    width: 30px;
+  }
 }
+
 .header-font {
   font-family: 'Lato', sans-serif;
 }
+
 .header-link * {
   vertical-align: text-bottom;
 }
+
 .top-navbar {
   padding: 15px 5px;
   margin-bottom: 10px;
@@ -73,13 +82,16 @@ mat-icon.account-icon {
       }
     }
   }
+
   div {
     transition: all 0.3s 0s ease-in;
   }
+
   &:hover {
     div {
       background: #ffcc00;
     }
+
     .category-menu {
       display: block;
     }
@@ -90,6 +102,7 @@ mat-icon.account-icon {
   color: #ffcc00;
   font-size: 24px;
 }
+
 @media screen and (max-width: 480px) {
   .mat-toolbar-row {
     height: 56px;
@@ -114,11 +127,13 @@ mat-icon.account-icon {
     height: 55px;
   }
 }
+
 @media (max-width: 768px) {
   .section {
     margin-top: 0;
   }
 }
+
 .center-logo {
   width: 160px;
 }

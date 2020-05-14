@@ -1,4 +1,4 @@
-<div class="flex justify-between items-center white mh3 mv2">
+<div class="flex justify-between items-center white mh3 mv2 ph6">
   <div class="flex">
     <p class="left-link mr2 mv0">© 2020 LazySuzy</p>
     <a class="link left-link" [routerLink]="['/privacypolicy']"
@@ -10,18 +10,14 @@
     >
   </div>
   <div>
-    <a
-      *ngIf="!isTablet"
-      class="link white white-link"
-      [routerLink]="['/aboutus']"
-    >
+    <a class="link white white-link" [routerLink]="['/aboutus']">
       The Lazy Story
     </a>
   </div>
 
   <div class="w-25 mv1 tr">
     <div class="flex fr">
-      <div class="mr2">
+      <div class="mr3">
         <a class="white white-link" href="mailto:hello@lazysuzy.com">
           <mat-icon aria-hidden="false">email</mat-icon>
         </a>
