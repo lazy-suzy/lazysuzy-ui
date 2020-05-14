@@ -3,7 +3,7 @@ import { Observable, Subscription } from 'rxjs';
 import {
   BreakpointState,
   Breakpoints,
-  BreakpointObserver
+  BreakpointObserver,
 } from '@angular/cdk/layout';
 import { ApiService, UtilsService } from 'src/app/shared/services';
 import { Router } from '@angular/router';
@@ -11,7 +11,7 @@ import { Router } from '@angular/router';
 @Component({
   selector: 'app-cart',
   templateUrl: './cart.component.html',
-  styleUrls: ['./cart.component.less']
+  styleUrls: ['./cart.component.less'],
 })
 export class CartComponent implements OnInit {
   bpObserver: Observable<BreakpointState> = this.breakpointObserver.observe(
@@ -26,7 +26,7 @@ export class CartComponent implements OnInit {
   totalAmount: number = 0;
   cartProductsLength: number;
   isProductFetching: boolean;
-  spinner: string = 'assets/images/spinner.gif';
+  spinner: string = 'assets/image/spinner.gif';
   emptyCart: boolean = true;
   isCartLoading: boolean;
   isLoggedIn: boolean;
@@ -75,7 +75,7 @@ export class CartComponent implements OnInit {
   increaseQuantity(product, quantity) {
     let postData = {
       product_sku: product,
-      count: quantity
+      count: quantity,
     };
     this.apiService.addCartProduct(postData).subscribe(
       (payload: any) => {
@@ -90,7 +90,7 @@ export class CartComponent implements OnInit {
   decreaseQuantity(product, quantity) {
     let postData = {
       product_sku: product,
-      count: quantity
+      count: quantity,
     };
     this.apiService.removeCartProduct(postData).subscribe(
       (payload: any) => {

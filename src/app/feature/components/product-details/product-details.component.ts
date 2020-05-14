@@ -3,7 +3,7 @@ import {
   Inject,
   OnInit,
   ViewChild,
-  ElementRef
+  ElementRef,
 } from '@angular/core';
 import { MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { Subscription } from 'rxjs';
@@ -14,7 +14,7 @@ import { Lightbox } from '@ngx-gallery/lightbox';
 @Component({
   selector: 'app-product-details',
   templateUrl: './product-details.component.html',
-  styleUrls: ['./product-details.component.less']
+  styleUrls: ['./product-details.component.less'],
 })
 export class ProductDetailsComponent implements OnInit {
   @ViewChild('topContainer', { static: false }) topContainer: ElementRef;
@@ -31,7 +31,7 @@ export class ProductDetailsComponent implements OnInit {
   items: GalleryItem[];
   isProductFetching: boolean = false;
   showDetails: boolean = false;
-  spinner: string = 'assets/images/spinner.gif';
+  spinner: string = 'assets/image/spinner.gif';
   description: any;
   features: any;
   productPrice: any;
@@ -41,12 +41,12 @@ export class ProductDetailsComponent implements OnInit {
   swatches = [];
   priceData = {
     price: '',
-    wasPrice: ''
+    wasPrice: '',
   };
   selectedSwatch = {
     swatch_image: null,
     price: '',
-    wasPrice: ''
+    wasPrice: '',
   };
   quantity: number = 1;
   quantityArray = [];
@@ -67,11 +67,14 @@ export class ProductDetailsComponent implements OnInit {
       .subscribe((payload: IProductDetail) => {
         this.product = payload;
         this.items = this.product.on_server_images.map(
-          item => new ImageItem({ src: item })
+          (item) => new ImageItem({ src: item })
         );
         this.galleryRef.load(this.items);
         this.description = this.utils.compileMarkdown(this.product.description);
-        this.features = this.utils.compileMarkdown(this.product.features, this.product.site);
+        this.features = this.utils.compileMarkdown(
+          this.product.features,
+          this.product.site
+        );
         this.dimensionExist = this.utils.checkDataLength(
           this.product.dimension
         );
@@ -81,14 +84,18 @@ export class ProductDetailsComponent implements OnInit {
         );
         this.isSwatchExist = this.utils.checkDataLength(
           this.product.variations.filter(
-            variation => variation.swatch_image !== null
+            (variation) => variation.swatch_image !== null
           )
         );
         if (this.product.in_inventory) {
           this.productPrice = this.product.inventory_product_details.price;
           this.productWasPrice = this.product.inventory_product_details.price;
-          for (let i = 1; i <= this.product.inventory_product_details.count; i++) {
-            this.quantityArray.push({value: i});
+          for (
+            let i = 1;
+            i <= this.product.inventory_product_details.count;
+            i++
+          ) {
+            this.quantityArray.push({ value: i });
           }
         } else {
           this.productPrice = this.product.is_price;
@@ -105,7 +112,7 @@ export class ProductDetailsComponent implements OnInit {
         }
         this.isProductFetching = false;
         const _self = this;
-        setTimeout(function() {
+        setTimeout(function () {
           _self.getMaxHeight();
         }, 1000);
       });
@@ -121,7 +128,7 @@ export class ProductDetailsComponent implements OnInit {
 
   openLightbox(index: number) {
     this.lightbox.open(index, this.galleryId, {
-      panelClass: 'fullscreen'
+      panelClass: 'fullscreen',
     });
   }
 
@@ -156,10 +163,10 @@ export class ProductDetailsComponent implements OnInit {
     let localData = JSON.parse(localStorage.getItem('user') || '{}');
     if (localData.email.length > 0) {
       this.apiService
-      .wishlistProduct(sku, mark, false)
-      .subscribe((payload: any) => {
-        this.product.wishlisted = mark;
-      });
+        .wishlistProduct(sku, mark, false)
+        .subscribe((payload: any) => {
+          this.product.wishlisted = mark;
+        });
     }
   }
 
@@ -177,7 +184,7 @@ export class ProductDetailsComponent implements OnInit {
   onSetImage(src): void {
     this.galleryContainer.nativeElement.scrollTop = 0;
     this.items = this.product.on_server_images.map(
-      item => new ImageItem({ src: item })
+      (item) => new ImageItem({ src: item })
     );
     if (src) {
       const image = new ImageItem({ src });
@@ -197,11 +204,11 @@ export class ProductDetailsComponent implements OnInit {
       image: this.items[0].data.src,
       name: this.product.name,
       price: this.productPrice,
-      quantity: this.quantity
+      quantity: this.quantity,
     };
     const postData = {
       product_sku: this.data.sku,
-      count: this.quantity
+      count: this.quantity,
     };
     this.apiService.addCartProduct(postData).subscribe(
       (payload: any) => {
