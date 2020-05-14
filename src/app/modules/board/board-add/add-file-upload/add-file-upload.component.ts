@@ -5,8 +5,9 @@ import { UploadFileDetailsComponent } from './upload-file-details/upload-file-de
 import { BoardService } from '../../board.service';
 import { CookieService } from 'ngx-cookie-service';
 import { DomSanitizer } from '@angular/platform-browser';
+import { environment } from 'src/environments/environment';
 
-const URL = 'http://staging.lazysuzy.com:8081/api/board/asset';
+const assetEndpoint = environment.API_BASE_HREF + 'board/asset';
 
 @Component({
   selector: 'app-add-file-upload',
@@ -32,7 +33,7 @@ export class AddFileUploadComponent {
   initUploader() {
     this.localImageUrl = null;
     this.uploader = new FileUploader({
-      url: URL,
+      url: assetEndpoint,
       disableMultipart: false,
       authToken: `Bearer ${this.cookie.get('token')}`,
     });

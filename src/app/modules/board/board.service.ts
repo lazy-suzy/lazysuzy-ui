@@ -64,8 +64,8 @@ export class BoardService extends SharedBoardService {
     );
   }
 
-  getAssets(): Observable<Asset[]> {
-    return this.http.get<Asset[]>(this.assetEndpoint, this.getHttpOptions())
+  getAssets(previewMode: boolean = false): Observable<Asset[]> {
+    return this.http.get<Asset[]>(this.assetEndpoint + (previewMode ? '/preview' : ''), this.getHttpOptions())
       .pipe(
         tap(_ => this.log('fetched assets')),
         catchError(this.handleError<Asset[]>('getAssets', []))

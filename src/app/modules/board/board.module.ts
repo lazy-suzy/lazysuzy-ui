@@ -42,6 +42,12 @@ import { CurrentBoardComponent } from './components/current-board/board.componen
 import { AddFileUploadComponent } from './board-add/add-file-upload/add-file-upload.component';
 import { UploadFileDetailsComponent } from './board-add/add-file-upload/upload-file-details/upload-file-details.component';
 
+import { FontPickerModule, FONT_PICKER_CONFIG, FontPickerConfigInterface } from 'ngx-font-picker';
+
+const DEFAULT_FONT_PICKER_CONFIG: FontPickerConfigInterface = {
+  apiKey: 'AIzaSyBCssLRX6vTUWmk__OTRIz5699gL4kgpVQ'
+};
+
 @NgModule({
   imports: [
     CommonModule,
@@ -61,7 +67,8 @@ import { UploadFileDetailsComponent } from './board-add/add-file-upload/upload-f
     FormsModule,
     ReactiveFormsModule,
     KeyboardShortcutsModule.forRoot(),
-    CarouselModule
+    CarouselModule,
+    FontPickerModule
   ],
   declarations: [
     BoardComponent,
@@ -91,6 +98,9 @@ import { UploadFileDetailsComponent } from './board-add/add-file-upload/upload-f
     AddViaUrlComponent, 
     UploadFileDetailsComponent
   ],
-  providers: [BoardService, CookieService]
+  providers: [BoardService, CookieService, {
+    provide: FONT_PICKER_CONFIG,
+    useValue: DEFAULT_FONT_PICKER_CONFIG
+  }]
 })
 export class BoardModule { }

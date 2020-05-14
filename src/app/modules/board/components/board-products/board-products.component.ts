@@ -1,4 +1,5 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-board-products',
@@ -37,7 +38,7 @@ export class BoardProductsComponent implements OnInit {
 
   transformAssetToProduct(assets) {
     assets = assets.map(ast => {
-      const imagePath = 'http://staging.lazysuzy.com:8081'+ ast.path;
+      const imagePath = environment.BASE_HREF + ast.path;
       return {
         ...ast,
         main_image: imagePath,
