@@ -33,6 +33,7 @@ export class BoardPopupComponent implements OnInit {
   private boardEmbedURL;
   private boardEmbedCode;
   private pinterestURL;
+  private previewImageURL;
 
   constructor(
     @Optional() @Inject(MAT_DIALOG_DATA) private data: any,
@@ -58,7 +59,6 @@ export class BoardPopupComponent implements OnInit {
       const uuid = this.route.snapshot.paramMap.get('uuid');
       if (this.data && this.data.board) {
         delete this.data.board.state;
-        delete this.data.board.preview;
         this.setBoard(this.data.board);
       }
       else if (uuid) {
@@ -176,8 +176,9 @@ export class BoardPopupComponent implements OnInit {
 
     this.boardShareURL = [environment.SITE_URL, environment.BOARD_BASE_HREF, boardRoutesNames.BOARD_PREVIEW, board.uuid].join('/');
     this.boardEmbedURL = [environment.SITE_URL, environment.BOARD_BASE_HREF, boardRoutesNames.BOARD_EMBED, board.uuid].join('/');
+    this.previewImageURL = environment.SITE_URL + board.preview;
     this.boardEmbedCode = `<iframe src="${this.boardEmbedURL}" scrolling="no" frameborder="no" align="center"></iframe>`;
-    this.pinterestURL = `http://pinterest.com/pin/create/button/?url=${this.boardShareURL}&media={imagelink}&description=${this.board.title}`;
+    this.pinterestURL = `http://pinterest.com/pin/create/button/?url=${this.boardShareURL}&media=${this.previewImageURL}&description=${this.board.title}`;
   }
 
   publishBoard() {

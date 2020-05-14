@@ -4,6 +4,8 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { Board } from '../board';
 import { BoardService } from '../board.service';
 
+import { Font, FontPickerService } from 'ngx-font-picker';
+
 declare const fb: any;
 
 @Component({
@@ -15,11 +17,12 @@ export class BoardPreviewComponent implements OnInit {
 
   loadedAsEmbed = false;
   constructor(
-    private boardService: BoardService, private route: ActivatedRoute, private router: Router) {
+    private boardService: BoardService, private route: ActivatedRoute, private router: Router, private fontPickerService: FontPickerService) {
     if (route.snapshot['_routerState'].url.match(/embed/))
       this.loadedAsEmbed = true;
   }
 
+  presetFonts = [];
   boardProducts = [];
   boardState;
   boardFound = false;
@@ -76,11 +79,25 @@ export class BoardPreviewComponent implements OnInit {
             this.boardFound = true;
             this.appMeta.board = response[0];
             this.boardState = JSON.parse(this.appMeta.board.state.toString());
+            if (this.boardState) {
+              this.boardState.objects.forEach((object) => {
+                if (object.type == "textbox") {
+                  this.addFontFamilyIfNotAdded(object.fontFamily);
+                }
+              });
+            }
             this.canvas.loadFromJSON(this.appMeta.board.state, () => {
               if (this.appMeta.flag.isBoot) {
                 this.appMeta.flag.isBoot = false;
                 this.enterPreviewMode();
                 this.handleResize(true);
+                setTimeout(() => {
+                  for (let index = 0; index < this.canvas._objects.length; index++) {
+                    if (this.canvas._objects[index].type == "textbox")
+                      this.canvas._objects[index].dirty = true;
+                  }
+                  this.canvas.renderAll();
+                }, 3000);
               }
             });
           }
@@ -168,5 +185,14 @@ export class BoardPreviewComponent implements OnInit {
 
     this.canvas.renderAll();
   };
+
+  addFontFamilyIfNotAdded(fontFamily: string) {
+    if (this.presetFonts.indexOf(fontFamily) === -1) {
+      this.fontPickerService.loadFont(new Font({
+        family: fontFamily
+      }));
+      this.presetFonts.push(fontFamily);
+    }
+  }
 
 }

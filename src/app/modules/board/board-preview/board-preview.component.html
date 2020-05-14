@@ -1,23 +1,27 @@
 <app-board-loader *ngIf="!boardFound"></app-board-loader>
 <div *ngIf="loadedAsEmbed" class="article-dual-column">
-    <div class="container">
-        <div class="row">
-            <div class="col-md-9 text-center">
-                <div class="intro">
-                    <h1 class="text-center">{{appMeta.board.title}}</h1>
-                    <p class="text-center">
-                        <span class="by">by</span>
-                        <a href="">Author Name</a>
-                        <span class="date">{{appMeta.board.updated_at | date:'mediumDate'}}</span>
-                    </p>
+    <div class="col col-md-12">
+        <div class="col-md-9 text-center">
+            <div class="intro">
+                <h1 class="text-center">{{appMeta.board.title}}</h1>
+                <p class="text-center">
+                    <span class="by">by</span>
+                    <a href="">Author Name</a>
+                    <span class="date">{{appMeta.board.updated_at | date:'mediumDate'}}</span>
+                </p>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col col-md-9">
+            <div class="m-5" style="background: white;">
+                <div id="canvas-droparea">
+                    <canvas id="canvas-area"></canvas>
                 </div>
             </div>
         </div>
-        <div class="row">
-            <div id="canvas-droparea" class="col-md-9 border">
-                <canvas id="canvas-area"></canvas>
-            </div>
-            <div *ngIf="boardProducts.length > 0" class="col-md-3 pl-4">
+        <div class="col col-md-3">
+            <div *ngIf="boardProducts.length > 0" class="mt-5">
                 <app-current-board [boardProducts]="boardProducts"></app-current-board>
             </div>
         </div>

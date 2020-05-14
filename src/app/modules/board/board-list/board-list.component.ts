@@ -73,7 +73,10 @@ export class BoardListComponent implements OnInit {
   }
 
   getPreviewImagePath(board: Board): string {
-    return environment.BASE_HREF + board.preview;
+    if(board.preview)
+      return environment.BASE_HREF + board.preview;
+    else
+      return "https://via.placeholder.com/500x400";
   }
 
 }
