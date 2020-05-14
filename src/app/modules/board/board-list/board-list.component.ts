@@ -46,14 +46,19 @@ export class BoardListComponent implements OnInit {
     this.boardService.addBoard(board)
       .subscribe(board => {
         if (board.uuid)
-          this.router.navigate([["..", this.boardViewLink, board.uuid].join('/')], { relativeTo: this.route });
+          this.router.navigate([["..", this.boardViewLink, board.uuid].join('/')], { relativeTo: this.route, state: {
+            justCreated: true
+          } });
       });
   }
 
   delete(board: Board): void {
     board.is_active = false;
     this.boards = this.boards.filter(h => h !== board);
-    this.boardService.updateBoard(board).subscribe();
+    this.boardService.updateBoard(new Board({
+      uuid: board.uuid,
+      is_active: 0
+    })).subscribe();
   }
 
   share(board: Board): void {
@@ -68,7 +73,7 @@ export class BoardListComponent implements OnInit {
   }
 
   getPreviewImagePath(board: Board): string {
-    return environment.SITE_URL + board.preview;
+    return environment.BASE_HREF + board.preview;
   }
 
 }

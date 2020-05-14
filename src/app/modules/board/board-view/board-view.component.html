@@ -120,7 +120,7 @@
     <div class="row">
       <div class="col-md-12 tool-bar-holder">
         <div class="top-panel row top-panel-hide">
-          <div class="col-sm-2  state-icons order-sm-1 ">
+          <div class="col-md-4 d-none d-md-block state-icons">
             <i class="mdi mdi-magnify-minus" (click)="zoomOut()" aria-hidden="true"></i>
             <i class="mdi mdi-magnify-plus" (click)="zoomIn()" aria-hidden="true"></i>
             <i class="mdi mdi-undo" (click)="undo()" aria-hidden="true"></i>
@@ -128,47 +128,10 @@
             <i class="mdi mdi-share-variant" (click)="openPopup('share')" aria-hidden="true"></i>
             <i class="mdi mdi-publish" (click)="openPopup('publish')" aria-hidden="true"></i>
           </div>
-          <div class="col-sm-6 text-right order-last order-sm-2 ">
-            <!-- <span data-title="Change color">
-                  <i class="mdi mdi-format-color-text" aria-hidden="true"></i>
-                </span>
-                <span data-title="Bold">
-                  <i class="mdi mdi-format-bold" aria-hidden="true"></i>
-                </span>
-                <span data-title="Italic">
-                  <i class="mdi mdi-format-italic" aria-hidden="true"></i>
-                </span>
-                <span data-title="Underline">
-                  <i class="mdi mdi-format-underline" aria-hidden="true"></i>
-                </span>
-                <span data-title="Uppercase">
-                  <i class="mdi mdi-format-letter-case" style="font-size: 1.3em" aria-hidden="true"></i>
-                </span> -->
+          <div class="col-sm-6 col-md-4 text-center mt-1">
             <div class="editor-icons">
-              <!-- <select class="js-font-select">
-                <option value="Helvetica" class="helvetica">Helvetica</option>
-                <option value="Times New Roman" class="times-new-roman">Times New Roman</option>
-                <option value="Courier New" class="courier-new">Courier New</option>
-                <option value="Georgia" class="georgia">Georgia</option>
-                <option value="Arial" class="arial" selected>Arial</option>
-              </select>
-              <select (click)="test()" class="js-font-select-size">
-                <option value="8">8</option>
-                <option value="9">9</option>
-                <option value="10">10</option>
-                <option value="11">11</option>
-                <option value="12">12</option>
-                <option value="14" selected>14</option>
-                <option value="18">18</option>
-                <option value="24">24</option>
-                <option value="30">30</option>
-                <option value="36">36</option>
-                <option value="48">48</option>
-                <option value="60">60</option>
-                <option value="72">72</option>
-                <option value="96">96</option>
-              </select> -->
-              <div class="d-inline" [(fontPicker)]="font" [fpPresetLabel]="'Used fonts'" [fpPresetFonts]="presetFonts" (fontPickerChange)="updateFontAndSize(font)" [fpWidth]="'auto'" [fpPosition]="'bottom'">
+              <div class="d-inline" [(fontPicker)]="font" [fpPresetLabel]="'Quick Access'" [fpPresetFonts]="presetFonts"
+                (fontPickerChange)="updateFontAndSize(font)" [fpWidth]="'auto'" [fpPosition]="'bottom'">
                 <div class="action-button dropdown mr-5">
                   {{font?.family}} {{font?.style | FontStyles}} | {{font?.size}}
                 </div>
@@ -176,13 +139,12 @@
               <input type="color" class="js-font-select-color" />
             </div>
           </div>
-          <div class="col-sm-4 order-sm-3">
-            <div class="item-action-icons">
-              <span data-title="Remove Background" class="image-icons do-transparent" (click)="action('transparent')">
+          <div class="col-sm-6 col-md-4">
+            <div class="item-action-icons float-right">
+              <span data-title="Remove Background" class="do-transparent" (click)="action('transparent')">
                 <i class="mdi mdi-auto-fix" aria-hidden="true"></i>
               </span>
-              <span data-title="Apply Background" class="image-icons undo-transparent"
-                (click)="action('undoTransparent')">
+              <span data-title="Apply Background" class="undo-transparent" (click)="action('undoTransparent')">
                 <i class="mdi mdi-format-paint" aria-hidden="true"></i>
               </span>
               <span class="background-msg hide">
@@ -190,20 +152,19 @@
                 <i class="mdi mdi-close close-background-msg" aria-hidden="true"></i>
                 Click here to remove background
               </span>
-              <span class="image-icons" data-title="Duplicate" (click)="action('duplicate')"><i
-                  class="mdi mdi-content-copy" aria-hidden="true"></i></span>
-              <span data-title="Crop" (click)="handleCrop()" class="image-icons"><i class="mdi mdi-crop"
+              <span data-title="Duplicate" (click)="action('duplicate')"><i class="mdi mdi-content-copy"
                   aria-hidden="true"></i></span>
-              <span class="image-icons" data-title="Flip" (click)="action('flip')">
+              <span data-title="Crop" (click)="handleCrop()"><i class="mdi mdi-crop" aria-hidden="true"></i></span>
+              <span data-title="Flip" (click)="action('flip')">
                 <i class="mdi mdi-autorenew" aria-hidden="true"></i>
               </span>
-              <span data-title="Send Backward" class="image-icons" (click)="action('sendBackward')">
+              <span data-title="Send Backward" (click)="action('sendBackward')">
                 <i class="mdi mdi-arrange-send-backward" aria-hidden="true"></i>
               </span>
-              <span data-title="Bring Forward" class="image-icons" (click)="action('bringForward')">
+              <span data-title="Bring Forward" (click)="action('bringForward')">
                 <i class="mdi mdi-arrange-bring-forward" aria-hidden="true"></i>
               </span>
-              <span data-title="Delete" class="image-icons" (click)="action('delete')">
+              <span data-title="Delete" (click)="action('delete')">
                 <i class="mdi mdi-delete" aria-hidden="true"></i>
               </span>
             </div>
@@ -220,83 +181,6 @@
             <button class="btn" (click)="handleCrop(false, true)">
               <i class="mdi mdi-minus" aria-hidden="true"></i> Revert
             </button>
-          </div>
-        </div>
-        <div class="top-panel row top-panel-wrapper d-xl-none" data-interval="false">
-          <div class="top-panel-container">
-            <div class="top-panel-scroll-contents editor-icons ml-2" id="canvasPalleteScrollContents">
-              <span class="state-icons order-sm-1 state-icons-hide">
-                <i class="mdi mdi-magnify-minus" (click)="zoomOut()" aria-hidden="true"></i>
-                <i class="mdi mdi-magnify-plus" (click)="zoomIn()" aria-hidden="true"></i>
-                <i class="mdi mdi-undo" (click)="undo()" aria-hidden="true"></i>
-                <i class="mdi mdi-redo" (click)="redo()" aria-hidden="true"></i>
-              </span>
-              <!-- <input class="js-font-select" type="text"> -->
-
-              <!-- <span data-title="Change color">
-                    <i class="mdi mdi-format-color-text" aria-hidden="true"></i>
-                  </span>
-                  <span data-title="Bold">
-                    <i class="mdi mdi-format-bold" aria-hidden="true"></i>
-                  </span>
-                  <span data-title="Italic">
-                    <i class="mdi mdi-format-italic" aria-hidden="true"></i>
-                  </span>
-                  <span data-title="Underline">
-                    <i class="mdi mdi-format-underline" aria-hidden="true"></i>
-                  </span>
-                  <span data-title="Uppercase">
-                    <i class="mdi mdi-format-letter-case" aria-hidden="true"></i>
-                  </span> -->
-
-              <select class="js-font-select">
-                <option value="Helvetica" class="helvetica">Helvetica</option>
-                <option value="Times New Roman" class="times-new-roman">Times New Roman</option>
-                <option value="Courier New" class="courier-new">Courier New</option>
-                <option value="Georgia" class="georgia">Georgia</option>
-                <option value="Arial" class="arial" selected>Arial</option>
-              </select>
-              <select class="js-font-select-size">
-                <option value="8">8</option>
-                <option value="9">9</option>
-                <option value="10">10</option>
-                <option value="11">11</option>
-                <option value="12">12</option>
-                <option value="14" selected>14</option>
-                <option value="18">18</option>
-                <option value="24">24</option>
-                <option value="30">30</option>
-                <option value="36">36</option>
-                <option value="48">48</option>
-                <option value="60">60</option>
-                <option value="72">72</option>
-                <option value="96">96</option>
-              </select>
-              <input type="color" class="font-color-picker" />
-              <span data-title="Remove Background" class="image-icons do-transparent" (click)="action('transparent')">
-                <i class="mdi mdi-auto-fix" aria-hidden="true"></i>
-              </span>
-              <span data-title="Apply Background" class="image-icons undo-transparent"
-                (click)="action('undoTransparent')">
-                <i class="mdi mdi-format-paint" aria-hidden="true"></i>
-              </span>
-              <span data-title="Duplicate" (click)="action('duplicate')"><i class="mdi mdi-content-copy"
-                  aria-hidden="true"></i></span>
-              <span data-title="Crop" (click)="handleCrop()" class="image-icons"><i class="mdi mdi-crop"
-                  aria-hidden="true"></i></span>
-              <span data-title="Flip" (click)="action('flip')">
-                <i class="mdi mdi-autorenew" aria-hidden="true"></i>
-              </span>
-              <span data-title="Send Backward" (click)="action('sendBackward')">
-                <i class="mdi mdi-arrange-send-backward" aria-hidden="true"></i>
-              </span>
-              <span data-title="Bring Forward" (click)="action('bringForward')">
-                <i class="mdi mdi-arrange-bring-forward" aria-hidden="true"></i>
-              </span>
-              <span data-title="Delete" (click)="action('delete')">
-                <i class="mdi mdi-delete" aria-hidden="true"></i>
-              </span>
-            </div>
           </div>
         </div>
         <div class="canvas-content">

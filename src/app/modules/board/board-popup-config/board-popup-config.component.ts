@@ -29,10 +29,10 @@ export class BoardPopupConfigComponent implements OnInit {
     '#e85f5b'
   ];
   private backgroundImages = [
-    environment.BASE_HREF + "storage/floor1.jpg",
-    environment.BASE_HREF + "storage/floor2.jpg",
-    environment.BASE_HREF + "storage/floor3.jpg",
-    environment.BASE_HREF + "storage/floor4.jpg",
+    environment.BASE_HREF + "/storage/floor1.jpg",
+    environment.BASE_HREF + "/storage/floor2.jpg",
+    environment.BASE_HREF + "/storage/floor3.jpg",
+    environment.BASE_HREF + "/storage/floor4.jpg",
   ];
 
   @Output() onChange = new EventEmitter();
