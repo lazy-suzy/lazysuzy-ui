@@ -43,7 +43,7 @@ export class AuthComponent implements OnInit {
     private utils: UtilsService,
     private eventEmitterService: EventEmitterService
   ) {
-    this.expiredDate.setDate(this.expiredDate.getDate() + 7);
+    this.expiredDate.setMonth(this.expiredDate.getMonth() + 6);
   }
 
   ngOnInit() {
@@ -52,7 +52,7 @@ export class AuthComponent implements OnInit {
     if (this.eventEmitterService.subsVar == undefined) {
       this.eventEmitterService.subsVar = this.eventEmitterService.invokeFetchUser.subscribe(
         (payload) => {
-          this.cookie.set('token', `${payload.token}`, undefined, '/');
+          this.cookie.set('token', `${payload.token}`, this.expiredDate, '/');
           localStorage.setItem('user', JSON.stringify(payload.user));
           this.fetchUser();
         }
@@ -91,7 +91,12 @@ export class AuthComponent implements OnInit {
       this.apiService
         .getAuthToken(userData.authToken, socialPlatform)
         .subscribe((payload: any) => {
-          this.cookie.set('token', `${payload.access_token}`, undefined, '/');
+          this.cookie.set(
+            'token',
+            `${payload.access_token}`,
+            this.expiredDate,
+            '/'
+          );
           localStorage.setItem('user', JSON.stringify(userData));
           this.fetchUser();
           this.closeLoginModal.nativeElement.click();
@@ -138,7 +143,12 @@ export class AuthComponent implements OnInit {
 
       this.apiService.signup(formData).subscribe((payload: any) => {
         if (payload.success) {
-          this.cookie.set('token', payload.success.token, undefined, '/');
+          this.cookie.set(
+            'token',
+            payload.success.token,
+            this.expiredDate,
+            '/'
+          );
           localStorage.setItem('user', JSON.stringify(payload.success.user));
           this.fetchUser();
         }
