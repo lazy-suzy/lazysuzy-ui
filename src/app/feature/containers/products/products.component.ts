@@ -42,6 +42,8 @@ export class ProductsComponent implements OnInit, OnDestroy {
     type: [],
     color: [],
     category: [],
+    shape: [],
+    seating: [],
     price: { from: 0, min: 0, max: 0, to: 0 },
   };
   department: string;
