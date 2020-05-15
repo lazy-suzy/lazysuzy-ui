@@ -79,6 +79,11 @@ export class ProductFiltersComponent {
             .filter((seating) => seating.checked)
             .map((seating) => seating.value);
         }
+        if (this.productFilters.shape) {
+          this.activeFilters.shape = this.productFilters.shape
+            .filter((shape) => shape.checked)
+            .map((shape) => shape.value);
+        }
         if (this.productFilters.category) {
           this.activeFilters.category = this.productFilters.category
             .filter((category) => category.checked)

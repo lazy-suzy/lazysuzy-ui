@@ -1,5 +1,9 @@
-<ng-container *ngFor="let filter of objectKeys(productFilters||{})">
-  <div class="flex items-center pa3 mr1 filter {{disableTab(filter)?'display-none':''}}">
+<ng-container *ngFor="let filter of objectKeys(productFilters || {})">
+  <div
+    class="flex items-center pa3 mr1 filter {{
+      disableTab(filter) ? 'display-none' : ''
+    }}"
+  >
     <span
       class="filter-name grow pointer {{
         filter !== 'price'
@@ -12,15 +16,17 @@
       }}"
       >{{ filter }}</span
     >
-    <div class="ml2 arrow-down {{
-      filter !== 'price'
-        ? activeFilters[filter].length > 0
+    <div
+      class="ml2 arrow-down {{
+        filter !== 'price'
+          ? activeFilters[filter].length > 0
+            ? 'active'
+            : ''
+          : isPriceChanged
           ? 'active'
           : ''
-        : isPriceChanged
-        ? 'active'
-        : ''
-    }}"></div>
+      }}"
+    ></div>
     <div class="filter-options">
       <div class="price-menu" *ngIf="filter === 'price'; else elseBlock">
         <ng5-slider
@@ -39,7 +45,7 @@
             [value]="option.value"
             (change)="onCheckChange($event, filter)"
           >
-            {{ option.name }}</mat-checkbox
+            {{ option.name | titlecase }}</mat-checkbox
           >
         </div>
       </ng-template>

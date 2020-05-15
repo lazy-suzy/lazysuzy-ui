@@ -83,6 +83,16 @@ export class ProductFilterMobileComponent implements OnInit {
         this.activeFilters.color = this.productFilters.color
           .filter((color) => color.checked)
           .map((color) => color.value);
+        if (this.productFilters.seating) {
+          this.activeFilters.seating = this.productFilters.seating
+            .filter((seating) => seating.checked)
+            .map((seating) => seating.value);
+        }
+        if (this.productFilters.shape) {
+          this.activeFilters.shape = this.productFilters.shape
+            .filter((shape) => shape.checked)
+            .map((shape) => shape.value);
+        }
         if (this.productFilters.category) {
           this.activeFilters.category = this.productFilters.category
             .filter((category) => category.checked)
