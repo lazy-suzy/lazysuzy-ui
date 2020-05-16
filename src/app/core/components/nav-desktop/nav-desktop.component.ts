@@ -46,7 +46,11 @@ export class NavDesktopComponent {
   ngOnInit(): void {
     this.router.events.subscribe((res) => {
       let orderRoute = this.router.url.slice(1, 6);
-      if (this.router.url === '/checkout' || orderRoute === 'order') {
+      if (
+        this.router.url === '/aboutus' ||
+        this.router.url === '/checkout' ||
+        orderRoute === 'order'
+      ) {
         this.hideBar = true;
       } else {
         this.hideBar = false;
