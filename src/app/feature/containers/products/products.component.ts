@@ -198,7 +198,7 @@ export class ProductsComponent implements OnInit, OnDestroy {
   }
 
   onSetFilters(e): void {
-    this.filters = this.buildFilters(e);
+    this.filters = e;
     this.loadProducts();
   }
 
@@ -235,18 +235,6 @@ export class ProductsComponent implements OnInit, OnDestroy {
         this.updateQueryString();
         this.isProductFetching = false;
       });
-  }
-
-  buildFilters(event: string): string {
-    let tempFilters = '';
-    for (let [filter, options] of Object.entries(event)) {
-      if (filter === 'price_from' || filter === 'price_to') {
-        tempFilters += `${filter}:${options};`;
-      } else {
-        tempFilters += options.length ? `${filter}:${options};` : ``;
-      }
-    }
-    return tempFilters;
   }
 
   @HostListener('window:scroll')

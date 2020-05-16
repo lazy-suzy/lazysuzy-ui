@@ -122,7 +122,23 @@ export class ProductFilterMobileComponent implements OnInit {
     } else {
       this.isPriceChanged = true;
     }
-    this.setFilters.emit(this.activeFilters);
+    this.buildAndSetFilters();
+  }
+
+  buildAndSetFilters(): string {
+    let tempFilters = '';
+    for (let [filter, options] of Object.entries(this.activeFilters)) {
+      if (filter === 'price_from' || filter === 'price_to') {
+        tempFilters += `${filter}:${options};`;
+      } else {
+        if (Array.isArray(options)) {
+          tempFilters += options.length ? `${filter}:${options};` : ``;
+        }
+      }
+    }
+    this.setFilters.emit(tempFilters);
+    this.isClearAllVisible = tempFilters !== '';
+    return tempFilters;
   }
 
   clearFilters() {
@@ -145,14 +161,14 @@ export class ProductFilterMobileComponent implements OnInit {
     delete this.activeFilters.price_from;
     delete this.activeFilters.price_to;
     this.isPriceChanged = false;
-    this.setFilters.emit(this.activeFilters);
+    this.buildAndSetFilters();
   }
 
   onPriceChange() {
     this.activeFilters.price_from = this.minValue;
     this.activeFilters.price_to = this.maxValue;
     this.isPriceChanged = true;
-    this.setFilters.emit(this.activeFilters);
+    this.buildAndSetFilters();
   }
 
   closeFilters() {
@@ -205,6 +221,6 @@ export class ProductFilterMobileComponent implements OnInit {
       this.activeFilters[activeFilter] = [];
       this.clearOptionVisible[activeFilter] = false;
     }
-    this.setFilters.emit(this.activeFilters);
+    this.buildAndSetFilters();
   }
 }

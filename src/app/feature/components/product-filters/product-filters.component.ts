@@ -113,7 +113,7 @@ export class ProductFiltersComponent {
     } else {
       this.isPriceChanged = true;
     }
-    this.setFilters.emit(this.activeFilters);
+    this.buildAndSetFilters();
   }
 
   clearFilters() {
@@ -130,14 +130,30 @@ export class ProductFiltersComponent {
     delete this.activeFilters.price_from;
     delete this.activeFilters.price_to;
     this.isPriceChanged = false;
-    this.setFilters.emit(this.activeFilters);
+    this.buildAndSetFilters();
+  }
+
+  buildAndSetFilters(): string {
+    let tempFilters = '';
+    for (let [filter, options] of Object.entries(this.activeFilters)) {
+      if (filter === 'price_from' || filter === 'price_to') {
+        tempFilters += `${filter}:${options};`;
+      } else {
+        if (Array.isArray(options)) {
+          tempFilters += options.length ? `${filter}:${options};` : ``;
+        }
+      }
+    }
+    this.setFilters.emit(tempFilters);
+    this.isClearAllVisible = tempFilters !== '';
+    return tempFilters;
   }
 
   onPriceChange() {
     this.activeFilters.price_from = this.minValue;
     this.activeFilters.price_to = this.maxValue;
     this.isPriceChanged = true;
-    this.setFilters.emit(this.activeFilters);
+    this.buildAndSetFilters();
   }
 
   disableTab(filter) {

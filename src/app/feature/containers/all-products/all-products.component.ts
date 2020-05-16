@@ -160,7 +160,7 @@ export class AllProductsComponent implements OnInit {
   }
 
   onSetFilters(e): void {
-    this.filters = this.buildFilters(e);
+    this.filters = e;
     this.loadProducts();
   }
 
@@ -197,18 +197,6 @@ export class AllProductsComponent implements OnInit {
         this.updateQueryString();
         this.isProductFetching = false;
       });
-  }
-
-  buildFilters(event: string): string {
-    let tempFilters = '';
-    for (const [filter, options] of Object.entries(event)) {
-      if (filter === 'price_from' || filter === 'price_to') {
-        tempFilters += `${filter}:${options};`;
-      } else {
-        tempFilters += options.length ? `${filter}:${options};` : ``;
-      }
-    }
-    return tempFilters;
   }
 
   @HostListener('window:scroll')
