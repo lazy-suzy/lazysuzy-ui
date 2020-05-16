@@ -368,7 +368,7 @@ export class BoardViewComponent implements OnInit, AfterViewInit {
   remoteProducts = [];
   boardPreviewProducts = [];
 
-  @HostListener('window:resize', ['$event'])
+  @HostListener('window:resize')
   onResize() {
     this.handleResize();
   }

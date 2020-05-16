@@ -12,6 +12,8 @@ export class StepperOverviewExample {
 
   isLinear = false;
   myForm: Array<string>;
+  stepOne: any;
+  stepTwo: any;
 
   @Output() stepperUpdates: EventEmitter<any> = new EventEmitter();
 

@@ -53,7 +53,7 @@ export class BoardPreviewComponent implements OnInit {
     }
   };
 
-  @HostListener('window:resize', ['$event'])
+  @HostListener('window:resize')
   onResize() {
     this.handleResize();
   }
