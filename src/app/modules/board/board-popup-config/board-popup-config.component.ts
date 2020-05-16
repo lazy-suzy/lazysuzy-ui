@@ -9,12 +9,12 @@ import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 })
 export class BoardPopupConfigComponent implements OnInit {
 
-  private showBoardPanel;
-  private showRoomPanel;
-  private currentTab;
+  showBoardPanel;
+  showRoomPanel;
+  currentTab;
 
   // border: 1px solid #000000;
-  private backgroundColors = [
+  backgroundColors = [
     '#ffffff',
     '#d9edf7',
     '#dff0d8',
@@ -28,7 +28,7 @@ export class BoardPopupConfigComponent implements OnInit {
     '#b94a48',
     '#e85f5b'
   ];
-  private backgroundImages = [
+  backgroundImages = [
     environment.BASE_HREF + "/storage/floor1.jpg",
     environment.BASE_HREF + "/storage/floor2.jpg",
     environment.BASE_HREF + "/storage/floor3.jpg",

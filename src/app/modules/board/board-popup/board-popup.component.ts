@@ -13,27 +13,27 @@ import { environment } from 'src/environments/environment';
 })
 export class BoardPopupComponent implements OnInit {
 
-  private roomTypeOptions = [];
-  private roomTypeOptionSelected = 0;
+  roomTypeOptions = [];
+  roomTypeOptionSelected = 0;
 
-  private roomStyleOptions = [];
-  private roomStyleOptionSelected = 0;
+  roomStyleOptions = [];
+  roomStyleOptionSelected = 0;
 
-  private popupShow = {
+  popupShow = {
     config: false,
     publish: false,
     share: false
   };
 
-  private board: Board = new Board();
+  board: Board = new Board();
 
-  private loadedIndependantly = false;
-  private forceReturnRoute;
-  private boardShareURL;
-  private boardEmbedURL;
-  private boardEmbedCode;
-  private pinterestURL;
-  private previewImageURL;
+  loadedIndependantly = false;
+  forceReturnRoute;
+  boardShareURL;
+  boardEmbedURL;
+  boardEmbedCode;
+  pinterestURL;
+  previewImageURL;
 
   constructor(
     @Optional() @Inject(MAT_DIALOG_DATA) private data: any,
