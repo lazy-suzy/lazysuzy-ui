@@ -1,5 +1,5 @@
 <div>
-  <span class="title">Options</span>
+  <span class="title">OPTIONS</span>
   <div class="sets-container" *ngFor="let item of sets">
     <ng-container *ngIf="isHandset; else isDesktop">
       <span class="w-60-ns w-100">
@@ -10,7 +10,7 @@
             else isOOSPrice
           "
         >
-          <div class="price">${{ item.inventory_product_details.price }}</div>
+          <div>${{ item.inventory_product_details.price }}</div>
         </ng-container>
         <ng-template #isOOSPrice>
           <div>
