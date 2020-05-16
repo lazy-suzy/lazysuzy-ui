@@ -39,6 +39,7 @@
     "ng2-us-states": "^3.0.1",
     "ng5-slider": "^1.2.4",
     "ngx-cookie-service": "^3.0.2",
+    "ngx-font-picker": "^9.0.0",
     "ngx-infinite-scroll": "^8.0.1",
     "ngx-markdown": "^8.0.0",
     "ngx-owl-carousel": "^2.0.7",

@@ -26,7 +26,7 @@ export class CartComponent implements OnInit {
   totalAmount: number = 0;
   cartProductsLength: number;
   isProductFetching: boolean;
-  spinner: string = 'assets/images/spinner.gif';
+  spinner: string = 'assets/image/spinner.gif';
   emptyCart: boolean = true;
   isCartLoading: boolean;
   isLoggedIn: boolean;

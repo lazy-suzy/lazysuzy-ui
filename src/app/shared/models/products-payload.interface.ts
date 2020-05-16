@@ -29,8 +29,8 @@ export interface IProduct {
   rating: number;
   in_inventory: boolean;
   inventory_product_details: {
-  price: number,
-  count: number,
+    price: number;
+    count: number;
   };
   redirect: boolean;
   redirect_url: string;
@@ -92,7 +92,25 @@ export interface IFilterData {
   price: Price;
   type: Brand[];
   color: Color[];
+  shape: Shape[];
+  seating: Seating[];
   category?: Category[];
+}
+
+export interface Shape {
+  name: string;
+  value: string;
+  hex: string;
+  enabled: boolean;
+  checked: boolean;
+}
+
+export interface Seating {
+  name: string;
+  value: string;
+  hex: string;
+  enabled: boolean;
+  checked: boolean;
 }
 
 export interface Color {

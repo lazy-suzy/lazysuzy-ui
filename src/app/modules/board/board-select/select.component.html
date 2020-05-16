@@ -1,0 +1,26 @@
+<app-loader class="spinner" *ngIf="showLoader"></app-loader>
+
+<div *ngIf="!showLoader" class="flex-grid">
+    <div class="browse-header w-100">
+        <div class="item-search-bar">
+            <div class="input-group">
+                <input type="text" class="form-control" [formControl]="filter" id="inlineFormInputGroupUsername" placeholder="Search">
+                <div class="input-group-append">
+                    <div class="input-group-text icon">
+                        <i class="mdi mdi-magnify" aria-hidden="true"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="text-left w-100">
+            <h5 class="title ml-2">Select New Category</h5>
+        </div>
+    </div>
+
+    <div class="flex-grid-item" (click)="handleSelectCategory(department)" *ngFor="let department of filteredDepartments">
+        <div class="icon lg category-label">
+            <i class="mdi mdi-hotel" aria-hidden="true"></i>
+            {{department.category}}
+        </div>
+    </div>
+</div>

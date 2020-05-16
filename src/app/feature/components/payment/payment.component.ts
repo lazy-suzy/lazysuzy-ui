@@ -4,13 +4,13 @@ import {
   FormBuilder,
   Validators,
   ReactiveFormsModule,
-  FormsModule
+  FormsModule,
 } from '@angular/forms';
 import {
   StripeService,
   Elements,
   Element as StripeElement,
-  ElementsOptions
+  ElementsOptions,
 } from 'ngx-stripe';
 import { ApiService } from 'src/app/shared/services';
 import { STATE_LIST } from './../../../shared/constants';
@@ -19,12 +19,12 @@ import { Observable, Subscription } from 'rxjs';
 import {
   BreakpointState,
   Breakpoints,
-  BreakpointObserver
+  BreakpointObserver,
 } from '@angular/cdk/layout';
 @Component({
   selector: 'app-payment',
   templateUrl: './payment.component.html',
-  styleUrls: ['./payment.component.less']
+  styleUrls: ['./payment.component.less'],
 })
 export class PaymentComponent implements OnInit {
   elements: Elements;
@@ -42,7 +42,7 @@ export class PaymentComponent implements OnInit {
   payment = false;
   statesArray = [];
   cartProducts = [];
-  spinner: string = 'assets/images/spinner.gif';
+  spinner: string = 'assets/image/spinner.gif';
   subTotalAmount: number = 0;
   cartProductsLength: number;
   totalShippingCharge: number = 0;
@@ -71,7 +71,7 @@ export class PaymentComponent implements OnInit {
     billing_city: null,
     billing_country: null,
     billing_state: null,
-    billing_zipcode: null
+    billing_zipcode: null,
   };
   country = 'USA';
   isBillingAddressSame: boolean = true;
@@ -102,13 +102,12 @@ export class PaymentComponent implements OnInit {
       }
     );
     this.stripeTest = this.fb.group({
-      name: ['', [Validators.required]]
+      name: ['', [Validators.required]],
     });
-    this.stripeService.elements(this.elementsOptions).subscribe(elements => {
+    this.stripeService.elements(this.elementsOptions).subscribe((elements) => {
       this.elements = elements;
       // Only mount the element the first time
       if (!this.card) {
-        
         let elementStyles = {
           base: {
             color: '#32325D',
@@ -117,34 +116,34 @@ export class PaymentComponent implements OnInit {
             fontSize: '16px',
             fontSmoothing: 'antialiased',
             '::placeholder': {
-              color: '#CFD7DF'
+              color: '#CFD7DF',
             },
             ':-webkit-autofill': {
-              color: '#e39f48'
-            }
+              color: '#e39f48',
+            },
           },
           invalid: {
             color: '#E25950',
             '::placeholder': {
-              color: '#FFCCA5'
-            }
-          }
+              color: '#FFCCA5',
+            },
+          },
         };
         let elementClasses = {
           focus: 'focused',
           empty: 'empty',
-          invalid: 'invalid'
+          invalid: 'invalid',
         };
         this.cardNumber = this.elements.create('cardNumber', {
-          style: elementStyles
+          style: elementStyles,
         });
         this.cardNumber.mount('#form-card-number');
         this.cardExpiry = this.elements.create('cardExpiry', {
-          style: elementStyles
+          style: elementStyles,
         });
         this.cardExpiry.mount('#form-card-expiry');
         this.cardCvc = this.elements.create('cardCvc', {
-          style: elementStyles
+          style: elementStyles,
         });
         this.cardCvc.mount('#form-card-cvc');
       }
@@ -230,13 +229,12 @@ export class PaymentComponent implements OnInit {
             this.apiService.postStripeToken(this.customerData).subscribe(
               (payload: any) => {
                 this.isPaymentExecuting = false;
-                if(payload.status==='succeeded'){
+                if (payload.status === 'succeeded') {
                   this.router.navigate([`order/${payload.order_id}`]);
                 } else {
-                  this.isRequiredFieldsPresent = false
-                  this.cardErrorMsg = payload.errors.message
+                  this.isRequiredFieldsPresent = false;
+                  this.cardErrorMsg = payload.errors.message;
                 }
-                
               },
               (error: any) => {
                 this.isPaymentExecuting = false;
@@ -282,7 +280,7 @@ export class PaymentComponent implements OnInit {
       const localUser: any = JSON.parse(localStorage.getItem('user') || '{}');
       if (localUser.email !== this.customerData.email) {
         const data = {
-          email: this.customerData.email
+          email: this.customerData.email,
         };
         this.apiService.userUpdate(data).subscribe(
           (payload: any) => {

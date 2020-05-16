@@ -1,50 +1,111 @@
 <div>
-  <span class="title">Options</span>
+  <span class="title">OPTIONS</span>
   <div class="sets-container" *ngFor="let item of sets">
-    <span class="w-60-ns w-40">
-      <a href="/product/{{ item.sku }}">{{ item.name }}</a>
-    </span>
+    <ng-container *ngIf="isHandset; else isDesktop">
+      <span class="w-60-ns w-100">
+        <a href="/product/{{ item.sku }}">{{ item.name }}</a>
+        <ng-container
+          *ngIf="
+            item.in_inventory && item.inventory_product_details.count > 0;
+            else isOOSPrice
+          "
+        >
+          <div>${{ item.inventory_product_details.price }}</div>
+        </ng-container>
+        <ng-template #isOOSPrice>
+          <div>
+            <span class="price">${{ item.price }}</span>
 
-    <ng-container
-      *ngIf="
-        item.in_inventory && item.inventory_product_details.count > 0;
-        else isOOS
-      "
-    >
-      <div class="w-60 flex">
-        <span class="price w-60-ns w-50 justify-end tr">
-          ${{ item.inventory_product_details.price }}
-        </span>
+            <span
+              class="was-price  {{
+                item.price !== item.was_price ? 'strike' : 'dn'
+              }}"
+              >${{ item.was_price }}</span
+            >
+          </div>
+        </ng-template>
+      </span>
 
-        <span class="brand-button">
-          <a class="pointer" (click)="openCartModal(item)" class="tr-addToCart"
-            >Add to cart
-          </a>
-        </span>
-      </div>
-    </ng-container>
+      <ng-container
+        *ngIf="
+          item.in_inventory && item.inventory_product_details.count > 0;
+          else isOOS
+        "
+      >
+        <div class="w-60-ns w-100 flex">
+          <span class="brand-button">
+            <a
+              class="pointer"
+              (click)="openCartModal(item)"
+              class="tr-addToCart"
+              >Add to cart
+            </a>
+          </span>
+        </div>
+      </ng-container>
 
-    <ng-template #isOOS>
-      <div class="w-60 flex">
-        <div class="w-50 w-60-ns flex justify-end">
-          <span class="price">${{ item.price }}</span>
-
-          <span
-            class="was-price  {{
-              item.price !== item.was_price ? 'strike' : 'dn'
-            }}"
-            >${{ item.was_price }}</span
+      <ng-template #isOOS>
+        <div class="w-60-ns w-100 flex">
+          <span class="brand-button"
+            ><a
+              class="tr-viewDetails"
+              (click)="openLink($event, item.link)"
+              href="{{ item.link }}"
+              >View at {{ brand }}</a
+            ></span
           >
         </div>
-        <span class="brand-button"
-          ><a
-            class="tr-viewDetails"
-            (click)="openLink($event, item.link)"
-            href="{{ item.link }}"
-            >View at {{ brand }}</a
-          ></span
-        >
-      </div>
+      </ng-template>
+    </ng-container>
+    <ng-template #isDesktop>
+      <span class="w-60-ns w-100">
+        <a href="/product/{{ item.sku }}">{{ item.name }}</a>
+      </span>
+
+      <ng-container
+        *ngIf="
+          item.in_inventory && item.inventory_product_details.count > 0;
+          else isOOS
+        "
+      >
+        <div class="w-60-ns w-100 flex">
+          <span class="price w-60-ns w-50 justify-end tr">
+            ${{ item.inventory_product_details.price }}
+          </span>
+
+          <span class="brand-button">
+            <a
+              class="pointer"
+              (click)="openCartModal(item)"
+              class="tr-addToCart"
+              >Add to cart
+            </a>
+          </span>
+        </div>
+      </ng-container>
+
+      <ng-template #isOOS>
+        <div class="w-60-ns w-100 flex">
+          <div class="w-50 w-60-ns flex justify-end">
+            <span class="price">${{ item.price }}</span>
+
+            <span
+              class="was-price  {{
+                item.price !== item.was_price ? 'strike' : 'dn'
+              }}"
+              >${{ item.was_price }}</span
+            >
+          </div>
+          <span class="brand-button"
+            ><a
+              class="tr-viewDetails"
+              (click)="openLink($event, item.link)"
+              href="{{ item.link }}"
+              >View at {{ brand }}</a
+            ></span
+          >
+        </div>
+      </ng-template>
     </ng-template>
   </div>
 </div>

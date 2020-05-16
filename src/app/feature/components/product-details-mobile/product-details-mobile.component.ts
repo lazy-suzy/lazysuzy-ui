@@ -31,7 +31,7 @@ export class ProductDetailsMobileComponent implements OnInit {
   dimensionExist: boolean = false;
   featuresExist: boolean = false;
   descriptionExist: boolean = false;
-  spinner: string = 'assets/images/spinner.gif';
+  spinner: string = 'assets/image/spinner.gif';
   bpObserver: Observable<BreakpointState> = this.breakpointObserver.observe(
     Breakpoints.Handset
   );
@@ -91,7 +91,10 @@ export class ProductDetailsMobileComponent implements OnInit {
       .subscribe((payload: IProductDetail) => {
         this.product = payload;
         this.description = this.utils.compileMarkdown(this.product.description);
-        this.features = this.utils.compileMarkdown(this.product.features, this.product.site);
+        this.features = this.utils.compileMarkdown(
+          this.product.features,
+          this.product.site
+        );
         this.dimensionExist = this.utils.checkDataLength(
           this.product.dimension
         );

@@ -1,12 +1,12 @@
 <ng-container *ngIf="hideBar; else showBar">
   <div class="flex items-center justify-center header pv2">
-      <a
-        routerLink="/"
-        routerLinkActive="active"
-        class="no-underline flex items-center"
-      >
-        <img class="w4 grow" [src]="logoPath" alt="Lazy Suzy Home" />
-      </a>
+    <a
+      routerLink="/"
+      routerLinkActive="active"
+      class="no-underline flex items-center"
+    >
+      <img class="w4 grow" [src]="logoPath" alt="Lazy Suzy Home" />
+    </a>
   </div>
 </ng-container>
 <ng-template #showBar>
@@ -69,7 +69,7 @@
         </ul>
       </div>
     </ng-container>
-  
+
     <a
       routerLink="/"
       routerLinkActive="active"
@@ -77,18 +77,18 @@
     >
       <img class="w4 grow" [src]="logoPath" alt="Lazy Suzy Home" />
     </a>
-  
-    <div class="flex">
+
+    <div class="flex items-center">
       <div class="header-link">
         <mat-icon
-          class="account-icon "
+          class="account-icon"
           *ngIf="notHome"
           aria-hidden="false"
           (click)="showSearchBar()"
           >search</mat-icon
         >
       </div>
-  
+
       <span (click)="isLoggedIn($event)" class="flex items-center header-link">
         <mat-icon class="account-icon" aria-hidden="false"
           >favorite_border</mat-icon
@@ -110,6 +110,5 @@
       class="section"
       [notHome]="notHome"
     ></app-search-bar>
-  </div>  
+  </div>
 </ng-template>
-

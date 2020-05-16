@@ -41,25 +41,27 @@
           href="http://board.lazysuzy.com/myboards.html"
           >My Board</a
         > -->
-        
-        <span class=" header-link pointer">
-          <mat-icon class="ml2" aria-hidden="false" [routerLink]="['/cart']">shopping_cart</mat-icon>
+
+        <span class="header-link pointer">
+          <mat-icon class="ml2" aria-hidden="false" [routerLink]="['/cart']"
+            >shopping_cart</mat-icon
+          >
         </span>
-        <span
-          (click)="isLoggedIn($event)"
-          class=" header-link pointer"
-        > 
+        <span (click)="isLoggedIn($event)" class="header-link pointer">
           <mat-icon aria-hidden="false">favorite_border</mat-icon>
         </span>
-        
-        <app-auth class="account-icon header-font" [isHandset]="false"></app-auth>
+
+        <app-auth
+          class="account-icon header-font"
+          [isHandset]="false"
+        ></app-auth>
       </div>
     </mat-toolbar-row>
   </mat-toolbar>
-  <div class="top-navbar flex justify-left " *ngIf="notHome">
+  <div class="top-navbar flex justify-left" *ngIf="notHome">
     <ng-container *ngFor="let department of departments">
       <div class="department-name">
-        <div class=" pointer pa2" [routerLink]="department.link">
+        <div class="pointer pa2" [routerLink]="department.link">
           {{ department.department | titlecase }}
         </div>
         <ul class="category-menu">
@@ -77,4 +79,3 @@
     </ng-container>
   </div>
 </ng-template>
-

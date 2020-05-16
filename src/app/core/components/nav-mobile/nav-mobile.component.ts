@@ -8,10 +8,10 @@ import { CookieService } from 'ngx-cookie-service';
 @Component({
   selector: 'app-nav-mobile',
   templateUrl: './nav-mobile.component.html',
-  styleUrls: ['./nav-mobile.component.less']
+  styleUrls: ['./nav-mobile.component.less'],
 })
 export class NavMobileComponent {
-  logoPath: string = 'assets/images/color_logo_transparent.png';
+  logoPath: string = 'assets/image/color_logo_transparent.png';
   departments: IAllDepartment[];
   selectedIndex: number = null;
   menuVisible = false;
@@ -30,14 +30,15 @@ export class NavMobileComponent {
     private location: Location
   ) {
     this.getDepartments();
-    this.router.events.subscribe(val => {
+    this.router.events.subscribe((val) => {
       if (val instanceof NavigationEnd) {
         this.menuVisible = false;
       }
     });
-    this.checkHomeRoute = router.events.subscribe(val => {
+    this.checkHomeRoute = router.events.subscribe((val) => {
       // this.notHome = location.path() !== '';
-      this.notHome = (location.path() !== '' && location.path().match(/board/) == null);
+      this.notHome =
+        location.path() !== '' && location.path().match(/board/) == null;
     });
   }
 

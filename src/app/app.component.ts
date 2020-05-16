@@ -5,7 +5,9 @@ import {
   Breakpoints,
   BreakpointObserver
 } from '@angular/cdk/layout';
-import { Router } from '@angular/router';
+
+import { Router, NavigationStart } from '@angular/router';
+import { boardRoutesNames } from './modules/board/board.routes.names';
 
 @Component({
   selector: 'app-root',
@@ -26,10 +28,14 @@ export class AppComponent {
   tabletSubscription: Subscription;
   isHandset: boolean;
   isTablet: boolean = false;
-  constructor(
-    private breakpointObserver: BreakpointObserver,
-    private router: Router
-  ) {}
+  isMinimalMode = false;
+
+  constructor(private breakpointObserver: BreakpointObserver, private router: Router) {
+    router.events.subscribe((navigation) => {
+      if (navigation instanceof NavigationStart && navigation.url.match(`/${boardRoutesNames.BOARD_EMBED}/`))
+        this.isMinimalMode = true;
+    });
+  }
 
   ngOnInit(): void {
     this.bpSubscription = this.bpObserver.subscribe(

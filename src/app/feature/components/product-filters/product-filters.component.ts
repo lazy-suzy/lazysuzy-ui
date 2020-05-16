@@ -6,7 +6,7 @@ import { IFilterData } from 'src/app/shared/models';
 @Component({
   selector: 'app-product-filters',
   templateUrl: './product-filters.component.html',
-  styleUrls: ['./product-filters.component.less']
+  styleUrls: ['./product-filters.component.less'],
 })
 export class ProductFiltersComponent {
   @Output() setFilters = new EventEmitter<any>();
@@ -15,7 +15,9 @@ export class ProductFiltersComponent {
     type: [],
     color: [],
     category: [],
-    price: { from: 0, min: 0, max: 0, to: 0 }
+    shape: [],
+    seating: [],
+    price: { from: 0, min: 0, max: 0, to: 0 },
   };
   objectKeys = Object.keys;
   isClearAllVisible = false;
@@ -25,7 +27,9 @@ export class ProductFiltersComponent {
     price_to: 0,
     type: [],
     color: [],
-    category: []
+    category: [],
+    shape: [],
+    seating: [],
   };
   isPriceChanged: boolean = false;
   minValue: number = 100;
@@ -35,13 +39,13 @@ export class ProductFiltersComponent {
     ceil: 500,
     translate: (value: number): string => {
       return '$' + value;
-    }
+    },
   };
 
   constructor(private activeRoute: ActivatedRoute) {}
 
   ngOnInit() {
-    this.activeRoute.queryParams.subscribe(params => {
+    this.activeRoute.queryParams.subscribe((params) => {
       this.isClearAllVisible = params['filters'] !== '';
     });
   }
@@ -57,23 +61,33 @@ export class ProductFiltersComponent {
           ceil: this.productFilters.price.max,
           translate: (value: number): string => {
             return '$' + value;
-          }
+          },
         };
         this.activeFilters.price_from = this.minValue;
         this.activeFilters.price_to = this.maxValue;
         this.activeFilters.brand = this.productFilters.brand
-          .filter(brand => brand.checked)
-          .map(brand => brand.value);
+          .filter((brand) => brand.checked)
+          .map((brand) => brand.value);
         this.activeFilters.type = this.productFilters.type
-          .filter(type => type.checked)
-          .map(type => type.value);
+          .filter((type) => type.checked)
+          .map((type) => type.value);
         this.activeFilters.color = this.productFilters.color
-          .filter(color => color.checked)
-          .map(color => color.value);
+          .filter((color) => color.checked)
+          .map((color) => color.value);
+        if (this.productFilters.seating) {
+          this.activeFilters.seating = this.productFilters.seating
+            .filter((seating) => seating.checked)
+            .map((seating) => seating.value);
+        }
+        if (this.productFilters.shape) {
+          this.activeFilters.shape = this.productFilters.shape
+            .filter((shape) => shape.checked)
+            .map((shape) => shape.value);
+        }
         if (this.productFilters.category) {
           this.activeFilters.category = this.productFilters.category
-          .filter(category => category.checked)
-          .map(category => category.value);
+            .filter((category) => category.checked)
+            .map((category) => category.value);
         }
       }
     }
@@ -99,7 +113,7 @@ export class ProductFiltersComponent {
     } else {
       this.isPriceChanged = true;
     }
-    this.setFilters.emit(this.activeFilters);
+    this.buildAndSetFilters();
   }
 
   clearFilters() {
@@ -109,28 +123,46 @@ export class ProductFiltersComponent {
       price_to: 0,
       type: [],
       color: [],
-      category: []
+      shape: [],
+      seating: [],
+      category: [],
     };
     delete this.activeFilters.price_from;
     delete this.activeFilters.price_to;
     this.isPriceChanged = false;
-    this.setFilters.emit(this.activeFilters);
+    this.buildAndSetFilters();
+  }
+
+  buildAndSetFilters(): string {
+    let tempFilters = '';
+    for (let [filter, options] of Object.entries(this.activeFilters)) {
+      if (filter === 'price_from' || filter === 'price_to') {
+        tempFilters += `${filter}:${options};`;
+      } else {
+        if (Array.isArray(options)) {
+          tempFilters += options.length ? `${filter}:${options};` : ``;
+        }
+      }
+    }
+    this.setFilters.emit(tempFilters);
+    this.isClearAllVisible = tempFilters !== '';
+    return tempFilters;
   }
 
   onPriceChange() {
     this.activeFilters.price_from = this.minValue;
     this.activeFilters.price_to = this.maxValue;
     this.isPriceChanged = true;
-    this.setFilters.emit(this.activeFilters);
+    this.buildAndSetFilters();
   }
 
   disableTab(filter) {
     if (filter !== 'price') {
-      return this.productFilters[filter].filter(data => data.enabled).length === 0;
+      return (
+        this.productFilters[filter].filter((data) => data.enabled).length === 0
+      );
     } else {
       return false;
     }
   }
-
-  
 }

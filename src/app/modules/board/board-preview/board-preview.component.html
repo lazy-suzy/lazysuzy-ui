@@ -1,0 +1,93 @@
+<app-board-loader *ngIf="!boardFound"></app-board-loader>
+<div *ngIf="loadedAsEmbed" class="article-dual-column">
+    <div class="col col-md-12">
+        <div class="col-md-9 text-center">
+            <div class="intro">
+                <h1 class="text-center">{{appMeta.board.title}}</h1>
+                <p class="text-center">
+                    <span class="by">by</span>
+                    <a href="">Author Name</a>
+                    <span class="date">{{appMeta.board.updated_at | date:'mediumDate'}}</span>
+                </p>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col col-md-9">
+            <div class="m-5" style="background: white;">
+                <div id="canvas-droparea">
+                    <canvas id="canvas-area"></canvas>
+                </div>
+            </div>
+        </div>
+        <div class="col col-md-3">
+            <div *ngIf="boardProducts.length > 0" class="mt-5">
+                <app-current-board [boardProducts]="boardProducts"></app-current-board>
+            </div>
+        </div>
+    </div>
+</div>
+<div *ngIf="!loadedAsEmbed" class="row bg-light">
+    <div class="col col-md-9">
+        <div class="m-5" style="background: white;">
+            <div id="canvas-droparea">
+                <canvas id="canvas-area"></canvas>
+            </div>
+        </div>
+    </div>
+    <div class="col col-md-3">
+        <div *ngIf="!loadedAsEmbed">
+            <div class="mt-5">
+                <span class="font-weight-bold h3">{{appMeta.board.title}}</span>
+            </div>
+            <div>
+                <span class="font-italic h3 font-weight-normal">Username</span>
+            </div>
+        </div>
+    </div>
+</div>
+<div *ngIf="!loadedAsEmbed && boardProducts.length > 0" class="row">
+    <div class="col mt-3">
+        <div class="text-center h2 font-weight-bold" style="color: #b76e79;"><span>Shop This Look</span></div>
+        <!-- <app-products-carousal [data]="boardProducts"></app-products-carousal> -->
+        <!-- <div class="banner">
+            <p-carousel
+              class="bannerCarousel"
+              [value]="boardProducts"
+              [numVisible]="1"
+              [numScroll]="1"
+              [autoplayInterval]="8000"
+              [circular]="true"
+            >
+              <ng-template let-data pTemplate="item">
+                <div class="product">
+                  <a href="{{ data.link }}">
+                    <img class="product_image" src="{{ data.main_image }}" alt="Owl Image" />
+                  </a>
+                </div>
+              </ng-template>
+            </p-carousel>
+          </div>           -->
+        <!-- temporary slider to be replaced with component -->
+        <div id="product-slider" class="m-5">
+            <div class="ui-carousel-content">
+                <div class="ui-carousel-container">
+                    <div class="ui-carousel-items-content" style="height: auto;">
+                        <div class="ui-carousel-items-container">
+                            <div *ngFor="let product of boardProducts" class="ui-carousel-item ui-carousel-item-active ui-carousel-item-start ng-star-inserted m-2">
+                                <div class="product ng-star-inserted">
+                                    <a><img alt="Owl Image" class="product_image" src="{{product.main_image}}"></a>
+                                    <div class="product_detail">
+                                        <span class="product_brand">{{product.site}}</span><br>
+                                        <span class="product_name">{{product.name}}</span><br>
+                                        <span class="current-price ng-star-inserted">${{product.is_price}}</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

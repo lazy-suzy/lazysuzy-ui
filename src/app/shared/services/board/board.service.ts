@@ -55,8 +55,8 @@ export class BoardService {
         return objects;
     }
 
-    getBrowseTabData(category): Observable<any> {
-        return this.apiService.getBrowseTabData(category.LS_ID);
+    getBrowseTabData(category, appliedFilters, pageNo): Observable<any> {
+        return this.apiService.getBrowseTabData(category.LS_ID, appliedFilters, pageNo);
     }
 
     getAllDepartments() {

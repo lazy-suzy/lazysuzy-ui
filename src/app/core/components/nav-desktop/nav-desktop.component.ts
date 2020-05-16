@@ -10,11 +10,11 @@ import { CookieService } from 'ngx-cookie-service';
 @Component({
   selector: 'app-nav-desktop',
   templateUrl: './nav-desktop.component.html',
-  styleUrls: ['./nav-desktop.component.less']
+  styleUrls: ['./nav-desktop.component.less'],
 })
 export class NavDesktopComponent {
   @Input() isTablet: boolean;
-  logoPath: string = 'assets/images/color_logo_transparent.png';
+  logoPath: string = 'assets/image/color_logo_transparent.png';
   departments: IAllDepartment[];
   notHome: Boolean;
   checkHomeRoute: Subscription;
@@ -31,9 +31,10 @@ export class NavDesktopComponent {
     private cookie: CookieService,
     private activatedRoute: ActivatedRoute
   ) {
-    this.checkHomeRoute = router.events.subscribe(val => {
+    this.checkHomeRoute = router.events.subscribe((val) => {
       // this.notHome = location.path() !== '';
-      this.notHome = (location.path() !== '' && location.path().match(/board/) == null);
+      this.notHome =
+        location.path() !== '' && location.path().match(/board/) == null;
     });
     this.getDepartments();
   }
@@ -43,9 +44,13 @@ export class NavDesktopComponent {
   }
 
   ngOnInit(): void {
-    this.router.events.subscribe((res) => { 
+    this.router.events.subscribe((res) => {
       let orderRoute = this.router.url.slice(1, 6);
-      if (this.router.url === '/checkout' || orderRoute === 'order') {
+      if (
+        this.router.url === '/aboutus' ||
+        this.router.url === '/checkout' ||
+        orderRoute === 'order'
+      ) {
         this.hideBar = true;
       } else {
         this.hideBar = false;
@@ -56,10 +61,10 @@ export class NavDesktopComponent {
   login() {
     const user = {
       email: this.email,
-      password: this.password
+      password: this.password,
     };
     if (user.email && user.password) {
-      this.apiService.login(user).subscribe(res => {
+      this.apiService.login(user).subscribe((res) => {
         if (res['data']) {
           // this.apiService.storeUserData(res["token"]);
           // localStorage.setItem("admin_id", res["data"]["id"]);
@@ -68,7 +73,7 @@ export class NavDesktopComponent {
           this.messageService.add({
             severity: 'success',
             summary: 'Success Message',
-            detail: 'User logged in'
+            detail: 'User logged in',
           });
         }
       });
@@ -83,7 +88,7 @@ export class NavDesktopComponent {
       this.messageService.add({
         severity: 'error',
         summary: ' Error Message',
-        detail: 'Please Enter Email and Password'
+        detail: 'Please Enter Email and Password',
       });
     }
   }

@@ -26,6 +26,7 @@ export class AuthComponent implements OnInit {
   @Input() isHandset: boolean;
   userCookie: string;
   user: any;
+  initials: any;
   googleRedirect = env.GOOGLE_LINK;
   facebookRedirect = env.FACEBOOK_LINK;
   error: boolean = false;
@@ -70,6 +71,10 @@ export class AuthComponent implements OnInit {
     this.userCookie = this.cookie.get('token');
     if (this.userCookie) {
       this.user = JSON.parse(localStorage.getItem('user'));
+      const initials = this.user.name.match(/\b\w/g) || [];
+      this.initials = (
+        (initials.shift() || '') + (initials.pop() || '')
+      ).toUpperCase();
     }
   }
 
