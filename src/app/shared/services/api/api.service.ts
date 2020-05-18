@@ -145,9 +145,8 @@ export class ApiService {
   }
 
   getProduct(id: string): Observable<IProductDetail> {
-    const url = env.useLocalJson
-      ? `${env.JSON_BASE_HREF}product/${id}`
-      : `${env.API_BASE_HREF}product/${id}`;
+    const endpoint = `product/${id}`;
+    const url = `${env.API_BASE_HREF}${endpoint}`;
     return this.httpService.get(url);
   }
 
@@ -156,6 +155,7 @@ export class ApiService {
     const url = env.useLocalJson
       ? `${env.JSON_BASE_HREF}${endpoint}`
       : `${env.API_BASE_HREF}${endpoint}`;
+
     return this.httpService.get(url);
   }
 

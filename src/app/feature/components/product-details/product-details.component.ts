@@ -39,6 +39,7 @@ export class ProductDetailsComponent implements OnInit {
   variations = [];
   topHeight: Object = { 'max-height': '0' };
   swatches = [];
+  errorMessage: string = '';
   priceData = {
     price: '',
     wasPrice: '',
@@ -92,7 +93,7 @@ export class ProductDetailsComponent implements OnInit {
           this.productWasPrice = this.product.inventory_product_details.price;
           for (
             let i = 1;
-            i <= this.product.inventory_product_details.count;
+            i <= this.product.inventory_product_details.count && i <= 10;
             i++
           ) {
             this.quantityArray.push({ value: i });
@@ -212,9 +213,15 @@ export class ProductDetailsComponent implements OnInit {
     };
     this.apiService.addCartProduct(postData).subscribe(
       (payload: any) => {
-        this.utils.openAddToCartDialog(data);
+        if (payload.status) {
+          this.errorMessage = '';
+          this.utils.openAddToCartDialog(data);
+        } else {
+          this.errorMessage = payload.msg;
+        }
       },
       (error: any) => {
+        this.errorMessage = 'Cannot add this product at the moment.';
         console.log(error);
       }
     );

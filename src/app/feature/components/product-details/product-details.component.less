@@ -10,6 +10,11 @@
   transform: translateX(-50%) translateY(-50%);
 }
 
+.invalid-feedback {
+  color: #ff0000;
+  font-size: 14px;
+}
+
 .product-details-container {
   position: relative;
 
@@ -70,18 +75,18 @@
         -moz-appearance: none;
       }
       select.quantity-selector {
-        background-image:
-          linear-gradient(45deg, transparent 50%, #ffffff 50%),
+        background-image: linear-gradient(45deg, transparent 50%, #ffffff 50%),
           linear-gradient(135deg, #ffffff 50%, transparent 50%),
           linear-gradient(to right, #606060, #606060);
-          background-position: calc(100% - 9px) calc(1em + 0px), calc(100% - 6px) calc(1em + 0px), 100% 0;
-          background-size: 4px 5px, 4px 5px, 18px;
+        background-position: calc(100% - 9px) calc(1em + 0px),
+          calc(100% - 6px) calc(1em + 0px), 100% 0;
+        background-size: 4px 5px, 4px 5px, 18px;
         background-repeat: no-repeat;
       }
       .price-font {
         font-size: 24px;
       }
-      
+
       .product-price {
         color: #b76e79;
       }

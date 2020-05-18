@@ -53,6 +53,7 @@ export class ProductDetailsMobileComponent implements OnInit {
     price: '',
     wasPrice: '',
   };
+  errorMessage: string = '';
   quantity: number = 1;
   quantityArray = [];
   galleryRef = this.gallery.ref(this.galleryId);
@@ -225,13 +226,18 @@ export class ProductDetailsMobileComponent implements OnInit {
     };
     this.apiService.addCartProduct(postData).subscribe(
       (payload: any) => {
-        this.utils.openAddToCartDialog(data);
+        if (payload.status) {
+          this.errorMessage = '';
+          this.utils.openAddToCartDialog(data);
+        } else {
+          this.errorMessage = payload.msg;
+        }
       },
       (error: any) => {
+        this.errorMessage = 'Cannot add this product at the moment.';
         console.log(error);
       }
     );
-    this.utils.openAddToCartDialog(data);
   }
   checkSetInventory(product) {
     for (let item of product) {

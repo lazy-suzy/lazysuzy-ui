@@ -88,6 +88,9 @@
                 Add to Cart
               </a>
             </button>
+            <div *ngIf="errorMessage !== ''" class="invalid-feedback">
+              <div>{{ errorMessage }}</div>
+            </div>
           </div>
         </div>
         <ng-container *ngIf="product.redirect; else allConditions">
