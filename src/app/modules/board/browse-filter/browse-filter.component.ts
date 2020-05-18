@@ -1,64 +1,169 @@
 import { Component, OnInit, Output, EventEmitter, Input } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
+import { Options } from 'ng5-slider';
 
 @Component({
   selector: 'app-browse-filter',
   templateUrl: './browse-filter.component.html',
-  styleUrls: ['./browse-filter.component.less', '../board.component.less']
+  styleUrls: ['./browse-filter.component.less', '../board.component.less'],
 })
 export class BrowsefilterComponent implements OnInit {
-
   showLoader: boolean = false;
   filterForm: any;
-
-  someValue = 0;
-  min = 0;
-  max = 10000;
-
-  brandsDropdown: any[];
-  selectedbrandsDropdown: any[] = [];
-
-  productsColors: any[];
-  selectedProductsColor: any[] = [];
 
   @Output() updatesFromFilter: EventEmitter<any> = new EventEmitter();
   @Output() addProduct: EventEmitter<any> = new EventEmitter();
   @Input() filterData: any = {};
+  objectKeys = Object.keys;
+  isClearAllVisible = false;
+  activeFilters = {
+    brand: [],
+    price_from: 0,
+    price_to: 0,
+    type: [],
+    color: [],
+    shape: [],
+    seating: [],
+  };
+  selectedFilter: string = '';
+  isPriceChanged: boolean = false;
+  minValue: number = 100;
+  maxValue: number = 600;
+  silderOptions: Options = {
+    floor: 10,
+    ceil: 500,
+    translate: (value: number): string => {
+      return '$' + value;
+    },
+  };
 
-  constructor(
-    private fb: FormBuilder
-  ) { }
+  constructor(private fb: FormBuilder) {}
 
-  clearAllFilters() {
-    this.someValue = 0;
-    this.min = 0;
-    this.max = 10000;
-
-    this.brandsDropdown = [];
-    this.selectedbrandsDropdown = [];
-
-    this.productsColors = [];
-    this.selectedProductsColor = [];
-  }
-
-  ngOnChanges(changes: any) {
-    if (changes['filterData'] && changes['filterData'].previousValue !== changes['filterData'].currentValue) {
-      let filterData = changes['filterData'].currentValue || [];
-      this.filterData = { ...filterData } || {};
-      this.createForm(this.filterData);
+  ngOnChanges(change: any) {
+    // if (
+    //   changes['filterData'] &&
+    //   changes['filterData'].previousValue !== changes['filterData'].currentValue
+    // ) {
+    //   let filterData = changes['filterData'].currentValue || [];
+    //   this.filterData = { ...filterData } || {};
+    //   this.createForm(this.filterData);
+    // }
+    if (
+      change.filterData.currentValue !== undefined &&
+      Object.keys(change.filterData.currentValue).length > 0
+    ) {
+      this.filterData = change.filterData.currentValue;
+      delete this.filterData.category;
+      if (this.filterData && !this.isPriceChanged) {
+        this.minValue = this.filterData.price.from;
+        this.maxValue = this.filterData.price.to;
+        this.silderOptions = {
+          floor: this.filterData.price.min,
+          ceil: this.filterData.price.max,
+          translate: (value: number): string => {
+            return '$' + value;
+          },
+        };
+        this.activeFilters.price_from = this.minValue;
+        this.activeFilters.price_to = this.maxValue;
+      }
     }
   }
 
-  ngOnInit(): void { }
+  ngOnInit(): void {}
+
+  toggleFilterOption(filter: string) {
+    if (this.selectedFilter === filter) {
+      this.selectedFilter = '';
+      return;
+    }
+    this.selectedFilter = filter;
+  }
+
+  onCheckChange(event, filter: string) {
+    const option: string = event.source.value;
+    if (event.source.checked) {
+      this.activeFilters[filter].push(option);
+    } else {
+      const optionsArr = this.activeFilters[filter].filter(
+        (value: string) => value !== option
+      );
+      this.activeFilters[filter] = optionsArr;
+    }
+    if (
+      Math.round(this.minValue) === this.filterData.price.from &&
+      Math.round(this.maxValue) === this.filterData.price.to
+    ) {
+      delete this.activeFilters.price_from;
+      delete this.activeFilters.price_to;
+      this.isPriceChanged = false;
+    } else {
+      this.isPriceChanged = true;
+    }
+    this.buildAndSetFilters();
+  }
+
+  clearFilters() {
+    this.activeFilters = {
+      brand: [],
+      price_from: 0,
+      price_to: 0,
+      type: [],
+      color: [],
+      shape: [],
+      seating: [],
+    };
+    delete this.activeFilters.price_from;
+    delete this.activeFilters.price_to;
+    this.isPriceChanged = false;
+    this.selectedFilter = '';
+    this.buildAndSetFilters();
+  }
+
+  buildAndSetFilters(): string {
+    let tempFilters = '';
+    for (let [filter, options] of Object.entries(this.activeFilters)) {
+      if (filter === 'price_from' || filter === 'price_to') {
+        tempFilters += `${filter}:${options};`;
+      } else {
+        if (Array.isArray(options)) {
+          tempFilters += options.length ? `${filter}:${options};` : ``;
+        }
+      }
+    }
+    this.updatesFromFilter.emit({
+      name: 'APPLY_FILTERS',
+      payload: tempFilters,
+    });
+    this.isClearAllVisible = tempFilters !== '';
+    return tempFilters;
+  }
+
+  onPriceChange() {
+    this.activeFilters.price_from = this.minValue;
+    this.activeFilters.price_to = this.maxValue;
+    this.isPriceChanged = true;
+    this.buildAndSetFilters();
+  }
+
+  disableTab(filter) {
+    if (filter !== 'price') {
+      return (
+        this.filterData[filter].filter((data) => data.enabled).length === 0
+      );
+    } else {
+      return false;
+    }
+  }
 
   convertFilterDataForPlugin(brand, color) {
-    let brands = (brand || []).map(ele => {
+    let brands = (brand || []).map((ele) => {
       return {
         ...ele,
         label: ele.name,
       };
     });
-    let colors = (color || []).map(ele => {
+    let colors = (color || []).map((ele) => {
       return {
         ...ele,
         label: ele.name,
@@ -66,22 +171,8 @@ export class BrowsefilterComponent implements OnInit {
     });
     return {
       brands: brands,
-      colors: colors
+      colors: colors,
     };
-  }
-
-  createForm(filterData) {
-    const result = this.convertFilterDataForPlugin(filterData.brand, filterData.color);
-    this.brandsDropdown = [...result.brands];
-    this.productsColors = [...result.colors];
-    this.filterForm = this.fb.group({
-      brand: [],
-      price: 0,
-      color: []
-    });
-    this.filterForm.valueChanges.subscribe(val => {
-      console.log("value", val);
-    });
   }
 
   formatLabel(value: number | null) {
@@ -90,36 +181,4 @@ export class BrowsefilterComponent implements OnInit {
     }
     return value;
   }
-
-  addProductToBoard(product) {
-    this.addProduct.emit(product);
-  }
-
-  applyFilters() {
-    const payload = {
-      selectedbrands: this.selectedbrandsDropdown,
-      selectedColors: this.selectedProductsColor,
-      price: this.someValue
-    };
-    this.updatesFromFilter.emit({
-      name: 'APPLY_FILTERS',
-      payload: payload
-    });
-  }
-
-  cancelFilters() {
-    this.updatesFromFilter.emit({
-      name: 'CANCEL_FILTERS',
-      payload: {}
-    });
-  }
-
-  clearFilters() {
-    this.clearAllFilters();
-    this.updatesFromFilter.emit({
-      name: 'CLEAR_FILTERS',
-      payload: {}
-    });
-  }
-
 }

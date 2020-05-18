@@ -1,8 +1,14 @@
-import { Component, OnInit, AfterViewInit, HostListener, ViewChild } from '@angular/core';
+import {
+  Component,
+  OnInit,
+  AfterViewInit,
+  HostListener,
+  ViewChild,
+} from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { CookieService } from 'ngx-cookie-service';
 import { SideNavItems } from './../sidenavitems';
-import { ShortcutInput } from "ng-keyboard-shortcuts";
+import { ShortcutInput } from 'ng-keyboard-shortcuts';
 import * as $ from 'jquery';
 import { Board } from '../board';
 import { Asset } from '../asset';
@@ -21,10 +27,9 @@ declare const fb: any;
 @Component({
   selector: 'app-board-view',
   templateUrl: './board-view.component.html',
-  styleUrls: ['./board-view.component.less', '../board.component.less']
+  styleUrls: ['./board-view.component.less', '../board.component.less'],
 })
 export class BoardViewComponent implements OnInit, AfterViewInit {
-
   shortcuts: ShortcutInput[] = [];
 
   selectedItem = 'select';
@@ -37,7 +42,7 @@ export class BoardViewComponent implements OnInit, AfterViewInit {
   @ViewChild('browsefilter', { static: false }) browsefilter?: OverlayPanel;
   currentUser = null;
   xpandStatus = false;
-  appliedFilters = {};
+  appliedFilters: string;
   showTab;
   fontPickerObject;
   justCreated = false;
@@ -53,19 +58,24 @@ export class BoardViewComponent implements OnInit, AfterViewInit {
     const user = JSON.parse(localStorage.getItem('user'));
     this.currentUser = user;
 
-    if(router.getCurrentNavigation().extras.state)
+    if (router.getCurrentNavigation().extras.state)
       this.justCreated = router.getCurrentNavigation().extras.state.justCreated;
-
   }
 
-  public presetFonts = ['Arial', 'Times', 'Courier', 'Lato', 'Open Sans', 'Roboto Slab'];
+  public presetFonts = [
+    'Arial',
+    'Times',
+    'Courier',
+    'Lato',
+    'Open Sans',
+    'Roboto Slab',
+  ];
   public font: Font = new Font({
     family: 'Roboto',
     size: '48px',
     style: 'regular',
-    styles: ['regular']
+    styles: ['regular'],
   });
-
 
   updateFontAndSize(font: Font) {
     let fontCss = font.getStyles();
@@ -78,23 +88,28 @@ export class BoardViewComponent implements OnInit, AfterViewInit {
     this.appMeta.flag.isFontToolbarDirty = true;
     this.addFontFamilyIfNotAdded(fontCss['font-family']);
     this.updateCurrentObject(true);
-
   }
 
   openPopup(param: string) {
-    if (this.appMeta.board.data[this.appMeta.board.currentIndex].type_privacy == 0) {
+    if (
+      this.appMeta.board.data[this.appMeta.board.currentIndex].type_privacy == 0
+    ) {
       this.appMeta.board.data[this.appMeta.board.currentIndex].type_privacy = 1;
-      this.boardService.updateBoard(new Board({
-        uuid: this.appMeta.board.data[this.appMeta.board.currentIndex].uuid,
-        type_privacy: 1
-      })).subscribe();
+      this.boardService
+        .updateBoard(
+          new Board({
+            uuid: this.appMeta.board.data[this.appMeta.board.currentIndex].uuid,
+            type_privacy: 1,
+          })
+        )
+        .subscribe();
     }
 
     const dialogRef = this.dialog.open(BoardPopupComponent, {
       panelClass: 'custom-dialog-container',
       data: {
         type: param,
-        board: this.appMeta.board.data[this.appMeta.board.currentIndex]
+        board: this.appMeta.board.data[this.appMeta.board.currentIndex],
       },
       width: '40%',
     });
@@ -120,7 +135,7 @@ export class BoardViewComponent implements OnInit, AfterViewInit {
     this.selectedItem = item.value;
     if (this.selectedItem === 'browse') {
       this.filterData = {};
-      this.appliedFilters = {};
+      this.appliedFilters = '';
       this.pageNo = 0;
       this.remoteProducts = [];
       let selCat = this.boardService.getCategory();
@@ -139,13 +154,12 @@ export class BoardViewComponent implements OnInit, AfterViewInit {
       let selCat = this.boardService.getCategory();
       this.remoteProducts = [...[]];
       this.getBrowseData(selCat);
-    }
-    else if (event.name === 'CANCEL_FILTERS') {
+    } else if (event.name === 'CANCEL_FILTERS') {
       this.xpandStatus = false;
     }
   }
 
-  handleAddProductBoardPreview($event) { }
+  handleAddProductBoardPreview($event) {}
 
   handleSelectCategory($event) {
     this.boardService.setCategory($event);
@@ -153,7 +167,7 @@ export class BoardViewComponent implements OnInit, AfterViewInit {
       name: 'Browse',
       label: 'Browse',
       value: 'browse',
-      route: 'board-browse'
+      route: 'board-browse',
     });
   }
 
@@ -168,19 +182,25 @@ export class BoardViewComponent implements OnInit, AfterViewInit {
   getBrowseData(categ) {
     this.selectedCategory = categ;
     this.showLoader = true;
-    this.boardService.getBrowseTabData(this.selectedCategory, this.appliedFilters, this.pageNo).subscribe((s: any) => {
-      this.remoteProducts = [...this.remoteProducts, ...(s.products || [])];
-      this.remoteProducts = this.remoteProducts.map((ele, i) => {
-        return {
-          ...ele,
-          refId: i
-        };
+    this.boardService
+      .getBrowseTabData(this.selectedCategory, this.appliedFilters, this.pageNo)
+      .subscribe((s: any) => {
+        this.remoteProducts = [...this.remoteProducts, ...(s.products || [])];
+        this.remoteProducts = this.remoteProducts.map((ele, i) => {
+          return {
+            ...ele,
+            refId: i,
+          };
+        });
+        this.filterData = s.filterData || {};
+        this.pageNo++;
+        this.boardService.setBoardData(
+          this.remoteProducts,
+          this.selectedCategory,
+          s.filterData || {}
+        );
+        this.showLoader = false;
       });
-      this.filterData = s.filterData || {};
-      this.pageNo++;
-      this.boardService.setBoardData(this.remoteProducts, this.selectedCategory, s.filterData || {});
-      this.showLoader = false;
-    });
   }
 
   loadMore() {
@@ -194,7 +214,7 @@ export class BoardViewComponent implements OnInit, AfterViewInit {
       name: 'Select',
       label: 'Select',
       value: 'select',
-      route: 'board-select'
+      route: 'board-select',
     });
   }
 
@@ -202,23 +222,23 @@ export class BoardViewComponent implements OnInit, AfterViewInit {
   canvasMeta = {
     identifier: {
       // simple identifier
-      id: "canvas-area",
-      containerArea: "canvas-inner-container",
+      id: 'canvas-area',
+      containerArea: 'canvas-inner-container',
       // specific identifier
-      dropArea: "#canvas-droparea",
+      dropArea: '#canvas-droparea',
     },
     value: {
       center: {
         x: 0,
-        y: 0
+        y: 0,
       },
-      aspectRatio: (16/9).toFixed(2),
+      aspectRatio: (16 / 9).toFixed(2),
       zoomValue: 1,
       zoomFactor: 0.1,
-      borderColor: "#b76e79",
+      borderColor: '#b76e79',
       cornerSize: 10,
-      cornerColor: "#b76e79",
-      cornerStyle: "circle",
+      cornerColor: '#b76e79',
+      cornerStyle: 'circle',
       transparentCorners: false,
       cloneOffset: 20,
       hideControls: {
@@ -230,7 +250,7 @@ export class BoardViewComponent implements OnInit, AfterViewInit {
         mt: false,
         mr: false,
         mb: false,
-        mtr: false
+        mtr: false,
       },
       textControl: {
         tl: true,
@@ -241,7 +261,7 @@ export class BoardViewComponent implements OnInit, AfterViewInit {
         mt: false,
         mr: true,
         mb: false,
-        mtr: true
+        mtr: true,
       },
       imageControl: {
         tl: true,
@@ -252,15 +272,15 @@ export class BoardViewComponent implements OnInit, AfterViewInit {
         mt: false,
         mr: false,
         mb: false,
-        mtr: true
+        mtr: true,
       },
       propertiesToInclude: [
-        "transparentCorners",
-        "borderColor",
-        "cornerSize",
-        "cornerColor",
-        "cornerStyle",
-        "referenceObject"
+        'transparentCorners',
+        'borderColor',
+        'cornerSize',
+        'cornerColor',
+        'cornerStyle',
+        'referenceObject',
       ],
       crop: {
         control: {
@@ -272,12 +292,12 @@ export class BoardViewComponent implements OnInit, AfterViewInit {
           mt: true,
           mr: true,
           mb: true,
-          mtr: false
+          mtr: false,
         },
         active: null,
         copy: null,
         box: null,
-      }
+      },
     },
 
     configuration: {},
@@ -295,19 +315,18 @@ export class BoardViewComponent implements OnInit, AfterViewInit {
       isCurrentObjectImage: false,
       isCurrentObjectTransparentable: false,
       isCurrentObjectTransparentSelected: false,
-    }
+    },
   };
   appMeta = {
-
     asset: [],
     board: {
       data: [],
       currentIndex: 0,
       update: {
         exist: false,
-        method: () => { },
-        delay: 2000
-      }
+        method: () => {},
+        delay: 2000,
+      },
     },
     flag: {
       isFontToolbarDirty: false,
@@ -316,56 +335,56 @@ export class BoardViewComponent implements OnInit, AfterViewInit {
       isProductPanelDirty: false,
       isBoardItemDirty: false,
       isBoot: true,
-      isPreviewEnabled: false
+      isPreviewEnabled: false,
     },
     value: {
-      fontFamily: "Roboto",
-      fontSize: "48",
-      fontStyle: "normal",
-      fontWeight: "normal",
-      fontColor: "#000000",
+      fontFamily: 'Roboto',
+      fontSize: '48',
+      fontStyle: 'normal',
+      fontWeight: 'normal',
+      fontColor: '#000000',
       userID: 1,
       currentSelectedItem: 0,
-      lastVisitedTab: "",
-      scaleFactor: 0
+      lastVisitedTab: '',
+      scaleFactor: 0,
     },
     identifier: {
       customProduct: '.product-image[type="custom"]',
 
-      boardTitle: ".board-title",
+      boardTitle: '.board-title',
       tab: '.nav-link',
-      currentDragableObject: ".dragging",
+      currentDragableObject: '.dragging',
 
-      fontFamily: ".js-font-select",
-      fontSize: ".js-font-select-size",
-      fontColor: ".js-font-select-color",
+      fontFamily: '.js-font-select',
+      fontSize: '.js-font-select-size',
+      fontColor: '.js-font-select-color',
 
       completeActionElement: ".item-action-icons ",
       completeTitleElement: ".d-flex:has(.canvas-title-bar)",
 
-      fontToolbarElement: ".editor-icons",
-      imageToolbarElement: ".image-icons",
-      cropToolbarElement: ".crop-toolbar",
-      transparentToolbarElement: ".do-transparent",
-      undoTransparentToolbarElement: ".undo-transparent",
+      fontToolbarElement: '.editor-icons',
+      imageToolbarElement: '.image-icons',
+      cropToolbarElement: '.crop-toolbar',
+      transparentToolbarElement: '.do-transparent',
+      undoTransparentToolbarElement: '.undo-transparent',
 
-      dropzoneElement: ".add-new",
+      dropzoneElement: '.add-new',
 
       uploadByURL: "input[name='url']",
       uploadByURLName: "input[name='name']",
       uploadByURLPrice: "input[name='price']",
       uploadByURLIsPrivate: "input[name='is_private']",
-      uploadByURLSubmit: "#step3 .red-button",
+      uploadByURLSubmit: '#step3 .red-button',
 
-      backgroundColorElement: ".canvas-pallete-color",
-      floorPatternElement: ".canvas-pallete-wood-patterns",
+      backgroundColorElement: '.canvas-pallete-color',
+      floorPatternElement: '.canvas-pallete-wood-patterns',
 
-      manualDrop: ".manual-drop",
-    }
+      manualDrop: '.manual-drop',
+    },
   };
 
-  facebookRedirect = "";
-  googleRedirect = "";
+  facebookRedirect = '';
+  googleRedirect = '';
   remoteProducts = [];
   boardPreviewProducts = [];
 
@@ -395,114 +414,121 @@ export class BoardViewComponent implements OnInit, AfterViewInit {
   ngAfterViewInit(): void {
     this.shortcuts.push(
       {
-        key: "up",
-        command: e => this.applyShortcut('activeObjectFetchAssign', 'top', -1),
-        preventDefault: true
+        key: 'up',
+        command: (e) =>
+          this.applyShortcut('activeObjectFetchAssign', 'top', -1),
+        preventDefault: true,
       },
       {
-        key: "down",
-        command: e => this.applyShortcut('activeObjectFetchAssign', 'top', 1),
-        preventDefault: true
+        key: 'down',
+        command: (e) => this.applyShortcut('activeObjectFetchAssign', 'top', 1),
+        preventDefault: true,
       },
       {
-        key: "left",
-        command: e => this.applyShortcut('activeObjectFetchAssign', 'left', -1),
-        preventDefault: true
+        key: 'left',
+        command: (e) =>
+          this.applyShortcut('activeObjectFetchAssign', 'left', -1),
+        preventDefault: true,
       },
       {
-        key: "right",
-        command: e => this.applyShortcut('activeObjectFetchAssign', 'left', 1),
-        preventDefault: true
+        key: 'right',
+        command: (e) =>
+          this.applyShortcut('activeObjectFetchAssign', 'left', 1),
+        preventDefault: true,
       },
       {
-        key: "shift + up",
-        command: e => this.applyShortcut('activeObjectFetchAssign', 'top', -10),
-        preventDefault: true
+        key: 'shift + up',
+        command: (e) =>
+          this.applyShortcut('activeObjectFetchAssign', 'top', -10),
+        preventDefault: true,
       },
       {
-        key: "shift + down",
-        command: e => this.applyShortcut('activeObjectFetchAssign', 'top', 10),
-        preventDefault: true
+        key: 'shift + down',
+        command: (e) =>
+          this.applyShortcut('activeObjectFetchAssign', 'top', 10),
+        preventDefault: true,
       },
       {
-        key: "shift + left",
-        command: e => this.applyShortcut('activeObjectFetchAssign', 'left', -10),
-        preventDefault: true
+        key: 'shift + left',
+        command: (e) =>
+          this.applyShortcut('activeObjectFetchAssign', 'left', -10),
+        preventDefault: true,
       },
       {
-        key: "shift + right",
-        command: e => this.applyShortcut('activeObjectFetchAssign', 'left', 10),
-        preventDefault: true
+        key: 'shift + right',
+        command: (e) =>
+          this.applyShortcut('activeObjectFetchAssign', 'left', 10),
+        preventDefault: true,
       },
       {
-        key: "esc",
-        command: e => this.applyShortcut("deselectOrCancel", ''),
-        preventDefault: true
+        key: 'esc',
+        command: (e) => this.applyShortcut('deselectOrCancel', ''),
+        preventDefault: true,
       },
       {
-        key: "t",
-        command: e => this.applyShortcut("addText", ''),
-        preventDefault: true
+        key: 't',
+        command: (e) => this.applyShortcut('addText', ''),
+        preventDefault: true,
       },
       {
-        key: "del",
-        command: e => this.applyShortcut("action", 'delete'),
-        preventDefault: true
+        key: 'del',
+        command: (e) => this.applyShortcut('action', 'delete'),
+        preventDefault: true,
       },
       {
-        key: ["ctrl + z", "cmd + z"],
-        command: e => this.applyShortcut("direct", 'undo'),
-        preventDefault: true
+        key: ['ctrl + z', 'cmd + z'],
+        command: (e) => this.applyShortcut('direct', 'undo'),
+        preventDefault: true,
       },
       {
-        key: ["ctrl + y", "cmd + y"],
-        command: e => this.applyShortcut("direct", 'redo'),
-        preventDefault: true
+        key: ['ctrl + y', 'cmd + y'],
+        command: (e) => this.applyShortcut('direct', 'redo'),
+        preventDefault: true,
       },
       {
-        key: ["ctrl + plus", "cmd + plus", "ctrl + =", "cmd + ="],
-        command: e => this.applyShortcut("direct", 'zoomIn'),
-        preventDefault: true
+        key: ['ctrl + plus', 'cmd + plus', 'ctrl + =', 'cmd + ='],
+        command: (e) => this.applyShortcut('direct', 'zoomIn'),
+        preventDefault: true,
       },
       {
-        key: ["ctrl + -", "cmd + -", "ctrl + _", "cmd + _"],
-        command: e => this.applyShortcut("direct", 'zoomOut'),
-        preventDefault: true
+        key: ['ctrl + -', 'cmd + -', 'ctrl + _', 'cmd + _'],
+        command: (e) => this.applyShortcut('direct', 'zoomOut'),
+        preventDefault: true,
       },
       {
-        key: ["ctrl + a", "cmd + a"],
-        command: e => this.applyShortcut("direct", "selectAll"),
-        preventDefault: true
+        key: ['ctrl + a', 'cmd + a'],
+        command: (e) => this.applyShortcut('direct', 'selectAll'),
+        preventDefault: true,
       },
       {
-        key: ["ctrl + d", "cmd + d"],
-        command: e => this.applyShortcut("action", "duplicate"),
-        preventDefault: true
+        key: ['ctrl + d', 'cmd + d'],
+        command: (e) => this.applyShortcut('action', 'duplicate'),
+        preventDefault: true,
       },
       {
-        key: ["ctrl + f", "cmd + f"],
-        command: e => this.applyShortcut("action", "flip"),
-        preventDefault: true
+        key: ['ctrl + f', 'cmd + f'],
+        command: (e) => this.applyShortcut('action', 'flip'),
+        preventDefault: true,
       },
       {
-        key: ["ctrl + b", "cmd + b"],
-        command: e => this.applyShortcut("toggleBackground", ""),
-        preventDefault: true
+        key: ['ctrl + b', 'cmd + b'],
+        command: (e) => this.applyShortcut('toggleBackground', ''),
+        preventDefault: true,
       },
       {
-        key: ["ctrl + r", "cmd + r"],
-        command: e => this.applyShortcut("initializeCrop", ""),
-        preventDefault: true
+        key: ['ctrl + r', 'cmd + r'],
+        command: (e) => this.applyShortcut('initializeCrop', ''),
+        preventDefault: true,
       },
       {
-        key: ["ctrl + up", "cmd + up"],
-        command: e => this.applyShortcut("action", "bringForward"),
-        preventDefault: true
+        key: ['ctrl + up', 'cmd + up'],
+        command: (e) => this.applyShortcut('action', 'bringForward'),
+        preventDefault: true,
       },
       {
-        key: ["ctrl + down", "cmd + down"],
-        command: e => this.applyShortcut("action", "sendBackward"),
-        preventDefault: true
+        key: ['ctrl + down', 'cmd + down'],
+        command: (e) => this.applyShortcut('action', 'sendBackward'),
+        preventDefault: true,
       },
       {
         key: "ctrl + u",
@@ -510,10 +536,10 @@ export class BoardViewComponent implements OnInit, AfterViewInit {
         preventDefault: true
       },
       {
-        key: "enter",
-        command: e => this.applyShortcut("confirmCrop", ""),
-        preventDefault: true
-      },
+        key: 'enter',
+        command: (e) => this.applyShortcut('confirmCrop', ''),
+        preventDefault: true,
+      }
     );
     // Object.keys(boardShortcuts).forEach((i) => { this.shortcuts.push(boardShortcuts[i]) });
   }
@@ -521,42 +547,48 @@ export class BoardViewComponent implements OnInit, AfterViewInit {
   applyShortcut = (action, name, value = 0) => {
     let activeObject = this.canvas.getActiveObject();
 
-    if (action == "deselectOrCancel") {
-      if (this.canvasMeta.flag.cropEnabled)
-        this.handleCrop(false);
-      else
-        this.canvas.discardActiveObject();
-    }
-    else if (action == "action" && activeObject)
-      this.action(name);
-    else if (action == "activeObjectFetchAssign" && activeObject)
+    if (action == 'deselectOrCancel') {
+      if (this.canvasMeta.flag.cropEnabled) this.handleCrop(false);
+      else this.canvas.discardActiveObject();
+    } else if (action == 'action' && activeObject) this.action(name);
+    else if (action == 'activeObjectFetchAssign' && activeObject)
       activeObject.set(name, activeObject[name] + value);
-    else if (action == "direct")
-      this[name]();
-    else if (action == "initializeCrop" && activeObject && activeObject.type == "image")
+    else if (action == 'direct') this[name]();
+    else if (
+      action == 'initializeCrop' &&
+      activeObject &&
+      activeObject.type == 'image'
+    )
       this.handleCrop();
-    else if (action == "confirmCrop" && activeObject && this.canvasMeta.flag.cropEnabled)
+    else if (
+      action == 'confirmCrop' &&
+      activeObject &&
+      this.canvasMeta.flag.cropEnabled
+    )
       this.handleCrop(true);
-    else if (action == "toggleBackground" && activeObject) {
-      if ((this.canvasMeta.flag.isCurrentObjectTransparentable &&
-        !this.canvasMeta.flag.isCurrentObjectTransparentSelected) == true)
+    else if (action == 'toggleBackground' && activeObject) {
+      if (
+        (this.canvasMeta.flag.isCurrentObjectTransparentable &&
+          !this.canvasMeta.flag.isCurrentObjectTransparentSelected) == true
+      )
         this.action('transparent');
-      else if ((this.canvasMeta.flag.isCurrentObjectTransparentable &&
-        this.canvasMeta.flag.isCurrentObjectTransparentSelected) == true)
+      else if (
+        (this.canvasMeta.flag.isCurrentObjectTransparentable &&
+          this.canvasMeta.flag.isCurrentObjectTransparentSelected) == true
+      )
         this.action('undoTransparent');
-    }
-    else if (action == "addText") {
-      let textToInsert = new fb.Textbox("Text", {
+    } else if (action == 'addText') {
+      let textToInsert = new fb.Textbox('Text', {
         fontFamily: this.appMeta.value.fontFamily,
         fontSize: this.appMeta.value.fontSize,
-        fill: "#000000"
+        fill: '#000000',
       });
       textToInsert.setControlsVisibility(this.canvasMeta.value.textControl);
       this.applyDrop(false, textToInsert);
     }
 
     this.canvas.requestRenderAll();
-  }
+  };
 
   getConfig = (callback) => {
     // this.canvasMeta.configuration = response.reduce(function (r, e) {
@@ -564,55 +596,55 @@ export class BoardViewComponent implements OnInit, AfterViewInit {
     //   return r;
     // }, {});
 
-    if (callback)
-      callback();
+    if (callback) callback();
   };
 
   getBoards = () => {
     const uuid = this.route.snapshot.paramMap.get('uuid');
-    this.boardService.getBoardByID(uuid).
-      subscribe(response => {
-        let boardFound = false;
-        this.appMeta.board.data = response;
-        this.appMeta.board.data.forEach((boardObject, objectIndex) => {
-          // convert state back to json
-          this.appMeta.board.data[objectIndex].state = JSON.parse(boardObject.state);
-          if (boardObject.uuid == uuid) {
-            boardFound = true;
-            this.appMeta.board.currentIndex = objectIndex;
-            $(this.appMeta.identifier.boardTitle).val(boardObject.title);
-            this.canvasMeta.currentHistory.push(boardObject.state);
-            this.canvasMeta.currentHistoryIndex++;
+    this.boardService.getBoardByID(uuid).subscribe((response) => {
+      let boardFound = false;
+      this.appMeta.board.data = response;
+      this.appMeta.board.data.forEach((boardObject, objectIndex) => {
+        // convert state back to json
+        this.appMeta.board.data[objectIndex].state = JSON.parse(
+          boardObject.state
+        );
+        if (boardObject.uuid == uuid) {
+          boardFound = true;
+          this.appMeta.board.currentIndex = objectIndex;
+          $(this.appMeta.identifier.boardTitle).val(boardObject.title);
+          this.canvasMeta.currentHistory.push(boardObject.state);
+          this.canvasMeta.currentHistoryIndex++;
 
-            if (boardObject.state){
-              boardObject.state.objects.forEach((object) => {
-                if (object.type == "textbox"){
-                  this.addFontFamilyIfNotAdded(object.fontFamily);
-                }
-              });
-            }
-            this.updateStateFromHistory();
+          if (boardObject.state) {
+            boardObject.state.objects.forEach((object) => {
+              if (object.type == 'textbox') {
+                this.addFontFamilyIfNotAdded(object.fontFamily);
+              }
+            });
           }
-        });
-
-        // if board does not exist redirect user to board list
-        if (boardFound == false)
-          this.router.navigate(["../../" + boardRoutesNames.BOARD_LIST], { relativeTo: this.route });
-        else if (this.justCreated)
-          this.openBoardConfig();
+          this.updateStateFromHistory();
+        }
       });
+
+      // if board does not exist redirect user to board list
+      if (boardFound == false)
+        this.router.navigate(['../../' + boardRoutesNames.BOARD_LIST], {
+          relativeTo: this.route,
+        });
+      else if (this.justCreated) this.openBoardConfig();
+    });
   };
 
   getAssets = () => {
-    this.boardService.getAssets(true)
-      .subscribe(response => {
-        if (response.length > 0) {
-          this.appMeta.asset = response;
-          this.appMeta.flag.isAssetDirty = true;
-          this.appMeta.flag.isProductPanelDirty = true;
-          this.renderAppMeta();
-        }
-      });
+    this.boardService.getAssets(true).subscribe((response) => {
+      if (response.length > 0) {
+        this.appMeta.asset = response;
+        this.appMeta.flag.isAssetDirty = true;
+        this.appMeta.flag.isProductPanelDirty = true;
+        this.renderAppMeta();
+      }
+    });
   };
 
   initializeCanvas = (callback) => {
@@ -620,40 +652,48 @@ export class BoardViewComponent implements OnInit, AfterViewInit {
       containerClass: this.canvasMeta.identifier.containerArea,
       preserveObjectStacking: true,
       width: $(this.canvasMeta.identifier.dropArea).parent().width(),
-      height: $(this.canvasMeta.identifier.dropArea).parent().width() / Number.parseFloat(this.canvasMeta.value.aspectRatio),
-      backgroundColor: "rgb(255,255,255)",
-      selection: true
+      height:
+        $(this.canvasMeta.identifier.dropArea).parent().width() /
+        Number.parseFloat(this.canvasMeta.value.aspectRatio),
+      backgroundColor: 'rgb(255,255,255)',
+      selection: true,
     });
 
     // add class for detection
-    $(".lazysuzy-board").on('dragstart dragend', (e) => {
-      $(e.target).toggleClass(this.appMeta.identifier.currentDragableObject.replace(".", ""));
+    $('.lazysuzy-board').on('dragstart dragend', (e) => {
+      $(e.target).toggleClass(
+        this.appMeta.identifier.currentDragableObject.replace('.', '')
+      );
     });
 
     // update canvas center point
     this.updateCanvasCenter();
 
     // bind drop area events
-    $(this.canvasMeta.identifier.dropArea).bind("drop", (e) => {
+    $(this.canvasMeta.identifier.dropArea).bind('drop', (e) => {
       let draggedObject = $(this.appMeta.identifier.currentDragableObject);
-      let dropType = draggedObject.attr("drop-type");
+      let dropType = draggedObject.attr('drop-type');
       let referenceID = draggedObject.parent().attr('data-product');
-      let referenceType = draggedObject.parent().attr("type");
+      let referenceType = draggedObject.parent().attr('type');
       this.handleDrop(e, draggedObject, dropType, referenceID, referenceType);
     });
 
     // handle canvas events
-    this.canvas.on("selection:created", this.handleSelection);
-    this.canvas.on("selection:updated", this.handleSelection);
-    this.canvas.on("selection:cleared", this.handleSelection);
+    this.canvas.on('selection:created', this.handleSelection);
+    this.canvas.on('selection:updated', this.handleSelection);
+    this.canvas.on('selection:cleared', this.handleSelection);
 
     // stop objects from going out of canvas area
-    this.canvas.on("object:moving", (e) => {
+    this.canvas.on('object:moving', (e) => {
       return;
       var obj = e.target;
       var boundingRect = obj.getBoundingRect();
       // if object is too big ignore
-      if (obj.currentHeight > obj.this.canvas.height || obj.currentWidth > obj.this.canvas.width || obj.clipPath)
+      if (
+        obj.currentHeight > obj.this.canvas.height ||
+        obj.currentWidth > obj.this.canvas.width ||
+        obj.clipPath
+      )
         return;
 
       obj.setCoords();
@@ -664,77 +704,92 @@ export class BoardViewComponent implements OnInit, AfterViewInit {
           obj.left = Math.max(obj.left, obj.left - boundingRect.left);
         }
 
-        if (boundingRect.top + boundingRect.height > obj.this.canvas.height || boundingRect.left + boundingRect.width > obj.this.canvas.width) {
-          obj.top = Math.min(obj.top, obj.this.canvas.height - boundingRect.height + obj.top - boundingRect.top);
-          obj.left = Math.min(obj.left, obj.this.canvas.width - boundingRect.width + obj.left - boundingRect.left);
+        if (
+          boundingRect.top + boundingRect.height > obj.this.canvas.height ||
+          boundingRect.left + boundingRect.width > obj.this.canvas.width
+        ) {
+          obj.top = Math.min(
+            obj.top,
+            obj.this.canvas.height -
+              boundingRect.height +
+              obj.top -
+              boundingRect.top
+          );
+          obj.left = Math.min(
+            obj.left,
+            obj.this.canvas.width -
+              boundingRect.width +
+              obj.left -
+              boundingRect.left
+          );
         }
       }
-
     });
-    this.canvas.on("object:modified", this.saveHistory);
-    this.canvas.on("object:scaling", (event) => {
-      this.font.size = (event.target.fontSize * event.target.scaleX).toFixed(0).toString() + "px";
+    this.canvas.on('object:modified', this.saveHistory);
+    this.canvas.on('object:scaling', (event) => {
+      this.font.size =
+        (event.target.fontSize * event.target.scaleX).toFixed(0).toString() +
+        'px';
     });
     this.canvas.on('object:modified', (event) => {
-      if (event.target && event.target.type == "textbox") {
+      if (event.target && event.target.type == 'textbox') {
         event.target.fontSize *= event.target.scaleX;
         event.target.fontSize = event.target.fontSize.toFixed(0);
         event.target.scaleX = 1;
         event.target.scaleY = 1;
         event.target._clearCache();
-        this.font.size = event.target.fontSize + "px";
+        this.font.size = event.target.fontSize + 'px';
       }
     });
 
-    this.canvas.on("mouse:down", (e) => {
+    this.canvas.on('mouse:down', (e) => {
       if (this.canvasMeta.flag.isZoomed && !this.canvas.getActiveObject()) {
         this.canvasMeta.flag.panningEnabled = true;
-        this.canvas.defaultCursor = "move";
+        this.canvas.defaultCursor = 'move';
         this.canvas.selection = false;
-      }
-      else if (this.canvasMeta.flag.cropEnabled)
-        // if cropbox exist and empty area was clicked
+      } else if (this.canvasMeta.flag.cropEnabled)
         if (this.canvasMeta.value.crop.box && e.target == null) {
+          // if cropbox exist and empty area was clicked
           this.canvas.setActiveObject(this.canvasMeta.value.crop.box);
           this.handleCrop(true);
         }
     });
-    this.canvas.on("mouse:up", (e) => {
-
+    this.canvas.on('mouse:up', (e) => {
       this.canvasMeta.flag.panningEnabled = false;
-      this.canvas.defaultCursor = "default";
+      this.canvas.defaultCursor = 'default';
       this.canvas.selection = true;
-
     });
-    this.canvas.on("mouse:move", (e) => {
+    this.canvas.on('mouse:move', (e) => {
       if (this.canvasMeta.flag.panningEnabled && e && e.e) {
         let delta = new fb.Point(e.e.movementX, e.e.movementY);
         this.canvas.relativePan(delta);
 
-        if (this.canvasMeta.value.zoomValue > 1)
-          this.keepPositionInBounds();
+        if (this.canvasMeta.value.zoomValue > 1) this.keepPositionInBounds();
       }
-
     });
 
-    if (callback)
-      callback();
+    if (callback) callback();
   };
 
   initializeAppMeta = () => {
     // Initialize font values
-    $(this.appMeta.identifier.fontColor).on("input", (e) => {
+    $(this.appMeta.identifier.fontColor).on('input', (e) => {
       this.appMeta.value.fontColor = $(e.currentTarget).val().toString();
       this.appMeta.flag.isFontToolbarDirty = true;
       this.updateCurrentObject(true);
     });
 
     $(this.appMeta.identifier.boardTitle).change((e) => {
-      this.appMeta.board.data[this.appMeta.board.currentIndex].title = $(this.appMeta.identifier.boardTitle).val();
+      this.appMeta.board.data[this.appMeta.board.currentIndex].title = $(
+        this.appMeta.identifier.boardTitle
+      ).val();
 
       if (this.appMeta.board.update.exist == false) {
         this.appMeta.board.update.exist = true;
-        this.appMeta.board.update.method = this.debounce(this.updateBoard, this.appMeta.board.update.delay);
+        this.appMeta.board.update.method = this.debounce(
+          this.updateBoard,
+          this.appMeta.board.update.delay
+        );
       }
 
       this.appMeta.board.update.method();
@@ -743,24 +798,36 @@ export class BoardViewComponent implements OnInit, AfterViewInit {
     // handle custom product click for bottom sheet render
     $(document).on('click', this.appMeta.identifier.customProduct, (e) => {
       this.appMeta.flag.isProductPanelDirty = true;
-      this.appMeta.value.currentSelectedItem = Number.parseInt($(e.currentTarget).attr('data-product'));
+      this.appMeta.value.currentSelectedItem = Number.parseInt(
+        $(e.currentTarget).attr('data-product')
+      );
       this.renderAppMeta();
     });
 
     // handle manual add
     $(document).on('click', this.appMeta.identifier.manualDrop, (e) => {
       let dropType = $(e.currentTarget).attr('drop-type');
-      if (dropType == "image") {
+      if (dropType == 'image') {
         let referenceID = $(e.currentTarget).attr('data-product');
         let referenceType = $(e.currentTarget).attr('type');
-        let draggedObject = $('.product-image[type="' + referenceType + '"][data-product="' + referenceID + '"] img');
+        let draggedObject = $(
+          '.product-image[type="' +
+            referenceType +
+            '"][data-product="' +
+            referenceID +
+            '"] img'
+        );
         // console.log(draggedObject, dropType, referenceID, referenceType);
-        this.handleDrop(false, draggedObject, dropType, referenceID, referenceType);
-      }
-      else if (dropType == "text")
+        this.handleDrop(
+          false,
+          draggedObject,
+          dropType,
+          referenceID,
+          referenceType
+        );
+      } else if (dropType == 'text')
         this.handleDrop(false, $(e.target), dropType, false, false);
     });
-
 
     // Render first updates
     this.updateToolbar();
@@ -816,55 +883,58 @@ export class BoardViewComponent implements OnInit, AfterViewInit {
       }
     });
     */
-  }
+  };
 
   updateCanvasCenter = () => {
     let center = this.canvas.getCenter();
     this.canvasMeta.value.center = {
       x: center.left,
-      y: center.top
+      y: center.top,
     };
   };
 
   updateCurrentObject = (forceUpdate = false) => {
     let activeObject = this.canvas.getActiveObject();
     if (activeObject) {
-      if (activeObject.type == "textbox") {
+      if (activeObject.type == 'textbox') {
         if (this.appMeta.flag.isFontToolbarDirty) {
-          activeObject.set("fontFamily", this.appMeta.value.fontFamily);
-          activeObject.set("fontSize", this.appMeta.value.fontSize);
-          activeObject.set("fontStyle", this.appMeta.value.fontStyle);
-          activeObject.set("fontWeight", this.appMeta.value.fontWeight);
-          activeObject.set("fill", this.appMeta.value.fontColor);
+          activeObject.set('fontFamily', this.appMeta.value.fontFamily);
+          activeObject.set('fontSize', this.appMeta.value.fontSize);
+          activeObject.set('fontStyle', this.appMeta.value.fontStyle);
+          activeObject.set('fontWeight', this.appMeta.value.fontWeight);
+          activeObject.set('fill', this.appMeta.value.fontColor);
         }
-      } else if (activeObject.type == "image") {
-
+      } else if (activeObject.type == 'image') {
       }
     }
 
     // request render at the end
     this.canvas.requestRenderAll();
     // mark all actions completed
-    Object.keys(this.appMeta.flag).map((flag) => this.appMeta.flag[flag] = false);
+    Object.keys(this.appMeta.flag).map(
+      (flag) => (this.appMeta.flag[flag] = false)
+    );
 
-    if (forceUpdate)
-      this.saveHistory();
+    if (forceUpdate) this.saveHistory();
   };
 
   updateStateFromHistory = () => {
-    return this.canvas.loadFromJSON(this.canvasMeta.currentHistory[this.canvasMeta.currentHistoryIndex], () => {
-      if (this.appMeta.flag.isBoot) {
-        this.appMeta.flag.isBoot = false;
-        this.handleResize(true);
-        setTimeout(() => { 
-          for (let index = 0; index < this.canvas._objects.length; index++) {
-            if (this.canvas._objects[index].type == "textbox")
-              this.canvas._objects[index].dirty = true;
-          }
-          this.canvas.renderAll();
-        }, 3000);
+    return this.canvas.loadFromJSON(
+      this.canvasMeta.currentHistory[this.canvasMeta.currentHistoryIndex],
+      () => {
+        if (this.appMeta.flag.isBoot) {
+          this.appMeta.flag.isBoot = false;
+          this.handleResize(true);
+          setTimeout(() => {
+            for (let index = 0; index < this.canvas._objects.length; index++) {
+              if (this.canvas._objects[index].type == 'textbox')
+                this.canvas._objects[index].dirty = true;
+            }
+            this.canvas.renderAll();
+          }, 3000);
+        }
       }
-    });
+    );
   };
 
   handleSelection = () => {
@@ -873,7 +943,7 @@ export class BoardViewComponent implements OnInit, AfterViewInit {
     this.canvasMeta.flag.isCurrentObjectText = this.canvasMeta.flag.isCurrentObjectImage = this.canvasMeta.flag.isCurrentObjectTransparentSelected = this.canvasMeta.flag.isCurrentObjectTransparentable = this.canvasMeta.flag.isCurrentSelectionEmpty = false;
 
     if (activeObject) {
-      if (activeObject.type == "textbox") {
+      if (activeObject.type == 'textbox') {
         this.font = new Font({
           family: activeObject.fontFamily,
           size: activeObject.fontSize + 'px',
@@ -884,15 +954,15 @@ export class BoardViewComponent implements OnInit, AfterViewInit {
         this.appMeta.flag.isFontToolbarDirty = true;
         this.canvasMeta.flag.isCurrentObjectText = true;
         activeObject.setControlsVisibility(this.canvasMeta.value.textControl);
-      }
-      else if (activeObject.type == "image") {
+      } else if (activeObject.type == 'image') {
         this.canvasMeta.flag.isCurrentObjectImage = true;
-        this.canvasMeta.flag.isCurrentObjectTransparentable = activeObject.referenceObject.type == "custom";
-        this.canvasMeta.flag.isCurrentObjectTransparentSelected = activeObject.getSrc().includes(activeObject.referenceObject.transparentPath);
+        this.canvasMeta.flag.isCurrentObjectTransparentable =
+          activeObject.referenceObject.type == 'custom';
+        this.canvasMeta.flag.isCurrentObjectTransparentSelected = activeObject
+          .getSrc()
+          .includes(activeObject.referenceObject.transparentPath);
       }
-    }
-    else
-      this.canvasMeta.flag.isCurrentSelectionEmpty = true;
+    } else this.canvasMeta.flag.isCurrentSelectionEmpty = true;
 
     this.updateToolbar();
   };
@@ -900,14 +970,15 @@ export class BoardViewComponent implements OnInit, AfterViewInit {
   handleDrop = (e, draggedObject, dropType, referenceID, referenceType) => {
     if (dropType == 'image') {
       let referenceObjectValue: any = {
-        type: referenceType
+        type: referenceType,
       };
 
       if (referenceType == 'custom') {
         referenceObjectValue.id = this.appMeta.asset[referenceID].asset_id;
         referenceObjectValue.path = this.appMeta.asset[referenceID].path;
-        referenceObjectValue.transparentPath =
-          this.appMeta.asset[referenceID].transparent_path;
+        referenceObjectValue.transparentPath = this.appMeta.asset[
+          referenceID
+        ].transparent_path;
         referenceObjectValue.name = this.appMeta.asset[referenceID].name;
         referenceObjectValue.price = this.appMeta.asset[referenceID].price;
         referenceObjectValue.brand = this.appMeta.asset[referenceID].brand;
@@ -925,7 +996,7 @@ export class BoardViewComponent implements OnInit, AfterViewInit {
 
       let imageToInsert = new fb.Image(draggedObject[0], {
         lockScalingFlip: true,
-        referenceObject: referenceObjectValue
+        referenceObject: referenceObjectValue,
       });
 
       this.applyDrop(e, imageToInsert);
@@ -948,12 +1019,11 @@ export class BoardViewComponent implements OnInit, AfterViewInit {
       //     // crossOrigin: 'anonymous'
       //   }
       // );
-
     } else if (dropType == 'text') {
       let textToInsert = new fb.Textbox(draggedObject.text(), {
         fontFamily: draggedObject.text(),
         fontSize: this.appMeta.value.fontSize,
-        fill: "#000000"
+        fill: '#000000',
       });
       textToInsert.setControlsVisibility(this.canvasMeta.value.textControl);
       this.applyDrop(e, textToInsert);
@@ -967,9 +1037,13 @@ export class BoardViewComponent implements OnInit, AfterViewInit {
 
       // if object is more then 30% size on canvas then make it 30%
       if (objectToInsert.width / this.canvas.getWidth() >= 0.3)
-        objectToInsert.scale((this.canvas.getWidth() * 0.3) / objectToInsert.width);
+        objectToInsert.scale(
+          (this.canvas.getWidth() * 0.3) / objectToInsert.width
+        );
       else if (objectToInsert.height / this.canvas.getHeight() >= 0.3)
-        objectToInsert.scale((this.canvas.getHeight() * 0.3) / objectToInsert.height);
+        objectToInsert.scale(
+          (this.canvas.getHeight() * 0.3) / objectToInsert.height
+        );
 
       if (e) {
         let offset = $('#' + this.canvasMeta.identifier.id).offset();
@@ -991,7 +1065,7 @@ export class BoardViewComponent implements OnInit, AfterViewInit {
         borderColor: this.canvasMeta.value.borderColor,
         cornerSize: this.canvasMeta.value.cornerSize,
         cornerColor: this.canvasMeta.value.cornerColor,
-        cornerStyle: this.canvasMeta.value.cornerStyle
+        cornerStyle: this.canvasMeta.value.cornerStyle,
       });
       this.canvas.add(objectToInsert);
       this.canvas.setActiveObject(objectToInsert);
@@ -1001,28 +1075,29 @@ export class BoardViewComponent implements OnInit, AfterViewInit {
   };
 
   updateCanvasState = () => {
-    this.appMeta.board.data[this.appMeta.board.currentIndex].state = this.canvas.toJSON(
-      this.canvasMeta.value.propertiesToInclude
-    );
+    this.appMeta.board.data[
+      this.appMeta.board.currentIndex
+    ].state = this.canvas.toJSON(this.canvasMeta.value.propertiesToInclude);
     this.appMeta.board.data[this.appMeta.board.currentIndex].state.canvas = {
       width: this.canvas.width,
-      height: this.canvas.height
+      height: this.canvas.height,
     };
     return this.appMeta.board.data[this.appMeta.board.currentIndex].state;
   };
 
   handleResize = (forceUpdate = false) => {
     let previousWidth = forceUpdate
-      ? this.appMeta.board.data[this.appMeta.board.currentIndex].state.canvas.width
+      ? this.appMeta.board.data[this.appMeta.board.currentIndex].state.canvas
+          .width
       : this.canvas.width;
-    let currentWidth = $(this.canvasMeta.identifier.dropArea)
-      .parent()
-      .width();
+    let currentWidth = $(this.canvasMeta.identifier.dropArea).parent().width();
 
     this.appMeta.value.scaleFactor = currentWidth / previousWidth;
 
     this.canvas.setWidth(currentWidth);
-    this.canvas.setHeight(currentWidth / Number.parseFloat(this.canvasMeta.value.aspectRatio));
+    this.canvas.setHeight(
+      currentWidth / Number.parseFloat(this.canvasMeta.value.aspectRatio)
+    );
 
     if (this.canvas.backgroundImage) {
       this.canvas.backgroundImage.scaleX *= this.appMeta.value.scaleFactor;
@@ -1045,7 +1120,9 @@ export class BoardViewComponent implements OnInit, AfterViewInit {
   saveHistory = () => {
     if (this.canvasMeta.flag.cropEnabled) return;
 
-    let currentState = this.canvas.toJSON(this.canvasMeta.value.propertiesToInclude);
+    let currentState = this.canvas.toJSON(
+      this.canvasMeta.value.propertiesToInclude
+    );
 
     this.canvasMeta.flag.isDirty = true;
 
@@ -1058,13 +1135,20 @@ export class BoardViewComponent implements OnInit, AfterViewInit {
     }
 
     // If a modification took place while under undo/redo state
-    if (this.canvasMeta.currentHistoryIndex !== this.canvasMeta.currentHistory.length - 1)
-      this.canvasMeta.currentHistory.splice(this.canvasMeta.currentHistoryIndex + 1);
+    if (
+      this.canvasMeta.currentHistoryIndex !==
+      this.canvasMeta.currentHistory.length - 1
+    )
+      this.canvasMeta.currentHistory.splice(
+        this.canvasMeta.currentHistoryIndex + 1
+      );
 
     this.canvasMeta.currentHistory.push(currentState);
     this.canvasMeta.currentHistoryIndex++;
 
-    this.appMeta.board.data[this.appMeta.board.currentIndex].state = currentState;
+    this.appMeta.board.data[
+      this.appMeta.board.currentIndex
+    ].state = currentState;
     // call the method
     this.appMeta.board.update.method();
   };
@@ -1076,27 +1160,28 @@ export class BoardViewComponent implements OnInit, AfterViewInit {
     try {
       previewObject = this.canvas.toDataURL({
         format: 'image/jpeg',
-        quality: 0.2
+        quality: 0.2,
         // multiplier: 0.2
       });
-    } catch (err) {
-  
-    }
+    } catch (err) {}
 
-    this.boardService.updateBoard(new Board({
-      uuid: this.appMeta.board.data[this.appMeta.board.currentIndex].uuid,
-      title: this.appMeta.board.data[this.appMeta.board.currentIndex].title,
-      state: JSON.stringify(this.updateCanvasState()),
-      preview: previewObject
-    })).subscribe(board => {
-      this.canvasMeta.flag.isDirty = false;
-    });
+    this.boardService
+      .updateBoard(
+        new Board({
+          uuid: this.appMeta.board.data[this.appMeta.board.currentIndex].uuid,
+          title: this.appMeta.board.data[this.appMeta.board.currentIndex].title,
+          state: JSON.stringify(this.updateCanvasState()),
+          preview: previewObject,
+        })
+      )
+      .subscribe((board) => {
+        this.canvasMeta.flag.isDirty = false;
+      });
   };
 
   updateToolbar = () => {
     if (this.appMeta.flag.isFontToolbarDirty) {
-      $(this.appMeta.identifier.fontColor)
-        .val(this.appMeta.value.fontColor)
+      $(this.appMeta.identifier.fontColor).val(this.appMeta.value.fontColor);
     }
 
     // toggle visibility of toolbar elements based on flag
@@ -1108,11 +1193,11 @@ export class BoardViewComponent implements OnInit, AfterViewInit {
     );
     $(this.appMeta.identifier.transparentToolbarElement).toggle(
       this.canvasMeta.flag.isCurrentObjectTransparentable &&
-      !this.canvasMeta.flag.isCurrentObjectTransparentSelected
+        !this.canvasMeta.flag.isCurrentObjectTransparentSelected
     );
     $(this.appMeta.identifier.undoTransparentToolbarElement).toggle(
       this.canvasMeta.flag.isCurrentObjectTransparentable &&
-      this.canvasMeta.flag.isCurrentObjectTransparentSelected
+        this.canvasMeta.flag.isCurrentObjectTransparentSelected
     );
     $(this.appMeta.identifier.completeActionElement).toggle(
       !this.canvasMeta.flag.isCurrentSelectionEmpty
@@ -1122,11 +1207,12 @@ export class BoardViewComponent implements OnInit, AfterViewInit {
       'visibility',
       this.appMeta.flag.isPreviewEnabled ? 'hidden' : 'visible'
     );
-    $(this.appMeta.identifier.cropToolbarElement).toggle(this.canvasMeta.flag.cropEnabled);
+    $(this.appMeta.identifier.cropToolbarElement).toggle(
+      this.canvasMeta.flag.cropEnabled
+    );
   };
 
   renderAppMeta = () => {
-
     // enable
     // if (this.appMeta.flag.isAssetDirty) {
     //   this.appMeta.flag.isAssetDirty = false;
@@ -1187,7 +1273,7 @@ export class BoardViewComponent implements OnInit, AfterViewInit {
           fill: '#fff',
           backgroundColor: '#b76e79',
           controlVisible: false,
-          selectable: false
+          selectable: false,
         });
 
         this.canvas.add(textToInsert);
@@ -1199,11 +1285,9 @@ export class BoardViewComponent implements OnInit, AfterViewInit {
             index: y + 1,
             name: x.referenceObject.name,
             brand: x.referenceObject.brand,
-            price: x.referenceObject.price
-              ? '$' + x.referenceObject.price
-              : ''
+            price: x.referenceObject.price ? '$' + x.referenceObject.price : '',
           };
-        })
+        });
       }
     }
   };
@@ -1235,7 +1319,10 @@ export class BoardViewComponent implements OnInit, AfterViewInit {
     let yMin = ((2 - zoom) * this.canvas.getHeight()) / 2;
     let yMax = (zoom * this.canvas.getHeight()) / 2;
 
-    let point = new fb.Point(this.canvas.getWidth() / 2, this.canvas.getHeight() / 2);
+    let point = new fb.Point(
+      this.canvas.getWidth() / 2,
+      this.canvas.getHeight() / 2
+    );
     let center = fb.util.transformPoint(point, this.canvas.viewportTransform);
 
     let clampedCenterX = this.clamp(center.x, xMin, xMax);
@@ -1256,7 +1343,10 @@ export class BoardViewComponent implements OnInit, AfterViewInit {
   zoomIn = () => {
     this.canvasMeta.flag.isZoomed = true;
     this.canvasMeta.value.zoomValue += this.canvasMeta.value.zoomFactor;
-    this.canvas.zoomToPoint(this.canvasMeta.value.center, this.canvasMeta.value.zoomValue);
+    this.canvas.zoomToPoint(
+      this.canvasMeta.value.center,
+      this.canvasMeta.value.zoomValue
+    );
     this.handleResize();
   };
 
@@ -1265,7 +1355,10 @@ export class BoardViewComponent implements OnInit, AfterViewInit {
       // set default color
       this.canvas.setBackgroundColor('#f2f3f4');
       this.canvasMeta.value.zoomValue -= this.canvasMeta.value.zoomFactor;
-      this.canvas.zoomToPoint(this.canvasMeta.value.center, this.canvasMeta.value.zoomValue);
+      this.canvas.zoomToPoint(
+        this.canvasMeta.value.center,
+        this.canvasMeta.value.zoomValue
+      );
       // handling a glitch in zooming out with background
       // this.keepPositionInBounds();
     } else this.canvasMeta.flag.isZoomed = false;
@@ -1282,7 +1375,10 @@ export class BoardViewComponent implements OnInit, AfterViewInit {
   };
   redo = () => {
     // Redo is possible
-    if (this.canvasMeta.currentHistoryIndex < this.canvasMeta.currentHistory.length - 1) {
+    if (
+      this.canvasMeta.currentHistoryIndex <
+      this.canvasMeta.currentHistory.length - 1
+    ) {
       this.canvasMeta.currentHistoryIndex++;
       this.updateStateFromHistory();
     }
@@ -1317,10 +1413,10 @@ export class BoardViewComponent implements OnInit, AfterViewInit {
           this.saveHistory();
           break;
         case false:
-          if (secondaryAction) this.canvasMeta.value.crop.active.clipPath = false;
+          if (secondaryAction)
+            this.canvasMeta.value.crop.active.clipPath = false;
           else
-            this.canvasMeta.value.crop.active.clipPath =
-              this.canvasMeta.value.crop.copy.clipPath;
+            this.canvasMeta.value.crop.active.clipPath = this.canvasMeta.value.crop.copy.clipPath;
 
           this.canvasMeta.value.crop.active.dirty = true;
           this.canvasMeta.flag.cropEnabled = false;
@@ -1348,21 +1444,21 @@ export class BoardViewComponent implements OnInit, AfterViewInit {
             top: activeObject.top,
             left: activeObject.left,
             fill: '',
-            transparentCorners: false
+            transparentCorners: false,
           });
 
           if (this.canvasMeta.value.crop.active.clipPath) {
             let center = activeObject.getCenterPoint();
-            this.canvasMeta.value.crop.box.width =
-              this.canvasMeta.value.crop.active.clipPath.width;
-            this.canvasMeta.value.crop.box.height =
-              this.canvasMeta.value.crop.active.clipPath.height;
+            this.canvasMeta.value.crop.box.width = this.canvasMeta.value.crop.active.clipPath.width;
+            this.canvasMeta.value.crop.box.height = this.canvasMeta.value.crop.active.clipPath.height;
             this.canvasMeta.value.crop.box.left =
               center.x +
-              this.canvasMeta.value.crop.active.clipPath.left * activeObject.scaleX;
+              this.canvasMeta.value.crop.active.clipPath.left *
+                activeObject.scaleX;
             this.canvasMeta.value.crop.box.top =
               center.y +
-              this.canvasMeta.value.crop.active.clipPath.top * activeObject.scaleY;
+              this.canvasMeta.value.crop.active.clipPath.top *
+                activeObject.scaleY;
           }
 
           this.canvasMeta.value.crop.box.on('scaling', this.applyCrop);
@@ -1381,13 +1477,13 @@ export class BoardViewComponent implements OnInit, AfterViewInit {
 
       this.canvas
         .getObjects()
-        .forEach(object => (object.selectable = this.canvas.selection));
+        .forEach((object) => (object.selectable = this.canvas.selection));
       this.canvas.renderAll();
       this.updateToolbar();
     }
   };
 
-  applyCrop = e => {
+  applyCrop = (e) => {
     let rect = this.canvasMeta.value.crop.box;
     let image = this.canvasMeta.value.crop.active;
 
@@ -1406,9 +1502,9 @@ export class BoardViewComponent implements OnInit, AfterViewInit {
 
     if (
       rect.top + rect.height * rect.scaleY >
-      image.top + image.height * image.scaleY ||
+        image.top + image.height * image.scaleY ||
       rect.left + rect.width * rect.scaleX >
-      image.left + image.width * image.scaleX
+        image.left + image.width * image.scaleX
     ) {
       rect.top = Math.min(
         rect.top,
@@ -1430,14 +1526,14 @@ export class BoardViewComponent implements OnInit, AfterViewInit {
       width: (rect.width * rect.scaleX) / image.scaleX,
       height: (rect.height * rect.scaleY) / image.scaleY,
       left: (image.width / 2) * -1 + offsetX,
-      top: (image.height / 2) * -1 + offsetY
+      top: (image.height / 2) * -1 + offsetY,
     });
 
     image.clipPath = mask;
     image.dirty = true;
   };
 
-  action = type => {
+  action = (type) => {
     let activeObject = this.canvas.getActiveObject();
 
     switch (type) {
@@ -1454,10 +1550,10 @@ export class BoardViewComponent implements OnInit, AfterViewInit {
         this.canvas.remove(activeObject);
         break;
       case 'duplicate':
-        activeObject.clone(clone => {
+        activeObject.clone((clone) => {
           clone.set({
             left: clone.left + this.canvasMeta.value.cloneOffset,
-            top: clone.top + this.canvasMeta.value.cloneOffset
+            top: clone.top + this.canvasMeta.value.cloneOffset,
           });
 
           this.canvas.add(clone);
@@ -1473,7 +1569,7 @@ export class BoardViewComponent implements OnInit, AfterViewInit {
             width: activeObject.width,
             height: activeObject.height,
             scaleX: activeObject.scaleX,
-            scaleY: activeObject.scaleY
+            scaleY: activeObject.scaleY,
           };
           this.canvasMeta.flag.isCurrentObjectTransparentable = false;
           this.canvasMeta.flag.isCurrentObjectTransparentSelected = false;
@@ -1516,7 +1612,7 @@ export class BoardViewComponent implements OnInit, AfterViewInit {
       this.canvas.selection = !toggle;
       this.canvas.discardActiveObject();
 
-      this.canvas.getObjects().forEach(object => {
+      this.canvas.getObjects().forEach((object) => {
         object.selectable = !toggle;
         if (object.type == 'text' && !toggle) this.canvas.remove(object);
       });
@@ -1531,18 +1627,24 @@ export class BoardViewComponent implements OnInit, AfterViewInit {
   };
 
   handleConfigChange = (object) => {
-
-    if (object.attribute == 'color'){
-      this.canvas.backgroundImage = "";
+    if (object.attribute == 'color') {
+      this.canvas.backgroundImage = '';
       this.canvas.setBackgroundColor(object.value, () => {
         this.canvas.renderAll();
         this.saveHistory();
       });
-    }
-    else if(object.attribute == 'background'){
+    } else if (object.attribute == 'background') {
       fb.Image.fromURL(object.value, (img) => {
-        img.set({ originX: 'left', originY: 'top', scaleX: this.canvas.width / img.width, scaleY: this.canvas.height / img.height });
-        this.canvas.setBackgroundImage(img, this.canvas.renderAll.bind(this.canvas));
+        img.set({
+          originX: 'left',
+          originY: 'top',
+          scaleX: this.canvas.width / img.width,
+          scaleY: this.canvas.height / img.height,
+        });
+        this.canvas.setBackgroundImage(
+          img,
+          this.canvas.renderAll.bind(this.canvas)
+        );
       });
     }
     else if(object.attribute == 'action')
@@ -1574,11 +1676,12 @@ export class BoardViewComponent implements OnInit, AfterViewInit {
 
   addFontFamilyIfNotAdded(fontFamily: string) {
     if (this.presetFonts.indexOf(fontFamily) === -1) {
-      this.fontPickerService.loadFont(new Font({
-        family: fontFamily
-      }));
+      this.fontPickerService.loadFont(
+        new Font({
+          family: fontFamily,
+        })
+      );
       this.presetFonts.push(fontFamily);
     }
   }
-
 }

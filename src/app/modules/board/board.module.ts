@@ -43,10 +43,15 @@ import { CurrentBoardComponent } from './components/current-board/board.componen
 import { AddFileUploadComponent } from './board-add/add-file-upload/add-file-upload.component';
 import { UploadFileDetailsComponent } from './board-add/add-file-upload/upload-file-details/upload-file-details.component';
 
-import { FontPickerModule, FONT_PICKER_CONFIG, FontPickerConfigInterface } from 'ngx-font-picker';
+import {
+  FontPickerModule,
+  FONT_PICKER_CONFIG,
+  FontPickerConfigInterface,
+} from 'ngx-font-picker';
+import { Ng5SliderModule } from 'ng5-slider';
 
 const DEFAULT_FONT_PICKER_CONFIG: FontPickerConfigInterface = {
-  apiKey: 'AIzaSyBCssLRX6vTUWmk__OTRIz5699gL4kgpVQ'
+  apiKey: 'AIzaSyBCssLRX6vTUWmk__OTRIz5699gL4kgpVQ',
 };
 
 @NgModule({
@@ -69,7 +74,8 @@ const DEFAULT_FONT_PICKER_CONFIG: FontPickerConfigInterface = {
     ReactiveFormsModule,
     KeyboardShortcutsModule.forRoot(),
     CarouselModule,
-    FontPickerModule
+    FontPickerModule,
+    Ng5SliderModule,
   ],
   declarations: [
     BoardComponent,
@@ -94,7 +100,7 @@ const DEFAULT_FONT_PICKER_CONFIG: FontPickerConfigInterface = {
     BoardProductsComponent,
     CurrentBoardComponent,
     AddFileUploadComponent,
-    UploadFileDetailsComponent
+    UploadFileDetailsComponent,
   ],
   entryComponents: [
     AddViaUrlComponent, 
@@ -107,4 +113,4 @@ const DEFAULT_FONT_PICKER_CONFIG: FontPickerConfigInterface = {
     useValue: DEFAULT_FONT_PICKER_CONFIG
   }]
 })
-export class BoardModule { }
+export class BoardModule {}
