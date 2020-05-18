@@ -102,22 +102,11 @@ const DEFAULT_FONT_PICKER_CONFIG: FontPickerConfigInterface = {
     AddFileUploadComponent,
     UploadFileDetailsComponent,
   ],
-<<<<<<< HEAD
-  entryComponents: [AddViaUrlComponent, UploadFileDetailsComponent],
-  providers: [
-    BoardService,
-    CookieService,
-    {
-      provide: FONT_PICKER_CONFIG,
-      useValue: DEFAULT_FONT_PICKER_CONFIG,
-    },
-=======
   entryComponents: [
     AddViaUrlComponent, 
     UploadFileDetailsComponent,
     BoardPopupConfigComponent,
     BoardPopupConfirmComponent
->>>>>>> 6f39dd367591cadbf306b9b53348fa301e1e6e41
   ],
 })
 export class BoardModule {}
