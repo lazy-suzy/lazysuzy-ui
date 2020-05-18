@@ -9,6 +9,7 @@ import { BoardPreviewComponent } from './board-preview/board-preview.component';
 import { BoardPopupComponent } from './board-popup/board-popup.component';
 import { BoardPopupConfigComponent } from './board-popup-config/board-popup-config.component';
 import { BoardLoaderComponent } from './board-loader/board-loader.component';
+import { BoardPopupConfirmComponent } from './board-popup-confirm/board-popup-confirm.component';
 
 import { BoardService } from './board.service';
 import { CookieService } from 'ngx-cookie-service';
@@ -78,6 +79,7 @@ const DEFAULT_FONT_PICKER_CONFIG: FontPickerConfigInterface = {
     BoardPopupComponent,
     BoardPopupConfigComponent,
     BoardLoaderComponent,
+    BoardPopupConfirmComponent,
     SelectComponent,
     BoardAddComponent,
     AddViaUrlComponent,
@@ -96,7 +98,9 @@ const DEFAULT_FONT_PICKER_CONFIG: FontPickerConfigInterface = {
   ],
   entryComponents: [
     AddViaUrlComponent, 
-    UploadFileDetailsComponent
+    UploadFileDetailsComponent,
+    BoardPopupConfigComponent,
+    BoardPopupConfirmComponent
   ],
   providers: [BoardService, CookieService, {
     provide: FONT_PICKER_CONFIG,

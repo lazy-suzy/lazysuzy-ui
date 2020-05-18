@@ -121,8 +121,8 @@
       <div class="col-md-12 tool-bar-holder">
         <div class="top-panel row top-panel-hide">
           <div class="col-md-4 d-none d-md-block state-icons">
-            <i class="mdi mdi-magnify-minus" (click)="zoomOut()" aria-hidden="true"></i>
-            <i class="mdi mdi-magnify-plus" (click)="zoomIn()" aria-hidden="true"></i>
+            <!-- <i class="mdi mdi-magnify-minus" (click)="zoomOut()" aria-hidden="true"></i> -->
+            <!-- <i class="mdi mdi-magnify-plus" (click)="zoomIn()" aria-hidden="true"></i> -->
             <i class="mdi mdi-undo" (click)="undo()" aria-hidden="true"></i>
             <i class="mdi mdi-redo" (click)="redo()" aria-hidden="true"></i>
             <i class="mdi mdi-share-variant" (click)="openPopup('share')" aria-hidden="true"></i>
@@ -198,12 +198,12 @@
           </div>
           <div class="canvas">
             <div id="canvas-droparea">
-              <canvas id="canvas-area" style="border:1px solid black"></canvas>
+              <canvas id="canvas-area" style="border:1px solid #c8c7cc"></canvas>
             </div>
           </div>
           <div class="col-sm-2 col-5 state-icons d-lg-none">
-            <i class="mdi mdi-magnify-minus" (click)="zoomOut()" aria-hidden="true"></i>
-            <i class="mdi mdi-magnify-plus" (click)="zoomIn()" aria-hidden="true"></i>
+            <!-- <i class="mdi mdi-magnify-minus" (click)="zoomOut()" aria-hidden="true"></i> -->
+            <!-- <i class="mdi mdi-magnify-plus" (click)="zoomIn()" aria-hidden="true"></i> -->
             <i class="mdi mdi-undo" (click)="undo()" aria-hidden="true"></i>
             <i class="mdi mdi-redo" (click)="redo()" aria-hidden="true"></i>
           </div>

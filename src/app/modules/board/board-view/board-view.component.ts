@@ -14,6 +14,7 @@ import { BoardPopupComponent } from '../board-popup/board-popup.component';
 import { BoardPopupConfigComponent } from '../board-popup-config/board-popup-config.component';
 import { boardRoutesNames } from '../board.routes.names';
 import { Font, FontPickerService } from 'ngx-font-picker';
+import { environment } from 'src/environments/environment';
 
 declare const fb: any;
 
@@ -106,7 +107,7 @@ export class BoardViewComponent implements OnInit, AfterViewInit {
     const dialogRef = this.dialog.open(BoardPopupConfigComponent, {
       panelClass: 'custom-dialog-container',
       data: {
-        color: this.canvas.backgroundColor,
+        color: this.canvas.backgroundColor ? ("#" + new fb.Color(this.canvas.backgroundColor).toHex()).toLocaleLowerCase() : null,
         background: this.canvas.backgroundImage ? this.canvas.backgroundImage._element.currentSrc : ""
       },
       width: '40%',
@@ -339,7 +340,7 @@ export class BoardViewComponent implements OnInit, AfterViewInit {
       fontSize: ".js-font-select-size",
       fontColor: ".js-font-select-color",
 
-      completeToolbarElement: ".top-panel",
+      completeActionElement: ".item-action-icons ",
       completeTitleElement: ".d-flex:has(.canvas-title-bar)",
 
       fontToolbarElement: ".editor-icons",
@@ -504,7 +505,7 @@ export class BoardViewComponent implements OnInit, AfterViewInit {
         preventDefault: true
       },
       {
-        key: "ctrl + p",
+        key: "ctrl + u",
         command: e => this.openPopup('publish'),
         preventDefault: true
       },
@@ -1113,8 +1114,8 @@ export class BoardViewComponent implements OnInit, AfterViewInit {
       this.canvasMeta.flag.isCurrentObjectTransparentable &&
       this.canvasMeta.flag.isCurrentObjectTransparentSelected
     );
-    $(this.appMeta.identifier.completeToolbarElement).toggle(
-      !this.appMeta.flag.isPreviewEnabled || !this.canvasMeta.flag.isCurrentSelectionEmpty
+    $(this.appMeta.identifier.completeActionElement).toggle(
+      !this.canvasMeta.flag.isCurrentSelectionEmpty
     );
     // had to do it this way because of css important on flex
     $(this.appMeta.identifier.completeTitleElement).css(
@@ -1466,36 +1467,6 @@ export class BoardViewComponent implements OnInit, AfterViewInit {
 
         break;
       case 'transparent':
-        if (activeObject.referenceObject.type == 'custom') {
-          var dimentionBefore = {
-            width: activeObject.width,
-            height: activeObject.height,
-            scaleX: activeObject.scaleX,
-            scaleY: activeObject.scaleY
-          };
-          this.canvasMeta.flag.isCurrentObjectTransparentable = false;
-          this.canvasMeta.flag.isCurrentObjectTransparentSelected = false;
-          this.updateToolbar();
-          this.boardService.updateAsset(new Asset({
-            asset_id: activeObject.referenceObject.id,
-          })).subscribe(response => {
-            activeObject.referenceObject.transparentPath =
-              response.transparent_path;
-            activeObject.setSrc(response.transparent_path, () => {
-              activeObject.scaleX =
-                (dimentionBefore.width * dimentionBefore.scaleX) /
-                activeObject.width;
-              activeObject.scaleY =
-                (dimentionBefore.height * dimentionBefore.scaleY) /
-                activeObject.height;
-              this.canvasMeta.flag.isCurrentObjectTransparentSelected = true;
-              this.canvas.discardActiveObject();
-              this.updateToolbar();
-              this.canvas.renderAll();
-            });
-          });
-        }
-        break;
       case 'undoTransparent':
         if (activeObject.referenceObject.type == 'custom') {
           var dimentionBefore = {
@@ -1507,18 +1478,22 @@ export class BoardViewComponent implements OnInit, AfterViewInit {
           this.canvasMeta.flag.isCurrentObjectTransparentable = false;
           this.canvasMeta.flag.isCurrentObjectTransparentSelected = false;
           this.updateToolbar();
-          activeObject.setSrc(activeObject.referenceObject.path, () => {
-            activeObject.scaleX =
-              (dimentionBefore.width * dimentionBefore.scaleX) /
-              activeObject.width;
-            activeObject.scaleY =
-              (dimentionBefore.height * dimentionBefore.scaleY) /
-              activeObject.height;
-            this.canvasMeta.flag.isCurrentObjectTransparentSelected = false;
-            this.canvas.discardActiveObject();
-            this.updateToolbar();
-            this.canvas.renderAll();
-          });
+
+          if (type == 'transparent'){
+            if (activeObject.referenceObject.transparentPath)
+              this.toggleTransparent(activeObject, dimentionBefore, true);
+            else {
+              this.boardService.updateAsset(new Asset({
+                asset_id: activeObject.referenceObject.id,
+                transparent: 1
+              })).subscribe(response => {
+                activeObject.referenceObject.transparentPath = response.transparent_path;
+                this.toggleTransparent(activeObject, dimentionBefore, true);
+              });
+            }
+          }
+          else
+            this.toggleTransparent(activeObject, dimentionBefore, false);
         }
         break;
     }
@@ -1570,6 +1545,31 @@ export class BoardViewComponent implements OnInit, AfterViewInit {
         this.canvas.setBackgroundImage(img, this.canvas.renderAll.bind(this.canvas));
       });
     }
+    else if(object.attribute == 'action')
+      if (object.value == 'cancel' && this.justCreated){
+        this.appMeta.board.data[this.appMeta.board.currentIndex].is_active = false;
+        this.boardService.updateBoard(this.appMeta.board.data[this.appMeta.board.currentIndex]).subscribe((response) => {
+          this.router.navigate(["../../" + boardRoutesNames.BOARD_LIST], { relativeTo: this.route });
+        });
+      }
+  }
+
+  toggleTransparent = (activeObject, dimentionBefore, enableTransparent = false) => {
+    activeObject.setSrc(environment.BASE_HREF + (enableTransparent ? activeObject.referenceObject.transparentPath : activeObject.referenceObject.path), () => {
+      activeObject.scaleX =
+        (dimentionBefore.width * dimentionBefore.scaleX) /
+        activeObject.width;
+      activeObject.scaleY =
+        (dimentionBefore.height * dimentionBefore.scaleY) /
+        activeObject.height;
+
+      this.canvasMeta.flag.isCurrentObjectTransparentSelected = enableTransparent;
+
+      this.canvas.discardActiveObject();
+      this.updateToolbar();
+      this.canvas.renderAll();
+
+    });
   }
 
   addFontFamilyIfNotAdded(fontFamily: string) {
