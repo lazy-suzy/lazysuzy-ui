@@ -59,11 +59,16 @@ const routes: Routes = [
     path: 'product/:product',
     component: ProductDetailsMobileComponent,
     pathMatch: 'full'
-  }
+  },
   // {
   //   path: 'blog',
   //   loadChildren: () => import('./feature/blog/blog/blog.module').then(m => m.BlogModule)
   // }
+  {
+    path: 'admin-dashboard',
+    loadChildren: () => import('./modules/admin-dashboard/admin-dashboard.module').then(m => m.AdminDashboardModule)
+  },
+
 ];
 
 @NgModule({
