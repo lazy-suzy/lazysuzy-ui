@@ -4,10 +4,10 @@
     </div>
     <div class="row modal-action mt-4 mb-4">
         <div class="col-6 text-right">
-            <button class="btn red-button" (click)="dialogRef.close(true)" data-action="delete">{{popupData.optionConfirm}}</button>
+            <button class="btn red-button" (click)="action(true)" data-action="delete">{{popupData.optionConfirm}}</button>
         </div>
         <div class="col-6">
-            <button class="btn btn-cancel" (click)="dialogRef.close(false)" data-action="cancel">{{popupData.optionCancel}}</button>
+            <button class="btn btn-cancel" (click)="action(false)" data-action="cancel">{{popupData.optionCancel}}</button>
         </div>
     </div>
 </div>

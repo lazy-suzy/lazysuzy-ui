@@ -8,7 +8,7 @@ import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material';
 })
 export class BoardPopupConfirmComponent implements OnInit {
 
-  private popupData = {
+  popupData = {
     title: "Are you sure?",
     optionConfirm: "Confirm",
     optionCancel: "Cancel"
@@ -23,6 +23,10 @@ export class BoardPopupConfirmComponent implements OnInit {
   }
 
   ngOnInit() {
+  }
+
+  action(actionToTake = false) {
+    this.dialogRef.close(actionToTake);
   }
 
 }
