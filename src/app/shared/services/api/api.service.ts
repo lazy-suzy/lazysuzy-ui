@@ -10,21 +10,21 @@ import {
   IProductPayload,
   ISearchProductsPayload,
   IDepartment,
-  IProductDetail
+  IProductDetail,
 } from './../../models';
 import { MOCK_PRODUCT_FILTERS } from 'src/app/mocks';
 import { forkJoin } from 'rxjs'; // RxJS 6 syntax
 import { delay, filter } from 'rxjs/operators';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class ApiService {
   constructor(
     private httpService: HttpService,
     private cookie: CookieService,
     private utils: UtilsService
-  ) { }
+  ) {}
 
   getNewArrivals(filters = '', page = 0): Observable<IProductsPayload> {
     const endpoint = `products/all`;
@@ -173,7 +173,7 @@ export class ApiService {
         is_private: 0,
         created_at: '2020-03-31 05:33:42',
         modified_at: '2020-03-31 13:03:56',
-        is_active: 1
+        is_active: 1,
       },
       {
         asset_id: 6,
@@ -186,7 +186,7 @@ export class ApiService {
         is_private: 0,
         created_at: '2020-03-27 20:59:12',
         modified_at: '2020-03-27 20:59:24',
-        is_active: 1
+        is_active: 1,
       },
       {
         asset_id: 5,
@@ -199,7 +199,7 @@ export class ApiService {
         is_private: 1,
         created_at: '2020-03-27 20:58:29',
         modified_at: '2020-03-27 20:58:33',
-        is_active: 1
+        is_active: 1,
       },
       {
         asset_id: 4,
@@ -212,7 +212,7 @@ export class ApiService {
         is_private: 1,
         created_at: '2020-03-27 20:58:02',
         modified_at: '2020-03-27 20:58:10',
-        is_active: 1
+        is_active: 1,
       },
       {
         asset_id: 2,
@@ -225,7 +225,7 @@ export class ApiService {
         is_private: 1,
         created_at: '2020-03-24 00:02:30',
         modified_at: '2020-03-27 20:57:47',
-        is_active: 1
+        is_active: 1,
       },
       {
         asset_id: 3,
@@ -238,7 +238,7 @@ export class ApiService {
         is_private: 0,
         created_at: '2020-03-26 05:32:43',
         modified_at: '2020-03-26 05:32:52',
-        is_active: 1
+        is_active: 1,
       },
       {
         asset_id: 1,
@@ -251,30 +251,25 @@ export class ApiService {
         is_private: 1,
         created_at: '2020-03-23 23:48:08',
         modified_at: '2020-03-23 23:48:08',
-        is_active: 1
-      }
+        is_active: 1,
+      },
     ];
     return of(result).pipe(delay(1000));
   }
 
-  getBrowseTabData(id: string, appliedFilters, pageNo): Observable<any> {
-    let colors = appliedFilters.selectedColors || [];
-    let brands = appliedFilters.selectedbrands || [];
-    let selColorString = '';
-    let selBrandsString = '';
-    if (brands.length) {
-      selBrandsString = brands.toString();
-    }
-    if (colors.length) {
-      selColorString = colors.toString();
-    }
-    let brandQuery = `brand:${selBrandsString}`;
-    let colorQuery = `color:${selColorString}`;
-    let priceQuery = `price_from:0;price_to:${appliedFilters.price|| `10000`}`;
+  getBrowseTabData(
+    id: string,
+    appliedFilters: string,
+    pageNo
+  ): Observable<any> {
     const endpoint = `products/all`;
     const url = env.useLocalJson
       ? `${env.JSON_BASE_HREF}${endpoint}.json`
-      : `${env.API_BASE_HREF}${endpoint}?filters=${brandQuery};${priceQuery};type:;${colorQuery};category:${id}&sort_type=&pageno=${pageNo || 0}&limit=24&board-view=true`;
+      : `${
+          env.API_BASE_HREF
+        }${endpoint}?filters=${appliedFilters};category:${id}&sort_type=&pageno=${
+          pageNo || 0
+        }&limit=24&board-view=true`;
     return this.httpService.get(url);
   }
 
@@ -292,7 +287,7 @@ export class ApiService {
     const url = `${env.API_BASE_HREF}${endpoint}`;
     const headers = new HttpHeaders({
       'Content-Type': 'application/json',
-      Authorization: `Bearer ${this.cookie.get('token')}`
+      Authorization: `Bearer ${this.cookie.get('token')}`,
     });
     // env.useLocalJson
     //   ? `${env.JSON_BASE_HREF}${endpoint}`
@@ -335,7 +330,7 @@ export class ApiService {
 
     const headers = new HttpHeaders({
       'Content-Type': 'application/json',
-      Authorization: `Bearer ${token}`
+      Authorization: `Bearer ${token}`,
     });
     return this.httpService.get(url, headers);
   }
@@ -344,7 +339,7 @@ export class ApiService {
     const endpoint = `register`;
     const url = `${env.API_BASE_HREF}${endpoint}`;
     const headers = new HttpHeaders({
-      Authorization: `Bearer ${this.cookie.get('token')}`
+      Authorization: `Bearer ${this.cookie.get('token')}`,
     });
     return this.httpService.post(url, data, headers);
   }
@@ -354,8 +349,8 @@ export class ApiService {
       'https://psimonmyway.com/wp-json/wp/v2/posts?_embed',
       {
         params: {
-          per_page: '6'
-        }
+          per_page: '6',
+        },
       }
     );
   }
@@ -374,7 +369,7 @@ export class ApiService {
       client_id: 11,
       client_secret: 'qVBaGC2G2qxa55VlbFRMrnPrjJGcRB98HFo8YoE4',
       grant_type: 'social',
-      provider
+      provider,
     };
     return this.httpService.post(url, data);
   }
@@ -383,7 +378,7 @@ export class ApiService {
     const token = this.cookie.get('token');
     const headers = new HttpHeaders({
       'Content-Type': 'application/json',
-      Authorization: `Bearer ${token}`
+      Authorization: `Bearer ${token}`,
     });
     const endpoint = 'cart/add';
     const url = `${env.API_BASE_HREF}${endpoint}`;
@@ -394,7 +389,7 @@ export class ApiService {
     const token = this.cookie.get('token');
     const headers = new HttpHeaders({
       'Content-Type': 'application/json',
-      Authorization: `Bearer ${token}`
+      Authorization: `Bearer ${token}`,
     });
     const endpoint = 'cart/remove';
     const url = `${env.API_BASE_HREF}${endpoint}`;
@@ -406,7 +401,7 @@ export class ApiService {
     const token = this.cookie.get('token');
     const headers = new HttpHeaders({
       'Content-Type': 'application/json',
-      Authorization: `Bearer ${token}`
+      Authorization: `Bearer ${token}`,
     });
     const url = `${env.API_BASE_HREF}${endpoint}`;
     return this.httpService.get(url, headers);
@@ -425,14 +420,14 @@ export class ApiService {
       operation: 'select',
       entity: 'board',
       data: 5,
-      Buser_id: 1
+      Buser_id: 1,
     });
   }
   postStripeToken(data) {
     const token = this.cookie.get('token');
     const headers = new HttpHeaders({
       'Content-Type': 'application/json',
-      Authorization: `Bearer ${token}`
+      Authorization: `Bearer ${token}`,
     });
     const endpoint = `payment/charge`;
     const url = `${env.API_BASE_HREF}${endpoint}`;
@@ -442,7 +437,7 @@ export class ApiService {
     const token = this.cookie.get('token');
     const headers = new HttpHeaders({
       'Content-Type': 'application/json',
-      Authorization: `Bearer ${token}`
+      Authorization: `Bearer ${token}`,
     });
     const endpoint = `order?order_id=${orderId}`;
     const url = `${env.API_BASE_HREF}${endpoint}`;
@@ -452,7 +447,7 @@ export class ApiService {
     const token = this.cookie.get('token');
     const headers = new HttpHeaders({
       'Content-Type': 'application/json',
-      Authorization: `Bearer ${token}`
+      Authorization: `Bearer ${token}`,
     });
     const endpoint = `user/update`;
     const url = `${env.API_BASE_HREF}${endpoint}`;

@@ -3,116 +3,148 @@
 <div class="lazysuzy-board">
   <div>
     <div class="left-panel">
-
       <div class="left-tabs">
-
         <ul class="nav nav-tabs flex-column">
-          <li 
-            *ngFor="let sideItem of sideBarItems;"
+          <li
+            *ngFor="let sideItem of sideBarItems"
             (click)="selectSideBarItem(sideItem)"
-            [ngClass]="boardService.state.selectedCategory == null  && sideItem?.value == 'browse' ? 'disable-browse' : ''"
+            [ngClass]="
+              boardService.state.selectedCategory == null &&
+              sideItem?.value == 'browse'
+                ? 'disable-browse'
+                : ''
+            "
             class="nav-item"
           >
-            <div class="nav-link" [class.active]="sideItem?.value === selectedItem">
-              {{sideItem?.label}}
+            <div
+              class="nav-link"
+              [class.active]="sideItem?.value === selectedItem"
+            >
+              {{ sideItem?.label }}
             </div>
           </li>
         </ul>
-
       </div>
 
       <div class="left-tab-pane">
-
         <!-- Selected Tab: {{selectedItem}} -->
 
-        <div *ngIf="selectedItem==='select'">
-          <app-select (goToCategory)="handleSelectCategory($event)"></app-select>
+        <div *ngIf="selectedItem === 'select'">
+          <app-select
+            (goToCategory)="handleSelectCategory($event)"
+          ></app-select>
         </div>
 
-        <div *ngIf="selectedItem==='browse'">
-
+        <div *ngIf="selectedItem === 'browse'">
           <div class="browse-header">
             <div class="item-search-bar">
-                <div class="input-group">
-                    <input type="text" class="form-control" id="inlineFormInputGroupUsername" placeholder="Search">
-                    <div class="input-group-append">
-                        <div class="input-group-text icon">
-                            <i class="mdi mdi-magnify" aria-hidden="true"></i>
-                        </div>
-                    </div>
+              <div class="input-group">
+                <input
+                  type="text"
+                  class="form-control"
+                  id="inlineFormInputGroupUsername"
+                  placeholder="Search"
+                />
+                <div class="input-group-append">
+                  <div class="input-group-text icon">
+                    <i class="mdi mdi-magnify" aria-hidden="true"></i>
+                  </div>
                 </div>
+              </div>
             </div>
             <div class="browse-title" (click)="handleGoToSelect($event)">
-                <i class="mdi mdi-chevron-left" aria-hidden="true"></i>
-                <h5 class="title js-category-title">
-                    {{selectedCategory?.category}}
-                </h5>
+              <i class="mdi mdi-chevron-left" aria-hidden="true"></i>
+              <h5 class="title js-category-title">
+                {{ selectedCategory?.category }}
+              </h5>
             </div>
             <div class="browse-filter">
-                <div class="filter-bar-container">
-                    <div class="filter-bar js-filter-section" id="desktop-filter">
-                        <div class="tabs">
-                          <!-- <button (click)='xpandStatus=xpandStatus?false:true'>Filters</button> -->
-                          <mat-expansion-panel [(expanded)]="xpandStatus">
-                            <mat-expansion-panel-header>
-                              <mat-icon>filter_list</mat-icon>
-                              </mat-expansion-panel-header>
-                            <app-browse-filter [filterData]="filterData" (updatesFromFilter)="handleFiltersUpdates($event)"></app-browse-filter>
-                          </mat-expansion-panel>
-                        </div>
-                    </div>
+              <div class="filter-bar-container">
+                <div class="filter-bar js-filter-section" id="desktop-filter">
+                  <app-browse-filter
+                    [filterData]="filterData"
+                    (updatesFromFilter)="handleFiltersUpdates($event)"
+                  ></app-browse-filter>
                 </div>
-                <div class="clear-all d-none d-md-block">Clear All</div>
+              </div>
+              <div class="clear-all d-none d-md-block">Clear All</div>
             </div>
-        </div>
-        
+          </div>
+
           <app-board-products
             [products]="remoteProducts"
-            (previewProduct)="handleProductPreview($event)">
+            (previewProduct)="handleProductPreview($event)"
+          >
           </app-board-products>
 
-          <button type="button" *ngIf="!showLoader && remoteProducts.length!=0" (click)="loadMore()" class="btn btn-primary">
+          <button
+            type="button"
+            *ngIf="!showLoader && remoteProducts.length != 0"
+            (click)="loadMore()"
+            class="btn btn-primary"
+          >
             Load More
           </button>
-          <button type="button" *ngIf="!showLoader && remoteProducts.length==0" (click)="loadMore()" class="btn btn-primary">
+          <button
+            type="button"
+            *ngIf="!showLoader && remoteProducts.length == 0"
+            (click)="loadMore()"
+            class="btn btn-primary"
+          >
             No products.Select another category.
           </button>
 
           <app-loader *ngIf="showLoader"></app-loader>
 
-          <div class="static-bottom-panel-wrapper" *ngIf="productForPreview" style="z-index: 9999999;">
+          <div
+            class="static-bottom-panel-wrapper"
+            *ngIf="productForPreview"
+            style="z-index: 9999999;"
+          >
             <div class="static-bottom-panel selected">
-              <app-product-preview [data]="productForPreview"
+              <app-product-preview
+                [data]="productForPreview"
                 (clearProductPreview)="handleClearProductPreview($event)"
-                (addProductBoard)="handleAddProductBoardPreview($event)">
+                (addProductBoard)="handleAddProductBoardPreview($event)"
+              >
               </app-product-preview>
             </div>
           </div>
-
         </div>
 
-        <div *ngIf="selectedItem==='text'">
+        <div *ngIf="selectedItem === 'text'">
           <app-board-text></app-board-text>
         </div>
 
-        <div *ngIf="selectedItem==='add'">
-          <app-board-add [allAssets]="appMeta.asset" [userId]="currentUser.id" (previewProduct)="handleProductPreview($event)"></app-board-add>
-          <div class="static-bottom-panel-wrapper" *ngIf="productForPreview" style="z-index: 9999999;">
+        <div *ngIf="selectedItem === 'add'">
+          <app-board-add
+            [allAssets]="appMeta.asset"
+            [userId]="currentUser.id"
+            (previewProduct)="handleProductPreview($event)"
+          ></app-board-add>
+          <div
+            class="static-bottom-panel-wrapper"
+            *ngIf="productForPreview"
+            style="z-index: 9999999;"
+          >
             <div class="static-bottom-panel selected">
-              <app-product-preview [data]="productForPreview"
+              <app-product-preview
+                [data]="productForPreview"
                 (clearProductPreview)="handleClearProductPreview($event)"
-                (addProductBoard)="handleAddProductBoardPreview($event)">
+                (addProductBoard)="handleAddProductBoardPreview($event)"
+              >
               </app-product-preview>
             </div>
           </div>
         </div>
 
-        <div *ngIf="selectedItem==='board'">
-          <app-current-board [boardProducts]="boardPreviewProducts"></app-current-board>
+        <div *ngIf="selectedItem === 'board'">
+          <app-current-board
+            [boardProducts]="boardPreviewProducts"
+          ></app-current-board>
         </div>
 
-        <div *ngIf="selectedItem==='favorites'"></div>
-        
+        <div *ngIf="selectedItem === 'favorites'"></div>
       </div>
     </div>
   </div>
@@ -121,19 +153,43 @@
       <div class="col-md-12 tool-bar-holder">
         <div class="top-panel row top-panel-hide">
           <div class="col-md-4 d-none d-md-block state-icons">
-            <i class="mdi mdi-magnify-minus" (click)="zoomOut()" aria-hidden="true"></i>
-            <i class="mdi mdi-magnify-plus" (click)="zoomIn()" aria-hidden="true"></i>
+            <i
+              class="mdi mdi-magnify-minus"
+              (click)="zoomOut()"
+              aria-hidden="true"
+            ></i>
+            <i
+              class="mdi mdi-magnify-plus"
+              (click)="zoomIn()"
+              aria-hidden="true"
+            ></i>
             <i class="mdi mdi-undo" (click)="undo()" aria-hidden="true"></i>
             <i class="mdi mdi-redo" (click)="redo()" aria-hidden="true"></i>
-            <i class="mdi mdi-share-variant" (click)="openPopup('share')" aria-hidden="true"></i>
-            <i class="mdi mdi-publish" (click)="openPopup('publish')" aria-hidden="true"></i>
+            <i
+              class="mdi mdi-share-variant"
+              (click)="openPopup('share')"
+              aria-hidden="true"
+            ></i>
+            <i
+              class="mdi mdi-publish"
+              (click)="openPopup('publish')"
+              aria-hidden="true"
+            ></i>
           </div>
           <div class="col-sm-6 col-md-4 text-center mt-1">
             <div class="editor-icons">
-              <div class="d-inline" [(fontPicker)]="font" [fpPresetLabel]="'Quick Access'" [fpPresetFonts]="presetFonts"
-                (fontPickerChange)="updateFontAndSize(font)" [fpWidth]="'auto'" [fpPosition]="'bottom'">
+              <div
+                class="d-inline"
+                [(fontPicker)]="font"
+                [fpPresetLabel]="'Quick Access'"
+                [fpPresetFonts]="presetFonts"
+                (fontPickerChange)="updateFontAndSize(font)"
+                [fpWidth]="'auto'"
+                [fpPosition]="'bottom'"
+              >
                 <div class="action-button dropdown mr-5">
-                  {{font?.family}} {{font?.style | FontStyles}} | {{font?.size}}
+                  {{ font?.family }} {{ font?.style | FontStyles }} |
+                  {{ font?.size }}
                 </div>
               </div>
               <input type="color" class="js-font-select-color" />
@@ -141,20 +197,37 @@
           </div>
           <div class="col-sm-6 col-md-4">
             <div class="item-action-icons float-right">
-              <span data-title="Remove Background" class="do-transparent" (click)="action('transparent')">
+              <span
+                data-title="Remove Background"
+                class="do-transparent"
+                (click)="action('transparent')"
+              >
                 <i class="mdi mdi-auto-fix" aria-hidden="true"></i>
               </span>
-              <span data-title="Apply Background" class="undo-transparent" (click)="action('undoTransparent')">
+              <span
+                data-title="Apply Background"
+                class="undo-transparent"
+                (click)="action('undoTransparent')"
+              >
                 <i class="mdi mdi-format-paint" aria-hidden="true"></i>
               </span>
               <span class="background-msg hide">
-                <i class="mdi mdi-arrow-up-bold background-msg-arrow" aria-hidden="true"></i>
-                <i class="mdi mdi-close close-background-msg" aria-hidden="true"></i>
+                <i
+                  class="mdi mdi-arrow-up-bold background-msg-arrow"
+                  aria-hidden="true"
+                ></i>
+                <i
+                  class="mdi mdi-close close-background-msg"
+                  aria-hidden="true"
+                ></i>
                 Click here to remove background
               </span>
-              <span data-title="Duplicate" (click)="action('duplicate')"><i class="mdi mdi-content-copy"
-                  aria-hidden="true"></i></span>
-              <span data-title="Crop" (click)="handleCrop()"><i class="mdi mdi-crop" aria-hidden="true"></i></span>
+              <span data-title="Duplicate" (click)="action('duplicate')"
+                ><i class="mdi mdi-content-copy" aria-hidden="true"></i
+              ></span>
+              <span data-title="Crop" (click)="handleCrop()"
+                ><i class="mdi mdi-crop" aria-hidden="true"></i
+              ></span>
               <span data-title="Flip" (click)="action('flip')">
                 <i class="mdi mdi-autorenew" aria-hidden="true"></i>
               </span>
@@ -171,7 +244,7 @@
           </div>
         </div>
         <div class="top-panel row top-panel-hide crop-toolbar">
-          <div class="col-sm-12 ">
+          <div class="col-sm-12">
             <button class="btn" (click)="handleCrop(true)">
               <i class="mdi mdi-check" aria-hidden="true"></i> Crop
             </button>
@@ -186,24 +259,46 @@
         <div class="canvas-content">
           <div class="d-flex">
             <div class="canvas-title-bar">
-              <div class="canvas-icons" mat-raised-button matTooltip="Edit Board Settings">
+              <div
+                class="canvas-icons"
+                mat-raised-button
+                matTooltip="Edit Board Settings"
+              >
                 <a>
-                  <i class="mdi mdi-settings" (click)="openBoardConfig()" aria-hidden="true"></i>
+                  <i
+                    class="mdi mdi-settings"
+                    (click)="openBoardConfig()"
+                    aria-hidden="true"
+                  ></i>
                 </a>
               </div>
             </div>
             <div class="w-25">
-              <input class="form-control board-title" placeholder="Board title" />
+              <input
+                class="form-control board-title"
+                placeholder="Board title"
+              />
             </div>
           </div>
           <div class="canvas">
             <div id="canvas-droparea">
-              <canvas id="canvas-area" style="border:1px solid black"></canvas>
+              <canvas
+                id="canvas-area"
+                style="border: 1px solid black;"
+              ></canvas>
             </div>
           </div>
           <div class="col-sm-2 col-5 state-icons d-lg-none">
-            <i class="mdi mdi-magnify-minus" (click)="zoomOut()" aria-hidden="true"></i>
-            <i class="mdi mdi-magnify-plus" (click)="zoomIn()" aria-hidden="true"></i>
+            <i
+              class="mdi mdi-magnify-minus"
+              (click)="zoomOut()"
+              aria-hidden="true"
+            ></i>
+            <i
+              class="mdi mdi-magnify-plus"
+              (click)="zoomIn()"
+              aria-hidden="true"
+            ></i>
             <i class="mdi mdi-undo" (click)="undo()" aria-hidden="true"></i>
             <i class="mdi mdi-redo" (click)="redo()" aria-hidden="true"></i>
           </div>
