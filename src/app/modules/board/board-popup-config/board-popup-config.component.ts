@@ -34,13 +34,21 @@ export class BoardPopupConfigComponent implements OnInit {
     environment.BASE_HREF + "/storage/floor3.jpg",
     environment.BASE_HREF + "/storage/floor4.jpg",
   ];
+  selected = {
+    color: this.backgroundColors[0],
+    background: this.backgroundImages[0]
+  };
 
   @Output() onChange = new EventEmitter();
 
   constructor(
     @Optional() private dialogRef: MatDialogRef<BoardPopupConfigComponent>,
     @Optional() @Inject(MAT_DIALOG_DATA) private data: any
-  ) { }
+  ) {
+    if (data) {
+      this.selected.color = data.color || this.selected.color;
+    }
+  }
 
   ngOnInit() {
     this.showBoardPanel = false;
@@ -54,12 +62,13 @@ export class BoardPopupConfigComponent implements OnInit {
       this.showRoomPanel = false;
     }
     else if (selection == "room") {
-      this.showBoardPanel = true;
+      this.showBoardPanel = false;
       this.showRoomPanel = true;
     }
   }
 
   handleChange(attribute: string, value: string) {
+    this.selected[attribute] = value;
     this.onChange.emit({
       attribute: attribute,
       value: attribute == 'color' ? this.hexToRGB(value) : value,
@@ -67,10 +76,12 @@ export class BoardPopupConfigComponent implements OnInit {
   }
 
   save() {
+    this.handleChange('action', 'save');
     this.dialogRef.close();
   }
 
   cancel() {
+    this.handleChange('action', 'cancel');
     this.dialogRef.close();
   }
 
@@ -80,7 +91,5 @@ export class BoardPopupConfigComponent implements OnInit {
     let b = "0x" + h[5] + h[6];
     return "rgb(" + +r + "," + +g + "," + +b + ")";
   }
-
-
 
 }

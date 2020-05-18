@@ -13,13 +13,13 @@ export const SideNavItems = [
     },
     {
       name: 'Add',
-      label: 'Add',
+      label: 'Custom',
       value: 'add',
       route:'board-add'
     },
     {
       name: 'Favorites',
-      label: 'Favourites',
+      label: 'Favorites',
       value: 'favorites',
       route:'board-favorites'
     },

@@ -3,7 +3,7 @@
     <h5 class="title">MY BOARDS</h5>
   </div>
   <div class="row" id="board-list">
-    <div class="col-sm-3">
+    <div class="col-sm-3 mt-3">
       <div class="board-card box-shadow-0">
         <div class="canvas-preview">
           <div class="add-board" (click)="add()">
@@ -17,7 +17,7 @@
         </div>
       </div>
     </div>
-    <div *ngFor="let board of boards; index as i;" class="col-sm-3">
+    <div *ngFor="let board of boards; index as i;" class="col-sm-3 mt-3">
       <div class="board-card">
         <div class="canvas-preview">
           <img width="100%" class="edit-board" [src]="getPreviewImagePath(board)" />

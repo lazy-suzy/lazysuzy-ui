@@ -3,12 +3,10 @@ import { Routes, RouterModule } from '@angular/router';
 
 import { boardRoutesNames } from './board.routes.names';
 
-import { BoardComponent } from './board.component';
 import { BoardViewComponent } from './board-view/board-view.component';
 import { BoardListComponent } from './board-list/board-list.component';
 import { BoardPreviewComponent } from './board-preview/board-preview.component';
 import { BoardPopupComponent } from './board-popup/board-popup.component';
-import { BoardPopupConfigComponent } from './board-popup-config/board-popup-config.component';
 
 const routes: Routes = [
   {
@@ -28,11 +26,7 @@ const routes: Routes = [
     component: BoardPreviewComponent
   },
   {
-    path: boardRoutesNames.BOARD_POPUP,
-    component: BoardPopupConfigComponent
-  },
-  {
-    path: boardRoutesNames.BOARD_POPUP + "/:uuid",
+    path: boardRoutesNames.BOARD_TEST + "/:uuid",
     component: BoardPopupComponent
   },
   {

@@ -5,7 +5,7 @@
                 <div class="row">
                     <div class="col-12">
                         <!-- <h4 class="board-header">Board Configuration</h4> -->
-                        <h5 class="title ml-2">Select Layout Style</h5>
+                        <h5 class="title ml-2 text-center">Select Layout Style</h5>
                     </div>
                     <div class="col-6" (click)="handleSelection('board')">
                         <div class="canvas-style" [class.selected]="currentTab == 'board'">
@@ -22,16 +22,16 @@
                     <div *ngIf="showBoardPanel" class="col-12" id="board-options-modal">
                         <h5 class="title ml-2 mt-4">Select Canvas Color</h5>
                         <div class="row justify-content-center">
-                            <div class="col-6">
-                                <div *ngFor="let backgroundColor of backgroundColors" (click)="handleChange('color', backgroundColor)" [style.background-color]="backgroundColor" class="canvas-pallete-color col-2"></div>
+                            <div class="col-12">
+                                <div *ngFor="let backgroundColor of backgroundColors" (click)="handleChange('color', backgroundColor)" [class.selected]="selected.color == backgroundColor" [style.background-color]="backgroundColor" class="canvas-pallete-color col-2"></div>
                             </div>
                         </div>
                     </div>
                     <div *ngIf="showRoomPanel" class="col-12 canvas-options" id="room-options-modal">
                         <h5 class="title ml-2 mt-4">Select Canvas Background</h5>
                         <div class="row justify-content-center canvas-pallete">
-                            <div class="col-6">
-                                <img *ngFor="let backgroundImage of backgroundImages" (click)="handleChange('background', backgroundImage)" [src]="backgroundImage" class="col-3" />
+                            <div class="col-12">
+                                <img *ngFor="let backgroundImage of backgroundImages" (click)="handleChange('background', backgroundImage)" [class.selected]="selected.background == backgroundImage" [src]="backgroundImage" class="col-3" />
                             </div>
                         </div>
                     </div>
@@ -41,7 +41,7 @@
                         <button (click)="cancel()" class="btn btn-cancel js-close-publish-board">Cancel</button>
                     </div>
                     <div class="col-6">
-                        <button (click)="save()" class="btn red-button">Save</button>
+                        <button (click)="save()" class="btn red-button">Go</button>
                     </div>
                 </div>
             </div>
