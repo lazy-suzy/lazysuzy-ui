@@ -108,5 +108,9 @@ const DEFAULT_FONT_PICKER_CONFIG: FontPickerConfigInterface = {
     BoardPopupConfigComponent,
     BoardPopupConfirmComponent
   ],
+  providers: [BoardService, CookieService, {
+    provide: FONT_PICKER_CONFIG,
+    useValue: DEFAULT_FONT_PICKER_CONFIG
+  }]
 })
 export class BoardModule {}
