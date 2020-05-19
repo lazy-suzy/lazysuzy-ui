@@ -1,12 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Observable } from 'rxjs';
-
-interface Todo {
-  content: string;
-  id?: string;
-  datemodified?: Date;
-  isDone?: boolean;
-}
+import { AdminDashboardService } from '../admin-dashboard.service';
 
 @Component({
   selector: 'app-product-customise',
@@ -15,18 +8,53 @@ interface Todo {
 })
 export class ProductCustomiseComponent implements OnInit {
 
-  states = [
-    { value: 'state-1', viewValue: 'State One' },
-    { value: 'state-2', viewValue: 'State Two' },
-    { value: 'state-3', viewValue: 'State Three' }
+  positions = [
+    { value: '0', viewValue: '0' },
+    { value: '1', viewValue: '1' },
+    { value: '2', viewValue: '2' },
+    { value: '3', viewValue: '3' }
+
   ];
 
-  constructor() { }
+  products = [
+    { value: 'B1', viewValue: 'B1', images: [{}, {}, {}, {}] },
+    { value: 'B2', viewValue: 'B2', images: [{}, {}, {}, {}] },
+    { value: 'B1', viewValue: 'B1', images: [{}, {}, {}, {}] },
+    { value: 'B2', viewValue: 'B2', images: [{}, {}, {}, {}] },
+    { value: 'B1', viewValue: 'B1', images: [{}, {}, {}, {}] },
+    { value: 'B2', viewValue: 'B2', images: [{}, {}, {}, {}] }
+  ];
 
-  ngOnInit() { }
+  allBoards = [
+    { value: 'B1', viewValue: 'B1' },
+    { value: 'B2', viewValue: 'B2' },
+    { value: 'B3', viewValue: 'B3' },
+    { value: 'B4', viewValue: 'B4' }
+  ];
 
-  someMethod(item,value) {
+  constructor(private adminDashboardService: AdminDashboardService) { }
+
+  ngOnInit() {
+    this.adminDashboardService.getProducts("category", {}, "").subscribe(s => {
+      this.products = s.products;
+      debugger;
+      this.products = this.products.map(pro => {
+        return {
+          ...pro,
+          value: 'B2',
+          viewValue: 'B2',
+          images: [{}, {}, {}, {}]
+        }
+      });
+    });
+  }
+
+  someMethod(item, value) {
     console.log(value, item);
+  }
+
+  handleUpdates(event) {
+    console.log(event);
   }
 
 }

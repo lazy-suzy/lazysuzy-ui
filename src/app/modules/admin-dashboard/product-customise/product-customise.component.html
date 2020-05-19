@@ -1,8 +1,36 @@
-<div *ngFor="let item of states">
-    <h2>Hello</h2>
-    <h2>Hello</h2>
-    <h2>Hello</h2>
-    <h2>Hello</h2>
-    <h2>Hello</h2>
-    <app-admin-product-listing ></app-admin-product-listing>
-</div>
+<h1>Product Dashboard</h1>
+<mat-form-field>
+    <mat-select placeholder="BRAND" (selectionChange)="someMethod(item,$event.value)">
+        <mat-option *ngFor="let position of positions" [value]="position.value">
+            {{ position.viewValue }}
+        </mat-option>
+    </mat-select>
+</mat-form-field>
+<mat-form-field>
+    <mat-select placeholder="CATEGORY" (selectionChange)="someMethod(item,$event.value)">
+        <mat-option *ngFor="let position of positions" [value]="position.value">
+            {{ position.viewValue }}
+        </mat-option>
+    </mat-select>
+</mat-form-field>
+<mat-form-field>
+    <mat-select placeholder="STATUS" (selectionChange)="someMethod(item,$event.value)">
+        <mat-option *ngFor="let position of positions" [value]="position.value">
+            {{ position.viewValue }}
+        </mat-option>
+    </mat-select>
+</mat-form-field>
+<mat-form-field>
+    <mat-select placeholder="CLASS" (selectionChange)="someMethod(item,$event.value)">
+        <mat-option *ngFor="let position of positions" [value]="position.value">
+            {{ position.viewValue }}
+        </mat-option>
+    </mat-select>
+</mat-form-field>
+
+<app-admin-product-listing 
+    [products]="products"
+    [allBoards]="allBoards"
+    [positions]="positions"
+    (updates)="handleUpdates($event)">
+</app-admin-product-listing>

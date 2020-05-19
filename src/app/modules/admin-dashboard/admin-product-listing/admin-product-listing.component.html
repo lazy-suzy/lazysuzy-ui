@@ -1,23 +1,52 @@
-<div class="container">
-	<div class="cards">
+<div *ngFor="let product of products">
 
-		<a *ngFor="let item of states" class="card" href="#">
-			<span class="card-header" style="background-image: url(http://placeimg.com/400/200/animals);">
-				
-			</span>
-			<span class="card-summary">
-				A summary will also be present.
-			</span>
-			<span class="card-meta">
+	<div>
+		<span>{{product.sku}}</span><br />
+		<span>{{product.name}}</span><br />
+		<span>{{product.site}}</span><br />
+		<span>{{product.is_price}}</span><br />
+		<span>{{product.was_price}}</span><br />
+		<span>Create Date: </span><br />
+		<span>Last Update Date: </span><br />
+
+		<button mat-mini-fab>
+			<mat-icon>check</mat-icon>
+		</button>
+
+		<button mat-mini-fab>
+			<mat-icon>clear</mat-icon>
+		</button>
+
+	</div>
+	
+	<div id="main">
+		<div style="background-color:lightblue;" *ngFor="let variation of product.variations" class="card">
+
+			<mat-card class="example-card">
+				<mat-card-header>
+					<div mat-card-avatar class="example-header-image">
+						<!-- <img src="https://via.placeholder.com/150" /> -->
+
+						<img [src]="variation.image||'https://via.placeholder.com/150'" />
+					</div>
+				</mat-card-header>
 				<mat-form-field>
-					<mat-select placeholder="State" (selectionChange)="someMethod(item,$event.value)">
-						<mat-option *ngFor="let state of states" [value]="state.value">
-							{{ state.viewValue }}
+					<mat-select placeholder="Board Tag" (selectionChange)="someMethod(item,$event.value)">
+						<mat-option *ngFor="let board of allBoards" [value]="board.value">
+							{{ board.viewValue }}
 						</mat-option>
 					</mat-select>
 				</mat-form-field>
-			</span>
-		</a>
-
+				<br />
+				<mat-form-field>
+					<mat-select disabled placeholder="Position" (selectionChange)="someMethod(item,$event.value)">
+						<mat-option *ngFor="let position of positions" [value]="position.value">
+							{{ position.viewValue }}
+						</mat-option>
+					</mat-select>
+				</mat-form-field>
+			</mat-card>
+		</div>
 	</div>
+
 </div>

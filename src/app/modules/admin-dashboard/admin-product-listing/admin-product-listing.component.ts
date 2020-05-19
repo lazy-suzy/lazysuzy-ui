@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 
 @Component({
   selector: 'app-admin-product-listing',
@@ -7,18 +7,38 @@ import { Component, OnInit } from '@angular/core';
 })
 export class AdminProductListingComponent implements OnInit {
 
-  states = [
-    { value: 'state-1', viewValue: 'State One' },
-    { value: 'state-2', viewValue: 'State Two' },
-    { value: 'state-3', viewValue: 'State Three' },
-    { value: 'state-4', viewValue: 'State Four' }
-  ];
+  @Input() allBoards: any = [];
+  @Input() positions: any = [];
+  @Input() products: any = [];
 
+  @Output() updates: EventEmitter<any> = new EventEmitter();
+  
   constructor() { }
 
   ngOnInit() { }
 
-  someMethod(item,value) {
+  ngOnChanges(changes: any) {
+    if (changes['allBoards'] && changes['allBoards'].previousValue !== changes['allBoards'].currentValue) {
+      let allBoards = changes['allBoards'].currentValue || [];
+      this.allBoards = [...allBoards] || [];
+    }
+    if (changes['positions'] && changes['positions'].previousValue !== changes['positions'].currentValue) {
+      let positions = changes['positions'].currentValue || [];
+      this.positions = [...positions] || [];
+    }
+    if (changes['products'] && changes['products'].previousValue !== changes['products'].currentValue) {
+      let products = changes['products'].currentValue || [];
+      this.products = [...products] || [];
+    }
+  }
+
+  someMethod(item, value) {
+    this.updates.emit({
+      data: {
+        value: value,
+        item: item
+      }
+    });
     console.log(value, item);
   }
 
