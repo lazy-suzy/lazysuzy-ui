@@ -2,7 +2,12 @@
 <app-board-loader *ngIf="appMeta.board.data.length == 0"></app-board-loader>
 <div class="lazysuzy-board">
   <div>
-    <div class="left-panel">
+    <div class="left-panel" [ngClass]="{'b-100': isTablet && showMenu, 'b-650': isTablet && !showMenu}">
+      <div class="d-lg-none" *ngIf="isTablet">
+        <div class="toggle-icon {{showMenu? 'b-577 transform-icon': 'b-25'}}" (click)="toggleMenu()">
+          <i class="mdi mdi-plus" aria-hidden="true"></i>
+        </div>
+      </div>
       <div class="left-tabs">
         <ul class="nav nav-tabs flex-column">
           <li
@@ -81,7 +86,7 @@
             type="button"
             *ngIf="!showLoader && remoteProducts.length != 0"
             (click)="loadMore()"
-            class="btn btn-primary"
+            class="btn btn-primary margin-bottom-75"
           >
             Load More
           </button>
@@ -112,11 +117,11 @@
           </div>
         </div>
 
-        <div *ngIf="selectedItem === 'text'">
+        <div *ngIf="selectedItem === 'text'" class="padding-top-60">
           <app-board-text></app-board-text>
         </div>
 
-        <div *ngIf="selectedItem === 'add'">
+        <div *ngIf="selectedItem === 'add'" class="padding-top-60">
           <app-board-add
             [allAssets]="appMeta.asset"
             [userId]="currentUser.id"
@@ -138,13 +143,13 @@
           </div>
         </div>
 
-        <div *ngIf="selectedItem === 'board'">
+        <div *ngIf="selectedItem === 'board'" class="padding-top-60">
           <app-current-board
             [boardProducts]="boardPreviewProducts"
           ></app-current-board>
         </div>
 
-        <div *ngIf="selectedItem === 'favorites'"></div>
+        <div *ngIf="selectedItem === 'favorites'" class="padding-top-60"></div>
       </div>
     </div>
   </div>

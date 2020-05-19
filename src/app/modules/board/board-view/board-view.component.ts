@@ -13,7 +13,7 @@ import * as $ from 'jquery';
 import { Board } from '../board';
 import { Asset } from '../asset';
 import { BoardService } from '../board.service';
-
+import { Observable, Subscription } from 'rxjs';
 import { OverlayPanel } from 'primeng/overlaypanel';
 import { MatDialog } from '@angular/material';
 import { BoardPopupComponent } from '../board-popup/board-popup.component';
@@ -21,7 +21,11 @@ import { BoardPopupConfigComponent } from '../board-popup-config/board-popup-con
 import { boardRoutesNames } from '../board.routes.names';
 import { Font, FontPickerService } from 'ngx-font-picker';
 import { environment } from 'src/environments/environment';
-
+import {
+  BreakpointState,
+  Breakpoints,
+  BreakpointObserver
+} from '@angular/cdk/layout';
 declare const fb: any;
 
 @Component({
@@ -46,14 +50,24 @@ export class BoardViewComponent implements OnInit, AfterViewInit {
   showTab;
   fontPickerObject;
   justCreated = false;
-
+  tabletObserver: Observable<BreakpointState> = this.breakpointObserver.observe(
+    Breakpoints.Tablet
+  );
+  bpObserver: Observable<BreakpointState> = this.breakpointObserver.observe(
+    Breakpoints.Handset
+  );
+  bpSubscription: Subscription;
+  tabletSubscription: Subscription;
+  isTablet: boolean = false;
+  showMenu: boolean = false;
   constructor(
     private cookieService: CookieService,
     private dialog: MatDialog,
     public boardService: BoardService,
     private route: ActivatedRoute,
     private router: Router,
-    private fontPickerService: FontPickerService
+    private fontPickerService: FontPickerService,
+    private breakpointObserver: BreakpointObserver
   ) {
     const user = JSON.parse(localStorage.getItem('user'));
     this.currentUser = user;
@@ -117,7 +131,9 @@ export class BoardViewComponent implements OnInit, AfterViewInit {
     //   console.log('The dialog was closed', result);
     // });
   }
-
+  toggleMenu() {
+    this.showMenu = !this.showMenu;
+  }
   openBoardConfig() {
     const dialogRef = this.dialog.open(BoardPopupConfigComponent, {
       panelClass: 'custom-dialog-container',
@@ -410,6 +426,18 @@ export class BoardViewComponent implements OnInit, AfterViewInit {
         });
       });
     });
+    this.bpSubscription = this.bpObserver.subscribe(
+      (handset: BreakpointState) => {
+        this.isTablet = handset.matches;
+      }
+    );
+    if (!this.isTablet) {
+      this.tabletSubscription = this.tabletObserver.subscribe(
+        (tablet: BreakpointState) => {
+          this.isTablet = tablet.matches;
+        }
+      );
+    }
   }
   ngAfterViewInit(): void {
     this.shortcuts.push(
