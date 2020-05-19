@@ -1,8 +1,9 @@
-.example-card {
-  max-width: 30%;
+.column-left {
+  float: left;
+  width: 33.333%;
 }
 
-.example-header-image {
-  background-image: url("https://material.angular.io/assets/img/examples/shiba1.jpg");
-  background-size: cover;
+.column-right {
+  float: right;
+  width: 66;
 }

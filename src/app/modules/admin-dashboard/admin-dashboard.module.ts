@@ -4,6 +4,7 @@ import { MatCardModule, MatSelectModule, MatInputModule } from '@angular/materia
 import { ProductCustomiseComponent } from './product-customise/product-customise.component';
 import { AdminDasboardRoutingModule } from './admin-dashboard-routing.module';
 import { AdminDashboardComponent } from './admin-dashboard/admin-dashboard.component';
+import { AdminProductListingComponent } from './admin-product-listing/admin-product-listing.component';
 
 @NgModule({
   imports: [
@@ -16,7 +17,8 @@ import { AdminDashboardComponent } from './admin-dashboard/admin-dashboard.compo
   ],
   declarations: [
     AdminDashboardComponent,
-    ProductCustomiseComponent
+    ProductCustomiseComponent,
+    AdminProductListingComponent
   ],
   entryComponents: [],
   providers: []
