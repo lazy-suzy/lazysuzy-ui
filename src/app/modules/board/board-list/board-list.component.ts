@@ -19,7 +19,7 @@ export class BoardListComponent implements OnInit {
   boards: Board[] = [];
   boardViewLink = boardRoutesNames.BOARD_VIEW;
   boardPreviewLink = boardRoutesNames.BOARD_PREVIEW;
-
+  isFetching: boolean = false;
   constructor(
     private boardService: BoardService,
     private router: Router,
@@ -28,12 +28,14 @@ export class BoardListComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
+    this.isFetching = true;
     this.getBoards();
   }
 
   getBoards(): void {
     this.boardService.getBoards()
       .subscribe(response => this.boards = response.reverse());
+    this.isFetching = false;
   }
 
   add(board: Board = new Board()): void {

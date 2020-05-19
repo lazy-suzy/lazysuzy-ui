@@ -181,8 +181,7 @@ h6 {
 }
 
 .board-list-container {
-  padding-top: 30px;
-  min-height: 550px;
+  padding: 30px 15px;
 }
 
 .canvas-style {
@@ -220,7 +219,7 @@ h6 {
   background: #b76e79;
   font-size: 18px;
   color: #fff;
-  padding: 5px;
+  // padding: 5px;
   display: inline-block;
 }
 
@@ -385,8 +384,8 @@ h6 {
 .form-control.board-title {
   background: #f2f3f4;
   border: none;
-  padding: 0;
   margin-bottom: 3px;
+  border: 1px solid #c8c7cc;
 }
 
 .form-control.board-title:hover {
@@ -402,6 +401,7 @@ h6 {
 .canvas {
   width: 100%;
   margin-top: 10px;
+  border: 1px solid #c8c7cc;
 }
 
 .canvas-content {
@@ -464,27 +464,29 @@ h6 {
 }
 
 .product-cont {
-  display: flex;
   border: 1px solid #b76e79;
+  font-size: 11px;
 }
 
 .product-cont img {
-  max-width: 100px;
+  max-width: 90px;
   margin-right: 10px;
 }
 
 .product-cont .product-info {
   flex: 1;
   line-height: 1.2;
+  margin-right: 4px;
 }
 
 .product-cont .brand {
   color: #999999;
-  margin: 5px 0;
+  margin: 12px 0;
 }
 
 .price {
   color: #b76e79;
+  margin: 12px 0;
 }
 
 .product-cont .icons {
@@ -1186,9 +1188,9 @@ div.canvas-layout-room {
   padding: 2px;
 }
 
-.board-card:hover {
-  box-shadow: 0 0 2px 1px #eee;
-}
+// .board-card:hover {
+//   box-shadow: 0 0 2px 1px #eee;
+// }
 
 .canvas-preview:hover .board-card-icons {
   display: flex;
@@ -1540,6 +1542,10 @@ i.background-msg-arrow {
 
 .static-bottom-panel-wrapper {
   position: relative;
+}
+
+.preview-title {
+  color: #0c1c31;
 }
 
 @media screen and (max-width: 991px) {
