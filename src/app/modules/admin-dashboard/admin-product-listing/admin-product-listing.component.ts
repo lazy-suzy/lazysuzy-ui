@@ -10,7 +10,8 @@ export class AdminProductListingComponent implements OnInit {
   states = [
     { value: 'state-1', viewValue: 'State One' },
     { value: 'state-2', viewValue: 'State Two' },
-    { value: 'state-3', viewValue: 'State Three' }
+    { value: 'state-3', viewValue: 'State Three' },
+    { value: 'state-4', viewValue: 'State Four' }
   ];
 
   constructor() { }

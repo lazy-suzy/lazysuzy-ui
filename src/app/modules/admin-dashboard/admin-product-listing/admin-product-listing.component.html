@@ -1,22 +1,23 @@
-<mat-card *ngFor="let item of states">
-  <mat-card-header>
-    <div mat-card-avatar class="example-header-image"></div>
-    <mat-card-title>Shiba Inu</mat-card-title>
-    <mat-card-subtitle>Dog Breed</mat-card-subtitle>
-  </mat-card-header>
-  <mat-card-content>
-    <p>
-     Text
-    </p>
-  </mat-card-content>
-  <mat-card-actions>
-      <mat-form-field>
-          <mat-select placeholder="State" (selectionChange)="someMethod(item,$event.value)">
-              <mat-option *ngFor="let state of states" [value]="state.value">
-                  {{ state.viewValue }}
-              </mat-option>
-          </mat-select>
-      </mat-form-field>
-      
-  </mat-card-actions>
-</mat-card>
+<div class="container">
+	<div class="cards">
+
+		<a *ngFor="let item of states" class="card" href="#">
+			<span class="card-header" style="background-image: url(http://placeimg.com/400/200/animals);">
+				
+			</span>
+			<span class="card-summary">
+				A summary will also be present.
+			</span>
+			<span class="card-meta">
+				<mat-form-field>
+					<mat-select placeholder="State" (selectionChange)="someMethod(item,$event.value)">
+						<mat-option *ngFor="let state of states" [value]="state.value">
+							{{ state.viewValue }}
+						</mat-option>
+					</mat-select>
+				</mat-form-field>
+			</span>
+		</a>
+
+	</div>
+</div>
