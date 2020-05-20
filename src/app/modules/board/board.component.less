@@ -177,7 +177,7 @@ h6 {
 }
 
 .main-content {
-  padding-left: 395px;
+  // padding-left: 395px;
 }
 
 .board-list-container {
@@ -203,12 +203,13 @@ h6 {
 }
 
 .left-panel {
-  height: 92vh;
-  overflow: auto;
+  height: 100vh;
+  overflow: hidden;
   background: #fff;
-  position: fixed;
+  // position: fixed;
   width: 380px;
-  overflow-x: hidden;
+  display: flex;
+  // overflow-x: hidden;
 }
 
 .left-panel::-webkit-scrollbar {
@@ -219,7 +220,7 @@ h6 {
   background: #b76e79;
   font-size: 18px;
   color: #fff;
-  // padding: 5px;
+  border-radius: 4px;
   display: inline-block;
 }
 
@@ -426,12 +427,14 @@ h6 {
 
 .left-panel .left-tabs {
   height: 100%;
-  position: fixed;
+  // position: fixed;
 }
 
 .left-panel .left-tab-pane {
-  margin-left: 80px;
+  margin-left: 5px;
   margin-right: 5px;
+  overflow-y: auto;
+  overflow-x: hidden;
 }
 
 .left-panel .tab {
@@ -465,7 +468,7 @@ h6 {
 
 .product-cont {
   border: 1px solid #b76e79;
-  font-size: 11px;
+  font-size: 12px;
 }
 
 .product-cont img {
@@ -1549,6 +1552,9 @@ i.background-msg-arrow {
 }
 
 @media screen and (max-width: 991px) {
+  .canvas-layout {
+    height: 80px;
+  }
   .padding-top-60 {
     padding-top: 60px;
   }

@@ -82,14 +82,17 @@
           >
           </app-board-products>
 
-          <button
-            type="button"
-            *ngIf="!showLoader && remoteProducts.length != 0"
-            (click)="loadMore()"
-            class="btn btn-primary margin-bottom-75"
-          >
-            Load More
-          </button>
+          <div class="tc pb-4">
+            <button
+              type="button"
+              *ngIf="!showLoader && remoteProducts.length != 0"
+              (click)="loadMore()"
+              class="btn load-more-btn"
+            >
+              Load More
+            </button>
+          </div>
+          
           <button
             type="button"
             *ngIf="!showLoader && remoteProducts.length == 0"
@@ -149,11 +152,33 @@
           ></app-current-board>
         </div>
 
-        <div *ngIf="selectedItem === 'favorites'" class="padding-top-60"></div>
-      </div>
+        <div *ngIf="selectedItem === 'favorites'">
+          <div class="pt-4" *ngIf="!favoriteProducts.length">No items found. Save items to your favorites to see them here.</div>
+          <app-board-products
+            [products]="favoriteProducts"
+            (previewProduct)="handleProductPreview($event)"
+          >
+          </app-board-products>
+          <div>{{productForPreview}}</div>
+          <div
+            class="static-bottom-panel-wrapper"
+            *ngIf="productForPreview"
+            style="z-index: 9999999;"
+          >
+            <div class="static-bottom-panel selected">
+              <app-product-preview
+                [data]="productForPreview"
+                (clearProductPreview)="handleClearProductPreview($event)"
+                (addProductBoard)="handleAddProductBoardPreview($event)"
+              >
+              </app-product-preview>
+            </div>
+          </div>
+        </div>
     </div>
   </div>
-  <div class="main-content container-fluid">
+  </div>
+  <div class="main-content container-fluid gray-bg">
     <div class="row">
       <div class="col-md-12 tool-bar-holder">
         <div class="top-panel row top-panel-hide">
@@ -291,5 +316,4 @@
         </div>
       </div>
     </div>
-  </div>
 </div>

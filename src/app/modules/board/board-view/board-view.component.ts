@@ -21,6 +21,8 @@ import { BoardPopupConfigComponent } from '../board-popup-config/board-popup-con
 import { boardRoutesNames } from '../board.routes.names';
 import { Font, FontPickerService } from 'ngx-font-picker';
 import { environment } from 'src/environments/environment';
+import { IProductPayload, IProductsPayload } from '../../../shared/models';
+import { ApiService } from '../../../shared/services';
 import {
   BreakpointState,
   Breakpoints,
@@ -35,7 +37,8 @@ declare const fb: any;
 })
 export class BoardViewComponent implements OnInit, AfterViewInit {
   shortcuts: ShortcutInput[] = [];
-
+  productsSubscription: Subscription;
+  favoriteProducts: IProductPayload[];
   selectedItem = 'select';
   selectedCategory = null;
   showLoader = false;
@@ -67,6 +70,7 @@ export class BoardViewComponent implements OnInit, AfterViewInit {
     private route: ActivatedRoute,
     private router: Router,
     private fontPickerService: FontPickerService,
+    private apiService: ApiService,
     private breakpointObserver: BreakpointObserver
   ) {
     const user = JSON.parse(localStorage.getItem('user'));
@@ -426,6 +430,11 @@ export class BoardViewComponent implements OnInit, AfterViewInit {
         });
       });
     });
+    this.productsSubscription = this.apiService
+      .getWishlistProducts()
+      .subscribe((payload: IProductsPayload) => {
+        this.favoriteProducts = payload.products;
+      });
     this.bpSubscription = this.bpObserver.subscribe(
       (handset: BreakpointState) => {
         this.isTablet = handset.matches;
