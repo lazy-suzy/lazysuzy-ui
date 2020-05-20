@@ -279,17 +279,18 @@ export class PaymentComponent implements OnInit {
     } else {
       const localUser: any = JSON.parse(localStorage.getItem('user') || '{}');
       if (localUser.email !== this.customerData.email) {
-        const data = {
-          email: this.customerData.email,
-        };
-        this.apiService.userUpdate(data).subscribe(
-          (payload: any) => {
-            localStorage.setItem('user', JSON.stringify(payload.success.user));
-          },
-          (error: any) => {
-            console.log(error);
-          }
-        );
+        localStorage.setItem('registeredEmail', this.customerData.email);
+        // const data = {
+        //   email: this.customerData.email,
+        // };
+        // this.apiService.userUpdate(data).subscribe(
+        //   (payload: any) => {
+        //     localStorage.setItem('user', JSON.stringify(payload.success.user));
+        //   },
+        //   (error: any) => {
+        //     console.log(error);
+        //   }
+        // );
       }
       this.shipping = true;
       this.customer = false;
