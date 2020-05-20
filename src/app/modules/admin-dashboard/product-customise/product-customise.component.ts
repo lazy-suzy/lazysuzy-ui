@@ -37,7 +37,6 @@ export class ProductCustomiseComponent implements OnInit {
   ngOnInit() {
     this.adminDashboardService.getProducts("category", {}, "").subscribe(s => {
       this.products = s.products;
-      debugger;
       this.products = this.products.map(pro => {
         return {
           ...pro,

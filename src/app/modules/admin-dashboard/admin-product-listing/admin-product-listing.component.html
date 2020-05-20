@@ -1,6 +1,6 @@
-<div *ngFor="let product of products">
+<div class="row" *ngFor="let product of products">
 
-	<div>
+	<div class="column1">
 		<span>{{product.sku}}</span><br />
 		<span>{{product.name}}</span><br />
 		<span>{{product.site}}</span><br />
@@ -19,14 +19,12 @@
 
 	</div>
 	
-	<div id="main">
+	<div class="column2" id="main">
 		<div style="background-color:lightblue;" *ngFor="let variation of product.variations" class="card">
 
 			<mat-card class="example-card">
 				<mat-card-header>
 					<div mat-card-avatar class="example-header-image">
-						<!-- <img src="https://via.placeholder.com/150" /> -->
-
 						<img [src]="variation.image||'https://via.placeholder.com/150'" />
 					</div>
 				</mat-card-header>
@@ -50,3 +48,14 @@
 	</div>
 
 </div>
+
+<!-- <div class="row">
+	<div class="column1" style="background-color:#aaa;">
+	  <h2>Column 1</h2>
+	  <p>Some text..</p>
+	</div>
+	<div class="column2" style="background-color:#bbb;">
+	  <h2>Column 2</h2>
+	  <p>Some text..</p>
+	</div>
+  </div> -->
