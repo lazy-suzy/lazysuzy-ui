@@ -215,17 +215,18 @@ export class PaymentComponent implements OnInit {
           if (result.token) {
             this.customerData.token = result.token.id;
             this.customerData.ip = result.token.client_ip;
-            this.apiService.userUpdate({ name }).subscribe(
-              (payload: any) => {
-                localStorage.setItem(
-                  'user',
-                  JSON.stringify(payload.success.user)
-                );
-              },
-              (error: any) => {
-                console.log(error);
-              }
-            );
+            localStorage.setItem('registeredName', name);
+            // this.apiService.userUpdate({ name }).subscribe(
+            //   (payload: any) => {
+            //     localStorage.setItem(
+            //       'user',
+            //       JSON.stringify(payload.success.user)
+            //     );
+            //   },
+            //   (error: any) => {
+            //     console.log(error);
+            //   }
+            // );
             this.apiService.postStripeToken(this.customerData).subscribe(
               (payload: any) => {
                 this.isPaymentExecuting = false;
@@ -279,17 +280,18 @@ export class PaymentComponent implements OnInit {
     } else {
       const localUser: any = JSON.parse(localStorage.getItem('user') || '{}');
       if (localUser.email !== this.customerData.email) {
-        const data = {
-          email: this.customerData.email,
-        };
-        this.apiService.userUpdate(data).subscribe(
-          (payload: any) => {
-            localStorage.setItem('user', JSON.stringify(payload.success.user));
-          },
-          (error: any) => {
-            console.log(error);
-          }
-        );
+        localStorage.setItem('registeredEmail', this.customerData.email);
+        // const data = {
+        //   email: this.customerData.email,
+        // };
+        // this.apiService.userUpdate(data).subscribe(
+        //   (payload: any) => {
+        //     localStorage.setItem('user', JSON.stringify(payload.success.user));
+        //   },
+        //   (error: any) => {
+        //     console.log(error);
+        //   }
+        // );
       }
       this.shipping = true;
       this.customer = false;

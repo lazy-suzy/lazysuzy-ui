@@ -1,25 +1,41 @@
 <div class="product-cont">
-    <div class="image">
-        <img src="{{data?.main_image}}">
-    </div>
-    <div class="product-info">
-        <div class="float-right" (click)="clearPreview(data)">
+    <div class="p-1 b">
+        {{data?.name}}
+        <div class="float-right preview-close-icon" (click)="clearPreview(data)">
             <i class="mdi mdi-close" aria-hidden="true"></i>
         </div>
-        <div>{{data?.name}}</div>
-        <div class="brand">{{data?.site}}</div>
-        <div class="price">{{data?.is_price}}</div>
-        <div class="icons">
-            <div class="icon top-tooltip manual-drop" attr.data-product="{{data.refId}}" drop-type="image" attr.type="{{dropType}}"
-                data-title="Add to Board" (click)="addToBoard(data)">
-                <i class="mdi mdi-plus" aria-hidden="true"></i>
+    </div>
+    <div class="flex detail-container">
+        <div class="image">
+            <img src="{{data?.main_image}}">
+        </div>
+        <div class="product-info">
+            
+            <div class="brand">
+                {{data?.site}}
+                <div class="float-right preview-icons">
+                    <div class="icon top-tooltip manual-drop" attr.data-product="{{data.refId}}" drop-type="image" attr.type="{{dropType}}"
+                        data-title="Add to Board" (click)="addToBoard(data)">
+                        <i class="mdi mdi-plus" aria-hidden="true"></i>
+                    </div>
+                </div>
             </div>
-            <div class="icon top-tooltip" data-title="See Details">
-                <a style="color: inherit;" target="_BLANK"
-                    [href]="data.product_url">
-                    <i class="mdi mdi-open-in-new" aria-hidden="true"></i>
-                </a>
+            
+            <div class="price">
+                ${{data?.is_price}}
+                <div class="float-right preview-icons">
+                    <div class="icon top-tooltip" data-title="See Details">
+                        <a style="color: inherit;" target="_BLANK"
+                            [href]="data.product_url">
+                            <i class="mdi mdi-open-in-new" aria-hidden="true"></i>
+                        </a>
+                    </div>
+                </div>
             </div>
+            <!-- <div class="icons">
+                
+                
+            </div> -->
         </div>
     </div>
 </div>

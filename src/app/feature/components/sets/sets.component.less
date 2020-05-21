@@ -1,9 +1,9 @@
-.sets-container {
+.sets-content {
   font-size: 14px;
   display: flex;
   width: 100%;
   position: relative;
-  margin: 5px 0;
+  margin: 5px 0 0 0;
 
   a {
     color: #0d1c31;
@@ -21,7 +21,14 @@
 
   .price {
     color: #b76e79;
+    font-size: 12px;
+    font-family: 'Open Sans';
     // padding: 0;
+  }
+  .was-price {
+    font-family: 'Open Sans';
+    color: #606060;
+    font-size: 12px;
   }
 
   .brand-button {
@@ -32,9 +39,10 @@
     border-radius: 5px;
     position: absolute;
     right: 10px;
-
+    font-size: 12px;
+    font-family: 'Lato';
     a {
-      color: #faca37;
+      color: #ffcc00;
 
       &:hover {
         text-decoration: none;
@@ -53,12 +61,42 @@
 }
 
 .title {
-  font-size: 22px;
+  color: #606060;
+  font-size: 12px;
+  font-family: Open sans;
 }
-
+.info-icon {
+  font-size: 14px;
+  width: 14px;
+  height: 14px;
+  position: relative;
+  top: 1px;
+  color: #606060;
+}
+.stock-msg {
+  font-size: 12px;
+  color: #b76e79;
+  padding-left: 4px;
+}
+.shipping-msg {
+  font-size: 12px;
+  color: #606060;
+  padding-left: 4px;
+}
+.stock-info {
+  display: flex;
+  padding: 0 5px;
+}
+.product-name {
+  font-size: 12px;
+  font-family: 'Open Sans';
+  color: #0c1c31;
+}
 @media (max-width: 767px) {
   .sets-container {
     border: 1px solid #c8c7cc;
+    padding: 4px;
+    margin: 6px 12px;
     span {
       padding: 1px 2px;
     }
@@ -71,5 +109,8 @@
       margin: 2px;
       // text-transform: uppercase;
     }
+  }
+  .stock-info {
+    padding: 0;
   }
 }

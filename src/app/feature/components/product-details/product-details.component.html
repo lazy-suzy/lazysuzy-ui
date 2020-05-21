@@ -59,7 +59,7 @@
                 [href]="product.product_url"
                 class="tr-viewDetails no-underline"
               >
-                View Details
+                VIEW DETAILS
               </a>
             </button>
 
@@ -85,12 +85,42 @@
               "
             >
               <a (click)="openCartModal()" class="tr-addToCart no-underline">
-                Add to Cart
+                ADD TO CART
               </a>
             </button>
             <div *ngIf="errorMessage !== ''" class="invalid-feedback">
               <div>{{ errorMessage }}</div>
             </div>
+          </div>
+        </div>
+        <div
+          class="stock-info"
+          *ngIf="
+            product.in_inventory &&
+            product.inventory_product_details.count > 0 &&
+            (product.inventory_product_details.is_low ||
+              product.inventory_product_details.message)
+          "
+        >
+          <div class="flex">
+            <span>
+              <mat-icon class="info-icon">info</mat-icon>
+            </span>
+            <div
+              class="stock-msg"
+              *ngIf="product.inventory_product_details.is_low"
+            >
+              Only
+              {{
+                product.inventory_product_details.count > 10
+                  ? '10'
+                  : product.inventory_product_details.count
+              }}
+              left in stock.
+            </div>
+          </div>
+          <div class="shipping-msg">
+            {{ product.inventory_product_details.message }}
           </div>
         </div>
         <ng-container *ngIf="product.redirect; else allConditions">

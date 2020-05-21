@@ -20,10 +20,10 @@ export class UploadFileDetailsComponent implements OnInit {
     private _formBuilder: FormBuilder
   ) {
     this.step = this._formBuilder.group({
-      productTitle: ['', Validators.required],
-      price: ['', Validators.required],
-      productListingUrl: ['', Validators.required],
-      additionalTags: ['', Validators.required],
+      productTitle: [''],
+      price: [''],
+      productListingUrl: [''],
+      additionalTags: [''],
       keepPrivate: [false],
     });
   }
@@ -49,8 +49,11 @@ export class UploadFileDetailsComponent implements OnInit {
     const data = {}
     const payload = {
       name: 'save-image-details',
-      data: this.step.value
+      data: '',
     };
+    if (this.step.value) {
+      payload.data = this.step.value;
+    }
     this.onYesClick(payload);
   }
 }

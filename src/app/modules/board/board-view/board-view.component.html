@@ -2,7 +2,12 @@
 <app-board-loader *ngIf="appMeta.board.data.length == 0"></app-board-loader>
 <div class="lazysuzy-board">
   <div>
-    <div class="left-panel">
+    <div class="left-panel" [ngClass]="{'b-100': isTablet && showMenu, 'b-650': isTablet && !showMenu}">
+      <div class="d-lg-none" *ngIf="isTablet">
+        <div class="toggle-icon {{showMenu? 'b-577 transform-icon': 'b-25'}}" (click)="toggleMenu()">
+          <i class="mdi mdi-plus" aria-hidden="true"></i>
+        </div>
+      </div>
       <div class="left-tabs">
         <ul class="nav nav-tabs flex-column">
           <li
@@ -77,14 +82,17 @@
           >
           </app-board-products>
 
-          <button
-            type="button"
-            *ngIf="!showLoader && remoteProducts.length != 0"
-            (click)="loadMore()"
-            class="btn btn-primary"
-          >
-            Load More
-          </button>
+          <div class="tc pb-4">
+            <button
+              type="button"
+              *ngIf="!showLoader && remoteProducts.length != 0"
+              (click)="loadMore()"
+              class="btn load-more-btn"
+            >
+              Load More
+            </button>
+          </div>
+          
           <button
             type="button"
             *ngIf="!showLoader && remoteProducts.length == 0"
@@ -93,7 +101,7 @@
           >
             No products.Select another category.
           </button>
-
+          <!-- <app-board-loader *ngIf="showLoader"></app-board-loader> -->
           <app-loader *ngIf="showLoader"></app-loader>
 
           <div
@@ -112,11 +120,11 @@
           </div>
         </div>
 
-        <div *ngIf="selectedItem === 'text'">
+        <div *ngIf="selectedItem === 'text'" class="padding-top-60">
           <app-board-text></app-board-text>
         </div>
 
-        <div *ngIf="selectedItem === 'add'">
+        <div *ngIf="selectedItem === 'add'" class="padding-top-60">
           <app-board-add
             [allAssets]="appMeta.asset"
             [userId]="currentUser.id"
@@ -138,17 +146,38 @@
           </div>
         </div>
 
-        <div *ngIf="selectedItem === 'board'">
+        <div *ngIf="selectedItem === 'board'" class="padding-top-60">
           <app-current-board
             [boardProducts]="boardPreviewProducts"
           ></app-current-board>
         </div>
 
-        <div *ngIf="selectedItem === 'favorites'"></div>
-      </div>
+        <div *ngIf="selectedItem === 'favorites'">
+          <div class="pt-4" *ngIf="!favoriteProducts.length">No items found. Save items to your favorites to see them here.</div>
+          <app-board-products
+            [products]="favoriteProducts"
+            (previewProduct)="handleProductPreview($event)"
+          >
+          </app-board-products>
+          <div
+            class="static-bottom-panel-wrapper"
+            *ngIf="productForPreview"
+            style="z-index: 9999999;"
+          >
+            <div class="static-bottom-panel selected">
+              <app-product-preview
+                [data]="productForPreview"
+                (clearProductPreview)="handleClearProductPreview($event)"
+                (addProductBoard)="handleAddProductBoardPreview($event)"
+              >
+              </app-product-preview>
+            </div>
+          </div>
+        </div>
     </div>
   </div>
-  <div class="main-content container-fluid">
+  </div>
+  <div class="main-content container-fluid gray-bg">
     <div class="row">
       <div class="col-md-12 tool-bar-holder">
         <div class="top-panel row top-panel-hide">
@@ -250,7 +279,7 @@
         </div>
         <div class="canvas-content">
           <div class="d-flex">
-            <div class="canvas-title-bar">
+            <!-- <div class="canvas-title-bar">
               <div
                 class="canvas-icons"
                 mat-raised-button
@@ -264,8 +293,8 @@
                   ></i>
                 </a>
               </div>
-            </div>
-            <div class="w-25">
+            </div> -->
+            <div class="w-25 ml-4">
               <input
                 class="form-control board-title"
                 placeholder="Board title"
@@ -286,5 +315,4 @@
         </div>
       </div>
     </div>
-  </div>
 </div>

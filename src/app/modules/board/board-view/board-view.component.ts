@@ -13,7 +13,7 @@ import * as $ from 'jquery';
 import { Board } from '../board';
 import { Asset } from '../asset';
 import { BoardService } from '../board.service';
-
+import { Observable, Subscription } from 'rxjs';
 import { OverlayPanel } from 'primeng/overlaypanel';
 import { MatDialog } from '@angular/material';
 import { BoardPopupComponent } from '../board-popup/board-popup.component';
@@ -21,7 +21,13 @@ import { BoardPopupConfigComponent } from '../board-popup-config/board-popup-con
 import { boardRoutesNames } from '../board.routes.names';
 import { Font, FontPickerService } from 'ngx-font-picker';
 import { environment } from 'src/environments/environment';
-
+import { IProductPayload, IProductsPayload } from '../../../shared/models';
+import { ApiService } from '../../../shared/services';
+import {
+  BreakpointState,
+  Breakpoints,
+  BreakpointObserver
+} from '@angular/cdk/layout';
 declare const fb: any;
 
 @Component({
@@ -31,7 +37,8 @@ declare const fb: any;
 })
 export class BoardViewComponent implements OnInit, AfterViewInit {
   shortcuts: ShortcutInput[] = [];
-
+  productsSubscription: Subscription;
+  favoriteProducts: IProductPayload[];
   selectedItem = 'select';
   selectedCategory = null;
   showLoader = false;
@@ -46,14 +53,25 @@ export class BoardViewComponent implements OnInit, AfterViewInit {
   showTab;
   fontPickerObject;
   justCreated = false;
-
+  tabletObserver: Observable<BreakpointState> = this.breakpointObserver.observe(
+    Breakpoints.Tablet
+  );
+  bpObserver: Observable<BreakpointState> = this.breakpointObserver.observe(
+    Breakpoints.Handset
+  );
+  bpSubscription: Subscription;
+  tabletSubscription: Subscription;
+  isTablet: boolean = false;
+  showMenu: boolean = false;
   constructor(
     private cookieService: CookieService,
     private dialog: MatDialog,
     public boardService: BoardService,
     private route: ActivatedRoute,
     private router: Router,
-    private fontPickerService: FontPickerService
+    private fontPickerService: FontPickerService,
+    private apiService: ApiService,
+    private breakpointObserver: BreakpointObserver
   ) {
     const user = JSON.parse(localStorage.getItem('user'));
     this.currentUser = user;
@@ -117,7 +135,9 @@ export class BoardViewComponent implements OnInit, AfterViewInit {
     //   console.log('The dialog was closed', result);
     // });
   }
-
+  toggleMenu() {
+    this.showMenu = !this.showMenu;
+  }
   openBoardConfig() {
     const dialogRef = this.dialog.open(BoardPopupConfigComponent, {
       panelClass: 'custom-dialog-container',
@@ -410,6 +430,29 @@ export class BoardViewComponent implements OnInit, AfterViewInit {
         });
       });
     });
+    this.productsSubscription = this.apiService
+      .getWishlistProducts()
+      .subscribe((payload: IProductsPayload) => {
+        this.favoriteProducts = payload.products;
+        this.favoriteProducts = this.favoriteProducts.map((ele, i) => {
+          return {
+            ...ele,
+            refId: i,
+          };
+        });
+      });
+    this.bpSubscription = this.bpObserver.subscribe(
+      (handset: BreakpointState) => {
+        this.isTablet = handset.matches;
+      }
+    );
+    if (!this.isTablet) {
+      this.tabletSubscription = this.tabletObserver.subscribe(
+        (tablet: BreakpointState) => {
+          this.isTablet = tablet.matches;
+        }
+      );
+    }
   }
   ngAfterViewInit(): void {
     this.shortcuts.push(
@@ -675,7 +718,7 @@ export class BoardViewComponent implements OnInit, AfterViewInit {
       let dropType = draggedObject.attr('drop-type');
       let referenceID = draggedObject.parent().attr('data-product');
       let referenceType = draggedObject.parent().attr('type');
-      this.handleDrop(e, draggedObject, dropType, referenceID, referenceType);
+      this.handleDrop(e, draggedObject, dropType, referenceID, referenceType, this.selectedItem);
     });
 
     // handle canvas events
@@ -817,16 +860,16 @@ export class BoardViewComponent implements OnInit, AfterViewInit {
             referenceID +
             '"] img'
         );
-        // console.log(draggedObject, dropType, referenceID, referenceType);
         this.handleDrop(
           false,
           draggedObject,
           dropType,
           referenceID,
-          referenceType
+          referenceType,
+          this.selectedItem
         );
       } else if (dropType == 'text')
-        this.handleDrop(false, $(e.target), dropType, false, false);
+        this.handleDrop(false, $(e.target), dropType, false, false, this.selectedItem);
     });
 
     // Render first updates
@@ -967,7 +1010,7 @@ export class BoardViewComponent implements OnInit, AfterViewInit {
     this.updateToolbar();
   };
 
-  handleDrop = (e, draggedObject, dropType, referenceID, referenceType) => {
+  handleDrop = (e, draggedObject, dropType, referenceID, referenceType, selectedItem) => {
     if (dropType == 'image') {
       let referenceObjectValue: any = {
         type: referenceType,
@@ -984,14 +1027,16 @@ export class BoardViewComponent implements OnInit, AfterViewInit {
         referenceObjectValue.brand = this.appMeta.asset[referenceID].brand;
         referenceObjectValue.sku = '';
       } else if (referenceType == 'default') {
-        referenceObjectValue.id = this.remoteProducts[referenceID].id;
+        let product = [];
+        {selectedItem === 'browse' ? product = this.remoteProducts : product = this.favoriteProducts; }
+        referenceObjectValue.id = product[referenceID].id;
         referenceObjectValue.isTransparent = 1;
-        referenceObjectValue.path = this.remoteProducts[referenceID].main_image;
+        referenceObjectValue.path = product[referenceID].main_image;
         referenceObjectValue.transparentPath = '';
-        referenceObjectValue.name = this.remoteProducts[referenceID].name;
-        referenceObjectValue.price = this.remoteProducts[referenceID].is_price;
-        referenceObjectValue.brand = this.remoteProducts[referenceID].site;
-        referenceObjectValue.sku = this.remoteProducts[referenceID].sku;
+        referenceObjectValue.name = product[referenceID].name;
+        referenceObjectValue.price = product[referenceID].is_price;
+        referenceObjectValue.brand = product[referenceID].site;
+        referenceObjectValue.sku = product[referenceID].sku;
       }
 
       let imageToInsert = new fb.Image(draggedObject[0], {
