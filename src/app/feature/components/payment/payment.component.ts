@@ -215,17 +215,18 @@ export class PaymentComponent implements OnInit {
           if (result.token) {
             this.customerData.token = result.token.id;
             this.customerData.ip = result.token.client_ip;
-            this.apiService.userUpdate({ name }).subscribe(
-              (payload: any) => {
-                localStorage.setItem(
-                  'user',
-                  JSON.stringify(payload.success.user)
-                );
-              },
-              (error: any) => {
-                console.log(error);
-              }
-            );
+            localStorage.setItem('registeredName', name);
+            // this.apiService.userUpdate({ name }).subscribe(
+            //   (payload: any) => {
+            //     localStorage.setItem(
+            //       'user',
+            //       JSON.stringify(payload.success.user)
+            //     );
+            //   },
+            //   (error: any) => {
+            //     console.log(error);
+            //   }
+            // );
             this.apiService.postStripeToken(this.customerData).subscribe(
               (payload: any) => {
                 this.isPaymentExecuting = false;

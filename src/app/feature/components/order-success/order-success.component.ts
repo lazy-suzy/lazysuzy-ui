@@ -70,7 +70,10 @@ export class OrderSuccessComponent implements OnInit {
       // const localUser: any = JSON.parse(localStorage.getItem('user') || '{}');
       const registeredEmail: string =
         localStorage.getItem('registeredEmail') || '';
+      const registeredName: string =
+        localStorage.getItem('registeredName') || '';
       let data = {
+        name: registeredName,
         email: registeredEmail,
         password: this.password,
       };
