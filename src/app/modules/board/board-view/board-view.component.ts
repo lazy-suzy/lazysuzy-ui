@@ -434,6 +434,12 @@ export class BoardViewComponent implements OnInit, AfterViewInit {
       .getWishlistProducts()
       .subscribe((payload: IProductsPayload) => {
         this.favoriteProducts = payload.products;
+        this.favoriteProducts = this.favoriteProducts.map((ele, i) => {
+          return {
+            ...ele,
+            refId: i,
+          };
+        });
       });
     this.bpSubscription = this.bpObserver.subscribe(
       (handset: BreakpointState) => {
@@ -712,7 +718,7 @@ export class BoardViewComponent implements OnInit, AfterViewInit {
       let dropType = draggedObject.attr('drop-type');
       let referenceID = draggedObject.parent().attr('data-product');
       let referenceType = draggedObject.parent().attr('type');
-      this.handleDrop(e, draggedObject, dropType, referenceID, referenceType);
+      this.handleDrop(e, draggedObject, dropType, referenceID, referenceType, this.selectedItem);
     });
 
     // handle canvas events
@@ -854,16 +860,16 @@ export class BoardViewComponent implements OnInit, AfterViewInit {
             referenceID +
             '"] img'
         );
-        // console.log(draggedObject, dropType, referenceID, referenceType);
         this.handleDrop(
           false,
           draggedObject,
           dropType,
           referenceID,
-          referenceType
+          referenceType,
+          this.selectedItem
         );
       } else if (dropType == 'text')
-        this.handleDrop(false, $(e.target), dropType, false, false);
+        this.handleDrop(false, $(e.target), dropType, false, false, this.selectedItem);
     });
 
     // Render first updates
@@ -1004,7 +1010,7 @@ export class BoardViewComponent implements OnInit, AfterViewInit {
     this.updateToolbar();
   };
 
-  handleDrop = (e, draggedObject, dropType, referenceID, referenceType) => {
+  handleDrop = (e, draggedObject, dropType, referenceID, referenceType, selectedItem) => {
     if (dropType == 'image') {
       let referenceObjectValue: any = {
         type: referenceType,
@@ -1021,14 +1027,16 @@ export class BoardViewComponent implements OnInit, AfterViewInit {
         referenceObjectValue.brand = this.appMeta.asset[referenceID].brand;
         referenceObjectValue.sku = '';
       } else if (referenceType == 'default') {
-        referenceObjectValue.id = this.remoteProducts[referenceID].id;
+        let product = [];
+        {selectedItem === 'browse' ? product = this.remoteProducts : product = this.favoriteProducts; }
+        referenceObjectValue.id = product[referenceID].id;
         referenceObjectValue.isTransparent = 1;
-        referenceObjectValue.path = this.remoteProducts[referenceID].main_image;
+        referenceObjectValue.path = product[referenceID].main_image;
         referenceObjectValue.transparentPath = '';
-        referenceObjectValue.name = this.remoteProducts[referenceID].name;
-        referenceObjectValue.price = this.remoteProducts[referenceID].is_price;
-        referenceObjectValue.brand = this.remoteProducts[referenceID].site;
-        referenceObjectValue.sku = this.remoteProducts[referenceID].sku;
+        referenceObjectValue.name = product[referenceID].name;
+        referenceObjectValue.price = product[referenceID].is_price;
+        referenceObjectValue.brand = product[referenceID].site;
+        referenceObjectValue.sku = product[referenceID].sku;
       }
 
       let imageToInsert = new fb.Image(draggedObject[0], {

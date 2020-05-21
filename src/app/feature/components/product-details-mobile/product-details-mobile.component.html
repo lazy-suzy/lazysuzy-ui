@@ -37,7 +37,7 @@
     <div class="price-container flex flex-wrap">
       <div class="padding-vertical-2">
         <div class="product-price mr3">${{ productPrice }}</div>
-        <div class="strike {{ productPrice !== productWasPrice ? '' : 'dn' }}">
+        <div class="strike product-old-price {{ productPrice !== productWasPrice ? '' : 'dn' }}">
           ${{ productWasPrice }}
         </div>
       </div>
@@ -55,7 +55,7 @@
           [href]="product.product_url"
           class="tr-viewDetails no-underline yellow"
         >
-          View Details
+          VIEW DETAILS
         </a>
       </button>
       <select
@@ -78,12 +78,24 @@
         "
       >
         <a (click)="openCartModal()" class="tr-addToCart no-underline yellow">
-          Add to Cart
+          ADD TO CART
         </a>
       </button>
       <div *ngIf="errorMessage !== ''" class="invalid-feedback">
         <div>{{ errorMessage }}</div>
       </div>
+    </div>
+    <div class="stock-info" *ngIf="
+        product.in_inventory &&
+        product.inventory_product_details.count > 0 && product.inventory_product_details.is_low ===true
+      ">
+      <div class="flex">
+        <span>
+          <mat-icon class="info-icon">info</mat-icon>
+        </span>
+        <div class="stock-msg">Only {{product.inventory_product_details.count > 10 ? '10': product.inventory_product_details.count}} left in stock.</div>
+      </div>
+      <div class="shipping-msg">Ships in 1-2 weeks.</div>
     </div>
     <ng-container *ngIf="product.redirect; else allConditions">
       <hr class="modal-hr mt-3" *ngIf="product.set && product.set.length > 0" />
@@ -130,21 +142,21 @@
         <li
           (click)="selectTab('desc')"
           *ngIf="descriptionExist"
-          class="{{ activeTab === 'desc' ? 'active' : 'bg-white' }}"
+          class="{{ activeTab === 'desc' ? 'active b' : 'bg-white' }}"
         >
           <span class="nav-link">Description</span>
         </li>
         <li
           (click)="selectTab('features')"
           *ngIf="featuresExist"
-          class="{{ activeTab === 'features' ? 'active' : 'bg-white' }}"
+          class="{{ activeTab === 'features' ? 'active b' : 'bg-white' }}"
         >
           <span class="nav-link">Features</span>
         </li>
         <li
           (click)="selectTab('dimensions')"
           *ngIf="dimensionExist"
-          class="{{ activeTab === 'dimensions' ? 'active' : 'bg-white' }}"
+          class="{{ activeTab === 'dimensions' ? 'active b' : 'bg-white' }}"
         >
           <span class="nav-link">Dimensions</span>
         </li>
@@ -154,14 +166,14 @@
           *ngIf="descriptionExist"
           class="{{ activeTab === 'desc' ? '' : 'dn' }}"
         >
-          <div [innerHTML]="description"></div>
+          <div [innerHTML]="description" class="nav-content"></div>
         </div>
         <div
           *ngIf="featuresExist"
           class="{{ activeTab === 'features' ? '' : 'dn' }}"
         >
           <div class="mt1 pl3">
-            <div [innerHTML]="features"></div>
+            <div [innerHTML]="features" class="nav-content"></div>
           </div>
         </div>
         <div
@@ -177,14 +189,14 @@
               class="fl w-50 pa2"
             >
               <div class="dimension-title">{{ dimension.description }}</div>
-              <div>Width: {{ dimension.width }}</div>
+              <div >Width: {{ dimension.width }}</div>
               <div>Depth: {{ dimension.depth }}</div>
               <div>Height: {{ dimension.height }}</div>
               <br />
             </div>
           </div>
           <ng-template #showDimensions>
-            <div>
+            <div class="nav-content">
               {{ product.dimension }}
             </div>
           </ng-template>

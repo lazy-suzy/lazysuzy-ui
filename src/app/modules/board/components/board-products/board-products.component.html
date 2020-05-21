@@ -2,7 +2,7 @@
     <div class="flex-grid" *ngIf="products?.length">
         <div class="flex-grid-item" *ngFor="let product of products">
             <div class="product-image" attr.type="{{productType}}" attr.data-product="{{product.refId}}" (click)="previewProductFn(product)">
-               <img drop-type="image" draggable="true" src={{product.main_image}} />
+               <img drop-type="image" draggable="true" src={{product.board_thumb}} />
             </div>
         </div>
     </div>
