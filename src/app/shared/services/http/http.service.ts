@@ -1,6 +1,7 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
+import { CookieService } from 'ngx-cookie-service';
 
 @Injectable({
   providedIn: 'root',
@@ -8,9 +9,11 @@ import { Observable } from 'rxjs';
 export class HttpService {
   headers: HttpHeaders;
 
-  constructor(private http: HttpClient) {
+  constructor(private http: HttpClient, private cookie: CookieService) {
+    const token = this.cookie.get('token');
     this.headers = new HttpHeaders({
       'Content-Type': 'application/json',
+      Authorization: `Bearer ${token}`,
     });
   }
 
@@ -20,11 +23,21 @@ export class HttpService {
   }
 
   get<T>(url: string, headers?): Observable<T> {
-    const options = headers ? headers : { headers: this.headers };
+    const token = this.cookie.get('token');
+    this.headers = new HttpHeaders({
+      'Content-Type': 'application/json',
+      Authorization: `Bearer ${token}`,
+    });
+    const options = headers ? headers : this.headers;
     return this.http.get<T>(url, { headers: options });
   }
 
   post<T>(url: string, payload: any, headers?): Observable<T> {
+    const token = this.cookie.get('token');
+    this.headers = new HttpHeaders({
+      'Content-Type': 'application/json',
+      Authorization: `Bearer ${token}`,
+    });
     const options = headers ? headers : { headers: this.headers };
     return this.http.post<T>(url, payload, { headers: options });
   }

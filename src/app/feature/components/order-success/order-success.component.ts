@@ -36,9 +36,7 @@ export class OrderSuccessComponent implements OnInit {
       }
     );
     let localData = JSON.parse(localStorage.getItem('user') || '{}');
-    if (localData.user_type === 1) {
-      this.isLoggedIn = true;
-    }
+    this.isLoggedIn = localData.user_type === 1;
     this.apiService.getOrderSuccessData(this.orderId).subscribe(
       (payload: any) => {
         this.cartProducts = payload.cart;
@@ -69,8 +67,14 @@ export class OrderSuccessComponent implements OnInit {
       this.showError = true;
     } else {
       this.showError = false;
-      const localUser: any = JSON.parse(localStorage.getItem('user') || '{}');
+      // const localUser: any = JSON.parse(localStorage.getItem('user') || '{}');
+      const registeredEmail: string =
+        localStorage.getItem('registeredEmail') || '';
+      const registeredName: string =
+        localStorage.getItem('registeredName') || '';
       let data = {
+        name: registeredName,
+        email: registeredEmail,
         password: this.password,
       };
       this.apiService.userUpdate(data).subscribe(

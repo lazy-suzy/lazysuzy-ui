@@ -21,7 +21,7 @@ export class SetsComponent implements OnInit {
       vglnk.open(url, '_blank');
     }
   }
-  openCartModal(item) {
+  openCartModal(item, index) {
     const data = {
       sku: item.sku,
       brand: this.brand,
@@ -36,9 +36,15 @@ export class SetsComponent implements OnInit {
     };
     this.apiService.addCartProduct(postData).subscribe(
       (payload: any) => {
-        this.utils.openAddToCartDialog(data);
+        if (payload.status) {
+          this.utils.openAddToCartDialog(data);
+        } else {
+          this.sets[index].errorMessage = payload.msg;
+        }
       },
       (error: any) => {
+        this.sets[index].errorMessage =
+          'Cannot add this product at the moment.';
         console.log(error);
       }
     );
