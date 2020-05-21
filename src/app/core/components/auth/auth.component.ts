@@ -48,7 +48,7 @@ export class AuthComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.createGuestUserIfRequired();
+    this.fetchUser();
     localStorage.setItem('cart', '0');
     if (this.eventEmitterService.subsVar == undefined) {
       this.eventEmitterService.subsVar = this.eventEmitterService.invokeFetchUser.subscribe(
@@ -135,18 +135,18 @@ export class AuthComponent implements OnInit {
   isCurrentUserGuest(): boolean {
     return this.user.user_type === this.utils.userType.guest;
   }
-  async createGuestUserIfRequired() {
-    // no trace of user
-    if (!this.cookie.get('token') && !localStorage.getItem('user')) {
-      var formData: any = new FormData();
-      formData.append('guest', 1);
+  // async createGuestUserIfRequired() {
+  //   // no trace of user
+  //   if (!this.cookie.get('token') && !localStorage.getItem('user')) {
+  //     var formData: any = new FormData();
+  //     formData.append('guest', 1);
 
-      const payload: any = await this.apiService.signup(formData).toPromise();
-      if (payload.success) {
-        this.cookie.set('token', payload.success.token, undefined, '/');
-        localStorage.setItem('user', JSON.stringify(payload.success.user));
-        this.fetchUser();
-      }
-    } else this.fetchUser();
-  }
+  //     const payload: any = await this.apiService.signup(formData).toPromise();
+  //     if (payload.success) {
+  //       this.cookie.set('token', payload.success.token, undefined, '/');
+  //       localStorage.setItem('user', JSON.stringify(payload.success.user));
+  //       this.fetchUser();
+  //     }
+  //   } else this.fetchUser();
+  // }
 }
