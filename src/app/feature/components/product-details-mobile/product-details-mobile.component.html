@@ -92,23 +92,24 @@
     <div
       class="stock-info"
       *ngIf="
-        product.in_inventory && product.inventory_product_details.count > 0
+        product.in_inventory &&
+        product.inventory_product_details.count > 0 &&
+        (product.inventory_product_details.is_low ||
+          product.inventory_product_details.message)
       "
     >
       <div class="flex">
-        <div class="flex" *ngIf="product.inventory_product_details.is_low">
-          <span>
-            <mat-icon class="info-icon">info</mat-icon>
-          </span>
-          <div class="stock-msg">
-            Only
-            {{
-              product.inventory_product_details.count > 10
-                ? '10'
-                : product.inventory_product_details.count
-            }}
-            left in stock.
-          </div>
+        <span>
+          <mat-icon class="info-icon">info</mat-icon>
+        </span>
+        <div class="stock-msg" *ngIf="product.inventory_product_details.is_low">
+          Only
+          {{
+            product.inventory_product_details.count > 10
+              ? '10'
+              : product.inventory_product_details.count
+          }}
+          left in stock.
         </div>
       </div>
       <div class="shipping-msg">

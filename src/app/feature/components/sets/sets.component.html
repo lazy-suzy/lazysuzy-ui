@@ -116,29 +116,29 @@
       </div>
       <div
         class="stock-info"
-        *ngIf="item.in_inventory && item.inventory_product_details.count > 0"
+        *ngIf="
+          item.in_inventory &&
+          item.inventory_product_details.count > 0 &&
+          (item.inventory_product_details.is_low ||
+            item.inventory_product_details.message)
+        "
       >
-        <div class="flex">
-          <div
-            class="flex items-center"
-            *ngIf="item.inventory_product_details.is_low"
-          >
-            <span>
-              <mat-icon class="info-icon">info</mat-icon>
-            </span>
-            <div class="stock-msg">
-              Only
-              {{
-                item.inventory_product_details.count > 10
-                  ? '10'
-                  : item.inventory_product_details.count
-              }}
-              left in stock.
-            </div>
+        <div class="flex items-center">
+          <span>
+            <mat-icon class="info-icon">info</mat-icon>
+          </span>
+          <div class="stock-msg" *ngIf="item.inventory_product_details.is_low">
+            Only
+            {{
+              item.inventory_product_details.count > 10
+                ? '10'
+                : item.inventory_product_details.count
+            }}
+            left in stock.
           </div>
-        </div>
-        <div class="shipping-msg">
-          {{ item.inventory_product_details.message }}
+          <div class="shipping-msg">
+            {{ item.inventory_product_details.message }}
+          </div>
         </div>
       </div>
       <div *ngIf="item.errorMessage !== ''" class="invalid-feedback">

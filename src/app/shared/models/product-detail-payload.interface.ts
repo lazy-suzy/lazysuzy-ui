@@ -31,8 +31,10 @@ export interface IProductDetail {
   department_info: Departmentinfo[];
   in_inventory: boolean;
   inventory_product_details: {
-  price: number,
-  count: number,
+    price: number;
+    count: number;
+    is_low: boolean;
+    message: string;
   };
 }
 
