@@ -9,17 +9,24 @@
 		<span>Create Date: </span><br />
 		<span>Last Update Date: </span><br />
 
-		<button mat-mini-fab>
+		<button mat-mini-fab *ngIf="currentEditingProduct?.sku === product?.sku" (click)="saveEdit()">
 			<mat-icon>check</mat-icon>
 		</button>
 
-		<button mat-mini-fab>
+		<button mat-mini-fab *ngIf="currentEditingProduct?.sku === product?.sku" (click)="cancelEdit()">
 			<mat-icon>clear</mat-icon>
 		</button>
+
+		{{product?.sku}}
+
+		<!-- <span *ngIf="currentEditingProduct?.id !== product?.id">
+			Not Editing
+		</span> -->
 
 	</div>
 	
 	<div class="column2" id="main">
+		
 		<div style="background-color:lightblue;" *ngFor="let variation of product.variations" class="card">
 
 			<mat-card class="example-card">
@@ -29,7 +36,7 @@
 					</div>
 				</mat-card-header>
 				<mat-form-field>
-					<mat-select placeholder="Board Tag" (selectionChange)="someMethod(item,$event.value)">
+					<mat-select placeholder="Board Tag" (selectionChange)="someMethod(product,$event.value)">
 						<mat-option *ngFor="let board of allBoards" [value]="board.value">
 							{{ board.viewValue }}
 						</mat-option>
@@ -37,13 +44,14 @@
 				</mat-form-field>
 				<br />
 				<mat-form-field>
-					<mat-select disabled placeholder="Position" (selectionChange)="someMethod(item,$event.value)">
+					<mat-select disabled placeholder="Position" (selectionChange)="someMethod(product,$event.value)">
 						<mat-option *ngFor="let position of positions" [value]="position.value">
 							{{ position.viewValue }}
 						</mat-option>
 					</mat-select>
 				</mat-form-field>
 			</mat-card>
+			
 		</div>
 	</div>
 

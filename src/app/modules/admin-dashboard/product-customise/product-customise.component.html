@@ -1,36 +1,40 @@
 <h1>Product Dashboard</h1>
 <mat-form-field>
-    <mat-select placeholder="BRAND" (selectionChange)="someMethod(item,$event.value)">
+    <mat-select placeholder="BRAND" (selectionChange)="someMethod($event.value)">
+        <mat-option *ngFor="let position of filterData.brand" [value]="position.value">
+            {{ position.name }}
+        </mat-option>
+    </mat-select>
+</mat-form-field>
+<mat-form-field>
+    <mat-select placeholder="CATEGORY" (selectionChange)="someMethod($event.value)">
+        <mat-option *ngFor="let position of filterData.category" [value]="position.value">
+            {{ position.name }}
+        </mat-option>
+    </mat-select>
+</mat-form-field>
+<mat-form-field>
+    <mat-select disabled placeholder="STATUS" (selectionChange)="someMethod($event.value)">
         <mat-option *ngFor="let position of positions" [value]="position.value">
             {{ position.viewValue }}
         </mat-option>
     </mat-select>
 </mat-form-field>
 <mat-form-field>
-    <mat-select placeholder="CATEGORY" (selectionChange)="someMethod(item,$event.value)">
-        <mat-option *ngFor="let position of positions" [value]="position.value">
-            {{ position.viewValue }}
-        </mat-option>
-    </mat-select>
-</mat-form-field>
-<mat-form-field>
-    <mat-select placeholder="STATUS" (selectionChange)="someMethod(item,$event.value)">
-        <mat-option *ngFor="let position of positions" [value]="position.value">
-            {{ position.viewValue }}
-        </mat-option>
-    </mat-select>
-</mat-form-field>
-<mat-form-field>
-    <mat-select placeholder="CLASS" (selectionChange)="someMethod(item,$event.value)">
+    <mat-select disabled placeholder="CLASS" (selectionChange)="someMethod($event.value)">
         <mat-option *ngFor="let position of positions" [value]="position.value">
             {{ position.viewValue }}
         </mat-option>
     </mat-select>
 </mat-form-field>
 
-<app-admin-product-listing 
-    [products]="products"
-    [allBoards]="allBoards"
-    [positions]="positions"
+<app-admin-product-listing [products]="products" [allBoards]="allBoards" [positions]="positions"
     (updates)="handleUpdates($event)">
 </app-admin-product-listing>
+
+<div class="flex flex-wrap" infiniteScroll [infiniteScrollDistance]="2" [infiniteScrollThrottle]="50"
+    (scrolled)="onScroll()">
+    <ng-container>
+        
+    </ng-container>
+</div>

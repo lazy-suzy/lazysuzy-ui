@@ -12,7 +12,7 @@ export class AdminProductListingComponent implements OnInit {
   @Input() products: any = [];
 
   @Output() updates: EventEmitter<any> = new EventEmitter();
-  
+
   constructor() { }
 
   ngOnInit() { }
@@ -32,14 +32,33 @@ export class AdminProductListingComponent implements OnInit {
     }
   }
 
+  currentEditingProduct: any = {};
+  currentEditingValue: any = "";
+
   someMethod(item, value) {
+    // this.updates.emit({
+    //   data: {
+    //     value: value,
+    //     item: item
+    //   }
+    // });
+    this.currentEditingProduct = { ...item };
+    this.currentEditingValue = value;
+    // console.log(value, item);
+  }
+
+  cancelEdit() {
+    this.currentEditingProduct = {};
+  }
+
+  saveEdit() {
     this.updates.emit({
       data: {
-        value: value,
-        item: item
+        value: this.currentEditingValue,
+        item: this.currentEditingProduct
       }
     });
-    console.log(value, item);
+    // Reset Product
   }
 
 }
