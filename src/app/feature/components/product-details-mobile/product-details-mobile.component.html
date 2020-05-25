@@ -34,8 +34,8 @@
       </ng-template>
     </div>
     <div class="product-site">{{ product.site }}</div>
-    <div class="price-container flex flex-wrap">
-      <div class="padding-vertical-2">
+    <div class="price-container flex flex-wrap items-center">
+      <div class="padding-vertical-2 flex items-center">
         <div class="product-price mr3">${{ productPrice }}</div>
         <div
           class="strike product-old-price {{
@@ -208,7 +208,7 @@
               class="fl w-50 pa2"
             >
               <div class="dimension-title">{{ dimension.description }}</div>
-              <div>Width: {{ dimension.width }}</div>
+              <div >Width: {{ dimension.width }}</div>
               <div>Depth: {{ dimension.depth }}</div>
               <div>Height: {{ dimension.height }}</div>
               <br />

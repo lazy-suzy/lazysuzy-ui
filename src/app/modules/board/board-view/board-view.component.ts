@@ -655,7 +655,9 @@ export class BoardViewComponent implements OnInit, AfterViewInit {
         if (boardObject.uuid == uuid) {
           boardFound = true;
           this.appMeta.board.currentIndex = objectIndex;
-          $(this.appMeta.identifier.boardTitle).val(boardObject.title);
+          if(boardObject.title !== 'Untitled Board'){
+            $(this.appMeta.identifier.boardTitle).val(boardObject.title);
+          }
           this.canvasMeta.currentHistory.push(boardObject.state);
           this.canvasMeta.currentHistoryIndex++;
 
