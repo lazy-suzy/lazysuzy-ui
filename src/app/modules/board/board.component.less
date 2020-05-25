@@ -432,7 +432,7 @@ h6 {
 
 .left-panel .left-tab-pane {
   margin-left: 5px;
-  margin-right: 5px;
+  // margin-right: 5px;
   overflow-y: auto;
   overflow-x: hidden;
 }
@@ -454,8 +454,9 @@ h6 {
 .left-panel .input-group .input-group-append .input-group-text {
   border-top-right-radius: 5px;
   border-bottom-right-radius: 5px;
-  padding: 5px 10px;
+  padding: 2px 10px;
   border: none;
+  font-size: 22px;
 }
 
 .bottom-panel {
@@ -473,7 +474,8 @@ h6 {
 
 .product-cont img {
   max-width: 90px;
-  margin-right: 10px;
+  margin: 0 10px 20px 0;
+
 }
 
 .product-cont .product-info {
@@ -1552,6 +1554,9 @@ i.background-msg-arrow {
 }
 
 @media screen and (max-width: 991px) {
+  .lazysuzy-board {
+    height: 100vh;
+  }
   .canvas-layout {
     height: 80px;
   }
@@ -1839,9 +1844,11 @@ i.background-msg-arrow {
   }
 
   .static-bottom-panel {
-    position: absolute;
-    left: 0;
-    width: 100%;
+    position: fixed;
+    right: 0;
+    width: 80%;
+    left: 20%;
+    bottom: 50px;
   }
 }
 
@@ -2015,9 +2022,9 @@ i.background-msg-arrow {
     margin: 2rem;
   }
 
-  .static-bottom-panel {
-    bottom: -45px;
-  }
+  // .static-bottom-panel {
+  //   bottom: -45px;
+  // }
 }
 
 /* Auth Related, Needs refactoring */
