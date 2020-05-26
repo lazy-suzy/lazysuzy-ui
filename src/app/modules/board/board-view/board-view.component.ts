@@ -694,6 +694,10 @@ export class BoardViewComponent implements OnInit, AfterViewInit {
     this.canvas = new fb.Canvas(this.canvasMeta.identifier.id, {
       containerClass: this.canvasMeta.identifier.containerArea,
       preserveObjectStacking: true,
+      useCors: true,
+      origin: "anonymous",
+      allowTaint: true,
+      foreignObjectRendering: true,
       width: $(this.canvasMeta.identifier.dropArea).parent().width(),
       height:
         $(this.canvasMeta.identifier.dropArea).parent().width() /
@@ -1031,7 +1035,7 @@ export class BoardViewComponent implements OnInit, AfterViewInit {
         {selectedItem === 'browse' ? product = this.remoteProducts : product = this.favoriteProducts; }
         referenceObjectValue.id = product[referenceID].id;
         referenceObjectValue.isTransparent = 1;
-        referenceObjectValue.path = product[referenceID].main_image;
+        referenceObjectValue.path = product[referenceID].board_cropped;
         referenceObjectValue.transparentPath = '';
         referenceObjectValue.name = product[referenceID].name;
         referenceObjectValue.price = product[referenceID].is_price;
@@ -1039,31 +1043,27 @@ export class BoardViewComponent implements OnInit, AfterViewInit {
         referenceObjectValue.sku = product[referenceID].sku;
       }
 
-      let imageToInsert = new fb.Image(draggedObject[0], {
-        lockScalingFlip: true,
-        referenceObject: referenceObjectValue,
-      });
+      // let imageToInsert = new fb.Image(draggedObject[0], {
+      //   lockScalingFlip: true,
+      //   referenceObject: referenceObjectValue,
+      // });
 
-      this.applyDrop(e, imageToInsert);
+      // this.applyDrop(e, imageToInsert);
 
-      // fb.Image.fromURL(draggedObject[0].src, (imageToInsert) => {
-      //   imageToInsert.lockScalingFlip = true;
-      //   imageToInsert.referenceObject = referenceObjectValue;
-      //   this.applyDrop(e, imageToInsert);
-      // }, { crossOrigin: 'anonymous' });
+      fb.Image.fromURL(referenceObjectValue.path, (img) => {
+        img.lockScalingFlip = true;
+        img.referenceObject = referenceObjectValue
+        this.applyDrop(e, img);
+      }, { crossOrigin: 'anonymous' });
 
-      // fb.util.loadImage(draggedObject[0].src,
-      //   (img) => {
-      //     imageToInsert = new fb.Image(img, {
-      //       lockScalingFlip: true
-      //     });
-      //     imageToInsert.scale(this.canvasMeta.value.scaleFactor);
-      //     imageToInsert.setControlsVisibility(this.canvasMeta.value.imageControl);
-      //     this.applyDrop(e, imageToInsert);
-      //   }, null, {
-      //     // crossOrigin: 'anonymous'
-      //   }
-      // );
+      // fb.util.loadImage(referenceObjectValue.path, (img) => {
+      //   var image = new fb.Image(img, {
+      //     lockScalingFlip: true,
+      //     referenceObject: referenceObjectValue,
+      //   });
+      //   this.applyDrop(e, image);
+      // });
+
     } else if (dropType == 'text') {
       let textToInsert = new fb.Textbox(draggedObject.text(), {
         fontFamily: draggedObject.text(),
@@ -1208,7 +1208,9 @@ export class BoardViewComponent implements OnInit, AfterViewInit {
         quality: 0.2,
         // multiplier: 0.2
       });
-    } catch (err) {}
+    } catch (err) {
+      console.log(err);
+    }
 
     this.boardService
       .updateBoard(
@@ -1690,7 +1692,7 @@ export class BoardViewComponent implements OnInit, AfterViewInit {
           img,
           this.canvas.renderAll.bind(this.canvas)
         );
-      });
+      }, { crossOrigin: 'anonymous' });
     }
     else if(object.attribute == 'action')
       if (object.value == 'cancel' && this.justCreated){
