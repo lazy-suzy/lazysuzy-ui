@@ -1257,7 +1257,7 @@ export class BoardViewComponent implements OnInit, AfterViewInit {
     $(this.appMeta.identifier.cropToolbarElement).toggle(
       this.canvasMeta.flag.cropEnabled
     );
-  };
+  }
 
   renderAppMeta = () => {
     // enable

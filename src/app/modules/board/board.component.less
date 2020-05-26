@@ -1,7 +1,11 @@
-@import (css) url('https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css');
-@import (css) url('https://fonts.googleapis.com/css?family=Lato:400,700&display=swap');
-@import (css) url('https://fonts.googleapis.com/css?family=Open+Sans&display=swap');
-@import (css) url('http://cdn.materialdesignicons.com/4.7.95/css/materialdesignicons.min.css');
+@import (css)
+  url('https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css');
+@import (css)
+  url('https://fonts.googleapis.com/css?family=Lato:400,700&display=swap');
+@import (css)
+  url('https://fonts.googleapis.com/css?family=Open+Sans&display=swap');
+@import (css)
+  url('http://cdn.materialdesignicons.com/4.7.95/css/materialdesignicons.min.css');
 
 h1,
 h2,
@@ -35,8 +39,6 @@ h6 {
   min-width: 75px;
   text-align: center;
 }
-
-
 
 .top-tooltip[data-title]:hover::before {
   bottom: 40px;
@@ -218,10 +220,11 @@ h6 {
 
 .icon {
   background: #b76e79;
-  font-size: 18px;
+  font-size: 16px;
   color: #fff;
   border-radius: 4px;
   display: inline-block;
+  padding: 0 3px;
 }
 
 .filter-icon {
@@ -341,6 +344,7 @@ h6 {
   text-align: left;
   padding: 10px 5px 15px;
   background: #d6d6d6;
+  height: 60px;
 }
 
 .top-panel i {
@@ -364,7 +368,7 @@ h6 {
 }
 
 .editor-icons select,
-.editor-icons .font-select>a {
+.editor-icons .font-select > a {
   background: #d6d6d6;
   border: none;
   padding: 0;
@@ -470,12 +474,12 @@ h6 {
 .product-cont {
   border: 1px solid #b76e79;
   font-size: 12px;
+  margin: 0;
 }
 
 .product-cont img {
   max-width: 90px;
   margin: 0 10px 20px 0;
-
 }
 
 .product-cont .product-info {
@@ -486,12 +490,11 @@ h6 {
 
 .product-cont .brand {
   color: #999999;
-  margin: 12px 0;
+  margin: 4px 0;
 }
 
 .price {
   color: #b76e79;
-  margin: 12px 0;
 }
 
 .product-cont .icons {
@@ -629,7 +632,7 @@ h6 {
   display: none;
 }
 
-.filter-label input:checked~.checkmark:after {
+.filter-label input:checked ~ .checkmark:after {
   display: block;
 }
 
@@ -819,7 +822,6 @@ h6 {
   border: 1px solid #000000;
 }
 
-
 div.canvas-layout-room {
   // background-image: url('floor3.jpg');
   max-width: 100%;
@@ -997,8 +999,8 @@ div.canvas-layout-room {
   margin-left: -0.5rem;
 }
 
-[data-overflowing='both']~.canvas-scroll-left,
-[data-overflowing='left']~.canvas-scroll-left {
+[data-overflowing='both'] ~ .canvas-scroll-left,
+[data-overflowing='left'] ~ .canvas-scroll-left {
   opacity: 1;
 }
 
@@ -1007,8 +1009,8 @@ div.canvas-layout-room {
   margin-right: -0.5rem;
 }
 
-[data-overflowing='both']~.canvas-scroll-right,
-[data-overflowing='right']~.canvas-scroll-right {
+[data-overflowing='both'] ~ .canvas-scroll-right,
+[data-overflowing='right'] ~ .canvas-scroll-right {
   opacity: 1;
 }
 
@@ -1166,7 +1168,7 @@ div.canvas-layout-room {
   background-color: #b76d79;
 }
 
-.irs--sharp .irs-handle>i:first-child {
+.irs--sharp .irs-handle > i:first-child {
   border-top-color: #b76d79;
 }
 
@@ -1191,6 +1193,9 @@ div.canvas-layout-room {
 
 .board-card {
   padding: 2px;
+  display: flex;
+  justify-content: flex-end;
+  flex-direction: column;
 }
 
 // .board-card:hover {
@@ -1205,7 +1210,6 @@ div.canvas-layout-room {
   border: 1px solid #c8c7cc;
   text-align: center;
   position: relative;
-  min-height: 200px;
 }
 
 .board-card .board-card-icons {
@@ -1532,7 +1536,6 @@ i.background-msg-arrow {
 }
 
 .static-bottom-panel {
-  position: fixed;
   bottom: 0;
   left: 75px;
   width: 305px;
@@ -1844,11 +1847,10 @@ i.background-msg-arrow {
   }
 
   .static-bottom-panel {
-    position: fixed;
     right: 0;
     width: 80%;
     left: 20%;
-    bottom: 50px;
+    bottom: 70px;
   }
 }
 
@@ -1857,7 +1859,7 @@ i.background-msg-arrow {
     height: auto;
   }
 
-  .margin-bottom-75 { 
+  .margin-bottom-75 {
     margin-bottom: 75px;
   }
   .editor-icons {
@@ -2211,4 +2213,3 @@ i.background-msg-arrow {
     margin-top: 0.5rem;
   }
 }
-

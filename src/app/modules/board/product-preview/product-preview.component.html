@@ -1,41 +1,42 @@
-<div class="product-cont">
+<div class="product-cont row">
+  <div class="col-10 pt-2 pl-2">
     <div class="p-1 b">
-        {{data?.name}}
-        <div class="float-right preview-close-icon" (click)="clearPreview(data)">
-            <i class="mdi mdi-close" aria-hidden="true"></i>
-        </div>
+      {{ data?.name }}
     </div>
     <div class="flex detail-container">
-        <div class="image flex align-items-center">
-            <img src="{{data?.main_image}}">
+      <div class="image flex align-items-center">
+        <img src="{{ data?.main_image }}" />
+      </div>
+      <div class="product-info">
+        <div class="brand">
+          {{ data?.site }}
         </div>
-        <div class="product-info">
-            
-            <div class="brand">
-                {{data?.site}}
-                <div class="float-right preview-icons">
-                    <div class="icon top-tooltip manual-drop" attr.data-product="{{data.refId}}" drop-type="image" attr.type="{{dropType}}"
-                        data-title="Add to Board" (click)="addToBoard(data)">
-                        <i class="mdi mdi-plus" aria-hidden="true"></i>
-                    </div>
-                </div>
-            </div>
-            
-            <div class="price">
-                ${{data?.is_price}}
-                <div class="float-right preview-icons">
-                    <div class="icon top-tooltip" data-title="See Details">
-                        <a style="color: inherit;" target="_BLANK"
-                            [href]="data.product_url">
-                            <i class="mdi mdi-open-in-new" aria-hidden="true"></i>
-                        </a>
-                    </div>
-                </div>
-            </div>
-            <!-- <div class="icons">
-                
-                
-            </div> -->
-        </div>
+        <div class="price">${{ data?.is_price }}</div>
+      </div>
     </div>
+  </div>
+  <div class="col-2 pr-0">
+    <div class="float-right preview-close-icon" (click)="clearPreview(data)">
+      <i class="mdi mdi-close" aria-hidden="true"></i>
+    </div>
+    <div class="preview-icons ml-1">
+      <div class="icon top-tooltip" data-title="See Details">
+        <a style="color: inherit;" target="_BLANK" [href]="data.product_url">
+          <i class="mdi mdi-open-in-new" aria-hidden="true"></i>
+        </a>
+      </div>
+    </div>
+    <div class="preview-icons ml-1">
+      <div
+        class="icon top-tooltip manual-drop"
+        attr.data-product="{{ data.refId }}"
+        drop-type="image"
+        attr.type="{{ dropType }}"
+        data-title="Add to Board"
+        (click)="addToBoard(data)"
+      >
+        <i class="mdi mdi-plus" aria-hidden="true"></i>
+      </div>
+    </div>
+  </div>
 </div>

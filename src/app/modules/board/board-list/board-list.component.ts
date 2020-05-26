@@ -91,6 +91,7 @@ export class BoardListComponent implements OnInit {
         board: board
       },
       width: '40%',
+      height: '90%',
     });
   }
 

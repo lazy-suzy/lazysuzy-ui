@@ -112,7 +112,7 @@
             *ngIf="productForPreview"
             style="z-index: 9999999;"
           >
-            <div class="static-bottom-panel selected">
+            <div class="static-bottom-panel selected {{showMenu?'position-fixed' :'position-absolute'}}">
               <app-product-preview
                 [data]="productForPreview"
                 (clearProductPreview)="handleClearProductPreview($event)"
@@ -189,16 +189,7 @@
             <!-- <i class="mdi mdi-magnify-plus" (click)="zoomIn()" aria-hidden="true"></i> -->
             <i class="mdi mdi-undo" (click)="undo()" aria-hidden="true"></i>
             <i class="mdi mdi-redo" (click)="redo()" aria-hidden="true"></i>
-            <i
-              class="mdi mdi-share-variant"
-              (click)="openPopup('share')"
-              aria-hidden="true"
-            ></i>
-            <i
-              class="mdi mdi-publish"
-              (click)="openPopup('publish')"
-              aria-hidden="true"
-            ></i>
+            
           </div>
           <div class="col-sm-6 col-md-4 text-center mt-1">
             <div class="editor-icons">
@@ -264,24 +255,36 @@
               <span data-title="Delete" (click)="action('delete')">
                 <i class="mdi mdi-delete" aria-hidden="true"></i>
               </span>
+              
             </div>
+            <!-- <div class="top-panel-hide crop-toolbar">
+              <span class="btn" (click)="handleCrop(true)">
+                <i class="mdi mdi-check" aria-hidden="true"></i> Crop
+              </span>
+              <span class="btn" (click)="handleCrop(false)">
+                <i class="mdi mdi-undo" aria-hidden="true"></i> Cancel
+              </span>
+              <span class="btn" (click)="handleCrop(false, true)">
+                <i class="mdi mdi-minus" aria-hidden="true"></i> Revert
+              </span>
+            </div> -->
           </div>
         </div>
         <div class="top-panel row top-panel-hide crop-toolbar">
           <div class="col-sm-12">
             <button class="btn" (click)="handleCrop(true)">
-              <i class="mdi mdi-check" aria-hidden="true"></i> Crop
+              <i class="mdi mdi-check mr-0" aria-hidden="true"></i> Crop
             </button>
             <button class="btn" (click)="handleCrop(false)">
-              <i class="mdi mdi-undo" aria-hidden="true"></i> Cancel
+              <i class="mdi mdi-undo mr-0" aria-hidden="true"></i> Cancel
             </button>
             <button class="btn" (click)="handleCrop(false, true)">
-              <i class="mdi mdi-minus" aria-hidden="true"></i> Revert
+              <i class="mdi mdi-minus mr-0" aria-hidden="true"></i> Revert
             </button>
           </div>
         </div>
         <div class="canvas-content">
-          <div class="d-flex">
+          <div class="d-flex justify-content-between">
             <!-- <div class="canvas-title-bar">
               <div
                 class="canvas-icons"
@@ -297,11 +300,23 @@
                 </a>
               </div>
             </div> -->
-            <div class="w-25 ml-4">
+            <div class="w-25-ns w-50 ml-4 ">
               <input
                 class="form-control board-title"
                 placeholder="Board title"
               />
+            </div>
+            <div class="mr-3 board-action-icons">
+              <i
+                class="mdi mdi-share-variant pr-1"
+                (click)="openPopup('share')"
+                aria-hidden="true"
+              ></i>
+              <i
+                class="mdi mdi-publish pr-1"
+                (click)="openPopup('publish')"
+                aria-hidden="true"
+              ></i>
             </div>
           </div>
           <div class="canvas">
