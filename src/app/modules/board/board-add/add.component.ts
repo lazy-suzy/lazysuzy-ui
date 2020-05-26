@@ -6,10 +6,9 @@ import { BoardService } from 'src/app/shared/services/board/board.service';
 @Component({
   selector: 'app-board-add',
   templateUrl: './add.component.html',
-  styleUrls: ['./add.component.less', '../board.component.less']
+  styleUrls: ['./add.component.less', '../board.component.less'],
 })
 export class BoardAddComponent implements OnInit {
-
   myUploads = [];
   allUploads = [];
   myItems = [];
@@ -20,23 +19,26 @@ export class BoardAddComponent implements OnInit {
   @Input() userId: any = null;
   @Output() previewProduct: EventEmitter<any> = new EventEmitter();
 
-  constructor(
-    public dialog: MatDialog,
-    private boardService: BoardService
-  ) { }
+  constructor(public dialog: MatDialog, private boardService: BoardService) {}
 
   ngOnChanges(changes: any) {
-    if (changes['userId'] && changes['userId'].previousValue !== changes['userId'].currentValue) {
+    if (
+      changes['userId'] &&
+      changes['userId'].previousValue !== changes['userId'].currentValue
+    ) {
       let userId = changes['userId'].currentValue || [];
       this.userId = userId;
     }
-    if (changes['allAssets'] && changes['allAssets'].previousValue !== changes['allAssets'].currentValue) {
+    if (
+      changes['allAssets'] &&
+      changes['allAssets'].previousValue !== changes['allAssets'].currentValue
+    ) {
       let allAssets = changes['allAssets'].currentValue || [];
       this.allAssets = [...allAssets] || [];
       this.allAssets = this.allAssets.map((ele, i) => {
         return {
           ...ele,
-          refId: i
+          refId: i,
         };
       });
     }
@@ -44,10 +46,10 @@ export class BoardAddComponent implements OnInit {
   }
 
   filterUploads(assets, userId) {
-    this.myUploads = assets.filter(asst => {
+    this.myUploads = assets.filter((asst) => {
       return asst.user_id == userId;
     });
-    this.allUploads = assets.filter(asst => {
+    this.allUploads = assets.filter((asst) => {
       return asst.is_private == 0 || asst.user_id == userId;
     });
   }
@@ -67,10 +69,10 @@ export class BoardAddComponent implements OnInit {
         name: '',
         panelClass: 'my-dialog',
       },
-      disableClose: true
+      disableClose: true,
     });
 
-    dialogRef.afterClosed().subscribe(result => {
+    dialogRef.afterClosed().subscribe((result) => {
       this.boardService.state.myUploads = [...this.myUploads, result];
       this.boardService.state.allUploads = [...this.allUploads, result];
       this.myUploads = [...this.boardService.state.myUploads];
@@ -81,5 +83,4 @@ export class BoardAddComponent implements OnInit {
   handlePreviewProduct(product) {
     this.previewProduct.emit(product);
   }
-
 }

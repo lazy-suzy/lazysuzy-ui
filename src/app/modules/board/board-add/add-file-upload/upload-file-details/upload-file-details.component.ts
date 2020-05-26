@@ -7,10 +7,9 @@ import { Asset } from '../../../asset';
   selector: 'app-upload-file-details',
   templateUrl: './upload-file-details.component.html',
   styleUrls: ['./upload-file-details.component.less'],
-  encapsulation: ViewEncapsulation.None
+  encapsulation: ViewEncapsulation.None,
 })
 export class UploadFileDetailsComponent implements OnInit {
-
   showLoader = false;
   loaderTypeProgress = true;
   step: FormGroup;
@@ -29,7 +28,7 @@ export class UploadFileDetailsComponent implements OnInit {
     });
   }
 
-  ngOnInit(): void { }
+  ngOnInit(): void {}
 
   onNoClick(): void {
     this.dialogRef.close();
@@ -42,22 +41,22 @@ export class UploadFileDetailsComponent implements OnInit {
   cancelAddImgViaUrl() {
     const payload = {
       name: 'cancel-save-image-details',
-      data: {}
+      data: {},
     };
   }
 
   saveAddViaUrl() {
-    const data = {}
     const payload = {
       name: 'save-image-details',
-      data: '',
+      data: new Asset({
+        is_private: this.step.value.keepPrivate,
+        name: this.step.value.productTitle,
+        price: this.step.value.price,
+      }),
     };
-    let asset = new Asset({
-      is_private: this.step.value.keepPrivate
-    });
-    if (this.step.value) {
-      payload.data = this.step.value;
-    }
+    // if (this.step.value) {
+    //   payload.data = this.step.value;
+    // }
     this.onYesClick(payload);
   }
 }
