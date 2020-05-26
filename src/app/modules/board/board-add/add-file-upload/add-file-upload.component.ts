@@ -12,10 +12,9 @@ const assetEndpoint = environment.API_BASE_HREF + 'board/asset';
 @Component({
   selector: 'app-add-file-upload',
   templateUrl: './add-file-upload.component.html',
-  styleUrls: ['./add-file-upload.component.less']
+  styleUrls: ['./add-file-upload.component.less'],
 })
 export class AddFileUploadComponent {
-
   uploader: FileUploader;
   hasAnotherDropZoneOver: boolean;
   currentAsset: any = {};
@@ -43,11 +42,13 @@ export class AddFileUploadComponent {
       }
     };
     this.uploader.onAfterAddingFile = (fileItem) => {
-      let url = (window.URL) ? window.URL.createObjectURL(fileItem._file) : (window as any).webkitURL.createObjectURL(fileItem._file);
-      this.localImageUrl = url
-    }
+      let url = window.URL
+        ? window.URL.createObjectURL(fileItem._file)
+        : (window as any).webkitURL.createObjectURL(fileItem._file);
+      this.localImageUrl = url;
+    };
     this.hasAnotherDropZoneOver = false;
-    this.uploader.response.subscribe(res => {
+    this.uploader.response.subscribe((res) => {
       this.handleFileUploadSuccess(res);
     });
     this.uploader.onAfterAddingFile = (file) => {
@@ -59,7 +60,7 @@ export class AddFileUploadComponent {
   handleFileUploadSuccess(res) {
     const response = JSON.parse(res);
     this.fileUploadedChanges.emit({
-      response: response
+      response: response,
     });
   }
 
@@ -68,7 +69,7 @@ export class AddFileUploadComponent {
   }
 
   clearEverything() {
-    this.uploader.queue.forEach(file => {
+    this.uploader.queue.forEach((file) => {
       file.remove();
     });
     // this.uploader.queue.pop();
@@ -90,10 +91,10 @@ export class AddFileUploadComponent {
         name: '',
         panelClass: 'my-dialog',
       },
-      disableClose: true
+      disableClose: true,
     });
 
-    dialogRef.afterClosed().subscribe(result => {
+    dialogRef.afterClosed().subscribe((result) => {
       if (result.name === 'save-image-details') {
         const asset = result.data;
         this.currentAsset = { ...this.currentAsset, ...asset };
@@ -101,11 +102,9 @@ export class AddFileUploadComponent {
         this.uploader.uploadAll();
         //Comment above line and uncomment below line to simulate success file upload.
         // this.handleFileUploadSuccess();
-      }
-      else if (result.name === 'cancel-save-image-details') {
+      } else if (result.name === 'cancel-save-image-details') {
         this.clearEverything();
       }
     });
   }
-
 }

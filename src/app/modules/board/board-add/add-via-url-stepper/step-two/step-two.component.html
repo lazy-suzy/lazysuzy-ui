@@ -1,21 +1,36 @@
 <form [formGroup]="step">
   <ng-template matStepLabel>Add Image</ng-template>
   <mat-form-field>
-    <input matInput placeholder="Product Title" formControlName="productTitle" required>
+    <input
+      matInput
+      placeholder="Product Title"
+      formControlName="productTitle"
+      required
+    />
   </mat-form-field>
   <mat-form-field>
-    <input matInput placeholder="Price" formControlName="price" required>
+    <input matInput placeholder="Price" formControlName="price" required />
   </mat-form-field>
   <mat-form-field>
-    <input matInput placeholder="Product Listing Url" formControlName="productListingUrl" required>
+    <input
+      matInput
+      placeholder="Product Listing Url"
+      formControlName="productListingUrl"
+    />
   </mat-form-field>
   <mat-form-field>
-    <input matInput placeholder="Additional Tags" formControlName="additionalTags" required>
+    <input
+      matInput
+      placeholder="Additional Tags"
+      formControlName="additionalTags"
+    />
   </mat-form-field>
-  <!-- <mat-form-field>
-    <mat-checkbox color="primary" formControlName="keepPrivate">Keep Private</mat-checkbox>
-  </mat-form-field> -->
+  <mat-checkbox color="primary" matInput formControlName="keepPrivate">
+    Keep Private
+  </mat-checkbox>
 </form>
 
 <button mat-button (click)="cancelAddImgViaUrl()">Cancel</button>
-<button mat-button [disabled]="!step.valid" (click)="saveAddViaUrl()">Add</button>
+<button mat-button [disabled]="!step.valid" (click)="saveAddViaUrl()">
+  Add
+</button>
