@@ -15,7 +15,7 @@ export class BoardProductsComponent implements OnInit {
 
   @Output() updates: EventEmitter<any> = new EventEmitter();
   @Output() previewProduct: EventEmitter<any> = new EventEmitter();
-
+  activeItem: string;
   constructor() { }
 
   ngOnInit() { }
@@ -49,6 +49,7 @@ export class BoardProductsComponent implements OnInit {
   }
 
   previewProductFn(product) {
+    this.activeItem = product.refId;
     this.previewProduct.emit(product);
   }
 

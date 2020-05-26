@@ -2,14 +2,15 @@
     <div class="row">
         <div class="col-md-12">
 
-            <div ng2FileDrop class="upload-container" [ngClass]="{'another-file-over-class': hasAnotherDropZoneOver}"
+            <div ng2FileDrop class="upload-container btn-file pointer" [ngClass]="{'another-file-over-class': hasAnotherDropZoneOver}"
                 (fileOver)="fileOverAnother($event)" [uploader]="uploader">
-                <div>Drop Images here</div>
+                <div>Click to Upload or Drag & Drop here</div>
+                <input type="file" ng2FileSelect [uploader]="uploader" />
             </div>
 
-            <span class="btn btn-primary btn-file">
-                Browse<input type="file" ng2FileSelect [uploader]="uploader" />
-            </span>
+            <!-- <span class="btn btn-primary btn-file">
+                Drag & Drop here<input type="file" ng2FileSelect [uploader]="uploader" />
+            </span> -->
 
         </div>
 

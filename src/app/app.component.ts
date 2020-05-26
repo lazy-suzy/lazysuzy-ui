@@ -32,6 +32,7 @@ export class AppComponent {
   isTablet: boolean = false;
   isMinimalMode = false;
   isLoggedIn = false;
+  expiredDate = new Date();
 
   constructor(
     private breakpointObserver: BreakpointObserver,
@@ -46,6 +47,7 @@ export class AppComponent {
       )
         this.isMinimalMode = true;
     });
+    this.expiredDate.setMonth(this.expiredDate.getMonth() + 6);
   }
 
   ngOnInit(): void {
@@ -72,7 +74,7 @@ export class AppComponent {
       formData.append('guest', 1);
       const payload: any = await this.apiService.signup(formData).toPromise();
       if (payload.success) {
-        this.cookie.set('token', payload.success.token, undefined, '/');
+        this.cookie.set('token', payload.success.token, this.expiredDate, '/');
         localStorage.setItem('user', JSON.stringify(payload.success.user));
         this.isLoggedIn = true;
       }

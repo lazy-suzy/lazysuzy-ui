@@ -57,7 +57,7 @@
                 </div>
               </div>
             </div>
-            <div class="browse-title" (click)="handleGoToSelect($event)">
+            <div class="browse-title pt-1" (click)="handleGoToSelect($event)">
               <i class="mdi mdi-chevron-left" aria-hidden="true"></i>
               <h5 class="title js-category-title">
                 {{ selectedCategory?.category }}
@@ -101,15 +101,18 @@
           >
             No products.Select another category.
           </button>
-          <!-- <app-board-loader *ngIf="showLoader"></app-board-loader> -->
-          <app-loader *ngIf="showLoader"></app-loader>
-
+          <!-- <app-loader *ngIf="showLoader"></app-loader> -->
+          <div *ngIf="showLoader" class="tc">
+            <div class="loader-box">
+              <div class="loader-bounceball"></div>
+            </div>
+          </div>
           <div
             class="static-bottom-panel-wrapper"
             *ngIf="productForPreview"
             style="z-index: 9999999;"
           >
-            <div class="static-bottom-panel selected">
+            <div class="static-bottom-panel selected {{showMenu?'position-fixed' :'position-absolute'}}">
               <app-product-preview
                 [data]="productForPreview"
                 (clearProductPreview)="handleClearProductPreview($event)"
@@ -124,7 +127,7 @@
           <app-board-text></app-board-text>
         </div>
 
-        <div *ngIf="selectedItem === 'add'" class="padding-top-60">
+        <div *ngIf="selectedItem === 'add'" class="padding-top-60 pl-0-ns pl-2">
           <app-board-add
             [allAssets]="appMeta.asset"
             [userId]="currentUser.id"
@@ -146,13 +149,13 @@
           </div>
         </div>
 
-        <div *ngIf="selectedItem === 'board'" class="padding-top-60">
+        <div *ngIf="selectedItem === 'board'" class="padding-top-60 pl-0-ns pl-2">
           <app-current-board
             [boardProducts]="boardPreviewProducts"
           ></app-current-board>
         </div>
 
-        <div *ngIf="selectedItem === 'favorites'">
+        <div *ngIf="selectedItem === 'favorites'" class="padding-top-60 pl-0-ns pl-2">
           <div class="pt-4" *ngIf="!favoriteProducts.length">No items found. Save items to your favorites to see them here.</div>
           <app-board-products
             [products]="favoriteProducts"
@@ -186,16 +189,7 @@
             <!-- <i class="mdi mdi-magnify-plus" (click)="zoomIn()" aria-hidden="true"></i> -->
             <i class="mdi mdi-undo" (click)="undo()" aria-hidden="true"></i>
             <i class="mdi mdi-redo" (click)="redo()" aria-hidden="true"></i>
-            <i
-              class="mdi mdi-share-variant"
-              (click)="openPopup('share')"
-              aria-hidden="true"
-            ></i>
-            <i
-              class="mdi mdi-publish"
-              (click)="openPopup('publish')"
-              aria-hidden="true"
-            ></i>
+            
           </div>
           <div class="col-sm-6 col-md-4 text-center mt-1">
             <div class="editor-icons">
@@ -261,24 +255,36 @@
               <span data-title="Delete" (click)="action('delete')">
                 <i class="mdi mdi-delete" aria-hidden="true"></i>
               </span>
+              
             </div>
+            <!-- <div class="top-panel-hide crop-toolbar">
+              <span class="btn" (click)="handleCrop(true)">
+                <i class="mdi mdi-check" aria-hidden="true"></i> Crop
+              </span>
+              <span class="btn" (click)="handleCrop(false)">
+                <i class="mdi mdi-undo" aria-hidden="true"></i> Cancel
+              </span>
+              <span class="btn" (click)="handleCrop(false, true)">
+                <i class="mdi mdi-minus" aria-hidden="true"></i> Revert
+              </span>
+            </div> -->
           </div>
         </div>
         <div class="top-panel row top-panel-hide crop-toolbar">
           <div class="col-sm-12">
             <button class="btn" (click)="handleCrop(true)">
-              <i class="mdi mdi-check" aria-hidden="true"></i> Crop
+              <i class="mdi mdi-check mr-0" aria-hidden="true"></i> Crop
             </button>
             <button class="btn" (click)="handleCrop(false)">
-              <i class="mdi mdi-undo" aria-hidden="true"></i> Cancel
+              <i class="mdi mdi-undo mr-0" aria-hidden="true"></i> Cancel
             </button>
             <button class="btn" (click)="handleCrop(false, true)">
-              <i class="mdi mdi-minus" aria-hidden="true"></i> Revert
+              <i class="mdi mdi-minus mr-0" aria-hidden="true"></i> Revert
             </button>
           </div>
         </div>
         <div class="canvas-content">
-          <div class="d-flex">
+          <div class="d-flex justify-content-between">
             <!-- <div class="canvas-title-bar">
               <div
                 class="canvas-icons"
@@ -294,11 +300,23 @@
                 </a>
               </div>
             </div> -->
-            <div class="w-25 ml-4">
+            <div class="w-25-ns w-50 ml-4 ">
               <input
                 class="form-control board-title"
                 placeholder="Board title"
               />
+            </div>
+            <div class="mr-3 board-action-icons">
+              <i
+                class="mdi mdi-share-variant pr-1"
+                (click)="openPopup('share')"
+                aria-hidden="true"
+              ></i>
+              <i
+                class="mdi mdi-publish pr-1"
+                (click)="openPopup('publish')"
+                aria-hidden="true"
+              ></i>
             </div>
           </div>
           <div class="canvas">
