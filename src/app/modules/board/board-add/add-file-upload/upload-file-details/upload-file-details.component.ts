@@ -1,6 +1,7 @@
 import { Component, OnInit, Inject, ViewEncapsulation } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { FormBuilder, Validators, FormGroup } from '@angular/forms';
+import { Asset } from '../../../asset';
 
 @Component({
   selector: 'app-upload-file-details',
@@ -51,6 +52,9 @@ export class UploadFileDetailsComponent implements OnInit {
       name: 'save-image-details',
       data: '',
     };
+    let asset = new Asset({
+      is_private: this.step.value.keepPrivate
+    });
     if (this.step.value) {
       payload.data = this.step.value;
     }

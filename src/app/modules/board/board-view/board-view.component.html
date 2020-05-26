@@ -15,7 +15,7 @@
             (click)="selectSideBarItem(sideItem)"
             [ngClass]="
               boardService.state.selectedCategory == null &&
-              sideItem?.value == 'browse'
+              sideItem?.value == 'browse' && !hasSearched
                 ? 'disable-browse'
                 : ''
             "
@@ -35,6 +35,28 @@
         <!-- Selected Tab: {{selectedItem}} -->
 
         <div *ngIf="selectedItem === 'select'">
+          <div class="browse-header">
+            <div class="item-search-bar">
+              <form class="input-group" (submit)="search()">
+                <input
+                  type="text"
+                  class="form-control"
+                  id="inlineFormInputGroupUsername"
+                  placeholder="Search"
+                  [(ngModel)]="searchText"
+                  name="searchText"
+                />
+                <div class="input-group-append" >
+                  <button class="input-group-text icon" type="submit">
+                    <i class="mdi mdi-magnify" aria-hidden="true"></i>
+                  </button>
+                </div>
+              </form>
+            </div>
+            <div class="text-left w-100">
+              <h5 class="title ml-2">Select New Category</h5>
+            </div>
+          </div>
           <app-select
             (goToCategory)="handleSelectCategory($event)"
           ></app-select>
@@ -43,27 +65,29 @@
         <div *ngIf="selectedItem === 'browse'">
           <div class="browse-header">
             <div class="item-search-bar">
-              <div class="input-group">
+              <form class="input-group" (submit)="search()">
                 <input
                   type="text"
                   class="form-control"
                   id="inlineFormInputGroupUsername"
                   placeholder="Search"
+                  [(ngModel)]="searchText"
+                  name="searchText"
                 />
-                <div class="input-group-append">
-                  <div class="input-group-text icon">
+                <div class="input-group-append" >
+                  <button class="input-group-text icon" type="submit">
                     <i class="mdi mdi-magnify" aria-hidden="true"></i>
-                  </div>
+                  </button>
                 </div>
-              </div>
+              </form>
             </div>
             <div class="browse-title pt-1" (click)="handleGoToSelect($event)">
               <i class="mdi mdi-chevron-left" aria-hidden="true"></i>
               <h5 class="title js-category-title">
-                {{ selectedCategory?.category }}
+                {{ searched? searchText: selectedCategory?.category }}
               </h5>
             </div>
-            <div class="browse-filter">
+            <div class="browse-filter" *ngIf="!searched">
               <div class="filter-bar-container">
                 <div class="filter-bar js-filter-section" id="desktop-filter">
                   <app-browse-filter

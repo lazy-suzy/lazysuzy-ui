@@ -17,9 +17,7 @@
         <mat-form-field>
             <input matInput placeholder="Additional Tags" formControlName="additionalTags" >
         </mat-form-field>
-        <mat-form-field>
-          <mat-checkbox color="primary" formControlName="keepPrivate">Keep Private</mat-checkbox>
-        </mat-form-field>
+        <mat-checkbox color="primary" matInput formControlName="keepPrivate">Keep Private</mat-checkbox>
     </form>
 
     <button mat-button (click)="cancelAddImgViaUrl()">Cancel</button>
