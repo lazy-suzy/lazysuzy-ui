@@ -2,7 +2,6 @@ import { Component, OnInit, Output, EventEmitter, Input } from '@angular/core';
 import { MatDialog } from '@angular/material';
 import { AddViaUrlComponent } from './add-via-url/add-via-url.component';
 import { BoardService } from 'src/app/shared/services/board/board.service';
-
 @Component({
   selector: 'app-board-add',
   templateUrl: './add.component.html',
@@ -15,10 +14,12 @@ export class BoardAddComponent implements OnInit {
 
   showLoader = false;
   loaderTypeProgress = true;
+  isAsset = true;
   @Input() allAssets: any = [];
   @Input() userId: any = null;
   @Output() previewProduct: EventEmitter<any> = new EventEmitter();
-
+  @Output() updateAsset: EventEmitter<any> = new EventEmitter();
+  
   constructor(public dialog: MatDialog, private boardService: BoardService) {}
 
   ngOnChanges(changes: any) {
@@ -58,6 +59,8 @@ export class BoardAddComponent implements OnInit {
     this.allAssets.push(event.response);
     // this.allAssets = [...this.allAssets];
     this.filterUploads(this.allAssets, this.userId);
+    this.updateAsset.emit(this.allAssets);
+    this.isAsset = !this.isAsset;
   }
 
   ngOnInit(): void {}

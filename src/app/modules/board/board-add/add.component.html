@@ -8,11 +8,11 @@
     <div class="d-flex mb-3">
         <mat-tab-group>
             <mat-tab label="My Items">
-                <app-board-products [products]="allAssets" [isAsset]="'true'"
+                <app-board-products [products]="allAssets" [isAsset]="isAsset"
                     (previewProduct)="handlePreviewProduct($event)"></app-board-products>
             </mat-tab>
             <mat-tab label="All Uploads">
-                <app-board-products [products]="allUploads" [isAsset]="'true'"
+                <app-board-products [products]="allUploads" [isAsset]="isAsset"
                     (previewProduct)="handlePreviewProduct($event)"></app-board-products>
             </mat-tab>
         </mat-tab-group>

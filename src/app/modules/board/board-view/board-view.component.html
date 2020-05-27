@@ -165,11 +165,12 @@
           <app-board-text></app-board-text>
         </div>
 
-        <div *ngIf="selectedItem === 'add'" class="padding-top-60 pl-0-ns pl-2">
+        <div *ngIf="selectedItem === 'add'" class="padding-top-60 pl-md-0 pl-2">
           <app-board-add
             [allAssets]="appMeta.asset"
             [userId]="currentUser.id"
             (previewProduct)="handleProductPreview($event)"
+            (updateAsset)="handleAssetUpdate($event)"
           ></app-board-add>
           <div
             class="static-bottom-panel-wrapper"

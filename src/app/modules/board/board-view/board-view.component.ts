@@ -744,8 +744,10 @@ export class BoardViewComponent implements OnInit, AfterViewInit {
         this.renderAppMeta();
       }
     });
-  };
-
+  }
+  handleAssetUpdate(event) {
+    this.appMeta.asset = event;
+  }
   initializeCanvas = (callback) => {
     this.canvas = new fb.Canvas(this.canvasMeta.identifier.id, {
       containerClass: this.canvasMeta.identifier.containerArea,
