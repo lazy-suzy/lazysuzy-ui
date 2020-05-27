@@ -306,7 +306,7 @@ export class BoardViewComponent implements OnInit, AfterViewInit {
         x: 0,
         y: 0,
       },
-      aspectRatio: (16 / 9).toFixed(2),
+      aspectRatio: (16 / 7.1).toFixed(2),
       zoomValue: 1,
       zoomFactor: 0.1,
       borderColor: '#b76e79',

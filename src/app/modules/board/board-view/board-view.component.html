@@ -177,7 +177,7 @@
             *ngIf="productForPreview"
             style="z-index: 9999999;"
           >
-            <div class="static-bottom-panel selected">
+            <div class="static-bottom-panel selected position-fixed">
               <app-product-preview
                 [data]="productForPreview"
                 (clearProductPreview)="handleClearProductPreview($event)"
@@ -343,6 +343,7 @@
               <input
                 class="form-control board-title"
                 placeholder="Board title"
+                onClick="this.select();"
               />
             </div>
             <div class="mr-3 board-action-icons">
