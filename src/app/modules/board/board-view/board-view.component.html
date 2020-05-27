@@ -136,14 +136,28 @@
             *ngIf="productForPreview"
             style="z-index: 9999999;"
           >
-            <div class="static-bottom-panel selected {{showMenu?'position-fixed' :'position-absolute'}}">
-              <app-product-preview
-                [data]="productForPreview"
-                (clearProductPreview)="handleClearProductPreview($event)"
-                (addProductBoard)="handleAddProductBoardPreview($event)"
-              >
-              </app-product-preview>
-            </div>
+            <ng-container *ngIf="!isTablet; else isDesktop">
+              <div class="static-bottom-panel selected position-fixed" >
+                <app-product-preview
+                  [data]="productForPreview"
+                  (clearProductPreview)="handleClearProductPreview($event)"
+                  (addProductBoard)="handleAddProductBoardPreview($event)"
+                >
+                </app-product-preview>
+              </div>
+            </ng-container>
+            
+            <ng-template #isDesktop>
+              <div class="static-bottom-panel selected {{!showMenu?'position-absolute' :'position-fixed'}}">
+                <app-product-preview
+                  [data]="productForPreview"
+                  (clearProductPreview)="handleClearProductPreview($event)"
+                  (addProductBoard)="handleAddProductBoardPreview($event)"
+                >
+                </app-product-preview>
+              </div>
+            </ng-template>
+            
           </div>
         </div>
 
