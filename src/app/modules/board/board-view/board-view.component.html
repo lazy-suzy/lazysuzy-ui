@@ -84,10 +84,10 @@
             <div class="browse-title pt-1" (click)="handleGoToSelect($event)">
               <i class="mdi mdi-chevron-left" aria-hidden="true"></i>
               <h5 class="title js-category-title">
-                {{ searched? searchText: selectedCategory?.category }}
+                {{ hasSearched? searchText: selectedCategory?.category }}
               </h5>
             </div>
-            <div class="browse-filter" *ngIf="!searched">
+            <div class="browse-filter" *ngIf="!hasSearched">
               <div class="filter-bar-container">
                 <div class="filter-bar js-filter-section" id="desktop-filter">
                   <app-browse-filter
