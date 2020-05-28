@@ -7,7 +7,7 @@
           <h5 class="title ml-2 text-center b">Start New Design Board</h5>
         </div>
         <div class="col-12 pb-3">
-          <h6 class="title ml-2 text-center font-size-12">
+          <h6 class="title ml-2 font-size-12">
             Select Canvas Style
           </h6>
         </div>
@@ -24,16 +24,23 @@
           </div>
         </div>
         <div *ngIf="showBoardPanel" class="col-12" id="board-options-modal">
-          <h6 class="title ml-2 mt-4">Select Canvas Color</h6>
+          <h6 class="title ml-2 mt-4 font-size-12">Select Canvas Color</h6>
           <div class="row justify-content-left">
             <div class="col-12 board-options">
-              <div
-                *ngFor="let backgroundColor of backgroundColors"
-                (click)="handleChange('color', backgroundColor)"
-                [class.selected]="selected.color == backgroundColor"
-                [style.background-color]="backgroundColor"
-                class="canvas-pallete-color col-2"
-              ></div>
+              <ng-container
+                *ngFor="
+                  let backgroundColor of backgroundColors;
+                  let indexOfelement = index
+                "
+              >
+                <div
+                  (click)="handleChange('color', backgroundColor)"
+                  [class.selected]="selected.color == backgroundColor"
+                  [style.background-color]="backgroundColor"
+                  class="canvas-pallete-color col-2"
+                ></div>
+                <br *ngIf="indexOfelement == 5" />
+              </ng-container>
             </div>
           </div>
         </div>
@@ -42,9 +49,9 @@
           class="col-12 canvas-options"
           id="room-options-modal"
         >
-          <h5 class="title ml-2 mt-4 font-size-10 font-size-12">
+          <h6 class="title ml-2 mt-4 font-size-12">
             Select Canvas Background
-          </h5>
+          </h6>
           <div class="row justify-content-left canvas-pallete">
             <div class="col-12 board-options">
               <img
