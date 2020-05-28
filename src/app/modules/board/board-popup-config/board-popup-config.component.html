@@ -1,28 +1,30 @@
 <div>
-  <div class="pl-5 pr-5 w-100 pt-4 board-modal">
+  <div class="ph5-ns ph4 w-100 pt-4 board-modal">
     <div class="canvas-config pb-0">
-      <div class="row">
-        <div class="col-12 pt-3 pb-3">
-          <!-- <h4 class="board-header">Board Configuration</h4> -->
-          <h5 class="title ml-2 text-center b">Start New Design Board</h5>
-        </div>
-        <div class="col-12 pb-3">
-          <h6 class="title ml-2 font-size-12">
-            Select Canvas Style
-          </h6>
-        </div>
-        <div class="col-6" (click)="handleSelection('board')">
+      <div class="pv3">
+        <!-- <h4 class="board-header">Board Configuration</h4> -->
+        <h5 class="title ml-2 text-center b">Start New Design Board</h5>
+      </div>
+      <div class="pb-3">
+        <h6 class="title font-size-12">
+          Select Canvas Style
+        </h6>
+      </div>
+      <div class="flex flex-wrap justify-content-between">
+        <div (click)="handleSelection('board')">
           <div class="canvas-style" [class.selected]="currentTab == 'board'">
             <div class="canvas-layout"></div>
             <h5>BOARD</h5>
           </div>
         </div>
-        <div class="col-6" (click)="handleSelection('room')">
+        <div (click)="handleSelection('room')">
           <div class="canvas-style" [class.selected]="currentTab == 'room'">
             <div class="canvas-layout canvas-layout-room"></div>
             <h5>ROOM</h5>
           </div>
         </div>
+      </div>
+      <div class="row">
         <div *ngIf="showBoardPanel" class="col-12" id="board-options-modal">
           <h6 class="title ml-2 mt-4 font-size-12">Select Canvas Color</h6>
           <div class="row justify-content-left">
