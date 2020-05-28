@@ -56,7 +56,11 @@ export class BoardAddComponent implements OnInit {
   }
 
   handleFileUploadSuccess(event) {
-    this.allAssets.push(event.response);
+    this.updateAssets(event.response);
+  }
+
+  updateAssets(data) {
+    this.allAssets.push(data);
     // this.allAssets = [...this.allAssets];
     this.filterUploads(this.allAssets, this.userId);
     this.updateAsset.emit(this.allAssets);
@@ -80,6 +84,7 @@ export class BoardAddComponent implements OnInit {
       this.boardService.state.allUploads = [...this.allUploads, result];
       this.myUploads = [...this.boardService.state.myUploads];
       this.allUploads = [...this.boardService.state.allUploads];
+      this.updateAssets(result);
     });
   }
 
