@@ -287,7 +287,7 @@ export class ApiService {
     // const sortTypes = '';
     // const endpoint = `products/${department}/${category}`;
     const endpoint = `wishlist`;
-    const url = `${env.API_BASE_HREF}${endpoint}`;
+    const url = `${env.API_BASE_HREF}${endpoint}?board-view=true`;
     const headers = new HttpHeaders({
       'Content-Type': 'application/json',
       Authorization: `Bearer ${this.cookie.get('token')}`,

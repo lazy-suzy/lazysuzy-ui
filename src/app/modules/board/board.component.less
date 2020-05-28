@@ -107,6 +107,7 @@ h6 {
 
 .subtle {
   color: #999999;
+  font-size: 12px;
 }
 
 .title {
@@ -224,7 +225,7 @@ h6 {
   color: #fff;
   border-radius: 4px;
   display: inline-block;
-  padding: 0 5px;
+  padding: 2px 5px;
 }
 
 .filter-icon {
@@ -1565,8 +1566,8 @@ i.background-msg-arrow {
     height: 75px;
     width: 120px;
   }
-  .padding-top-60 {
-    padding-top: 60px !important;
+  .margin-top-60 {
+    margin-top: 60px !important;
   }
   .logo {
     max-width: 100px;
@@ -1612,7 +1613,7 @@ i.background-msg-arrow {
 
   .canvas {
     width: 100%;
-    height: 70vh;
+    height: auto;
     margin-top: 5px;
   }
 
@@ -1624,7 +1625,7 @@ i.background-msg-arrow {
     border-top: 2px solid;
     transition: all 0.3s 0s ease;
     height: 700px;
-    padding: 30px 5px;
+    // padding: 30px 5px;
     left: 0;
     right: 0;
     z-index: 1;
@@ -2208,5 +2209,11 @@ i.background-msg-arrow {
 
   .account-icon {
     margin-top: 0.5rem;
+  }
+}
+
+@media only screen and (max-width: 1025px) and (min-width: 992) {
+  .static-bottom-panel {
+    bottom: 85px;
   }
 }
