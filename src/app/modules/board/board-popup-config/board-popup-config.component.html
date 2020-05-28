@@ -26,7 +26,10 @@
       </div>
       <div class="row">
         <div *ngIf="showBoardPanel" class="col-12" id="board-options-modal">
-          <h6 class="title ml-2 mt-4 font-size-12">Select Canvas Color</h6>
+          <div class="pb-3">
+            <h6 class="title ml-2 mt-5 font-size-12">Select Canvas Color</h6>
+          </div>
+
           <div class="row justify-content-left">
             <div class="col-12 board-options">
               <ng-container
@@ -51,9 +54,12 @@
           class="col-12 canvas-options"
           id="room-options-modal"
         >
-          <h6 class="title ml-2 mt-4 font-size-12">
-            Select Canvas Background
-          </h6>
+          <div class="pb-3">
+            <h6 class="title ml-2 mt-5 font-size-12">
+              Select Canvas Background
+            </h6>
+          </div>
+
           <div class="row justify-content-left canvas-pallete">
             <div class="col-12 board-options">
               <img
