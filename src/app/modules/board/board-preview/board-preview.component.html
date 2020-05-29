@@ -1,80 +1,75 @@
 <app-board-loader *ngIf="!boardFound"></app-board-loader>
 <div *ngIf="loadedAsEmbed" class="article-dual-column">
-    <div class="col col-md-12">
-        <div class="col-md-9 text-center">
-            <div class="intro">
-                <h1 class="text-center">{{appMeta.board.title}}</h1>
-                <p class="text-center">
-                    <span class="by">by</span>
-                    <a href="">Author Name</a>
-                    <span class="date">{{appMeta.board.updated_at | date:'mediumDate'}}</span>
-                </p>
-            </div>
-        </div>
+  <div class="col col-md-12">
+    <div class="col-md-9 text-center">
+      <div class="intro">
+        <h1 class="text-center">{{ appMeta.board.title }}</h1>
+        <p class="text-center">
+          <span class="by">by</span>
+          <a href="">Author Name</a>
+          <span class="date">{{
+            appMeta.board.updated_at | date: 'mediumDate'
+          }}</span>
+        </p>
+      </div>
     </div>
-    <div class="row">
-        <div class="col col-md-9">
-            <div class="m-5" style="background: white;">
-                <div id="canvas-droparea">
-                    <canvas id="canvas-area"></canvas>
-                </div>
-            </div>
-        </div>
-        <div class="col col-md-3">
-            <div *ngIf="boardProducts.length > 0" class="mt-5">
-                <app-current-board [boardProducts]="boardProducts"></app-current-board>
-            </div>
-        </div>
-    </div>
-</div>
-<div *ngIf="!loadedAsEmbed" class="row bg-light">
+  </div>
+  <div class="row">
     <div class="col col-md-9">
-        <div class="m-5" style="background: white;">
-            <div id="canvas-droparea">
-                <canvas id="canvas-area"></canvas>
-            </div>
+      <div class="m-5" style="background: white;">
+        <div id="canvas-droparea">
+          <canvas id="canvas-area"></canvas>
         </div>
+      </div>
     </div>
     <div class="col col-md-3">
-        <div *ngIf="!loadedAsEmbed" class="mb-0-ns mb-5">
-            <div class="mt-5-ns">
-                <span class="font-weight-bold h3">{{appMeta.board.title}}</span>
-            </div>
-            <div>
-                <span class="font-italic h3 font-weight-normal">Username</span>
-            </div>
-        </div>
+      <div *ngIf="boardProducts.length > 0" class="mt-5">
+        <app-current-board [boardProducts]="boardProducts"></app-current-board>
+      </div>
     </div>
+  </div>
+</div>
+<div *ngIf="!loadedAsEmbed" class="row bg-light">
+  <div class="col col-md-9">
+    <div class="m-5" style="background: white;">
+      <div id="canvas-droparea">
+        <canvas id="canvas-area"></canvas>
+      </div>
+    </div>
+  </div>
+  <div class="col col-md-3">
+    <div *ngIf="!loadedAsEmbed" class="mb-0-ns mb-5">
+      <div class="mt-5-ns">
+        <span class="font-weight-bold h3">{{ appMeta.board.title }}</span>
+      </div>
+      <div>
+        <span class="font-italic h3 font-weight-normal">Username</span>
+      </div>
+    </div>
+  </div>
 </div>
 <div *ngIf="!loadedAsEmbed && boardProducts.length > 0" class="row">
-    <div class="col mt-3">
-        <div class="text-center h2 font-weight-bold" style="color: #b76e79;"><span>Shop This Look</span></div>
-            <div class="products-container">
-                <div *ngFor="let product of boardProducts" class="w-25-ns">
-                    <div class="ls-product-div">
-                        <div class="ls-product" (click)="openDialog(product.sku)">
-                          <img
-                            class="{{ isVariationImageVisible ? 'prod-img' : 'prod-img show' }}"
-                            [src]="product.main_image"
-                            [alt]="product.name"
-                          />
-                        </div>
-                        <div class="prod-info">
-                          <span class="site">
-                            {{ product.site }}
-                          </span>
-                        </div>
-                        <div class="name">{{ product.name }}</div>
-                        <div class="prices">
-                            <span
-                              class="{{
-                                (product.is_price !== product.was_price && 'cprice sale') || 'cprice'
-                              }}"
-                              >${{ product.is_price }}</span
-                            >
-                        </div>
-                      </div>
-                </div>
-            </div>
+  <div class="col mt-3">
+    <div class="text-center h2 font-weight-bold" style="color: #b76e79;">
+      <span>Shop This Look</span>
     </div>
+    <div class="products-container">
+      <div *ngFor="let product of boardProducts" class="w-25-ns">
+        <div class="ls-product-div">
+          <div class="ls-product" (click)="openDialog(product.sku)">
+            <img [src]="product.main_image" [alt]="product.name" />
+          </div>
+          <div class="prod-info">
+            <span class="site">
+              {{ product.site }}
+            </span>
+          </div>
+          <div class="name">{{ product.name }}</div>
+          <div class="prices">
+            <span>${{ product.is_price }}</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>
