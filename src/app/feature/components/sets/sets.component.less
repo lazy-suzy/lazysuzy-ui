@@ -21,7 +21,7 @@
 
   .price {
     color: #b76e79;
-    font-size: 12px;
+    font-size: 14px;
     font-family: 'Open Sans';
     // padding: 0;
   }
@@ -31,14 +31,17 @@
     font-size: 12px;
   }
 
+  .brand-button-container {
+    position: absolute;
+    right: 10px;
+  }
+
   .brand-button {
     text-align: center;
     width: 100px;
     background-color: #0d1c31;
     padding: 1px 5px;
     border-radius: 5px;
-    position: absolute;
-    right: 10px;
     font-size: 12px;
     font-family: 'Lato';
     a {
@@ -86,6 +89,7 @@
 .stock-info {
   display: flex;
   padding: 0 5px;
+  margin: -5px 0;
 }
 .product-name {
   font-size: 12px;
@@ -93,6 +97,9 @@
   color: #0c1c31;
 }
 @media (max-width: 767px) {
+  .sets-content {
+    margin: 0;
+  }
   .sets-container {
     border: 1px solid #c8c7cc;
     padding: 4px;
@@ -100,11 +107,11 @@
     span {
       padding: 1px 2px;
     }
-
-    .brand-button {
+    .brand-button-container {
       right: 0;
-      top: 0;
-      bottom: 0;
+      top: 10px;
+    }
+    .brand-button {
       padding: 8px 5px;
       margin: 2px;
       // text-transform: uppercase;

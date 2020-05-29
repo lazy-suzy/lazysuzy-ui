@@ -63,6 +63,11 @@ export class BoardViewComponent implements OnInit, AfterViewInit {
   tabletSubscription: Subscription;
   isTablet: boolean = false;
   showMenu: boolean = false;
+  searchText: string;
+  iPageNo: number = 0;
+  iLimit: number;
+  total_count: number = 0;
+  hasSearched: boolean;
   constructor(
     private cookieService: CookieService,
     private dialog: MatDialog,
@@ -94,7 +99,43 @@ export class BoardViewComponent implements OnInit, AfterViewInit {
     style: 'regular',
     styles: ['regular'],
   });
-
+  search() {
+    if (!this.hasSearched) {
+      this.remoteProducts = [];
+    }
+    this.showLoader = true;
+    this.iLimit = 24;
+    const queryString = JSON.stringify({
+      from: this.iPageNo * this.iLimit,
+      size: this.iLimit,
+      query: {
+        match: {
+          name: {
+            query: this.searchText + '*'
+          }
+        }
+      }
+    });
+    if (this.selectedItem === 'select') {
+      this.selectedItem = 'browse';
+    }
+    this.productsSubscription = this.apiService
+      .getSearchProducts(queryString)
+      .subscribe((payload: any) => {
+        const { hits } = payload.hits;
+        this.hasSearched = true;
+        let products = hits.map((hit: any) => hit._source);
+        this.remoteProducts = [...this.remoteProducts, ...(products || [])];
+        this.remoteProducts = this.remoteProducts.map((ele, i) => {
+          return {
+            ...ele,
+            refId: i,
+          };
+        });
+        this.iPageNo += 1;
+        this.showLoader = false;
+      });
+  }
   updateFontAndSize(font: Font) {
     let fontCss = font.getStyles();
 
@@ -156,10 +197,15 @@ export class BoardViewComponent implements OnInit, AfterViewInit {
     if (this.selectedItem === 'browse') {
       this.filterData = {};
       this.appliedFilters = '';
-      this.pageNo = 0;
+      this.iPageNo = 0;
       this.remoteProducts = [];
+      this.pageNo = 0;
       let selCat = this.boardService.getCategory();
-      this.getBrowseData(selCat);
+      if(this.hasSearched) {
+        this.search();
+      } else {
+        this.getBrowseData(selCat);
+      }
       this.productForPreview = null;
     }
     this.productForPreview = null;
@@ -183,6 +229,7 @@ export class BoardViewComponent implements OnInit, AfterViewInit {
 
   handleSelectCategory($event) {
     this.boardService.setCategory($event);
+    this.hasSearched = false;
     this.selectSideBarItem({
       name: 'Browse',
       label: 'Browse',
@@ -202,6 +249,7 @@ export class BoardViewComponent implements OnInit, AfterViewInit {
   getBrowseData(categ) {
     this.selectedCategory = categ;
     this.showLoader = true;
+    this.hasSearched = false;
     this.boardService
       .getBrowseTabData(this.selectedCategory, this.appliedFilters, this.pageNo)
       .subscribe((s: any) => {
@@ -225,11 +273,17 @@ export class BoardViewComponent implements OnInit, AfterViewInit {
 
   loadMore() {
     let selCat = this.boardService.getCategory();
-    this.getBrowseData(selCat);
+    if(this.hasSearched) {
+      this.search();
+    } else {
+      this.getBrowseData(selCat);
+    }
   }
 
   handleGoToSelect(event) {
     this.boardService.resetBoard();
+    this.iPageNo = 0;
+    this.hasSearched = false;
     this.selectSideBarItem({
       name: 'Select',
       label: 'Select',
@@ -252,7 +306,7 @@ export class BoardViewComponent implements OnInit, AfterViewInit {
         x: 0,
         y: 0,
       },
-      aspectRatio: (16 / 9).toFixed(2),
+      aspectRatio: (16 / 7.1).toFixed(2),
       zoomValue: 1,
       zoomFactor: 0.1,
       borderColor: '#b76e79',
@@ -655,7 +709,9 @@ export class BoardViewComponent implements OnInit, AfterViewInit {
         if (boardObject.uuid == uuid) {
           boardFound = true;
           this.appMeta.board.currentIndex = objectIndex;
-          $(this.appMeta.identifier.boardTitle).val(boardObject.title);
+          if(boardObject.title !== 'Untitled Board'){
+            $(this.appMeta.identifier.boardTitle).val(boardObject.title);
+          }
           this.canvasMeta.currentHistory.push(boardObject.state);
           this.canvasMeta.currentHistoryIndex++;
 
@@ -688,8 +744,10 @@ export class BoardViewComponent implements OnInit, AfterViewInit {
         this.renderAppMeta();
       }
     });
-  };
-
+  }
+  handleAssetUpdate(event) {
+    this.appMeta.asset = event;
+  }
   initializeCanvas = (callback) => {
     this.canvas = new fb.Canvas(this.canvasMeta.identifier.id, {
       containerClass: this.canvasMeta.identifier.containerArea,
@@ -1255,7 +1313,7 @@ export class BoardViewComponent implements OnInit, AfterViewInit {
     $(this.appMeta.identifier.cropToolbarElement).toggle(
       this.canvasMeta.flag.cropEnabled
     );
-  };
+  }
 
   renderAppMeta = () => {
     // enable

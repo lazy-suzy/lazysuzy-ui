@@ -275,8 +275,11 @@ export class ApiService {
 
   getSearchProducts(search_query: string): Observable<ISearchProductsPayload> {
     const endpoint = `products/_search`;
+    const headers = new HttpHeaders({
+      'Content-Type': 'application/json',
+    });
     const url = `${env.ES_API_BASE_HREF}${endpoint}?source=${search_query}&source_content_type=application%2Fjson`;
-    return this.httpService.get(url);
+    return this.httpService.get(url, headers);
   }
 
   getWishlistProducts(): Observable<IProductsPayload> {
@@ -284,7 +287,7 @@ export class ApiService {
     // const sortTypes = '';
     // const endpoint = `products/${department}/${category}`;
     const endpoint = `wishlist`;
-    const url = `${env.API_BASE_HREF}${endpoint}`;
+    const url = `${env.API_BASE_HREF}${endpoint}?board-view=true`;
     const headers = new HttpHeaders({
       'Content-Type': 'application/json',
       Authorization: `Bearer ${this.cookie.get('token')}`,

@@ -47,8 +47,8 @@
             >shopping_cart</mat-icon
           >
         </span>
-        <span (click)="isLoggedIn($event)" class="header-link pointer">
-          <mat-icon aria-hidden="false">favorite_border</mat-icon>
+        <span class="header-link pointer">
+          <mat-icon aria-hidden="false" [routerLink]="['/wishlist']">favorite_border</mat-icon>
         </span>
 
         <app-auth

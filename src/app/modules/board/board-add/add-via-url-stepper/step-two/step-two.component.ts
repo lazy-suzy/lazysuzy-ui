@@ -18,20 +18,20 @@ export class StepTwoComponent implements OnInit {
     private formService: FormService
   ) {
     this.step = this._formBuilder.group({
-      productTitle: ['', Validators.required],
-      price: ['', Validators.required],
-      productListingUrl: ['', Validators.required],
-      additionalTags: ['', Validators.required],
+      productTitle: [''],
+      price: [''],
+      productListingUrl: [''],
+      additionalTags: [''],
       keepPrivate: [false],
     });
-    this.formService.stepReady(this.step, 'two')
+    this.formService.stepReady(this.step, 'two');
   }
 
   ngOnInit() { }
 
   cancelAddImgViaUrl() {
     const payload = {
-      name:'cancel',
+      name: 'cancel',
       data: {}
     };
     this.stepperUpdates.emit(payload);
@@ -40,7 +40,7 @@ export class StepTwoComponent implements OnInit {
   saveAddViaUrl() {
     const data = this.formService.getAddViaUrlValues();
     const payload = {
-      name:'add-image-via-url',
+      name: 'add-image-via-url',
       data: data
     };
     this.stepperUpdates.emit(payload);

@@ -63,6 +63,9 @@ export class CartComponent implements OnInit {
         this.isCartLoading = false;
       },
       (error: any) => {
+        this.isCartLoading = false;
+        this.isProductFetching = false;
+        this.emptyCart = true;
         console.log(error);
       }
     );

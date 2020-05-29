@@ -2208,6 +2208,9 @@ h6 {
   .brand-footer {
     margin-left: 0 !important;
   }
+  .custom-dialog-container > mat-dialog-container {
+    margin-top: 20px;
+  }
 }
 
 @media (max-width: 576px) {
@@ -2225,6 +2228,26 @@ h6 {
   }
   .bannerCarousel .ui-carousel-next.ui-button {
     right: 3%;
+  }
+}
+
+@media (max-width: 1280px) {
+  .cdk-overlay-pane {
+    width: 60% !important;
+  }
+}
+
+@media (max-width: 1380px) {
+  .cdk-overlay-pane {
+    width: 50% !important;
+  }
+}
+
+@media (max-width: 1024px) {
+  .cdk-overlay-pane {
+    max-width: 100vw !important;
+    width: 60% !important;
+    height: 90% !important;
   }
 }
 
@@ -2274,6 +2297,6 @@ h6 {
 }
 
 .custom-dialog-container .mat-dialog-container {
-   padding: 0;
-   overflow: hidden;
+  padding: 0;
+  overflow: hidden;
 }

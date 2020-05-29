@@ -4,7 +4,7 @@
     <div class="sets-container">
       <div class="sets-content">
         <ng-container *ngIf="isHandset; else isDesktop">
-          <span class="w-60-ns w-100">
+          <span class="w-60">
             <a href="/product/{{ item.sku }}" class="product-name">{{
               item.name
             }}</a>
@@ -19,7 +19,6 @@
             <ng-template #isOOSPrice>
               <div>
                 <span class="price">${{ item.price }}</span>
-
                 <span
                   class="was-price  {{
                     item.price !== item.was_price ? 'strike' : 'dn'
@@ -29,35 +28,37 @@
               </div>
             </ng-template>
           </span>
-
           <ng-container
             *ngIf="
               item.in_inventory && item.inventory_product_details.count > 0;
               else isOOS
             "
           >
-            <div class="w-60-ns w-100 flex">
-              <span class="brand-button">
-                <a
-                  class="pointer"
-                  (click)="openCartModal(item, i)"
-                  class="tr-addToCart"
-                  >ADD TO CART
-                </a>
-              </span>
+            <div class="w-40 flex ">
+              <div class="brand-button-container">
+                <span class="brand-button">
+                  <a
+                    class="pointer"
+                    (click)="openCartModal(item, i)"
+                    class="tr-addToCart"
+                    >ADD TO CART
+                  </a>
+                </span>
+              </div>
             </div>
           </ng-container>
-
           <ng-template #isOOS>
-            <div class="w-60-ns w-100 flex">
-              <span class="brand-button"
+            <div class="w-40 flex ">
+              <div class="brand-button-container">
+                <span class="brand-button"
                 ><a
                   class="tr-viewDetails"
                   (click)="openLink($event, item.link)"
                   href="{{ item.link }}"
                   >VIEW AT {{ brand }}</a
                 ></span
-              >
+                >
+              </div>
             </div>
           </ng-template>
         </ng-container>
@@ -78,7 +79,6 @@
               <span class="price w-50 justify-end tr">
                 ${{ item.inventory_product_details.price }}
               </span>
-
               <span class="brand-button">
                 <a
                   class="pointer"
@@ -89,12 +89,10 @@
               </span>
             </div>
           </ng-container>
-
           <ng-template #isOOS>
             <div class="w-60-ns w-100 flex">
               <div class="w-50 w-60-ns flex justify-end">
                 <span class="price">${{ item.price }}</span>
-
                 <span
                   class="was-price  {{
                     item.price !== item.was_price ? 'strike' : 'dn'
