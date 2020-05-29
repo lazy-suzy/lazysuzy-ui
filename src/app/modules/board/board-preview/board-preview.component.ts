@@ -5,6 +5,7 @@ import { Board } from '../board';
 import { BoardService } from '../board.service';
 
 import { Font, FontPickerService } from 'ngx-font-picker';
+import { UtilsService } from '../../../shared/services/utils/utils.service';
 
 declare const fb: any;
 
@@ -17,7 +18,8 @@ export class BoardPreviewComponent implements OnInit {
 
   loadedAsEmbed = false;
   constructor(
-    private boardService: BoardService, private route: ActivatedRoute, private router: Router, private fontPickerService: FontPickerService) {
+    private boardService: BoardService, private route: ActivatedRoute, private router: Router, 
+    private fontPickerService: FontPickerService, private utilsService: UtilsService) {
     if (route.snapshot['_routerState'].url.match(/embed/))
       this.loadedAsEmbed = true;
   }
@@ -194,5 +196,9 @@ export class BoardPreviewComponent implements OnInit {
       this.presetFonts.push(fontFamily);
     }
   }
-
+  openDialog(product): void {
+    if (product) {
+      this.utilsService.openMatDialog(product);
+    }
+  }
 }

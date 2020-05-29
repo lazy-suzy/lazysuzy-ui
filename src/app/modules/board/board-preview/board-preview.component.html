@@ -36,8 +36,8 @@
         </div>
     </div>
     <div class="col col-md-3">
-        <div *ngIf="!loadedAsEmbed">
-            <div class="mt-5">
+        <div *ngIf="!loadedAsEmbed" class="mb-0-ns mb-5">
+            <div class="mt-5-ns">
                 <span class="font-weight-bold h3">{{appMeta.board.title}}</span>
             </div>
             <div>
@@ -49,45 +49,32 @@
 <div *ngIf="!loadedAsEmbed && boardProducts.length > 0" class="row">
     <div class="col mt-3">
         <div class="text-center h2 font-weight-bold" style="color: #b76e79;"><span>Shop This Look</span></div>
-        <!-- <app-products-carousal [data]="boardProducts"></app-products-carousal> -->
-        <!-- <div class="banner">
-            <p-carousel
-              class="bannerCarousel"
-              [value]="boardProducts"
-              [numVisible]="1"
-              [numScroll]="1"
-              [autoplayInterval]="8000"
-              [circular]="true"
-            >
-              <ng-template let-data pTemplate="item">
-                <div class="product">
-                  <a href="{{ data.link }}">
-                    <img class="product_image" src="{{ data.main_image }}" alt="Owl Image" />
-                  </a>
-                </div>
-              </ng-template>
-            </p-carousel>
-          </div>           -->
-        <!-- temporary slider to be replaced with component -->
-        <div id="product-slider" class="m-5">
-            <div class="ui-carousel-content">
-                <div class="ui-carousel-container">
-                    <div class="ui-carousel-items-content" style="height: auto;">
-                        <div class="ui-carousel-items-container">
-                            <div *ngFor="let product of boardProducts" class="ui-carousel-item ui-carousel-item-active ui-carousel-item-start ng-star-inserted m-2">
-                                <div class="product ng-star-inserted">
-                                    <a><img alt="Owl Image" class="product_image" src="{{product.main_image}}"></a>
-                                    <div class="product_detail">
-                                        <span class="product_brand">{{product.site}}</span><br>
-                                        <span class="product_name">{{product.name}}</span><br>
-                                        <span class="current-price ng-star-inserted">${{product.is_price}}</span>
-                                    </div>
-                                </div>
-                            </div>
+            <div class="products-container">
+                <div *ngFor="let product of boardProducts" class="w-25-ns">
+                    <div class="ls-product-div">
+                        <div class="ls-product" (click)="openDialog(product.sku)">
+                          <img
+                            class="{{ isVariationImageVisible ? 'prod-img' : 'prod-img show' }}"
+                            [src]="product.main_image"
+                            [alt]="product.name"
+                          />
                         </div>
-                    </div>
+                        <div class="prod-info">
+                          <span class="site">
+                            {{ product.site }}
+                          </span>
+                        </div>
+                        <div class="name">{{ product.name }}</div>
+                        <div class="prices">
+                            <span
+                              class="{{
+                                (product.is_price !== product.was_price && 'cprice sale') || 'cprice'
+                              }}"
+                              >${{ product.is_price }}</span
+                            >
+                        </div>
+                      </div>
                 </div>
             </div>
-        </div>
     </div>
 </div>

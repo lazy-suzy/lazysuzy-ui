@@ -48,291 +48,338 @@
           showMenu && isTablet ? 'mt-0' : 'margin-top-60'
         }}"
       >
-        <!-- Selected Tab: {{selectedItem}} -->
-
-        <div *ngIf="selectedItem === 'select'">
-          <div class="browse-header padding-top-30">
-            <div class="item-search-bar">
-              <form class="input-group" (submit)="search()">
-                <input
-                  type="text"
-                  class="form-control"
-                  id="inlineFormInputGroupUsername"
-                  placeholder="Search"
-                  [(ngModel)]="searchText"
-                  name="searchText"
-                />
-                <div class="input-group-append">
-                  <button class="input-group-text icon" type="submit">
-                    <i class="mdi mdi-magnify" aria-hidden="true"></i>
-                  </button>
-                </div>
-              </form>
-            </div>
-            <div class="text-left w-100">
-              <h5 class="title ml-2">Select New Category</h5>
-            </div>
-          </div>
-          <app-select
-            (goToCategory)="handleSelectCategory($event)"
-          ></app-select>
-        </div>
-
-        <div *ngIf="selectedItem === 'browse'">
-          <div class="browse-header padding-top-30">
-            <div class="item-search-bar">
-              <form class="input-group" (submit)="search()">
-                <input
-                  type="text"
-                  class="form-control"
-                  id="inlineFormInputGroupUsername"
-                  placeholder="Search"
-                  [(ngModel)]="searchText"
-                  name="searchText"
-                />
-                <div class="input-group-append">
-                  <button class="input-group-text icon" type="submit">
-                    <i class="mdi mdi-magnify" aria-hidden="true"></i>
-                  </button>
-                </div>
-              </form>
-            </div>
-            <div class="browse-title pt-1" (click)="handleGoToSelect($event)">
-              <i class="mdi mdi-chevron-left" aria-hidden="true"></i>
-              <h5 class="title js-category-title">
-                {{ hasSearched ? searchText : selectedCategory?.category }}
-              </h5>
-            </div>
-            <div class="browse-filter" *ngIf="!hasSearched">
-              <div class="filter-bar-container">
-                <div class="filter-bar js-filter-section" id="desktop-filter">
-                  <app-browse-filter
-                    [filterData]="filterData"
-                    (updatesFromFilter)="handleFiltersUpdates($event)"
-                  ></app-browse-filter>
-                </div>
+          <!-- Selected Tab: {{selectedItem}} -->
+          <div *ngIf="selectedItem === 'select'">
+            <div class="browse-header padding-top-30">
+              <div class="item-search-bar">
+                <form class="input-group" (submit)="search()">
+                  <input
+                    type="text"
+                    class="form-control"
+                    id="inlineFormInputGroupUsername"
+                    placeholder="Search"
+                    [(ngModel)]="searchText"
+                    name="searchText"
+                  />
+                  <div class="input-group-append">
+                    <button class="input-group-text icon" type="submit">
+                      <i class="mdi mdi-magnify" aria-hidden="true"></i>
+                    </button>
+                  </div>
+                </form>
               </div>
-              <div class="clear-all d-none d-md-block">Clear All</div>
+              <div class="text-left w-100">
+                <h5 class="title ml-2">Select New Category</h5>
+              </div>
             </div>
+            <app-select
+              (goToCategory)="handleSelectCategory($event)"
+            ></app-select>
           </div>
 
-          <app-board-products
-            [products]="remoteProducts"
-            (previewProduct)="handleProductPreview($event)"
-          >
-          </app-board-products>
+          <div *ngIf="selectedItem === 'browse'">
+            <div class="browse-header padding-top-30">
+              <div class="item-search-bar">
+                <form class="input-group" (submit)="search()">
+                  <input
+                    type="text"
+                    class="form-control"
+                    id="inlineFormInputGroupUsername"
+                    placeholder="Search"
+                    [(ngModel)]="searchText"
+                    name="searchText"
+                  />
+                  <div class="input-group-append">
+                    <button class="input-group-text icon" type="submit">
+                      <i class="mdi mdi-magnify" aria-hidden="true"></i>
+                    </button>
+                  </div>
+                </form>
+              </div>
+              <div class="browse-title pt-1" (click)="handleGoToSelect($event)">
+                <i class="mdi mdi-chevron-left" aria-hidden="true"></i>
+                <h5 class="title js-category-title">
+                  {{ hasSearched ? searchText : selectedCategory?.category }}
+                </h5>
+              </div>
+              <div class="browse-filter" *ngIf="!hasSearched">
+                <div class="filter-bar-container">
+                  <div class="filter-bar js-filter-section" id="desktop-filter">
+                    <app-browse-filter
+                      [filterData]="filterData"
+                      (updatesFromFilter)="handleFiltersUpdates($event)"
+                    ></app-browse-filter>
+                  </div>
+                </div>
+                <div class="clear-all d-none d-md-block">Clear All</div>
+              </div>
+            </div>
 
-          <div class="load-more-btn-container">
+            <app-board-products
+              [products]="remoteProducts"
+              (previewProduct)="handleProductPreview($event)"
+            >
+            </app-board-products>
+
+            <div class="load-more-btn-container">
+              <button
+                type="button"
+                *ngIf="!showLoader && remoteProducts.length != 0"
+                (click)="loadMore()"
+                class="btn load-more-btn"
+              >
+                Load More
+              </button>
+            </div>
+
             <button
               type="button"
-              *ngIf="!showLoader && remoteProducts.length != 0"
+              *ngIf="!showLoader && remoteProducts.length == 0"
               (click)="loadMore()"
-              class="btn load-more-btn"
+              class="btn btn-primary"
             >
-              Load More
+              No products.Select another category.
             </button>
-          </div>
-
-          <button
-            type="button"
-            *ngIf="!showLoader && remoteProducts.length == 0"
-            (click)="loadMore()"
-            class="btn btn-primary"
-          >
-            No products.Select another category.
-          </button>
-          <!-- <app-loader *ngIf="showLoader"></app-loader> -->
-          <div *ngIf="showLoader" class="loader-container">
-            <div class="loader-box">
-              <div class="loader-bounceball"></div>
-            </div>
-          </div>
-          <div
-            class="static-bottom-panel-wrapper"
-            *ngIf="productForPreview"
-            style="z-index: 9999999;"
-          >
-            <ng-container *ngIf="!isTablet; else isDesktop">
-              <div class="static-bottom-panel selected position-fixed">
-                <app-product-preview
-                  [data]="productForPreview"
-                  (clearProductPreview)="handleClearProductPreview($event)"
-                  (addProductBoard)="handleAddProductBoardPreview($event)"
-                >
-                </app-product-preview>
+            <!-- <app-loader *ngIf="showLoader"></app-loader> -->
+            <div *ngIf="showLoader" class="loader-container">
+              <div class="loader-box">
+                <div class="loader-bounceball"></div>
               </div>
-            </ng-container>
+            </div>
+            <div
+              class="static-bottom-panel-wrapper"
+              *ngIf="productForPreview"
+              style="z-index: 9999999;"
+            >
+              <ng-container *ngIf="!isTablet; else isDesktop">
+                <div class="static-bottom-panel selected position-fixed">
+                  <app-product-preview
+                    [data]="productForPreview"
+                    (clearProductPreview)="handleClearProductPreview($event)"
+                    (addProductBoard)="handleAddProductBoardPreview($event)"
+                  >
+                  </app-product-preview>
+                </div>
+              </ng-container>
 
-            <ng-template #isDesktop>
-              <div
-                class="static-bottom-panel selected {{
-                  !showMenu ? 'position-absolute' : 'position-fixed'
-                }}"
-              >
-                <app-product-preview
-                  [data]="productForPreview"
-                  (clearProductPreview)="handleClearProductPreview($event)"
-                  (addProductBoard)="handleAddProductBoardPreview($event)"
+              <ng-template #isDesktop>
+                <div
+                  class="static-bottom-panel selected {{
+                    !showMenu ? 'position-absolute' : 'position-fixed'
+                  }}"
                 >
-                </app-product-preview>
-              </div>
-            </ng-template>
-          </div>
-        </div>
-
-        <div *ngIf="selectedItem === 'text'" class="padding-top-30">
-          <app-board-text></app-board-text>
-        </div>
-
-        <div *ngIf="selectedItem === 'add'" class="padding-top-30 pl-md-0 pl-2">
-          <app-board-add
-            [allAssets]="appMeta.asset"
-            [userId]="currentUser.id"
-            (previewProduct)="handleProductPreview($event)"
-            (updateAsset)="handleAssetUpdate($event)"
-          ></app-board-add>
-          <div
-            class="static-bottom-panel-wrapper"
-            *ngIf="productForPreview"
-            style="z-index: 9999999;"
-          >
-            <div
-              class="static-bottom-panel selected {{
-                !showMenu && isTablet ? 'position-absolute' : 'position-fixed'
-              }} {{ !isTablet ? 'position-fixed' : '' }}"
-            >
-              <app-product-preview
-                [data]="productForPreview"
-                (clearProductPreview)="handleClearProductPreview($event)"
-                (addProductBoard)="handleAddProductBoardPreview($event)"
-              >
-              </app-product-preview>
+                  <app-product-preview
+                    [data]="productForPreview"
+                    (clearProductPreview)="handleClearProductPreview($event)"
+                    (addProductBoard)="handleAddProductBoardPreview($event)"
+                  >
+                  </app-product-preview>
+                </div>
+              </ng-template>
             </div>
           </div>
-        </div>
 
-        <div
-          *ngIf="selectedItem === 'board'"
-          class="padding-top-30 pl-0-ns pl-2"
-        >
-          <app-current-board
-            [boardProducts]="boardPreviewProducts"
-          ></app-current-board>
-        </div>
+          <div *ngIf="selectedItem === 'text'" class="padding-top-30">
+            <app-board-text></app-board-text>
+          </div>
 
-        <div
-          *ngIf="selectedItem === 'favorites'"
-          class="padding-top-30 pl-0-ns pl-2 mt-3"
-        >
-          <div class="pt-4" *ngIf="!favoriteProducts.length">
-            No items found. Save items to your favorites to see them here.
-          </div>
-          <div class="text-left w-100" *ngIf="favoriteProducts.length">
-            <h5 class="title ml-2">Favorites</h5>
-          </div>
-          <app-board-products
-            [products]="favoriteProducts"
-            (previewProduct)="handleProductPreview($event)"
-          >
-          </app-board-products>
           <div
-            class="static-bottom-panel-wrapper"
-            *ngIf="productForPreview"
-            style="z-index: 9999999;"
+            *ngIf="selectedItem === 'add'"
+            class="padding-top-30 pl-md-0 pl-2"
           >
+            <app-board-add
+              [allAssets]="appMeta.asset"
+              [userId]="currentUser.id"
+              (previewProduct)="handleProductPreview($event)"
+              (updateAsset)="handleAssetUpdate($event)"
+            ></app-board-add>
             <div
-              class="static-bottom-panel selected {{
-                !showMenu && isTablet ? 'position-absolute' : 'position-fixed'
-              }} {{ !isTablet ? 'position-fixed' : '' }}"
+              class="static-bottom-panel-wrapper"
+              *ngIf="productForPreview"
+              style="z-index: 9999999;"
             >
-              <app-product-preview
-                [data]="productForPreview"
-                (clearProductPreview)="handleClearProductPreview($event)"
-                (addProductBoard)="handleAddProductBoardPreview($event)"
-              >
-              </app-product-preview>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-  <div class="main-content container-fluid gray-bg">
-    <div class="row">
-      <div class="col-md-12 tool-bar-holder">
-        <div class="top-panel row top-panel-hide">
-          <div class="col-md-4 d-none d-md-block state-icons">
-            <!-- <i class="mdi mdi-magnify-minus" (click)="zoomOut()" aria-hidden="true"></i> -->
-            <!-- <i class="mdi mdi-magnify-plus" (click)="zoomIn()" aria-hidden="true"></i> -->
-            <i class="mdi mdi-undo" (click)="undo()" aria-hidden="true"></i>
-            <i class="mdi mdi-redo" (click)="redo()" aria-hidden="true"></i>
-          </div>
-          <div class="col-sm-6 col-md-4 text-center mt-1">
-            <div class="editor-icons">
-              <div
-                class="d-inline"
-                [(fontPicker)]="font"
-                [fpPresetLabel]="'Quick Access'"
-                [fpPresetFonts]="presetFonts"
-                (fontPickerChange)="updateFontAndSize(font)"
-                [fpWidth]="'auto'"
-                [fpPosition]="'bottom'"
-              >
-                <div class="action-button dropdown mr-5">
-                  {{ font?.family }} {{ font?.style | FontStyles }} |
-                  {{ font?.size }}
+                <div
+                  class="static-bottom-panel selected {{
+                    !showMenu && isTablet
+                      ? 'position-absolute'
+                      : 'position-fixed'
+                  }} {{ !isTablet ? 'position-fixed' : '' }}"
+                >
+                  <app-product-preview
+                    [data]="productForPreview"
+                    (clearProductPreview)="handleClearProductPreview($event)"
+                    (addProductBoard)="handleAddProductBoardPreview($event)"
+                  >
+                  </app-product-preview>
                 </div>
               </div>
-              <input type="color" class="js-font-select-color" />
+            </div>
+
+              <div
+                *ngIf="selectedItem === 'board'"
+                class="padding-top-30 pl-0-ns pl-2"
+              >
+                <app-current-board
+                  [boardProducts]="boardPreviewProducts"
+                ></app-current-board>
+              </div>
+
+              <div
+                *ngIf="selectedItem === 'favorites'"
+                class="padding-top-30 pl-0-ns pl-2 mt-3"
+              >
+                <div class="pt-4" *ngIf="!favoriteProducts.length">
+                  No items found. Save items to your favorites to see them here.
+                </div>
+                <div
+                  *ngIf="selectedItem === 'favorites'"
+                  class="padding-top-30 pl-0-ns pl-2 mt-3"
+                >
+                  <div class="pt-4" *ngIf="!favoriteProducts.length">
+                    No items found. Save items to your favorites to see them
+                    here.
+                  </div>
+                  <div class="text-left w-100" *ngIf="favoriteProducts.length">
+                    <h5 class="title ml-2">Favorites</h5>
+                  </div>
+                  <app-board-products
+                    [products]="favoriteProducts"
+                    (previewProduct)="handleProductPreview($event)"
+                  >
+                  </app-board-products>
+                  <div
+                    class="static-bottom-panel-wrapper"
+                    *ngIf="productForPreview"
+                    style="z-index: 9999999;"
+                  >
+                      <div
+                        class="static-bottom-panel selected {{
+                          !showMenu && isTablet
+                            ? 'position-absolute'
+                            : 'position-fixed'
+                        }} {{ !isTablet ? 'position-fixed' : '' }}"
+                      >
+                        <app-product-preview
+                          [data]="productForPreview"
+                          (clearProductPreview)="
+                            handleClearProductPreview($event)
+                          "
+                          (addProductBoard)="
+                            handleAddProductBoardPreview($event)
+                          "
+                        >
+                        </app-product-preview>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
-          <div class="col-sm-6 col-md-4">
-            <div class="item-action-icons float-right">
-              <span
-                data-title="Remove Background"
-                class="do-transparent"
-                (click)="action('transparent')"
-              >
-                <i class="mdi mdi-auto-fix" aria-hidden="true"></i>
-              </span>
-              <span
-                data-title="Apply Background"
-                class="undo-transparent"
-                (click)="action('undoTransparent')"
-              >
-                <i class="mdi mdi-format-paint" aria-hidden="true"></i>
-              </span>
-              <span class="background-msg hide">
-                <i
-                  class="mdi mdi-arrow-up-bold background-msg-arrow"
-                  aria-hidden="true"
-                ></i>
-                <i
-                  class="mdi mdi-close close-background-msg"
-                  aria-hidden="true"
-                ></i>
-                Click here to remove background
-              </span>
-              <span data-title="Duplicate" (click)="action('duplicate')"
-                ><i class="mdi mdi-content-copy" aria-hidden="true"></i
-              ></span>
-              <span data-title="Crop" (click)="handleCrop()"
-                ><i class="mdi mdi-crop" aria-hidden="true"></i
-              ></span>
-              <span data-title="Flip" (click)="action('flip')">
-                <i class="mdi mdi-autorenew" aria-hidden="true"></i>
-              </span>
-              <span data-title="Send Backward" (click)="action('sendBackward')">
-                <i class="mdi mdi-arrange-send-backward" aria-hidden="true"></i>
-              </span>
-              <span data-title="Bring Forward" (click)="action('bringForward')">
-                <i class="mdi mdi-arrange-bring-forward" aria-hidden="true"></i>
-              </span>
-              <span data-title="Delete" (click)="action('delete')">
-                <i class="mdi mdi-delete" aria-hidden="true"></i>
-              </span>
-            </div>
-            <!-- <div class="top-panel-hide crop-toolbar">
+            <div class="main-content container-fluid gray-bg">
+              <div class="row">
+                <div class="col-md-12 tool-bar-holder">
+                  <div class="top-panel row top-panel-hide">
+                    <div class="col-md-4 d-none d-md-block state-icons">
+                      <!-- <i class="mdi mdi-magnify-minus" (click)="zoomOut()" aria-hidden="true"></i> -->
+                      <!-- <i class="mdi mdi-magnify-plus" (click)="zoomIn()" aria-hidden="true"></i> -->
+                      <i
+                        class="mdi mdi-undo"
+                        (click)="undo()"
+                        aria-hidden="true"
+                      ></i>
+                      <i
+                        class="mdi mdi-redo"
+                        (click)="redo()"
+                        aria-hidden="true"
+                      ></i>
+                    </div>
+                    <div class="col-sm-6 col-md-4 text-center mt-1">
+                      <div class="editor-icons">
+                        <div
+                          class="d-inline"
+                          [(fontPicker)]="font"
+                          [fpPresetLabel]="'Quick Access'"
+                          [fpPresetFonts]="presetFonts"
+                          (fontPickerChange)="updateFontAndSize(font)"
+                          [fpWidth]="'auto'"
+                          [fpPosition]="'bottom'"
+                        >
+                          <div class="action-button dropdown mr-5">
+                            {{ font?.family }} {{ font?.style | FontStyles }} |
+                            {{ font?.size }}
+                          </div>
+                        </div>
+                        <input type="color" class="js-font-select-color" />
+                      </div>
+                    </div>
+                    <div class="col-sm-6 col-md-4">
+                      <div class="item-action-icons float-right">
+                        <span
+                          data-title="Remove Background"
+                          class="do-transparent"
+                          (click)="action('transparent')"
+                        >
+                          <i class="mdi mdi-auto-fix" aria-hidden="true"></i>
+                        </span>
+                        <span
+                          data-title="Apply Background"
+                          class="undo-transparent"
+                          (click)="action('undoTransparent')"
+                        >
+                          <i
+                            class="mdi mdi-format-paint"
+                            aria-hidden="true"
+                          ></i>
+                        </span>
+                        <span class="background-msg hide">
+                          <i
+                            class="mdi mdi-arrow-up-bold background-msg-arrow"
+                            aria-hidden="true"
+                          ></i>
+                          <i
+                            class="mdi mdi-close close-background-msg"
+                            aria-hidden="true"
+                          ></i>
+                          Click here to remove background
+                        </span>
+                        <span
+                          data-title="Duplicate"
+                          (click)="action('duplicate')"
+                          ><i
+                            class="mdi mdi-content-copy"
+                            aria-hidden="true"
+                          ></i
+                        ></span>
+                        <span data-title="Crop" (click)="handleCrop()"
+                          ><i class="mdi mdi-crop" aria-hidden="true"></i
+                        ></span>
+                        <span data-title="Flip" (click)="action('flip')">
+                          <i class="mdi mdi-autorenew" aria-hidden="true"></i>
+                        </span>
+                        <span
+                          data-title="Send Backward"
+                          (click)="action('sendBackward')"
+                        >
+                          <i
+                            class="mdi mdi-arrange-send-backward"
+                            aria-hidden="true"
+                          ></i>
+                        </span>
+                        <span
+                          data-title="Bring Forward"
+                          (click)="action('bringForward')"
+                        >
+                          <i
+                            class="mdi mdi-arrange-bring-forward"
+                            aria-hidden="true"
+                          ></i>
+                        </span>
+                        <span data-title="Delete" (click)="action('delete')">
+                          <i class="mdi mdi-delete" aria-hidden="true"></i>
+                        </span>
+                      </div>
+                      <!-- <div class="top-panel-hide crop-toolbar">
               <span class="btn" (click)="handleCrop(true)">
                 <i class="mdi mdi-check" aria-hidden="true"></i> Crop
               </span>
@@ -343,24 +390,27 @@
                 <i class="mdi mdi-minus" aria-hidden="true"></i> Revert
               </span>
             </div> -->
-          </div>
-        </div>
-        <div class="top-panel row top-panel-hide crop-toolbar">
-          <div class="col-sm-12">
-            <button class="btn" (click)="handleCrop(true)">
-              <i class="mdi mdi-check mr-0" aria-hidden="true"></i> Crop
-            </button>
-            <button class="btn" (click)="handleCrop(false)">
-              <i class="mdi mdi-undo mr-0" aria-hidden="true"></i> Cancel
-            </button>
-            <button class="btn" (click)="handleCrop(false, true)">
-              <i class="mdi mdi-minus mr-0" aria-hidden="true"></i> Revert
-            </button>
-          </div>
-        </div>
-        <div class="canvas-content">
-          <div class="d-flex justify-content-between">
-            <!-- <div class="canvas-title-bar">
+                    </div>
+                  </div>
+                  <div class="top-panel row top-panel-hide crop-toolbar">
+                    <div class="col-sm-12">
+                      <button class="btn" (click)="handleCrop(true)">
+                        <i class="mdi mdi-check mr-0" aria-hidden="true"></i>
+                        Crop
+                      </button>
+                      <button class="btn" (click)="handleCrop(false)">
+                        <i class="mdi mdi-undo mr-0" aria-hidden="true"></i>
+                        Cancel
+                      </button>
+                      <button class="btn" (click)="handleCrop(false, true)">
+                        <i class="mdi mdi-minus mr-0" aria-hidden="true"></i>
+                        Revert
+                      </button>
+                    </div>
+                  </div>
+                  <div class="canvas-content">
+                    <div class="d-flex justify-content-between">
+                      <!-- <div class="canvas-title-bar">
               <div
                 class="canvas-icons"
                 mat-raised-button
@@ -375,43 +425,50 @@
                 </a>
               </div>
             </div> -->
-            <div class="w-25-ns w-50 ml-4">
-              <input
-                class="form-control board-title"
-                placeholder="Board title"
-                onClick="this.select();"
-                onfocus="this.placeholder = ''"
-              />
+                      <div class="w-25-ns w-50 ml-4">
+                        <input
+                          class="form-control board-title"
+                          placeholder="Board title"
+                          onClick="this.select();"
+                          onfocus="this.placeholder = ''"
+                        />
+                      </div>
+                      <div class="mr-3 board-action-icons">
+                        <i
+                          class="mdi mdi-share-variant pr-1"
+                          (click)="openPopup('share')"
+                          aria-hidden="true"
+                        ></i>
+                        <i
+                          class="mdi mdi-publish pr-1"
+                          (click)="openPopup('publish')"
+                          aria-hidden="true"
+                        ></i>
+                      </div>
+                    </div>
+                    <div class="canvas">
+                      <div id="canvas-droparea">
+                        <canvas
+                          id="canvas-area"
+                          style="border: 1px solid #c8c7cc;"
+                        ></canvas>
+                      </div>
+                    </div>
+                    <div class="col-sm-2 col-5 state-icons d-lg-none">
+                      <!-- <i class="mdi mdi-magnify-minus" (click)="zoomOut()" aria-hidden="true"></i> -->
+                      <!-- <i class="mdi mdi-magnify-plus" (click)="zoomIn()" aria-hidden="true"></i> -->
+                      <i
+                        class="mdi mdi-undo"
+                        (click)="undo()"
+                        aria-hidden="true"
+                      ></i>
+                      <i
+                        class="mdi mdi-redo"
+                        (click)="redo()"
+                        aria-hidden="true"
+                      ></i>
+                    </div>
+                  </div>
+                </div>
+              </div>
             </div>
-            <div class="mr-3 board-action-icons">
-              <i
-                class="mdi mdi-share-variant pr-1"
-                (click)="openPopup('share')"
-                aria-hidden="true"
-              ></i>
-              <i
-                class="mdi mdi-publish pr-1"
-                (click)="openPopup('publish')"
-                aria-hidden="true"
-              ></i>
-            </div>
-          </div>
-          <div class="canvas">
-            <div id="canvas-droparea">
-              <canvas
-                id="canvas-area"
-                style="border: 1px solid #c8c7cc;"
-              ></canvas>
-            </div>
-          </div>
-          <div class="col-sm-2 col-5 state-icons d-lg-none">
-            <!-- <i class="mdi mdi-magnify-minus" (click)="zoomOut()" aria-hidden="true"></i> -->
-            <!-- <i class="mdi mdi-magnify-plus" (click)="zoomIn()" aria-hidden="true"></i> -->
-            <i class="mdi mdi-undo" (click)="undo()" aria-hidden="true"></i>
-            <i class="mdi mdi-redo" (click)="redo()" aria-hidden="true"></i>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-</div>
