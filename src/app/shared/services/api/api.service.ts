@@ -282,12 +282,12 @@ export class ApiService {
     return this.httpService.get(url, headers);
   }
 
-  getWishlistProducts(): Observable<IProductsPayload> {
+  getWishlistProducts(isBoard): Observable<IProductsPayload> {
     // const filters = '';
     // const sortTypes = '';
     // const endpoint = `products/${department}/${category}`;
     const endpoint = `wishlist`;
-    const url = `${env.API_BASE_HREF}${endpoint}?board-view=true`;
+    let url: string = `${env.API_BASE_HREF}${endpoint}${isBoard ? '?board-view=true' : ''}`;
     const headers = new HttpHeaders({
       'Content-Type': 'application/json',
       Authorization: `Bearer ${this.cookie.get('token')}`,

@@ -1,60 +1,54 @@
-<div class="row" *ngFor="let product of products">
+<div class="flex flex-wrap pa1" *ngFor="let product of products">
+  <div class="w-20">
+    <div class="ph2">
+      <div class="silver f6">{{ product.sku }}</div>
+      <div>{{ product.name }}</div>
+      <div class="silver f6">{{ product.site }}</div>
+      <div class="prices">
+        <span
+          class="{{
+            (product.is_price !== product.was_price && 'cprice sale') ||
+              'cprice'
+          }}"
+          >${{ product.is_price }}</span
+        >
+        <span *ngIf="product.is_price !== product.was_price" class="oldprice">
+          ${{ product.was_price }}
+        </span>
+      </div>
+      <div>Create Date:</div>
+      <div>Last Update Date:</div>
+    </div>
+  </div>
 
-	<div class="column1">
-		<span>{{product.sku}}</span><br />
-		<span>{{product.name}}</span><br />
-		<span>{{product.site}}</span><br />
-		<span>{{product.is_price}}</span><br />
-		<span>{{product.was_price}}</span><br />
-		<span>Create Date: </span><br />
-		<span>Last Update Date: </span><br />
-
-		<button mat-mini-fab *ngIf="currentEditingProduct?.sku === product?.sku" (click)="saveEdit()">
-			<mat-icon>check</mat-icon>
-		</button>
-
-		<button mat-mini-fab *ngIf="currentEditingProduct?.sku === product?.sku" (click)="cancelEdit()">
-			<mat-icon>clear</mat-icon>
-		</button>
-
-		{{product?.sku}}
-
-		<!-- <span *ngIf="currentEditingProduct?.id !== product?.id">
-			Not Editing
-		</span> -->
-
-	</div>
-	
-	<div class="column2" id="main">
-		
-		<div style="background-color:lightblue;" *ngFor="let variation of product.variations" class="card">
-
-			<mat-card class="example-card">
-				<mat-card-header>
-					<div mat-card-avatar class="example-header-image">
-						<img [src]="variation.image||'https://via.placeholder.com/150'" />
-					</div>
-				</mat-card-header>
-				<mat-form-field>
-					<mat-select placeholder="Board Tag" (selectionChange)="someMethod(product,$event.value)">
-						<mat-option *ngFor="let board of allBoards" [value]="board.value">
-							{{ board.viewValue }}
-						</mat-option>
-					</mat-select>
-				</mat-form-field>
-				<br />
-				<mat-form-field>
-					<mat-select disabled placeholder="Position" (selectionChange)="someMethod(product,$event.value)">
-						<mat-option *ngFor="let position of positions" [value]="position.value">
-							{{ position.viewValue }}
-						</mat-option>
-					</mat-select>
-				</mat-form-field>
-			</mat-card>
-			
-		</div>
-	</div>
-
+  <div class="w-80 flex flex-wrap">
+    <div
+      style="background-color: lightblue;"
+      *ngFor="let variation of product.on_server_images"
+      class="card w-25"
+    >
+      <mat-card>
+        <mat-card-content>
+          <div>
+            <img [src]="variation.url || 'https://via.placeholder.com/150'" />
+          </div>
+          <mat-form-field>
+            <mat-select
+              [(value)]="variation.btag"
+              placeholder="Board Tag"
+              (selectionChange)="
+                handleTagChange(product.sku, variation.url, $event.value)
+              "
+            >
+              <mat-option *ngFor="let board of allBoards" [value]="board.value">
+                {{ board.viewValue }}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+        </mat-card-content>
+      </mat-card>
+    </div>
+  </div>
 </div>
 
 <!-- <div class="row">

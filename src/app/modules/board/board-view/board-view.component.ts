@@ -491,8 +491,9 @@ export class BoardViewComponent implements OnInit, AfterViewInit {
         });
       });
     });
+    const isBoardApi = true;
     this.productsSubscription = this.apiService
-      .getWishlistProducts()
+      .getWishlistProducts(isBoardApi)
       .subscribe((payload: IProductsPayload) => {
         this.favoriteProducts = payload.products;
         this.favoriteProducts = this.favoriteProducts.map((ele, i) => {

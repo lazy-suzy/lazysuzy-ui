@@ -1,0 +1,17 @@
+@product-price: #b76e79;
+@primary-color: #ffcc00;
+@secondary-color: #0c1c31;
+
+.prices {
+  .cprice {
+    color: @secondary-color;
+    margin-right: 10px;
+    &.sale {
+      color: @product-price;
+    }
+  }
+
+  .oldprice {
+    text-decoration: line-through;
+  }
+}

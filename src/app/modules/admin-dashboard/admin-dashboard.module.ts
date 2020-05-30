@@ -1,10 +1,21 @@
 import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';import { FormsModule } from '@angular/forms';
-import { MatCardModule, MatSelectModule, MatInputModule, MatIconModule, MatButtonModule } from '@angular/material';
+import { CommonModule } from '@angular/common';
+import { FormsModule } from '@angular/forms';
+import {
+  MatCardModule,
+  MatSelectModule,
+  MatInputModule,
+  MatIconModule,
+  MatButtonModule,
+} from '@angular/material';
 import { ProductCustomiseComponent } from './product-customise/product-customise.component';
 import { AdminDasboardRoutingModule } from './admin-dashboard-routing.module';
 import { AdminDashboardComponent } from './admin-dashboard/admin-dashboard.component';
 import { AdminProductListingComponent } from './admin-product-listing/admin-product-listing.component';
+import {
+  ProductFiltersModule,
+  SortTypeModule,
+} from './../../../app/feature/components';
 
 @NgModule({
   imports: [
@@ -15,14 +26,16 @@ import { AdminProductListingComponent } from './admin-product-listing/admin-prod
     MatInputModule,
     MatSelectModule,
     MatIconModule,
-    MatButtonModule
+    MatButtonModule,
+    ProductFiltersModule,
+    SortTypeModule,
   ],
   declarations: [
     AdminDashboardComponent,
     ProductCustomiseComponent,
-    AdminProductListingComponent
+    AdminProductListingComponent,
   ],
   entryComponents: [],
-  providers: []
+  providers: [],
 })
-export class AdminDashboardModule { }
+export class AdminDashboardModule {}
