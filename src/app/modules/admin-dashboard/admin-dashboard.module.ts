@@ -16,6 +16,7 @@ import {
   ProductFiltersModule,
   SortTypeModule,
 } from './../../../app/feature/components';
+import { InfiniteScrollModule } from 'ngx-infinite-scroll';
 
 @NgModule({
   imports: [
@@ -29,6 +30,7 @@ import {
     MatButtonModule,
     ProductFiltersModule,
     SortTypeModule,
+    InfiniteScrollModule,
   ],
   declarations: [
     AdminDashboardComponent,

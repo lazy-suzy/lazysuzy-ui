@@ -1,32 +1,34 @@
-<div class="flex flex-wrap pa1" *ngFor="let product of products">
+<div
+  class="flex flex-wrap pa1 ph4"
+  *ngFor="let product of products; let i = index"
+>
   <div class="w-20">
-    <div class="ph2">
-      <div class="silver f6">{{ product.sku }}</div>
-      <div>{{ product.name }}</div>
-      <div class="silver f6">{{ product.site }}</div>
-      <div class="prices">
-        <span
-          class="{{
-            (product.is_price !== product.was_price && 'cprice sale') ||
-              'cprice'
-          }}"
-          >${{ product.is_price }}</span
-        >
-        <span *ngIf="product.is_price !== product.was_price" class="oldprice">
-          ${{ product.was_price }}
-        </span>
+    <div class="flex">
+      <div>{{ i }}</div>
+      <div class="pl4">
+        <div class="silver f6">{{ product.sku }}</div>
+        <div>{{ product.name }}</div>
+        <div class="silver f6">{{ product.site }}</div>
+        <div class="prices">
+          <span
+            class="{{
+              (product.is_price !== product.was_price && 'cprice sale') ||
+                'cprice'
+            }}"
+            >${{ product.is_price }}</span
+          >
+          <span *ngIf="product.is_price !== product.was_price" class="oldprice">
+            ${{ product.was_price }}
+          </span>
+        </div>
+        <div>Create Date:</div>
+        <div>Last Update Date:</div>
       </div>
-      <div>Create Date:</div>
-      <div>Last Update Date:</div>
     </div>
   </div>
 
   <div class="w-80 flex flex-wrap">
-    <div
-      style="background-color: lightblue;"
-      *ngFor="let variation of product.on_server_images"
-      class="card w-25"
-    >
+    <div *ngFor="let variation of product.on_server_images" class="card w-20">
       <mat-card>
         <mat-card-content>
           <div>

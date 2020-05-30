@@ -16,7 +16,7 @@ export class AdminDashboardService {
     total: number,
     filters = '',
     sortType = '',
-    page = 0
+    page: number
   ): Observable<any> {
     const endpoint = `products/all`;
     const url = `${env.ADMIN_API_BASE_HREF}${endpoint}?limit=${total}&filters=${filters}&sort_type=${sortType}&pageno=${page}`;
