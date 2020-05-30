@@ -287,7 +287,9 @@ export class ApiService {
     // const sortTypes = '';
     // const endpoint = `products/${department}/${category}`;
     const endpoint = `wishlist`;
-    let url: string = `${env.API_BASE_HREF}${endpoint}${isBoard ? '?board-view=true' : ''}`;
+    let url: string = `${env.API_BASE_HREF}${endpoint}${
+      isBoard ? '?board-view=true' : ''
+    }`;
     const headers = new HttpHeaders({
       'Content-Type': 'application/json',
       Authorization: `Bearer ${this.cookie.get('token')}`,
@@ -307,7 +309,10 @@ export class ApiService {
   login(data) {
     const endpoint = `login`;
     const url = `${env.API_BASE_HREF}${endpoint}`;
-    return this.httpService.post(url, data);
+    const headers = new HttpHeaders({
+      Authorization: `Bearer ${this.cookie.get('token')}`,
+    });
+    return this.httpService.post(url, data, headers);
   }
 
   subscription(URL, email): Observable<string> {
