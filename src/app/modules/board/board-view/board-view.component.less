@@ -45,6 +45,9 @@
 .load-more-btn {
   background-color: #b76e79;
   color: #ffffff;
+  &:hover {
+    color: #FFC40D;
+  }
 }
 .gray-bg {
   background-color: #f9f9f9;
@@ -128,6 +131,25 @@
   }
 }
 
+.board-action-button {
+  background-color: #ffffff;
+  margin-right: 8px;
+  display: flex;
+  align-items: center;
+  padding: 0 12px;
+  border-radius: 5px;
+  border: 1px solid #cbcad0;
+  cursor: pointer;
+  .board-action-button-text {
+    font-size: 16px;
+    padding-left: 8px;
+    font-weight: bold;
+  }
+  &:hover{
+    background-color: #FFC40D;
+    border-color: #000000;
+  }
+}
 @media screen and (max-width: 991px) {
   .load-more-btn-container {
     padding-bottom: 0;

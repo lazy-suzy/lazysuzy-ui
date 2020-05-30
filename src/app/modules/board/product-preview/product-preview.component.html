@@ -1,17 +1,17 @@
 <div class="product-cont row">
-  <div class="col-10 pt-2 pl-2">
-    <div class="pl-2 pt-1 pb-4 b">
+  <div class="col-10 pt-2 pl-0">
+    <div class="pl-2 pt-0 pb-3 b">
       {{ data?.name }}
     </div>
     <div class="flex detail-container">
       <div class="image flex align-items-center">
-        <img src="{{ data?.main_image }}" />
+        <img src="{{ data?.board_thumb }}" />
       </div>
       <div class="product-info">
         <div class="brand">
           {{ data?.site }}
         </div>
-        <div class="price">${{ data?.is_price }}</div>
+        <div class="price">${{ minPrice | number}} <span *ngIf="maxPrice">- $</span> {{maxPrice | number}}</div>
       </div>
     </div>
   </div>

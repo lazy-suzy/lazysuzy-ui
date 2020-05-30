@@ -17,7 +17,7 @@
         </div>
     </div> -->
 
-    <div class="flex-grid-item" (click)="handleSelectCategory(department)" *ngFor="let department of filteredDepartments">
+    <div class="flex-grid-item border-0 mb-2" (click)="handleSelectCategory(department)" *ngFor="let department of filteredDepartments">
         <div class="icon lg category-label">
             <i class="mdi mdi-hotel" aria-hidden="true"></i>
             {{department.category}}

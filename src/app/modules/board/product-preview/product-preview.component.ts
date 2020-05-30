@@ -11,14 +11,18 @@ export class AppProductPreviewComponent implements OnInit {
   @Output() addProductBoard: EventEmitter<any> = new EventEmitter();
   @Output() clearProductPreview: EventEmitter<any> = new EventEmitter();
   dropType = 'default';
-
+  minPrice: number;
+  maxPrice: number;
   constructor() { }
 
-  ngOnInit() { }
+  ngOnInit() {
+    this.updatePriceFormat(this.data.is_price);
+   }
 
   ngOnChanges(changes: any) {
     if (changes['data'] && changes['data'].previousValue !== changes['data'].currentValue) {
       this.data = changes['data'].currentValue || {};
+      this.updatePriceFormat(this.data.is_price);
       if(this.data.dropType){
         this.dropType = this.data.dropType;
       }
@@ -31,6 +35,14 @@ export class AppProductPreviewComponent implements OnInit {
 
   clearPreview(data){
     this.clearProductPreview.emit(data);
+  }
+
+  updatePriceFormat(price) {
+    let splitedPrice = price.split('-');
+    this.minPrice = splitedPrice[0];
+    if(splitedPrice.length > 1) {
+      this.maxPrice = splitedPrice[1];
+    }
   }
 
 }

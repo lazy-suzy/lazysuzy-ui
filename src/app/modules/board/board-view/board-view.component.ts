@@ -68,6 +68,7 @@ export class BoardViewComponent implements OnInit, AfterViewInit {
   iLimit: number;
   total_count: number = 0;
   hasSearched: boolean;
+  hasLoadedAllProducts: boolean = false;
   constructor(
     private cookieService: CookieService,
     private dialog: MatDialog,
@@ -132,6 +133,9 @@ export class BoardViewComponent implements OnInit, AfterViewInit {
             refId: i,
           };
         });
+        if (this.remoteProducts.length < 24 || !this.remoteProducts.length) {
+          this.hasLoadedAllProducts = true;
+        }
         this.iPageNo += 1;
         this.showLoader = false;
       });
@@ -262,6 +266,9 @@ export class BoardViewComponent implements OnInit, AfterViewInit {
         });
         this.filterData = s.filterData || {};
         this.pageNo++;
+        if (this.remoteProducts.length < 24 || !this.remoteProducts.length ) {
+          this.hasLoadedAllProducts = true;
+        }
         this.boardService.setBoardData(
           this.remoteProducts,
           this.selectedCategory,
