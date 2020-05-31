@@ -19,12 +19,12 @@
   margin-top: -50px;
 }
 .board-action-icons {
-  font-size: 20px;
   align-self: center;
-}
-.board-action-icons {
-  font-size: 20px;
-  align-self: center;
+  margin-right: 15px;
+  font-size: 24px;
+  border-radius: 5px;
+  padding: 3px;
+  transition: all 0.3s 0s ease;
 }
 .dropdown {
   position: relative;
@@ -45,12 +45,16 @@
 .load-more-btn {
   background-color: #b76e79;
   color: #ffffff;
+  &:hover {
+    color: #FFC40D;
+  }
 }
 .gray-bg {
   background-color: #f9f9f9;
 }
 .lazysuzy-board {
   display: flex;
+  height: calc(100vh - 115px);
 }
 .b-100 {
   bottom: -100px;
@@ -72,6 +76,15 @@
 }
 .position-absolute {
   position: absolute;
+}
+.loader-container {
+  position: absolute;
+  top: 50%;
+  left: 45%;
+}
+.load-more-btn-container {
+  text-align: center;
+  padding-bottom: 7rem;
 }
 .loader-box {
   border: 4px solid @primary_color;
@@ -115,5 +128,36 @@
   }
   100% {
     top: 0;
+  }
+}
+
+.board-action-button {
+  background-color: #ffffff;
+  margin-right: 8px;
+  display: flex;
+  align-items: center;
+  padding: 0 12px;
+  border-radius: 5px;
+  border: 1px solid #cbcad0;
+  cursor: pointer;
+  .board-action-button-text {
+    font-size: 16px;
+    padding-left: 8px;
+    font-weight: bold;
+  }
+  &:hover{
+    background-color: #FFC40D;
+    border-color: #000000;
+  }
+}
+@media screen and (max-width: 991px) {
+  .load-more-btn-container {
+    padding-bottom: 0;
+  }
+  .top-position-60 {
+    top: 60px;
+  }
+  .padding-top-30 {
+    padding-top: 30px !important;
   }
 }

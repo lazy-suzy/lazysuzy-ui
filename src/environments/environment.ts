@@ -3,6 +3,7 @@ export const environment = {
   useLocalJson: false,
   APP_NAME: 'LazySuzy',
   JSON_BASE_HREF: 'assets/resources/',
+  ADMIN_API_BASE_HREF: 'http://staging.lazysuzy.com:8081/api/admin/',
   API_BASE_HREF: 'http://staging.lazysuzy.com:8081/api/',
   BASE_HREF: 'http://staging.lazysuzy.com:8081/api/',
   SITE_URL: 'https://www.lazysuzy.com',
@@ -11,5 +12,5 @@ export const environment = {
   GOOGLE_LINK: 'https://www.lazysuzy.com/redirect/google',
   FACEBOOK_LINK: 'https://www.lazysuzy.com/redirect/facebook',
   STRIPE_API_KEY: 'pk_test_0QKsReaTyej3eaewGR3HWiqZ00CzWWFs34',
-  BOARD_BASE_HREF: 'board'
+  BOARD_BASE_HREF: 'board',
 };

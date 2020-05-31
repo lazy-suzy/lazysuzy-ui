@@ -16,8 +16,9 @@ export class WishlistComponent implements OnInit {
   constructor(private apiService: ApiService, private router: Router) {}
 
   ngOnInit(): void {
+    const isBoardApi = false;
     this.productsSubscription = this.apiService
-      .getWishlistProducts()
+      .getWishlistProducts(isBoardApi)
       .subscribe((payload: IProductsPayload) => {
         this.products = payload.products;
       });

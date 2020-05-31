@@ -1,53 +1,97 @@
 <div>
-    <div>
-        <div class="pl-5 pr-5 w-100 pt-4 board-modal">
-            <div class="canvas-config pb-0">
-                <div class="row">
-                    <div class="col-12 pt-2 pb-3">
-                        <!-- <h4 class="board-header">Board Configuration</h4> -->
-                        <h5 class="title ml-2 text-center b">Start New Design Board</h5>
-                    </div>
-                    <div class="col-12 pb-1">
-                        <h6 class="title ml-2 text-center font-size-10">Select Canvas Style</h6>
-                    </div>
-                    <div class="col-6" (click)="handleSelection('board')">
-                        <div class="canvas-style" [class.selected]="currentTab == 'board'">
-                            <div class="canvas-layout"></div>
-                            <h5>BOARD</h5>
-                        </div>
-                    </div>
-                    <div class="col-6" (click)="handleSelection('room')">
-                        <div class="canvas-style" [class.selected]="currentTab == 'room'">
-                            <div class="canvas-layout canvas-layout-room"></div>
-                            <h5>ROOM</h5>
-                        </div>
-                    </div>
-                    <div *ngIf="showBoardPanel" class="col-12" id="board-options-modal">
-                        <h5 class="title ml-2 mt-4 font-size-10">Select Canvas Color</h5>
-                        <div class="row justify-content-center">
-                            <div class="col-12">
-                                <div *ngFor="let backgroundColor of backgroundColors" (click)="handleChange('color', backgroundColor)" [class.selected]="selected.color == backgroundColor" [style.background-color]="backgroundColor" class="canvas-pallete-color col-2"></div>
-                            </div>
-                        </div>
-                    </div>
-                    <div *ngIf="showRoomPanel" class="col-12 canvas-options" id="room-options-modal">
-                        <h5 class="title ml-2 mt-4 font-size-10">Select Canvas Background</h5>
-                        <div class="row justify-content-center canvas-pallete">
-                            <div class="col-12">
-                                <img *ngFor="let backgroundImage of backgroundImages" (click)="handleChange('background', backgroundImage)" [class.selected]="selected.background == backgroundImage" [src]="backgroundImage" class="col-3" />
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="row mt-5 mb-3 board-action-buttons">
-                    <div class="col-6 text-right">
-                        <button (click)="cancel()" class="btn btn-cancel js-close-publish-board">Cancel</button>
-                    </div>
-                    <div class="col-6">
-                        <button (click)="save()" class="btn red-button">Go</button>
-                    </div>
-                </div>
-            </div>
+  <div class="ph5-ns ph4 w-100 pt-4 board-modal">
+    <div class="canvas-config pb-0">
+      <div class="pv3">
+        <!-- <h4 class="board-header">Board Configuration</h4> -->
+        <h5 class="title ml-2 text-center b">Start New Design Board</h5>
+      </div>
+      <div class="pb-3">
+        <h6 class="title font-size-12">
+          Select Canvas Style
+        </h6>
+      </div>
+      <div class="flex justify-content-between">
+        <div (click)="handleSelection('board')">
+          <div class="canvas-style" [class.selected]="currentTab == 'board'">
+            <div class="canvas-layout"></div>
+            <h5>BOARD</h5>
+          </div>
         </div>
+        <div (click)="handleSelection('room')">
+          <div class="canvas-style" [class.selected]="currentTab == 'room'">
+            <div class="canvas-layout canvas-layout-room"></div>
+            <h5>ROOM</h5>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div *ngIf="showBoardPanel" class="col-12" id="board-options-modal">
+          <div class="pb-3">
+            <h6 class="title ml-2 mt-5 font-size-12">Select Canvas Color</h6>
+          </div>
+
+          <div class="row justify-content-left">
+            <div class="col-12 board-options">
+              <ng-container
+                *ngFor="
+                  let backgroundColor of backgroundColors;
+                  let indexOfelement = index
+                "
+              >
+                <div
+                  (click)="handleChange('color', backgroundColor)"
+                  [class.selected]="selected.color == backgroundColor"
+                  [style.background-color]="backgroundColor"
+                  class="canvas-pallete-color col-2"
+                ></div>
+                <br *ngIf="indexOfelement == 5" />
+              </ng-container>
+            </div>
+          </div>
+        </div>
+        <div
+          *ngIf="showRoomPanel"
+          class="col-12 canvas-options"
+          id="room-options-modal"
+        >
+          <div class="pb-3">
+            <h6 class="title ml-2 mt-5 font-size-12">
+              Select Canvas Background
+            </h6>
+          </div>
+
+          <div class="row justify-content-left canvas-pallete">
+            <div class="col-12 board-options">
+              <img
+                *ngFor="let backgroundImage of backgroundImages"
+                (click)="handleChange('background', backgroundImage)"
+                [class.selected]="selected.background == backgroundImage"
+                [src]="backgroundImage"
+                class="col-3"
+              />
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="row board-action-buttons">
+        <div class="col-6 text-right">
+          <button
+            (click)="cancel()"
+            class="btn btn-cancel w-50 js-close-publish-board"
+          >
+            Cancel
+          </button>
+        </div>
+        <div class="col-6">
+          <button
+            (click)="save()"
+            [disabled]="!currentTab"
+            class="btn red-button w-50"
+          >
+            Go
+          </button>
+        </div>
+      </div>
     </div>
+  </div>
 </div>

@@ -38,7 +38,7 @@ export class HttpService {
       'Content-Type': 'application/json',
       Authorization: `Bearer ${token}`,
     });
-    const options = headers ? headers : { headers: this.headers };
+    const options = headers ? headers : this.headers;
     return this.http.post<T>(url, payload, { headers: options });
   }
 

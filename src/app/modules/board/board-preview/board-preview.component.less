@@ -50,6 +50,26 @@
   line-height: 1.45;
 }
 
+.products-container {
+  display: flex;
+  margin: 24px;
+  flex-wrap: wrap;
+}
+
+.site {
+  color: #606060;
+}
+.name {
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  width: 100%;
+  margin-bottom: 5px;
+  overflow: hidden;
+}
+
+.prices {
+  color: #b76e79;
+}
 @media (min-width:768px) {
   .article-dual-column .text p {
     font-size: 16px;
@@ -70,7 +90,9 @@
     font-size: 20px;
   }
 }
-
+.row {
+  margin: 0;
+}
 .article-dual-column .text figure {
   text-align: center;
   margin-top: 30px;

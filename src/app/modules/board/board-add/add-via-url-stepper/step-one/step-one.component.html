@@ -3,6 +3,9 @@
   <mat-form-field>
     <input matInput placeholder="Image Url" formControlName="imageUrl" required>
   </mat-form-field>
+  <div *ngIf="imageUrl.errors?.pattern" class="invalid">
+    Image Url not valid.
+  </div> 
   <div>
     <button [disabled]="!step.valid" mat-button matStepperNext>Next</button>
   </div>

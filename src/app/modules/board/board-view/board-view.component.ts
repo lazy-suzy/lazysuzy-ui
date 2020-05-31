@@ -68,6 +68,7 @@ export class BoardViewComponent implements OnInit, AfterViewInit {
   iLimit: number;
   total_count: number = 0;
   hasSearched: boolean;
+  hasLoadedAllProducts: boolean = false;
   constructor(
     private cookieService: CookieService,
     private dialog: MatDialog,
@@ -132,6 +133,9 @@ export class BoardViewComponent implements OnInit, AfterViewInit {
             refId: i,
           };
         });
+        if (this.remoteProducts.length < 24 || !this.remoteProducts.length) {
+          this.hasLoadedAllProducts = true;
+        }
         this.iPageNo += 1;
         this.showLoader = false;
       });
@@ -262,6 +266,9 @@ export class BoardViewComponent implements OnInit, AfterViewInit {
         });
         this.filterData = s.filterData || {};
         this.pageNo++;
+        if (this.remoteProducts.length < 24 || !this.remoteProducts.length ) {
+          this.hasLoadedAllProducts = true;
+        }
         this.boardService.setBoardData(
           this.remoteProducts,
           this.selectedCategory,
@@ -306,7 +313,7 @@ export class BoardViewComponent implements OnInit, AfterViewInit {
         x: 0,
         y: 0,
       },
-      aspectRatio: (16 / 9).toFixed(2),
+      aspectRatio: (16 / 7.1).toFixed(2),
       zoomValue: 1,
       zoomFactor: 0.1,
       borderColor: '#b76e79',
@@ -484,8 +491,9 @@ export class BoardViewComponent implements OnInit, AfterViewInit {
         });
       });
     });
+    const isBoardApi = true;
     this.productsSubscription = this.apiService
-      .getWishlistProducts()
+      .getWishlistProducts(isBoardApi)
       .subscribe((payload: IProductsPayload) => {
         this.favoriteProducts = payload.products;
         this.favoriteProducts = this.favoriteProducts.map((ele, i) => {
@@ -744,8 +752,10 @@ export class BoardViewComponent implements OnInit, AfterViewInit {
         this.renderAppMeta();
       }
     });
-  };
-
+  }
+  handleAssetUpdate(event) {
+    this.appMeta.asset = event;
+  }
   initializeCanvas = (callback) => {
     this.canvas = new fb.Canvas(this.canvasMeta.identifier.id, {
       containerClass: this.canvasMeta.identifier.containerArea,

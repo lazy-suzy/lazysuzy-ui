@@ -282,12 +282,14 @@ export class ApiService {
     return this.httpService.get(url, headers);
   }
 
-  getWishlistProducts(): Observable<IProductsPayload> {
+  getWishlistProducts(isBoard): Observable<IProductsPayload> {
     // const filters = '';
     // const sortTypes = '';
     // const endpoint = `products/${department}/${category}`;
     const endpoint = `wishlist`;
-    const url = `${env.API_BASE_HREF}${endpoint}`;
+    let url: string = `${env.API_BASE_HREF}${endpoint}${
+      isBoard ? '?board-view=true' : ''
+    }`;
     const headers = new HttpHeaders({
       'Content-Type': 'application/json',
       Authorization: `Bearer ${this.cookie.get('token')}`,
@@ -307,7 +309,10 @@ export class ApiService {
   login(data) {
     const endpoint = `login`;
     const url = `${env.API_BASE_HREF}${endpoint}`;
-    return this.httpService.post(url, data);
+    const headers = new HttpHeaders({
+      Authorization: `Bearer ${this.cookie.get('token')}`,
+    });
+    return this.httpService.post(url, data, headers);
   }
 
   subscription(URL, email): Observable<string> {

@@ -87,11 +87,14 @@
         (mouseout)="hideVariationImage()"
       />
     </div>
-    <div
+    <ng-container *ngIf="product.variations">
+      <div
       (click)="openDialog()"
       *ngIf="product.variations.length > numbOfSwatchItems"
-    >
-      + more
-    </div>
+      >
+        + more
+      </div>
+    </ng-container>
+    
   </div>
 </div>
