@@ -1574,7 +1574,7 @@ export class BoardViewComponent implements OnInit, AfterViewInit {
 
           this.canvas.add(this.canvasMeta.value.crop.box);
           this.canvas.setActiveObject(this.canvasMeta.value.crop.box);
-
+          this.canvasMeta.flag.isCurrentSelectionEmpty = true;
           break;
       }
 

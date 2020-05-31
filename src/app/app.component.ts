@@ -51,7 +51,7 @@ export class AppComponent {
   }
 
   ngOnInit(): void {
-    this.createGuestUserIfRequired();
+    this.initializeUserSession();
     this.bpSubscription = this.bpObserver.subscribe(
       (handset: BreakpointState) => {
         this.isHandset = handset.matches;
@@ -67,19 +67,50 @@ export class AppComponent {
   ngOnDestroy(): void {
     this.bpSubscription.unsubscribe();
   }
-  async createGuestUserIfRequired() {
-    // no trace of user
-    if (!this.cookie.get('token') && !localStorage.getItem('user')) {
-      var formData: any = new FormData();
-      formData.append('guest', 1);
-      const payload: any = await this.apiService.signup(formData).toPromise();
-      if (payload.success) {
-        this.cookie.set('token', payload.success.token, this.expiredDate, '/');
-        localStorage.setItem('user', JSON.stringify(payload.success.user));
-        this.isLoggedIn = true;
+  async initializeUserSession() {
+
+    const attribute = {
+      postGuestKey: 'guest',
+      lsGuestUser: 'guest-user',
+      lsGuestUserToken: 'guest-token',
+      lsRegularUser: 'user',
+      cookieUserRegularToken: 'token'
+    };
+    
+    let guestUserCreated = false;
+
+    if (!localStorage.getItem(attribute.lsGuestUser) || !localStorage.getItem(attribute.lsGuestUserToken)){
+      let skipGuestUserCreation = false;
+
+      // this "IF BLOCK" is temporary code block to handle cases where there is some data for user
+      if (localStorage.getItem(attribute.lsRegularUser) && this.cookie.get(attribute.cookieUserRegularToken)){
+        let currentUser = JSON.parse(localStorage.getItem(attribute.lsRegularUser));
+        // the current user is already a guest so copy the data
+        if (currentUser.email == ""){
+          skipGuestUserCreation = true;
+          localStorage.setItem(attribute.lsGuestUser, localStorage.getItem(attribute.lsRegularUser));
+          localStorage.setItem(attribute.lsGuestUserToken, this.cookie.get(attribute.cookieUserRegularToken));
+        }
       }
-    } else {
-      this.isLoggedIn = true;
+
+      if (!skipGuestUserCreation) {
+        const payload: any = await this.apiService.signup({
+          guest: 1
+        }).toPromise();
+        if (payload.success) {
+          guestUserCreated = true;
+          localStorage.setItem(attribute.lsGuestUser, JSON.stringify(payload.success.user));
+          localStorage.setItem(attribute.lsGuestUserToken, payload.success.token);
+        }
+      }
     }
+
+    if (!localStorage.getItem(attribute.lsRegularUser) || !this.cookie.get(attribute.cookieUserRegularToken) || guestUserCreated) {
+      localStorage.setItem(attribute.lsRegularUser, localStorage.getItem(attribute.lsGuestUser));
+      this.cookie.set(attribute.cookieUserRegularToken, localStorage.getItem(attribute.lsGuestUserToken), this.expiredDate, '/');
+    }
+
+    this.isLoggedIn = true;
+
   }
 }

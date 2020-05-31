@@ -120,21 +120,12 @@ export class AuthComponent implements OnInit {
   }
 
   logout() {
-    // change user type to guest on logout
-    let userInLocalStorage = JSON.parse(localStorage.getItem('user'));
-
-    if (userInLocalStorage && userInLocalStorage.hasOwnProperty('user_type')) {
-      userInLocalStorage.user_type = this.utils.userType.guest;
-      localStorage.setItem('user', JSON.stringify(userInLocalStorage));
-      this.fetchUser();
-    }
-    // handling previous version of the database
-    else {
-      this.cookie.set('token', '');
+    this.apiService.signout().subscribe((payload: any) => {
+      console.log(payload);
+      this.cookie.delete('token');
       localStorage.removeItem('user');
-      this.fetchUser();
-    }
-    window.location.reload();
+      window.location.reload();
+    });
   }
 
   isCurrentUserGuest(): boolean {

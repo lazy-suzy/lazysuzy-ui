@@ -235,6 +235,17 @@
             </div>
           </div>
           <div class="col-sm-6 col-md-4">
+            <div class="crop-toolbar float-right">
+              <button class="btn" (click)="handleCrop(true)">
+                <i class="mdi mdi-check mr-0" aria-hidden="true"></i> Crop
+              </button>
+              <button class="btn" (click)="handleCrop(false)">
+                <i class="mdi mdi-undo mr-0" aria-hidden="true"></i> Cancel
+              </button>
+              <button class="btn" (click)="handleCrop(false, true)">
+                <i class="mdi mdi-minus mr-0" aria-hidden="true"></i> Revert
+              </button>
+            </div>
             <div class="item-action-icons float-right">
               <span
                 data-title="Remove Background"
@@ -281,30 +292,6 @@
               </span>
               
             </div>
-            <!-- <div class="top-panel-hide crop-toolbar">
-              <span class="btn" (click)="handleCrop(true)">
-                <i class="mdi mdi-check" aria-hidden="true"></i> Crop
-              </span>
-              <span class="btn" (click)="handleCrop(false)">
-                <i class="mdi mdi-undo" aria-hidden="true"></i> Cancel
-              </span>
-              <span class="btn" (click)="handleCrop(false, true)">
-                <i class="mdi mdi-minus" aria-hidden="true"></i> Revert
-              </span>
-            </div> -->
-          </div>
-        </div>
-        <div class="top-panel row top-panel-hide crop-toolbar">
-          <div class="col-sm-12">
-            <button class="btn" (click)="handleCrop(true)">
-              <i class="mdi mdi-check mr-0" aria-hidden="true"></i> Crop
-            </button>
-            <button class="btn" (click)="handleCrop(false)">
-              <i class="mdi mdi-undo mr-0" aria-hidden="true"></i> Cancel
-            </button>
-            <button class="btn" (click)="handleCrop(false, true)">
-              <i class="mdi mdi-minus mr-0" aria-hidden="true"></i> Revert
-            </button>
           </div>
         </div>
         <div class="canvas-content">
