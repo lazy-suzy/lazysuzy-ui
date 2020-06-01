@@ -1,11 +1,11 @@
 <div>
-  <div class="ph5-ns ph4 w-100 pt-4 board-modal">
-    <div class="canvas-config pb-0">
+  <div class="ph5-ns ph4 w-100 pt4 board-modal">
+    <div class="canvas-config pb0">
       <div class="pv3">
         <!-- <h4 class="board-header">Board Configuration</h4> -->
-        <h5 class="title ml-2 text-center b">Start New Design Board</h5>
+        <h5 class="title ml2 text-center b">Start New Design Board</h5>
       </div>
-      <div class="pb-3">
+      <div class="pb3">
         <h6 class="title font-size-12">
           Select Canvas Style
         </h6>
@@ -24,14 +24,14 @@
           </div>
         </div>
       </div>
-      <div class="row">
-        <div *ngIf="showBoardPanel" class="col-12" id="board-options-modal">
-          <div class="pb-3">
-            <h6 class="title ml-2 mt-5 font-size-12">Select Canvas Color</h6>
+      <div class="flex">
+        <div *ngIf="showBoardPanel" class="w-100" id="board-options-modal">
+          <div class="pb3">
+            <h6 class="title ml2 mt4 font-size-12">Select Canvas Color</h6>
           </div>
 
-          <div class="row justify-content-left">
-            <div class="col-12 board-options">
+          <div class="flex justify-content-left">
+            <div class="w-100 board-options">
               <ng-container
                 *ngFor="
                   let backgroundColor of backgroundColors;
@@ -51,30 +51,30 @@
         </div>
         <div
           *ngIf="showRoomPanel"
-          class="col-12 canvas-options"
+          class="w-100 canvas-options"
           id="room-options-modal"
         >
-          <div class="pb-3">
-            <h6 class="title ml-2 mt-5 font-size-12">
+          <div class="pb3">
+            <h6 class="title ml2 mt4 font-size-12">
               Select Canvas Background
             </h6>
           </div>
 
-          <div class="row justify-content-left canvas-pallete">
-            <div class="col-12 board-options">
+          <div class="flex justify-content-left canvas-pallete">
+            <div class="w-100 board-options">
               <img
                 *ngFor="let backgroundImage of backgroundImages"
                 (click)="handleChange('background', backgroundImage)"
                 [class.selected]="selected.background == backgroundImage"
                 [src]="backgroundImage"
-                class="col-3"
+                class="w-25 ph2"
               />
             </div>
           </div>
         </div>
       </div>
-      <div class="row board-action-buttons">
-        <div class="col-6 text-right">
+      <div class="flex board-action-buttons">
+        <div class="w-50 ph3 text-right">
           <button
             (click)="cancel()"
             class="btn btn-cancel w-50 js-close-publish-board"
@@ -82,10 +82,10 @@
             Cancel
           </button>
         </div>
-        <div class="col-6">
+        <div class="w-50 ph3">
           <button
             (click)="save()"
-            [disabled]="!currentTab"
+            [disabled]="!isOptionSelected"
             class="btn red-button w-50"
           >
             Go

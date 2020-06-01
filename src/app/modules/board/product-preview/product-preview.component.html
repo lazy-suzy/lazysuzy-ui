@@ -1,6 +1,6 @@
 <div class="product-cont row">
   <div class="col-10 pt-2 pl-0">
-    <div class="pl-2 pt-0 pb-3 b">
+    <div class="pl-2 pt-0 pb-1 b">
       {{ data?.name }}
     </div>
     <div class="flex detail-container">
@@ -11,7 +11,10 @@
         <div class="brand">
           {{ data?.site }}
         </div>
-        <div class="price">${{ minPrice | number}} <span *ngIf="maxPrice">- $</span> {{maxPrice | number}}</div>
+        <div class="price">
+          ${{ minPrice | number }} <span *ngIf="maxPrice">- $</span
+          >{{ maxPrice | number }}
+        </div>
       </div>
     </div>
   </div>

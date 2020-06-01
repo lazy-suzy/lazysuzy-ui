@@ -128,7 +128,8 @@ h6 {
   padding: 0 4px;
   display: flex;
   align-items: center;
-  border: 1px solid #F2F4F3;
+  border: 1px solid #f2f4f3;
+  height: 101px;
 }
 
 .flex-grid-item.col6 {
@@ -346,7 +347,7 @@ h6 {
 .top-panel {
   text-align: left;
   padding: 10px 5px 15px;
-  background: #d6d6d6;
+  background: #b76e79;
   height: 60px;
 }
 
@@ -356,10 +357,12 @@ h6 {
   border-radius: 5px;
   padding: 3px;
   transition: all 0.3s 0s ease;
+  color: #f7f6f6;
 }
 
 .top-panel i:hover {
   background: rgba(120, 120, 120, 0.3);
+  color: #ffcc00;
 }
 
 .top-panel .state-icons i {
@@ -483,7 +486,7 @@ h6 {
 .product-cont img {
   max-width: 90px;
   max-height: 80px;
-  margin: 0 10px 15px 0;
+  margin: 0 10px 0 5px;
 }
 
 .product-cont .product-info {
@@ -1156,6 +1159,8 @@ div.canvas-layout-room {
 
 .browse-title {
   display: flex;
+  max-width: fit-content;
+  cursor: pointer;
 }
 
 .browse-title i {
@@ -1814,6 +1819,7 @@ i.background-msg-arrow {
 
   .flex-grid-item {
     width: 25%;
+    height: 20vw;
   }
 
   [data-title]:hover::before {
@@ -1887,6 +1893,7 @@ i.background-msg-arrow {
 
   .flex-grid-item {
     width: 33.333%;
+    height: 26vw;
   }
 
   .mobile-filter.open {

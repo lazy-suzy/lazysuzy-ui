@@ -4,8 +4,13 @@
 
             <div ng2FileDrop class="upload-container btn-file pointer" [ngClass]="{'another-file-over-class': hasAnotherDropZoneOver}"
                 (fileOver)="fileOverAnother($event)" [uploader]="uploader">
-                <div>Click to Upload or Drag & Drop here</div>
-                <input type="file" ng2FileSelect [uploader]="uploader" />
+                <div class="cloud-icon">
+                    <i class="mdi mdi-cloud-upload"></i>
+                </div>
+                <div>
+                    <div>Drop image here or click to Upload</div>
+                    <input type="file" ng2FileSelect [uploader]="uploader" />
+                </div>
             </div>
 
             <!-- <span class="btn btn-primary btn-file">

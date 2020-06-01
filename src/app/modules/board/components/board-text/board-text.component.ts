@@ -28,7 +28,7 @@ export class BoardTextComponent implements OnInit {
   },
   {
     name: 'Arial',
-    value: 'Arial'
+    value: 'Arial',
   }];
 
   constructor(private apiService: ApiService) { }

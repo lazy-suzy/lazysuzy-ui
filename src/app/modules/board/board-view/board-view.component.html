@@ -111,7 +111,7 @@
                   ></app-browse-filter>
                 </div>
               </div>
-              <div class="clear-all d-none d-md-block">Clear All</div>
+              <!-- <div class="clear-all d-none">Clear All</div> -->
             </div>
           </div>
 
@@ -134,14 +134,16 @@
             </button>
           </div>
 
-          <button
-            type="button"
-            *ngIf="!showLoader && remoteProducts.length == 0"
-            (click)="handleGoToSelect($event)"
-            class="btn btn-primary"
-          >
-            No products.Select another category.
-          </button>
+          <div class="msg-button-container">
+            <button
+              type="button"
+              *ngIf="!showLoader && remoteProducts.length == 0"
+              (click)="handleGoToSelect($event)"
+              class="btn btn-primary "
+            >
+              No items found. Please click here to select another Category
+            </button>
+          </div>
           <!-- <app-loader *ngIf="showLoader"></app-loader> -->
           <div *ngIf="showLoader" class="loader-container">
             <div class="loader-box">
@@ -185,7 +187,8 @@
           <app-board-text></app-board-text>
         </div>
 
-        <div *ngIf="selectedItem === 'add'" class="padding-top-30 pl-md-0 pl-2">
+        <div *ngIf="selectedItem === 'add'" class="padding-top-30 pl-md-0 pl-2 mt-3">
+          <h5 class="title ml-2">Add Custom Object</h5>
           <app-board-add
             [allAssets]="appMeta.asset"
             [userId]="currentUser.id"
@@ -226,7 +229,7 @@
           class="padding-top-30 pl-sm-0 pl-2 mt-3"
         >
           <div class="text-left w-100">
-            <h5 class="title ml-2">Favorites</h5>
+            <h5 class="title ml-2">Add from Saved Favorites</h5>
           </div>
           <div class="pt-4" *ngIf="!favoriteProducts.length">
             No items found. Save items to your favorites to see them here.

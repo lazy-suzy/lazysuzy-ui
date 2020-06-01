@@ -78,13 +78,24 @@
   position: absolute;
 }
 .loader-container {
-  position: absolute;
+  position: fixed;
   top: 50%;
-  left: 45%;
+  left: 200px;
 }
 .load-more-btn-container {
   text-align: center;
   padding-bottom: 7rem;
+}
+.msg-button-container {
+  button {
+    white-space: normal;
+    position: absolute;
+    width: 90%;
+    left: 5%;
+    top: 50%;
+    color: #ffcc00;
+    background-color: #0d1c31;
+  }
 }
 .loader-box {
   border: 4px solid @primary_color;
@@ -139,15 +150,20 @@
   padding: 0 12px;
   border-radius: 5px;
   border: 1px solid #cbcad0;
+
   cursor: pointer;
   .board-action-button-text {
-    font-size: 16px;
+    font-size: 14px;
     padding-left: 8px;
     font-weight: bold;
+    color: #999999;
   }
   &:hover{
     background-color: #FFC40D;
     border-color: #000000;
+    .board-action-button-text {
+      color: #000000;
+    }
   }
 }
 @media screen and (max-width: 991px) {
@@ -159,5 +175,16 @@
   }
   .padding-top-30 {
     padding-top: 30px !important;
+  }
+  .loader-container {
+    top: 70%;
+    left: 420px;
+  }
+}
+
+@media screen and (max-width: 767px) {
+  .loader-container {
+    top: 60%;
+    left: 200px;
   }
 }
