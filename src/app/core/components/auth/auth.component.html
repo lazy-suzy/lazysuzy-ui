@@ -1,38 +1,19 @@
-<div
-  class="flex"
-  *ngIf="!userCookie || isCurrentUserGuest(); else userName"
-  (click)="openSignupDialog()"
->
-  <mat-icon
-    class="account-icon pointer"
-    aria-hidden="false"
-    aria-label="Account"
-  >
-    account_circle</mat-icon
-  >
+<div *ngIf="initialized">
+  <span *ngIf="isCurrentUserGuest(); else userName" (click)="openSignupDialog()">
+    <mat-icon class="account-icon pointer" aria-hidden="false" aria-label="Account">
+        account_circle
+    </mat-icon>
+  </span>
+  
+  <ng-template #userName>
+    <span class="profile-name pointer" [matMenuTriggerFor]="optionsMenu">
+      {{ initials }}
+    </span>
+  </ng-template>
+  
+  <mat-menu #optionsMenu="matMenu">
+    <span>
+      <button mat-menu-item (click)="logout()">Logout</button>
+    </span>
+  </mat-menu>
 </div>
-<ng-template #userName>
-  <span class="profile-name pointer" [matMenuTriggerFor]="optionsMenu">
-    {{ initials }}
-  </span>
-</ng-template>
-
-<!-- <mat-menu #accountMenu="matMenu">
-  <span (mouseleave)="closeMyMenu()">
-    <button mat-menu-item data-toggle="modal" data-target="#signInModal">
-      Sign In
-    </button>
-    <button mat-menu-item data-toggle="modal" data-target="#signUpModal">
-      Sign Up
-    </button>
-  </span>
-</mat-menu>-->
-
-<mat-menu #optionsMenu="matMenu">
-  <span (mouseleave)="closeMyMenu()">
-    <button mat-menu-item (click)="logout()">Logout</button>
-  </span>
-</mat-menu>
-<!--SignIn Modal -->
-
-<!--SignUp Modal -->

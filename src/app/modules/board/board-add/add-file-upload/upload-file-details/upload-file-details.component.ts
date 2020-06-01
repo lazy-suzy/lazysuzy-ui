@@ -49,7 +49,7 @@ export class UploadFileDetailsComponent implements OnInit {
     const payload = {
       name: 'save-image-details',
       data: new Asset({
-        is_private: this.step.value.keepPrivate,
+        is_private: this.step.value.keepPrivate == true ? 1 : 0,
         name: this.step.value.productTitle,
         price: this.step.value.price,
       }),

@@ -31,8 +31,6 @@ export class AppComponent {
   isHandset: boolean;
   isTablet: boolean = false;
   isMinimalMode = false;
-  isLoggedIn = false;
-  expiredDate = new Date();
 
   constructor(
     private breakpointObserver: BreakpointObserver,
@@ -47,11 +45,9 @@ export class AppComponent {
       )
         this.isMinimalMode = true;
     });
-    this.expiredDate.setMonth(this.expiredDate.getMonth() + 6);
   }
 
   ngOnInit(): void {
-    this.createGuestUserIfRequired();
     this.bpSubscription = this.bpObserver.subscribe(
       (handset: BreakpointState) => {
         this.isHandset = handset.matches;
@@ -66,20 +62,5 @@ export class AppComponent {
 
   ngOnDestroy(): void {
     this.bpSubscription.unsubscribe();
-  }
-  async createGuestUserIfRequired() {
-    // no trace of user
-    if (!this.cookie.get('token') && !localStorage.getItem('user')) {
-      var formData: any = new FormData();
-      formData.append('guest', 1);
-      const payload: any = await this.apiService.signup(formData).toPromise();
-      if (payload.success) {
-        this.cookie.set('token', payload.success.token, this.expiredDate, '/');
-        localStorage.setItem('user', JSON.stringify(payload.success.user));
-        this.isLoggedIn = true;
-      }
-    } else {
-      this.isLoggedIn = true;
-    }
   }
 }

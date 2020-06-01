@@ -291,6 +291,17 @@
             </div>
           </div>
           <div class="col-sm-6 col-md-4">
+            <div class="crop-toolbar float-right">
+              <button class="btn" (click)="handleCrop(true)">
+                <i class="mdi mdi-check mr-0" aria-hidden="true"></i> Crop
+              </button>
+              <button class="btn" (click)="handleCrop(false)">
+                <i class="mdi mdi-undo mr-0" aria-hidden="true"></i> Cancel
+              </button>
+              <button class="btn" (click)="handleCrop(false, true)">
+                <i class="mdi mdi-minus mr-0" aria-hidden="true"></i> Revert
+              </button>
+            </div>
             <div class="item-action-icons float-right">
               <span
                 data-title="Remove Background"
@@ -382,7 +393,7 @@
                 </a>
               </div>
             </div> -->
-            <div class="w-25-ns w-50 ml-4">
+            <div class="w-25-ns w-50">
               <input
                 class="form-control board-title"
                 placeholder="Board title"

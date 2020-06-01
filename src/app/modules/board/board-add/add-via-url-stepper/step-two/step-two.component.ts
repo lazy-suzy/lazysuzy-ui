@@ -18,8 +18,8 @@ export class StepTwoComponent implements OnInit {
     private formService: FormService
   ) {
     this.step = this._formBuilder.group({
-      productTitle: [''],
-      price: [''],
+      productTitle: ['', Validators.required],
+      price: ['', Validators.required],
       productListingUrl: [''],
       additionalTags: [''],
       keepPrivate: [false],

@@ -22,7 +22,7 @@ import { boardRoutesNames } from '../board.routes.names';
 import { Font, FontPickerService } from 'ngx-font-picker';
 import { environment } from 'src/environments/environment';
 import { IProductPayload, IProductsPayload } from '../../../shared/models';
-import { ApiService } from '../../../shared/services';
+import { ApiService, EventEmitterService } from '../../../shared/services';
 import {
   BreakpointState,
   Breakpoints,
@@ -77,7 +77,8 @@ export class BoardViewComponent implements OnInit, AfterViewInit {
     private router: Router,
     private fontPickerService: FontPickerService,
     private apiService: ApiService,
-    private breakpointObserver: BreakpointObserver
+    private breakpointObserver: BreakpointObserver,
+    private eventEmitterService: EventEmitterService,
   ) {
     const user = JSON.parse(localStorage.getItem('user'));
     this.currentUser = user;
@@ -441,7 +442,7 @@ export class BoardViewComponent implements OnInit, AfterViewInit {
       fontColor: '.js-font-select-color',
 
       completeActionElement: ".item-action-icons ",
-      completeTitleElement: ".d-flex:has(.canvas-title-bar)",
+      completeTitleElement: ".top-panel-hide",
 
       fontToolbarElement: '.editor-icons',
       imageToolbarElement: '.image-icons',
@@ -475,6 +476,15 @@ export class BoardViewComponent implements OnInit, AfterViewInit {
   }
 
   ngOnInit(): void {
+
+    // if there is a change in user after the first boot then redirect
+    this.eventEmitterService.userChangeEvent.asObservable().subscribe((user) => {
+      if (!this.appMeta.flag.isBoot)
+        this.router.navigate(['../../' + boardRoutesNames.BOARD_LIST], {
+          relativeTo: this.route,
+        });
+    });
+
     // main entry point
     $(() => {
       this.getConfig(() => {
@@ -746,7 +756,7 @@ export class BoardViewComponent implements OnInit, AfterViewInit {
   getAssets = () => {
     this.boardService.getAssets(true).subscribe((response) => {
       if (response.length > 0) {
-        this.appMeta.asset = response;
+        this.appMeta.asset = response.reverse();
         this.appMeta.flag.isAssetDirty = true;
         this.appMeta.flag.isProductPanelDirty = true;
         this.renderAppMeta();
@@ -1115,8 +1125,14 @@ export class BoardViewComponent implements OnInit, AfterViewInit {
       // });
 
       // this.applyDrop(e, imageToInsert);
+      let effectiveURL = "";
+      try {
+        effectiveURL = new URL(referenceObjectValue.path).href;
+      } catch (_) {
+        effectiveURL = environment.BASE_HREF + referenceObjectValue.path;
+      }
 
-      fb.Image.fromURL(referenceObjectValue.path, (img) => {
+      fb.Image.fromURL(effectiveURL, (img) => {
         img.lockScalingFlip = true;
         img.referenceObject = referenceObjectValue
         this.applyDrop(e, img);
@@ -1265,7 +1281,7 @@ export class BoardViewComponent implements OnInit, AfterViewInit {
   };
 
   updateBoard = () => {
-    if (this.canvasMeta.flag.cropEnabled) return;
+    if (this.canvasMeta.flag.cropEnabled || this.appMeta.flag.isPreviewEnabled) return;
 
     let previewObject = '';
     try {
@@ -1315,11 +1331,13 @@ export class BoardViewComponent implements OnInit, AfterViewInit {
     $(this.appMeta.identifier.completeActionElement).toggle(
       !this.canvasMeta.flag.isCurrentSelectionEmpty
     );
-    // had to do it this way because of css important on flex
-    $(this.appMeta.identifier.completeTitleElement).css(
-      'visibility',
-      this.appMeta.flag.isPreviewEnabled ? 'hidden' : 'visible'
+    $(this.appMeta.identifier.completeTitleElement).toggle(
+      !this.appMeta.flag.isPreviewEnabled
     );
+    // $(this.appMeta.identifier.completeTitleElement).css(
+    //   'visibility',
+    //   this.appMeta.flag.isPreviewEnabled ? 'hidden' : 'visible'
+    // );
     $(this.appMeta.identifier.cropToolbarElement).toggle(
       this.canvasMeta.flag.cropEnabled
     );
@@ -1584,7 +1602,7 @@ export class BoardViewComponent implements OnInit, AfterViewInit {
 
           this.canvas.add(this.canvasMeta.value.crop.box);
           this.canvas.setActiveObject(this.canvasMeta.value.crop.box);
-
+          this.canvasMeta.flag.isCurrentSelectionEmpty = true;
           break;
       }
 
