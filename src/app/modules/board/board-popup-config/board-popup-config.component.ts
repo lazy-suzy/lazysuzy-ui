@@ -1,4 +1,11 @@
-import { Component, OnInit, Output, EventEmitter, Optional, Inject } from '@angular/core';
+import {
+  Component,
+  OnInit,
+  Output,
+  EventEmitter,
+  Optional,
+  Inject
+} from '@angular/core';
 import { environment } from 'src/environments/environment';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 
@@ -8,12 +15,11 @@ import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
   styleUrls: ['./board-popup-config.component.less', '../board.component.less']
 })
 export class BoardPopupConfigComponent implements OnInit {
-
   showBoardPanel;
   showRoomPanel;
   currentTab;
+  isOptionSelected = false;
   isRoomSelected = false;
-
   // border: 1px solid #000000;
   backgroundColors = [
     '#ffffff',
@@ -30,10 +36,10 @@ export class BoardPopupConfigComponent implements OnInit {
     '#e85f5b'
   ];
   backgroundImages = [
-    environment.BASE_HREF + "/storage/floor1.jpg",
-    environment.BASE_HREF + "/storage/floor2.jpg",
-    environment.BASE_HREF + "/storage/floor3.jpg",
-    environment.BASE_HREF + "/storage/floor4.jpg",
+    environment.BASE_HREF + '/storage/floor1.jpg',
+    environment.BASE_HREF + '/storage/floor2.jpg',
+    environment.BASE_HREF + '/storage/floor3.jpg',
+    environment.BASE_HREF + '/storage/floor4.jpg'
   ];
   selected = {
     color: this.backgroundColors[0],
@@ -58,24 +64,30 @@ export class BoardPopupConfigComponent implements OnInit {
 
   handleSelection(selection: string) {
     this.currentTab = selection;
-    if (selection == "board") {
+    if (selection == 'board') {
+      this.isOptionSelected = true;
       this.showBoardPanel = true;
       this.showRoomPanel = false;
-    }
-    else if (selection == "room") {
+    } else if (selection == 'room') {
       this.showBoardPanel = false;
+      if (this.isRoomSelected) {
+        this.isOptionSelected = true;
+      } else {
+        this.isOptionSelected = false;
+      }
       this.showRoomPanel = true;
     }
   }
 
   handleChange(attribute: string, value: string) {
     this.selected[attribute] = value;
-    if(attribute === 'background') {
+    if (attribute === 'background') {
+      this.isOptionSelected = true;
       this.isRoomSelected = true;
     }
     this.onChange.emit({
       attribute: attribute,
-      value: attribute == 'color' ? this.hexToRGB(value) : value,
+      value: attribute == 'color' ? this.hexToRGB(value) : value
     });
   }
 
@@ -90,10 +102,9 @@ export class BoardPopupConfigComponent implements OnInit {
   }
 
   hexToRGB(h) {
-    let r = "0x" + h[1] + h[2];
-    let g = "0x" + h[3] + h[4];
-    let b = "0x" + h[5] + h[6];
-    return "rgb(" + +r + "," + +g + "," + +b + ")";
+    let r = '0x' + h[1] + h[2];
+    let g = '0x' + h[3] + h[4];
+    let b = '0x' + h[5] + h[6];
+    return 'rgb(' + +r + ',' + +g + ',' + +b + ')';
   }
-
 }
