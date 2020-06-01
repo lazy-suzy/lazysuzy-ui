@@ -5,10 +5,10 @@ export class Asset {
   brand: string;
   path: string;
   transparent_path: string;
-  is_private: boolean;
-  is_active: boolean;
-  created_at: boolean;
-  updated_at: boolean;
+  is_private: number;
+  is_active: number;
+  created_at: string;
+  updated_at: string;
 
   constructor(values: Object = {}) {
     Object.assign(this, values);

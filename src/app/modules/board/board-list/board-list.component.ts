@@ -6,9 +6,10 @@ import { Board } from '../board';
 import { BoardService } from '../board.service';
 import { boardRoutesNames } from '../board.routes.names';
 import { BoardPopupComponent } from '../board-popup/board-popup.component';
-import { MatDialog } from '@angular/material';
+import { MatDialog, MatSnackBar } from '@angular/material';
 import { environment } from 'src/environments/environment';
 import { BoardPopupConfirmComponent } from '../board-popup-confirm/board-popup-confirm.component';
+import { EventEmitterService } from 'src/app/shared/services';
 
 @Component({
   selector: 'app-board-list',
@@ -20,22 +21,43 @@ export class BoardListComponent implements OnInit {
   boardViewLink = boardRoutesNames.BOARD_VIEW;
   boardPreviewLink = boardRoutesNames.BOARD_PREVIEW;
   isFetching: boolean = false;
+  isFirstBoot: boolean = true;
+
   constructor(
     private boardService: BoardService,
     private router: Router,
     private route: ActivatedRoute,
-    private dialog: MatDialog
+    private dialog: MatDialog,
+    private eventEmitterService: EventEmitterService,
+    private _snackBar: MatSnackBar
   ) { }
 
   ngOnInit(): void {
+
     this.isFetching = true;
-    this.getBoards();
+    this.eventEmitterService.userChangeEvent.asObservable().subscribe((user) => {
+      // if it has been called previously for every new change create a snackbar
+      if (!this.isFirstBoot){
+        this.isFetching = true;
+        this._snackBar.open((user.name ? "Welcome back " + user.name : "Now browsing as guest"), 'Dismiss', {
+          duration: 2000,
+          horizontalPosition: "center",
+          verticalPosition: "top",
+        });
+      }
+      this.isFirstBoot = false;
+      this.getBoards();
+    });
+
+    this.eventEmitterService.userTransitionEvent.subscribe(() => this.isFetching = true);
   }
 
   getBoards(): void {
     this.boardService.getBoards()
-      .subscribe(response => this.boards = response.reverse());
-    this.isFetching = false;
+      .subscribe(response => {
+        this.boards = response.reverse();
+        this.isFetching = false;
+      });
   }
 
   add(board: Board = new Board()): void {

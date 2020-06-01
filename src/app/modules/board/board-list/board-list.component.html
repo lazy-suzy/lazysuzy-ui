@@ -2,7 +2,7 @@
   <div class="board-list-header">
     <h5 class="title">MY BOARDS</h5>
   </div>
-  <app-loader *ngIf="isFetching"></app-loader>
+  <app-board-loader *ngIf="isFetching"></app-board-loader>
   <div class="row" id="board-list" *ngIf="!isFetching">
     <div class="col-sm-3 mt-4">
       <div class="board-card box-shadow-0">

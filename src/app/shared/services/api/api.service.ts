@@ -258,6 +258,15 @@ export class ApiService {
     return this.httpService.get(url, headers);
   }
 
+  keepAlive() {
+    const endpoint = `user/keepalive`;
+    const url = `${env.API_BASE_HREF}${endpoint}`;
+    const headers = new HttpHeaders({
+      Authorization: `Bearer ${this.cookie.get('token')}`,
+    });
+    return this.httpService.get(url, headers);
+  }
+
   getPosts(): Observable<any[]> {
     return this.httpService.get<any[]>(
       'https://psimonmyway.com/wp-json/wp/v2/posts?_embed',

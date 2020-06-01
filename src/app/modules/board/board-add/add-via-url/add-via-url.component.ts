@@ -44,7 +44,7 @@ export class AddViaUrlComponent implements OnInit {
         brand: 'Custom',
         // path: payload.imageUrl,
         // transparent_path: payload.productListingUrl,
-        is_private: payload.keepPrivate,
+        is_private: payload.keepPrivate == true ? 1 : 0,
         url: payload.imageUrl
         // file:
       });
