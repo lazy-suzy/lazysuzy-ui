@@ -11,6 +11,7 @@ export class BoardPopupConfigComponent implements OnInit {
 
   showBoardPanel;
   showRoomPanel;
+  currentTab;
   isRoomSelected = false;
 
   // border: 1px solid #000000;
@@ -56,6 +57,7 @@ export class BoardPopupConfigComponent implements OnInit {
   }
 
   handleSelection(selection: string) {
+    this.currentTab = selection;
     if (selection == "board") {
       this.showBoardPanel = true;
       this.showRoomPanel = false;
