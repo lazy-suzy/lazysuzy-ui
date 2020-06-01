@@ -5,7 +5,7 @@ export const environment = {
   JSON_BASE_HREF: 'assets/resources/',
   ADMIN_API_BASE_HREF: 'http://staging.lazysuzy.com:8081/api/admin/',
   API_BASE_HREF: 'http://staging.lazysuzy.com:8081/api/',
-  BASE_HREF: 'http://staging.lazysuzy.com:8081/api/',
+  BASE_HREF: 'http://staging.lazysuzy.com:8081',
   SITE_URL: 'https://www.lazysuzy.com',
   ES_API_BASE_HREF: 'https://www.lazysuzy.com:9200/',
   LIVE_SITE: false,

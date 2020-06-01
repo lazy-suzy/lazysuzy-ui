@@ -1,6 +1,6 @@
 <div id="board" class="tab active">
   <div class="catalog-content mr-4">
-    <h4 class="title mt-3 mb-3">Board Items</h4>
+    <h5 class="title mt-3 mb-3">Your Board List</h5>
     <div
       class="catalog-item mb-3"
       *ngFor="let product of boardProducts; let index = index"
@@ -13,7 +13,7 @@
             <div class="subtle">{{ product.brand }}</div>
           </div>
           <div class="col-3 price-container">
-            <div class="price">{{ product.price || 'n.a.' }}</div>
+            <div class="price">{{ updatePriceFormat(product.price) || 'n.a.' }}</div>
           </div>
         </div>
       </div>

@@ -21,5 +21,19 @@ export class CurrentBoardComponent implements OnInit {
       this.boardProducts = [...boardProducts] || [];
     }
   }
-
+  updatePriceFormat(price) {
+    let minPrice: string = '';
+    let maxPrice: string = '';
+    var formatter = new Intl.NumberFormat('en-US', {
+      style: 'currency',
+      currency: 'USD',
+    });
+    let splitedPrice = price.split('-');
+    minPrice = formatter.format(splitedPrice[0].slice(1));
+    if (splitedPrice.length > 1) {
+      maxPrice = formatter.format(splitedPrice[1]);
+      return `${minPrice.slice(0, -3)} - ${maxPrice.slice(0, -3)}`;
+    }
+    return `${minPrice.slice(0, -3)}`;
+  }
 }

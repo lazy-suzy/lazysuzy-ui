@@ -100,6 +100,10 @@ export class BrowsefilterComponent implements OnInit {
     } else {
       this.isPriceChanged = true;
     }
+    let _self = this;
+    setTimeout(function(){
+      _self.selectedFilter = '';
+    }, 3000);
     this.buildAndSetFilters();
   }
 

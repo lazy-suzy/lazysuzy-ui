@@ -11,7 +11,7 @@ export class BoardPopupConfigComponent implements OnInit {
 
   showBoardPanel;
   showRoomPanel;
-  currentTab;
+  isRoomSelected = false;
 
   // border: 1px solid #000000;
   backgroundColors = [
@@ -56,7 +56,6 @@ export class BoardPopupConfigComponent implements OnInit {
   }
 
   handleSelection(selection: string) {
-    this.currentTab = selection;
     if (selection == "board") {
       this.showBoardPanel = true;
       this.showRoomPanel = false;
@@ -69,6 +68,9 @@ export class BoardPopupConfigComponent implements OnInit {
 
   handleChange(attribute: string, value: string) {
     this.selected[attribute] = value;
+    if(attribute === 'background') {
+      this.isRoomSelected = true;
+    }
     this.onChange.emit({
       attribute: attribute,
       value: attribute == 'color' ? this.hexToRGB(value) : value,
