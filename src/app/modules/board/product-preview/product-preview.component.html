@@ -11,7 +11,10 @@
         <div class="brand">
           {{ data?.site }}
         </div>
-        <div class="price">${{ minPrice | number}} <span *ngIf="maxPrice">- $</span> {{maxPrice | number}}</div>
+        <div class="price">
+          ${{ minPrice | number }} <span *ngIf="maxPrice">- $</span
+          >{{ maxPrice | number }}
+        </div>
       </div>
     </div>
   </div>
