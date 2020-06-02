@@ -6,11 +6,12 @@ import { IAllDepartment } from '../../../shared/models';
 import { ApiService, UtilsService } from './../../../shared/services';
 import { MessageService } from 'primeng/api';
 import { CookieService } from 'ngx-cookie-service';
+import { EventEmitterService } from 'src/app/shared/services';
 
 @Component({
   selector: 'app-nav-desktop',
   templateUrl: './nav-desktop.component.html',
-  styleUrls: ['./nav-desktop.component.less'],
+  styleUrls: ['./nav-desktop.component.less']
 })
 export class NavDesktopComponent {
   @Input() isTablet: boolean;
@@ -29,14 +30,14 @@ export class NavDesktopComponent {
     private apiService: ApiService,
     private messageService: MessageService,
     private cookie: CookieService,
-    private activatedRoute: ActivatedRoute
+    private activatedRoute: ActivatedRoute,
+    private eventEmitterService: EventEmitterService
   ) {
     this.checkHomeRoute = router.events.subscribe((val) => {
       // this.notHome = location.path() !== '';
       this.notHome =
         location.path() !== '' && location.path().match(/board/) == null;
     });
-    this.getDepartments();
   }
 
   ngOnDestroy(): void {
@@ -44,24 +45,29 @@ export class NavDesktopComponent {
   }
 
   ngOnInit(): void {
-    this.router.events.subscribe((res) => {
-      let orderRoute = this.router.url.slice(1, 6);
-      if (
-        this.router.url === '/aboutus' ||
-        this.router.url === '/checkout' ||
-        orderRoute === 'order'
-      ) {
-        this.hideBar = true;
-      } else {
-        this.hideBar = false;
-      }
-    });
+    this.eventEmitterService.userChangeEvent
+      .asObservable()
+      .subscribe((user) => {
+        this.getDepartments();
+        this.router.events.subscribe((res) => {
+          let orderRoute = this.router.url.slice(1, 6);
+          if (
+            this.router.url === '/aboutus' ||
+            this.router.url === '/checkout' ||
+            orderRoute === 'order'
+          ) {
+            this.hideBar = true;
+          } else {
+            this.hideBar = false;
+          }
+        });
+      });
   }
 
   login() {
     const user = {
       email: this.email,
-      password: this.password,
+      password: this.password
     };
     if (user.email && user.password) {
       this.apiService.login(user).subscribe((res) => {
@@ -73,7 +79,7 @@ export class NavDesktopComponent {
           this.messageService.add({
             severity: 'success',
             summary: 'Success Message',
-            detail: 'User logged in',
+            detail: 'User logged in'
           });
         }
       });
@@ -88,7 +94,7 @@ export class NavDesktopComponent {
       this.messageService.add({
         severity: 'error',
         summary: ' Error Message',
-        detail: 'Please Enter Email and Password',
+        detail: 'Please Enter Email and Password'
       });
     }
   }

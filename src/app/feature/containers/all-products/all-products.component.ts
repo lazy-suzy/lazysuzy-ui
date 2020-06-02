@@ -5,23 +5,26 @@ import {
   IProductPayload,
   IProductsPayload,
   IFilterData,
-  ISortType,
+  ISortType
 } from './../../../shared/models';
-import { ApiService, CacheService } from './../../../shared/services';
+import {
+  ApiService,
+  CacheService,
+  EventEmitterService
+} from './../../../shared/services';
 import { SCROLL_ICON_SHOW_DURATION } from './../../../shared/constants';
 import { Router, ActivatedRoute } from '@angular/router';
 import { Observable, Subscription } from 'rxjs';
 import {
   BreakpointState,
   Breakpoints,
-  BreakpointObserver,
+  BreakpointObserver
 } from '@angular/cdk/layout';
-import { EventEmitterService } from 'src/app/shared/services';
 
 @Component({
   selector: 'app-all-products',
   templateUrl: './all-products.component.html',
-  styleUrls: ['./all-products.component.less'],
+  styleUrls: ['./all-products.component.less']
 })
 export class AllProductsComponent implements OnInit {
   productsSubscription: Subscription;
@@ -64,16 +67,16 @@ export class AllProductsComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.getParamsFromQuery();
     this.eventEmitterService.userChangeEvent
       .asObservable()
       .subscribe((user) => {
+        this.getParamsFromQuery();
+        this.bpSubscription = this.bpObserver.subscribe(
+          (handset: BreakpointState) => {
+            this.isHandset = handset.matches;
+          }
+        );
       });
-    this.bpSubscription = this.bpObserver.subscribe(
-      (handset: BreakpointState) => {
-        this.isHandset = handset.matches;
-      }
-    );
   }
 
   ngOnDestroy(): void {
@@ -226,7 +229,7 @@ export class AllProductsComponent implements OnInit {
     window.scroll({
       top: 0,
       left: 0,
-      behavior: 'smooth',
+      behavior: 'smooth'
     });
   }
 

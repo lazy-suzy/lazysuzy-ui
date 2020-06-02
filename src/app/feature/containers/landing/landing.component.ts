@@ -40,18 +40,18 @@ export class LandingComponent implements OnInit {
     this.eventEmitterService.userChangeEvent
       .asObservable()
       .subscribe((user) => {
+        this.emailForm = this.formBuilder.group({
+          email: ['', [Validators.required, Validators.email]]
+        });
+        this.bpSubscription = this.bpObserver.subscribe(
+          (handset: BreakpointState) => {
+            this.isHandset = handset.matches;
+          }
+        );
       });
-    this.emailForm = this.formBuilder.group({
-      email: ['', [Validators.required, Validators.email]]
-    });
-    this.bpSubscription = this.bpObserver.subscribe(
-      (handset: BreakpointState) => {
-        this.isHandset = handset.matches;
-      }
-    );
   }
 
   onSubmit(value: any) {
-    this.apiService.getEmail().subscribe(res => {});
+    this.apiService.getEmail().subscribe((res) => {});
   }
 }

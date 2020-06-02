@@ -5,22 +5,22 @@ import {
   ApiService,
   UtilsService,
   CacheService,
+  EventEmitterService
 } from 'src/app/shared/services';
 import { Observable, Subscription } from 'rxjs';
 import {
   BreakpointState,
   Breakpoints,
-  BreakpointObserver,
+  BreakpointObserver
 } from '@angular/cdk/layout';
 import { Gallery, GalleryItem, ImageItem } from '@ngx-gallery/core';
 import { Lightbox } from '@ngx-gallery/lightbox';
 import { VariationsComponent } from '../variations/variations.component';
-import { EventEmitterService } from 'src/app/shared/services';
 
 @Component({
   selector: 'app-product-details-mobile',
   templateUrl: './product-details-mobile.component.html',
-  styleUrls: ['./product-details-mobile.component.less'],
+  styleUrls: ['./product-details-mobile.component.less']
 })
 export class ProductDetailsMobileComponent implements OnInit {
   @ViewChild(VariationsComponent, { static: false }) child: VariationsComponent;
@@ -52,7 +52,7 @@ export class ProductDetailsMobileComponent implements OnInit {
   selectedSwatch = {
     swatch_image: null,
     price: '',
-    wasPrice: '',
+    wasPrice: ''
   };
   errorMessage: string = '';
   quantity: number = 1;
@@ -75,13 +75,13 @@ export class ProductDetailsMobileComponent implements OnInit {
     this.eventEmitterService.userChangeEvent
       .asObservable()
       .subscribe((user) => {
+        this.bpSubscription = this.bpObserver.subscribe(
+          (handset: BreakpointState) => {
+            this.isHandset = handset.matches;
+          }
+        );
+        this.loadProduct();
       });
-    this.bpSubscription = this.bpObserver.subscribe(
-      (handset: BreakpointState) => {
-        this.isHandset = handset.matches;
-      }
-    );
-    this.loadProduct();
   }
 
   loadProduct() {
@@ -166,7 +166,7 @@ export class ProductDetailsMobileComponent implements OnInit {
       this.selectedSwatch = {
         swatch_image: variation.swatch_image,
         price: variation.price,
-        wasPrice: variation.was_price,
+        wasPrice: variation.was_price
       };
       this.productPrice = variation.price;
       this.productWasPrice = variation.was_price;
@@ -188,7 +188,7 @@ export class ProductDetailsMobileComponent implements OnInit {
 
   openLightbox(index: number) {
     this.lightbox.open(index, this.galleryId, {
-      panelClass: 'fullscreen',
+      panelClass: 'fullscreen'
     });
   }
 
@@ -224,11 +224,11 @@ export class ProductDetailsMobileComponent implements OnInit {
       image: this.items[0].data.src,
       name: this.product.name,
       price: this.productPrice,
-      quantity: this.quantity,
+      quantity: this.quantity
     };
     const postData = {
       product_sku: this.productSku,
-      count: this.quantity,
+      count: this.quantity
     };
     this.apiService.addCartProduct(postData).subscribe(
       (payload: any) => {

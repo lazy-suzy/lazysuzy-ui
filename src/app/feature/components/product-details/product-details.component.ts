@@ -8,10 +8,13 @@ import {
 import { MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { Subscription } from 'rxjs';
 import { IProductPayload, IProductDetail } from 'src/app/shared/models';
-import { ApiService, UtilsService } from 'src/app/shared/services';
+import {
+  ApiService,
+  UtilsService,
+  EventEmitterService
+} from 'src/app/shared/services';
 import { Gallery, GalleryItem, ImageItem } from '@ngx-gallery/core';
 import { Lightbox } from '@ngx-gallery/lightbox';
-import { EventEmitterService } from 'src/app/shared/services';
 
 @Component({
   selector: 'app-product-details',
@@ -67,64 +70,68 @@ export class ProductDetailsComponent implements OnInit {
 
   ngOnInit(): void {
     this.isProductFetching = true;
-    this.productSubscription = this.apiService
-      .getProduct(this.data.sku)
-      .subscribe((payload: IProductDetail) => {
-        this.product = payload;
-        this.items = this.product.on_server_images.map(
-          (item) => new ImageItem({ src: item })
-        );
-        this.galleryRef.load(this.items);
-        this.description = this.utils.compileMarkdown(this.product.description);
-        this.features = this.utils.compileMarkdown(
-          this.product.features,
-          this.product.site
-        );
-        this.dimensionExist = this.utils.checkDataLength(
-          this.product.dimension
-        );
-        this.featuresExist = this.utils.checkDataLength(this.product.features);
-        this.descriptionExist = this.utils.checkDataLength(
-          this.product.description
-        );
-        this.isSwatchExist = this.utils.checkDataLength(
-          this.product.variations.filter(
-            (variation) => variation.swatch_image !== null
-          )
-        );
-        if (this.product.in_inventory) {
-          this.productPrice = this.product.inventory_product_details.price;
-          this.productWasPrice = this.product.inventory_product_details.price;
-          for (
-            let i = 1;
-            i <= this.product.inventory_product_details.count && i <= 10;
-            i++
-          ) {
-            this.quantityArray.push({ value: i });
-          }
-        } else {
-          this.productPrice = this.product.is_price;
-          this.productWasPrice = this.product.was_price;
-        }
-        this.isVariationExist = this.utils.checkDataLength(
-          this.product.variations
-        );
-        this.variations = this.product.variations.sort((a, b) =>
-          a.name > b.name ? 1 : -1
-        );
-        if (this.product.set) {
-          this.checkSetInventory(this.product.set);
-        }
-        this.isProductFetching = false;
-        const _self = this;
-        setTimeout(function () {
-          _self.getMaxHeight();
-        }, 1000);
-      });
 
     this.eventEmitterService.userChangeEvent
       .asObservable()
       .subscribe((user) => {
+        this.productSubscription = this.apiService
+          .getProduct(this.data.sku)
+          .subscribe((payload: IProductDetail) => {
+            this.product = payload;
+            this.items = this.product.on_server_images.map(
+              (item) => new ImageItem({ src: item })
+            );
+            this.galleryRef.load(this.items);
+            this.description = this.utils.compileMarkdown(
+              this.product.description
+            );
+            this.features = this.utils.compileMarkdown(
+              this.product.features,
+              this.product.site
+            );
+            this.dimensionExist = this.utils.checkDataLength(
+              this.product.dimension
+            );
+            this.featuresExist = this.utils.checkDataLength(
+              this.product.features
+            );
+            this.descriptionExist = this.utils.checkDataLength(
+              this.product.description
+            );
+            this.isSwatchExist = this.utils.checkDataLength(
+              this.product.variations.filter(
+                (variation) => variation.swatch_image !== null
+              )
+            );
+            if (this.product.in_inventory) {
+              this.productPrice = this.product.inventory_product_details.price;
+              this.productWasPrice = this.product.inventory_product_details.price;
+              for (
+                let i = 1;
+                i <= this.product.inventory_product_details.count && i <= 10;
+                i++
+              ) {
+                this.quantityArray.push({ value: i });
+              }
+            } else {
+              this.productPrice = this.product.is_price;
+              this.productWasPrice = this.product.was_price;
+            }
+            this.isVariationExist = this.utils.checkDataLength(
+              this.product.variations
+            );
+            this.variations = this.product.variations.sort((a, b) =>
+              a.name > b.name ? 1 : -1
+            );
+            if (this.product.set) {
+              this.checkSetInventory(this.product.set);
+            }
+            this.isProductFetching = false;
+            const _self = this;
+            setTimeout(function () {
+              _self.getMaxHeight();
+            }, 1000);
+          });
         this.localStorageUser = user;
       });
   }

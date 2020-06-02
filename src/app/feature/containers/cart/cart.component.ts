@@ -52,9 +52,8 @@ export class CartComponent implements OnInit {
         if (user.user_type === 1) {
           this.isLoggedIn = true;
         }
+        this.getCartProducts();
       });
-
-    this.getCartProducts();
   }
 
   getCartProducts() {

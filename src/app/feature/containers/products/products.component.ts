@@ -3,7 +3,7 @@ import {
   OnInit,
   OnDestroy,
   HostListener,
-  ElementRef,
+  ElementRef
 } from '@angular/core';
 import { Location } from '@angular/common';
 import { HttpParams } from '@angular/common/http';
@@ -11,13 +11,14 @@ import {
   IProductPayload,
   IProductsPayload,
   IFilterData,
-  ISortType,
+  ISortType
 } from './../../../shared/models';
 import { MatDialog } from '@angular/material/dialog';
 import {
   ApiService,
   UtilsService,
   CacheService,
+  EventEmitterService
 } from './../../../shared/services';
 import { SCROLL_ICON_SHOW_DURATION } from './../../../shared/constants';
 import { Router, ActivatedRoute } from '@angular/router';
@@ -25,14 +26,13 @@ import { Observable, Subscription } from 'rxjs';
 import {
   BreakpointState,
   Breakpoints,
-  BreakpointObserver,
+  BreakpointObserver
 } from '@angular/cdk/layout';
-import { EventEmitterService } from 'src/app/shared/services';
 
 @Component({
   selector: 'app-products',
   templateUrl: './products.component.html',
-  styleUrls: ['./products.component.less'],
+  styleUrls: ['./products.component.less']
 })
 export class ProductsComponent implements OnInit, OnDestroy {
   productsSubscription: Subscription;
@@ -45,7 +45,7 @@ export class ProductsComponent implements OnInit, OnDestroy {
     category: [],
     shape: [],
     seating: [],
-    price: { from: 0, min: 0, max: 0, to: 0 },
+    price: { from: 0, min: 0, max: 0, to: 0 }
   };
   department: string;
   category: string;
@@ -87,28 +87,30 @@ export class ProductsComponent implements OnInit, OnDestroy {
   ) {}
 
   ngOnInit(): void {
-    this.getParams();
-    this.getParamsFromQuery();
     this.eventEmitterService.userChangeEvent
       .asObservable()
       .subscribe((user) => {
+        this.getParams();
+        this.getParamsFromQuery();
+        this.bpSubscription = this.bpObserver.subscribe(
+          (handset: BreakpointState) => {
+            this.isHandset = handset.matches;
+          }
+        );
+        this.routeSubscription = this.activeRoute.params.subscribe(
+          (routeParams) => {
+            this.department = routeParams.department;
+            this.category = routeParams.category;
+            this.checkPage();
+          }
+        );
+        this.modalSku = this.activeRoute.snapshot.queryParamMap.get(
+          'modal_sku'
+        );
+        if (this.modalSku) {
+          this.utilsService.openMatDialog(this.modalSku);
+        }
       });
-    this.bpSubscription = this.bpObserver.subscribe(
-      (handset: BreakpointState) => {
-        this.isHandset = handset.matches;
-      }
-    );
-    this.routeSubscription = this.activeRoute.params.subscribe(
-      (routeParams) => {
-        this.department = routeParams.department;
-        this.category = routeParams.category;
-        this.checkPage();
-      }
-    );
-    this.modalSku = this.activeRoute.snapshot.queryParamMap.get('modal_sku');
-    if (this.modalSku) {
-      this.utilsService.openMatDialog(this.modalSku);
-    }
   }
 
   ngOnDestroy(): void {
@@ -264,7 +266,7 @@ export class ProductsComponent implements OnInit, OnDestroy {
     window.scroll({
       top: 0,
       left: 0,
-      behavior: 'smooth',
+      behavior: 'smooth'
     });
   }
 

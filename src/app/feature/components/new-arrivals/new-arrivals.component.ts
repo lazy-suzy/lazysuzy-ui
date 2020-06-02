@@ -1,5 +1,9 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { ApiService, UtilsService } from './../../../shared/services';
+import {
+  ApiService,
+  UtilsService,
+  EventEmitterService
+} from './../../../shared/services';
 import { Router } from '@angular/router';
 import { Carousel } from 'primeng/carousel';
 import { IProductsPayload } from 'src/app/shared/models';
@@ -14,10 +18,10 @@ export class NewArrivalsComponent implements OnInit {
   responsiveOptions: any;
 
   mySlideImages = [1, 2, 3].map(
-    i => `https://picsum.photos/640/480?image=${i}`
+    (i) => `https://picsum.photos/640/480?image=${i}`
   );
   myCarouselImages = [1, 2, 3, 4, 5, 6].map(
-    i => `https://picsum.photos/640/480?image=${i}`
+    (i) => `https://picsum.photos/640/480?image=${i}`
   );
   mySlideOptions = { items: 1, dots: true, nav: false };
   myCarouselOptions = { items: 3, dots: true, nav: true };
@@ -36,7 +40,8 @@ export class NewArrivalsComponent implements OnInit {
   constructor(
     private apiService: ApiService,
     private router: Router,
-    private utilsService: UtilsService
+    private utilsService: UtilsService,
+    private eventEmitterService: EventEmitterService
   ) {
     this.responsiveOptions = [
       {
@@ -59,7 +64,11 @@ export class NewArrivalsComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.getNewArrivals();
+    this.eventEmitterService.userChangeEvent
+      .asObservable()
+      .subscribe((user) => {
+        this.getNewArrivals();
+      });
   }
   getNewArrivals(): void {
     this.showLoader = true;

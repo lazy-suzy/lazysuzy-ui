@@ -5,10 +5,11 @@ import { IAllDepartment } from '../../../shared/models/all-department.interface'
 import { Subscription } from 'rxjs';
 import { Location } from '@angular/common';
 import { CookieService } from 'ngx-cookie-service';
+import { EventEmitterService } from 'src/app/shared/services';
 @Component({
   selector: 'app-nav-mobile',
   templateUrl: './nav-mobile.component.html',
-  styleUrls: ['./nav-mobile.component.less'],
+  styleUrls: ['./nav-mobile.component.less']
 })
 export class NavMobileComponent {
   logoPath: string = 'assets/image/color_logo_transparent.png';
@@ -27,9 +28,9 @@ export class NavMobileComponent {
     private utils: UtilsService,
     private cookie: CookieService,
     private router: Router,
-    private location: Location
+    private location: Location,
+    private eventEmitterService: EventEmitterService
   ) {
-    this.getDepartments();
     this.router.events.subscribe((val) => {
       if (val instanceof NavigationEnd) {
         this.menuVisible = false;
@@ -43,14 +44,19 @@ export class NavMobileComponent {
   }
 
   ngOnInit(): void {
-    this.router.events.subscribe((res) => {
-      let orderRoute = this.router.url.slice(1, 6);
-      if (this.router.url === '/checkout' || orderRoute === 'order') {
-        this.hideBar = true;
-      } else {
-        this.hideBar = false;
-      }
-    });
+    this.eventEmitterService.userChangeEvent
+      .asObservable()
+      .subscribe((user) => {
+        this.getDepartments();
+        this.router.events.subscribe((res) => {
+          let orderRoute = this.router.url.slice(1, 6);
+          if (this.router.url === '/checkout' || orderRoute === 'order') {
+            this.hideBar = true;
+          } else {
+            this.hideBar = false;
+          }
+        });
+      });
   }
 
   ngOnDestroy(): void {

@@ -13,4 +13,6 @@ export const environment = {
   FACEBOOK_LINK: 'https://www.lazysuzy.com/redirect/facebook',
   BOARD_BASE_HREF: 'board',
   STRIPE_API_KEY: 'pk_live_fRQIcotImgi7zlvKSIe7f8xT00tE6x9cYY',
+  CLIENT_ID: 11,
+  CLIENT_SECRET: 'qVBaGC2G2qxa55VlbFRMrnPrjJGcRB98HFo8YoE4'
 };

@@ -10,14 +10,14 @@ import {
   IProductPayload,
   ISearchProductsPayload,
   IDepartment,
-  IProductDetail,
+  IProductDetail
 } from './../../models';
 import { MOCK_PRODUCT_FILTERS } from 'src/app/mocks';
 import { forkJoin } from 'rxjs'; // RxJS 6 syntax
 import { delay, filter } from 'rxjs/operators';
 
 @Injectable({
-  providedIn: 'root',
+  providedIn: 'root'
 })
 export class ApiService {
   constructor(
@@ -178,7 +178,7 @@ export class ApiService {
   getSearchProducts(search_query: string): Observable<ISearchProductsPayload> {
     const endpoint = `products/_search`;
     const headers = new HttpHeaders({
-      'Content-Type': 'application/json',
+      'Content-Type': 'application/json'
     });
     const url = `${env.ES_API_BASE_HREF}${endpoint}?source=${search_query}&source_content_type=application%2Fjson`;
     return this.httpService.get(url, headers);
@@ -194,7 +194,7 @@ export class ApiService {
     }`;
     const headers = new HttpHeaders({
       'Content-Type': 'application/json',
-      Authorization: `Bearer ${this.cookie.get('token')}`,
+      Authorization: `Bearer ${this.cookie.get('token')}`
     });
     // env.useLocalJson
     //   ? `${env.JSON_BASE_HREF}${endpoint}`
@@ -212,7 +212,7 @@ export class ApiService {
     const endpoint = `login`;
     const url = `${env.API_BASE_HREF}${endpoint}`;
     const headers = new HttpHeaders({
-      Authorization: `Bearer ${this.cookie.get('token')}`,
+      Authorization: `Bearer ${this.cookie.get('token')}`
     });
     return this.httpService.post(url, data, headers);
   }
@@ -240,7 +240,7 @@ export class ApiService {
 
     const headers = new HttpHeaders({
       'Content-Type': 'application/json',
-      Authorization: `Bearer ${token}`,
+      Authorization: `Bearer ${token}`
     });
     return this.httpService.get(url, headers);
   }
@@ -249,7 +249,7 @@ export class ApiService {
     const endpoint = `register`;
     const url = `${env.API_BASE_HREF}${endpoint}`;
     const headers = new HttpHeaders({
-      Authorization: `Bearer ${this.cookie.get('token')}`,
+      Authorization: `Bearer ${this.cookie.get('token')}`
     });
     return this.httpService.post(url, data, headers);
   }
@@ -258,7 +258,7 @@ export class ApiService {
     const endpoint = `logout`;
     const url = `${env.API_BASE_HREF}${endpoint}`;
     const headers = new HttpHeaders({
-      Authorization: `Bearer ${this.cookie.get('token')}`,
+      Authorization: `Bearer ${this.cookie.get('token')}`
     });
     return this.httpService.get(url, headers);
   }
@@ -267,7 +267,7 @@ export class ApiService {
     const endpoint = `user/keepalive`;
     const url = `${env.API_BASE_HREF}${endpoint}`;
     const headers = new HttpHeaders({
-      Authorization: `Bearer ${this.cookie.get('token')}`,
+      Authorization: `Bearer ${this.cookie.get('token')}`
     });
     return this.httpService.get(url, headers);
   }
@@ -277,8 +277,8 @@ export class ApiService {
       'https://psimonmyway.com/wp-json/wp/v2/posts?_embed',
       {
         params: {
-          per_page: '6',
-        },
+          per_page: '6'
+        }
       }
     );
   }
@@ -294,10 +294,10 @@ export class ApiService {
     const url = `${env.API_BASE_HREF}${endpoint}`;
     const data = {
       access_token,
-      client_id: 11,
-      client_secret: 'qVBaGC2G2qxa55VlbFRMrnPrjJGcRB98HFo8YoE4',
+      client_id: env.CLIENT_ID,
+      client_secret: env.CLIENT_SECRET,
       grant_type: 'social',
-      provider,
+      provider
     };
     return this.httpService.post(url, data);
   }
@@ -306,7 +306,7 @@ export class ApiService {
     const token = this.cookie.get('token');
     const headers = new HttpHeaders({
       'Content-Type': 'application/json',
-      Authorization: `Bearer ${token}`,
+      Authorization: `Bearer ${token}`
     });
     const endpoint = 'cart/add';
     const url = `${env.API_BASE_HREF}${endpoint}`;
@@ -317,7 +317,7 @@ export class ApiService {
     const token = this.cookie.get('token');
     const headers = new HttpHeaders({
       'Content-Type': 'application/json',
-      Authorization: `Bearer ${token}`,
+      Authorization: `Bearer ${token}`
     });
     const endpoint = 'cart/remove';
     const url = `${env.API_BASE_HREF}${endpoint}`;
@@ -329,7 +329,7 @@ export class ApiService {
     const token = this.cookie.get('token');
     const headers = new HttpHeaders({
       'Content-Type': 'application/json',
-      Authorization: `Bearer ${token}`,
+      Authorization: `Bearer ${token}`
     });
     const url = `${env.API_BASE_HREF}${endpoint}`;
     return this.httpService.get(url, headers);
@@ -348,14 +348,14 @@ export class ApiService {
       operation: 'select',
       entity: 'board',
       data: 5,
-      Buser_id: 1,
+      Buser_id: 1
     });
   }
   postStripeToken(data) {
     const token = this.cookie.get('token');
     const headers = new HttpHeaders({
       'Content-Type': 'application/json',
-      Authorization: `Bearer ${token}`,
+      Authorization: `Bearer ${token}`
     });
     const endpoint = `payment/charge`;
     const url = `${env.API_BASE_HREF}${endpoint}`;
@@ -365,7 +365,7 @@ export class ApiService {
     const token = this.cookie.get('token');
     const headers = new HttpHeaders({
       'Content-Type': 'application/json',
-      Authorization: `Bearer ${token}`,
+      Authorization: `Bearer ${token}`
     });
     const endpoint = `order?order_id=${orderId}`;
     const url = `${env.API_BASE_HREF}${endpoint}`;
@@ -375,7 +375,7 @@ export class ApiService {
     const token = this.cookie.get('token');
     const headers = new HttpHeaders({
       'Content-Type': 'application/json',
-      Authorization: `Bearer ${token}`,
+      Authorization: `Bearer ${token}`
     });
     const endpoint = `user/update`;
     const url = `${env.API_BASE_HREF}${endpoint}`;

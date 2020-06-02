@@ -12,7 +12,7 @@ import {
   Element as StripeElement,
   ElementsOptions
 } from 'ngx-stripe';
-import { ApiService } from 'src/app/shared/services';
+import { ApiService, EventEmitterService } from 'src/app/shared/services';
 import { STATE_LIST } from './../../../shared/constants';
 import { Router } from '@angular/router';
 import { Observable, Subscription } from 'rxjs';
@@ -21,7 +21,6 @@ import {
   Breakpoints,
   BreakpointObserver
 } from '@angular/cdk/layout';
-import { EventEmitterService } from 'src/app/shared/services';
 
 @Component({
   selector: 'app-payment',
@@ -157,8 +156,8 @@ export class PaymentComponent implements OnInit {
       .subscribe((user) => {
         this.customerData.email = user.email;
         this.localStorageUser = user;
+        this.getCartProducts();
       });
-    this.getCartProducts();
   }
 
   getCartProducts() {

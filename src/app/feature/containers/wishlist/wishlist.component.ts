@@ -1,9 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { IProductPayload, IProductsPayload } from './../../../shared/models';
-import { ApiService } from './../../../shared/services';
+import { ApiService, EventEmitterService } from './../../../shared/services';
 import { Router } from '@angular/router';
-import { EventEmitterService } from 'src/app/shared/services';
 
 @Component({
   selector: 'app-wishlist',
@@ -14,20 +13,22 @@ export class WishlistComponent implements OnInit {
   productsSubscription: Subscription;
   products: IProductPayload[];
 
-  constructor(private apiService: ApiService, private router: Router,
-              private eventEmitterService: EventEmitterService
+  constructor(
+    private apiService: ApiService,
+    private router: Router,
+    private eventEmitterService: EventEmitterService
   ) {}
 
   ngOnInit(): void {
     this.eventEmitterService.userChangeEvent
       .asObservable()
       .subscribe((user) => {
-      });
-    const isBoardApi = false;
-    this.productsSubscription = this.apiService
-      .getWishlistProducts(isBoardApi)
-      .subscribe((payload: IProductsPayload) => {
-        this.products = payload.products;
+        const isBoardApi = false;
+        this.productsSubscription = this.apiService
+          .getWishlistProducts(isBoardApi)
+          .subscribe((payload: IProductsPayload) => {
+            this.products = payload.products;
+          });
       });
   }
 }

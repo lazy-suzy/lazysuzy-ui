@@ -42,23 +42,23 @@ export class OrderSuccessComponent implements OnInit {
       .asObservable()
       .subscribe((user) => {
         this.isLoggedIn = user.user_type === 1;
-      });
-    this.apiService.getOrderSuccessData(this.orderId).subscribe(
-      (payload: any) => {
-        this.cartProducts = payload.cart;
-        this.deliveryData = payload.delivery;
-        this.cardDetails = payload.payment.card;
-        this.orderDate = moment(payload.delivery[0].created_at).format(
-          'D MMM, YYYY'
+        this.apiService.getOrderSuccessData(this.orderId).subscribe(
+          (payload: any) => {
+            this.cartProducts = payload.cart;
+            this.deliveryData = payload.delivery;
+            this.cardDetails = payload.payment.card;
+            this.orderDate = moment(payload.delivery[0].created_at).format(
+              'D MMM, YYYY'
+            );
+            this.cartProductsLength = 0;
+            this.subTotalAmount = 0;
+            this.calculateCartData();
+          },
+          (error: any) => {
+            console.log(error);
+          }
         );
-        this.cartProductsLength = 0;
-        this.subTotalAmount = 0;
-        this.calculateCartData();
-      },
-      (error: any) => {
-        console.log(error);
-      }
-    );
+      });
   }
   calculateCartData() {
     for (let product of this.cartProducts) {

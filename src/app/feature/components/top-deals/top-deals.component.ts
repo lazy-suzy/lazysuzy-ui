@@ -1,5 +1,9 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { ApiService, UtilsService } from 'src/app/shared/services';
+import {
+  ApiService,
+  UtilsService,
+  EventEmitterService
+} from 'src/app/shared/services';
 import { Router } from '@angular/router';
 import { Carousel } from 'primeng/carousel';
 
@@ -17,7 +21,8 @@ export class TopDealsComponent implements OnInit {
   constructor(
     private apiService: ApiService,
     private router: Router,
-    private utilsService: UtilsService
+    private utilsService: UtilsService,
+    private eventEmitterService: EventEmitterService
   ) {
     this.responsiveOptions = [
       {
@@ -40,12 +45,16 @@ export class TopDealsComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.getTopDeals();
+    this.eventEmitterService.userChangeEvent
+      .asObservable()
+      .subscribe((user) => {
+        this.getTopDeals();
+      });
   }
 
   getTopDeals(): void {
     this.showLoader = true;
-    this.apiService.getTopDeals().subscribe(res => {
+    this.apiService.getTopDeals().subscribe((res) => {
       this.topDeals = res.products;
       this.showLoader = false;
     });
@@ -61,7 +70,7 @@ export class TopDealsComponent implements OnInit {
       : this.utilsService.homepageMatDialog(sku);
   }
 
-  handleEvtProductCarousal(e){
+  handleEvtProductCarousal(e) {
     this.openDialog(e);
   }
 }

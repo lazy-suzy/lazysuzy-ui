@@ -3,8 +3,7 @@
   [src]="spinner"
   class="loader"
 />
-
-<ng-template #showDetails>
+<ng-container *ngIf="!isProductFetching">
   <div class="images-container" #gallery>
     <div class="images">
       <img
@@ -49,9 +48,11 @@
         mat-raised-button
         class="bg-red view-details-btn"
         *ngIf="
+          product &&
           !(
             product.in_inventory && product.inventory_product_details.count > 0
-          ) && !product.redirect
+          ) &&
+          !product.redirect
         "
       >
         <a
@@ -67,7 +68,9 @@
         #quantitySelector
         class="quantity-selector"
         *ngIf="
-          product.in_inventory && product.inventory_product_details.count > 0
+          product &&
+          product.in_inventory &&
+          product.inventory_product_details.count > 0
         "
       >
         <option *ngFor="let item of quantityArray" [value]="item.value">{{
@@ -78,7 +81,9 @@
         mat-raised-button
         class="bg-red view-details-btn"
         *ngIf="
-          product.in_inventory && product.inventory_product_details.count > 0
+          product &&
+          product.in_inventory &&
+          product.inventory_product_details.count > 0
         "
       >
         <a (click)="openCartModal()" class="tr-addToCart no-underline yellow">
@@ -92,6 +97,7 @@
     <div
       class="stock-info"
       *ngIf="
+        product &&
         product.in_inventory &&
         product.inventory_product_details.count > 0 &&
         (product.inventory_product_details.is_low ||
@@ -102,7 +108,10 @@
         <span>
           <mat-icon class="info-icon">info</mat-icon>
         </span>
-        <div class="stock-msg" *ngIf="product.inventory_product_details.is_low">
+        <div
+          class="stock-msg"
+          *ngIf="product && product.inventory_product_details.is_low"
+        >
           Only
           {{
             product.inventory_product_details.count > 10
@@ -116,7 +125,7 @@
         {{ product.inventory_product_details.message }}
       </div>
     </div>
-    <ng-container *ngIf="product.redirect; else allConditions">
+    <ng-container *ngIf="product && product.redirect; else allConditions">
       <hr class="modal-hr mt-3" *ngIf="product.set && product.set.length > 0" />
     </ng-container>
     <ng-template #allConditions>
@@ -128,6 +137,7 @@
     <div *ngIf="!isSetItemInInventory">
       <app-redirect
         *ngIf="
+          product &&
           product.redirect &&
           !(product.in_inventory && product.inventory_product_details.count > 0)
         "
@@ -140,7 +150,7 @@
     </div>
 
     <app-variations
-      *ngIf="isVariationExist && !product.redirect"
+      *ngIf="product && isVariationExist && !product.redirect"
       [variations]="variations"
       [isSwatchExist]="isSwatchExist"
       [inputSelections]="product.selections"
@@ -149,7 +159,7 @@
       (reload)="onVariationChange()"
     ></app-variations>
     <app-sets
-      *ngIf="product.set && product.set.length > 0"
+      *ngIf="product && product.set && product.set.length > 0"
       [sets]="product.set"
       [brand]="product.site"
       [isHandset]="true"
@@ -208,7 +218,7 @@
               class="fl w-50 pa2"
             >
               <div class="dimension-title">{{ dimension.description }}</div>
-              <div >Width: {{ dimension.width }}</div>
+              <div>Width: {{ dimension.width }}</div>
               <div>Depth: {{ dimension.depth }}</div>
               <div>Height: {{ dimension.height }}</div>
               <br />
@@ -223,4 +233,4 @@
       </div>
     </div>
   </div>
-</ng-template>
+</ng-container>
