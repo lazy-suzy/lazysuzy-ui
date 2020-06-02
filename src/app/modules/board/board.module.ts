@@ -42,16 +42,17 @@ import { BoardProductsComponent } from './components/board-products/board-produc
 import { CurrentBoardComponent } from './components/current-board/board.component';
 import { AddFileUploadComponent } from './board-add/add-file-upload/add-file-upload.component';
 import { UploadFileDetailsComponent } from './board-add/add-file-upload/upload-file-details/upload-file-details.component';
+import { InfiniteScrollModule } from 'ngx-infinite-scroll';
 
 import {
   FontPickerModule,
   FONT_PICKER_CONFIG,
-  FontPickerConfigInterface,
+  FontPickerConfigInterface
 } from 'ngx-font-picker';
 import { Ng5SliderModule } from 'ng5-slider';
 
 const DEFAULT_FONT_PICKER_CONFIG: FontPickerConfigInterface = {
-  apiKey: 'AIzaSyBCssLRX6vTUWmk__OTRIz5699gL4kgpVQ',
+  apiKey: 'AIzaSyBCssLRX6vTUWmk__OTRIz5699gL4kgpVQ'
 };
 
 @NgModule({
@@ -76,6 +77,7 @@ const DEFAULT_FONT_PICKER_CONFIG: FontPickerConfigInterface = {
     CarouselModule,
     FontPickerModule,
     Ng5SliderModule,
+    InfiniteScrollModule
   ],
   declarations: [
     BoardComponent,
@@ -100,17 +102,21 @@ const DEFAULT_FONT_PICKER_CONFIG: FontPickerConfigInterface = {
     BoardProductsComponent,
     CurrentBoardComponent,
     AddFileUploadComponent,
-    UploadFileDetailsComponent,
+    UploadFileDetailsComponent
   ],
   entryComponents: [
-    AddViaUrlComponent, 
+    AddViaUrlComponent,
     UploadFileDetailsComponent,
     BoardPopupConfigComponent,
     BoardPopupConfirmComponent
   ],
-  providers: [BoardService, CookieService, {
-    provide: FONT_PICKER_CONFIG,
-    useValue: DEFAULT_FONT_PICKER_CONFIG
-  }]
+  providers: [
+    BoardService,
+    CookieService,
+    {
+      provide: FONT_PICKER_CONFIG,
+      useValue: DEFAULT_FONT_PICKER_CONFIG
+    }
+  ]
 })
 export class BoardModule {}

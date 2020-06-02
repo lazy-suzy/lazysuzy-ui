@@ -7,6 +7,7 @@ import {
   Breakpoints,
   BreakpointObserver
 } from '@angular/cdk/layout';
+import { EventEmitterService } from 'src/app/shared/services';
 
 @Component({
   selector: 'app-landing',
@@ -31,10 +32,15 @@ export class LandingComponent implements OnInit {
   constructor(
     private apiService: ApiService,
     private formBuilder: FormBuilder,
-    private breakpointObserver: BreakpointObserver
+    private breakpointObserver: BreakpointObserver,
+    private eventEmitterService: EventEmitterService
   ) {}
 
   ngOnInit() {
+    this.eventEmitterService.userChangeEvent
+      .asObservable()
+      .subscribe((user) => {
+      });
     this.emailForm = this.formBuilder.group({
       email: ['', [Validators.required, Validators.email]]
     });

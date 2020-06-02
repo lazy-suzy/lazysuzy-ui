@@ -3,7 +3,7 @@ import {
   OnInit,
   AfterViewInit,
   HostListener,
-  ViewChild,
+  ViewChild
 } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { CookieService } from 'ngx-cookie-service';
@@ -33,7 +33,7 @@ declare const fb: any;
 @Component({
   selector: 'app-board-view',
   templateUrl: './board-view.component.html',
-  styleUrls: ['./board-view.component.less', '../board.component.less'],
+  styleUrls: ['./board-view.component.less', '../board.component.less']
 })
 export class BoardViewComponent implements OnInit, AfterViewInit {
   shortcuts: ShortcutInput[] = [];
@@ -78,7 +78,7 @@ export class BoardViewComponent implements OnInit, AfterViewInit {
     private fontPickerService: FontPickerService,
     private apiService: ApiService,
     private breakpointObserver: BreakpointObserver,
-    private eventEmitterService: EventEmitterService,
+    private eventEmitterService: EventEmitterService
   ) {
     const user = JSON.parse(localStorage.getItem('user'));
     this.currentUser = user;
@@ -93,13 +93,13 @@ export class BoardViewComponent implements OnInit, AfterViewInit {
     'Courier',
     'Lato',
     'Open Sans',
-    'Roboto Slab',
+    'Roboto Slab'
   ];
   public font: Font = new Font({
     family: 'Roboto',
     size: '48px',
     style: 'regular',
-    styles: ['regular'],
+    styles: ['regular']
   });
   search() {
     if (!this.hasSearched) {
@@ -118,6 +118,7 @@ export class BoardViewComponent implements OnInit, AfterViewInit {
         }
       }
     });
+    
     if (this.selectedItem === 'select') {
       this.selectedItem = 'browse';
     }
@@ -131,7 +132,7 @@ export class BoardViewComponent implements OnInit, AfterViewInit {
         this.remoteProducts = this.remoteProducts.map((ele, i) => {
           return {
             ...ele,
-            refId: i,
+            refId: i
           };
         });
         if (this.remoteProducts.length < 24 || !this.remoteProducts.length) {
@@ -163,7 +164,7 @@ export class BoardViewComponent implements OnInit, AfterViewInit {
         .updateBoard(
           new Board({
             uuid: this.appMeta.board.data[this.appMeta.board.currentIndex].uuid,
-            type_privacy: 1,
+            type_privacy: 1
           })
         )
         .subscribe();
@@ -173,9 +174,9 @@ export class BoardViewComponent implements OnInit, AfterViewInit {
       panelClass: 'custom-dialog-container',
       data: {
         type: param,
-        board: this.appMeta.board.data[this.appMeta.board.currentIndex],
+        board: this.appMeta.board.data[this.appMeta.board.currentIndex]
       },
-      width: '40%',
+      width: '40%'
     });
     // dialogRef.afterClosed().subscribe(result => {
     //   console.log('The dialog was closed', result);
@@ -188,10 +189,16 @@ export class BoardViewComponent implements OnInit, AfterViewInit {
     const dialogRef = this.dialog.open(BoardPopupConfigComponent, {
       panelClass: 'custom-dialog-container',
       data: {
-        color: this.canvas.backgroundColor ? ("#" + new fb.Color(this.canvas.backgroundColor).toHex()).toLocaleLowerCase() : null,
-        background: this.canvas.backgroundImage ? this.canvas.backgroundImage._element.currentSrc : ""
+        color: this.canvas.backgroundColor
+          ? (
+              '#' + new fb.Color(this.canvas.backgroundColor).toHex()
+            ).toLocaleLowerCase()
+          : null,
+        background: this.canvas.backgroundImage
+          ? this.canvas.backgroundImage._element.currentSrc
+          : ''
       },
-      width: '40%',
+      width: '40%'
     });
 
     dialogRef.componentInstance.onChange.subscribe(this.handleConfigChange);
@@ -206,7 +213,7 @@ export class BoardViewComponent implements OnInit, AfterViewInit {
       this.remoteProducts = [];
       this.pageNo = 0;
       let selCat = this.boardService.getCategory();
-      if(this.hasSearched) {
+      if (this.hasSearched) {
         this.search();
       } else {
         this.getBrowseData(selCat);
@@ -239,7 +246,7 @@ export class BoardViewComponent implements OnInit, AfterViewInit {
       name: 'Browse',
       label: 'Browse',
       value: 'browse',
-      route: 'board-browse',
+      route: 'board-browse'
     });
   }
 
@@ -262,12 +269,12 @@ export class BoardViewComponent implements OnInit, AfterViewInit {
         this.remoteProducts = this.remoteProducts.map((ele, i) => {
           return {
             ...ele,
-            refId: i,
+            refId: i
           };
         });
         this.filterData = s.filterData || {};
         this.pageNo++;
-        if (this.remoteProducts.length < 24 || !this.remoteProducts.length ) {
+        if (this.remoteProducts.length < 24 || !this.remoteProducts.length) {
           this.hasLoadedAllProducts = true;
         }
         this.boardService.setBoardData(
@@ -281,7 +288,7 @@ export class BoardViewComponent implements OnInit, AfterViewInit {
 
   loadMore() {
     let selCat = this.boardService.getCategory();
-    if(this.hasSearched) {
+    if (this.hasSearched) {
       this.search();
     } else {
       this.getBrowseData(selCat);
@@ -296,7 +303,7 @@ export class BoardViewComponent implements OnInit, AfterViewInit {
       name: 'Select',
       label: 'Select',
       value: 'select',
-      route: 'board-select',
+      route: 'board-select'
     });
   }
 
@@ -307,12 +314,12 @@ export class BoardViewComponent implements OnInit, AfterViewInit {
       id: 'canvas-area',
       containerArea: 'canvas-inner-container',
       // specific identifier
-      dropArea: '#canvas-droparea',
+      dropArea: '#canvas-droparea'
     },
     value: {
       center: {
         x: 0,
-        y: 0,
+        y: 0
       },
       aspectRatio: (16 / 7.1).toFixed(2),
       zoomValue: 1,
@@ -332,7 +339,7 @@ export class BoardViewComponent implements OnInit, AfterViewInit {
         mt: false,
         mr: false,
         mb: false,
-        mtr: false,
+        mtr: false
       },
       textControl: {
         tl: true,
@@ -343,7 +350,7 @@ export class BoardViewComponent implements OnInit, AfterViewInit {
         mt: false,
         mr: true,
         mb: false,
-        mtr: true,
+        mtr: true
       },
       imageControl: {
         tl: true,
@@ -354,7 +361,7 @@ export class BoardViewComponent implements OnInit, AfterViewInit {
         mt: false,
         mr: false,
         mb: false,
-        mtr: true,
+        mtr: true
       },
       propertiesToInclude: [
         'transparentCorners',
@@ -362,7 +369,7 @@ export class BoardViewComponent implements OnInit, AfterViewInit {
         'cornerSize',
         'cornerColor',
         'cornerStyle',
-        'referenceObject',
+        'referenceObject'
       ],
       crop: {
         control: {
@@ -374,12 +381,12 @@ export class BoardViewComponent implements OnInit, AfterViewInit {
           mt: true,
           mr: true,
           mb: true,
-          mtr: false,
+          mtr: false
         },
         active: null,
         copy: null,
-        box: null,
-      },
+        box: null
+      }
     },
 
     configuration: {},
@@ -396,8 +403,8 @@ export class BoardViewComponent implements OnInit, AfterViewInit {
       isCurrentObjectText: false,
       isCurrentObjectImage: false,
       isCurrentObjectTransparentable: false,
-      isCurrentObjectTransparentSelected: false,
-    },
+      isCurrentObjectTransparentSelected: false
+    }
   };
   appMeta = {
     asset: [],
@@ -407,8 +414,8 @@ export class BoardViewComponent implements OnInit, AfterViewInit {
       update: {
         exist: false,
         method: () => {},
-        delay: 2000,
-      },
+        delay: 2000
+      }
     },
     flag: {
       isFontToolbarDirty: false,
@@ -417,7 +424,7 @@ export class BoardViewComponent implements OnInit, AfterViewInit {
       isProductPanelDirty: false,
       isBoardItemDirty: false,
       isBoot: true,
-      isPreviewEnabled: false,
+      isPreviewEnabled: false
     },
     value: {
       fontFamily: 'Roboto',
@@ -428,7 +435,7 @@ export class BoardViewComponent implements OnInit, AfterViewInit {
       userID: 1,
       currentSelectedItem: 0,
       lastVisitedTab: '',
-      scaleFactor: 0,
+      scaleFactor: 0
     },
     identifier: {
       customProduct: '.product-image[type="custom"]',
@@ -441,8 +448,8 @@ export class BoardViewComponent implements OnInit, AfterViewInit {
       fontSize: '.js-font-select-size',
       fontColor: '.js-font-select-color',
 
-      completeActionElement: ".item-action-icons ",
-      completeTitleElement: ".top-panel-hide",
+      completeActionElement: '.item-action-icons ',
+      completeTitleElement: '.top-panel-hide',
 
       fontToolbarElement: '.editor-icons',
       imageToolbarElement: '.image-icons',
@@ -461,8 +468,8 @@ export class BoardViewComponent implements OnInit, AfterViewInit {
       backgroundColorElement: '.canvas-pallete-color',
       floorPatternElement: '.canvas-pallete-wood-patterns',
 
-      manualDrop: '.manual-drop',
-    },
+      manualDrop: '.manual-drop'
+    }
   };
 
   facebookRedirect = '';
@@ -474,16 +481,23 @@ export class BoardViewComponent implements OnInit, AfterViewInit {
   onResize() {
     this.handleResize();
   }
-
+  onScroll() {
+    if (this.hasLoadedAllProducts) {
+      return;
+    } else {
+      this.loadMore();
+    }
+  }
   ngOnInit(): void {
-
     // if there is a change in user after the first boot then redirect
-    this.eventEmitterService.userChangeEvent.asObservable().subscribe((user) => {
-      if (!this.appMeta.flag.isBoot)
-        this.router.navigate(['../../' + boardRoutesNames.BOARD_LIST], {
-          relativeTo: this.route,
-        });
-    });
+    this.eventEmitterService.userChangeEvent
+      .asObservable()
+      .subscribe((user) => {
+        if (!this.appMeta.flag.isBoot)
+          this.router.navigate(['../../' + boardRoutesNames.BOARD_LIST], {
+            relativeTo: this.route
+          });
+      });
 
     // main entry point
     $(() => {
@@ -509,7 +523,7 @@ export class BoardViewComponent implements OnInit, AfterViewInit {
         this.favoriteProducts = this.favoriteProducts.map((ele, i) => {
           return {
             ...ele,
-            refId: i,
+            refId: i
           };
         });
       });
@@ -532,128 +546,128 @@ export class BoardViewComponent implements OnInit, AfterViewInit {
         key: 'up',
         command: (e) =>
           this.applyShortcut('activeObjectFetchAssign', 'top', -1),
-        preventDefault: true,
+        preventDefault: true
       },
       {
         key: 'down',
         command: (e) => this.applyShortcut('activeObjectFetchAssign', 'top', 1),
-        preventDefault: true,
+        preventDefault: true
       },
       {
         key: 'left',
         command: (e) =>
           this.applyShortcut('activeObjectFetchAssign', 'left', -1),
-        preventDefault: true,
+        preventDefault: true
       },
       {
         key: 'right',
         command: (e) =>
           this.applyShortcut('activeObjectFetchAssign', 'left', 1),
-        preventDefault: true,
+        preventDefault: true
       },
       {
         key: 'shift + up',
         command: (e) =>
           this.applyShortcut('activeObjectFetchAssign', 'top', -10),
-        preventDefault: true,
+        preventDefault: true
       },
       {
         key: 'shift + down',
         command: (e) =>
           this.applyShortcut('activeObjectFetchAssign', 'top', 10),
-        preventDefault: true,
+        preventDefault: true
       },
       {
         key: 'shift + left',
         command: (e) =>
           this.applyShortcut('activeObjectFetchAssign', 'left', -10),
-        preventDefault: true,
+        preventDefault: true
       },
       {
         key: 'shift + right',
         command: (e) =>
           this.applyShortcut('activeObjectFetchAssign', 'left', 10),
-        preventDefault: true,
+        preventDefault: true
       },
       {
         key: 'esc',
         command: (e) => this.applyShortcut('deselectOrCancel', ''),
-        preventDefault: true,
+        preventDefault: true
       },
       {
         key: 't',
         command: (e) => this.applyShortcut('addText', ''),
-        preventDefault: true,
+        preventDefault: true
       },
       {
         key: 'del',
         command: (e) => this.applyShortcut('action', 'delete'),
-        preventDefault: true,
+        preventDefault: true
       },
       {
         key: ['ctrl + z', 'cmd + z'],
         command: (e) => this.applyShortcut('direct', 'undo'),
-        preventDefault: true,
+        preventDefault: true
       },
       {
         key: ['ctrl + y', 'cmd + y'],
         command: (e) => this.applyShortcut('direct', 'redo'),
-        preventDefault: true,
+        preventDefault: true
       },
       {
         key: ['ctrl + plus', 'cmd + plus', 'ctrl + =', 'cmd + ='],
         command: (e) => this.applyShortcut('direct', 'zoomIn'),
-        preventDefault: true,
+        preventDefault: true
       },
       {
         key: ['ctrl + -', 'cmd + -', 'ctrl + _', 'cmd + _'],
         command: (e) => this.applyShortcut('direct', 'zoomOut'),
-        preventDefault: true,
+        preventDefault: true
       },
       {
         key: ['ctrl + a', 'cmd + a'],
         command: (e) => this.applyShortcut('direct', 'selectAll'),
-        preventDefault: true,
+        preventDefault: true
       },
       {
         key: ['ctrl + d', 'cmd + d'],
         command: (e) => this.applyShortcut('action', 'duplicate'),
-        preventDefault: true,
+        preventDefault: true
       },
       {
         key: ['ctrl + f', 'cmd + f'],
         command: (e) => this.applyShortcut('action', 'flip'),
-        preventDefault: true,
+        preventDefault: true
       },
       {
         key: ['ctrl + b', 'cmd + b'],
         command: (e) => this.applyShortcut('toggleBackground', ''),
-        preventDefault: true,
+        preventDefault: true
       },
       {
         key: ['ctrl + r', 'cmd + r'],
         command: (e) => this.applyShortcut('initializeCrop', ''),
-        preventDefault: true,
+        preventDefault: true
       },
       {
         key: ['ctrl + up', 'cmd + up'],
         command: (e) => this.applyShortcut('action', 'bringForward'),
-        preventDefault: true,
+        preventDefault: true
       },
       {
         key: ['ctrl + down', 'cmd + down'],
         command: (e) => this.applyShortcut('action', 'sendBackward'),
-        preventDefault: true,
+        preventDefault: true
       },
       {
-        key: "ctrl + u",
-        command: e => this.openPopup('publish'),
+        key: 'ctrl + u',
+        command: (e) => this.openPopup('publish'),
         preventDefault: true
       },
       {
         key: 'enter',
         command: (e) => this.applyShortcut('confirmCrop', ''),
-        preventDefault: true,
+        preventDefault: true
       }
     );
     // Object.keys(boardShortcuts).forEach((i) => { this.shortcuts.push(boardShortcuts[i]) });
@@ -696,7 +710,7 @@ export class BoardViewComponent implements OnInit, AfterViewInit {
       let textToInsert = new fb.Textbox('Text', {
         fontFamily: this.appMeta.value.fontFamily,
         fontSize: this.appMeta.value.fontSize,
-        fill: '#000000',
+        fill: '#000000'
       });
       textToInsert.setControlsVisibility(this.canvasMeta.value.textControl);
       this.applyDrop(false, textToInsert);
@@ -727,7 +741,7 @@ export class BoardViewComponent implements OnInit, AfterViewInit {
         if (boardObject.uuid == uuid) {
           boardFound = true;
           this.appMeta.board.currentIndex = objectIndex;
-          if(boardObject.title !== 'Untitled Board'){
+          if (boardObject.title !== 'Untitled Board') {
             $(this.appMeta.identifier.boardTitle).val(boardObject.title);
           }
           this.canvasMeta.currentHistory.push(boardObject.state);
@@ -747,7 +761,7 @@ export class BoardViewComponent implements OnInit, AfterViewInit {
       // if board does not exist redirect user to board list
       if (boardFound == false)
         this.router.navigate(['../../' + boardRoutesNames.BOARD_LIST], {
-          relativeTo: this.route,
+          relativeTo: this.route
         });
       else if (this.justCreated) this.openBoardConfig();
     });
@@ -762,7 +776,7 @@ export class BoardViewComponent implements OnInit, AfterViewInit {
         this.renderAppMeta();
       }
     });
-  }
+  };
   handleAssetUpdate(event) {
     this.appMeta.asset = event;
   }
@@ -771,7 +785,7 @@ export class BoardViewComponent implements OnInit, AfterViewInit {
       containerClass: this.canvasMeta.identifier.containerArea,
       preserveObjectStacking: true,
       useCors: true,
-      origin: "anonymous",
+      origin: 'anonymous',
       allowTaint: true,
       foreignObjectRendering: true,
       width: $(this.canvasMeta.identifier.dropArea).parent().width(),
@@ -779,7 +793,7 @@ export class BoardViewComponent implements OnInit, AfterViewInit {
         $(this.canvasMeta.identifier.dropArea).parent().width() /
         Number.parseFloat(this.canvasMeta.value.aspectRatio),
       backgroundColor: 'rgb(255,255,255)',
-      selection: true,
+      selection: true
     });
 
     // add class for detection
@@ -798,7 +812,14 @@ export class BoardViewComponent implements OnInit, AfterViewInit {
       let dropType = draggedObject.attr('drop-type');
       let referenceID = draggedObject.parent().attr('data-product');
       let referenceType = draggedObject.parent().attr('type');
-      this.handleDrop(e, draggedObject, dropType, referenceID, referenceType, this.selectedItem);
+      this.handleDrop(
+        e,
+        draggedObject,
+        dropType,
+        referenceID,
+        referenceType,
+        this.selectedItem
+      );
     });
 
     // handle canvas events
@@ -949,7 +970,14 @@ export class BoardViewComponent implements OnInit, AfterViewInit {
           this.selectedItem
         );
       } else if (dropType == 'text')
-        this.handleDrop(false, $(e.target), dropType, false, false, this.selectedItem);
+        this.handleDrop(
+          false,
+          $(e.target),
+          dropType,
+          false,
+          false,
+          this.selectedItem
+        );
     });
 
     // Render first updates
@@ -1012,7 +1040,7 @@ export class BoardViewComponent implements OnInit, AfterViewInit {
     let center = this.canvas.getCenter();
     this.canvasMeta.value.center = {
       x: center.left,
-      y: center.top,
+      y: center.top
     };
   };
 
@@ -1069,7 +1097,7 @@ export class BoardViewComponent implements OnInit, AfterViewInit {
       if (activeObject.type == 'textbox') {
         this.font = new Font({
           family: activeObject.fontFamily,
-          size: activeObject.fontSize + 'px',
+          size: activeObject.fontSize + 'px'
           // style: 'regular',
           // styles: ['regular']
         });
@@ -1090,10 +1118,17 @@ export class BoardViewComponent implements OnInit, AfterViewInit {
     this.updateToolbar();
   };
 
-  handleDrop = (e, draggedObject, dropType, referenceID, referenceType, selectedItem) => {
+  handleDrop = (
+    e,
+    draggedObject,
+    dropType,
+    referenceID,
+    referenceType,
+    selectedItem
+  ) => {
     if (dropType == 'image') {
       let referenceObjectValue: any = {
-        type: referenceType,
+        type: referenceType
       };
 
       if (referenceType == 'custom') {
@@ -1108,7 +1143,11 @@ export class BoardViewComponent implements OnInit, AfterViewInit {
         referenceObjectValue.sku = '';
       } else if (referenceType == 'default') {
         let product = [];
-        {selectedItem === 'browse' ? product = this.remoteProducts : product = this.favoriteProducts; }
+        {
+          selectedItem === 'browse'
+            ? (product = this.remoteProducts)
+            : (product = this.favoriteProducts);
+        }
         referenceObjectValue.id = product[referenceID].id;
         referenceObjectValue.isTransparent = 1;
         referenceObjectValue.path = product[referenceID].board_cropped;
@@ -1125,18 +1164,22 @@ export class BoardViewComponent implements OnInit, AfterViewInit {
       // });
 
       // this.applyDrop(e, imageToInsert);
-      let effectiveURL = "";
+      let effectiveURL = '';
       try {
         effectiveURL = new URL(referenceObjectValue.path).href;
       } catch (_) {
         effectiveURL = environment.BASE_HREF + referenceObjectValue.path;
       }
 
-      fb.Image.fromURL(effectiveURL, (img) => {
-        img.lockScalingFlip = true;
-        img.referenceObject = referenceObjectValue
-        this.applyDrop(e, img);
-      }, { crossOrigin: 'anonymous' });
+      fb.Image.fromURL(
+        effectiveURL,
+        (img) => {
+          img.lockScalingFlip = true;
+          img.referenceObject = referenceObjectValue;
+          this.applyDrop(e, img);
+        },
+        { crossOrigin: 'anonymous' }
+      );
 
       // fb.util.loadImage(referenceObjectValue.path, (img) => {
       //   var image = new fb.Image(img, {
@@ -1145,12 +1188,11 @@ export class BoardViewComponent implements OnInit, AfterViewInit {
       //   });
       //   this.applyDrop(e, image);
       // });
-
     } else if (dropType == 'text') {
       let textToInsert = new fb.Textbox(draggedObject.text(), {
         fontFamily: draggedObject.text(),
         fontSize: this.appMeta.value.fontSize,
-        fill: '#000000',
+        fill: '#000000'
       });
       textToInsert.setControlsVisibility(this.canvasMeta.value.textControl);
       this.applyDrop(e, textToInsert);
@@ -1192,7 +1234,7 @@ export class BoardViewComponent implements OnInit, AfterViewInit {
         borderColor: this.canvasMeta.value.borderColor,
         cornerSize: this.canvasMeta.value.cornerSize,
         cornerColor: this.canvasMeta.value.cornerColor,
-        cornerStyle: this.canvasMeta.value.cornerStyle,
+        cornerStyle: this.canvasMeta.value.cornerStyle
       });
       this.canvas.add(objectToInsert);
       this.canvas.setActiveObject(objectToInsert);
@@ -1207,7 +1249,7 @@ export class BoardViewComponent implements OnInit, AfterViewInit {
     ].state = this.canvas.toJSON(this.canvasMeta.value.propertiesToInclude);
     this.appMeta.board.data[this.appMeta.board.currentIndex].state.canvas = {
       width: this.canvas.width,
-      height: this.canvas.height,
+      height: this.canvas.height
     };
     return this.appMeta.board.data[this.appMeta.board.currentIndex].state;
   };
@@ -1281,13 +1323,14 @@ export class BoardViewComponent implements OnInit, AfterViewInit {
   };
 
   updateBoard = () => {
-    if (this.canvasMeta.flag.cropEnabled || this.appMeta.flag.isPreviewEnabled) return;
+    if (this.canvasMeta.flag.cropEnabled || this.appMeta.flag.isPreviewEnabled)
+      return;
 
     let previewObject = '';
     try {
       previewObject = this.canvas.toDataURL({
         format: 'image/jpeg',
-        quality: 0.2,
+        quality: 0.2
         // multiplier: 0.2
       });
     } catch (err) {
@@ -1300,7 +1343,7 @@ export class BoardViewComponent implements OnInit, AfterViewInit {
           uuid: this.appMeta.board.data[this.appMeta.board.currentIndex].uuid,
           title: this.appMeta.board.data[this.appMeta.board.currentIndex].title,
           state: JSON.stringify(this.updateCanvasState()),
-          preview: previewObject,
+          preview: previewObject
         })
       )
       .subscribe((board) => {
@@ -1341,7 +1384,7 @@ export class BoardViewComponent implements OnInit, AfterViewInit {
     $(this.appMeta.identifier.cropToolbarElement).toggle(
       this.canvasMeta.flag.cropEnabled
     );
-  }
+  };
 
   renderAppMeta = () => {
     // enable
@@ -1404,7 +1447,7 @@ export class BoardViewComponent implements OnInit, AfterViewInit {
           fill: '#fff',
           backgroundColor: '#b76e79',
           controlVisible: false,
-          selectable: false,
+          selectable: false
         });
 
         this.canvas.add(textToInsert);
@@ -1416,7 +1459,7 @@ export class BoardViewComponent implements OnInit, AfterViewInit {
             index: y + 1,
             name: x.referenceObject.name,
             brand: x.referenceObject.brand,
-            price: x.referenceObject.price ? '$' + x.referenceObject.price : '',
+            price: x.referenceObject.price ? '$' + x.referenceObject.price : ''
           };
         });
       }
@@ -1517,7 +1560,7 @@ export class BoardViewComponent implements OnInit, AfterViewInit {
   selectAll = () => {
     this.canvas.discardActiveObject();
     let selection = new fb.ActiveSelection(this.canvas.getObjects(), {
-      canvas: this.canvas,
+      canvas: this.canvas
     });
     this.canvas.setActiveObject(selection);
     this.canvas.requestRenderAll();
@@ -1575,7 +1618,7 @@ export class BoardViewComponent implements OnInit, AfterViewInit {
             top: activeObject.top,
             left: activeObject.left,
             fill: '',
-            transparentCorners: false,
+            transparentCorners: false
           });
 
           if (this.canvasMeta.value.crop.active.clipPath) {
@@ -1657,7 +1700,7 @@ export class BoardViewComponent implements OnInit, AfterViewInit {
       width: (rect.width * rect.scaleX) / image.scaleX,
       height: (rect.height * rect.scaleY) / image.scaleY,
       left: (image.width / 2) * -1 + offsetX,
-      top: (image.height / 2) * -1 + offsetY,
+      top: (image.height / 2) * -1 + offsetY
     });
 
     image.clipPath = mask;
@@ -1684,7 +1727,7 @@ export class BoardViewComponent implements OnInit, AfterViewInit {
         activeObject.clone((clone) => {
           clone.set({
             left: clone.left + this.canvasMeta.value.cloneOffset,
-            top: clone.top + this.canvasMeta.value.cloneOffset,
+            top: clone.top + this.canvasMeta.value.cloneOffset
           });
 
           this.canvas.add(clone);
@@ -1700,27 +1743,30 @@ export class BoardViewComponent implements OnInit, AfterViewInit {
             width: activeObject.width,
             height: activeObject.height,
             scaleX: activeObject.scaleX,
-            scaleY: activeObject.scaleY,
+            scaleY: activeObject.scaleY
           };
           this.canvasMeta.flag.isCurrentObjectTransparentable = false;
           this.canvasMeta.flag.isCurrentObjectTransparentSelected = false;
           this.updateToolbar();
 
-          if (type == 'transparent'){
+          if (type == 'transparent') {
             if (activeObject.referenceObject.transparentPath)
               this.toggleTransparent(activeObject, dimentionBefore, true);
             else {
-              this.boardService.updateAsset(new Asset({
-                asset_id: activeObject.referenceObject.id,
-                transparent: 1
-              })).subscribe(response => {
-                activeObject.referenceObject.transparentPath = response.transparent_path;
-                this.toggleTransparent(activeObject, dimentionBefore, true);
-              });
+              this.boardService
+                .updateAsset(
+                  new Asset({
+                    asset_id: activeObject.referenceObject.id,
+                    transparent: 1
+                  })
+                )
+                .subscribe((response) => {
+                  activeObject.referenceObject.transparentPath =
+                    response.transparent_path;
+                  this.toggleTransparent(activeObject, dimentionBefore, true);
+                });
             }
-          }
-          else
-            this.toggleTransparent(activeObject, dimentionBefore, false);
+          } else this.toggleTransparent(activeObject, dimentionBefore, false);
         }
         break;
     }
@@ -1765,51 +1811,68 @@ export class BoardViewComponent implements OnInit, AfterViewInit {
         this.saveHistory();
       });
     } else if (object.attribute == 'background') {
-      fb.Image.fromURL(object.value, (img) => {
-        img.set({
-          originX: 'left',
-          originY: 'top',
-          scaleX: this.canvas.width / img.width,
-          scaleY: this.canvas.height / img.height,
-        });
-        this.canvas.setBackgroundImage(
-          img,
-          this.canvas.renderAll.bind(this.canvas)
-        );
-      }, { crossOrigin: 'anonymous' });
-    }
-    else if(object.attribute == 'action')
-      if (object.value == 'cancel' && this.justCreated){
-        this.appMeta.board.data[this.appMeta.board.currentIndex].is_active = false;
-        this.boardService.updateBoard(this.appMeta.board.data[this.appMeta.board.currentIndex]).subscribe((response) => {
-          this.router.navigate(["../../" + boardRoutesNames.BOARD_LIST], { relativeTo: this.route });
-        });
+      fb.Image.fromURL(
+        object.value,
+        (img) => {
+          img.set({
+            originX: 'left',
+            originY: 'top',
+            scaleX: this.canvas.width / img.width,
+            scaleY: this.canvas.height / img.height
+          });
+          this.canvas.setBackgroundImage(
+            img,
+            this.canvas.renderAll.bind(this.canvas)
+          );
+        },
+        { crossOrigin: 'anonymous' }
+      );
+    } else if (object.attribute == 'action')
+      if (object.value == 'cancel' && this.justCreated) {
+        this.appMeta.board.data[
+          this.appMeta.board.currentIndex
+        ].is_active = false;
+        this.boardService
+          .updateBoard(this.appMeta.board.data[this.appMeta.board.currentIndex])
+          .subscribe((response) => {
+            this.router.navigate(['../../' + boardRoutesNames.BOARD_LIST], {
+              relativeTo: this.route
+            });
+          });
       }
-  }
+  };
 
-  toggleTransparent = (activeObject, dimentionBefore, enableTransparent = false) => {
-    activeObject.setSrc(environment.BASE_HREF + (enableTransparent ? activeObject.referenceObject.transparentPath : activeObject.referenceObject.path), () => {
-      activeObject.scaleX =
-        (dimentionBefore.width * dimentionBefore.scaleX) /
-        activeObject.width;
-      activeObject.scaleY =
-        (dimentionBefore.height * dimentionBefore.scaleY) /
-        activeObject.height;
+  toggleTransparent = (
+    activeObject,
+    dimentionBefore,
+    enableTransparent = false
+  ) => {
+    activeObject.setSrc(
+      environment.BASE_HREF +
+        (enableTransparent
+          ? activeObject.referenceObject.transparentPath
+          : activeObject.referenceObject.path),
+      () => {
+        activeObject.scaleX =
+          (dimentionBefore.width * dimentionBefore.scaleX) / activeObject.width;
+        activeObject.scaleY =
+          (dimentionBefore.height * dimentionBefore.scaleY) /
+          activeObject.height;
 
-      this.canvasMeta.flag.isCurrentObjectTransparentSelected = enableTransparent;
+        this.canvasMeta.flag.isCurrentObjectTransparentSelected = enableTransparent;
 
-      this.canvas.discardActiveObject();
-      this.updateToolbar();
-      this.canvas.renderAll();
-
-    });
-  }
+        this.canvas.discardActiveObject();
+        this.updateToolbar();
+        this.canvas.renderAll();
+      }
+    );
+  };
 
   addFontFamilyIfNotAdded(fontFamily: string) {
     if (this.presetFonts.indexOf(fontFamily) === -1) {
       this.fontPickerService.loadFont(
         new Font({
-          family: fontFamily,
+          family: fontFamily
         })
       );
       this.presetFonts.push(fontFamily);

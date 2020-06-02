@@ -4,10 +4,7 @@ import { environment } from 'src/environments/environment';
 @Component({
   selector: 'app-board-products',
   templateUrl: './board-products.component.html',
-  styleUrls: [
-    './board-products.component.less',
-    './../../board.component.less',
-  ],
+  styleUrls: ['./board-products.component.less', './../../board.component.less']
 })
 export class BoardProductsComponent implements OnInit {
   @Input() products: any = null;
@@ -50,7 +47,7 @@ export class BoardProductsComponent implements OnInit {
       return {
         ...ast,
         board_thumb: imagePath,
-        dropType: 'custom',
+        dropType: 'custom'
       };
     });
     return assets;

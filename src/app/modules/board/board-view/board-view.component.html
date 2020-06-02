@@ -46,7 +46,7 @@
       <div
         class="left-tab-pane {{ !isTablet ? 'position-relative w-100' : '' }} {{
           showMenu && isTablet ? 'mt-0' : 'margin-top-60'
-        }}"
+        }} {{ selectedItem === 'browse' ? 'overflow-hidden' : '' }}"
       >
         <!-- Selected Tab: {{selectedItem}} -->
         <div *ngIf="selectedItem === 'select'">
@@ -114,14 +114,21 @@
               <!-- <div class="clear-all d-none">Clear All</div> -->
             </div>
           </div>
-
-          <app-board-products
-            [products]="remoteProducts"
-            (previewProduct)="handleProductPreview($event)"
-          >
-          </app-board-products>
-
           <div
+            class="product-container"
+            infiniteScroll
+            [infiniteScrollDistance]="3"
+            [infiniteScrollThrottle]="50"
+            (scrolled)="onScroll()"
+            [scrollWindow]="false"
+          >
+            <app-board-products
+              [products]="remoteProducts"
+              (previewProduct)="handleProductPreview($event)"
+            >
+            </app-board-products>
+          </div>
+          <!-- <div
             class="load-more-btn-container"
             *ngIf="!showLoader && !hasLoadedAllProducts"
           >
@@ -132,14 +139,14 @@
             >
               Load More
             </button>
-          </div>
+          </div> -->
 
           <div class="msg-button-container">
             <button
               type="button"
               *ngIf="!showLoader && remoteProducts.length == 0"
               (click)="handleGoToSelect($event)"
-              class="btn btn-primary "
+              class="btn btn-primary"
             >
               No items found. Please click here to select another Category
             </button>
@@ -187,7 +194,10 @@
           <app-board-text></app-board-text>
         </div>
 
-        <div *ngIf="selectedItem === 'add'" class="padding-top-30 pl-md-0 pl-2 mt-3">
+        <div
+          *ngIf="selectedItem === 'add'"
+          class="padding-top-30 pl-md-0 pl-2 mt-3"
+        >
           <h5 class="title ml-2">Add Custom Object</h5>
           <app-board-add
             [allAssets]="appMeta.asset"
@@ -361,7 +371,7 @@
           </div>
         </div>
         <div class="top-panel row top-panel-hide crop-toolbar">
-          <div class="col-sm-12">
+          <div class="col-sm-12 crop-options">
             <button class="btn" (click)="handleCrop(true)">
               <i class="mdi mdi-check mr-0" aria-hidden="true"></i>
               Crop

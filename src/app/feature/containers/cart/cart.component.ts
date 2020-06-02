@@ -3,15 +3,16 @@ import { Observable, Subscription } from 'rxjs';
 import {
   BreakpointState,
   Breakpoints,
-  BreakpointObserver,
+  BreakpointObserver
 } from '@angular/cdk/layout';
 import { ApiService, UtilsService } from 'src/app/shared/services';
 import { Router } from '@angular/router';
+import { EventEmitterService } from 'src/app/shared/services';
 
 @Component({
   selector: 'app-cart',
   templateUrl: './cart.component.html',
-  styleUrls: ['./cart.component.less'],
+  styleUrls: ['./cart.component.less']
 })
 export class CartComponent implements OnInit {
   bpObserver: Observable<BreakpointState> = this.breakpointObserver.observe(
@@ -34,7 +35,8 @@ export class CartComponent implements OnInit {
     private breakpointObserver: BreakpointObserver,
     private apiService: ApiService,
     private utilsService: UtilsService,
-    private router: Router
+    private router: Router,
+    private eventEmitterService: EventEmitterService
   ) {}
 
   ngOnInit(): void {
@@ -44,10 +46,14 @@ export class CartComponent implements OnInit {
         this.isHandset = handset.matches;
       }
     );
-    let localData = JSON.parse(localStorage.getItem('user') || '{}');
-    if (localData.user_type === 1) {
-      this.isLoggedIn = true;
-    }
+    this.eventEmitterService.userChangeEvent
+      .asObservable()
+      .subscribe((user) => {
+        if (user.user_type === 1) {
+          this.isLoggedIn = true;
+        }
+      });
+
     this.getCartProducts();
   }
 
@@ -78,7 +84,7 @@ export class CartComponent implements OnInit {
   increaseQuantity(product, quantity) {
     let postData = {
       product_sku: product,
-      count: quantity,
+      count: quantity
     };
     this.apiService.addCartProduct(postData).subscribe(
       (payload: any) => {
@@ -93,7 +99,7 @@ export class CartComponent implements OnInit {
   decreaseQuantity(product, quantity) {
     let postData = {
       product_sku: product,
-      count: quantity,
+      count: quantity
     };
     this.apiService.removeCartProduct(postData).subscribe(
       (payload: any) => {

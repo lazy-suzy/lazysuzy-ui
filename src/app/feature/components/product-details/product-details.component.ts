@@ -3,7 +3,7 @@ import {
   Inject,
   OnInit,
   ViewChild,
-  ElementRef,
+  ElementRef
 } from '@angular/core';
 import { MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { Subscription } from 'rxjs';
@@ -11,10 +11,12 @@ import { IProductPayload, IProductDetail } from 'src/app/shared/models';
 import { ApiService, UtilsService } from 'src/app/shared/services';
 import { Gallery, GalleryItem, ImageItem } from '@ngx-gallery/core';
 import { Lightbox } from '@ngx-gallery/lightbox';
+import { EventEmitterService } from 'src/app/shared/services';
+
 @Component({
   selector: 'app-product-details',
   templateUrl: './product-details.component.html',
-  styleUrls: ['./product-details.component.less'],
+  styleUrls: ['./product-details.component.less']
 })
 export class ProductDetailsComponent implements OnInit {
   @ViewChild('topContainer', { static: false }) topContainer: ElementRef;
@@ -42,23 +44,25 @@ export class ProductDetailsComponent implements OnInit {
   errorMessage: string = '';
   priceData = {
     price: '',
-    wasPrice: '',
+    wasPrice: ''
   };
   selectedSwatch = {
     swatch_image: null,
     price: '',
-    wasPrice: '',
+    wasPrice: ''
   };
   quantity: number = 1;
   quantityArray = [];
   galleryRef = this.gallery.ref(this.galleryId);
   isSetItemInInventory: boolean = false;
+  localStorageUser = {};
   constructor(
     @Inject(MAT_DIALOG_DATA) public data: any,
     private apiService: ApiService,
     private utils: UtilsService,
     public gallery: Gallery,
-    public lightbox: Lightbox
+    public lightbox: Lightbox,
+    private eventEmitterService: EventEmitterService
   ) {}
 
   ngOnInit(): void {
@@ -117,6 +121,12 @@ export class ProductDetailsComponent implements OnInit {
           _self.getMaxHeight();
         }, 1000);
       });
+
+    this.eventEmitterService.userChangeEvent
+      .asObservable()
+      .subscribe((user) => {
+        this.localStorageUser = user;
+      });
   }
 
   ngOnDestroy(): void {
@@ -129,7 +139,7 @@ export class ProductDetailsComponent implements OnInit {
 
   openLightbox(index: number) {
     this.lightbox.open(index, this.galleryId, {
-      panelClass: 'fullscreen',
+      panelClass: 'fullscreen'
     });
   }
 
@@ -161,7 +171,7 @@ export class ProductDetailsComponent implements OnInit {
   }
 
   wishlistProduct(sku, mark) {
-    let localData = JSON.parse(localStorage.getItem('user') || '{}');
+    let localData: any = this.localStorageUser;
     if (localData.email.length > 0) {
       this.apiService
         .wishlistProduct(sku, mark, false)
@@ -205,11 +215,11 @@ export class ProductDetailsComponent implements OnInit {
       image: this.items[0].data.src,
       name: this.product.name,
       price: this.productPrice,
-      quantity: this.quantity,
+      quantity: this.quantity
     };
     const postData = {
       product_sku: this.data.sku,
-      count: this.quantity,
+      count: this.quantity
     };
     this.apiService.addCartProduct(postData).subscribe(
       (payload: any) => {

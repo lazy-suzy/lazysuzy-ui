@@ -15,6 +15,7 @@ import {
 import { Gallery, GalleryItem, ImageItem } from '@ngx-gallery/core';
 import { Lightbox } from '@ngx-gallery/lightbox';
 import { VariationsComponent } from '../variations/variations.component';
+import { EventEmitterService } from 'src/app/shared/services';
 
 @Component({
   selector: 'app-product-details-mobile',
@@ -66,10 +67,15 @@ export class ProductDetailsMobileComponent implements OnInit {
     private breakpointObserver: BreakpointObserver,
     public gallery: Gallery,
     public lightbox: Lightbox,
-    public cacheService: CacheService
+    public cacheService: CacheService,
+    private eventEmitterService: EventEmitterService
   ) {}
 
   ngOnInit() {
+    this.eventEmitterService.userChangeEvent
+      .asObservable()
+      .subscribe((user) => {
+      });
     this.bpSubscription = this.bpObserver.subscribe(
       (handset: BreakpointState) => {
         this.isHandset = handset.matches;

@@ -87,10 +87,16 @@
   padding-bottom: 8rem;
   padding-top: 20px;
 }
-.crop-toolbar {
-  padding: 0 5px !important;
-  height: 50px !important;
-  margin-top: -10px;
+.crop-options {
+  margin-top: -5px;
+}
+.product-container {
+  height: 65vh;
+  overflow-y: auto;
+  overflow-x: hidden;
+}
+.overflow-hidden {
+  overflow: hidden !important;
 }
 .msg-button-container {
   button {
@@ -189,11 +195,17 @@
     top: 70%;
     left: 420px;
   }
+  .product-container {
+    height: 45vh;
+  }
 }
 
 @media screen and (max-width: 767px) {
   .loader-container {
     top: 60%;
     left: 200px;
+  }
+  .product-container {
+    height: 58vh;
   }
 }

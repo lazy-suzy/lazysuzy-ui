@@ -4,13 +4,13 @@ import {
   FormBuilder,
   Validators,
   ReactiveFormsModule,
-  FormsModule,
+  FormsModule
 } from '@angular/forms';
 import {
   StripeService,
   Elements,
   Element as StripeElement,
-  ElementsOptions,
+  ElementsOptions
 } from 'ngx-stripe';
 import { ApiService } from 'src/app/shared/services';
 import { STATE_LIST } from './../../../shared/constants';
@@ -19,12 +19,14 @@ import { Observable, Subscription } from 'rxjs';
 import {
   BreakpointState,
   Breakpoints,
-  BreakpointObserver,
+  BreakpointObserver
 } from '@angular/cdk/layout';
+import { EventEmitterService } from 'src/app/shared/services';
+
 @Component({
   selector: 'app-payment',
   templateUrl: './payment.component.html',
-  styleUrls: ['./payment.component.less'],
+  styleUrls: ['./payment.component.less']
 })
 export class PaymentComponent implements OnInit {
   elements: Elements;
@@ -71,7 +73,7 @@ export class PaymentComponent implements OnInit {
     billing_city: null,
     billing_country: null,
     billing_state: null,
-    billing_zipcode: null,
+    billing_zipcode: null
   };
   country = 'USA';
   isBillingAddressSame: boolean = true;
@@ -85,12 +87,14 @@ export class PaymentComponent implements OnInit {
   bpSubscription: Subscription;
   isHandset: boolean;
   isLoading: boolean = true;
+  localStorageUser = {};
   constructor(
     private fb: FormBuilder,
     private stripeService: StripeService,
     private apiService: ApiService,
     private router: Router,
-    private breakpointObserver: BreakpointObserver
+    private breakpointObserver: BreakpointObserver,
+    private eventEmitterService: EventEmitterService
   ) {
     this.statesArray = STATE_LIST;
   }
@@ -102,7 +106,7 @@ export class PaymentComponent implements OnInit {
       }
     );
     this.stripeTest = this.fb.group({
-      name: ['', [Validators.required]],
+      name: ['', [Validators.required]]
     });
     this.stripeService.elements(this.elementsOptions).subscribe((elements) => {
       this.elements = elements;
@@ -116,40 +120,44 @@ export class PaymentComponent implements OnInit {
             fontSize: '16px',
             fontSmoothing: 'antialiased',
             '::placeholder': {
-              color: '#CFD7DF',
+              color: '#CFD7DF'
             },
             ':-webkit-autofill': {
-              color: '#e39f48',
-            },
+              color: '#e39f48'
+            }
           },
           invalid: {
             color: '#E25950',
             '::placeholder': {
-              color: '#FFCCA5',
-            },
-          },
+              color: '#FFCCA5'
+            }
+          }
         };
         let elementClasses = {
           focus: 'focused',
           empty: 'empty',
-          invalid: 'invalid',
+          invalid: 'invalid'
         };
         this.cardNumber = this.elements.create('cardNumber', {
-          style: elementStyles,
+          style: elementStyles
         });
         this.cardNumber.mount('#form-card-number');
         this.cardExpiry = this.elements.create('cardExpiry', {
-          style: elementStyles,
+          style: elementStyles
         });
         this.cardExpiry.mount('#form-card-expiry');
         this.cardCvc = this.elements.create('cardCvc', {
-          style: elementStyles,
+          style: elementStyles
         });
         this.cardCvc.mount('#form-card-cvc');
       }
     });
-    const localUser: any = JSON.parse(localStorage.getItem('user') || '{}');
-    this.customerData.email = localUser.email;
+    this.eventEmitterService.userChangeEvent
+      .asObservable()
+      .subscribe((user) => {
+        this.customerData.email = user.email;
+        this.localStorageUser = user;
+      });
     this.getCartProducts();
   }
 
@@ -278,7 +286,7 @@ export class PaymentComponent implements OnInit {
       this.customer = true;
       this.isEmailValid = false;
     } else {
-      const localUser: any = JSON.parse(localStorage.getItem('user') || '{}');
+      const localUser: any = this.localStorageUser;
       if (localUser.email !== this.customerData.email) {
         localStorage.setItem('registeredEmail', this.customerData.email);
         // const data = {

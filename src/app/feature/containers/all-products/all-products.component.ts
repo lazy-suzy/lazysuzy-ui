@@ -16,6 +16,7 @@ import {
   Breakpoints,
   BreakpointObserver,
 } from '@angular/cdk/layout';
+import { EventEmitterService } from 'src/app/shared/services';
 
 @Component({
   selector: 'app-all-products',
@@ -58,11 +59,16 @@ export class AllProductsComponent implements OnInit {
     private location: Location,
     private activeRoute: ActivatedRoute,
     private breakpointObserver: BreakpointObserver,
-    public cacheService: CacheService
+    public cacheService: CacheService,
+    private eventEmitterService: EventEmitterService
   ) {}
 
   ngOnInit(): void {
     this.getParamsFromQuery();
+    this.eventEmitterService.userChangeEvent
+      .asObservable()
+      .subscribe((user) => {
+      });
     this.bpSubscription = this.bpObserver.subscribe(
       (handset: BreakpointState) => {
         this.isHandset = handset.matches;

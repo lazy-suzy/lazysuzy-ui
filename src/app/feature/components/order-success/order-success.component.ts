@@ -2,10 +2,12 @@ import { Component, OnInit } from '@angular/core';
 import { ApiService } from 'src/app/shared/services';
 import moment from 'moment';
 import { Router, ActivatedRoute } from '@angular/router';
+import { EventEmitterService } from 'src/app/shared/services';
+
 @Component({
   selector: 'app-order-success',
   templateUrl: './order-success.component.html',
-  styleUrls: ['./order-success.component.less'],
+  styleUrls: ['./order-success.component.less']
 })
 export class OrderSuccessComponent implements OnInit {
   cartProducts = [];
@@ -26,7 +28,8 @@ export class OrderSuccessComponent implements OnInit {
   constructor(
     private apiService: ApiService,
     private router: Router,
-    private activeRoute: ActivatedRoute
+    private activeRoute: ActivatedRoute,
+    private eventEmitterService: EventEmitterService
   ) {}
 
   ngOnInit() {
@@ -35,8 +38,11 @@ export class OrderSuccessComponent implements OnInit {
         this.orderId = routeParams.order;
       }
     );
-    let localData = JSON.parse(localStorage.getItem('user') || '{}');
-    this.isLoggedIn = localData.user_type === 1;
+    this.eventEmitterService.userChangeEvent
+      .asObservable()
+      .subscribe((user) => {
+        this.isLoggedIn = user.user_type === 1;
+      });
     this.apiService.getOrderSuccessData(this.orderId).subscribe(
       (payload: any) => {
         this.cartProducts = payload.cart;
@@ -75,7 +81,7 @@ export class OrderSuccessComponent implements OnInit {
       let data = {
         name: registeredName,
         email: registeredEmail,
-        password: this.password,
+        password: this.password
       };
       this.apiService.userUpdate(data).subscribe(
         (payload: any) => {
