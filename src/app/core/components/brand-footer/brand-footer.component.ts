@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ApiService } from './../../../shared/services';
+import { ApiService, EventEmitterService } from './../../../shared/services';
 import {
   trigger,
   transition,
@@ -25,16 +25,23 @@ import {
 export class BrandFooterComponent implements OnInit {
   fade: any;
 
-  constructor(private apiService: ApiService) {}
+  constructor(
+    private apiService: ApiService,
+    private eventEmitterService: EventEmitterService
+  ) {}
   brands: any;
 
   ngOnInit() {
-    this.getbrands();
+    this.eventEmitterService.userChangeEvent
+      .asObservable()
+      .subscribe((user) => {
+        this.getbrands();
+      });
   }
   getbrands() {
-    this.apiService.getBrands().subscribe(res => {
+    this.apiService.getBrands().subscribe((res) => {
       this.brands = res;
-      this.brands = this.brands.filter(function(val) {
+      this.brands = this.brands.filter(function (val) {
         if (val['value'] != 'potterybarn') {
           return val;
         }

@@ -1,5 +1,9 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { ApiService, UtilsService } from './../../../shared/services';
+import {
+  ApiService,
+  UtilsService,
+  EventEmitterService
+} from './../../../shared/services';
 import { Router } from '@angular/router';
 import { Carousel } from 'primeng/carousel';
 
@@ -17,7 +21,8 @@ export class BestSellersComponent implements OnInit {
   constructor(
     private apiService: ApiService,
     private router: Router,
-    private utilsService: UtilsService
+    private utilsService: UtilsService,
+    private eventEmitterService: EventEmitterService
   ) {
     this.responsiveOptions = [
       {
@@ -40,11 +45,15 @@ export class BestSellersComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.getBestSellers();
+    this.eventEmitterService.userChangeEvent
+      .asObservable()
+      .subscribe((user) => {
+        this.getBestSellers();
+      });
   }
   getBestSellers(): void {
     this.showLoader = true;
-    this.apiService.getBestSellers().subscribe(res => {
+    this.apiService.getBestSellers().subscribe((res) => {
       this.bestSellers = res.products;
       this.showLoader = false;
     });
@@ -60,7 +69,7 @@ export class BestSellersComponent implements OnInit {
       : this.utilsService.homepageMatDialog(sku);
   }
 
-  handleEvtProductCarousal(e){
+  handleEvtProductCarousal(e) {
     this.openDialog(e);
   }
 }
