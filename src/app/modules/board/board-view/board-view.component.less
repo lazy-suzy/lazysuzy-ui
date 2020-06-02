@@ -46,7 +46,7 @@
   background-color: #b76e79;
   color: #ffffff;
   &:hover {
-    color: #FFC40D;
+    color: #ffc40d;
   }
 }
 .gray-bg {
@@ -84,7 +84,13 @@
 }
 .load-more-btn-container {
   text-align: center;
-  padding-bottom: 7rem;
+  padding-bottom: 8rem;
+  padding-top: 20px;
+}
+.crop-toolbar {
+  padding: 0 5px !important;
+  height: 50px !important;
+  margin-top: -10px;
 }
 .msg-button-container {
   button {
@@ -150,7 +156,9 @@
   padding: 0 12px;
   border-radius: 5px;
   border: 1px solid #cbcad0;
-
+  i {
+    color: #999999;
+  }
   cursor: pointer;
   .board-action-button-text {
     font-size: 14px;
@@ -158,10 +166,11 @@
     font-weight: bold;
     color: #999999;
   }
-  &:hover{
-    background-color: #FFC40D;
+  &:hover {
+    background-color: #ffc40d;
     border-color: #000000;
-    .board-action-button-text {
+    .board-action-button-text,
+    i {
       color: #000000;
     }
   }
