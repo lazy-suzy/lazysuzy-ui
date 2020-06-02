@@ -1,8 +1,4 @@
-<img
-  *ngIf="isProductFetching; else showDetails"
-  [src]="spinner"
-  class="loader"
-/>
+<img *ngIf="isProductFetching" [src]="spinner" class="loader" />
 <ng-container *ngIf="!isProductFetching">
   <div class="images-container" #gallery>
     <div class="images">
