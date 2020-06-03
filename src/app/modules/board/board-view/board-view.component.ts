@@ -69,6 +69,7 @@ export class BoardViewComponent implements OnInit, AfterViewInit {
   total_count: number = 0;
   hasSearched: boolean;
   hasLoadedAllProducts: boolean = false;
+  canvasHeight: number;
   constructor(
     private cookieService: CookieService,
     private dialog: MatDialog,
@@ -792,12 +793,10 @@ export class BoardViewComponent implements OnInit, AfterViewInit {
       foreignObjectRendering: true,
       width: $(this.canvasMeta.identifier.dropArea).parent().width(),
       height:
-        $(this.canvasMeta.identifier.dropArea).parent().width() /
-        Number.parseFloat(this.canvasMeta.value.aspectRatio),
+        ($(this.canvasMeta.identifier.dropArea).parent().width() * 9) / 16,
       backgroundColor: 'rgb(255,255,255)',
       selection: true
     });
-
     // add class for detection
     $('.lazysuzy-board').on('dragstart dragend', (e) => {
       $(e.target).toggleClass(
@@ -1262,13 +1261,10 @@ export class BoardViewComponent implements OnInit, AfterViewInit {
           .width
       : this.canvas.width;
     let currentWidth = $(this.canvasMeta.identifier.dropArea).parent().width();
-
+    let currentHeight = (currentWidth * 9) / 16;
     this.appMeta.value.scaleFactor = currentWidth / previousWidth;
-
     this.canvas.setWidth(currentWidth);
-    this.canvas.setHeight(
-      currentWidth / Number.parseFloat(this.canvasMeta.value.aspectRatio)
-    );
+    this.canvas.setHeight(currentHeight);
 
     if (this.canvas.backgroundImage) {
       this.canvas.backgroundImage.scaleX *= this.appMeta.value.scaleFactor;
