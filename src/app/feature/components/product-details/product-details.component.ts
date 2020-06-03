@@ -134,6 +134,12 @@ export class ProductDetailsComponent implements OnInit {
           });
         this.localStorageUser = user;
       });
+
+    this.eventEmitterService.userChangeEvent
+      .asObservable()
+      .subscribe((user) => {
+        this.localStorageUser = user;
+      });
   }
 
   ngOnDestroy(): void {

@@ -3,6 +3,7 @@ import { Subscription } from 'rxjs';
 import { IProductPayload, IProductsPayload } from './../../../shared/models';
 import { ApiService, EventEmitterService } from './../../../shared/services';
 import { Router } from '@angular/router';
+import { EventEmitterService } from 'src/app/shared/services';
 
 @Component({
   selector: 'app-wishlist',
