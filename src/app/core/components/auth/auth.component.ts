@@ -68,6 +68,7 @@ export class AuthComponent implements OnInit {
       );
       this.eventEmitterService.userChangeEvent.asObservable().subscribe(
         (user) => {
+          this.user = user;
           this.initialized = true;
         }
       );

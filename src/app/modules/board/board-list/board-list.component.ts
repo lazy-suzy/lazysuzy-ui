@@ -10,6 +10,7 @@ import { MatDialog, MatSnackBar } from '@angular/material';
 import { environment } from 'src/environments/environment';
 import { BoardPopupConfirmComponent } from '../board-popup-confirm/board-popup-confirm.component';
 import { EventEmitterService } from 'src/app/shared/services';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-board-list',
@@ -22,6 +23,7 @@ export class BoardListComponent implements OnInit {
   boardPreviewLink = boardRoutesNames.BOARD_PREVIEW;
   isFetching: boolean = false;
   isFirstBoot: boolean = true;
+  userEventSubscription: Subscription;
 
   constructor(
     private boardService: BoardService,
@@ -34,10 +36,9 @@ export class BoardListComponent implements OnInit {
 
   ngOnInit(): void {
     this.isFetching = true;
-    this.eventEmitterService.userChangeEvent
+    this.userEventSubscription = this.eventEmitterService.userChangeEvent
       .asObservable()
       .subscribe((user) => {
-        console.log(user);
         // if it has been called previously for every new change create a snackbar
         if (!this.isFirstBoot) {
           this.isFetching = true;
@@ -58,6 +59,9 @@ export class BoardListComponent implements OnInit {
     this.eventEmitterService.userTransitionEvent.subscribe(
       () => (this.isFetching = true)
     );
+  }
+  ngOnDestroy() {
+    this.userEventSubscription.unsubscribe();
   }
 
   getBoards(): void {

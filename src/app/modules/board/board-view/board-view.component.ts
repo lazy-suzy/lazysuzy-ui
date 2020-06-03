@@ -53,6 +53,8 @@ export class BoardViewComponent implements OnInit, AfterViewInit {
   showTab;
   fontPickerObject;
   justCreated = false;
+  initialUserID = 0;
+  userEventSubscription: Subscription;
   tabletObserver: Observable<BreakpointState> = this.breakpointObserver.observe(
     Breakpoints.Tablet
   );
@@ -321,7 +323,7 @@ export class BoardViewComponent implements OnInit, AfterViewInit {
         x: 0,
         y: 0
       },
-      aspectRatio: (16 / 7.1).toFixed(2),
+      aspectRatio: (2.0).toFixed(2),
       zoomValue: 1,
       zoomFactor: 0.1,
       borderColor: '#b76e79',
@@ -468,7 +470,8 @@ export class BoardViewComponent implements OnInit, AfterViewInit {
       backgroundColorElement: '.canvas-pallete-color',
       floorPatternElement: '.canvas-pallete-wood-patterns',
 
-      manualDrop: '.manual-drop'
+      manualDrop: '.manual-drop',
+      topLevelElement: '.lazysuzy-board'
     }
   };
 
@@ -490,13 +493,21 @@ export class BoardViewComponent implements OnInit, AfterViewInit {
   }
   ngOnInit(): void {
     // if there is a change in user after the first boot then redirect
-    this.eventEmitterService.userChangeEvent
+    this.userEventSubscription = this.eventEmitterService.userChangeEvent
       .asObservable()
       .subscribe((user) => {
-        if (!this.appMeta.flag.isBoot)
-          this.router.navigate(['../../' + boardRoutesNames.BOARD_LIST], {
-            relativeTo: this.route
-          });
+        if (this.appMeta.flag.isBoot){
+          this.initialUserID = user.id;
+        }
+        // if the change came after the first boot
+        else {
+          // redirect the user only the changed user is different then the one before
+          if (this.initialUserID != user.id){
+            this.router.navigate(['../../' + boardRoutesNames.BOARD_LIST], {
+              relativeTo: this.route
+            });
+          }
+        }
       });
 
     // main entry point
@@ -671,6 +682,9 @@ export class BoardViewComponent implements OnInit, AfterViewInit {
       }
     );
     // Object.keys(boardShortcuts).forEach((i) => { this.shortcuts.push(boardShortcuts[i]) });
+  }
+  ngOnDestroy() {
+    this.userEventSubscription.unsubscribe();
   }
 
   applyShortcut = (action, name, value = 0) => {
@@ -1255,18 +1269,44 @@ export class BoardViewComponent implements OnInit, AfterViewInit {
   };
 
   handleResize = (forceUpdate = false) => {
-    let previousWidth = forceUpdate
-      ? this.appMeta.board.data[this.appMeta.board.currentIndex].state.canvas
-          .width
-      : this.canvas.width;
-    let currentWidth = $(this.canvasMeta.identifier.dropArea).parent().width();
+    let previousWidth = forceUpdate ? this.appMeta.board.data[this.appMeta.board.currentIndex].state.canvas.width: this.canvas.width;
+    
+    let widthBuffer = this.isTablet ? 0 : 18;
+    let heightBuffer = this.isTablet ? 110 : 0;
 
-    this.appMeta.value.scaleFactor = currentWidth / previousWidth;
+    let relativePositionToWindow = $(this.canvasMeta.identifier.dropArea)[0].getBoundingClientRect();
+    let topLevelElement = $(this.appMeta.identifier.topLevelElement);
+    
+    // let availableWidth = $(this.canvasMeta.identifier.dropArea).parent().width();
+    // console.log(window.innerWidth, $(this.canvasMeta.identifier.dropArea).position().left);
+    let calculatedWidth = topLevelElement.width() - relativePositionToWindow.left - widthBuffer;
+    let availableWidth = calculatedWidth + widthBuffer < relativePositionToWindow.width ? calculatedWidth : relativePositionToWindow.width;
+    let availableHeight = topLevelElement.height() - relativePositionToWindow.top - heightBuffer;
+    
+    // console.log(calculatedWidth < relativePositionToWindow.width ? "using calculated width" : "using relative width");
+    // console.log("available scale space", availableWidth, availableHeight, availableWidth / availableHeight);
 
-    this.canvas.setWidth(currentWidth);
-    this.canvas.setHeight(
-      currentWidth / Number.parseFloat(this.canvasMeta.value.aspectRatio)
-    );
+    let newWidth = availableWidth;
+    let newHeight = availableWidth / Number.parseFloat(this.canvasMeta.value.aspectRatio);
+
+    // console.log("initial scale", newWidth, newHeight, newWidth / newHeight);
+
+    // check if the height will be more than available
+    if (newHeight > availableHeight){
+      newHeight = availableHeight;
+      newWidth = availableHeight * Number.parseFloat(this.canvasMeta.value.aspectRatio)
+      // console.log(`changing scale because ${newHeight} > ${availableHeight}`, newWidth, newHeight, newWidth/newHeight);
+    }
+
+    // console.log("final scale", newWidth, newHeight, newWidth/newHeight);
+
+    this.canvas.setWidth(newWidth);
+    this.canvas.setHeight(newHeight);
+    
+    this.appMeta.value.scaleFactor = newWidth / previousWidth;
+
+
+    // console.log(currentWidth, currentWidth / Number.parseFloat(this.canvasMeta.value.aspectRatio))
 
     if (this.canvas.backgroundImage) {
       this.canvas.backgroundImage.scaleX *= this.appMeta.value.scaleFactor;

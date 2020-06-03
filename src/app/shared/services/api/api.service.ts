@@ -166,7 +166,7 @@ export class ApiService {
   ): Observable<any> {
     const endpoint = `products/all`;
     const url = env.useLocalJson
-      ? `${env.JSON_BASE_HREF}${endpoint}.json`
+      ? `${env.JSON_BASE_HREF}${endpoint}`
       : `${
           env.API_BASE_HREF
         }${endpoint}?filters=${appliedFilters};category:${id}&sort_type=&pageno=${
@@ -337,7 +337,7 @@ export class ApiService {
   getAllDepartmentsBoard(): Observable<IDepartment> {
     const endpoint = `all-departments`;
     const url = env.useLocalJson
-      ? `${env.JSON_BASE_HREF}${endpoint}.json`
+      ? `${env.JSON_BASE_HREF}${endpoint}`
       : `${env.API_BASE_HREF}${endpoint}?board-view=true`;
     return this.httpService.get(url);
   }
