@@ -105,12 +105,13 @@ export class BoardViewComponent implements OnInit, AfterViewInit {
     style: 'regular',
     styles: ['regular']
   });
-  search() {
+  search(isNewSearch: boolean = false) {
     if (!this.hasSearched) {
       this.remoteProducts = [];
     }
     this.showLoader = true;
     this.iLimit = 24;
+    this.iPageNo = isNewSearch ? 0 : this.iPageNo;
     const queryString = JSON.stringify({
       from: this.iPageNo * this.iLimit,
       size: this.iLimit,
@@ -150,7 +151,10 @@ export class BoardViewComponent implements OnInit, AfterViewInit {
             products[i].board_thumb =
               '//www.lazysuzy.com' + products[i].board_thumb;
         }
-        this.remoteProducts = [...this.remoteProducts, ...(products || [])];
+
+        this.remoteProducts = isNewSearch
+          ? products
+          : [...this.remoteProducts, ...(products || [])];
         this.remoteProducts = this.remoteProducts.map((ele, i) => {
           return {
             ...ele,
@@ -760,7 +764,9 @@ export class BoardViewComponent implements OnInit, AfterViewInit {
 
     this.canvas.requestRenderAll();
   };
-
+  selectColor() {
+    $('.js-font-select-color').click();
+  }
   getConfig = (callback) => {
     // this.canvasMeta.configuration = response.reduce(function (r, e) {
     //   r[e.name] = e.value;

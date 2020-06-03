@@ -52,7 +52,7 @@
         <div *ngIf="selectedItem === 'select'">
           <div class="browse-header padding-top-30">
             <div class="item-search-bar">
-              <form class="input-group" (submit)="search()">
+              <form class="input-group" (submit)="search(true)">
                 <input
                   type="text"
                   class="form-control"
@@ -80,7 +80,7 @@
         <div *ngIf="selectedItem === 'browse'">
           <div class="browse-header padding-top-30">
             <div class="item-search-bar">
-              <form class="input-group" (submit)="search()">
+              <form class="input-group" (submit)="search(true)">
                 <input
                   type="text"
                   class="form-control"
@@ -101,7 +101,7 @@
               <h5 class="title js-category-title">
                 {{ hasSearched ? searchText : selectedCategory?.category }}
               </h5>
-            </div>                                                                                       
+            </div>
             <div class="browse-filter" *ngIf="!hasSearched">
               <div class="filter-bar-container">
                 <div class="filter-bar js-filter-section" id="desktop-filter">
@@ -114,10 +114,7 @@
               <!-- <div class="clear-all d-none">Clear All</div> -->
             </div>
           </div>
-          <div
-            (scroll)="onScrollEvent($event)"
-            class="product-container"
-          >
+          <div (scroll)="onScrollEvent($event)" class="product-container">
             <app-board-products
               [products]="remoteProducts"
               (previewProduct)="handleProductPreview($event)"
@@ -277,7 +274,9 @@
             <i class="mdi mdi-undo" (click)="undo()" aria-hidden="true"></i>
             <i class="mdi mdi-redo" (click)="redo()" aria-hidden="true"></i>
           </div>
-          <div class="col-sm-6 col-md-4 text-center mt-1">
+          <div
+            class="col-sm-6 col-md-4 text-center mt-1 col-4 font-editor-container"
+          >
             <div class="editor-icons">
               <div
                 class="d-inline"
@@ -288,15 +287,18 @@
                 [fpWidth]="'auto'"
                 [fpPosition]="'bottom'"
               >
-                <div class="action-button dropdown mr-5">
+                <div class="action-button dropdown mr-5-sm">
                   {{ font?.family }} {{ font?.style | FontStyles }} |
                   {{ font?.size }}
                 </div>
               </div>
-              <input type="color" class="js-font-select-color" />
+              <input type="color" class="js-font-select-color d-none-xs" />
+              <div class="color-selector-tab" (click)="selectColor()">
+                <i class="mdi mdi-format-color-text" aria-hidden="true"></i>
+              </div>
             </div>
           </div>
-          <div class="col-sm-6 col-md-4">
+          <div class="col-sm-6 col-md-4 col-8 padding-right-0">
             <div class="crop-toolbar float-right">
               <button class="btn" (click)="handleCrop(true)">
                 <i class="mdi mdi-check mr-0" aria-hidden="true"></i> Crop
