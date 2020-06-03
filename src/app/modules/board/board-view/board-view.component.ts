@@ -231,6 +231,8 @@ export class BoardViewComponent implements OnInit, AfterViewInit {
       this.appliedFilters = event.payload;
       let selCat = this.boardService.getCategory();
       this.remoteProducts = [...[]];
+      this.pageNo = 0;
+      this.hasSearched = false;
       this.getBrowseData(selCat);
     } else if (event.name === 'CANCEL_FILTERS') {
       this.xpandStatus = false;
