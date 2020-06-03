@@ -22,6 +22,7 @@ export class NavMobileComponent {
   notHome: Boolean;
   checkHomeRoute: Subscription;
   hideBar: boolean = false;
+  eventSubscription: Subscription;
 
   constructor(
     private apiService: ApiService,
@@ -44,7 +45,7 @@ export class NavMobileComponent {
   }
 
   ngOnInit(): void {
-    this.eventEmitterService.userChangeEvent
+    this.eventSubscription = this.eventEmitterService.userChangeEvent
       .asObservable()
       .subscribe((user) => {
         this.getDepartments();
@@ -61,6 +62,7 @@ export class NavMobileComponent {
 
   ngOnDestroy(): void {
     this.checkHomeRoute.unsubscribe();
+    this.eventSubscription.unsubscribe();
   }
 
   setIndex(index: number) {

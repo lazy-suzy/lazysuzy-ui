@@ -19,6 +19,7 @@ export class NavDesktopComponent {
   departments: IAllDepartment[];
   notHome: Boolean;
   checkHomeRoute: Subscription;
+  eventSubscription: Subscription;
   email: any;
   password: any;
   hideBar: boolean = false;
@@ -42,10 +43,11 @@ export class NavDesktopComponent {
 
   ngOnDestroy(): void {
     this.checkHomeRoute.unsubscribe();
+    this.eventSubscription.unsubscribe();
   }
 
   ngOnInit(): void {
-    this.eventEmitterService.userChangeEvent
+    this.eventSubscription = this.eventEmitterService.userChangeEvent
       .asObservable()
       .subscribe((user) => {
         this.getDepartments();

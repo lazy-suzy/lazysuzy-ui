@@ -29,6 +29,7 @@ export class LandingComponent implements OnInit {
 
   bpSubscription: Subscription;
   isHandset: boolean = false;
+  eventSubscription: Subscription;
   constructor(
     private apiService: ApiService,
     private formBuilder: FormBuilder,
@@ -37,7 +38,7 @@ export class LandingComponent implements OnInit {
   ) {}
 
   ngOnInit() {
-    this.eventEmitterService.userChangeEvent
+    this.eventSubscription = this.eventEmitterService.userChangeEvent
       .asObservable()
       .subscribe((user) => {
         this.emailForm = this.formBuilder.group({
@@ -50,7 +51,9 @@ export class LandingComponent implements OnInit {
         );
       });
   }
-
+  ngOnDestroy(): void {
+    this.eventSubscription.unsubscribe();
+  }
   onSubmit(value: any) {
     this.apiService.getEmail().subscribe((res) => {});
   }

@@ -7,6 +7,7 @@ import {
   style,
   animate
 } from '@angular/animations';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-brand-footer',
@@ -24,7 +25,7 @@ import {
 })
 export class BrandFooterComponent implements OnInit {
   fade: any;
-
+  eventSubscription: Subscription;
   constructor(
     private apiService: ApiService,
     private eventEmitterService: EventEmitterService
@@ -32,11 +33,14 @@ export class BrandFooterComponent implements OnInit {
   brands: any;
 
   ngOnInit() {
-    this.eventEmitterService.userChangeEvent
+    this.eventSubscription = this.eventEmitterService.userChangeEvent
       .asObservable()
       .subscribe((user) => {
         this.getbrands();
       });
+  }
+  ngOnDestroy(): void {
+    this.eventSubscription.unsubscribe();
   }
   getbrands() {
     this.apiService.getBrands().subscribe((res) => {

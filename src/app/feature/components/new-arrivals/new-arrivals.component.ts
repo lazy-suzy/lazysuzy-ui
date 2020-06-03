@@ -7,7 +7,7 @@ import {
 import { Router } from '@angular/router';
 import { Carousel } from 'primeng/carousel';
 import { IProductsPayload } from 'src/app/shared/models';
-
+import { Subscription } from 'rxjs';
 @Component({
   selector: 'app-new-arrivals',
   templateUrl: './new-arrivals.component.html',
@@ -26,7 +26,7 @@ export class NewArrivalsComponent implements OnInit {
   mySlideOptions = { items: 1, dots: true, nav: false };
   myCarouselOptions = { items: 3, dots: true, nav: true };
   showLoader = false;
-
+  eventSubscription: Subscription;
   images = [
     'https://s3-us-west-2.amazonaws.com/s.cdpn.io/43033/slider_bags.jpg',
     'https://s3-us-west-2.amazonaws.com/s.cdpn.io/43033/slider_book_cover.jpg',
@@ -64,11 +64,14 @@ export class NewArrivalsComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.eventEmitterService.userChangeEvent
+    this.eventSubscription = this.eventEmitterService.userChangeEvent
       .asObservable()
       .subscribe((user) => {
         this.getNewArrivals();
       });
+  }
+  ngOnDestroy(): void {
+    this.eventSubscription.unsubscribe();
   }
   getNewArrivals(): void {
     this.showLoader = true;

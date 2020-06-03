@@ -3,7 +3,6 @@ import { Subscription } from 'rxjs';
 import { IProductPayload, IProductsPayload } from './../../../shared/models';
 import { ApiService, EventEmitterService } from './../../../shared/services';
 import { Router } from '@angular/router';
-import { EventEmitterService } from 'src/app/shared/services';
 
 @Component({
   selector: 'app-wishlist',
@@ -13,7 +12,7 @@ import { EventEmitterService } from 'src/app/shared/services';
 export class WishlistComponent implements OnInit {
   productsSubscription: Subscription;
   products: IProductPayload[];
-
+  eventSubscription: Subscription;
   constructor(
     private apiService: ApiService,
     private router: Router,
@@ -21,7 +20,7 @@ export class WishlistComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.eventEmitterService.userChangeEvent
+    this.eventSubscription = this.eventEmitterService.userChangeEvent
       .asObservable()
       .subscribe((user) => {
         const isBoardApi = false;
@@ -31,5 +30,9 @@ export class WishlistComponent implements OnInit {
             this.products = payload.products;
           });
       });
+  }
+
+  ngOnDestroy(): void {
+    this.eventSubscription.unsubscribe();
   }
 }

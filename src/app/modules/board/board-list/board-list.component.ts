@@ -10,7 +10,7 @@ import { MatDialog, MatSnackBar } from '@angular/material';
 import { environment } from 'src/environments/environment';
 import { BoardPopupConfirmComponent } from '../board-popup-confirm/board-popup-confirm.component';
 import { EventEmitterService } from 'src/app/shared/services';
-
+import { Subscription } from 'rxjs';
 @Component({
   selector: 'app-board-list',
   templateUrl: './board-list.component.html',
@@ -22,7 +22,7 @@ export class BoardListComponent implements OnInit {
   boardPreviewLink = boardRoutesNames.BOARD_PREVIEW;
   isFetching: boolean = false;
   isFirstBoot: boolean = true;
-
+  eventSubscription: Subscription;
   constructor(
     private boardService: BoardService,
     private router: Router,
@@ -34,7 +34,7 @@ export class BoardListComponent implements OnInit {
 
   ngOnInit(): void {
     this.isFetching = true;
-    this.eventEmitterService.userChangeEvent
+    this.eventSubscription = this.eventEmitterService.userChangeEvent
       .asObservable()
       .subscribe((user) => {
         console.log(user);
@@ -59,7 +59,9 @@ export class BoardListComponent implements OnInit {
       () => (this.isFetching = true)
     );
   }
-
+  ngOnDestroy(): void {
+    this.eventSubscription.unsubscribe();
+  }
   getBoards(): void {
     this.boardService.getBoards().subscribe((response) => {
       this.boards = response.reverse();

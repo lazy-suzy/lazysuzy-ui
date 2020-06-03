@@ -68,6 +68,7 @@ export class BoardViewComponent implements OnInit, AfterViewInit {
   iLimit: number;
   total_count: number = 0;
   hasSearched: boolean;
+  eventSubscription: Subscription;
   hasLoadedAllProducts: boolean = false;
   canvasHeight: number;
   constructor(
@@ -493,7 +494,7 @@ export class BoardViewComponent implements OnInit, AfterViewInit {
   }
   ngOnInit(): void {
     // if there is a change in user after the first boot then redirect
-    this.eventEmitterService.userChangeEvent
+    this.eventSubscription = this.eventEmitterService.userChangeEvent
       .asObservable()
       .subscribe((user) => {
         if (!this.appMeta.flag.isBoot)
@@ -542,6 +543,9 @@ export class BoardViewComponent implements OnInit, AfterViewInit {
         }
       );
     }
+  }
+  ngOnDestroy(): void {
+    this.eventSubscription.unsubscribe();
   }
   ngAfterViewInit(): void {
     this.shortcuts.push(

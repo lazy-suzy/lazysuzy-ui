@@ -59,6 +59,7 @@ export class ProductDetailsMobileComponent implements OnInit {
   quantityArray = [];
   galleryRef = this.gallery.ref(this.galleryId);
   isSetItemInInventory: boolean = false;
+  eventSubscription: Subscription;
   constructor(
     private router: Router,
     private activeRoute: ActivatedRoute,
@@ -72,7 +73,7 @@ export class ProductDetailsMobileComponent implements OnInit {
   ) {}
 
   ngOnInit() {
-    this.eventEmitterService.userChangeEvent
+    this.eventSubscription = this.eventEmitterService.userChangeEvent
       .asObservable()
       .subscribe((user) => {
         this.bpSubscription = this.bpObserver.subscribe(
@@ -153,6 +154,7 @@ export class ProductDetailsMobileComponent implements OnInit {
   ngOnDestroy(): void {
     this.productSubscription.unsubscribe();
     this.bpSubscription.unsubscribe();
+    this.eventSubscription.unsubscribe();
   }
 
   selectTab(tab) {

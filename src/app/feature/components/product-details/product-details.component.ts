@@ -26,6 +26,7 @@ export class ProductDetailsComponent implements OnInit {
   @ViewChild('gallery', { static: false }) galleryContainer: ElementRef;
   product: IProductDetail;
   productSubscription: Subscription;
+  eventSubscription: Subscription;
   selectedIndex: number;
   dimensionExist: boolean;
   featuresExist: boolean;
@@ -71,7 +72,7 @@ export class ProductDetailsComponent implements OnInit {
   ngOnInit(): void {
     this.isProductFetching = true;
 
-    this.eventEmitterService.userChangeEvent
+    this.eventSubscription = this.eventEmitterService.userChangeEvent
       .asObservable()
       .subscribe((user) => {
         this.productSubscription = this.apiService
@@ -134,16 +135,11 @@ export class ProductDetailsComponent implements OnInit {
           });
         this.localStorageUser = user;
       });
-
-    this.eventEmitterService.userChangeEvent
-      .asObservable()
-      .subscribe((user) => {
-        this.localStorageUser = user;
-      });
   }
 
   ngOnDestroy(): void {
     this.productSubscription.unsubscribe();
+    this.eventSubscription.unsubscribe();
   }
 
   ngAfterViewChecked(): void {

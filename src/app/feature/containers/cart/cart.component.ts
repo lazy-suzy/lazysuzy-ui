@@ -31,6 +31,7 @@ export class CartComponent implements OnInit {
   emptyCart: boolean = true;
   isCartLoading: boolean;
   isLoggedIn: boolean;
+  eventSubscription: Subscription;
   constructor(
     private breakpointObserver: BreakpointObserver,
     private apiService: ApiService,
@@ -46,7 +47,7 @@ export class CartComponent implements OnInit {
         this.isHandset = handset.matches;
       }
     );
-    this.eventEmitterService.userChangeEvent
+    this.eventSubscription = this.eventEmitterService.userChangeEvent
       .asObservable()
       .subscribe((user) => {
         if (user.user_type === 1) {
@@ -78,6 +79,7 @@ export class CartComponent implements OnInit {
 
   ngOnDestroy(): void {
     this.bpSubscription.unsubscribe();
+    this.eventSubscription.unsubscribe();
   }
 
   increaseQuantity(product, quantity) {

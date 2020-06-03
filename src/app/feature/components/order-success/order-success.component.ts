@@ -3,7 +3,7 @@ import { ApiService } from 'src/app/shared/services';
 import moment from 'moment';
 import { Router, ActivatedRoute } from '@angular/router';
 import { EventEmitterService } from 'src/app/shared/services';
-
+import { Subscription } from 'rxjs';
 @Component({
   selector: 'app-order-success',
   templateUrl: './order-success.component.html',
@@ -25,6 +25,7 @@ export class OrderSuccessComponent implements OnInit {
   showError: boolean;
   isLoggedIn: boolean;
   showSuccess: boolean;
+  eventSubscription: Subscription;
   constructor(
     private apiService: ApiService,
     private router: Router,
@@ -38,7 +39,7 @@ export class OrderSuccessComponent implements OnInit {
         this.orderId = routeParams.order;
       }
     );
-    this.eventEmitterService.userChangeEvent
+    this.eventSubscription = this.eventEmitterService.userChangeEvent
       .asObservable()
       .subscribe((user) => {
         this.isLoggedIn = user.user_type === 1;
@@ -59,6 +60,9 @@ export class OrderSuccessComponent implements OnInit {
           }
         );
       });
+  }
+  ngOnDestroy(): void {
+    this.eventSubscription.unsubscribe();
   }
   calculateCartData() {
     for (let product of this.cartProducts) {

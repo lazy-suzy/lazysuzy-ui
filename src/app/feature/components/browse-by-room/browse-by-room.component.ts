@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ApiService, EventEmitterService } from './../../../shared/services';
 import { Router } from '@angular/router';
 import { environment } from './../../../../environments/environment';
-
+import { Subscription } from 'rxjs';
 @Component({
   selector: 'app-browse-by-room',
   templateUrl: './browse-by-room.component.html',
@@ -11,7 +11,7 @@ import { environment } from './../../../../environments/environment';
 export class BrowseByRoomComponent implements OnInit {
   departments: any;
   ref = environment.BASE_HREF;
-
+  eventSubscription: Subscription;
   constructor(
     private apiService: ApiService,
     private router: Router,
@@ -19,11 +19,14 @@ export class BrowseByRoomComponent implements OnInit {
   ) {}
 
   ngOnInit() {
-    this.eventEmitterService.userChangeEvent
+    this.eventSubscription = this.eventEmitterService.userChangeEvent
       .asObservable()
       .subscribe((user) => {
         this.onClick();
       });
+  }
+  ngOnDestroy(): void {
+    this.eventSubscription.unsubscribe();
   }
   onClick() {
     this.apiService.browseRoom().subscribe((res: any) => {

@@ -6,7 +6,7 @@ import {
 } from 'src/app/shared/services';
 import { Router } from '@angular/router';
 import { Carousel } from 'primeng/carousel';
-
+import { Subscription } from 'rxjs';
 @Component({
   selector: 'app-top-deals',
   templateUrl: './top-deals.component.html',
@@ -17,7 +17,7 @@ export class TopDealsComponent implements OnInit {
   responsiveOptions: any;
   @Input() isHandset: boolean = false;
   showLoader = false;
-
+  eventSubscription: Subscription;
   constructor(
     private apiService: ApiService,
     private router: Router,
@@ -45,13 +45,15 @@ export class TopDealsComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.eventEmitterService.userChangeEvent
+    this.eventSubscription = this.eventEmitterService.userChangeEvent
       .asObservable()
       .subscribe((user) => {
         this.getTopDeals();
       });
   }
-
+  ngOnDestroy(): void {
+    this.eventSubscription.unsubscribe();
+  }
   getTopDeals(): void {
     this.showLoader = true;
     this.apiService.getTopDeals().subscribe((res) => {

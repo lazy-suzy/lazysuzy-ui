@@ -87,6 +87,7 @@ export class PaymentComponent implements OnInit {
   isHandset: boolean;
   isLoading: boolean = true;
   localStorageUser = {};
+  eventSubscription: Subscription;
   constructor(
     private fb: FormBuilder,
     private stripeService: StripeService,
@@ -151,7 +152,7 @@ export class PaymentComponent implements OnInit {
         this.cardCvc.mount('#form-card-cvc');
       }
     });
-    this.eventEmitterService.userChangeEvent
+    this.eventSubscription = this.eventEmitterService.userChangeEvent
       .asObservable()
       .subscribe((user) => {
         this.customerData.email = user.email;
@@ -159,7 +160,9 @@ export class PaymentComponent implements OnInit {
         this.getCartProducts();
       });
   }
-
+  ngOnDestroy(): void {
+    this.eventSubscription.unsubscribe();
+  }
   getCartProducts() {
     this.apiService.getCartProduct().subscribe(
       (payload: any) => {

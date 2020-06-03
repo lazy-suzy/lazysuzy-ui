@@ -32,7 +32,6 @@ export class AuthComponent implements OnInit {
   name: string = '';
   expiredDate = new Date();
   initialized = false;
-
   private attribute = {
     postGuestKey: 'guest',
     lsGuestUser: 'guest-user',
@@ -74,7 +73,6 @@ export class AuthComponent implements OnInit {
     }
     this.resolveUser();
   }
-
   private updateUser(user) {
     this.user = typeof user == "string" ? JSON.parse(user) : user;
     if (this.user.name){

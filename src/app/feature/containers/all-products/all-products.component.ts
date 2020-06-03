@@ -55,7 +55,7 @@ export class AllProductsComponent implements OnInit {
   isHandset: boolean = false;
   total: number = 24;
   scrollToProductSKU: string = '';
-
+  eventSubscription: Subscription;
   constructor(
     private apiService: ApiService,
     private router: Router,
@@ -67,7 +67,7 @@ export class AllProductsComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.eventEmitterService.userChangeEvent
+    this.eventSubscription = this.eventEmitterService.userChangeEvent
       .asObservable()
       .subscribe((user) => {
         this.getParamsFromQuery();
@@ -83,6 +83,7 @@ export class AllProductsComponent implements OnInit {
     this.productsSubscription.unsubscribe();
     this.routeSubscription.unsubscribe();
     this.bpSubscription.unsubscribe();
+    this.eventSubscription.unsubscribe();
   }
 
   getParamsFromQuery(): void {

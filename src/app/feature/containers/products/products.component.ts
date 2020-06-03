@@ -72,7 +72,7 @@ export class ProductsComponent implements OnInit, OnDestroy {
   bpSubscription: Subscription;
   isHandset: boolean;
   scrollToProductSKU: string = '';
-
+  eventSubscription: Subscription;
   constructor(
     public dialog: MatDialog,
     private productElement: ElementRef,
@@ -87,7 +87,7 @@ export class ProductsComponent implements OnInit, OnDestroy {
   ) {}
 
   ngOnInit(): void {
-    this.eventEmitterService.userChangeEvent
+    this.eventSubscription = this.eventEmitterService.userChangeEvent
       .asObservable()
       .subscribe((user) => {
         this.getParams();
@@ -117,6 +117,7 @@ export class ProductsComponent implements OnInit, OnDestroy {
     this.productsSubscription.unsubscribe();
     this.routeSubscription.unsubscribe();
     this.bpSubscription.unsubscribe();
+    this.eventSubscription.unsubscribe();
   }
 
   getParams(): void {
