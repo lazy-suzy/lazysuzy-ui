@@ -31,7 +31,7 @@ export class SearchComponent implements OnInit {
   isHandset: boolean;
   productsInRow: number = 2;
   isProductFetching: boolean = false;
-
+  isBoardApi = false;
   constructor(
     private apiService: ApiService,
     private router: Router,
@@ -70,7 +70,7 @@ export class SearchComponent implements OnInit {
           name: {
             query: this.query + '*'
           }
-        }
+        },
       }
     });
 

@@ -101,7 +101,7 @@
               <h5 class="title js-category-title">
                 {{ hasSearched ? searchText : selectedCategory?.category }}
               </h5>
-            </div>
+            </div>                                                                                       
             <div class="browse-filter" *ngIf="!hasSearched">
               <div class="filter-bar-container">
                 <div class="filter-bar js-filter-section" id="desktop-filter">
@@ -115,12 +115,8 @@
             </div>
           </div>
           <div
+            (scroll)="onScrollEvent($event)"
             class="product-container"
-            infiniteScroll
-            [infiniteScrollDistance]="3"
-            [infiniteScrollThrottle]="50"
-            (scrolled)="onScroll()"
-            [scrollWindow]="false"
           >
             <app-board-products
               [products]="remoteProducts"

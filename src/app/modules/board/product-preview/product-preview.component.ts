@@ -16,13 +16,13 @@ export class AppProductPreviewComponent implements OnInit {
   constructor() { }
 
   ngOnInit() {
-    this.updatePriceFormat(this.data.is_price);
+    this.updatePriceFormat(this.data.is_price, this.data.price);
    }
 
   ngOnChanges(changes: any) {
     if (changes['data'] && changes['data'].previousValue !== changes['data'].currentValue) {
       this.data = changes['data'].currentValue || {};
-      this.updatePriceFormat(this.data.is_price);
+      this.updatePriceFormat(this.data.is_price, this.data.price);
       if(this.data.dropType){
         this.dropType = this.data.dropType;
       }
@@ -37,11 +37,14 @@ export class AppProductPreviewComponent implements OnInit {
     this.clearProductPreview.emit(data);
   }
 
-  updatePriceFormat(price) {
-    let splitedPrice = price.split('-');
+  updatePriceFormat(price, searchProductsPrice) {
+    let data = price || searchProductsPrice;
+    let splitedPrice = data.split('-');
     this.minPrice = splitedPrice[0];
     if(splitedPrice.length > 1) {
       this.maxPrice = splitedPrice[1];
+    } else {
+      this.maxPrice = null;
     }
   }
 

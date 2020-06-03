@@ -70,6 +70,8 @@ export class BoardViewComponent implements OnInit, AfterViewInit {
   hasSearched: boolean;
   eventSubscription: Subscription;
   hasLoadedAllProducts: boolean = false;
+  isBoardApi = true;
+
   canvasHeight: number;
   constructor(
     private cookieService: CookieService,
@@ -113,14 +115,27 @@ export class BoardViewComponent implements OnInit, AfterViewInit {
       from: this.iPageNo * this.iLimit,
       size: this.iLimit,
       query: {
-        match: {
-          name: {
-            query: this.searchText + '*'
-          }
+        bool: {
+          must: [
+            {
+              match: {
+                name: {
+                  query: this.searchText + '*'
+                }
+              }
+            },
+            {
+              match: {
+                image_xbg_processed: {
+                  query: true
+                }
+              }
+            }
+          ]
         }
       }
     });
-    
+
     if (this.selectedItem === 'select') {
       this.selectedItem = 'browse';
     }
@@ -130,6 +145,11 @@ export class BoardViewComponent implements OnInit, AfterViewInit {
         const { hits } = payload.hits;
         this.hasSearched = true;
         let products = hits.map((hit: any) => hit._source);
+        for (let i in products) {
+          if (products[i].board_thumb)
+            products[i].board_thumb =
+              '//www.lazysuzy.com' + products[i].board_thumb;
+        }
         this.remoteProducts = [...this.remoteProducts, ...(products || [])];
         this.remoteProducts = this.remoteProducts.map((ele, i) => {
           return {
@@ -486,10 +506,26 @@ export class BoardViewComponent implements OnInit, AfterViewInit {
     this.handleResize();
   }
   onScroll() {
-    if (this.hasLoadedAllProducts) {
-      return;
-    } else {
-      this.loadMore();
+    // if (this.hasLoadedAllProducts) {
+    //   console.log('here');
+    //   this.hasLoadedAllProducts = false;
+    //   return;
+    // } else {
+    //   this.loadMore();
+    // }
+  }
+  onScrollEvent(event) {
+    var element: any = document.getElementsByClassName('product-container');
+    if (
+      element[0].scrollHeight - element[0].scrollTop ===
+      element[0].clientHeight
+    ) {
+      if (this.hasLoadedAllProducts) {
+        this.hasLoadedAllProducts = false;
+        return;
+      } else {
+        this.loadMore();
+      }
     }
   }
   ngOnInit(): void {
@@ -519,9 +555,8 @@ export class BoardViewComponent implements OnInit, AfterViewInit {
         });
       });
     });
-    const isBoardApi = true;
     this.productsSubscription = this.apiService
-      .getWishlistProducts(isBoardApi)
+      .getWishlistProducts(this.isBoardApi)
       .subscribe((payload: IProductsPayload) => {
         this.favoriteProducts = payload.products;
         this.favoriteProducts = this.favoriteProducts.map((ele, i) => {
