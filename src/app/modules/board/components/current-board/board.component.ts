@@ -8,31 +8,36 @@ import { BoardService } from 'src/app/shared/services/board/board.service';
   styleUrls: ['./board.component.less', './../../board.component.less']
 })
 export class CurrentBoardComponent implements OnInit {
-
   @Input() boardProducts: any = [];
 
-  constructor() { }
+  constructor() {}
 
-  ngOnInit() { }
+  ngOnInit() {}
 
   ngOnChanges(changes: any) {
-    if (changes['boardProducts'] && changes['boardProducts'].previousValue !== changes['boardProducts'].currentValue) {
+    if (
+      changes['boardProducts'] &&
+      changes['boardProducts'].previousValue !==
+        changes['boardProducts'].currentValue
+    ) {
       let boardProducts = changes['boardProducts'].currentValue || [];
       this.boardProducts = [...boardProducts] || [];
     }
   }
-  updatePriceFormat(price) {
+  updatePriceFormat(price, max) {
     let minPrice: string = '';
     let maxPrice: string = '';
     var formatter = new Intl.NumberFormat('en-US', {
       style: 'currency',
-      currency: 'USD',
+      currency: 'USD'
     });
     let splitedPrice = price.split('-');
     minPrice = formatter.format(splitedPrice[0].slice(1));
     if (splitedPrice.length > 1) {
-      maxPrice = formatter.format(splitedPrice[1]);
-      return `${minPrice.slice(0, -3)} - ${maxPrice.slice(0, -3)}`;
+      if (max) {
+        maxPrice = formatter.format(splitedPrice[1]);
+        return `- ${maxPrice.slice(0, -3)}`;
+      }
     }
     return `${minPrice.slice(0, -3)}`;
   }
