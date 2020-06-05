@@ -131,8 +131,7 @@ export class BoardListComponent implements OnInit {
         type: 'share',
         board: board
       },
-      width: '40%',
-      height: '90%'
+      width: '40%'
     });
   }
 
