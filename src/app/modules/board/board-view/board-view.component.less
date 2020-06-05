@@ -184,6 +184,32 @@
 .color-selector-tab {
   display: none;
 }
+.editor-icons {
+  display: flex;
+  justify-content: space-between;
+  color: #f7f6f6;
+}
+.dropdown::after {
+  border-top-color: #f7f6f6;
+}
+.top-panel .crop-options {
+  button {
+    color: #f7f6f6;
+    &:hover {
+      i {
+        background: none;
+        color: #ffcc00;
+      }
+      background: rgba(247, 246, 246, 0.1);
+      color: #ffcc00;
+    }
+    i {
+      &:hover {
+        background: none;
+      }
+    }
+  }
+}
 @media screen and (max-width: 991px) {
   .load-more-btn-container {
     padding-bottom: 0;
@@ -216,6 +242,7 @@
     overflow: hidden;
     text-overflow: ellipsis;
     color: #f7f6f6;
+    font-size: 17px;
   }
   .dropdown::after {
     display: none;
@@ -227,22 +254,45 @@
     background: #f7f6f6 !important;
   }
   .item-action-icons {
-    display:flex;
+    display: flex;
   }
-  .color-selector-tab {
+  .top-panel .color-selector-tab {
     display: block;
-    margin-left: 10%;
-    margin-top: -1px;
+    margin-left: 13px;
+    margin-top: -3px;
+    i {
+      font-size: 22px;
+    }
   }
   .padding-right-0 {
     padding-right: 0;
   }
   .editor-icons {
     display: flex;
-    float: right;
+    margin-left: 18px;
   }
   .font-editor-container {
     padding-left: 0;
     padding-right: 10px;
+  }
+  .tool-bar-holder .top-panel {
+    padding: 5px 16px 0;
+  }
+}
+@media screen and (max-width: 375px) {
+  .tool-bar-holder .top-panel {
+    padding: 5px 0 0;
+  }
+  .color-selector-tab {
+    margin-left: 8px;
+  }
+}
+@media screen and (max-width: 360px) {
+  .top-panel i {
+    margin-right: 13px !important;
+  }
+  .editor-icons {
+    display: flex;
+    margin-left: 16px;
   }
 }

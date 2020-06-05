@@ -372,15 +372,15 @@
           <div class="col-sm-12 crop-options">
             <button class="btn" (click)="handleCrop(true)">
               <i class="mdi mdi-check mr-0" aria-hidden="true"></i>
-              Crop
+              <span>Crop</span>
             </button>
             <button class="btn" (click)="handleCrop(false)">
               <i class="mdi mdi-undo mr-0" aria-hidden="true"></i>
-              Cancel
+              <span>Cancel</span>
             </button>
             <button class="btn" (click)="handleCrop(false, true)">
               <i class="mdi mdi-minus mr-0" aria-hidden="true"></i>
-              Revert
+              <span>Revert</span>
             </button>
           </div>
         </div>
@@ -410,7 +410,7 @@
               />
             </div>
             <div
-              class="mr-3 board-action-icons"
+              class="board-action-icons mr-0 pr-0 pt-2"
               *ngIf="isTablet; else isDesktop"
             >
               <i
@@ -419,7 +419,7 @@
                 aria-hidden="true"
               ></i>
               <i
-                class="mdi mdi-publish pr-1"
+                class="mdi mdi-publish ml-1"
                 (click)="openPopup('publish')"
                 aria-hidden="true"
               ></i>
@@ -445,11 +445,15 @@
               ></canvas>
             </div>
           </div>
-          <div class="col-sm-2 col-5 state-icons d-lg-none">
+          <div class="col-sm-2 col-5 state-icons d-lg-none pr-0">
             <!-- <i class="mdi mdi-magnify-minus" (click)="zoomOut()" aria-hidden="true"></i> -->
             <!-- <i class="mdi mdi-magnify-plus" (click)="zoomIn()" aria-hidden="true"></i> -->
             <i class="mdi mdi-undo" (click)="undo()" aria-hidden="true"></i>
-            <i class="mdi mdi-redo" (click)="redo()" aria-hidden="true"></i>
+            <i
+              class="mdi mdi-redo ml-1"
+              (click)="redo()"
+              aria-hidden="true"
+            ></i>
           </div>
         </div>
       </div>
