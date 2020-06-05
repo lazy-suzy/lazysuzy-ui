@@ -2,10 +2,11 @@ import { Component, OnInit, Output, EventEmitter, Input } from '@angular/core';
 import { MatDialog } from '@angular/material';
 import { AddViaUrlComponent } from './add-via-url/add-via-url.component';
 import { BoardService } from 'src/app/shared/services/board/board.service';
+import { environment as env } from 'src/environments/environment';
 @Component({
   selector: 'app-board-add',
   templateUrl: './add.component.html',
-  styleUrls: ['./add.component.less', '../board.component.less'],
+  styleUrls: ['./add.component.less', '../board.component.less']
 })
 export class BoardAddComponent implements OnInit {
   myUploads = [];
@@ -19,7 +20,7 @@ export class BoardAddComponent implements OnInit {
   @Input() userId: any = null;
   @Output() previewProduct: EventEmitter<any> = new EventEmitter();
   @Output() updateAsset: EventEmitter<any> = new EventEmitter();
-  
+
   constructor(public dialog: MatDialog, private boardService: BoardService) {}
 
   ngOnChanges(changes: any) {
@@ -39,7 +40,7 @@ export class BoardAddComponent implements OnInit {
       this.allAssets = this.allAssets.map((ele, i) => {
         return {
           ...ele,
-          refId: i,
+          refId: i
         };
       });
     }
@@ -51,7 +52,7 @@ export class BoardAddComponent implements OnInit {
       return asst.user_id == userId;
     });
     this.allUploads = assets.filter((asst) => {
-      return asst.is_private == 0 || asst.user_id == userId;
+      return asst.is_private == 0;
     });
   }
 
@@ -60,7 +61,12 @@ export class BoardAddComponent implements OnInit {
   }
 
   updateAssets(data) {
-    this.allAssets.push(data);
+    data.board_thumb = `${env.BASE_HREF}${data.path}`;
+    this.allAssets = this.allAssets.map((elem) => ({
+      ...elem,
+      board_thumb: `${env.BASE_HREF}${elem.path}`
+    }));
+    this.allAssets.unshift(data);
     // this.allAssets = [...this.allAssets];
     this.filterUploads(this.allAssets, this.userId);
     this.updateAsset.emit(this.allAssets);
@@ -74,9 +80,9 @@ export class BoardAddComponent implements OnInit {
       width: '450px',
       data: {
         name: '',
-        panelClass: 'my-dialog',
+        panelClass: 'my-dialog'
       },
-      disableClose: true,
+      disableClose: true
     });
 
     dialogRef.afterClosed().subscribe((result) => {
