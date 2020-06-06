@@ -2,6 +2,8 @@ import { Component, OnInit, Inject, ViewEncapsulation } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { FormBuilder, Validators, FormGroup } from '@angular/forms';
 import { Asset } from '../../../asset';
+import { MatChipInputEvent } from '@angular/material/chips';
+import { COMMA, ENTER } from '@angular/cdk/keycodes';
 
 @Component({
   selector: 'app-upload-file-details',
@@ -14,6 +16,13 @@ export class UploadFileDetailsComponent implements OnInit {
   loaderTypeProgress = true;
   step: FormGroup;
 
+  readonly separatorKeysCodes: number[] = [ENTER, COMMA];
+  visible = true;
+  selectable = true;
+  removable = true;
+  addOnBlur = true;
+  tags = [];
+
   constructor(
     public dialogRef: MatDialogRef<UploadFileDetailsComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any,
@@ -23,7 +32,7 @@ export class UploadFileDetailsComponent implements OnInit {
       productTitle: [''],
       price: [''],
       productListingUrl: [''],
-      additionalTags: [''],
+      tags: "",
       keepPrivate: [false]
     });
   }
@@ -51,8 +60,9 @@ export class UploadFileDetailsComponent implements OnInit {
       data: new Asset({
         is_private: this.step.value.keepPrivate == true ? 1 : 0,
         name: this.step.value.productTitle,
-        price: this.step.value.price
-        // product_url: this.step.value.productListingUrl
+        price: this.step.value.price,
+        listing_url: this.step.value.productListingUrl,
+        tags: this.tags.join(',')
       })
     };
     // if (this.step.value) {
@@ -60,4 +70,28 @@ export class UploadFileDetailsComponent implements OnInit {
     // }
     this.onYesClick(payload);
   }
+
+  add(event: MatChipInputEvent): void {
+    const input = event.input;
+    const value = event.value;
+
+    // Add our fruit
+    if ((value || '').trim()) {
+      this.tags.push(value.trim());
+    }
+
+    // Reset the input value
+    if (input) {
+      input.value = '';
+    }
+  }
+
+  remove(tag: string): void {
+    const index = this.tags.indexOf(tag);
+
+    if (index >= 0) {
+      this.tags.splice(index, 1);
+    }
+  }
+
 }

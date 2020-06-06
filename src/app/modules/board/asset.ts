@@ -5,6 +5,8 @@ export class Asset {
   brand: string;
   path: string;
   transparent_path: string;
+  url: string;
+  tags: string;
   is_private: number;
   is_active: number;
   created_at: string;
