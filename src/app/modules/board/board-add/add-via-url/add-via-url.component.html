@@ -1,8 +1,84 @@
 <button mat-icon-button class="close-button" [mat-dialog-close]="true">
-    <mat-icon class="close-icon">close</mat-icon>
+  <mat-icon class="close-icon">close</mat-icon>
 </button>
 <h2 mat-dialog-title>Add Image via URL</h2>
 <div mat-dialog-content>
-    <stepper-overview-example (stepperUpdates)="handleStepperUpdates($event)"></stepper-overview-example>
-    <app-loader [showProgressBar]="loaderTypeProgress" *ngIf="showLoader"></app-loader>
+  <mat-horizontal-stepper [linear]="isLinear" #stepper>
+    <mat-step [stepControl]="stepOne">
+      <form [formGroup]="stepOne">
+        <!-- <ng-template matStepLabel>Fill out image url</ng-template> -->
+        <mat-form-field>
+          <input
+            matInput
+            placeholder="Image Url"
+            formControlName="imageUrl"
+            required
+          />
+        </mat-form-field>
+        <div *ngIf="imageUrl.errors?.pattern" class="invalid">
+          Image Url not valid.
+        </div>
+        <div>
+          <button [disabled]="!stepOne.valid" mat-button matStepperNext>
+            Next
+          </button>
+        </div>
+      </form>
+    </mat-step>
+    <mat-step [stepControl]="stepTwo">
+      <form [formGroup]="stepTwo">
+        <!-- <ng-template matStepLabel>Add Image</ng-template> -->
+        <mat-form-field>
+          <input
+            matInput
+            placeholder="Product Title"
+            formControlName="productTitle"
+          />
+        </mat-form-field>
+        <mat-form-field>
+          <input matInput placeholder="Price" formControlName="price" />
+        </mat-form-field>
+        <mat-form-field>
+          <input
+            matInput
+            placeholder="Product Listing Url"
+            formControlName="productListingUrl"
+          />
+        </mat-form-field>
+        <mat-form-field class="chip-list">
+          <mat-chip-list #chipList aria-label="Tags">
+            <mat-chip
+              *ngFor="let tag of tags"
+              [selectable]="selectable"
+              [removable]="removable"
+              (removed)="remove(tag)"
+            >
+              {{ tag }}
+              <mat-icon matChipRemove *ngIf="removable">cancel</mat-icon>
+            </mat-chip>
+            <input
+              placeholder="Tags"
+              [matChipInputFor]="chipList"
+              [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+              [matChipInputAddOnBlur]="addOnBlur"
+              (matChipInputTokenEnd)="add($event)"
+            />
+          </mat-chip-list>
+        </mat-form-field>
+        <mat-checkbox color="primary" matInput formControlName="keepPrivate">
+          Keep Private
+        </mat-checkbox>
+      </form>
+
+      <button mat-button (click)="cancelAddImgViaUrl()">Cancel</button>
+      <button mat-button [disabled]="!isUrlAdded" (click)="saveAddViaUrl()">
+        Add
+      </button>
+    </mat-step>
+  </mat-horizontal-stepper>
+
+  <app-loader
+    [showProgressBar]="loaderTypeProgress"
+    *ngIf="showLoader"
+  ></app-loader>
 </div>

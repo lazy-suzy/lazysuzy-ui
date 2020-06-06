@@ -38,6 +38,7 @@ export class UploadFileDetailsComponent implements OnInit {
       productTitle: [''],
       price: [''],
       productListingUrl: [''],
+      tags: '',
       keepPrivate: [false]
     });
   }
@@ -51,9 +52,9 @@ export class UploadFileDetailsComponent implements OnInit {
         productTitle: product.name,
         price: product.price,
         productListingUrl: product.listing_url,
+        tags: product.tags,
         keepPrivate: product.is_private === 1 ? true : false
       });
-      this.tags = product.tags.split(',')
     } else {
       this.buttonText = 'Add';
     }
