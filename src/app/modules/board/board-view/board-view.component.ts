@@ -858,6 +858,8 @@ export class BoardViewComponent implements OnInit, AfterViewInit {
       backgroundColor: 'rgb(255,255,255)',
       selection: true
     });
+
+    if (this.justCreated) this.handleResize();
     // add class for detection
     $('.lazysuzy-board').on('dragstart dragend', (e) => {
       $(e.target).toggleClass(
@@ -1911,6 +1913,10 @@ export class BoardViewComponent implements OnInit, AfterViewInit {
         this.saveHistory();
       });
     } else if (object.attribute == 'background') {
+      this.canvas.setBackgroundColor(null, () => {
+        this.canvas.renderAll();
+        this.saveHistory();
+      });
       fb.Image.fromURL(
         object.value,
         (img) => {
@@ -1947,23 +1953,29 @@ export class BoardViewComponent implements OnInit, AfterViewInit {
     dimentionBefore,
     enableTransparent = false
   ) => {
+    this.canvas.discardActiveObject();
     activeObject.setSrc(
       environment.BASE_HREF +
         (enableTransparent
           ? activeObject.referenceObject.transparentPath
           : activeObject.referenceObject.path),
       () => {
-        activeObject.scaleX =
-          (dimentionBefore.width * dimentionBefore.scaleX) / activeObject.width;
-        activeObject.scaleY =
-          (dimentionBefore.height * dimentionBefore.scaleY) /
-          activeObject.height;
+        activeObject.width = dimentionBefore.width;
+        activeObject.height = dimentionBefore.height;
+        activeObject.scaleX = dimentionBefore.scaleX;
+        activeObject.scaleY = dimentionBefore.scaleY;
+        // activeObject.scaleX =
+        //   (dimentionBefore.width * dimentionBefore.scaleX) / activeObject.width;
+        // activeObject.scaleY =
+        //   (dimentionBefore.height * dimentionBefore.scaleY) /
+        //   activeObject.height;
 
         this.canvasMeta.flag.isCurrentObjectTransparentSelected = enableTransparent;
 
-        this.canvas.discardActiveObject();
-        this.updateToolbar();
+        this.canvas.setActiveObject(activeObject);
         this.canvas.renderAll();
+        this.updateToolbar();
+        this.canvas.renderCanvas();
       }
     );
   };
