@@ -37,7 +37,6 @@ export class BoardListComponent implements OnInit {
     this.eventSubscription = this.eventEmitterService.userChangeEvent
       .asObservable()
       .subscribe((user) => {
-        console.log(user);
         // if it has been called previously for every new change create a snackbar
         if (!this.isFirstBoot) {
           this.isFetching = true;
