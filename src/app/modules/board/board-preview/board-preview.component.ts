@@ -1,9 +1,9 @@
 import { Component, OnInit, HostListener } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-
+import { Observable, Subscription } from 'rxjs';
 import { Board } from '../board';
 import { BoardService } from '../board.service';
-
+import { EventEmitterService } from 'src/app/shared/services';
 import { Font, FontPickerService } from 'ngx-font-picker';
 import { UtilsService } from '../../../shared/services/utils/utils.service';
 
@@ -15,11 +15,17 @@ declare const fb: any;
   styleUrls: ['./board-preview.component.less', '../board.component.less']
 })
 export class BoardPreviewComponent implements OnInit {
-
   loadedAsEmbed = false;
+  eventSubscription: Subscription;
+  userName: string;
   constructor(
-    private boardService: BoardService, private route: ActivatedRoute, private router: Router, 
-    private fontPickerService: FontPickerService, private utilsService: UtilsService) {
+    private boardService: BoardService,
+    private route: ActivatedRoute,
+    private router: Router,
+    private fontPickerService: FontPickerService,
+    private utilsService: UtilsService,
+    private eventEmitterService: EventEmitterService
+  ) {
     if (route.snapshot['_routerState'].url.match(/embed/))
       this.loadedAsEmbed = true;
   }
@@ -31,9 +37,9 @@ export class BoardPreviewComponent implements OnInit {
   canvas: any;
   canvasMeta = {
     identifier: {
-      id: "canvas-area",
-      containerArea: "canvas-inner-container",
-      dropArea: "#canvas-droparea",
+      id: 'canvas-area',
+      containerArea: 'canvas-inner-container',
+      dropArea: '#canvas-droparea'
     },
     value: {
       center: {
@@ -44,7 +50,6 @@ export class BoardPreviewComponent implements OnInit {
     }
   };
   appMeta = {
-
     board: new Board(),
     flag: {
       isBoot: true
@@ -61,54 +66,67 @@ export class BoardPreviewComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    // main entry point
-    $(() => {
-      this.canvas = new fb.Canvas(this.canvasMeta.identifier.id, {
-        containerClass: this.canvasMeta.identifier.containerArea,
-        preserveObjectStacking: true,
-        width: $(this.canvasMeta.identifier.dropArea).parent().width(),
-        height: $(this.canvasMeta.identifier.dropArea).parent().width() / Number.parseFloat(this.canvasMeta.value.aspectRatio),
-        selection: true
-      });
-      
-      // update canvas center point
-      this.updateCanvasCenter();
-      
-      const uuid = this.route.snapshot.paramMap.get('uuid');
-      this.boardService.getBoardByID(uuid, true)
-        .subscribe(response => {
-          if (response[0]) {
-            this.boardFound = true;
-            this.appMeta.board = response[0];
-            this.boardState = JSON.parse(this.appMeta.board.state.toString());
-            if (this.boardState) {
-              this.boardState.objects.forEach((object) => {
-                if (object.type == "textbox") {
-                  this.addFontFamilyIfNotAdded(object.fontFamily);
+    this.eventSubscription = this.eventEmitterService.userChangeEvent
+      .asObservable()
+      .subscribe((user) => {
+        console.log(user);
+        if (user.user_type === 0) {
+          this.userName = 'Guest';
+        } else {
+          this.userName = `${user.first_name} ${user.last_name}`;
+        }
+        // main entry point
+        $(() => {
+          this.canvas = new fb.Canvas(this.canvasMeta.identifier.id, {
+            containerClass: this.canvasMeta.identifier.containerArea,
+            preserveObjectStacking: true,
+            width: $(this.canvasMeta.identifier.dropArea).parent().width(),
+            height:
+              $(this.canvasMeta.identifier.dropArea).parent().width() /
+              Number.parseFloat(this.canvasMeta.value.aspectRatio),
+            selection: true
+          });
+          console.log(this.canvas);
+          // update canvas center point
+          this.updateCanvasCenter();
+
+          const uuid = this.route.snapshot.paramMap.get('uuid');
+          this.boardService.getBoardByID(uuid, true).subscribe((response) => {
+            if (response[0]) {
+              this.boardFound = true;
+              this.appMeta.board = response[0];
+              this.boardState = JSON.parse(this.appMeta.board.state.toString());
+              if (this.boardState) {
+                this.boardState.objects.forEach((object) => {
+                  if (object.type == 'textbox') {
+                    this.addFontFamilyIfNotAdded(object.fontFamily);
+                  }
+                });
+              }
+              this.canvas.loadFromJSON(this.appMeta.board.state, () => {
+                if (this.appMeta.flag.isBoot) {
+                  this.appMeta.flag.isBoot = false;
+                  this.enterPreviewMode();
+                  this.handleResize(true);
+                  setTimeout(() => {
+                    for (
+                      let index = 0;
+                      index < this.canvas._objects.length;
+                      index++
+                    ) {
+                      if (this.canvas._objects[index].type == 'textbox')
+                        this.canvas._objects[index].dirty = true;
+                    }
+                    this.canvas.renderAll();
+                  }, 3000);
                 }
               });
             }
-            this.canvas.loadFromJSON(this.appMeta.board.state, () => {
-              if (this.appMeta.flag.isBoot) {
-                this.appMeta.flag.isBoot = false;
-                this.enterPreviewMode();
-                this.handleResize(true);
-                setTimeout(() => {
-                  for (let index = 0; index < this.canvas._objects.length; index++) {
-                    if (this.canvas._objects[index].type == "textbox")
-                      this.canvas._objects[index].dirty = true;
-                  }
-                  this.canvas.renderAll();
-                }, 3000);
-              }
-            });
-          }
 
-          if (this.boardFound == false)
-            this.router.navigate(['/']);
-
+            if (this.boardFound == false) this.router.navigate(['/']);
+          });
         });
-    });
+      });
   }
 
   updateCanvasCenter = () => {
@@ -123,14 +141,14 @@ export class BoardPreviewComponent implements OnInit {
     let previousWidth = forceUpdate
       ? this.boardState.canvas.width
       : this.canvas.width;
-    let currentWidth = $(this.canvasMeta.identifier.dropArea)
-      .parent()
-      .width();
+    let currentWidth = $(this.canvasMeta.identifier.dropArea).parent().width();
 
     this.appMeta.value.scaleFactor = currentWidth / previousWidth;
 
     this.canvas.setWidth(currentWidth);
-    this.canvas.setHeight(currentWidth / Number.parseFloat(this.canvasMeta.value.aspectRatio));
+    this.canvas.setHeight(
+      currentWidth / Number.parseFloat(this.canvasMeta.value.aspectRatio)
+    );
 
     if (this.canvas.backgroundImage) {
       this.canvas.backgroundImage.scaleX *= this.appMeta.value.scaleFactor;
@@ -150,12 +168,11 @@ export class BoardPreviewComponent implements OnInit {
     this.updateCanvasCenter();
   };
   enterPreviewMode = () => {
-
     this.canvas.hoverCursor = 'pointer';
     this.canvas.selection = false;
     this.canvas.discardActiveObject();
 
-    this.canvas.getObjects().forEach(object => {
+    this.canvas.getObjects().forEach((object) => {
       object.selectable = false;
       object.editable = false;
     });
@@ -163,13 +180,17 @@ export class BoardPreviewComponent implements OnInit {
     let imageObjects = this.canvas.getObjects('image');
     imageObjects.forEach((object, index) => {
       this.boardProducts.push({
-        main_image: object.referenceObject.path ? object.referenceObject.path : "",
-        site: object.referenceObject.brand ? object.referenceObject.brand : "",
-        brand: object.referenceObject.brand ? object.referenceObject.brand : "",
-        name: object.referenceObject.name ? object.referenceObject.name : "",
-        is_price: object.referenceObject.price ? object.referenceObject.price : "",
-        price: object.referenceObject.price ? object.referenceObject.price : "",
-        sku: object.referenceObject.sku ? object.referenceObject.sku : ""
+        main_image: object.referenceObject.path
+          ? object.referenceObject.path
+          : '',
+        site: object.referenceObject.brand ? object.referenceObject.brand : '',
+        brand: object.referenceObject.brand ? object.referenceObject.brand : '',
+        name: object.referenceObject.name ? object.referenceObject.name : '',
+        is_price: object.referenceObject.price
+          ? object.referenceObject.price
+          : '',
+        price: object.referenceObject.price ? object.referenceObject.price : '',
+        sku: object.referenceObject.sku ? object.referenceObject.sku : ''
       });
       let objectCenter = object.getCenterPoint();
       let textToInsert = new fb.Text(` ${index + 1} `, {
@@ -190,9 +211,11 @@ export class BoardPreviewComponent implements OnInit {
 
   addFontFamilyIfNotAdded(fontFamily: string) {
     if (this.presetFonts.indexOf(fontFamily) === -1) {
-      this.fontPickerService.loadFont(new Font({
-        family: fontFamily
-      }));
+      this.fontPickerService.loadFont(
+        new Font({
+          family: fontFamily
+        })
+      );
       this.presetFonts.push(fontFamily);
     }
   }
