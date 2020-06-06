@@ -18,7 +18,7 @@ import { SelectComponent } from './board-select/select.component';
 import { SharedModule } from 'src/app/shared/shared.module';
 import { BoardAddComponent } from './board-add/add.component';
 import { AddViaUrlComponent } from './board-add/add-via-url/add-via-url.component';
-import { StepperOverviewExample } from './board-add/add-via-url-stepper/stepper-overview-example';
+// import { StepperOverviewExample } from './board-add/add-via-url-stepper/stepper-overview-example';
 import { BrowsefilterComponent } from './browse-filter/browse-filter.component';
 
 import { MatSliderModule } from '@angular/material/slider';
@@ -36,8 +36,8 @@ import { AppProductPreviewComponent } from './product-preview/product-preview.co
 import { KeyboardShortcutsModule } from 'ng-keyboard-shortcuts';
 import { CarouselModule } from 'primeng/carousel';
 import { BoardTextComponent } from './components/board-text/board-text.component';
-import { StepOneComponent } from './board-add/add-via-url-stepper/step-one/step-one.component';
-import { StepTwoComponent } from './board-add/add-via-url-stepper/step-two/step-two.component';
+// import { StepOneComponent } from './board-add/add-via-url-stepper/step-one/step-one.component';
+// import { StepTwoComponent } from './board-add/add-via-url-stepper/step-two/step-two.component';
 import { BoardProductsComponent } from './components/board-products/board-products.component';
 import { CurrentBoardComponent } from './components/current-board/board.component';
 import { AddFileUploadComponent } from './board-add/add-file-upload/add-file-upload.component';
@@ -91,14 +91,14 @@ const DEFAULT_FONT_PICKER_CONFIG: FontPickerConfigInterface = {
     SelectComponent,
     BoardAddComponent,
     AddViaUrlComponent,
-    StepperOverviewExample,
+    // StepperOverviewExample,
     BrowsefilterComponent,
     AppProductPreviewComponent,
     BoardPreviewComponent,
     BoardTextComponent,
-    StepperOverviewExample,
-    StepOneComponent,
-    StepTwoComponent,
+    // StepperOverviewExample,
+    // StepOneComponent,
+    // StepTwoComponent,
     BoardProductsComponent,
     CurrentBoardComponent,
     AddFileUploadComponent,
