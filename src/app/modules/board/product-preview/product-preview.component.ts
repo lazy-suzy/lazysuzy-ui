@@ -48,8 +48,8 @@ export class AppProductPreviewComponent implements OnInit {
     }
   }
 
-  addToBoard(data) {
-    this.addProductBoard.emit(data);
+  addToBoard() {
+    this.addProductBoard.emit(this.data);
   }
 
   clearPreview(data) {

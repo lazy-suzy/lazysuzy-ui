@@ -550,9 +550,7 @@ export class BoardViewComponent implements OnInit, AfterViewInit {
           }
         }
       });
-    this.eventEmitterService.assets.subscribe((assets) =>
-      this.getAssets()
-    );
+    this.eventEmitterService.assets.subscribe((assets) => this.getAssets());
     // this.eventEmitterService.updateAssetsEvent
     //   .asObservable()
     //   .subscribe((user) => {
@@ -1212,6 +1210,7 @@ export class BoardViewComponent implements OnInit, AfterViewInit {
             ? (product = this.remoteProducts)
             : (product = this.favoriteProducts);
         }
+        console.log(product);
         referenceObjectValue.id = product[referenceID].id;
         referenceObjectValue.isTransparent = 1;
         referenceObjectValue.path = product[referenceID].board_cropped;
