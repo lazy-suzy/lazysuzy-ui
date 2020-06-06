@@ -537,20 +537,29 @@ export class BoardViewComponent implements OnInit, AfterViewInit {
     this.userEventSubscription = this.eventEmitterService.userChangeEvent
       .asObservable()
       .subscribe((user) => {
-        if (this.appMeta.flag.isBoot){
+        if (this.appMeta.flag.isBoot) {
           this.initialUserID = user.id;
         }
         // if the change came after the first boot
         else {
           // redirect the user only the changed user is different then the one before
-          if (this.initialUserID != user.id){
+          if (this.initialUserID != user.id) {
             this.router.navigate(['../../' + boardRoutesNames.BOARD_LIST], {
               relativeTo: this.route
             });
           }
         }
       });
-
+    this.eventEmitterService.assets.subscribe((assets) =>
+      this.getAssets()
+    );
+    // this.eventEmitterService.updateAssetsEvent
+    //   .asObservable()
+    //   .subscribe((user) => {
+    //     console.log('here');
+    //     console.log(user);
+    //     this.getAssets();
+    //   });
     // main entry point
     $(() => {
       this.getConfig(() => {
@@ -1310,32 +1319,44 @@ export class BoardViewComponent implements OnInit, AfterViewInit {
   };
 
   handleResize = (forceUpdate = false) => {
-    let previousWidth = forceUpdate ? this.appMeta.board.data[this.appMeta.board.currentIndex].state.canvas.width: this.canvas.width;
-    
+    let previousWidth = forceUpdate
+      ? this.appMeta.board.data[this.appMeta.board.currentIndex].state.canvas
+          .width
+      : this.canvas.width;
+
     let widthBuffer = this.isTablet ? 0 : 18;
     let heightBuffer = this.isTablet ? 110 : 0;
 
-    let relativePositionToWindow = $(this.canvasMeta.identifier.dropArea)[0].getBoundingClientRect();
+    let relativePositionToWindow = $(
+      this.canvasMeta.identifier.dropArea
+    )[0].getBoundingClientRect();
     let topLevelElement = $(this.appMeta.identifier.topLevelElement);
-    
+
     // let availableWidth = $(this.canvasMeta.identifier.dropArea).parent().width();
     // console.log(window.innerWidth, $(this.canvasMeta.identifier.dropArea).position().left);
-    let calculatedWidth = topLevelElement.width() - relativePositionToWindow.left - widthBuffer;
-    let availableWidth = calculatedWidth + widthBuffer < relativePositionToWindow.width ? calculatedWidth : relativePositionToWindow.width;
-    let availableHeight = topLevelElement.height() - relativePositionToWindow.top - heightBuffer;
-    
+    let calculatedWidth =
+      topLevelElement.width() - relativePositionToWindow.left - widthBuffer;
+    let availableWidth =
+      calculatedWidth + widthBuffer < relativePositionToWindow.width
+        ? calculatedWidth
+        : relativePositionToWindow.width;
+    let availableHeight =
+      topLevelElement.height() - relativePositionToWindow.top - heightBuffer;
+
     // console.log(calculatedWidth < relativePositionToWindow.width ? "using calculated width" : "using relative width");
     // console.log("available scale space", availableWidth, availableHeight, availableWidth / availableHeight);
 
     let newWidth = availableWidth;
-    let newHeight = availableWidth / Number.parseFloat(this.canvasMeta.value.aspectRatio);
+    let newHeight =
+      availableWidth / Number.parseFloat(this.canvasMeta.value.aspectRatio);
 
     // console.log("initial scale", newWidth, newHeight, newWidth / newHeight);
 
     // check if the height will be more than available
-    if (newHeight > availableHeight){
+    if (newHeight > availableHeight) {
       newHeight = availableHeight;
-      newWidth = availableHeight * Number.parseFloat(this.canvasMeta.value.aspectRatio)
+      newWidth =
+        availableHeight * Number.parseFloat(this.canvasMeta.value.aspectRatio);
       // console.log(`changing scale because ${newHeight} > ${availableHeight}`, newWidth, newHeight, newWidth/newHeight);
     }
 
@@ -1343,9 +1364,8 @@ export class BoardViewComponent implements OnInit, AfterViewInit {
 
     this.canvas.setWidth(newWidth);
     this.canvas.setHeight(newHeight);
-    
-    this.appMeta.value.scaleFactor = newWidth / previousWidth;
 
+    this.appMeta.value.scaleFactor = newWidth / previousWidth;
 
     // console.log(currentWidth, currentWidth / Number.parseFloat(this.canvasMeta.value.aspectRatio))
 

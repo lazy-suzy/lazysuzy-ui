@@ -37,6 +37,7 @@ export class BoardAddComponent implements OnInit {
     ) {
       let allAssets = changes['allAssets'].currentValue || [];
       this.allAssets = [...allAssets] || [];
+      this.isAsset = !this.isAsset;
       this.allAssets = this.allAssets.map((ele, i) => {
         return {
           ...ele,

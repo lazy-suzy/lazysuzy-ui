@@ -1,5 +1,6 @@
 import { Injectable, EventEmitter } from '@angular/core';
 import { ReplaySubject } from 'rxjs';
+import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 
 @Injectable({
   providedIn: 'root'
@@ -9,8 +10,8 @@ export class EventEmitterService {
   invokeSocialLogin = new EventEmitter();
   userTransitionEvent = new EventEmitter();
   userChangeEvent = new ReplaySubject<any>(1);
-
-
+  private assetsData = new BehaviorSubject('');
+  assets = this.assetsData.asObservable();
   constructor() {}
 
   // Triggered from: anywhere
@@ -39,5 +40,9 @@ export class EventEmitterService {
   // Purpose: notify entire application about user data change currently under process, use to display loader
   invokeUserTransition() {
     this.userTransitionEvent.emit();
+  }
+
+  updateAssets(item: any) {
+    this.assetsData.next(item);
   }
 }

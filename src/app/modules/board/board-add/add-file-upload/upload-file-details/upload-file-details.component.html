@@ -1,36 +1,59 @@
 <button mat-icon-button class="close-button" [mat-dialog-close]="true">
-    <mat-icon class="close-icon">close</mat-icon>
+  <mat-icon class="close-icon">close</mat-icon>
 </button>
 <h2 mat-dialog-title>Image Details</h2>
 <div mat-dialog-content>
-    <form [formGroup]="step">
-        <ng-template matStepLabel>Add Image</ng-template>
-        <mat-form-field>
-            <input matInput placeholder="Product Title" formControlName="productTitle">
-        </mat-form-field>
-        <mat-form-field>
-            <input matInput placeholder="Price" formControlName="price" >
-        </mat-form-field>
-        <mat-form-field>
-            <input matInput placeholder="Product Listing Url" formControlName="productListingUrl" >
-        </mat-form-field>
-        <mat-form-field class="chip-list">
-            <mat-chip-list #chipList aria-label="Tags">
-                <mat-chip *ngFor="let tag of tags" [selectable]="selectable" [removable]="removable"
-                    (removed)="remove(tag)">
-                    {{tag}}
-                    <mat-icon matChipRemove *ngIf="removable">cancel</mat-icon>
-                </mat-chip>
-                <input placeholder="Tags" [matChipInputFor]="chipList"
-                    [matChipInputSeparatorKeyCodes]="separatorKeysCodes" [matChipInputAddOnBlur]="addOnBlur"
-                    (matChipInputTokenEnd)="add($event)">
-            </mat-chip-list>
-        </mat-form-field>
-        <mat-checkbox color="primary" matInput formControlName="keepPrivate">Keep Private</mat-checkbox>
-    </form>
+  <form [formGroup]="step">
+    <ng-template matStepLabel>Add Image</ng-template>
+    <mat-form-field>
+      <input
+        matInput
+        placeholder="Product Title"
+        formControlName="productTitle"
+      />
+    </mat-form-field>
+    <mat-form-field>
+      <input matInput placeholder="Price" formControlName="price" />
+    </mat-form-field>
+    <mat-form-field>
+      <input
+        matInput
+        placeholder="Product Listing Url"
+        formControlName="productListingUrl"
+      />
+    </mat-form-field>
+    <mat-form-field class="chip-list">
+      <mat-chip-list #chipList aria-label="Tags">
+        <mat-chip
+          *ngFor="let tag of tags"
+          [selectable]="selectable"
+          [removable]="removable"
+          (removed)="remove(tag)"
+        >
+          {{ tag }}
+          <mat-icon matChipRemove *ngIf="removable">cancel</mat-icon>
+        </mat-chip>
+        <input
+          placeholder="Tags"
+          [matChipInputFor]="chipList"
+          [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+          [matChipInputAddOnBlur]="addOnBlur"
+          (matChipInputTokenEnd)="add($event)"
+        />
+      </mat-chip-list>
+    </mat-form-field>
+    <mat-checkbox color="primary" matInput formControlName="keepPrivate"
+      >Keep Private</mat-checkbox
+    >
+  </form>
 
-    <button mat-button (click)="cancelAddImgViaUrl()">Cancel</button>
-    <button mat-button (click)="saveAddViaUrl()">Add</button>
+  <button mat-button (click)="cancelAddImgViaUrl()" class="close-icon">
+    Cancel
+  </button>
+  <button mat-button (click)="saveAddViaUrl()">{{ buttonText }}</button>
 
-    <app-loader [showProgressBar]="loaderTypeProgress" *ngIf="showLoader"></app-loader>
+  <app-loader
+    [showProgressBar]="loaderTypeProgress"
+    *ngIf="showLoader"
+  ></app-loader>
 </div>

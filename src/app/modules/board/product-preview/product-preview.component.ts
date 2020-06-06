@@ -1,4 +1,8 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+import { MatDialog } from '@angular/material';
+import { UploadFileDetailsComponent } from '../board-add/add-file-upload/upload-file-details/upload-file-details.component';
+import { EventEmitterService } from '../../../shared/services';
+import { Observable, Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-product-preview',
@@ -12,10 +16,22 @@ export class AppProductPreviewComponent implements OnInit {
   dropType = 'default';
   minPrice: number;
   maxPrice: number;
-  constructor() {}
+  isEditBtn: boolean;
+  eventSubscription: Subscription;
+  userId: number;
+  constructor(
+    public dialog: MatDialog,
+    private eventEmitterService: EventEmitterService
+  ) {}
 
   ngOnInit() {
-    this.updatePriceFormat(this.data.is_price, this.data.price);
+    this.eventSubscription = this.eventEmitterService.userChangeEvent
+      .asObservable()
+      .subscribe((user) => {
+        this.userId = user.id;
+        this.updatePriceFormat(this.data.is_price, this.data.price);
+        this.isUsersProduct();
+      });
   }
 
   ngOnChanges(changes: any) {
@@ -24,6 +40,7 @@ export class AppProductPreviewComponent implements OnInit {
       changes['data'].previousValue !== changes['data'].currentValue
     ) {
       this.data = changes['data'].currentValue || {};
+      this.isUsersProduct();
       this.updatePriceFormat(this.data.is_price, this.data.price);
       if (this.data.dropType) {
         this.dropType = this.data.dropType;
@@ -53,5 +70,33 @@ export class AppProductPreviewComponent implements OnInit {
     } else {
       this.maxPrice = null;
     }
+  }
+
+  isUsersProduct() {
+    if (this.userId == this.data.user_id) {
+      this.isEditBtn = true;
+    } else {
+      this.isEditBtn = false;
+    }
+  }
+
+  openDialog(): void {
+    const dialogRef = this.dialog.open(UploadFileDetailsComponent, {
+      width: '450px',
+      data: {
+        name: '',
+        panelClass: 'my-dialog',
+        product: this.data
+      },
+      disableClose: true
+    });
+    dialogRef.afterClosed().subscribe((result) => {
+      let updatedData = result.data;
+      this.data.is_private = updatedData.is_private;
+      this.data.is_price = updatedData.price;
+      this.data.listing_url = updatedData.listing_url;
+      this.data.name = updatedData.name;
+      this.updatePriceFormat(this.data.is_price, this.data.price);
+    });
   }
 }

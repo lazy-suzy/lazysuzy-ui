@@ -12,7 +12,7 @@ const assetEndpoint = environment.API_BASE_HREF + 'board/asset';
 @Component({
   selector: 'app-add-file-upload',
   templateUrl: './add-file-upload.component.html',
-  styleUrls: ['./add-file-upload.component.less'],
+  styleUrls: ['./add-file-upload.component.less']
 })
 export class AddFileUploadComponent {
   uploader: FileUploader;
@@ -34,7 +34,7 @@ export class AddFileUploadComponent {
     this.uploader = new FileUploader({
       url: assetEndpoint,
       disableMultipart: false,
-      authToken: `Bearer ${this.cookie.get('token')}`,
+      authToken: `Bearer ${this.cookie.get('token')}`
     });
     this.uploader.onBuildItemForm = (fileItem: any, form: any) => {
       for (let [key, value] of Object.entries(this.currentAsset)) {
@@ -60,7 +60,7 @@ export class AddFileUploadComponent {
   handleFileUploadSuccess(res) {
     const response = JSON.parse(res);
     this.fileUploadedChanges.emit({
-      response: response,
+      response: response
     });
   }
 
@@ -89,9 +89,9 @@ export class AddFileUploadComponent {
       width: '450px',
       data: {
         name: '',
-        panelClass: 'my-dialog',
+        panelClass: 'my-dialog'
       },
-      disableClose: true,
+      disableClose: true
     });
 
     dialogRef.afterClosed().subscribe((result) => {

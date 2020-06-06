@@ -2,6 +2,9 @@
   <div class="col-10 pt-2 pl-0">
     <div class="pl-2 pt-0 pb-1 b">
       {{ data?.name }}
+      <span class="edit-btn" (click)="openDialog()" *ngIf="isEditBtn"
+        >EDIT</span
+      >
     </div>
     <div class="flex detail-container">
       <div class="image flex align-items-center">
@@ -22,9 +25,16 @@
     <div class="float-right preview-close-icon" (click)="clearPreview(data)">
       <i class="mdi mdi-close" aria-hidden="true"></i>
     </div>
-    <div class="preview-icons ml-1" *ngIf="data.product_url">
+    <div
+      class="preview-icons ml-1"
+      *ngIf="data.product_url || data.listing_url"
+    >
       <div class="icon top-tooltip" data-title="Go to product page">
-        <a style="color: inherit;" target="_BLANK" [href]="data.product_url">
+        <a
+          style="color: inherit;"
+          target="_BLANK"
+          [href]="data.product_url || data.listing_url"
+        >
           <i class="mdi mdi-open-in-new" aria-hidden="true"></i>
         </a>
       </div>
