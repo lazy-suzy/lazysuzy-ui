@@ -955,12 +955,13 @@ export class BoardViewComponent implements OnInit, AfterViewInit {
         this.canvasMeta.flag.panningEnabled = true;
         this.canvas.defaultCursor = 'move';
         this.canvas.selection = false;
-      } else if (this.canvasMeta.flag.cropEnabled)
-        if (this.canvasMeta.value.crop.box && e.target == null) {
+      } else if (this.canvasMeta.flag.cropEnabled){
+        if (this.canvasMeta.value.crop.box && (e.target == null || e.target.cacheKey !== undefined)) {
           // if cropbox exist and empty area was clicked
           this.canvas.setActiveObject(this.canvasMeta.value.crop.box);
           this.handleCrop(true);
         }
+      }
     });
     this.canvas.on('mouse:up', (e) => {
       this.canvasMeta.flag.panningEnabled = false;
@@ -1682,8 +1683,9 @@ export class BoardViewComponent implements OnInit, AfterViewInit {
         case true:
           this.canvasMeta.flag.cropEnabled = false;
           this.appMeta.flag.isPreviewEnabled = false;
-          this.canvasMeta.value.crop.active.angle = this.canvasMeta.value.crop.copy.angle;
+          this.canvasMeta.value.crop.active.angle = 0;
           this.canvasMeta.value.crop.active.flipX = this.canvasMeta.value.crop.copy.flipX;
+          this.canvasMeta.value.crop.active.flipY = this.canvasMeta.value.crop.copy.flipY;
           this.canvasMeta.value.crop.active.top = this.canvasMeta.value.crop.copy.top;
           this.canvasMeta.value.crop.active.left = this.canvasMeta.value.crop.copy.left;
           this.saveHistory();
