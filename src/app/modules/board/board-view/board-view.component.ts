@@ -1447,6 +1447,8 @@ export class BoardViewComponent implements OnInit, AfterViewInit {
 
     this.appMeta.value.scaleFactor = newWidth / previousWidth;
 
+    $(this.canvasMeta.identifier.dropArea + "> div ").css('margin', "auto");
+
     // console.log(currentWidth, currentWidth / Number.parseFloat(this.canvasMeta.value.aspectRatio))
 
     if (this.canvas.backgroundImage) {
