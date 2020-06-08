@@ -874,21 +874,23 @@ export class BoardViewComponent implements OnInit, AfterViewInit {
         );
         if (boardObject.uuid == uuid) {
           boardFound = true;
-          this.appMeta.board.currentIndex = objectIndex;
-          if (boardObject.title !== 'Untitled Board') {
-            $(this.appMeta.identifier.boardTitle).val(boardObject.title);
-          }
-          this.canvasMeta.currentHistory.push(boardObject.state);
-          this.canvasMeta.currentHistoryIndex++;
-
           if (boardObject.state) {
-            boardObject.state.objects.forEach((object) => {
-              if (object.type == 'textbox') {
-                this.addFontFamilyIfNotAdded(object.fontFamily);
-              }
-            });
+            this.appMeta.board.currentIndex = objectIndex;
+            if (boardObject.title !== 'Untitled Board') {
+              $(this.appMeta.identifier.boardTitle).val(boardObject.title);
+            }
+            this.canvasMeta.currentHistory.push(boardObject.state);
+            this.canvasMeta.currentHistoryIndex++;
+
+            if (boardObject.state) {
+              boardObject.state.objects.forEach((object) => {
+                if (object.type == 'textbox') {
+                  this.addFontFamilyIfNotAdded(object.fontFamily);
+                }
+              });
+            }
+            this.updateStateFromHistory(); 
           }
-          this.updateStateFromHistory();
         }
       });
 
@@ -897,7 +899,10 @@ export class BoardViewComponent implements OnInit, AfterViewInit {
         this.router.navigate(['../../' + boardRoutesNames.BOARD_LIST], {
           relativeTo: this.route
         });
-      else if (this.justCreated) this.openBoardConfig();
+      else if (this.justCreated) {
+        this.updateBoard();
+        this.openBoardConfig();
+      }
     });
   };
 
@@ -922,15 +927,14 @@ export class BoardViewComponent implements OnInit, AfterViewInit {
       origin: 'anonymous',
       allowTaint: true,
       foreignObjectRendering: true,
-      width: $(this.canvasMeta.identifier.dropArea).parent().width(),
-      height:
-        $(this.canvasMeta.identifier.dropArea).parent().width() /
-        Number.parseFloat(this.canvasMeta.value.aspectRatio),
       backgroundColor: 'rgb(255,255,255)',
       selection: true
     });
 
-    if (this.justCreated) this.handleResize();
+    if (this.appMeta.flag.isBoot) {
+      this.updateToolbar();
+      this.handleResize();
+    }
     // add class for detection
     $('.lazysuzy-board').on('dragstart dragend', (e) => {
       $(e.target).toggleClass(
@@ -1408,8 +1412,6 @@ export class BoardViewComponent implements OnInit, AfterViewInit {
     )[0].getBoundingClientRect();
     let topLevelElement = $(this.appMeta.identifier.topLevelElement);
 
-    // let availableWidth = $(this.canvasMeta.identifier.dropArea).parent().width();
-    // console.log(window.innerWidth, $(this.canvasMeta.identifier.dropArea).position().left);
     let calculatedWidth =
       topLevelElement.width() - relativePositionToWindow.left - widthBuffer;
     let availableWidth =
@@ -1419,14 +1421,16 @@ export class BoardViewComponent implements OnInit, AfterViewInit {
     let availableHeight =
       topLevelElement.height() - relativePositionToWindow.top - heightBuffer;
 
-    // console.log(calculatedWidth < relativePositionToWindow.width ? "using calculated width" : "using relative width");
-    // console.log("available scale space", availableWidth, availableHeight, availableWidth / availableHeight);
+    // console.log("Resize", "is tablet", this.isTablet);
+    // console.log("Resize", "drop area relative to window", { left: relativePositionToWindow.left, top: relativePositionToWindow.top, width: relativePositionToWindow.width});
+    // console.log("Resize", "top level element", { width: topLevelElement.width(), height: topLevelElement.height()});
+    // console.log("Resize", calculatedWidth, availableWidth, calculatedWidth < relativePositionToWindow.width ? "using calculated width" : "using relative width");
 
     let newWidth = availableWidth;
     let newHeight =
       availableWidth / Number.parseFloat(this.canvasMeta.value.aspectRatio);
 
-    // console.log("initial scale", newWidth, newHeight, newWidth / newHeight);
+    // console.log("Resize", "initial scale", newWidth, newHeight, newWidth / newHeight);
 
     // check if the height will be more than available
     if (newHeight > availableHeight) {
@@ -1436,7 +1440,7 @@ export class BoardViewComponent implements OnInit, AfterViewInit {
       // console.log(`changing scale because ${newHeight} > ${availableHeight}`, newWidth, newHeight, newWidth/newHeight);
     }
 
-    // console.log("final scale", newWidth, newHeight, newWidth/newHeight);
+    // console.log("Resize", "final scale", newWidth, newHeight, newWidth / newHeight);
 
     this.canvas.setWidth(newWidth);
     this.canvas.setHeight(newHeight);
