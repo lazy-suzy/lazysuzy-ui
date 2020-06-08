@@ -41,14 +41,16 @@
           href="http://board.lazysuzy.com/myboards.html"
           >My Board</a
         > -->
-
+        <span [routerLink]="['/board']" class="my-boards-link">My Boards</span>
         <span class="header-link pointer">
           <mat-icon class="ml2" aria-hidden="false" [routerLink]="['/cart']"
             >shopping_cart</mat-icon
           >
         </span>
         <span class="header-link pointer">
-          <mat-icon aria-hidden="false" [routerLink]="['/wishlist']">favorite_border</mat-icon>
+          <mat-icon aria-hidden="false" [routerLink]="['/wishlist']"
+            >favorite_border</mat-icon
+          >
         </span>
 
         <app-auth
