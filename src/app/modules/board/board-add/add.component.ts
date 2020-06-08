@@ -63,9 +63,11 @@ export class BoardAddComponent implements OnInit {
 
   updateAssets(data) {
     data.board_thumb = `${env.BASE_HREF}${data.path}`;
+    data.dropType = 'custom';
     this.allAssets = this.allAssets.map((elem) => ({
       ...elem,
-      board_thumb: `${env.BASE_HREF}${elem.path}`
+      board_thumb: `${env.BASE_HREF}${elem.path}`,
+      dropType: 'custom'
     }));
     this.allAssets.unshift(data);
     // this.allAssets = [...this.allAssets];

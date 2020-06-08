@@ -955,8 +955,11 @@ export class BoardViewComponent implements OnInit, AfterViewInit {
         this.canvasMeta.flag.panningEnabled = true;
         this.canvas.defaultCursor = 'move';
         this.canvas.selection = false;
-      } else if (this.canvasMeta.flag.cropEnabled){
-        if (this.canvasMeta.value.crop.box && (e.target == null || e.target.cacheKey !== undefined)) {
+      } else if (this.canvasMeta.flag.cropEnabled) {
+        if (
+          this.canvasMeta.value.crop.box &&
+          (e.target == null || e.target.cacheKey !== undefined)
+        ) {
           // if cropbox exist and empty area was clicked
           this.canvas.setActiveObject(this.canvasMeta.value.crop.box);
           this.handleCrop(true);
@@ -1213,7 +1216,7 @@ export class BoardViewComponent implements OnInit, AfterViewInit {
             ? (product = this.remoteProducts)
             : (product = this.favoriteProducts);
         }
-        console.log(product);
+
         referenceObjectValue.id = product[referenceID].id;
         referenceObjectValue.isTransparent = 1;
         referenceObjectValue.path = product[referenceID].board_cropped;

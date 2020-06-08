@@ -4,7 +4,7 @@ import { environment as env } from 'src/environments/environment';
 import { HttpService } from 'src/app/shared/services/http/http.service';
 
 @Injectable({
-  providedIn: 'root',
+  providedIn: 'root'
 })
 export class AdminDashboardService {
   private adminDashboardState: BehaviorSubject<any> = new BehaviorSubject({});
@@ -19,7 +19,7 @@ export class AdminDashboardService {
     page: number
   ): Observable<any> {
     const endpoint = `products/all`;
-    const url = `${env.ADMIN_API_BASE_HREF}${endpoint}?limit=${total}&filters=${filters}&sort_type=${sortType}&pageno=${page}`;
+    const url = `${env.ADMIN_API_BASE_HREF}${endpoint}?limit=${total}&filters=${filters}&sort_type=${sortType}&pageno=${page}&board-view=true`;
     return this.httpService.get(url);
   }
   tagImage(data): Observable<any> {
