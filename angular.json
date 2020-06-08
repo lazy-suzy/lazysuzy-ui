@@ -32,7 +32,8 @@
               "src/styles.less",
               "node_modules/tachyons/css/tachyons.min.css",
               "node_modules/owl.carousel/dist/assets/owl.carousel.css",
-              "node_modules/owl.carousel/dist/assets/owl.theme.default.css"
+              "node_modules/owl.carousel/dist/assets/owl.theme.default.css",
+              "node_modules/@simonwep/pickr/dist/themes/nano.min.css"
             ],
             "scripts": [
               "node_modules/marked/lib/marked.js",

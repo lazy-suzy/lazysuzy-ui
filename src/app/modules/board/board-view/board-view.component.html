@@ -292,9 +292,17 @@
                   {{ font?.size }}
                 </div>
               </div>
-              <input type="color" class="js-font-select-color d-none-xs" />
+
+              <div class="pickr-container {{ showPicker ? '' : 'd-none-xs' }}">
+                <div class="pickr" #colorPicker></div>
+              </div>
               <div class="color-selector-tab" (click)="selectColor()">
-                <i class="mdi mdi-format-color-text" aria-hidden="true"></i>
+                <i
+                  class="mdi mdi-format-color-text {{
+                    showPicker ? 'd-none-xs' : ''
+                  }}"
+                  aria-hidden="true"
+                ></i>
               </div>
             </div>
           </div>

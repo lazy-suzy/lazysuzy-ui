@@ -3,7 +3,8 @@ import {
   OnInit,
   AfterViewInit,
   HostListener,
-  ViewChild
+  ViewChild,
+  ElementRef
 } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { CookieService } from 'ngx-cookie-service';
@@ -28,6 +29,8 @@ import {
   Breakpoints,
   BreakpointObserver
 } from '@angular/cdk/layout';
+import Pickr from '@simonwep/pickr';
+import '@simonwep/pickr/dist/themes/nano.min.css';
 declare const fb: any;
 
 @Component({
@@ -72,6 +75,11 @@ export class BoardViewComponent implements OnInit, AfterViewInit {
   total_count: number = 0;
   hasSearched: boolean;
   hasLoadedAllProducts: boolean = false;
+  private pickr: Pickr;
+  color: string;
+  showPicker: boolean;
+  @ViewChild('colorPicker', { static: false })
+  public colorPicker: ElementRef;
   constructor(
     private cookieService: CookieService,
     private dialog: MatDialog,
@@ -473,7 +481,7 @@ export class BoardViewComponent implements OnInit, AfterViewInit {
 
       fontFamily: '.js-font-select',
       fontSize: '.js-font-select-size',
-      fontColor: '.js-font-select-color',
+      fontColor: '.pickr',
 
       completeActionElement: '.item-action-icons ',
       completeTitleElement: '.top-panel-hide',
@@ -728,7 +736,69 @@ export class BoardViewComponent implements OnInit, AfterViewInit {
         preventDefault: true
       }
     );
-    // Object.keys(boardShortcuts).forEach((i) => { this.shortcuts.push(boardShortcuts[i]) });
+    this.pickr = new Pickr({
+      el: this.colorPicker.nativeElement,
+      container: '.pickr-container',
+      default: '#42445A',
+      theme: 'nano',
+      swatches: [
+        'rgba(244, 67, 54, 1)',
+        'rgba(233, 30, 99, 0.95)',
+        'rgba(156, 39, 176, 0.9)',
+        'rgba(103, 58, 183, 0.85)',
+        'rgba(63, 81, 181, 0.8)',
+        'rgba(33, 150, 243, 0.75)',
+        'rgba(3, 169, 244, 0.7)',
+        'rgba(0, 188, 212, 0.7)',
+        'rgba(0, 150, 136, 0.75)',
+        'rgba(76, 175, 80, 0.8)',
+        'rgba(139, 195, 74, 0.85)',
+        'rgba(205, 220, 57, 0.9)',
+        'rgba(255, 235, 59, 0.95)',
+        'rgba(255, 193, 7, 1)',
+        'rgba(244, 67, 54, 1)',
+        'rgba(233, 30, 99, 0.95)',
+        'rgba(156, 39, 176, 0.9)',
+        'rgba(103, 58, 183, 0.85)',
+        'rgba(63, 81, 181, 0.8)',
+        'rgba(33, 150, 243, 0.75)',
+        'rgba(3, 169, 244, 0.7)',
+        'rgba(0, 188, 212, 0.7)',
+        'rgba(0, 150, 136, 0.75)',
+        'rgba(76, 175, 80, 0.8)',
+        'rgba(139, 195, 74, 0.85)',
+        'rgba(205, 220, 57, 0.9)',
+        'rgba(255, 235, 59, 0.95)',
+        'rgba(255, 193, 7, 1)'
+      ],
+      showAlways: false,
+      components: {
+        preview: false,
+        opacity: false,
+        hue: false,
+
+        interaction: {
+          hex: false,
+          rgba: false,
+          hsva: false,
+          input: true,
+          clear: false,
+          save: false
+        }
+      }
+    });
+    this.pickr.on('change', (instance) => {
+      this.appMeta.value.fontColor = '#' + instance.toHEXA().join('');
+      this.updateCurrentObject(true);
+      this.pickr.hide();
+      this.showPicker = false;
+    });
+    this.pickr.on('cancel', (instance) => {
+      this.showPicker = false;
+    });
+    this.pickr.on('hide', (instance) => {
+      this.showPicker = false;
+    });
   }
   ngOnDestroy() {
     this.userEventSubscription.unsubscribe();
@@ -780,7 +850,8 @@ export class BoardViewComponent implements OnInit, AfterViewInit {
     this.canvas.requestRenderAll();
   };
   selectColor() {
-    $('.js-font-select-color').click();
+    this.showPicker = true;
+    this.pickr.show();
   }
   getConfig = (callback) => {
     // this.canvasMeta.configuration = response.reduce(function (r, e) {
@@ -985,7 +1056,7 @@ export class BoardViewComponent implements OnInit, AfterViewInit {
 
   initializeAppMeta = () => {
     // Initialize font values
-    $(this.appMeta.identifier.fontColor).on('input', (e) => {
+    $(this.appMeta.identifier.fontColor).on('div', (e) => {
       this.appMeta.value.fontColor = $(e.currentTarget).val().toString();
       this.appMeta.flag.isFontToolbarDirty = true;
       this.updateCurrentObject(true);
