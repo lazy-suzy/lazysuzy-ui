@@ -37,8 +37,15 @@ export class CurrentBoardComponent implements OnInit {
       if (max) {
         maxPrice = formatter.format(splitedPrice[1]);
         return `- ${maxPrice.slice(0, -3)}`;
+      } else {
+        return `${minPrice.slice(0, -3)}`;
+      }
+    } else {
+      if (max) {
+        return null;
+      } else {
+        return `${minPrice.slice(0, -3)}`;
       }
     }
-    return `${minPrice.slice(0, -3)}`;
   }
 }

@@ -20,3 +20,33 @@
   font-size: 10px;
   margin: -12px 0 12px 4px;
 }
+
+[data-title] {
+  position: relative;
+  cursor: pointer;
+  font-size: 18px;
+  vertical-align: middle;
+}
+
+[data-title]:hover::before {
+  content: attr(data-title);
+  position: absolute;
+  bottom: -30px;
+  display: inline-block;
+  padding: 3px 6px;
+  border-radius: 2px;
+  background: #000;
+  color: #fff;
+  font-size: 12px;
+  font-family: sans-serif;
+  white-space: nowrap;
+  left: -400px;
+  min-width: 75px;
+  text-align: center;
+}
+
+@media screen and (max-width: 991px) {
+  [data-title]:hover::before {
+    display: none;
+  }
+}

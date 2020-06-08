@@ -1212,6 +1212,7 @@ div.canvas-layout-room {
   display: flex;
   justify-content: flex-end;
   flex-direction: column;
+  height: 200px;
 }
 
 // .board-card:hover {
@@ -1226,7 +1227,6 @@ div.canvas-layout-room {
   border: 1px solid #c8c7cc;
   text-align: center;
   position: relative;
-  height: 200px;
   img {
     height: 100%;
   }
@@ -1586,6 +1586,21 @@ i.background-msg-arrow {
   color: #0c1c31;
 }
 
+::ng-deep .mat-checkbox-checked.mat-primary .mat-checkbox-background {
+  background-color: #b76e79;
+}
+
+::ng-deep .mat-button-focus-overlay,
+.mat-button-ripple.mat-ripple :focus {
+  outline: none;
+}
+
+::ng-deep .mat-icon-button :focus {
+  outline: none;
+}
+button:focus {
+  outline: none !important;
+}
 @media screen and (max-width: 991px) {
   .lazysuzy-board {
     height: 100vh;

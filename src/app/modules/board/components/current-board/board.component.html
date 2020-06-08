@@ -12,9 +12,9 @@
             <div class="product-name">{{ product.name }}</div>
             <div class="subtle">{{ product.brand }}</div>
           </div>
-          <div class="col-3 price-container">
+          <div class="col-3 price-container" *ngIf="product.price">
             <div class="price">
-              {{ updatePriceFormat(product.price, false) || 'n.a.' }}
+              {{ updatePriceFormat(product.price, false) }}
             </div>
             <div class="price">
               {{ updatePriceFormat(product.price, true) }}

@@ -44,7 +44,7 @@ export class BoardListComponent implements OnInit {
             user.name ? 'Welcome back ' + user.name : 'Now browsing as guest',
             'Dismiss',
             {
-              duration: 2000,
+              duration: 3000,
               horizontalPosition: 'center',
               verticalPosition: 'top'
             }

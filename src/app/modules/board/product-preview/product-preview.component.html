@@ -26,16 +26,9 @@
       <i class="mdi mdi-close" aria-hidden="true"></i>
     </div>
     <div class="preview-icons-container">
-      <div
-        class="preview-icons ml-1"
-        *ngIf="data.product_url || data.listing_url"
-      >
+      <div class="preview-icons ml-1" *ngIf="productPageUrl">
         <div class="icon top-tooltip" data-title="Go to product page">
-          <a
-            style="color: inherit;"
-            target="_BLANK"
-            [href]="data.product_url || data.listing_url"
-          >
+          <a style="color: inherit;" target="_BLANK" [href]="productPageUrl">
             <i class="mdi mdi-open-in-new" aria-hidden="true"></i>
           </a>
         </div>

@@ -42,9 +42,13 @@
         />
       </mat-chip-list>
     </mat-form-field>
-    <mat-checkbox color="primary" matInput formControlName="keepPrivate"
-      >Keep Private</mat-checkbox
+    <span
+      data-title="Leave this unchecked to give the LazySuzy community access to see and use your uploaded item!"
     >
+      <mat-checkbox color="primary" matInput formControlName="keepPrivate"
+        >Keep Private</mat-checkbox
+      >
+    </span>
   </form>
 
   <button mat-button (click)="cancelAddImgViaUrl()" class="close-icon">

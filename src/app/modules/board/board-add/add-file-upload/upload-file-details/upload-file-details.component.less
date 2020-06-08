@@ -1,17 +1,61 @@
-.close-button{
+.close-button {
   float: right;
-  top:-24px;
-  right:-24px;
+  top: -24px;
+  right: -24px;
+  transform: none;
+  &:focus {
+    outline: none;
+  }
+  &:focus {
+    transform: none;
+  }
 }
 
-.close-icon {
-  transition: 1s ease-in-out;
-}
+// .close-icon {
+//   transition: 1s ease-in-out;
+// }
 
-.close-icon:hover {
-  transform: rotate(180deg);
-}
+// .close-icon:hover {
+//   transform: rotate(180deg);
+// }
 
-.mat-form-field{
+.mat-form-field {
   min-width: 100%;
+}
+::ng-deep .mat-icon-button:focus {
+  outline: none;
+}
+
+[data-title] {
+  position: relative;
+  cursor: pointer;
+  font-size: 18px;
+  vertical-align: middle;
+}
+
+[data-title]:hover::before {
+  content: attr(data-title);
+  position: absolute;
+  bottom: -30px;
+  display: inline-block;
+  padding: 3px 6px;
+  border-radius: 2px;
+  background: #000;
+  color: #fff;
+  font-size: 12px;
+  font-family: sans-serif;
+  white-space: nowrap;
+  left: -400px;
+  min-width: 75px;
+  text-align: center;
+}
+
+.top-tooltip[data-title]:hover::before {
+  bottom: 40px;
+}
+
+@media screen and (max-width: 991px) {
+  [data-title]:hover::before {
+    display: none;
+  }
 }

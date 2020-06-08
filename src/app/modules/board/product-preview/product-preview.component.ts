@@ -19,6 +19,7 @@ export class AppProductPreviewComponent implements OnInit {
   isEditBtn: boolean;
   eventSubscription: Subscription;
   userId: number;
+  productPageUrl: string;
   constructor(
     public dialog: MatDialog,
     private eventEmitterService: EventEmitterService
@@ -30,6 +31,7 @@ export class AppProductPreviewComponent implements OnInit {
       .subscribe((user) => {
         this.userId = user.id;
         this.updatePriceFormat(this.data.is_price, this.data.price);
+        this.updateProductUrl(this.data.product_url, this.data.listing_url);
         this.isUsersProduct();
       });
   }
@@ -41,6 +43,7 @@ export class AppProductPreviewComponent implements OnInit {
     ) {
       this.data = changes['data'].currentValue || {};
       this.isUsersProduct();
+      this.updateProductUrl(this.data.product_url, this.data.listing_url);
       this.updatePriceFormat(this.data.is_price, this.data.price);
       if (this.data.dropType) {
         this.dropType = this.data.dropType;
@@ -80,6 +83,14 @@ export class AppProductPreviewComponent implements OnInit {
     }
   }
 
+  updateProductUrl(productUrl, listingUrl) {
+    this.productPageUrl = productUrl || listingUrl;
+    if (this.productPageUrl.substring(0, 4) === 'http') {
+      return;
+    } else {
+      this.productPageUrl = '//' + this.productPageUrl;
+    }
+  }
   openDialog(): void {
     const dialogRef = this.dialog.open(UploadFileDetailsComponent, {
       width: '450px',
