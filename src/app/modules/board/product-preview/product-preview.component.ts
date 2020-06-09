@@ -31,7 +31,10 @@ export class AppProductPreviewComponent implements OnInit {
       .subscribe((user) => {
         this.userId = user.id;
         this.updatePriceFormat(this.data.is_price, this.data.price);
-        this.updateProductUrl(this.data.product_url, this.data.listing_url);
+        this.updateProductUrl(
+          this.data.product_detail_url,
+          this.data.listing_url
+        );
         this.isUsersProduct();
       });
   }

@@ -5,7 +5,7 @@ import { Options } from 'ng5-slider';
 @Component({
   selector: 'app-browse-filter',
   templateUrl: './browse-filter.component.html',
-  styleUrls: ['./browse-filter.component.less', '../board.component.less'],
+  styleUrls: ['./browse-filter.component.less', '../board.component.less']
 })
 export class BrowsefilterComponent implements OnInit {
   showLoader: boolean = false;
@@ -23,7 +23,7 @@ export class BrowsefilterComponent implements OnInit {
     type: [],
     color: [],
     shape: [],
-    seating: [],
+    seating: []
   };
   selectedFilter: string = '';
   isPriceChanged: boolean = false;
@@ -34,7 +34,7 @@ export class BrowsefilterComponent implements OnInit {
     ceil: 500,
     translate: (value: number): string => {
       return '$' + value;
-    },
+    }
   };
 
   constructor(private fb: FormBuilder) {}
@@ -62,10 +62,13 @@ export class BrowsefilterComponent implements OnInit {
           ceil: this.filterData.price.max,
           translate: (value: number): string => {
             return '$' + value;
-          },
+          }
         };
         this.activeFilters.price_from = this.minValue;
         this.activeFilters.price_to = this.maxValue;
+      }
+      if (this.isPriceChanged) {
+        this.toggleFilterOption('price');
       }
     }
   }
@@ -101,7 +104,7 @@ export class BrowsefilterComponent implements OnInit {
       this.isPriceChanged = true;
     }
     let _self = this;
-    setTimeout(function(){
+    setTimeout(function () {
       _self.selectedFilter = '';
     }, 3000);
     this.buildAndSetFilters();
@@ -115,7 +118,7 @@ export class BrowsefilterComponent implements OnInit {
       type: [],
       color: [],
       shape: [],
-      seating: [],
+      seating: []
     };
     delete this.activeFilters.price_from;
     delete this.activeFilters.price_to;
@@ -137,7 +140,7 @@ export class BrowsefilterComponent implements OnInit {
     }
     this.updatesFromFilter.emit({
       name: 'APPLY_FILTERS',
-      payload: tempFilters,
+      payload: tempFilters
     });
     this.isClearAllVisible = tempFilters !== '';
     return tempFilters;
@@ -164,18 +167,18 @@ export class BrowsefilterComponent implements OnInit {
     let brands = (brand || []).map((ele) => {
       return {
         ...ele,
-        label: ele.name,
+        label: ele.name
       };
     });
     let colors = (color || []).map((ele) => {
       return {
         ...ele,
-        label: ele.name,
+        label: ele.name
       };
     });
     return {
       brands: brands,
-      colors: colors,
+      colors: colors
     };
   }
 

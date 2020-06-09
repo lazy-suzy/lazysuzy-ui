@@ -19,6 +19,10 @@
   }
 }
 
+.title {
+  color: #b76e79;
+}
+
 .social-icons i {
   font-size: 32px;
   display: inline-block;
@@ -44,4 +48,40 @@
 .caption {
   color: #f7f6f6;
   font-style: italic;
+}
+
+[data-title] {
+  position: relative;
+  cursor: pointer;
+  font-size: 18px;
+  vertical-align: sub;
+}
+
+[data-title]:hover::before {
+  content: attr(data-title);
+  position: absolute;
+  bottom: -15px;
+  display: inline-block;
+  padding: 3px 6px;
+  border-radius: 2px;
+  background: #f2f4f3;
+  color: #606060;
+  font-size: 12px;
+  font-family: sans-serif;
+  white-space: pre-wrap;
+  left: 28px;
+  width: 180px;
+}
+
+[data-title]:hover::after {
+  display: none;
+}
+
+::ng-deep .tool-tip .mat-icon {
+  color: #999999;
+  font-size: 20px;
+  height: 20px;
+  width: 20px;
+  left: 2px;
+  position: relative;
 }

@@ -9,7 +9,7 @@ import { environment } from 'src/environments/environment';
 @Component({
   selector: 'app-board-popup',
   templateUrl: './board-popup.component.html',
-  styleUrls: ['./board-popup.component.less', '../board.component.less']
+  styleUrls: ['../board.component.less', './board-popup.component.less']
 })
 export class BoardPopupComponent implements OnInit {
   roomTypeOptions = [];
@@ -125,7 +125,7 @@ export class BoardPopupComponent implements OnInit {
       {
         code: 123,
         label: 'Style',
-        value: 'Contempor'
+        value: 'Contemporary'
       },
       {
         code: 124,

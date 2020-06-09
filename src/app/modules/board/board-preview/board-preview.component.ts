@@ -69,7 +69,6 @@ export class BoardPreviewComponent implements OnInit {
     this.eventSubscription = this.eventEmitterService.userChangeEvent
       .asObservable()
       .subscribe((user) => {
-        console.log(user);
         if (user.user_type === 0) {
           this.userName = 'Guest';
         } else {
@@ -86,7 +85,6 @@ export class BoardPreviewComponent implements OnInit {
               Number.parseFloat(this.canvasMeta.value.aspectRatio),
             selection: true
           });
-          console.log(this.canvas);
           // update canvas center point
           this.updateCanvasCenter();
 

@@ -55,7 +55,10 @@
     </div>
     <div class="products-container">
       <div *ngFor="let product of boardProducts" class="w-25-ns">
-        <div class="ls-product-div">
+        <div
+          *ngIf="product.is_price && product.is_price > 0"
+          class="ls-product-div"
+        >
           <div class="ls-product" (click)="openDialog(product.sku)">
             <img [src]="product.main_image" [alt]="product.name" />
           </div>
