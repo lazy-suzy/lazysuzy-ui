@@ -1,15 +1,18 @@
 <div class="board-list-container container">
-  <div class="board-list-header">
+  <div class="board-list-header mb-5">
     <h5 class="title">MY BOARDS</h5>
   </div>
   <app-board-loader *ngIf="isFetching"></app-board-loader>
   <div class="row" id="board-list" *ngIf="!isFetching">
-    <div class="col-sm-3 mt-4">
+    <div class="col-sm-4 mb-5">
       <div class="board-card box-shadow-0">
-        <div class="canvas-preview">
+        <div class="canvas-preview mb-4">
           <div class="add-board" (click)="add()">
             <div class="add-board-icon">
-              <i class="mdi mdi-plus-box-outline js-open-config cursor-pointer" aria-hidden="true"></i>
+              <i
+                class="mdi mdi-plus-box-outline js-open-config cursor-pointer"
+                aria-hidden="true"
+              ></i>
             </div>
             <div>
               Start new design
@@ -18,12 +21,19 @@
         </div>
       </div>
     </div>
-    <div *ngFor="let board of boards; index as i;" class="col-sm-3 mt-4">
+    <div *ngFor="let board of boards; index as i" class="col-sm-4 mb-5">
       <div class="board-card">
         <div class="canvas-preview">
-          <img width="100%" class="edit-board" [src]="getPreviewImagePath(board)" />
+          <img
+            width="100%"
+            class="edit-board"
+            [src]="getPreviewImagePath(board)"
+          />
           <div class="board-card-icons">
-            <span data-title="Edit" routerLink="../{{boardViewLink}}/{{board.uuid}}">
+            <span
+              data-title="Edit"
+              routerLink="../{{ boardViewLink }}/{{ board.uuid }}"
+            >
               <i class="mdi mdi-pencil" aria-hidden="true"></i>
             </span>
             <span data-title="Delete" (click)="delete(board)">
@@ -32,16 +42,23 @@
             <span data-title="Share" (click)="share(board)" data-action="share">
               <i class="mdi mdi-share-variant" aria-hidden="true"></i>
             </span>
-            <span data-title="Duplicate" data-action="duplicate" (click)="add(board)">
+            <span
+              data-title="Duplicate"
+              data-action="duplicate"
+              (click)="add(board)"
+            >
               <i class="mdi mdi-content-copy" aria-hidden="true"></i>
             </span>
-            <span data-title="Shop" routerLink="../{{boardPreviewLink}}/{{board.uuid}}">
+            <span
+              data-title="Shop"
+              routerLink="../{{ boardPreviewLink }}/{{ board.uuid }}"
+            >
               <i class="mdi mdi-cart" aria-hidden="true"></i>
             </span>
           </div>
         </div>
         <div class="preview-title">
-          {{board.title}}
+          {{ board.title }}
         </div>
       </div>
     </div>
