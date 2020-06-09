@@ -1,25 +1,32 @@
-<button mat-icon-button class="close-button" [mat-dialog-close]="true">
+<button mat-icon-button class="close-button" [mat-dialog-close]="false">
   <mat-icon class="close-icon">close</mat-icon>
 </button>
 <h2 mat-dialog-title>Add Image</h2>
 <div mat-dialog-content>
   <mat-horizontal-stepper [linear]="isLinear" #stepper>
     <mat-step [stepControl]="stepOne">
-      <form [formGroup]="stepOne">
+      <form [formGroup]="stepOne" class="dialog flex items-center">
         <mat-form-field>
           <input
             matInput
-            placeholder="Image Url"
+            placeholder="Image URL"
             formControlName="imageUrl"
             required
           />
         </mat-form-field>
-        <div>
-          <button [disabled]="!stepOne.valid" mat-button matStepperNext>
-            Next
-          </button>
-        </div>
       </form>
+      <div class="tc">
+        <button class="btn btn-cancel mh2" (click)="cancelAddImgViaUrl()">
+          Back
+        </button>
+        <button
+          class="btn red-button mh2"
+          [disabled]="!stepOne.valid"
+          matStepperNext
+        >
+          Next
+        </button>
+      </div>
     </mat-step>
     <mat-step [stepControl]="stepTwo">
       <form [formGroup]="stepTwo">
@@ -41,7 +48,7 @@
         <mat-form-field>
           <input
             matInput
-            placeholder="Product Listing Url"
+            placeholder="Product Listing URL"
             formControlName="productListingUrl"
           />
         </mat-form-field>
@@ -64,8 +71,9 @@
               (matChipInputTokenEnd)="add($event)"
             />
           </mat-chip-list>
+          <mat-hint>Separate by comma</mat-hint>
         </mat-form-field>
-        <span>
+        <div class="subtle-label mt3">
           <mat-checkbox color="primary" matInput formControlName="keepPrivate">
             Keep Private
           </mat-checkbox>
@@ -75,13 +83,19 @@
           >
             <mat-icon>info</mat-icon></span
           >
-        </span>
+        </div>
       </form>
-
-      <button mat-button (click)="cancelAddImgViaUrl()">Cancel</button>
-      <button mat-button (click)="saveAddViaUrl()">
-        Add
-      </button>
+      <div *ngIf="hasErrorMessage" class="invalid">
+        Error while uploading image
+      </div>
+      <div class="tc">
+        <button class="btn btn-cancel mh2" (click)="cancelAddImgViaUrl()">
+          Cancel
+        </button>
+        <button class="btn red-button mh2" (click)="saveAddViaUrl()">
+          Add
+        </button>
+      </div>
     </mat-step>
   </mat-horizontal-stepper>
 

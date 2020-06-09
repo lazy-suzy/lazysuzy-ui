@@ -1,4 +1,4 @@
-<button mat-icon-button class="close-button" [mat-dialog-close]="true">
+<button mat-icon-button class="close-button" [mat-dialog-close]="false">
   <mat-icon class="close-icon">close</mat-icon>
 </button>
 <h2 mat-dialog-title>Add Image</h2>
@@ -21,7 +21,7 @@
     <mat-form-field>
       <input
         matInput
-        placeholder="Product Listing Url"
+        placeholder="Product Listing URL"
         formControlName="productListingUrl"
       />
     </mat-form-field>
@@ -44,24 +44,32 @@
           (matChipInputTokenEnd)="add($event)"
         />
       </mat-chip-list>
+      <mat-hint>Separate by comma</mat-hint>
     </mat-form-field>
-    <span>
+    <div class="subtle-label mt3">
       <mat-checkbox color="primary" matInput formControlName="keepPrivate"
         >Keep Private</mat-checkbox
       >
-    </span>
-    <span
-      class="tool-tip"
-      data-title="Leave this unchecked to give the LazySuzy community access to see and use your uploaded item!"
-    >
-      <mat-icon>info</mat-icon></span
-    >
+      <span
+        class="tool-tip"
+        data-title="Leave this unchecked to give the LazySuzy community access to see and use your uploaded item!"
+      >
+        <mat-icon>info</mat-icon></span
+      >
+    </div>
   </form>
-
-  <button mat-button (click)="cancelAddImgViaUrl()" class="close-icon">
-    Cancel
-  </button>
-  <button mat-button (click)="saveAddViaUrl()">{{ buttonText }}</button>
+  <div class="tc">
+    <button
+      class="btn btn-cancel"
+      (click)="cancelAddImgViaUrl()"
+      class="close-icon"
+    >
+      Cancel
+    </button>
+    <button class="btn red-button" (click)="saveAddViaUrl()">
+      {{ buttonText }}
+    </button>
+  </div>
 
   <app-loader
     [showProgressBar]="loaderTypeProgress"

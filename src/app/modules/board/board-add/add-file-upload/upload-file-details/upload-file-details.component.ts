@@ -10,7 +10,10 @@ import { EventEmitterService } from '../../../../../shared/services';
 @Component({
   selector: 'app-upload-file-details',
   templateUrl: './upload-file-details.component.html',
-  styleUrls: ['./upload-file-details.component.less'],
+  styleUrls: [
+    './upload-file-details.component.less',
+    '../../../board.component.less'
+  ],
   encapsulation: ViewEncapsulation.None
 })
 export class UploadFileDetailsComponent implements OnInit {
@@ -63,7 +66,7 @@ export class UploadFileDetailsComponent implements OnInit {
   }
 
   onNoClick(): void {
-    this.dialogRef.close();
+    this.dialogRef.close(false);
   }
 
   onYesClick(data): void {
@@ -71,10 +74,7 @@ export class UploadFileDetailsComponent implements OnInit {
   }
 
   cancelAddImgViaUrl() {
-    const payload = {
-      name: 'cancel-save-image-details',
-      data: {}
-    };
+    this.dialogRef.close(false);
   }
 
   saveAddViaUrl() {

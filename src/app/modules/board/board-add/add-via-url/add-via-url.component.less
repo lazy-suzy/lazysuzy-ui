@@ -4,13 +4,19 @@
   right: -24px;
 }
 
+.dialog {
+  min-height: 375px;
+  display: flex;
+}
+
 .mat-form-field {
   min-width: 100%;
 }
 .invalid {
   color: #ff0000;
-  font-size: 10px;
-  margin: -12px 0 12px 4px;
+  font-size: 14px;
+  margin: 0px 0 10px;
+  text-align: center;
 }
 
 [data-title] {
@@ -33,6 +39,14 @@
   white-space: pre-wrap;
   left: 28px;
   width: 180px;
+}
+
+[data-title]:hover::after {
+  display: none;
+}
+
+.subtle-label {
+  color: #999999;
 }
 
 @media screen and (max-width: 991px) {

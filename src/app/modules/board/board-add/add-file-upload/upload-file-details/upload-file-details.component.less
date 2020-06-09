@@ -48,8 +48,12 @@
   width: 180px;
 }
 
-.top-tooltip[data-title]:hover::before {
-  bottom: 40px;
+[data-title]:hover::after {
+  display: none;
+}
+
+.subtle-label {
+  color: #999999;
 }
 
 @media screen and (max-width: 991px) {

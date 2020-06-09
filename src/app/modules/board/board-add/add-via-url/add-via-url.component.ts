@@ -15,7 +15,7 @@ import { COMMA, ENTER } from '@angular/cdk/keycodes';
 @Component({
   selector: 'app-add-via-url',
   templateUrl: './add-via-url.component.html',
-  styleUrls: ['./add-via-url.component.less'],
+  styleUrls: ['../../board.component.less', './add-via-url.component.less'],
   encapsulation: ViewEncapsulation.None,
   providers: [FormService]
 })
@@ -33,6 +33,7 @@ export class AddViaUrlComponent implements OnInit {
   selectable = true;
   removable = true;
   addOnBlur = true;
+  hasErrorMessage: boolean = false;
   tags = [];
   constructor(
     public dialogRef: MatDialogRef<AddViaUrlComponent>,
@@ -55,8 +56,9 @@ export class AddViaUrlComponent implements OnInit {
     });
   }
   ngOnInit() {}
+
   onNoClick(): void {
-    this.dialogRef.close();
+    this.dialogRef.close(false);
   }
 
   onYesClick(data): void {
@@ -64,7 +66,7 @@ export class AddViaUrlComponent implements OnInit {
   }
 
   cancelAddImgViaUrl() {
-    this.dialogRef.close();
+    this.dialogRef.close(false);
   }
 
   saveAddViaUrl() {
@@ -81,7 +83,11 @@ export class AddViaUrlComponent implements OnInit {
     let asset = new Asset(data);
     this.boardService.addAsset(asset).subscribe((res) => {
       this.showLoader = false;
-      this.onYesClick(res);
+      if (res) {
+        this.onYesClick(res);
+      } else {
+        this.hasErrorMessage = true;
+      }
     });
   }
 

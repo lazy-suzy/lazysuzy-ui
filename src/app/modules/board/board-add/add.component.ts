@@ -90,11 +90,13 @@ export class BoardAddComponent implements OnInit {
     });
 
     dialogRef.afterClosed().subscribe((result) => {
-      this.boardService.state.myUploads = [...this.myUploads, result];
-      this.boardService.state.allUploads = [...this.allUploads, result];
-      this.myUploads = [...this.boardService.state.myUploads];
-      this.allUploads = [...this.boardService.state.allUploads];
-      this.updateAssets(result);
+      if (result) {
+        this.boardService.state.myUploads = [...this.myUploads, result];
+        this.boardService.state.allUploads = [...this.allUploads, result];
+        this.myUploads = [...this.boardService.state.myUploads];
+        this.allUploads = [...this.boardService.state.allUploads];
+        this.updateAssets(result);
+      }
     });
   }
 
