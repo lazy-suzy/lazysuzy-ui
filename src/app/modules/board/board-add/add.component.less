@@ -6,7 +6,40 @@
 //     width: 100%;
 // }
 
+::ng-deep .mat-horizontal-stepper-header-container {
+  display: none !important;
+}
+
+::ng-deep .mat-focused .mat-form-field-label {
+  /*change color of label*/
+  color: #b76d79 !important;
+}
+
+::ng-deep.mat-form-field-underline {
+  /*change color of underline*/
+  background-color: #b76d79 !important;
+}
+
+::ng-deep.mat-form-field-ripple {
+  /*change color of underline when focused*/
+  background-color: #b76d79 !important;
+}
+
+::ng-deep .tool-tip .mat-icon {
+  color: #999999;
+  font-size: 20px;
+  height: 20px;
+  width: 20px;
+  left: 2px;
+  position: relative;
+}
+
 ::ng-deep .mat-tab-body-content {
   width: 90%;
   overflow: hidden !important;
+}
+
+::ng-deep .mat-dialog-title {
+  text-align: center;
+  color: #b76d79;
 }

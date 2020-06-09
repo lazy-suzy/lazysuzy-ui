@@ -36,6 +36,7 @@ export class UploadFileDetailsComponent implements OnInit {
   ) {
     this.step = this._formBuilder.group({
       productTitle: [''],
+      brand: '',
       price: [''],
       productListingUrl: [''],
       tags: '',
@@ -50,6 +51,7 @@ export class UploadFileDetailsComponent implements OnInit {
       this.buttonText = 'Edit';
       this.step.setValue({
         productTitle: product.name,
+        brand: product.brand,
         price: product.price,
         productListingUrl: product.listing_url,
         tags: product.tags,

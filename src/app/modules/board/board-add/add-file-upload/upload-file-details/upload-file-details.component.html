@@ -1,7 +1,7 @@
 <button mat-icon-button class="close-button" [mat-dialog-close]="true">
   <mat-icon class="close-icon">close</mat-icon>
 </button>
-<h2 mat-dialog-title>Image Details</h2>
+<h2 mat-dialog-title>Add Image</h2>
 <div mat-dialog-content>
   <form [formGroup]="step">
     <ng-template matStepLabel>Add Image</ng-template>
@@ -11,6 +11,9 @@
         placeholder="Product Title"
         formControlName="productTitle"
       />
+    </mat-form-field>
+    <mat-form-field>
+      <input matInput placeholder="Brand" formControlName="brand" />
     </mat-form-field>
     <mat-form-field>
       <input matInput placeholder="Price" formControlName="price" />
@@ -42,13 +45,17 @@
         />
       </mat-chip-list>
     </mat-form-field>
-    <span
-      data-title="Leave this unchecked to give the LazySuzy community access to see and use your uploaded item!"
-    >
+    <span>
       <mat-checkbox color="primary" matInput formControlName="keepPrivate"
         >Keep Private</mat-checkbox
       >
     </span>
+    <span
+      class="tool-tip"
+      data-title="Leave this unchecked to give the LazySuzy community access to see and use your uploaded item!"
+    >
+      <mat-icon>info</mat-icon></span
+    >
   </form>
 
   <button mat-button (click)="cancelAddImgViaUrl()" class="close-icon">

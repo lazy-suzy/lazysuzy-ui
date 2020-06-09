@@ -85,7 +85,8 @@ export class BoardAddComponent implements OnInit {
         name: '',
         panelClass: 'my-dialog'
       },
-      disableClose: true
+      disableClose: true,
+      autoFocus: false
     });
 
     dialogRef.afterClosed().subscribe((result) => {

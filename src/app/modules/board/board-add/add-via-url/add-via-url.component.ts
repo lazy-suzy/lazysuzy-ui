@@ -43,11 +43,12 @@ export class AddViaUrlComponent implements OnInit {
   ) {
     this.myForm = this.formService.mainForm.value;
     this.stepOne = this._formBuilder.group({
-      imageUrl: ['', Validators.pattern(this.urlPattern)]
+      imageUrl: ['']
     });
     // this.formService.stepReady(this.stepOne, 'one');
     this.stepTwo = this._formBuilder.group({
       productTitle: [''],
+      brand: '',
       price: [''],
       productListingUrl: [''],
       tags: [''],
@@ -83,7 +84,7 @@ export class AddViaUrlComponent implements OnInit {
       price: this.stepTwo.value.price,
       listing_url: this.stepTwo.value.productListingUrl,
       name: this.stepTwo.value.productTitle,
-      brand: 'Custom'
+      brand: this.stepTwo.value.brand
     };
     let asset = new Asset(data);
     this.boardService.addAsset(asset).subscribe((res) => {

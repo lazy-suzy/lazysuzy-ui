@@ -209,6 +209,7 @@ export class BoardViewComponent implements OnInit, AfterViewInit {
         type: param,
         board: this.appMeta.board.data[this.appMeta.board.currentIndex]
       },
+      autoFocus: false,
       width: '40%'
     });
     // dialogRef.afterClosed().subscribe(result => {
@@ -231,7 +232,8 @@ export class BoardViewComponent implements OnInit, AfterViewInit {
           ? this.canvas.backgroundImage._element.currentSrc
           : ''
       },
-      width: '40%'
+      width: '40%',
+      autoFocus: false
     });
 
     dialogRef.componentInstance.onChange.subscribe(this.handleConfigChange);
@@ -889,7 +891,7 @@ export class BoardViewComponent implements OnInit, AfterViewInit {
                 }
               });
             }
-            this.updateStateFromHistory(); 
+            this.updateStateFromHistory();
           }
         }
       });
@@ -1447,7 +1449,7 @@ export class BoardViewComponent implements OnInit, AfterViewInit {
 
     this.appMeta.value.scaleFactor = newWidth / previousWidth;
 
-    $(this.canvasMeta.identifier.dropArea + "> div ").css('margin', "auto");
+    $(this.canvasMeta.identifier.dropArea + '> div ').css('margin', 'auto');
 
     // console.log(currentWidth, currentWidth / Number.parseFloat(this.canvasMeta.value.aspectRatio))
 
