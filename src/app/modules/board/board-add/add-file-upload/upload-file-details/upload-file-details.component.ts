@@ -83,6 +83,7 @@ export class UploadFileDetailsComponent implements OnInit {
       data: new Asset({
         is_private: this.step.value.keepPrivate == true ? 1 : 0,
         name: this.step.value.productTitle,
+        brand: this.step.value.brand,
         price: this.step.value.price,
         listing_url: this.step.value.productListingUrl,
         tags: this.tags.join(',')

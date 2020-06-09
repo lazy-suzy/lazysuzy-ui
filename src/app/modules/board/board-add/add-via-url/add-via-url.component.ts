@@ -43,9 +43,8 @@ export class AddViaUrlComponent implements OnInit {
   ) {
     this.myForm = this.formService.mainForm.value;
     this.stepOne = this._formBuilder.group({
-      imageUrl: ['']
+      imageUrl: ['', Validators.required]
     });
-    // this.formService.stepReady(this.stepOne, 'one');
     this.stepTwo = this._formBuilder.group({
       productTitle: [''],
       brand: '',
@@ -54,15 +53,8 @@ export class AddViaUrlComponent implements OnInit {
       tags: [''],
       keepPrivate: [false]
     });
-    // this.formService.stepReady(this.stepTwo, 'two');
   }
-
-  ngOnInit(): void {}
-
-  get imageUrl() {
-    this.isUrlAdded = this.stepOne.valid ? true : false;
-    return this.stepOne.get('imageUrl');
-  }
+  ngOnInit() {}
   onNoClick(): void {
     this.dialogRef.close();
   }

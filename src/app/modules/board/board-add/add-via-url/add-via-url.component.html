@@ -6,7 +6,6 @@
   <mat-horizontal-stepper [linear]="isLinear" #stepper>
     <mat-step [stepControl]="stepOne">
       <form [formGroup]="stepOne">
-        <!-- <ng-template matStepLabel>Fill out image url</ng-template> -->
         <mat-form-field>
           <input
             matInput
@@ -15,9 +14,6 @@
             required
           />
         </mat-form-field>
-        <!-- <div *ngIf="imageUrl.errors?.pattern" class="invalid">
-          Image Url not valid.
-        </div> -->
         <div>
           <button [disabled]="!stepOne.valid" mat-button matStepperNext>
             Next
@@ -83,7 +79,7 @@
       </form>
 
       <button mat-button (click)="cancelAddImgViaUrl()">Cancel</button>
-      <button mat-button [disabled]="!isUrlAdded" (click)="saveAddViaUrl()">
+      <button mat-button (click)="saveAddViaUrl()">
         Add
       </button>
     </mat-step>
