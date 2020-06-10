@@ -618,7 +618,7 @@ export class BoardViewComponent implements OnInit, AfterViewInit {
 
   @HostListener("window:keyup", ["$event"])
   keyEvent(event: KeyboardEvent) {
-    if (event.keyCode == 46 || event.keyCode == 91)
+    if (event.keyCode == 46 || event.keyCode == 8)
       this.applyShortcut('action', 'delete');
   }
   
