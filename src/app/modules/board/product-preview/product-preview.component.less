@@ -29,3 +29,22 @@
   cursor: pointer;
   z-index: 1;
 }
+.preview-icons-container {
+  .top-tooltip[data-title-board]:hover::before {
+    bottom: 3px;
+  }
+
+  [data-title]:hover::after {
+    left: 20px;
+  }
+
+  .top-tooltip[data-title]:hover::after {
+    transform: rotate(270deg);
+    bottom: 5px;
+  }
+
+  [data-title]:hover::before {
+    bottom: 0px;
+    left: 35px;
+  }
+}
