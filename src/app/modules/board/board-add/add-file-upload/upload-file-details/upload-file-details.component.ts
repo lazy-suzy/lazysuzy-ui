@@ -67,6 +67,14 @@ export class UploadFileDetailsComponent implements OnInit {
   }
 
   onNoClick(): void {
+    this.step = this._formBuilder.group({
+      productTitle: [''],
+      brand: '',
+      price: [''],
+      productListingUrl: [''],
+      tags: '',
+      keepPrivate: [false]
+    });
     this.dialogRef.close(false);
   }
 
@@ -75,6 +83,14 @@ export class UploadFileDetailsComponent implements OnInit {
   }
 
   cancelAddImgViaUrl() {
+    this.step = this._formBuilder.group({
+      productTitle: [''],
+      brand: '',
+      price: [''],
+      productListingUrl: [''],
+      tags: '',
+      keepPrivate: [false]
+    });
     this.dialogRef.close(false);
   }
 

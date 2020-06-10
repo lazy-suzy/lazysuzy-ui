@@ -75,6 +75,14 @@ export class AddViaUrlComponent implements OnInit {
   }
 
   onNoClick(): void {
+    this.stepTwo = this._formBuilder.group({
+      productTitle: [''],
+      brand: '',
+      price: [''],
+      productListingUrl: [''],
+      tags: '',
+      keepPrivate: [false]
+    });
     this.dialogRef.close(false);
   }
 
@@ -83,6 +91,14 @@ export class AddViaUrlComponent implements OnInit {
   }
 
   cancelAddImgViaUrl() {
+    this.stepTwo = this._formBuilder.group({
+      productTitle: [''],
+      brand: '',
+      price: [''],
+      productListingUrl: [''],
+      tags: '',
+      keepPrivate: [false]
+    });
     this.dialogRef.close(false);
   }
 

@@ -1904,6 +1904,14 @@ export class BoardViewComponent implements OnInit, AfterViewInit {
     image.dirty = true;
   };
 
+  postImageProcess = () => {
+    $('.background-msg').removeClass('hide');
+    setTimeout(function () {
+      $('.background-msg').addClass('hide');
+    }, 3000);
+    this.hasCanvasLoader = false;
+  };
+
   action = (type) => {
     let activeObject = this.canvas.getActiveObject();
 
@@ -1947,13 +1955,10 @@ export class BoardViewComponent implements OnInit, AfterViewInit {
           this.canvasMeta.flag.isCurrentObjectTransparentSelected = false;
           this.updateToolbar();
           if (type == 'transparent') {
-            $('.background-msg').removeClass('hide');
-            setTimeout(function () {
-              $('.background-msg').addClass('hide');
-            }, 3000);
-            if (activeObject.referenceObject.transparentPath)
+            if (activeObject.referenceObject.transparentPath) {
               this.toggleTransparent(activeObject, dimentionBefore, true);
-            else {
+              this.postImageProcess();
+            } else {
               this.boardService
                 .updateAsset(
                   new Asset({
@@ -1964,14 +1969,15 @@ export class BoardViewComponent implements OnInit, AfterViewInit {
                 .subscribe((response) => {
                   activeObject.referenceObject.transparentPath =
                     response.transparent_path;
+                  this.postImageProcess();
                   this.toggleTransparent(activeObject, dimentionBefore, true);
                 });
             }
           } else {
             this.toggleTransparent(activeObject, dimentionBefore, false);
             $('.background-msg').addClass('hide');
+            this.hasCanvasLoader = false;
           }
-          this.hasCanvasLoader = false;
         }
         break;
     }
