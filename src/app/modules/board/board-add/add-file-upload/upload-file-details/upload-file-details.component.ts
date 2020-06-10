@@ -11,8 +11,8 @@ import { EventEmitterService } from '../../../../../shared/services';
   selector: 'app-upload-file-details',
   templateUrl: './upload-file-details.component.html',
   styleUrls: [
-    './upload-file-details.component.less',
-    '../../../board.component.less'
+    '../../../board.component.less',
+    './upload-file-details.component.less'
   ],
   encapsulation: ViewEncapsulation.None
 })
@@ -51,13 +51,14 @@ export class UploadFileDetailsComponent implements OnInit {
     if (this.data.product) {
       this.isToEditProduct = true;
       let product = this.data.product;
-      this.buttonText = 'Edit';
+      this.buttonText = 'Update';
+      this.tags = product.tags.split(',');
       this.step.setValue({
         productTitle: product.name,
         brand: product.brand,
         price: product.price,
         productListingUrl: product.listing_url,
-        tags: product.tags,
+        tags: product.tags.split(','),
         keepPrivate: product.is_private === 1 ? true : false
       });
     } else {
