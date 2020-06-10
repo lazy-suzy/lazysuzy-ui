@@ -6,6 +6,7 @@ import { BoardService } from '../board.service';
 import { EventEmitterService } from 'src/app/shared/services';
 import { Font, FontPickerService } from 'ngx-font-picker';
 import { UtilsService } from '../../../shared/services/utils/utils.service';
+import { environment } from 'src/environments/environment';
 
 declare const fb: any;
 
@@ -93,6 +94,12 @@ export class BoardPreviewComponent implements OnInit {
             if (response[0]) {
               this.boardFound = true;
               this.appMeta.board = response[0];
+              if (
+                this.appMeta.board.is_private &&
+                this.appMeta.board.user_id !== user.id
+              ) {
+                this.router.navigate([`/`]);
+              }
               this.boardState = JSON.parse(this.appMeta.board.state.toString());
               if (this.boardState) {
                 this.boardState.objects.forEach((object) => {
@@ -176,6 +183,7 @@ export class BoardPreviewComponent implements OnInit {
     });
 
     let imageObjects = this.canvas.getObjects('image');
+    let productSkus = [];
     imageObjects.forEach((object, index) => {
       this.boardProducts.push({
         main_image: object.referenceObject.path
@@ -190,6 +198,8 @@ export class BoardPreviewComponent implements OnInit {
         price: object.referenceObject.price ? object.referenceObject.price : '',
         sku: object.referenceObject.sku ? object.referenceObject.sku : ''
       });
+      if (object.referenceObject.sku)
+        productSkus.push(object.referenceObject.sku);
       let objectCenter = object.getCenterPoint();
       let textToInsert = new fb.Text(` ${index + 1} `, {
         left: objectCenter.x,
@@ -205,8 +215,22 @@ export class BoardPreviewComponent implements OnInit {
     });
 
     this.canvas.renderAll();
+    let skuData = productSkus.join();
+    this.boardService
+      .getBoardProductImages(productSkus[0], skuData)
+      .subscribe((response) => {
+        let responseData: any = response;
+        for (let prod of responseData) {
+          this.boardProducts.find((item) => item.sku === prod.sku).main_image =
+            prod.main_image;
+        }
+        for (let prod of this.boardProducts) {
+          if (prod.main_image.substring(0, 8) === '/storage') {
+            prod.main_image = environment.BASE_HREF + prod.main_image;
+          }
+        }
+      });
   };
-
   addFontFamilyIfNotAdded(fontFamily: string) {
     if (this.presetFonts.indexOf(fontFamily) === -1) {
       this.fontPickerService.loadFont(

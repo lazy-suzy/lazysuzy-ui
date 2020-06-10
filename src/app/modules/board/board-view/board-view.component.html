@@ -336,11 +336,11 @@
                   class="mdi mdi-arrow-up-bold background-msg-arrow"
                   aria-hidden="true"
                 ></i>
-                <i
+                <!-- <i
                   class="mdi mdi-close close-background-msg"
                   aria-hidden="true"
-                ></i>
-                Click here to remove background
+                ></i> -->
+                Click here to revert to Original
               </span>
               <span data-title="Duplicate" (click)="action('duplicate')"
                 ><i class="mdi mdi-content-copy" aria-hidden="true"></i
@@ -447,6 +447,11 @@
             </ng-template>
           </div>
           <div class="canvas">
+            <div *ngIf="hasCanvasLoader" class="loader-container canvas-loader">
+              <div class="loader-box">
+                <div class="loader-bounceball"></div>
+              </div>
+            </div>
             <div id="canvas-droparea">
               <canvas
                 id="canvas-area"

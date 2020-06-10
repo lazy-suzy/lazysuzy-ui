@@ -88,11 +88,13 @@ export class AppProductPreviewComponent implements OnInit {
 
   updateProductUrl(productUrl, listingUrl) {
     this.productPageUrl = productUrl || listingUrl;
-    if (this.productPageUrl.substring(0, 4) === 'http') {
-      return;
-    } else {
-      this.productPageUrl = '//' + this.productPageUrl;
-    }
+    if (this.productPageUrl) {
+      if (this.productPageUrl.substring(0, 4) === 'http') {
+        return;
+      } else {
+        this.productPageUrl = '//' + this.productPageUrl;
+      }
+    } else return;
   }
   openDialog(): void {
     const dialogRef = this.dialog.open(UploadFileDetailsComponent, {

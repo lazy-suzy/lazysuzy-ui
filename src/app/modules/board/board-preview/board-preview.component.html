@@ -40,10 +40,10 @@
   <div class="col col-md-3">
     <div *ngIf="!loadedAsEmbed" class="mb-0-ns mb-5 mt-0-ns mt-5">
       <div class="mt-5-ns">
-        <span class="font-weight-bold h4">{{ appMeta.board.title }}</span>
+        <span class="font-weight-bold h5">{{ appMeta.board.title }}</span>
       </div>
       <div>
-        <span class="font-italic h4 font-weight-normal">{{ userName }}</span>
+        <span class="font-italic h5 font-weight-normal">{{ userName }}</span>
       </div>
     </div>
   </div>
@@ -55,10 +55,7 @@
     </div>
     <div class="products-container">
       <div *ngFor="let product of boardProducts" class="w-25-ns">
-        <div
-          *ngIf="product.is_price && product.is_price > 0"
-          class="ls-product-div"
-        >
+        <div *ngIf="product.is_price" class="ls-product-div pl-1 pr-1">
           <div class="ls-product" (click)="openDialog(product.sku)">
             <img [src]="product.main_image" [alt]="product.name" />
           </div>

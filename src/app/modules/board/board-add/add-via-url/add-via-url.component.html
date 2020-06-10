@@ -3,6 +3,11 @@
 </button>
 <h2 mat-dialog-title>Add Image</h2>
 <div mat-dialog-content>
+  <div *ngIf="showImageVerificationLoader" class="loader-container">
+    <div class="loader-box">
+      <div class="loader-bounceball"></div>
+    </div>
+  </div>
   <mat-horizontal-stepper [linear]="isLinear" #stepper>
     <mat-step [stepControl]="stepOne">
       <form [formGroup]="stepOne" class="dialog flex items-center">
@@ -15,6 +20,9 @@
           />
         </mat-form-field>
       </form>
+      <div *ngIf="hasErrorMessage" class="invalid">
+        Please check your file and try again.
+      </div>
       <div class="tc">
         <button class="btn btn-cancel mh2" (click)="cancelAddImgViaUrl()">
           Back
@@ -22,7 +30,7 @@
         <button
           class="btn red-button mh2"
           [disabled]="!stepOne.valid"
-          matStepperNext
+          (click)="verifyImage(stepper)"
         >
           Next
         </button>
@@ -85,9 +93,6 @@
           >
         </div>
       </form>
-      <div *ngIf="hasErrorMessage" class="invalid">
-        Please check your file and try again.
-      </div>
       <div class="tc mt4">
         <button class="btn btn-cancel mh2" (click)="cancelAddImgViaUrl()">
           Cancel

@@ -17,11 +17,14 @@ import { environment } from 'src/environments/environment';
   providedIn: 'root'
 })
 export class BoardService extends SharedBoardService {
-
   private boardEndpoint = environment.API_BASE_HREF + 'board';
   private assetEndpoint = environment.API_BASE_HREF + 'board/asset';
 
-  constructor(private http: HttpClient, private cookie: CookieService, public apiService: ApiService) {
+  constructor(
+    private http: HttpClient,
+    private cookie: CookieService,
+    public apiService: ApiService
+  ) {
     super(apiService);
   }
 
@@ -29,66 +32,111 @@ export class BoardService extends SharedBoardService {
     return {
       headers: new HttpHeaders({
         'Content-Type': 'application/json',
-        "Authorization": `Bearer ${this.cookie.get('token')}`
+        Authorization: `Bearer ${this.cookie.get('token')}`
       })
     };
   }
 
   getBoards(): Observable<Board[]> {
-    return this.http.get<Board[]>(this.boardEndpoint, this.getHttpOptions())
+    return this.http
+      .get<Board[]>(this.boardEndpoint, this.getHttpOptions())
       .pipe(
-        tap(_ => this.log('fetched boards')),
+        tap((_) => this.log('fetched boards')),
         catchError(this.handleError<Board[]>('getBoards', []))
       );
   }
 
-  getBoardByID(board_id: string, previewMode: boolean = false): Observable<Board[]> {
-    return this.http.get<Board[]>(this.boardEndpoint + (previewMode ? '/preview' : '') + `/` + board_id, this.getHttpOptions())
+  getBoardByID(
+    board_id: string,
+    previewMode: boolean = false
+  ): Observable<Board[]> {
+    return this.http
+      .get<Board[]>(
+        this.boardEndpoint + (previewMode ? '/preview' : '') + `/` + board_id,
+        this.getHttpOptions()
+      )
       .pipe(
-        tap(_ => this.log(`fetched board w/ id=${board_id}`)),
+        tap((_) => this.log(`fetched board w/ id=${board_id}`)),
         catchError(this.handleError<Board[]>('getBoardsByID', []))
       );
   }
-
+  getBoardProductImages(sku: string, skus: any): Observable<Board[]> {
+    return this.http
+      .get<Board[]>(
+        environment.API_BASE_HREF + 'product/' + sku + '?skus=' + skus,
+        this.getHttpOptions()
+      )
+      .pipe(
+        tap((_) => this.log(`fetched boardProducts w/ skus=${skus}`)),
+        catchError(this.handleError<Board[]>('getBoardProductImages', []))
+      );
+  }
   addBoard(board: Board): Observable<Board> {
-    return this.http.post<Board>(this.boardEndpoint, board, this.getHttpOptions()).pipe(
-      tap((newBoard: Board) => this.log(`added board w/ id=${newBoard.board_id}`)),
-      catchError(this.handleError<Board>('addBoard'))
-    );
+    return this.http
+      .post<Board>(this.boardEndpoint, board, this.getHttpOptions())
+      .pipe(
+        tap((newBoard: Board) =>
+          this.log(`added board w/ id=${newBoard.board_id}`)
+        ),
+        catchError(this.handleError<Board>('addBoard'))
+      );
   }
 
   updateBoard(board: Board): Observable<Board> {
-    return this.http.post<Board>(this.boardEndpoint + `/` + board.uuid, board, this.getHttpOptions()).pipe(
-      tap((newBoard: Board) => this.log(`updated board w/ id=${newBoard.board_id}`)),
-      catchError(this.handleError<Board>('updateBoard'))
-    );
+    return this.http
+      .post<Board>(
+        this.boardEndpoint + `/` + board.uuid,
+        board,
+        this.getHttpOptions()
+      )
+      .pipe(
+        tap((newBoard: Board) =>
+          this.log(`updated board w/ id=${newBoard.board_id}`)
+        ),
+        catchError(this.handleError<Board>('updateBoard'))
+      );
   }
 
   getAssets(previewMode: boolean = false): Observable<Asset[]> {
-    return this.http.get<Asset[]>(this.assetEndpoint + (previewMode ? '/preview' : ''), this.getHttpOptions())
+    return this.http
+      .get<Asset[]>(
+        this.assetEndpoint + (previewMode ? '/preview' : ''),
+        this.getHttpOptions()
+      )
       .pipe(
-        tap(_ => this.log('fetched assets')),
+        tap((_) => this.log('fetched assets')),
         catchError(this.handleError<Asset[]>('getAssets', []))
       );
   }
 
   addAsset(asset: any): Observable<any> {
-    return this.http.post<any>(this.assetEndpoint, asset, this.getHttpOptions()).pipe(
-      tap((newAsset: any) => this.log(`add asset w/ id=${newAsset.asset_id}`)),
-      catchError(this.handleError<any>('addAsset'))
-    );
+    return this.http
+      .post<any>(this.assetEndpoint, asset, this.getHttpOptions())
+      .pipe(
+        tap((newAsset: any) =>
+          this.log(`add asset w/ id=${newAsset.asset_id}`)
+        ),
+        catchError(this.handleError<any>('addAsset'))
+      );
   }
 
   updateAsset(asset: Asset): Observable<Asset> {
-    return this.http.post<Asset>(this.assetEndpoint + `/`+ asset.asset_id, asset, this.getHttpOptions()).pipe(
-      tap((newAsset: Asset) => this.log(`updated asset w/ id=${newAsset.asset_id}`)),
-      catchError(this.handleError<Asset>('updateAsset'))
-    );
+    return this.http
+      .post<Asset>(
+        this.assetEndpoint + `/` + asset.asset_id,
+        asset,
+        this.getHttpOptions()
+      )
+      .pipe(
+        tap((newAsset: Asset) =>
+          this.log(`updated asset w/ id=${newAsset.asset_id}`)
+        ),
+        catchError(this.handleError<Asset>('updateAsset'))
+      );
   }
 
   private handleError<T>(operation = 'operation', result?: T) {
     return (error: any): Observable<T> => {
-
       // TODO: send the error to remote logging infrastructure
       console.error(error); // log to console instead
 

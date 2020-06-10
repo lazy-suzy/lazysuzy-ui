@@ -11,6 +11,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { FormService } from '../form.service';
 import { MatChipInputEvent } from '@angular/material/chips';
 import { COMMA, ENTER } from '@angular/cdk/keycodes';
+import { MatStepper } from '@angular/material/stepper';
 
 @Component({
   selector: 'app-add-via-url',
@@ -35,6 +36,7 @@ export class AddViaUrlComponent implements OnInit {
   addOnBlur = true;
   hasErrorMessage: boolean = false;
   tags = [];
+  showImageVerificationLoader: boolean = false;
   constructor(
     public dialogRef: MatDialogRef<AddViaUrlComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any,
@@ -56,6 +58,21 @@ export class AddViaUrlComponent implements OnInit {
     });
   }
   ngOnInit() {}
+
+  verifyImage(stepper: MatStepper) {
+    this.showImageVerificationLoader = true;
+    var img = new Image();
+    img.src = this.stepOne.value.imageUrl;
+    let _self = this;
+    img.onload = function () {
+      _self.hasErrorMessage = false;
+      stepper.next();
+    };
+    img.onerror = function () {
+      _self.hasErrorMessage = true;
+    };
+    this.showImageVerificationLoader = false;
+  }
 
   onNoClick(): void {
     this.dialogRef.close(false);

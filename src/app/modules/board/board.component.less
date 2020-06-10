@@ -1,7 +1,11 @@
-@import (css) url('https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css');
-@import (css) url('https://fonts.googleapis.com/css?family=Lato:400,700&display=swap');
-@import (css) url('https://fonts.googleapis.com/css?family=Open+Sans&display=swap');
-@import (css) url('http://cdn.materialdesignicons.com/4.7.95/css/materialdesignicons.min.css');
+@import (css)
+  url('https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css');
+@import (css)
+  url('https://fonts.googleapis.com/css?family=Lato:400,700&display=swap');
+@import (css)
+  url('https://fonts.googleapis.com/css?family=Open+Sans&display=swap');
+@import (css)
+  url('http://cdn.materialdesignicons.com/4.7.95/css/materialdesignicons.min.css');
 
 h1,
 h2,
@@ -365,7 +369,6 @@ h6 {
     background: rgba(247, 246, 246, 0.1);
     color: #ffcc00;
   }
-
 }
 
 .top-panel .state-icons i {
@@ -377,7 +380,7 @@ h6 {
 }
 
 .editor-icons select,
-.editor-icons .font-select>a {
+.editor-icons .font-select > a {
   background: #d6d6d6;
   border: none;
   padding: 0;
@@ -639,7 +642,7 @@ h6 {
   display: none;
 }
 
-.filter-label input:checked~.checkmark:after {
+.filter-label input:checked ~ .checkmark:after {
   display: block;
 }
 
@@ -1006,8 +1009,8 @@ div.canvas-layout-room {
   margin-left: -0.5rem;
 }
 
-[data-overflowing='both']~.canvas-scroll-left,
-[data-overflowing='left']~.canvas-scroll-left {
+[data-overflowing='both'] ~ .canvas-scroll-left,
+[data-overflowing='left'] ~ .canvas-scroll-left {
   opacity: 1;
 }
 
@@ -1016,8 +1019,8 @@ div.canvas-layout-room {
   margin-right: -0.5rem;
 }
 
-[data-overflowing='both']~.canvas-scroll-right,
-[data-overflowing='right']~.canvas-scroll-right {
+[data-overflowing='both'] ~ .canvas-scroll-right,
+[data-overflowing='right'] ~ .canvas-scroll-right {
   opacity: 1;
 }
 
@@ -1182,7 +1185,7 @@ div.canvas-layout-room {
   background-color: #b76d79;
 }
 
-.irs--sharp .irs-handle>i:first-child {
+.irs--sharp .irs-handle > i:first-child {
   border-top-color: #b76d79;
 }
 
@@ -1278,18 +1281,22 @@ div.canvas-layout-room {
 .background-msg {
   position: absolute;
   font-size: 11px;
-  bottom: -75px;
+  bottom: -70px;
+  z-index: 9;
   background-color: #b76d79;
-  right: 190px;
+  right: 271px;
   padding: 5px;
   color: white;
   text-align: center;
   width: 80px;
   border-radius: 5px;
+  visibility: visible;
+  opacity: 1;
+  transition: visibility 2s linear 0s, opacity 300ms;
 }
 
 .background-msg.hide {
-  display: none;
+  transition: all 3s linear 300ms;
 }
 
 i.close-background-msg {
@@ -1303,8 +1310,8 @@ i.background-msg-arrow {
   right: 12px;
   position: absolute;
   font-size: 34px;
-  bottom: 45px;
-  color: #b76d79;
+  bottom: 35px;
+  color: #b76d79 !important;
 }
 
 .item-search-bar {

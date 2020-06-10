@@ -78,6 +78,7 @@ export class BoardViewComponent implements OnInit, AfterViewInit {
   private pickr: Pickr;
   color: string;
   showPicker: boolean;
+  hasCanvasLoader: boolean = false;
   @ViewChild('colorPicker', { static: false })
   public colorPicker: ElementRef;
   constructor(
@@ -1641,7 +1642,8 @@ export class BoardViewComponent implements OnInit, AfterViewInit {
           fill: '#fff',
           backgroundColor: '#b76e79',
           controlVisible: false,
-          selectable: false
+          selectable: false,
+          fontFamily: 'Open Sans'
         });
 
         this.canvas.add(textToInsert);
@@ -1933,6 +1935,7 @@ export class BoardViewComponent implements OnInit, AfterViewInit {
         break;
       case 'transparent':
       case 'undoTransparent':
+        this.hasCanvasLoader = true;
         if (activeObject.referenceObject.type == 'custom') {
           var dimentionBefore = {
             width: activeObject.width,
@@ -1943,8 +1946,11 @@ export class BoardViewComponent implements OnInit, AfterViewInit {
           this.canvasMeta.flag.isCurrentObjectTransparentable = false;
           this.canvasMeta.flag.isCurrentObjectTransparentSelected = false;
           this.updateToolbar();
-
           if (type == 'transparent') {
+            $('.background-msg').removeClass('hide');
+            setTimeout(function () {
+              $('.background-msg').addClass('hide');
+            }, 3000);
             if (activeObject.referenceObject.transparentPath)
               this.toggleTransparent(activeObject, dimentionBefore, true);
             else {
@@ -1961,7 +1967,11 @@ export class BoardViewComponent implements OnInit, AfterViewInit {
                   this.toggleTransparent(activeObject, dimentionBefore, true);
                 });
             }
-          } else this.toggleTransparent(activeObject, dimentionBefore, false);
+          } else {
+            this.toggleTransparent(activeObject, dimentionBefore, false);
+            $('.background-msg').addClass('hide');
+          }
+          this.hasCanvasLoader = false;
         }
         break;
     }

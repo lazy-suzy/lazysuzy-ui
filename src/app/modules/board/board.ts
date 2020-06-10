@@ -11,7 +11,7 @@ export class Board {
   is_active: boolean;
   created_at: boolean;
   updated_at: boolean;
-
+  user_id: number;
   constructor(values: Object = {}) {
     Object.assign(this, values);
   }
