@@ -618,8 +618,8 @@ export class BoardViewComponent implements OnInit, AfterViewInit {
 
   @HostListener("window:keyup", ["$event"])
   keyEvent(event: KeyboardEvent) {
-    if (event.keyCode == 27 || event.key == "escape")
-      this.applyShortcut('deselectOrCancel', '');
+    if (event.keyCode == 46 || event.keyCode == 91)
+      this.applyShortcut('action', 'delete');
   }
   
   ngAfterViewInit(): void {
@@ -672,13 +672,13 @@ export class BoardViewComponent implements OnInit, AfterViewInit {
         preventDefault: true
       },
       {
-        key: 't',
-        command: (e) => this.applyShortcut('addText', ''),
+        key: 'esc',
+        command: (e) => this.applyShortcut('deselectOrCancel', ''),
         preventDefault: true
       },
       {
-        key: 'del',
-        command: (e) => this.applyShortcut('action', 'delete'),
+        key: 't',
+        command: (e) => this.applyShortcut('addText', ''),
         preventDefault: true
       },
       {
