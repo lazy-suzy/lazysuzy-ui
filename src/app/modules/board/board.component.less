@@ -1,11 +1,7 @@
-@import (css)
-  url('https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css');
-@import (css)
-  url('https://fonts.googleapis.com/css?family=Lato:400,700&display=swap');
-@import (css)
-  url('https://fonts.googleapis.com/css?family=Open+Sans&display=swap');
-@import (css)
-  url('http://cdn.materialdesignicons.com/4.7.95/css/materialdesignicons.min.css');
+@import (css) url('https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css');
+@import (css) url('https://fonts.googleapis.com/css?family=Lato:400,700&display=swap');
+@import (css) url('https://fonts.googleapis.com/css?family=Open+Sans&display=swap');
+@import (css) url('http://cdn.materialdesignicons.com/4.7.95/css/materialdesignicons.min.css');
 
 h1,
 h2,
@@ -364,9 +360,12 @@ h6 {
   color: #f7f6f6;
 }
 
-.top-panel i:hover {
-  background: rgba(247, 246, 246, 0.1);
-  color: #ffcc00;
+.top-panel [data-title]:hover {
+  i {
+    background: rgba(247, 246, 246, 0.1);
+    color: #ffcc00;
+  }
+
 }
 
 .top-panel .state-icons i {
@@ -378,7 +377,7 @@ h6 {
 }
 
 .editor-icons select,
-.editor-icons .font-select > a {
+.editor-icons .font-select>a {
   background: #d6d6d6;
   border: none;
   padding: 0;
@@ -640,7 +639,7 @@ h6 {
   display: none;
 }
 
-.filter-label input:checked ~ .checkmark:after {
+.filter-label input:checked~.checkmark:after {
   display: block;
 }
 
@@ -1007,8 +1006,8 @@ div.canvas-layout-room {
   margin-left: -0.5rem;
 }
 
-[data-overflowing='both'] ~ .canvas-scroll-left,
-[data-overflowing='left'] ~ .canvas-scroll-left {
+[data-overflowing='both']~.canvas-scroll-left,
+[data-overflowing='left']~.canvas-scroll-left {
   opacity: 1;
 }
 
@@ -1017,8 +1016,8 @@ div.canvas-layout-room {
   margin-right: -0.5rem;
 }
 
-[data-overflowing='both'] ~ .canvas-scroll-right,
-[data-overflowing='right'] ~ .canvas-scroll-right {
+[data-overflowing='both']~.canvas-scroll-right,
+[data-overflowing='right']~.canvas-scroll-right {
   opacity: 1;
 }
 
@@ -1183,7 +1182,7 @@ div.canvas-layout-room {
   background-color: #b76d79;
 }
 
-.irs--sharp .irs-handle > i:first-child {
+.irs--sharp .irs-handle>i:first-child {
   border-top-color: #b76d79;
 }
 
@@ -1226,6 +1225,7 @@ div.canvas-layout-room {
   border: 1px solid #c8c7cc;
   text-align: center;
   position: relative;
+
   img {
     height: 100%;
   }
@@ -1246,11 +1246,13 @@ div.canvas-layout-room {
 .board-card-icons {
   i {
     font-size: 22px;
+
     &:hover {
       color: #b76d79;
     }
   }
 }
+
 .footer {
   padding: 12px 15px;
   position: fixed;
@@ -1493,6 +1495,7 @@ i.background-msg-arrow {
   height: 172px;
   background-color: #e9ecef;
   color: #5f5f5f;
+
   &:hover {
     color: #b76e79;
   }
@@ -1597,17 +1600,21 @@ i.background-msg-arrow {
 ::ng-deep .mat-icon-button :focus {
   outline: none;
 }
+
 button:focus {
   outline: none !important;
 }
+
 @media screen and (max-width: 991px) {
   .lazysuzy-board {
     height: 100vh;
   }
+
   .canvas-layout {
     height: 75px;
     width: 120px;
   }
+
   // .intercom-lightweight-app-launcher {
   //   left:25px;
   // }
@@ -1615,10 +1622,12 @@ button:focus {
   .margin-top-60 {
     margin-top: 60px !important;
   }
+
   .top-panel {
     padding: 5px 5px 0;
     height: 45px;
   }
+
   .logo {
     max-width: 100px;
     vertical-align: sub;
@@ -1906,11 +1915,14 @@ button:focus {
     left: 20%;
     bottom: 70px;
   }
+
   .preview-icons-container {
     flex-direction: row;
     display: flex;
+
     .icon {
       padding: 5px 10px;
+
       i {
         font-size: 24px;
       }
@@ -1926,6 +1938,7 @@ button:focus {
   .margin-bottom-75 {
     margin-bottom: 75px;
   }
+
   .editor-icons {
     white-space: nowrap;
     max-width: 340px;

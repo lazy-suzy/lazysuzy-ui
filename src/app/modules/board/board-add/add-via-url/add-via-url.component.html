@@ -73,7 +73,7 @@
           </mat-chip-list>
           <mat-hint>Separate by comma</mat-hint>
         </mat-form-field>
-        <div class="subtle-label mt3">
+        <div class="subtle-label mt4">
           <mat-checkbox color="primary" matInput formControlName="keepPrivate">
             Keep Private
           </mat-checkbox>
@@ -86,9 +86,9 @@
         </div>
       </form>
       <div *ngIf="hasErrorMessage" class="invalid">
-        Error while uploading image
+        Please check your file and try again.
       </div>
-      <div class="tc">
+      <div class="tc mt4">
         <button class="btn btn-cancel mh2" (click)="cancelAddImgViaUrl()">
           Cancel
         </button>
