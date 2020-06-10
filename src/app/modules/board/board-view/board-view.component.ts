@@ -4,7 +4,7 @@ import {
   AfterViewInit,
   HostListener,
   ViewChild,
-  ElementRef
+  ElementRef,
 } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { CookieService } from 'ngx-cookie-service';
@@ -365,7 +365,7 @@ export class BoardViewComponent implements OnInit, AfterViewInit {
         x: 0,
         y: 0
       },
-      aspectRatio: (2.0).toFixed(2),
+      aspectRatio: (16/10).toFixed(2),
       zoomValue: 1,
       zoomFactor: 0.1,
       borderColor: '#b76e79',
@@ -615,6 +615,13 @@ export class BoardViewComponent implements OnInit, AfterViewInit {
       );
     }
   }
+
+  @HostListener("window:keyup", ["$event"])
+  keyEvent(event: KeyboardEvent) {
+    if (event.keyCode == 27 || event.key == "escape")
+      this.applyShortcut('deselectOrCancel', '');
+  }
+  
   ngAfterViewInit(): void {
     this.shortcuts.push(
       {
@@ -662,11 +669,6 @@ export class BoardViewComponent implements OnInit, AfterViewInit {
         key: 'shift + right',
         command: (e) =>
           this.applyShortcut('activeObjectFetchAssign', 'left', 10),
-        preventDefault: true
-      },
-      {
-        key: 'esc',
-        command: (e) => this.applyShortcut('deselectOrCancel', ''),
         preventDefault: true
       },
       {
