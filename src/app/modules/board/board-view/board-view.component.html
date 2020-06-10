@@ -275,11 +275,11 @@
             <i class="mdi mdi-redo" (click)="redo()" aria-hidden="true"></i>
           </div>
           <div
-            class="col-sm-6 col-md-4 text-center mt-1 col-4 font-editor-container"
+            class="col-sm-6 col-md-8 text-center mt-1 col-12 font-editor-container"
           >
             <div class="editor-icons">
               <div
-                class="d-inline"
+                class="d-inline font-selector"
                 [(fontPicker)]="font"
                 [fpPresetLabel]="'Quick Access'"
                 [fpPresetFonts]="presetFonts"
@@ -305,8 +305,6 @@
                 ></i>
               </div>
             </div>
-          </div>
-          <div class="col-sm-6 col-md-4 col-8 padding-right-0">
             <div class="crop-toolbar float-right">
               <button class="btn" (click)="handleCrop(true)">
                 <i class="mdi mdi-check mr-0" aria-hidden="true"></i> Crop
@@ -363,7 +361,10 @@
                 <i class="mdi mdi-delete" aria-hidden="true"></i>
               </span>
             </div>
-            <!-- <div class="top-panel-hide crop-toolbar">
+          </div>
+          <!-- <div class="col-sm-6 col-md-4 col-8 padding-right-0"> -->
+
+          <!-- <div class="top-panel-hide crop-toolbar">
               <span class="btn" (click)="handleCrop(true)">
                 <i class="mdi mdi-check" aria-hidden="true"></i> Crop
               </span>
@@ -374,7 +375,7 @@
                 <i class="mdi mdi-minus" aria-hidden="true"></i> Revert
               </span>
             </div> -->
-          </div>
+          <!-- </div> -->
         </div>
         <div class="top-panel row top-panel-hide crop-toolbar">
           <div class="col-sm-12 crop-options">

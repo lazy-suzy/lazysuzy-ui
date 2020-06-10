@@ -100,9 +100,15 @@ export class BoardViewComponent implements OnInit, AfterViewInit {
 
   public presetFonts = [
     'Arial',
+    'Helvetica',
     'Times',
+    'Georgia',
     'Courier',
-    'Lato',
+    'Amatic',
+    'Allura',
+    'Italianno',
+    'Montserrat',
+    'Garamond',
     'Open Sans',
     'Roboto Slab'
   ];
@@ -791,9 +797,11 @@ export class BoardViewComponent implements OnInit, AfterViewInit {
     });
     this.pickr.on('change', (instance) => {
       this.appMeta.value.fontColor = '#' + instance.toHEXA().join('');
+      this.pickr.setColor(this.appMeta.value.fontColor);
       this.updateCurrentObject(true);
       this.pickr.hide();
       this.showPicker = false;
+      this.appMeta.flag.isFontToolbarDirty = true;
     });
     this.pickr.on('cancel', (instance) => {
       this.showPicker = false;
@@ -1247,6 +1255,7 @@ export class BoardViewComponent implements OnInit, AfterViewInit {
           // styles: ['regular']
         });
         this.appMeta.value.fontColor = activeObject.fill;
+        this.pickr.setColor(this.appMeta.value.fontColor);
         this.appMeta.flag.isFontToolbarDirty = true;
         this.canvasMeta.flag.isCurrentObjectText = true;
         activeObject.setControlsVisibility(this.canvasMeta.value.textControl);
