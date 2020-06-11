@@ -52,14 +52,14 @@ export class UploadFileDetailsComponent implements OnInit {
       this.isToEditProduct = true;
       let product = this.data.product;
       this.buttonText = 'Update';
-      this.tags = product.tags.split(',');
+      this.tags = (product.tags && product.tags.split(',')) || [];
       this.step.setValue({
         productTitle: product.name,
         brand: product.brand,
         price: product.price,
         productListingUrl: product.listing_url,
-        tags: product.tags.split(','),
-        keepPrivate: product.is_private === 1 ? true : false
+        tags: this.tags,
+        keepPrivate: product.is_private === 1
       });
     } else {
       this.buttonText = 'Add';
