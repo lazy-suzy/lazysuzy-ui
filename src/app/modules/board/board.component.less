@@ -1281,23 +1281,23 @@ div.canvas-layout-room {
 
 .background-msg {
   position: absolute;
-  font-size: 11px;
+  font-size: 14px;
   bottom: -70px;
   z-index: 9;
-  background-color: #b76d79;
+  background-color: #f7f6f6;
+  color: #b76e79 !important;
   right: 271px;
   padding: 5px;
   color: white;
   text-align: center;
   width: 80px;
   border-radius: 5px;
-  visibility: visible;
-  opacity: 1;
-  transition: visibility 2s linear 0s, opacity 300ms;
+  opacity: 0;
+  transition: opacity 3s ease 0s;
 }
 
-.background-msg.hide {
-  transition: all 3s linear 300ms;
+.background-msg.visible {
+  opacity: 1;
 }
 
 i.close-background-msg {
@@ -1311,8 +1311,8 @@ i.background-msg-arrow {
   right: 12px;
   position: absolute;
   font-size: 34px;
-  bottom: 35px;
-  color: #b76d79 !important;
+  bottom: 45px;
+  color: #f7f6f6 !important;
 }
 
 .item-search-bar {

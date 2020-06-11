@@ -1906,10 +1906,10 @@ export class BoardViewComponent implements OnInit, AfterViewInit {
   };
 
   postImageProcess = () => {
-    $('.background-msg').removeClass('hide');
+    $('.background-msg').addClass('visible');
     setTimeout(function () {
-      $('.background-msg').addClass('hide');
-    }, 3000);
+      $('.background-msg').removeClass('visible');
+    }, 5000);
     this.hasCanvasLoader = false;
   };
 
@@ -1976,7 +1976,7 @@ export class BoardViewComponent implements OnInit, AfterViewInit {
             }
           } else {
             this.toggleTransparent(activeObject, dimentionBefore, false);
-            $('.background-msg').addClass('hide');
+            $('.background-msg').removeClass('visible');
             this.hasCanvasLoader = false;
           }
         }
