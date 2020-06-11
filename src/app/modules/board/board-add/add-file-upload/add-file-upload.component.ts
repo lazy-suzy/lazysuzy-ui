@@ -52,9 +52,15 @@ export class AddFileUploadComponent {
       this.handleFileUploadSuccess(res);
     });
     this.uploader.onAfterAddingFile = (file) => {
+      debugger;
       file.withCredentials = false;
       this.openDialog();
     };
+  }
+
+  onFileSelected(event: EventEmitter<File[]>) {
+    const file: File = event[0];
+    console.log(file);
   }
 
   handleFileUploadSuccess(res) {
@@ -64,22 +70,22 @@ export class AddFileUploadComponent {
     });
   }
 
-  public fileOverAnother(e: any): void {
-    this.hasAnotherDropZoneOver = e;
-  }
-
   clearEverything() {
     this.uploader.queue.forEach((file) => {
       file.remove();
     });
+<<<<<<< HEAD
+=======
+    document.getElementById('customImageFile').value = '';
+>>>>>>> shadow
     this.handleCancelUpload();
     // this.uploader.queue.pop();
     // this.localImageUrl = null
   }
 
-  handleUpload() {
-    this.openDialog();
-  }
+  // handleUpload() {
+  //   this.openDialog();
+  // }
 
   handleCancelUpload() {
     this.uploader.clearQueue();
@@ -96,14 +102,18 @@ export class AddFileUploadComponent {
     });
 
     dialogRef.afterClosed().subscribe((result) => {
-      if (result.name === 'save-image-details') {
+      if (result) {
         const asset = result.data;
         this.currentAsset = { ...this.currentAsset, ...asset };
         //MIKE: NOTE
         this.uploader.uploadAll();
         //Comment above line and uncomment below line to simulate success file upload.
         // this.handleFileUploadSuccess();
+<<<<<<< HEAD
       } else if (!result) {
+=======
+      } else {
+>>>>>>> shadow
         this.clearEverything();
       }
     });
