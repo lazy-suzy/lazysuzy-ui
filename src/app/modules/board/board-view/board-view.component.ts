@@ -100,18 +100,18 @@ export class BoardViewComponent implements OnInit, AfterViewInit {
   }
 
   public presetFonts = [
-    'Arial',
-    'Helvetica',
-    'Times',
-    'Georgia',
-    'Courier',
-    'Amatic',
     'Allura',
+    'Amatic',
+    'Arial',
+    'Courier',
+    'Garamond',
+    'Georgia',
+    'Helvetica',
     'Italianno',
     'Montserrat',
-    'Garamond',
     'Open Sans',
-    'Roboto Slab'
+    'Roboto Slab',
+    'Times'
   ];
   public font: Font = new Font({
     family: 'Roboto',
@@ -802,7 +802,6 @@ export class BoardViewComponent implements OnInit, AfterViewInit {
       this.appMeta.value.fontColor = '#' + instance.toHEXA().join('');
       this.pickr.setColor(this.appMeta.value.fontColor);
       this.updateCurrentObject(true);
-      this.pickr.hide();
       this.showPicker = false;
       this.appMeta.flag.isFontToolbarDirty = true;
     });
