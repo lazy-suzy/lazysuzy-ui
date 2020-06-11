@@ -74,7 +74,7 @@ export class AddFileUploadComponent {
     this.uploader.queue.forEach((file) => {
       file.remove();
     });
-    document.getElementById('customImageFile').value = '';
+    (<HTMLInputElement>document.getElementById('customImageFile')).value = '';
     this.handleCancelUpload();
     // this.uploader.queue.pop();
     // this.localImageUrl = null
