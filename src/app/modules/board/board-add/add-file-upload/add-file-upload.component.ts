@@ -72,6 +72,7 @@ export class AddFileUploadComponent {
     this.uploader.queue.forEach((file) => {
       file.remove();
     });
+    this.handleCancelUpload();
     // this.uploader.queue.pop();
     // this.localImageUrl = null
   }
@@ -102,7 +103,7 @@ export class AddFileUploadComponent {
         this.uploader.uploadAll();
         //Comment above line and uncomment below line to simulate success file upload.
         // this.handleFileUploadSuccess();
-      } else if (result.name === 'cancel-save-image-details') {
+      } else if (!result) {
         this.clearEverything();
       }
     });

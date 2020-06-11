@@ -11,15 +11,14 @@
   &:focus {
     transform: none;
   }
+  div {
+    display: none;
+  }
 }
 
-// .close-icon {
-//   transition: 1s ease-in-out;
-// }
-
-// .close-icon:hover {
-//   transform: rotate(180deg);
-// }
+.btn {
+  width: 25%;
+}
 
 .mat-form-field {
   min-width: 100%;
@@ -58,7 +57,12 @@
 .subtle-label {
   color: #999999;
 }
-
+.btn-cancel:hover {
+  color: #999999;
+}
+.red-button:hover {
+  color: #ffffff;
+}
 @media screen and (max-width: 991px) {
   [data-title]:hover::before {
     display: none;
