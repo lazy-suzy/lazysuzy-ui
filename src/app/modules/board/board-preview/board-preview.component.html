@@ -16,7 +16,7 @@
   </div>
   <div class="row">
     <div class="col col-md-9">
-      <div class="m-5" style="background: white;">
+      <div class="m-5 white-background">
         <div id="canvas-droparea">
           <canvas id="canvas-area"></canvas>
         </div>
@@ -31,7 +31,7 @@
 </div>
 <div *ngIf="!loadedAsEmbed" class="row bg-light">
   <div class="col col-md-9">
-    <div class="m-5" style="background: white;">
+    <div class="m-5 white-background">
       <div id="canvas-droparea">
         <canvas id="canvas-area"></canvas>
       </div>
@@ -50,12 +50,15 @@
 </div>
 <div *ngIf="!loadedAsEmbed && boardProducts.length > 0" class="row">
   <div class="col mt-3">
-    <div class="text-center h2 font-weight-bold" style="color: #b76e79;">
-      <span>Shop This Look</span>
+    <div class="text-center h2 font-weight-bold mt-3">
+      <span class="shop-title">Shop This Look</span>
     </div>
-    <div class="products-container">
-      <div *ngFor="let product of boardProducts" class="w-25-ns">
-        <div *ngIf="product.is_price" class="ls-product-div pl-1 pr-1">
+    <div class="products-container mt-5">
+      <div
+        *ngFor="let product of boardProducts"
+        class="w-25-ns {{ product.is_price ? '' : 'dn' }}"
+      >
+        <div class="ls-product-div pl-1 pr-1">
           <div class="ls-product" (click)="openDialog(product.sku)">
             <img [src]="product.main_image" [alt]="product.name" />
           </div>
