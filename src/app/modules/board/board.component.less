@@ -223,20 +223,36 @@ h6 {
 }
 
 .icon {
-  background: #b76e79;
+  background: #b76e7922;
   font-size: 16px;
-  color: #fff;
+  color: #b76e79;
   border-radius: 4px;
   display: inline-block;
   padding: 2px 5px;
+  transition: all 0.3s ease;
+  .svg-icon {
+    width: 100%;
+    height: 75px;
+    fill: #b76e79;
+    padding-bottom: 20px;
+  }
+  &:hover {
+    color: #ffffff;
+    background: #b76e79;
+    .svg-icon {
+      fill: #ffffff;
+      .svg-icon-border {
+        fill: #ffffff;
+      }
+    }
+  }
 }
-
 .filter-icon {
   display: none;
 }
 
 .icon.lg {
-  padding: 10px;
+  padding: 16px 10px 0px;
   font-size: 18px;
   border-radius: 5px;
   text-align: center;

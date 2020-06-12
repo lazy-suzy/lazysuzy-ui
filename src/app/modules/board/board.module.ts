@@ -43,7 +43,7 @@ import { CurrentBoardComponent } from './components/current-board/board.componen
 import { AddFileUploadComponent } from './board-add/add-file-upload/add-file-upload.component';
 import { UploadFileDetailsComponent } from './board-add/add-file-upload/upload-file-details/upload-file-details.component';
 import { InfiniteScrollModule } from 'ngx-infinite-scroll';
-
+import { IconFactoryComponent } from './icon-factory/icon-factory';
 import {
   FontPickerModule,
   FONT_PICKER_CONFIG,
@@ -102,7 +102,8 @@ const DEFAULT_FONT_PICKER_CONFIG: FontPickerConfigInterface = {
     BoardProductsComponent,
     CurrentBoardComponent,
     AddFileUploadComponent,
-    UploadFileDetailsComponent
+    UploadFileDetailsComponent,
+    IconFactoryComponent
   ],
   entryComponents: [
     AddViaUrlComponent,

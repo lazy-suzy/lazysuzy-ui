@@ -1,4 +1,5 @@
 <!-- <app-loader class="spinner" *ngIf="showLoader"></app-loader> -->
+<board-icon-factory></board-icon-factory>
 <div *ngIf="showLoader" class="loader-container">
   <div class="loader-box">
     <div class="loader-bounceball"></div>
@@ -26,8 +27,11 @@
     (click)="handleSelectCategory(department)"
     *ngFor="let department of filteredDepartments"
   >
-    <div class="icon lg category-label">
-      <i class="mdi mdi-hotel" aria-hidden="true"></i>
+    <div class="category-label icon lg">
+      <svg class="svg-icon">
+        <use attr.xlink:href="#{{ department.icon }}" />
+      </svg>
+      <!-- <i class="mdi mdi-hotel" aria-hidden="true"></i> -->
       {{ department.category }}
     </div>
   </div>
