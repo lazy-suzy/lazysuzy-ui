@@ -186,17 +186,13 @@ export class BoardPreviewComponent implements OnInit {
     let productSkus = [];
     imageObjects.forEach((object, index) => {
       this.boardProducts.push({
-        main_image: object.referenceObject.path
-          ? object.referenceObject.path
-          : '',
-        site: object.referenceObject.brand ? object.referenceObject.brand : '',
-        brand: object.referenceObject.brand ? object.referenceObject.brand : '',
-        name: object.referenceObject.name ? object.referenceObject.name : '',
-        is_price: object.referenceObject.price
-          ? object.referenceObject.price
-          : '',
-        price: object.referenceObject.price ? object.referenceObject.price : '',
-        sku: object.referenceObject.sku ? object.referenceObject.sku : ''
+        main_image: object.referenceObject.path || '',
+        site: object.referenceObject.brand || '',
+        brand: object.referenceObject.brand || '',
+        name: object.referenceObject.name || '',
+        is_price: object.referenceObject.price || '',
+        price: object.referenceObject.price || '',
+        sku: object.referenceObject.sku || ''
       });
       if (object.referenceObject.sku)
         productSkus.push(object.referenceObject.sku);

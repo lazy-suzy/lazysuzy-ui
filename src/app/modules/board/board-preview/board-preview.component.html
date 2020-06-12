@@ -55,10 +55,11 @@
     </div>
     <div class="products-container mt-5">
       <div
-        *ngFor="let product of boardProducts"
+        *ngFor="let product of boardProducts; let index = index"
         class="w-25-ns {{ product.is_price ? '' : 'dn' }}"
       >
         <div class="ls-product-div pl-1 pr-1">
+          <div class="product-tag icon">{{ index + 1 }}</div>
           <div class="ls-product" (click)="openDialog(product.sku)">
             <img [src]="product.main_image" [alt]="product.name" />
           </div>
