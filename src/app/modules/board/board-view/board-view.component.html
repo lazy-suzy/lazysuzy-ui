@@ -99,7 +99,12 @@
             <div class="browse-title pt-1" (click)="handleGoToSelect($event)">
               <i class="mdi mdi-chevron-left" aria-hidden="true"></i>
               <h5 class="title js-category-title">
-                {{ hasSearched ? searchText : selectedCategory?.category }}
+                <ng-container *ngIf="hasSearched; else categoryName">
+                  Search results for "{{ searchText }}"
+                </ng-container>
+                <ng-template #categoryName>
+                  {{ selectedCategory?.category }}
+                </ng-template>
               </h5>
             </div>
             <div class="browse-filter" *ngIf="!hasSearched">

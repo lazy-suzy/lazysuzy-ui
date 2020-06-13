@@ -23,6 +23,7 @@ export class BoardListComponent implements OnInit {
   isFetching: boolean = false;
   isFirstBoot: boolean = true;
   eventSubscription: Subscription;
+  user = null;
   constructor(
     private boardService: BoardService,
     private router: Router,
@@ -51,6 +52,7 @@ export class BoardListComponent implements OnInit {
           );
         }
         this.isFirstBoot = false;
+        this.user = localStorage.getItem('user');
         this.getBoards();
       });
 

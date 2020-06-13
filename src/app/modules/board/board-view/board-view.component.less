@@ -173,6 +173,7 @@
   padding: 0 12px;
   border-radius: 5px;
   border: 1px solid #cbcad0;
+  transition: all 0.3s ease;
   i {
     color: #999999;
   }
@@ -182,13 +183,14 @@
     padding-left: 8px;
     font-weight: bold;
     color: #999999;
+    transition: all 0.3s ease;
   }
   &:hover {
-    background-color: #ffc40d;
-    border-color: #000000;
+    background-color: #b76e79;
+    border-color: #f7f6f6;
     .board-action-button-text,
     i {
-      color: #000000;
+      color: #f7f6f6;
     }
   }
 }
@@ -251,6 +253,21 @@
   .font-options {
     padding-top: 0 !important;
   }
+  .font-list .font-item {
+    &:hover {
+      background: #b76e79;
+
+      .font-info .font-name {
+        color: #f7f6f6;
+      }
+    }
+    .font-info {
+      margin: 0;
+      .not-available {
+        display: none;
+      }
+    }
+  }
   input,
   select {
     height: 31px;
@@ -258,8 +275,8 @@
 }
 ::ng-deep .pickr .pcr-button:after,
 ::ng-deep .pickr .pcr-button:before {
-  width: 77%;
-  height: 77%;
+  width: 72%;
+  height: 72%;
   box-shadow: 0 0 2px 1px #ccc;
 }
 ::ng-deep .pickr button:focus {

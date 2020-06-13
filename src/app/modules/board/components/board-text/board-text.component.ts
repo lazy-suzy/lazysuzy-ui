@@ -11,52 +11,54 @@ export class BoardTextComponent implements OnInit {
 
   allFonts = [
     {
-      name: 'Helvetica',
-      value: 'Helvetica'
-    },
-    {
-      name: 'Times New Roman',
-      value: 'Times New Roman'
-    },
-    {
-      name: 'Courier New',
-      value: 'Courier New'
-    },
-    {
-      name: 'Georgia',
-      value: 'Georgia'
-    },
-    {
       name: 'Arial',
       value: 'Arial'
-    },
-    {
-      name: 'Garamond',
-      value: 'Garamond'
-    },
-    {
-      name: 'Montserrat',
-      value: 'Montserrat'
-    },
-    {
-      name: 'Roboto',
-      value: 'Roboto'
-    },
-    {
-      name: 'Amatic',
-      value: 'Amatic'
     },
     {
       name: 'Allura',
       value: 'Allura'
     },
     {
+      name: 'Amatic',
+      value: 'Amatic'
+    },
+    {
+      name: 'Courier New',
+      value: 'Courier New'
+    },
+    {
+      name: 'Garamond',
+      value: 'Garamond'
+    },
+    {
+      name: 'Georgia',
+      value: 'Georgia'
+    },
+    {
+      name: 'Helvetica',
+      value: 'Helvetica'
+    },
+    {
       name: 'Italianno',
       value: 'Italianno'
     },
+
+    {
+      name: 'Montserrat',
+      value: 'Montserrat'
+    },
+
     {
       name: 'Open Sans',
       value: 'Open Sans'
+    },
+    {
+      name: 'Roboto',
+      value: 'Roboto'
+    },
+    {
+      name: 'Times New Roman',
+      value: 'Times New Roman'
     }
   ];
 
