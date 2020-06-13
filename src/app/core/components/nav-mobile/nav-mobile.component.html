@@ -88,9 +88,21 @@
           >search</mat-icon
         >
       </div>
+      <div class="header-link">
+        <mat-icon
+          class="account-icon"
+          *ngIf="!notHome"
+          aria-hidden="false"
+          [routerLink]="['/board']"
+          >dashboard</mat-icon
+        >
+      </div>
 
       <span class="flex items-center header-link">
-        <mat-icon class="account-icon" aria-hidden="false" [routerLink]="['/wishlist']"
+        <mat-icon
+          class="account-icon"
+          aria-hidden="false"
+          [routerLink]="['/wishlist']"
           >favorite_border</mat-icon
         >
       </span>

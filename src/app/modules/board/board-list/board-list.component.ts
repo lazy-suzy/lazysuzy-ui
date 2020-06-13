@@ -35,6 +35,7 @@ export class BoardListComponent implements OnInit {
 
   bpSubscription: Subscription;
   isHandset: boolean = false;
+  isAnyPublished: boolean = false;
 
   constructor(
     private boardService: BoardService,
@@ -86,6 +87,8 @@ export class BoardListComponent implements OnInit {
   getBoards(): void {
     this.boardService.getBoards().subscribe((response) => {
       this.boards = response.reverse();
+      this.isAnyPublished =
+        this.boards.filter((b) => b.type_room !== null).length > 0;
       this.isFetching = false;
     });
   }

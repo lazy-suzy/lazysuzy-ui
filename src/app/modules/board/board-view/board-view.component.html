@@ -100,7 +100,9 @@
               <i class="mdi mdi-chevron-left" aria-hidden="true"></i>
               <h5 class="title js-category-title">
                 <ng-container *ngIf="hasSearched; else categoryName">
-                  Search results for "{{ searchText }}"
+                  <span class="highlight">Search results for</span> "{{
+                    searchText
+                  }}"
                 </ng-container>
                 <ng-template #categoryName>
                   {{ selectedCategory?.category }}
