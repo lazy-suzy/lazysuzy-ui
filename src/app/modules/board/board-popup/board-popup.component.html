@@ -72,7 +72,13 @@
           </button>
         </div>
         <div class="col-6">
-          <button (click)="publishBoard()" class="btn red-button">Save</button>
+          <button
+            (click)="publishBoard()"
+            [disabled]="!isOptionSelected"
+            class="btn red-button"
+          >
+            Save
+          </button>
         </div>
       </div>
     </div>

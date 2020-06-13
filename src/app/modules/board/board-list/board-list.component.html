@@ -1,6 +1,17 @@
 <div class="board-list-container container">
+  <div>
+    <ng-container *ngIf="user.name; else guest">
+      <h4>WELCOME BACK, {{ user.name }}!</h4>
+    </ng-container>
+    <ng-template #guest>
+      <div class="flex items-center justify-between signup-message">
+        <span>SIGNUP OR LOGIN TO SAVE YOUR BOARDS TO YOUR ACCOUNT</span>
+        <button class="btn" (click)="openSignupDialog()">SIGNUP</button>
+      </div>
+    </ng-template>
+  </div>
   <div class="board-list-header mb-5">
-    <h5 class="title">MY BOARDS</h5>
+    <h5 class="title">YOUR BOARDS</h5>
   </div>
   <app-board-loader *ngIf="isFetching"></app-board-loader>
   <div class="row" id="board-list" *ngIf="!isFetching">
@@ -22,7 +33,54 @@
       </div>
     </div>
     <div *ngFor="let board of boards; index as i" class="col-sm-4 mb-5">
-      <div class="board-card">
+      <div *ngIf="board.type_room === null" class="board-card">
+        <div class="canvas-preview">
+          <img
+            width="100%"
+            class="edit-board"
+            [src]="getPreviewImagePath(board)"
+          />
+          <div class="board-card-icons">
+            <span
+              data-title="Edit"
+              routerLink="../{{ boardViewLink }}/{{ board.uuid }}"
+            >
+              <i class="mdi mdi-pencil" aria-hidden="true"></i>
+            </span>
+            <span data-title="Delete" (click)="delete(board)">
+              <i class="mdi mdi-delete" aria-hidden="true"></i>
+            </span>
+            <span data-title="Share" (click)="share(board)" data-action="share">
+              <i class="mdi mdi-share-variant" aria-hidden="true"></i>
+            </span>
+            <span
+              data-title="Duplicate"
+              data-action="duplicate"
+              (click)="add(board)"
+            >
+              <i class="mdi mdi-content-copy" aria-hidden="true"></i>
+            </span>
+            <span
+              data-title="Shop"
+              routerLink="../{{ boardPreviewLink }}/{{ board.uuid }}"
+            >
+              <i class="mdi mdi-cart" aria-hidden="true"></i>
+            </span>
+          </div>
+        </div>
+        <div class="preview-title">
+          {{ board.title }}
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="board-list-header mb-5">
+    <h5 class="title">YOUR PUBLISHED BOARDS</h5>
+  </div>
+  <div class="row">
+    <div *ngFor="let board of boards; index as i" class="col-sm-4 mb-5">
+      <div *ngIf="board.type_room !== null" class="board-card">
         <div class="canvas-preview">
           <img
             width="100%"

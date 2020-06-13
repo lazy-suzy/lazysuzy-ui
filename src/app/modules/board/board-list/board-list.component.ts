@@ -9,8 +9,13 @@ import { BoardPopupComponent } from '../board-popup/board-popup.component';
 import { MatDialog, MatSnackBar } from '@angular/material';
 import { environment } from 'src/environments/environment';
 import { BoardPopupConfirmComponent } from '../board-popup-confirm/board-popup-confirm.component';
-import { EventEmitterService } from 'src/app/shared/services';
-import { Subscription } from 'rxjs';
+import { EventEmitterService, UtilsService } from 'src/app/shared/services';
+import { Subscription, Observable } from 'rxjs';
+import {
+  BreakpointState,
+  Breakpoints,
+  BreakpointObserver
+} from '@angular/cdk/layout';
 @Component({
   selector: 'app-board-list',
   templateUrl: './board-list.component.html',
@@ -24,13 +29,22 @@ export class BoardListComponent implements OnInit {
   isFirstBoot: boolean = true;
   eventSubscription: Subscription;
   user = null;
+  bpObserver: Observable<BreakpointState> = this.breakpointObserver.observe(
+    Breakpoints.Handset
+  );
+
+  bpSubscription: Subscription;
+  isHandset: boolean = false;
+
   constructor(
     private boardService: BoardService,
     private router: Router,
     private route: ActivatedRoute,
     private dialog: MatDialog,
     private eventEmitterService: EventEmitterService,
-    private _snackBar: MatSnackBar
+    private _snackBar: MatSnackBar,
+    private utils: UtilsService,
+    private breakpointObserver: BreakpointObserver
   ) {}
 
   ngOnInit(): void {
@@ -50,14 +64,20 @@ export class BoardListComponent implements OnInit {
               verticalPosition: 'bottom'
             }
           );
+          this.user = user;
         }
         this.isFirstBoot = false;
-        this.user = localStorage.getItem('user');
+        this.user = JSON.parse(localStorage.getItem('user'));
         this.getBoards();
       });
 
     this.eventEmitterService.userTransitionEvent.subscribe(
       () => (this.isFetching = true)
+    );
+    this.bpSubscription = this.bpObserver.subscribe(
+      (handset: BreakpointState) => {
+        this.isHandset = handset.matches;
+      }
     );
   }
   ngOnDestroy(): void {
@@ -139,5 +159,9 @@ export class BoardListComponent implements OnInit {
   getPreviewImagePath(board: Board): string {
     if (board.preview) return environment.BASE_HREF + board.preview;
     else return 'https://via.placeholder.com/500x400';
+  }
+
+  openSignupDialog() {
+    this.utils.openSignupDialog(this.isHandset);
   }
 }

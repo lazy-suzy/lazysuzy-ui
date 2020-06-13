@@ -13,16 +13,18 @@ import { environment } from 'src/environments/environment';
 })
 export class BoardPopupComponent implements OnInit {
   roomTypeOptions = [];
-  roomTypeOptionSelected = 0;
+  roomTypeOptionSelected = -1;
 
   roomStyleOptions = [];
-  roomStyleOptionSelected = 0;
+  roomStyleOptionSelected = -1;
 
   popupShow = {
     config: false,
     publish: false,
     share: false
   };
+
+  isOptionSelected: boolean = false;
 
   board: Board = new Board();
 
@@ -162,10 +164,14 @@ export class BoardPopupComponent implements OnInit {
   selectRoomType(index: number) {
     this.board.type_room = this.roomTypeOptions[index].code;
     this.roomTypeOptionSelected = index;
+    this.isOptionSelected =
+      this.board.type_room !== null && this.board.type_style !== null;
   }
   selectRoomStyle(index: number) {
     this.board.type_style = this.roomStyleOptions[index].code;
     this.roomStyleOptionSelected = index;
+    this.isOptionSelected =
+      this.board.type_room !== null && this.board.type_style !== null;
   }
 
   setBoard(board: Board) {
