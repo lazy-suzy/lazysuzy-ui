@@ -10,75 +10,77 @@
   </div>
 </ng-container>
 <ng-template #showBar>
-  <div class="flex items-center justify-between header">
-    <ng-container>
-      <button
-        mat-icon-button
-        id="side-nav-btn"
-        (click)="showMenu()"
-        class="fixed top-0 z-99"
-      >
-        <mat-icon class="account-icon">menu</mat-icon>
-      </button>
-      <div
-        id="mobileMenuContainer"
-        class="mobile-menu-container {{ menuVisible ? 'show' : 'hide' }}"
-      >
-        <ul class="department-container">
-          <li *ngFor="let department of departments" class="department-list">
-            <div (click)="showDepartmentChild(department.department)">
-              <span
-                class="department-title {{
-                  showDepartment === department.department ? 'active' : 'none'
+  <div class="flex items-center header">
+    <div class="w-60 flex">
+      <ng-container>
+        <button
+          mat-icon-button
+          id="side-nav-btn"
+          (click)="showMenu()"
+          class="fixed top-0 z-99"
+        >
+          <mat-icon class="account-icon">menu</mat-icon>
+        </button>
+        <div
+          id="mobileMenuContainer"
+          class="mobile-menu-container {{ menuVisible ? 'show' : 'hide' }}"
+        >
+          <ul class="department-container">
+            <li *ngFor="let department of departments" class="department-list">
+              <div (click)="showDepartmentChild(department.department)">
+                <span
+                  class="department-title {{
+                    showDepartment === department.department ? 'active' : 'none'
+                  }}"
+                >
+                  {{ department.department | titlecase }}
+                </span>
+                <mat-icon
+                  class="department-list-icon"
+                  *ngIf="showDepartment !== department.department"
+                  aria-hidden="false"
+                  aria-label="Search"
+                >
+                  chevron_right
+                </mat-icon>
+                <mat-icon
+                  class="department-list-icon active"
+                  *ngIf="showDepartment === department.department"
+                  aria-hidden="false"
+                  aria-label="Search"
+                >
+                  expand_more
+                </mat-icon>
+              </div>
+              <ul
+                class="category-container {{
+                  showDepartment === department.department ? 'show' : 'hide'
                 }}"
               >
-                {{ department.department | titlecase }}
-              </span>
-              <mat-icon
-                class="department-list-icon"
-                *ngIf="showDepartment !== department.department"
-                aria-hidden="false"
-                aria-label="Search"
-              >
-                chevron_right
-              </mat-icon>
-              <mat-icon
-                class="department-list-icon active"
-                *ngIf="showDepartment === department.department"
-                aria-hidden="false"
-                aria-label="Search"
-              >
-                expand_more
-              </mat-icon>
-            </div>
-            <ul
-              class="category-container {{
-                showDepartment === department.department ? 'show' : 'hide'
-              }}"
-            >
-              <li
-                *ngFor="let category of department.categories"
-                class="category-list"
-              >
-                <a class="category-title" [routerLink]="category.link"
-                  >{{ category.category }}
-                </a>
-              </li>
-            </ul>
-          </li>
-        </ul>
-      </div>
-    </ng-container>
+                <li
+                  *ngFor="let category of department.categories"
+                  class="category-list"
+                >
+                  <a class="category-title" [routerLink]="category.link"
+                    >{{ category.category }}
+                  </a>
+                </li>
+              </ul>
+            </li>
+          </ul>
+        </div>
+      </ng-container>
 
-    <a
-      routerLink="/"
-      routerLinkActive="active"
-      class="no-underline flex items-center"
-    >
-      <img class="w4 grow" [src]="logoPath" alt="Lazy Suzy Home" />
-    </a>
+      <a
+        routerLink="/"
+        routerLinkActive="active"
+        class="no-underline flex items-center"
+      >
+        <img class="w4 grow" [src]="logoPath" alt="Lazy Suzy Home" />
+      </a>
+    </div>
 
-    <div class="flex items-center">
+    <div class="flex items-center mr-2 w-40 justify-end">
       <div class="header-link">
         <mat-icon
           class="account-icon"

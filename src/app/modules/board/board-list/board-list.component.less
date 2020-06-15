@@ -8,11 +8,40 @@
 ::ng-deep .mat-simple-snackbar {
   color: #ffcc00;
 }
+.welcome-msg-container {
+  margin: 15px 0 40px 0;
+  .welcome-msg-block span {
+    display: inline-block;
+    &:first-letter {
+      font-size: 24px;
+    }
+    .welcome-msg {
+      font-size: 22px;
+    }
+  }
+}
+.overlay {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 100%;
+  width: 100%;
+  opacity: 0;
+  transition: 0.5s ease;
+  background-color: #f2f4f3;
+}
+.canvas-preview:hover .overlay {
+  opacity: 0.5;
+}
+
 .signup-message {
   border: 1px solid #ccc;
   padding: 5px 10px;
   border-radius: 5px;
-
+  width: 60%;
+  margin: auto;
   .btn {
     background: #0c1c31;
     color: #ffcc00;
@@ -25,5 +54,26 @@
   ::ng-deep .mat-snack-bar-handset {
     max-height: 48px;
     margin-bottom: 100px !important;
+  }
+}
+@media screen and (max-width: 767px) {
+  .welcome-msg-container {
+    .welcome-msg-block span {
+      &:first-letter {
+        font-size: 18px;
+      }
+    }
+  }
+  .signup-message {
+    font-size: 12px;
+    flex-direction: column;
+    width: 90%;
+    text-align: center;
+    span,
+    .btn {
+      margin: 5px 0;
+      font-size: 12px;
+      width: 60%;
+    }
   }
 }

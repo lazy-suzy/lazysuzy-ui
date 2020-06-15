@@ -80,3 +80,31 @@
     top: 0;
   }
 }
+
+.category-options {
+  .icon {
+    background: #b76e7922;
+    font-size: 16px;
+    color: #b76e79;
+    border-radius: 4px;
+    display: inline-block;
+    padding: 2px 5px;
+    transition: all 0.3s ease;
+    .svg-icon {
+      width: 100%;
+      height: 75px;
+      fill: #b76e79;
+      padding-bottom: 20px;
+    }
+    &:hover {
+      color: #ffffff;
+      background: #b76e79;
+      .svg-icon {
+        fill: #ffffff;
+        .svg-icon-border {
+          fill: #ffffff;
+        }
+      }
+    }
+  }
+}
