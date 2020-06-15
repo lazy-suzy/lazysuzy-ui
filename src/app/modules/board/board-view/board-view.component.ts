@@ -4,7 +4,7 @@ import {
   AfterViewInit,
   HostListener,
   ViewChild,
-  ElementRef,
+  ElementRef
 } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { CookieService } from 'ngx-cookie-service';
@@ -142,7 +142,7 @@ export class BoardViewComponent implements OnInit, AfterViewInit {
             {
               match: {
                 image_xbg_processed: {
-                  query: true
+                  query: 1
                 }
               }
             }
@@ -365,7 +365,7 @@ export class BoardViewComponent implements OnInit, AfterViewInit {
         x: 0,
         y: 0
       },
-      aspectRatio: (16/10).toFixed(2),
+      aspectRatio: (16 / 10).toFixed(2),
       zoomValue: 1,
       zoomFactor: 0.1,
       borderColor: '#b76e79',
@@ -616,12 +616,12 @@ export class BoardViewComponent implements OnInit, AfterViewInit {
     }
   }
 
-  @HostListener("window:keyup", ["$event"])
+  @HostListener('window:keyup', ['$event'])
   keyEvent(event: KeyboardEvent) {
     if (event.keyCode == 46 || event.keyCode == 8)
       this.applyShortcut('action', 'delete');
   }
-  
+
   ngAfterViewInit(): void {
     this.shortcuts.push(
       {
