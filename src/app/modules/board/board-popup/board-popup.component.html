@@ -1,6 +1,6 @@
 <div [ngStyle]="{ padding: loadedIndependantly ? '50px 500px' : '' }">
   <div *ngIf="popupShow.config">
-    <div class="p-sm-5 w-100 pl-2 pr-2">
+    <div class="p-sm-5 w-100 pl-sm-2 pr-sm-2">
       <div class="row">
         <div class="col-12 text-center">
           <h5 class="title ml2 text-center b">TELL US MORE</h5>
@@ -62,7 +62,7 @@
           </div>
         </div>
       </div>
-      <div class="row mb-3">
+      <div class="row mb-3 action-buttons-row">
         <div class="col-6 text-right">
           <button
             (click)="closePopup()"

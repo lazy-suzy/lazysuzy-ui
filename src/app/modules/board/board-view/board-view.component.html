@@ -282,7 +282,11 @@
             <i class="mdi mdi-redo" (click)="redo()" aria-hidden="true"></i>
           </div>
           <div
-            class="col-sm-6 col-md-8 text-center col-12 font-editor-container"
+            class="col-sm-6 col-md-8 text-center col-12 font-editor-container {{
+              this.canvasMeta.flag.isCurrentObjectImage
+                ? 'image-toolbar-position'
+                : 'justify-content-center'
+            }}"
           >
             <div class="editor-icons">
               <div
@@ -435,7 +439,7 @@
                 aria-hidden="true"
               ></i>
               <i
-                class="mdi mdi-publish ml-2"
+                class="mdi mdi-publish ml-2 publish-icon"
                 (click)="openPopup('publish')"
                 aria-hidden="true"
               ></i>

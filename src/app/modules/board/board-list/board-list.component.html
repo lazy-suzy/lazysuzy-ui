@@ -10,7 +10,7 @@
     </ng-container>
     <ng-template #guest>
       <div class="flex items-center justify-between signup-message">
-        <span>Sign up or Login to save your Boards To Your Account</span>
+        <span>Sign up or Login to save your Boards to your account</span>
         <button class="btn" (click)="openSignupDialog()">SIGN UP</button>
       </div>
     </ng-template>
@@ -20,7 +20,7 @@
   </div>
   <app-board-loader *ngIf="isFetching"></app-board-loader>
   <div class="row" id="board-list" *ngIf="!isFetching">
-    <div class="col-sm-4 mb-ns-5">
+    <div class="col-sm-4 mb-sm-4">
       <div class="board-card box-shadow-0">
         <div class="canvas-preview mb-4">
           <div class="add-board" (click)="add()">
@@ -37,8 +37,11 @@
         </div>
       </div>
     </div>
-    <div *ngFor="let board of boards; index as i" class="col-sm-4 mb-ns-5">
-      <div *ngIf="board.type_room === null" class="board-card">
+    <div
+      *ngFor="let board of boards; index as i"
+      class="col-sm-4 mb-sm-4 {{ board.type_room === null ? '' : 'dn' }}"
+    >
+      <div class="board-card">
         <div class="canvas-preview">
           <img
             width="100%"
@@ -87,7 +90,7 @@
   <div class="row">
     <div
       *ngFor="let board of boards; index as i"
-      class="col-sm-4 mb-ns-5 {{ board.type_room !== null ? '' : 'dn' }}"
+      class="col-sm-4 mb-sm-4 {{ board.type_room !== null ? '' : 'dn' }}"
     >
       <div class="board-card">
         <div class="canvas-preview">

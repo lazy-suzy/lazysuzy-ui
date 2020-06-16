@@ -212,7 +212,7 @@ export class BoardViewComponent implements OnInit, AfterViewInit {
     }
 
     const dialogRef = this.dialog.open(BoardPopupComponent, {
-      panelClass: 'custom-dialog-container',
+      panelClass: 'board-popup-dialog-container',
       data: {
         type: param,
         board: this.appMeta.board.data[this.appMeta.board.currentIndex]
