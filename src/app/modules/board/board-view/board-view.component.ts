@@ -172,6 +172,7 @@ export class BoardViewComponent implements OnInit, AfterViewInit {
         this.remoteProducts = this.remoteProducts.map((ele, i) => {
           return {
             ...ele,
+            site: ele.site_name,
             refId: i
           };
         });
