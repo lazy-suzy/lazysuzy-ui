@@ -1,4 +1,4 @@
-import { Component, OnInit, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter, Input } from '@angular/core';
 import { BoardService } from 'src/app/shared/services/board/board.service';
 import { FormControl } from '@angular/forms';
 import { Observable } from 'rxjs';
@@ -9,6 +9,7 @@ import { debounceTime } from 'rxjs/operators';
   styleUrls: ['./select.component.less', '../board.component.less']
 })
 export class SelectComponent implements OnInit {
+  @Input() showMenu: boolean;
   allDepartments = [];
   filteredDepartments = [];
   showLoader: boolean = false;
@@ -19,7 +20,11 @@ export class SelectComponent implements OnInit {
   constructor(private boardService: BoardService) {}
 
   ngOnInit(): void {
-    this.showLoader = true;
+    if (!this.showMenu) {
+      this.showLoader = false;
+    } else {
+      this.showLoader = true;
+    }
     this.filter = new FormControl('');
     this.filter$ = this.filter.valueChanges;
     this.boardService.getAllDepartments().subscribe((s: any) => {

@@ -46,7 +46,9 @@
       <div
         class="left-tab-pane {{ !isTablet ? 'position-relative w-100' : '' }} {{
           showMenu && isTablet ? 'mt-0' : 'margin-top-60'
-        }} {{ selectedItem === 'browse' ? 'overflow-hidden' : '' }}"
+        }} {{ selectedItem === 'browse' ? 'overflow-hidden' : '' }} {{
+          hasPanelFixed ? 'panel-top-position' : ''
+        }}"
       >
         <!-- Selected Tab: {{selectedItem}} -->
         <div *ngIf="selectedItem === 'select'">
@@ -60,6 +62,8 @@
                   placeholder="Search"
                   [(ngModel)]="searchText"
                   name="searchText"
+                  (blur)="onSearchBlur()"
+                  (focus)="onSearchFocus()"
                 />
                 <div class="input-group-append">
                   <button class="input-group-text icon" type="submit">
@@ -74,6 +78,7 @@
           </div>
           <app-select
             (goToCategory)="handleSelectCategory($event)"
+            [showMenu]="showMenu"
           ></app-select>
         </div>
 
@@ -88,6 +93,8 @@
                   placeholder="Search"
                   [(ngModel)]="searchText"
                   name="searchText"
+                  (blur)="onSearchBlur()"
+                  (focus)="onSearchFocus()"
                 />
                 <div class="input-group-append">
                   <button class="input-group-text icon" type="submit">
@@ -110,7 +117,10 @@
               </h5>
             </div>
             <div class="browse-filter" *ngIf="!hasSearched">
-              <div class="filter-bar-container">
+              <div
+                class="filter-bar-container"
+                *ngIf="filterData && hasFilterEnabled"
+              >
                 <div class="filter-bar js-filter-section" id="desktop-filter">
                   <app-browse-filter
                     [filterData]="filterData"
@@ -275,14 +285,14 @@
     <div class="row">
       <div class="col-md-12 tool-bar-holder">
         <div class="top-panel row top-panel-hide">
-          <div class="col-md-4 d-none d-md-block state-icons">
+          <div class="col-md-2 col-lg-6 d-none d-md-block state-icons">
             <!-- <i class="mdi mdi-magnify-minus" (click)="zoomOut()" aria-hidden="true"></i> -->
             <!-- <i class="mdi mdi-magnify-plus" (click)="zoomIn()" aria-hidden="true"></i> -->
             <i class="mdi mdi-undo" (click)="undo()" aria-hidden="true"></i>
             <i class="mdi mdi-redo" (click)="redo()" aria-hidden="true"></i>
           </div>
           <div
-            class="col-sm-6 col-md-8 text-center col-12 font-editor-container {{
+            class="col-sm-6 col-md-10 col-lg-6 text-center col-12 font-editor-container {{
               this.canvasMeta.flag.isCurrentObjectImage
                 ? 'image-toolbar-position'
                 : 'justify-content-center'
@@ -459,9 +469,9 @@
           </div>
           <div class="canvas">
             <div *ngIf="hasCanvasLoader" class="loader-container canvas-loader">
-              <div class="loader-box">
+              <!-- <div class="loader-box">
                 <div class="loader-bounceball"></div>
-              </div>
+              </div> -->
             </div>
             <div id="canvas-droparea">
               <canvas

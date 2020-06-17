@@ -54,7 +54,11 @@ export class BrowsefilterComponent implements OnInit {
     ) {
       this.filterData = change.filterData.currentValue;
       delete this.filterData.category;
-      if (this.filterData && !this.isPriceChanged) {
+      if (
+        this.filterData &&
+        !this.isPriceChanged &&
+        this.filterData.price.to !== 0
+      ) {
         this.minValue = this.filterData.price.from;
         this.maxValue = this.filterData.price.to;
         this.silderOptions = {

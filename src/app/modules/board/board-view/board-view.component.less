@@ -202,6 +202,8 @@
   justify-content: space-between;
   color: #f7f6f6;
   margin: 6px 15px 0 0;
+  position: absolute;
+  left: 0px;
 }
 .dropdown::after {
   border-top-color: #f7f6f6;
@@ -287,6 +289,11 @@
   outline: none;
   box-shadow: none;
 }
+.item-action-icons {
+  display: flex;
+  position: absolute;
+  right: 0px;
+}
 @media screen and (max-width: 991px) {
   .load-more-btn-container {
     padding-bottom: 0;
@@ -339,6 +346,8 @@
   }
   .item-action-icons {
     display: flex;
+    position: absolute;
+    right: 0px;
   }
   .top-panel .color-selector-tab {
     display: block;
@@ -355,13 +364,16 @@
   .editor-icons {
     display: flex;
     max-width: 100px;
-    margin-left: 30px;
+    margin-left: 25px;
     justify-content: flex-start;
     margin-top: 3px;
+    position: absolute;
+    left: -5px;
+    top: 4px;
   }
   .font-editor-container {
     padding-left: 0;
-    padding-right: 10px;
+    padding-right: 0;
     .font-selector {
       margin-right: 0;
     }
@@ -377,7 +389,18 @@
   }
   .image-toolbar-position {
     justify-content: flex-end;
-    margin-left: 10px;
+    margin-left: 0;
+  }
+  .pickr-container {
+    ::ng-deep .pcr-app {
+      top: 80px !important;
+      bottom: unset !important;
+      left: 15px !important;
+      right: unset !important;
+    }
+  }
+  .panel-top-position {
+    top: 70px;
   }
 }
 @media screen and (max-width: 375px) {

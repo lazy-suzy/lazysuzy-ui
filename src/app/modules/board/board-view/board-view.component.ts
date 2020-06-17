@@ -67,8 +67,9 @@ export class BoardViewComponent implements OnInit, AfterViewInit {
   );
   bpSubscription: Subscription;
   tabletSubscription: Subscription;
-  isTablet: boolean = false;
-  showMenu: boolean = false;
+  isTablet = false;
+  isHandset = false;
+  showMenu = false;
   searchText: string;
   iPageNo: number = 0;
   iLimit: number;
@@ -79,6 +80,8 @@ export class BoardViewComponent implements OnInit, AfterViewInit {
   color: string;
   showPicker: boolean;
   hasCanvasLoader: boolean = false;
+  hasFilterEnabled = false;
+  hasPanelFixed = false;
   @ViewChild('colorPicker', { static: false })
   public colorPicker: ElementRef;
   constructor(
@@ -120,6 +123,9 @@ export class BoardViewComponent implements OnInit, AfterViewInit {
     styles: ['regular']
   });
   search(isNewSearch: boolean = false) {
+    if (this.isHandset) {
+      this.hasPanelFixed = false;
+    }
     if (!this.hasSearched) {
       this.remoteProducts = [];
     }
@@ -176,6 +182,7 @@ export class BoardViewComponent implements OnInit, AfterViewInit {
             refId: i
           };
         });
+        this.checkFilterEnabled(this.filterData);
         if (this.remoteProducts.length < 24 || !this.remoteProducts.length) {
           this.hasLoadedAllProducts = true;
         }
@@ -319,6 +326,7 @@ export class BoardViewComponent implements OnInit, AfterViewInit {
         });
         this.filterData = s.filterData || {};
         this.pageNo++;
+        this.checkFilterEnabled(this.filterData);
         if (this.remoteProducts.length < 24 || !this.remoteProducts.length) {
           this.hasLoadedAllProducts = true;
         }
@@ -331,6 +339,31 @@ export class BoardViewComponent implements OnInit, AfterViewInit {
       });
   }
 
+  checkFilterEnabled(filterData) {
+    const keys = Object.keys(filterData);
+    const filters = keys.filter((data) => data !== 'price');
+    for (const key of filters) {
+      for (const i in filterData[key]) {
+        if (filterData[key][i].enabled) {
+          this.hasFilterEnabled = true;
+          break;
+        }
+      }
+      if (this.hasFilterEnabled) {
+        break;
+      }
+    }
+  }
+  onSearchFocus() {
+    if (this.isHandset) {
+      this.hasPanelFixed = true;
+    }
+  }
+  onSearchBlur() {
+    if (this.isHandset) {
+      this.hasPanelFixed = false;
+    }
+  }
   loadMore() {
     let selCat = this.boardService.getCategory();
     if (this.hasSearched) {
@@ -540,7 +573,8 @@ export class BoardViewComponent implements OnInit, AfterViewInit {
     var element: any = document.getElementsByClassName('product-container');
     if (
       element[0].scrollHeight - element[0].scrollTop ===
-      element[0].clientHeight
+        element[0].clientHeight ||
+      element[0].scrollHeight - element[0].scrollTop < element[0].clientHeight
     ) {
       if (this.hasLoadedAllProducts) {
         this.hasLoadedAllProducts = false;
@@ -606,6 +640,11 @@ export class BoardViewComponent implements OnInit, AfterViewInit {
     this.bpSubscription = this.bpObserver.subscribe(
       (handset: BreakpointState) => {
         this.isTablet = handset.matches;
+      }
+    );
+    this.bpSubscription = this.bpObserver.subscribe(
+      (handset: BreakpointState) => {
+        this.isHandset = handset.matches;
       }
     );
     if (!this.isTablet) {
