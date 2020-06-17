@@ -1,16 +1,30 @@
 <div *ngIf="initialized">
-  <span *ngIf="isCurrentUserGuest(); else userName" (click)="openSignupDialog()">
-    <mat-icon class="account-icon pointer" aria-hidden="false" aria-label="Account">
-        account_circle
+  <span
+    *ngIf="isCurrentUserGuest(); else userName"
+    (click)="openSignupDialog()"
+  >
+    <mat-icon
+      class="account-icon pointer"
+      aria-hidden="false"
+      aria-label="Account"
+    >
+      account_circle
     </mat-icon>
   </span>
-  
+
   <ng-template #userName>
-    <span class="profile-name pointer" [matMenuTriggerFor]="optionsMenu">
-      {{ initials }}
-    </span>
+    <img
+      *ngIf="user.picture !== 'null'; else showInitials"
+      [src]="user.picture"
+      class="profile-avatar"
+    />
+    <ng-template #showInitials>
+      <span class="profile-name pointer" [matMenuTriggerFor]="optionsMenu">
+        {{ initials }}
+      </span>
+    </ng-template>
   </ng-template>
-  
+
   <mat-menu #optionsMenu="matMenu">
     <span>
       <button mat-menu-item (click)="logout()">Logout</button>
