@@ -11,7 +11,6 @@ import {
   EventEmitterService
 } from 'src/app/shared/services';
 import { environment as env } from 'src/environments/environment';
-import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-auth',
@@ -101,19 +100,20 @@ export class AuthComponent implements OnInit {
     }
 
     this.socialAuthService.signIn(socialPlatformProvider).then((userData) => {
+      console.log(socialPlatform);
       this.apiService
         .getAuthToken(userData.authToken, socialPlatform)
         .subscribe((payload: any) => {
           this.cookie.set(
             'token',
-            `${payload.access_token}`,
+            `${payload.success.token}`,
             this.expiredDate,
             '/'
           );
-          localStorage.setItem('user', JSON.stringify(userData));
+
+          localStorage.setItem('user', JSON.stringify(payload.user));
           // this.fetchUser();
-          this.closeLoginModal.nativeElement.click();
-          this.closeSignupModal.nativeElement.click();
+          this.utils.closeDialogs();
         });
     });
   }

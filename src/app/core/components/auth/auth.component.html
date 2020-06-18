@@ -14,9 +14,10 @@
 
   <ng-template #userName>
     <img
-      *ngIf="user.picture !== 'null'; else showInitials"
+      *ngIf="user.picture; else showInitials"
       [src]="user.picture"
       class="profile-avatar"
+      [matMenuTriggerFor]="optionsMenu"
     />
     <ng-template #showInitials>
       <span class="profile-name pointer" [matMenuTriggerFor]="optionsMenu">
