@@ -27,6 +27,7 @@ export class BoardPopupComponent implements OnInit {
   isOptionSelected: boolean = false;
 
   board: Board = new Board();
+  boardPrivacy : boolean = false;
 
   loadedIndependantly = false;
   forceReturnRoute;
@@ -176,13 +177,15 @@ export class BoardPopupComponent implements OnInit {
 
   setBoard(board: Board) {
     this.board = board;
-    this.board.is_private = false;
     this.roomTypeOptions.forEach((o, i) => {
       if (o.code == this.board.type_room) this.roomTypeOptionSelected = i;
     });
     this.roomStyleOptions.forEach((o, i) => {
       if (o.code == this.board.type_style) this.roomStyleOptionSelected = i;
     });
+
+    this.isOptionSelected =
+      this.board.type_room !== null && this.board.type_style !== null;
 
     this.boardShareURL = [
       environment.SITE_URL,
@@ -201,10 +204,12 @@ export class BoardPopupComponent implements OnInit {
     this.pinterestURL = `http://pinterest.com/pin/create/button/?url=${this.boardShareURL}&media=${this.previewImageURL}&description=${this.board.title}`;
   }
   updatePrivacy() {
-    this.board.is_private = !this.board.is_private;
+    this.boardPrivacy = !this.boardPrivacy;
   }
   publishBoard() {
     this.popupShow.config = false;
+    this.board.type_privacy = this.boardPrivacy ? 0 : 2;
+    this.board.is_published = true;
     this.boardService.updateBoard(this.board).subscribe((response) => {
       this.popupShow.publish = true;
     });
