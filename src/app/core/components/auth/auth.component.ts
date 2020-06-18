@@ -100,7 +100,6 @@ export class AuthComponent implements OnInit {
     }
 
     this.socialAuthService.signIn(socialPlatformProvider).then((userData) => {
-      console.log(socialPlatform);
       this.apiService
         .getAuthToken(userData.authToken, socialPlatform)
         .subscribe((payload: any) => {
@@ -112,7 +111,7 @@ export class AuthComponent implements OnInit {
           );
 
           localStorage.setItem('user', JSON.stringify(payload.user));
-          // this.fetchUser();
+          this.user = payload.user;
           this.utils.closeDialogs();
         });
     });

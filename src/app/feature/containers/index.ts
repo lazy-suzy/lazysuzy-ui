@@ -12,3 +12,7 @@ export * from './all-products/all-products.module';
 export * from './all-products/all-products.component';
 export * from './cart/cart.component';
 export * from './cart/cart.module';
+export * from './forgot-password/forgot-password.component';
+export * from './forgot-password/forgot-password.module';
+export * from './reset-password/reset-password.component';
+export * from './reset-password/reset-password.module';

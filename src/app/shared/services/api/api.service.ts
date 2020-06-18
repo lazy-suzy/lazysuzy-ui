@@ -381,4 +381,19 @@ export class ApiService {
     const url = `${env.API_BASE_HREF}${endpoint}`;
     return this.httpService.post(url, data, headers);
   }
+  sendPasswordResetLink(data) {
+    const endpoint = `password/create`;
+    const url = `${env.API_BASE_HREF}${endpoint}`;
+    return this.httpService.post(url, data);
+  }
+  validateResetPasswordToken(token) {
+    const endpoint = `password/find/${token}`;
+    const url = `${env.API_BASE_HREF}${endpoint}`;
+    return this.httpService.get(url);
+  }
+  setNewPassword(data) {
+    const endpoint = `password/reset`;
+    const url = `${env.API_BASE_HREF}${endpoint}`;
+    return this.httpService.post(url, data);
+  }
 }

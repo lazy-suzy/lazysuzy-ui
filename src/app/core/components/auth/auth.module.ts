@@ -7,6 +7,7 @@ import { MatMenuModule } from '@angular/material/menu';
 import { MatIconModule } from '@angular/material/icon';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { FormsModule } from '@angular/forms';
+import { RouterModule } from '@angular/router';
 import {
   SocialLoginModule,
   AuthServiceConfig,
@@ -53,7 +54,8 @@ const COMPONENTS = [SignupComponent, SigninComponent];
     MatIconModule,
     FormsModule,
     MatDialogModule,
-    SocialLoginModule
+    SocialLoginModule,
+    RouterModule
   ],
   exports: [AuthComponent, CommonModule],
   entryComponents: [...COMPONENTS],
