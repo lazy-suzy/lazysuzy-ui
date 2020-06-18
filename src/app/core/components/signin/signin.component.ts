@@ -98,4 +98,8 @@ export class SigninComponent implements OnInit {
   openSignupDialog() {
     this.utils.openSignupDialog(this.isHandset);
   }
+
+  closeDialogs() {
+    this.utils.closeDialogs();
+  }
 }
