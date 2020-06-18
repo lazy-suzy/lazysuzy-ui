@@ -95,8 +95,7 @@ export class BoardPreviewComponent implements OnInit {
               this.boardFound = true;
               this.appMeta.board = response[0];
               if (
-                this.appMeta.board.is_private &&
-                this.appMeta.board.user_id !== user.id
+                this.appMeta.board.type_privacy == 0
               ) {
                 this.router.navigate([`/`]);
               }
