@@ -70,7 +70,7 @@ export class ResetPasswordComponent implements OnInit {
         .subscribe(
           (data: any) => {
             this.message = 'Password reset successfully. Go to Login';
-            this.isSuccess = data.status;
+            this.isSuccess = true;
           },
           (error) => {
             this.error = true;
