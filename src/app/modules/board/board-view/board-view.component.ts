@@ -205,7 +205,8 @@ export class BoardViewComponent implements OnInit, AfterViewInit {
 
   openPopup(param: string) {
     if (
-      this.appMeta.board.data[this.appMeta.board.currentIndex].type_privacy == 0
+      this.appMeta.board.data[this.appMeta.board.currentIndex].type_privacy == 0 &&
+      param == 'share'
     ) {
       this.appMeta.board.data[this.appMeta.board.currentIndex].type_privacy = 1;
       this.boardService
