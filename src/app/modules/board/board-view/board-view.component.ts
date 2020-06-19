@@ -1596,7 +1596,7 @@ export class BoardViewComponent implements OnInit, AfterViewInit {
     // tslint:disable-next-line: semicolon
   };
 
-  updateBoard = () => {
+  updateBoard = (callback?) => {
     if (
       this.canvasMeta.flag.cropEnabled ||
       this.appMeta.flag.isPreviewEnabled
@@ -1629,7 +1629,9 @@ export class BoardViewComponent implements OnInit, AfterViewInit {
         })
       )
       .subscribe((board) => {
-        if (callback) callback(board);
+        if (callback) {
+          callback(board);
+        }
         this.canvasMeta.flag.isDirty = false;
       });
     // tslint:disable-next-line: semicolon
