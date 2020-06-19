@@ -209,14 +209,7 @@ export class BoardViewComponent implements OnInit, AfterViewInit {
       param == 'share'
     ) {
       this.appMeta.board.data[this.appMeta.board.currentIndex].type_privacy = 1;
-      this.boardService
-        .updateBoard(
-          new Board({
-            uuid: this.appMeta.board.data[this.appMeta.board.currentIndex].uuid,
-            type_privacy: 1
-          })
-        )
-        .subscribe();
+      this.updateBoard();
     }
 
     const dialogRef = this.dialog.open(BoardPopupComponent, {
@@ -1559,7 +1552,7 @@ export class BoardViewComponent implements OnInit, AfterViewInit {
     this.appMeta.board.update.method();
   };
 
-  updateBoard = () => {
+  updateBoard = (callback?) => {
     if (this.canvasMeta.flag.cropEnabled || this.appMeta.flag.isPreviewEnabled)
       return;
 
@@ -1580,10 +1573,14 @@ export class BoardViewComponent implements OnInit, AfterViewInit {
           uuid: this.appMeta.board.data[this.appMeta.board.currentIndex].uuid,
           title: this.appMeta.board.data[this.appMeta.board.currentIndex].title,
           state: JSON.stringify(this.updateCanvasState()),
-          preview: previewObject
+          preview: previewObject,
+          type_privacy: this.appMeta.board.data[this.appMeta.board.currentIndex].type_privacy,
+          is_active: this.appMeta.board.data[this.appMeta.board.currentIndex].is_active
         })
       )
       .subscribe((board) => {
+        if (callback)
+          callback(board);
         this.canvasMeta.flag.isDirty = false;
       });
   };
@@ -2089,13 +2086,11 @@ export class BoardViewComponent implements OnInit, AfterViewInit {
         this.appMeta.board.data[
           this.appMeta.board.currentIndex
         ].is_active = false;
-        this.boardService
-          .updateBoard(this.appMeta.board.data[this.appMeta.board.currentIndex])
-          .subscribe((response) => {
-            this.router.navigate(['../../' + boardRoutesNames.BOARD_LIST], {
-              relativeTo: this.route
-            });
+        this.updateBoard(() => {
+          this.router.navigate(['../../' + boardRoutesNames.BOARD_LIST], {
+            relativeTo: this.route
           });
+        });
       }
   };
 
