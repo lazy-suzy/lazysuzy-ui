@@ -493,6 +493,7 @@ export class BoardViewComponent implements OnInit, AfterViewInit {
             refId: i
           };
         });
+        delete s.filterData.category;
         this.filterData = s.filterData || {};
         this.pageNo++;
         this.checkFilterEnabled(this.filterData);
