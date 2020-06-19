@@ -19,6 +19,7 @@ export class AdminDashboardService {
     page: number
   ): Observable<any> {
     const endpoint = `products/all`;
+    // tslint:disable-next-line: max-line-length
     const url = `${env.ADMIN_API_BASE_HREF}${endpoint}?limit=${total}&filters=${filters}&sort_type=${sortType}&pageno=${page}&board-view=true&admin=true`;
     return this.httpService.get(url);
   }
@@ -28,7 +29,7 @@ export class AdminDashboardService {
     return this.httpService.post(url, data);
   }
 
-  ngOnDestroy() {
+  onDestroy() {
     this.unsubscribe$.next(true);
     this.unsubscribe$.complete();
   }

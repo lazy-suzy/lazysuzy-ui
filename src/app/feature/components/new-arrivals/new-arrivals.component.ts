@@ -36,7 +36,7 @@ export class NewArrivalsComponent implements OnInit {
     'https://s3-us-west-2.amazonaws.com/s.cdpn.io/43033/slider_book_cover.jpg'
   ];
 
-  @Input() isHandset: boolean = false;
+  @Input() isHandset = false;
   constructor(
     private apiService: ApiService,
     private router: Router,
@@ -70,7 +70,7 @@ export class NewArrivalsComponent implements OnInit {
         this.getNewArrivals();
       });
   }
-  ngOnDestroy(): void {
+  onDestroy(): void {
     this.eventSubscription.unsubscribe();
   }
   getNewArrivals(): void {

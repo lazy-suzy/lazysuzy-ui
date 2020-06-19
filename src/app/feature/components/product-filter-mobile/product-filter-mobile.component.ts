@@ -5,13 +5,13 @@ import {
   IFilterData,
   IProductFilterOption,
   IProductFilter,
-  IProductsPayload,
+  IProductsPayload
 } from 'src/app/shared/models';
 
 @Component({
   selector: 'app-product-filter-mobile',
   templateUrl: './product-filter-mobile.component.html',
-  styleUrls: ['./product-filter-mobile.component.less'],
+  styleUrls: ['./product-filter-mobile.component.less']
 })
 export class ProductFilterMobileComponent implements OnInit {
   @Output() setMobileToggle = new EventEmitter<any>();
@@ -29,36 +29,36 @@ export class ProductFilterMobileComponent implements OnInit {
     category: [],
     shape: [],
     seating: [],
-    color: [],
+    color: []
   };
-  isPriceChanged: boolean = false;
-  minValue: number = 100;
-  maxValue: number = 600;
+  isPriceChanged = false;
+  minValue = 100;
+  maxValue = 600;
   silderOptions: Options = {
     floor: 10,
     ceil: 500,
-    translate: (value: number): string => {
+    translate: (value: number) => {
       return '$' + value;
-    },
+    }
   };
-  activeTab: string = 'brand';
+  activeTab = 'brand';
   activeFilterTabData: any;
   clearOptionVisible = {
     brand: false,
     color: false,
     type: false,
-    price: true,
+    price: true
   };
   constructor(private activeRoute: ActivatedRoute) {}
 
   ngOnInit() {
     this.selectTab(this.activeTab);
     this.activeRoute.queryParams.subscribe((params) => {
-      this.isClearAllVisible = params['filters'] !== '';
+      this.isClearAllVisible = params.filters !== '';
     });
   }
 
-  ngOnChanges(change: any) {
+  onChanges(change: any) {
     if (change.productFilters !== undefined) {
       this.productFilters = change.productFilters.currentValue;
       this.selectTab(this.activeTab);
@@ -68,9 +68,9 @@ export class ProductFilterMobileComponent implements OnInit {
         this.silderOptions = {
           floor: this.productFilters.price.min,
           ceil: this.productFilters.price.max,
-          translate: (value: number): string => {
+          translate: (value: number) => {
             return '$' + value;
-          },
+          }
         };
         this.activeFilters.price_from = this.minValue;
         this.activeFilters.price_to = this.maxValue;
@@ -103,7 +103,7 @@ export class ProductFilterMobileComponent implements OnInit {
   }
 
   onCheckChange(event, filter: string) {
-    const option: string = event.source.value;
+    const option = event.source.value;
     if (event.source.checked) {
       this.activeFilters[filter].push(option);
     } else {
@@ -125,9 +125,9 @@ export class ProductFilterMobileComponent implements OnInit {
     this.buildAndSetFilters();
   }
 
-  buildAndSetFilters(): string {
+  buildAndSetFilters() {
     let tempFilters = '';
-    for (let [filter, options] of Object.entries(this.activeFilters)) {
+    for (const [filter, options] of Object.entries(this.activeFilters)) {
       if (filter === 'price_from' || filter === 'price_to') {
         tempFilters += `${filter}:${options};`;
       } else {
@@ -150,13 +150,13 @@ export class ProductFilterMobileComponent implements OnInit {
       category: [],
       shape: [],
       seating: [],
-      color: [],
+      color: []
     };
     this.clearOptionVisible = {
       brand: false,
       color: false,
       type: false,
-      price: true,
+      price: true
     };
     delete this.activeFilters.price_from;
     delete this.activeFilters.price_to;

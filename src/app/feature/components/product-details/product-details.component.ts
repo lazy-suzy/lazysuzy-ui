@@ -35,17 +35,17 @@ export class ProductDetailsComponent implements OnInit {
   isVariationExist: boolean;
   galleryId = 'myLightbox';
   items: GalleryItem[];
-  isProductFetching: boolean = false;
-  showDetails: boolean = false;
-  spinner: string = 'assets/image/spinner.gif';
+  isProductFetching = false;
+  showDetails = false;
+  spinner = 'assets/image/spinner.gif';
   description: any;
   features: any;
   productPrice: any;
   productWasPrice: any;
   variations = [];
-  topHeight: Object = { 'max-height': '0' };
+  topHeight = { 'max-height': '0' };
   swatches = [];
-  errorMessage: string = '';
+  errorMessage = '';
   priceData = {
     price: '',
     wasPrice: ''
@@ -55,10 +55,10 @@ export class ProductDetailsComponent implements OnInit {
     price: '',
     wasPrice: ''
   };
-  quantity: number = 1;
+  quantity = 1;
   quantityArray = [];
   galleryRef = this.gallery.ref(this.galleryId);
-  isSetItemInInventory: boolean = false;
+  isSetItemInInventory = false;
   localStorageUser = {};
   constructor(
     @Inject(MAT_DIALOG_DATA) public data: any,
@@ -128,22 +128,18 @@ export class ProductDetailsComponent implements OnInit {
               this.checkSetInventory(this.product.set);
             }
             this.isProductFetching = false;
-            const _self = this;
-            setTimeout(function () {
-              _self.getMaxHeight();
+            const self = this;
+            setTimeout(() => {
+              self.getMaxHeight();
             }, 1000);
           });
         this.localStorageUser = user;
       });
   }
 
-  ngOnDestroy(): void {
+  onDestroy(): void {
     this.productSubscription.unsubscribe();
     this.eventSubscription.unsubscribe();
-  }
-
-  ngAfterViewChecked(): void {
-    // this.getMaxHeight();
   }
 
   openLightbox(index: number) {
@@ -153,7 +149,7 @@ export class ProductDetailsComponent implements OnInit {
   }
 
   checkSetInventory(product) {
-    for (let item of product) {
+    for (const item of product) {
       if (item.in_inventory) {
         this.isSetItemInInventory = true;
       }
@@ -180,7 +176,7 @@ export class ProductDetailsComponent implements OnInit {
   }
 
   wishlistProduct(sku, mark) {
-    let localData: any = this.localStorageUser;
+    const localData: any = this.localStorageUser;
     if (localData.email.length > 0) {
       this.apiService
         .wishlistProduct(sku, mark, false)

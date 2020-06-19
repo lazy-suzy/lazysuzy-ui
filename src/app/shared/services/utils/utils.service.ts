@@ -45,10 +45,10 @@ export class UtilsService {
       data: { sku: modalSku },
       panelClass: 'product-details-dialog-container'
     });
-    dialogRef.afterOpened().subscribe(result => {
+    dialogRef.afterOpened().subscribe((result) => {
       this.location.go(`product/${modalSku}`, '', this.location.getState());
     });
-    dialogRef.afterClosed().subscribe(result => {
+    dialogRef.afterClosed().subscribe((result) => {
       const params = { ...this.activeRoute.snapshot.queryParams };
       if (params.modal_sku) {
         delete params.modal_sku;
@@ -66,14 +66,14 @@ export class UtilsService {
       data: { sku: modalSku },
       panelClass: 'product-details-dialog-container'
     });
-    dialogRef.afterOpened().subscribe(result => {
+    dialogRef.afterOpened().subscribe((result) => {
       this.location.replaceState(
         `product/${modalSku}`,
         '',
         this.location.getState()
       );
     });
-    dialogRef.afterClosed().subscribe(result => {
+    dialogRef.afterClosed().subscribe((result) => {
       this.dialog.closeAll();
       const params = { ...this.activeRoute.snapshot.queryParams };
       if (params.modal_sku) {
@@ -92,16 +92,17 @@ export class UtilsService {
       data: { sku: modalSku },
       panelClass: 'product-details-dialog-container'
     });
-    dialogRef.afterOpened().subscribe(result => {
+    dialogRef.afterOpened().subscribe((result) => {
       this.location.go(`product/${modalSku}`);
     });
-    dialogRef.afterClosed().subscribe(result => {
+    dialogRef.afterClosed().subscribe((result) => {
       this.location.go(``);
     });
   }
 
-  openSignupDialog(isHandset: boolean = false, isClose = false) {
+  openSignupDialog(isHandset = false, isClose = false) {
     const width = isHandset ? '100%' : '35%';
+    // tslint:disable-next-line: no-unused-expression
     !isClose && this.dialog.closeAll();
     return this.dialog.open(SignupComponent, {
       width,
@@ -111,7 +112,7 @@ export class UtilsService {
     });
   }
 
-  openSigninDialog(width: string = '35%') {
+  openSigninDialog(width = '35%') {
     this.dialog.closeAll();
     return this.dialog.open(SigninComponent, {
       width,
@@ -120,15 +121,15 @@ export class UtilsService {
     });
   }
 
-  compileMarkdown(data, site:string = 'West Elm') {
+  compileMarkdown(data, site = 'West Elm') {
     let compileData;
     if (site !== 'West Elm') {
-      compileData = data.map(item => `*   ${item}`);
+      compileData = data.map((item) => `*   ${item}`);
     } else {
       compileData = data;
     }
     let mergedData = '';
-    for (let item of compileData) {
+    for (const item of compileData) {
       mergedData = `${mergedData}${
         item.indexOf('</h6>') > -1 ? '\n' : ''
       }${item}\n${item.indexOf('</h6>') > -1 ? '\n' : ''}`;

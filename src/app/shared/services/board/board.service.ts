@@ -6,93 +6,95 @@ import { addViaUrlResponse } from './mockboards';
 import { BehaviorSubject } from 'rxjs';
 
 @Injectable({
-    providedIn: 'root'
+  providedIn: 'root'
 })
 export class BoardService {
+  settings: any;
 
-    settings: any;
+  state: any = {
+    allBoards: [],
+    currentBoard: {},
+    currentBoardProducts: [],
+    myUploads: [],
+    allUploads: [],
+    selectedCategory: null,
+    filterData: {}
+  };
 
-    state: any = {
-        allBoards: [],
-        currentBoard: {},
-        currentBoardProducts: [],
-        myUploads: [],
-        allUploads: [],
-        selectedCategory: null,
-        filterData: {}
+  private boardState: BehaviorSubject<any> = new BehaviorSubject(this.state);
+  unsubscribe$: Subject<boolean> = new Subject();
+
+  constructor(public apiService: ApiService) {}
+
+  resetBoard() {
+    this.state.allUploads = [];
+    this.state.allBoards = [];
+    this.state.selectedCategory = null;
+    this.state.myUploads = [];
+    this.state.currentBoard = [];
+    this.state.currentBoardProducts = [];
+    this.state = {
+      ...this.state
     };
+  }
 
-    private boardState: BehaviorSubject<any> = new BehaviorSubject(this.state);
-    unsubscribe$: Subject<boolean> = new Subject();
+  getBoardStateObs(): Observable<any> {
+    return this.boardState.asObservable();
+  }
 
-    constructor(public apiService: ApiService) { }
+  setBoardStateObs(profile: any) {
+    this.boardState.next(profile);
+  }
 
-    resetBoard() {
-        this.state.allUploads = [];
-        this.state.allBoards = [];
-        this.state.selectedCategory = null;
-        this.state.myUploads = [];
-        this.state.currentBoard = [];
-        this.state.currentBoardProducts = [];
-        this.state = {
-            ...this.state
-        };
-    }
+  extractBoardItems(board) {
+    const state = JSON.parse(board.state);
+    const objects = state.objects.map((ele) => {
+      return ele.referenceObject || {};
+    });
+    return objects;
+  }
 
-    getBoardStateObs(): Observable<any> {
-        return this.boardState.asObservable();
-    }
+  getBrowseTabData(category, appliedFilters, pageNo): Observable<any> {
+    return this.apiService.getBrowseTabData(
+      category.LS_ID,
+      appliedFilters,
+      pageNo
+    );
+  }
 
-    setBoardStateObs(profile: any) {
-        this.boardState.next(profile);
-    }
+  getAllDepartments() {
+    return this.apiService.getAllDepartmentsBoard();
+  }
 
-    extractBoardItems(board) {
-        let state = JSON.parse(board.state);
-        let objects = state.objects.map(ele => {
-            return ele.referenceObject || {};
-        });
-        return objects;
-    }
+  setBoardData(products, category, filterData) {
+    this.state.filterData = { ...filterData };
+    this.state.selectedCategory = { ...category };
+    this.state.myUploads = [...products];
+    this.state.allUploads = [...products];
+    this.state.currentBoardProducts = [...products];
+  }
 
-    getBrowseTabData(category, appliedFilters, pageNo): Observable<any> {
-        return this.apiService.getBrowseTabData(category.LS_ID, appliedFilters, pageNo);
-    }
+  saveAddViaUrl(payload) {
+    // TO ASK MIKE
+    return of(addViaUrlResponse).pipe(delay(5000));
+  }
 
-    getAllDepartments() {
-        return this.apiService.getAllDepartmentsBoard();
-    }
+  uploadFileManual(payload) {
+    // return this.apiService.getAllBoards(payload);
+    // TO ASK MIKE
+    return of(addViaUrlResponse).pipe(delay(5000));
+  }
 
-    setBoardData(products, category, filterData) {
-        this.state.filterData = { ...filterData };
-        this.state.selectedCategory = { ...category };
-        this.state.myUploads = [...products];
-        this.state.allUploads = [...products];
-        this.state.currentBoardProducts = [...products];
-    }
+  setCategory(category) {
+    this.state.selectedCategory = { ...category };
+  }
 
-    saveAddViaUrl(payload) {
-        //TO ASK MIKE
-        return of(addViaUrlResponse).pipe(delay(5000));
-    }
+  getCategory() {
+    return this.state.selectedCategory;
+  }
 
-    uploadFileManual(payload) {
-        // return this.apiService.getAllBoards(payload);
-        //TO ASK MIKE
-        return of(addViaUrlResponse).pipe(delay(5000));
-    }
-
-    setCategory(category) {
-        this.state.selectedCategory = { ...category };
-    }
-
-    getCategory() {
-        return this.state.selectedCategory;
-    }
-
-    ngOnDestroy() {
-        this.unsubscribe$.next(true);
-        this.unsubscribe$.complete();
-    }
-
+  onDestroy() {
+    this.unsubscribe$.next(true);
+    this.unsubscribe$.complete();
+  }
 }

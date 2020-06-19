@@ -68,7 +68,7 @@ const routes: Routes = [
     pathMatch: 'full'
   },
   {
-    path: 'reset-password/:token',
+    path: 'reset-password',
     component: ResetPasswordComponent,
     pathMatch: 'full'
   },

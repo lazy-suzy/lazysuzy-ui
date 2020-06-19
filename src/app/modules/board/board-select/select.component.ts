@@ -12,7 +12,7 @@ export class SelectComponent implements OnInit {
   @Input() showMenu: boolean;
   allDepartments = [];
   filteredDepartments = [];
-  showLoader: boolean = false;
+  showLoader = false;
   filter: FormControl;
   filter$: Observable<string>;
   @Output() goToCategory: EventEmitter<any> = new EventEmitter();

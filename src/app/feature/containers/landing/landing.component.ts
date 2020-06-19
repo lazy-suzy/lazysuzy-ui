@@ -28,7 +28,7 @@ export class LandingComponent implements OnInit {
   );
 
   bpSubscription: Subscription;
-  isHandset: boolean = false;
+  isHandset = false;
   eventSubscription: Subscription;
   constructor(
     private apiService: ApiService,
@@ -51,7 +51,7 @@ export class LandingComponent implements OnInit {
         );
       });
   }
-  ngOnDestroy(): void {
+  onDestroy(): void {
     this.eventSubscription.unsubscribe();
   }
   onSubmit(value: any) {

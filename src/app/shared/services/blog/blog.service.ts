@@ -5,15 +5,11 @@ import { ApiService } from '../api/api.service';
   providedIn: 'root'
 })
 export class BlogService {
-
   blogs = [];
 
-  constructor() { }
-
-  ngOnInit() { }
+  constructor() {}
 
   setBlogItems(blogs) {
     this.blogs = [...blogs];
   }
-
 }

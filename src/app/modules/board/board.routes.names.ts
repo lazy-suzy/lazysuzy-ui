@@ -3,5 +3,5 @@ export const boardRoutesNames = {
   BOARD_LIST: 'dashboard',
   BOARD_PREVIEW: 'preview',
   BOARD_EMBED: 'embed',
-  BOARD_TEST: 'test',
-}
+  BOARD_TEST: 'test'
+};

@@ -33,7 +33,7 @@ export class AllProductsComponent implements OnInit {
   productFilters: IFilterData;
   trend: string;
   category: string;
-  total_count = 0;
+  totalCount = 0;
   filters = '';
   sortType = '';
   sortTypeList: ISortType[];
@@ -52,9 +52,9 @@ export class AllProductsComponent implements OnInit {
   );
 
   bpSubscription: Subscription;
-  isHandset: boolean = false;
-  total: number = 24;
-  scrollToProductSKU: string = '';
+  isHandset = false;
+  total = 24;
+  scrollToProductSKU = '';
   eventSubscription: Subscription;
   constructor(
     private apiService: ApiService,
@@ -79,7 +79,7 @@ export class AllProductsComponent implements OnInit {
       });
   }
 
-  ngOnDestroy(): void {
+  onDestroy(): void {
     this.productsSubscription.unsubscribe();
     this.routeSubscription.unsubscribe();
     this.bpSubscription.unsubscribe();
@@ -90,6 +90,7 @@ export class AllProductsComponent implements OnInit {
     this.routeSubscription = this.activeRoute.queryParams.subscribe(
       (params) => {
         this.filters = params.filters || '';
+        // tslint:disable-next-line: radix
         this.pageNo = parseInt(params.pageNo) || 0;
         this.sortType = params.sortType || '';
         Object.keys(params).map((key) => {
@@ -114,12 +115,13 @@ export class AllProductsComponent implements OnInit {
         )
         .subscribe((response) => {
           let allProducts = [];
+          // tslint:disable-next-line: prefer-for-of
           for (let i = 0; i < response.length; i++) {
             allProducts = [...allProducts, ...response[i].products];
           }
           this.products = allProducts;
           this.updateQueryString();
-          this.total_count = response[0].total;
+          this.totalCount = response[0].total;
           this.productFilters = response[0].filterData;
           this.sortTypeList = response[0].sortType;
           this.isProductFetching = false;
@@ -128,7 +130,7 @@ export class AllProductsComponent implements OnInit {
             this.cacheService.data.useCache = false;
             setTimeout(() => {
               // this.productElement.nativeElement.getElementById
-              let el = document.getElementById(this.scrollToProductSKU);
+              const el = document.getElementById(this.scrollToProductSKU);
               window.scrollTo(0, el.offsetTop - 200);
             }, 500);
           }
@@ -137,7 +139,7 @@ export class AllProductsComponent implements OnInit {
       this.loadProducts();
     }
 
-    //Code for cached product sku
+    // Code for cached product sku
   }
 
   loadProducts(): void {
@@ -149,7 +151,7 @@ export class AllProductsComponent implements OnInit {
         this.products = payload.products;
         this.productFilters = payload.filterData;
         this.sortTypeList = payload.sortType;
-        this.total_count = payload.total;
+        this.totalCount = payload.total;
         this.updateQueryString();
         this.isProductFetching = false;
       });
@@ -218,10 +220,10 @@ export class AllProductsComponent implements OnInit {
       0;
     this.isIconShow = scrollPosition >= this.topPosToStartShowing;
     this.showBar = scrollPosition >= this.fixFilterBar;
-    const _self = this;
+    const self = this;
     if (this.isIconShow) {
-      setTimeout(function () {
-        _self.isIconShow = false;
+      setTimeout(() => {
+        self.isIconShow = false;
       }, SCROLL_ICON_SHOW_DURATION);
     }
   }

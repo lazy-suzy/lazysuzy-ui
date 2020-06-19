@@ -27,7 +27,7 @@ export function getAuthServiceConfigs() {
     return_scopes: true,
     enable_profile_selector: true
   };
-  let config = new AuthServiceConfig([
+  const config = new AuthServiceConfig([
     {
       id: GoogleLoginProvider.PROVIDER_ID,
       provider: new GoogleLoginProvider(

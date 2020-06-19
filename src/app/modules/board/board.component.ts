@@ -7,11 +7,9 @@ import { boardRoutesNames } from './board.routes.names';
   styleUrls: ['./board.component.less']
 })
 export class BoardComponent implements OnInit {
+  boardListLink = './' + boardRoutesNames.BOARD_LIST;
 
-  boardListLink = "./" + boardRoutesNames.BOARD_LIST;
+  constructor() {}
 
-  constructor() { }
-
-  ngOnInit(): void {  }
-
+  ngOnInit(): void {}
 }

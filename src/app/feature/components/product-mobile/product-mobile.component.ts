@@ -13,7 +13,7 @@ export class ProductMobileComponent implements OnInit {
   @Input() product: IProductPayload;
   @Input() productsInRow: number;
 
-  isVariationImageVisible: boolean = false;
+  isVariationImageVisiblefalse;
 
   constructor(private apiService: ApiService) {}
 

@@ -28,11 +28,11 @@ export class ProductDetailsMobileComponent implements OnInit {
   routeSubscription: any;
   product: IProductDetail;
   productSubscription: Subscription;
-  activeTab: string = 'desc';
-  dimensionExist: boolean = false;
-  featuresExist: boolean = false;
-  descriptionExist: boolean = false;
-  spinner: string = 'assets/image/spinner.gif';
+  activeTab = 'desc';
+  dimensionExist = false;
+  featuresExist = false;
+  descriptionExist = false;
+  spinner = 'assets/image/spinner.gif';
   bpObserver: Observable<BreakpointState> = this.breakpointObserver.observe(
     Breakpoints.Handset
   );
@@ -43,7 +43,7 @@ export class ProductDetailsMobileComponent implements OnInit {
   isVariationExist: boolean;
   selectedIndex: any;
   isSwatchExist: boolean;
-  isProductFetching: boolean = false;
+  isProductFetching = false;
   description: any;
   features: any;
   productPrice: any;
@@ -54,11 +54,11 @@ export class ProductDetailsMobileComponent implements OnInit {
     price: '',
     wasPrice: ''
   };
-  errorMessage: string = '';
-  quantity: number = 1;
+  errorMessage = '';
+  quantity = 1;
   quantityArray = [];
   galleryRef = this.gallery.ref(this.galleryId);
-  isSetItemInInventory: boolean = false;
+  isSetItemInInventory = false;
   eventSubscription: Subscription;
   constructor(
     private router: Router,
@@ -151,7 +151,7 @@ export class ProductDetailsMobileComponent implements OnInit {
         this.isProductFetching = false;
       });
   }
-  ngOnDestroy(): void {
+  onDestroy(): void {
     this.productSubscription.unsubscribe();
     this.bpSubscription.unsubscribe();
     this.eventSubscription.unsubscribe();
@@ -248,7 +248,7 @@ export class ProductDetailsMobileComponent implements OnInit {
     );
   }
   checkSetInventory(product) {
-    for (let item of product) {
+    for (const item of product) {
       if (item.in_inventory) {
         this.isSetItemInInventory = true;
       }

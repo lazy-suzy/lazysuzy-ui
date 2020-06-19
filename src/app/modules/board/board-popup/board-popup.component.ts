@@ -24,10 +24,10 @@ export class BoardPopupComponent implements OnInit {
     share: false
   };
 
-  isOptionSelected: boolean = false;
+  isOptionSelected = false;
 
   board: Board = new Board();
-  boardPrivacy : boolean = false;
+  boardPrivacy = false;
 
   loadedIndependantly = false;
   forceReturnRoute;
@@ -46,11 +46,15 @@ export class BoardPopupComponent implements OnInit {
   ) {
     if (data) {
       if (data.type) {
-        if (data.type == 'publish') {
+        if (data.type === 'publish') {
           this.popupShow.config = true;
-        } else if (data.type == 'share') this.popupShow.share = true;
+        } else if (data.type === 'share') {
+          this.popupShow.share = true;
+        }
       }
-      if (data.forceReturnRoute) this.forceReturnRoute = data.forceReturnRoute;
+      if (data.forceReturnRoute) {
+        this.forceReturnRoute = data.forceReturnRoute;
+      }
     }
   }
 
@@ -68,11 +72,14 @@ export class BoardPopupComponent implements OnInit {
             this.setBoard(response[0]);
           }
         });
-      } else return;
+      } else {
+        return;
+      }
     });
 
-    if (this.dialogRef)
+    if (this.dialogRef) {
       this.dialogRef
+        // tslint:disable-next-line: deprecation
         .beforeClose()
         .subscribe(() =>
           this.forceReturnRoute
@@ -81,10 +88,11 @@ export class BoardPopupComponent implements OnInit {
               ])
             : ''
         );
+    }
   }
 
   getRoomTypeAndStyleOptions(callback): void {
-    let roomTypeAndStyleOptions = [
+    const roomTypeAndStyleOptions = [
       {
         code: 111,
         label: 'Room',
@@ -153,13 +161,15 @@ export class BoardPopupComponent implements OnInit {
     ];
 
     this.roomTypeOptions = roomTypeAndStyleOptions.filter(
-      (o) => o.label == 'Room'
+      (o) => o.label === 'Room'
     );
     this.roomStyleOptions = roomTypeAndStyleOptions.filter(
-      (o) => o.label == 'Style'
+      (o) => o.label === 'Style'
     );
 
-    if (callback) callback();
+    if (callback) {
+      callback();
+    }
   }
 
   selectRoomType(index: number) {
@@ -178,10 +188,14 @@ export class BoardPopupComponent implements OnInit {
   setBoard(board: Board) {
     this.board = board;
     this.roomTypeOptions.forEach((o, i) => {
-      if (o.code == this.board.type_room) this.roomTypeOptionSelected = i;
+      if (o.code === this.board.type_room) {
+        this.roomTypeOptionSelected = i;
+      }
     });
     this.roomStyleOptions.forEach((o, i) => {
-      if (o.code == this.board.type_style) this.roomStyleOptionSelected = i;
+      if (o.code === this.board.type_style) {
+        this.roomStyleOptionSelected = i;
+      }
     });
 
     this.isOptionSelected =
@@ -201,6 +215,7 @@ export class BoardPopupComponent implements OnInit {
     ].join('/');
     this.previewImageURL = environment.BASE_HREF + board.preview;
     this.boardEmbedCode = `<iframe src="${this.boardEmbedURL}" scrolling="no" frameborder="no" align="center"></iframe>`;
+    // tslint:disable-next-line: max-line-length
     this.pinterestURL = `http://pinterest.com/pin/create/button/?url=${this.boardShareURL}&media=${this.previewImageURL}&description=${this.board.title}`;
   }
   updatePrivacy() {
@@ -216,14 +231,16 @@ export class BoardPopupComponent implements OnInit {
   }
 
   handleExit(action, value) {
-    if (this.dialogRef) this.dialogRef.close();
+    if (this.dialogRef) {
+      this.dialogRef.close();
+    }
 
-    if (action == 'navigate') {
-      if (value == 'list')
+    if (action === 'navigate') {
+      if (value === 'list') {
         this.router.navigate([
           [environment.BOARD_BASE_HREF, boardRoutesNames.BOARD_LIST].join('/')
         ]);
-      else if (value == 'shop')
+      } else if (value === 'shop') {
         this.router.navigate([
           [
             environment.BOARD_BASE_HREF,
@@ -231,11 +248,14 @@ export class BoardPopupComponent implements OnInit {
             this.board.uuid
           ].join('/')
         ]);
+      }
     }
   }
 
   closePopup() {
-    if (this.dialogRef) this.dialogRef.close();
+    if (this.dialogRef) {
+      this.dialogRef.close();
+    }
   }
 
   showShare() {

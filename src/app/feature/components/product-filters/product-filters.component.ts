@@ -6,9 +6,9 @@ import { IFilterData } from 'src/app/shared/models';
 @Component({
   selector: 'app-product-filters',
   templateUrl: './product-filters.component.html',
-  styleUrls: ['./product-filters.component.less'],
+  styleUrls: ['./product-filters.component.less']
 })
-export class ProductFiltersComponent {
+export class ProductFiltersComponent implements OnInit {
   @Output() setFilters = new EventEmitter<any>();
   @Input() productFilters: IFilterData = {
     brand: [],
@@ -17,7 +17,7 @@ export class ProductFiltersComponent {
     category: [],
     shape: [],
     seating: [],
-    price: { from: 0, min: 0, max: 0, to: 0 },
+    price: { from: 0, min: 0, max: 0, to: 0 }
   };
   objectKeys = Object.keys;
   isClearAllVisible = false;
@@ -29,28 +29,28 @@ export class ProductFiltersComponent {
     color: [],
     category: [],
     shape: [],
-    seating: [],
+    seating: []
   };
-  isPriceChanged: boolean = false;
-  minValue: number = 100;
-  maxValue: number = 600;
+  isPriceChanged = false;
+  minValue = 100;
+  maxValue = 600;
   silderOptions: Options = {
     floor: 10,
     ceil: 500,
-    translate: (value: number): string => {
+    translate: (value: number) => {
       return '$' + value;
-    },
+    }
   };
 
   constructor(private activeRoute: ActivatedRoute) {}
 
   ngOnInit() {
     this.activeRoute.queryParams.subscribe((params) => {
-      this.isClearAllVisible = params['filters'] !== '';
+      this.isClearAllVisible = params.filters !== '';
     });
   }
 
-  ngOnChanges(change: any) {
+  onChanges(change: any) {
     if (change.productFilters.currentValue !== undefined) {
       this.productFilters = change.productFilters.currentValue;
       if (this.productFilters && !this.isPriceChanged) {
@@ -59,9 +59,9 @@ export class ProductFiltersComponent {
         this.silderOptions = {
           floor: this.productFilters.price.min,
           ceil: this.productFilters.price.max,
-          translate: (value: number): string => {
+          translate: (value: number) => {
             return '$' + value;
-          },
+          }
         };
         this.activeFilters.price_from = this.minValue;
         this.activeFilters.price_to = this.maxValue;
@@ -94,7 +94,7 @@ export class ProductFiltersComponent {
   }
 
   onCheckChange(event, filter: string) {
-    const option: string = event.source.value;
+    const option = event.source.value;
     if (event.source.checked) {
       this.activeFilters[filter].push(option);
     } else {
@@ -125,7 +125,7 @@ export class ProductFiltersComponent {
       color: [],
       shape: [],
       seating: [],
-      category: [],
+      category: []
     };
     delete this.activeFilters.price_from;
     delete this.activeFilters.price_to;
@@ -133,9 +133,9 @@ export class ProductFiltersComponent {
     this.buildAndSetFilters();
   }
 
-  buildAndSetFilters(): string {
+  buildAndSetFilters() {
     let tempFilters = '';
-    for (let [filter, options] of Object.entries(this.activeFilters)) {
+    for (const [filter, options] of Object.entries(this.activeFilters)) {
       if (filter === 'price_from' || filter === 'price_to') {
         tempFilters += `${filter}:${options};`;
       } else {

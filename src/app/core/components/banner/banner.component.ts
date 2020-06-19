@@ -8,21 +8,19 @@ import { Router, ActivatedRoute } from '@angular/router';
   styleUrls: ['./banner.component.less']
 })
 export class BannerComponent implements OnInit {
-
   bannerData: any;
-  isBanner: boolean = true;
-  @Input() isHandset: boolean = false;
+  isBanner = true;
+  @Input() isHandset = false;
 
   constructor(
     private apiService: ApiService,
     private router: Router,
     private activeRoute: ActivatedRoute
-  ) { }
+  ) {}
 
   ngOnInit() {
     this.apiService.bannerData().subscribe((res) => {
       this.bannerData = res;
-    })
+    });
   }
-
 }

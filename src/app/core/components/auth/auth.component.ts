@@ -29,7 +29,7 @@ export class AuthComponent implements OnInit {
   initials: any;
   googleRedirect = env.GOOGLE_LINK;
   facebookRedirect = env.FACEBOOK_LINK;
-  name: string = '';
+  name = '';
   expiredDate = new Date();
   initialized = false;
   private attribute = {
@@ -52,7 +52,7 @@ export class AuthComponent implements OnInit {
 
   ngOnInit() {
     // localStorage.setItem('cart', '0');
-    if (this.initialized == false) {
+    if (this.initialized === false) {
       this.eventEmitterService.invokeFetchUser.subscribe((payload) => {
         this.cookie.set(
           this.attribute.cookieUserRegularToken,
@@ -79,7 +79,7 @@ export class AuthComponent implements OnInit {
     this.resolveUser();
   }
   private updateUser(user) {
-    this.user = typeof user == 'string' ? JSON.parse(user) : user;
+    this.user = typeof user === 'string' ? JSON.parse(user) : user;
     if (this.user.name) {
       const initials = this.user.name.match(/\b\w/g) || [];
       this.initials = (
@@ -91,9 +91,9 @@ export class AuthComponent implements OnInit {
 
   public socialSignIn(socialPlatform: string) {
     let socialPlatformProvider;
-    if (socialPlatform == 'facebook') {
+    if (socialPlatform === 'facebook') {
       socialPlatformProvider = FacebookLoginProvider.PROVIDER_ID;
-    } else if (socialPlatform == 'google') {
+    } else if (socialPlatform === 'google') {
       socialPlatformProvider = GoogleLoginProvider.PROVIDER_ID;
     } else {
       return;
@@ -181,12 +181,16 @@ export class AuthComponent implements OnInit {
 
       this.apiService.keepAlive().subscribe((payload: any) => {
         // guest profile is valid
-        if (payload.alive)
+        if (payload.alive) {
           this.updateUser(localStorage.getItem(this.attribute.lsGuestUser));
-        // guest profile is not valid
-        else this.createGuestUser();
+        } else {
+          // guest profile is not valid
+          this.createGuestUser();
+        }
       });
-    } else this.createGuestUser();
+    } else {
+      this.createGuestUser();
+    }
   }
 
   resolveUser() {
@@ -198,11 +202,15 @@ export class AuthComponent implements OnInit {
       // check if the user session is valid
       this.apiService.keepAlive().subscribe((payload: any) => {
         // check if regular user profile is valid
-        if (payload.alive)
+        if (payload.alive) {
           this.updateUser(localStorage.getItem(this.attribute.lsRegularUser));
-        // check if guest profile is valid
-        else this.checkIfGuestIsValid();
+        } else {
+          // check if guest profile is valid
+          this.checkIfGuestIsValid();
+        }
       });
-    } else this.checkIfGuestIsValid();
+    } else {
+      this.checkIfGuestIsValid();
+    }
   }
 }

@@ -29,7 +29,7 @@
         (setMobileToggle)="onSetMobileToggle($event)"
         [productFilters]="productFilters"
         [isProductFetching]="isProductFetching"
-        [totalCount]="total_count"
+        [totalCount]="totalCount"
         (setFilters)="onSetFilters($event)"
       >
       </app-product-filter-mobile>
@@ -51,7 +51,7 @@
         (setFilters)="onSetFilters($event)"
         class="flex justify-start w-75"
       ></app-product-filters>
-      <div>{{ total_count }} Results</div>
+      <div>{{ totalCount }} Results</div>
       <app-sort-type
         [sortTypeList]="sortTypeList"
         (setSortType)="onSetSortType($event)"
@@ -84,7 +84,7 @@
       <app-product
         *ngFor="let product of products"
         [product]="product"
-        class="w-25-ns "
+        class="w-25-ns"
       ></app-product>
     </ng-container>
   </div>

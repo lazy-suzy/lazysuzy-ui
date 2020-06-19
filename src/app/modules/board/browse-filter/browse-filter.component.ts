@@ -8,7 +8,7 @@ import { Options } from 'ng5-slider';
   styleUrls: ['./browse-filter.component.less', '../board.component.less']
 })
 export class BrowsefilterComponent implements OnInit {
-  showLoader: boolean = false;
+  showLoader = false;
   filterForm: any;
 
   @Output() updatesFromFilter: EventEmitter<any> = new EventEmitter();
@@ -25,21 +25,21 @@ export class BrowsefilterComponent implements OnInit {
     shape: [],
     seating: []
   };
-  selectedFilter: string = '';
-  isPriceChanged: boolean = false;
-  minValue: number = 100;
-  maxValue: number = 600;
+  selectedFilter = '';
+  isPriceChanged = false;
+  minValue = 100;
+  maxValue = 600;
   silderOptions: Options = {
     floor: 10,
     ceil: 500,
-    translate: (value: number): string => {
+    translate: (value: number) => {
       return '$' + value;
     }
   };
 
   constructor(private fb: FormBuilder) {}
 
-  ngOnChanges(change: any) {
+  onChanges(change: any) {
     // if (
     //   changes['filterData'] &&
     //   changes['filterData'].previousValue !== changes['filterData'].currentValue
@@ -64,7 +64,7 @@ export class BrowsefilterComponent implements OnInit {
         this.silderOptions = {
           floor: this.filterData.price.min,
           ceil: this.filterData.price.max,
-          translate: (value: number): string => {
+          translate: (value: number) => {
             return '$' + value;
           }
         };
@@ -88,7 +88,7 @@ export class BrowsefilterComponent implements OnInit {
   }
 
   onCheckChange(event, filter: string) {
-    const option: string = event.source.value;
+    const option = event.source.value;
     if (event.source.checked) {
       this.activeFilters[filter].push(option);
     } else {
@@ -107,9 +107,9 @@ export class BrowsefilterComponent implements OnInit {
     } else {
       this.isPriceChanged = true;
     }
-    let _self = this;
-    setTimeout(function () {
-      _self.selectedFilter = '';
+    const self = this;
+    setTimeout(() => {
+      self.selectedFilter = '';
     }, 3000);
     this.buildAndSetFilters();
   }
@@ -131,9 +131,9 @@ export class BrowsefilterComponent implements OnInit {
     this.buildAndSetFilters();
   }
 
-  buildAndSetFilters(): string {
+  buildAndSetFilters() {
     let tempFilters = '';
-    for (let [filter, options] of Object.entries(this.activeFilters)) {
+    for (const [filter, options] of Object.entries(this.activeFilters)) {
       if (filter === 'price_from' || filter === 'price_to') {
         tempFilters += `${filter}:${options};`;
       } else {
@@ -168,21 +168,21 @@ export class BrowsefilterComponent implements OnInit {
   }
 
   convertFilterDataForPlugin(brand, color) {
-    let brands = (brand || []).map((ele) => {
+    const brands = (brand || []).map((ele) => {
       return {
         ...ele,
         label: ele.name
       };
     });
-    let colors = (color || []).map((ele) => {
+    const colors = (color || []).map((ele) => {
       return {
         ...ele,
         label: ele.name
       };
     });
     return {
-      brands: brands,
-      colors: colors
+      brands,
+      colors
     };
   }
 

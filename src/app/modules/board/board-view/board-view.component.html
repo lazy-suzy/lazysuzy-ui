@@ -3,7 +3,7 @@
 <div class="lazysuzy-board">
   <div>
     <div
-      class="left-panel"
+      class="left-panel {{ hasPanelFixed ? 'panel-height' : '' }}"
       [ngClass]="{
         'b-100': isTablet && showMenu,
         'b-650': isTablet && !showMenu
@@ -46,9 +46,7 @@
       <div
         class="left-tab-pane {{ !isTablet ? 'position-relative w-100' : '' }} {{
           showMenu && isTablet ? 'mt-0' : 'margin-top-60'
-        }} {{ selectedItem === 'browse' ? 'overflow-hidden' : '' }} {{
-          hasPanelFixed ? 'panel-top-position' : ''
-        }}"
+        }} {{ selectedItem === 'browse' ? 'overflow-hidden' : '' }}"
       >
         <!-- Selected Tab: {{selectedItem}} -->
         <div *ngIf="selectedItem === 'select'">

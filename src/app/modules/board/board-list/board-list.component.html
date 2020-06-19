@@ -39,7 +39,7 @@
     </div>
     <div
       *ngFor="let board of boards; index as i"
-      class="col-sm-4 mb-sm-4 {{ board.type_room === null ? '' : 'dn' }}"
+      class="col-sm-4 mb-sm-4 {{ board.type_privacy === 0 ? '' : 'dn' }}"
     >
       <div class="board-card">
         <div class="canvas-preview">
@@ -90,7 +90,7 @@
   <div class="row">
     <div
       *ngFor="let board of boards; index as i"
-      class="col-sm-4 mb-sm-4 {{ board.type_room !== null ? '' : 'dn' }}"
+      class="col-sm-4 mb-sm-4 {{ board.type_privacy === 1 ? '' : 'dn' }}"
     >
       <div class="board-card">
         <div class="canvas-preview">

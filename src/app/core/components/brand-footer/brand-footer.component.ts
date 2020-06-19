@@ -39,14 +39,14 @@ export class BrandFooterComponent implements OnInit {
         this.getbrands();
       });
   }
-  ngOnDestroy(): void {
+  onnDestroy(): void {
     this.eventSubscription.unsubscribe();
   }
   getbrands() {
     this.apiService.getBrands().subscribe((res) => {
       this.brands = res;
-      this.brands = this.brands.filter(function (val) {
-        if (val['value'] != 'potterybarn') {
+      this.brands = this.brands.filter((val) => {
+        if (val.value !== 'potterybarn') {
           return val;
         }
       });

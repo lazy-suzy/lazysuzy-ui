@@ -7,8 +7,8 @@ import { InfiniteScrollModule } from 'ngx-infinite-scroll';
 import {
   ProductFiltersModule,
   ProductModule,
-  SortTypeModule,
-} from "./../../components";
+  SortTypeModule
+} from './../../components';
 
 import { AllProductsComponent } from './all-products.component';
 import { ProductMobileModule } from '../../components/product-mobile/product-mobile.module';
@@ -35,4 +35,4 @@ const MODULES = [
   imports: [...MODULES],
   exports: [...DECLARATIONS, ...MODULES]
 })
-export class AllProductsModule { }
+export class AllProductsModule {}

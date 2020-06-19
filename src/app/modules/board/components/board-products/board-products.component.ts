@@ -19,20 +19,20 @@ export class BoardProductsComponent implements OnInit {
 
   ngOnInit() {}
 
-  ngOnChanges(changes: any) {
+  onChanges(changes: any) {
     if (
-      changes['products'] &&
-      changes['products'].previousValue !== changes['products'].currentValue
+      changes.products &&
+      changes.products.previousValue !== changes.products.currentValue
     ) {
-      let products = changes['products'].currentValue || [];
+      const products = changes.products.currentValue || [];
       this.products = [...products] || [];
     }
 
     if (
-      changes['isAsset'] &&
-      changes['isAsset'].previousValue !== changes['isAsset'].currentValue
+      changes.isAsset &&
+      changes.isAsset.previousValue !== changes.isAsset.currentValue
     ) {
-      let isAsset = changes['isAsset'].currentValue || [];
+      const isAsset = changes.isAsset.currentValue || [];
       this.isAsset = isAsset;
       if (this.isAsset) {
         this.productType = 'custom';

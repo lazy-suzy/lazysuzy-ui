@@ -14,24 +14,23 @@ export class CurrentBoardComponent implements OnInit {
 
   ngOnInit() {}
 
-  ngOnChanges(changes: any) {
+  onChanges(changes: any) {
     if (
-      changes['boardProducts'] &&
-      changes['boardProducts'].previousValue !==
-        changes['boardProducts'].currentValue
+      changes.boardProducts &&
+      changes.boardProducts.previousValue !== changes.boardProducts.currentValue
     ) {
-      let boardProducts = changes['boardProducts'].currentValue || [];
+      const boardProducts = changes.boardProducts.currentValue || [];
       this.boardProducts = [...boardProducts] || [];
     }
   }
   updatePriceFormat(price, max) {
-    let minPrice: string = '';
-    let maxPrice: string = '';
-    var formatter = new Intl.NumberFormat('en-US', {
+    let minPrice = '';
+    let maxPrice = '';
+    const formatter = new Intl.NumberFormat('en-US', {
       style: 'currency',
       currency: 'USD'
     });
-    let splitedPrice = price.split('-');
+    const splitedPrice = price.split('-');
     minPrice = formatter.format(splitedPrice[0].slice(1));
     if (splitedPrice.length > 1) {
       if (max) {

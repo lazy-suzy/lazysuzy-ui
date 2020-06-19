@@ -6,11 +6,11 @@ declare var $: any;
 @Component({
   selector: 'app-room',
   templateUrl: './room.component.html',
-  styleUrls: ['./room.component.less'],
+  styleUrls: ['./room.component.less']
 })
 export class RoomComponent implements OnInit {
   @Input() department: IDepartment;
-  placeholder: string = 'assets/image/placeholder.png';
+  placeholder = 'assets/image/placeholder.png';
 
   category = {};
   // category1 = [];

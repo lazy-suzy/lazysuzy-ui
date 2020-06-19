@@ -4,12 +4,10 @@ import { Injectable } from '@angular/core';
   providedIn: 'root'
 })
 export class CacheService {
-
   data = {
     useCache: false,
     productSku: ''
-  }
+  };
 
-  constructor() { }
-
+  constructor() {}
 }

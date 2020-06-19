@@ -32,7 +32,7 @@ export class WishlistComponent implements OnInit {
       });
   }
 
-  ngOnDestroy(): void {
+  onDestroy(): void {
     this.eventSubscription.unsubscribe();
   }
 }

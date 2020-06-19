@@ -57,12 +57,15 @@ export class VariationsComponent implements OnInit {
     this.selectionsExist =
       this.inputSelections && Object.keys(this.inputSelections)[0] !== 'type';
     if (this.selectionsExist) {
+      // tslint:disable-next-line: forin
       for (const key in this.inputSelections) {
         const value = this.inputSelections[key];
+        // tslint:disable-next-line: forin
         for (const object in value) {
           const newObject = JSON.stringify(value[object]);
           const options = JSON.parse(newObject);
           if (Array.isArray(options)) {
+            // tslint:disable-next-line: prefer-for-of
             for (let i = 0; i < options.length; i++) {
               this.selectionOptions[options[i]] = true;
             }
@@ -70,23 +73,23 @@ export class VariationsComponent implements OnInit {
         }
       }
     }
-    const _self = this;
+    const self = this;
     this.filteredVariations = this.variations;
 
     this.swatches = this.variations
-      .filter(function(variation) {
+      .filter((variation) => {
         return variation.swatch_image !== null;
       })
-      .filter(function(variation) {
-        return _self.filterDuplicateSwatches(variation, _self);
+      .filter((variation) => {
+        return self.filterDuplicateSwatches(variation, self);
       });
   }
-  ngOnDestroy(): void {
+  onDestroy(): void {
     this.bpSubscription.unsubscribe();
   }
   selectedVariation(variation, index: number) {
     if (variation.has_parent_sku) {
-      if(this.isHandset) {
+      if (this.isHandset) {
         this.router.navigate([`/product/${variation.variation_sku}`]);
         this.reload.emit();
       } else {
@@ -156,18 +159,18 @@ export class VariationsComponent implements OnInit {
   }
 
   updateSwatches() {
-    const _self = this;
-    _self.swatchFilter = [];
+    const self = this;
+    self.swatchFilter = [];
     const filteredSwatches = ([] = this.variations
-      .map(function(variation) {
+      .map((variation) => {
         return {
           ...variation,
-          enabled: _self.checkSwatchSelection(variation, _self)
+          enabled: self.checkSwatchSelection(variation, self)
         };
       })
-      .filter(function(variation) {
+      .filter((variation) => {
         if (variation.swatch_image !== null) {
-          return _self.filterDuplicateSwatches(variation, _self);
+          return self.filterDuplicateSwatches(variation, self);
         }
       }));
     this.swatches = [];
@@ -181,14 +184,14 @@ export class VariationsComponent implements OnInit {
       this.swatches.push(variation);
       this.previousSwatch = variation;
     }
-    this.filteredVariations = this.variations.filter(function(variation) {
-      if (_self.selectedSwatch.swatch_image) {
+    this.filteredVariations = this.variations.filter((variation) => {
+      if (self.selectedSwatch.swatch_image) {
         return (
-          _self.checkSwatchSelection(variation, _self) &&
-          variation.swatch_image === _self.selectedSwatch.swatch_image
+          self.checkSwatchSelection(variation, self) &&
+          variation.swatch_image === self.selectedSwatch.swatch_image
         );
       }
-      return _self.checkSwatchSelection(variation, _self);
+      return self.checkSwatchSelection(variation, self);
     });
 
     if (
@@ -206,12 +209,12 @@ export class VariationsComponent implements OnInit {
     }
   }
 
-  checkSwatchSelection(variation, _self) {
+  checkSwatchSelection(variation, self) {
     let isValidVariation = true;
-    for (const key in _self.selections) {
+    for (const key in self.selections) {
       if (
-        variation.features[key] === _self.selections[key] ||
-        _self.selections[key].includes(variation.features[key])
+        variation.features[key] === self.selections[key] ||
+        self.selections[key].includes(variation.features[key])
       ) {
         isValidVariation = true;
       } else {
@@ -222,25 +225,25 @@ export class VariationsComponent implements OnInit {
     return isValidVariation;
   }
 
-  filterDuplicateSwatches(variation, _self) {
+  filterDuplicateSwatches(variation, self) {
     let isValidSwatch;
     if (
-      !_self.swatchFilter.includes(variation.swatch_image) ||
-      _self.swatchFilter.length === 0
+      !self.swatchFilter.includes(variation.swatch_image) ||
+      self.swatchFilter.length === 0
     ) {
-      _self.swatchFilter.push(variation.swatch_image);
+      self.swatchFilter.push(variation.swatch_image);
       isValidSwatch = true;
-      _self.previousSwatch = variation;
+      self.previousSwatch = variation;
     } else {
       if (
         variation.hasOwnProperty('enabled') &&
-        !_self.previousSwatch.enabled &&
+        !self.previousSwatch.enabled &&
         variation.enabled
       ) {
         isValidSwatch = true;
-        _self.swatchFilter.pop();
-        _self.swatchFilter.push(variation.swatch_image);
-        _self.previousSwatch = variation;
+        self.swatchFilter.pop();
+        self.swatchFilter.push(variation.swatch_image);
+        self.previousSwatch = variation;
       } else {
         isValidSwatch = false;
       }
@@ -248,14 +251,17 @@ export class VariationsComponent implements OnInit {
     return isValidSwatch;
   }
   filterSwatches() {
-    let variations = this.variations;
+    const variations = this.variations;
     if (this.selectionsExist && this.selectedSwatch.swatch_image) {
+      // tslint:disable-next-line: forin
       for (const keys in this.selectionOptions) {
         this.selectionOptions[keys] = false;
       }
+      // tslint:disable-next-line: forin
       for (const key in variations) {
         const value = variations[key];
         const options = value.features;
+        // tslint:disable-next-line: forin
         for (const features in options) {
           const feature = options[features];
           if (feature && feature.charAt(0) !== '#') {
@@ -269,6 +275,7 @@ export class VariationsComponent implements OnInit {
         }
       }
     } else {
+      // tslint:disable-next-line: forin
       for (const keys in this.selectionOptions) {
         this.selectionOptions[keys] = true;
       }
@@ -278,7 +285,7 @@ export class VariationsComponent implements OnInit {
     if (
       this.selectedSwatch.swatch_image &&
       this.swatches.some(
-        data => data.swatch_image === this.selectedSwatch.swatch_image
+        (data) => data.swatch_image === this.selectedSwatch.swatch_image
       )
     ) {
       this.priceData = {

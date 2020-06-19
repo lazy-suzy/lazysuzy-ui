@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
-import { ApiService } from 'src/app/shared/services';
+import { ApiService, EventEmitterService } from 'src/app/shared/services';
 
 @Component({
   selector: 'app-reset-password',
@@ -9,24 +9,27 @@ import { ApiService } from 'src/app/shared/services';
 })
 export class ResetPasswordComponent implements OnInit {
   message: string;
-  error: boolean = false;
-  email: string = '';
-  password: string = '';
-  cpassword: string = '';
-  isValidToken: boolean = false;
-  token: string = '';
-  isSuccess: boolean = false;
+  error = false;
+  email = '';
+  password = '';
+  cpassword = '';
+  isValidToken = false;
+  token = '';
+  isSuccess = false;
   routeSubscription: any;
 
   constructor(
     private apiService: ApiService,
-    private activeRoute: ActivatedRoute
+    private activeRoute: ActivatedRoute,
+    private eventService: EventEmitterService,
+    private router: Router
   ) {}
 
   ngOnInit() {
-    this.routeSubscription = this.activeRoute.params.subscribe(
+    this.routeSubscription = this.activeRoute.queryParams.subscribe(
       (routeParams) => {
         this.token = routeParams.token;
+        this.email = routeParams.email;
         this.apiService.validateResetPasswordToken(this.token).subscribe(
           (data) => {
             this.isValidToken = true;
@@ -69,8 +72,21 @@ export class ResetPasswordComponent implements OnInit {
         })
         .subscribe(
           (data: any) => {
-            this.message = 'Password reset successfully. Go to Login';
+            this.message = 'Password reset successfully. Signing in..';
             this.isSuccess = true;
+            const formData: any = new FormData();
+            formData.append('email', this.email);
+            formData.append('password', this.password);
+            this.apiService.login(formData).subscribe((payload: any) => {
+              if (payload.success) {
+                this.error = false;
+                this.eventService.fetchUser(
+                  payload.success.token,
+                  payload.user
+                );
+                this.router.navigateByUrl('/');
+              }
+            });
           },
           (error) => {
             this.error = true;

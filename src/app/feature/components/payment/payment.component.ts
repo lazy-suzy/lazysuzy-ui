@@ -43,10 +43,10 @@ export class PaymentComponent implements OnInit {
   payment = false;
   statesArray = [];
   cartProducts = [];
-  spinner: string = 'assets/image/spinner.gif';
-  subTotalAmount: number = 0;
+  spinner = 'assets/image/spinner.gif';
+  subTotalAmount = 0;
   cartProductsLength: number;
-  totalShippingCharge: number = 0;
+  totalShippingCharge = 0;
   totalAmount: number;
   customerData = {
     email: null,
@@ -75,17 +75,17 @@ export class PaymentComponent implements OnInit {
     billing_zipcode: null
   };
   country = 'USA';
-  isBillingAddressSame: boolean = true;
-  isEmailValid: boolean = true;
-  isRequiredFieldsPresent: boolean = true;
-  isPaymentExecuting: boolean = false;
+  isBillingAddressSame = true;
+  isEmailValid = true;
+  isRequiredFieldsPresent = true;
+  isPaymentExecuting = false;
   cardErrorMsg: string;
   bpObserver: Observable<BreakpointState> = this.breakpointObserver.observe(
     Breakpoints.Handset
   );
   bpSubscription: Subscription;
   isHandset: boolean;
-  isLoading: boolean = true;
+  isLoading = true;
   localStorageUser = {};
   eventSubscription: Subscription;
   constructor(
@@ -112,7 +112,7 @@ export class PaymentComponent implements OnInit {
       this.elements = elements;
       // Only mount the element the first time
       if (!this.card) {
-        let elementStyles = {
+        const elementStyles = {
           base: {
             color: '#32325D',
             fontWeight: 500,
@@ -133,7 +133,7 @@ export class PaymentComponent implements OnInit {
             }
           }
         };
-        let elementClasses = {
+        const elementClasses = {
           focus: 'focused',
           empty: 'empty',
           invalid: 'invalid'
@@ -160,7 +160,7 @@ export class PaymentComponent implements OnInit {
         this.getCartProducts();
       });
   }
-  ngOnDestroy(): void {
+  onDestroy(): void {
     this.eventSubscription.unsubscribe();
   }
   getCartProducts() {
@@ -177,7 +177,7 @@ export class PaymentComponent implements OnInit {
     );
   }
   calculateCartData() {
-    for (let product of this.cartProducts) {
+    for (const product of this.cartProducts) {
       this.subTotalAmount =
         this.subTotalAmount + product.retail_price * product.count;
       this.cartProductsLength = this.cartProductsLength + product.count;
@@ -193,8 +193,8 @@ export class PaymentComponent implements OnInit {
   buy() {
     this.customerData.billing_country = 'USA';
     this.customerData.shipping_country = 'USA';
-    let data = this.customerData;
-    let condition =
+    const data = this.customerData;
+    const condition =
       data.email &&
       data.shipping_f_Name &&
       data.shipping_l_Name &&
@@ -220,6 +220,7 @@ export class PaymentComponent implements OnInit {
         ' ' +
         this.customerData.billing_l_Name;
       this.stripeService
+        // tslint:disable-next-line: no-unused-expression
         .createToken((this.cardNumber, this.cardExpiry, this.cardCvc), { name })
         .subscribe((result: any) => {
           if (result.token) {

@@ -25,8 +25,8 @@ export class BoardListComponent implements OnInit {
   boards: Board[] = [];
   boardViewLink = boardRoutesNames.BOARD_VIEW;
   boardPreviewLink = boardRoutesNames.BOARD_PREVIEW;
-  isFetching: boolean = false;
-  isFirstBoot: boolean = true;
+  isFetching = false;
+  isFirstBoot = true;
   eventSubscription: Subscription;
   user = null;
   bpObserver: Observable<BreakpointState> = this.breakpointObserver.observe(
@@ -34,8 +34,8 @@ export class BoardListComponent implements OnInit {
   );
 
   bpSubscription: Subscription;
-  isHandset: boolean = false;
-  isAnyPublished: boolean = false;
+  isHandset = false;
+  isAnyPublished = false;
 
   constructor(
     private boardService: BoardService,
@@ -43,7 +43,7 @@ export class BoardListComponent implements OnInit {
     private route: ActivatedRoute,
     private dialog: MatDialog,
     private eventEmitterService: EventEmitterService,
-    private _snackBar: MatSnackBar,
+    private snackBar: MatSnackBar,
     private utils: UtilsService,
     private breakpointObserver: BreakpointObserver
   ) {}
@@ -56,7 +56,7 @@ export class BoardListComponent implements OnInit {
         // if it has been called previously for every new change create a snackbar
         if (!this.isFirstBoot) {
           this.isFetching = true;
-          this._snackBar.open(
+          this.snackBar.open(
             user.name ? 'Welcome back ' + user.name : 'Now browsing as guest',
             'Dismiss',
             {
@@ -81,29 +81,31 @@ export class BoardListComponent implements OnInit {
       }
     );
   }
-  ngOnDestroy(): void {
+  onDestroy(): void {
     this.eventSubscription.unsubscribe();
   }
   getBoards(): void {
     this.boardService.getBoards().subscribe((response) => {
       this.boards = response.reverse();
       this.isAnyPublished =
-        this.boards.filter((b) => b.type_room !== null).length > 0;
+        this.boards.filter((b) => b.type_privacy === 1).length > 0;
       this.isFetching = false;
     });
   }
 
   add(board: Board = new Board()): void {
     let redirect = false;
-    let newBoard = Object.assign({}, board);
-    if (newBoard.title) newBoard.title = 'Copy of ' + newBoard.title;
-    else {
-      var datePipe = new DatePipe('en-US');
+    const newBoard = Object.assign({}, board);
+    if (newBoard.title) {
+      newBoard.title = 'Copy of ' + newBoard.title;
+    } else {
+      const datePipe = new DatePipe('en-US');
       newBoard.title = 'Untitled Board';
       // newBoard.title = "Untitled Board " + datePipe.transform(new Date(), 'MM/dd/yyyy hh:mm:ss');
       redirect = true;
     }
 
+    // tslint:disable-next-line: no-shadowed-variable
     this.boardService.addBoard(newBoard).subscribe((board) => {
       if (board.uuid) {
         if (redirect) {
@@ -133,7 +135,7 @@ export class BoardListComponent implements OnInit {
       })
       .afterClosed()
       .subscribe((result) => {
-        if (result == true) {
+        if (result === true) {
           board.is_active = false;
           this.boards = this.boards.filter((h) => h !== board);
           this.boardService
@@ -153,15 +155,18 @@ export class BoardListComponent implements OnInit {
       panelClass: 'custom-dialog-container',
       data: {
         type: 'share',
-        board: board
+        board
       },
       width: '40%'
     });
   }
 
-  getPreviewImagePath(board: Board): string {
-    if (board.preview) return environment.BASE_HREF + board.preview;
-    else return 'https://via.placeholder.com/500x400';
+  getPreviewImagePath(board: Board) {
+    if (board.preview) {
+      return environment.BASE_HREF + board.preview;
+    } else {
+      return 'https://via.placeholder.com/500x400';
+    }
   }
 
   openSignupDialog() {

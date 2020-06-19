@@ -26,8 +26,8 @@ export interface IProductPayload {
   department_info?: IDepartmentInfo[];
   in_inventory: boolean;
   inventory_product_details: {
-  price: number,
-  count: number,
+    price: number;
+    count: number;
   };
 }
 

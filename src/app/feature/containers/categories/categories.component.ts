@@ -22,14 +22,16 @@ export class CategoriesComponent implements OnInit {
 
   ngOnInit(): void {
     this.getParams();
-    this.routeSubscription = this.activeRoute.params.subscribe(routeParams => {
-      this.department = routeParams.department;
-      this.getCategories();
-    });
+    this.routeSubscription = this.activeRoute.params.subscribe(
+      (routeParams) => {
+        this.department = routeParams.department;
+        this.getCategories();
+      }
+    );
     this.getCategories();
   }
 
-  ngOnDestroy(): void {
+  onDestroy(): void {
     this.routeSubscription.unsubscribe();
     this.categorySubscription.unsubscribe();
   }
