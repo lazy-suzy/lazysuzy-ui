@@ -111,7 +111,7 @@ export class AuthComponent implements OnInit {
           );
 
           localStorage.setItem('user', JSON.stringify(payload.user));
-          this.user = payload.user;
+          this.updateUser(payload.user);
           this.utils.closeDialogs();
         });
     });
