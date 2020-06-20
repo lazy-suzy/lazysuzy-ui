@@ -47,9 +47,9 @@
           <span class="font-weight-bold h5">{{ appMeta.board.title }}</span>
         </div>
         <div>
-          <div class="tile-icon wishlist-icon wishlist-container">
+          <!-- <div class="tile-icon wishlist-icon wishlist-container">
             <mat-icon (click)="wishlistProduct()">favorite </mat-icon>
-          </div>
+          </div> -->
         </div>
         <!-- <ng-template #elseBlock>
           <div class="tile-icon wishlist-icon wishlist-container">
@@ -74,7 +74,7 @@
       <span class="shop-title">Shop This Look</span>
     </div>
     <div>
-      <p-carousel
+      <!-- <p-carousel
         class="top-deal-slider"
         [value]="boardProducts"
         [numVisible]="5"
@@ -105,7 +105,7 @@
             </div>
           </div>
         </ng-template>
-      </p-carousel>
+      </p-carousel> -->
       <!-- <div *ngIf="isHandset">
         <app-products-carousal
           [data]="topDeals"
@@ -114,7 +114,7 @@
         ></app-products-carousal>                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 
       </div> -->
     </div>
-    <!-- <div class="products-container mt-5">
+    <div class="products-container mt-5">
       <div
         *ngFor="let product of boardProducts; let index = index"
         class="w-25-ns {{ product.is_price ? '' : 'dn' }}"
@@ -135,6 +135,6 @@
           </div>
         </div>
       </div>
-    </div> -->
+    </div>
   </div>
 </div>
