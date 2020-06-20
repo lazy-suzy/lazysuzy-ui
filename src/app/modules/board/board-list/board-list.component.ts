@@ -151,6 +151,10 @@ export class BoardListComponent implements OnInit {
   }
 
   share(board: Board): void {
+    if (board.type_privacy == 0){
+      board.type_privacy = 1;
+      this.boardService.updateBoard(board).subscribe();
+    }
     this.dialog.open(BoardPopupComponent, {
       panelClass: 'custom-dialog-container',
       data: {
