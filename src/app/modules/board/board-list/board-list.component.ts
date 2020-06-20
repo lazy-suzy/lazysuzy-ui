@@ -105,6 +105,8 @@ export class BoardListComponent implements OnInit {
       redirect = true;
     }
 
+    newBoard.type_privacy = newBoard.is_published = 0;
+    
     // tslint:disable-next-line: no-shadowed-variable
     this.boardService.addBoard(newBoard).subscribe((board) => {
       if (board.uuid) {
