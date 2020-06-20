@@ -256,4 +256,6 @@ export class BoardPreviewComponent implements OnInit {
       this.utilsService.openMatDialog(product);
     }
   }
+
+  wishlistProduct() {}
 }
