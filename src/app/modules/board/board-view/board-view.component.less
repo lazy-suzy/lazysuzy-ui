@@ -201,7 +201,7 @@
   display: flex;
   justify-content: space-between;
   color: #f7f6f6;
-  margin: 6px 15px 0 0;
+  margin-top: 6px;
 }
 .dropdown::after {
   border-top-color: #f7f6f6;
@@ -287,6 +287,13 @@
   outline: none;
   box-shadow: none;
 }
+.item-action-icons {
+  display: flex;
+  margin-left: 15px;
+}
+::ng-deep .pickr-container .pcr-app {
+  width: 132px;
+}
 @media screen and (max-width: 991px) {
   .load-more-btn-container {
     padding-bottom: 0;
@@ -337,9 +344,6 @@
   .mdi-format-color-text::after {
     background: #f7f6f6 !important;
   }
-  .item-action-icons {
-    display: flex;
-  }
   .top-panel .color-selector-tab {
     display: block;
     margin-left: 10px;
@@ -355,13 +359,13 @@
   .editor-icons {
     display: flex;
     max-width: 100px;
-    margin-left: 30px;
+    margin-left: 25px;
     justify-content: flex-start;
     margin-top: 3px;
   }
   .font-editor-container {
     padding-left: 0;
-    padding-right: 10px;
+    padding-right: 0;
     .font-selector {
       margin-right: 0;
     }
@@ -377,7 +381,29 @@
   }
   .image-toolbar-position {
     justify-content: flex-end;
-    margin-left: 10px;
+    margin-left: 0;
+  }
+  .pickr-container {
+    ::ng-deep .pcr-app {
+      top: 80px !important;
+      bottom: unset !important;
+      left: 15px !important;
+      right: unset !important;
+      width: 142px;
+    }
+    ::ng-deep .pcr-interaction {
+      background: white;
+      margin: 0;
+    }
+    ::ng-deep .pcr-swatches {
+      background: white;
+      padding-left: 16px;
+    }
+  }
+  .lazysuzy-board {
+    .panel-height {
+      height: 100%;
+    }
   }
 }
 @media screen and (max-width: 375px) {

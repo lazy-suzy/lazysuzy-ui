@@ -14,7 +14,7 @@ const routes: Routes = [
     redirectTo: boardRoutesNames.BOARD_LIST
   },
   {
-    path: boardRoutesNames.BOARD_VIEW + "/:uuid",
+    path: boardRoutesNames.BOARD_VIEW + '/:uuid',
     component: BoardViewComponent
   },
   {
@@ -22,15 +22,15 @@ const routes: Routes = [
     component: BoardListComponent
   },
   {
-    path: boardRoutesNames.BOARD_PREVIEW + "/:uuid",
+    path: boardRoutesNames.BOARD_PREVIEW + '/:uuid',
     component: BoardPreviewComponent
   },
   {
-    path: boardRoutesNames.BOARD_TEST + "/:uuid",
+    path: boardRoutesNames.BOARD_TEST + '/:uuid',
     component: BoardPopupComponent
   },
   {
-    path: boardRoutesNames.BOARD_EMBED + "/:uuid",
+    path: boardRoutesNames.BOARD_EMBED + '/:uuid',
     component: BoardPreviewComponent
   }
 ];
@@ -39,4 +39,4 @@ const routes: Routes = [
   imports: [RouterModule.forChild(routes)],
   exports: [RouterModule]
 })
-export class BoardRoutingModule { }
+export class BoardRoutingModule {}

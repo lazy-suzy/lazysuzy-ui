@@ -33,11 +33,11 @@ export class UploadFileDetailsComponent implements OnInit {
   constructor(
     public dialogRef: MatDialogRef<UploadFileDetailsComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any,
-    private _formBuilder: FormBuilder,
+    private formBuilder: FormBuilder,
     private boardService: BoardService,
     private eventEmitterService: EventEmitterService
   ) {
-    this.step = this._formBuilder.group({
+    this.step = this.formBuilder.group({
       productTitle: [''],
       brand: '',
       price: [''],
@@ -50,7 +50,7 @@ export class UploadFileDetailsComponent implements OnInit {
   ngOnInit(): void {
     if (this.data.product) {
       this.isToEditProduct = true;
-      let product = this.data.product;
+      const product = this.data.product;
       this.buttonText = 'Update';
       this.tags = (product.tags && product.tags.split(',')) || [];
       this.step.setValue({
@@ -67,7 +67,7 @@ export class UploadFileDetailsComponent implements OnInit {
   }
 
   onNoClick(): void {
-    this.step = this._formBuilder.group({
+    this.step = this.formBuilder.group({
       productTitle: [''],
       brand: '',
       price: [''],
@@ -83,7 +83,7 @@ export class UploadFileDetailsComponent implements OnInit {
   }
 
   cancelAddImgViaUrl() {
-    this.step = this._formBuilder.group({
+    this.step = this.formBuilder.group({
       productTitle: [''],
       brand: '',
       price: [''],
@@ -98,7 +98,7 @@ export class UploadFileDetailsComponent implements OnInit {
     const payload = {
       name: 'save-image-details',
       data: new Asset({
-        is_private: this.step.value.keepPrivate == true ? 1 : 0,
+        is_private: this.step.value.keepPrivate ? 1 : 0,
         name: this.step.value.productTitle,
         brand: this.step.value.brand,
         price: this.step.value.price,

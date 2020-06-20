@@ -56,7 +56,10 @@
           Login
         </button>
         <br />
-        <a class="resetPassword" href="http://lazysuzy.com:8081/password/reset"
+        <a
+          class="resetPassword"
+          (click)="closeDialogs()"
+          [routerLink]="['/forgot-password']"
           >Reset Password</a
         >
       </div>

@@ -9,7 +9,7 @@ import { Router } from '@angular/router';
 export class SearchBarComponent {
   @Input() notHome: boolean;
   @Output() searchComplete = new EventEmitter<any>();
-  textChange: boolean = false;
+  textChange = false;
 
   constructor(private router: Router) {}
 

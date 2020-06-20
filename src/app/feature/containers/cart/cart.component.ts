@@ -22,13 +22,13 @@ export class CartComponent implements OnInit {
   bpSubscription: Subscription;
   tabletSubscription: Subscription;
   isHandset: boolean;
-  quantityValue: number = 1;
+  quantityValue = 1;
   cartProducts = [];
-  totalAmount: number = 0;
+  totalAmount = 0;
   cartProductsLength: number;
   isProductFetching: boolean;
-  spinner: string = 'assets/image/spinner.gif';
-  emptyCart: boolean = true;
+  spinner = 'assets/image/spinner.gif';
+  emptyCart = true;
   isCartLoading: boolean;
   isLoggedIn: boolean;
   eventSubscription: Subscription;
@@ -77,13 +77,13 @@ export class CartComponent implements OnInit {
     );
   }
 
-  ngOnDestroy(): void {
+  onDestroy(): void {
     this.bpSubscription.unsubscribe();
     this.eventSubscription.unsubscribe();
   }
 
   increaseQuantity(product, quantity) {
-    let postData = {
+    const postData = {
       product_sku: product,
       count: quantity
     };
@@ -98,7 +98,7 @@ export class CartComponent implements OnInit {
   }
 
   decreaseQuantity(product, quantity) {
-    let postData = {
+    const postData = {
       product_sku: product,
       count: quantity
     };
@@ -113,7 +113,7 @@ export class CartComponent implements OnInit {
   }
 
   getSubTotal() {
-    for (let product of this.cartProducts) {
+    for (const product of this.cartProducts) {
       this.totalAmount =
         this.totalAmount + product.retail_price * product.count;
       this.cartProductsLength = this.cartProductsLength + product.count;

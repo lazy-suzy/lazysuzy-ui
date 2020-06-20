@@ -43,12 +43,12 @@ export class SearchProductComponent implements OnInit {
     );
   }
 
-  ngOnDestroy(): void {
+  onDestroy(): void {
     this.bpSubscription.unsubscribe();
   }
 
   setRating(): void {
-    let starCount: number = Math.round(parseFloat(this.product.rating) * 2) / 2;
+    let starCount = Math.round(parseFloat(this.product.rating) * 2) / 2;
     while (starCount > 0.5) {
       this.starIcons.push('star');
       starCount -= 1;
@@ -72,7 +72,7 @@ export class SearchProductComponent implements OnInit {
         data: { sku: this.product.product_sku }
       });
 
-      dialogRef.afterClosed().subscribe(result => {});
+      dialogRef.afterClosed().subscribe((result) => {});
     }
   }
 

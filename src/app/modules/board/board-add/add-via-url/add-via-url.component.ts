@@ -28,27 +28,27 @@ export class AddViaUrlComponent implements OnInit {
   urlPattern = '(https?://)?([\\da-z.-]+)\\.([a-z.]{2,6})[/\\w .-]*/?';
   stepOne: FormGroup;
   stepTwo: FormGroup;
-  isUrlAdded: boolean = false;
+  isUrlAdded = false;
   readonly separatorKeysCodes: number[] = [ENTER, COMMA];
   visible = true;
   selectable = true;
   removable = true;
   addOnBlur = true;
-  hasErrorMessage: boolean = false;
+  hasErrorMessage = false;
   tags = [];
-  showImageVerificationLoader: boolean = false;
+  showImageVerificationLoader = false;
   constructor(
     public dialogRef: MatDialogRef<AddViaUrlComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any,
     private boardService: BoardService,
     public formService: FormService,
-    private _formBuilder: FormBuilder
+    private formBuilder: FormBuilder
   ) {
     this.myForm = this.formService.mainForm.value;
-    this.stepOne = this._formBuilder.group({
+    this.stepOne = this.formBuilder.group({
       imageUrl: ['', Validators.required]
     });
-    this.stepTwo = this._formBuilder.group({
+    this.stepTwo = this.formBuilder.group({
       productTitle: [''],
       brand: '',
       price: [''],
@@ -61,21 +61,21 @@ export class AddViaUrlComponent implements OnInit {
 
   verifyImage(stepper: MatStepper) {
     this.showImageVerificationLoader = true;
-    var img = new Image();
+    const img = new Image();
     img.src = this.stepOne.value.imageUrl;
-    let _self = this;
-    img.onload = function () {
-      _self.hasErrorMessage = false;
+    const self = this;
+    img.onload = () => {
+      self.hasErrorMessage = false;
       stepper.next();
     };
-    img.onerror = function () {
-      _self.hasErrorMessage = true;
+    img.onerror = () => {
+      self.hasErrorMessage = true;
     };
     this.showImageVerificationLoader = false;
   }
 
   onNoClick(): void {
-    this.stepTwo = this._formBuilder.group({
+    this.stepTwo = this.formBuilder.group({
       productTitle: [''],
       brand: '',
       price: [''],
@@ -91,7 +91,7 @@ export class AddViaUrlComponent implements OnInit {
   }
 
   cancelAddImgViaUrl() {
-    this.stepTwo = this._formBuilder.group({
+    this.stepTwo = this.formBuilder.group({
       productTitle: [''],
       brand: '',
       price: [''],
@@ -107,13 +107,13 @@ export class AddViaUrlComponent implements OnInit {
     const data = {
       tags: this.tags.join(','),
       url: this.stepOne.value.imageUrl,
-      is_private: this.stepTwo.value.keepPrivate == true ? 1 : 0,
+      is_private: this.stepTwo.value.keepPrivate === true ? 1 : 0,
       price: this.stepTwo.value.price,
       listing_url: this.stepTwo.value.productListingUrl,
       name: this.stepTwo.value.productTitle,
       brand: this.stepTwo.value.brand
     };
-    let asset = new Asset(data);
+    const asset = new Asset(data);
     this.boardService.addAsset(asset).subscribe((res) => {
       this.showLoader = false;
       if (res) {

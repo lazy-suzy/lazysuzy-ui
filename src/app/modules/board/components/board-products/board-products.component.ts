@@ -9,7 +9,7 @@ import { environment } from 'src/environments/environment';
 export class BoardProductsComponent implements OnInit {
   @Input() products: any = null;
   @Input() modifyPath: any = false;
-  @Input() isAsset: any = false;
+  @Input() isAsset: boolean;
   productType = 'default';
 
   @Output() updates: EventEmitter<any> = new EventEmitter();
@@ -19,20 +19,21 @@ export class BoardProductsComponent implements OnInit {
 
   ngOnInit() {}
 
+  // tslint:disable-next-line: use-lifecycle-interface
   ngOnChanges(changes: any) {
     if (
-      changes['products'] &&
-      changes['products'].previousValue !== changes['products'].currentValue
+      changes.products &&
+      changes.products.previousValue !== changes.products.currentValue
     ) {
-      let products = changes['products'].currentValue || [];
+      const products = changes.products.currentValue || [];
       this.products = [...products] || [];
     }
 
     if (
-      changes['isAsset'] &&
-      changes['isAsset'].previousValue !== changes['isAsset'].currentValue
+      changes.isAsset &&
+      changes.isAsset.previousValue !== changes.isAsset.currentValue
     ) {
-      let isAsset = changes['isAsset'].currentValue || [];
+      const isAsset = changes.isAsset.currentValue || [];
       this.isAsset = isAsset;
       if (this.isAsset) {
         this.productType = 'custom';

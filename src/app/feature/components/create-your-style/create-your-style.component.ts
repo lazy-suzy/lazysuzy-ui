@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { trigger, transition, animate, style } from '@angular/animations'
+import { trigger, transition, animate, style } from '@angular/animations';
 
 @Component({
   selector: 'app-create-your-style',
@@ -8,20 +8,18 @@ import { trigger, transition, animate, style } from '@angular/animations'
   animations: [
     trigger('slideInLeft', [
       transition(':enter', [
-        style({transform: 'translateX(50%)'}),
-        animate('400ms ease-in', style({transform: 'translateX(50%)'}))
+        style({ transform: 'translateX(50%)' }),
+        animate('400ms ease-in', style({ transform: 'translateX(50%)' }))
       ]),
       transition(':leave', [
-        animate('400ms ease-in', style({transform: 'translateX(0%)'}))
+        animate('400ms ease-in', style({ transform: 'translateX(0%)' }))
       ])
     ])
   ]
 })
 export class CreateYourStyleComponent implements OnInit {
-  videoSource : string = "https://lazysuzy.com/vd/lz-landing-design.mp4";
-  constructor() { }
+  videoSource = 'https://lazysuzy.com/vd/lz-landing-design.mp4';
+  constructor() {}
 
-  ngOnInit() {
-  }
-
+  ngOnInit() {}
 }

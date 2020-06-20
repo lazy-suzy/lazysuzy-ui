@@ -1,11 +1,11 @@
 <div [ngStyle]="{ padding: loadedIndependantly ? '50px 500px' : '' }">
   <div *ngIf="popupShow.config">
-    <div class="p-sm-5 w-100 pl-sm-2 pr-sm-2">
+    <div class="p-sm-5 w-100 pl-sm-2 pr-sm-2 mt-3">
       <div class="row">
         <div class="col-12 text-center">
           <h5 class="title ml2 text-center b">TELL US MORE</h5>
         </div>
-        <div class="publish-board-input mt-0 mt-sm-3">
+        <div class="publish-board-input mt-sm-3">
           <div>
             <input
               class="form-control"
@@ -43,14 +43,14 @@
             </div>
           </div>
         </div>
-        <div class="publish-board-title d-flex">
-          <div>
-            <input
-              [(ngModel)]="board.is_private"
-              type="checkbox"
-              class="keep-private-checkbox"
-            />
-          </div>
+        <div class="publish-board-title d-flex align-items-center">
+          <mat-checkbox
+            color="primary"
+            matInput
+            [(ngModel)]="boardPrivacy"
+            (click)="updatePrivacy()"
+          >
+          </mat-checkbox>
           <div class="ml-2 pointer" (click)="updatePrivacy()">
             Keep Private
             <span

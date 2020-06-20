@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { ApiService, UtilsService } from './../../../shared/services';
 import { Router, NavigationEnd } from '@angular/router';
 import { IAllDepartment } from '../../../shared/models/all-department.interface';
@@ -11,17 +11,17 @@ import { EventEmitterService } from 'src/app/shared/services';
   templateUrl: './nav-mobile.component.html',
   styleUrls: ['./nav-mobile.component.less']
 })
-export class NavMobileComponent {
-  logoPath: string = 'assets/image/color_logo_transparent.png';
+export class NavMobileComponent implements OnInit {
+  logoPath = 'assets/image/color_logo_transparent.png';
   departments: IAllDepartment[];
-  selectedIndex: number = null;
+  selectedIndex = null;
   menuVisible = false;
   mobileMenuContainer;
   showDepartment;
-  showSearchComponent: boolean = false;
-  notHome: Boolean;
+  showSearchComponent = false;
+  notHome: boolean;
   checkHomeRoute: Subscription;
-  hideBar: boolean = false;
+  hideBar = false;
   eventSubscription: Subscription;
 
   constructor(
@@ -50,7 +50,7 @@ export class NavMobileComponent {
       .subscribe((user) => {
         this.getDepartments();
         this.router.events.subscribe((res) => {
-          let orderRoute = this.router.url.slice(1, 6);
+          const orderRoute = this.router.url.slice(1, 6);
           if (this.router.url === '/checkout' || orderRoute === 'order') {
             this.hideBar = true;
           } else {
@@ -60,7 +60,7 @@ export class NavMobileComponent {
       });
   }
 
-  ngOnDestroy(): void {
+  onDestroy(): void {
     this.checkHomeRoute.unsubscribe();
     this.eventSubscription.unsubscribe();
   }
@@ -99,7 +99,7 @@ export class NavMobileComponent {
     event.preventDefault();
     event.stopPropagation();
 
-    let localData = JSON.parse(localStorage.getItem('user') || '{}');
+    const localData = JSON.parse(localStorage.getItem('user') || '{}');
     if (localData.email.length > 0) {
       this.router.navigateByUrl('/wishlist');
     } else {

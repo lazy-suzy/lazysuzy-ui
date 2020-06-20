@@ -25,14 +25,14 @@ export class BrowseByRoomComponent implements OnInit {
         this.onClick();
       });
   }
-  ngOnDestroy(): void {
+  onDestroy(): void {
     this.eventSubscription.unsubscribe();
   }
   onClick() {
     this.apiService.browseRoom().subscribe((res: any) => {
-      this.departments = res['all_departments'];
-      this.departments = this.departments.filter(function (val) {
-        if (val['department'] != 'Decor' && val['department'] != '') {
+      this.departments = res.all_departments;
+      this.departments = this.departments.filter((val) => {
+        if (val.department !== 'Decor' && val.department !== '') {
           return val;
         }
       });

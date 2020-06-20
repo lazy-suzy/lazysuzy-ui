@@ -34,7 +34,7 @@ import {
   templateUrl: './products.component.html',
   styleUrls: ['./products.component.less']
 })
-export class ProductsComponent implements OnInit, OnDestroy {
+export class ProductsComponent implements OnInit {
   productsSubscription: Subscription;
   routeSubscription: Subscription;
   products: IProductPayload[];
@@ -51,27 +51,27 @@ export class ProductsComponent implements OnInit, OnDestroy {
   category: string;
   categoryTitle: string;
   emailTitle: string;
-  total_count: number = 0;
+  totalCount = 0;
   filters = '';
   sortType = '';
   sortTypeList: ISortType[];
-  pageNo: number = 0;
+  pageNo = 0;
   topPosToStartShowing = 300;
   fixFilterBar = 150;
-  isIconShow: boolean = false;
-  showBar: boolean = false;
-  isProductFetching: boolean = false;
-  spinner: string = 'assets/image/spinner.gif';
-  showMobileFilter: boolean = false;
-  showMobileSort: boolean = false;
-  productsInRow: number = 2;
-  modalSku: string = '';
+  isIconShow = false;
+  showBar = false;
+  isProductFetching = false;
+  spinner = 'assets/image/spinner.gif';
+  showMobileFilter = false;
+  showMobileSort = false;
+  productsInRow = 2;
+  modalSku = '';
   bpObserver: Observable<BreakpointState> = this.breakpointObserver.observe(
     Breakpoints.Handset
   );
   bpSubscription: Subscription;
   isHandset: boolean;
-  scrollToProductSKU: string = '';
+  scrollToProductSKU = '';
   eventSubscription: Subscription;
   constructor(
     public dialog: MatDialog,
@@ -113,7 +113,7 @@ export class ProductsComponent implements OnInit, OnDestroy {
       });
   }
 
-  ngOnDestroy(): void {
+  onDestroy(): void {
     this.productsSubscription.unsubscribe();
     this.routeSubscription.unsubscribe();
     this.bpSubscription.unsubscribe();
@@ -127,9 +127,9 @@ export class ProductsComponent implements OnInit, OnDestroy {
   }
   getParamsFromQuery(): void {
     this.activeRoute.queryParams.subscribe((params) => {
-      this.filters = params['filters'] || '';
-      this.pageNo = parseInt(params['pageNo']) || 0;
-      this.sortType = params['sortType'] || '';
+      this.filters = params.filters || '';
+      this.pageNo = parseInt(params.pageNo, 10) || 0;
+      this.sortType = params.sortType || '';
     });
   }
 
@@ -146,6 +146,7 @@ export class ProductsComponent implements OnInit, OnDestroy {
         )
         .subscribe((response) => {
           let allProducts = [];
+          // tslint:disable-next-line: prefer-for-of
           for (let i = 0; i < response.length; i++) {
             allProducts = [...allProducts, ...response[i].products];
           }
@@ -153,7 +154,7 @@ export class ProductsComponent implements OnInit, OnDestroy {
           this.emailTitle = response[0].seo_data.email_title;
           this.products = allProducts;
           this.updateQueryString();
-          this.total_count = response[0].total;
+          this.totalCount = response[0].total;
           delete response[0].filterData.category;
           this.productFilters = response[0].filterData;
           this.sortTypeList = response[0].sortType;
@@ -163,7 +164,7 @@ export class ProductsComponent implements OnInit, OnDestroy {
             this.cacheService.data.useCache = false;
             setTimeout(() => {
               // this.productElement.nativeElement.getElementById
-              let el = document.getElementById(this.scrollToProductSKU);
+              const el = document.getElementById(this.scrollToProductSKU);
               window.scrollTo(0, el.offsetTop - 200);
             }, 500);
           }
@@ -172,7 +173,7 @@ export class ProductsComponent implements OnInit, OnDestroy {
       this.loadProducts();
     }
 
-    //Code for cached product sku
+    // Code for cached product sku
   }
 
   loadProducts(): void {
@@ -187,7 +188,7 @@ export class ProductsComponent implements OnInit, OnDestroy {
         delete payload.filterData.category;
         this.productFilters = payload.filterData;
         this.sortTypeList = payload.sortType;
-        this.total_count = payload.total;
+        this.totalCount = payload.total;
         this.updateQueryString();
         this.isProductFetching = false;
       });
@@ -255,10 +256,10 @@ export class ProductsComponent implements OnInit, OnDestroy {
       0;
     this.isIconShow = scrollPosition >= this.topPosToStartShowing;
     this.showBar = scrollPosition >= this.fixFilterBar;
-    const _self = this;
+    const self = this;
     if (this.isIconShow) {
-      setTimeout(function () {
-        _self.isIconShow = false;
+      setTimeout(() => {
+        self.isIconShow = false;
       }, SCROLL_ICON_SHOW_DURATION);
     }
   }

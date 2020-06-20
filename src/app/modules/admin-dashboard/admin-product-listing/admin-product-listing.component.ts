@@ -3,7 +3,7 @@ import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 @Component({
   selector: 'app-admin-product-listing',
   templateUrl: './admin-product-listing.component.html',
-  styleUrls: ['./admin-product-listing.component.less'],
+  styleUrls: ['./admin-product-listing.component.less']
 })
 export class AdminProductListingComponent implements OnInit {
   @Input() allBoards: any = [];
@@ -16,11 +16,11 @@ export class AdminProductListingComponent implements OnInit {
 
   ngOnInit() {}
 
-  handleTagChange(product_sku, image, value) {
+  handleTagChange(productSku, image, value) {
     this.tagImage.emit({
-      product_sku,
+      productSku,
       image,
-      type: value,
+      type: value
     });
   }
 }

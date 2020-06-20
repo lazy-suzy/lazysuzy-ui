@@ -15,7 +15,7 @@ import { Subscription } from 'rxjs';
 export class BestSellersComponent implements OnInit {
   bestSellers: any;
   responsiveOptions: any;
-  @Input() isHandset: boolean = false;
+  @Input() isHandset = false;
   showLoader = false;
   eventSubscription: Subscription;
   constructor(
@@ -51,7 +51,7 @@ export class BestSellersComponent implements OnInit {
         this.getBestSellers();
       });
   }
-  ngOnDestroy(): void {
+  onDestroy(): void {
     this.eventSubscription.unsubscribe();
   }
   getBestSellers(): void {

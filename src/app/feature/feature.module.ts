@@ -7,7 +7,9 @@ import {
   WishlistModule,
   AllProductsModule,
   CategoriesModule,
-  CartModule
+  CartModule,
+  ForgotPasswordModule,
+  ResetPasswordModule
 } from './containers';
 import { AmericanNumberPipe } from '../shared/pipes/american-number.pipe';
 
@@ -16,6 +18,7 @@ import {
   PaymentModule,
   OrderSuccessModule
 } from './components';
+import { ResetPasswordComponent } from './containers/reset-password/reset-password.component';
 
 // import { BlogModule } from './blog/blog/blog.module';
 
@@ -32,12 +35,14 @@ const MODULES = [
   ProductDetailsMobileModule,
   CartModule,
   PaymentModule,
-  OrderSuccessModule
+  OrderSuccessModule,
+  ForgotPasswordModule,
+  ResetPasswordModule
   // BlogModule
 ];
 
 @NgModule({
-  declarations: [...DECLARATIONS],
+  declarations: [...DECLARATIONS, ResetPasswordComponent],
   imports: [...MODULES],
   // providers: [AmericanNumberPipe],
   exports: [...DECLARATIONS, ...MODULES]

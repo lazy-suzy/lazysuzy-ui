@@ -4,6 +4,7 @@
   class="text-items manual-drop mt-3"
   drop-type="text"
   draggable="true"
+  (click)="selectFontFn(font.value)"
 >
   <span [style.fontFamily]="font.value">{{ font.value }}</span>
 </div>

@@ -10,7 +10,7 @@ export class ProductSortMobileComponent implements OnInit {
   @Output() setSortToggle = new EventEmitter<any>();
   @Output() setSortType = new EventEmitter<any>();
   @Input() sortTypeList: ISortType[];
-  default: string = 'recommended';
+  default = 'recommended';
 
   constructor() {}
 

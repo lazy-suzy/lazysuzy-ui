@@ -20,12 +20,12 @@ export class SignupComponent implements OnInit {
   isHandset: boolean;
   userCookie: string;
   user: any;
-  error: boolean = false;
+  error = false;
   errorMsg: string;
-  name: string = '';
-  email: string = '';
-  password: string = '';
-  thanksMsg: boolean = false;
+  name = '';
+  email = '';
+  password = '';
+  thanksMsg = false;
 
   bpObserver: Observable<BreakpointState> = this.breakpointObserver.observe(
     Breakpoints.Handset
@@ -48,7 +48,7 @@ export class SignupComponent implements OnInit {
     );
   }
 
-  ngOnDestroy(): void {
+  onDestroy(): void {
     this.bpSubscription.unsubscribe();
   }
 
@@ -74,7 +74,7 @@ export class SignupComponent implements OnInit {
   signup(event, name, email, password) {
     event.preventDefault();
     if (this.validateForm(email, password)) {
-      var formData: any = new FormData();
+      const formData: any = new FormData();
       formData.append('name', name);
       formData.append('email', email);
       formData.append('password', password);

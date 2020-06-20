@@ -19,8 +19,8 @@ import { ApiService, UtilsService } from 'src/app/shared/services';
 export class ProductComponent implements OnInit {
   @Input() product: IProductPayload;
   starIcons: string[] = new Array();
-  variationImage: string = '';
-  isVariationImageVisible: boolean = false;
+  variationImage = '';
+  isVariationImageVisible = false;
   modalSku: any;
   bpObserver: Observable<BreakpointState> = this.breakpointObserver.observe(
     Breakpoints.Handset
@@ -55,12 +55,12 @@ export class ProductComponent implements OnInit {
     // });
   }
 
-  ngOnDestroy(): void {
+  onDestroy(): void {
     this.bpSubscription.unsubscribe();
   }
 
   setRating(): void {
-    let starCount: number = Math.round(this.product.rating * 2) / 2;
+    let starCount = Math.round(this.product.rating * 2) / 2;
     while (starCount > 0.5) {
       this.starIcons.push('star');
       starCount -= 1;

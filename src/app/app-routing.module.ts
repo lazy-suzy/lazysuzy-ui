@@ -7,7 +7,9 @@ import {
   WishlistComponent,
   CategoriesComponent,
   AllProductsComponent,
-  CartComponent
+  CartComponent,
+  ForgotPasswordComponent,
+  ResetPasswordComponent
 } from './feature/containers';
 import {
   AboutusComponent,
@@ -16,7 +18,6 @@ import {
 } from './core/components';
 import {
   ProductDetailsMobileComponent,
-  BillingComponent,
   PaymentComponent,
   OrderSuccessComponent
 } from './feature/components';
@@ -27,7 +28,8 @@ const routes: Routes = [
 
   {
     path: environment.BOARD_BASE_HREF,
-    loadChildren: () => import('./modules/board/board.module').then(m => m.BoardModule),
+    loadChildren: () =>
+      import('./modules/board/board.module').then((m) => m.BoardModule)
     // pathMatch: 'full'
   },
 
@@ -60,15 +62,27 @@ const routes: Routes = [
     component: ProductDetailsMobileComponent,
     pathMatch: 'full'
   },
+  {
+    path: 'forgot-password',
+    component: ForgotPasswordComponent,
+    pathMatch: 'full'
+  },
+  {
+    path: 'reset-password',
+    component: ResetPasswordComponent,
+    pathMatch: 'full'
+  },
   // {
   //   path: 'blog',
   //   loadChildren: () => import('./feature/blog/blog/blog.module').then(m => m.BlogModule)
   // }
   {
     path: 'admin-dashboard',
-    loadChildren: () => import('./modules/admin-dashboard/admin-dashboard.module').then(m => m.AdminDashboardModule)
-  },
-
+    loadChildren: () =>
+      import('./modules/admin-dashboard/admin-dashboard.module').then(
+        (m) => m.AdminDashboardModule
+      )
+  }
 ];
 
 @NgModule({

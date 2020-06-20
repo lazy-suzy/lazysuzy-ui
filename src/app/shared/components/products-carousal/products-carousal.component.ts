@@ -36,19 +36,20 @@ export class ProductsCarousalComponent implements OnInit {
   @Input() data: any = [];
   @Output() updates: EventEmitter<any> = new EventEmitter();
 
-  @Input() isBanner: boolean = false;
-  @Input() nameOfCarousal: string = '';
+  @Input() isBanner = false;
+  @Input() nameOfCarousal = '';
 
   constructor() {}
 
   ngOnInit() {}
 
+  // tslint:disable-next-line: use-lifecycle-interface
   ngOnChanges(changes: any) {
     if (
-      changes['data'] &&
-      changes['data'].previousValue !== changes['data'].currentValue
+      changes.data &&
+      changes.data.previousValue !== changes.data.currentValue
     ) {
-      this.data = changes['data'].currentValue;
+      this.data = changes.data.currentValue;
     }
   }
 

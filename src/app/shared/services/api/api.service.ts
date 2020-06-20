@@ -175,12 +175,12 @@ export class ApiService {
     return this.httpService.get(url);
   }
 
-  getSearchProducts(search_query: string): Observable<ISearchProductsPayload> {
+  getSearchProducts(searchQuery: string): Observable<ISearchProductsPayload> {
     const endpoint = `products/_search`;
     const headers = new HttpHeaders({
       'Content-Type': 'application/json'
     });
-    const url = `${env.ES_API_BASE_HREF}${endpoint}?source=${search_query}&source_content_type=application%2Fjson`;
+    const url = `${env.ES_API_BASE_HREF}${endpoint}?source=${searchQuery}&source_content_type=application%2Fjson`;
     return this.httpService.get(url, headers);
   }
 
@@ -189,7 +189,7 @@ export class ApiService {
     // const sortTypes = '';
     // const endpoint = `products/${department}/${category}`;
     const endpoint = `wishlist`;
-    let url: string = `${env.API_BASE_HREF}${endpoint}${
+    const url = `${env.API_BASE_HREF}${endpoint}${
       isBoard ? '?board-view=true' : ''
     }`;
     const headers = new HttpHeaders({
@@ -289,11 +289,11 @@ export class ApiService {
     );
   }
 
-  getAuthToken(access_token, provider) {
+  getAuthToken(accessToken, provider) {
     const endpoint = `oauth/token`;
     const url = `${env.API_BASE_HREF}${endpoint}`;
     const data = {
-      access_token,
+      access_token: accessToken,
       client_id: env.CLIENT_ID,
       client_secret: env.CLIENT_SECRET,
       grant_type: 'social',
@@ -380,5 +380,20 @@ export class ApiService {
     const endpoint = `user/update`;
     const url = `${env.API_BASE_HREF}${endpoint}`;
     return this.httpService.post(url, data, headers);
+  }
+  sendPasswordResetLink(data) {
+    const endpoint = `password/create`;
+    const url = `${env.API_BASE_HREF}${endpoint}`;
+    return this.httpService.post(url, data);
+  }
+  validateResetPasswordToken(token) {
+    const endpoint = `password/find/${token}`;
+    const url = `${env.API_BASE_HREF}${endpoint}`;
+    return this.httpService.get(url);
+  }
+  setNewPassword(data) {
+    const endpoint = `password/reset`;
+    const url = `${env.API_BASE_HREF}${endpoint}`;
+    return this.httpService.post(url, data);
   }
 }

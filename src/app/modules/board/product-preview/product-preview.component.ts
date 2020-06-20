@@ -38,13 +38,13 @@ export class AppProductPreviewComponent implements OnInit {
         this.isUsersProduct();
       });
   }
-
+  // tslint:disable-next-line: use-lifecycle-interface
   ngOnChanges(changes: any) {
     if (
-      changes['data'] &&
-      changes['data'].previousValue !== changes['data'].currentValue
+      changes.data &&
+      changes.data.previousValue !== changes.data.currentValue
     ) {
-      this.data = changes['data'].currentValue || {};
+      this.data = changes.data.currentValue || {};
       this.isUsersProduct();
       this.updateProductUrl(this.data.product_url, this.data.listing_url);
       this.updatePriceFormat(this.data.is_price, this.data.price);
@@ -63,13 +63,13 @@ export class AppProductPreviewComponent implements OnInit {
   }
 
   updatePriceFormat(price, searchProductsPrice) {
-    let data = price || searchProductsPrice;
+    const data = price || searchProductsPrice;
     if (!data) {
       this.maxPrice = null;
       this.minPrice = null;
       return;
     }
-    let splitedPrice = data.split('-');
+    const splitedPrice = data.split('-');
     this.minPrice = splitedPrice[0];
     if (splitedPrice.length > 1) {
       this.maxPrice = splitedPrice[1];
@@ -79,7 +79,7 @@ export class AppProductPreviewComponent implements OnInit {
   }
 
   isUsersProduct() {
-    if (this.userId == this.data.user_id) {
+    if (this.userId === this.data.user_id) {
       this.isEditBtn = true;
     } else {
       this.isEditBtn = false;
@@ -94,7 +94,9 @@ export class AppProductPreviewComponent implements OnInit {
       } else {
         this.productPageUrl = '//' + this.productPageUrl;
       }
-    } else return;
+    } else {
+      return;
+    }
   }
   openDialog(): void {
     const dialogRef = this.dialog.open(UploadFileDetailsComponent, {
@@ -107,7 +109,7 @@ export class AppProductPreviewComponent implements OnInit {
       disableClose: true
     });
     dialogRef.afterClosed().subscribe((result) => {
-      let updatedData = result.data;
+      const updatedData = result.data;
       this.data.is_private = updatedData.is_private;
       this.data.is_price = updatedData.price;
       this.data.listing_url = updatedData.listing_url;

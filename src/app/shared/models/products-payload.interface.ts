@@ -42,6 +42,7 @@ export interface IProduct {
 export interface ISearchProductsPayload {
   took: number;
   timed_out: boolean;
+  // tslint:disable-next-line: ban-types
   _shards: Object;
   hits: any;
 }
@@ -60,6 +61,7 @@ export interface ISearchProduct {
   rating: string;
   name: string;
   site: string;
+  // tslint:disable-next-line: ban-types
   product_name: Object;
   site_name: string;
   is_new: boolean;

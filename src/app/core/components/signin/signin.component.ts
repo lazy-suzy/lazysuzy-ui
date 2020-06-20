@@ -20,11 +20,11 @@ export class SigninComponent implements OnInit {
   isHandset: boolean;
   userCookie: string;
   user: any;
-  error: boolean = false;
+  error = false;
   errorMsg: string;
-  email: string = '';
-  password: string = '';
-  thanksMsg: boolean = false;
+  email = '';
+  password = '';
+  thanksMsg = false;
 
   bpObserver: Observable<BreakpointState> = this.breakpointObserver.observe(
     Breakpoints.Handset
@@ -46,7 +46,7 @@ export class SigninComponent implements OnInit {
     );
   }
 
-  ngOnDestroy(): void {
+  onDestroy(): void {
     this.bpSubscription.unsubscribe();
   }
 
@@ -97,5 +97,9 @@ export class SigninComponent implements OnInit {
 
   openSignupDialog() {
     this.utils.openSignupDialog(this.isHandset);
+  }
+
+  closeDialogs() {
+    this.utils.closeDialogs();
   }
 }

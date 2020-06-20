@@ -15,7 +15,7 @@ export class OrderSuccessComponent implements OnInit {
   cardDetails: any = [];
   cartProductsLength: number;
   subTotalAmount: number;
-  totalShippingCharge: number = 0;
+  totalShippingCharge = 0;
   totalAmount: number;
   perItemShippingCharge = 25;
   orderDate;
@@ -61,11 +61,11 @@ export class OrderSuccessComponent implements OnInit {
         );
       });
   }
-  ngOnDestroy(): void {
+  onDestroy(): void {
     this.eventSubscription.unsubscribe();
   }
   calculateCartData() {
-    for (let product of this.cartProducts) {
+    for (const product of this.cartProducts) {
       this.subTotalAmount = this.subTotalAmount + product.price * product.count;
       this.cartProductsLength = this.cartProductsLength + product.count;
       this.totalShippingCharge += product.count * product.ship_custom;
@@ -78,11 +78,9 @@ export class OrderSuccessComponent implements OnInit {
     } else {
       this.showError = false;
       // const localUser: any = JSON.parse(localStorage.getItem('user') || '{}');
-      const registeredEmail: string =
-        localStorage.getItem('registeredEmail') || '';
-      const registeredName: string =
-        localStorage.getItem('registeredName') || '';
-      let data = {
+      const registeredEmail = localStorage.getItem('registeredEmail') || '';
+      const registeredName = localStorage.getItem('registeredName') || '';
+      const data = {
         name: registeredName,
         email: registeredEmail,
         password: this.password
@@ -92,7 +90,7 @@ export class OrderSuccessComponent implements OnInit {
           localStorage.setItem('user', JSON.stringify(payload.success.user));
           this.showSuccess = true;
           const self = this;
-          setTimeout(function () {
+          setTimeout(() => {
             self.isLoggedIn = true;
           }, 1000);
         },

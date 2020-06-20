@@ -37,12 +37,12 @@ export class AddFileUploadComponent {
       authToken: `Bearer ${this.cookie.get('token')}`
     });
     this.uploader.onBuildItemForm = (fileItem: any, form: any) => {
-      for (let [key, value] of Object.entries(this.currentAsset)) {
+      for (const [key, value] of Object.entries(this.currentAsset)) {
         form.append(key, value);
       }
     };
     this.uploader.onAfterAddingFile = (fileItem) => {
-      let url = window.URL
+      const url = window.URL
         ? window.URL.createObjectURL(fileItem._file)
         : (window as any).webkitURL.createObjectURL(fileItem._file);
       this.localImageUrl = url;
@@ -52,7 +52,6 @@ export class AddFileUploadComponent {
       this.handleFileUploadSuccess(res);
     });
     this.uploader.onAfterAddingFile = (file) => {
-      debugger;
       file.withCredentials = false;
       this.openDialog();
     };
@@ -66,7 +65,7 @@ export class AddFileUploadComponent {
   handleFileUploadSuccess(res) {
     const response = JSON.parse(res);
     this.fileUploadedChanges.emit({
-      response: response
+      response
     });
   }
 
@@ -74,7 +73,7 @@ export class AddFileUploadComponent {
     this.uploader.queue.forEach((file) => {
       file.remove();
     });
-    (<HTMLInputElement>document.getElementById('customImageFile')).value = '';
+    (document.getElementById('customImageFile') as HTMLInputElement).value = '';
     this.handleCancelUpload();
     // this.uploader.queue.pop();
     // this.localImageUrl = null
@@ -102,9 +101,9 @@ export class AddFileUploadComponent {
       if (result) {
         const asset = result.data;
         this.currentAsset = { ...this.currentAsset, ...asset };
-        //MIKE: NOTE
+        // MIKE: NOTE
         this.uploader.uploadAll();
-        //Comment above line and uncomment below line to simulate success file upload.
+        // Comment above line and uncomment below line to simulate success file upload.
         // this.handleFileUploadSuccess();
       } else {
         this.clearEverything();

@@ -19,6 +19,9 @@ export class BoardPreviewComponent implements OnInit {
   loadedAsEmbed = false;
   eventSubscription: Subscription;
   userName: string;
+  // bpObserver: Observable<BreakpointState> = this.breakpointObserver.observe(
+  //   Breakpoints.Handset
+  // );
   constructor(
     private boardService: BoardService,
     private route: ActivatedRoute,
@@ -27,8 +30,10 @@ export class BoardPreviewComponent implements OnInit {
     private utilsService: UtilsService,
     private eventEmitterService: EventEmitterService
   ) {
-    if (route.snapshot['_routerState'].url.match(/embed/))
+    // tslint:disable-next-line: no-string-literal
+    if (route.snapshot['_routerState'].url.match(/embed/)) {
       this.loadedAsEmbed = true;
+    }
   }
 
   presetFonts = [];
@@ -95,7 +100,7 @@ export class BoardPreviewComponent implements OnInit {
               this.boardFound = true;
               this.appMeta.board = response[0];
               if (
-                this.appMeta.board.is_private &&
+                this.appMeta.board.type_privacy === 0 &&
                 this.appMeta.board.user_id !== user.id
               ) {
                 this.router.navigate([`/`]);
@@ -103,7 +108,7 @@ export class BoardPreviewComponent implements OnInit {
               this.boardState = JSON.parse(this.appMeta.board.state.toString());
               if (this.boardState) {
                 this.boardState.objects.forEach((object) => {
-                  if (object.type == 'textbox') {
+                  if (object.type === 'textbox') {
                     this.addFontFamilyIfNotAdded(object.fontFamily);
                   }
                 });
@@ -114,39 +119,45 @@ export class BoardPreviewComponent implements OnInit {
                   this.enterPreviewMode();
                   this.handleResize(true);
                   setTimeout(() => {
+                    // tslint:disable-next-line: prefer-for-of
                     for (
                       let index = 0;
                       index < this.canvas._objects.length;
                       index++
                     ) {
-                      if (this.canvas._objects[index].type == 'textbox')
+                      if (this.canvas._objects[index].type === 'textbox') {
                         this.canvas._objects[index].dirty = true;
+                      }
                     }
                     this.canvas.renderAll();
                   }, 3000);
                 }
               });
             }
-
-            if (this.boardFound == false) this.router.navigate(['/']);
+            if (this.boardFound === false || !response.length) {
+              this.router.navigate(['/']);
+            }
           });
         });
       });
   }
 
   updateCanvasCenter = () => {
-    let center = this.canvas.getCenter();
+    const center = this.canvas.getCenter();
     this.canvasMeta.value.center = {
       x: center.left,
       y: center.top
     };
+    // tslint:disable-next-line: semicolon
   };
 
   handleResize = (forceUpdate = false) => {
-    let previousWidth = forceUpdate
+    const previousWidth = forceUpdate
       ? this.boardState.canvas.width
       : this.canvas.width;
-    let currentWidth = $(this.canvasMeta.identifier.dropArea).parent().width();
+    const currentWidth = $(this.canvasMeta.identifier.dropArea)
+      .parent()
+      .width();
 
     this.appMeta.value.scaleFactor = currentWidth / previousWidth;
 
@@ -171,6 +182,7 @@ export class BoardPreviewComponent implements OnInit {
 
     // update canvas center point
     this.updateCanvasCenter();
+    // tslint:disable-next-line: semicolon
   };
   enterPreviewMode = () => {
     this.canvas.hoverCursor = 'pointer';
@@ -182,8 +194,8 @@ export class BoardPreviewComponent implements OnInit {
       object.editable = false;
     });
 
-    let imageObjects = this.canvas.getObjects('image');
-    let productSkus = [];
+    const imageObjects = this.canvas.getObjects('image');
+    const productSkus = [];
     imageObjects.forEach((object, index) => {
       this.boardProducts.push({
         main_image: object.referenceObject.path || '',
@@ -194,10 +206,11 @@ export class BoardPreviewComponent implements OnInit {
         price: object.referenceObject.price || '',
         sku: object.referenceObject.sku || ''
       });
-      if (object.referenceObject.sku)
+      if (object.referenceObject.sku) {
         productSkus.push(object.referenceObject.sku);
-      let objectCenter = object.getCenterPoint();
-      let textToInsert = new fb.Text(` ${index + 1} `, {
+      }
+      const objectCenter = object.getCenterPoint();
+      const textToInsert = new fb.Text(` ${index + 1} `, {
         left: objectCenter.x,
         top: objectCenter.y,
         fontSize: 20,
@@ -211,21 +224,22 @@ export class BoardPreviewComponent implements OnInit {
     });
 
     this.canvas.renderAll();
-    let skuData = productSkus.join();
+    const skuData = productSkus.join();
     this.boardService
       .getBoardProductImages(productSkus[0], skuData)
       .subscribe((response) => {
-        let responseData: any = response;
-        for (let prod of responseData) {
+        const responseData: any = response;
+        for (const prod of responseData) {
           this.boardProducts.find((item) => item.sku === prod.sku).main_image =
             prod.main_image;
         }
-        for (let prod of this.boardProducts) {
+        for (const prod of this.boardProducts) {
           if (prod.main_image.substring(0, 8) === '/storage') {
             prod.main_image = environment.BASE_HREF + prod.main_image;
           }
         }
       });
+    // tslint:disable-next-line: semicolon
   };
   addFontFamilyIfNotAdded(fontFamily: string) {
     if (this.presetFonts.indexOf(fontFamily) === -1) {
@@ -242,4 +256,6 @@ export class BoardPreviewComponent implements OnInit {
       this.utilsService.openMatDialog(product);
     }
   }
+
+  wishlistProduct() {}
 }

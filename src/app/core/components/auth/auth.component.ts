@@ -2,26 +2,26 @@ import { Component, OnInit, ViewChild, ElementRef, Input } from '@angular/core';
 import {
   AuthService,
   FacebookLoginProvider,
-  GoogleLoginProvider,
+  GoogleLoginProvider
 } from 'angularx-social-login';
 import { CookieService } from 'ngx-cookie-service';
 import {
   ApiService,
   UtilsService,
-  EventEmitterService,
+  EventEmitterService
 } from 'src/app/shared/services';
 import { environment as env } from 'src/environments/environment';
-import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-auth',
   templateUrl: './auth.component.html',
-  styleUrls: ['./auth.component.less'],
+  styleUrls: ['./auth.component.less']
 })
 export class AuthComponent implements OnInit {
   @ViewChild('closeLoginModal', { static: false }) closeLoginModal: ElementRef;
   @ViewChild('closeSignupModal', { static: false })
-  @ViewChild('signupBtn', { static: false }) signupBtn: ElementRef;
+  @ViewChild('signupBtn', { static: false })
+  signupBtn: ElementRef;
   closeSignupModal: ElementRef;
 
   @Input() isHandset: boolean;
@@ -29,7 +29,7 @@ export class AuthComponent implements OnInit {
   initials: any;
   googleRedirect = env.GOOGLE_LINK;
   facebookRedirect = env.FACEBOOK_LINK;
-  name: string = '';
+  name = '';
   expiredDate = new Date();
   initialized = false;
   private attribute = {
@@ -45,38 +45,42 @@ export class AuthComponent implements OnInit {
     private apiService: ApiService,
     private cookie: CookieService,
     private utils: UtilsService,
-    private eventEmitterService: EventEmitterService,
+    private eventEmitterService: EventEmitterService
   ) {
     this.expiredDate.setMonth(this.expiredDate.getMonth() + 6);
   }
 
   ngOnInit() {
     // localStorage.setItem('cart', '0');
-    if (this.initialized == false) {
-      this.eventEmitterService.invokeFetchUser.subscribe(
-        (payload) => {
-          this.cookie.set(this.attribute.cookieUserRegularToken, payload.token, this.expiredDate, '/');
-          localStorage.setItem(this.attribute.lsRegularUser, JSON.stringify(payload.user));
-          this.updateUser(payload.user);
-        }
-      );
-      this.eventEmitterService.invokeSocialLogin.subscribe(
-        (platform) => {
-          this.socialSignIn(platform);
-        }
-      );
-      this.eventEmitterService.userChangeEvent.asObservable().subscribe(
-        (user) => {
+    if (this.initialized === false) {
+      this.eventEmitterService.invokeFetchUser.subscribe((payload) => {
+        this.cookie.set(
+          this.attribute.cookieUserRegularToken,
+          payload.token,
+          this.expiredDate,
+          '/'
+        );
+        localStorage.setItem(
+          this.attribute.lsRegularUser,
+          JSON.stringify(payload.user)
+        );
+        this.updateUser(payload.user);
+      });
+      this.eventEmitterService.invokeSocialLogin.subscribe((platform) => {
+        this.socialSignIn(platform);
+      });
+      this.eventEmitterService.userChangeEvent
+        .asObservable()
+        .subscribe((user) => {
           this.user = user;
           this.initialized = true;
-        }
-      );
+        });
     }
     this.resolveUser();
   }
   private updateUser(user) {
-    this.user = typeof user == "string" ? JSON.parse(user) : user;
-    if (this.user.name){
+    this.user = typeof user === 'string' ? JSON.parse(user) : user;
+    if (this.user.name) {
       const initials = this.user.name.match(/\b\w/g) || [];
       this.initials = (
         (initials.shift() || '') + (initials.pop() || '')
@@ -87,9 +91,9 @@ export class AuthComponent implements OnInit {
 
   public socialSignIn(socialPlatform: string) {
     let socialPlatformProvider;
-    if (socialPlatform == 'facebook') {
+    if (socialPlatform === 'facebook') {
       socialPlatformProvider = FacebookLoginProvider.PROVIDER_ID;
-    } else if (socialPlatform == 'google') {
+    } else if (socialPlatform === 'google') {
       socialPlatformProvider = GoogleLoginProvider.PROVIDER_ID;
     } else {
       return;
@@ -101,14 +105,14 @@ export class AuthComponent implements OnInit {
         .subscribe((payload: any) => {
           this.cookie.set(
             'token',
-            `${payload.access_token}`,
+            `${payload.success.token}`,
             this.expiredDate,
             '/'
           );
-          localStorage.setItem('user', JSON.stringify(userData));
-          // this.fetchUser();
-          this.closeLoginModal.nativeElement.click();
-          this.closeSignupModal.nativeElement.click();
+
+          localStorage.setItem('user', JSON.stringify(payload.user));
+          this.updateUser(payload.user);
+          this.utils.closeDialogs();
         });
     });
   }
@@ -134,52 +138,79 @@ export class AuthComponent implements OnInit {
   createGuestUser() {
     this.apiService.signup({ guest: 1 }).subscribe((payload: any) => {
       if (payload.success) {
-        localStorage.setItem(this.attribute.lsGuestUser, JSON.stringify(payload.success.user));
-        localStorage.setItem(this.attribute.lsGuestUserToken, payload.success.token);
+        localStorage.setItem(
+          this.attribute.lsGuestUser,
+          JSON.stringify(payload.success.user)
+        );
+        localStorage.setItem(
+          this.attribute.lsGuestUserToken,
+          payload.success.token
+        );
 
-        localStorage.setItem(this.attribute.lsRegularUser, localStorage.getItem(this.attribute.lsGuestUser));
-        this.cookie.set(this.attribute.cookieUserRegularToken, localStorage.getItem(this.attribute.lsGuestUserToken), this.expiredDate, '/');
-      
+        localStorage.setItem(
+          this.attribute.lsRegularUser,
+          localStorage.getItem(this.attribute.lsGuestUser)
+        );
+        this.cookie.set(
+          this.attribute.cookieUserRegularToken,
+          localStorage.getItem(this.attribute.lsGuestUserToken),
+          this.expiredDate,
+          '/'
+        );
+
         this.updateUser(localStorage.getItem(this.attribute.lsRegularUser));
       }
     });
-  }; 
+  }
 
   checkIfGuestIsValid() {
+    if (
+      localStorage.getItem(this.attribute.lsGuestUser) &&
+      localStorage.getItem(this.attribute.lsGuestUserToken)
+    ) {
+      localStorage.setItem(
+        this.attribute.lsRegularUser,
+        localStorage.getItem(this.attribute.lsGuestUser)
+      );
+      this.cookie.set(
+        this.attribute.cookieUserRegularToken,
+        localStorage.getItem(this.attribute.lsGuestUserToken),
+        this.expiredDate,
+        '/'
+      );
 
-    if (localStorage.getItem(this.attribute.lsGuestUser) && localStorage.getItem(this.attribute.lsGuestUserToken)) {
-      localStorage.setItem(this.attribute.lsRegularUser, localStorage.getItem(this.attribute.lsGuestUser));
-      this.cookie.set(this.attribute.cookieUserRegularToken, localStorage.getItem(this.attribute.lsGuestUserToken), this.expiredDate, '/');
-      
       this.apiService.keepAlive().subscribe((payload: any) => {
         // guest profile is valid
-        if (payload.alive)
+        if (payload.alive) {
           this.updateUser(localStorage.getItem(this.attribute.lsGuestUser));
-        // guest profile is not valid
-        else
+        } else {
+          // guest profile is not valid
           this.createGuestUser();
+        }
       });
-    }
-    else
+    } else {
       this.createGuestUser();
-  
+    }
   }
 
   resolveUser() {
-
     // check if regular user exists
-    if (localStorage.getItem(this.attribute.lsRegularUser) && this.cookie.get(this.attribute.cookieUserRegularToken)) {
+    if (
+      localStorage.getItem(this.attribute.lsRegularUser) &&
+      this.cookie.get(this.attribute.cookieUserRegularToken)
+    ) {
       // check if the user session is valid
       this.apiService.keepAlive().subscribe((payload: any) => {
         // check if regular user profile is valid
-        if (payload.alive)
+        if (payload.alive) {
           this.updateUser(localStorage.getItem(this.attribute.lsRegularUser));
-        // check if guest profile is valid
-        else
+        } else {
+          // check if guest profile is valid
           this.checkIfGuestIsValid();
+        }
       });
-    }
-    else
+    } else {
       this.checkIfGuestIsValid();
+    }
   }
 }

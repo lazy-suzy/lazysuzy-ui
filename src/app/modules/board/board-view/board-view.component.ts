@@ -39,6 +39,24 @@ declare const fb: any;
   styleUrls: ['./board-view.component.less', '../board.component.less']
 })
 export class BoardViewComponent implements OnInit, AfterViewInit {
+  constructor(
+    private cookieService: CookieService,
+    private dialog: MatDialog,
+    public boardService: BoardService,
+    private route: ActivatedRoute,
+    private router: Router,
+    private fontPickerService: FontPickerService,
+    private apiService: ApiService,
+    private breakpointObserver: BreakpointObserver,
+    private eventEmitterService: EventEmitterService
+  ) {
+    const user = JSON.parse(localStorage.getItem('user'));
+    this.currentUser = user;
+
+    if (router.getCurrentNavigation().extras.state) {
+      this.justCreated = router.getCurrentNavigation().extras.state.justCreated;
+    }
+  }
   shortcuts: ShortcutInput[] = [];
   productsSubscription: Subscription;
   favoriteProducts: IProductPayload[];
@@ -67,37 +85,23 @@ export class BoardViewComponent implements OnInit, AfterViewInit {
   );
   bpSubscription: Subscription;
   tabletSubscription: Subscription;
-  isTablet: boolean = false;
-  showMenu: boolean = false;
+  isTablet = false;
+  isHandset = false;
+  showMenu = false;
   searchText: string;
-  iPageNo: number = 0;
+  iPageNo = 0;
   iLimit: number;
-  total_count: number = 0;
+  totalCount = 0;
   hasSearched: boolean;
-  hasLoadedAllProducts: boolean = false;
+  hasLoadedAllProducts = false;
   private pickr: Pickr;
   color: string;
   showPicker: boolean;
-  hasCanvasLoader: boolean = false;
+  hasCanvasLoader = false;
+  hasFilterEnabled = false;
+  hasPanelFixed = false;
   @ViewChild('colorPicker', { static: false })
   public colorPicker: ElementRef;
-  constructor(
-    private cookieService: CookieService,
-    private dialog: MatDialog,
-    public boardService: BoardService,
-    private route: ActivatedRoute,
-    private router: Router,
-    private fontPickerService: FontPickerService,
-    private apiService: ApiService,
-    private breakpointObserver: BreakpointObserver,
-    private eventEmitterService: EventEmitterService
-  ) {
-    const user = JSON.parse(localStorage.getItem('user'));
-    this.currentUser = user;
-
-    if (router.getCurrentNavigation().extras.state)
-      this.justCreated = router.getCurrentNavigation().extras.state.justCreated;
-  }
 
   public presetFonts = [
     'Allura',
@@ -114,243 +118,11 @@ export class BoardViewComponent implements OnInit, AfterViewInit {
     'Times'
   ];
   public font: Font = new Font({
-    family: 'Roboto',
+    family: '',
     size: '48px',
     style: 'regular',
     styles: ['regular']
   });
-  search(isNewSearch: boolean = false) {
-    if (!this.hasSearched) {
-      this.remoteProducts = [];
-    }
-    this.showLoader = true;
-    this.iLimit = 24;
-    this.iPageNo = isNewSearch ? 0 : this.iPageNo;
-    const queryString = JSON.stringify({
-      from: this.iPageNo * this.iLimit,
-      size: this.iLimit,
-      query: {
-        bool: {
-          must: [
-            {
-              match: {
-                name: {
-                  query: this.searchText + '*'
-                }
-              }
-            },
-            {
-              match: {
-                image_xbg_processed: {
-                  query: 1
-                }
-              }
-            }
-          ]
-        }
-      }
-    });
-
-    if (this.selectedItem === 'select') {
-      this.selectedItem = 'browse';
-    }
-    this.productsSubscription = this.apiService
-      .getSearchProducts(queryString)
-      .subscribe((payload: any) => {
-        const { hits } = payload.hits;
-        this.hasSearched = true;
-        let products = hits.map((hit: any) => hit._source);
-        for (let i in products) {
-          if (products[i].board_thumb)
-            products[i].board_thumb =
-              '//www.lazysuzy.com' + products[i].board_thumb;
-        }
-
-        this.remoteProducts = isNewSearch
-          ? products
-          : [...this.remoteProducts, ...(products || [])];
-        this.remoteProducts = this.remoteProducts.map((ele, i) => {
-          return {
-            ...ele,
-            site: ele.site_name,
-            refId: i
-          };
-        });
-        if (this.remoteProducts.length < 24 || !this.remoteProducts.length) {
-          this.hasLoadedAllProducts = true;
-        }
-        this.iPageNo += 1;
-        this.showLoader = false;
-      });
-  }
-  updateFontAndSize(font: Font) {
-    let fontCss = font.getStyles();
-
-    this.appMeta.value.fontFamily = fontCss['font-family'];
-    this.appMeta.value.fontSize = fontCss['font-size'].replace('px', '');
-    this.appMeta.value.fontStyle = fontCss['font-style'];
-    this.appMeta.value.fontWeight = fontCss['font-weight'];
-
-    this.appMeta.flag.isFontToolbarDirty = true;
-    this.addFontFamilyIfNotAdded(fontCss['font-family']);
-    this.updateCurrentObject(true);
-  }
-
-  openPopup(param: string) {
-    if (
-      this.appMeta.board.data[this.appMeta.board.currentIndex].type_privacy == 0
-    ) {
-      this.appMeta.board.data[this.appMeta.board.currentIndex].type_privacy = 1;
-      this.boardService
-        .updateBoard(
-          new Board({
-            uuid: this.appMeta.board.data[this.appMeta.board.currentIndex].uuid,
-            type_privacy: 1
-          })
-        )
-        .subscribe();
-    }
-
-    const dialogRef = this.dialog.open(BoardPopupComponent, {
-      panelClass: 'board-popup-dialog-container',
-      data: {
-        type: param,
-        board: this.appMeta.board.data[this.appMeta.board.currentIndex]
-      },
-      autoFocus: false,
-      width: '40%'
-    });
-    // dialogRef.afterClosed().subscribe(result => {
-    //   console.log('The dialog was closed', result);
-    // });
-  }
-  toggleMenu() {
-    this.showMenu = !this.showMenu;
-  }
-  openBoardConfig() {
-    const dialogRef = this.dialog.open(BoardPopupConfigComponent, {
-      panelClass: 'custom-dialog-container',
-      data: {
-        color: this.canvas.backgroundColor
-          ? (
-              '#' + new fb.Color(this.canvas.backgroundColor).toHex()
-            ).toLocaleLowerCase()
-          : null,
-        background: this.canvas.backgroundImage
-          ? this.canvas.backgroundImage._element.currentSrc
-          : ''
-      },
-      width: '40%',
-      autoFocus: false
-    });
-
-    dialogRef.componentInstance.onChange.subscribe(this.handleConfigChange);
-  }
-
-  selectSideBarItem(item) {
-    this.selectedItem = item.value;
-    if (this.selectedItem === 'browse') {
-      this.filterData = {};
-      this.appliedFilters = '';
-      this.iPageNo = 0;
-      this.remoteProducts = [];
-      this.pageNo = 0;
-      let selCat = this.boardService.getCategory();
-      if (this.hasSearched) {
-        this.search();
-      } else {
-        this.getBrowseData(selCat);
-      }
-      this.productForPreview = null;
-    }
-    this.productForPreview = null;
-    this.handlePreviewMode(this.selectedItem);
-  }
-
-  handleFiltersUpdates(event) {
-    if (event.name === 'APPLY_FILTERS' || event.name === 'CLEAR_FILTERS') {
-      //Apply filters
-      this.xpandStatus = false;
-      this.appliedFilters = event.payload;
-      let selCat = this.boardService.getCategory();
-      this.remoteProducts = [...[]];
-      this.pageNo = 0;
-      this.hasSearched = false;
-      this.getBrowseData(selCat);
-    } else if (event.name === 'CANCEL_FILTERS') {
-      this.xpandStatus = false;
-    }
-  }
-
-  handleAddProductBoardPreview($event) {}
-
-  handleSelectCategory($event) {
-    this.boardService.setCategory($event);
-    this.hasSearched = false;
-    this.selectSideBarItem({
-      name: 'Browse',
-      label: 'Browse',
-      value: 'browse',
-      route: 'board-browse'
-    });
-  }
-
-  handleProductPreview(product) {
-    this.productForPreview = { ...product };
-  }
-
-  handleClearProductPreview(product) {
-    this.productForPreview = null;
-  }
-
-  getBrowseData(categ) {
-    this.selectedCategory = categ;
-    this.showLoader = true;
-    this.hasSearched = false;
-    this.boardService
-      .getBrowseTabData(this.selectedCategory, this.appliedFilters, this.pageNo)
-      .subscribe((s: any) => {
-        this.remoteProducts = [...this.remoteProducts, ...(s.products || [])];
-        this.remoteProducts = this.remoteProducts.map((ele, i) => {
-          return {
-            ...ele,
-            refId: i
-          };
-        });
-        this.filterData = s.filterData || {};
-        this.pageNo++;
-        if (this.remoteProducts.length < 24 || !this.remoteProducts.length) {
-          this.hasLoadedAllProducts = true;
-        }
-        this.boardService.setBoardData(
-          this.remoteProducts,
-          this.selectedCategory,
-          s.filterData || {}
-        );
-        this.showLoader = false;
-      });
-  }
-
-  loadMore() {
-    let selCat = this.boardService.getCategory();
-    if (this.hasSearched) {
-      this.search();
-    } else {
-      this.getBrowseData(selCat);
-    }
-  }
-
-  handleGoToSelect(event) {
-    this.boardService.resetBoard();
-    this.iPageNo = 0;
-    this.hasSearched = false;
-    this.selectSideBarItem({
-      name: 'Select',
-      label: 'Select',
-      value: 'select',
-      route: 'board-select'
-    });
-  }
 
   canvas: any;
   canvasMeta = {
@@ -504,10 +276,10 @@ export class BoardViewComponent implements OnInit, AfterViewInit {
 
       dropzoneElement: '.add-new',
 
-      uploadByURL: "input[name='url']",
-      uploadByURLName: "input[name='name']",
-      uploadByURLPrice: "input[name='price']",
-      uploadByURLIsPrivate: "input[name='is_private']",
+      uploadByURL: 'input[name="url"]',
+      uploadByURLName: 'input[name="name"]',
+      uploadByURLPrice: 'input[name="price"]',
+      uploadByURLIsPrivate: 'input[name="is_private"]',
       uploadByURLSubmit: '#step3 .red-button',
 
       backgroundColorElement: '.canvas-pallete-color',
@@ -523,6 +295,266 @@ export class BoardViewComponent implements OnInit, AfterViewInit {
   remoteProducts = [];
   boardPreviewProducts = [];
 
+  search(isNewSearch = false) {
+    if (this.isHandset) {
+      this.hasPanelFixed = false;
+    }
+    if (!this.hasSearched) {
+      this.remoteProducts = [];
+    }
+    this.showLoader = true;
+    this.iLimit = 24;
+    this.iPageNo = isNewSearch ? 0 : this.iPageNo;
+    const queryString = JSON.stringify({
+      from: this.iPageNo * this.iLimit,
+      size: this.iLimit,
+      query: {
+        bool: {
+          must: [
+            {
+              match: {
+                name: {
+                  query: this.searchText + '*'
+                }
+              }
+            },
+            {
+              match: {
+                image_xbg_processed: {
+                  query: 1
+                }
+              }
+            }
+          ]
+        }
+      }
+    });
+
+    if (this.selectedItem === 'select') {
+      this.selectedItem = 'browse';
+    }
+    this.productsSubscription = this.apiService
+      .getSearchProducts(queryString)
+      .subscribe((payload: any) => {
+        const { hits } = payload.hits;
+        this.hasSearched = true;
+        const products = hits.map((hit: any) => hit._source);
+        for (const i in products) {
+          if (products[i].board_thumb) {
+            products[i].board_thumb =
+              '//www.lazysuzy.com' + products[i].board_thumb;
+          }
+        }
+
+        this.remoteProducts = isNewSearch
+          ? products
+          : [...this.remoteProducts, ...(products || [])];
+        this.remoteProducts = this.remoteProducts.map((ele, i) => {
+          return {
+            ...ele,
+            site: ele.site_name,
+            refId: i
+          };
+        });
+        this.checkFilterEnabled(this.filterData);
+        if (this.remoteProducts.length < 24 || !this.remoteProducts.length) {
+          this.hasLoadedAllProducts = true;
+        }
+        this.iPageNo += 1;
+        this.showLoader = false;
+      });
+  }
+  updateFontAndSize(font: Font) {
+    const fontCss = font.getStyles();
+
+    this.appMeta.value.fontFamily = fontCss['font-family'];
+    this.appMeta.value.fontSize = fontCss['font-size'].replace('px', '');
+    this.appMeta.value.fontStyle = fontCss['font-style'];
+    this.appMeta.value.fontWeight = fontCss['font-weight'];
+
+    this.appMeta.flag.isFontToolbarDirty = true;
+    this.addFontFamilyIfNotAdded(fontCss['font-family']);
+    this.updateCurrentObject(true);
+  }
+
+  openPopup(param: string) {
+    if (
+      this.appMeta.board.data[this.appMeta.board.currentIndex].type_privacy ===
+        0 &&
+      param === 'share'
+    ) {
+      this.appMeta.board.data[this.appMeta.board.currentIndex].type_privacy = 1;
+      this.updateBoard();
+    }
+
+    const dialogRef = this.dialog.open(BoardPopupComponent, {
+      panelClass: 'board-popup-dialog-container',
+      data: {
+        type: param,
+        board: this.appMeta.board.data[this.appMeta.board.currentIndex]
+      },
+      autoFocus: false,
+      width: '40%'
+    });
+    // dialogRef.afterClosed().subscribe(result => {
+    //   console.log('The dialog was closed', result);
+    // });
+  }
+  toggleMenu() {
+    this.showMenu = !this.showMenu;
+  }
+  openBoardConfig() {
+    const dialogRef = this.dialog.open(BoardPopupConfigComponent, {
+      panelClass: 'custom-dialog-container',
+      data: {
+        color: this.canvas.backgroundColor
+          ? (
+              '#' + new fb.Color(this.canvas.backgroundColor).toHex()
+            ).toLocaleLowerCase()
+          : null,
+        background: this.canvas.backgroundImage
+          ? this.canvas.backgroundImage._element.currentSrc
+          : ''
+      },
+      width: '40%',
+      autoFocus: false
+    });
+
+    dialogRef.componentInstance.onChange.subscribe(this.handleConfigChange);
+  }
+
+  selectSideBarItem(item) {
+    this.selectedItem = item.value;
+    if (this.selectedItem === 'browse') {
+      this.filterData = {};
+      this.appliedFilters = '';
+      this.iPageNo = 0;
+      this.remoteProducts = [];
+      this.pageNo = 0;
+      const selCat = this.boardService.getCategory();
+      if (this.hasSearched) {
+        this.search();
+      } else {
+        this.getBrowseData(selCat);
+      }
+      this.productForPreview = null;
+    }
+    this.productForPreview = null;
+    this.handlePreviewMode(this.selectedItem);
+  }
+
+  handleFiltersUpdates(event) {
+    if (event.name === 'APPLY_FILTERS' || event.name === 'CLEAR_FILTERS') {
+      // Apply filters
+      this.xpandStatus = false;
+      this.appliedFilters = event.payload;
+      const selCat = this.boardService.getCategory();
+      this.remoteProducts = [...[]];
+      this.pageNo = 0;
+      this.hasSearched = false;
+      this.getBrowseData(selCat);
+    } else if (event.name === 'CANCEL_FILTERS') {
+      this.xpandStatus = false;
+    }
+  }
+
+  handleAddProductBoardPreview($event) {}
+
+  handleSelectCategory($event) {
+    this.boardService.setCategory($event);
+    this.hasSearched = false;
+    this.selectSideBarItem({
+      name: 'Browse',
+      label: 'Browse',
+      value: 'browse',
+      route: 'board-browse'
+    });
+  }
+
+  handleProductPreview(product) {
+    this.productForPreview = { ...product };
+  }
+
+  handleClearProductPreview(product) {
+    this.productForPreview = null;
+  }
+
+  getBrowseData(categ) {
+    this.selectedCategory = categ;
+    this.showLoader = true;
+    this.hasSearched = false;
+    this.boardService
+      .getBrowseTabData(this.selectedCategory, this.appliedFilters, this.pageNo)
+      .subscribe((s: any) => {
+        this.remoteProducts = [...this.remoteProducts, ...(s.products || [])];
+        this.remoteProducts = this.remoteProducts.map((ele, i) => {
+          return {
+            ...ele,
+            refId: i
+          };
+        });
+        delete s.filterData.category;
+        this.filterData = s.filterData || {};
+        this.pageNo++;
+        this.checkFilterEnabled(this.filterData);
+        if (this.remoteProducts.length < 24 || !this.remoteProducts.length) {
+          this.hasLoadedAllProducts = true;
+        }
+        this.boardService.setBoardData(
+          this.remoteProducts,
+          this.selectedCategory,
+          s.filterData || {}
+        );
+        this.showLoader = false;
+      });
+  }
+
+  checkFilterEnabled(filterData) {
+    const keys = Object.keys(filterData);
+    const filters = keys.filter((data) => data !== 'price');
+    for (const key of filters) {
+      for (const i in filterData[key]) {
+        if (filterData[key][i].enabled) {
+          this.hasFilterEnabled = true;
+          break;
+        }
+      }
+      if (this.hasFilterEnabled) {
+        break;
+      }
+    }
+  }
+  onSearchFocus() {
+    if (this.isHandset) {
+      this.hasPanelFixed = true;
+    }
+  }
+  onSearchBlur() {
+    if (this.isHandset) {
+      this.hasPanelFixed = false;
+    }
+  }
+  loadMore() {
+    const selCat = this.boardService.getCategory();
+    if (this.hasSearched) {
+      this.search();
+    } else {
+      this.getBrowseData(selCat);
+    }
+  }
+
+  handleGoToSelect(event) {
+    this.boardService.resetBoard();
+    this.iPageNo = 0;
+    this.hasSearched = false;
+    this.selectSideBarItem({
+      name: 'Select',
+      label: 'Select',
+      value: 'select',
+      route: 'board-select'
+    });
+  }
+
   @HostListener('window:resize')
   onResize() {
     this.handleResize();
@@ -537,10 +569,11 @@ export class BoardViewComponent implements OnInit, AfterViewInit {
     // }
   }
   onScrollEvent(event) {
-    var element: any = document.getElementsByClassName('product-container');
+    const element: any = document.getElementsByClassName('product-container');
     if (
       element[0].scrollHeight - element[0].scrollTop ===
-      element[0].clientHeight
+        element[0].clientHeight ||
+      element[0].scrollHeight - element[0].scrollTop < element[0].clientHeight
     ) {
       if (this.hasLoadedAllProducts) {
         this.hasLoadedAllProducts = false;
@@ -557,11 +590,10 @@ export class BoardViewComponent implements OnInit, AfterViewInit {
       .subscribe((user) => {
         if (this.appMeta.flag.isBoot) {
           this.initialUserID = user.id;
-        }
-        // if the change came after the first boot
-        else {
+        } else {
+          // if the change came after the first boot
           // redirect the user only the changed user is different then the one before
-          if (this.initialUserID != user.id) {
+          if (this.initialUserID !== user.id) {
             this.router.navigate(['../../' + boardRoutesNames.BOARD_LIST], {
               relativeTo: this.route
             });
@@ -608,6 +640,11 @@ export class BoardViewComponent implements OnInit, AfterViewInit {
         this.isTablet = handset.matches;
       }
     );
+    this.bpSubscription = this.bpObserver.subscribe(
+      (handset: BreakpointState) => {
+        this.isHandset = handset.matches;
+      }
+    );
     if (!this.isTablet) {
       this.tabletSubscription = this.tabletObserver.subscribe(
         (tablet: BreakpointState) => {
@@ -619,8 +656,10 @@ export class BoardViewComponent implements OnInit, AfterViewInit {
 
   @HostListener('window:keyup', ['$event'])
   keyEvent(event: KeyboardEvent) {
-    if (event.keyCode == 46 || event.keyCode == 8)
+    // tslint:disable-next-line: deprecation
+    if (event.keyCode === 46 || event.keyCode === 8) {
       this.applyShortcut('action', 'delete');
+    }
   }
 
   ngAfterViewInit(): void {
@@ -754,34 +793,38 @@ export class BoardViewComponent implements OnInit, AfterViewInit {
       default: '#42445A',
       theme: 'nano',
       swatches: [
-        'rgba(244, 67, 54, 1)',
-        'rgba(233, 30, 99, 0.95)',
-        'rgba(156, 39, 176, 0.9)',
-        'rgba(103, 58, 183, 0.85)',
-        'rgba(63, 81, 181, 0.8)',
-        'rgba(33, 150, 243, 0.75)',
-        'rgba(3, 169, 244, 0.7)',
-        'rgba(0, 188, 212, 0.7)',
-        'rgba(0, 150, 136, 0.75)',
-        'rgba(76, 175, 80, 0.8)',
-        'rgba(139, 195, 74, 0.85)',
-        'rgba(205, 220, 57, 0.9)',
-        'rgba(255, 235, 59, 0.95)',
-        'rgba(255, 193, 7, 1)',
-        'rgba(244, 67, 54, 1)',
-        'rgba(233, 30, 99, 0.95)',
-        'rgba(156, 39, 176, 0.9)',
-        'rgba(103, 58, 183, 0.85)',
-        'rgba(63, 81, 181, 0.8)',
-        'rgba(33, 150, 243, 0.75)',
-        'rgba(3, 169, 244, 0.7)',
-        'rgba(0, 188, 212, 0.7)',
-        'rgba(0, 150, 136, 0.75)',
-        'rgba(76, 175, 80, 0.8)',
-        'rgba(139, 195, 74, 0.85)',
-        'rgba(205, 220, 57, 0.9)',
-        'rgba(255, 235, 59, 0.95)',
-        'rgba(255, 193, 7, 1)'
+        '#777777',
+        '#000000',
+        '#0055cc',
+        '#005580',
+        '#468847',
+        '#f89406',
+        '#9d261d',
+        '#7a43b6',
+        '#cccccc',
+        '#222222',
+        '#337ab7',
+        '#2f96b4',
+        '#46a546',
+        '#fbb450',
+        '#bd362f',
+        '#c3325f',
+        '#eeeeee',
+        '#333333',
+        '#0088cc',
+        '#5bc0de',
+        '#62c462',
+        '#ffc40d',
+        '#b94a48',
+        '#ee5f5b',
+        '#ffffff',
+        '#555555',
+        '#049cdb',
+        '#d9edf7',
+        '#dff0d8',
+        '#f3edd2',
+        '#c09853',
+        '#f2dede'
       ],
       showAlways: false,
       components: {
@@ -813,45 +856,51 @@ export class BoardViewComponent implements OnInit, AfterViewInit {
       this.showPicker = false;
     });
   }
-  ngOnDestroy() {
+  onDestroy() {
     this.userEventSubscription.unsubscribe();
   }
 
   applyShortcut = (action, name, value = 0) => {
-    let activeObject = this.canvas.getActiveObject();
+    const activeObject = this.canvas.getActiveObject();
 
-    if (action == 'deselectOrCancel') {
-      if (this.canvasMeta.flag.cropEnabled) this.handleCrop(false);
-      else this.canvas.discardActiveObject();
-    } else if (action == 'action' && activeObject) this.action(name);
-    else if (action == 'activeObjectFetchAssign' && activeObject)
+    if (action === 'deselectOrCancel') {
+      if (this.canvasMeta.flag.cropEnabled) {
+        this.handleCrop(false);
+      } else {
+        this.canvas.discardActiveObject();
+      }
+    } else if (action === 'action' && activeObject) {
+      this.action(name);
+    } else if (action === 'activeObjectFetchAssign' && activeObject) {
       activeObject.set(name, activeObject[name] + value);
-    else if (action == 'direct') this[name]();
-    else if (
-      action == 'initializeCrop' &&
+    } else if (action === 'direct') {
+      this[name]();
+    } else if (
+      action === 'initializeCrop' &&
       activeObject &&
-      activeObject.type == 'image'
-    )
+      activeObject.type === 'image'
+    ) {
       this.handleCrop();
-    else if (
-      action == 'confirmCrop' &&
+    } else if (
+      action === 'confirmCrop' &&
       activeObject &&
       this.canvasMeta.flag.cropEnabled
-    )
+    ) {
       this.handleCrop(true);
-    else if (action == 'toggleBackground' && activeObject) {
+    } else if (action === 'toggleBackground' && activeObject) {
       if (
         (this.canvasMeta.flag.isCurrentObjectTransparentable &&
-          !this.canvasMeta.flag.isCurrentObjectTransparentSelected) == true
-      )
+          !this.canvasMeta.flag.isCurrentObjectTransparentSelected) === true
+      ) {
         this.action('transparent');
-      else if (
+      } else if (
         (this.canvasMeta.flag.isCurrentObjectTransparentable &&
-          this.canvasMeta.flag.isCurrentObjectTransparentSelected) == true
-      )
+          this.canvasMeta.flag.isCurrentObjectTransparentSelected) === true
+      ) {
         this.action('undoTransparent');
-    } else if (action == 'addText') {
-      let textToInsert = new fb.Textbox('Text', {
+      }
+    } else if (action === 'addText') {
+      const textToInsert = new fb.Textbox('Text', {
         fontFamily: this.appMeta.value.fontFamily,
         fontSize: this.appMeta.value.fontSize,
         fill: '#000000'
@@ -861,7 +910,9 @@ export class BoardViewComponent implements OnInit, AfterViewInit {
     }
 
     this.canvas.requestRenderAll();
+    // tslint:disable-next-line: semicolon
   };
+
   selectColor() {
     this.showPicker = true;
     this.pickr.show();
@@ -872,7 +923,10 @@ export class BoardViewComponent implements OnInit, AfterViewInit {
     //   return r;
     // }, {});
 
-    if (callback) callback();
+    if (callback) {
+      callback();
+    }
+    // tslint:disable-next-line: semicolon
   };
 
   getBoards = () => {
@@ -885,7 +939,7 @@ export class BoardViewComponent implements OnInit, AfterViewInit {
         this.appMeta.board.data[objectIndex].state = JSON.parse(
           boardObject.state
         );
-        if (boardObject.uuid == uuid) {
+        if (boardObject.uuid === uuid) {
           boardFound = true;
           if (boardObject.state) {
             this.appMeta.board.currentIndex = objectIndex;
@@ -897,7 +951,7 @@ export class BoardViewComponent implements OnInit, AfterViewInit {
 
             if (boardObject.state) {
               boardObject.state.objects.forEach((object) => {
-                if (object.type == 'textbox') {
+                if (object.type === 'textbox') {
                   this.addFontFamilyIfNotAdded(object.fontFamily);
                 }
               });
@@ -908,15 +962,16 @@ export class BoardViewComponent implements OnInit, AfterViewInit {
       });
 
       // if board does not exist redirect user to board list
-      if (boardFound == false)
+      if (boardFound === false) {
         this.router.navigate(['../../' + boardRoutesNames.BOARD_LIST], {
           relativeTo: this.route
         });
-      else if (this.justCreated) {
+      } else if (this.justCreated) {
         this.updateBoard();
         this.openBoardConfig();
       }
     });
+    // tslint:disable-next-line: semicolon
   };
 
   getAssets = () => {
@@ -928,6 +983,7 @@ export class BoardViewComponent implements OnInit, AfterViewInit {
         this.renderAppMeta();
       }
     });
+    // tslint:disable-next-line: semicolon
   };
   handleAssetUpdate(event) {
     this.appMeta.asset = event;
@@ -959,11 +1015,12 @@ export class BoardViewComponent implements OnInit, AfterViewInit {
     this.updateCanvasCenter();
 
     // bind drop area events
+    // tslint:disable-next-line: deprecation
     $(this.canvasMeta.identifier.dropArea).bind('drop', (e) => {
-      let draggedObject = $(this.appMeta.identifier.currentDragableObject);
-      let dropType = draggedObject.attr('drop-type');
-      let referenceID = draggedObject.parent().attr('data-product');
-      let referenceType = draggedObject.parent().attr('type');
+      const draggedObject = $(this.appMeta.identifier.currentDragableObject);
+      const dropType = draggedObject.attr('drop-type');
+      const referenceID = draggedObject.parent().attr('data-product');
+      const referenceType = draggedObject.parent().attr('type');
       this.handleDrop(
         e,
         draggedObject,
@@ -982,15 +1039,16 @@ export class BoardViewComponent implements OnInit, AfterViewInit {
     // stop objects from going out of canvas area
     this.canvas.on('object:moving', (e) => {
       return;
-      var obj = e.target;
-      var boundingRect = obj.getBoundingRect();
+      const obj = e.target;
+      const boundingRect = obj.getBoundingRect();
       // if object is too big ignore
       if (
         obj.currentHeight > obj.this.canvas.height ||
         obj.currentWidth > obj.this.canvas.width ||
         obj.clipPath
-      )
+      ) {
         return;
+      }
 
       obj.setCoords();
 
@@ -1028,7 +1086,7 @@ export class BoardViewComponent implements OnInit, AfterViewInit {
         'px';
     });
     this.canvas.on('object:modified', (event) => {
-      if (event.target && event.target.type == 'textbox') {
+      if (event.target && event.target.type === 'textbox') {
         event.target.fontSize *= event.target.scaleX;
         event.target.fontSize = event.target.fontSize.toFixed(0);
         event.target.scaleX = 1;
@@ -1061,14 +1119,19 @@ export class BoardViewComponent implements OnInit, AfterViewInit {
     });
     this.canvas.on('mouse:move', (e) => {
       if (this.canvasMeta.flag.panningEnabled && e && e.e) {
-        let delta = new fb.Point(e.e.movementX, e.e.movementY);
+        const delta = new fb.Point(e.e.movementX, e.e.movementY);
         this.canvas.relativePan(delta);
 
-        if (this.canvasMeta.value.zoomValue > 1) this.keepPositionInBounds();
+        if (this.canvasMeta.value.zoomValue > 1) {
+          this.keepPositionInBounds();
+        }
       }
     });
 
-    if (callback) callback();
+    if (callback) {
+      callback();
+    }
+    // tslint:disable-next-line: semicolon
   };
 
   initializeAppMeta = () => {
@@ -1079,12 +1142,13 @@ export class BoardViewComponent implements OnInit, AfterViewInit {
       this.updateCurrentObject(true);
     });
 
+    // tslint:disable-next-line: deprecation
     $(this.appMeta.identifier.boardTitle).change((e) => {
       this.appMeta.board.data[this.appMeta.board.currentIndex].title = $(
         this.appMeta.identifier.boardTitle
       ).val();
 
-      if (this.appMeta.board.update.exist == false) {
+      if (this.appMeta.board.update.exist === false) {
         this.appMeta.board.update.exist = true;
         this.appMeta.board.update.method = this.debounce(
           this.updateBoard,
@@ -1098,6 +1162,7 @@ export class BoardViewComponent implements OnInit, AfterViewInit {
     // handle custom product click for bottom sheet render
     $(document).on('click', this.appMeta.identifier.customProduct, (e) => {
       this.appMeta.flag.isProductPanelDirty = true;
+      // tslint:disable-next-line: radix
       this.appMeta.value.currentSelectedItem = Number.parseInt(
         $(e.currentTarget).attr('data-product')
       );
@@ -1106,11 +1171,11 @@ export class BoardViewComponent implements OnInit, AfterViewInit {
 
     // handle manual add
     $(document).on('click', this.appMeta.identifier.manualDrop, (e) => {
-      let dropType = $(e.currentTarget).attr('drop-type');
-      if (dropType == 'image') {
-        let referenceID = $(e.currentTarget).attr('data-product');
-        let referenceType = $(e.currentTarget).attr('type');
-        let draggedObject = $(
+      const dropType = $(e.currentTarget).attr('drop-type');
+      if (dropType === 'image') {
+        const referenceID = $(e.currentTarget).attr('data-product');
+        const referenceType = $(e.currentTarget).attr('type');
+        const draggedObject = $(
           '.product-image[type="' +
             referenceType +
             '"][data-product="' +
@@ -1125,7 +1190,7 @@ export class BoardViewComponent implements OnInit, AfterViewInit {
           referenceType,
           this.selectedItem
         );
-      } else if (dropType == 'text')
+      } else if (dropType === 'text') {
         this.handleDrop(
           false,
           $(e.target),
@@ -1134,10 +1199,12 @@ export class BoardViewComponent implements OnInit, AfterViewInit {
           false,
           this.selectedItem
         );
+      }
     });
 
     // Render first updates
     this.updateToolbar();
+    // tslint:disable-next-line: semicolon
   };
 
   initializeUploadMethods = () => {
@@ -1147,7 +1214,6 @@ export class BoardViewComponent implements OnInit, AfterViewInit {
       url: this.appMeta.endpoint.api,
       autoProcessQueue: true,
       maxFilesize: 20,
-      acceptedFiles: "image/bmp, image/x-bmp, image/x-bitmap, image/x-xbitmap, image/x-win-bitmap, image/x-windows-bmp, image/ms-bmp, image/x-ms-bmp, image/gif, image/x-icon, image/x-ico, image/vnd.microsoft.icon, image/jpx, image/jpm, image/jpeg, image/pjpeg, image/png,image/x-png, image/tiff",
       sending: (file, xhr, formData) => {
         formData.append("operation", "file");
         formData.append("user_id", this.appMeta.value.userID);
@@ -1190,28 +1256,30 @@ export class BoardViewComponent implements OnInit, AfterViewInit {
       }
     });
     */
+    // tslint:disable-next-line: semicolon
   };
 
   updateCanvasCenter = () => {
-    let center = this.canvas.getCenter();
+    const center = this.canvas.getCenter();
     this.canvasMeta.value.center = {
       x: center.left,
       y: center.top
     };
+    // tslint:disable-next-line: semicolon
   };
 
   updateCurrentObject = (forceUpdate = false) => {
-    let activeObject = this.canvas.getActiveObject();
+    const activeObject = this.canvas.getActiveObject();
     if (activeObject) {
-      if (activeObject.type == 'textbox') {
+      if (activeObject.type === 'textbox') {
         if (this.appMeta.flag.isFontToolbarDirty) {
-          activeObject.set('fontFamily', this.appMeta.value.fontFamily);
+          activeObject.set('fontFamily', this.font.family);
           activeObject.set('fontSize', this.appMeta.value.fontSize);
           activeObject.set('fontStyle', this.appMeta.value.fontStyle);
           activeObject.set('fontWeight', this.appMeta.value.fontWeight);
           activeObject.set('fill', this.appMeta.value.fontColor);
         }
-      } else if (activeObject.type == 'image') {
+      } else if (activeObject.type === 'image') {
       }
     }
 
@@ -1222,7 +1290,10 @@ export class BoardViewComponent implements OnInit, AfterViewInit {
       (flag) => (this.appMeta.flag[flag] = false)
     );
 
-    if (forceUpdate) this.saveHistory();
+    if (forceUpdate) {
+      this.saveHistory();
+    }
+    // tslint:disable-next-line: semicolon
   };
 
   updateStateFromHistory = () => {
@@ -1233,24 +1304,28 @@ export class BoardViewComponent implements OnInit, AfterViewInit {
           this.appMeta.flag.isBoot = false;
           this.handleResize(true);
           setTimeout(() => {
+            // tslint:disable-next-line: prefer-for-of
             for (let index = 0; index < this.canvas._objects.length; index++) {
-              if (this.canvas._objects[index].type == 'textbox')
+              if (this.canvas._objects[index].type === 'textbox') {
                 this.canvas._objects[index].dirty = true;
+              }
             }
             this.canvas.renderAll();
           }, 3000);
         }
       }
     );
+    // tslint:disable-next-line: semicolon
   };
 
   handleSelection = () => {
-    let activeObject = this.canvas.getActiveObject();
+    const activeObject = this.canvas.getActiveObject();
     // reset selection
+    // tslint:disable-next-line: max-line-length
     this.canvasMeta.flag.isCurrentObjectText = this.canvasMeta.flag.isCurrentObjectImage = this.canvasMeta.flag.isCurrentObjectTransparentSelected = this.canvasMeta.flag.isCurrentObjectTransparentable = this.canvasMeta.flag.isCurrentSelectionEmpty = false;
 
     if (activeObject) {
-      if (activeObject.type == 'textbox') {
+      if (activeObject.type === 'textbox') {
         this.font = new Font({
           family: activeObject.fontFamily,
           size: activeObject.fontSize + 'px'
@@ -1262,17 +1337,20 @@ export class BoardViewComponent implements OnInit, AfterViewInit {
         this.appMeta.flag.isFontToolbarDirty = true;
         this.canvasMeta.flag.isCurrentObjectText = true;
         activeObject.setControlsVisibility(this.canvasMeta.value.textControl);
-      } else if (activeObject.type == 'image') {
+      } else if (activeObject.type === 'image') {
         this.canvasMeta.flag.isCurrentObjectImage = true;
         this.canvasMeta.flag.isCurrentObjectTransparentable =
-          activeObject.referenceObject.type == 'custom';
+          activeObject.referenceObject.type === 'custom';
         this.canvasMeta.flag.isCurrentObjectTransparentSelected = activeObject
           .getSrc()
           .includes(activeObject.referenceObject.transparentPath);
       }
-    } else this.canvasMeta.flag.isCurrentSelectionEmpty = true;
+    } else {
+      this.canvasMeta.flag.isCurrentSelectionEmpty = true;
+    }
 
     this.updateToolbar();
+    // tslint:disable-next-line: semicolon
   };
 
   handleDrop = (
@@ -1283,12 +1361,12 @@ export class BoardViewComponent implements OnInit, AfterViewInit {
     referenceType,
     selectedItem
   ) => {
-    if (dropType == 'image') {
-      let referenceObjectValue: any = {
+    if (dropType === 'image') {
+      const referenceObjectValue: any = {
         type: referenceType
       };
 
-      if (referenceType == 'custom') {
+      if (referenceType === 'custom') {
         referenceObjectValue.id = this.appMeta.asset[referenceID].asset_id;
         referenceObjectValue.path = this.appMeta.asset[referenceID].path;
         referenceObjectValue.transparentPath = this.appMeta.asset[
@@ -1298,7 +1376,7 @@ export class BoardViewComponent implements OnInit, AfterViewInit {
         referenceObjectValue.price = this.appMeta.asset[referenceID].price;
         referenceObjectValue.brand = this.appMeta.asset[referenceID].brand;
         referenceObjectValue.sku = '';
-      } else if (referenceType == 'default') {
+      } else if (referenceType === 'default') {
         let product = [];
         {
           selectedItem === 'browse'
@@ -1346,8 +1424,8 @@ export class BoardViewComponent implements OnInit, AfterViewInit {
       //   });
       //   this.applyDrop(e, image);
       // });
-    } else if (dropType == 'text') {
-      let textToInsert = new fb.Textbox(draggedObject.text(), {
+    } else if (dropType === 'text') {
+      const textToInsert = new fb.Textbox(draggedObject.text(), {
         fontFamily: draggedObject.text(),
         fontSize: this.appMeta.value.fontSize,
         fill: '#000000'
@@ -1355,6 +1433,7 @@ export class BoardViewComponent implements OnInit, AfterViewInit {
       textToInsert.setControlsVisibility(this.canvasMeta.value.textControl);
       this.applyDrop(e, textToInsert);
     }
+    // tslint:disable-next-line: semicolon
   };
 
   applyDrop = (e, objectToInsert) => {
@@ -1363,17 +1442,18 @@ export class BoardViewComponent implements OnInit, AfterViewInit {
       let y = 0;
 
       // if object is more then 30% size on canvas then make it 30%
-      if (objectToInsert.width / this.canvas.getWidth() >= 0.3)
+      if (objectToInsert.width / this.canvas.getWidth() >= 0.3) {
         objectToInsert.scale(
           (this.canvas.getWidth() * 0.3) / objectToInsert.width
         );
-      else if (objectToInsert.height / this.canvas.getHeight() >= 0.3)
+      } else if (objectToInsert.height / this.canvas.getHeight() >= 0.3) {
         objectToInsert.scale(
           (this.canvas.getHeight() * 0.3) / objectToInsert.height
         );
+      }
 
       if (e) {
-        let offset = $('#' + this.canvasMeta.identifier.id).offset();
+        const offset = $('#' + this.canvasMeta.identifier.id).offset();
         x = e.clientX - offset.left;
         y = e.clientY - offset.top;
       } else {
@@ -1399,6 +1479,7 @@ export class BoardViewComponent implements OnInit, AfterViewInit {
       this.canvas.requestRenderAll();
       this.saveHistory();
     }
+    // tslint:disable-next-line: semicolon
   };
 
   updateCanvasState = () => {
@@ -1410,35 +1491,31 @@ export class BoardViewComponent implements OnInit, AfterViewInit {
       height: this.canvas.height
     };
     return this.appMeta.board.data[this.appMeta.board.currentIndex].state;
+    // tslint:disable-next-line: semicolon
   };
 
   handleResize = (forceUpdate = false) => {
-    let previousWidth = forceUpdate
+    const previousWidth = forceUpdate
       ? this.appMeta.board.data[this.appMeta.board.currentIndex].state.canvas
           .width
       : this.canvas.width;
 
-    let widthBuffer = this.isTablet ? 0 : 18;
-    let heightBuffer = this.isTablet ? 110 : 0;
+    const widthBuffer = this.isTablet ? 0 : 18;
+    const heightBuffer = this.isTablet ? 110 : 0;
 
-    let relativePositionToWindow = $(
+    const relativePositionToWindow = $(
       this.canvasMeta.identifier.dropArea
     )[0].getBoundingClientRect();
-    let topLevelElement = $(this.appMeta.identifier.topLevelElement);
+    const topLevelElement = $(this.appMeta.identifier.topLevelElement);
 
-    let calculatedWidth =
+    const calculatedWidth =
       topLevelElement.width() - relativePositionToWindow.left - widthBuffer;
-    let availableWidth =
+    const availableWidth =
       calculatedWidth + widthBuffer < relativePositionToWindow.width
         ? calculatedWidth
         : relativePositionToWindow.width;
-    let availableHeight =
+    const availableHeight =
       topLevelElement.height() - relativePositionToWindow.top - heightBuffer;
-
-    // console.log("Resize", "is tablet", this.isTablet);
-    // console.log("Resize", "drop area relative to window", { left: relativePositionToWindow.left, top: relativePositionToWindow.top, width: relativePositionToWindow.width});
-    // console.log("Resize", "top level element", { width: topLevelElement.width(), height: topLevelElement.height()});
-    // console.log("Resize", calculatedWidth, availableWidth, calculatedWidth < relativePositionToWindow.width ? "using calculated width" : "using relative width");
 
     let newWidth = availableWidth;
     let newHeight =
@@ -1481,18 +1558,21 @@ export class BoardViewComponent implements OnInit, AfterViewInit {
 
     // update canvas center point
     this.updateCanvasCenter();
+    // tslint:disable-next-line: semicolon
   };
 
   saveHistory = () => {
-    if (this.canvasMeta.flag.cropEnabled) return;
+    if (this.canvasMeta.flag.cropEnabled) {
+      return;
+    }
 
-    let currentState = this.canvas.toJSON(
+    const currentState = this.canvas.toJSON(
       this.canvasMeta.value.propertiesToInclude
     );
 
     this.canvasMeta.flag.isDirty = true;
 
-    if (this.appMeta.board.update.exist == false) {
+    if (this.appMeta.board.update.exist === false) {
       this.appMeta.board.update.exist = true;
       this.appMeta.board.update.method = this.debounce(
         this.updateBoard,
@@ -1504,10 +1584,11 @@ export class BoardViewComponent implements OnInit, AfterViewInit {
     if (
       this.canvasMeta.currentHistoryIndex !==
       this.canvasMeta.currentHistory.length - 1
-    )
+    ) {
       this.canvasMeta.currentHistory.splice(
         this.canvasMeta.currentHistoryIndex + 1
       );
+    }
 
     this.canvasMeta.currentHistory.push(currentState);
     this.canvasMeta.currentHistoryIndex++;
@@ -1517,11 +1598,16 @@ export class BoardViewComponent implements OnInit, AfterViewInit {
     ].state = currentState;
     // call the method
     this.appMeta.board.update.method();
+    // tslint:disable-next-line: semicolon
   };
 
-  updateBoard = () => {
-    if (this.canvasMeta.flag.cropEnabled || this.appMeta.flag.isPreviewEnabled)
+  updateBoard = (callback?) => {
+    if (
+      this.canvasMeta.flag.cropEnabled ||
+      this.appMeta.flag.isPreviewEnabled
+    ) {
       return;
+    }
 
     let previewObject = '';
     try {
@@ -1540,12 +1626,20 @@ export class BoardViewComponent implements OnInit, AfterViewInit {
           uuid: this.appMeta.board.data[this.appMeta.board.currentIndex].uuid,
           title: this.appMeta.board.data[this.appMeta.board.currentIndex].title,
           state: JSON.stringify(this.updateCanvasState()),
-          preview: previewObject
+          preview: previewObject,
+          type_privacy: this.appMeta.board.data[this.appMeta.board.currentIndex]
+            .type_privacy,
+          is_active: this.appMeta.board.data[this.appMeta.board.currentIndex]
+            .is_active
         })
       )
       .subscribe((board) => {
+        if (callback) {
+          callback(board);
+        }
         this.canvasMeta.flag.isDirty = false;
       });
+    // tslint:disable-next-line: semicolon
   };
 
   updateToolbar = () => {
@@ -1581,6 +1675,7 @@ export class BoardViewComponent implements OnInit, AfterViewInit {
     $(this.appMeta.identifier.cropToolbarElement).toggle(
       this.canvasMeta.flag.cropEnabled
     );
+    // tslint:disable-next-line: semicolon
   };
 
   renderAppMeta = () => {
@@ -1633,11 +1728,11 @@ export class BoardViewComponent implements OnInit, AfterViewInit {
     if (this.appMeta.flag.isBoardItemDirty) {
       this.appMeta.flag.isBoardItemDirty = false;
 
-      let imageObjects = this.canvas.getObjects('image');
+      const imageObjects = this.canvas.getObjects('image');
 
       imageObjects.forEach((object, index) => {
-        let objectCenter = object.getCenterPoint();
-        let textToInsert = new fb.Text(` ${index + 1} `, {
+        const objectCenter = object.getCenterPoint();
+        const textToInsert = new fb.Text(` ${index + 1} `, {
           left: objectCenter.x,
           top: objectCenter.y,
           fontSize: 20,
@@ -1662,54 +1757,61 @@ export class BoardViewComponent implements OnInit, AfterViewInit {
         });
       }
     }
+    // tslint:disable-next-line: semicolon
   };
 
   debounce = (func, wait, immediate = false) => {
-    var timeout;
+    let timeout;
 
+    // tslint:disable-next-line: space-before-function-paren
     return function () {
-      var context = this,
-        args = arguments;
-      var callNow = immediate && !timeout;
+      const context = this;
+      const args = arguments;
+      const callNow = immediate && !timeout;
       clearTimeout(timeout);
 
       // Set the new timeout
-      timeout = setTimeout(function () {
+      timeout = setTimeout(() => {
         timeout = null;
         if (!immediate) {
           func.apply(context, args);
         }
       }, wait);
-      if (callNow) func.apply(context, args);
+      if (callNow) {
+        func.apply(context, args);
+      }
     };
+    // tslint:disable-next-line: semicolon
   };
 
   keepPositionInBounds = () => {
-    let zoom = this.canvas.getZoom();
-    let xMin = ((2 - zoom) * this.canvas.getWidth()) / 2;
-    let xMax = (zoom * this.canvas.getWidth()) / 2;
-    let yMin = ((2 - zoom) * this.canvas.getHeight()) / 2;
-    let yMax = (zoom * this.canvas.getHeight()) / 2;
+    const zoom = this.canvas.getZoom();
+    const xMin = ((2 - zoom) * this.canvas.getWidth()) / 2;
+    const xMax = (zoom * this.canvas.getWidth()) / 2;
+    const yMin = ((2 - zoom) * this.canvas.getHeight()) / 2;
+    const yMax = (zoom * this.canvas.getHeight()) / 2;
 
-    let point = new fb.Point(
+    const point = new fb.Point(
       this.canvas.getWidth() / 2,
       this.canvas.getHeight() / 2
     );
-    let center = fb.util.transformPoint(point, this.canvas.viewportTransform);
+    const center = fb.util.transformPoint(point, this.canvas.viewportTransform);
 
-    let clampedCenterX = this.clamp(center.x, xMin, xMax);
-    let clampedCenterY = this.clamp(center.y, yMin, yMax);
+    const clampedCenterX = this.clamp(center.x, xMin, xMax);
+    const clampedCenterY = this.clamp(center.y, yMin, yMax);
 
-    let diffX = clampedCenterX - center.x;
-    let diffY = clampedCenterY - center.y;
+    const diffX = clampedCenterX - center.x;
+    const diffY = clampedCenterY - center.y;
 
-    if (diffX != 0 || diffY != 0) {
+    if (diffX !== 0 || diffY !== 0) {
       this.canvas.relativePan(new fb.Point(diffX, diffY));
     }
+    // tslint:disable-next-line: semicolon
   };
 
   clamp = (value, min, max) => {
     return Math.max(min, Math.min(value, max));
+    // tslint:disable-next-line: semicolon
   };
 
   zoomIn = () => {
@@ -1720,6 +1822,7 @@ export class BoardViewComponent implements OnInit, AfterViewInit {
       this.canvasMeta.value.zoomValue
     );
     this.handleResize();
+    // tslint:disable-next-line: semicolon
   };
 
   zoomOut = () => {
@@ -1733,9 +1836,12 @@ export class BoardViewComponent implements OnInit, AfterViewInit {
       );
       // handling a glitch in zooming out with background
       // this.keepPositionInBounds();
-    } else this.canvasMeta.flag.isZoomed = false;
+    } else {
+      this.canvasMeta.flag.isZoomed = false;
+    }
 
     this.handleResize();
+    // tslint:disable-next-line: semicolon
   };
 
   undo = () => {
@@ -1744,6 +1850,7 @@ export class BoardViewComponent implements OnInit, AfterViewInit {
       this.canvasMeta.currentHistoryIndex--;
       this.updateStateFromHistory();
     }
+    // tslint:disable-next-line: semicolon
   };
   redo = () => {
     // Redo is possible
@@ -1754,18 +1861,20 @@ export class BoardViewComponent implements OnInit, AfterViewInit {
       this.canvasMeta.currentHistoryIndex++;
       this.updateStateFromHistory();
     }
+    // tslint:disable-next-line: semicolon
   };
   selectAll = () => {
     this.canvas.discardActiveObject();
-    let selection = new fb.ActiveSelection(this.canvas.getObjects(), {
+    const selection = new fb.ActiveSelection(this.canvas.getObjects(), {
       canvas: this.canvas
     });
     this.canvas.setActiveObject(selection);
     this.canvas.requestRenderAll();
+    // tslint:disable-next-line: semicolon
   };
 
   handleCrop = (action = undefined, secondaryAction = false) => {
-    let activeObject = this.canvas.getActiveObject();
+    const activeObject = this.canvas.getActiveObject();
     if (activeObject) {
       this.canvas.selection = true;
 
@@ -1786,10 +1895,11 @@ export class BoardViewComponent implements OnInit, AfterViewInit {
           this.saveHistory();
           break;
         case false:
-          if (secondaryAction)
+          if (secondaryAction) {
             this.canvasMeta.value.crop.active.clipPath = false;
-          else
+          } else {
             this.canvasMeta.value.crop.active.clipPath = this.canvasMeta.value.crop.copy.clipPath;
+          }
 
           this.canvasMeta.value.crop.active.dirty = true;
           this.canvasMeta.flag.cropEnabled = false;
@@ -1821,7 +1931,7 @@ export class BoardViewComponent implements OnInit, AfterViewInit {
           });
 
           if (this.canvasMeta.value.crop.active.clipPath) {
-            let center = activeObject.getCenterPoint();
+            const center = activeObject.getCenterPoint();
             this.canvasMeta.value.crop.box.width = this.canvasMeta.value.crop.active.clipPath.width;
             this.canvasMeta.value.crop.box.height = this.canvasMeta.value.crop.active.clipPath.height;
             this.canvasMeta.value.crop.box.left =
@@ -1854,14 +1964,15 @@ export class BoardViewComponent implements OnInit, AfterViewInit {
       this.canvas.renderAll();
       this.updateToolbar();
     }
+    // tslint:disable-next-line: semicolon
   };
 
   applyCrop = (e) => {
-    let rect = this.canvasMeta.value.crop.box;
-    let image = this.canvasMeta.value.crop.active;
+    const rect = this.canvasMeta.value.crop.box;
+    const image = this.canvasMeta.value.crop.active;
 
-    let maxScaleX = (image.width * image.scaleX) / rect.width;
-    let maxScaleY = (image.height * image.scaleY) / rect.height;
+    const maxScaleX = (image.width * image.scaleX) / rect.width;
+    const maxScaleY = (image.height * image.scaleY) / rect.height;
 
     if (rect.scaleX > maxScaleX || rect.scaleY > maxScaleY) {
       rect.scaleX = Math.min(rect.scaleX, maxScaleX);
@@ -1895,7 +2006,7 @@ export class BoardViewComponent implements OnInit, AfterViewInit {
     offsetX = offsetX <= 1 ? 0 : offsetX;
     offsetY = offsetY <= 1 ? 0 : offsetY;
 
-    let mask = new fb.Rect({
+    const mask = new fb.Rect({
       width: (rect.width * rect.scaleX) / image.scaleX,
       height: (rect.height * rect.scaleY) / image.scaleY,
       left: (image.width / 2) * -1 + offsetX,
@@ -1904,18 +2015,20 @@ export class BoardViewComponent implements OnInit, AfterViewInit {
 
     image.clipPath = mask;
     image.dirty = true;
+    // tslint:disable-next-line: semicolon
   };
 
   postImageProcess = () => {
     $('.background-msg').addClass('visible');
-    setTimeout(function () {
+    setTimeout(() => {
       $('.background-msg').removeClass('visible');
     }, 5000);
     this.hasCanvasLoader = false;
+    // tslint:disable-next-line: semicolon
   };
 
   action = (type) => {
-    let activeObject = this.canvas.getActiveObject();
+    const activeObject = this.canvas.getActiveObject();
 
     switch (type) {
       case 'flip':
@@ -1928,7 +2041,8 @@ export class BoardViewComponent implements OnInit, AfterViewInit {
         activeObject.sendBackwards();
         break;
       case 'delete':
-        this.canvas.remove(activeObject);
+        if (!activeObject.isEditing)
+          this.canvas.remove(activeObject);
         break;
       case 'duplicate':
         activeObject.clone((clone) => {
@@ -1946,8 +2060,8 @@ export class BoardViewComponent implements OnInit, AfterViewInit {
       case 'transparent':
       case 'undoTransparent':
         this.hasCanvasLoader = true;
-        if (activeObject.referenceObject.type == 'custom') {
-          var dimentionBefore = {
+        if (activeObject.referenceObject.type === 'custom') {
+          const dimentionBefore = {
             width: activeObject.width,
             height: activeObject.height,
             scaleX: activeObject.scaleX,
@@ -1956,7 +2070,7 @@ export class BoardViewComponent implements OnInit, AfterViewInit {
           this.canvasMeta.flag.isCurrentObjectTransparentable = false;
           this.canvasMeta.flag.isCurrentObjectTransparentSelected = false;
           this.updateToolbar();
-          if (type == 'transparent') {
+          if (type === 'transparent') {
             if (activeObject.referenceObject.transparentPath) {
               this.toggleTransparent(activeObject, dimentionBefore, true);
               this.postImageProcess();
@@ -1986,17 +2100,22 @@ export class BoardViewComponent implements OnInit, AfterViewInit {
 
     this.canvas.requestRenderAll();
     this.saveHistory();
+    // tslint:disable-next-line: semicolon
   };
 
   handlePreviewMode = (targetLink) => {
-    let toggle = targetLink == 'board';
+    const toggle = targetLink === 'board';
     // if a different tab was clicked and preview was enabled or disabled
-    if (targetLink == 'board' || this.appMeta.value.lastVisitedTab == 'board') {
+    if (
+      targetLink === 'board' ||
+      this.appMeta.value.lastVisitedTab === 'board'
+    ) {
       this.appMeta.value.lastVisitedTab = targetLink;
 
       // check if state has changed
-      if (this.appMeta.flag.isPreviewEnabled !== toggle)
+      if (this.appMeta.flag.isPreviewEnabled !== toggle) {
         this.appMeta.flag.isPreviewEnabled = toggle;
+      }
 
       this.updateToolbar();
       this.canvas.selection = !toggle;
@@ -2004,7 +2123,9 @@ export class BoardViewComponent implements OnInit, AfterViewInit {
 
       this.canvas.getObjects().forEach((object) => {
         object.selectable = !toggle;
-        if (object.type == 'text' && !toggle) this.canvas.remove(object);
+        if (object.type === 'text' && !toggle) {
+          this.canvas.remove(object);
+        }
       });
 
       if (toggle) {
@@ -2014,16 +2135,17 @@ export class BoardViewComponent implements OnInit, AfterViewInit {
 
       this.canvas.renderAll();
     }
+    // tslint:disable-next-line: semicolon
   };
 
   handleConfigChange = (object) => {
-    if (object.attribute == 'color') {
+    if (object.attribute === 'color') {
       this.canvas.backgroundImage = '';
       this.canvas.setBackgroundColor(object.value, () => {
         this.canvas.renderAll();
         this.saveHistory();
       });
-    } else if (object.attribute == 'background') {
+    } else if (object.attribute === 'background') {
       this.canvas.setBackgroundColor(null, () => {
         this.canvas.renderAll();
         this.saveHistory();
@@ -2044,19 +2166,19 @@ export class BoardViewComponent implements OnInit, AfterViewInit {
         },
         { crossOrigin: 'anonymous' }
       );
-    } else if (object.attribute == 'action')
-      if (object.value == 'cancel' && this.justCreated) {
+    } else if (object.attribute === 'action') {
+      if (object.value === 'cancel' && this.justCreated) {
         this.appMeta.board.data[
           this.appMeta.board.currentIndex
         ].is_active = false;
-        this.boardService
-          .updateBoard(this.appMeta.board.data[this.appMeta.board.currentIndex])
-          .subscribe((response) => {
-            this.router.navigate(['../../' + boardRoutesNames.BOARD_LIST], {
-              relativeTo: this.route
-            });
+        this.updateBoard(() => {
+          this.router.navigate(['../../' + boardRoutesNames.BOARD_LIST], {
+            relativeTo: this.route
           });
+        });
       }
+    }
+    // tslint:disable-next-line: semicolon
   };
 
   toggleTransparent = (
@@ -2089,10 +2211,11 @@ export class BoardViewComponent implements OnInit, AfterViewInit {
         this.canvas.renderCanvas();
       }
     );
+    // tslint:disable-next-line: semicolon
   };
 
   addFontFamilyIfNotAdded(fontFamily: string) {
-    if (this.presetFonts.indexOf(fontFamily) === -1) {
+    if (this.presetFonts.indexOf(fontFamily) !== -1) {
       this.fontPickerService.loadFont(
         new Font({
           family: fontFamily

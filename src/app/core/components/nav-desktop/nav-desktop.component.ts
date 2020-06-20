@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { Location } from '@angular/common';
 import { Subscription } from 'rxjs';
@@ -13,16 +13,16 @@ import { EventEmitterService } from 'src/app/shared/services';
   templateUrl: './nav-desktop.component.html',
   styleUrls: ['./nav-desktop.component.less']
 })
-export class NavDesktopComponent {
+export class NavDesktopComponent implements OnInit {
   @Input() isTablet: boolean;
-  logoPath: string = 'assets/image/color_logo_transparent.png';
+  logoPath = 'assets/image/color_logo_transparent.png';
   departments: IAllDepartment[];
-  notHome: Boolean;
+  notHome: boolean;
   checkHomeRoute: Subscription;
   eventSubscription: Subscription;
   email: any;
   password: any;
-  hideBar: boolean = false;
+  hideBar = false;
 
   constructor(
     private router: Router,
@@ -41,18 +41,13 @@ export class NavDesktopComponent {
     });
   }
 
-  ngOnDestroy(): void {
-    this.checkHomeRoute.unsubscribe();
-    this.eventSubscription.unsubscribe();
-  }
-
   ngOnInit(): void {
     this.eventSubscription = this.eventEmitterService.userChangeEvent
       .asObservable()
       .subscribe((user) => {
         this.getDepartments();
         this.router.events.subscribe((res) => {
-          let orderRoute = this.router.url.slice(1, 6);
+          const orderRoute = this.router.url.slice(1, 6);
           if (
             this.router.url === '/aboutus' ||
             this.router.url === '/checkout' ||
@@ -65,7 +60,10 @@ export class NavDesktopComponent {
         });
       });
   }
-
+  onDestroy(): void {
+    this.checkHomeRoute.unsubscribe();
+    this.eventSubscription.unsubscribe();
+  }
   login() {
     const user = {
       email: this.email,
@@ -73,6 +71,7 @@ export class NavDesktopComponent {
     };
     if (user.email && user.password) {
       this.apiService.login(user).subscribe((res) => {
+        // tslint:disable-next-line: no-string-literal
         if (res['data']) {
           // this.apiService.storeUserData(res["token"]);
           // localStorage.setItem("admin_id", res["data"]["id"]);
@@ -104,7 +103,7 @@ export class NavDesktopComponent {
   isLoggedIn(event) {
     event.preventDefault();
     event.stopPropagation();
-    let localData = JSON.parse(localStorage.getItem('user') || '{}');
+    const localData = JSON.parse(localStorage.getItem('user') || '{}');
     if (localData.email.length > 0) {
       this.router.navigateByUrl('/wishlist');
     } else {

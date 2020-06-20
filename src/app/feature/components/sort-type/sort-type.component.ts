@@ -9,7 +9,7 @@ import { ISortType } from 'src/app/shared/models';
 export class SortTypeComponent implements OnInit {
   @Output() setSortType = new EventEmitter<any>();
   @Input() sortTypeList: ISortType[];
-  default: string = 'recommended';
+  default = 'recommended';
 
   constructor() {}
 

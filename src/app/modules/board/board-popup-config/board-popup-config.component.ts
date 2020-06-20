@@ -41,11 +41,18 @@ export class BoardPopupConfigComponent implements OnInit {
     'https://www.lazysuzy.com/images/board/rooms/light_wood_1610.jpg',
     'https://www.lazysuzy.com/images/board/rooms/medium_wood_1610.jpg'
   ];
+  backgroundImagesThumbs = [
+    'https://www.lazysuzy.com/images/board/rooms/blue_gray_1610_thumb.jpg',
+    'https://www.lazysuzy.com/images/board/rooms/dining_dark_wood_1610_thumb.jpg',
+    'https://www.lazysuzy.com/images/board/rooms/light_wood_1610_thumb.jpg',
+    'https://www.lazysuzy.com/images/board/rooms/medium_wood_1610_thumb.jpg'
+  ];
   selected = {
     color: this.backgroundColors[0],
     background: this.backgroundImages[0]
   };
 
+  // tslint:disable-next-line: no-output-on-prefix
   @Output() onChange = new EventEmitter();
 
   constructor(
@@ -64,11 +71,11 @@ export class BoardPopupConfigComponent implements OnInit {
 
   handleSelection(selection: string) {
     this.currentTab = selection;
-    if (selection == 'board') {
+    if (selection === 'board') {
       this.isOptionSelected = true;
       this.showBoardPanel = true;
       this.showRoomPanel = false;
-    } else if (selection == 'room') {
+    } else if (selection === 'room') {
       this.showBoardPanel = false;
       if (this.isRoomSelected) {
         this.isOptionSelected = true;
@@ -86,8 +93,8 @@ export class BoardPopupConfigComponent implements OnInit {
       this.isRoomSelected = true;
     }
     this.onChange.emit({
-      attribute: attribute,
-      value: attribute == 'color' ? this.hexToRGB(value) : value
+      attribute,
+      value: attribute === 'color' ? this.hexToRGB(value) : value
     });
   }
 
@@ -102,9 +109,9 @@ export class BoardPopupConfigComponent implements OnInit {
   }
 
   hexToRGB(h) {
-    let r = '0x' + h[1] + h[2];
-    let g = '0x' + h[3] + h[4];
-    let b = '0x' + h[5] + h[6];
+    const r = '0x' + h[1] + h[2];
+    const g = '0x' + h[3] + h[4];
+    const b = '0x' + h[5] + h[6];
     return 'rgb(' + +r + ',' + +g + ',' + +b + ')';
   }
 }

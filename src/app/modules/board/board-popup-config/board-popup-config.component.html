@@ -63,10 +63,10 @@
           <div class="flex justify-content-left canvas-pallete">
             <div class="w-100 board-options">
               <img
-                *ngFor="let backgroundImage of backgroundImages"
+                *ngFor="let backgroundImage of backgroundImages; let i = index"
                 (click)="handleChange('background', backgroundImage)"
                 [class.selected]="selected.background == backgroundImage"
-                [src]="backgroundImage"
+                [src]="backgroundImagesThumbs[i]"
                 class="w-25 ph2"
               />
             </div>

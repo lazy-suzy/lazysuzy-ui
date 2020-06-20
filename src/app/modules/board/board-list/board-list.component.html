@@ -39,7 +39,7 @@
     </div>
     <div
       *ngFor="let board of boards; index as i"
-      class="col-sm-4 mb-sm-4 {{ board.type_room === null ? '' : 'dn' }}"
+      class="col-sm-4 mb-sm-4 {{ board.is_published === 0 ? '' : 'dn' }}"
     >
       <div class="board-card">
         <div class="canvas-preview">
@@ -71,6 +71,7 @@
             </span>
             <span
               data-title="Shop"
+              target="_blank"
               routerLink="../{{ boardPreviewLink }}/{{ board.uuid }}"
             >
               <i class="mdi mdi-cart" aria-hidden="true"></i>
@@ -90,7 +91,7 @@
   <div class="row">
     <div
       *ngFor="let board of boards; index as i"
-      class="col-sm-4 mb-sm-4 {{ board.type_room !== null ? '' : 'dn' }}"
+      class="col-sm-4 mb-sm-4 {{ board.is_published === 1 ? '' : 'dn' }}"
     >
       <div class="board-card">
         <div class="canvas-preview">

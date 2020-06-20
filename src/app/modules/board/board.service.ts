@@ -46,17 +46,14 @@ export class BoardService extends SharedBoardService {
       );
   }
 
-  getBoardByID(
-    board_id: string,
-    previewMode: boolean = false
-  ): Observable<Board[]> {
+  getBoardByID(boardId: string, previewMode = false): Observable<Board[]> {
     return this.http
       .get<Board[]>(
-        this.boardEndpoint + (previewMode ? '/preview' : '') + `/` + board_id,
+        this.boardEndpoint + (previewMode ? '/preview' : '') + `/` + boardId,
         this.getHttpOptions()
       )
       .pipe(
-        tap((_) => this.log(`fetched board w/ id=${board_id}`)),
+        tap((_) => this.log(`fetched board w/ id=${boardId}`)),
         catchError(this.handleError<Board[]>('getBoardsByID', []))
       );
   }
@@ -97,7 +94,7 @@ export class BoardService extends SharedBoardService {
       );
   }
 
-  getAssets(previewMode: boolean = false): Observable<Asset[]> {
+  getAssets(previewMode = false): Observable<Asset[]> {
     return this.http
       .get<Asset[]>(
         this.assetEndpoint + (previewMode ? '/preview' : ''),

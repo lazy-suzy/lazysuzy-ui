@@ -23,19 +23,20 @@ export class BoardAddComponent implements OnInit {
 
   constructor(public dialog: MatDialog, private boardService: BoardService) {}
 
+  // tslint:disable-next-line: use-lifecycle-interface
   ngOnChanges(changes: any) {
     if (
-      changes['userId'] &&
-      changes['userId'].previousValue !== changes['userId'].currentValue
+      changes.userId &&
+      changes.userId.previousValue !== changes.userId.currentValue
     ) {
-      let userId = changes['userId'].currentValue || [];
+      const userId = changes.userId.currentValue || [];
       this.userId = userId;
     }
     if (
-      changes['allAssets'] &&
-      changes['allAssets'].previousValue !== changes['allAssets'].currentValue
+      changes.allAssets &&
+      changes.allAssets.previousValue !== changes.allAssets.currentValue
     ) {
-      let allAssets = changes['allAssets'].currentValue || [];
+      const allAssets = changes.allAssets.currentValue || [];
       this.allAssets = [...allAssets] || [];
       this.isAsset = !this.isAsset;
       this.allAssets = this.allAssets.map((ele, i) => {
@@ -50,10 +51,10 @@ export class BoardAddComponent implements OnInit {
 
   filterUploads(assets, userId) {
     this.myUploads = assets.filter((asst) => {
-      return asst.user_id == userId;
+      return asst.user_id === userId;
     });
     this.allUploads = assets.filter((asst) => {
-      return asst.is_private == 0;
+      return asst.is_private === 0;
     });
   }
 

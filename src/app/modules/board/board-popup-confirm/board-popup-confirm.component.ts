@@ -7,26 +7,28 @@ import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material';
   styleUrls: ['../board.component.less']
 })
 export class BoardPopupConfirmComponent implements OnInit {
-
   popupData = {
-    title: "Are you sure?",
-    optionConfirm: "Confirm",
-    optionCancel: "Cancel"
+    title: 'Are you sure?',
+    optionConfirm: 'Confirm',
+    optionCancel: 'Cancel'
   };
 
-  constructor(@Optional() @Inject(MAT_DIALOG_DATA) private data: any, @Optional() private dialogRef: MatDialogRef<BoardPopupConfirmComponent>) { 
-    if(data){
+  constructor(
+    @Optional() @Inject(MAT_DIALOG_DATA) private data: any,
+    @Optional() private dialogRef: MatDialogRef<BoardPopupConfirmComponent>
+  ) {
+    if (data) {
       this.popupData.title = data.title || this.popupData.title;
-      this.popupData.optionConfirm = data.optionConfirm || this.popupData.optionConfirm;
-      this.popupData.optionCancel = data.optionCancel || this.popupData.optionCancel;
+      this.popupData.optionConfirm =
+        data.optionConfirm || this.popupData.optionConfirm;
+      this.popupData.optionCancel =
+        data.optionCancel || this.popupData.optionCancel;
     }
   }
 
-  ngOnInit() {
-  }
+  ngOnInit() {}
 
   action(actionToTake = false) {
     this.dialogRef.close(actionToTake);
   }
-
 }
