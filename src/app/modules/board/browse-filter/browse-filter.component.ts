@@ -39,7 +39,8 @@ export class BrowsefilterComponent implements OnInit {
 
   constructor(private fb: FormBuilder) {}
 
-  onChanges(change: any) {
+  // tslint:disable-next-line: use-lifecycle-interface
+  ngOnChanges(change: any) {
     // if (
     //   changes['filterData'] &&
     //   changes['filterData'].previousValue !== changes['filterData'].currentValue
@@ -64,7 +65,7 @@ export class BrowsefilterComponent implements OnInit {
         this.silderOptions = {
           floor: this.filterData.price.min,
           ceil: this.filterData.price.max,
-          translate: (value: number) => {
+          translate: (value: number): string => {
             return '$' + value;
           }
         };
@@ -88,7 +89,7 @@ export class BrowsefilterComponent implements OnInit {
   }
 
   onCheckChange(event, filter: string) {
-    const option = event.source.value;
+    const option: string = event.source.value;
     if (event.source.checked) {
       this.activeFilters[filter].push(option);
     } else {
@@ -131,7 +132,7 @@ export class BrowsefilterComponent implements OnInit {
     this.buildAndSetFilters();
   }
 
-  buildAndSetFilters() {
+  buildAndSetFilters(): string {
     let tempFilters = '';
     for (const [filter, options] of Object.entries(this.activeFilters)) {
       if (filter === 'price_from' || filter === 'price_to') {

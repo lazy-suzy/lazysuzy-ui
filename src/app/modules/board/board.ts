@@ -14,7 +14,7 @@ export class Board {
   // tslint:disable-next-line: variable-name
   is_private: boolean;
   // tslint:disable-next-line: variable-name
-  is_published: boolean;
+  is_published: number;
   // tslint:disable-next-line: variable-name
   is_active: boolean;
   // tslint:disable-next-line: variable-name

@@ -9,7 +9,7 @@ import { environment } from 'src/environments/environment';
 export class BoardProductsComponent implements OnInit {
   @Input() products: any = null;
   @Input() modifyPath: any = false;
-  @Input() isAsset: any = false;
+  @Input() isAsset: boolean;
   productType = 'default';
 
   @Output() updates: EventEmitter<any> = new EventEmitter();
@@ -19,7 +19,8 @@ export class BoardProductsComponent implements OnInit {
 
   ngOnInit() {}
 
-  onChanges(changes: any) {
+  // tslint:disable-next-line: use-lifecycle-interface
+  ngOnChanges(changes: any) {
     if (
       changes.products &&
       changes.products.previousValue !== changes.products.currentValue

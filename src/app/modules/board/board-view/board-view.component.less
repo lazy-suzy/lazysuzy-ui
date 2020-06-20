@@ -201,9 +201,7 @@
   display: flex;
   justify-content: space-between;
   color: #f7f6f6;
-  margin: 6px 15px 0 0;
-  position: absolute;
-  left: 0px;
+  margin-top: 6px;
 }
 .dropdown::after {
   border-top-color: #f7f6f6;
@@ -291,8 +289,7 @@
 }
 .item-action-icons {
   display: flex;
-  position: absolute;
-  right: 0px;
+  margin-left: 15px;
 }
 @media screen and (max-width: 991px) {
   .load-more-btn-container {
@@ -344,11 +341,6 @@
   .mdi-format-color-text::after {
     background: #f7f6f6 !important;
   }
-  .item-action-icons {
-    display: flex;
-    position: absolute;
-    right: 0px;
-  }
   .top-panel .color-selector-tab {
     display: block;
     margin-left: 10px;
@@ -367,9 +359,6 @@
     margin-left: 25px;
     justify-content: flex-start;
     margin-top: 3px;
-    position: absolute;
-    left: -5px;
-    top: 4px;
   }
   .font-editor-container {
     padding-left: 0;
@@ -397,6 +386,14 @@
       bottom: unset !important;
       left: 15px !important;
       right: unset !important;
+    }
+    ::ng-deep .pcr-interaction {
+      background: white;
+      margin: 0;
+    }
+    ::ng-deep .pcr-swatches {
+      background: white;
+      padding-left: 16px;
     }
   }
   .lazysuzy-board {

@@ -23,7 +23,8 @@ export class BoardAddComponent implements OnInit {
 
   constructor(public dialog: MatDialog, private boardService: BoardService) {}
 
-  onChanges(changes: any) {
+  // tslint:disable-next-line: use-lifecycle-interface
+  ngOnChanges(changes: any) {
     if (
       changes.userId &&
       changes.userId.previousValue !== changes.userId.currentValue

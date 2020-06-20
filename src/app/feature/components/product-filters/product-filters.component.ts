@@ -50,7 +50,8 @@ export class ProductFiltersComponent implements OnInit {
     });
   }
 
-  onChanges(change: any) {
+  // tslint:disable-next-line: use-lifecycle-interface
+  ngOnChanges(change: any) {
     if (change.productFilters.currentValue !== undefined) {
       this.productFilters = change.productFilters.currentValue;
       if (this.productFilters && !this.isPriceChanged) {

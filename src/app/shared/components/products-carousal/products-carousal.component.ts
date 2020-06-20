@@ -43,7 +43,8 @@ export class ProductsCarousalComponent implements OnInit {
 
   ngOnInit() {}
 
-  onChanges(changes: any) {
+  // tslint:disable-next-line: use-lifecycle-interface
+  ngOnChanges(changes: any) {
     if (
       changes.data &&
       changes.data.previousValue !== changes.data.currentValue

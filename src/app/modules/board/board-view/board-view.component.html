@@ -283,18 +283,14 @@
     <div class="row">
       <div class="col-md-12 tool-bar-holder">
         <div class="top-panel row top-panel-hide">
-          <div class="col-md-2 col-lg-6 d-none d-md-block state-icons">
+          <div class="col-md-2 d-none d-md-block state-icons">
             <!-- <i class="mdi mdi-magnify-minus" (click)="zoomOut()" aria-hidden="true"></i> -->
             <!-- <i class="mdi mdi-magnify-plus" (click)="zoomIn()" aria-hidden="true"></i> -->
             <i class="mdi mdi-undo" (click)="undo()" aria-hidden="true"></i>
             <i class="mdi mdi-redo" (click)="redo()" aria-hidden="true"></i>
           </div>
           <div
-            class="col-sm-6 col-md-10 col-lg-6 text-center col-12 font-editor-container {{
-              this.canvasMeta.flag.isCurrentObjectImage
-                ? 'image-toolbar-position'
-                : 'justify-content-center'
-            }}"
+            class="col-sm-6 col-md-10 p-0 text-center col-12 font-editor-container image-toolbar-position'"
           >
             <div class="editor-icons">
               <div
@@ -324,7 +320,7 @@
                 ></i>
               </div>
             </div>
-            <div class="crop-toolbar float-right">
+            <div class="crop-toolbar">
               <button class="btn" (click)="handleCrop(true)">
                 <i class="mdi mdi-check mr-0" aria-hidden="true"></i> Crop
               </button>
@@ -335,7 +331,7 @@
                 <i class="mdi mdi-minus mr-0" aria-hidden="true"></i> Revert
               </button>
             </div>
-            <div class="item-action-icons float-right">
+            <div class="item-action-icons">
               <span
                 data-title="Remove Background"
                 class="do-transparent"

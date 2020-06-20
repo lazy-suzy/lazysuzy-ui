@@ -41,6 +41,12 @@ export class BoardPopupConfigComponent implements OnInit {
     'https://www.lazysuzy.com/images/board/rooms/light_wood_1610.jpg',
     'https://www.lazysuzy.com/images/board/rooms/medium_wood_1610.jpg'
   ];
+  backgroundImagesThumbs = [
+    'https://www.lazysuzy.com/images/board/rooms/blue_gray_1610_thumb.jpg',
+    'https://www.lazysuzy.com/images/board/rooms/dining_dark_wood_1610_thumb.jpg',
+    'https://www.lazysuzy.com/images/board/rooms/light_wood_1610_thumb.jpg',
+    'https://www.lazysuzy.com/images/board/rooms/medium_wood_1610_thumb.jpg'
+  ];
   selected = {
     color: this.backgroundColors[0],
     background: this.backgroundImages[0]

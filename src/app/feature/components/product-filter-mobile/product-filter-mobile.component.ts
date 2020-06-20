@@ -58,7 +58,8 @@ export class ProductFilterMobileComponent implements OnInit {
     });
   }
 
-  onChanges(change: any) {
+  // tslint:disable-next-line: use-lifecycle-interface
+  ngOnChanges(change: any) {
     if (change.productFilters !== undefined) {
       this.productFilters = change.productFilters.currentValue;
       this.selectTab(this.activeTab);
