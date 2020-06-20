@@ -224,7 +224,7 @@ export class BoardPopupComponent implements OnInit {
   publishBoard() {
     this.popupShow.config = false;
     this.board.type_privacy = this.boardPrivacy ? 0 : 2;
-    this.board.is_published = true;
+    this.board.is_published = 1;
     this.boardService.updateBoard(this.board).subscribe((response) => {
       this.popupShow.publish = true;
     });
