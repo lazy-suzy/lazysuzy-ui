@@ -37,23 +37,85 @@
       </div>
     </div>
   </div>
-  <div class="col col-md-3">
-    <div *ngIf="!loadedAsEmbed" class="mb-0-ns mb-5 mt-0-ns mt-5">
-      <div class="mt-5-ns">
-        <span class="font-weight-bold h5">{{ appMeta.board.title }}</span>
+  <div class="col col-md-3 flex align-items-center">
+    <div
+      *ngIf="!loadedAsEmbed"
+      class="mb-0-ns mb-5 mt-0-ns mt-5 board-user-container"
+    >
+      <div class="mt-5-ns shop-title-row">
+        <div>
+          <span class="font-weight-bold h5">{{ appMeta.board.title }}</span>
+        </div>
+        <div>
+          <div class="tile-icon wishlist-icon wishlist-container">
+            <mat-icon (click)="wishlistProduct()">favorite </mat-icon>
+          </div>
+        </div>
+        <!-- <ng-template #elseBlock>
+          <div class="tile-icon wishlist-icon wishlist-container">
+            <mat-icon (click)="wishlistProduct(product.sku, true)"
+              >favorite_border </mat-icon
+            >
+          </div>
+        </ng-template> -->
       </div>
-      <div>
-        <span class="font-italic h5 font-weight-normal">{{ userName }}</span>
+      <div class="flex">
+        <mat-icon class="profile-avatar">account_circle</mat-icon>
+        <span class="font-italic profile-username font-weight-normal">{{
+          userName
+        }}</span>
       </div>
     </div>
   </div>
 </div>
 <div *ngIf="!loadedAsEmbed && boardProducts.length > 0" class="row">
   <div class="col mt-3">
-    <div class="text-center h2 font-weight-bold mt-3">
+    <div class="text-center h2 font-weight-bold mt-3 mb-4">
       <span class="shop-title">Shop This Look</span>
     </div>
-    <div class="products-container mt-5">
+    <div>
+      <p-carousel
+        class="top-deal-slider"
+        [value]="boardProducts"
+        [numVisible]="5"
+        [numScroll]="1"
+        [responsiveOptions]="responsiveOptions"
+      >
+        <ng-template
+          ngFor
+          let-data
+          [ngForOf]="boardProducts"
+          let-index="index"
+          pTemplate="item"
+        >
+          <div class="product mr-4">
+            <span class="product-tag icon">{{ index + 1 }}</span>
+            <a (click)="openDialog(data.sku)">
+              <img
+                class="product_image"
+                src="{{ data.main_image }}"
+                alt="Owl Image"
+              />
+            </a>
+            <div class="product_detail mt-2">
+              <span class="site">{{ data.site }}</span>
+              <br />
+              <span class="name">{{ data.name }}</span>
+              <br />
+              <span class="price">${{ data.is_price }}</span>
+            </div>
+          </div>
+        </ng-template>
+      </p-carousel>
+      <!-- <div *ngIf="isHandset">
+        <app-products-carousal
+          [data]="topDeals"
+          [nameOfCarousal]="'top-deals'"
+          (updates)="handleEvtProductCarousal($event)"
+        ></app-products-carousal>                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 
+      </div> -->
+    </div>
+    <!-- <div class="products-container mt-5">
       <div
         *ngFor="let product of boardProducts; let index = index"
         class="w-25-ns {{ product.is_price ? '' : 'dn' }}"
@@ -74,6 +136,6 @@
           </div>
         </div>
       </div>
-    </div>
+    </div> -->
   </div>
 </div>

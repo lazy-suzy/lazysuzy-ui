@@ -19,6 +19,9 @@ export class BoardPreviewComponent implements OnInit {
   loadedAsEmbed = false;
   eventSubscription: Subscription;
   userName: string;
+  // bpObserver: Observable<BreakpointState> = this.breakpointObserver.observe(
+  //   Breakpoints.Handset
+  // );
   constructor(
     private boardService: BoardService,
     private route: ActivatedRoute,
@@ -96,7 +99,10 @@ export class BoardPreviewComponent implements OnInit {
             if (response[0]) {
               this.boardFound = true;
               this.appMeta.board = response[0];
-              if (this.appMeta.board.type_privacy === 0) {
+              if (
+                this.appMeta.board.type_privacy === 0 &&
+                this.appMeta.board.user_id !== user.id
+              ) {
                 this.router.navigate([`/`]);
               }
               this.boardState = JSON.parse(this.appMeta.board.state.toString());
@@ -128,8 +134,7 @@ export class BoardPreviewComponent implements OnInit {
                 }
               });
             }
-
-            if (this.boardFound === false) {
+            if (this.boardFound === false || !response.length) {
               this.router.navigate(['/']);
             }
           });
