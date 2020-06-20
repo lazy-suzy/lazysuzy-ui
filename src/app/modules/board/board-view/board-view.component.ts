@@ -2037,7 +2037,8 @@ export class BoardViewComponent implements OnInit, AfterViewInit {
         activeObject.sendBackwards();
         break;
       case 'delete':
-        this.canvas.remove(activeObject);
+        if (!activeObject.isEditing)
+          this.canvas.remove(activeObject);
         break;
       case 'duplicate':
         activeObject.clone((clone) => {
