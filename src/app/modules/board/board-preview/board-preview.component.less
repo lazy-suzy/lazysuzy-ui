@@ -69,8 +69,19 @@
 }
 
 .prices {
-  color: #0c1c31;
+  .cprice {
+    color: #0c1c31;
+    margin-right: 10px;
+    &.sale {
+      color: #b76e79;
+    }
+  }
+
+  .oldprice {
+    text-decoration: line-through;
+  }
 }
+
 .ls-product {
   display: flex;
   align-items: center;

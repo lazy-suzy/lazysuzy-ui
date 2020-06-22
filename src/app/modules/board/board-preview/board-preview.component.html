@@ -131,7 +131,19 @@
           </div>
           <div class="name">{{ product.name }}</div>
           <div class="prices">
-            <span>${{ product.is_price }}</span>
+            <span
+              class="{{
+                (product.is_price !== product.was_price && 'cprice sale') ||
+                  'cprice'
+              }}"
+              >${{ product.is_price }}</span
+            >
+            <span
+              *ngIf="product.is_price !== product.was_price"
+              class="oldprice"
+            >
+              ${{ product.was_price }}
+            </span>
           </div>
         </div>
       </div>
