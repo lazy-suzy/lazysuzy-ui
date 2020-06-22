@@ -25,26 +25,28 @@ export class CurrentBoardComponent implements OnInit {
     }
   }
   updatePriceFormat(price, max) {
-    let minPrice = '';
-    let maxPrice = '';
-    const formatter = new Intl.NumberFormat('en-US', {
-      style: 'currency',
-      currency: 'USD'
-    });
-    const splitedPrice = price.split('-');
-    minPrice = formatter.format(splitedPrice[0].slice(1));
-    if (splitedPrice.length > 1) {
-      if (max) {
-        maxPrice = formatter.format(splitedPrice[1]);
-        return `- ${maxPrice.slice(0, -3)}`;
+    if (price) {
+      let minPrice = '';
+      let maxPrice = '';
+      const formatter = new Intl.NumberFormat('en-US', {
+        style: 'currency',
+        currency: 'USD'
+      });
+      const splitedPrice = price.split('-');
+      minPrice = formatter.format(splitedPrice[0].slice(1));
+      if (splitedPrice.length > 1) {
+        if (max) {
+          maxPrice = formatter.format(splitedPrice[1]);
+          return `- ${maxPrice.slice(0, -3)}`;
+        } else {
+          return `${minPrice.slice(0, -3)}`;
+        }
       } else {
-        return `${minPrice.slice(0, -3)}`;
-      }
-    } else {
-      if (max) {
-        return null;
-      } else {
-        return `${minPrice.slice(0, -3)}`;
+        if (max) {
+          return null;
+        } else {
+          return `${minPrice.slice(0, -3)}`;
+        }
       }
     }
   }

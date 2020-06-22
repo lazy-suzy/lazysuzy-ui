@@ -102,7 +102,7 @@
   }
 }
 .product-container {
-  height: 65vh;
+  height: calc(100vh - 260px);
   overflow-y: auto;
   overflow-x: hidden;
 }
@@ -164,7 +164,12 @@
     top: 0;
   }
 }
-
+::ng-deep .font-picker.visibleFontPicker {
+  visibility: visible;
+}
+.displayEditor {
+  display: flex;
+}
 .board-action-button {
   background-color: #ffffff;
   margin-right: 8px;
@@ -292,7 +297,14 @@
   margin-left: 15px;
 }
 ::ng-deep .pickr-container .pcr-app {
-  width: 132px;
+  width: 245px;
+}
+.no-more-items-msg {
+  text-align: center;
+  color: #606060;
+}
+.product-container-padding {
+  padding-bottom: 100px;
 }
 @media screen and (max-width: 991px) {
   .load-more-btn-container {
@@ -389,7 +401,7 @@
       bottom: unset !important;
       left: 15px !important;
       right: unset !important;
-      width: 142px;
+      width: 260px;
     }
     ::ng-deep .pcr-interaction {
       background: white;

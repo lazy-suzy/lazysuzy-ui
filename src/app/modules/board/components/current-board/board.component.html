@@ -8,16 +8,26 @@
       <div class="product-tag icon">{{ index + 1 }}</div>
       <div class="w-100">
         <div class="row">
-          <div class="col-9 pr-0">
+          <div class="col-8 pr-0">
             <div class="product-name">{{ product.name }}</div>
             <div class="subtle">{{ product.brand }}</div>
           </div>
-          <div class="col-3 price-container" *ngIf="product.price">
-            <div class="price">
-              {{ updatePriceFormat(product.price, false) }}
+          <div class="col-4 price-container" *ngIf="product.price">
+            <div class="flex justify-content-end">
+              <div class="is_price">
+                {{ updatePriceFormat(product.price, false) }}
+              </div>
+              <div class="is_price">
+                {{ updatePriceFormat(product.price, true) }}
+              </div>
             </div>
-            <div class="price">
-              {{ updatePriceFormat(product.price, true) }}
+            <div class="flex justify-content-end strike">
+              <div class="price">
+                {{ updatePriceFormat(product.was_price, false) }}
+              </div>
+              <div class="price">
+                {{ updatePriceFormat(product.was_price, true) }}
+              </div>
             </div>
           </div>
         </div>

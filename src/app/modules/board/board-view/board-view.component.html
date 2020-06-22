@@ -129,12 +129,23 @@
               <!-- <div class="clear-all d-none">Clear All</div> -->
             </div>
           </div>
-          <div (scroll)="onScrollEvent($event)" class="product-container">
+          <div
+            (scroll)="onScrollEvent($event)"
+            class="product-container {{
+              productForPreview ? 'product-container-padding' : ''
+            }}"
+          >
             <app-board-products
               [products]="remoteProducts"
               (previewProduct)="handleProductPreview($event)"
             >
             </app-board-products>
+            <div
+              *ngIf="hasLoadedAllProducts && remoteProducts.length !== 0"
+              class="no-more-items-msg"
+            >
+              No more items available.
+            </div>
           </div>
           <!-- <div
             class="load-more-btn-container"

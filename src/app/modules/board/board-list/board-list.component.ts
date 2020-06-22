@@ -151,7 +151,7 @@ export class BoardListComponent implements OnInit {
   }
 
   share(board: Board): void {
-    if (board.type_privacy == 0){
+    if (board.type_privacy === 0) {
       board.type_privacy = 1;
       this.boardService.updateBoard(board).subscribe();
     }
@@ -167,7 +167,8 @@ export class BoardListComponent implements OnInit {
 
   getPreviewImagePath(board: Board) {
     if (board.preview) {
-      return environment.BASE_HREF + board.preview;
+      const timestamp = new Date().getTime();
+      return `${environment.BASE_HREF}${board.preview}?v=${timestamp}`;
     } else {
       return 'https://via.placeholder.com/500x400';
     }

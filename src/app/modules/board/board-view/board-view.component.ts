@@ -339,12 +339,6 @@ export class BoardViewComponent implements OnInit, AfterViewInit {
         const { hits } = payload.hits;
         this.hasSearched = true;
         const products = hits.map((hit: any) => hit._source);
-        for (const i in products) {
-          if (products[i].board_thumb) {
-            products[i].board_thumb =
-              '//www.lazysuzy.com' + products[i].board_thumb;
-          }
-        }
 
         this.remoteProducts = isNewSearch
           ? products
@@ -357,7 +351,7 @@ export class BoardViewComponent implements OnInit, AfterViewInit {
           };
         });
         this.checkFilterEnabled(this.filterData);
-        if (this.remoteProducts.length < 24 || !this.remoteProducts.length) {
+        if (products.length < 24 || products.length === 0) {
           this.hasLoadedAllProducts = true;
         }
         this.iPageNo += 1;
@@ -366,12 +360,10 @@ export class BoardViewComponent implements OnInit, AfterViewInit {
   }
   updateFontAndSize(font: Font) {
     const fontCss = font.getStyles();
-
     this.appMeta.value.fontFamily = fontCss['font-family'];
     this.appMeta.value.fontSize = fontCss['font-size'].replace('px', '');
     this.appMeta.value.fontStyle = fontCss['font-style'];
     this.appMeta.value.fontWeight = fontCss['font-weight'];
-
     this.appMeta.flag.isFontToolbarDirty = true;
     this.addFontFamilyIfNotAdded(fontCss['font-family']);
     this.updateCurrentObject(true);
@@ -497,7 +489,7 @@ export class BoardViewComponent implements OnInit, AfterViewInit {
         this.filterData = s.filterData || {};
         this.pageNo++;
         this.checkFilterEnabled(this.filterData);
-        if (this.remoteProducts.length < 24 || !this.remoteProducts.length) {
+        if (s.products.length < 24 || s.products.length === 0) {
           this.hasLoadedAllProducts = true;
         }
         this.boardService.setBoardData(
@@ -559,15 +551,6 @@ export class BoardViewComponent implements OnInit, AfterViewInit {
   onResize() {
     this.handleResize();
   }
-  onScroll() {
-    // if (this.hasLoadedAllProducts) {
-    //   console.log('here');
-    //   this.hasLoadedAllProducts = false;
-    //   return;
-    // } else {
-    //   this.loadMore();
-    // }
-  }
   onScrollEvent(event) {
     const element: any = document.getElementsByClassName('product-container');
     if (
@@ -576,7 +559,6 @@ export class BoardViewComponent implements OnInit, AfterViewInit {
       element[0].scrollHeight - element[0].scrollTop < element[0].clientHeight
     ) {
       if (this.hasLoadedAllProducts) {
-        this.hasLoadedAllProducts = false;
         return;
       } else {
         this.loadMore();
@@ -604,7 +586,6 @@ export class BoardViewComponent implements OnInit, AfterViewInit {
     // this.eventEmitterService.updateAssetsEvent
     //   .asObservable()
     //   .subscribe((user) => {
-    //     console.log('here');
     //     console.log(user);
     //     this.getAssets();
     //   });
@@ -654,11 +635,29 @@ export class BoardViewComponent implements OnInit, AfterViewInit {
     }
   }
 
+  // tslint:disable-next-line: use-lifecycle-interface
+  ngAfterViewChecked() {
+    $('.size-select').on('focus', (e) => {
+      $('.font-picker').addClass('visibleFontPicker');
+      $('.editor-icons').addClass('displayEditor');
+      $('.item-action-icons').addClass('displayEditor');
+    });
+    $('.size-select').on('blur', (e) => {
+      $('.font-picker').removeClass('visibleFontPicker');
+      $('.editor-icons').removeClass('displayEditor');
+      $('.item-action-icons').removeClass('displayEditor');
+    });
+  }
+
   @HostListener('window:keyup', ['$event'])
   keyEvent(event: KeyboardEvent) {
-    // tslint:disable-next-line: deprecation
-    if (event.keyCode === 46 || event.keyCode === 8) {
-      this.applyShortcut('action', 'delete');
+    if ($('.size-select').is(':focus')) {
+      return;
+    } else {
+      // tslint:disable-next-line: deprecation
+      if (event.keyCode === 46 || event.keyCode === 8) {
+        this.applyShortcut('action', 'delete');
+      }
     }
   }
 
@@ -1383,15 +1382,17 @@ export class BoardViewComponent implements OnInit, AfterViewInit {
             ? (product = this.remoteProducts)
             : (product = this.favoriteProducts);
         }
-
         referenceObjectValue.id = product[referenceID].id;
         referenceObjectValue.isTransparent = 1;
         referenceObjectValue.path = product[referenceID].board_cropped;
         referenceObjectValue.transparentPath = '';
         referenceObjectValue.name = product[referenceID].name;
-        referenceObjectValue.price = product[referenceID].is_price;
+        referenceObjectValue.price =
+          product[referenceID].is_price || product[referenceID].price;
         referenceObjectValue.brand = product[referenceID].site;
-        referenceObjectValue.sku = product[referenceID].sku;
+        referenceObjectValue.sku =
+          product[referenceID].sku || product[referenceID].product_sku;
+        referenceObjectValue.was_price = product[referenceID].was_price;
       }
 
       // let imageToInsert = new fb.Image(draggedObject[0], {
@@ -1752,7 +1753,10 @@ export class BoardViewComponent implements OnInit, AfterViewInit {
             index: y + 1,
             name: x.referenceObject.name,
             brand: x.referenceObject.brand,
-            price: x.referenceObject.price ? '$' + x.referenceObject.price : ''
+            price: x.referenceObject.price ? '$' + x.referenceObject.price : '',
+            was_price: x.referenceObject.was_price
+              ? '$' + x.referenceObject.was_price
+              : ''
           };
         });
       }
@@ -2041,8 +2045,9 @@ export class BoardViewComponent implements OnInit, AfterViewInit {
         activeObject.sendBackwards();
         break;
       case 'delete':
-        if (!activeObject.isEditing)
+        if (!activeObject.isEditing) {
           this.canvas.remove(activeObject);
+        }
         break;
       case 'duplicate':
         activeObject.clone((clone) => {
