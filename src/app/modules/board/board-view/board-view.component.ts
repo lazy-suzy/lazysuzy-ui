@@ -339,7 +339,12 @@ export class BoardViewComponent implements OnInit, AfterViewInit {
         const { hits } = payload.hits;
         this.hasSearched = true;
         const products = hits.map((hit: any) => hit._source);
-
+        if (products.length) {
+          for (const i in products) {
+            products[i].product_detail_url =
+              'www.lazysuzy.com/product/' + products[i].product_sku;
+          }
+        }
         this.remoteProducts = isNewSearch
           ? products
           : [...this.remoteProducts, ...(products || [])];

@@ -34,7 +34,10 @@ export class AppProductPreviewComponent implements OnInit {
         this.userId = user.id;
         this.updatePriceFormat(this.data.is_price, this.data.price);
         this.updateOriginalPriceFormat(this.data.was_price);
-        this.updateProductUrl(this.data.product_url, this.data.listing_url);
+        this.updateProductUrl(
+          this.data.product_detail_url,
+          this.data.listing_url
+        );
         this.isUsersProduct();
       });
   }
@@ -46,7 +49,10 @@ export class AppProductPreviewComponent implements OnInit {
     ) {
       this.data = changes.data.currentValue || {};
       this.isUsersProduct();
-      this.updateProductUrl(this.data.product_url, this.data.listing_url);
+      this.updateProductUrl(
+        this.data.product_detail_url,
+        this.data.listing_url
+      );
       this.updateOriginalPriceFormat(this.data.was_price);
       this.updatePriceFormat(this.data.is_price, this.data.price);
       if (this.data.dropType) {
@@ -120,13 +126,8 @@ export class AppProductPreviewComponent implements OnInit {
   }
 
   updateOriginalPriceFormat(price) {
-    if (this.data.is_price !== this.data.was_price) {
+    if (this.data.is_price !== this.data.was_price && price) {
       const data = price;
-      if (!data) {
-        this.maxWasPrice = null;
-        this.minWasPrice = null;
-        return;
-      }
       const splitedPrice = data.split('-');
       this.minWasPrice = splitedPrice[0];
       if (splitedPrice.length > 1) {
@@ -134,6 +135,9 @@ export class AppProductPreviewComponent implements OnInit {
       } else {
         this.maxWasPrice = null;
       }
+    } else {
+      this.maxWasPrice = null;
+      this.minWasPrice = null;
     }
   }
 }

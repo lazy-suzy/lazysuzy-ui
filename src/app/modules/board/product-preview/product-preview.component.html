@@ -1,5 +1,5 @@
 <div class="product-cont row">
-  <div class="col-10 pt-2 pl-0">
+  <div class="col-10 pt-2 pl-0 pr-0">
     <div class="pl-2 pt-0 pb-1 b">
       {{ data?.name }}
       <span class="edit-btn" (click)="openDialog()" *ngIf="isEditBtn"
@@ -14,13 +14,19 @@
         <div class="brand">
           {{ data?.site }}
         </div>
-        <div class="is_price" *ngIf="minPrice">
-          ${{ minPrice | number }} <span *ngIf="maxPrice">- $</span
-          >{{ maxPrice | number }}
-        </div>
-        <div class="price strike" *ngIf="minWasPrice">
-          ${{ minWasPrice | number }} <span *ngIf="maxWasPrice">- $</span
-          >{{ maxWasPrice | number }}
+        <div class="flex flex-wrap">
+          <div
+            class="{{ minWasPrice ? 'is_price' : 'price' }}"
+            *ngIf="minPrice"
+          >
+            ${{ minPrice | number }}
+            <span *ngIf="maxPrice">- ${{ maxPrice | number }}</span>
+            &nbsp;
+          </div>
+          <div class="strike" *ngIf="minWasPrice">
+            <span class="price"> ${{ minWasPrice | number }} </span>
+            <span *ngIf="maxWasPrice">- ${{ maxWasPrice | number }}</span>
+          </div>
         </div>
       </div>
     </div>
