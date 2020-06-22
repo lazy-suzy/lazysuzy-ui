@@ -33,8 +33,6 @@ export class SearchProductComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.product.main_product_images =
-      '//www.lazysuzy.com' + this.product.main_product_images;
     this.setRating();
     this.bpSubscription = this.bpObserver.subscribe(
       (handset: BreakpointState) => {
