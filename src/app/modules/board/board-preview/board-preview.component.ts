@@ -232,6 +232,8 @@ export class BoardPreviewComponent implements OnInit {
         for (const prod of responseData) {
           this.boardProducts.find((item) => item.sku === prod.sku).main_image =
             prod.main_image;
+          this.boardProducts.find((item) => item.sku === prod.sku).was_price =
+            prod.was_price;
         }
         for (const prod of this.boardProducts) {
           if (prod.main_image.substring(0, 8) === '/storage') {

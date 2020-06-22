@@ -133,13 +133,17 @@
           <div class="prices">
             <span
               class="{{
-                (product.is_price !== product.was_price && 'cprice sale') ||
+                (product.was_price &&
+                  product.is_price !== product.was_price &&
+                  'cprice sale') ||
                   'cprice'
               }}"
               >${{ product.is_price }}</span
             >
             <span
-              *ngIf="product.is_price !== product.was_price"
+              *ngIf="
+                product.was_price && product.is_price !== product.was_price
+              "
               class="oldprice"
             >
               ${{ product.was_price }}
