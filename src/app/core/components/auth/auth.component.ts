@@ -32,6 +32,7 @@ export class AuthComponent implements OnInit {
   name = '';
   expiredDate = new Date();
   initialized = false;
+  hasPicture: boolean;
   private attribute = {
     postGuestKey: 'guest',
     lsGuestUser: 'guest-user',
@@ -60,6 +61,9 @@ export class AuthComponent implements OnInit {
           this.expiredDate,
           '/'
         );
+        this.hasPicture =
+          payload.user.picture && payload.user.picture !== null ? true : false;
+        payload.user.picture = env.BASE_HREF + payload.user.picture;
         localStorage.setItem(
           this.attribute.lsRegularUser,
           JSON.stringify(payload.user)

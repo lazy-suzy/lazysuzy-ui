@@ -16,8 +16,8 @@ import {
   ProductDetailsMobileModule,
   PaymentModule,
   OrderSuccessModule,
-  ProfileModule,
-  DisplayProfileModule
+  EditMyProfileModule,
+  PublicProfileModule
 } from './components';
 import { ResetPasswordComponent } from './containers/reset-password/reset-password.component';
 // import { BlogModule } from './blog/blog/blog.module';
@@ -36,8 +36,8 @@ const MODULES = [
   OrderSuccessModule,
   ForgotPasswordModule,
   ResetPasswordModule,
-  ProfileModule,
-  DisplayProfileModule
+  EditMyProfileModule,
+  PublicProfileModule
   // BlogModule
 ];
 @NgModule({

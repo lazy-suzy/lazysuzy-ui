@@ -20,8 +20,8 @@ import {
   ProductDetailsMobileComponent,
   PaymentComponent,
   OrderSuccessComponent,
-  ProfileComponent,
-  DisplayProfileComponent
+  EditMyProfileComponent,
+  PublicProfileComponent
 } from './feature/components';
 import { environment } from 'src/environments/environment';
 
@@ -85,8 +85,8 @@ const routes: Routes = [
         (m) => m.AdminDashboardModule
       )
   },
-  { path: 'profile', component: ProfileComponent },
-  { path: ':profile', component: DisplayProfileComponent }
+  { path: 'editMyProfile', component: EditMyProfileComponent },
+  { path: ':profile', component: PublicProfileComponent }
 ];
 
 @NgModule({

@@ -14,7 +14,7 @@
 
   <ng-template #userName>
     <img
-      *ngIf="user.picture && user.picture != 'null'; else showInitials"
+      *ngIf="hasPicture; else showInitials"
       [src]="user.picture"
       class="profile-avatar"
       [matMenuTriggerFor]="optionsMenu"
@@ -30,7 +30,7 @@
     <span>
       <button
         mat-menu-item
-        [routerLink]="['/profile']"
+        [routerLink]="['/editMyProfile']"
         routerLinkActive="router-link-active"
       >
         Profile

@@ -88,6 +88,7 @@
     button {
       padding: 10px 40px;
       border: none;
+      border-radius: 4px;
     }
     .profile-cancel-btn {
       color: #0c1c31;
@@ -100,6 +101,7 @@
       width: 65px;
       border-radius: 50%;
       height: 100%;
+      object-fit: cover;
     }
   }
 }
@@ -123,7 +125,16 @@
   color: #ff0000;
   font-size: 14px;
 }
-
+::ng-deep .mat-simple-snackbar-action {
+  color: #b76e79;
+}
+::ng-deep .mat-snack-bar-container {
+  background: #0c1c31;
+  margin-bottom: 70px !important;
+}
+::ng-deep .mat-simple-snackbar {
+  color: #ffcc00;
+}
 @media (max-width: 767px) {
   .profile-container {
     width: 100%;

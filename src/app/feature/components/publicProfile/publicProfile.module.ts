@@ -1,13 +1,13 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { DisplayProfileComponent } from './display-profile.component';
+import { PublicProfileComponent } from './publicProfile.component';
 import { MatIconModule } from '@angular/material/icon';
 
-const DECLARATIONS = [DisplayProfileComponent];
+const DECLARATIONS = [PublicProfileComponent];
 
 const MODULES = [CommonModule, MatIconModule];
 @NgModule({
   declarations: [...DECLARATIONS],
   imports: [...MODULES]
 })
-export class DisplayProfileModule {}
+export class PublicProfileModule {}

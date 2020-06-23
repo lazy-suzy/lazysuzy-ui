@@ -18,11 +18,7 @@
           (change)="readFile($event)"
         />
         <span class="edit-image {{ hasEditIcon ? '' : 'dn' }}">
-          <mat-icon
-            class="pointer"
-            aria-hidden="false"
-            aria-label="Edit-Image"
-            *ngIf="!imageSrc"
+          <mat-icon class="pointer" aria-hidden="false" aria-label="Edit-Image"
             >edit</mat-icon
           >
         </span>
@@ -30,11 +26,11 @@
           class="account-icon"
           aria-hidden="false"
           aria-label="Account"
-          *ngIf="!imageSrc"
+          *ngIf="!hasImage"
         >
           account_circle
         </mat-icon>
-        <img [src]="imageSrc" *ngIf="imageSrc" class="profile-avatar" />
+        <img [src]="imageSrc" *ngIf="hasImage" class="profile-avatar" />
         <span class="form-msg"
           >Let the LazySuzy community get to know you with the info below</span
         >
@@ -129,9 +125,6 @@
         <button class="profile-update-btn b ml3">UPDATE</button>
       </div>
     </form>
-    <div class="update-msg" *ngIf="isProfileUpdated">
-      <span>Profile Updated</span>
-    </div>
   </div>
 </div>
 <img *ngIf="isLoading" [src]="spinner" class="loader" />

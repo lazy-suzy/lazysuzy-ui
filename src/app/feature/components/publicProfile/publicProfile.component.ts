@@ -10,11 +10,11 @@ import { IDisplayProfile } from '../../../shared/models';
 import { environment as env } from 'src/environments/environment';
 
 @Component({
-  selector: 'app-display-profile',
-  templateUrl: './display-profile.component.html',
-  styleUrls: ['./display-profile.component.less']
+  selector: 'app-public-profile',
+  templateUrl: './publicProfile.component.html',
+  styleUrls: ['./publicProfile.component.less']
 })
-export class DisplayProfileComponent implements OnInit {
+export class PublicProfileComponent implements OnInit {
   routeSubscription: any;
   username: string;
   profile: IDisplayProfile;
