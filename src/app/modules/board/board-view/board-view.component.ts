@@ -850,7 +850,7 @@ export class BoardViewComponent implements OnInit, AfterViewInit {
       this.appMeta.value.fontColor = '#' + instance.toHEXA().join('');
       this.pickr.setColor(this.appMeta.value.fontColor);
       this.updateCurrentObject(true);
-      this.showPicker = false;
+      // this.showPicker = false;
       this.appMeta.flag.isFontToolbarDirty = true;
     });
     this.pickr.on('cancel', (instance) => {

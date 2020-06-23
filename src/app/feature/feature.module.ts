@@ -12,7 +12,6 @@ import {
   ResetPasswordModule
 } from './containers';
 import { AmericanNumberPipe } from '../shared/pipes/american-number.pipe';
-
 import {
   ProductDetailsMobileModule,
   PaymentModule,
@@ -21,13 +20,8 @@ import {
   DisplayProfileModule
 } from './components';
 import { ResetPasswordComponent } from './containers/reset-password/reset-password.component';
-import { ProfileComponent } from './components/profile/profile.component';
-import { DisplayProfileComponent } from './components/display-profile/display-profile.component';
-
 // import { BlogModule } from './blog/blog/blog.module';
-
 const DECLARATIONS = [];
-
 const MODULES = [
   CommonModule,
   ProductsModule,
@@ -46,9 +40,8 @@ const MODULES = [
   DisplayProfileModule
   // BlogModule
 ];
-
 @NgModule({
-  declarations: [...DECLARATIONS, ResetPasswordComponent, ProfileComponent, DisplayProfileComponent],
+  declarations: [...DECLARATIONS, ResetPasswordComponent],
   imports: [...MODULES],
   // providers: [AmericanNumberPipe],
   exports: [...DECLARATIONS, ...MODULES]
