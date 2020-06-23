@@ -19,7 +19,9 @@ import {
 import {
   ProductDetailsMobileComponent,
   PaymentComponent,
-  OrderSuccessComponent
+  OrderSuccessComponent,
+  ProfileComponent,
+  DisplayProfileComponent
 } from './feature/components';
 import { environment } from 'src/environments/environment';
 
@@ -82,7 +84,9 @@ const routes: Routes = [
       import('./modules/admin-dashboard/admin-dashboard.module').then(
         (m) => m.AdminDashboardModule
       )
-  }
+  },
+  { path: 'profile', component: ProfileComponent },
+  { path: ':profile', component: DisplayProfileComponent }
 ];
 
 @NgModule({

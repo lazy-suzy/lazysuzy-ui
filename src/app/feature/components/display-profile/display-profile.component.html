@@ -1,0 +1,40 @@
+<div class="display-profile-container">
+  <div class="profile-section">
+    <div class="flex profile-image-row">
+      <div class="w-40 tc">
+        <img
+          [src]="profile.picture"
+          class="profile-avatar"
+          *ngIf="profile.picture"
+        />
+        <mat-icon
+          class="profile-avatar"
+          aria-hidden="false"
+          aria-label="Account"
+          *ngIf="!profile.picture"
+        >
+          account_circle
+        </mat-icon>
+      </div>
+      <div class="profile-header-content">
+        <div class="name">{{ profile.first_name }} {{ profile.last_name }}</div>
+        <div>{{ profile.tag_line }}</div>
+      </div>
+    </div>
+    <div class="flex mv4">
+      <div class="w-40 tc">
+        <div>{{ profile.location }}</div>
+        <a [href]="profile.website" class="website mt1">{{
+          profile.website
+        }}</a>
+      </div>
+      <div class="w-60">
+        <div>{{ profile.description }}</div>
+      </div>
+    </div>
+  </div>
+  <div class="boards-section">
+    <div class="pink-font">DESIGN BOARDS</div>
+  </div>
+</div>
+<img *ngIf="isLoading" [src]="spinner" class="loader" />

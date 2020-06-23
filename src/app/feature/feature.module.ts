@@ -19,6 +19,8 @@ import {
   OrderSuccessModule
 } from './components';
 import { ResetPasswordComponent } from './containers/reset-password/reset-password.component';
+import { ProfileComponent } from './components/profile/profile.component';
+import { DisplayProfileComponent } from './components/display-profile/display-profile.component';
 
 // import { BlogModule } from './blog/blog/blog.module';
 
@@ -42,7 +44,7 @@ const MODULES = [
 ];
 
 @NgModule({
-  declarations: [...DECLARATIONS, ResetPasswordComponent],
+  declarations: [...DECLARATIONS, ResetPasswordComponent, ProfileComponent, DisplayProfileComponent],
   imports: [...MODULES],
   // providers: [AmericanNumberPipe],
   exports: [...DECLARATIONS, ...MODULES]

@@ -1,0 +1,153 @@
+.profile-container {
+  width: 50%;
+  margin: auto;
+  .title {
+    color: #b76e79;
+    font-size: 24px;
+    padding-bottom: 15px;
+    border-bottom: 1px solid #aab7b6;
+    margin-bottom: 15px;
+  }
+  .profile-form-container {
+    width: 70%;
+    margin: 0 auto 20px;
+    .account-avatar-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      position: relative;
+      height: 65px;
+      .profile-image-input {
+        position: absolute;
+        left: 0;
+        height: 65px;
+        width: 65px;
+        opacity: 0;
+        z-index: 1;
+        border-radius: 50%;
+      }
+      .edit-image {
+        position: absolute;
+        left: 20px;
+        top: 25px;
+        color: #808080;
+      }
+      .account-icon {
+        font-size: 75px;
+        margin: 0 0 45px -5px;
+        color: #d4d4d4;
+      }
+    }
+    .input-container {
+      margin: 25px 0;
+      border-color: #999999;
+      &:focus {
+        border-color: #999999;
+      }
+    }
+    label {
+      color: #999999;
+    }
+    input {
+      &:focus {
+        outline: none;
+      }
+    }
+    .form-input {
+      padding: 8px 16px;
+      height: 40px;
+      border-radius: 3px;
+      border-color: #999999;
+    }
+    .profile-link {
+      font-size: 14px;
+      span a {
+        color: #999999;
+      }
+    }
+    .last-name {
+      text-align: left;
+      margin-left: 15px;
+    }
+    .text-area {
+      height: 100px;
+      resize: none;
+      border-color: #999999;
+      &:focus {
+        outline: none;
+      }
+    }
+    .tag-line-container {
+      height: 55px;
+    }
+    .action-buttons-row {
+      width: 100%;
+      text-align: right;
+      margin: 15px 0;
+    }
+    button {
+      padding: 10px 40px;
+      border: none;
+    }
+    .profile-cancel-btn {
+      color: #0c1c31;
+    }
+    .profile-update-btn {
+      background-color: #0c1c31;
+      color: #f7c107;
+    }
+    .profile-avatar {
+      width: 65px;
+      border-radius: 50%;
+      height: 100%;
+    }
+  }
+}
+.input-50 {
+  width: 95%;
+}
+.update-msg {
+  padding: 15px 0;
+  text-align: center;
+  color: #12d319;
+  font-size: 14px;
+}
+.loader {
+  position: fixed;
+  z-index: 1;
+  top: 50%;
+  left: 50%;
+  transform: translateX(-50%) translateY(-50%);
+}
+.error-msg {
+  color: #ff0000;
+  font-size: 14px;
+}
+
+@media (max-width: 767px) {
+  .profile-container {
+    width: 100%;
+    .title {
+      padding: 15px;
+    }
+    .profile-form-container {
+      width: 90%;
+      .account-avatar-row {
+        text-align: right;
+      }
+      .form-msg {
+        max-width: 75%;
+      }
+      .last-name {
+        margin: 20px 0 10px;
+      }
+      .action-buttons-row {
+        text-align: center;
+        margin: 10px 0 20px;
+      }
+    }
+  }
+  .input-50 {
+    width: 100%;
+  }
+}

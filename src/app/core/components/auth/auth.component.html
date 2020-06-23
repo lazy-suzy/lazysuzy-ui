@@ -28,6 +28,15 @@
 
   <mat-menu #optionsMenu="matMenu">
     <span>
+      <button
+        mat-menu-item
+        [routerLink]="['/profile']"
+        routerLinkActive="router-link-active"
+      >
+        Profile
+      </button>
+    </span>
+    <span>
       <button mat-menu-item (click)="logout()">Logout</button>
     </span>
   </mat-menu>

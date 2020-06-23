@@ -25,3 +25,7 @@ export * from './confirm-cart-product/confirm-cart-product.component';
 export * from './confirm-cart-product/confirm-cart-product.module';
 export * from './order-success/order-success.component';
 export * from './order-success/order-success.module';
+export * from './profile/profile.component';
+export * from './profile/profile.module';
+export * from './display-profile/display-profile.module';
+export * from './display-profile/display-profile.component';

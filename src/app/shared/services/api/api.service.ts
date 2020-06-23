@@ -396,4 +396,31 @@ export class ApiService {
     const url = `${env.API_BASE_HREF}${endpoint}`;
     return this.httpService.post(url, data);
   }
+  updateProfile(data) {
+    const endpoint = 'user/details/update';
+    const token = this.cookie.get('token');
+    const headers = new HttpHeaders({
+      Authorization: `Bearer ${token}`
+    });
+    const url = `${env.API_BASE_HREF}${endpoint}`;
+    return this.httpService.post(url, data, headers);
+  }
+  getProfile() {
+    const endpoint = 'get-user';
+    const token = this.cookie.get('token');
+    const headers = new HttpHeaders({
+      Authorization: `Bearer ${token}`
+    });
+    const url = `${env.API_BASE_HREF}${endpoint}`;
+    return this.httpService.get(url, headers);
+  }
+  fetchDisplayProfile(username) {
+    const endpoint = `user/details?username=${username}`;
+    const token = this.cookie.get('token');
+    const headers = new HttpHeaders({
+      Authorization: `Bearer ${token}`
+    });
+    const url = `${env.API_BASE_HREF}${endpoint}`;
+    return this.httpService.get(url, headers);
+  }
 }
