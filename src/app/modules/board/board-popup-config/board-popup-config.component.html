@@ -64,10 +64,12 @@
             <div class="w-100 board-options">
               <img
                 *ngFor="let backgroundImage of backgroundImages; let i = index"
-                (click)="handleChange('background', backgroundImage)"
-                [class.selected]="selected.background == backgroundImage"
+                (click)="handleChange('background', backgroundImagesThumbs[i])"
+                [class.selected]="
+                  selected.background == backgroundImagesThumbs[i]
+                "
                 [src]="backgroundImagesThumbs[i]"
-                class="w-25 ph2"
+                class="w-20 background-image"
               />
             </div>
           </div>

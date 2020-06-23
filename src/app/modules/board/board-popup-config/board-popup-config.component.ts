@@ -49,7 +49,7 @@ export class BoardPopupConfigComponent implements OnInit {
   ];
   selected = {
     color: this.backgroundColors[0],
-    background: this.backgroundImages[0]
+    background: this.backgroundImagesThumbs[0]
   };
 
   // tslint:disable-next-line: no-output-on-prefix
@@ -88,6 +88,7 @@ export class BoardPopupConfigComponent implements OnInit {
 
   handleChange(attribute: string, value: string) {
     this.selected[attribute] = value;
+    console.log(attribute, value, this.selected.background);
     if (attribute === 'background') {
       this.isOptionSelected = true;
       this.isRoomSelected = true;

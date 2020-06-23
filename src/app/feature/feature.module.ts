@@ -16,7 +16,9 @@ import { AmericanNumberPipe } from '../shared/pipes/american-number.pipe';
 import {
   ProductDetailsMobileModule,
   PaymentModule,
-  OrderSuccessModule
+  OrderSuccessModule,
+  ProfileModule,
+  DisplayProfileModule
 } from './components';
 import { ResetPasswordComponent } from './containers/reset-password/reset-password.component';
 import { ProfileComponent } from './components/profile/profile.component';
@@ -39,7 +41,9 @@ const MODULES = [
   PaymentModule,
   OrderSuccessModule,
   ForgotPasswordModule,
-  ResetPasswordModule
+  ResetPasswordModule,
+  ProfileModule,
+  DisplayProfileModule
   // BlogModule
 ];
 
