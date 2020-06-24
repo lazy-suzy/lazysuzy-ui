@@ -65,7 +65,7 @@ export class ProductDetailsMobileComponent implements OnInit {
     private router: Router,
     private activeRoute: ActivatedRoute,
     private apiService: ApiService,
-    private utils: UtilsService,
+    public utils: UtilsService,
     private breakpointObserver: BreakpointObserver,
     public gallery: Gallery,
     public lightbox: Lightbox,

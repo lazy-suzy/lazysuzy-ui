@@ -64,7 +64,7 @@ export class ProductDetailsComponent implements OnInit {
   constructor(
     @Inject(MAT_DIALOG_DATA) public data: any,
     private apiService: ApiService,
-    private utils: UtilsService,
+    public utils: UtilsService,
     public gallery: Gallery,
     public lightbox: Lightbox,
     private eventEmitterService: EventEmitterService,

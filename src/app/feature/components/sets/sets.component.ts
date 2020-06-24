@@ -18,7 +18,7 @@ export class SetsComponent implements OnInit {
   constructor(
     private apiService: ApiService,
     private matDialogUtils: MatDialogUtilsService,
-    private utils: UtilsService
+    public utils: UtilsService
   ) {}
 
   ngOnInit() {}
