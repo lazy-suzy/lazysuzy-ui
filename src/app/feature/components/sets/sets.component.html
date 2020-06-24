@@ -8,12 +8,7 @@
             <a href="/product/{{ item.sku }}" class="product-name">{{
               item.name
             }}</a>
-            <ng-container
-              *ngIf="
-                utils.checkInventory(item.in_inventory, item.inventory_product_details.count);
-                else isOOSPrice
-              "
-            >
+            <ng-container *ngIf="utils.hasInventory(item); else isOOSPrice">
               <div>${{ item.inventory_product_details.price }}</div>
             </ng-container>
             <ng-template #isOOSPrice>
@@ -28,13 +23,8 @@
               </div>
             </ng-template>
           </span>
-          <ng-container
-            *ngIf="
-            utils.checkInventory(item.in_inventory, item.inventory_product_details.count);
-              else isOOS
-            "
-          >
-            <div class="w-40 flex ">
+          <ng-container *ngIf="utils.hasInventory(item); else isOOS">
+            <div class="w-40 flex">
               <div class="brand-button-container">
                 <span class="brand-button">
                   <a
@@ -48,15 +38,15 @@
             </div>
           </ng-container>
           <ng-template #isOOS>
-            <div class="w-40 flex ">
+            <div class="w-40 flex">
               <div class="brand-button-container">
                 <span class="brand-button"
-                ><a
-                  class="tr-viewDetails"
-                  (click)="openLink($event, item.link)"
-                  href="{{ item.link }}"
-                  >VIEW AT {{ brand }}</a
-                ></span
+                  ><a
+                    class="tr-viewDetails"
+                    (click)="openLink($event, item.link)"
+                    href="{{ item.link }}"
+                    >VIEW AT {{ brand }}</a
+                  ></span
                 >
               </div>
             </div>
@@ -69,12 +59,7 @@
             }}</a>
           </span>
 
-          <ng-container
-            *ngIf="
-            utils.checkInventory(item.in_inventory, item.inventory_product_details.count);
-              else isOOS
-            "
-          >
+          <ng-container *ngIf="utils.hasInventory(item); else isOOS">
             <div class="w-60-ns w-100 flex">
               <span class="price w-50 w-60-ns justify-end tr">
                 ${{ item.inventory_product_details.price }}
@@ -104,12 +89,12 @@
               </div>
               <div class="brand-button-card w-50 w-40-ns">
                 <span class="brand-button"
-                ><a
-                  class="tr-viewDetails"
-                  (click)="openLink($event, item.link)"
-                  href="{{ item.link }}"
-                  >VIEW AT {{ brand }}</a
-                ></span
+                  ><a
+                    class="tr-viewDetails"
+                    (click)="openLink($event, item.link)"
+                    href="{{ item.link }}"
+                    >VIEW AT {{ brand }}</a
+                  ></span
                 >
               </div>
             </div>
@@ -118,7 +103,8 @@
       </div>
       <div
         class="stock-info"
-        *ngIf=" utils.checkInventory(item.in_inventory, item.inventory_product_details.count) &&
+        *ngIf="
+          utils.hasInventory(item) &&
           (item.inventory_product_details.is_low ||
             item.inventory_product_details.message)
         "

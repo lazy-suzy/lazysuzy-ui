@@ -29,8 +29,14 @@ export class UtilsService {
     return data.length > 0;
   }
 
-  checkInventory(itemInInventory, ProductCount) {
-    return itemInInventory && ProductCount > 0;
+  hasInventory(product) {
+    if (product.in_inventory) {
+      return (
+        product.in_inventory && product.inventory_product_details.count > 0
+      );
+    } else {
+      return false;
+    }
   }
 
   openSignupDialog(isHandset = false, isClose = false) {

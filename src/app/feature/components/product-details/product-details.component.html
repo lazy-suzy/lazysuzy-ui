@@ -47,12 +47,7 @@
             <button
               mat-raised-button
               class="bg-red view-details-btn"
-              *ngIf="
-                !utils.checkInventory(
-                  product.in_inventory,
-                  product.inventory_product_details.count
-                ) && !product.redirect
-              "
+              *ngIf="!utils.hasInventory(product) && !product.redirect"
             >
               <a
                 (click)="openLink($event, product.product_url)"
@@ -66,12 +61,7 @@
             <select
               [(ngModel)]="quantity"
               class="quantity-selector w-30 ml2"
-              *ngIf="
-                utils.checkInventory(
-                  product.in_inventory,
-                  product.inventory_product_details.count
-                )
-              "
+              *ngIf="utils.hasInventory(product)"
             >
               <option *ngFor="let item of quantityArray" [value]="item.value">{{
                 item.value
@@ -81,12 +71,7 @@
             <button
               mat-raised-button
               class="bg-red view-details-btn"
-              *ngIf="
-                utils.checkInventory(
-                  product.in_inventory,
-                  product.inventory_product_details.count
-                )
-              "
+              *ngIf="utils.hasInventory(product)"
             >
               <a (click)="openCartModal()" class="tr-addToCart no-underline">
                 ADD TO CART
@@ -100,10 +85,7 @@
         <div
           class="stock-info"
           *ngIf="
-            utils.checkInventory(
-              product.in_inventory,
-              product.inventory_product_details.count
-            ) &&
+            utils.hasInventory(product) &&
             (product.inventory_product_details.is_low ||
               product.inventory_product_details.message)
           "
@@ -146,13 +128,7 @@
       <div class="product-description-container" [ngStyle]="topHeight">
         <div *ngIf="!isSetItemInInventory">
           <app-redirect
-            *ngIf="
-              product.redirect &&
-              !utils.checkInventory(
-                product.in_inventory,
-                product.inventory_product_details.count
-              )
-            "
+            *ngIf="product.redirect && !utils.hasInventory(product)"
             [redirectUrl]="product.redirect_url"
             [redirectDetails]="product.redirect_details"
             [category]="product.department_info[0].category_name"
