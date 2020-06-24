@@ -5,7 +5,8 @@ import {
   ApiService,
   UtilsService,
   CacheService,
-  EventEmitterService
+  EventEmitterService,
+  MatDialogUtilsService
 } from 'src/app/shared/services';
 import { Observable, Subscription } from 'rxjs';
 import {
@@ -69,7 +70,8 @@ export class ProductDetailsMobileComponent implements OnInit {
     public gallery: Gallery,
     public lightbox: Lightbox,
     public cacheService: CacheService,
-    private eventEmitterService: EventEmitterService
+    private eventEmitterService: EventEmitterService,
+    private matDialogUtils: MatDialogUtilsService
   ) {}
 
   ngOnInit() {
@@ -236,7 +238,7 @@ export class ProductDetailsMobileComponent implements OnInit {
       (payload: any) => {
         if (payload.status) {
           this.errorMessage = '';
-          this.utils.openAddToCartDialog(data);
+          this.matDialogUtils.openAddToCartDialog(data);
         } else {
           this.errorMessage = payload.msg;
         }

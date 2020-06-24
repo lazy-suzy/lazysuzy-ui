@@ -2,7 +2,8 @@ import { Component, OnInit, Input } from '@angular/core';
 import {
   ApiService,
   UtilsService,
-  EventEmitterService
+  EventEmitterService,
+  MatDialogUtilsService
 } from 'src/app/shared/services';
 import {
   BreakpointState,
@@ -35,7 +36,8 @@ export class SigninComponent implements OnInit {
     private apiService: ApiService,
     private utils: UtilsService,
     private eventService: EventEmitterService,
-    private breakpointObserver: BreakpointObserver
+    private breakpointObserver: BreakpointObserver,
+    private matDialogUtils: MatDialogUtilsService
   ) {}
 
   ngOnInit() {
@@ -81,7 +83,7 @@ export class SigninComponent implements OnInit {
           if (payload.success) {
             this.error = false;
             this.eventService.fetchUser(payload.success.token, payload.user);
-            this.utils.closeDialogs();
+            this.matDialogUtils.closeDialogs();
           } else {
             this.handleError(payload);
           }
@@ -96,10 +98,10 @@ export class SigninComponent implements OnInit {
   }
 
   openSignupDialog() {
-    this.utils.openSignupDialog(this.isHandset);
+    this.matDialogUtils.openSignupDialog(this.isHandset);
   }
 
   closeDialogs() {
-    this.utils.closeDialogs();
+    this.matDialogUtils.closeDialogs();
   }
 }

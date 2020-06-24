@@ -9,7 +9,10 @@ import { BoardPopupComponent } from '../board-popup/board-popup.component';
 import { MatDialog, MatSnackBar } from '@angular/material';
 import { environment } from 'src/environments/environment';
 import { BoardPopupConfirmComponent } from '../board-popup-confirm/board-popup-confirm.component';
-import { EventEmitterService, UtilsService } from 'src/app/shared/services';
+import {
+  EventEmitterService,
+  MatDialogUtilsService
+} from 'src/app/shared/services';
 import { Subscription, Observable } from 'rxjs';
 import {
   BreakpointState,
@@ -44,7 +47,7 @@ export class BoardListComponent implements OnInit {
     private dialog: MatDialog,
     private eventEmitterService: EventEmitterService,
     private snackBar: MatSnackBar,
-    private utils: UtilsService,
+    private matDialogUtils: MatDialogUtilsService,
     private breakpointObserver: BreakpointObserver
   ) {}
 
@@ -106,7 +109,7 @@ export class BoardListComponent implements OnInit {
     }
 
     newBoard.type_privacy = newBoard.is_published = 0;
-    
+
     // tslint:disable-next-line: no-shadowed-variable
     this.boardService.addBoard(newBoard).subscribe((board) => {
       if (board.uuid) {
@@ -177,6 +180,6 @@ export class BoardListComponent implements OnInit {
   }
 
   openSignupDialog() {
-    this.utils.openSignupDialog(this.isHandset);
+    this.matDialogUtils.openSignupDialog(this.isHandset);
   }
 }

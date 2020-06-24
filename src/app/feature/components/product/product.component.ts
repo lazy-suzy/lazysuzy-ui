@@ -10,7 +10,11 @@ import {
 } from '@angular/cdk/layout';
 import { Location } from '@angular/common';
 import { Router, ActivatedRoute } from '@angular/router';
-import { ApiService, UtilsService } from 'src/app/shared/services';
+import {
+  ApiService,
+  UtilsService,
+  MatDialogUtilsService
+} from 'src/app/shared/services';
 @Component({
   selector: 'app-product',
   templateUrl: './product.component.html',
@@ -36,7 +40,8 @@ export class ProductComponent implements OnInit {
     private router: Router,
     private activeRoute: ActivatedRoute,
     private apiService: ApiService,
-    private utilsService: UtilsService
+    private utilsService: UtilsService,
+    private matDialogUtils: MatDialogUtilsService
   ) {}
 
   ngOnInit(): void {
@@ -75,11 +80,11 @@ export class ProductComponent implements OnInit {
   }
 
   openDialog(): void {
-    this.utilsService.openMatDialog(this.product.sku);
+    this.matDialogUtils.openMatDialog(this.product.sku);
   }
 
   openSwatchDialog(variation): void {
-    this.utilsService.openMatDialog(
+    this.matDialogUtils.openMatDialog(
       variation.has_parent_sku ? variation.variation_sku : variation.product_sku
     );
   }

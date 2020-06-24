@@ -16,7 +16,7 @@ import {
 import { MatDialog } from '@angular/material/dialog';
 import {
   ApiService,
-  UtilsService,
+  MatDialogUtilsService,
   CacheService,
   EventEmitterService
 } from './../../../shared/services';
@@ -81,7 +81,7 @@ export class ProductsComponent implements OnInit {
     private location: Location,
     private activeRoute: ActivatedRoute,
     private breakpointObserver: BreakpointObserver,
-    private utilsService: UtilsService,
+    private matDialogUtils: MatDialogUtilsService,
     public cacheService: CacheService,
     private eventEmitterService: EventEmitterService
   ) {}
@@ -108,7 +108,7 @@ export class ProductsComponent implements OnInit {
           'modal_sku'
         );
         if (this.modalSku) {
-          this.utilsService.openMatDialog(this.modalSku);
+          this.matDialogUtils.openMatDialog(this.modalSku);
         }
       });
   }

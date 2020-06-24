@@ -48,9 +48,8 @@
               mat-raised-button
               class="bg-red view-details-btn"
               *ngIf="
-                !(
-                  product.in_inventory &&
-                  product.inventory_product_details.count > 0
+                !( utils.checkInventory(product.in_inventory &&
+                product.inventory_product_details.count > 0)
                 ) && !product.redirect
               "
             >
@@ -67,8 +66,8 @@
               [(ngModel)]="quantity"
               class="quantity-selector w-30 ml2"
               *ngIf="
-                product.in_inventory &&
-                product.inventory_product_details.count > 0
+              utils.checkInventory(product.in_inventory &&
+              product.inventory_product_details.count > 0)
               "
             >
               <option *ngFor="let item of quantityArray" [value]="item.value">{{
@@ -80,8 +79,8 @@
               mat-raised-button
               class="bg-red view-details-btn"
               *ngIf="
-                product.in_inventory &&
-                product.inventory_product_details.count > 0
+              utils.checkInventory(product.in_inventory &&
+              product.inventory_product_details.count > 0)
               "
             >
               <a (click)="openCartModal()" class="tr-addToCart no-underline">
@@ -96,8 +95,8 @@
         <div
           class="stock-info"
           *ngIf="
-            product.in_inventory &&
-            product.inventory_product_details.count > 0 &&
+          utils.checkInventory(product.in_inventory &&
+          product.inventory_product_details.count > 0) &&
             (product.inventory_product_details.is_low ||
               product.inventory_product_details.message)
           "
@@ -143,8 +142,8 @@
             *ngIf="
               product.redirect &&
               !(
-                product.in_inventory &&
-                product.inventory_product_details.count > 0
+                utils.checkInventory(product.in_inventory &&
+                product.inventory_product_details.count > 0)
               )
             "
             [redirectUrl]="product.redirect_url"

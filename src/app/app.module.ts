@@ -14,7 +14,7 @@ import { GalleryModule } from '@ngx-gallery/core';
 import { LightboxModule } from '@ngx-gallery/lightbox';
 import { LIGHTBOX_CONFIG } from '@ngx-gallery/lightbox';
 import { MarkdownModule } from 'ngx-markdown';
-import { EventEmitterService } from './shared/services/events/event-emitter.service';
+import { EventEmitterService, MatDialogUtilsService } from './shared/services';
 import { NgxStripeModule } from 'ngx-stripe';
 import { environment as env } from 'src/environments/environment';
 
@@ -40,6 +40,7 @@ const MODULES = [
   providers: [
     CookieService,
     EventEmitterService,
+    MatDialogUtilsService,
     {
       provide: LIGHTBOX_CONFIG,
       useValue: {

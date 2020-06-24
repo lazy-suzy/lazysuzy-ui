@@ -11,7 +11,8 @@ import { IProductPayload, IProductDetail } from 'src/app/shared/models';
 import {
   ApiService,
   UtilsService,
-  EventEmitterService
+  EventEmitterService,
+  MatDialogUtilsService
 } from 'src/app/shared/services';
 import { Gallery, GalleryItem, ImageItem } from '@ngx-gallery/core';
 import { Lightbox } from '@ngx-gallery/lightbox';
@@ -66,7 +67,8 @@ export class ProductDetailsComponent implements OnInit {
     private utils: UtilsService,
     public gallery: Gallery,
     public lightbox: Lightbox,
-    private eventEmitterService: EventEmitterService
+    private eventEmitterService: EventEmitterService,
+    private matDialogUtils: MatDialogUtilsService
   ) {}
 
   ngOnInit(): void {
@@ -230,7 +232,7 @@ export class ProductDetailsComponent implements OnInit {
       (payload: any) => {
         if (payload.status) {
           this.errorMessage = '';
-          this.utils.openAddToCartDialog(data);
+          this.matDialogUtils.openAddToCartDialog(data);
         } else {
           this.errorMessage = payload.msg;
         }

@@ -46,7 +46,8 @@
         *ngIf="
           product &&
           !(
-            product.in_inventory && product.inventory_product_details.count > 0
+            utils.checkInventory(product.in_inventory &&
+                product.inventory_product_details.count > 0)
           ) &&
           !product.redirect
         "
@@ -65,8 +66,8 @@
         class="quantity-selector"
         *ngIf="
           product &&
-          product.in_inventory &&
-          product.inventory_product_details.count > 0
+          utils.checkInventory(product.in_inventory &&
+                product.inventory_product_details.count > 0)
         "
       >
         <option *ngFor="let item of quantityArray" [value]="item.value">{{
@@ -78,8 +79,8 @@
         class="bg-red view-details-btn"
         *ngIf="
           product &&
-          product.in_inventory &&
-          product.inventory_product_details.count > 0
+          utils.checkInventory(product.in_inventory &&
+                product.inventory_product_details.count > 0)
         "
       >
         <a (click)="openCartModal()" class="tr-addToCart no-underline yellow">
@@ -94,8 +95,8 @@
       class="stock-info"
       *ngIf="
         product &&
-        product.in_inventory &&
-        product.inventory_product_details.count > 0 &&
+        utils.checkInventory(product.in_inventory &&
+                product.inventory_product_details.count > 0) &&
         (product.inventory_product_details.is_low ||
           product.inventory_product_details.message)
       "

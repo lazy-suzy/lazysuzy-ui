@@ -8,7 +8,8 @@ import { CookieService } from 'ngx-cookie-service';
 import {
   ApiService,
   UtilsService,
-  EventEmitterService
+  EventEmitterService,
+  MatDialogUtilsService
 } from 'src/app/shared/services';
 import { environment as env } from 'src/environments/environment';
 
@@ -46,7 +47,8 @@ export class AuthComponent implements OnInit {
     private apiService: ApiService,
     private cookie: CookieService,
     private utils: UtilsService,
-    private eventEmitterService: EventEmitterService
+    private eventEmitterService: EventEmitterService,
+    private matDialogUtils: MatDialogUtilsService
   ) {
     this.expiredDate.setMonth(this.expiredDate.getMonth() + 6);
   }
@@ -116,13 +118,13 @@ export class AuthComponent implements OnInit {
 
           localStorage.setItem('user', JSON.stringify(payload.user));
           this.updateUser(payload.user);
-          this.utils.closeDialogs();
+          this.matDialogUtils.closeDialogs();
         });
     });
   }
 
   openSignupDialog() {
-    this.utils.openSignupDialog(this.isHandset);
+    this.matDialogUtils.openSignupDialog(this.isHandset);
   }
 
   logout() {

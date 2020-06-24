@@ -3,7 +3,11 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { Location } from '@angular/common';
 import { Subscription } from 'rxjs';
 import { IAllDepartment } from '../../../shared/models';
-import { ApiService, UtilsService } from './../../../shared/services';
+import {
+  ApiService,
+  UtilsService,
+  MatDialogUtilsService
+} from './../../../shared/services';
 import { MessageService } from 'primeng/api';
 import { CookieService } from 'ngx-cookie-service';
 import { EventEmitterService } from 'src/app/shared/services';
@@ -32,7 +36,8 @@ export class NavDesktopComponent implements OnInit {
     private messageService: MessageService,
     private cookie: CookieService,
     private activatedRoute: ActivatedRoute,
-    private eventEmitterService: EventEmitterService
+    private eventEmitterService: EventEmitterService,
+    private matDialogUtils: MatDialogUtilsService
   ) {
     this.checkHomeRoute = router.events.subscribe((val) => {
       // this.notHome = location.path() !== '';
@@ -107,7 +112,7 @@ export class NavDesktopComponent implements OnInit {
     if (localData.email.length > 0) {
       this.router.navigateByUrl('/wishlist');
     } else {
-      this.utils.openSignupDialog(false);
+      this.matDialogUtils.openSignupDialog(false);
     }
   }
 

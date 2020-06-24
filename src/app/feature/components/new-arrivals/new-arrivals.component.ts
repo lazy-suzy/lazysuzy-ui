@@ -2,7 +2,8 @@ import { Component, OnInit, Input } from '@angular/core';
 import {
   ApiService,
   UtilsService,
-  EventEmitterService
+  EventEmitterService,
+  MatDialogUtilsService
 } from './../../../shared/services';
 import { Router } from '@angular/router';
 import { Carousel } from 'primeng/carousel';
@@ -41,7 +42,8 @@ export class NewArrivalsComponent implements OnInit {
     private apiService: ApiService,
     private router: Router,
     private utilsService: UtilsService,
-    private eventEmitterService: EventEmitterService
+    private eventEmitterService: EventEmitterService,
+    private matDialogUtils: MatDialogUtilsService
   ) {
     this.responsiveOptions = [
       {
@@ -88,7 +90,7 @@ export class NewArrivalsComponent implements OnInit {
   openDialog(sku) {
     this.isHandset
       ? this.router.navigateByUrl(`/product/${sku}`)
-      : this.utilsService.homepageMatDialog(sku);
+      : this.matDialogUtils.homepageMatDialog(sku);
   }
 
   handleEvtProductCarousal(e) {

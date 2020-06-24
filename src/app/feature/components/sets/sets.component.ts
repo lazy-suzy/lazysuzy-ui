@@ -1,5 +1,9 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { ApiService, UtilsService } from 'src/app/shared/services';
+import {
+  ApiService,
+  MatDialogUtilsService,
+  UtilsService
+} from 'src/app/shared/services';
 
 @Component({
   selector: 'app-sets',
@@ -11,7 +15,11 @@ export class SetsComponent implements OnInit {
   @Input() brand: string;
   @Input() isHandset = false;
 
-  constructor(private apiService: ApiService, private utils: UtilsService) {}
+  constructor(
+    private apiService: ApiService,
+    private matDialogUtils: MatDialogUtilsService,
+    private utils: UtilsService
+  ) {}
 
   ngOnInit() {}
 
@@ -37,7 +45,7 @@ export class SetsComponent implements OnInit {
     this.apiService.addCartProduct(postData).subscribe(
       (payload: any) => {
         if (payload.status) {
-          this.utils.openAddToCartDialog(data);
+          this.matDialogUtils.openAddToCartDialog(data);
         } else {
           this.sets[index].errorMessage = payload.msg;
         }

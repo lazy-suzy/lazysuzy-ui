@@ -1,7 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
 import {
   ApiService,
-  UtilsService,
+  MatDialogUtilsService,
   EventEmitterService
 } from 'src/app/shared/services';
 import { Router } from '@angular/router';
@@ -21,7 +21,7 @@ export class TopDealsComponent implements OnInit {
   constructor(
     private apiService: ApiService,
     private router: Router,
-    private utilsService: UtilsService,
+    private matDialogUtils: MatDialogUtilsService,
     private eventEmitterService: EventEmitterService
   ) {
     this.responsiveOptions = [
@@ -69,7 +69,7 @@ export class TopDealsComponent implements OnInit {
   openDialog(sku) {
     this.isHandset
       ? this.router.navigateByUrl(`/product/${sku}`)
-      : this.utilsService.homepageMatDialog(sku);
+      : this.matDialogUtils.homepageMatDialog(sku);
   }
 
   handleEvtProductCarousal(e) {

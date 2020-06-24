@@ -1,5 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { ApiService, UtilsService } from './../../../shared/services';
+import {
+  ApiService,
+  UtilsService,
+  MatDialogUtilsService
+} from './../../../shared/services';
 import { Router, NavigationEnd } from '@angular/router';
 import { IAllDepartment } from '../../../shared/models/all-department.interface';
 import { Subscription } from 'rxjs';
@@ -30,7 +34,8 @@ export class NavMobileComponent implements OnInit {
     private cookie: CookieService,
     private router: Router,
     private location: Location,
-    private eventEmitterService: EventEmitterService
+    private eventEmitterService: EventEmitterService,
+    private matDialogUtils: MatDialogUtilsService
   ) {
     this.router.events.subscribe((val) => {
       if (val instanceof NavigationEnd) {
@@ -103,7 +108,7 @@ export class NavMobileComponent implements OnInit {
     if (localData.email.length > 0) {
       this.router.navigateByUrl('/wishlist');
     } else {
-      this.utils.openSignupDialog(true);
+      this.matDialogUtils.openSignupDialog(true);
     }
   }
 }

@@ -5,7 +5,7 @@ import { Board } from '../board';
 import { BoardService } from '../board.service';
 import { EventEmitterService } from 'src/app/shared/services';
 import { Font, FontPickerService } from 'ngx-font-picker';
-import { UtilsService } from '../../../shared/services/utils/utils.service';
+import { MatDialogUtilsService } from '../../../shared/services';
 import { environment } from 'src/environments/environment';
 
 declare const fb: any;
@@ -27,7 +27,7 @@ export class BoardPreviewComponent implements OnInit {
     private route: ActivatedRoute,
     private router: Router,
     private fontPickerService: FontPickerService,
-    private utilsService: UtilsService,
+    private matDialogUtils: MatDialogUtilsService,
     private eventEmitterService: EventEmitterService
   ) {
     // tslint:disable-next-line: no-string-literal
@@ -255,7 +255,7 @@ export class BoardPreviewComponent implements OnInit {
   }
   openDialog(product): void {
     if (product) {
-      this.utilsService.openMatDialog(product);
+      this.matDialogUtils.openMatDialog(product);
     }
   }
 

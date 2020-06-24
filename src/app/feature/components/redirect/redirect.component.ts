@@ -1,5 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { UtilsService } from '../../../shared/services/utils/utils.service';
+import { MatDialogUtilsService } from '../../../shared/services';
 @Component({
   selector: 'app-redirect',
   templateUrl: './redirect.component.html',
@@ -17,11 +17,11 @@ export class RedirectComponent implements OnInit {
   @Input() categoryUrl: string;
   @Input() isHandset: boolean;
 
-  constructor(private utils: UtilsService) {}
+  constructor(private matDialogUtils: MatDialogUtilsService) {}
 
   ngOnInit() {}
 
   openSignup() {
-    this.utils.openSignupDialog(this.isHandset);
+    this.matDialogUtils.openSignupDialog(this.isHandset);
   }
 }

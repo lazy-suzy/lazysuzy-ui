@@ -1,5 +1,5 @@
 import { Component, OnInit, Input, EventEmitter, Output } from '@angular/core';
-import { UtilsService } from 'src/app/shared/services';
+import { MatDialogUtilsService } from 'src/app/shared/services';
 import { Router } from '@angular/router';
 import { Observable, Subscription } from 'rxjs';
 import {
@@ -44,7 +44,7 @@ export class VariationsComponent implements OnInit {
   previousSwatch;
   constructor(
     private router: Router,
-    private utils: UtilsService,
+    private matDialogUtils: MatDialogUtilsService,
     private breakpointObserver: BreakpointObserver
   ) {}
 
@@ -93,7 +93,7 @@ export class VariationsComponent implements OnInit {
         this.router.navigate([`/product/${variation.variation_sku}`]);
         this.reload.emit();
       } else {
-        this.utils.openVariationDialog(variation.variation_sku);
+        this.matDialogUtils.openVariationDialog(variation.variation_sku);
       }
     } else {
       this.selectedSwatch = {

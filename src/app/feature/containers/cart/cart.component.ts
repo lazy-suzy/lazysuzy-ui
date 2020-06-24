@@ -5,9 +5,12 @@ import {
   Breakpoints,
   BreakpointObserver
 } from '@angular/cdk/layout';
-import { ApiService, UtilsService } from 'src/app/shared/services';
+import {
+  ApiService,
+  MatDialogUtilsService,
+  EventEmitterService
+} from 'src/app/shared/services';
 import { Router } from '@angular/router';
-import { EventEmitterService } from 'src/app/shared/services';
 
 @Component({
   selector: 'app-cart',
@@ -35,7 +38,7 @@ export class CartComponent implements OnInit {
   constructor(
     private breakpointObserver: BreakpointObserver,
     private apiService: ApiService,
-    private utilsService: UtilsService,
+    private matDialogUtils: MatDialogUtilsService,
     private router: Router,
     private eventEmitterService: EventEmitterService
   ) {}
@@ -136,7 +139,7 @@ export class CartComponent implements OnInit {
   }
 
   openProductDetail(sku) {
-    this.utilsService.openMatDialog(sku);
+    this.matDialogUtils.openMatDialog(sku);
   }
 
   openProductPage(sku) {
@@ -144,7 +147,7 @@ export class CartComponent implements OnInit {
   }
 
   openSignupDialog(device) {
-    this.utilsService.openSignupDialog(device);
+    this.matDialogUtils.openSignupDialog(device);
   }
 
   seeMore(category) {
