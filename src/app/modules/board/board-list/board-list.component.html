@@ -77,6 +77,21 @@
               <i class="mdi mdi-cart" aria-hidden="true"></i>
             </span>
           </div>
+          <div class="like-icon pointer">
+            <mat-icon
+              (click)="likeBoard(board.uuid, true)"
+              *ngIf="!board.is_liked; else hasLikedBoard"
+              >favorite_border
+            </mat-icon>
+            <ng-template #hasLikedBoard>
+              <mat-icon (click)="likeBoard(board.uuid, false)"
+                >favorite
+              </mat-icon>
+            </ng-template>
+            <span class="likes-count" *ngIf="board.like_count > 0">
+              {{ board.like_count }}</span
+            >
+          </div>
         </div>
         <div class="preview-title">
           {{ board.title }}
@@ -127,6 +142,21 @@
             >
               <i class="mdi mdi-cart" aria-hidden="true"></i>
             </span>
+          </div>
+          <div class="like-icon pointer">
+            <mat-icon
+              (click)="likeBoard(board.uuid, true)"
+              *ngIf="!board.is_liked; else hasLikedBoard"
+              >favorite_border
+            </mat-icon>
+            <ng-template #hasLikedBoard>
+              <mat-icon (click)="likeBoard(board.uuid, false)"
+                >favorite
+              </mat-icon>
+            </ng-template>
+            <span class="likes-count" *ngIf="board.like_count > 0">
+              {{ board.like_count }}</span
+            >
           </div>
         </div>
         <div class="preview-title">

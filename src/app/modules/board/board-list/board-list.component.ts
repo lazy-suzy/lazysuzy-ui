@@ -11,7 +11,9 @@ import { environment } from 'src/environments/environment';
 import { BoardPopupConfirmComponent } from '../board-popup-confirm/board-popup-confirm.component';
 import {
   EventEmitterService,
-  MatDialogUtilsService
+  MatDialogUtilsService,
+  ApiService,
+  UtilsService
 } from 'src/app/shared/services';
 import { Subscription, Observable } from 'rxjs';
 import {
@@ -48,7 +50,9 @@ export class BoardListComponent implements OnInit {
     private eventEmitterService: EventEmitterService,
     private snackBar: MatSnackBar,
     private matDialogUtils: MatDialogUtilsService,
-    private breakpointObserver: BreakpointObserver
+    private breakpointObserver: BreakpointObserver,
+    private apiService: ApiService,
+    private utils: UtilsService
   ) {}
 
   ngOnInit(): void {
@@ -181,5 +185,12 @@ export class BoardListComponent implements OnInit {
 
   openSignupDialog() {
     this.matDialogUtils.openSignupDialog(this.isHandset);
+  }
+
+  likeBoard(boardId, like) {
+    this.apiService.likeBoard(boardId, like).subscribe((payload) => {
+      const board = this.boards.find((id) => boardId === id.uuid);
+      this.utils.updateBoardLike(board, like);
+    });
   }
 }

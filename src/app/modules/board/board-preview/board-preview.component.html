@@ -47,20 +47,31 @@
           <span class="font-weight-bold h5">{{ appMeta.board.title }}</span>
         </div>
         <div>
-          <!-- <div class="tile-icon wishlist-icon wishlist-container">
-            <mat-icon (click)="wishlistProduct()">favorite </mat-icon>
-          </div> -->
-        </div>
-        <!-- <ng-template #elseBlock>
-          <div class="tile-icon wishlist-icon wishlist-container">
-            <mat-icon (click)="wishlistProduct(product.sku, true)"
-              >favorite_border </mat-icon
-            >
+          <div class="likes-container pointer">
+            <mat-icon
+              (click)="likeBoard(true)"
+              *ngIf="!appMeta.board.is_liked; else hasLikedBoard"
+              >favorite_border
+            </mat-icon>
+            <ng-template #hasLikedBoard>
+              <mat-icon (click)="likeBoard(false)">favorite </mat-icon>
+            </ng-template>
+            <span *ngIf="appMeta.board.like_count > 0" class="like-count">{{
+              appMeta.board.like_count
+            }}</span>
           </div>
-        </ng-template> -->
+        </div>
       </div>
       <div class="flex">
-        <mat-icon class="profile-avatar">account_circle</mat-icon>
+        <img
+          class="profile-avatar-image"
+          [src]="profileAvatar"
+          *ngIf="profileAvatar; else showIcon"
+        />
+        <ng-template #showIcon>
+          <mat-icon class="profile-avatar">account_circle</mat-icon>
+        </ng-template>
+
         <span class="font-italic profile-username font-weight-normal">{{
           userName
         }}</span>

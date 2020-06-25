@@ -3,11 +3,14 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { Observable, Subscription } from 'rxjs';
 import { Board } from '../board';
 import { BoardService } from '../board.service';
-import { EventEmitterService } from 'src/app/shared/services';
+import {
+  EventEmitterService,
+  ApiService,
+  UtilsService
+} from 'src/app/shared/services';
 import { Font, FontPickerService } from 'ngx-font-picker';
 import { MatDialogUtilsService } from '../../../shared/services';
 import { environment } from 'src/environments/environment';
-
 declare const fb: any;
 
 @Component({
@@ -28,7 +31,9 @@ export class BoardPreviewComponent implements OnInit {
     private router: Router,
     private fontPickerService: FontPickerService,
     private matDialogUtils: MatDialogUtilsService,
-    private eventEmitterService: EventEmitterService
+    private eventEmitterService: EventEmitterService,
+    private apiService: ApiService,
+    private utils: UtilsService
   ) {
     // tslint:disable-next-line: no-string-literal
     if (route.snapshot['_routerState'].url.match(/embed/)) {
@@ -65,7 +70,7 @@ export class BoardPreviewComponent implements OnInit {
       scaleFactor: 0
     }
   };
-
+  profileAvatar: string;
   @HostListener('window:resize')
   onResize() {
     this.handleResize();
@@ -104,6 +109,9 @@ export class BoardPreviewComponent implements OnInit {
                 this.appMeta.board.user_id !== user.id
               ) {
                 this.router.navigate([`/`]);
+              }
+              if (user.picture && user.picture !== 'null') {
+                this.profileAvatar = user.picture;
               }
               this.boardState = JSON.parse(this.appMeta.board.state.toString());
               if (this.boardState) {
@@ -259,5 +267,15 @@ export class BoardPreviewComponent implements OnInit {
     }
   }
 
-  wishlistProduct() {}
+  likeBoard(like) {
+    this.apiService
+      .likeBoard(this.appMeta.board.uuid, like)
+      .subscribe((payload) => {
+        this.utils.updateBoardLike(this.appMeta.board, like);
+        // this.appMeta.board.is_liked = like ? true : false;
+        // this.appMeta.board.like_count = like
+        //   ? this.appMeta.board.like_count + 1
+        //   : this.appMeta.board.like_count - 1;
+      });
+  }
 }

@@ -423,4 +423,20 @@ export class ApiService {
     const url = `${env.API_BASE_HREF}${endpoint}`;
     return this.httpService.get(url, headers);
   }
+  getUserBoards(username) {
+    const endpoint = `board?username=${username}`;
+    const token = this.cookie.get('token');
+    const url = `${env.API_BASE_HREF}${endpoint}`;
+    return this.httpService.get(url);
+  }
+  likeBoard(boardId, like) {
+    const apiAction = like ? 'like' : 'unlike';
+    const endpoint = `board/${apiAction}/${boardId}`;
+    const token = this.cookie.get('token');
+    const headers = new HttpHeaders({
+      Authorization: `Bearer ${token}`
+    });
+    const url = `${env.API_BASE_HREF}${endpoint}`;
+    return this.httpService.post(url, headers);
+  }
 }

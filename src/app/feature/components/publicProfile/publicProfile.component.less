@@ -1,5 +1,5 @@
 .display-profile-container {
-  width: 70%;
+  width: 75%;
   margin: 50px auto;
   .profile-section {
     width: 60%;
@@ -29,6 +29,31 @@
   }
   .boards-section {
     margin-top: 120px;
+    .card-container {
+      height: 250px;
+      .board-card {
+        .canvas-preview {
+          height: 220px;
+          border: 1px solid #c8c7cc;
+          position: relative;
+          .like-icon {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            color: #b76e79;
+            display: flex;
+            align-items: center;
+            .likes-count {
+              font-size: 14px;
+              padding-left: 2px;
+            }
+          }
+          img {
+            height: 100%;
+          }
+        }
+      }
+    }
   }
 }
 .loader {
@@ -41,6 +66,7 @@
 .pink-font {
   color: #b76e79;
 }
+
 @media (max-width: 767px) {
   .display-profile-container {
     width: 90%;

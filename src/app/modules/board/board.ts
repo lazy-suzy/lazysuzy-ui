@@ -23,6 +23,10 @@ export class Board {
   updated_at: boolean;
   // tslint:disable-next-line: variable-name
   user_id: number;
+  // tslint:disable-next-line: variable-name
+  like_count: number;
+  // tslint:disable-next-line: variable-name
+  is_liked: boolean;
   constructor(values = {}) {
     Object.assign(this, values);
   }

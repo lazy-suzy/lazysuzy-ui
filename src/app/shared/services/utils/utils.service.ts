@@ -66,4 +66,11 @@ export class UtilsService {
     }
     return this.markdownService.compile(mergedData);
   }
+
+  updateBoardLike(board, like) {
+    return (
+      (board.is_liked = like),
+      (board.like_count = like ? board.like_count + 1 : board.like_count - 1)
+    );
+  }
 }
