@@ -338,13 +338,15 @@ export class BoardViewComponent implements OnInit, AfterViewInit {
       .subscribe((payload: any) => {
         const { hits } = payload.hits;
         this.hasSearched = true;
-        const products = hits.map((hit: any) => hit._source);
-        if (products.length) {
-          for (const i in products) {
-            products[i].product_detail_url =
-              'www.lazysuzy.com/product/' + products[i].product_sku;
-          }
-        }
+        const products = hits
+          .map((hit: any) => hit._source)
+          .map((p) => {
+            return {
+              ...p,
+              product_detail_url: `www.lazysuzy.com/product/${p.product_sku}`
+            };
+          });
+
         this.remoteProducts = isNewSearch
           ? products
           : [...this.remoteProducts, ...(products || [])];

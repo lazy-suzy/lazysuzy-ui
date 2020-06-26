@@ -1,128 +1,138 @@
 <div class="profile-container">
-  <div class="title b">Edit Profile</div>
+  <div class="header">
+    <div class="title b">Edit Profile</div>
+    <div class="form-msg">
+      Let the LazySuzy community get to know you with the info below
+    </div>
+  </div>
   <div class="profile-form-container">
     <form
       name="profile-form"
-      class="w-100"
+      class="w-100 flex-ns"
       (ngSubmit)="profileUpdate()"
       #profileForm="ngForm"
     >
-      <div class="w-100 account-avatar-row">
-        <input
-          type="file"
-          accept=".jpg,.png"
-          name="profileImage"
-          class="profile-image-input pointer"
-          (mouseover)="over()"
-          (mouseout)="out()"
-          (change)="readFile($event)"
-        />
-        <span class="edit-image {{ hasEditIcon ? '' : 'dn' }}">
-          <mat-icon class="pointer" aria-hidden="false" aria-label="Edit-Image"
-            >edit</mat-icon
-          >
-        </span>
-        <mat-icon
-          class="account-icon"
-          aria-hidden="false"
-          aria-label="Account"
-          *ngIf="!hasImage"
-        >
-          account_circle
-        </mat-icon>
-        <img [src]="imageSrc" *ngIf="hasImage" class="profile-avatar" />
-        <span class="form-msg"
-          >Let the LazySuzy community get to know you with the info below</span
-        >
-      </div>
-      <div class="w-100 input-container">
-        <div class="flex justify-between items-center">
-          <label class="db">User Name</label>
-          <span class="profile-link"
-            >www<span
-              >.lazysuzy<span>.com</span>/{{ profileData.username }}</span
-            ></span
-          >
-        </div>
-        <input
-          class="form-input w-100"
-          name="profileUserName"
-          #profileUserName="ngModel"
-          [(ngModel)]="profileData.username"
-        />
-        <span *ngIf="hasUsernameError" class="error-msg">
-          The username has already been taken.
-        </span>
-      </div>
-      <div class="flex-ns input-container">
-        <div class="w-50-ns w-100">
-          <label class="db">First Name</label>
+      <div class="avatar-container">
+        <div class="account-avatar-row">
           <input
-            class="form-input input-50"
-            name="profileFirstName"
-            #profileFirstName="ngModel"
-            [(ngModel)]="profileData.firstName"
+            type="file"
+            accept=".jpg,.png"
+            name="profileImage"
+            class="profile-image-input pointer"
+            (mouseover)="over()"
+            (mouseout)="out()"
+            (change)="readFile($event)"
+          />
+          <span class="edit-image {{ hasEditIcon ? '' : 'dn' }}">
+            <mat-icon
+              class="pointer"
+              aria-hidden="false"
+              aria-label="Edit-Image"
+              >edit</mat-icon
+            >
+          </span>
+          <mat-icon
+            class="account-icon"
+            aria-hidden="false"
+            aria-label="Account"
+            *ngIf="!hasImage"
+          >
+            account_circle
+          </mat-icon>
+          <img [src]="imageSrc" *ngIf="hasImage" class="profile-avatar" />
+        </div>
+      </div>
+      <div class="form-input-container">
+        <div class="w-100 input-container">
+          <div class="flex justify-between items-center">
+            <label class="db">User Name</label>
+            <span
+              class="profile-link pointer"
+              [routerLink]="['/', profileData.username]"
+              >www<span
+                >.lazysuzy<span>.com</span>/{{ profileData.username }}</span
+              ></span
+            >
+          </div>
+          <input
+            class="form-input w-100"
+            name="profileUserName"
+            #profileUserName="ngModel"
+            [(ngModel)]="profileData.username"
+          />
+          <span *ngIf="hasUsernameError" class="error-msg">
+            The username has already been taken.
+          </span>
+        </div>
+        <div class="flex-ns input-container">
+          <div class="w-50-ns w-100">
+            <label class="db">First Name</label>
+            <input
+              class="form-input input-50"
+              name="profileFirstName"
+              #profileFirstName="ngModel"
+              [(ngModel)]="profileData.firstName"
+            />
+          </div>
+          <div class="w-50-ns w-100 tr">
+            <label class="db last-name">Last Name</label>
+            <input
+              class="form-input input-50"
+              name="profileLastName"
+              #profileLastName="ngModel"
+              [(ngModel)]="profileData.lastName"
+            />
+          </div>
+        </div>
+        <div class="w-100 input-container">
+          <label class="db">Tag line</label>
+          <textarea
+            class="form-input w-100 text-area tag-line-container"
+            name="profileTagline"
+            rows="2"
+            maxlength="80"
+            #profileTagline="ngModel"
+            [(ngModel)]="profileData.tag_line"
+          >
+          </textarea>
+        </div>
+        <div class="w-100 input-container">
+          <label class="db">About yourself</label>
+          <textarea
+            class="form-input w-100 text-area"
+            name="profileDescription"
+            rows="5"
+            maxlength="240"
+            #profileDescription="ngModel"
+            [(ngModel)]="profileData.description"
+          >
+          </textarea>
+        </div>
+        <div class="w-100 input-container">
+          <label class="db">Location</label>
+          <input
+            class="form-input w-100"
+            name="profileLocation"
+            #profileLocation="ngModel"
+            [(ngModel)]="profileData.location"
           />
         </div>
-        <div class="w-50-ns w-100 tr">
-          <label class="db last-name">Last Name</label>
+        <div class="w-100 input-container">
+          <label class="db">Website</label>
           <input
-            class="form-input input-50"
-            name="profileLastName"
-            #profileLastName="ngModel"
-            [(ngModel)]="profileData.lastName"
+            class="form-input w-100"
+            name="profileWebsite"
+            #profileWebsite="ngModel"
+            [(ngModel)]="profileData.website"
           />
+          <span *ngIf="hasWebsiteError" class="error-msg"
+            >The website format is invalid.</span
+          >
         </div>
-      </div>
-      <div class="w-100 input-container">
-        <label class="db">Tag line</label>
-        <textarea
-          class="form-input w-100 text-area tag-line-container"
-          name="profileTagline"
-          rows="2"
-          maxlength="80"
-          #profileTagline="ngModel"
-          [(ngModel)]="profileData.tag_line"
-        >
-        </textarea>
-      </div>
-      <div class="w-100 input-container">
-        <label class="db">About yourself</label>
-        <textarea
-          class="form-input w-100 text-area"
-          name="profileDescription"
-          rows="5"
-          maxlength="240"
-          #profileDescription="ngModel"
-          [(ngModel)]="profileData.description"
-        >
-        </textarea>
-      </div>
-      <div class="w-100 input-container">
-        <label class="db">Location</label>
-        <input
-          class="form-input w-100"
-          name="profileLocation"
-          #profileLocation="ngModel"
-          [(ngModel)]="profileData.location"
-        />
-      </div>
-      <div class="w-100 input-container">
-        <label class="db">Website</label>
-        <input
-          class="form-input w-100"
-          name="profileWebsite"
-          #profileWebsite="ngModel"
-          [(ngModel)]="profileData.website"
-        />
-        <span *ngIf="hasWebsiteError" class="error-msg"
-          >The website format is invalid.</span
-        >
-      </div>
-
-      <div class="action-buttons-row">
-        <button class="profile-cancel-btn b">CANCEL</button>
-        <button class="profile-update-btn b ml3">UPDATE</button>
+        <div class="action-buttons-row">
+          <button class="profile-cancel-btn b">CANCEL</button>
+          <button class="profile-update-btn b ml3">UPDATE</button>
+        </div>
       </div>
     </form>
   </div>

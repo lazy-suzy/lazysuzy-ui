@@ -116,8 +116,9 @@ export class BoardPreviewComponent implements OnInit {
                 this.appMeta.board.picture &&
                 this.appMeta.board.picture !== 'null'
               ) {
-                this.profileAvatar =
-                  environment.BASE_HREF + this.appMeta.board.picture;
+                this.profileAvatar = this.appMeta.board.picture.includes('http')
+                  ? this.appMeta.board.picture
+                  : environment.BASE_HREF + this.appMeta.board.picture;
               }
               this.boardState = JSON.parse(this.appMeta.board.state.toString());
               if (this.boardState) {

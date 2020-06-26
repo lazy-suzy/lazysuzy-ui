@@ -86,7 +86,7 @@ const routes: Routes = [
       )
   },
   { path: 'editMyProfile', component: EditMyProfileComponent },
-  { path: ':profile', component: PublicProfileComponent }
+  { path: 'p/:profile', component: PublicProfileComponent }
 ];
 
 @NgModule({

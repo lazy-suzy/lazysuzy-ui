@@ -1,40 +1,93 @@
 <div class="display-profile-container">
-  <div class="profile-section">
+  <div class="profile-section" *ngIf="profile">
     <div class="flex profile-image-row">
       <div class="w-40 tc">
         <img
           [src]="profile.picture"
           class="profile-avatar"
-          *ngIf="profile.picture"
+          *ngIf="profile.picture && profile.picture !== 'null'; else showIcon"
         />
-        <mat-icon
-          class="profile-avatar"
-          aria-hidden="false"
-          aria-label="Account"
-          *ngIf="!profile.picture"
-        >
-          account_circle
-        </mat-icon>
+        <ng-template #showIcon>
+          <mat-icon
+            class="profile-avatar"
+            aria-hidden="false"
+            aria-label="Account"
+          >
+            account_circle
+          </mat-icon>
+        </ng-template>
       </div>
       <div class="profile-header-content">
         <div class="name">{{ profile.first_name }} {{ profile.last_name }}</div>
-        <div>{{ profile.tag_line }}</div>
+        <div>{{ profile.tag_line || '' }}</div>
       </div>
     </div>
     <div class="flex mv4">
       <div class="w-40 tc">
-        <div>{{ profile.location }}</div>
+        <div>{{ profile.location || '' }}</div>
         <a [href]="profile.website" class="website mt1">{{
-          profile.website
+          profile.website || ''
         }}</a>
       </div>
       <div class="w-60">
-        <div>{{ profile.description }}</div>
+        <div>{{ profile.description || '' }}</div>
       </div>
     </div>
   </div>
   <div class="boards-section">
-    <div class="pink-font">DESIGN BOARDS</div>
+    <div
+      class="pink-font pb3"
+      *ngIf="
+        board &&
+        board.is_published === BOARD_PUBLISHED &&
+        board.type_privacy === PRIVACY_PUBLIC
+      "
+    >
+      DESIGN BOARDS
+    </div>
+    <div class="flex flex-wrap">
+      <div
+        class="w-33-ns w-100 mv3 pr4-ns pl0 card-container {{
+          board.is_published === BOARD_PUBLISHED &&
+          board.type_privacy === PRIVACY_PUBLIC
+            ? ''
+            : 'dn'
+        }}"
+        *ngFor="let board of boards"
+      >
+        <div class="board-card">
+          <div class="canvas-preview">
+            <img
+              width="100%"
+              class="edit-board"
+              [src]="getPreviewImagePath(board)"
+            />
+            <div class="like-icon pointer">
+              <mat-icon
+                (click)="likeBoard(board.uuid, true)"
+                *ngIf="!board.is_liked; else hasLikedBoard"
+                >favorite_border
+              </mat-icon>
+              <ng-template #hasLikedBoard>
+                <mat-icon (click)="likeBoard(board.uuid, false)"
+                  >favorite
+                </mat-icon>
+              </ng-template>
+              <span class="likes-count" *ngIf="board.like_count > 0">
+                {{ board.like_count }}</span
+              >
+              <!-- <div class="overlay"></div> -->
+            </div>
+            <div class="preview-title pv3">
+              {{ board.title }}
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
+  <img *ngIf="isLoading" [src]="spinner" class="loader" />
 </div>
-<img *ngIf="isLoading" [src]="spinner" class="loader" />
+<div class="tc pink-font" *ngIf="!profile && !isLoading">
+  Profile doesn't exist
+</div>
