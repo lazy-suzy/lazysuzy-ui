@@ -35,14 +35,7 @@
     </div>
   </div>
   <div class="boards-section">
-    <div
-      class="pink-font pb3"
-      *ngIf="
-        board &&
-        board.is_published === BOARD_PUBLISHED &&
-        board.type_privacy === PRIVACY_PUBLIC
-      "
-    >
+    <div class="pink-font pb3">
       DESIGN BOARDS
     </div>
     <div class="flex flex-wrap">
@@ -55,7 +48,14 @@
         }}"
         *ngFor="let board of boards"
       >
-        <div class="board-card">
+        <div
+          class="board-card"
+          *ngIf="
+            board &&
+            board.is_published === BOARD_PUBLISHED &&
+            board.type_privacy === PRIVACY_PUBLIC
+          "
+        >
           <div class="canvas-preview">
             <img
               width="100%"
