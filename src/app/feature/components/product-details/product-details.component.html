@@ -47,7 +47,7 @@
             <button
               mat-raised-button
               class="bg-red view-details-btn"
-              *ngIf="!utils.hasInventory(product) && !product.redirect"
+              *ngIf="!utils.hasInventory(activeProduct) && !product.redirect"
             >
               <a
                 (click)="openLink($event, product.product_url)"
@@ -61,7 +61,7 @@
             <select
               [(ngModel)]="quantity"
               class="quantity-selector w-30 ml2"
-              *ngIf="utils.hasInventory(product)"
+              *ngIf="utils.hasInventory(activeProduct)"
             >
               <option *ngFor="let item of quantityArray" [value]="item.value">{{
                 item.value
@@ -71,7 +71,7 @@
             <button
               mat-raised-button
               class="bg-red view-details-btn"
-              *ngIf="utils.hasInventory(product)"
+              *ngIf="utils.hasInventory(activeProduct)"
             >
               <a (click)="openCartModal()" class="tr-addToCart no-underline">
                 ADD TO CART
@@ -85,9 +85,9 @@
         <div
           class="stock-info"
           *ngIf="
-            utils.hasInventory(product) &&
-            (product.inventory_product_details.is_low ||
-              product.inventory_product_details.message)
+            utils.hasInventory(activeProduct) &&
+            (activeProduct.inventory_product_details.is_low ||
+              activeProduct.inventory_product_details.message)
           "
         >
           <div class="flex">
@@ -100,15 +100,15 @@
             >
               Only
               {{
-                product.inventory_product_details.count > 10
+                activeProduct.inventory_product_details.count > 10
                   ? '10'
-                  : product.inventory_product_details.count
+                  : activeProduct.inventory_product_details.count
               }}
               left in stock.
             </div>
           </div>
           <div class="shipping-msg">
-            {{ product.inventory_product_details.message }}
+            {{ activeProduct.inventory_product_details.message }}
           </div>
         </div>
         <ng-container *ngIf="product.redirect; else allConditions">
@@ -128,7 +128,7 @@
       <div class="product-description-container" [ngStyle]="topHeight">
         <div *ngIf="!isSetItemInInventory">
           <app-redirect
-            *ngIf="product.redirect && !utils.hasInventory(product)"
+            *ngIf="product.redirect && !utils.hasInventory(activeProduct)"
             [redirectUrl]="product.redirect_url"
             [redirectDetails]="product.redirect_details"
             [category]="product.department_info[0].category_name"

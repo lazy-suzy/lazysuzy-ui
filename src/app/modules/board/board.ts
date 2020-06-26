@@ -27,6 +27,8 @@ export class Board {
   like_count: number;
   // tslint:disable-next-line: variable-name
   is_liked: boolean;
+  picture: string;
+  username: string;
   constructor(values = {}) {
     Object.assign(this, values);
   }

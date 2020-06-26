@@ -108,7 +108,7 @@ export class VariationsComponent implements OnInit {
         wasPrice: variation.was_price
       };
       this.setPrice.emit(this.priceData);
-      this.setImage.emit(variation.image);
+      this.setImage.emit(variation);
       this.updateSwatches();
       this.filterSwatches();
     }
@@ -203,7 +203,7 @@ export class VariationsComponent implements OnInit {
         wasPrice: this.filteredVariations[0].was_price
       };
       this.setPrice.emit(this.priceData);
-      this.setImage.emit(this.filteredVariations[0].image);
+      this.setImage.emit(this.filteredVariations[0]);
     } else {
       this.checkSwatchActive();
     }
@@ -293,7 +293,7 @@ export class VariationsComponent implements OnInit {
         wasPrice: this.selectedSwatch.wasPrice
       };
       this.setPrice.emit(this.priceData);
-      this.setImage.emit(this.selectedSwatch.image);
+      this.setImage.emit(this.selectedSwatch);
     } else {
       this.selectedSwatch = {
         image: '',

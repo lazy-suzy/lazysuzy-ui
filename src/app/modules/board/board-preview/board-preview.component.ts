@@ -22,6 +22,8 @@ export class BoardPreviewComponent implements OnInit {
   loadedAsEmbed = false;
   eventSubscription: Subscription;
   userName: string;
+  filteredProducts = [];
+  productSkus = [];
   // bpObserver: Observable<BreakpointState> = this.breakpointObserver.observe(
   //   Breakpoints.Handset
   // );
@@ -110,8 +112,12 @@ export class BoardPreviewComponent implements OnInit {
               ) {
                 this.router.navigate([`/`]);
               }
-              if (user.picture && user.picture !== 'null') {
-                this.profileAvatar = user.picture;
+              if (
+                this.appMeta.board.picture &&
+                this.appMeta.board.picture !== 'null'
+              ) {
+                this.profileAvatar =
+                  environment.BASE_HREF + this.appMeta.board.picture;
               }
               this.boardState = JSON.parse(this.appMeta.board.state.toString());
               if (this.boardState) {
@@ -248,7 +254,13 @@ export class BoardPreviewComponent implements OnInit {
             prod.main_image = environment.BASE_HREF + prod.main_image;
           }
         }
+        let i = 0;
+        for (const product of this.boardProducts) {
+          i++;
+          this.productListFilter(product, i);
+        }
       });
+
     // tslint:disable-next-line: semicolon
   };
   addFontFamilyIfNotAdded(fontFamily: string) {
@@ -272,10 +284,20 @@ export class BoardPreviewComponent implements OnInit {
       .likeBoard(this.appMeta.board.uuid, like)
       .subscribe((payload) => {
         this.utils.updateBoardLike(this.appMeta.board, like);
-        // this.appMeta.board.is_liked = like ? true : false;
-        // this.appMeta.board.like_count = like
-        //   ? this.appMeta.board.like_count + 1
-        //   : this.appMeta.board.like_count - 1;
       });
+  }
+
+  productListFilter(product, index) {
+    if (product.is_price) {
+      if (this.productSkus.includes(product.sku)) {
+        return false;
+      } else {
+        this.productSkus.push(product.sku);
+        this.filteredProducts.push({ ...product, index });
+        return true;
+      }
+    } else {
+      return false;
+    }
   }
 }

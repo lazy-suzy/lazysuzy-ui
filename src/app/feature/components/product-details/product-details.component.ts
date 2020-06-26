@@ -7,7 +7,11 @@ import {
 } from '@angular/core';
 import { MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { Subscription } from 'rxjs';
-import { IProductPayload, IProductDetail } from 'src/app/shared/models';
+import {
+  IProductPayload,
+  IProductDetail,
+  IActiveProduct
+} from 'src/app/shared/models';
 import {
   ApiService,
   UtilsService,
@@ -61,6 +65,7 @@ export class ProductDetailsComponent implements OnInit {
   galleryRef = this.gallery.ref(this.galleryId);
   isSetItemInInventory = false;
   localStorageUser = {};
+  activeProduct: IActiveProduct;
   constructor(
     @Inject(MAT_DIALOG_DATA) public data: any,
     private apiService: ApiService,
@@ -81,6 +86,7 @@ export class ProductDetailsComponent implements OnInit {
           .getProduct(this.data.sku)
           .subscribe((payload: IProductDetail) => {
             this.product = payload;
+            this.updateActiveProduct(this.product);
             this.items = this.product.on_server_images.map(
               (item) => new ImageItem({ src: item })
             );
@@ -106,20 +112,7 @@ export class ProductDetailsComponent implements OnInit {
                 (variation) => variation.swatch_image !== null
               )
             );
-            if (this.product.in_inventory) {
-              this.productPrice = this.product.inventory_product_details.price;
-              this.productWasPrice = this.product.inventory_product_details.price;
-              for (
-                let i = 1;
-                i <= this.product.inventory_product_details.count && i <= 10;
-                i++
-              ) {
-                this.quantityArray.push({ value: i });
-              }
-            } else {
-              this.productPrice = this.product.is_price;
-              this.productWasPrice = this.product.was_price;
-            }
+            this.updateQuantity(this.product);
             this.isVariationExist = this.utils.checkDataLength(
               this.product.variations
             );
@@ -157,22 +150,7 @@ export class ProductDetailsComponent implements OnInit {
       }
     }
   }
-  // selectedVariation(variation, index, container) {
-  //   if (variation.has_parent_sku) {
-  //     this.utils.openVariationDialog(variation.variation_sku);
-  //   } else {
-  //     this.selectedSwatch = {
-  //       swatch_image: variation.swatch_image,
-  //       price: variation.price,
-  //       wasPrice: variation.was_price
-  //     };
-  //     this.productPrice = variation.price;
-  //     this.productWasPrice = variation.was_price;
-  //     this.onSetImage(variation.image);
-  //     this.selectedIndex = index;
-  //     container.scrollTop = 0;
-  //   }
-  // }
+
   isArray(obj: any) {
     return Array.isArray(obj);
   }
@@ -199,14 +177,17 @@ export class ProductDetailsComponent implements OnInit {
       this.topContainer && (this.topContainer.nativeElement.offsetHeight || 0);
     this.topHeight = { 'max-height': `calc(100vh - ${topHeight + 12}px)` };
   }
-  onSetImage(src): void {
+  onSetImage(variation): void {
     this.galleryContainer.nativeElement.scrollTop = 0;
     this.items = this.product.on_server_images.map(
       (item) => new ImageItem({ src: item })
     );
-    if (src) {
+    if (variation) {
+      const src = variation.image;
       const image = new ImageItem({ src });
       this.items.splice(0, 0, image);
+      this.updateActiveProduct(variation);
+      this.updateQuantity(variation);
     }
     this.galleryRef.load(this.items);
   }
@@ -217,7 +198,7 @@ export class ProductDetailsComponent implements OnInit {
 
   openCartModal() {
     const data = {
-      sku: this.data.sku,
+      sku: this.activeProduct.sku,
       brand: this.product.site,
       image: this.items[0].data.src,
       name: this.product.name,
@@ -225,7 +206,7 @@ export class ProductDetailsComponent implements OnInit {
       quantity: this.quantity
     };
     const postData = {
-      product_sku: this.data.sku,
+      product_sku: this.activeProduct.sku,
       count: this.quantity
     };
     this.apiService.addCartProduct(postData).subscribe(
@@ -242,5 +223,33 @@ export class ProductDetailsComponent implements OnInit {
         console.log(error);
       }
     );
+  }
+
+  updateActiveProduct(product) {
+    this.activeProduct = {
+      sku: product.variation_sku ? product.variation_sku : product.sku,
+      in_inventory: product.in_inventory,
+      inventory_product_details: product.inventory_product_details
+    };
+  }
+
+  updateQuantity(product) {
+    this.quantityArray = [];
+    if (product.in_inventory) {
+      this.productPrice = product.inventory_product_details.price;
+      this.productWasPrice = product.inventory_product_details.was_price;
+      for (
+        let i = 1;
+        i <= product.inventory_product_details.count && i <= 10;
+        i++
+      ) {
+        this.quantityArray.push({ value: i });
+      }
+    } else {
+      if (!product.variation_sku) {
+        this.productPrice = product.is_price;
+        this.productWasPrice = product.was_price;
+      }
+    }
   }
 }

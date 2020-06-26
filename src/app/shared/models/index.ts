@@ -6,3 +6,4 @@ export * from './product-filter.interface';
 export * from './all-department.interface';
 export * from './profile.interface';
 export * from './display-profile.interface';
+export * from './activeProduct.interface';

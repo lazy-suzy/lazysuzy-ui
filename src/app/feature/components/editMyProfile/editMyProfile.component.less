@@ -1,27 +1,34 @@
 .profile-container {
   width: 50%;
   margin: auto;
-  .title {
-    color: #b76e79;
-    font-size: 24px;
+  .header {
     padding-bottom: 15px;
     border-bottom: 1px solid #aab7b6;
     margin-bottom: 15px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  .title {
+    color: #b76e79;
+    font-size: 24px;
   }
   .profile-form-container {
-    width: 70%;
+    width: 90%;
     margin: 0 auto 20px;
     .account-avatar-row {
       display: flex;
       justify-content: space-between;
       align-items: center;
       position: relative;
-      height: 65px;
+      height: 70px;
+      margin: 25px auto;
+      width: 90%;
       .profile-image-input {
         position: absolute;
         left: 0;
-        height: 65px;
-        width: 65px;
+        height: 70px;
+        width: 70px;
         opacity: 0;
         z-index: 1;
         border-radius: 50%;
@@ -78,7 +85,7 @@
       }
     }
     .tag-line-container {
-      height: 55px;
+      height: 40px;
     }
     .action-buttons-row {
       width: 100%;
@@ -98,12 +105,19 @@
       color: #f7c107;
     }
     .profile-avatar {
-      width: 65px;
+      width: 70px;
       border-radius: 50%;
       height: 100%;
       object-fit: cover;
     }
   }
+}
+.avatar-container {
+  width: 15%;
+}
+.form-input-container {
+  width: 85%;
+  margin-left: 10px;
 }
 .input-50 {
   width: 95%;
@@ -138,17 +152,22 @@
 @media (max-width: 767px) {
   .profile-container {
     width: 100%;
+    .header {
+      display: block;
+    }
     .title {
       padding: 15px;
+    }
+    .form-msg {
+      margin: 0 15px;
     }
     .profile-form-container {
       width: 90%;
       .account-avatar-row {
         text-align: right;
+        width: 20%;
       }
-      .form-msg {
-        max-width: 75%;
-      }
+
       .last-name {
         margin: 20px 0 10px;
       }
@@ -157,6 +176,13 @@
         margin: 10px 0 20px;
       }
     }
+  }
+  .avatar-container {
+    width: 100%;
+  }
+  .form-input-container {
+    width: 100%;
+    margin-left: 0;
   }
   .input-50 {
     width: 100%;

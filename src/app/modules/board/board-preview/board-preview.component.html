@@ -72,9 +72,11 @@
           <mat-icon class="profile-avatar">account_circle</mat-icon>
         </ng-template>
 
-        <span class="font-italic profile-username font-weight-normal">{{
-          userName
-        }}</span>
+        <span
+          class="font-italic profile-username font-weight-normal pointer"
+          [routerLink]="['/', appMeta.board.username]"
+          >{{ appMeta.board.username }}</span
+        >
       </div>
     </div>
   </div>
@@ -84,54 +86,11 @@
     <div class="text-center h2 font-weight-bold mt-3 mb-4">
       <span class="shop-title">Shop This Look</span>
     </div>
-    <div>
-      <!-- <p-carousel
-        class="top-deal-slider"
-        [value]="boardProducts"
-        [numVisible]="5"
-        [numScroll]="1"
-      >
-        <ng-template
-          ngFor
-          let-data
-          [ngForOf]="boardProducts"
-          let-index="index"
-          pTemplate="item"
-        >
-          <div class="product mr-4">
-            <span class="product-tag icon">{{ index + 1 }}</span>
-            <a (click)="openDialog(data.sku)">
-              <img
-                class="product_image"
-                src="{{ data.main_image }}"
-                alt="Owl Image"
-              />
-            </a>
-            <div class="product_detail mt-2">
-              <span class="site">{{ data.site }}</span>
-              <br />
-              <span class="name">{{ data.name }}</span>
-              <br />
-              <span class="price">${{ data.is_price }}</span>
-            </div>
-          </div>
-        </ng-template>
-      </p-carousel> -->
-      <!-- <div *ngIf="isHandset">
-        <app-products-carousal
-          [data]="topDeals"
-          [nameOfCarousal]="'top-deals'"
-          (updates)="handleEvtProductCarousal($event)"
-        ></app-products-carousal>                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 
-      </div> -->
-    </div>
+    <div></div>
     <div class="products-container mt-5">
-      <div
-        *ngFor="let product of boardProducts; let index = index"
-        class="w-25-ns {{ product.is_price ? '' : 'dn' }}"
-      >
+      <div *ngFor="let product of filteredProducts" class="w-25-ns">
         <div class="ls-product-div pl-1 pr-1">
-          <div class="product-tag icon">{{ index + 1 }}</div>
+          <div class="product-tag icon">{{ product.index }}</div>
           <div class="ls-product" (click)="openDialog(product.sku)">
             <img [src]="product.main_image" [alt]="product.name" />
           </div>
