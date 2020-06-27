@@ -79,6 +79,8 @@ export class AuthComponent implements OnInit {
         .asObservable()
         .subscribe((user) => {
           this.user = user;
+          this.hasPicture =
+            user.picture && user.picture !== null ? true : false;
           this.initialized = true;
         });
     }
