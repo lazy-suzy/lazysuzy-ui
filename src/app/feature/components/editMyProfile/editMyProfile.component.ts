@@ -69,7 +69,6 @@ export class EditMyProfileComponent implements OnInit {
           if (this.hasImage) {
             this.imageSrc = this.utils.updateProfileImageLink(userData.picture);
           }
-          this.imageSrc = env.BASE_HREF + userData.picture;
           this.presentUserName = userData.username;
         });
       });
