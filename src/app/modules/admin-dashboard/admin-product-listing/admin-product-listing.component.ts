@@ -18,7 +18,7 @@ export class AdminProductListingComponent implements OnInit {
 
   handleTagChange(productSku, image, value) {
     this.tagImage.emit({
-      productSku,
+      product_sku: productSku,
       image,
       type: value
     });
