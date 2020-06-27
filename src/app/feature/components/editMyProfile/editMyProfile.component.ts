@@ -60,10 +60,9 @@ export class EditMyProfileComponent implements OnInit {
           this.profileData.username = userData.username;
           this.profileData.firstName = userData.first_name;
           this.profileData.lastName = userData.last_name;
-          this.profileData.website = userData.website;
-          this.profileData.location = userData.location;
-          this.profileData.description = userData.description;
-          this.profileData.tag_line = userData.tag_line;
+          for (const key of this.hasEditedInput) {
+            this.profileData[key] = this.hasNull(userData[key]);
+          }
           this.hasImage =
             userData.picture && userData.picture !== 'null' ? true : false;
           if (this.hasImage) {

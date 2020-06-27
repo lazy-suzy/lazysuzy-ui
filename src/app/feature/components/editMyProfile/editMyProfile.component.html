@@ -6,12 +6,7 @@
     </div>
   </div>
   <div class="profile-form-container">
-    <form
-      name="profile-form"
-      class="w-100 flex-ns"
-      (ngSubmit)="profileUpdate()"
-      #profileForm="ngForm"
-    >
+    <form name="profile-form" class="w-100 flex-ns" #profileForm="ngForm">
       <div class="avatar-container">
         <div class="account-avatar-row">
           <input
@@ -48,9 +43,9 @@
             <label class="db">User Name</label>
             <span
               class="profile-link pointer"
-              [routerLink]="['/', profileData.username]"
+              [routerLink]="['/p/', profileData.username]"
               >www<span
-                >.lazysuzy<span>.com</span>/{{ profileData.username }}</span
+                >.lazysuzy<span>.com</span>/p/{{ profileData.username }}</span
               ></span
             >
           </div>
@@ -130,8 +125,12 @@
           >
         </div>
         <div class="action-buttons-row">
-          <button class="profile-cancel-btn b">CANCEL</button>
-          <button class="profile-update-btn b ml3">UPDATE</button>
+          <button class="profile-cancel-btn b" [routerLink]="['/board']">
+            CANCEL
+          </button>
+          <button class="profile-update-btn b ml3" (click)="profileUpdate()">
+            UPDATE
+          </button>
         </div>
       </div>
     </form>

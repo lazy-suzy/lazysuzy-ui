@@ -31,7 +31,7 @@
         width: 70px;
         opacity: 0;
         z-index: 1;
-        border-radius: 50%;
+        border-radius: 100%;
       }
       .edit-image {
         position: absolute;
@@ -99,6 +99,9 @@
     }
     .profile-cancel-btn {
       color: #0c1c31;
+      &:focus {
+        outline: none;
+      }
     }
     .profile-update-btn {
       background-color: #0c1c31;
@@ -106,9 +109,8 @@
     }
     .profile-avatar {
       width: 70px;
-      border-radius: 50%;
-      height: 100%;
-      object-fit: none;
+      border-radius: 100%;
+      object-fit: cover;
     }
   }
 }
