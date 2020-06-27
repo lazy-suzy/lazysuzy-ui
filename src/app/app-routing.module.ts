@@ -85,7 +85,7 @@ const routes: Routes = [
         (m) => m.AdminDashboardModule
       )
   },
-  { path: 'editMyProfile', component: EditMyProfileComponent },
+  { path: 'settings/profile', component: EditMyProfileComponent },
   { path: 'p/:profile', component: PublicProfileComponent }
 ];
 

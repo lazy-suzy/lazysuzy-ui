@@ -35,6 +35,7 @@ export interface IProductDetail {
     count: number;
     is_low: boolean;
     message: string;
+    was_price: number;
   };
 }
 

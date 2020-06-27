@@ -2,6 +2,7 @@ import { Injectable, ElementRef } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { SignupComponent } from 'src/app/core/components';
 import { MarkdownService } from 'ngx-markdown';
+import { environment as env } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root'
@@ -72,5 +73,9 @@ export class UtilsService {
       (board.is_liked = like),
       (board.like_count = like ? board.like_count + 1 : board.like_count - 1)
     );
+  }
+
+  updateProfileImageLink(picture) {
+    return picture.includes('http') ? picture : env.BASE_HREF + picture;
   }
 }

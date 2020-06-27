@@ -116,9 +116,9 @@ export class BoardPreviewComponent implements OnInit {
                 this.appMeta.board.picture &&
                 this.appMeta.board.picture !== 'null'
               ) {
-                this.profileAvatar = this.appMeta.board.picture.includes('http')
-                  ? this.appMeta.board.picture
-                  : environment.BASE_HREF + this.appMeta.board.picture;
+                this.profileAvatar = this.utils.updateProfileImageLink(
+                  this.appMeta.board.picture
+                );
               }
               this.boardState = JSON.parse(this.appMeta.board.state.toString());
               if (this.boardState) {
@@ -255,13 +255,21 @@ export class BoardPreviewComponent implements OnInit {
             prod.main_image = environment.BASE_HREF + prod.main_image;
           }
         }
-        let i = 0;
-        for (const product of this.boardProducts) {
-          i++;
-          this.productListFilter(product, i);
-        }
+        const self = this;
+        this.boardProducts.forEach((product, index) => {
+          if (product.is_price) {
+            if (self.productSkus.includes(product.sku)) {
+              return false;
+            } else {
+              self.productSkus.push(product.sku);
+              self.filteredProducts.push({ ...product, index });
+              return true;
+            }
+          } else {
+            return false;
+          }
+        });
       });
-
     // tslint:disable-next-line: semicolon
   };
   addFontFamilyIfNotAdded(fontFamily: string) {
@@ -286,19 +294,5 @@ export class BoardPreviewComponent implements OnInit {
       .subscribe((payload) => {
         this.utils.updateBoardLike(this.appMeta.board, like);
       });
-  }
-
-  productListFilter(product, index) {
-    if (product.is_price) {
-      if (this.productSkus.includes(product.sku)) {
-        return false;
-      } else {
-        this.productSkus.push(product.sku);
-        this.filteredProducts.push({ ...product, index });
-        return true;
-      }
-    } else {
-      return false;
-    }
   }
 }

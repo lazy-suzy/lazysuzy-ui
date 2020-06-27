@@ -27,6 +27,7 @@ export class PublicProfileComponent implements OnInit {
   isLoading = false;
   spinner = 'assets/image/spinner.gif';
   boards: Board[] = [];
+  hasPicture: boolean;
   constructor(
     private router: Router,
     private activeRoute: ActivatedRoute,
@@ -46,13 +47,24 @@ export class PublicProfileComponent implements OnInit {
       .subscribe((payload: any) => {
         if (payload[0] !== null) {
           this.profile = payload;
-          this.profile.picture = env.BASE_HREF + this.profile.picture;
+          this.hasPicture =
+            payload.picture && payload.picture !== 'null' ? true : false;
+          if (this.hasPicture) {
+            this.profile.picture = this.utils.updateProfileImageLink(
+              payload.picture
+            );
+          }
         }
         this.isLoading = false;
       });
 
     this.apiService.getUserBoards(this.username).subscribe((payload: any) => {
-      this.boards = payload;
+      this.boards = payload.filter((board) => {
+        return (
+          board.is_published === this.BOARD_PUBLISHED &&
+          board.type_privacy === this.PRIVACY_PUBLIC
+        );
+      });
     });
   }
   onDestroy(): void {

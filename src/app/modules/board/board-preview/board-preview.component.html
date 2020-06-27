@@ -90,7 +90,7 @@
     <div class="products-container mt-5">
       <div *ngFor="let product of filteredProducts" class="w-25-ns">
         <div class="ls-product-div pl-1 pr-1">
-          <div class="product-tag icon">{{ product.index }}</div>
+          <div class="product-tag icon">{{ product.index + 1 }}</div>
           <div class="ls-product" (click)="openDialog(product.sku)">
             <img [src]="product.main_image" [alt]="product.name" />
           </div>

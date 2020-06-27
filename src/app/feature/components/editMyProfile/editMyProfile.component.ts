@@ -1,5 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { ApiService, EventEmitterService } from 'src/app/shared/services';
+import {
+  ApiService,
+  EventEmitterService,
+  UtilsService
+} from 'src/app/shared/services';
 import { IProfile } from '../../../shared/models';
 import { environment as env } from 'src/environments/environment';
 import { Subscription } from 'rxjs';
@@ -34,12 +38,14 @@ export class EditMyProfileComponent implements OnInit {
   hasImage: boolean;
   eventSubscription: Subscription;
   websiteRegex = /^[a-zA-Z0-9][a-zA-Z0-9-]{1,61}[a-zA-Z0-9].[a-zA-Z]{2,}$/;
+  hasEditedInput = ['description', 'location', 'website', 'tag_line'];
   constructor(
     private apiService: ApiService,
     private eventEmitterService: EventEmitterService,
     private router: Router,
     private cookie: CookieService,
-    private snackBar: MatSnackBar
+    private snackBar: MatSnackBar,
+    private utils: UtilsService
   ) {}
 
   ngOnInit() {
@@ -60,6 +66,9 @@ export class EditMyProfileComponent implements OnInit {
           this.profileData.tag_line = userData.tag_line;
           this.hasImage =
             userData.picture && userData.picture !== 'null' ? true : false;
+          if (this.hasImage) {
+            this.imageSrc = this.utils.updateProfileImageLink(userData.picture);
+          }
           this.imageSrc = env.BASE_HREF + userData.picture;
           this.presentUserName = userData.username;
         });
@@ -81,10 +90,9 @@ export class EditMyProfileComponent implements OnInit {
         this.profileData.website = 'http://' + this.profileData.website;
       }
     }
-    formData.append('location', this.profileData.location);
-    formData.append('website', this.profileData.website);
-    formData.append('description', this.profileData.description);
-    formData.append('tag_line', this.profileData.tag_line);
+    for (const key of this.hasEditedInput) {
+      formData.append(key, this.hasNull(this.profileData[key]));
+    }
     if (this.presentUserName !== this.profileData.username) {
       formData.append('username', this.profileData.username);
     }
@@ -115,7 +123,12 @@ export class EditMyProfileComponent implements OnInit {
       }, 5000);
     });
   }
-
+  hasNull(data) {
+    if (data && data !== 'null') {
+      return data;
+    }
+    return '';
+  }
   over() {
     this.hasEditIcon = true;
   }

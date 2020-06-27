@@ -63,9 +63,15 @@
               class="quantity-selector w-30 ml2"
               *ngIf="utils.hasInventory(activeProduct)"
             >
-              <option *ngFor="let item of quantityArray" [value]="item.value">{{
-                item.value
-              }}</option>
+              <option
+                *ngFor="
+                  let i of quantityLimit(
+                    activeProduct.inventory_product_details.count
+                  )
+                "
+                [value]="i"
+                >{{ i }}</option
+              >
             </select>
 
             <button

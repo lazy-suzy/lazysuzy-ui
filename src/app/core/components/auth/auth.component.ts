@@ -64,8 +64,14 @@ export class AuthComponent implements OnInit {
           '/'
         );
         this.hasPicture =
-          payload.user.picture && payload.user.picture !== null ? true : false;
-        payload.user.picture = env.BASE_HREF + payload.user.picture;
+          payload.user.picture && payload.user.picture !== 'null'
+            ? true
+            : false;
+        if (this.hasPicture) {
+          payload.user.picture = this.utils.updateProfileImageLink(
+            payload.user.picture
+          );
+        }
         localStorage.setItem(
           this.attribute.lsRegularUser,
           JSON.stringify(payload.user)
@@ -80,7 +86,7 @@ export class AuthComponent implements OnInit {
         .subscribe((user) => {
           this.user = user;
           this.hasPicture =
-            user.picture && user.picture !== null ? true : false;
+            user.picture && user.picture !== 'null' ? true : false;
           this.initialized = true;
         });
     }

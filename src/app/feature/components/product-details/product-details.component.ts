@@ -112,7 +112,13 @@ export class ProductDetailsComponent implements OnInit {
                 (variation) => variation.swatch_image !== null
               )
             );
-            this.updateQuantity(this.product);
+            if (this.product.in_inventory) {
+              this.productPrice = this.product.inventory_product_details.price;
+              this.productWasPrice = this.product.inventory_product_details.was_price;
+            } else {
+              this.productPrice = this.product.is_price;
+              this.productWasPrice = this.product.was_price;
+            }
             this.isVariationExist = this.utils.checkDataLength(
               this.product.variations
             );
@@ -187,7 +193,6 @@ export class ProductDetailsComponent implements OnInit {
       const image = new ImageItem({ src });
       this.items.splice(0, 0, image);
       this.updateActiveProduct(variation);
-      this.updateQuantity(variation);
     }
     this.galleryRef.load(this.items);
   }
@@ -233,23 +238,8 @@ export class ProductDetailsComponent implements OnInit {
     };
   }
 
-  updateQuantity(product) {
-    this.quantityArray = [];
-    if (product.in_inventory) {
-      this.productPrice = product.inventory_product_details.price;
-      this.productWasPrice = product.inventory_product_details.was_price;
-      for (
-        let i = 1;
-        i <= product.inventory_product_details.count && i <= 10;
-        i++
-      ) {
-        this.quantityArray.push({ value: i });
-      }
-    } else {
-      if (!product.variation_sku) {
-        this.productPrice = product.is_price;
-        this.productWasPrice = product.was_price;
-      }
-    }
+  quantityLimit(count) {
+    const maxNumber = count < 10 ? count : 10;
+    return Array.from({ length: maxNumber }, Number.call, (i) => i + 1);
   }
 }

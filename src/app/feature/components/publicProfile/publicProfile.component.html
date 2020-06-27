@@ -5,7 +5,7 @@
         <img
           [src]="profile.picture"
           class="profile-avatar"
-          *ngIf="profile.picture && profile.picture !== 'null'; else showIcon"
+          *ngIf="hasPicture; else showIcon"
         />
         <ng-template #showIcon>
           <mat-icon
@@ -34,28 +34,19 @@
       </div>
     </div>
   </div>
-  <div class="boards-section">
-    <div class="pink-font pb3">
+  <div class="boards-section" *ngIf="!isLoading">
+    <div class="pink-font boards-header pb3">
       DESIGN BOARDS
     </div>
-    <div class="flex flex-wrap">
+    <div
+      class="flex flex-wrap"
+      *ngIf="this.boards.length; else showNewBoardOption"
+    >
       <div
-        class="w-33-ns w-100 mv3 pr4-ns pl0 card-container {{
-          board.is_published === BOARD_PUBLISHED &&
-          board.type_privacy === PRIVACY_PUBLIC
-            ? ''
-            : 'dn'
-        }}"
+        class="w-33-ns w-100 mv3 pr4-ns pl0 card-container"
         *ngFor="let board of boards"
       >
-        <div
-          class="board-card"
-          *ngIf="
-            board &&
-            board.is_published === BOARD_PUBLISHED &&
-            board.type_privacy === PRIVACY_PUBLIC
-          "
-        >
+        <div class="board-card">
           <div class="canvas-preview">
             <img
               width="100%"
@@ -85,6 +76,16 @@
         </div>
       </div>
     </div>
+    <ng-template #showNewBoardOption>
+      <div class="new-board-card">
+        <div class="mb1">{{ username }} hasn't created any Boards yet</div>
+        <div>But don't let that stop you</div>
+        <div class="new-board-button" [routerLink]="['/board']">
+          <div>Create new</div>
+          <div>Board</div>
+        </div>
+      </div>
+    </ng-template>
   </div>
   <img *ngIf="isLoading" [src]="spinner" class="loader" />
 </div>
