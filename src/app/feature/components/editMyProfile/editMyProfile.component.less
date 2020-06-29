@@ -22,8 +22,9 @@
       align-items: center;
       position: relative;
       height: 70px;
-      margin: 25px auto;
+      margin: 25px auto 25px -10px;
       width: 90%;
+      overflow: hidden;
       .profile-image-input {
         position: absolute;
         left: 0;
@@ -111,6 +112,13 @@
       width: 70px;
       border-radius: 100%;
       object-fit: cover;
+      left: 50%;
+      top: 50%;
+      position: absolute;
+      height: 100%;
+      -webkit-transform: translate(-50%, -50%);
+      -ms-transform: translate(-50%, -50%);
+      transform: translate(-50%, -50%);
     }
   }
 }
@@ -168,6 +176,7 @@
       .account-avatar-row {
         text-align: right;
         width: 20%;
+        margin: 25px auto;
       }
 
       .last-name {

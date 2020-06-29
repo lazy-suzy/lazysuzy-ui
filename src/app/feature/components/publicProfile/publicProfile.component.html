@@ -1,7 +1,7 @@
 <div class="display-profile-container">
   <div class="profile-section" *ngIf="profile">
     <div class="flex profile-image-row">
-      <div class="w-40 tc">
+      <div class="w-40 tc profile-image-container">
         <img
           [src]="profile.picture"
           class="profile-avatar"
@@ -29,7 +29,7 @@
           profile.website || ''
         }}</a>
       </div>
-      <div class="w-60">
+      <div class="w-60 tl-ns tc">
         <div>{{ profile.description || '' }}</div>
       </div>
     </div>

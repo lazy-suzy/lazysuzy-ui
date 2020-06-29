@@ -9,12 +9,24 @@
       height: 150px;
       align-items: center;
     }
-    .profile-avatar {
-      width: 150px;
-      border-radius: 100%;
-      font-size: 150px;
-      color: #999999;
-      object-fit: cover;
+    .profile-image-container {
+      position: relative;
+      height: 150px;
+      overflow: hidden;
+      .profile-avatar {
+        width: 150px;
+        border-radius: 100%;
+        font-size: 150px;
+        color: #999999;
+        object-fit: cover;
+        position: absolute;
+        left: 50%;
+        top: 50%;
+        height: 100%;
+        -webkit-transform: translate(-50%, -50%);
+        -ms-transform: translate(-50%, -50%);
+        transform: translate(-50%, -50%);
+      }
     }
     .profile-header-content {
       display: flex;
@@ -103,8 +115,15 @@
     width: 90%;
     .profile-section {
       width: 100%;
+<<<<<<< HEAD
       .profile-avatar {
         height: auto;
+=======
+      .profile-image-container {
+        .profile-avatar {
+          height: 36vw;
+        }
+>>>>>>> shadow
       }
       .profile-header-content {
         width: 60%;
