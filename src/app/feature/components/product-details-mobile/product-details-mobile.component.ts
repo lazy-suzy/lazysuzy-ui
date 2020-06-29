@@ -1,6 +1,6 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
-import { IProductPayload, IProductDetail } from 'src/app/shared/models';
+import { IActiveProduct, IProductDetail } from 'src/app/shared/models';
 import {
   ApiService,
   UtilsService,
@@ -61,6 +61,7 @@ export class ProductDetailsMobileComponent implements OnInit {
   galleryRef = this.gallery.ref(this.galleryId);
   isSetItemInInventory = false;
   eventSubscription: Subscription;
+  activeProduct: IActiveProduct;
   constructor(
     private router: Router,
     private activeRoute: ActivatedRoute,
@@ -100,6 +101,7 @@ export class ProductDetailsMobileComponent implements OnInit {
       .getProduct(this.productSku)
       .subscribe((payload: IProductDetail) => {
         this.product = payload;
+        this.updateActiveProduct(this.product);
         this.description = this.utils.compileMarkdown(this.product.description);
         this.features = this.utils.compileMarkdown(
           this.product.features,
@@ -120,6 +122,7 @@ export class ProductDetailsMobileComponent implements OnInit {
         this.isVariationExist = this.utils.checkDataLength(
           this.product.variations
         );
+        this.hasVariationsInventory();
         if (!this.isHandset) {
           this.router.navigate(
             [`${this.product.department_info[0].category_url}`],
@@ -131,14 +134,7 @@ export class ProductDetailsMobileComponent implements OnInit {
         );
         if (this.product.in_inventory) {
           this.productPrice = this.product.inventory_product_details.price;
-          this.productWasPrice = this.product.inventory_product_details.price;
-          for (
-            let i = 1;
-            i <= this.product.inventory_product_details.count;
-            i++
-          ) {
-            this.quantityArray.push({ value: i });
-          }
+          this.productWasPrice = this.product.inventory_product_details.was_price;
         } else {
           this.productPrice = this.product.is_price;
           this.productWasPrice = this.product.was_price;
@@ -206,14 +202,19 @@ export class ProductDetailsMobileComponent implements OnInit {
       vglnk.open(url, '_blank');
     }
   }
-  onSetImage(src): void {
+  onSetImage(variation): void {
     // this.galleryContainer.nativeElement.scrollTop = 0;
     this.items = this.product.on_server_images.map(
       (item) => new ImageItem({ src: item })
     );
-    if (src) {
+    if (variation) {
+      const src = variation.image;
       const image = new ImageItem({ src });
       this.items.splice(0, 0, image);
+      this.updateActiveProduct(variation);
+    } else {
+      this.updateActiveProduct(this.product);
+      this.hasVariationsInventory();
     }
     this.galleryRef.load(this.items);
   }
@@ -222,37 +223,74 @@ export class ProductDetailsMobileComponent implements OnInit {
     this.productWasPrice = priceData.wasPrice || this.product.was_price;
   }
   openCartModal() {
-    const data = {
-      sku: this.productSku,
-      brand: this.product.site,
-      image: this.items[0].data.src,
-      name: this.product.name,
-      price: this.productPrice,
-      quantity: this.quantity
-    };
-    const postData = {
-      product_sku: this.productSku,
-      count: this.quantity
-    };
-    this.apiService.addCartProduct(postData).subscribe(
-      (payload: any) => {
-        if (payload.status) {
-          this.errorMessage = '';
-          this.matDialogUtils.openAddToCartDialog(data);
-        } else {
-          this.errorMessage = payload.msg;
+    if (
+      !this.product.in_inventory &&
+      !this.activeProduct.inventory_product_details.price
+    ) {
+      this.errorMessage = 'Please select a variation';
+      const self = this;
+      setTimeout(() => {
+        self.errorMessage = '';
+      }, 3000);
+    } else {
+      const data = {
+        sku: this.productSku,
+        brand: this.product.site,
+        image: this.items[0].data.src,
+        name: this.product.name,
+        price: this.productPrice,
+        quantity: this.quantity
+      };
+      const postData = {
+        product_sku: this.productSku,
+        count: this.quantity
+      };
+      this.apiService.addCartProduct(postData).subscribe(
+        (payload: any) => {
+          if (payload.status) {
+            this.errorMessage = '';
+            this.matDialogUtils.openAddToCartDialog(data);
+          } else {
+            this.errorMessage = payload.msg;
+          }
+        },
+        (error: any) => {
+          this.errorMessage = 'Cannot add this product at the moment.';
+          console.log(error);
         }
-      },
-      (error: any) => {
-        this.errorMessage = 'Cannot add this product at the moment.';
-        console.log(error);
-      }
-    );
+      );
+    }
   }
   checkSetInventory(product) {
     for (const item of product) {
       if (item.in_inventory) {
         this.isSetItemInInventory = true;
+      }
+    }
+  }
+  updateActiveProduct(product) {
+    this.activeProduct = {
+      sku: product.variation_sku ? product.variation_sku : product.sku,
+      in_inventory: product.in_inventory,
+      inventory_product_details: product.inventory_product_details
+        ? product.inventory_product_details
+        : []
+    };
+  }
+
+  quantityLimit(count) {
+    const maxNumber = count < 10 ? count : 10;
+    return Array.from({ length: maxNumber }, Number.call, (i) => i + 1);
+  }
+
+  hasVariationsInventory() {
+    if (
+      this.isVariationExist &&
+      this.product.inventory_product_details === null
+    ) {
+      if (this.product.variations.find((item) => item.in_inventory === true)) {
+        this.activeProduct.in_inventory = true;
+        this.activeProduct.inventory_product_details.count = 1;
       }
     }
   }

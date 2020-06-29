@@ -122,6 +122,7 @@ export class ProductDetailsComponent implements OnInit {
             this.isVariationExist = this.utils.checkDataLength(
               this.product.variations
             );
+            this.hasVariationsInventory();
             this.variations = this.product.variations.sort((a, b) =>
               a.name > b.name ? 1 : -1
             );
@@ -193,6 +194,9 @@ export class ProductDetailsComponent implements OnInit {
       const image = new ImageItem({ src });
       this.items.splice(0, 0, image);
       this.updateActiveProduct(variation);
+    } else {
+      this.updateActiveProduct(this.product);
+      this.hasVariationsInventory();
     }
     this.galleryRef.load(this.items);
   }
@@ -202,32 +206,43 @@ export class ProductDetailsComponent implements OnInit {
   }
 
   openCartModal() {
-    const data = {
-      sku: this.activeProduct.sku,
-      brand: this.product.site,
-      image: this.items[0].data.src,
-      name: this.product.name,
-      price: this.productPrice,
-      quantity: this.quantity
-    };
-    const postData = {
-      product_sku: this.activeProduct.sku,
-      count: this.quantity
-    };
-    this.apiService.addCartProduct(postData).subscribe(
-      (payload: any) => {
-        if (payload.status) {
-          this.errorMessage = '';
-          this.matDialogUtils.openAddToCartDialog(data);
-        } else {
-          this.errorMessage = payload.msg;
+    if (
+      !this.product.in_inventory &&
+      !this.activeProduct.inventory_product_details.price
+    ) {
+      this.errorMessage = 'Please select a variation';
+      const self = this;
+      setTimeout(() => {
+        self.errorMessage = '';
+      }, 3000);
+    } else {
+      const data = {
+        sku: this.activeProduct.sku,
+        brand: this.product.site,
+        image: this.items[0].data.src,
+        name: this.product.name,
+        price: this.productPrice,
+        quantity: this.quantity
+      };
+      const postData = {
+        product_sku: this.activeProduct.sku,
+        count: this.quantity
+      };
+      this.apiService.addCartProduct(postData).subscribe(
+        (payload: any) => {
+          if (payload.status) {
+            this.errorMessage = '';
+            this.matDialogUtils.openAddToCartDialog(data);
+          } else {
+            this.errorMessage = payload.msg;
+          }
+        },
+        (error: any) => {
+          this.errorMessage = 'Cannot add this product at the moment.';
+          console.log(error);
         }
-      },
-      (error: any) => {
-        this.errorMessage = 'Cannot add this product at the moment.';
-        console.log(error);
-      }
-    );
+      );
+    }
   }
 
   updateActiveProduct(product) {
@@ -235,11 +250,25 @@ export class ProductDetailsComponent implements OnInit {
       sku: product.variation_sku ? product.variation_sku : product.sku,
       in_inventory: product.in_inventory,
       inventory_product_details: product.inventory_product_details
+        ? product.inventory_product_details
+        : []
     };
   }
 
   quantityLimit(count) {
     const maxNumber = count < 10 ? count : 10;
     return Array.from({ length: maxNumber }, Number.call, (i) => i + 1);
+  }
+
+  hasVariationsInventory() {
+    if (
+      this.isVariationExist &&
+      this.product.inventory_product_details === null
+    ) {
+      if (this.product.variations.find((item) => item.in_inventory === true)) {
+        this.activeProduct.in_inventory = true;
+        this.activeProduct.inventory_product_details.count = 1;
+      }
+    }
   }
 }

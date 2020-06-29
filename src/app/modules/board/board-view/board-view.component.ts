@@ -296,6 +296,9 @@ export class BoardViewComponent implements OnInit, AfterViewInit {
   boardPreviewProducts = [];
 
   search(isNewSearch = false) {
+    if (isNewSearch) {
+      this.hasLoadedAllProducts = false;
+    }
     if (this.isHandset) {
       this.hasPanelFixed = false;
     }
@@ -479,6 +482,9 @@ export class BoardViewComponent implements OnInit, AfterViewInit {
   }
 
   getBrowseData(categ) {
+    if (this.selectedCategory !== categ) {
+      this.hasLoadedAllProducts = false;
+    }
     this.selectedCategory = categ;
     this.showLoader = true;
     this.hasSearched = false;

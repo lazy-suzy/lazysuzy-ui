@@ -30,13 +30,7 @@ export interface IProductDetail {
   on_server_images: string[];
   department_info: Departmentinfo[];
   in_inventory: boolean;
-  inventory_product_details: {
-    price: number;
-    count: number;
-    is_low: boolean;
-    message: string;
-    was_price: number;
-  };
+  inventory_product_details: InventoryProductDetails;
 }
 
 interface Departmentinfo {
@@ -55,6 +49,8 @@ interface Dimension {
 }
 
 interface Variation {
+  in_inventory: boolean;
+  inventory_product_details: InventoryProductDetails;
   product_sku: string;
   variation_sku: string;
   name: string;
@@ -72,4 +68,12 @@ interface Features {
   shape: string;
   fabric: string;
   delivery: string;
+}
+
+interface InventoryProductDetails {
+  price: number;
+  count: number;
+  is_low: boolean;
+  message: string;
+  was_price: number;
 }
