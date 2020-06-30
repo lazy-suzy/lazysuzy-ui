@@ -1,7 +1,18 @@
 <ng-container *ngIf="isHandset && isSwatchExist; else isBrowser">
   <div class="variation-container">
-    <span class="title">Options</span>
-    <span class="clear-btn" (click)="clearVariations()">Clear</span>
+    <div class="flex items-center">
+      <span class="title">Options</span>
+      <span
+        class="clear-btn"
+        *ngIf="selectedSwatch.swatch_image && hasSelection"
+        (click)="clearVariations()"
+        >Clear</span
+      >
+      <span *ngIf="hasSelection === false" class="error-msg">
+        Please make a selection
+      </span>
+    </div>
+
     <div class="variation-options" *ngIf="isSwatchExist">
       <div
         class="variation {{
@@ -77,7 +88,7 @@
         </div>
       </ng-container>
     </div>
-    <div class=" variant-features-options-container">
+    <div class="variant-features-options-container">
       <div
         class="variant-feature-content"
         *ngFor="let item of inputSelections | keyvalue"
@@ -117,8 +128,18 @@
 
 <ng-template #isBrowser>
   <div class="variations-container pr2">
-    <span class="title">Options</span>
-    <span class="clear-btn" (click)="clearVariations()">Clear</span>
+    <div class="flex items-center justify-between">
+      <span class="title">Options</span>
+      <span
+        class="clear-btn"
+        (click)="clearVariations()"
+        *ngIf="selectedSwatch.swatch_image && hasSelection"
+        >Clear</span
+      >
+      <span *ngIf="hasSelection === false" class="error-msg">
+        Please make a selection
+      </span>
+    </div>
     <div class="variation-options" *ngIf="isSwatchExist">
       <div
         *ngFor="let variation of swatches; let i = index"
@@ -187,13 +208,13 @@
         </div>
       </ng-container>
     </div>
-    <div class=" variant-features-options-container">
+    <div class="variant-features-options-container">
       <div
         class="variant-feature-content"
         *ngFor="let item of inputSelections | keyvalue"
       >
         <div
-          class=" variant-feature-options"
+          class="variant-feature-options"
           *ngIf="item.value.select_type === 'single_select'"
         >
           <h6 class="selection-title">

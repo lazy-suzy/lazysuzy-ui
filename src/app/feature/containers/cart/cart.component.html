@@ -34,9 +34,9 @@
           <div class="subtotal-card ma4">
             <div class="title pv2 flex justify-between b">
               <div class="blue-font">
-                Subtotal ({{ cartProductsLength }} items):
+                Subtotal ({{ cartProducts.length }} items):
               </div>
-              <div class="pink-font">${{ totalAmount | number: '1.2-2' }}</div>
+              <div class="pink-font">${{ subTotal | number: '1.2-2' }}</div>
             </div>
             <div class="tc">
               <button
@@ -68,21 +68,21 @@
               <div class="quantity w-30">
                 <span
                   class="btn-quantity-operation b w-20"
-                  (click)="decreaseQuantity(product.product_sku, 1)"
+                  (click)="decreaseQuantity(product, 1)"
                 >
                   -
                 </span>
                 <span class="value w-60"> {{ product.count }} </span>
                 <span
                   class="btn-quantity-operation b w-20"
-                  (click)="increaseQuantity(product.product_sku, 1)"
+                  (click)="increaseQuantity(product, 1)"
                 >
                   +
                 </span>
               </div>
               <div
                 class="btn-remove gray-font ml4"
-                (click)="removeProduct(product.product_sku, product.count)"
+                (click)="removeProduct(product, product.count)"
               >
                 REMOVE
               </div>
@@ -153,7 +153,7 @@
                     class="quantity-selector w-30"
                     (change)="
                       onQuantityChanged(
-                        product.product_sku,
+                        product,
                         product.count,
                         $event.target.value
                       )
@@ -171,7 +171,7 @@
                   </select>
                   <div
                     class="pt3 gray-font b pointer fs14"
-                    (click)="removeProduct(product.product_sku, product.count)"
+                    (click)="removeProduct(product, product.count)"
                   >
                     REMOVE
                   </div>
@@ -184,9 +184,9 @@
           <div class="subtotal-card">
             <div class="title pv2 flex justify-between b">
               <div class="blue-font">
-                Subtotal ({{ cartProductsLength }} items):
+                Subtotal ({{ cartProducts.length }} items):
               </div>
-              <div class="pink-font">${{ totalAmount | number: '1.2-2' }}</div>
+              <div class="pink-font">${{ subTotal | number: '1.2-2' }}</div>
             </div>
             <div class="tc">
               <button

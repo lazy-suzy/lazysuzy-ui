@@ -19,6 +19,7 @@ export class VariationsComponent implements OnInit {
   @Input() variations = [];
   @Input() inputSelections = {};
   @Input() isSwatchExist = false;
+  @Input() hasSelection = true;
   bpObserver: Observable<BreakpointState> = this.breakpointObserver.observe(
     Breakpoints.Handset
   );

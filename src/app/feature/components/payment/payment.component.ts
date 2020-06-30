@@ -88,6 +88,7 @@ export class PaymentComponent implements OnInit {
   isLoading = true;
   localStorageUser = {};
   eventSubscription: Subscription;
+  orderAmount = {};
   constructor(
     private fb: FormBuilder,
     private stripeService: StripeService,
@@ -157,38 +158,24 @@ export class PaymentComponent implements OnInit {
       .subscribe((user) => {
         this.customerData.email = user.email;
         this.localStorageUser = user;
-        this.getCartProducts();
+        this.getCartProducts(false, this.customerData.shipping_state);
       });
   }
   onDestroy(): void {
     this.eventSubscription.unsubscribe();
   }
-  getCartProducts() {
-    this.apiService.getCartProduct().subscribe(
+  getCartProducts(hasState, state) {
+    this.isLoading = true;
+    this.apiService.getCartProduct(hasState, state).subscribe(
       (payload: any) => {
-        this.cartProducts = payload;
-        this.cartProductsLength = 0;
-        this.subTotalAmount = 0;
-        this.calculateCartData();
+        this.cartProducts = payload.products;
+        this.orderAmount = payload.order;
+        this.isLoading = false;
       },
       (error: any) => {
         console.log(error);
       }
     );
-  }
-  calculateCartData() {
-    for (const product of this.cartProducts) {
-      this.subTotalAmount =
-        this.subTotalAmount + product.retail_price * product.count;
-      this.cartProductsLength = this.cartProductsLength + product.count;
-      this.totalShippingCharge += product.count * product.ship_custom;
-    }
-    if (this.cartProductsLength === 0) {
-      this.router.navigate(['cart']);
-    } else {
-      this.isLoading = false;
-    }
-    this.totalAmount = this.subTotalAmount + this.totalShippingCharge;
   }
   buy() {
     this.customerData.billing_country = 'USA';
@@ -227,17 +214,6 @@ export class PaymentComponent implements OnInit {
             this.customerData.token = result.token.id;
             this.customerData.ip = result.token.client_ip;
             localStorage.setItem('registeredName', name);
-            // this.apiService.userUpdate({ name }).subscribe(
-            //   (payload: any) => {
-            //     localStorage.setItem(
-            //       'user',
-            //       JSON.stringify(payload.success.user)
-            //     );
-            //   },
-            //   (error: any) => {
-            //     console.log(error);
-            //   }
-            // );
             this.apiService.postStripeToken(this.customerData).subscribe(
               (payload: any) => {
                 this.isPaymentExecuting = false;
@@ -292,17 +268,6 @@ export class PaymentComponent implements OnInit {
       const localUser: any = this.localStorageUser;
       if (localUser.email !== this.customerData.email) {
         localStorage.setItem('registeredEmail', this.customerData.email);
-        // const data = {
-        //   email: this.customerData.email,
-        // };
-        // this.apiService.userUpdate(data).subscribe(
-        //   (payload: any) => {
-        //     localStorage.setItem('user', JSON.stringify(payload.success.user));
-        //   },
-        //   (error: any) => {
-        //     console.log(error);
-        //   }
-        // );
       }
       this.shipping = true;
       this.customer = false;
@@ -334,5 +299,9 @@ export class PaymentComponent implements OnInit {
       this.customerData.billing_state = '';
       this.customerData.billing_zipcode = '';
     }
+  }
+
+  shippingStateChanged() {
+    this.getCartProducts(true, this.customerData.shipping_state);
   }
 }

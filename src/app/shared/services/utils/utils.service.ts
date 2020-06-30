@@ -78,4 +78,25 @@ export class UtilsService {
   updateProfileImageLink(picture) {
     return picture.includes('http') ? picture : env.BASE_HREF + picture;
   }
+
+  formatPrice(price) {
+    if (price) {
+      const priceString = price.toString();
+      let minRange;
+      let maxRange;
+      let result;
+      const splitedPrice = priceString.split('-');
+      minRange = parseFloat(splitedPrice[0]).toFixed(2);
+      if (splitedPrice.length > 1) {
+        maxRange = parseFloat(splitedPrice[1]).toFixed(2);
+        result = minRange.toString() + ' - ' + maxRange.toString();
+      } else {
+        maxRange = null;
+        result = minRange.toString();
+      }
+      return result;
+    } else {
+      return;
+    }
+  }
 }

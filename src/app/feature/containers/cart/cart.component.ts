@@ -27,7 +27,7 @@ export class CartComponent implements OnInit {
   isHandset: boolean;
   quantityValue = 1;
   cartProducts = [];
-  totalAmount = 0;
+  subTotal = 0;
   cartProductsLength: number;
   isProductFetching: boolean;
   spinner = 'assets/image/spinner.gif';
@@ -62,14 +62,14 @@ export class CartComponent implements OnInit {
 
   getCartProducts() {
     this.isProductFetching = true;
-    this.apiService.getCartProduct().subscribe(
+    this.apiService.getCartProduct(false, null).subscribe(
       (payload: any) => {
-        this.cartProducts = payload;
+        this.cartProducts = payload.products;
         this.cartProductsLength = 0;
         this.emptyCart = this.cartProducts.length === 0;
-        this.totalAmount = 0;
-        this.getSubTotal();
+        this.subTotal = payload.order.sub_total;
         this.isCartLoading = false;
+        this.isProductFetching = false;
       },
       (error: any) => {
         this.isCartLoading = false;
@@ -87,8 +87,9 @@ export class CartComponent implements OnInit {
 
   increaseQuantity(product, quantity) {
     const postData = {
-      product_sku: product,
-      count: quantity
+      product_sku: product.product_sku,
+      count: quantity,
+      parent_sku: product.parent_sku
     };
     this.apiService.addCartProduct(postData).subscribe(
       (payload: any) => {
@@ -102,8 +103,9 @@ export class CartComponent implements OnInit {
 
   decreaseQuantity(product, quantity) {
     const postData = {
-      product_sku: product,
-      count: quantity
+      product_sku: product.product_sku,
+      count: quantity,
+      parent_sku: product.parent_sku
     };
     this.apiService.removeCartProduct(postData).subscribe(
       (payload: any) => {
@@ -113,15 +115,6 @@ export class CartComponent implements OnInit {
         console.log(error);
       }
     );
-  }
-
-  getSubTotal() {
-    for (const product of this.cartProducts) {
-      this.totalAmount =
-        this.totalAmount + product.retail_price * product.count;
-      this.cartProductsLength = this.cartProductsLength + product.count;
-    }
-    this.isProductFetching = false;
   }
 
   removeProduct(product, quantity) {

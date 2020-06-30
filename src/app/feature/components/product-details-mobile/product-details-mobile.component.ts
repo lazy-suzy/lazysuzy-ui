@@ -62,6 +62,7 @@ export class ProductDetailsMobileComponent implements OnInit {
   isSetItemInInventory = false;
   eventSubscription: Subscription;
   activeProduct: IActiveProduct;
+  hasSelection: boolean;
   constructor(
     private router: Router,
     private activeRoute: ActivatedRoute,
@@ -133,11 +134,15 @@ export class ProductDetailsMobileComponent implements OnInit {
           a.name > b.name ? 1 : -1
         );
         if (this.product.in_inventory) {
-          this.productPrice = this.product.inventory_product_details.price;
-          this.productWasPrice = this.product.inventory_product_details.was_price;
+          this.productPrice = this.utils.formatPrice(
+            this.product.inventory_product_details.price
+          );
+          this.productWasPrice = this.utils.formatPrice(
+            this.product.inventory_product_details.was_price
+          );
         } else {
-          this.productPrice = this.product.is_price;
-          this.productWasPrice = this.product.was_price;
+          this.productPrice = this.utils.formatPrice(this.product.is_price);
+          this.productWasPrice = this.utils.formatPrice(this.product.was_price);
         }
         this.items = this.product.on_server_images.map(
           (item) => new ImageItem({ src: item })
@@ -212,6 +217,7 @@ export class ProductDetailsMobileComponent implements OnInit {
       const image = new ImageItem({ src });
       this.items.splice(0, 0, image);
       this.updateActiveProduct(variation);
+      this.hasSelection = true;
     } else {
       this.updateActiveProduct(this.product);
       this.hasVariationsInventory();
@@ -219,19 +225,19 @@ export class ProductDetailsMobileComponent implements OnInit {
     this.galleryRef.load(this.items);
   }
   onSetPrice(priceData): void {
-    this.productPrice = priceData.price || this.product.is_price;
-    this.productWasPrice = priceData.wasPrice || this.product.was_price;
+    this.productPrice = this.utils.formatPrice(
+      priceData.price || this.product.is_price
+    );
+    this.productWasPrice = this.utils.formatPrice(
+      priceData.wasPrice || this.product.was_price
+    );
   }
   openCartModal() {
     if (
       !this.product.in_inventory &&
       !this.activeProduct.inventory_product_details.price
     ) {
-      this.errorMessage = 'Please select a variation';
-      const self = this;
-      setTimeout(() => {
-        self.errorMessage = '';
-      }, 3000);
+      this.hasSelection = false;
     } else {
       const data = {
         sku: this.productSku,
@@ -243,7 +249,8 @@ export class ProductDetailsMobileComponent implements OnInit {
       };
       const postData = {
         product_sku: this.productSku,
-        count: this.quantity
+        count: this.quantity,
+        parent_sku: this.product.sku
       };
       this.apiService.addCartProduct(postData).subscribe(
         (payload: any) => {

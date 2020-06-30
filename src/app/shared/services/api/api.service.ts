@@ -324,8 +324,8 @@ export class ApiService {
     return this.httpService.post(url, data, headers);
   }
 
-  getCartProduct() {
-    const endpoint = 'cart';
+  getCartProduct(hasState, state) {
+    const endpoint = hasState ? `cart?state_code=${state}` : 'cart';
     const token = this.cookie.get('token');
     const headers = new HttpHeaders({
       'Content-Type': 'application/json',
