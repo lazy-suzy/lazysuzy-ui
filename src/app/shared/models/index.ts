@@ -7,3 +7,4 @@ export * from './all-department.interface';
 export * from './profile.interface';
 export * from './display-profile.interface';
 export * from './activeProduct.interface';
+export * from './order-amount.interface';

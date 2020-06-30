@@ -21,7 +21,7 @@ import {
   Breakpoints,
   BreakpointObserver
 } from '@angular/cdk/layout';
-
+import { IOrderAmount } from '../../../shared/models';
 @Component({
   selector: 'app-payment',
   templateUrl: './payment.component.html',
@@ -88,7 +88,7 @@ export class PaymentComponent implements OnInit {
   isLoading = true;
   localStorageUser = {};
   eventSubscription: Subscription;
-  orderAmount = {};
+  orderAmount: IOrderAmount;
   constructor(
     private fb: FormBuilder,
     private stripeService: StripeService,
