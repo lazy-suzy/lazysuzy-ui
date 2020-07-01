@@ -89,6 +89,7 @@ export class PaymentComponent implements OnInit {
   localStorageUser = {};
   eventSubscription: Subscription;
   orderAmount: IOrderAmount;
+  isStateUpdating: boolean;
   constructor(
     private fb: FormBuilder,
     private stripeService: StripeService,
@@ -218,6 +219,7 @@ export class PaymentComponent implements OnInit {
               (payload: any) => {
                 this.isPaymentExecuting = false;
                 if (payload.status === 'succeeded') {
+                  localStorage.setItem('cart', '0');
                   this.router.navigate([`order/${payload.order_id}`]);
                 } else {
                   this.isRequiredFieldsPresent = false;
@@ -302,6 +304,17 @@ export class PaymentComponent implements OnInit {
   }
 
   shippingStateChanged() {
-    this.getCartProducts(true, this.customerData.shipping_state);
+    this.isStateUpdating = true;
+    this.apiService
+      .getCartProduct(true, this.customerData.shipping_state)
+      .subscribe(
+        (payload: any) => {
+          this.orderAmount = payload.order;
+          this.isStateUpdating = false;
+        },
+        (error: any) => {
+          console.log(error);
+        }
+      );
   }
 }

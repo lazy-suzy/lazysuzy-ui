@@ -62,10 +62,7 @@
         <div>Shipping</div>
         <div>${{ orderAmount.shipment_total | number: '1.2-2' }}</div>
       </div>
-      <div
-        class="flex justify-between pv2"
-        *ngIf="orderAmount.sales_tax_total > 0"
-      >
+      <div class="flex justify-between pv2">
         <div>Tax</div>
         <div>${{ orderAmount.sales_tax_total | number: '1.2-2' }}</div>
       </div>

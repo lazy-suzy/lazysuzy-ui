@@ -8,7 +8,8 @@ import {
 import {
   ApiService,
   MatDialogUtilsService,
-  EventEmitterService
+  EventEmitterService,
+  UtilsService
 } from 'src/app/shared/services';
 import { Router } from '@angular/router';
 
@@ -40,7 +41,8 @@ export class CartComponent implements OnInit {
     private apiService: ApiService,
     private matDialogUtils: MatDialogUtilsService,
     private router: Router,
-    private eventEmitterService: EventEmitterService
+    private eventEmitterService: EventEmitterService,
+    private utils: UtilsService
   ) {}
 
   ngOnInit(): void {
@@ -94,6 +96,7 @@ export class CartComponent implements OnInit {
     this.apiService.addCartProduct(postData).subscribe(
       (payload: any) => {
         this.getCartProducts();
+        this.utils.updateLocalCart(quantity);
       },
       (error: any) => {
         console.log(error);
@@ -110,6 +113,7 @@ export class CartComponent implements OnInit {
     this.apiService.removeCartProduct(postData).subscribe(
       (payload: any) => {
         this.getCartProducts();
+        this.utils.updateLocalCart(-quantity);
       },
       (error: any) => {
         console.log(error);

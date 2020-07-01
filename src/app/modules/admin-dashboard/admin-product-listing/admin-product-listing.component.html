@@ -34,19 +34,19 @@
           <div>
             <img [src]="variation.url || 'https://via.placeholder.com/150'" />
           </div>
-          <mat-form-field>
-            <mat-select
-              [(value)]="variation.btag"
-              placeholder="Board Tag"
-              (selectionChange)="
-                handleTagChange(product.sku, variation.url, $event.value)
-              "
+          <label>Board Tag</label> <br />
+          <mat-radio-group
+            aria-labelledby="board-tag-label"
+            [(ngModel)]="variation.btag"
+            (change)="handleTagChange(product.sku, variation.url, $event.value)"
+          >
+            <mat-radio-button
+              *ngFor="let board of allBoards"
+              [value]="board.value"
             >
-              <mat-option *ngFor="let board of allBoards" [value]="board.value">
-                {{ board.viewValue }}
-              </mat-option>
-            </mat-select>
-          </mat-form-field>
+              {{ board.viewValue }}
+            </mat-radio-button>
+          </mat-radio-group>
         </mat-card-content>
       </mat-card>
     </div>

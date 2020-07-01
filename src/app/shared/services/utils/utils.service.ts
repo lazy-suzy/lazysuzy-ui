@@ -99,4 +99,16 @@ export class UtilsService {
       return;
     }
   }
+
+  updateLocalCart(quantityChange) {
+    // tslint:disable-next-line: radix
+    const localCartData = parseInt(localStorage.getItem('cart'));
+    let quantity = quantityChange;
+    if (typeof quantityChange === 'string') {
+      // tslint:disable-next-line: radix
+      quantity = parseInt(quantityChange);
+    }
+    const updateCartTotal = localCartData + quantity;
+    localStorage.setItem('cart', updateCartTotal.toString());
+  }
 }

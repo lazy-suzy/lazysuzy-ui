@@ -12,11 +12,13 @@ export class ConfirmCartProductComponent implements OnInit {
   product: any = {};
   constructor(
     @Inject(MAT_DIALOG_DATA) public data: any,
-    private router: Router
+    private router: Router,
+    private utils: UtilsService
   ) {}
 
   ngOnInit() {
     this.product = this.data;
+    this.utils.updateLocalCart(this.product.quantity);
   }
 
   closeAllDialogs() {

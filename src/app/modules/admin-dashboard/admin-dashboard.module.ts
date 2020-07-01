@@ -7,6 +7,7 @@ import {
   MatInputModule,
   MatIconModule,
   MatButtonModule,
+  MatRadioModule
 } from '@angular/material';
 import { ProductCustomiseComponent } from './product-customise/product-customise.component';
 import { AdminDasboardRoutingModule } from './admin-dashboard-routing.module';
@@ -14,7 +15,7 @@ import { AdminDashboardComponent } from './admin-dashboard/admin-dashboard.compo
 import { AdminProductListingComponent } from './admin-product-listing/admin-product-listing.component';
 import {
   ProductFiltersModule,
-  SortTypeModule,
+  SortTypeModule
 } from './../../../app/feature/components';
 import { InfiniteScrollModule } from 'ngx-infinite-scroll';
 
@@ -31,13 +32,14 @@ import { InfiniteScrollModule } from 'ngx-infinite-scroll';
     ProductFiltersModule,
     SortTypeModule,
     InfiniteScrollModule,
+    MatRadioModule
   ],
   declarations: [
     AdminDashboardComponent,
     ProductCustomiseComponent,
-    AdminProductListingComponent,
+    AdminProductListingComponent
   ],
   entryComponents: [],
-  providers: [],
+  providers: []
 })
 export class AdminDashboardModule {}

@@ -1,4 +1,4 @@
-<div class="container flex-ns">
+<div class="container flex-ns" *ngIf="!isLoading">
   <div class="w-30-ns w-100 pa2 mh5-ns mv3" *ngIf="isHandset">
     <div class="order-summary-card">
       <div class="order-details section-border">
@@ -36,10 +36,7 @@
           >
           <span>${{ orderAmount.shipment_total | number: '1.2-2' }}</span>
         </div>
-        <div
-          class="flex justify-between pb3"
-          *ngIf="customerData.shipping_state"
-        >
+        <div class="flex justify-between pb3">
           <span>Tax</span>
           <span>${{ orderAmount.sales_tax_total | number: '1.2-2' }}</span>
         </div>
@@ -720,10 +717,7 @@
           >
           <span>${{ orderAmount.shipment_total | number: '1.2-2' }}</span>
         </div>
-        <div
-          class="flex justify-between pb3"
-          *ngIf="customerData.shipping_state"
-        >
+        <div class="flex justify-between pb3">
           <span>Tax</span>
           <span>${{ orderAmount.sales_tax_total | number: '1.2-2' }}</span>
         </div>
@@ -735,4 +729,4 @@
     </div>
   </div>
 </div>
-<img *ngIf="isLoading" [src]="spinner" class="loader" />
+<img *ngIf="isLoading || isStateUpdating" [src]="spinner" class="loader" />

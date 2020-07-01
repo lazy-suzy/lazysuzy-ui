@@ -54,7 +54,6 @@ export class AuthComponent implements OnInit {
   }
 
   ngOnInit() {
-    // localStorage.setItem('cart', '0');
     if (this.initialized === false) {
       this.eventEmitterService.invokeFetchUser.subscribe((payload) => {
         this.cookie.set(
@@ -88,6 +87,7 @@ export class AuthComponent implements OnInit {
           this.hasPicture =
             user.picture && user.picture !== 'null' ? true : false;
           this.initialized = true;
+          localStorage.setItem('cart', '0');
         });
     }
     this.resolveUser();
