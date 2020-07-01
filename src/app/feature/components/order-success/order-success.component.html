@@ -1,4 +1,4 @@
-<div class="pv4-ns ph6-ns pa2 tc">
+<div class="pv4-ns ph6-ns pa2 tc" *ngIf="!isLoading">
   <div class="pink-font ml3-ns b pb2-ns pv2">
     THANKS FOR YOUR ORDER!
   </div>
@@ -41,7 +41,7 @@
       </div>
     </div>
     <div class="order-products pb4 section">
-      <div class="pv3">{{ cartProductsLength }} Items</div>
+      <div class="pv3">{{ cartProducts.length }} Items</div>
       <div class="flex-ns">
         <div class="w-33-ns pv2 blue-font" *ngFor="let item of cartProducts">
           <img [src]="item.image" />
@@ -56,19 +56,22 @@
     <div class="order-pricing section mb3">
       <div class="flex justify-between pv3">
         <div class="b">SUBTOTAL</div>
-        <div class="b">${{ subTotalAmount | number: '1.2-2' }}</div>
+        <div class="b">${{ orderAmount.sub_total | number: '1.2-2' }}</div>
       </div>
       <div class="flex justify-between pv2">
         <div>Shipping</div>
-        <div>${{ totalShippingCharge | number: '1.2-2' }}</div>
+        <div>${{ orderAmount.shipment_total | number: '1.2-2' }}</div>
       </div>
-      <!-- <div class="flex justify-between pv2">
-                <div>Tax</div>
-                <div>$40</div>
-            </div> -->
+      <div
+        class="flex justify-between pv2"
+        *ngIf="orderAmount.sales_tax_total > 0"
+      >
+        <div>Tax</div>
+        <div>${{ orderAmount.sales_tax_total | number: '1.2-2' }}</div>
+      </div>
       <div class="flex justify-between pink-font b pv3">
         <div>TOTAL</div>
-        <div>${{ totalAmount | number: '1.2-2' }}</div>
+        <div>${{ orderAmount.total_cost | number: '1.2-2' }}</div>
       </div>
     </div>
     <div class="order-details section">
@@ -120,3 +123,4 @@
     </div>
   </div>
 </div>
+<img *ngIf="isLoading" [src]="spinner" class="loader" />

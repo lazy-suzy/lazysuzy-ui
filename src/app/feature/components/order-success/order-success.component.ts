@@ -4,6 +4,8 @@ import moment from 'moment';
 import { Router, ActivatedRoute } from '@angular/router';
 import { EventEmitterService } from 'src/app/shared/services';
 import { Subscription } from 'rxjs';
+import { IOrderAmount } from '../../../shared/models';
+
 @Component({
   selector: 'app-order-success',
   templateUrl: './order-success.component.html',
@@ -26,6 +28,9 @@ export class OrderSuccessComponent implements OnInit {
   isLoggedIn: boolean;
   showSuccess: boolean;
   eventSubscription: Subscription;
+  orderAmount: IOrderAmount;
+  isLoading: boolean;
+  spinner = 'assets/image/spinner.gif';
   constructor(
     private apiService: ApiService,
     private router: Router,
@@ -34,6 +39,7 @@ export class OrderSuccessComponent implements OnInit {
   ) {}
 
   ngOnInit() {
+    this.isLoading = true;
     this.routeSubscription = this.activeRoute.params.subscribe(
       (routeParams) => {
         this.orderId = routeParams.order;
@@ -45,18 +51,18 @@ export class OrderSuccessComponent implements OnInit {
         this.isLoggedIn = user.user_type === 1;
         this.apiService.getOrderSuccessData(this.orderId).subscribe(
           (payload: any) => {
-            this.cartProducts = payload.cart;
+            this.cartProducts = payload.cart.products;
+            this.orderAmount = payload.cart.order;
             this.deliveryData = payload.delivery;
             this.cardDetails = payload.payment.card;
             this.orderDate = moment(payload.delivery[0].created_at).format(
               'D MMM, YYYY'
             );
-            this.cartProductsLength = 0;
-            this.subTotalAmount = 0;
-            this.calculateCartData();
+            this.isLoading = false;
           },
           (error: any) => {
             console.log(error);
+            this.isLoading = false;
           }
         );
       });
@@ -64,14 +70,7 @@ export class OrderSuccessComponent implements OnInit {
   onDestroy(): void {
     this.eventSubscription.unsubscribe();
   }
-  calculateCartData() {
-    for (const product of this.cartProducts) {
-      this.subTotalAmount = this.subTotalAmount + product.price * product.count;
-      this.cartProductsLength = this.cartProductsLength + product.count;
-      this.totalShippingCharge += product.count * product.ship_custom;
-    }
-    this.totalAmount = this.subTotalAmount + this.totalShippingCharge;
-  }
+
   updatePassword() {
     if (this.password && this.password.length < 8) {
       this.showError = true;
