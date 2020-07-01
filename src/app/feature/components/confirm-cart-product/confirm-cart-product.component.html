@@ -18,7 +18,9 @@
           <div class="product-brand" *ngIf="product.quantity > 1">
             Items in Cart: {{ product.quantity }}
           </div>
-          <div class="product-brand font-size-20 b">${{ product.total }}</div>
+          <div class="product-brand font-size-20 b">
+            ${{ product.total | number: '1.2-2' }}
+          </div>
         </div>
       </div>
     </div>
