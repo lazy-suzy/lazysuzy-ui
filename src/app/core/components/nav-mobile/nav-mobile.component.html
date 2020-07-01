@@ -111,6 +111,8 @@
       <span class="flex items-center header-link">
         <mat-icon
           class="account-icon"
+          [matBadge]="cartProduct > 0 ? cartProduct : null"
+          matBadgeColor="warn"
           aria-hidden="false"
           [routerLink]="['/cart']"
           >shopping_cart</mat-icon

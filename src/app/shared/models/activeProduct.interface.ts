@@ -1,6 +1,7 @@
 export interface IActiveProduct {
   sku: string;
   in_inventory: boolean;
+  name: string;
   inventory_product_details: {
     price: number;
     count: number;

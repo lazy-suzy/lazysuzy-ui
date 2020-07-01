@@ -27,6 +27,7 @@ export class NavMobileComponent implements OnInit {
   checkHomeRoute: Subscription;
   hideBar = false;
   eventSubscription: Subscription;
+  cartProduct: number;
 
   constructor(
     private apiService: ApiService,
@@ -53,6 +54,12 @@ export class NavMobileComponent implements OnInit {
     this.eventSubscription = this.eventEmitterService.userChangeEvent
       .asObservable()
       .subscribe((user) => {
+        this.eventEmitterService.updateCart.subscribe((payload) => {
+          // tslint:disable-next-line: radix
+          this.cartProduct = parseInt(localStorage.getItem('cart'));
+        });
+        // tslint:disable-next-line: radix
+        this.cartProduct = parseInt(localStorage.getItem('cart'));
         this.getDepartments();
         this.router.events.subscribe((res) => {
           const orderRoute = this.router.url.slice(1, 6);

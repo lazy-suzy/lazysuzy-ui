@@ -1,6 +1,10 @@
 import { Component, OnInit, Inject } from '@angular/core';
 import { MAT_DIALOG_DATA } from '@angular/material/dialog';
-import { ApiService, UtilsService } from 'src/app/shared/services';
+import {
+  ApiService,
+  UtilsService,
+  EventEmitterService
+} from 'src/app/shared/services';
 import { Router } from '@angular/router';
 
 @Component({
@@ -13,12 +17,14 @@ export class ConfirmCartProductComponent implements OnInit {
   constructor(
     @Inject(MAT_DIALOG_DATA) public data: any,
     private router: Router,
-    private utils: UtilsService
+    private utils: UtilsService,
+    private eventEmitterService: EventEmitterService
   ) {}
 
   ngOnInit() {
     this.product = this.data;
     this.utils.updateLocalCart(this.product.quantity);
+    this.eventEmitterService.updateCartIcon();
   }
 
   closeAllDialogs() {

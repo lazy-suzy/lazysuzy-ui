@@ -9,6 +9,7 @@ export class EventEmitterService {
   invokeFetchUser = new EventEmitter();
   invokeSocialLogin = new EventEmitter();
   userTransitionEvent = new EventEmitter();
+  updateCart = new EventEmitter();
   userChangeEvent = new ReplaySubject<any>(1);
   private assetsData = new BehaviorSubject('');
   assets = this.assetsData.asObservable();
@@ -44,5 +45,9 @@ export class EventEmitterService {
 
   updateAssets(item: any) {
     this.assetsData.next(item);
+  }
+
+  updateCartIcon() {
+    this.updateCart.emit();
   }
 }

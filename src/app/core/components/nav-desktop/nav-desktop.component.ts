@@ -27,7 +27,7 @@ export class NavDesktopComponent implements OnInit {
   email: any;
   password: any;
   hideBar = false;
-
+  cartProduct: number;
   constructor(
     private router: Router,
     private location: Location,
@@ -50,6 +50,12 @@ export class NavDesktopComponent implements OnInit {
     this.eventSubscription = this.eventEmitterService.userChangeEvent
       .asObservable()
       .subscribe((user) => {
+        this.eventEmitterService.updateCart.subscribe((payload) => {
+          // tslint:disable-next-line: radix
+          this.cartProduct = parseInt(localStorage.getItem('cart'));
+        });
+        // tslint:disable-next-line: radix
+        this.cartProduct = parseInt(localStorage.getItem('cart'));
         this.getDepartments();
         this.router.events.subscribe((res) => {
           const orderRoute = this.router.url.slice(1, 6);

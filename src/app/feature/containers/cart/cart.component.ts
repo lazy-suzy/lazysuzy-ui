@@ -97,6 +97,7 @@ export class CartComponent implements OnInit {
       (payload: any) => {
         this.getCartProducts();
         this.utils.updateLocalCart(quantity);
+        this.eventEmitterService.updateCartIcon();
       },
       (error: any) => {
         console.log(error);
@@ -114,6 +115,7 @@ export class CartComponent implements OnInit {
       (payload: any) => {
         this.getCartProducts();
         this.utils.updateLocalCart(-quantity);
+        this.eventEmitterService.updateCartIcon();
       },
       (error: any) => {
         console.log(error);
@@ -135,8 +137,12 @@ export class CartComponent implements OnInit {
     }
   }
 
-  openProductDetail(sku) {
-    this.matDialogUtils.openMatDialog(sku);
+  openProductDetail(product) {
+    if (product.parent_sku) {
+      this.matDialogUtils.openMatDialog(product.parent_sku);
+    } else {
+      this.matDialogUtils.openMatDialog(product.product_sku);
+    }
   }
 
   openProductPage(sku) {

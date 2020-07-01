@@ -240,10 +240,13 @@ export class ProductDetailsMobileComponent implements OnInit {
       this.hasSelection = false;
     } else {
       const data = {
-        sku: this.productSku,
+        sku: this.activeProduct.sku,
         brand: this.product.site,
         image: this.items[0].data.src,
-        name: this.product.name,
+        name:
+          this.activeProduct.sku === this.product.sku
+            ? this.activeProduct.name
+            : this.product.name + ' ' + this.activeProduct.name,
         price: this.productPrice,
         quantity: this.quantity
       };
@@ -279,6 +282,7 @@ export class ProductDetailsMobileComponent implements OnInit {
     this.activeProduct = {
       sku: product.variation_sku ? product.variation_sku : product.sku,
       in_inventory: product.in_inventory,
+      name: product.name,
       inventory_product_details: product.inventory_product_details
         ? product.inventory_product_details
         : []

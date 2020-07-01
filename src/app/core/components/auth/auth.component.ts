@@ -87,7 +87,9 @@ export class AuthComponent implements OnInit {
           this.hasPicture =
             user.picture && user.picture !== 'null' ? true : false;
           this.initialized = true;
-          localStorage.setItem('cart', '0');
+          if (!localStorage.getItem('cart')) {
+            localStorage.setItem('cart', '0');
+          }
         });
     }
     this.resolveUser();
@@ -140,6 +142,7 @@ export class AuthComponent implements OnInit {
     this.apiService.signout().subscribe((payload: any) => {
       this.cookie.delete('token');
       localStorage.removeItem('user');
+      localStorage.removeItem('cart');
       this.checkIfGuestIsValid();
     });
   }
