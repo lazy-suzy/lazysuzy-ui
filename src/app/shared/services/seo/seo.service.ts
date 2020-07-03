@@ -38,7 +38,7 @@ export class SeoService {
       head.appendChild(element);
     }
     element.setAttribute('rel', 'canonical');
-    // element.setAttribute('href', url);
+    element.setAttribute('href', url);
   }
 
   setSchema(data) {
