@@ -6,7 +6,8 @@ import {
   UtilsService,
   CacheService,
   EventEmitterService,
-  MatDialogUtilsService
+  MatDialogUtilsService,
+  SeoService
 } from 'src/app/shared/services';
 import { Observable, Subscription } from 'rxjs';
 import {
@@ -63,6 +64,7 @@ export class ProductDetailsMobileComponent implements OnInit {
   eventSubscription: Subscription;
   activeProduct: IActiveProduct;
   hasSelection: boolean;
+  schema = {};
   constructor(
     private router: Router,
     private activeRoute: ActivatedRoute,
@@ -73,7 +75,8 @@ export class ProductDetailsMobileComponent implements OnInit {
     public lightbox: Lightbox,
     public cacheService: CacheService,
     private eventEmitterService: EventEmitterService,
-    private matDialogUtils: MatDialogUtilsService
+    private matDialogUtils: MatDialogUtilsService,
+    private seoService: SeoService
   ) {}
 
   ngOnInit() {
@@ -102,6 +105,7 @@ export class ProductDetailsMobileComponent implements OnInit {
       .getProduct(this.productSku)
       .subscribe((payload: IProductDetail) => {
         this.product = payload;
+        this.schema = this.seoService.setSchema(this.product);
         this.updateActiveProduct(this.product);
         this.description = this.utils.compileMarkdown(this.product.description);
         this.features = this.utils.compileMarkdown(

@@ -1,4 +1,5 @@
 <img *ngIf="isProductFetching" [src]="spinner" class="loader" />
+<ngx-json-ld [json]="schema"></ngx-json-ld>
 <ng-container *ngIf="!isProductFetching && product">
   <div class="images-container" #gallery>
     <div class="images">

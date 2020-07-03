@@ -18,7 +18,8 @@ import {
   ApiService,
   MatDialogUtilsService,
   CacheService,
-  EventEmitterService
+  EventEmitterService,
+  SeoService
 } from './../../../shared/services';
 import { SCROLL_ICON_SHOW_DURATION } from './../../../shared/constants';
 import { Router, ActivatedRoute } from '@angular/router';
@@ -83,7 +84,8 @@ export class ProductsComponent implements OnInit {
     private breakpointObserver: BreakpointObserver,
     private matDialogUtils: MatDialogUtilsService,
     public cacheService: CacheService,
-    private eventEmitterService: EventEmitterService
+    private eventEmitterService: EventEmitterService,
+    private seoService: SeoService
   ) {}
 
   ngOnInit(): void {
@@ -182,6 +184,8 @@ export class ProductsComponent implements OnInit {
     this.productsSubscription = this.apiService
       .getProducts(this.department, this.category, this.filters, this.sortType)
       .subscribe((payload: IProductsPayload) => {
+        this.seoService.setMetaTags(payload.seo_data);
+        this.seoService.setCanonicalURL();
         this.categoryTitle = payload.seo_data.page_title;
         this.emailTitle = payload.seo_data.email_title;
         this.products = payload.products;

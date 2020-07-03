@@ -9,7 +9,7 @@ import {
   Breakpoints,
   BreakpointObserver
 } from '@angular/cdk/layout';
-import { ApiService } from 'src/app/shared/services';
+import { ApiService, MatDialogUtilsService } from 'src/app/shared/services';
 
 @Component({
   selector: 'app-search-product',
@@ -29,7 +29,8 @@ export class SearchProductComponent implements OnInit {
     public dialog: MatDialog,
     private breakpointObserver: BreakpointObserver,
     private apiService: ApiService,
-    private router: Router
+    private router: Router,
+    private matDialogUtils: MatDialogUtilsService
   ) {}
 
   ngOnInit(): void {
@@ -64,13 +65,7 @@ export class SearchProductComponent implements OnInit {
     if (this.isHandset) {
       this.router.navigateByUrl(`/product/${this.product.product_sku}`);
     } else {
-      const dialogRef = this.dialog.open(ProductDetailsComponent, {
-        width: '80%',
-        height: '80%',
-        data: { sku: this.product.product_sku }
-      });
-
-      dialogRef.afterClosed().subscribe((result) => {});
+      this.matDialogUtils.openMatDialog(this.product.product_sku);
     }
   }
 

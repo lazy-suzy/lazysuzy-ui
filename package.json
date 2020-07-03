@@ -25,6 +25,7 @@
     "@ng-bootstrap/ng-bootstrap": "^6.0.0",
     "@ngx-gallery/core": "^5.0.0-beta.0",
     "@ngx-gallery/lightbox": "^5.0.0-beta.0",
+    "@ngx-lite/json-ld": "^0.6.2",
     "@simonwep/pickr": "1.4.5",
     "@types/dropzone": "^5.5.2",
     "@types/owl.carousel": "^2.3.1",

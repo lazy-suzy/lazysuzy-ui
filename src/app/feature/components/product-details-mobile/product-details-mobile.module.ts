@@ -7,6 +7,7 @@ import { ProductDetailsMobileComponent } from './product-details-mobile.componen
 import { VariationsModule } from '../variations/variations.module';
 import { RedirectModule } from '../redirect/redirect.module';
 import { FormsModule } from '@angular/forms';
+import { NgxJsonLdModule } from '@ngx-lite/json-ld';
 
 const DECLARATIONS = [ProductDetailsMobileComponent];
 
@@ -17,7 +18,8 @@ const MODULES = [
   MatButtonModule,
   VariationsModule,
   RedirectModule,
-  FormsModule
+  FormsModule,
+  NgxJsonLdModule
 ];
 
 @NgModule({

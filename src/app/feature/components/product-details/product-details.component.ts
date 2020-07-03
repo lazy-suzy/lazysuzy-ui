@@ -16,7 +16,8 @@ import {
   ApiService,
   UtilsService,
   EventEmitterService,
-  MatDialogUtilsService
+  MatDialogUtilsService,
+  SeoService
 } from 'src/app/shared/services';
 import { Gallery, GalleryItem, ImageItem } from '@ngx-gallery/core';
 import { Lightbox } from '@ngx-gallery/lightbox';
@@ -67,6 +68,7 @@ export class ProductDetailsComponent implements OnInit {
   localStorageUser = {};
   activeProduct: IActiveProduct;
   hasSelection: boolean;
+  schema = {};
   constructor(
     @Inject(MAT_DIALOG_DATA) public data: any,
     private apiService: ApiService,
@@ -74,7 +76,8 @@ export class ProductDetailsComponent implements OnInit {
     public gallery: Gallery,
     public lightbox: Lightbox,
     private eventEmitterService: EventEmitterService,
-    private matDialogUtils: MatDialogUtilsService
+    private matDialogUtils: MatDialogUtilsService,
+    private seoService: SeoService
   ) {}
 
   ngOnInit(): void {
@@ -87,6 +90,7 @@ export class ProductDetailsComponent implements OnInit {
           .getProduct(this.data.sku)
           .subscribe((payload: IProductDetail) => {
             this.product = payload;
+            this.schema = this.seoService.setSchema(this.product);
             this.updateActiveProduct(this.product);
             this.items = this.product.on_server_images.map(
               (item) => new ImageItem({ src: item })

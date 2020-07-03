@@ -61,7 +61,9 @@
                   {{ product.product_name }}
                 </div>
                 <div class="gray-font fs14">by {{ product.site }}</div>
-                <div class="pink-font b">${{ product.retail_price }}</div>
+                <div class="pink-font b">
+                  ${{ product.retail_price | number: '1.2-2' }}
+                </div>
               </div>
             </div>
             <div class="flex pt3">

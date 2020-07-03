@@ -17,6 +17,7 @@ import { MarkdownModule } from 'ngx-markdown';
 import { EventEmitterService, MatDialogUtilsService } from './shared/services';
 import { NgxStripeModule } from 'ngx-stripe';
 import { environment as env } from 'src/environments/environment';
+import { NgxJsonLdModule } from '@ngx-lite/json-ld';
 
 const MODULES = [
   BrowserModule,
@@ -31,7 +32,8 @@ const MODULES = [
   GalleryModule,
   LightboxModule,
   MarkdownModule.forRoot(),
-  NgxStripeModule.forRoot(env.STRIPE_API_KEY)
+  NgxStripeModule.forRoot(env.STRIPE_API_KEY),
+  NgxJsonLdModule
 ];
 
 @NgModule({
