@@ -17,7 +17,7 @@ export class SeoService {
 
   setMetaTags(data) {
     const logoPath = 'assets/image/color_logo_transparent.png';
-    this.titleService.setTitle(data.page_title || 'LazySuzy');
+    this.titleService.setTitle(data.full_title || 'LazySuzy');
     this.metaService.updateTag({
       name: 'description',
       content: data.description || `Search America's top Home brands in one go`
