@@ -29,9 +29,6 @@ export class SeoService {
   setMetaTags(data) {
     const url = env.BASE_HREF + this.router.url.split('?')[0];
     const logoPath = 'assets/image/color_logo_transparent.png';
-<<<<<<< HEAD
-    this.titleService.setTitle(data.full_title || 'LazySuzy');
-=======
     const metaData = {
       TITLE: data.full_title || 'LazySuzy',
       IMAGE: data.image_url || logoPath,
@@ -52,7 +49,6 @@ export class SeoService {
       property: this.metaTags.OG_TITLE,
       content: metaData.TITLE
     });
->>>>>>> shadow
     this.metaService.updateTag({
       name: this.metaTags.OG_DESCRIPTION,
       content: metaData.DESCRIPTION
