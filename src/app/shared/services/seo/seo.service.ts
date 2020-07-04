@@ -1,4 +1,4 @@
-import { Injectable, Inject } from '@angular/core';
+import { Injectable, Inject, OnInit } from '@angular/core';
 import { environment as env } from 'src/environments/environment';
 import { Title, Meta } from '@angular/platform-browser';
 import { DOCUMENT } from '@angular/common';
@@ -8,6 +8,17 @@ import { Router } from '@angular/router';
   providedIn: 'root'
 })
 export class SeoService {
+  metaTags: {
+    DESCRIPTION: 'description';
+    IMAGE: 'image,';
+    OG_TITLE: 'og:title';
+    OG_DESCRIPTION: 'og:description';
+    OG_IMAGE: 'og:image';
+    OG_URL: 'og:url';
+    SECURE_IMAGE: 'og:image:secure_url';
+    TWITTER_TITLE: 'twitter:text:title';
+    TWITTER_IMAGE: 'twitter:image';
+  };
   constructor(
     private titleService: Title,
     private metaService: Meta,
@@ -16,15 +27,51 @@ export class SeoService {
   ) {}
 
   setMetaTags(data) {
+    const url = env.BASE_HREF + this.router.url.split('?')[0];
     const logoPath = 'assets/image/color_logo_transparent.png';
+<<<<<<< HEAD
     this.titleService.setTitle(data.full_title || 'LazySuzy');
+=======
+    const metaData = {
+      TITLE: data.full_title || 'LazySuzy',
+      IMAGE: data.image_url || logoPath,
+      DESCRIPTION:
+        data.description || `Search America's top Home brands in one go`,
+      URL: url
+    };
+    this.titleService.setTitle(metaData.TITLE);
     this.metaService.updateTag({
-      name: 'description',
-      content: data.description || `Search America's top Home brands in one go`
+      name: this.metaTags.DESCRIPTION,
+      content: metaData.DESCRIPTION
     });
     this.metaService.updateTag({
-      name: 'image',
-      content: data.image_url || logoPath
+      name: this.metaTags.IMAGE,
+      content: metaData.IMAGE
+    });
+    this.metaService.updateTag({
+      property: this.metaTags.OG_TITLE,
+      content: metaData.TITLE
+    });
+>>>>>>> shadow
+    this.metaService.updateTag({
+      name: this.metaTags.OG_DESCRIPTION,
+      content: metaData.DESCRIPTION
+    });
+    this.metaService.updateTag({
+      name: this.metaTags.OG_IMAGE,
+      content: metaData.IMAGE
+    });
+    this.metaService.updateTag({
+      name: this.metaTags.OG_IMAGE,
+      content: metaData.URL
+    });
+    this.metaService.updateTag({
+      name: this.metaTags.TWITTER_TITLE,
+      content: metaData.TITLE
+    });
+    this.metaService.updateTag({
+      name: this.metaTags.TWITTER_IMAGE,
+      content: metaData.IMAGE
     });
   }
 
@@ -47,12 +94,15 @@ export class SeoService {
       '@type': 'Product',
       name: data.name,
       image: data.main_image,
-      ratingValue: data.rating,
-      reviewCount: data.reviews,
+      aggregateRating: {
+        '@type': 'AggregateRating',
+        ratingCount: data.reviews,
+        ratingValue: data.rating
+      },
       offers: {
         price: data.is_price,
         priceCurrency: '$',
-        availability: data.in_inventory
+        availability: data.in_inventory ? 'InStock' : 'OutOfStock'
       },
       description: data.description[0]
     };
