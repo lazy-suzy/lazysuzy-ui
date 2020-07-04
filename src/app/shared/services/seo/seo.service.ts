@@ -8,16 +8,16 @@ import { Router } from '@angular/router';
   providedIn: 'root'
 })
 export class SeoService {
-  metaTags: {
-    DESCRIPTION: 'description';
-    IMAGE: 'image,';
-    OG_TITLE: 'og:title';
-    OG_DESCRIPTION: 'og:description';
-    OG_IMAGE: 'og:image';
-    OG_URL: 'og:url';
-    SECURE_IMAGE: 'og:image:secure_url';
-    TWITTER_TITLE: 'twitter:text:title';
-    TWITTER_IMAGE: 'twitter:image';
+  metaTags = {
+    DESCRIPTION: 'description',
+    IMAGE: 'image,',
+    OG_TITLE: 'og:title',
+    OG_DESCRIPTION: 'og:description',
+    OG_IMAGE: 'og:image',
+    OG_URL: 'og:url',
+    SECURE_IMAGE: 'og:image:secure_url',
+    TWITTER_TITLE: 'twitter:text:title',
+    TWITTER_IMAGE: 'twitter:image'
   };
   constructor(
     private titleService: Title,
