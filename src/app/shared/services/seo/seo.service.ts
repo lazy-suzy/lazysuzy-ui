@@ -8,16 +8,17 @@ import { Router } from '@angular/router';
   providedIn: 'root'
 })
 export class SeoService {
-  metaTags: {
-    DESCRIPTION: 'description';
-    IMAGE: 'image,';
-    OG_TITLE: 'og:title';
-    OG_DESCRIPTION: 'og:description';
-    OG_IMAGE: 'og:image';
-    OG_URL: 'og:url';
-    SECURE_IMAGE: 'og:image:secure_url';
-    TWITTER_TITLE: 'twitter:text:title';
-    TWITTER_IMAGE: 'twitter:image';
+  metaTags = {
+    DESCRIPTION: 'description',
+    IMAGE: 'image,',
+    OG_TITLE: 'og:title',
+    OG_DESCRIPTION: 'og:description',
+    OG_IMAGE: 'og:image',
+    OG_URL: 'og:url',
+    OG_TYPE: 'og:type',
+    SECURE_IMAGE: 'og:image:secure_url',
+    TWITTER_TITLE: 'twitter:text:title',
+    TWITTER_IMAGE: 'twitter:image'
   };
   constructor(
     private titleService: Title,
@@ -29,15 +30,13 @@ export class SeoService {
   setMetaTags(data) {
     const url = env.BASE_HREF + this.router.url.split('?')[0];
     const logoPath = 'assets/image/color_logo_transparent.png';
-<<<<<<< HEAD
-    this.titleService.setTitle(data.full_title || 'LazySuzy');
-=======
     const metaData = {
       TITLE: data.full_title || 'LazySuzy',
       IMAGE: data.image_url || logoPath,
       DESCRIPTION:
         data.description || `Search America's top Home brands in one go`,
-      URL: url
+      URL: url,
+      TYPE: 'website'
     };
     this.titleService.setTitle(metaData.TITLE);
     this.metaService.updateTag({
@@ -52,7 +51,6 @@ export class SeoService {
       property: this.metaTags.OG_TITLE,
       content: metaData.TITLE
     });
->>>>>>> shadow
     this.metaService.updateTag({
       name: this.metaTags.OG_DESCRIPTION,
       content: metaData.DESCRIPTION
@@ -62,8 +60,16 @@ export class SeoService {
       content: metaData.IMAGE
     });
     this.metaService.updateTag({
-      name: this.metaTags.OG_IMAGE,
+      property: this.metaTags.OG_URL,
       content: metaData.URL
+    });
+    this.metaService.updateTag({
+      property: this.metaTags.OG_TYPE,
+      content: metaData.TYPE
+    });
+    this.metaService.updateTag({
+      property: this.metaTags.SECURE_IMAGE,
+      content: metaData.IMAGE
     });
     this.metaService.updateTag({
       name: this.metaTags.TWITTER_TITLE,

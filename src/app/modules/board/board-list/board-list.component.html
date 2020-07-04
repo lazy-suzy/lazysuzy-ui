@@ -18,6 +18,9 @@
   <div class="board-list-header">
     <h5 class="title">YOUR BOARDS</h5>
   </div>
+  <div class="board-list-header">
+    <div class="sub-title">DRAFTS</div>
+  </div>
   <app-board-loader *ngIf="isFetching"></app-board-loader>
   <div class="row" id="board-list" *ngIf="!isFetching">
     <div class="col-sm-4 mb-sm-4">
@@ -42,7 +45,10 @@
       class="col-sm-4 mb-sm-4 {{ board.is_published === 0 ? '' : 'dn' }}"
     >
       <div class="board-card">
-        <div class="canvas-preview">
+        <div
+          class="canvas-preview pointer"
+          routerLink="../{{ boardViewLink }}/{{ board.uuid }}"
+        >
           <img
             width="100%"
             class="edit-board"
@@ -77,21 +83,6 @@
               <i class="mdi mdi-cart" aria-hidden="true"></i>
             </span>
           </div>
-          <div class="like-icon pointer">
-            <mat-icon
-              (click)="likeBoard(board.uuid, true)"
-              *ngIf="!board.is_liked; else hasLikedBoard"
-              >favorite_border
-            </mat-icon>
-            <ng-template #hasLikedBoard>
-              <mat-icon (click)="likeBoard(board.uuid, false)"
-                >favorite
-              </mat-icon>
-            </ng-template>
-            <span class="likes-count" *ngIf="board.like_count > 0">
-              {{ board.like_count }}</span
-            >
-          </div>
         </div>
         <div class="preview-title">
           {{ board.title }}
@@ -101,7 +92,7 @@
   </div>
 
   <div *ngIf="isAnyPublished" class="board-list-header">
-    <h5 class="title">YOUR PUBLISHED BOARDS</h5>
+    <div class="sub-title">PUBLISHED</div>
   </div>
   <div class="row">
     <div
@@ -109,7 +100,10 @@
       class="col-sm-4 mb-sm-4 {{ board.is_published === 1 ? '' : 'dn' }}"
     >
       <div class="board-card">
-        <div class="canvas-preview">
+        <div
+          class="canvas-preview pointer"
+          routerLink="../{{ boardPreviewLink }}/{{ board.uuid }}"
+        >
           <img
             width="100%"
             class="edit-board"
