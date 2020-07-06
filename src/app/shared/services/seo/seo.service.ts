@@ -103,20 +103,25 @@ export class SeoService {
   }
 
   setSchema(data) {
+    const isPriceRange = data.is_price.includes('-');
+    const minPrice = data.is_price.split('-')[0];
     const schema = {
       '@context': 'http://schema.org',
       '@type': 'Product',
       name: data.name,
       image: data.main_image,
-      aggregateRating: {
-        '@type': 'AggregateRating',
-        ratingCount: data.reviews,
-        ratingValue: data.rating
-      },
+      aggregateRating:
+        data.rating > 0
+          ? {
+              '@type': 'AggregateRating',
+              ratingCount: data.reviews,
+              ratingValue: data.rating
+            }
+          : null,
       offers: {
-        price: data.is_price,
+        price: isPriceRange ? minPrice : data.is_price,
         priceCurrency: '$',
-        availability: data.in_inventory ? 'InStock' : 'OutOfStock'
+        availability: data.in_inventory ? 'InStock' : null
       },
       description: data.description[0]
     };

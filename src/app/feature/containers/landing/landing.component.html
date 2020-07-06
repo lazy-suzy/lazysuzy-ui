@@ -15,6 +15,52 @@
       <app-top-deals [isHandset]="isHandset"></app-top-deals>
       <app-best-sellers [isHandset]="isHandset"></app-best-sellers>
     </div>
+    <div class="design-board-section">
+      <div class="header">LazySuzy Design Boards</div>
+      <div class="content">
+        <div class="text-content">
+          <div class="title">
+            Create & share your own style!
+          </div>
+          <div class="content-list" *ngFor="let text of contentList">
+            <div class="list-image">
+              <input
+                type="checkbox"
+                id="checkbox"
+                checked="checked"
+                disabled="disabled"
+              />
+              <label for="checkbox"></label>
+            </div>
+            <div class="list-text">{{ text }}</div>
+          </div>
+          <div class="action-btn" (click)="newBoard()">
+            <span> Try it out now!</span>
+          </div>
+        </div>
+        <div class="image-content">
+          <img src="../../../../assets/image/placeholder.png" />
+        </div>
+      </div>
+    </div>
+    <div class="reviews-section">
+      <div class="header">DON'T TAKE OUR WORD FOR IT</div>
+      <div class="flex-ns justify-center-ns">
+        <div class="review-card" *ngFor="let data of reviews">
+          <a href="https://www.trustpilot.com/review/www.lazysuzy.com">
+            <div class="trustpilot-images">
+              <img src="../../../../assets/image/trustpilot_stars.png" />
+              <img src="../../../../assets/image/trustpilot_logo.png" />
+            </div>
+            <div class="content">
+              <div class="review-title">{{ data.title }}</div>
+              <div class="review-writer">by {{ data.writer }}</div>
+              <div class="review-content">{{ data.review }}</div>
+            </div>
+          </a>
+        </div>
+      </div>
+    </div>
     <app-subscribe [homePage]="true"></app-subscribe>
   </div>
 </div>
