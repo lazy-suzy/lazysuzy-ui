@@ -52,12 +52,12 @@ export class SeoService {
       content: metaData.TITLE
     });
     this.metaService.updateTag({
-      name: this.metaTags.OG_DESCRIPTION,
-      content: metaData.DESCRIPTION
+      property: this.metaTags.OG_IMAGE,
+      content: metaData.IMAGE
     });
     this.metaService.updateTag({
-      name: this.metaTags.OG_IMAGE,
-      content: metaData.IMAGE
+      property: this.metaTags.OG_DESCRIPTION,
+      content: metaData.DESCRIPTION
     });
     this.metaService.updateTag({
       property: this.metaTags.OG_URL,
@@ -68,8 +68,16 @@ export class SeoService {
       content: metaData.TYPE
     });
     this.metaService.updateTag({
+      name: this.metaTags.OG_DESCRIPTION,
+      content: metaData.DESCRIPTION
+    });
+    this.metaService.updateTag({
       property: this.metaTags.SECURE_IMAGE,
       content: metaData.IMAGE
+    });
+    this.metaService.updateTag({
+      name: this.metaTags.OG_IMAGE,
+      content: metaData.URL
     });
     this.metaService.updateTag({
       name: this.metaTags.TWITTER_TITLE,

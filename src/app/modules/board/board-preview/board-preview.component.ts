@@ -11,6 +11,8 @@ import {
 import { Font, FontPickerService } from 'ngx-font-picker';
 import { MatDialogUtilsService } from '../../../shared/services';
 import { environment } from 'src/environments/environment';
+import { boardRoutesNames } from '../board.routes.names';
+
 declare const fb: any;
 
 @Component({
@@ -24,9 +26,8 @@ export class BoardPreviewComponent implements OnInit {
   userName: string;
   filteredProducts = [];
   productSkus = [];
-  // bpObserver: Observable<BreakpointState> = this.breakpointObserver.observe(
-  //   Breakpoints.Handset
-  // );
+  boardViewLink = boardRoutesNames.BOARD_VIEW;
+
   constructor(
     private boardService: BoardService,
     private route: ActivatedRoute,
@@ -294,5 +295,27 @@ export class BoardPreviewComponent implements OnInit {
       .subscribe((payload) => {
         this.utils.updateBoardLike(this.appMeta.board, like);
       });
+  }
+
+  newBoard() {
+    const board: Board = new Board();
+    const newBoard = Object.assign({}, board);
+    newBoard.title = 'Untitled Board';
+
+    newBoard.type_privacy = newBoard.is_published = 0;
+
+    // tslint:disable-next-line: no-shadowed-variable
+    this.boardService.addBoard(newBoard).subscribe((board) => {
+      console.log(board);
+      this.router.navigate(
+        [['/board', this.boardViewLink, board.uuid].join('/')],
+        {
+          relativeTo: this.route,
+          state: {
+            justCreated: true
+          }
+        }
+      );
+    });
   }
 }
