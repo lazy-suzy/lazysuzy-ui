@@ -64,6 +64,19 @@
   color: #0c1c31;
   font-family: 'Lato';
 }
+.shared-boards-container {
+  background-color: #ebebeb;
+  margin-bottom: 60px;
+  .shared-list-header {
+    padding: 40px 0 0;
+  }
+}
+::ng-deep .ui-carousel-content {
+  padding: 0;
+}
+::ng-deep .ui-carousel-dots-container {
+  display: none;
+}
 @media screen and (max-width: 991px) {
   ::ng-deep .mat-snack-bar-container {
     max-height: 48px;
@@ -93,6 +106,11 @@
     }
     button {
       width: 60%;
+    }
+  }
+  .shared-boards-container {
+    .shared-list-header {
+      padding-bottom: 20px;
     }
   }
 }

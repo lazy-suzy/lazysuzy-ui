@@ -160,3 +160,58 @@
     </div>
   </div>
 </div>
+<div class="shared-boards-container">
+  <div class="container">
+    <div *ngIf="sharedBoards.length" class="pb-5-ns">
+      <div class="shared-list-header">
+        <h5 class="title">BROWSE SHARED BOARDS</h5>
+      </div>
+      <div>
+        <div class="row" *ngIf="sharedBoards.length < 4 && !isHandset">
+          <div class="col-sm-4" *ngFor="let data of sharedBoards">
+            <div class="board-card">
+              <div
+                class="canvas-preview pointer"
+                routerLink="../{{ boardPreviewLink }}/{{ data.uuid }}"
+              >
+                <img
+                  width="100%"
+                  class="edit-board"
+                  [src]="getPreviewImagePath(data)"
+                />
+              </div>
+            </div>
+          </div>
+        </div>
+        <p-carousel
+          *ngIf="!isHandset && sharedBoards.length > 3"
+          class="top-deal-slider"
+          [value]="sharedBoards"
+          [numVisible]="3"
+          [numScroll]="1"
+          [responsiveOptions]="responsiveOptions"
+        >
+          <ng-template let-data pTemplate="item">
+            <div class="board-card">
+              <div
+                class="canvas-preview pointer"
+                routerLink="../{{ boardPreviewLink }}/{{ data.uuid }}"
+              >
+                <img
+                  width="100%"
+                  class="edit-board"
+                  [src]="getPreviewImagePath(data)"
+                />
+              </div>
+            </div>
+          </ng-template>
+        </p-carousel>
+        <app-products-carousal
+          *ngIf="isHandset"
+          [data]="sharedBoards"
+          [isBoards]="true"
+        ></app-products-carousal>
+      </div>
+    </div>
+  </div>
+</div>

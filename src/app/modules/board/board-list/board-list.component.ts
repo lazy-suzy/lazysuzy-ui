@@ -28,6 +28,7 @@ import {
 })
 export class BoardListComponent implements OnInit {
   boards: Board[] = [];
+  responsiveOptions: any;
   boardViewLink = boardRoutesNames.BOARD_VIEW;
   boardPreviewLink = boardRoutesNames.BOARD_PREVIEW;
   isFetching = false;
@@ -41,7 +42,7 @@ export class BoardListComponent implements OnInit {
   bpSubscription: Subscription;
   isHandset = false;
   isAnyPublished = false;
-
+  sharedBoards = [];
   constructor(
     private boardService: BoardService,
     private router: Router,
@@ -87,6 +88,23 @@ export class BoardListComponent implements OnInit {
         this.isHandset = handset.matches;
       }
     );
+    this.responsiveOptions = [
+      {
+        breakpoint: '1024px',
+        numVisible: 3,
+        numScroll: 3
+      },
+      {
+        breakpoint: '768px',
+        numVisible: 2,
+        numScroll: 2
+      },
+      {
+        breakpoint: '560px',
+        numVisible: 1,
+        numScroll: 1
+      }
+    ];
   }
   onDestroy(): void {
     this.eventSubscription.unsubscribe();
@@ -96,6 +114,7 @@ export class BoardListComponent implements OnInit {
       this.boards = response.reverse();
       this.isAnyPublished =
         this.boards.filter((b) => b.is_published === 1).length > 0;
+      this.sharedBoards = this.boards.filter((b) => b.type_privacy === 1);
       this.isFetching = false;
     });
   }

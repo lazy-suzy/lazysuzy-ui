@@ -1,4 +1,5 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-products-carousal',
@@ -32,11 +33,22 @@ export class ProductsCarousalComponent implements OnInit {
     navText: false
   };
 
+  boardCarousalOptions = {
+    margin: 10,
+    loop: true,
+    items: 1,
+    dots: true,
+    pagination: true,
+    // autoWidth: true,
+    // stagePadding: 100,
+    singleItem: true
+  };
   images = [];
   @Input() data: any = [];
   @Output() updates: EventEmitter<any> = new EventEmitter();
 
   @Input() isBanner = false;
+  @Input() isBoards = false;
   @Input() nameOfCarousal = '';
 
   constructor() {}
@@ -55,5 +67,12 @@ export class ProductsCarousalComponent implements OnInit {
 
   openDialog(sku) {
     this.updates.emit(sku);
+  }
+  getPreviewImagePath(preview) {
+    if (preview) {
+      return `${environment.BASE_HREF}${preview}`;
+    } else {
+      return 'https://via.placeholder.com/500x400';
+    }
   }
 }
