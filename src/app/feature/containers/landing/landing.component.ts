@@ -63,6 +63,9 @@ export class LandingComponent implements OnInit {
     }
   ];
   boardViewLink = boardRoutesNames.BOARD_VIEW;
+  displayBoardPath = 'assets/image/board_display.webp';
+  trustPilotStarsPath = 'assets/image/trustpilot_stars.png';
+  trustPilotLogoPath = 'assets/image/trustpilot_logo.png';
   constructor(
     private apiService: ApiService,
     private formBuilder: FormBuilder,

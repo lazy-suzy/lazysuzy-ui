@@ -60,15 +60,16 @@ h1 {
   padding: 0 15px;
 }
 .design-board-section {
-  padding: 25px 0;
+  padding: 80px 0;
   .header {
     color: #b76e79;
-    padding: 20px 0;
+    padding: 20px 0 60px;
     font-size: 42px;
   }
   .content {
     display: flex;
-    justify-content: space-evenly;
+    justify-content: space-between;
+    padding: 0 15%;
     .text-content {
       padding-top: 50px;
       .action-btn {
@@ -85,10 +86,11 @@ h1 {
         font-size: 24px;
         font-weight: bold;
         color: #0c1c31;
+        text-align: left;
       }
       .content-list {
         display: flex;
-        margin: 15px 0 15px 35px;
+        margin: 15px 0 15px 10px;
         .list-text {
           margin-left: 10px;
         }
@@ -148,7 +150,7 @@ h1 {
 .reviews-section {
   background-color: #b76e79;
   padding: 30px 0;
-  margin: 30px 0 50px;
+  margin: 40px 0 80px;
   .header {
     color: #fff;
     font-weight: bold;
@@ -160,8 +162,8 @@ h1 {
     background-color: #fff;
     padding: 10px 15px;
     text-align: left;
-    margin: 10px 30px;
-    width: 20%;
+    margin: 10px 0;
+    width: 30%;
     a {
       color: #0c1c31;
       &:hover {
@@ -191,6 +193,9 @@ h1 {
       }
     }
   }
+}
+.review-cards-container {
+  padding: 0 15%;
 }
 @media only screen and (max-width: 768px) {
   .searchbar {
@@ -238,31 +243,52 @@ h1 {
       text-align: center;
     }
     .review-card {
-      margin: 30px;
-      width: auto;
+      margin: 30px 20px 30px 0;
+      min-width: 300px;
+      height: 55vh;
     }
   }
   .design-board-section {
+    padding: 30px 0;
     .header {
       font-size: 28px;
+      padding: 20px 0 30px;
     }
     .content {
       display: block;
+      padding: 0 5%;
       .text-content {
         padding-top: 0;
         .content-list {
-          margin: 15px;
+          margin: 15px 5px;
           font-size: 14px;
+          .list-image {
+            width: 20px;
+            height: 20px;
+          }
+          .list-image label {
+            height: 20px;
+            width: 20px;
+          }
+          .list-image label:after {
+            left: 3px;
+            height: 2px;
+          }
         }
       }
       .image-content {
-        margin-top: 40px;
+        margin-bottom: 40px;
         img {
-          max-height: 210px;
-          max-width: 336px;
+          max-height: 230px;
         }
       }
     }
+  }
+  .review-cards-container {
+    padding: 0;
+    margin: 0 20px;
+    display: flex;
+    overflow-x: auto;
   }
 }
 .fixed {
@@ -342,5 +368,17 @@ input::-webkit-input-placeholder {
   .search-title {
     font-size: 28px;
     padding-top: 8%;
+  }
+}
+@media only screen and (max-width: 375px) {
+  .design-board-section {
+    .content {
+      .image-content {
+        margin-bottom: 40px;
+        img {
+          max-height: 210px;
+        }
+      }
+    }
   }
 }

@@ -18,6 +18,11 @@
     <div class="design-board-section">
       <div class="header">LazySuzy Design Boards</div>
       <div class="content">
+        <div *ngIf="isHandset; else isBrowser">
+          <div class="image-content">
+            <img [src]="displayBoardPath" />
+          </div>
+        </div>
         <div class="text-content">
           <div class="title">
             Create & share your own style!
@@ -38,19 +43,19 @@
             <span> Try it out now!</span>
           </div>
         </div>
-        <div class="image-content">
-          <img src="../../../../assets/image/placeholder.png" />
+        <div class="image-content" *ngIf="!isHandset">
+          <img [src]="displayBoardPath" />
         </div>
       </div>
     </div>
     <div class="reviews-section">
       <div class="header">DON'T TAKE OUR WORD FOR IT</div>
-      <div class="flex-ns justify-center-ns">
+      <div class="flex-ns justify-between-ns review-cards-container">
         <div class="review-card" *ngFor="let data of reviews">
           <a href="https://www.trustpilot.com/review/www.lazysuzy.com">
             <div class="trustpilot-images">
-              <img src="../../../../assets/image/trustpilot_stars.png" />
-              <img src="../../../../assets/image/trustpilot_logo.png" />
+              <img [src]="trustPilotStarsPath" />
+              <img [src]="trustPilotLogoPath" />
             </div>
             <div class="content">
               <div class="review-title">{{ data.title }}</div>
