@@ -2070,7 +2070,7 @@ export class BoardViewComponent implements OnInit, AfterViewInit {
           });
 
           this.canvas.add(clone);
-          clone.setControlsVisibility(this.canvasMeta.value.hideControls);
+          // clone.setControlsVisibility(this.canvasMeta.value.hideControls);
           this.canvas.setActiveObject(clone);
         }, this.canvasMeta.value.propertiesToInclude);
 
