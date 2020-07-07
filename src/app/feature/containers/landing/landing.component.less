@@ -8,7 +8,6 @@
 @background-color: #fbfbfb;
 @dropdown-background-color: #f7f6f7;
 
-
 .main-container {
   text-align: center;
 }
@@ -60,6 +59,146 @@ h1 {
 .pad-h {
   padding: 0 15px;
 }
+.design-board-section {
+  padding: 80px 0;
+  .header {
+    color: #b76e79;
+    padding: 20px 0 40px;
+    font-size: 42px;
+  }
+  .content {
+    display: flex;
+    justify-content: space-between;
+    padding: 0 15%;
+    .text-content {
+      padding-top: 50px;
+      .action-btn {
+        margin-top: 35px;
+        cursor: pointer;
+        span {
+          background: #b76e79;
+          padding: 20px 40px;
+          font-size: 18px;
+          border-radius: 4px;
+          color: #fff;
+          display: inline-block;
+        }
+      }
+      .title {
+        font-size: 24px;
+        font-weight: bold;
+        color: #0c1c31;
+        text-align: left;
+      }
+      .content-list {
+        display: flex;
+        margin: 15px 0 15px 10px;
+        .list-text {
+          margin-left: 10px;
+        }
+
+        .list-image {
+          position: relative;
+          width: 25px;
+          height: 25px;
+        }
+        .list-image label {
+          background-color: #fff;
+          border: 1px solid #ccc;
+          border-radius: 50%;
+          height: 25px;
+          left: 0;
+          position: absolute;
+          top: 0;
+          width: 25px;
+        }
+
+        .list-image label:after {
+          border: 2px solid #fff;
+          border-top: none;
+          border-right: none;
+          content: '';
+          height: 5px;
+          left: 5px;
+          opacity: 0;
+          position: absolute;
+          top: 8px;
+          transform: rotate(-45deg);
+          width: 12px;
+        }
+
+        .list-image input[type='checkbox'] {
+          visibility: hidden;
+        }
+
+        .list-image input[type='checkbox']:checked + label {
+          background-color: #b76e79;
+          border-color: #b76e79;
+        }
+
+        .list-image input[type='checkbox']:checked + label:after {
+          opacity: 1;
+        }
+      }
+    }
+    .image-content {
+      img {
+        width: 640px;
+        height: 400px;
+      }
+    }
+  }
+}
+.reviews-section {
+  background-color: #b76e79;
+  padding: 30px 0;
+  margin: 40px 0 80px;
+  .header {
+    color: #fff;
+    font-weight: bold;
+    font-size: 32px;
+    text-align: left;
+    padding: 0px 70px 20px;
+  }
+  .review-card {
+    background-color: #fff;
+    padding: 10px 15px;
+    text-align: left;
+    margin: 10px 0;
+    width: 30%;
+    a {
+      color: #0c1c31;
+      &:hover {
+        text-decoration: none;
+      }
+    }
+    .trustpilot-images {
+      display: flex;
+      justify-content: space-between;
+      img {
+        height: 30px;
+      }
+    }
+    .content {
+      padding: 15px;
+      .review-title {
+        font-size: 20px;
+        font-weight: bold;
+        padding-bottom: 10px;
+      }
+      .review-writer {
+        color: #b76e79;
+        padding-bottom: 10px;
+      }
+      .review-content {
+        padding-bottom: 10px;
+      }
+    }
+  }
+}
+.review-cards-container {
+  padding: 0 15%;
+}
 @media only screen and (max-width: 768px) {
   .searchbar {
     height: 34px !important;
@@ -98,6 +237,60 @@ h1 {
         height: 30px;
       }
     }
+  }
+  .reviews-section {
+    .header {
+      font-size: 22px;
+      padding: 0;
+      text-align: center;
+    }
+    .review-card {
+      margin: 30px 20px 30px 0;
+      min-width: 300px;
+      height: 55vh;
+    }
+  }
+  .design-board-section {
+    padding: 30px 0;
+    .header {
+      font-size: 28px;
+      padding: 20px 0 30px;
+    }
+    .content {
+      display: block;
+      padding: 0 5%;
+      .text-content {
+        padding-top: 0;
+        .content-list {
+          margin: 15px 5px;
+          font-size: 14px;
+          .list-image {
+            width: 20px;
+            height: 20px;
+          }
+          .list-image label {
+            height: 20px;
+            width: 20px;
+          }
+          .list-image label:after {
+            left: 3px;
+            height: 2px;
+          }
+        }
+      }
+      .image-content {
+        margin-bottom: 40px;
+        img {
+          max-height: 230px;
+        }
+      }
+    }
+  }
+  .review-cards-container {
+    padding: 0;
+    margin: 0 20px;
+    display: flex;
+    overflow-x: auto;
   }
 }
 .fixed {
@@ -162,7 +355,7 @@ input::-webkit-input-placeholder {
   box-shadow: 3px 8px 8px #8f8e8e;
 }
 
-.space_between{
+.space_between {
   position: relative;
   top: 80px;
 }
@@ -174,9 +367,20 @@ input::-webkit-input-placeholder {
 }
 
 @media only screen and (max-width: 768px) {
-.search-title {
-  font-size: 28px;
-  padding-top: 8%;
+  .search-title {
+    font-size: 28px;
+    padding-top: 8%;
+  }
 }
-
+@media only screen and (max-width: 375px) {
+  .design-board-section {
+    .content {
+      .image-content {
+        margin-bottom: 40px;
+        img {
+          max-height: 210px;
+        }
+      }
+    }
+  }
 }

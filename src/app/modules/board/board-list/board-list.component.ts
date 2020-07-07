@@ -28,6 +28,7 @@ import {
 })
 export class BoardListComponent implements OnInit {
   boards: Board[] = [];
+  responsiveOptions: any;
   boardViewLink = boardRoutesNames.BOARD_VIEW;
   boardPreviewLink = boardRoutesNames.BOARD_PREVIEW;
   isFetching = false;
@@ -41,6 +42,8 @@ export class BoardListComponent implements OnInit {
   bpSubscription: Subscription;
   isHandset = false;
   isAnyPublished = false;
+  sharedBoards = [];
+  timestamp = new Date().getTime();
 
   constructor(
     private boardService: BoardService,
@@ -87,6 +90,23 @@ export class BoardListComponent implements OnInit {
         this.isHandset = handset.matches;
       }
     );
+    this.responsiveOptions = [
+      {
+        breakpoint: '1024px',
+        numVisible: 3,
+        numScroll: 3
+      },
+      {
+        breakpoint: '768px',
+        numVisible: 2,
+        numScroll: 2
+      },
+      {
+        breakpoint: '560px',
+        numVisible: 1,
+        numScroll: 1
+      }
+    ];
   }
   onDestroy(): void {
     this.eventSubscription.unsubscribe();
@@ -96,7 +116,14 @@ export class BoardListComponent implements OnInit {
       this.boards = response.reverse();
       this.isAnyPublished =
         this.boards.filter((b) => b.is_published === 1).length > 0;
+
       this.isFetching = false;
+    });
+    this.boardService.getPublicBoards().subscribe((response) => {
+      const boards = response.reverse();
+      this.sharedBoards = boards.filter(
+        (b) => b.type_privacy === 2 && b.is_published === 1
+      );
     });
   }
 
@@ -176,8 +203,7 @@ export class BoardListComponent implements OnInit {
 
   getPreviewImagePath(board: Board) {
     if (board.preview) {
-      const timestamp = new Date().getTime();
-      return `${environment.BASE_HREF}${board.preview}?v=${timestamp}`;
+      return `${environment.BASE_HREF}${board.preview}?v=${this.timestamp}`;
     } else {
       return 'https://via.placeholder.com/500x400';
     }

@@ -46,6 +46,15 @@ export class BoardService extends SharedBoardService {
       );
   }
 
+  getPublicBoards(): Observable<Board[]> {
+    return this.http
+      .get<Board[]>(`${this.boardEndpoint}/get/all`, this.getHttpOptions())
+      .pipe(
+        tap((_) => this.log('fetched boards')),
+        catchError(this.handleError<Board[]>('getBoards', []))
+      );
+  }
+
   getBoardByID(boardId: string, previewMode = false): Observable<Board[]> {
     return this.http
       .get<Board[]>(

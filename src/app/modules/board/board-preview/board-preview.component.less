@@ -121,8 +121,10 @@
   color: #7b7979;
 }
 .profile-avatar-image {
-  border-radius: 50%;
+  border-radius: 100%;
+  width: 35px;
   height: 35px;
+  object-fit: cover;
 }
 .profile-username {
   font-size: 18px;
@@ -141,7 +143,27 @@
     padding-left: 5px;
   }
 }
-
+.new-board-card {
+  padding: 25px 15px;
+  background-color: #f8f9fa;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #b76e79;
+  .new-board-btn {
+    background-color: #ba7989;
+    color: white;
+    text-align: center;
+    padding: 10px 20px;
+    border-radius: 4px;
+    font-weight: bold;
+    margin-left: 50px;
+  }
+  .new-board-text {
+    margin-right: 50px;
+    font-size: 20px;
+  }
+}
 @media (min-width: 768px) {
   .article-dual-column .text p {
     font-size: 16px;
@@ -182,6 +204,16 @@
     padding: 20px 0 15px;
     margin-bottom: 20px;
     border-width: 1px 0;
+  }
+  .new-board-card {
+    display: block;
+    .new-board-btn {
+      width: 50%;
+      margin: 10px auto;
+    }
+    .new-board-text {
+      margin-right: 0;
+    }
   }
 }
 

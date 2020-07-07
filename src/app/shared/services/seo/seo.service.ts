@@ -15,6 +15,7 @@ export class SeoService {
     OG_DESCRIPTION: 'og:description',
     OG_IMAGE: 'og:image',
     OG_URL: 'og:url',
+    OG_TYPE: 'og:type',
     SECURE_IMAGE: 'og:image:secure_url',
     TWITTER_TITLE: 'twitter:text:title',
     TWITTER_IMAGE: 'twitter:image'
@@ -34,7 +35,8 @@ export class SeoService {
       IMAGE: data.image_url || logoPath,
       DESCRIPTION:
         data.description || `Search America's top Home brands in one go`,
-      URL: url
+      URL: url,
+      TYPE: 'website'
     };
     this.titleService.setTitle(metaData.TITLE);
     this.metaService.updateTag({
@@ -50,11 +52,27 @@ export class SeoService {
       content: metaData.TITLE
     });
     this.metaService.updateTag({
+      property: this.metaTags.OG_IMAGE,
+      content: metaData.IMAGE
+    });
+    this.metaService.updateTag({
+      property: this.metaTags.OG_DESCRIPTION,
+      content: metaData.DESCRIPTION
+    });
+    this.metaService.updateTag({
+      property: this.metaTags.OG_URL,
+      content: metaData.URL
+    });
+    this.metaService.updateTag({
+      property: this.metaTags.OG_TYPE,
+      content: metaData.TYPE
+    });
+    this.metaService.updateTag({
       name: this.metaTags.OG_DESCRIPTION,
       content: metaData.DESCRIPTION
     });
     this.metaService.updateTag({
-      name: this.metaTags.OG_IMAGE,
+      property: this.metaTags.SECURE_IMAGE,
       content: metaData.IMAGE
     });
     this.metaService.updateTag({
@@ -85,20 +103,25 @@ export class SeoService {
   }
 
   setSchema(data) {
+    const isPriceRange = data.is_price.includes('-');
+    const minPrice = data.is_price.split('-')[0];
     const schema = {
       '@context': 'http://schema.org',
       '@type': 'Product',
       name: data.name,
       image: data.main_image,
-      aggregateRating: {
-        '@type': 'AggregateRating',
-        ratingCount: data.reviews,
-        ratingValue: data.rating
-      },
+      aggregateRating:
+        data.rating > 0
+          ? {
+              '@type': 'AggregateRating',
+              ratingCount: data.reviews,
+              ratingValue: data.rating
+            }
+          : null,
       offers: {
-        price: data.is_price,
+        price: isPriceRange ? minPrice : data.is_price,
         priceCurrency: '$',
-        availability: data.in_inventory ? 'InStock' : 'OutOfStock'
+        availability: data.in_inventory ? 'InStock' : null
       },
       description: data.description[0]
     };

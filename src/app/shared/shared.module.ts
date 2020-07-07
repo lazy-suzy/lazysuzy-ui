@@ -5,10 +5,17 @@ import { OwlModule } from 'ngx-owl-carousel';
 import { LoaderModule } from './components/loader/loader.module';
 import { MaterialModule } from './material-module';
 import { AmericanNumberPipe } from './pipes/american-number.pipe';
+import { RouterModule } from '@angular/router';
 
 const DECLARATIONS = [ProductsCarousalComponent, AmericanNumberPipe];
 
-const MODULES = [CommonModule, OwlModule, LoaderModule, MaterialModule];
+const MODULES = [
+  CommonModule,
+  OwlModule,
+  LoaderModule,
+  MaterialModule,
+  RouterModule
+];
 
 @NgModule({
   declarations: [...DECLARATIONS],

@@ -351,6 +351,7 @@ export class ApiService {
       Buser_id: 1
     });
   }
+
   postStripeToken(data) {
     const token = this.cookie.get('token');
     const headers = new HttpHeaders({
