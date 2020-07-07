@@ -18,7 +18,7 @@
     <div class="design-board-section">
       <div class="header">LazySuzy Design Boards</div>
       <div class="content">
-        <div *ngIf="isHandset; else isBrowser">
+        <div *ngIf="isHandset">
           <div class="image-content">
             <img [src]="displayBoardPath" />
           </div>
