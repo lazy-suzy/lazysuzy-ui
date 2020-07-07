@@ -43,6 +43,8 @@ export class BoardListComponent implements OnInit {
   isHandset = false;
   isAnyPublished = false;
   sharedBoards = [];
+  timestamp = new Date().getTime();
+
   constructor(
     private boardService: BoardService,
     private router: Router,
@@ -201,8 +203,7 @@ export class BoardListComponent implements OnInit {
 
   getPreviewImagePath(board: Board) {
     if (board.preview) {
-      const timestamp = new Date().getTime();
-      return `${environment.BASE_HREF}${board.preview}?v=${timestamp}`;
+      return `${environment.BASE_HREF}${board.preview}?v=${this.timestamp}`;
     } else {
       return 'https://via.placeholder.com/500x400';
     }
