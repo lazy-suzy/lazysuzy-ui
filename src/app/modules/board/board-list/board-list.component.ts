@@ -116,7 +116,6 @@ export class BoardListComponent implements OnInit {
       this.boards = response.reverse();
       this.isAnyPublished =
         this.boards.filter((b) => b.is_published === 1).length > 0;
-
       this.isFetching = false;
     });
     this.boardService.getPublicBoards().subscribe((response) => {

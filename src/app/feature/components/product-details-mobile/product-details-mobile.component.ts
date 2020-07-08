@@ -65,6 +65,7 @@ export class ProductDetailsMobileComponent implements OnInit {
   activeProduct: IActiveProduct;
   hasSelection: boolean;
   schema = {};
+  invalidLinkImageSrc = 'assets/image/invalid_link.png';
   constructor(
     private router: Router,
     private activeRoute: ActivatedRoute,
@@ -105,56 +106,64 @@ export class ProductDetailsMobileComponent implements OnInit {
       .getProduct(this.productSku)
       .subscribe((payload: IProductDetail) => {
         this.product = payload;
-        this.schema = this.seoService.setSchema(this.product);
-        this.updateActiveProduct(this.product);
-        this.description = this.utils.compileMarkdown(this.product.description);
-        this.features = this.utils.compileMarkdown(
-          this.product.features,
-          this.product.site
-        );
-        this.dimensionExist = this.utils.checkDataLength(
-          this.product.dimension
-        );
-        this.featuresExist = this.utils.checkDataLength(this.product.features);
-        this.descriptionExist = this.utils.checkDataLength(
-          this.product.description
-        );
-        this.isSwatchExist = this.utils.checkDataLength(
-          this.product.variations.filter(
-            (variation) => variation.swatch_image !== null
-          )
-        );
-        this.isVariationExist = this.utils.checkDataLength(
-          this.product.variations
-        );
-        this.hasVariationsInventory();
-        if (!this.isHandset) {
-          this.router.navigate(
-            [`${this.product.department_info[0].category_url}`],
-            { queryParams: { modal_sku: this.product.sku } }
+        if (this.product.sku) {
+          this.schema = this.seoService.setSchema(this.product);
+          this.updateActiveProduct(this.product);
+          this.description = this.utils.compileMarkdown(
+            this.product.description
           );
-        }
-        this.variations = this.product.variations.sort((a, b) =>
-          a.name > b.name ? 1 : -1
-        );
-        if (this.product.in_inventory) {
-          this.productPrice = this.utils.formatPrice(
-            this.product.inventory_product_details.price
+          this.features = this.utils.compileMarkdown(
+            this.product.features,
+            this.product.site
           );
-          this.productWasPrice = this.utils.formatPrice(
-            this.product.inventory_product_details.was_price
+          this.dimensionExist = this.utils.checkDataLength(
+            this.product.dimension
           );
-        } else {
-          this.productPrice = this.utils.formatPrice(this.product.is_price);
-          this.productWasPrice = this.utils.formatPrice(this.product.was_price);
+          this.featuresExist = this.utils.checkDataLength(
+            this.product.features
+          );
+          this.descriptionExist = this.utils.checkDataLength(
+            this.product.description
+          );
+          this.isSwatchExist = this.utils.checkDataLength(
+            this.product.variations.filter(
+              (variation) => variation.swatch_image !== null
+            )
+          );
+          this.isVariationExist = this.utils.checkDataLength(
+            this.product.variations
+          );
+          this.hasVariationsInventory();
+          if (!this.isHandset) {
+            this.router.navigate(
+              [`${this.product.department_info[0].category_url}`],
+              { queryParams: { modal_sku: this.product.sku } }
+            );
+          }
+          this.variations = this.product.variations.sort((a, b) =>
+            a.name > b.name ? 1 : -1
+          );
+          if (this.product.in_inventory) {
+            this.productPrice = this.utils.formatPrice(
+              this.product.inventory_product_details.price
+            );
+            this.productWasPrice = this.utils.formatPrice(
+              this.product.inventory_product_details.was_price
+            );
+          } else {
+            this.productPrice = this.utils.formatPrice(this.product.is_price);
+            this.productWasPrice = this.utils.formatPrice(
+              this.product.was_price
+            );
+          }
+          this.items = this.product.on_server_images.map(
+            (item) => new ImageItem({ src: item })
+          );
+          if (this.product.set) {
+            this.checkSetInventory(this.product.set);
+          }
+          this.galleryRef.load(this.items);
         }
-        this.items = this.product.on_server_images.map(
-          (item) => new ImageItem({ src: item })
-        );
-        if (this.product.set) {
-          this.checkSetInventory(this.product.set);
-        }
-        this.galleryRef.load(this.items);
         this.isProductFetching = false;
       });
   }
