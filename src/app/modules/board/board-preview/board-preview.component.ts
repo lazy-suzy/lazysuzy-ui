@@ -220,7 +220,8 @@ export class BoardPreviewComponent implements OnInit {
         name: object.referenceObject.name || '',
         is_price: object.referenceObject.price || '',
         price: object.referenceObject.price || '',
-        sku: object.referenceObject.sku || ''
+        sku: object.referenceObject.sku || '',
+        productListingUrl: object.referenceObject.productListingUrl || ''
       });
       if (object.referenceObject.sku) {
         productSkus.push(object.referenceObject.sku);

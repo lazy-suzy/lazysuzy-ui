@@ -1387,6 +1387,10 @@ export class BoardViewComponent implements OnInit, AfterViewInit {
         referenceObjectValue.name = this.appMeta.asset[referenceID].name;
         referenceObjectValue.price = this.appMeta.asset[referenceID].price;
         referenceObjectValue.brand = this.appMeta.asset[referenceID].brand;
+        console.log(this.appMeta.asset[referenceID].listing_url);
+        referenceObjectValue.productListingUrl = this.appMeta.asset[
+          referenceID
+        ].listing_url;
         referenceObjectValue.sku = '';
       } else if (referenceType === 'default') {
         let product = [];

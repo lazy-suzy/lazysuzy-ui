@@ -91,9 +91,23 @@
       <div *ngFor="let product of filteredProducts" class="w-25-ns">
         <div class="ls-product-div pl-1 pr-1">
           <div class="product-tag icon">{{ product.index + 1 }}</div>
-          <div class="ls-product" (click)="openDialog(product.sku)">
-            <img [src]="product.main_image" [alt]="product.name" />
-          </div>
+          <ng-container
+            *ngIf="product.productListingUrl !== ''; else isProduct"
+          >
+            <a
+              class="ls-product"
+              [href]="product.productListingUrl"
+              target="_blank"
+            >
+              <img [src]="product.main_image" [alt]="product.name" />
+            </a>
+          </ng-container>
+          <ng-template #isProduct>
+            <div class="ls-product" (click)="openDialog(product.sku)">
+              <img [src]="product.main_image" [alt]="product.name" />
+            </div>
+          </ng-template>
+
           <div class="prod-info">
             <span class="site">
               {{ product.site }}
