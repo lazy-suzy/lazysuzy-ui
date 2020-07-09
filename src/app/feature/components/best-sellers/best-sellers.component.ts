@@ -1,7 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
 import {
   ApiService,
-  UtilsService,
   EventEmitterService,
   MatDialogUtilsService
 } from './../../../shared/services';
@@ -22,7 +21,6 @@ export class BestSellersComponent implements OnInit {
   constructor(
     private apiService: ApiService,
     private router: Router,
-    private utilsService: UtilsService,
     private eventEmitterService: EventEmitterService,
     private matDialogUtils: MatDialogUtilsService
   ) {
@@ -30,20 +28,14 @@ export class BestSellersComponent implements OnInit {
       {
         breakpoint: '1024px',
         numVisible: 3,
-        numScroll: 3
+        numScroll: 1
       },
       {
         breakpoint: '768px',
         numVisible: 2,
         numScroll: 2
-      },
-      {
-        breakpoint: '560px',
-        numVisible: 1,
-        numScroll: 1
       }
     ];
-    Carousel.prototype.changePageOnTouch = (e, diff) => {};
   }
 
   ngOnInit() {

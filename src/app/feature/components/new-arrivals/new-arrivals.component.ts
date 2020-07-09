@@ -48,7 +48,7 @@ export class NewArrivalsComponent implements OnInit {
     this.responsiveOptions = [
       {
         breakpoint: '1024px',
-        numVisible: 1,
+        numVisible: 3,
         numScroll: 1
       },
       {
