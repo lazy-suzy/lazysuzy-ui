@@ -18,7 +18,7 @@
     <div class="design-board-section">
       <div class="header">LazySuzy Design Boards</div>
       <div class="content">
-        <div *ngIf="isHandset">
+        <div class="displayTablet">
           <div class="image-content">
             <a href="https://www.lazysuzy.com/board/preview/y7vt3u">
               <img [src]="displayBoardPath" />
@@ -45,7 +45,7 @@
             <span> Try it out now!</span>
           </div>
         </div>
-        <div class="image-content" *ngIf="!isHandset">
+        <div class="image-content" class="displayDesktop">
           <a href="https://www.lazysuzy.com/board/preview/y7vt3u">
             <img [src]="displayBoardPath" />
           </a>

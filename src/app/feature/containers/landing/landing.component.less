@@ -204,7 +204,20 @@ h1 {
   margin: auto;
   padding: 0 20px;
 }
+.displayTablet {
+  display: none;
+}
+.displayDesktop {
+  display: block;
+  width: 60%;
+}
 @media only screen and (max-width: 768px) {
+  .displayTablet {
+    display: block;
+  }
+  .displayDesktop {
+    display: none;
+  }
   .searchbar {
     height: 34px !important;
     border: 1px solid #ccc !important;

@@ -418,7 +418,7 @@ export class BoardViewComponent implements OnInit, AfterViewInit {
           ? this.canvas.backgroundImage._element.currentSrc
           : ''
       },
-      width: '40%',
+      width: '70%',
       autoFocus: false
     });
 
