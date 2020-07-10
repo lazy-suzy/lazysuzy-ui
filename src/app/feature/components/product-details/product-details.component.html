@@ -1,6 +1,6 @@
 <ngx-json-ld [json]="schema"></ngx-json-ld>
 <ng-container *ngIf="!isProductFetching">
-  <div *ngIf="product.sku; else invalidProduct">
+  <div *ngIf="product.sku || !invalidLink; else invalidProduct">
     <div class="product-details-container">
       <button class="close-icon" mat-dialog-close>
         <mat-icon>close </mat-icon>

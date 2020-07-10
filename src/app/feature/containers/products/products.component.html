@@ -96,6 +96,9 @@
   >
   </app-subscribe>
 </div>
+<div class="tc" *ngIf="invalidLink">
+  <img [src]="invalidLinkImageSrc" class="invalid-url-image" />
+</div>
 <img *ngIf="isProductFetching" [src]="spinner" class="loader" />
 <button
   class="scroll-to-btn f6 dib white bg-near-black"

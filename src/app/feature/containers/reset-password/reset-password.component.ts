@@ -55,7 +55,7 @@ export class ResetPasswordComponent implements OnInit {
       this.message = 'Password must contain 8 characters';
     } else if (cpassword !== password) {
       this.error = true;
-      this.message = 'Password do not match';
+      this.message = 'Passwords do not match';
     }
     return !this.error;
   }

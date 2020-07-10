@@ -10,7 +10,9 @@ import { Subscription } from 'rxjs';
 import {
   IProductPayload,
   IProductDetail,
-  IActiveProduct
+  IActiveProduct,
+  IProduct,
+  ISeo
 } from 'src/app/shared/models';
 import {
   ApiService,
@@ -30,7 +32,8 @@ import { Lightbox } from '@ngx-gallery/lightbox';
 export class ProductDetailsComponent implements OnInit {
   @ViewChild('topContainer', { static: false }) topContainer: ElementRef;
   @ViewChild('gallery', { static: false }) galleryContainer: ElementRef;
-  product: IProductDetail;
+  product: IProduct;
+  seoData: ISeo;
   productSubscription: Subscription;
   eventSubscription: Subscription;
   selectedIndex: number;
@@ -70,6 +73,7 @@ export class ProductDetailsComponent implements OnInit {
   hasSelection: boolean;
   schema = {};
   invalidLinkImageSrc = 'assets/image/invalid_link.png';
+  invalidLink: boolean;
   constructor(
     @Inject(MAT_DIALOG_DATA) public data: any,
     private apiService: ApiService,
@@ -89,69 +93,105 @@ export class ProductDetailsComponent implements OnInit {
       .subscribe((user) => {
         this.productSubscription = this.apiService
           .getProduct(this.data.sku)
-          .subscribe((payload: IProductDetail) => {
-            this.product = payload;
-            if (this.product.sku) {
-              this.schema = this.seoService.setSchema(this.product);
-              this.updateActiveProduct(this.product);
-              this.items = this.product.on_server_images.map(
-                (item) => new ImageItem({ src: item })
-              );
-              this.galleryRef.load(this.items);
-              this.description = this.utils.compileMarkdown(
-                this.product.description
-              );
-              this.features = this.utils.compileMarkdown(
-                this.product.features,
-                this.product.site
-              );
-              this.dimensionExist = this.utils.checkDataLength(
-                this.product.dimension
-              );
-              this.featuresExist = this.utils.checkDataLength(
-                this.product.features
-              );
-              this.descriptionExist = this.utils.checkDataLength(
-                this.product.description
-              );
-              this.isSwatchExist = this.utils.checkDataLength(
-                this.product.variations.filter(
-                  (variation) => variation.swatch_image !== null
-                )
-              );
-              if (this.product.in_inventory) {
-                this.productPrice = this.utils.formatPrice(
-                  this.product.inventory_product_details.price
+          .subscribe(
+            (payload: IProductDetail) => {
+              this.product = payload.product;
+              this.seoData = payload.seo_data;
+              if (this.product.sku) {
+                this.schema = this.seoService.setSchema(this.product);
+                this.seoService.setMetaTags(this.seoData);
+                this.updateActiveProduct(this.product);
+                this.items = this.product.on_server_images.map(
+                  (item) => new ImageItem({ src: item })
                 );
-                this.productWasPrice = this.utils.formatPrice(
-                  this.product.inventory_product_details.was_price
+                this.galleryRef.load(this.items);
+                this.description = this.utils.compileMarkdown(
+                  this.product.description
                 );
-              } else {
-                this.productPrice = this.utils.formatPrice(
-                  this.product.is_price
+                this.features = this.utils.compileMarkdown(
+                  this.product.features,
+                  this.product.site
                 );
-                this.productWasPrice = this.utils.formatPrice(
-                  this.product.was_price
+                this.dimensionExist = this.utils.checkDataLength(
+                  this.product.dimension
                 );
+                this.featuresExist = this.utils.checkDataLength(
+                  this.product.features
+                );
+                this.descriptionExist = this.utils.checkDataLength(
+                  this.product.description
+                );
+                this.isSwatchExist = this.utils.checkDataLength(
+                  this.product.variations.filter(
+                    (variation) => variation.swatch_image !== null
+                  )
+                );
+                if (this.product.in_inventory) {
+                  this.productPrice = this.utils.formatPrice(
+                    this.product.inventory_product_details.price
+                  );
+                  this.galleryRef.load(this.items);
+                  this.description = this.utils.compileMarkdown(
+                    this.product.description
+                  );
+                  this.features = this.utils.compileMarkdown(
+                    this.product.features,
+                    this.product.site
+                  );
+                  this.dimensionExist = this.utils.checkDataLength(
+                    this.product.dimension
+                  );
+                  this.featuresExist = this.utils.checkDataLength(
+                    this.product.features
+                  );
+                  this.descriptionExist = this.utils.checkDataLength(
+                    this.product.description
+                  );
+                  this.isSwatchExist = this.utils.checkDataLength(
+                    this.product.variations.filter(
+                      (variation) => variation.swatch_image !== null
+                    )
+                  );
+                  if (this.product.in_inventory) {
+                    this.productPrice = this.utils.formatPrice(
+                      this.product.inventory_product_details.price
+                    );
+                    this.productWasPrice = this.utils.formatPrice(
+                      this.product.inventory_product_details.was_price
+                    );
+                  } else {
+                    this.productPrice = this.utils.formatPrice(
+                      this.product.is_price
+                    );
+                    this.productWasPrice = this.utils.formatPrice(
+                      this.product.was_price
+                    );
+                  }
+                  this.isVariationExist = this.utils.checkDataLength(
+                    this.product.variations
+                  );
+                  this.hasVariationsInventory();
+                  this.variations = this.product.variations.sort((a, b) =>
+                    a.name > b.name ? 1 : -1
+                  );
+                  if (this.product.set) {
+                    this.checkSetInventory(this.product.set);
+                  }
+                  const self = this;
+                  setTimeout(() => {
+                    self.getMaxHeight();
+                  }, 1000);
+                }
+                this.invalidLink = false;
+                this.isProductFetching = false;
               }
-              this.isVariationExist = this.utils.checkDataLength(
-                this.product.variations
-              );
-              this.hasVariationsInventory();
-              this.variations = this.product.variations.sort((a, b) =>
-                a.name > b.name ? 1 : -1
-              );
-              if (this.product.set) {
-                this.checkSetInventory(this.product.set);
-              }
-              const self = this;
-              setTimeout(() => {
-                self.getMaxHeight();
-              }, 1000);
+              this.localStorageUser = user;
+            },
+            (error) => {
+              this.invalidLink = true;
+              this.isProductFetching = false;
             }
-            this.isProductFetching = false;
-          });
-        this.localStorageUser = user;
+          );
       });
   }
 

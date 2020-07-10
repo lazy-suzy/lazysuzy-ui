@@ -74,6 +74,8 @@ export class ProductsComponent implements OnInit {
   isHandset: boolean;
   scrollToProductSKU = '';
   eventSubscription: Subscription;
+  invalidLinkImageSrc = 'assets/image/invalid_link.png';
+  invalidLink: boolean;
   constructor(
     public dialog: MatDialog,
     private productElement: ElementRef,
@@ -183,19 +185,26 @@ export class ProductsComponent implements OnInit {
     this.isProductFetching = true;
     this.productsSubscription = this.apiService
       .getProducts(this.department, this.category, this.filters, this.sortType)
-      .subscribe((payload: IProductsPayload) => {
-        this.seoService.setMetaTags(payload.seo_data);
-        this.seoService.setCanonicalURL();
-        this.categoryTitle = payload.seo_data.page_title;
-        this.emailTitle = payload.seo_data.email_title;
-        this.products = payload.products;
-        delete payload.filterData.category;
-        this.productFilters = payload.filterData;
-        this.sortTypeList = payload.sortType;
-        this.totalCount = payload.total;
-        this.updateQueryString();
-        this.isProductFetching = false;
-      });
+      .subscribe(
+        (payload: IProductsPayload) => {
+          this.seoService.setMetaTags(payload.seo_data);
+          this.seoService.setCanonicalURL();
+          this.categoryTitle = payload.seo_data.page_title;
+          this.emailTitle = payload.seo_data.email_title;
+          this.products = payload.products;
+          delete payload.filterData.category;
+          this.productFilters = payload.filterData;
+          this.sortTypeList = payload.sortType;
+          this.totalCount = payload.total;
+          this.updateQueryString();
+          this.isProductFetching = false;
+          this.invalidLink = false;
+        },
+        (error) => {
+          this.invalidLink = true;
+          this.isProductFetching = false;
+        }
+      );
   }
 
   updateQueryString(): void {

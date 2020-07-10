@@ -1,7 +1,7 @@
 <img *ngIf="isProductFetching" [src]="spinner" class="loader" />
 <ngx-json-ld [json]="schema"></ngx-json-ld>
 <ng-container *ngIf="!isProductFetching && product">
-  <div *ngIf="product.sku; else invalidProduct">
+  <div *ngIf="product.sku || !invalidLink; else invalidProduct">
     <div class="images-container" #gallery>
       <div class="images">
         <img

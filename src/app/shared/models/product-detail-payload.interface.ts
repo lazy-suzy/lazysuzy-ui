@@ -1,4 +1,11 @@
+import { ISeo } from './index';
+
 export interface IProductDetail {
+  product: IProduct;
+  seo_data: ISeo;
+}
+
+export interface IProduct {
   id: number;
   sku: string;
   is_new: boolean;
