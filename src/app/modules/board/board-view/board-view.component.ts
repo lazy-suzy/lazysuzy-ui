@@ -396,7 +396,7 @@ export class BoardViewComponent implements OnInit, AfterViewInit {
         board: this.appMeta.board.data[this.appMeta.board.currentIndex]
       },
       autoFocus: false,
-      width: '40%'
+      width: '100%'
     });
     // dialogRef.afterClosed().subscribe(result => {
     //   console.log('The dialog was closed', result);

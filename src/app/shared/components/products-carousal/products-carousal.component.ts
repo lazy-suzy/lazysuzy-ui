@@ -33,27 +33,30 @@ export class ProductsCarousalComponent implements OnInit {
     navText: false
   };
 
-  boardCarousalOptions = {
-    margin: 10,
-    loop: true,
-    items: 1,
-    dots: true,
-    pagination: true,
-    // autoWidth: true,
-    // stagePadding: 100,
-    singleItem: true
-  };
   images = [];
   @Input() data: any = [];
+  @Input() items: string;
   @Output() updates: EventEmitter<any> = new EventEmitter();
 
   @Input() isBanner = false;
   @Input() isBoards = false;
   @Input() nameOfCarousal = '';
 
+  boardCarousalOptions = {
+    margin: 10,
+    loop: true,
+    items: this.items,
+    dots: true,
+    pagination: true,
+    // autoWidth: true,
+    // stagePadding: 100,
+    singleItem: true
+  };
   constructor() {}
 
-  ngOnInit() {}
+  ngOnInit() {
+    this.boardCarousalOptions.items = this.items;
+  }
 
   // tslint:disable-next-line: use-lifecycle-interface
   ngOnChanges(changes: any) {

@@ -51,7 +51,7 @@ export class ProductDetailsMobileComponent implements OnInit {
   isVariationExist: boolean;
   selectedIndex: any;
   isSwatchExist: boolean;
-  isProductFetching = false;
+  isProductFetching = true;
   description: any;
   features: any;
   productPrice: any;
@@ -115,7 +115,7 @@ export class ProductDetailsMobileComponent implements OnInit {
         (payload: IProductDetail) => {
           this.product = payload.product;
           this.seoData = payload.seo_data;
-          if (this.product.sku) {
+          if (this.product) {
             this.schema = this.seoService.setSchema(this.product);
             this.seoService.setMetaTags(this.seoData);
             this.updateActiveProduct(this.product);
@@ -173,8 +173,10 @@ export class ProductDetailsMobileComponent implements OnInit {
               this.checkSetInventory(this.product.set);
             }
             this.galleryRef.load(this.items);
+            this.invalidLink = false;
+          } else {
+            this.invalidLink = true;
           }
-          this.invalidLink = false;
           this.isProductFetching = false;
         },
         (error) => {

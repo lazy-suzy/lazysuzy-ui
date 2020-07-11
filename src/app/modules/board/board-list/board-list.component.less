@@ -78,6 +78,9 @@
 ::ng-deep .ui-carousel-dots-container {
   display: none;
 }
+.owl-carousel {
+  display: none;
+}
 @media screen and (max-width: 991px) {
   ::ng-deep .mat-snack-bar-container {
     max-height: 48px;
@@ -116,5 +119,13 @@
     .shared-list-header {
       padding-bottom: 20px;
     }
+  }
+}
+@media screen and (max-width: 1024px) {
+  .top-deal-slider {
+    display: none;
+  }
+  .owl-carousel {
+    display: block;
   }
 }

@@ -2254,8 +2254,10 @@ h6 {
     margin-top: 20px;
   }
   .board-popup-dialog-container > mat-dialog-container {
-    padding: 0 12px;
-    overflow: hidden;
+    width: 95% !important;
+  }
+  .board-popup-dialog-container {
+    width: 100% !important;
   }
   .auth-dialog-container {
     height: 95% !important;
@@ -2303,6 +2305,24 @@ h6 {
 .board-popup-dialog-container > mat-dialog-container {
   padding: 0 12px;
   overflow: hidden;
+  margin: auto;
+  width: 40%;
+}
+.board-popup-dialog-container {
+  max-width: 100% !important;
+}
+@media only screen and (max-width: 1025px) and (min-width: 768px) {
+  .auth-dialog-container {
+    width: 75vw !important;
+  }
+  .board-popup-dialog-container > mat-dialog-container {
+    width: 50%;
+  }
+}
+@media (max-width: 768px) {
+  .board-popup-dialog-container > mat-dialog-container {
+    width: 70%;
+  }
 }
 
 @media only screen and (max-width: 1025px) and (min-width: 768px) {

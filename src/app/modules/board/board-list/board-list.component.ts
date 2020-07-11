@@ -38,7 +38,6 @@ export class BoardListComponent implements OnInit {
   bpObserver: Observable<BreakpointState> = this.breakpointObserver.observe(
     Breakpoints.Handset
   );
-
   bpSubscription: Subscription;
   isHandset = false;
   isAnyPublished = false;

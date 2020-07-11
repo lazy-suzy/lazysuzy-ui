@@ -44,7 +44,7 @@ export class ProductDetailsComponent implements OnInit {
   isVariationExist: boolean;
   galleryId = 'myLightbox';
   items: GalleryItem[];
-  isProductFetching = false;
+  isProductFetching = true;
   showDetails = false;
   spinner = 'assets/image/spinner.gif';
   description: any;
@@ -97,7 +97,7 @@ export class ProductDetailsComponent implements OnInit {
             (payload: IProductDetail) => {
               this.product = payload.product;
               this.seoData = payload.seo_data;
-              if (this.product.sku) {
+              if (payload.product) {
                 this.schema = this.seoService.setSchema(this.product);
                 this.seoService.setMetaTags(this.seoData);
                 this.updateActiveProduct(this.product);
@@ -130,61 +130,36 @@ export class ProductDetailsComponent implements OnInit {
                   this.productPrice = this.utils.formatPrice(
                     this.product.inventory_product_details.price
                   );
-                  this.galleryRef.load(this.items);
-                  this.description = this.utils.compileMarkdown(
-                    this.product.description
+                  this.productWasPrice = this.utils.formatPrice(
+                    this.product.inventory_product_details.was_price
                   );
-                  this.features = this.utils.compileMarkdown(
-                    this.product.features,
-                    this.product.site
+                } else {
+                  this.productPrice = this.utils.formatPrice(
+                    this.product.is_price
                   );
-                  this.dimensionExist = this.utils.checkDataLength(
-                    this.product.dimension
+                  this.productWasPrice = this.utils.formatPrice(
+                    this.product.was_price
                   );
-                  this.featuresExist = this.utils.checkDataLength(
-                    this.product.features
-                  );
-                  this.descriptionExist = this.utils.checkDataLength(
-                    this.product.description
-                  );
-                  this.isSwatchExist = this.utils.checkDataLength(
-                    this.product.variations.filter(
-                      (variation) => variation.swatch_image !== null
-                    )
-                  );
-                  if (this.product.in_inventory) {
-                    this.productPrice = this.utils.formatPrice(
-                      this.product.inventory_product_details.price
-                    );
-                    this.productWasPrice = this.utils.formatPrice(
-                      this.product.inventory_product_details.was_price
-                    );
-                  } else {
-                    this.productPrice = this.utils.formatPrice(
-                      this.product.is_price
-                    );
-                    this.productWasPrice = this.utils.formatPrice(
-                      this.product.was_price
-                    );
-                  }
-                  this.isVariationExist = this.utils.checkDataLength(
-                    this.product.variations
-                  );
-                  this.hasVariationsInventory();
-                  this.variations = this.product.variations.sort((a, b) =>
-                    a.name > b.name ? 1 : -1
-                  );
-                  if (this.product.set) {
-                    this.checkSetInventory(this.product.set);
-                  }
-                  const self = this;
-                  setTimeout(() => {
-                    self.getMaxHeight();
-                  }, 1000);
                 }
+                this.isVariationExist = this.utils.checkDataLength(
+                  this.product.variations
+                );
+                this.hasVariationsInventory();
+                this.variations = this.product.variations.sort((a, b) =>
+                  a.name > b.name ? 1 : -1
+                );
+                if (this.product.set) {
+                  this.checkSetInventory(this.product.set);
+                }
+                const self = this;
+                setTimeout(() => {
+                  self.getMaxHeight();
+                }, 1000);
                 this.invalidLink = false;
-                this.isProductFetching = false;
+              } else {
+                this.invalidLink = true;
               }
+              this.isProductFetching = false;
               this.localStorageUser = user;
             },
             (error) => {

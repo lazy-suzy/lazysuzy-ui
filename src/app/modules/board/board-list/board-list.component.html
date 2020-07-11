@@ -213,9 +213,10 @@
           </ng-template>
         </p-carousel>
         <app-products-carousal
-          *ngIf="isHandset"
+          [items]="isHandset ? 1 : 4"
           [data]="sharedBoards"
           [isBoards]="true"
+          class="owl-carousel"
         ></app-products-carousal>
       </div>
     </div>

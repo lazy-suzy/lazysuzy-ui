@@ -1,6 +1,6 @@
 <ngx-json-ld [json]="schema"></ngx-json-ld>
 <ng-container *ngIf="!isProductFetching">
-  <div *ngIf="product.sku || !invalidLink; else invalidProduct">
+  <div *ngIf="product || !invalidLink; else invalidProduct">
     <div class="product-details-container">
       <button class="close-icon" mat-dialog-close>
         <mat-icon>close </mat-icon>
@@ -48,6 +48,61 @@
               >
             </div>
             <div class="w-40">
+              <button
+                mat-raised-button
+                class="bg-red view-details-btn"
+                *ngIf="!utils.hasInventory(activeProduct) && !product.redirect"
+              >
+                <a
+                  (click)="openLink($event, product.product_url)"
+                  [href]="product.product_url"
+                  class="tr-viewDetails no-underline"
+                >
+                  VIEW DETAILS
+                </a>
+              </button>
+
+              <select
+                [(ngModel)]="quantity"
+                class="quantity-selector w-30 ml2"
+                *ngIf="utils.hasInventory(activeProduct)"
+              >
+                <option
+                  *ngFor="
+                    let i of quantityLimit(
+                      activeProduct.inventory_product_details.count
+                    )
+                  "
+                  [value]="i"
+                  >{{ i }}</option
+                >
+              </select>
+
+              <button
+                mat-raised-button
+                class="bg-red view-details-btn"
+                *ngIf="utils.hasInventory(activeProduct)"
+              >
+                <a (click)="openCartModal()" class="tr-addToCart no-underline">
+                  ADD TO CART
+                </a>
+              </button>
+              <div *ngIf="errorMessage !== ''" class="invalid-feedback">
+                <div>{{ errorMessage }}</div>
+              </div>
+            </div>
+          </div>
+          <div class="price-container-tabs">
+            <div class="price-font">
+              <span class="product-price mr3">${{ productPrice }}</span>
+              <span
+                class="strike {{
+                  productPrice !== productWasPrice ? '' : 'dn'
+                }}"
+                >${{ productWasPrice }}</span
+              >
+            </div>
+            <div>
               <button
                 mat-raised-button
                 class="bg-red view-details-btn"
