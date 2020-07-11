@@ -179,8 +179,12 @@
   transform: translate(-50%, -50%);
 }
 
+.price-container-tabs {
+  display: none;
+}
 @media (max-width: 1025px) {
   .price-container-tabs {
+    display: block;
     .price-font {
       font-size: 18px;
       margin-bottom: 10px;
@@ -199,8 +203,10 @@
     }
   }
   .product-details-container {
-    .price-container {
-      display: none;
+    .product-details-container {
+      .price-container {
+        display: none;
+      }
     }
   }
 }
