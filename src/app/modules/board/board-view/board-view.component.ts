@@ -100,6 +100,7 @@ export class BoardViewComponent implements OnInit, AfterViewInit {
   hasCanvasLoader = false;
   hasFilterEnabled = false;
   hasPanelFixed = false;
+  hasToggleIconTooltip: string;
   @ViewChild('colorPicker', { static: false })
   public colorPicker: ElementRef;
 
@@ -402,8 +403,9 @@ export class BoardViewComponent implements OnInit, AfterViewInit {
     //   console.log('The dialog was closed', result);
     // });
   }
-  toggleMenu() {
+  toggleMenu(event: any) {
     this.showMenu = !this.showMenu;
+    this.hideMenuMsg(event);
   }
   openBoardConfig() {
     const dialogRef = this.dialog.open(BoardPopupConfigComponent, {
@@ -578,6 +580,15 @@ export class BoardViewComponent implements OnInit, AfterViewInit {
       }
     }
   }
+
+  hideMenuMsg(event: any) {
+    event.stopPropagation();
+    if (this.hasToggleIconTooltip === 'true') {
+      this.hasToggleIconTooltip = 'false';
+      localStorage.setItem('hasTooltip', 'false');
+    }
+  }
+
   ngOnInit(): void {
     // if there is a change in user after the first boot then redirect
     this.userEventSubscription = this.eventEmitterService.userChangeEvent
@@ -618,6 +629,7 @@ export class BoardViewComponent implements OnInit, AfterViewInit {
         });
       });
     });
+    this.hasToggleIconTooltip = localStorage.getItem('hasTooltip');
     this.productsSubscription = this.apiService
       .getWishlistProducts(this.isBoardApi)
       .subscribe((payload: IProductsPayload) => {

@@ -307,6 +307,28 @@
 .product-container-padding {
   padding-bottom: 90px;
 }
+.tooltiptext {
+  position: absolute;
+  bottom: 60px;
+  left: -118px;
+  width: 275px;
+  background: #b76d79;
+  color: #ffffff;
+  font-size: 22px;
+  padding: 10px 20px;
+  border-radius: 15px;
+}
+.tooltiptext::after {
+  content: '';
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  margin-left: -5px;
+  border-width: 10px;
+  border-style: solid;
+  border-color: #b76d79 transparent transparent transparent;
+}
+
 @media screen and (max-width: 991px) {
   .load-more-btn-container {
     padding-bottom: 0;

@@ -76,6 +76,10 @@ export class BoardListComponent implements OnInit {
           );
           this.user = user;
         }
+        const tooltip = localStorage.getItem('hasTooltip');
+        if (tooltip === null) {
+          localStorage.setItem('hasTooltip', 'true');
+        }
         this.isFirstBoot = false;
         this.user = JSON.parse(localStorage.getItem('user'));
         this.getBoards();

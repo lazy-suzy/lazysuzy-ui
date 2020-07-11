@@ -12,9 +12,17 @@
       <div class="d-lg-none" *ngIf="isTablet">
         <div
           class="toggle-icon {{ showMenu ? 'b-577 transform-icon' : 'b-25' }}"
-          (click)="toggleMenu()"
+          (click)="toggleMenu($event)"
         >
           <i class="mdi mdi-plus" aria-hidden="true"></i>
+          <div
+            class="tooltiptext {{
+              hasToggleIconTooltip === 'true' ? '' : 'dn'
+            }}"
+          >
+            Click here to get started
+            <div class="fr" (click)="hideMenuMsg($event)">GOT IT</div>
+          </div>
         </div>
       </div>
       <div
