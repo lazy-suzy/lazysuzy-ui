@@ -143,7 +143,6 @@ export class AuthComponent implements OnInit {
       this.cookie.delete('token');
       localStorage.removeItem('user');
       localStorage.removeItem('cart');
-      localStorage.removeItem('hasTooltip');
       this.checkIfGuestIsValid();
     });
   }
