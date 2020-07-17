@@ -263,7 +263,7 @@ export class BoardPreviewComponent implements OnInit {
             if (self.productSkus.includes(product.sku)) {
               return false;
             } else {
-              self.productSkus.push(product.sku);
+              product.sku && self.productSkus.push(product.sku);
               self.filteredProducts.push({ ...product, index });
               return true;
             }
