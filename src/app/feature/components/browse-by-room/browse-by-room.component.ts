@@ -32,7 +32,7 @@ export class BrowseByRoomComponent implements OnInit {
     this.apiService.browseRoom().subscribe((res: any) => {
       this.departments = res.all_departments;
       this.departments = this.departments.filter((val) => {
-        if (val.department !== 'Decor' && val.department !== '') {
+        if (val.department !== 'Bathroom' && val.department !== '') {
           return val;
         }
       });
