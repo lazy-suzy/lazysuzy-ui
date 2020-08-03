@@ -39,16 +39,16 @@ export class MatDialogUtilsService {
       panelClass: 'product-details-dialog-container'
     });
     dialogRef.afterOpened().subscribe((result) => {
-      this.location.go(`product/${modalSku}`, '', this.location.getState());
+      // this.location.go(`product/${modalSku}`, '', this.location.getState());
     });
     dialogRef.afterClosed().subscribe((result) => {
-      const params = { ...this.activeRoute.snapshot.queryParams };
-      if (params.modal_sku) {
-        delete params.modal_sku;
-        this.router.navigate([], { queryParams: params });
-      } else {
-        this.location.back();
-      }
+      // if (params.modal_sku) {
+      //   console.log('this is case when params.modal_sku: ', params)
+      //   delete params.modal_sku;
+      //   this.router.navigate([], { queryParams: params });
+      // } else {
+      //   // this.location.back();
+      // }
     });
   }
 
@@ -60,21 +60,21 @@ export class MatDialogUtilsService {
       panelClass: 'product-details-dialog-container'
     });
     dialogRef.afterOpened().subscribe((result) => {
-      this.location.replaceState(
-        `product/${modalSku}`,
-        '',
-        this.location.getState()
-      );
+      // this.location.replaceState(
+      //   `product/${modalSku}`,
+      //   '',
+      //   this.location.getState()
+      // );
     });
     dialogRef.afterClosed().subscribe((result) => {
       this.dialog.closeAll();
-      const params = { ...this.activeRoute.snapshot.queryParams };
-      if (params.modal_sku) {
-        delete params.modal_sku;
-        this.router.navigate([], { queryParams: params });
-      } else {
-        this.location.back();
-      }
+      // const params = { ...this.activeRoute.snapshot.queryParams };
+      // if (params.modal_sku) {
+      //   delete params.modal_sku;
+      //   this.router.navigate([], { queryParams: params });
+      // } else {
+      //   this.location.back();
+      // }
     });
   }
 
@@ -86,10 +86,10 @@ export class MatDialogUtilsService {
       panelClass: 'product-details-dialog-container'
     });
     dialogRef.afterOpened().subscribe((result) => {
-      this.location.go(`product/${modalSku}`);
+      // this.location.go(`product/${modalSku}`);
     });
     dialogRef.afterClosed().subscribe((result) => {
-      this.location.go(``);
+      // this.location.go(``);
     });
   }
 
