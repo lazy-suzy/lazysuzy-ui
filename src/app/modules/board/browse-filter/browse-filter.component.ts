@@ -37,7 +37,9 @@ export class BrowsefilterComponent implements OnInit {
     }
   };
 
-  constructor(private fb: FormBuilder) {}
+  constructor(private fb: FormBuilder) {
+    
+  }
 
   // tslint:disable-next-line: use-lifecycle-interface
   ngOnChanges(change: any) {
@@ -78,7 +80,9 @@ export class BrowsefilterComponent implements OnInit {
     }
   }
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    console.log('thsi si filter value: ', this.filterData)
+  }
 
   toggleFilterOption(filter: string) {
     if (this.selectedFilter === filter) {
