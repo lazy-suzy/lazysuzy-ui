@@ -3,7 +3,7 @@ import { ApiService } from "./../../../shared/services/api/api.service";
 import { Component, OnInit } from "@angular/core";
 import { IFilterData } from "src/app/shared/models";
 import { HttpService } from "src/app/shared/services/http/http.service";
-import { env } from 'process';
+import { environment as env } from "src/environments/environment";
 
 @Component({
   selector: "app-new-product-listing",
