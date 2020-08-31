@@ -3,7 +3,6 @@ import { ApiService } from "./../../../shared/services/api/api.service";
 import { Component, OnInit } from "@angular/core";
 import { IFilterData } from "src/app/shared/models";
 import { HttpService } from "src/app/shared/services/http/http.service";
-import { env } from 'process';
 
 @Component({
   selector: "app-new-product-listing",
@@ -33,12 +32,14 @@ export class NewProductListingComponent implements OnInit {
   loadProduct(page: number = 1): void {
     this.isProductFetching = true;
     this.httpService
-      .get(`${env.ADMIN_API_BASE_HREF}/staging-products?page=${page}`)
+      .get(
+        `http://localhost/lazy-suzy/lazysuzy-code/public/api/staging-products?page=${page}`
+      )
       .pipe(
         take(1) // take only one result and then unsubscribe
       )
       .subscribe(({ status, data }) => {
-        if (status = 'success') {
+        if (status) {
           let receivedProducts = [];
           let receivedData = { ...data };
           if (this.products.data) {
@@ -49,9 +50,9 @@ export class NewProductListingComponent implements OnInit {
           this.products.data.map((product) => {
             if (typeof product.color === "string") {
               product.color = product.color.split(",");
-              //  product.shape = product.shape.split(",")
+            //  product.shape = product.shape.split(",")
               product.colors = product.color.filter(this.removeNullItems);
-              //  product.shapes = product.shape.filter(this.removeNullItems);
+            //  product.shapes = product.shape.filter(this.removeNullItems);
             }
             return product;
           });
@@ -79,7 +80,7 @@ export class NewProductListingComponent implements OnInit {
     const formData = { products: submitProducts };
     this.httpService
       .post(
-        `${env.ADMIN_API_BASE_HREF}/staging-products/update-multiple`,
+        `http://localhost/lazy-suzy/lazysuzy-code/public/api/staging-products/update-multiple`,
         formData
       )
       .pipe(
@@ -87,7 +88,7 @@ export class NewProductListingComponent implements OnInit {
         take(1)
       )
       .subscribe(({ status }) => {
-        if (status=='success') {
+        if (status) {
           this.loadProduct();
         }
       });
