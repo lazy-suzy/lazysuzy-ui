@@ -85,13 +85,6 @@ const routes: Routes = [
         (m) => m.AdminDashboardModule
       )
   },
-  {
-    path: 'admin/dashboard/new-products',
-    loadChildren: ()=>
-    import('./modules/new-products-dashboard/new-products-dashboard.module').then(
-      (m)=> m.NewProductsDashboardModule
-    )
-  },
   { path: 'settings/profile', component: EditMyProfileComponent },
   { path: 'p/:profile', component: PublicProfileComponent }
 ];
