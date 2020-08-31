@@ -1,0 +1,160 @@
+<div class="row">
+    <div class="column col-1">
+        <span>{{index}}</span>
+    </div>
+    <div class="column col-3">
+        <div class="row">
+            <div class="col-12">
+                <h5>{{product.product_sku}}</h5>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-12">
+                <h5>{{product.product_name}}</h5>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-12">
+                <h5>{{product.site_name}}</h5>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-12">
+                 <div class="price-font">
+                     <span class="product-price mr3">${{ product.price }}</span>
+                     <span class="strike {{
+                  product.price !== product.was_price ? '' : 'dn'
+                }}">${{ product.was_price }}</span>
+                 </div>
+                <!-- <h5>${{product.price}}</h5> -->
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-12">
+                <h5>Create date: {{product.created_date}}</h5>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-12">
+                <h5>Last updated date: {{product.updated_date}}</h5>
+            </div>
+        </div>
+    </div>
+    <div class="column col-8">
+        <div class="row">
+            <div class="col-6">
+                <div class="row">
+                    <div class="col-6" *ngIf="product.colors.length>0">
+                        <mat-form-field appearance="fill">
+                            <mat-label>Color</mat-label>
+                            <mat-select [(ngModel)]="product.color" multiple>
+                                <mat-option [value]="color" *ngFor="let color of product.colors">{{color}}
+                                </mat-option>
+                            </mat-select>
+                        </mat-form-field>
+
+                    </div>
+                        <div class="col-6" *ngIf="product.shapes?.length>0">
+                            <mat-form-field appearance="fill">
+                                <mat-label>Shape</mat-label>
+                                <mat-select [(ngModel)]="product.shape" multiple>
+                                    <mat-option [value]="shape" *ngFor="let shape of product.shapes">{{shape}}
+                                    </mat-option>
+                                </mat-select>
+                            </mat-form-field>
+                        
+                        </div> <div class="col-6">
+
+                    </div>
+                    <div class="col-6">
+
+                    </div>
+                </div>
+            </div>
+            <div class="col-6">
+                <div class="row">
+                    <div class="col-4 text-center">
+                        <h5> Master ID</h5>
+                    </div>
+                    <div class="col-4">
+                        <mat-form-field appearance="fill">
+                            <input matInput [(ngModel)]="product.master_id">
+                        </mat-form-field>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-4 text-center">
+                        <h5> Set ID</h5>
+                    </div>
+                    <div class="col-4">
+                        <mat-form-field appearance="fill">
+                            <input matInput [(ngModel)]="product.set_id">
+                        </mat-form-field>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="row" style="margin-top:15px">
+    <div class="col-1"></div>
+    <div class="col-3">
+        <div class="row">
+            <mat-radio-group [(ngModel)]="product.status" aria-label="Select an option">
+                <div class="col-12">
+                    <mat-radio-button color="warn" value="approved">Accept</mat-radio-button>
+                </div>
+                <div class="col-12">
+                    <mat-radio-button color="warn" value="rejected">Reject</mat-radio-button>
+                </div>
+            </mat-radio-group>
+        </div>
+        <div class="row" style="margin-top: 15px;">
+            <div class="col-12">
+                <h4>New Arrivals Group</h4>
+            </div>
+            <mat-radio-group value="one" aria-label="Select an option">
+                <div class="col-12">
+                    <mat-radio-button color="warn" value="one">One</mat-radio-button>
+                </div>
+                <div class="col-12">
+                    <mat-radio-button color="warn" value="two">Two</mat-radio-button>
+                </div>
+                <div class="col-12">
+                    <mat-radio-button color="warn" value="three">Three</mat-radio-button>
+                </div>
+            </mat-radio-group>
+        </div>
+    </div>
+    <div class="col-8">
+        <ng-container *ngFor="let image of product.images.split(',')">
+            <img src={{image}} height="100px" width='100px'>
+        </ng-container>
+    </div>
+</div>
+<div class="row" style="margin-top:15px">
+    <div class="col-4">
+        <h4>Description</h4>
+        <p [innerHTML]='product.product_description'></p>
+    </div>
+    <div class="col-4">
+        <h4>Features</h4>
+        <p [innerHTML]='product.product_feature'></p>
+    </div>
+    <div class="col-4">
+        <h4>Dimensions</h4>
+
+        <div class="row">
+            <div class="col-6 m-t-5" *ngFor="let dimension of product.product_dimension">
+                <h3>{{dimension.description}}</h3>
+                <span>Height: {{dimension.height}}</span> <br />
+                <span>Width: {{dimension.width}}</span><br />
+                <span>Depth: {{dimension.depth}}</span><br />
+                <span>Diameter: {{dimension.diameter}}</span><br />
+            </div>
+        </div>
+
+
+
+    </div>
+</div>

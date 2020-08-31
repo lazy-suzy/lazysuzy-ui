@@ -1,0 +1,17 @@
+<ng-container *ngIf="!isLoading">
+    <div class="row justify-around align-items-baseline">
+        <h1 class="header">New Product Dashboard</h1>
+        <h4>{{products.total}} Products for review</h4>
+        <button mat-raised-button class="submit-btn" (click)="submit()">Submit</button>
+    </div>
+    <div class="container" infinite-scroll [infiniteScrollDistance]="scrollDistance"
+        [infiniteScrollUpDistance]="scrollUpDistance" [infiniteScrollThrottle]="throttle" (scrolled)="onScrollDown()">
+
+        <ng-container *ngFor="let product of products.data;let i=index">
+            <app-new-product-row [product]="product" [index]="i+1"></app-new-product-row>
+            <hr />
+        </ng-container>
+
+    </div>
+</ng-container>
+<img *ngIf="isProductFetching" [src]="spinner" class="loader" />
