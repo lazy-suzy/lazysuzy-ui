@@ -155,7 +155,7 @@ export class SearchComponent implements OnInit {
       .getSearchProducts(queryString)
       .subscribe((payload: ISearchProductsPayload) => {
         const { hits } = payload.hits;
-        this.totalCount = hits.length;
+        this.totalCount = payload.hits.total.value;
         this.products = hits.map((hit: any) => hit._source);
       });
   }
