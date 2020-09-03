@@ -36,8 +36,8 @@ export class SearchComponent implements OnInit {
   isProductFetching = false;
   isBoardApi = false;
   searchKeywords = [];
-  must_query_params = [];
-  should_query_params = [];
+  mustQueryParams = [];
+  shouldQueryParams = [];
   constructor(
     private apiService: ApiService,
     private router: Router,
@@ -48,7 +48,6 @@ export class SearchComponent implements OnInit {
   ngOnInit(): void {
     this.query = this.route.snapshot.queryParamMap.get("query");
     this.getSearchKeywords();
-
     this.route.queryParams.subscribe((params) => {
       this.query = params.query || "";
       this.getNewQueryResult();
@@ -76,41 +75,100 @@ export class SearchComponent implements OnInit {
       });
   }
 
-  createProductNameParameter(param) {
-    console.log({ params: param });
-  }
   createQueryParamsObject() {
-    this.must_query_params = [];
-    this.should_query_params = [];
+    this.mustQueryParams = [];
+    this.shouldQueryParams = [];
     let queries = this.query.split(" ");
-    let color = queries[0].toLowerCase();
-    let params;
-    if (COLORS.indexOf(color) > -1) {
-      this.must_query_params.push({
-        term: {
-          color: color,
-        },
-      });
-      params = queries[1].toLowerCase();
+    let fullQuery = queries.join("");
+    const spareValues = this.createMustQuery(queries, fullQuery);
+    if (!!spareValues.trim()) {
+      this.createShouldQuery(queries, spareValues);
     } else {
-      params = color;
+      this.createShouldQuery(queries);
     }
-    this.must_query_params.push({
-      term: {
-        product_name: params,
-      },
+  }
+
+  //Form the Must Query
+  createMustQuery(queries: string[], fullQuery: string): string {
+    let color = [];
+    let brand = [];
+    let objectParam = [];
+    let spareValues = [];
+    queries.forEach((value) => {
+      if (COLORS.indexOf(value) > -1) {
+        color.push(value);
+      } else if (this.searchKeywords.hasOwnProperty(value)) {
+        objectParam.push(value);
+      } else {
+        spareValues.push(value);
+      }
     });
-    if (this.searchKeywords.hasOwnProperty(params)) {
-      this.should_query_params = this.searchKeywords[params]
-        .filter((value) => value != params)
-        .map((value) => {
-          return {
-            term: {
-              product_name: value,
-            },
-          };
-        });
+    if (color.length > 0) {
+      color.forEach((value) =>
+        this.mustQueryParams.push({
+          term: {
+            color: value,
+          },
+        })
+      );
     }
+    if (objectParam.length > 0) {
+      objectParam.forEach((value) => {
+        this.mustQueryParams.push({
+          term: {
+            product_name: value,
+          },
+        });
+      });
+    }
+    return spareValues.join(" ");
+  }
+
+  //Form the Should Query
+  createShouldQuery(queries: string[], spareValue = "") {
+    let shouldKeys = [];
+    let keysWithSpareValues = [];
+    queries
+      .filter((value) => {
+        if (COLORS.indexOf(value) > -1) {
+          return false;
+        }
+        if (this.searchKeywords.hasOwnProperty(value)) {
+          return true;
+        }
+        return false;
+      })
+      .forEach((filteredValue) => {
+        shouldKeys = this.searchKeywords[filteredValue].filter(
+          (value) => value != filteredValue
+        );
+      });
+    let allKeys = [];
+    if (spareValue != "") {
+      keysWithSpareValues = shouldKeys.map((value) => `${spareValue} ${value}`);
+      allKeys = [...shouldKeys, ...keysWithSpareValues];
+    } else{
+      allKeys=[...shouldKeys]
+    }
+      this.shouldQueryParams = allKeys.map((value) => {
+        return {
+          term: {
+            product_name: value,
+          },
+        };
+      });
+    //this.shouldQueryParams = shouldKeys.filter(value=>)
+    //  if (this.searchKeywords.hasOwnProperty(params)) {
+    //    this.shouldQueryParams = this.searchKeywords[params]
+    //      .filter((value) => value != params)
+    //      .map((value) => {
+    //        return {
+    //          term: {
+    //            product_name: value,
+    //          },
+    //        };
+    //      });
+    //  }
   }
 
   getNewQueryResult(): void {
@@ -122,8 +180,8 @@ export class SearchComponent implements OnInit {
       size: this.iLimit,
       query: {
         bool: {
-          must: this.must_query_params,
-          should: this.should_query_params,
+          must: this.mustQueryParams,
+          should: this.shouldQueryParams,
         },
       },
     });
@@ -183,8 +241,8 @@ export class SearchComponent implements OnInit {
       size: this.iLimit,
       query: {
         bool: {
-          must: this.must_query_params,
-          should: this.should_query_params,
+          must: this.mustQueryParams,
+          should: this.shouldQueryParams,
         },
       },
     });
