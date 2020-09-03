@@ -1,9 +1,0 @@
-<form [formGroup]="step">
-  <ng-template matStepLabel>Fill out image url</ng-template>
-  <mat-form-field>
-    <input matInput placeholder="Image Url" formControlName="imageUrl" required>
-  </mat-form-field>
-  <div>
-    <button [disabled]="!step.valid" mat-button matStepperNext>Next</button>
-  </div>
-</form>
