@@ -1,0 +1,37 @@
+@product-price: #b76e79;
+@primary-color: #ffcc00;
+@secondary-color: #0c1c31;
+
+.prices {
+  .cprice {
+    color: @secondary-color;
+    margin-right: 10px;
+    &.sale {
+      color: @product-price;
+    }
+  }
+
+  .oldprice {
+    text-decoration: line-through;
+  }
+}
+
+::ng-deep .mat-card:not([class*='mat-elevation-z']) {
+  box-shadow: none;
+}
+
+::ng-deep .mat-option:hover:not(.mat-option-disabled) {
+  background-color: @product-price;
+  color: #ffffff;
+}
+
+::ng-deep .mat-radio-button {
+  margin-right: 15px;
+  .mat-radio-inner-circle {
+    background-color: @primary-color !important;
+  }
+}
+::ng-deep.mat-radio-button.mat-accent.mat-radio-checked
+  .mat-radio-outer-circle {
+  border-color: @primary-color !important;
+}

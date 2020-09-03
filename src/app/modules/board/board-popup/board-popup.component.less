@@ -1,0 +1,105 @@
+@media (max-width: 767px) {
+  .social-icons {
+    padding: 10px 0;
+  }
+  .share-modal {
+    height: 100vh;
+  }
+  .embed-text-container {
+    height: 25vh !important;
+  }
+  .publish-board-title .board-header {
+    margin: 0;
+  }
+  .publish-board-title {
+    margin: 0 2rem 1.5rem;
+  }
+  .publish-board-room-items,
+  .publish-board-style-items {
+    margin: 0rem 1rem 1rem 0;
+  }
+  .action-buttons-row {
+    position: absolute;
+    bottom: 40px;
+    width: 100%;
+  }
+  .publish-board-input {
+    margin: 1rem 0 1rem 2rem;
+  }
+}
+
+.title {
+  color: #b76e79;
+}
+
+.social-icons i {
+  font-size: 32px;
+  display: inline-block;
+  margin: 0 10px;
+  width: 60px;
+  height: 60px;
+  border: 1px solid #c8ced7;
+  color: white;
+  text-align: center;
+  border-radius: 50%;
+  line-height: 60px;
+}
+
+.close-icon {
+  font-size: 22px;
+  color: #f7f6f6;
+}
+
+.embed-text-container {
+  height: 20vh;
+}
+
+.caption {
+  color: #f7f6f6;
+  font-style: italic;
+}
+
+[data-title] {
+  position: relative;
+  cursor: pointer;
+  font-size: 18px;
+  vertical-align: sub;
+}
+
+[data-title]:hover::before {
+  content: attr(data-title);
+  position: absolute;
+  bottom: -15px;
+  display: inline-block;
+  padding: 3px 6px;
+  border-radius: 2px;
+  background: #f2f4f3;
+  color: #606060;
+  font-size: 12px;
+  font-family: sans-serif;
+  white-space: pre-wrap;
+  left: 28px;
+  width: 180px;
+}
+
+[data-title]:hover::after {
+  display: none;
+}
+
+::ng-deep .tool-tip .mat-icon {
+  color: #999999;
+  font-size: 20px;
+  height: 20px;
+  width: 20px;
+  left: 2px;
+  position: relative;
+}
+
+@media (max-width: 360px) {
+  .publish-board-title {
+    margin: 0 1rem 1rem;
+  }
+  .publish-board-input {
+    margin: 0 0 1rem 1rem;
+  }
+}

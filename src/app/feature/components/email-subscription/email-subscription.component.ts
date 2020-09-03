@@ -24,10 +24,8 @@ export class EmailSubscriptionComponent implements OnInit {
     });
   }
   onSubmit(value: any) {
-    debugger;
     if (value.email.length > 0) {
-      this.apiService.getEmail().subscribe(res => {
-        debugger;
+      this.apiService.getEmail().subscribe((res) => {
         this.emailSubmitted = true;
       });
     } else {

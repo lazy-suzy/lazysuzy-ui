@@ -29,7 +29,7 @@
         (setMobileToggle)="onSetMobileToggle($event)"
         [productFilters]="productFilters"
         [isProductFetching]="isProductFetching"
-        [totalCount]="total_count"
+        [totalCount]="totalCount"
         (setFilters)="onSetFilters($event)"
       >
       </app-product-filter-mobile>
@@ -43,25 +43,10 @@
     </div>
   </ng-container>
 
-  <ng-container *ngIf="!isHandset">
-    <!-- <h4 class="category-title">{{ category }}</h4> -->
-    <div class="filter-panel flex justify-around items-center">
-      <app-product-filters
-        [productFilters]="productFilters"
-        (setFilters)="onSetFilters($event)"
-        class="flex justify-start w-75"
-      ></app-product-filters>
-      <div>{{ total_count }} Results</div>
-      <app-sort-type
-        [sortTypeList]="sortTypeList"
-        (setSortType)="onSetSortType($event)"
-      >
-      </app-sort-type>
-    </div>
-  </ng-container>
-
+  
   <div
     class="flex flex-wrap justify-between"
+    [ngClass]="{'products-container': !isHandset}"
     infiniteScroll
     [infiniteScrollDistance]="2"
     [infiniteScrollThrottle]="50"
@@ -80,12 +65,55 @@
         class="w-50"
       ></app-product-mobile>
     </ng-container>
+
+    <!-- brandlist -->
     <ng-container *ngIf="!isHandset">
-      <app-product
-        *ngFor="let product of products"
-        [product]="product"
-        class="w-25-ns "
-      ></app-product>
+      <div class="brandlist-container brandlist-left">
+        <app-brand-list 
+          [selectedBrandValue] = "selectedBrandValue"
+          [isBrandPage] = "isBrandPage"
+          (setBrand)="getProductwithBrandName($event)"></app-brand-list>
+      </div>
+    </ng-container>
+    <!-- / brandlist -->  
+
+    <ng-container *ngIf="!isHandset">
+      <!-- show brand data -->
+      <ng-container *ngIf="filters && !isHandset && isBrandPage">
+        <div class="branddata-container w-100">
+          <p class="brand-name">{{ brandData.name }}</p>
+          <p class="brand-description">{{ brandData.description }}</p>
+        </div>
+      </ng-container>
+      <!-- / show brand data -->
+
+      <!-- filter bar -->
+      <ng-container *ngIf="!isHandset">
+        <!-- <h4 class="category-title">{{ category }}</h4> -->
+        <div class="filter-panel flex justify-around items-center w-100">
+          <app-product-filters
+            [isBrandPage] = "isBrandPage"
+            [productFilters]="productFilters"
+            [isChangingBrandList]="isChangingBrandList"
+            (setFilters)="onSetFilters($event)"
+            class="flex justify-start w-75"
+          ></app-product-filters>
+          <div style="font-size: 14px; min-width: 110px">{{ totalCount }} Results</div>
+          <app-sort-type
+            [sortTypeList]="sortTypeList"
+            (setSortType)="onSetSortType($event)"
+          >
+          </app-sort-type>
+        </div>
+      </ng-container>
+      <!-- /filter bar -->
+      <ng-container *ngIf="!isChangingBrandList">
+        <app-product
+          *ngFor="let product of products"
+          [product]="product"
+          class="w-25-ns"
+        ></app-product>        
+      </ng-container>
     </ng-container>
   </div>
 </div>

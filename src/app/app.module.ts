@@ -14,7 +14,10 @@ import { GalleryModule } from '@ngx-gallery/core';
 import { LightboxModule } from '@ngx-gallery/lightbox';
 import { LIGHTBOX_CONFIG } from '@ngx-gallery/lightbox';
 import { MarkdownModule } from 'ngx-markdown';
-import { EventEmitterService } from './shared/services/events/event-emitter.service';
+import { EventEmitterService, MatDialogUtilsService } from './shared/services';
+import { NgxStripeModule } from 'ngx-stripe';
+import { environment as env } from 'src/environments/environment';
+import { NgxJsonLdModule } from '@ngx-lite/json-ld';
 
 const MODULES = [
   BrowserModule,
@@ -28,7 +31,9 @@ const MODULES = [
   FormsModule,
   GalleryModule,
   LightboxModule,
-  MarkdownModule.forRoot()
+  MarkdownModule.forRoot(),
+  NgxStripeModule.forRoot(env.STRIPE_API_KEY),
+  NgxJsonLdModule
 ];
 
 @NgModule({
@@ -37,6 +42,7 @@ const MODULES = [
   providers: [
     CookieService,
     EventEmitterService,
+    MatDialogUtilsService,
     {
       provide: LIGHTBOX_CONFIG,
       useValue: {

@@ -16,6 +16,22 @@
       rel="stylesheet"
     />
     <link
+      href="https://fonts.googleapis.com/css?family=Allura"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css?family=Amatic SC"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css?family=Italianno"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css?family=Montserrat"
+      rel="stylesheet"
+    />
+    <link
       href="https://fonts.googleapis.com/icon?family=Material+Icons"
       rel="stylesheet"
     />
@@ -32,10 +48,6 @@
       integrity="sha256-ke5yDzwl7GsgnYgBnCDiWSNA/x/hyU89VDHl/R535dw="
       crossorigin="anonymous"
     />
-
-    <!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
-    integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous"> -->
-
     <link
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css"
@@ -72,7 +84,7 @@
 
     <!-- Google Tag Manager -->
     <script>
-      (function(w, d, s, l, i) {
+      (function (w, d, s, l, i) {
         w[l] = w[l] || [];
         w[l].push({ 'gtm.start': new Date().getTime(), event: 'gtm.js' });
         var f = d.getElementsByTagName(s)[0],
@@ -90,7 +102,7 @@
         src="https://www.googletagmanager.com/ns.html?id=GTM-PD8TXBM"
         height="0"
         width="0"
-        style="display:none;visibility:hidden"
+        style="display: none; visibility: hidden;"
       ></iframe
     ></noscript>
     <!-- End Google Tag Manager (noscript) -->
@@ -101,9 +113,9 @@
 
     <!-- Facebook Pixel Code -->
     <script>
-      !(function(f, b, e, v, n, t, s) {
+      !(function (f, b, e, v, n, t, s) {
         if (f.fbq) return;
-        n = f.fbq = function() {
+        n = f.fbq = function () {
           n.callMethod
             ? n.callMethod.apply(n, arguments)
             : n.queue.push(arguments);
@@ -146,9 +158,20 @@
     </script>
 
     <script>
-      window.onload = event => {
+      // vg link starts here
+      var vglnk = { key: '7c7cd49fe471830c75c9967f05d5f292' };
+      (function (d, t) {
+        var s = d.createElement(t);
+        s.type = 'text/javascript';
+        s.async = true;
+        s.src = '//cdn.viglink.com/api/vglnk.js';
+        var r = d.getElementsByTagName(t)[0];
+        r.parentNode.insertBefore(s, r);
+      })(document, 'script');
+
+      window.onload = (event) => {
         // intercom starts here
-        (function() {
+        (function () {
           var w = window;
           var ic = w.Intercom;
           if (typeof ic === 'function') {
@@ -156,15 +179,15 @@
             ic('update', w.intercomSettings);
           } else {
             var d = document;
-            var i = function() {
+            var i = function () {
               i.c(arguments);
             };
             i.q = [];
-            i.c = function(args) {
+            i.c = function (args) {
               i.q.push(args);
             };
             w.Intercom = i;
-            var l = function() {
+            var l = function () {
               var s = d.createElement('script');
               s.type = 'text/javascript';
               s.async = true;
@@ -180,17 +203,6 @@
           }
         })();
 
-        // vg link starts here
-        var vglnk = { key: '7c7cd49fe471830c75c9967f05d5f292' };
-        (function(d, t) {
-          var s = d.createElement(t);
-          s.type = 'text/javascript';
-          s.async = true;
-          s.src = '//cdn.viglink.com/api/vglnk.js';
-          var r = d.getElementsByTagName(t)[0];
-          r.parentNode.insertBefore(s, r);
-        })(document, 'script');
-
         // full story starts here
 
         window['_fs_debug'] = false;
@@ -198,7 +210,7 @@
         window['_fs_script'] = 'fullstory.com/s/fs.js';
         window['_fs_org'] = 'P2QG6';
         window['_fs_namespace'] = 'FS';
-        (function(m, n, e, t, l, o, g, y) {
+        (function (m, n, e, t, l, o, g, y) {
           if (e in m) {
             if (m.console && m.console.log) {
               m.console.log(
@@ -207,7 +219,7 @@
             }
             return;
           }
-          g = m[e] = function(a, b, s) {
+          g = m[e] = function (a, b, s) {
             g.q ? g.q.push([a, b, s]) : g._api(a, b, s);
           };
           g.q = [];
@@ -217,35 +229,35 @@
           o.src = 'https://' + _fs_script;
           y = n.getElementsByTagName(t)[0];
           y.parentNode.insertBefore(o, y);
-          g.identify = function(i, v, s) {
+          g.identify = function (i, v, s) {
             g(l, { uid: i }, s);
             if (v) g(l, v, s);
           };
-          g.setUserVars = function(v, s) {
+          g.setUserVars = function (v, s) {
             g(l, v, s);
           };
-          g.event = function(i, v, s) {
+          g.event = function (i, v, s) {
             g('event', { n: i, p: v }, s);
           };
-          g.shutdown = function() {
+          g.shutdown = function () {
             g('rec', !1);
           };
-          g.restart = function() {
+          g.restart = function () {
             g('rec', !0);
           };
-          g.log = function(a, b) {
+          g.log = function (a, b) {
             g('log', [a, b]);
           };
-          g.consent = function(a) {
+          g.consent = function (a) {
             g('consent', !arguments.length || a);
           };
-          g.identifyAccount = function(i, v) {
+          g.identifyAccount = function (i, v) {
             o = 'account';
             v = v || {};
             v.acctId = i;
             g(o, v);
           };
-          g.clearUserCookie = function() {};
+          g.clearUserCookie = function () {};
         })(window, document, window['_fs_namespace'], 'script', 'user');
       };
     </script>
@@ -258,8 +270,8 @@
       }
     </style>
     <link
-        rel="stylesheet"
-        href="http://cdn.materialdesignicons.com/4.7.95/css/materialdesignicons.min.css"
-      />
+      rel="stylesheet"
+      href="https://cdn.materialdesignicons.com/4.7.95/css/materialdesignicons.min.css"
+    />
   </body>
 </html>

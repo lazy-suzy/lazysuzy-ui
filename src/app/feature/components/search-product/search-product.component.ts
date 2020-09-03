@@ -9,7 +9,7 @@ import {
   Breakpoints,
   BreakpointObserver
 } from '@angular/cdk/layout';
-import { ApiService } from 'src/app/shared/services';
+import { ApiService, MatDialogUtilsService } from 'src/app/shared/services';
 
 @Component({
   selector: 'app-search-product',
@@ -29,12 +29,11 @@ export class SearchProductComponent implements OnInit {
     public dialog: MatDialog,
     private breakpointObserver: BreakpointObserver,
     private apiService: ApiService,
-    private router: Router
+    private router: Router,
+    private matDialogUtils: MatDialogUtilsService
   ) {}
 
   ngOnInit(): void {
-    this.product.main_product_images =
-      '//www.lazysuzy.com' + this.product.main_product_images;
     this.setRating();
     this.bpSubscription = this.bpObserver.subscribe(
       (handset: BreakpointState) => {
@@ -43,12 +42,12 @@ export class SearchProductComponent implements OnInit {
     );
   }
 
-  ngOnDestroy(): void {
+  onDestroy(): void {
     this.bpSubscription.unsubscribe();
   }
 
   setRating(): void {
-    let starCount: number = Math.round(parseFloat(this.product.rating) * 2) / 2;
+    let starCount = Math.round(parseFloat(this.product.rating) * 2) / 2;
     while (starCount > 0.5) {
       this.starIcons.push('star');
       starCount -= 1;
@@ -66,13 +65,7 @@ export class SearchProductComponent implements OnInit {
     if (this.isHandset) {
       this.router.navigateByUrl(`/product/${this.product.product_sku}`);
     } else {
-      const dialogRef = this.dialog.open(ProductDetailsComponent, {
-        width: '80%',
-        height: '80%',
-        data: { sku: this.product.product_sku }
-      });
-
-      dialogRef.afterClosed().subscribe(result => {});
+      this.matDialogUtils.openMatDialog(this.product.product_sku);
     }
   }
 

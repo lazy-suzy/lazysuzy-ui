@@ -26,12 +26,12 @@ export class SearchComponent implements OnInit {
   bpObserver: Observable<BreakpointState> = this.breakpointObserver.observe(
     Breakpoints.Handset
   );
-  total_count: number = 0;
+  totalCount = 0;
   bpSubscription: Subscription;
   isHandset: boolean;
-  productsInRow: number = 2;
-  isProductFetching: boolean = false;
-
+  productsInRow = 2;
+  isProductFetching = false;
+  isBoardApi = false;
   constructor(
     private apiService: ApiService,
     private router: Router,
@@ -42,8 +42,8 @@ export class SearchComponent implements OnInit {
   ngOnInit(): void {
     this.query = this.route.snapshot.queryParamMap.get('query');
     this.getQueryResult();
-    this.route.queryParams.subscribe(params => {
-      this.query = params['query'] || '';
+    this.route.queryParams.subscribe((params) => {
+      this.query = params.query || '';
       this.getQueryResult();
     });
 
@@ -54,7 +54,7 @@ export class SearchComponent implements OnInit {
     );
   }
 
-  ngOnDestroy(): void {
+  onDestroy(): void {
     this.productsSubscription.unsubscribe();
     this.bpSubscription.unsubscribe();
   }
@@ -78,7 +78,7 @@ export class SearchComponent implements OnInit {
       .getSearchProducts(queryString)
       .subscribe((payload: ISearchProductsPayload) => {
         const { hits } = payload.hits;
-        this.total_count = hits.length;
+        this.totalCount = hits.length;
         this.products = hits.map((hit: any) => hit._source);
       });
   }

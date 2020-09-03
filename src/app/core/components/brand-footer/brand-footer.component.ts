@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ApiService } from './../../../shared/services';
+import { ApiService, EventEmitterService } from './../../../shared/services';
 import {
   trigger,
   transition,
@@ -7,6 +7,7 @@ import {
   style,
   animate
 } from '@angular/animations';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-brand-footer',
@@ -24,18 +25,28 @@ import {
 })
 export class BrandFooterComponent implements OnInit {
   fade: any;
-
-  constructor(private apiService: ApiService) {}
+  eventSubscription: Subscription;
+  constructor(
+    private apiService: ApiService,
+    private eventEmitterService: EventEmitterService
+  ) {}
   brands: any;
 
   ngOnInit() {
-    this.getbrands();
+    this.eventSubscription = this.eventEmitterService.userChangeEvent
+      .asObservable()
+      .subscribe((user) => {
+        this.getbrands();
+      });
+  }
+  onnDestroy(): void {
+    this.eventSubscription.unsubscribe();
   }
   getbrands() {
-    this.apiService.getBrands().subscribe(res => {
+    this.apiService.getBrands().subscribe((res) => {
       this.brands = res;
-      this.brands = this.brands.filter(function(val) {
-        if (val['value'] != 'potterybarn') {
+      this.brands = this.brands.filter((val) => {
+        if (val.value !== 'potterybarn') {
           return val;
         }
       });

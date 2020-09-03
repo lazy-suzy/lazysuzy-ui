@@ -2,7 +2,8 @@ import { Component, OnInit, Input } from '@angular/core';
 import {
   ApiService,
   UtilsService,
-  EventEmitterService
+  EventEmitterService,
+  MatDialogUtilsService
 } from 'src/app/shared/services';
 import {
   BreakpointState,
@@ -20,12 +21,12 @@ export class SignupComponent implements OnInit {
   isHandset: boolean;
   userCookie: string;
   user: any;
-  error: boolean = false;
+  error = false;
   errorMsg: string;
-  name: string = '';
-  email: string = '';
-  password: string = '';
-  thanksMsg: boolean = false;
+  name = '';
+  email = '';
+  password = '';
+  thanksMsg = false;
 
   bpObserver: Observable<BreakpointState> = this.breakpointObserver.observe(
     Breakpoints.Handset
@@ -37,7 +38,8 @@ export class SignupComponent implements OnInit {
     private apiService: ApiService,
     private utils: UtilsService,
     private eventService: EventEmitterService,
-    private breakpointObserver: BreakpointObserver
+    private breakpointObserver: BreakpointObserver,
+    private matDialogUtils: MatDialogUtilsService
   ) {}
 
   ngOnInit() {
@@ -48,7 +50,7 @@ export class SignupComponent implements OnInit {
     );
   }
 
-  ngOnDestroy(): void {
+  onDestroy(): void {
     this.bpSubscription.unsubscribe();
   }
 
@@ -74,7 +76,7 @@ export class SignupComponent implements OnInit {
   signup(event, name, email, password) {
     event.preventDefault();
     if (this.validateForm(email, password)) {
-      var formData: any = new FormData();
+      const formData: any = new FormData();
       formData.append('name', name);
       formData.append('email', email);
       formData.append('password', password);
@@ -88,7 +90,7 @@ export class SignupComponent implements OnInit {
               payload.success.token,
               payload.success.user
             );
-            this.utils.closeDialogs();
+            this.matDialogUtils.closeDialogs();
           }
         },
         (error: any) => {
@@ -107,6 +109,6 @@ export class SignupComponent implements OnInit {
   }
 
   openSigninDialog() {
-    this.utils.openSigninDialog(this.isHandset ? '80%' : '35%');
+    this.matDialogUtils.openSigninDialog(this.isHandset ? '80%' : '35%');
   }
 }

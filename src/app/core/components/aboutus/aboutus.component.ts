@@ -6,10 +6,9 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./aboutus.component.less']
 })
 export class AboutusComponent implements OnInit {
+  logoPath = 'assets/image/color_logo_transparent.png';
 
-  constructor() { }
+  constructor() {}
 
-  ngOnInit() {
-  }
-
+  ngOnInit() {}
 }

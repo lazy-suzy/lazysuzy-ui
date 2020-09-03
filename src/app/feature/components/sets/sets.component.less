@@ -1,48 +1,131 @@
-.sets-container {
+.sets-content {
   font-size: 14px;
   display: flex;
   width: 100%;
   position: relative;
-  margin: 5px 0;
+  margin: 5px 0 0 0;
+
+  a {
+    color: #0d1c31;
+  }
+
   span {
     padding: 1px 5px;
     color: #0d1c31;
   }
+
   i {
     padding: 5px 0;
     color: #b76e79;
   }
+
   .price {
     color: #b76e79;
+    font-size: 14px;
+    font-family: 'Open Sans';
+    // padding: 0;
   }
-  .brand-button {
-    background-color: #0d1c31;
-    padding: 1px 10px;
-    border-radius: 5px;
+  .was-price {
+    font-family: 'Open Sans';
+    color: #606060;
+    font-size: 12px;
+    padding-top: 3px;
+  }
+
+  .brand-button-container {
     position: absolute;
     right: 10px;
+  }
+
+  .brand-button {
+    text-align: center;
+    width: 100px;
+    background-color: #0d1c31;
+    padding: 1px 5px;
+    border-radius: 5px;
+    font-size: 12px;
+    font-family: 'Lato';
     a {
-      color: #faca37;
+      color: #ffcc00;
+
       &:hover {
         text-decoration: none;
       }
     }
   }
 }
+
+.invalid-feedback {
+  color: #ff0000;
+  font-size: 14px;
+}
+
+.pad-0 {
+  padding: 0 !important;
+}
+
 .title {
-  font-size: 22px;
+  color: #606060;
+  font-size: 12px;
+  font-family: Open sans;
+}
+.info-icon {
+  font-size: 14px;
+  width: 14px;
+  height: 14px;
+  position: relative;
+  top: 1px;
+  color: #606060;
+}
+.stock-msg {
+  font-size: 12px;
+  color: #b76e79;
+  padding-left: 4px;
+}
+.shipping-msg {
+  font-size: 12px;
+  color: #606060;
+  padding-left: 4px;
+}
+.stock-info {
+  display: flex;
+  padding: 0 5px;
+  margin: -5px 0;
+}
+.product-name {
+  font-size: 12px;
+  font-family: 'Open Sans';
+  color: #0c1c31;
+}
+.brand-button-card {
+  display: flex;
+  align-items: flex-start;
+  flex-wrap: wrap;
+  overflow: hidden;
+  justify-content: center;
 }
 @media (max-width: 767px) {
+  .sets-content {
+    margin: 0;
+  }
   .sets-container {
+    border: 1px solid #c8c7cc;
+    padding: 4px;
+    margin: 6px 12px;
     span {
       padding: 1px 2px;
     }
-    .price {
-      width: 13%;
+    .brand-button-container {
+      right: 0;
+      top: 10px;
     }
     .brand-button {
-      right: 0;
-      padding: 1px 5px;
+      padding: 8px 5px;
+      margin: 2px;
+      // text-transform: uppercase;
     }
+  }
+  .stock-info {
+    padding: 0;
   }
 }

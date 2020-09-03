@@ -1,0 +1,510 @@
+<ng-keyboard-shortcuts [shortcuts]="shortcuts"></ng-keyboard-shortcuts>
+<app-board-loader *ngIf="appMeta.board.data.length == 0"></app-board-loader>
+<div class="lazysuzy-board">
+  <div>
+    <div
+      class="left-panel {{ hasPanelFixed ? 'panel-height' : '' }}"
+      [ngClass]="{
+        'b-100': isTablet && showMenu,
+        'b-650': isTablet && !showMenu
+      }"
+    >
+      <div class="d-lg-none" *ngIf="isTablet">
+        <div
+          class="toggle-icon {{ showMenu ? 'b-577 transform-icon' : 'b-25' }}"
+          (click)="toggleMenu($event)"
+        >
+          <i class="mdi mdi-plus" aria-hidden="true"></i>
+          <div
+            class="tooltiptext {{
+              hasToggleIconTooltip === 'true' ? '' : 'dn'
+            }}"
+          >
+            Click here to get started
+            <div class="fr" (click)="hideMenuMsg($event)">GOT IT</div>
+          </div>
+        </div>
+      </div>
+      <div
+        class="left-tabs {{ showMenu && isTablet ? '' : 'top-position-60' }}"
+      >
+        <ul class="nav nav-tabs flex-column">
+          <li
+            *ngFor="let sideItem of sideBarItems"
+            (click)="selectSideBarItem(sideItem)"
+            [ngClass]="
+              boardService.state.selectedCategory == null &&
+              sideItem?.value == 'browse' &&
+              !hasSearched
+                ? 'disable-browse'
+                : ''
+            "
+            class="nav-item"
+          >
+            <div
+              class="nav-link"
+              [class.active]="sideItem?.value === selectedItem"
+            >
+              {{ sideItem?.label }}
+            </div>
+          </li>
+        </ul>
+      </div>
+
+      <div
+        class="left-tab-pane {{ !isTablet ? 'position-relative w-100' : '' }} {{
+          showMenu && isTablet ? 'mt-0' : 'margin-top-60'
+        }} {{ selectedItem === 'browse' ? 'overflow-hidden' : '' }}"
+      >
+        <!-- Selected Tab: {{selectedItem}} -->
+        <div *ngIf="selectedItem === 'select'">
+          <div class="browse-header padding-top-30">
+            <div class="item-search-bar">
+              <form class="input-group" (submit)="search(true)">
+                <input
+                  type="text"
+                  class="form-control"
+                  id="inlineFormInputGroupUsername"
+                  placeholder="Search"
+                  [(ngModel)]="searchText"
+                  name="searchText"
+                  (blur)="onSearchBlur()"
+                  (focus)="onSearchFocus()"
+                />
+                <div class="input-group-append">
+                  <button class="input-group-text icon" type="submit">
+                    <i class="mdi mdi-magnify" aria-hidden="true"></i>
+                  </button>
+                </div>
+              </form>
+            </div>
+            <div class="text-left w-100">
+              <h5 class="title ml-2">Select New Category</h5>
+            </div>
+          </div>
+          <app-select
+            (goToCategory)="handleSelectCategory($event)"
+            [showMenu]="showMenu"
+          ></app-select>
+        </div>
+
+        <div *ngIf="selectedItem === 'browse'">
+          <div class="browse-header padding-top-30">
+            <div class="item-search-bar">
+              <form class="input-group" (submit)="search(true)">
+                <input
+                  type="text"
+                  class="form-control"
+                  id="inlineFormInputGroupUsername"
+                  placeholder="Search"
+                  [(ngModel)]="searchText"
+                  name="searchText"
+                  (blur)="onSearchBlur()"
+                  (focus)="onSearchFocus()"
+                />
+                <div class="input-group-append">
+                  <button class="input-group-text icon" type="submit">
+                    <i class="mdi mdi-magnify" aria-hidden="true"></i>
+                  </button>
+                </div>
+              </form>
+            </div>
+            <div class="browse-title pt-1" (click)="handleGoToSelect($event)">
+              <i class="mdi mdi-chevron-left" aria-hidden="true"></i>
+              <h5 class="title js-category-title">
+                <ng-container *ngIf="hasSearched; else categoryName">
+                  <span class="highlight">Search results for</span> "{{
+                    searchText
+                  }}"
+                </ng-container>
+                <ng-template #categoryName>
+                  {{ selectedCategory?.category }}
+                </ng-template>
+              </h5>
+            </div>
+            <div class="browse-filter" *ngIf="!hasSearched">
+              <div
+                class="filter-bar-container"
+                *ngIf="filterData && hasFilterEnabled"
+              >
+                <div class="filter-bar js-filter-section" id="desktop-filter">
+                  <app-browse-filter
+                    [filterData]="filterData"
+                    (updatesFromFilter)="handleFiltersUpdates($event)"
+                  ></app-browse-filter>
+                </div>
+              </div>
+              <!-- <div class="clear-all d-none">Clear All</div> -->
+            </div>
+          </div>
+          <div
+            (scroll)="onScrollEvent($event)"
+            class="product-container {{
+              productForPreview ? 'product-container-padding' : ''
+            }}"
+          >
+            <app-board-products
+              [products]="remoteProducts"
+              (previewProduct)="handleProductPreview($event)"
+            >
+            </app-board-products>
+            <div
+              *ngIf="hasLoadedAllProducts && remoteProducts.length !== 0"
+              class="no-more-items-msg"
+            >
+              No more items available.
+            </div>
+          </div>
+          <!-- <div
+            class="load-more-btn-container"
+            *ngIf="!showLoader && !hasLoadedAllProducts"
+          >
+            <button
+              type="button"
+              (click)="loadMore()"
+              class="btn load-more-btn"
+            >
+              Load More
+            </button>
+          </div> -->
+
+          <div class="msg-button-container">
+            <button
+              type="button"
+              *ngIf="!showLoader && remoteProducts.length == 0"
+              (click)="handleGoToSelect($event)"
+              class="btn btn-primary"
+            >
+              No items found. Please click here to select another Category
+            </button>
+          </div>
+          <!-- <app-loader *ngIf="showLoader"></app-loader> -->
+          <div *ngIf="showLoader" class="loader-container">
+            <div class="loader-box">
+              <div class="loader-bounceball"></div>
+            </div>
+          </div>
+          <div
+            class="static-bottom-panel-wrapper"
+            *ngIf="productForPreview"
+            style="z-index: 9999999;"
+          >
+            <ng-container *ngIf="!isTablet; else isDesktop">
+              <div class="static-bottom-panel selected position-fixed">
+                <app-product-preview
+                  [data]="productForPreview"
+                  (clearProductPreview)="handleClearProductPreview($event)"
+                  (addProductBoard)="handleAddProductBoardPreview($event)"
+                >
+                </app-product-preview>
+              </div>
+            </ng-container>
+
+            <ng-template #isDesktop>
+              <div
+                class="static-bottom-panel selected {{
+                  !showMenu ? 'position-absolute' : 'position-fixed'
+                }}"
+              >
+                <app-product-preview
+                  [data]="productForPreview"
+                  (clearProductPreview)="handleClearProductPreview($event)"
+                  (addProductBoard)="handleAddProductBoardPreview($event)"
+                >
+                </app-product-preview>
+              </div>
+            </ng-template>
+          </div>
+        </div>
+
+        <div *ngIf="selectedItem === 'text'" class="padding-top-30">
+          <app-board-text></app-board-text>
+        </div>
+
+        <div
+          *ngIf="selectedItem === 'add'"
+          class="padding-top-30 pl-md-0 pl-2 mt-3"
+        >
+          <h5 class="title ml-2">Add Custom Object</h5>
+          <app-board-add
+            [allAssets]="appMeta.asset"
+            [userId]="currentUser.id"
+            (previewProduct)="handleProductPreview($event)"
+            (updateAsset)="handleAssetUpdate($event)"
+          ></app-board-add>
+          <div
+            class="static-bottom-panel-wrapper"
+            *ngIf="productForPreview"
+            style="z-index: 9999999;"
+          >
+            <div
+              class="static-bottom-panel selected {{
+                !showMenu && isTablet ? 'position-absolute' : 'position-fixed'
+              }} {{ !isTablet ? 'position-fixed' : '' }}"
+            >
+              <app-product-preview
+                [data]="productForPreview"
+                (clearProductPreview)="handleClearProductPreview($event)"
+                (addProductBoard)="handleAddProductBoardPreview($event)"
+              >
+              </app-product-preview>
+            </div>
+          </div>
+        </div>
+
+        <div
+          *ngIf="selectedItem === 'board'"
+          class="padding-top-30 pl-0-ns pl-2"
+        >
+          <app-current-board
+            [boardProducts]="boardPreviewProducts"
+          ></app-current-board>
+        </div>
+
+        <div
+          *ngIf="selectedItem === 'favorites'"
+          class="padding-top-30 pl-sm-0 pl-2 mt-3"
+        >
+          <div class="text-left w-100">
+            <h5 class="title ml-2">Add from Saved Favorites</h5>
+          </div>
+          <div class="pt-4" *ngIf="!favoriteProducts.length">
+            No items found. Save items to your favorites to see them here.
+          </div>
+          <app-board-products
+            [products]="favoriteProducts"
+            (previewProduct)="handleProductPreview($event)"
+          >
+          </app-board-products>
+          <div
+            class="static-bottom-panel-wrapper"
+            *ngIf="productForPreview"
+            style="z-index: 9999999;"
+          >
+            <div
+              class="static-bottom-panel selected {{
+                !showMenu && isTablet ? 'position-absolute' : 'position-fixed'
+              }} {{ !isTablet ? 'position-fixed' : '' }}"
+            >
+              <app-product-preview
+                [data]="productForPreview"
+                (clearProductPreview)="handleClearProductPreview($event)"
+                (addProductBoard)="handleAddProductBoardPreview($event)"
+              >
+              </app-product-preview>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="main-content container-fluid gray-bg">
+    <div class="row">
+      <div class="col-md-12 tool-bar-holder">
+        <div class="top-panel row top-panel-hide">
+          <div class="col-md-2 d-none d-md-block state-icons">
+            <!-- <i class="mdi mdi-magnify-minus" (click)="zoomOut()" aria-hidden="true"></i> -->
+            <!-- <i class="mdi mdi-magnify-plus" (click)="zoomIn()" aria-hidden="true"></i> -->
+            <i class="mdi mdi-undo" (click)="undo()" aria-hidden="true"></i>
+            <i class="mdi mdi-redo" (click)="redo()" aria-hidden="true"></i>
+          </div>
+          <div
+            class="col-sm-6 col-md-10 p-0 text-center col-12 font-editor-container image-toolbar-position'"
+          >
+            <div class="editor-icons">
+              <div
+                class="d-inline font-selector"
+                [(fontPicker)]="font"
+                [fpPresetLabel]="'Quick Access'"
+                [fpPresetFonts]="presetFonts"
+                (fontPickerChange)="updateFontAndSize(font)"
+                [fpWidth]="'auto'"
+                [fpPosition]="'bottom'"
+              >
+                <div class="action-button dropdown mr-5-sm">
+                  {{ font?.family }} {{ font?.style | FontStyles }} |
+                  {{ font?.size }}
+                </div>
+              </div>
+
+              <div class="pickr-container {{ showPicker ? '' : 'd-none-xs' }}">
+                <div class="pickr" #colorPicker></div>
+              </div>
+              <div class="color-selector-tab" (click)="selectColor()">
+                <i
+                  class="mdi mdi-format-color-text {{
+                    showPicker ? 'd-none-xs' : ''
+                  }}"
+                  aria-hidden="true"
+                ></i>
+              </div>
+            </div>
+            <div class="crop-toolbar">
+              <button class="btn" (click)="handleCrop(true)">
+                <i class="mdi mdi-check mr-0" aria-hidden="true"></i> Crop
+              </button>
+              <button class="btn" (click)="handleCrop(false)">
+                <i class="mdi mdi-undo mr-0" aria-hidden="true"></i> Cancel
+              </button>
+              <button class="btn" (click)="handleCrop(false, true)">
+                <i class="mdi mdi-minus mr-0" aria-hidden="true"></i> Revert
+              </button>
+            </div>
+            <div class="item-action-icons">
+              <span
+                data-title="Remove Background"
+                class="do-transparent"
+                (click)="action('transparent')"
+              >
+                <i class="mdi mdi-auto-fix" aria-hidden="true"></i>
+              </span>
+              <span
+                data-title="Apply Background"
+                class="undo-transparent"
+                (click)="action('undoTransparent')"
+              >
+                <i class="mdi mdi-format-paint" aria-hidden="true"></i>
+              </span>
+              <span class="background-msg">
+                <i
+                  class="mdi mdi-arrow-up-bold background-msg-arrow"
+                  aria-hidden="true"
+                ></i>
+                <!-- <i
+                  class="mdi mdi-close close-background-msg"
+                  aria-hidden="true"
+                ></i> -->
+                Click here to revert to Original
+              </span>
+              <span data-title="Duplicate" (click)="action('duplicate')"
+                ><i class="mdi mdi-content-copy" aria-hidden="true"></i
+              ></span>
+              <span data-title="Crop" (click)="handleCrop()"
+                ><i class="mdi mdi-crop" aria-hidden="true"></i
+              ></span>
+              <span data-title="Flip" (click)="action('flip')">
+                <i class="mdi mdi-autorenew" aria-hidden="true"></i>
+              </span>
+              <span data-title="Send Backward" (click)="action('sendBackward')">
+                <i class="mdi mdi-arrange-send-backward" aria-hidden="true"></i>
+              </span>
+              <span data-title="Bring Forward" (click)="action('bringForward')">
+                <i class="mdi mdi-arrange-bring-forward" aria-hidden="true"></i>
+              </span>
+              <span data-title="Delete" (click)="action('delete')">
+                <i class="mdi mdi-delete" aria-hidden="true"></i>
+              </span>
+            </div>
+          </div>
+          <!-- <div class="col-sm-6 col-md-4 col-8 padding-right-0"> -->
+
+          <!-- <div class="top-panel-hide crop-toolbar">
+              <span class="btn" (click)="handleCrop(true)">
+                <i class="mdi mdi-check" aria-hidden="true"></i> Crop
+              </span>
+              <span class="btn" (click)="handleCrop(false)">
+                <i class="mdi mdi-undo" aria-hidden="true"></i> Cancel
+              </span>
+              <span class="btn" (click)="handleCrop(false, true)">
+                <i class="mdi mdi-minus" aria-hidden="true"></i> Revert
+              </span>
+            </div> -->
+          <!-- </div> -->
+        </div>
+        <div class="top-panel row top-panel-hide crop-toolbar">
+          <div class="col-sm-12 crop-options">
+            <button class="btn" (click)="handleCrop(true)">
+              <i class="mdi mdi-check mr-0" aria-hidden="true"></i>
+              <span>Crop</span>
+            </button>
+            <button class="btn" (click)="handleCrop(false)">
+              <i class="mdi mdi-undo mr-0" aria-hidden="true"></i>
+              <span>Cancel</span>
+            </button>
+            <button class="btn" (click)="handleCrop(false, true)">
+              <i class="mdi mdi-minus mr-0" aria-hidden="true"></i>
+              <span>Revert</span>
+            </button>
+          </div>
+        </div>
+        <div class="canvas-content">
+          <div class="d-flex justify-content-between">
+            <!-- <div class="canvas-title-bar">
+              <div
+                class="canvas-icons"
+                mat-raised-button
+                matTooltip="Edit Board Settings"
+              >
+                <a>
+                  <i
+                    class="mdi mdi-settings"
+                    (click)="openBoardConfig()"
+                    aria-hidden="true"
+                  ></i>
+                </a>
+              </div>
+            </div> -->
+            <div class="w-25-ns w-50">
+              <input
+                class="form-control board-title"
+                placeholder="Board title"
+                onClick="this.select();"
+                onfocus="this.placeholder = ''"
+              />
+            </div>
+            <div
+              class="board-action-icons mr-0 pr-0 pt-2"
+              *ngIf="isTablet; else isDesktop"
+            >
+              <i
+                class="mdi mdi-share-variant pr-1"
+                (click)="openPopup('share')"
+                aria-hidden="true"
+              ></i>
+              <i
+                class="mdi mdi-publish ml-2 publish-icon"
+                (click)="openPopup('publish')"
+                aria-hidden="true"
+              ></i>
+            </div>
+            <ng-template #isDesktop>
+              <div class="d-flex mr-3 board-action-icons">
+                <div class="board-action-button" (click)="openPopup('share')">
+                  <i class="mdi mdi-share-variant pr-1" aria-hidden="true"></i>
+                  <div class="board-action-button-text">SHARE</div>
+                </div>
+                <div class="board-action-button" (click)="openPopup('publish')">
+                  <i class="mdi mdi-publish pr-1" aria-hidden="true"></i>
+                  <div class="board-action-button-text">PUBLISH</div>
+                </div>
+              </div>
+            </ng-template>
+          </div>
+          <div class="canvas">
+            <div *ngIf="hasCanvasLoader" class="loader-container canvas-loader">
+              <!-- <div class="loader-box">
+                <div class="loader-bounceball"></div>
+              </div> -->
+            </div>
+            <div id="canvas-droparea">
+              <canvas
+                id="canvas-area"
+                style="border: 1px solid #c8c7cc;"
+              ></canvas>
+            </div>
+          </div>
+          <div class="col-sm-2 col-5 state-icons d-md-none pr-0">
+            <!-- <i class="mdi mdi-magnify-minus" (click)="zoomOut()" aria-hidden="true"></i> -->
+            <!-- <i class="mdi mdi-magnify-plus" (click)="zoomIn()" aria-hidden="true"></i> -->
+            <i class="mdi mdi-undo" (click)="undo()" aria-hidden="true"></i>
+            <i
+              class="mdi mdi-redo ml-1"
+              (click)="redo()"
+              aria-hidden="true"
+            ></i>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

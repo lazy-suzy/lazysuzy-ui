@@ -1,0 +1,53 @@
+.detail-container {
+  height: 50px;
+  // margin-bottom: 10px;
+}
+.preview-close-icon {
+  font-size: 18px;
+  margin: -5px 0 0;
+  color: #b7b4b4;
+}
+.preview-icons {
+  margin: 0 5px 5px 0;
+  float: right;
+}
+.preview-icons-column {
+  display: flex;
+  align-items: flex-end;
+  flex-direction: column;
+  justify-content: space-between;
+}
+.image {
+  overflow: hidden;
+  max-width: 100px;
+}
+.edit-btn {
+  position: absolute;
+  right: -15px;
+  color: #b8b5b5;
+  top: 0px;
+  cursor: pointer;
+  z-index: 1;
+}
+.is_price {
+  color: #b76d79;
+}
+.preview-icons-container {
+  .top-tooltip[data-title-board]:hover::before {
+    bottom: 3px;
+  }
+
+  [data-title]:hover::after {
+    left: 20px;
+  }
+
+  .top-tooltip[data-title]:hover::after {
+    transform: rotate(270deg);
+    bottom: 5px;
+  }
+
+  [data-title]:hover::before {
+    bottom: 0px;
+    left: 35px;
+  }
+}

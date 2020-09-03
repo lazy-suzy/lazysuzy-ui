@@ -7,6 +7,7 @@ import { MatMenuModule } from '@angular/material/menu';
 import { MatIconModule } from '@angular/material/icon';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { FormsModule } from '@angular/forms';
+import { RouterModule } from '@angular/router';
 import {
   SocialLoginModule,
   AuthServiceConfig,
@@ -26,7 +27,7 @@ export function getAuthServiceConfigs() {
     return_scopes: true,
     enable_profile_selector: true
   };
-  let config = new AuthServiceConfig([
+  const config = new AuthServiceConfig([
     {
       id: GoogleLoginProvider.PROVIDER_ID,
       provider: new GoogleLoginProvider(
@@ -53,7 +54,8 @@ const COMPONENTS = [SignupComponent, SigninComponent];
     MatIconModule,
     FormsModule,
     MatDialogModule,
-    SocialLoginModule
+    SocialLoginModule,
+    RouterModule
   ],
   exports: [AuthComponent, CommonModule],
   entryComponents: [...COMPONENTS],

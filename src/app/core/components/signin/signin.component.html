@@ -27,14 +27,14 @@
     <hr />
   </div>
 
-  <div class="modal-body">
+  <div>
     <div class="span-line text-center">Not Feeling Social?</div>
     <br />
     <form role="form" (submit)="login($event, email, password)">
       <div class="form-group">
         <input
           type="email"
-          class="form-control "
+          class="form-control"
           name="email"
           placeholder="Email"
           required
@@ -43,7 +43,7 @@
         <br />
         <input
           type="password"
-          class="form-control  password"
+          class="form-control password"
           name="password"
           placeholder="Password"
           required
@@ -56,7 +56,10 @@
           Login
         </button>
         <br />
-        <a class="resetPassword" href="http://lazysuzy.com:8081/password/reset"
+        <a
+          class="resetPassword"
+          (click)="closeDialogs()"
+          [routerLink]="['/forgot-password']"
           >Reset Password</a
         >
       </div>
@@ -64,7 +67,7 @@
     <hr />
   </div>
 
-  <div class="modal-footer">
+  <div>
     <span class="footer-content"
       >Not a member yet?&nbsp;
       <button class="btn-sm" (click)="openSignupDialog()">

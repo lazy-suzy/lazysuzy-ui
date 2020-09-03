@@ -29,14 +29,14 @@
     <hr />
   </div>
 
-  <div class="modal-body">
+  <div>
     <div class="span-line text-center">Not Feeling Social?</div>
     <br />
     <form role="form" (submit)="signup($event, name, email, password)">
       <div class="form-group">
         <input
           type="name"
-          class="form-control "
+          class="form-control"
           name="name"
           placeholder="Name"
           required
@@ -45,7 +45,7 @@
         <br />
         <input
           type="email"
-          class="form-control "
+          class="form-control"
           name="email"
           placeholder="Email"
           required
@@ -54,7 +54,7 @@
         <br />
         <input
           type="password"
-          class="form-control "
+          class="form-control"
           name="password"
           placeholder="Password"
           required
@@ -71,7 +71,7 @@
     <hr />
   </div>
 
-  <div class="modal-footer">
+  <div>
     <span class="footer-content {{ thanksMsg ? 'dn' : '' }}"
       >Already Joined?&nbsp;
       <button class="btn-sm" (click)="openSigninDialog()">

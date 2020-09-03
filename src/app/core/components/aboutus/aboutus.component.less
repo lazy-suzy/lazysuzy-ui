@@ -1,40 +1,64 @@
 .aboutus {
-    margin: 20px auto;
-    color: #212529;
-    .main-heading {
-        color: #ffcc00;
-        margin: 30px 0px 20px 0px;
-        font-size: 30px;
+  margin: 20px auto;
+  color: #212529;
+  font-size: 24px;
+  .main-heading {
+    margin: 50px;
+    font-size: 30px;
+    text-align: center;
+  }
+  .first-section {
+    padding: 50px;
+    background: #eeeeee;
+    text-align: center;
+    color: #b76e79;
+  }
+  .logo-section {
+    background: #0c1c31;
+    padding: 50px;
+    text-align: center;
+    img {
+      max-width: 200px;
     }
-    .secondary-heading {
-        margin: 25px 0px;
+  }
+  .promise-section {
+    background: #b76e79;
+    color: #ffffff;
+    font-size: 18px;
+    .promise-heading {
+      font-size: 24px;
     }
-    p {
-        margin: 15px 0px;
-        font-size: 18px;
+    img {
+      max-width: 90px;
     }
+  }
+  .secondary-heading {
+    margin: 25px 0px;
+  }
+  p {
+    margin: 15px 0px;
+    font-size: 18px;
+  }
 }
 
 .container {
-    padding-right: 15px;
-    padding-left: 15px;
-    margin-right: auto;
-    margin-left: auto;
+  padding-right: 15px;
+  padding-left: 15px;
+  margin-right: auto;
+  margin-left: auto;
+}
+@media (min-width: 768px) {
+  .container {
+    width: 750px;
   }
-  @media (min-width: 768px) {
-    .container {
-      width: 750px;
-    }
+}
+@media (min-width: 992px) {
+  .container {
+    width: 970px;
   }
-  @media (min-width: 992px) {
-    .container {
-      width: 970px;
-    }
+}
+@media (min-width: 1200px) {
+  .container {
+    width: 1170px;
   }
-  @media (min-width: 1200px) {
-    .container {
-      width: 1170px;
-    }
-  }
-    
-    
+}

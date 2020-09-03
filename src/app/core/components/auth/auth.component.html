@@ -1,53 +1,43 @@
-<div
-  class="flex"
-  *ngIf="!userCookie; else userName"
-  (click)="openSignupDialog()"
->
-  <mat-icon
-    class="account-icon pointer"
-    aria-hidden="false"
-    aria-label="Account"
-  >
-    account_circle</mat-icon
-  >
-  <span *ngIf="!isHandset" class="signup-link ml1 pointer">Sign Up</span>
-</div>
-<ng-template #userName>
+<div *ngIf="initialized">
   <span
-    class="profile-name"
-    *ngIf="!isHandset; else showIcon"
-    [matMenuTriggerFor]="optionsMenu"
+    *ngIf="isCurrentUserGuest(); else userName"
+    (click)="openSignupDialog()"
   >
-    {{ user.name }}
-  </span>
-  <ng-template #showIcon>
     <mat-icon
       class="account-icon pointer"
       aria-hidden="false"
       aria-label="Account"
+    >
+      account_circle
+    </mat-icon>
+  </span>
+
+  <ng-template #userName>
+    <img
+      *ngIf="hasPicture; else showInitials"
+      [src]="user.picture"
+      class="profile-avatar"
       [matMenuTriggerFor]="optionsMenu"
-    >
-      account_circle</mat-icon
-    >
+    />
+    <ng-template #showInitials>
+      <span class="profile-name pointer" [matMenuTriggerFor]="optionsMenu">
+        {{ initials }}
+      </span>
+    </ng-template>
   </ng-template>
-</ng-template>
 
-<!-- <mat-menu #accountMenu="matMenu">
-  <span (mouseleave)="closeMyMenu()">
-    <button mat-menu-item data-toggle="modal" data-target="#signInModal">
-      Sign In
-    </button>
-    <button mat-menu-item data-toggle="modal" data-target="#signUpModal">
-      Sign Up
-    </button>
-  </span>
-</mat-menu>-->
-
-<mat-menu #optionsMenu="matMenu">
-  <span (mouseleave)="closeMyMenu()">
-    <button mat-menu-item (click)="logout()">Logout</button>
-  </span>
-</mat-menu>
-<!--SignIn Modal -->
-
-<!--SignUp Modal -->
+  <mat-menu #optionsMenu="matMenu">
+    <span>
+      <button
+        mat-menu-item
+        [routerLink]="['/settings/profile']"
+        routerLinkActive="router-link-active"
+      >
+        Profile
+      </button>
+    </span>
+    <span>
+      <button mat-menu-item (click)="logout()">Logout</button>
+    </span>
+  </mat-menu>
+</div>

@@ -16,6 +16,7 @@
 
 ::ng-deep .mat-menu-panel {
   min-width: 20rem !important;
+  height: 120px;
   // min-height: calc(100vh - 2rem) !important;
 }
 
@@ -37,9 +38,14 @@
 .account-menu {
   color: #ffcc00;
 }
+
 mat-icon.account-icon {
   color: #ffcc00;
   margin: 6px 0;
+  font-size: 28px;
+  &:focus {
+    outline: none;
+  }
 }
 
 .show {
@@ -54,14 +60,22 @@ mat-icon.account-icon {
   color: #ffcc00;
   margin-right: 10px;
   text-decoration: none;
+
+  mat-icon {
+    font-size: 24px;
+    height: 24px;
+    width: 24px;
+  }
 }
+
 .header-link * {
   vertical-align: text-bottom;
 }
+
 .top-navbar {
   padding: 15px 0;
   margin-bottom: 10px;
-  font-size: 18px;
+  font-size: 14px;
 }
 
 .department-name {
@@ -146,4 +160,12 @@ mat-icon.account-icon {
   margin-right: 10px;
   float: right;
   padding-top: 5px;
+}
+
+.navbar-icons {
+  margin-right: 10px;
+}
+
+.mat-badge-content {
+  background: #b76379;
 }

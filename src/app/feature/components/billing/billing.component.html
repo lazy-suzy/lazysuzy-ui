@@ -1,0 +1,7 @@
+<form role="form" (submit)="billing(name, address)">
+  <input name="name" placeholder="Name" required [(ngModel)]="name" />
+  <input name="address" placeholder="Address" required [(ngModel)]="address" />
+  <button type="submit" class="form-control submit-btn">
+    Sign Up
+  </button>
+</form>

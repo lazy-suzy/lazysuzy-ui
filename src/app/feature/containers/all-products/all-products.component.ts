@@ -7,15 +7,20 @@ import {
   IFilterData,
   ISortType
 } from './../../../shared/models';
-import { ApiService, CacheService } from './../../../shared/services';
+import {
+  ApiService,
+  CacheService,
+  EventEmitterService
+} from './../../../shared/services';
 import { SCROLL_ICON_SHOW_DURATION } from './../../../shared/constants';
-import { Router, ActivatedRoute } from '@angular/router';
-import { Observable, Subscription } from 'rxjs';
+import { Router, ActivatedRoute, NavigationEnd } from '@angular/router';
+import { Observable, Subscription, Subscribable } from 'rxjs';
 import {
   BreakpointState,
   Breakpoints,
   BreakpointObserver
 } from '@angular/cdk/layout';
+import { Title } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-all-products',
@@ -24,12 +29,13 @@ import {
 })
 export class AllProductsComponent implements OnInit {
   productsSubscription: Subscription;
+  isBrandPageSubscription: Subscription;
   routeSubscription: Subscription;
   products: IProductPayload[];
   productFilters: IFilterData;
   trend: string;
   category: string;
-  total_count = 0;
+  totalCount = 0;
   filters = '';
   sortType = '';
   sortTypeList: ISortType[];
@@ -39,7 +45,7 @@ export class AllProductsComponent implements OnInit {
   isIconShow = false;
   showBar = false;
   isProductFetching = false;
-  spinner = 'assets/images/spinner.gif';
+  spinner = 'assets/image/spinner.gif';
   showMobileFilter = false;
   showMobileSort = false;
   productsInRow = 2;
@@ -48,9 +54,21 @@ export class AllProductsComponent implements OnInit {
   );
 
   bpSubscription: Subscription;
-  isHandset: boolean = false;
-  total: number = 24;
-  scrollToProductSKU: string = '';
+  isHandset = false;
+  total = 24;
+  scrollToProductSKU = '';
+  eventSubscription: Subscription;
+  brandData: any = {
+    cover_image: "",
+    description: "",
+    logo: "",
+    name: "",
+    url: "",
+    value: ""
+  };
+  selectedBrandValue: string = '';
+  isBrandPage: boolean = false;
+  isChangingBrandList: boolean = false;
 
   constructor(
     private apiService: ApiService,
@@ -58,37 +76,76 @@ export class AllProductsComponent implements OnInit {
     private location: Location,
     private activeRoute: ActivatedRoute,
     private breakpointObserver: BreakpointObserver,
-    public cacheService: CacheService
-  ) {}
-
-  ngOnInit(): void {
-    this.getParamsFromQuery();
-    this.bpSubscription = this.bpObserver.subscribe(
-      (handset: BreakpointState) => {
-        this.isHandset = handset.matches;
+    public cacheService: CacheService,
+    private eventEmitterService: EventEmitterService,
+    private title: Title
+  ) {
+    this.isBrandPageSubscription = this.router.events.subscribe(event => {
+      if (event instanceof NavigationEnd) {
+        const url = event.urlAfterRedirects;
+        const checkBrandPage = url.indexOf('/products/brand');
+        if(checkBrandPage > -1) {
+          this.isBrandPage = true;
+        }
+        // console.log('this is isBrandPage: ', this.isBrandPage);
       }
-    );
+    });
   }
 
-  ngOnDestroy(): void {
+  ngOnInit(): void {
+    this.eventSubscription = this.eventEmitterService.userChangeEvent
+      .asObservable()
+      .subscribe((user) => {
+        this.getParamsFromQuery();
+        this.bpSubscription = this.bpObserver.subscribe(
+          (handset: BreakpointState) => {
+            this.isHandset = handset.matches;
+          }
+        );
+      });
+  }
+
+  onDestroy(): void {
     this.productsSubscription.unsubscribe();
     this.routeSubscription.unsubscribe();
     this.bpSubscription.unsubscribe();
+    this.eventSubscription.unsubscribe();
+    this.isBrandPageSubscription.unsubscribe();
   }
 
   getParamsFromQuery(): void {
-    this.routeSubscription = this.activeRoute.queryParams.subscribe(params => {
-      this.filters = params.filters || '';
-      this.pageNo = parseInt(params.pageNo) || 0;
-      this.sortType = params.sortType || '';
-      Object.keys(params).map(key => {
-        if (key === 'new' || key === 'bestseller' || key === 'sale') {
-          this.trend = key;
+    this.routeSubscription = this.activeRoute.queryParams.subscribe(
+      (params) => {
+        this.filters = params.filters || '';
+        // console.log('this is filter in getparams: ', this.filters);
+        const checkBrand = this.filters.indexOf('brand:');
+        if (checkBrand < 0) {
+          this.selectedBrandValue = ''
+        } else {
+          const restString = this.filters.slice(checkBrand + 6);
+          const endBrand = restString.indexOf(';');
+          this.selectedBrandValue = restString.substr(0, endBrand);
+          this.getBrandData(this.selectedBrandValue);
         }
-      });
-      this.checkPage();
-    });
+        if(this.isBrandPage === true) {
+          this.eventEmitterService.isBrandSubject.next(this.selectedBrandValue);
+        }
+        // console.log('this is selectedBrandValue: ', this.selectedBrandValue);
+
+        // tslint:disable-next-line: radix
+        this.pageNo = parseInt(params.pageNo) || 0;
+        this.sortType = params.sortType || '';
+        Object.keys(params).map((key) => {
+          if (key === 'new' || key === 'bestseller' || key === 'sale') {
+            this.trend = key;
+          }
+        });
+        this.checkPage();
+      }
+    );
+    this.setTitle(this.brandData.name);
   }
+
   checkPage() {
     if (this.pageNo > 0) {
       this.isProductFetching = true;
@@ -100,14 +157,15 @@ export class AllProductsComponent implements OnInit {
           this.sortType,
           this.pageNo
         )
-        .subscribe(response => {
+        .subscribe((response) => {
           let allProducts = [];
+          // tslint:disable-next-line: prefer-for-of
           for (let i = 0; i < response.length; i++) {
             allProducts = [...allProducts, ...response[i].products];
           }
           this.products = allProducts;
           this.updateQueryString();
-          this.total_count = response[0].total;
+          this.totalCount = response[0].total;
           this.productFilters = response[0].filterData;
           this.sortTypeList = response[0].sortType;
           this.isProductFetching = false;
@@ -116,7 +174,7 @@ export class AllProductsComponent implements OnInit {
             this.cacheService.data.useCache = false;
             setTimeout(() => {
               // this.productElement.nativeElement.getElementById
-              let el = document.getElementById(this.scrollToProductSKU);
+              const el = document.getElementById(this.scrollToProductSKU);
               window.scrollTo(0, el.offsetTop - 200);
             }, 500);
           }
@@ -125,7 +183,7 @@ export class AllProductsComponent implements OnInit {
       this.loadProducts();
     }
 
-    //Code for cached product sku
+    // Code for cached product sku
   }
 
   loadProducts(): void {
@@ -134,12 +192,14 @@ export class AllProductsComponent implements OnInit {
     this.productsSubscription = this.apiService
       .getAllProducts(this.trend, this.total, this.filters, this.sortType)
       .subscribe((payload: IProductsPayload) => {
+        console.log('this is load Products: ', payload)
         this.products = payload.products;
         this.productFilters = payload.filterData;
         this.sortTypeList = payload.sortType;
-        this.total_count = payload.total;
+        this.totalCount = payload.total;
         this.updateQueryString();
         this.isProductFetching = false;
+        this.isChangingBrandList = false;
       });
   }
 
@@ -157,8 +217,51 @@ export class AllProductsComponent implements OnInit {
     );
   }
 
+  getProductwithBrandName(brandValue: string) {
+    if(this.selectedBrandValue !== brandValue) {
+      this.isChangingBrandList = true;
+      this.selectedBrandValue = brandValue;
+      if (brandValue !== '') {
+        this.filters = 'brand:' + brandValue + ';';
+      } else {
+        this.filters = '';
+      }
+      this.getBrandData(brandValue);
+      // this.loadProducts();
+    }
+  }
+
+  getBrandData(brandValue: string) {
+    this.apiService.getBrandData(brandValue).subscribe((brandData: any) => {
+      if (brandData.length !== 0) {
+        this.brandData = brandData[0];
+        console.log('this is brandData: ', this.brandData);
+        if(brandValue !== '') {
+          this.setTitle(this.brandData.name);
+        } else {
+          this.setTitle('')
+        }
+      }
+    })
+  }
+
+  setTitle(title: string = '') {
+    let tabTitle = ''
+    if(title === '') {
+      tabTitle = 'Designer Home Furniture | LazySuzy';
+    } else {
+      tabTitle = title;
+    }
+    this.title.setTitle(tabTitle);
+  }
+
+  ngOnDestroy(): void {
+    this.setTitle('Lazysuzy');
+  }
+
   onSetFilters(e): void {
-    this.filters = this.buildFilters(e);
+    console.log('this is filter from filterbar: ', e)
+    this.filters = e;
     this.loadProducts();
   }
 
@@ -197,18 +300,6 @@ export class AllProductsComponent implements OnInit {
       });
   }
 
-  buildFilters(event: string): string {
-    let tempFilters = '';
-    for (const [filter, options] of Object.entries(event)) {
-      if (filter === 'price_from' || filter === 'price_to') {
-        tempFilters += `${filter}:${options};`;
-      } else {
-        tempFilters += options.length ? `${filter}:${options};` : ``;
-      }
-    }
-    return tempFilters;
-  }
-
   @HostListener('window:scroll')
   checkScroll() {
     const scrollPosition =
@@ -218,10 +309,10 @@ export class AllProductsComponent implements OnInit {
       0;
     this.isIconShow = scrollPosition >= this.topPosToStartShowing;
     this.showBar = scrollPosition >= this.fixFilterBar;
-    const _self = this;
+    const self = this;
     if (this.isIconShow) {
-      setTimeout(function() {
-        _self.isIconShow = false;
+      setTimeout(() => {
+        self.isIconShow = false;
       }, SCROLL_ICON_SHOW_DURATION);
     }
   }

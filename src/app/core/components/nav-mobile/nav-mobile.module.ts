@@ -6,6 +6,7 @@ import {
   MatIconModule,
   MatMenuModule,
   MatButtonModule,
+  MatBadgeModule
 } from '@angular/material';
 import { RouterModule } from '@angular/router';
 import { SearchBarModule } from '../search-bar/search-bar.module';
@@ -21,12 +22,13 @@ const MODULES = [
   MatMenuModule,
   RouterModule,
   SearchBarModule,
-  AuthModule
+  AuthModule,
+  MatBadgeModule
 ];
 
 @NgModule({
   declarations: [...DECLARATIONS],
   imports: [...MODULES],
-exports: [...DECLARATIONS, ...MODULES],
+  exports: [...DECLARATIONS, ...MODULES]
 })
 export class NavMobileModule {}

@@ -1,0 +1,91 @@
+<div class="display-profile-container">
+  <div class="profile-section" *ngIf="profile">
+    <div class="flex profile-image-row">
+      <div class="w-40 tc profile-image-container">
+        <img
+          [src]="profile.picture"
+          class="profile-avatar"
+          *ngIf="hasPicture; else showIcon"
+        />
+        <ng-template #showIcon>
+          <mat-icon
+            class="profile-avatar"
+            aria-hidden="false"
+            aria-label="Account"
+          >
+            account_circle
+          </mat-icon>
+        </ng-template>
+      </div>
+      <div class="profile-header-content">
+        <div class="name">{{ profile.first_name }} {{ profile.last_name }}</div>
+        <div>{{ profile.tag_line || '' }}</div>
+      </div>
+    </div>
+    <div class="flex mv4">
+      <div class="w-40 tc">
+        <div>{{ profile.location || '' }}</div>
+        <a [href]="profile.website" class="website mt1">{{
+          profile.website || ''
+        }}</a>
+      </div>
+      <div class="w-60 tl-ns tc">
+        <div>{{ profile.description || '' }}</div>
+      </div>
+    </div>
+  </div>
+  <div class="boards-section" *ngIf="!isLoading">
+    <div class="pink-font boards-header pb3">
+      DESIGN BOARDS
+    </div>
+    <div class="flex flex-wrap" *ngIf="boards.length; else showNewBoardOption">
+      <div
+        class="w-33-ns w-100 mv3 pl0 card-container"
+        *ngFor="let board of boards"
+      >
+        <div class="board-card" [routerLink]="['/board/preview', board.uuid]">
+          <div class="canvas-preview">
+            <img
+              width="100%"
+              class="edit-board pointer"
+              [src]="getPreviewImagePath(board)"
+            />
+            <div class="like-icon pointer">
+              <mat-icon
+                (click)="likeBoard(board.uuid, true)"
+                *ngIf="!board.is_liked; else hasLikedBoard"
+                >favorite_border
+              </mat-icon>
+              <ng-template #hasLikedBoard>
+                <mat-icon (click)="likeBoard(board.uuid, false)"
+                  >favorite
+                </mat-icon>
+              </ng-template>
+              <span class="likes-count" *ngIf="board.like_count > 0">
+                {{ board.like_count }}</span
+              >
+              <!-- <div class="overlay"></div> -->
+            </div>
+          </div>
+          <div class="preview-title pv3">
+            {{ board.title }}
+          </div>
+        </div>
+      </div>
+    </div>
+    <ng-template #showNewBoardOption>
+      <div class="new-board-card">
+        <div class="mb1">{{ username }} hasn't created any Boards yet</div>
+        <div>But don't let that stop you</div>
+        <div class="new-board-button" [routerLink]="['/board']">
+          <div>Create new</div>
+          <div>Board</div>
+        </div>
+      </div>
+    </ng-template>
+  </div>
+  <img *ngIf="isLoading" [src]="spinner" class="loader" />
+</div>
+<div class="tc pink-font" *ngIf="!profile && !isLoading">
+  Profile doesn't exist
+</div>

@@ -1,0 +1,149 @@
+<app-board-loader *ngIf="!boardFound"></app-board-loader>
+<div *ngIf="loadedAsEmbed" class="article-dual-column">
+  <div class="col col-md-12">
+    <div class="col-md-9 text-center">
+      <div class="intro">
+        <h1 class="text-center">{{ appMeta.board.title }}</h1>
+        <p class="text-center">
+          <span class="by">by</span>
+          <a href="">Author Name</a>
+          <span class="date">{{
+            appMeta.board.updated_at | date: 'mediumDate'
+          }}</span>
+        </p>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col col-md-9">
+      <div class="m-5 white-background">
+        <div id="canvas-droparea">
+          <canvas id="canvas-area"></canvas>
+        </div>
+      </div>
+    </div>
+    <div class="col col-md-3">
+      <div *ngIf="boardProducts.length > 0" class="mt-5">
+        <app-current-board [boardProducts]="boardProducts"></app-current-board>
+      </div>
+    </div>
+  </div>
+</div>
+<div *ngIf="!loadedAsEmbed" class="row bg-light">
+  <div class="col col-md-9">
+    <div class="m-5 white-background">
+      <div id="canvas-droparea">
+        <canvas id="canvas-area"></canvas>
+      </div>
+    </div>
+  </div>
+  <div class="col col-md-3 flex align-items-center">
+    <div
+      *ngIf="!loadedAsEmbed"
+      class="mb-0-ns mb-5 mt-0-ns mt-5 board-user-container"
+    >
+      <div class="mt-5-ns shop-title-row">
+        <div>
+          <span class="font-weight-bold h5">{{ appMeta.board.title }}</span>
+        </div>
+        <div>
+          <div class="likes-container pointer">
+            <mat-icon
+              (click)="likeBoard(true)"
+              *ngIf="!appMeta.board.is_liked; else hasLikedBoard"
+              >favorite_border
+            </mat-icon>
+            <ng-template #hasLikedBoard>
+              <mat-icon (click)="likeBoard(false)">favorite </mat-icon>
+            </ng-template>
+            <span *ngIf="appMeta.board.like_count > 0" class="like-count">{{
+              appMeta.board.like_count
+            }}</span>
+          </div>
+        </div>
+      </div>
+      <div class="flex">
+        <img
+          class="profile-avatar-image"
+          [src]="profileAvatar"
+          *ngIf="profileAvatar; else showIcon"
+        />
+        <ng-template #showIcon>
+          <mat-icon class="profile-avatar">account_circle</mat-icon>
+        </ng-template>
+
+        <span
+          class="font-italic profile-username font-weight-normal pointer"
+          [routerLink]="['/p/', appMeta.board.username]"
+          >{{ appMeta.board.username }}</span
+        >
+      </div>
+    </div>
+  </div>
+</div>
+<div *ngIf="!loadedAsEmbed && boardProducts.length > 0" class="row">
+  <div class="col mt-3">
+    <div class="text-center h2 font-weight-bold mt-3 mb-4">
+      <span class="shop-title">Shop This Look</span>
+    </div>
+    <div></div>
+    <div class="products-container mt-5">
+      <div *ngFor="let product of filteredProducts" class="w-25-ns">
+        <div class="ls-product-div pl-1 pr-1">
+          <div class="product-tag icon">{{ product.index + 1 }}</div>
+          <ng-container
+            *ngIf="product.productListingUrl !== ''; else isProduct"
+          >
+            <a
+              class="ls-product"
+              [href]="product.productListingUrl"
+              target="_blank"
+            >
+              <img [src]="product.main_image" [alt]="product.name" />
+            </a>
+          </ng-container>
+          <ng-template #isProduct>
+            <div class="ls-product" (click)="openDialog(product.sku)">
+              <img [src]="product.main_image" [alt]="product.name" />
+            </div>
+          </ng-template>
+
+          <div class="prod-info">
+            <span class="site">
+              {{ product.site }}
+            </span>
+          </div>
+          <div class="name">{{ product.name }}</div>
+          <div class="prices">
+            <span
+              class="{{
+                (product.was_price &&
+                  product.is_price !== product.was_price &&
+                  'cprice sale') ||
+                  'cprice'
+              }}"
+              >${{ product.is_price }}</span
+            >
+            <span
+              *ngIf="
+                product.was_price && product.is_price !== product.was_price
+              "
+              class="oldprice"
+            >
+              ${{ product.was_price }}
+            </span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="new-board-card mb-5">
+  <div class="new-board-text">
+    Inspired? Try your own hand at a Design Board now!
+  </div>
+  <div class="new-board-btn pointer" (click)="newBoard()">
+    <span>Create new</span> <br />
+    <span>Board</span>
+  </div>
+</div>

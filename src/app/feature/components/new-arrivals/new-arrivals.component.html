@@ -1,15 +1,17 @@
 <div class="flex flex-wrap new-arrivals">
-  <div class="{{ isHandset ? 'w-100' : 'w-10-ns' }} new-arrivals-heading">
+  <div
+    class="{{ isHandset ? 'w-100' : 'w-10-ns w-20-m' }} new-arrivals-heading"
+  >
     <h2 class="title-new-arrivals">new arrivals</h2>
     <button type="button" class="btn btn-sm btn-dark" (click)="seeAll()">
       see all
     </button>
   </div>
 
-  <div class="{{ isHandset ? 'w-100' : 'w-90-ns' }}">
+  <div class="{{ isHandset ? 'w-100' : 'w-90-ns w-80-m' }}">
     <div *ngIf="!newProducts">
       <img
-        src="../../../../assets/images/three-dots.svg"
+        src="../../../../assets/image/three-dots.svg"
         width="60"
         height="46"
         alt=""

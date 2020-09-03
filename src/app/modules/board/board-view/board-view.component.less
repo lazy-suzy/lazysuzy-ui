@@ -1,0 +1,460 @@
+@width: 15px;
+@height: 15px;
+@bounce_height: 25px;
+@primary_color: #ffcc00;
+.disable-browse {
+  pointer-events: none;
+  /* for "disabled" effect */
+  opacity: 0.5;
+  background: #ccc;
+}
+
+.spinner {
+  position: absolute;
+  height: 100px;
+  width: 100px;
+  top: 50%;
+  left: 50%;
+  margin-left: -50px;
+  margin-top: -50px;
+}
+.board-action-icons {
+  align-self: center;
+  margin-right: 15px;
+  font-size: 24px;
+  border-radius: 5px;
+  padding: 3px;
+  transition: all 0.3s 0s ease;
+}
+.dropdown {
+  position: relative;
+  display: inline-block;
+}
+.dropdown::after {
+  content: '';
+  width: 0;
+  height: 0;
+  border-left: 6px solid transparent;
+  border-right: 6px solid transparent;
+  border-top: 6px solid black;
+  position: absolute;
+  right: -10%;
+  top: 44%;
+  pointer-events: none;
+}
+.load-more-btn {
+  background-color: #b76e79;
+  color: #ffffff;
+  &:hover {
+    color: #ffc40d;
+  }
+}
+.gray-bg {
+  background-color: #f9f9f9;
+}
+.lazysuzy-board {
+  display: flex;
+  height: calc(100vh - 115px);
+}
+.b-100 {
+  bottom: -100px;
+}
+.b-650 {
+  bottom: -650px;
+}
+.b-577 {
+  bottom: 577px;
+}
+.b-25 {
+  bottom: 25px;
+}
+.transform-icon i:before {
+  transform: rotate(45deg);
+}
+.position-fixed {
+  position: fixed;
+}
+.position-absolute {
+  position: absolute;
+}
+.loader-container {
+  position: fixed;
+  top: 50%;
+  left: 200px;
+}
+.canvas {
+  .canvas-loader {
+    left: 60%;
+    z-index: 9;
+  }
+}
+.load-more-btn-container {
+  text-align: center;
+  padding-bottom: 8rem;
+  padding-top: 20px;
+}
+.crop-options {
+  margin-top: -5px;
+  display: flex;
+  button {
+    display: flex;
+    align-items: center;
+  }
+}
+.product-container {
+  height: calc(100vh - 260px);
+  overflow-y: auto;
+  overflow-x: hidden;
+}
+.overflow-hidden {
+  overflow: hidden !important;
+}
+.msg-button-container {
+  button {
+    white-space: normal;
+    position: absolute;
+    width: 90%;
+    left: 5%;
+    top: 50%;
+    color: #ffcc00;
+    background-color: #0d1c31;
+  }
+}
+.loader-box {
+  border: 4px solid @primary_color;
+  border-radius: 10px;
+  width: 40px;
+  height: 40px;
+  display: inline-block;
+  text-align: center;
+}
+
+.loader-bounceball {
+  position: relative;
+  display: inline-block;
+  height: 37px;
+  width: @width;
+  &:before {
+    position: absolute;
+    content: '';
+    display: block;
+    top: 0;
+    width: @width;
+    height: @height;
+    border-radius: 50%;
+    background-color: @primary_color;
+    transform-origin: 50%;
+    animation: bounce 500ms alternate infinite ease;
+  }
+}
+
+@keyframes bounce {
+  0% {
+    top: @bounce_height;
+    height: 5px;
+    border-radius: 60px 60px 20px 20px;
+    transform: scaleX(2);
+  }
+  35% {
+    height: @height;
+    border-radius: 50%;
+    transform: scaleX(1);
+  }
+  100% {
+    top: 0;
+  }
+}
+::ng-deep .font-picker.visibleFontPicker {
+  visibility: visible !important;
+}
+.displayEditor {
+  display: flex;
+}
+.board-action-button {
+  background-color: #ffffff;
+  margin-right: 8px;
+  display: flex;
+  align-items: center;
+  padding: 0 12px;
+  border-radius: 5px;
+  border: 1px solid #cbcad0;
+  transition: all 0.3s ease;
+  i {
+    color: #999999;
+  }
+  cursor: pointer;
+  .board-action-button-text {
+    font-size: 14px;
+    padding-left: 8px;
+    font-weight: bold;
+    color: #999999;
+    transition: all 0.3s ease;
+  }
+  &:hover {
+    background-color: #b76e79;
+    border-color: #f7f6f6;
+    .board-action-button-text,
+    i {
+      color: #f7f6f6;
+    }
+  }
+}
+.color-selector-tab {
+  display: none;
+}
+.editor-icons {
+  display: flex;
+  justify-content: space-between;
+  color: #f7f6f6;
+  margin-top: 6px;
+}
+.dropdown::after {
+  border-top-color: #f7f6f6;
+}
+.highlight {
+  color: #0c1c31;
+}
+.top-panel .crop-options {
+  button {
+    color: #f7f6f6;
+    &:hover {
+      i {
+        background: none;
+        color: #ffcc00;
+      }
+      background: rgba(247, 246, 246, 0.1);
+      color: #ffcc00;
+    }
+    i {
+      &:hover {
+        background: none;
+      }
+    }
+  }
+}
+.font-editor-container {
+  display: flex;
+  justify-content: flex-end;
+  .font-selector {
+    margin-right: 45px;
+  }
+}
+::ng-deep .font-picker {
+  border: none !important;
+  border-radius: 5px;
+  .arrow.arrow-bottom {
+    display: none;
+  }
+  .ps-content {
+    text-align: left;
+  }
+  .group-text {
+    color: #b76e79 !important;
+  }
+  .group-line {
+    background: #b76e79 !important;
+  }
+  .font-options,
+  .search-box {
+    color: #999999;
+  }
+  .font-options {
+    padding-top: 0 !important;
+  }
+  .font-list .font-item {
+    &:hover {
+      background: #b76e79;
+
+      .font-info .font-name {
+        color: #f7f6f6;
+      }
+    }
+    .font-info {
+      margin: 0;
+      .not-available {
+        display: none;
+      }
+    }
+  }
+  input,
+  select {
+    height: 31px;
+  }
+}
+::ng-deep .pickr .pcr-button:after,
+::ng-deep .pickr .pcr-button:before {
+  width: 70%;
+  height: 70%;
+  top: 1px;
+  box-shadow: 0 0 2px 1px #ccc;
+}
+::ng-deep .pickr button:focus {
+  outline: none;
+  box-shadow: none;
+}
+.item-action-icons {
+  display: flex;
+  margin-left: 15px;
+}
+::ng-deep .pickr-container .pcr-app {
+  width: 245px;
+}
+.no-more-items-msg {
+  text-align: center;
+  color: #606060;
+  margin: 10px 0;
+}
+.product-container-padding {
+  padding-bottom: 90px;
+}
+.tooltiptext {
+  position: absolute;
+  bottom: 60px;
+  left: -85px;
+  width: 210px;
+  background: #b76d79;
+  color: #ffffff;
+  font-size: 16px;
+  padding: 10px 20px;
+  border-radius: 15px;
+}
+.tooltiptext::after {
+  content: '';
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  margin-left: -5px;
+  border-width: 10px;
+  border-style: solid;
+  border-color: #b76d79 transparent transparent transparent;
+}
+
+@media screen and (max-width: 991px) {
+  .load-more-btn-container {
+    padding-bottom: 0;
+  }
+  .top-position-60 {
+    top: 60px;
+  }
+  .padding-top-30 {
+    padding-top: 30px !important;
+  }
+  .loader-container {
+    top: 70%;
+    left: 420px;
+  }
+  .product-container {
+    height: 45vh;
+  }
+  .pickr-container {
+    margin-left: 18px;
+  }
+  .pickr .pcr-button:after {
+    width: 80%;
+    height: 80%;
+  }
+}
+
+@media screen and (max-width: 767px) {
+  .loader-container {
+    top: 60%;
+    left: 200px;
+  }
+  .product-container {
+    height: 58vh;
+  }
+  .action-button {
+    width: 45px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    color: #f7f6f6;
+    font-size: 17px;
+  }
+  .dropdown::after {
+    display: none;
+  }
+  .d-none-xs {
+    display: none;
+  }
+  .mdi-format-color-text::after {
+    background: #f7f6f6 !important;
+  }
+  .top-panel .color-selector-tab {
+    display: block;
+    margin-left: 10px;
+    margin-top: -3px;
+    i {
+      font-size: 22px;
+      margin-right: 5px;
+    }
+  }
+  .padding-right-0 {
+    padding-right: 0;
+  }
+  .editor-icons {
+    display: flex;
+    max-width: 100px;
+    margin-left: 25px;
+    justify-content: flex-start;
+    margin-top: 3px;
+  }
+  .font-editor-container {
+    padding-left: 0;
+    padding-right: 0;
+    .font-selector {
+      margin-right: 0;
+    }
+  }
+  .tool-bar-holder .top-panel {
+    padding: 5px 16px 0;
+  }
+  .publish-icon {
+    font-size: 26px;
+  }
+  .board-action-icons {
+    padding: 0;
+  }
+  .image-toolbar-position {
+    justify-content: flex-end;
+    margin-left: 0;
+  }
+  .pickr-container {
+    ::ng-deep .pcr-app {
+      top: 80px !important;
+      bottom: unset !important;
+      left: 15px !important;
+      right: unset !important;
+      width: 260px;
+    }
+    ::ng-deep .pcr-interaction {
+      background: white;
+      margin: 0;
+    }
+    ::ng-deep .pcr-swatches {
+      background: white;
+      padding-left: 16px;
+    }
+  }
+  .lazysuzy-board {
+    .panel-height {
+      height: 100%;
+    }
+  }
+}
+@media screen and (max-width: 375px) {
+  .tool-bar-holder .top-panel {
+    padding: 5px 0 0;
+  }
+  .color-selector-tab {
+    margin-left: 8px;
+  }
+}
+@media screen and (max-width: 360px) {
+  .top-panel i {
+    margin-right: 13px !important;
+  }
+  .editor-icons {
+    display: flex;
+    margin-left: 16px;
+  }
+}

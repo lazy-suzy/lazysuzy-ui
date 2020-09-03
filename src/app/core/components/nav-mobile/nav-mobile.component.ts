@@ -1,46 +1,80 @@
-import { Component } from '@angular/core';
-import { ApiService, UtilsService } from './../../../shared/services';
+import { Component, OnInit } from '@angular/core';
+import {
+  ApiService,
+  UtilsService,
+  MatDialogUtilsService
+} from './../../../shared/services';
 import { Router, NavigationEnd } from '@angular/router';
 import { IAllDepartment } from '../../../shared/models/all-department.interface';
 import { Subscription } from 'rxjs';
 import { Location } from '@angular/common';
 import { CookieService } from 'ngx-cookie-service';
+import { EventEmitterService } from 'src/app/shared/services';
 @Component({
   selector: 'app-nav-mobile',
   templateUrl: './nav-mobile.component.html',
   styleUrls: ['./nav-mobile.component.less']
 })
-export class NavMobileComponent {
-  logoPath: string = 'assets/images/color_logo_transparent.png';
+export class NavMobileComponent implements OnInit {
+  logoPath = 'assets/image/color_logo_transparent.png';
   departments: IAllDepartment[];
-  selectedIndex: number = null;
+  selectedIndex = null;
   menuVisible = false;
   mobileMenuContainer;
   showDepartment;
-  showSearchComponent: boolean = false;
-  notHome: Boolean;
+  showSearchComponent = false;
+  notHome: boolean;
   checkHomeRoute: Subscription;
+  hideBar = false;
+  eventSubscription: Subscription;
+  cartProduct: number;
 
   constructor(
     private apiService: ApiService,
     private utils: UtilsService,
     private cookie: CookieService,
     private router: Router,
-    private location: Location
+    private location: Location,
+    private eventEmitterService: EventEmitterService,
+    private matDialogUtils: MatDialogUtilsService
   ) {
-    this.getDepartments();
-    this.router.events.subscribe(val => {
+    this.router.events.subscribe((val) => {
       if (val instanceof NavigationEnd) {
         this.menuVisible = false;
       }
     });
-    this.checkHomeRoute = router.events.subscribe(val => {
-      this.notHome = location.path() !== '';
+    this.checkHomeRoute = router.events.subscribe((val) => {
+      // this.notHome = location.path() !== '';
+      this.notHome =
+        location.path() !== '' && location.path().match(/board/) == null;
     });
   }
 
-  ngOnDestroy(): void {
+  ngOnInit(): void {
+    this.eventSubscription = this.eventEmitterService.userChangeEvent
+      .asObservable()
+      .subscribe((user) => {
+        this.eventEmitterService.updateCart.subscribe((payload) => {
+          // tslint:disable-next-line: radix
+          this.cartProduct = parseInt(localStorage.getItem('cart'));
+        });
+        // tslint:disable-next-line: radix
+        this.cartProduct = parseInt(localStorage.getItem('cart'));
+        this.getDepartments();
+        this.router.events.subscribe((res) => {
+          const orderRoute = this.router.url.slice(1, 6);
+          if (this.router.url === '/checkout' || orderRoute === 'order') {
+            this.hideBar = true;
+          } else {
+            this.hideBar = false;
+          }
+        });
+      });
+  }
+
+  onDestroy(): void {
     this.checkHomeRoute.unsubscribe();
+    this.eventSubscription.unsubscribe();
   }
 
   setIndex(index: number) {
@@ -77,10 +111,11 @@ export class NavMobileComponent {
     event.preventDefault();
     event.stopPropagation();
 
-    if (this.cookie.get('token')) {
+    const localData = JSON.parse(localStorage.getItem('user') || '{}');
+    if (localData.email.length > 0) {
       this.router.navigateByUrl('/wishlist');
     } else {
-      this.utils.openSignupDialog(true);
+      this.matDialogUtils.openSignupDialog(true);
     }
   }
 }

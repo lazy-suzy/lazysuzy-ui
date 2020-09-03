@@ -1,0 +1,113 @@
+@width: 15px;
+@height: 15px;
+@bounce_height: 25px;
+@primary_color: #ffcc00;
+.close-button {
+  float: right;
+  top: -24px;
+  right: -24px;
+  div {
+    display: none;
+  }
+}
+.btn {
+  width: 25%;
+}
+.dialog {
+  min-height: 375px;
+  display: flex;
+}
+
+.mat-form-field {
+  min-width: 100%;
+}
+.invalid {
+  color: #ff0000;
+  font-size: 14px;
+  margin: 0px 0 10px;
+  text-align: center;
+}
+
+[data-title] {
+  position: relative;
+  cursor: pointer;
+  font-size: 18px;
+}
+
+[data-title]:hover::before {
+  content: attr(data-title);
+  position: absolute;
+  bottom: -40px;
+  display: inline-block;
+  padding: 3px 6px;
+  border-radius: 2px;
+  background: #f2f4f3;
+  color: #606060;
+  font-size: 12px;
+  font-family: sans-serif;
+  white-space: pre-wrap;
+  left: 28px;
+  width: 180px;
+}
+
+[data-title]:hover::after {
+  display: none;
+}
+
+.subtle-label {
+  color: #999999;
+}
+.loader-container {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+}
+.loader-box {
+  border: 4px solid @primary_color;
+  border-radius: 10px;
+  width: 40px;
+  height: 40px;
+  display: inline-block;
+  text-align: center;
+}
+
+.loader-bounceball {
+  position: relative;
+  display: inline-block;
+  height: 37px;
+  width: @width;
+  &:before {
+    position: absolute;
+    content: '';
+    display: block;
+    top: 0;
+    width: @width;
+    height: @height;
+    border-radius: 50%;
+    background-color: @primary_color;
+    transform-origin: 50%;
+    animation: bounce 500ms alternate infinite ease;
+  }
+}
+
+@keyframes bounce {
+  0% {
+    top: @bounce_height;
+    height: 5px;
+    border-radius: 60px 60px 20px 20px;
+    transform: scaleX(2);
+  }
+  35% {
+    height: @height;
+    border-radius: 50%;
+    transform: scaleX(1);
+  }
+  100% {
+    top: 0;
+  }
+}
+@media screen and (max-width: 991px) {
+  [data-title]:hover::before {
+    display: none;
+  }
+}

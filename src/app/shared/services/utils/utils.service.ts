@@ -1,22 +1,21 @@
 import { Injectable, ElementRef } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
-import { ProductDetailsComponent } from 'src/app/feature/components';
-import { SigninComponent, SignupComponent } from 'src/app/core/components';
-import { Location } from '@angular/common';
-import { Router, ActivatedRoute } from '@angular/router';
+import { SignupComponent } from 'src/app/core/components';
 import { MarkdownService } from 'ngx-markdown';
+import { environment as env } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class UtilsService {
   signupRef: ElementRef;
+  readonly userType = {
+    guest: 0,
+    default: 1
+  };
 
   constructor(
     public dialog: MatDialog,
-    private location: Location,
-    private router: Router,
-    private activeRoute: ActivatedRoute,
     private markdownService: MarkdownService
   ) {}
 
@@ -31,70 +30,19 @@ export class UtilsService {
     return data.length > 0;
   }
 
-  openMatDialog(modalSku) {
-    const dialogRef = this.dialog.open(ProductDetailsComponent, {
-      width: '80%',
-      height: '100%',
-      data: { sku: modalSku },
-      panelClass: 'product-details-dialog-container'
-    });
-    dialogRef.afterOpened().subscribe(result => {
-      this.location.go(`product/${modalSku}`, '', this.location.getState());
-    });
-    dialogRef.afterClosed().subscribe(result => {
-      const params = { ...this.activeRoute.snapshot.queryParams };
-      if (params.modal_sku) {
-        delete params.modal_sku;
-        this.router.navigate([], { queryParams: params });
-      } else {
-        this.location.back();
-      }
-    });
-  }
-
-  openVariationDialog(modalSku) {
-    const dialogRef = this.dialog.open(ProductDetailsComponent, {
-      width: '80%',
-      height: '100%',
-      data: { sku: modalSku },
-      panelClass: 'product-details-dialog-container'
-    });
-    dialogRef.afterOpened().subscribe(result => {
-      this.location.replaceState(
-        `product/${modalSku}`,
-        '',
-        this.location.getState()
+  hasInventory(product) {
+    if (product.in_inventory) {
+      return (
+        product.in_inventory && product.inventory_product_details.count > 0
       );
-    });
-    dialogRef.afterClosed().subscribe(result => {
-      this.dialog.closeAll();
-      const params = { ...this.activeRoute.snapshot.queryParams };
-      if (params.modal_sku) {
-        delete params.modal_sku;
-        this.router.navigate([], { queryParams: params });
-      } else {
-        this.location.back();
-      }
-    });
+    } else {
+      return false;
+    }
   }
 
-  homepageMatDialog(modalSku) {
-    const dialogRef = this.dialog.open(ProductDetailsComponent, {
-      width: '80%',
-      height: '100%',
-      data: { sku: modalSku },
-      panelClass: 'product-details-dialog-container'
-    });
-    dialogRef.afterOpened().subscribe(result => {
-      this.location.go(`product/${modalSku}`);
-    });
-    dialogRef.afterClosed().subscribe(result => {
-      this.location.go(``);
-    });
-  }
-
-  openSignupDialog(isHandset: boolean = false, isClose = false) {
+  openSignupDialog(isHandset = false, isClose = false) {
     const width = isHandset ? '100%' : '35%';
+    // tslint:disable-next-line: no-unused-expression
     !isClose && this.dialog.closeAll();
     return this.dialog.open(SignupComponent, {
       width,
@@ -104,22 +52,63 @@ export class UtilsService {
     });
   }
 
-  openSigninDialog(width: string = '35%') {
-    this.dialog.closeAll();
-    return this.dialog.open(SigninComponent, {
-      width,
-      panelClass: 'auth-dialog-container',
-      autoFocus: false
-    });
-  }
-
-  compileMarkdown(data) {
+  compileMarkdown(data, site = 'West Elm') {
+    let compileData;
+    if (site !== 'West Elm') {
+      compileData = data.map((item) => `*   ${item}`);
+    } else {
+      compileData = data;
+    }
     let mergedData = '';
-    for (let item of data) {
+    for (const item of compileData) {
       mergedData = `${mergedData}${
         item.indexOf('</h6>') > -1 ? '\n' : ''
       }${item}\n${item.indexOf('</h6>') > -1 ? '\n' : ''}`;
     }
     return this.markdownService.compile(mergedData);
+  }
+
+  updateBoardLike(board, like) {
+    return (
+      (board.is_liked = like),
+      (board.like_count = like ? board.like_count + 1 : board.like_count - 1)
+    );
+  }
+
+  updateProfileImageLink(picture) {
+    return picture.includes('http') ? picture : env.BASE_HREF + picture;
+  }
+
+  formatPrice(price) {
+    if (price) {
+      const priceString = price.toString();
+      let minRange;
+      let maxRange;
+      let result;
+      const splitedPrice = priceString.split('-');
+      minRange = parseFloat(splitedPrice[0]).toFixed(2);
+      if (splitedPrice.length > 1) {
+        maxRange = parseFloat(splitedPrice[1]).toFixed(2);
+        result = minRange.toString() + ' - ' + maxRange.toString();
+      } else {
+        maxRange = null;
+        result = minRange.toString();
+      }
+      return result;
+    } else {
+      return;
+    }
+  }
+
+  updateLocalCart(quantityChange) {
+    // tslint:disable-next-line: radix
+    const localCartData = parseInt(localStorage.getItem('cart'));
+    let quantity = quantityChange;
+    if (typeof quantityChange === 'string') {
+      // tslint:disable-next-line: radix
+      quantity = parseInt(quantityChange);
+    }
+    const updateCartTotal = localCartData + quantity;
+    localStorage.setItem('cart', updateCartTotal.toString());
   }
 }

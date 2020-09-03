@@ -1,4 +1,4 @@
-<div *ngIf="!isBanner">
+<div *ngIf="!isBanner && !isBoards">
   <owl-carousel
     [options]="carousalOptions"
     *ngIf="data?.length"
@@ -53,6 +53,26 @@
       href="{{ product.link }}"
     >
       <img class="owl-item-bg" src="{{ product.image }}" alt="Owl Image" />
+    </a>
+  </owl-carousel>
+</div>
+
+<div *ngIf="isBoards">
+  <owl-carousel
+    [options]="boardCarousalOptions"
+    *ngIf="data?.length"
+    [carouselClasses]="['owl-carousel', 'owl-theme']"
+  >
+    <a
+      class="item carousel"
+      *ngFor="let board of data; let i = index"
+      [href]="['/board/preview/' + board.uuid]"
+    >
+      <img
+        [src]="getPreviewImagePath(board.preview)"
+        class="board-image"
+        alt=""
+      />
     </a>
   </owl-carousel>
 </div>

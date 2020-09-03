@@ -1,0 +1,139 @@
+.display-profile-container {
+  width: 75%;
+  margin: 50px auto;
+  .profile-section {
+    width: 60%;
+    margin: auto;
+    color: #0d1c31;
+    .profile-image-row {
+      height: 150px;
+      align-items: center;
+    }
+    .profile-image-container {
+      position: relative;
+      height: 150px;
+      overflow: hidden;
+      .profile-avatar {
+        width: 150px;
+        border-radius: 100%;
+        font-size: 150px;
+        color: #999999;
+        object-fit: cover;
+        position: absolute;
+        left: 50%;
+        top: 50%;
+        height: 100%;
+        -webkit-transform: translate(-50%, -50%);
+        -ms-transform: translate(-50%, -50%);
+        transform: translate(-50%, -50%);
+      }
+    }
+    .profile-header-content {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      .name {
+        font-size: 24px;
+      }
+    }
+    .website {
+      color: #0d1c31;
+    }
+  }
+  .boards-section {
+    margin-top: 120px;
+    padding: 0 20px;
+    .boards-header {
+      border-bottom: 1px solid #cccccc;
+      text-align: center;
+      font-size: 20px;
+      font-weight: bold;
+      margin-bottom: 20px;
+    }
+    .card-container {
+      height: 250px;
+      width: 33%;
+      padding: 0 20px;
+      .board-card {
+        &:focus {
+          outline: none;
+        }
+        .canvas-preview {
+          position: relative;
+          border: 1px solid #c8c7cc;
+          .like-icon {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            color: #b76e79;
+            display: flex;
+            align-items: center;
+            .likes-count {
+              font-size: 14px;
+              padding-left: 2px;
+            }
+          }
+          img {
+            max-height: 210px;
+          }
+        }
+      }
+    }
+    .new-board-card {
+      background-color: #eeeeee;
+      width: 30%;
+      margin: 30px auto;
+      padding: 25px 10px;
+      text-align: center;
+      color: #0d1c31;
+      border-radius: 4px;
+      .new-board-button {
+        background-color: #b76e79;
+        color: #ffffff;
+        width: 40%;
+        border-radius: 4px;
+        padding: 10px;
+        margin: 15px auto 10px;
+        font-weight: bold;
+      }
+    }
+  }
+}
+.loader {
+  position: fixed;
+  z-index: 1;
+  top: 50%;
+  left: 50%;
+  transform: translateX(-50%) translateY(-50%);
+}
+.pink-font {
+  color: #b76e79;
+}
+
+@media (max-width: 767px) {
+  .display-profile-container {
+    width: 90%;
+    .profile-section {
+      width: 100%;
+      .profile-image-container {
+        .profile-avatar {
+          height: 36vw;
+        }
+      }
+      .profile-header-content {
+        width: 60%;
+        align-items: center;
+      }
+    }
+    .boards-section {
+      padding: 20px 5px 0;
+      .card-container {
+        width: 100%;
+        padding: 0;
+      }
+      .new-board-card {
+        width: 100%;
+      }
+    }
+  }
+}

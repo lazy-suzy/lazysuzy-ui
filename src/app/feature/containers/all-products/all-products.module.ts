@@ -7,13 +7,14 @@ import { InfiniteScrollModule } from 'ngx-infinite-scroll';
 import {
   ProductFiltersModule,
   ProductModule,
-  SortTypeModule,
-} from "./../../components";
+  SortTypeModule
+} from './../../components';
 
 import { AllProductsComponent } from './all-products.component';
 import { ProductMobileModule } from '../../components/product-mobile/product-mobile.module';
 import { ProductFilterMobileModule } from '../../components/product-filter-mobile/product-filter-mobile.module';
 import { ProductSortMobileModule } from '../../components/product-sort-mobile/product-sort-mobile.module';
+import { BrandListModule } from '../../components/brand-list/brand-list.module';
 
 const DECLARATIONS = [AllProductsComponent];
 
@@ -27,6 +28,7 @@ const MODULES = [
   InfiniteScrollModule,
   ProductMobileModule,
   ProductFilterMobileModule,
+  BrandListModule,
   ProductSortMobileModule
 ];
 
@@ -35,4 +37,4 @@ const MODULES = [
   imports: [...MODULES],
   exports: [...DECLARATIONS, ...MODULES]
 })
-export class AllProductsModule { }
+export class AllProductsModule {}

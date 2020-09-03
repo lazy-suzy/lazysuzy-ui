@@ -1,147 +1,144 @@
-<img
-  *ngIf="isProductFetching; else showDetails"
-  [src]="spinner"
-  class="loader"
-/>
+<img *ngIf="isProductFetching" [src]="spinner" class="loader" />
+<ngx-json-ld [json]="schema"></ngx-json-ld>
+<ng-container *ngIf="!isProductFetching">
+    <div *ngIf="product || !invalidLink; else invalidProduct">
+        <div class="images-container" #gallery>
+            <div class="images">
+                <img *ngFor="let image of items; index as i" [src]="image.data.src" (click)="openLightbox(i)" class="prod-img" />
+            </div>
+        </div>
+        <div class="product-content">
+            <div class="flex justify-between">
+                <div class="product-name">{{ product.name }}</div>
+                <div *ngIf="product && product.wishlisted; else elseBlock">
+                    <div class="tile-icon wishlist-icon wishlist-container">
+                        <mat-icon (click)="wishlistProduct(product.sku, false)">favorite
+                        </mat-icon>
+                    </div>
+                </div>
+                <ng-template #elseBlock>
+                    <div class="tile-icon wishlist-icon wishlist-container">
+                        <mat-icon (click)="wishlistProduct(product.sku, true)">favorite_border
+                        </mat-icon>
+                    </div>
+                </ng-template>
+            </div>
+            <div class="product-site">{{ product.site }}</div>
+            <div class="price-container flex flex-wrap items-center">
+                <div class="padding-vertical-2 flex items-center">
+                    <div class="product-price mr3">${{ productPrice }}</div>
+                    <div class="strike product-old-price {{
+              productPrice !== productWasPrice ? '' : 'dn'
+            }}">
+                        ${{ productWasPrice }}
+                    </div>
+                </div>
+                <button mat-raised-button class="bg-red view-details-btn" *ngIf="
+            product && !utils.hasInventory(activeProduct) && !product.redirect
+          ">
+          <a (click)="openLink($event, product.product_url)" [href]="product.product_url"
+            class="tr-viewDetails no-underline yellow">
+            VIEW DETAILS
+          </a>
+        </button>
+                <select [(ngModel)]="quantity" #quantitySelector class="quantity-selector" *ngIf="product && utils.hasInventory(activeProduct)">
+          <option *ngFor="
+              let i of quantityLimit(
+                activeProduct.inventory_product_details.count
+              )
+            " [value]="i">{{ i }}</option>
+        </select>
+                <button mat-raised-button class="bg-red view-details-btn" *ngIf="product && utils.hasInventory(activeProduct)">
+                  <a (click)="openCartModal()" class="tr-addToCart no-underline yellow">
+                    ADD TO CART
+                  </a>
+                </button>
+                <div *ngIf="errorMessage !== ''" class="invalid-feedback">
+                    <div>{{ errorMessage }}</div>
+                </div>
+            </div>
+            <div class="stock-info" *ngIf="
+          product &&
+          utils.hasInventory(activeProduct) &&
+          (activeProduct.inventory_product_details.is_low ||
+            activeProduct.inventory_product_details.message)
+        ">
+                <div class="flex">
+                    <span>
+            <mat-icon class="info-icon">info</mat-icon>
+          </span>
+                    <div class="stock-msg" *ngIf="activeProduct && activeProduct.inventory_product_details.is_low">
+                        Only {{ activeProduct.inventory_product_details.count > 10 ? '10' : activeProduct.inventory_product_details.count }} left in stock.
+                    </div>
+                </div>
+                <div class="shipping-msg">
+                    {{ activeProduct.inventory_product_details.message }}
+                </div>
+            </div>
+            <ng-container *ngIf="product && product.redirect; else allConditions">
+                <hr class="modal-hr mt-3" *ngIf="product && product.set && product.set.length > 0" />
+            </ng-container>
+            <ng-template #allConditions>
+                <hr class="modal-hr mt-3" *ngIf="
+            isVariationExist ||
+            (product && product.set && product.set.length > 0)
+          " />
+            </ng-template>
+            <div *ngIf="!isSetItemInInventory">
+                <app-redirect *ngIf="
+            product && product.redirect && !utils.hasInventory(activeProduct)
+          " [redirectUrl]="product.redirect_url" [redirectDetails]="product.redirect_details" [category]="product.department_info[0].category_name" [categoryUrl]="product.department_info[0].category_url" [isHandset]="true"></app-redirect>
+            </div>
 
-<ng-template #showDetails>
-  <div class="images-container" #gallery>
-    <div class="images">
-      <img
-        *ngFor="let image of items; index as i"
-        [src]="image.data.src"
-        (click)="openLightbox(i)"
-        class="prod-img"
-      />
-    </div>
-  </div>
-  <div class="product-content">
-    <div class="flex justify-between">
-      <div class="product-name">{{ product.name }}</div>
-      <div *ngIf="product && product.wishlisted; else elseBlock">
-        <div class="tile-icon wishlist-icon wishlist-container">
-          <mat-icon (click)="wishlistProduct(product.sku, false)"
-            >favorite
-          </mat-icon>
-        </div>
-      </div>
-      <ng-template #elseBlock>
-        <div class="tile-icon wishlist-icon wishlist-container">
-          <mat-icon (click)="wishlistProduct(product.sku, true)"
-            >favorite_border
-          </mat-icon>
-        </div>
-      </ng-template>
-    </div>
-    <div class="product-site">{{ product.site }}</div>
-    <div class="price-container flex flex-wrap">
-      <div class="product-price mr3">${{ productPrice }}</div>
-      <div class="strike {{ productPrice !== productWasPrice ? '' : 'dn' }}">
-        ${{ productWasPrice }}
-      </div>
-      <button
-        mat-raised-button
-        class="bg-red view-details-btn"
-        *ngIf="!product.redirect"
-      >
-        <a
-          (click)="openLink($event, product.product_url)"
-          [href]="product.product_url"
-          class="tr-viewDetails no-underline yellow"
-        >
-          View Details
-        </a>
-      </button>
-    </div>
-    <hr
-      class="modal-hr mt-3"
-      *ngIf="isVariationExist || product.set || product.redirect"
-    />
-    <app-redirect
-      *ngIf="product.redirect"
-      [redirectUrl]="product.redirect_url"
-      [redirectDetails]="product.redirect_details"
-      [category]="product.department_info[0].category_name"
-      [categoryUrl]="product.department_info[0].category_url"
-      [isHandset]="true"
-    ></app-redirect>
-    <app-variations
-      *ngIf="isVariationExist && !product.redirect"
-      [variations]="variations"
-      [isSwatchExist]="isSwatchExist"
-      [inputSelections]="product.selections"
-      (setPrice)="onSetPrice($event)"
-      (setImage)="onSetImage($event)"
-      (reload)="onVariationChange()"
-    ></app-variations>
-    <app-sets *ngIf="product.set" [sets]="product.set" [brand]="product.site">
-    </app-sets>
-    <hr class="modal-hr" />
-    <div class="pv2">
-      <ul class="description-menu">
-        <li
-          (click)="selectTab('desc')"
-          *ngIf="descriptionExist"
-          class="{{ activeTab === 'desc' ? 'active' : 'bg-white' }}"
-        >
-          <span class="nav-link">Description</span>
-        </li>
-        <li
-          (click)="selectTab('features')"
-          *ngIf="featuresExist"
-          class="{{ activeTab === 'features' ? 'active' : 'bg-white' }}"
-        >
-          <span class="nav-link">Features</span>
-        </li>
-        <li
-          (click)="selectTab('dimensions')"
-          *ngIf="dimensionExist"
-          class="{{ activeTab === 'dimensions' ? 'active' : 'bg-white' }}"
-        >
-          <span class="nav-link">Dimensions</span>
-        </li>
-      </ul>
-      <div class="menu-content">
-        <div
-          *ngIf="descriptionExist"
-          class="{{ activeTab === 'desc' ? '' : 'dn' }}"
-        >
-          <div [innerHTML]="description"></div>
-        </div>
-        <div
-          *ngIf="featuresExist"
-          class="{{ activeTab === 'features' ? '' : 'dn' }}"
-        >
-          <div class="mt1 pl3">
-            <div [innerHTML]="features"></div>
-          </div>
-        </div>
-        <div
-          *ngIf="dimensionExist"
-          class="{{ activeTab === 'dimensions' ? '' : 'dn' }}"
-        >
-          <div
-            *ngIf="isArray(product.dimension); else showDimensions"
-            class="dimension-container"
-          >
-            <div
-              *ngFor="let dimension of product.dimension"
-              class="fl w-50 pa2"
-            >
-              <div class="dimension-title">{{ dimension.description }}</div>
-              <div>Width: {{ dimension.width }}</div>
-              <div>Depth: {{ dimension.depth }}</div>
-              <div>Height: {{ dimension.height }}</div>
-              <br />
+            <app-variations *ngIf="product && isVariationExist && !product.redirect" [variations]="variations" [isSwatchExist]="isSwatchExist" [inputSelections]="product.selections" [hasSelection]="hasSelection" (setPrice)="onSetPrice($event)" (setImage)="onSetImage($event)"
+                (reload)="onVariationChange()" (setSelectionChecked)="onSetSelectionChecked($event)" (clearSelection)="onClearSelection($event)" (setSelection)="onSetSelection($event)"></app-variations>
+            <app-sets *ngIf="product && product.set && product.set.length > 0" [sets]="product.set" [brand]="product.site" [isHandset]="true">
+            </app-sets>
+            <hr class="modal-hr" />
+            <div class="pv2">
+                <ul class="description-menu">
+                    <li (click)="selectTab('desc')" *ngIf="descriptionExist" class="{{ activeTab === 'desc' ? 'active b' : 'bg-white' }}">
+                        <span class="nav-link">Description</span>
+                    </li>
+                    <li (click)="selectTab('features')" *ngIf="featuresExist" class="{{ activeTab === 'features' ? 'active b' : 'bg-white' }}">
+                        <span class="nav-link">Features</span>
+                    </li>
+                    <li (click)="selectTab('dimensions')" *ngIf="dimensionExist" class="{{ activeTab === 'dimensions' ? 'active b' : 'bg-white' }}">
+                        <span class="nav-link">Dimensions</span>
+                    </li>
+                </ul>
+                <div class="menu-content">
+                    <div *ngIf="descriptionExist" class="{{ activeTab === 'desc' ? '' : 'dn' }}">
+                        <div [innerHTML]="description" class="nav-content"></div>
+                    </div>
+                    <div *ngIf="featuresExist" class="{{ activeTab === 'features' ? '' : 'dn' }}">
+                        <div class="mt1 pl3">
+                            <div [innerHTML]="features" class="nav-content"></div>
+                        </div>
+                    </div>
+                    <div *ngIf="dimensionExist" class="{{ activeTab === 'dimensions' ? '' : 'dn' }}">
+                        <div *ngIf="isArray(product.dimension); else showDimensions" class="dimension-container">
+                            <div *ngFor="let dimension of product.dimension" class="fl w-50 pa2">
+                                <div class="dimension-title">{{ dimension.description }}</div>
+                                <div>Width: {{ dimension.width }}</div>
+                                <div>Depth: {{ dimension.depth }}</div>
+                                <div>Height: {{ dimension.height }}</div>
+                                <br />
+                            </div>
+                        </div>
+                        <ng-template #showDimensions>
+                            <div class="nav-content">
+                                {{ product.dimension }}
+                            </div>
+                        </ng-template>
+                    </div>
+                </div>
             </div>
-          </div>
-          <ng-template #showDimensions>
-            <div>
-              {{ product.dimension }}
-            </div>
-          </ng-template>
         </div>
-      </div>
     </div>
-  </div>
-</ng-template>
+    <ng-template #invalidProduct>
+        <div class="tc">
+            <img [src]="invalidLinkImageSrc" class="invalid-url-image" />
+        </div>
+    </ng-template>
+</ng-container>

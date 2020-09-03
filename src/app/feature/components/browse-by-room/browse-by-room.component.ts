@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { ApiService } from './../../../shared/services';
+import { ApiService, EventEmitterService } from './../../../shared/services';
 import { Router } from '@angular/router';
-import { environment} from './../../../../environments/environment';
-
+import { environment } from './../../../../environments/environment';
+import { Subscription } from 'rxjs';
 @Component({
   selector: 'app-browse-by-room',
   templateUrl: './browse-by-room.component.html',
@@ -11,22 +11,31 @@ import { environment} from './../../../../environments/environment';
 export class BrowseByRoomComponent implements OnInit {
   departments: any;
   ref = environment.BASE_HREF;
-
-  constructor(private apiService: ApiService, private router: Router) { }
+  eventSubscription: Subscription;
+  constructor(
+    private apiService: ApiService,
+    private router: Router,
+    private eventEmitterService: EventEmitterService
+  ) {}
 
   ngOnInit() {
-    this.onClick();
+    this.eventSubscription = this.eventEmitterService.userChangeEvent
+      .asObservable()
+      .subscribe((user) => {
+        this.onClick();
+      });
   }
-  onClick(){
+  onDestroy(): void {
+    this.eventSubscription.unsubscribe();
+  }
+  onClick() {
     this.apiService.browseRoom().subscribe((res: any) => {
-      this.departments = res['all_departments'];
-      this.departments = this.departments.filter(function(val){
-        if(val['department'] != 'Decor' && val['department'] != ''){
+      this.departments = res.all_departments;
+      this.departments = this.departments.filter((val) => {
+        if (val.department !== 'Bathroom' && val.department !== '') {
           return val;
         }
-      })
-    })
-    
+      });
+    });
   }
-
 }

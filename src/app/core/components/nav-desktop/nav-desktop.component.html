@@ -1,62 +1,119 @@
-<mat-toolbar class="bg-transparent">
-  <mat-toolbar-row class="header flex justify-between ph2">
-    <a
-      routerLink="/"
-      routerLinkActive="active"
-      class="no-underline flex items-center"
-    >
-      <img
-        class="w4 pointer grow title-image"
-        [src]="logoPath"
-        alt="Lazy Suzy Home"
-      />
-    </a>
-    <app-search-bar
-      *ngIf="notHome"
-      class="section"
-      [notHome]="notHome"
-    ></app-search-bar>
-    <div class="mr3 flex items-center">
-      <!-- <a
-        *ngIf="!isTablet"
-        class="header-link header-font"
-        href="http://board.lazysuzy.com/myboards.html"
-        >My Board</a
-      > -->
+<ng-container *ngIf="hideBar; else showBar">
+  <mat-toolbar class="bg-transparent">
+    <mat-toolbar-row class="header flex justify-center ph2">
       <a
-        *ngIf="!isTablet"
-        class="header-link header-font"
-        [routerLink]="['/aboutus']"
-        >The Lazy Story</a
+        routerLink="/"
+        routerLinkActive="active"
+        class="no-underline flex items-center"
       >
-      <span
-        (click)="isLoggedIn($event)"
-        class="flex items-center header-link pointer"
+        <img
+          class="center-logo pointer grow title-image"
+          [src]="logoPath"
+          alt="Lazy Suzy Home"
+        />
+      </a>
+    </mat-toolbar-row>
+  </mat-toolbar>
+</ng-container>
+<ng-template #showBar>
+  <mat-toolbar class="bg-transparent">
+    <mat-toolbar-row class="header flex justify-between ph2">
+      <a
+        routerLink="/"
+        routerLinkActive="active"
+        class="no-underline flex items-center"
       >
-        <mat-icon aria-hidden="false">favorite_border</mat-icon>
-        <span class="ml2 header-font" *ngIf="!isTablet">Saved items</span>
-      </span>
-      <app-auth class="account-icon header-font" [isHandset]="false"></app-auth>
-    </div>
-  </mat-toolbar-row>
-</mat-toolbar>
-<div class="top-navbar flex justify-left " *ngIf="notHome">
-  <ng-container *ngFor="let department of departments">
-    <div class="department-name">
-      <div class=" pointer pa2" [routerLink]="department.link">
-        {{ department.department | titlecase }}
-      </div>
-      <ul class="category-menu">
-        <li *ngFor="let category of department.categories">
-          <a
-            [routerLink]="category.link"
-            routerLinkActive="active"
-            class="no-underline"
+        <img
+          class="w4 pointer grow title-image"
+          [src]="logoPath"
+          alt="Lazy Suzy Home"
+        />
+      </a>
+      <app-search-bar
+        *ngIf="notHome"
+        class="section"
+        [notHome]="notHome"
+      ></app-search-bar>
+      <div class="mr3 flex items-center">
+        <!-- <a
+          *ngIf="!isTablet"
+          class="header-link header-font"
+          href="http://board.lazysuzy.com/myboards.html"
+          >My Board</a
+        > -->
+        <span [routerLink]="['/board']" class="my-boards-link">My Boards</span>
+        <span class="header-link pointer boards-icon">
+          <mat-icon aria-hidden="false" [routerLink]="['/board']" class="mt-0"
+            >dashboard</mat-icon
           >
-            {{ category.category | titlecase }}
-          </a>
-        </li>
-      </ul>
-    </div>
-  </ng-container>
-</div>
+        </span>
+        <span class="header-link pointer">
+          <mat-icon
+            class="ml2"
+            [matBadge]="cartProduct > 0 ? cartProduct : null"
+            matBadgeColor="#b76379"
+            aria-hidden="false"
+            [routerLink]="['/cart']"
+            >shopping_cart</mat-icon
+          >
+        </span>
+        <span class="header-link pointer">
+          <mat-icon aria-hidden="false" [routerLink]="['/wishlist']"
+            >favorite_border</mat-icon
+          >
+        </span>
+
+        <app-auth
+          class="account-icon header-font"
+          [isHandset]="false"
+        ></app-auth>
+      </div>
+    </mat-toolbar-row>
+  </mat-toolbar>
+  <div class="top-navbar flex justify-left" *ngIf="notHome && !isBrandPage">
+    <ng-container *ngFor="let department of departments">
+      <div class="department-name" *ngIf="department.enabled">
+        <div class="pointer pa2" [routerLink]="department.link">
+          {{ department.department | titlecase }}
+        </div>
+        <ul class="category-menu">
+          <ng-container *ngFor="let category of department.categories">
+            <li *ngIf="category.enabled">
+              <a
+                [routerLink]="category.link"
+                routerLinkActive="active"
+                class="no-underline"
+              >
+                {{ category.category | titlecase }}
+              </a>
+            </li>
+          </ng-container>
+        </ul>
+      </div>
+    </ng-container>
+  </div>
+
+  <div class="top-navbar flex justify-left" *ngIf="notHome && isBrandPage">
+    <ng-container *ngFor="let department of departments">
+      <div class="department-name" *ngIf="department.enabled">
+        <div class="pointer pa2">
+          {{ department.department | titlecase }}
+        </div>
+        <ul class="category-menu">
+          <ng-container *ngFor="let category of department.categories">
+            <li *ngIf="category.enabled">
+              <a
+                href="javascript: void(0);"
+                routerLinkActive="active"
+                class="no-underline"
+                (click)="setCategoryForBrandPage(category.LS_ID)"
+              >
+                {{ category.category | titlecase }}
+              </a>
+            </li>
+          </ng-container>
+        </ul>
+      </div>
+    </ng-container>
+  </div>
+</ng-template>

@@ -14,7 +14,7 @@ import {
 } from './../../models';
 import { MOCK_PRODUCT_FILTERS } from 'src/app/mocks';
 import { forkJoin } from 'rxjs'; // RxJS 6 syntax
-import { delay } from 'rxjs/operators';
+import { delay, filter } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
@@ -24,7 +24,7 @@ export class ApiService {
     private httpService: HttpService,
     private cookie: CookieService,
     private utils: UtilsService
-  ) { }
+  ) {}
 
   getNewArrivals(filters = '', page = 0): Observable<IProductsPayload> {
     const endpoint = `products/all`;
@@ -126,6 +126,17 @@ export class ApiService {
     return this.httpService.get(url);
   }
 
+  getBrandData(brandName: string):Observable<any> {
+    let endpoint = `brand`;
+    if(brandName !== '') {
+      endpoint = `brand/${brandName}`;
+    }
+    const url = env.useLocalJson
+    ? `${env.JSON_BASE_HREF}${endpoint}`
+    : `${env.API_BASE_HREF}${endpoint}`;
+    return this.httpService.get(url)
+  }
+
   getMultiplePageProducts(
     department: string,
     category: string,
@@ -145,138 +156,63 @@ export class ApiService {
   }
 
   getProduct(id: string): Observable<IProductDetail> {
-    const url = env.useLocalJson
-      ? `${env.JSON_BASE_HREF}product/${id}`
-      : `${env.API_BASE_HREF}product/${id}`;
+    const endpoint = `product/${id}`;
+    const url = `${env.API_BASE_HREF}${endpoint}`;
     return this.httpService.get(url);
   }
 
-  getAllDepartments(): Observable<IDepartment> {
-    const endpoint = `all-departments`;
+  getAllBrandNames(): Observable<any> {
+    const endpoint = `brand`;
     const url = env.useLocalJson
-      ? `${env.JSON_BASE_HREF}${endpoint}`
-      : `${env.API_BASE_HREF}${endpoint}`;
-    return this.httpService.get(url);
+    ? `${env.JSON_BASE_HREF}${endpoint}`
+    : `${env.API_BASE_HREF}${endpoint}`;
+    return this.httpService.get(url)
   }
 
-  getCustomProducts(): Observable<any> {
-    // TODO: To be done.
-    const result = [
-      {
-        asset_id: 7,
-        user_id: 1,
-        name: '',
-        price: '',
-        brand: null,
-        path: 'uploads/0BA81717-B481-EA94-84E9-2E3C9268FF2B.jpeg',
-        transparent_path: 'uploads/1720DB7C-72D3-681E-A149-30B8B608BBD7.png',
-        is_private: 0,
-        created_at: '2020-03-31 05:33:42',
-        modified_at: '2020-03-31 13:03:56',
-        is_active: 1
-      },
-      {
-        asset_id: 6,
-        user_id: 1,
-        name: 'bed',
-        price: '',
-        brand: null,
-        path: 'uploads/0C5B07AF-65A5-8098-9838-25C4AA291F3C.jpeg',
-        transparent_path: 'uploads/3B16C0A4-4904-B9C9-D9C4-253AEDDD0AF2.png',
-        is_private: 0,
-        created_at: '2020-03-27 20:59:12',
-        modified_at: '2020-03-27 20:59:24',
-        is_active: 1
-      },
-      {
-        asset_id: 5,
-        user_id: 1,
-        name: 'custom',
-        price: null,
-        brand: 'custom',
-        path: 'uploads/2F20D5D7-9069-88DF-E0E1-CA7352F16FE7.png',
-        transparent_path: 'uploads/359FD8C8-35CF-F18E-1AED-50C148F9D678.png',
-        is_private: 1,
-        created_at: '2020-03-27 20:58:29',
-        modified_at: '2020-03-27 20:58:33',
-        is_active: 1
-      },
-      {
-        asset_id: 4,
-        user_id: 1,
-        name: 'custom',
-        price: null,
-        brand: 'custom',
-        path: 'uploads/97A9EBCD-D0B2-2AA5-3A07-2DB6D7AA933F.gif',
-        transparent_path: 'uploads/B8235047-021D-FDAB-43B1-0093B244AF07.png',
-        is_private: 1,
-        created_at: '2020-03-27 20:58:02',
-        modified_at: '2020-03-27 20:58:10',
-        is_active: 1
-      },
-      {
-        asset_id: 2,
-        user_id: 1,
-        name: 'High Back Chair',
-        price: '450',
-        brand: null,
-        path: 'uploads/3A0FD864-69DC-2FEB-9B80-B417CF2FCC0A.png',
-        transparent_path: 'uploads/9143AED4-A686-7D90-196B-F909348067E4.png',
-        is_private: 1,
-        created_at: '2020-03-24 00:02:30',
-        modified_at: '2020-03-27 20:57:47',
-        is_active: 1
-      },
-      {
-        asset_id: 3,
-        user_id: 1,
-        name: '',
-        price: '',
-        brand: null,
-        path: 'uploads/03A566DD-88BC-3143-23B4-18517CAD1D93.jpeg',
-        transparent_path: 'uploads/B2F1A3FA-C58D-B463-A2A7-AB51AD75F248.png',
-        is_private: 0,
-        created_at: '2020-03-26 05:32:43',
-        modified_at: '2020-03-26 05:32:52',
-        is_active: 1
-      },
-      {
-        asset_id: 1,
-        user_id: 1,
-        name: 'custom',
-        price: null,
-        brand: 'custom',
-        path: 'uploads/F20B8FA2-D805-8F42-DC80-01EB05D3C0BB.png',
-        transparent_path: null,
-        is_private: 1,
-        created_at: '2020-03-23 23:48:08',
-        modified_at: '2020-03-23 23:48:08',
-        is_active: 1
-      }
-    ];
-    return of(result).pipe(delay(1000));
-  }
-
-  getBrowseTabData(id: string): Observable<any> {
-    const endpoint = `products/all?filters=category:${id}&sort_type=&pageno=0&limit=24&board-view=true`;
+  getAllDepartments(brandFilter: string = ''): Observable<IDepartment> {
+    let endpoint = `all-departments`;
+    if(brandFilter !== '' && brandFilter !== undefined) {
+      endpoint = `all-departments?brands=${brandFilter}`;
+    }
     const url = env.useLocalJson
       ? `${env.JSON_BASE_HREF}${endpoint}`
       : `${env.API_BASE_HREF}${endpoint}`;
     return this.httpService.get(url);
   }
 
-  getSearchProducts(search_query: string): Observable<ISearchProductsPayload> {
+  getBrowseTabData(
+    id: string,
+    appliedFilters: string,
+    pageNo
+  ): Observable<any> {
+    const endpoint = `products/all`;
+    const url = env.useLocalJson
+      ? `${env.JSON_BASE_HREF}${endpoint}`
+      : `${
+          env.API_BASE_HREF
+        }${endpoint}?filters=${appliedFilters};category:${id}&sort_type=&pageno=${
+          pageNo || 0
+        }&limit=24&board-view=true`;
+    return this.httpService.get(url);
+  }
+
+  getSearchProducts(searchQuery: string): Observable<ISearchProductsPayload> {
     const endpoint = `products/_search`;
-    const url = `${env.ES_API_BASE_HREF}${endpoint}?source=${search_query}&source_content_type=application%2Fjson`;
-    return this.httpService.get(url);
+    const headers = new HttpHeaders({
+      'Content-Type': 'application/json'
+    });
+    const url = `${env.ES_API_BASE_HREF}${endpoint}?source=${searchQuery}&source_content_type=application%2Fjson`;
+    return this.httpService.get(url, headers);
   }
 
-  getWishlistProducts(): Observable<IProductsPayload> {
+  getWishlistProducts(isBoard): Observable<IProductsPayload> {
     // const filters = '';
     // const sortTypes = '';
     // const endpoint = `products/${department}/${category}`;
     const endpoint = `wishlist`;
-    const url = `${env.API_BASE_HREF}${endpoint}`;
+    const url = `${env.API_BASE_HREF}${endpoint}${
+      isBoard ? '?board-view=true' : ''
+    }`;
     const headers = new HttpHeaders({
       'Content-Type': 'application/json',
       Authorization: `Bearer ${this.cookie.get('token')}`
@@ -296,7 +232,10 @@ export class ApiService {
   login(data) {
     const endpoint = `login`;
     const url = `${env.API_BASE_HREF}${endpoint}`;
-    return this.httpService.post(url, data);
+    const headers = new HttpHeaders({
+      Authorization: `Bearer ${this.cookie.get('token')}`
+    });
+    return this.httpService.post(url, data, headers);
   }
 
   subscription(URL, email): Observable<string> {
@@ -330,12 +269,33 @@ export class ApiService {
   signup(data) {
     const endpoint = `register`;
     const url = `${env.API_BASE_HREF}${endpoint}`;
-    return this.httpService.post(url, data);
+    const headers = new HttpHeaders({
+      Authorization: `Bearer ${this.cookie.get('token')}`
+    });
+    return this.httpService.post(url, data, headers);
+  }
+
+  signout() {
+    const endpoint = `logout`;
+    const url = `${env.API_BASE_HREF}${endpoint}`;
+    const headers = new HttpHeaders({
+      Authorization: `Bearer ${this.cookie.get('token')}`
+    });
+    return this.httpService.get(url, headers);
+  }
+
+  keepAlive() {
+    const endpoint = `user/keepalive`;
+    const url = `${env.API_BASE_HREF}${endpoint}`;
+    const headers = new HttpHeaders({
+      Authorization: `Bearer ${this.cookie.get('token')}`
+    });
+    return this.httpService.get(url, headers);
   }
 
   getPosts(): Observable<any[]> {
     return this.httpService.get<any[]>(
-      'http://wordpress.lazysuzy.com/index.php/wp-json/wp/v2/posts?_embed&per_page=100',
+      'https://psimonmyway.com/wp-json/wp/v2/posts?_embed',
       {
         params: {
           per_page: '6'
@@ -346,21 +306,61 @@ export class ApiService {
 
   getPostById(id): Observable<any[]> {
     return this.httpService.get<any[]>(
-      `http://wordpress.lazysuzy.com/index.php/wp-json/wp/v2/posts?slug=${id}`
+      `https://psimonmyway.com/wp-json/wp/v2/posts/${id}`
     );
   }
 
-  getAuthToken(access_token, provider) {
+  getAuthToken(accessToken, provider) {
     const endpoint = `oauth/token`;
     const url = `${env.API_BASE_HREF}${endpoint}`;
     const data = {
-      access_token,
-      client_id: 11,
-      client_secret: 'qVBaGC2G2qxa55VlbFRMrnPrjJGcRB98HFo8YoE4',
+      access_token: accessToken,
+      client_id: env.CLIENT_ID,
+      client_secret: env.CLIENT_SECRET,
       grant_type: 'social',
       provider
     };
     return this.httpService.post(url, data);
+  }
+
+  addCartProduct(data) {
+    const token = this.cookie.get('token');
+    const headers = new HttpHeaders({
+      'Content-Type': 'application/json',
+      Authorization: `Bearer ${token}`
+    });
+    const endpoint = 'cart/add';
+    const url = `${env.API_BASE_HREF}${endpoint}`;
+    return this.httpService.post(url, data, headers);
+  }
+
+  removeCartProduct(data) {
+    const token = this.cookie.get('token');
+    const headers = new HttpHeaders({
+      'Content-Type': 'application/json',
+      Authorization: `Bearer ${token}`
+    });
+    const endpoint = 'cart/remove';
+    const url = `${env.API_BASE_HREF}${endpoint}`;
+    return this.httpService.post(url, data, headers);
+  }
+
+  getCartProduct(hasState, state) {
+    const endpoint = hasState ? `cart?state_code=${state}` : 'cart';
+    const token = this.cookie.get('token');
+    const headers = new HttpHeaders({
+      'Content-Type': 'application/json',
+      Authorization: `Bearer ${token}`
+    });
+    const url = `${env.API_BASE_HREF}${endpoint}`;
+    return this.httpService.get(url, headers);
+  }
+  getAllDepartmentsBoard(): Observable<IDepartment> {
+    const endpoint = `all-departments`;
+    const url = env.useLocalJson
+      ? `${env.JSON_BASE_HREF}${endpoint}`
+      : `${env.API_BASE_HREF}${endpoint}?board-view=true`;
+    return this.httpService.get(url);
   }
 
   getAllBoards(payload): Observable<IProductPayload> {
@@ -371,5 +371,94 @@ export class ApiService {
       data: 5,
       Buser_id: 1
     });
+  }
+
+  postStripeToken(data) {
+    const token = this.cookie.get('token');
+    const headers = new HttpHeaders({
+      'Content-Type': 'application/json',
+      Authorization: `Bearer ${token}`
+    });
+    const endpoint = `payment/charge`;
+    const url = `${env.API_BASE_HREF}${endpoint}`;
+    return this.httpService.post(url, data, headers);
+  }
+  getOrderSuccessData(orderId) {
+    const token = this.cookie.get('token');
+    const headers = new HttpHeaders({
+      'Content-Type': 'application/json',
+      Authorization: `Bearer ${token}`
+    });
+    const endpoint = `order?order_id=${orderId}`;
+    const url = `${env.API_BASE_HREF}${endpoint}`;
+    return this.httpService.get(url, headers);
+  }
+  userUpdate(data) {
+    const token = this.cookie.get('token');
+    const headers = new HttpHeaders({
+      'Content-Type': 'application/json',
+      Authorization: `Bearer ${token}`
+    });
+    const endpoint = `user/update`;
+    const url = `${env.API_BASE_HREF}${endpoint}`;
+    return this.httpService.post(url, data, headers);
+  }
+  sendPasswordResetLink(data) {
+    const endpoint = `password/create`;
+    const url = `${env.API_BASE_HREF}${endpoint}`;
+    return this.httpService.post(url, data);
+  }
+  validateResetPasswordToken(token) {
+    const endpoint = `password/find/${token}`;
+    const url = `${env.API_BASE_HREF}${endpoint}`;
+    return this.httpService.get(url);
+  }
+  setNewPassword(data) {
+    const endpoint = `password/reset`;
+    const url = `${env.API_BASE_HREF}${endpoint}`;
+    return this.httpService.post(url, data);
+  }
+  updateProfile(data) {
+    const endpoint = 'user/details/update';
+    const token = this.cookie.get('token');
+    const headers = new HttpHeaders({
+      Authorization: `Bearer ${token}`
+    });
+    const url = `${env.API_BASE_HREF}${endpoint}`;
+    return this.httpService.post(url, data, headers);
+  }
+  getProfile() {
+    const endpoint = 'get-user';
+    const token = this.cookie.get('token');
+    const headers = new HttpHeaders({
+      Authorization: `Bearer ${token}`
+    });
+    const url = `${env.API_BASE_HREF}${endpoint}`;
+    return this.httpService.get(url, headers);
+  }
+  fetchDisplayProfile(username) {
+    const endpoint = `user/details?username=${username}`;
+    const token = this.cookie.get('token');
+    const headers = new HttpHeaders({
+      Authorization: `Bearer ${token}`
+    });
+    const url = `${env.API_BASE_HREF}${endpoint}`;
+    return this.httpService.get(url, headers);
+  }
+  getUserBoards(username) {
+    const endpoint = `board?username=${username}`;
+    const token = this.cookie.get('token');
+    const url = `${env.API_BASE_HREF}${endpoint}`;
+    return this.httpService.get(url);
+  }
+  likeBoard(boardId, like) {
+    const apiAction = like ? 'like' : 'unlike';
+    const endpoint = `board/${apiAction}/${boardId}`;
+    const token = this.cookie.get('token');
+    const headers = new HttpHeaders({
+      Authorization: `Bearer ${token}`
+    });
+    const url = `${env.API_BASE_HREF}${endpoint}`;
+    return this.httpService.post(url, headers);
   }
 }

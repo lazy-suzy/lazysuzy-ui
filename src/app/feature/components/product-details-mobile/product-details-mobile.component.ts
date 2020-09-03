@@ -1,10 +1,18 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
-import { IProductPayload, IProductDetail } from 'src/app/shared/models';
+import {
+  IActiveProduct,
+  IProductDetail,
+  IProduct,
+  ISeo
+} from 'src/app/shared/models';
 import {
   ApiService,
   UtilsService,
-  CacheService
+  CacheService,
+  EventEmitterService,
+  MatDialogUtilsService,
+  SeoService
 } from 'src/app/shared/services';
 import { Observable, Subscription } from 'rxjs';
 import {
@@ -25,13 +33,14 @@ export class ProductDetailsMobileComponent implements OnInit {
   @ViewChild(VariationsComponent, { static: false }) child: VariationsComponent;
   productSku: any;
   routeSubscription: any;
-  product: IProductDetail;
+  product: IProduct;
+  seoData: ISeo;
   productSubscription: Subscription;
-  activeTab: string = 'desc';
-  dimensionExist: boolean = false;
-  featuresExist: boolean = false;
-  descriptionExist: boolean = false;
-  spinner: string = 'assets/images/spinner.gif';
+  activeTab = 'desc';
+  dimensionExist = false;
+  featuresExist = false;
+  descriptionExist = false;
+  spinner = 'assets/image/spinner.gif';
   bpObserver: Observable<BreakpointState> = this.breakpointObserver.observe(
     Breakpoints.Handset
   );
@@ -42,87 +51,150 @@ export class ProductDetailsMobileComponent implements OnInit {
   isVariationExist: boolean;
   selectedIndex: any;
   isSwatchExist: boolean;
-  isProductFetching: boolean = false;
+  isProductFetching = true;
   description: any;
   features: any;
-  productPrice: string;
-  productWasPrice: string;
+  productPrice: any;
+  productWasPrice: any;
   variations = [];
   selectedSwatch = {
     swatch_image: null,
     price: '',
     wasPrice: ''
   };
+  errorMessage = '';
+  quantity = 1;
+  quantityArray = [];
   galleryRef = this.gallery.ref(this.galleryId);
+  isSetItemInInventory = false;
+  eventSubscription: Subscription;
+  activeProduct: IActiveProduct;
+  hasSelection: boolean;
+  beforeSelection: boolean;
+  checkSelection: boolean;
+  schema = {};
+  invalidLinkImageSrc = 'assets/image/invalid_link.png';
+  invalidLink: boolean;
   constructor(
     private router: Router,
     private activeRoute: ActivatedRoute,
     private apiService: ApiService,
-    private utils: UtilsService,
+    public utils: UtilsService,
     private breakpointObserver: BreakpointObserver,
     public gallery: Gallery,
     public lightbox: Lightbox,
-    public cacheService: CacheService
+    public cacheService: CacheService,
+    private eventEmitterService: EventEmitterService,
+    private matDialogUtils: MatDialogUtilsService,
+    private seoService: SeoService
   ) {}
 
   ngOnInit() {
-    this.bpSubscription = this.bpObserver.subscribe(
-      (handset: BreakpointState) => {
-        this.isHandset = handset.matches;
-      }
-    );
-    this.loadProduct();
+    this.eventSubscription = this.eventEmitterService.userChangeEvent
+      .asObservable()
+      .subscribe((user) => {
+        this.bpSubscription = this.bpObserver.subscribe(
+          (handset: BreakpointState) => {
+            this.isHandset = handset.matches;
+          }
+        );
+        this.loadProduct();
+      });
   }
 
   loadProduct() {
     this.isProductFetching = true;
-    this.routeSubscription = this.activeRoute.params.subscribe(routeParams => {
-      this.productSku = routeParams.product;
-      this.cacheService.data.productSku = this.productSku;
-      this.cacheService.data.useCache = true;
-    });
+    this.routeSubscription = this.activeRoute.params.subscribe(
+      (routeParams) => {
+        this.productSku = routeParams.product;
+        this.cacheService.data.productSku = this.productSku;
+        this.cacheService.data.useCache = true;
+      }
+    );
     this.productSubscription = this.apiService
       .getProduct(this.productSku)
-      .subscribe((payload: IProductDetail) => {
-        this.product = payload;
-        this.description = this.utils.compileMarkdown(this.product.description);
-        this.features = this.utils.compileMarkdown(this.product.features);
-        this.dimensionExist = this.utils.checkDataLength(
-          this.product.dimension
-        );
-        this.featuresExist = this.utils.checkDataLength(this.product.features);
-        this.descriptionExist = this.utils.checkDataLength(
-          this.product.description
-        );
-        this.isSwatchExist = this.utils.checkDataLength(
-          this.product.variations.filter(
-            variation => variation.swatch_image !== null
-          )
-        );
-        this.isVariationExist = this.utils.checkDataLength(
-          this.product.variations
-        );
-        if (!this.isHandset) {
-          this.router.navigate(
-            [`${this.product.department_info[0].category_url}`],
-            { queryParams: { modal_sku: this.product.sku } }
-          );
+      .subscribe(
+        (payload: IProductDetail) => {
+          this.product = payload.product;
+          this.seoData = payload.seo_data;
+          if (this.product) {
+            this.schema = this.seoService.setSchema(this.product);
+            this.seoService.setMetaTags(this.seoData);
+            this.updateActiveProduct(this.product);
+            this.description = this.utils.compileMarkdown(
+              this.product.description
+            );
+            this.features = this.utils.compileMarkdown(
+              this.product.features,
+              this.product.site
+            );
+            this.dimensionExist = this.utils.checkDataLength(
+              this.product.dimension
+            );
+            this.featuresExist = this.utils.checkDataLength(
+              this.product.features
+            );
+            this.descriptionExist = this.utils.checkDataLength(
+              this.product.description
+            );
+            this.isSwatchExist = this.utils.checkDataLength(
+              this.product.variations.filter(
+                (variation) => variation.swatch_image !== null
+              )
+            );
+            this.isVariationExist = this.utils.checkDataLength(
+              this.product.variations
+            );
+            if (!this.isVariationExist) {
+              this.beforeSelection = true;
+              this.checkSelection = true;
+            }
+            this.hasVariationsInventory();
+            if (!this.isHandset) {
+              this.router.navigate(
+                [`${this.product.department_info[0].category_url}`],
+                { queryParams: { modal_sku: this.product.sku } }
+              );
+            }
+            this.variations = this.product.variations.sort((a, b) =>
+              a.name > b.name ? 1 : -1
+            );
+            if (this.product.in_inventory) {
+              this.productPrice = this.utils.formatPrice(
+                this.product.inventory_product_details.price
+              );
+              this.productWasPrice = this.utils.formatPrice(
+                this.product.inventory_product_details.was_price
+              );
+            } else {
+              this.productPrice = this.utils.formatPrice(this.product.is_price);
+              this.productWasPrice = this.utils.formatPrice(
+                this.product.was_price
+              );
+            }
+            this.items = this.product.on_server_images.map(
+              (item) => new ImageItem({ src: item })
+            );
+            if (this.product.set) {
+              this.checkSetInventory(this.product.set);
+            }
+            this.galleryRef.load(this.items);
+            this.invalidLink = false;
+          } else {
+            this.invalidLink = true;
+          }
+          this.isProductFetching = false;
+        },
+        (error) => {
+          this.invalidLink = true;
+          this.isProductFetching = false;
         }
-        this.variations = this.product.variations.sort((a, b) =>
-          a.name > b.name ? 1 : -1
-        );
-        this.productPrice = this.product.is_price;
-        this.productWasPrice = this.product.was_price;
-        this.items = this.product.on_server_images.map(
-          item => new ImageItem({ src: item })
-        );
-        this.galleryRef.load(this.items);
-        this.isProductFetching = false;
-      });
+      );
   }
-  ngOnDestroy(): void {
+  onDestroy(): void {
     this.productSubscription.unsubscribe();
     this.bpSubscription.unsubscribe();
+    this.eventSubscription.unsubscribe();
   }
 
   selectTab(tab) {
@@ -172,19 +244,122 @@ export class ProductDetailsMobileComponent implements OnInit {
       vglnk.open(url, '_blank');
     }
   }
-  onSetImage(src): void {
+  onSetImage(variation): void {
     // this.galleryContainer.nativeElement.scrollTop = 0;
     this.items = this.product.on_server_images.map(
-      item => new ImageItem({ src: item })
+      (item) => new ImageItem({ src: item })
     );
-    if (src) {
+    if (variation) {
+      const src = variation.image;
       const image = new ImageItem({ src });
       this.items.splice(0, 0, image);
+      this.updateActiveProduct(variation);
+      this.hasSelection = true;
+    } else {
+      this.updateActiveProduct(this.product);
+      this.hasVariationsInventory();
+      // this.hasSelection = false;
     }
     this.galleryRef.load(this.items);
   }
   onSetPrice(priceData): void {
-    this.productPrice = priceData.price || this.product.is_price;
-    this.productWasPrice = priceData.wasPrice || this.product.was_price;
+    this.productPrice = this.utils.formatPrice(
+      priceData.price || this.product.is_price
+    );
+    this.productWasPrice = this.utils.formatPrice(
+      priceData.wasPrice || this.product.was_price
+    );
+  }
+  openCartModal() {
+    if (
+      !this.product.in_inventory &&
+      !this.activeProduct.inventory_product_details.price ||
+      !this.beforeSelection
+    ) {
+      this.hasSelection = false;
+    } else {
+      const data = {
+        sku: this.activeProduct.sku,
+        brand: this.product.site,
+        image: this.items[0].data.src,
+        name:
+          this.activeProduct.sku === this.product.sku
+            ? this.activeProduct.name
+            : this.product.name + ' ' + this.activeProduct.name,
+        price: this.productPrice,
+        quantity: this.quantity
+      };
+      const postData = {
+        product_sku: this.activeProduct.sku,
+        count: this.quantity,
+        parent_sku: this.product.sku
+      };
+
+      console.log('this.product: ', this.product);
+      console.log('postData: ', postData);
+
+      this.apiService.addCartProduct(postData).subscribe(
+        (payload: any) => {
+          if (payload.status) {
+            this.errorMessage = '';
+            this.matDialogUtils.openAddToCartDialog(data);
+          } else {
+            this.errorMessage = payload.msg;
+          }
+        },
+        (error: any) => {
+          this.errorMessage = 'Cannot add this product at the moment.';
+          console.log(error);
+        }
+      );
+    }
+  }
+  checkSetInventory(product) {
+    for (const item of product) {
+      if (item.in_inventory) {
+        this.isSetItemInInventory = true;
+      }
+    }
+  }
+  updateActiveProduct(product) {
+    this.activeProduct = {
+      sku: product.variation_sku ? product.variation_sku : product.sku,
+      in_inventory: product.in_inventory,
+      name: product.name,
+      inventory_product_details: product.inventory_product_details
+        ? product.inventory_product_details
+        : []
+    };
+  }
+
+  quantityLimit(count) {
+    const maxNumber = count < 10 ? count : 10;
+    return Array.from({ length: maxNumber }, Number.call, (i) => i + 1);
+  }
+
+  hasVariationsInventory() {
+    if (
+      this.isVariationExist &&
+      this.product.inventory_product_details === null
+    ) {
+      if (this.product.variations.find((item) => item.in_inventory === true)) {
+        this.activeProduct.in_inventory = true;
+        this.activeProduct.inventory_product_details.count = 1;
+      }
+    }
+  }
+
+  onSetSelectionChecked(e: boolean) {
+    console.log('set Selection checked: ', e);
+    this.beforeSelection = e;
+  }
+
+  onClearSelection(e: boolean) {
+    this.hasSelection = e;
+    this.checkSelection = e;
+  }
+
+  onSetSelection(e: boolean) {
+    this.hasSelection = e;
   }
 }

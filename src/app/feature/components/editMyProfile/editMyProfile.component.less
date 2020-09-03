@@ -1,0 +1,208 @@
+.profile-container {
+  width: 50%;
+  margin: auto;
+  .header {
+    padding-bottom: 15px;
+    border-bottom: 1px solid #aab7b6;
+    margin-bottom: 15px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  .title {
+    color: #b76e79;
+    font-size: 24px;
+  }
+  .profile-form-container {
+    width: 90%;
+    margin: 0 auto 20px;
+    .account-avatar-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      position: relative;
+      height: 70px;
+      margin: 25px auto 25px -10px;
+      width: 90%;
+      overflow: hidden;
+      .profile-image-input {
+        position: absolute;
+        left: 0;
+        height: 70px;
+        width: 70px;
+        opacity: 0;
+        z-index: 1;
+        border-radius: 100%;
+      }
+      .edit-image {
+        position: absolute;
+        left: 20px;
+        top: 25px;
+        color: #808080;
+      }
+      .account-icon {
+        font-size: 75px;
+        margin: 0 0 45px -5px;
+        color: #d4d4d4;
+      }
+    }
+    .input-container {
+      margin: 25px 0;
+      border-color: #999999;
+      &:focus {
+        border-color: #999999;
+      }
+    }
+    label {
+      color: #999999;
+    }
+    input {
+      &:focus {
+        outline: none;
+      }
+    }
+    .form-input {
+      padding: 8px 16px;
+      height: 40px;
+      border-radius: 3px;
+      border-color: #999999;
+    }
+    .profile-link {
+      font-size: 14px;
+      span a {
+        color: #999999;
+      }
+    }
+    .last-name {
+      text-align: left;
+      margin-left: 15px;
+    }
+    .text-area {
+      height: 100px;
+      resize: none;
+      border-color: #999999;
+      &:focus {
+        outline: none;
+      }
+    }
+    .tag-line-container {
+      height: 40px;
+    }
+    .action-buttons-row {
+      width: 100%;
+      text-align: right;
+      margin: 15px 0;
+    }
+    button {
+      padding: 10px 40px;
+      border: none;
+      border-radius: 4px;
+    }
+    .profile-cancel-btn {
+      color: #0c1c31;
+      &:focus {
+        outline: none;
+      }
+    }
+    .profile-update-btn {
+      background-color: #0c1c31;
+      color: #f7c107;
+    }
+    .profile-avatar {
+      width: 70px;
+      border-radius: 100%;
+      object-fit: cover;
+      left: 50%;
+      top: 50%;
+      position: absolute;
+      height: 100%;
+      -webkit-transform: translate(-50%, -50%);
+      -ms-transform: translate(-50%, -50%);
+      transform: translate(-50%, -50%);
+    }
+  }
+}
+.avatar-container {
+  width: 15%;
+}
+.form-input-container {
+  width: 85%;
+  margin-left: 10px;
+}
+.input-50 {
+  width: 95%;
+}
+.update-msg {
+  padding: 15px 0;
+  text-align: center;
+  color: #12d319;
+  font-size: 14px;
+}
+.loader {
+  position: fixed;
+  z-index: 1;
+  top: 50%;
+  left: 50%;
+  transform: translateX(-50%) translateY(-50%);
+}
+.error-msg {
+  color: #ff0000;
+  font-size: 14px;
+}
+::ng-deep .mat-simple-snackbar-action {
+  color: #b76e79;
+}
+::ng-deep .mat-snack-bar-container {
+  background: #0c1c31;
+  margin-bottom: 70px !important;
+}
+::ng-deep .mat-simple-snackbar {
+  color: #ffcc00;
+}
+@media (max-width: 767px) {
+  .profile-container {
+    width: 100%;
+    .header {
+      display: block;
+    }
+    .title {
+      padding: 15px;
+    }
+    .form-msg {
+      margin: 0 15px;
+    }
+    .profile-form-container {
+      width: 90%;
+      .account-avatar-row {
+        text-align: right;
+        width: 20%;
+        margin: 25px auto;
+      }
+
+      .last-name {
+        margin: 20px 0 10px;
+      }
+      .action-buttons-row {
+        text-align: center;
+        margin: 10px 0 20px;
+      }
+    }
+  }
+  .avatar-container {
+    width: 100%;
+  }
+  .form-input-container {
+    width: 100%;
+    margin-left: 0;
+  }
+  .input-50 {
+    width: 100%;
+  }
+  ::ng-deep .mat-snack-bar-container {
+    max-height: 48px;
+  }
+  ::ng-deep .mat-snack-bar-handset {
+    max-height: 48px;
+    margin-bottom: 100px !important;
+  }
+}

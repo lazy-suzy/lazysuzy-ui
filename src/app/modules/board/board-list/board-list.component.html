@@ -1,0 +1,224 @@
+<div class="board-list-container container">
+  <div class="welcome-msg-container">
+    <ng-container *ngIf="user.name; else guest">
+      <div class="welcome-msg-block">
+        <span class="welcome-msg">WELCOME </span>
+        <span class="welcome-msg">&nbsp;BACK</span>,
+        <span class="welcome-msg">{{ user.first_name | uppercase }}</span>
+        <span class="welcome-msg">!</span>
+      </div>
+    </ng-container>
+    <ng-template #guest>
+      <div class="flex items-center justify-between signup-message">
+        <span>Sign up or Login to save your Boards to your account</span>
+        <button class="btn" (click)="openSignupDialog()">SIGN UP</button>
+      </div>
+    </ng-template>
+  </div>
+  <div class="board-list-header">
+    <h5 class="title">YOUR BOARDS</h5>
+  </div>
+  <div class="board-list-header">
+    <div class="sub-title">DRAFTS</div>
+  </div>
+  <app-board-loader *ngIf="isFetching"></app-board-loader>
+  <div class="row" id="board-list" *ngIf="!isFetching">
+    <div class="col-sm-4 mb-sm-4">
+      <div class="board-card box-shadow-0">
+        <div class="canvas-preview mb-4">
+          <div class="add-board" (click)="add()">
+            <div class="add-board-icon">
+              <i
+                class="mdi mdi-plus-box-outline js-open-config cursor-pointer"
+                aria-hidden="true"
+              ></i>
+            </div>
+            <div>
+              Start new design
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div
+      *ngFor="let board of boards; index as i"
+      class="col-sm-4 mb-sm-4 {{ board.is_published === 0 ? '' : 'dn' }}"
+    >
+      <div class="board-card">
+        <div
+          class="canvas-preview pointer"
+          routerLink="../{{ boardViewLink }}/{{ board.uuid }}"
+        >
+          <img
+            width="100%"
+            class="edit-board"
+            [src]="getPreviewImagePath(board)"
+          />
+          <div class="overlay"></div>
+          <div class="board-card-icons">
+            <span
+              data-title="Edit"
+              routerLink="../{{ boardViewLink }}/{{ board.uuid }}"
+            >
+              <i class="mdi mdi-pencil" aria-hidden="true"></i>
+            </span>
+            <span data-title="Delete" (click)="delete(board)">
+              <i class="mdi mdi-delete" aria-hidden="true"></i>
+            </span>
+            <span data-title="Share" (click)="share(board)" data-action="share">
+              <i class="mdi mdi-share-variant" aria-hidden="true"></i>
+            </span>
+            <span
+              data-title="Duplicate"
+              data-action="duplicate"
+              (click)="add(board)"
+            >
+              <i class="mdi mdi-content-copy" aria-hidden="true"></i>
+            </span>
+            <span
+              data-title="Shop"
+              target="_blank"
+              routerLink="../{{ boardPreviewLink }}/{{ board.uuid }}"
+            >
+              <i class="mdi mdi-cart" aria-hidden="true"></i>
+            </span>
+          </div>
+        </div>
+        <div class="preview-title">
+          {{ board.title }}
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div *ngIf="isAnyPublished" class="board-list-header">
+    <div class="sub-title">PUBLISHED</div>
+  </div>
+  <div class="row">
+    <div
+      *ngFor="let board of boards; index as i"
+      class="col-sm-4 mb-sm-4 {{ board.is_published === 1 ? '' : 'dn' }}"
+    >
+      <div class="board-card">
+        <div
+          class="canvas-preview pointer"
+          routerLink="../{{ boardPreviewLink }}/{{ board.uuid }}"
+        >
+          <img
+            width="100%"
+            class="edit-board"
+            [src]="getPreviewImagePath(board)"
+          />
+          <div class="overlay"></div>
+          <div class="board-card-icons">
+            <span
+              data-title="Edit"
+              routerLink="../{{ boardViewLink }}/{{ board.uuid }}"
+            >
+              <i class="mdi mdi-pencil" aria-hidden="true"></i>
+            </span>
+            <span data-title="Delete" (click)="delete(board)">
+              <i class="mdi mdi-delete" aria-hidden="true"></i>
+            </span>
+            <span data-title="Share" (click)="share(board)" data-action="share">
+              <i class="mdi mdi-share-variant" aria-hidden="true"></i>
+            </span>
+            <span
+              data-title="Duplicate"
+              data-action="duplicate"
+              (click)="add(board)"
+            >
+              <i class="mdi mdi-content-copy" aria-hidden="true"></i>
+            </span>
+            <span
+              data-title="Shop"
+              routerLink="../{{ boardPreviewLink }}/{{ board.uuid }}"
+            >
+              <i class="mdi mdi-cart" aria-hidden="true"></i>
+            </span>
+          </div>
+          <div class="like-icon pointer">
+            <mat-icon
+              (click)="likeBoard(board.uuid, true)"
+              *ngIf="!board.is_liked; else hasLikedBoard"
+              >favorite_border
+            </mat-icon>
+            <ng-template #hasLikedBoard>
+              <mat-icon (click)="likeBoard(board.uuid, false)"
+                >favorite
+              </mat-icon>
+            </ng-template>
+            <span class="likes-count" *ngIf="board.like_count > 0">
+              {{ board.like_count }}</span
+            >
+          </div>
+        </div>
+        <div class="preview-title">
+          {{ board.title }}
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="shared-boards-container">
+  <div class="container">
+    <div *ngIf="sharedBoards.length" class="pb-5-ns">
+      <div class="shared-list-header">
+        <h5 class="title">BROWSE SHARED BOARDS</h5>
+      </div>
+      <div>
+        <div class="row" *ngIf="sharedBoards.length < 4 && !isHandset">
+          <div class="col-sm-4" *ngFor="let data of sharedBoards">
+            <div class="board-card">
+              <div
+                class="canvas-preview pointer"
+                routerLink="../{{ boardPreviewLink }}/{{ data.uuid }}"
+              >
+                <img
+                  width="100%"
+                  class="edit-board"
+                  [src]="getPreviewImagePath(data)"
+                />
+              </div>
+              <div class="preview-title">
+                {{ data.title }}
+              </div>
+            </div>
+          </div>
+        </div>
+        <p-carousel
+          *ngIf="!isHandset && sharedBoards.length > 3"
+          class="top-deal-slider"
+          [value]="sharedBoards"
+          [numVisible]="3"
+          [numScroll]="1"
+          [responsiveOptions]="responsiveOptions"
+        >
+          <ng-template let-data pTemplate="item">
+            <div class="board-card">
+              <div
+                class="canvas-preview pointer"
+                routerLink="../{{ boardPreviewLink }}/{{ data.uuid }}"
+              >
+                <img
+                  width="100%"
+                  class="edit-board"
+                  [src]="getPreviewImagePath(data)"
+                />
+              </div>
+              <div class="preview-title">
+                {{ data.title }}
+              </div>
+            </div>
+          </ng-template>
+        </p-carousel>
+        <app-products-carousal
+          [items]="isHandset ? 1 : 4"
+          [data]="sharedBoards"
+          [isBoards]="true"
+          class="owl-carousel"
+        ></app-products-carousal>
+      </div>
+    </div>
+  </div>
+</div>

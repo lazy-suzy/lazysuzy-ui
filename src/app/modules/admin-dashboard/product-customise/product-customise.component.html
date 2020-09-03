@@ -1,0 +1,44 @@
+<h1 class="header">Product Dashboard</h1>
+
+<ng-container>
+  <div
+    class="filter-panel flex justify-around items-center"
+    *ngIf="!isProductFetching"
+  >
+    <app-product-filters
+      [productFilters]="productFilters"
+      (setFilters)="onSetFilters($event)"
+      class="flex justify-start w-75 product-filters"
+      *ngIf="!isProductFetching"
+    ></app-product-filters>
+    <div style="font-size: 14px; min-width: 110px">{{ totalCount }} Results</div>
+    <app-sort-type
+      [sortTypeList]="sortTypeList"
+      (setSortType)="onSetSortType($event)"
+    >
+    </app-sort-type>
+  </div>
+</ng-container>
+<div
+  infiniteScroll
+  [infiniteScrollDistance]="2"
+  [infiniteScrollThrottle]="50"
+  (scrolled)="onScroll()"
+>
+  <app-admin-product-listing
+    [products]="products"
+    [allBoards]="allBoards"
+    [positions]="positions"
+    (tagImage)="tagImage($event)"
+  >
+  </app-admin-product-listing>
+</div>
+
+<img *ngIf="isProductFetching" [src]="spinner" class="loader" />
+
+<!-- <div class="flex flex-wrap" infiniteScroll [infiniteScrollDistance]="2" [infiniteScrollThrottle]="50"
+    (scrolled)="onScroll()">
+    <ng-container>
+        
+    </ng-container>
+</div> -->

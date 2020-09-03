@@ -1,42 +1,61 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-board-products',
   templateUrl: './board-products.component.html',
-  styleUrls: ['./board-products.component.less']
+  styleUrls: ['./board-products.component.less', './../../board.component.less']
 })
 export class BoardProductsComponent implements OnInit {
+  @Input() products: any = null;
+  @Input() modifyPath: any = false;
+  @Input() isAsset: boolean;
+  productType = 'default';
 
-  @Input() products: any = [];
   @Output() updates: EventEmitter<any> = new EventEmitter();
   @Output() previewProduct: EventEmitter<any> = new EventEmitter();
-  @Input() modifyPath: any = false;
+  activeItem: string;
+  constructor() {}
 
-  constructor() { }
+  ngOnInit() {}
 
-  ngOnInit() { }
-
+  // tslint:disable-next-line: use-lifecycle-interface
   ngOnChanges(changes: any) {
-    if (changes['products'] && changes['products'].previousValue !== changes['products'].currentValue) {
-      let products = changes['products'].currentValue || [];
-      if (this.modifyPath) {
-        debugger;
-        products = products.map(pro => {
-          return {
-            ...pro,
-            //TO ASK MIKE
-            // main_image: `https://www.lazysuzy.com/${pro.path}`
-            main_image: `http://board.lazysuzy.com/${pro.path}`
-          };
-        });
-      }
+    if (
+      changes.products &&
+      changes.products.previousValue !== changes.products.currentValue
+    ) {
+      const products = changes.products.currentValue || [];
       this.products = [...products] || [];
+    }
 
+    if (
+      changes.isAsset &&
+      changes.isAsset.previousValue !== changes.isAsset.currentValue
+    ) {
+      const isAsset = changes.isAsset.currentValue || [];
+      this.isAsset = isAsset;
+      if (this.isAsset) {
+        this.productType = 'custom';
+        this.products = this.transformAssetToProduct(this.products);
+      }
     }
   }
 
-  previewProductFn(product) {
-    this.previewProduct.emit(product);
+  transformAssetToProduct(assets) {
+    assets = assets.map((ast) => {
+      const imagePath = environment.BASE_HREF + ast.path;
+      return {
+        ...ast,
+        board_thumb: imagePath,
+        dropType: 'custom'
+      };
+    });
+    return assets;
   }
 
+  previewProductFn(product) {
+    this.activeItem = product.refId;
+    this.previewProduct.emit(product);
+  }
 }

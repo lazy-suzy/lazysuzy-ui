@@ -1,86 +1,123 @@
-import { NgModule } from "@angular/core";
-import { CommonModule } from "@angular/common";
-import { BoardRoutingModule } from './board.routes';
-import { CanvasComponent } from './components/canvas/canvas.component';
-import { BoardContainerComponent } from './components/board-container/board-container.component';
-import { BoardSideNavComponent } from './components/board-side-nav/board-side-nav.component';
-import { LoaderModule } from 'src/app/shared/components/loader/loader.module';
-import { SelectComponent } from './components/select/select.component';
-import { MidPanelComponent } from './components/mid-panel/mid-panel.component';
-import { TextComponent } from './components/text/text.component';
-import { BrowseComponent } from './components/browse/browse.component';
-import { FavoritesComponent } from './components/favorites/favorites.component';
-import { BoardComponent } from './components/board/board.component';
-import { AddComponent } from './components/add/add.component';
-import { MatSelectModule } from '@angular/material/select'
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { NgModule } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { HttpClientModule } from '@angular/common/http';
+
+import { BoardComponent } from './board.component';
+import { BoardViewComponent } from './board-view/board-view.component';
+import { BoardListComponent } from './board-list/board-list.component';
+import { BoardPreviewComponent } from './board-preview/board-preview.component';
+import { BoardPopupComponent } from './board-popup/board-popup.component';
+import { BoardPopupConfigComponent } from './board-popup-config/board-popup-config.component';
+import { BoardLoaderComponent } from './board-loader/board-loader.component';
+import { BoardPopupConfirmComponent } from './board-popup-confirm/board-popup-confirm.component';
+
+import { BoardService } from './board.service';
+import { CookieService } from 'ngx-cookie-service';
+import { BoardRoutingModule } from './board-routing.module';
+import { SelectComponent } from './board-select/select.component';
+import { SharedModule } from 'src/app/shared/shared.module';
+import { BoardAddComponent } from './board-add/add.component';
+import { AddViaUrlComponent } from './board-add/add-via-url/add-via-url.component';
+// import { StepperOverviewExample } from './board-add/add-via-url-stepper/stepper-overview-example';
+import { BrowsefilterComponent } from './browse-filter/browse-filter.component';
+
 import { MatSliderModule } from '@angular/material/slider';
 import { MatInputModule } from '@angular/material/input';
 import { OverlayPanelModule } from 'primeng/overlaypanel';
 import { PanelModule } from 'primeng/panel';
 import { PanelMenuModule } from 'primeng/panelmenu';
-import { ToolbarComponent } from './components/toolbar/toolbar.component';
 import { MatTabsModule } from '@angular/material/tabs';
-import { BrowsefilterComponent } from './components/browse-filter/browse-filter.component';
 import { MaterialModule } from 'src/app/shared/material-module';
 import { MultiSelectModule } from 'primeng/multiselect';
-import { AddViaUrlComponent } from './components/add-via-url/add-via-url.component';
-import { StepperOverviewExample } from './components/add-via-url-stepper/stepper-overview-example';
-import { StepOneComponent } from './components/add-via-url-stepper/step-one/step-one.component';
-import { StepTwoComponent } from './components/add-via-url-stepper/step-two/step-two.component';
-import { TextInputComponent } from './components/add-via-url-stepper/text-input/text-input.component';
-import { BoardProductsComponent } from './components/board-products/board-products.component';
-import { AppProductPreviewComponent } from './components/product-preview/product-preview.component';
 import { FileUploadModule } from 'ng2-file-upload';
-import { CanvasNewComponent } from './components/canvas-new/canvas-new.component';
+import { MatSelectModule } from '@angular/material';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { AppProductPreviewComponent } from './product-preview/product-preview.component';
+import { KeyboardShortcutsModule } from 'ng-keyboard-shortcuts';
+import { CarouselModule } from 'primeng/carousel';
+import { BoardTextComponent } from './components/board-text/board-text.component';
+// import { StepOneComponent } from './board-add/add-via-url-stepper/step-one/step-one.component';
+// import { StepTwoComponent } from './board-add/add-via-url-stepper/step-two/step-two.component';
+import { BoardProductsComponent } from './components/board-products/board-products.component';
+import { CurrentBoardComponent } from './components/current-board/board.component';
+import { AddFileUploadComponent } from './board-add/add-file-upload/add-file-upload.component';
+import { UploadFileDetailsComponent } from './board-add/add-file-upload/upload-file-details/upload-file-details.component';
+import { InfiniteScrollModule } from 'ngx-infinite-scroll';
+import { IconFactoryComponent } from './icon-factory/icon-factory';
+import {
+  FontPickerModule,
+  FONT_PICKER_CONFIG,
+  FontPickerConfigInterface
+} from 'ngx-font-picker';
+import { Ng5SliderModule } from 'ng5-slider';
 
-const DECLARATIONS = [
-  BoardContainerComponent,
-  MidPanelComponent,
-  BoardSideNavComponent,
-  SelectComponent,
-  TextComponent,
-  BrowseComponent,
-  FavoritesComponent,
-  BoardComponent,
-  CanvasComponent,
-  AddComponent,
-  ToolbarComponent,
-  BrowsefilterComponent,
-  AddViaUrlComponent,
-  StepperOverviewExample,
-  StepOneComponent,
-  StepTwoComponent,
-  TextInputComponent,
-  BoardProductsComponent,
-  AppProductPreviewComponent,
-  CanvasNewComponent
-];
-
-const MODULES = [
-  CommonModule,
-  BoardRoutingModule,
-  LoaderModule,
-  MatSelectModule,
-  FormsModule,
-  ReactiveFormsModule,
-  MatSliderModule,
-  MatInputModule,
-  OverlayPanelModule,
-  PanelModule,
-  PanelMenuModule,
-  MatTabsModule,
-  MaterialModule,
-  MultiSelectModule,
-  FileUploadModule
-];
+const DEFAULT_FONT_PICKER_CONFIG: FontPickerConfigInterface = {
+  apiKey: 'AIzaSyBCssLRX6vTUWmk__OTRIz5699gL4kgpVQ'
+};
 
 @NgModule({
-  declarations: [...DECLARATIONS],
-  imports: [...MODULES],
-  exports: [...DECLARATIONS, ...MODULES],
+  imports: [
+    CommonModule,
+    BoardRoutingModule,
+    HttpClientModule,
+    SharedModule,
+    MatSliderModule,
+    MatInputModule,
+    OverlayPanelModule,
+    PanelModule,
+    PanelMenuModule,
+    MatTabsModule,
+    MaterialModule,
+    MultiSelectModule,
+    FileUploadModule,
+    MatSelectModule,
+    FormsModule,
+    ReactiveFormsModule,
+    KeyboardShortcutsModule.forRoot(),
+    CarouselModule,
+    FontPickerModule,
+    Ng5SliderModule,
+    InfiniteScrollModule
+  ],
+  declarations: [
+    BoardComponent,
+    BoardViewComponent,
+    BoardListComponent,
+    BoardPreviewComponent,
+    BoardPopupComponent,
+    BoardPopupConfigComponent,
+    BoardLoaderComponent,
+    BoardPopupConfirmComponent,
+    SelectComponent,
+    BoardAddComponent,
+    AddViaUrlComponent,
+    // StepperOverviewExample,
+    BrowsefilterComponent,
+    AppProductPreviewComponent,
+    BoardPreviewComponent,
+    BoardTextComponent,
+    // StepperOverviewExample,
+    // StepOneComponent,
+    // StepTwoComponent,
+    BoardProductsComponent,
+    CurrentBoardComponent,
+    AddFileUploadComponent,
+    UploadFileDetailsComponent,
+    IconFactoryComponent
+  ],
   entryComponents: [
-    AddViaUrlComponent
+    AddViaUrlComponent,
+    UploadFileDetailsComponent,
+    BoardPopupConfigComponent,
+    BoardPopupConfirmComponent
+  ],
+  providers: [
+    BoardService,
+    CookieService,
+    {
+      provide: FONT_PICKER_CONFIG,
+      useValue: DEFAULT_FONT_PICKER_CONFIG
+    }
   ]
 })
-export class BoardModule { }
+export class BoardModule {}

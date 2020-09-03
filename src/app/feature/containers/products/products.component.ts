@@ -16,8 +16,10 @@ import {
 import { MatDialog } from '@angular/material/dialog';
 import {
   ApiService,
-  UtilsService,
-  CacheService
+  MatDialogUtilsService,
+  CacheService,
+  EventEmitterService,
+  SeoService
 } from './../../../shared/services';
 import { SCROLL_ICON_SHOW_DURATION } from './../../../shared/constants';
 import { Router, ActivatedRoute } from '@angular/router';
@@ -33,7 +35,7 @@ import {
   templateUrl: './products.component.html',
   styleUrls: ['./products.component.less']
 })
-export class ProductsComponent implements OnInit, OnDestroy {
+export class ProductsComponent implements OnInit {
   productsSubscription: Subscription;
   routeSubscription: Subscription;
   products: IProductPayload[];
@@ -42,34 +44,46 @@ export class ProductsComponent implements OnInit, OnDestroy {
     type: [],
     color: [],
     category: [],
+    shape: [],
+    seating: [],
     price: { from: 0, min: 0, max: 0, to: 0 }
   };
   department: string;
   category: string;
   categoryTitle: string;
   emailTitle: string;
-  total_count: number = 0;
+  totalCount = 0;
   filters = '';
   sortType = '';
   sortTypeList: ISortType[];
-  pageNo: number = 0;
+  pageNo = 0;
   topPosToStartShowing = 300;
   fixFilterBar = 150;
-  isIconShow: boolean = false;
-  showBar: boolean = false;
-  isProductFetching: boolean = false;
-  spinner: string = 'assets/images/spinner.gif';
-  showMobileFilter: boolean = false;
-  showMobileSort: boolean = false;
-  productsInRow: number = 2;
-  modalSku: string = '';
+  isIconShow = false;
+  showBar = false;
+  isProductFetching = false;
+  spinner = 'assets/image/spinner.gif';
+  showMobileFilter = false;
+  showMobileSort = false;
+  productsInRow = 2;
+  modalSku = '';
   bpObserver: Observable<BreakpointState> = this.breakpointObserver.observe(
     Breakpoints.Handset
   );
   bpSubscription: Subscription;
   isHandset: boolean;
-  scrollToProductSKU: string = '';
-
+  scrollToProductSKU = '';
+  eventSubscription: Subscription;
+  invalidLinkImageSrc = 'assets/image/invalid_link.png';
+  invalidLink: boolean;
+  brandData: any = {
+    cover_image: "",
+    description: "",
+    logo: "",
+    name: "",
+    url: "",
+    value: ""
+  };
   constructor(
     public dialog: MatDialog,
     private productElement: ElementRef,
@@ -78,33 +92,44 @@ export class ProductsComponent implements OnInit, OnDestroy {
     private location: Location,
     private activeRoute: ActivatedRoute,
     private breakpointObserver: BreakpointObserver,
-    private utilsService: UtilsService,
-    public cacheService: CacheService
-  ) {}
+    private matDialogUtils: MatDialogUtilsService,
+    public cacheService: CacheService,
+    private eventEmitterService: EventEmitterService,
+    private seoService: SeoService
+  ) { }
 
   ngOnInit(): void {
-    this.getParams();
-    this.getParamsFromQuery();
-    this.bpSubscription = this.bpObserver.subscribe(
-      (handset: BreakpointState) => {
-        this.isHandset = handset.matches;
-      }
-    );
-    this.routeSubscription = this.activeRoute.params.subscribe(routeParams => {
-      this.department = routeParams.department;
-      this.category = routeParams.category;
-      this.checkPage();
-    });
-    this.modalSku = this.activeRoute.snapshot.queryParamMap.get('modal_sku');
-    if (this.modalSku) {
-      this.utilsService.openMatDialog(this.modalSku);
-    }
+    this.eventSubscription = this.eventEmitterService.userChangeEvent
+      .asObservable()
+      .subscribe((user) => {
+        this.getParams();
+        this.getParamsFromQuery();
+        this.bpSubscription = this.bpObserver.subscribe(
+          (handset: BreakpointState) => {
+            this.isHandset = handset.matches;
+          }
+        );
+        this.routeSubscription = this.activeRoute.params.subscribe(
+          (routeParams) => {
+            this.department = routeParams.department;
+            this.category = routeParams.category;
+            this.checkPage();
+          }
+        );
+        this.modalSku = this.activeRoute.snapshot.queryParamMap.get(
+          'modal_sku'
+        );
+        if (this.modalSku) {
+          this.matDialogUtils.openMatDialog(this.modalSku);
+        }
+      });
   }
 
-  ngOnDestroy(): void {
+  onDestroy(): void {
     this.productsSubscription.unsubscribe();
     this.routeSubscription.unsubscribe();
     this.bpSubscription.unsubscribe();
+    this.eventSubscription.unsubscribe();
   }
 
   getParams(): void {
@@ -113,14 +138,22 @@ export class ProductsComponent implements OnInit, OnDestroy {
     this.category = urlParams[2].split('?')[1];
   }
   getParamsFromQuery(): void {
-    this.activeRoute.queryParams.subscribe(params => {
-      this.filters = params['filters'] || '';
-      this.pageNo = parseInt(params['pageNo']) || 0;
-      this.sortType = params['sortType'] || '';
+    this.activeRoute.queryParams.subscribe((params) => {
+      this.filters = params.filters || '';
+      this.pageNo = parseInt(params.pageNo, 10) || 0;
+      this.sortType = params.sortType || 'recommended';
     });
   }
 
   checkPage() {
+    // get brandData when page is loading
+    // const checkBrand = this.filters.indexOf('brand:');
+    // if (checkBrand > -1) {
+    //   const endBrand = this.filters.indexOf(';');
+    //   const brandName = this.filters.substr(6, endBrand - 6);
+    //   this.getBrandData(brandName);
+    // }
+
     if (this.pageNo > 0) {
       this.isProductFetching = true;
       this.productsSubscription = this.apiService
@@ -131,8 +164,10 @@ export class ProductsComponent implements OnInit, OnDestroy {
           this.sortType,
           this.pageNo
         )
-        .subscribe(response => {
+        .subscribe((response) => {
           let allProducts = [];
+          // tslint:disable-next-line: prefer-for-of
+          console.log('check for length error: ', response.length)
           for (let i = 0; i < response.length; i++) {
             allProducts = [...allProducts, ...response[i].products];
           }
@@ -140,17 +175,23 @@ export class ProductsComponent implements OnInit, OnDestroy {
           this.emailTitle = response[0].seo_data.email_title;
           this.products = allProducts;
           this.updateQueryString();
-          this.total_count = response[0].total;
+          this.totalCount = response[0].total;
           delete response[0].filterData.category;
           this.productFilters = response[0].filterData;
           this.sortTypeList = response[0].sortType;
           this.isProductFetching = false;
+
+          // this.productFilters.brand.map((item: any) => {
+          //   if(item.checked === true) {
+          //     this.getBrandData(item.value);
+          //   }
+          // })
           if (this.cacheService.data.useCache) {
             this.scrollToProductSKU = this.cacheService.data.productSku;
             this.cacheService.data.useCache = false;
             setTimeout(() => {
               // this.productElement.nativeElement.getElementById
-              let el = document.getElementById(this.scrollToProductSKU);
+              const el = document.getElementById(this.scrollToProductSKU);
               window.scrollTo(0, el.offsetTop - 200);
             }, 500);
           }
@@ -159,7 +200,16 @@ export class ProductsComponent implements OnInit, OnDestroy {
       this.loadProducts();
     }
 
-    //Code for cached product sku
+    // Code for cached product sku
+  }
+
+  getProductwithBrandName(brandValue) {
+    console.log('this is brandValue: ', brandValue);
+    // let filterValue = '';
+    // if (brandValue !== '') {
+    //   filterValue = 'brand:' + brandValue + ';';
+    // };
+    // this.router.navigateByUrl(`/products/brand?undefined=true&limit=24&filters=${filterValue}&sort_type=&pageno=1`)
   }
 
   loadProducts(): void {
@@ -167,17 +217,26 @@ export class ProductsComponent implements OnInit, OnDestroy {
     this.isProductFetching = true;
     this.productsSubscription = this.apiService
       .getProducts(this.department, this.category, this.filters, this.sortType)
-      .subscribe((payload: IProductsPayload) => {
-        this.categoryTitle = payload.seo_data.page_title;
-        this.emailTitle = payload.seo_data.email_title;
-        this.products = payload.products;
-        delete payload.filterData.category;
-        this.productFilters = payload.filterData;
-        this.sortTypeList = payload.sortType;
-        this.total_count = payload.total;
-        this.updateQueryString();
-        this.isProductFetching = false;
-      });
+      .subscribe(
+        (payload: IProductsPayload) => {
+          this.seoService.setMetaTags(payload.seo_data);
+          this.seoService.setCanonicalURL();
+          this.categoryTitle = payload.seo_data.page_title;
+          this.emailTitle = payload.seo_data.email_title;
+          this.products = payload.products;
+          delete payload.filterData.category;
+          this.productFilters = payload.filterData;
+          this.sortTypeList = payload.sortType;
+          this.totalCount = payload.total;
+          this.updateQueryString();
+          this.isProductFetching = false;
+          this.invalidLink = false;
+        },
+        (error) => {
+          this.invalidLink = true;
+          this.isProductFetching = false;
+        }
+      );
   }
 
   updateQueryString(): void {
@@ -194,9 +253,35 @@ export class ProductsComponent implements OnInit, OnDestroy {
   }
 
   onSetFilters(e): void {
-    this.filters = this.buildFilters(e);
+    this.filters = e;
     this.loadProducts();
   }
+
+  onSetBrand(brandName: string) {
+    if (brandName === '') {
+      this.filters = '';
+    } else {
+      const checkBrand = this.filters.indexOf('brand:');
+      if (checkBrand < 0) {
+        this.filters += 'brand:' + brandName + ';'
+      } else {
+        const endBrand = this.filters.indexOf(';');
+        this.filters = 'brand:' + brandName + ';' + this.filters.substr(endBrand + 1);
+      }
+      // this.getBrandData(brandName);
+    }
+    this.loadProducts();
+  }
+
+  // getBrandData(brandName: string) {
+  //   this.apiService.getBrandData(brandName).subscribe((brandData: any) => {
+  //     console.log('check for length error: ', brandData.length)
+
+  //     if (brandData.length !== 0) {
+  //       this.brandData = brandData[0];
+  //     }
+  //   })
+  // }
 
   onSetSortType(e): void {
     this.sortType = e;
@@ -233,18 +318,6 @@ export class ProductsComponent implements OnInit, OnDestroy {
       });
   }
 
-  buildFilters(event: string): string {
-    let tempFilters = '';
-    for (let [filter, options] of Object.entries(event)) {
-      if (filter === 'price_from' || filter === 'price_to') {
-        tempFilters += `${filter}:${options};`;
-      } else {
-        tempFilters += options.length ? `${filter}:${options};` : ``;
-      }
-    }
-    return tempFilters;
-  }
-
   @HostListener('window:scroll')
   checkScroll() {
     const scrollPosition =
@@ -254,10 +327,10 @@ export class ProductsComponent implements OnInit, OnDestroy {
       0;
     this.isIconShow = scrollPosition >= this.topPosToStartShowing;
     this.showBar = scrollPosition >= this.fixFilterBar;
-    const _self = this;
+    const self = this;
     if (this.isIconShow) {
-      setTimeout(function() {
-        _self.isIconShow = false;
+      setTimeout(() => {
+        self.isIconShow = false;
       }, SCROLL_ICON_SHOW_DURATION);
     }
   }

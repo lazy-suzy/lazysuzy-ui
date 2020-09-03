@@ -10,7 +10,11 @@ import {
 } from '@angular/cdk/layout';
 import { Location } from '@angular/common';
 import { Router, ActivatedRoute } from '@angular/router';
-import { ApiService, UtilsService } from 'src/app/shared/services';
+import {
+  ApiService,
+  UtilsService,
+  MatDialogUtilsService
+} from 'src/app/shared/services';
 @Component({
   selector: 'app-product',
   templateUrl: './product.component.html',
@@ -19,8 +23,8 @@ import { ApiService, UtilsService } from 'src/app/shared/services';
 export class ProductComponent implements OnInit {
   @Input() product: IProductPayload;
   starIcons: string[] = new Array();
-  variationImage: string = '';
-  isVariationImageVisible: boolean = false;
+  variationImage = '';
+  isVariationImageVisible = false;
   modalSku: any;
   bpObserver: Observable<BreakpointState> = this.breakpointObserver.observe(
     Breakpoints.Handset
@@ -36,7 +40,8 @@ export class ProductComponent implements OnInit {
     private router: Router,
     private activeRoute: ActivatedRoute,
     private apiService: ApiService,
-    private utilsService: UtilsService
+    private utilsService: UtilsService,
+    private matDialogUtils: MatDialogUtilsService
   ) {}
 
   ngOnInit(): void {
@@ -55,12 +60,12 @@ export class ProductComponent implements OnInit {
     // });
   }
 
-  ngOnDestroy(): void {
+  onDestroy(): void {
     this.bpSubscription.unsubscribe();
   }
 
   setRating(): void {
-    let starCount: number = Math.round(this.product.rating * 2) / 2;
+    let starCount = Math.round(this.product.rating * 2) / 2;
     while (starCount > 0.5) {
       this.starIcons.push('star');
       starCount -= 1;
@@ -75,11 +80,11 @@ export class ProductComponent implements OnInit {
   }
 
   openDialog(): void {
-    this.utilsService.openMatDialog(this.product.sku);
+    this.matDialogUtils.openMatDialog(this.product.sku);
   }
 
   openSwatchDialog(variation): void {
-    this.utilsService.openMatDialog(
+    this.matDialogUtils.openMatDialog(
       variation.has_parent_sku ? variation.variation_sku : variation.product_sku
     );
   }

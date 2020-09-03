@@ -23,10 +23,7 @@
             "polyfills": "src/polyfills.ts",
             "tsConfig": "tsconfig.app.json",
             "aot": false,
-            "assets": [
-              "src/favicon.ico",
-              "src/assets"
-            ],
+            "assets": ["src/favicon.ico", "src/assets"],
             "styles": [
               "node_modules/primeicons/primeicons.css",
               "node_modules/primeng/resources/themes/nova-light/theme.css",
@@ -35,14 +32,14 @@
               "src/styles.less",
               "node_modules/tachyons/css/tachyons.min.css",
               "node_modules/owl.carousel/dist/assets/owl.carousel.css",
-              "node_modules/owl.carousel/dist/assets/owl.theme.default.css"
+              "node_modules/owl.carousel/dist/assets/owl.theme.default.css",
+              "node_modules/@simonwep/pickr/dist/themes/nano.min.css"
             ],
             "scripts": [
               "node_modules/marked/lib/marked.js",
               "node_modules/jquery/dist/jquery.min.js",
               "node_modules/owl.carousel/dist/owl.carousel.min.js",
-              "src/app/modules/board/components/canvas/fb.min.js",
-              "src/app/modules/board/components/add/dropzone.min.js"
+              "src/app/modules/board/fb.min.js"
             ]
           },
           "configurations": {
@@ -69,6 +66,38 @@
                   "maximumError": "5mb"
                 }
               ]
+            },
+            "staging": {
+              "fileReplacements": [
+                {
+                  "replace": "src/environments/environment.ts",
+                  "with": "src/environments/environment.staging.ts"
+                }
+              ],
+              "optimization": true,
+              "outputHashing": "all",
+              "sourceMap": false,
+              "extractCss": true,
+              "namedChunks": false,
+              "aot": true,
+              "extractLicenses": true,
+              "vendorChunk": false,
+              "buildOptimizer": true,
+              "budgets": [
+                {
+                  "type": "initial",
+                  "maximumWarning": "2mb",
+                  "maximumError": "5mb"
+                }
+              ]
+            },
+            "local": {
+              "fileReplacements": [
+                {
+                  "replace": "src/environments/environment.ts",
+                  "with": "src/environments/environment.local.ts"
+                }
+              ]
             }
           }
         },
@@ -80,6 +109,12 @@
           "configurations": {
             "production": {
               "browserTarget": "lazysuzy-ui:build:production"
+            },
+            "staging": {
+              "browserTarget": "lazysuzy-ui:build:staging"
+            },
+            "local": {
+              "browserTarget": "lazysuzy-ui:build:local"
             }
           }
         },
@@ -96,10 +131,7 @@
             "polyfills": "src/polyfills.ts",
             "tsConfig": "tsconfig.spec.json",
             "karmaConfig": "karma.conf.js",
-            "assets": [
-              "src/favicon.ico",
-              "src/assets"
-            ],
+            "assets": ["src/favicon.ico", "src/assets"],
             "styles": [
               "src/styles.less",
               "node_modules/tachyons/css/tachyons.min.css"
@@ -115,9 +147,7 @@
               "tsconfig.spec.json",
               "e2e/tsconfig.json"
             ],
-            "exclude": [
-              "**/node_modules/**"
-            ]
+            "exclude": ["**/node_modules/**"]
           }
         },
         "e2e": {

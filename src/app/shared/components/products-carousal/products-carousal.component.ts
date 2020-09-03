@@ -1,4 +1,5 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-products-carousal',
@@ -34,25 +35,47 @@ export class ProductsCarousalComponent implements OnInit {
 
   images = [];
   @Input() data: any = [];
+  @Input() items: string;
   @Output() updates: EventEmitter<any> = new EventEmitter();
 
-  @Input() isBanner: boolean = false;
-  @Input() nameOfCarousal: string = '';
+  @Input() isBanner = false;
+  @Input() isBoards = false;
+  @Input() nameOfCarousal = '';
 
+  boardCarousalOptions = {
+    margin: 10,
+    loop: true,
+    items: this.items,
+    dots: true,
+    pagination: true,
+    // autoWidth: true,
+    // stagePadding: 100,
+    singleItem: true
+  };
   constructor() {}
 
-  ngOnInit() {}
+  ngOnInit() {
+    this.boardCarousalOptions.items = this.items;
+  }
 
+  // tslint:disable-next-line: use-lifecycle-interface
   ngOnChanges(changes: any) {
     if (
-      changes['data'] &&
-      changes['data'].previousValue !== changes['data'].currentValue
+      changes.data &&
+      changes.data.previousValue !== changes.data.currentValue
     ) {
-      this.data = changes['data'].currentValue;
+      this.data = changes.data.currentValue;
     }
   }
 
   openDialog(sku) {
     this.updates.emit(sku);
+  }
+  getPreviewImagePath(preview) {
+    if (preview) {
+      return `${environment.BASE_HREF}${preview}`;
+    } else {
+      return 'https://via.placeholder.com/500x400';
+    }
   }
 }

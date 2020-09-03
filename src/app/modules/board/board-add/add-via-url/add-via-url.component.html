@@ -1,0 +1,112 @@
+<button mat-icon-button class="close-button" [mat-dialog-close]="false">
+  <mat-icon class="close-icon">close</mat-icon>
+</button>
+<h2 mat-dialog-title>Add Image</h2>
+<div mat-dialog-content>
+  <div *ngIf="showImageVerificationLoader" class="loader-container">
+    <div class="loader-box">
+      <div class="loader-bounceball"></div>
+    </div>
+  </div>
+  <mat-horizontal-stepper [linear]="isLinear" #stepper>
+    <mat-step [stepControl]="stepOne">
+      <form [formGroup]="stepOne" class="dialog flex items-center">
+        <mat-form-field>
+          <input
+            matInput
+            placeholder="Image URL"
+            formControlName="imageUrl"
+            required
+          />
+          <mat-hint>Must be .png or .jpg</mat-hint>
+        </mat-form-field>
+      </form>
+      <div *ngIf="hasErrorMessage" class="invalid">
+        Error while uploading image. Please check your file and try again.
+      </div>
+      <div class="tc">
+        <button class="btn btn-cancel mh2" (click)="cancelAddImgViaUrl()">
+          Cancel
+        </button>
+        <button
+          class="btn red-button mh2"
+          [disabled]="!stepOne.valid"
+          (click)="verifyImage(stepper)"
+        >
+          Next
+        </button>
+      </div>
+    </mat-step>
+    <mat-step [stepControl]="stepTwo">
+      <form [formGroup]="stepTwo">
+        <!-- <ng-template matStepLabel>Add Image</ng-template> -->
+        <mat-form-field>
+          <input
+            matInput
+            placeholder="Product Title"
+            formControlName="productTitle"
+          />
+        </mat-form-field>
+        <mat-form-field>
+          <input matInput placeholder="Brand" formControlName="brand" />
+        </mat-form-field>
+
+        <mat-form-field>
+          <input matInput placeholder="Price" formControlName="price" />
+        </mat-form-field>
+        <mat-form-field>
+          <input
+            matInput
+            placeholder="Product Listing URL"
+            formControlName="productListingUrl"
+          />
+        </mat-form-field>
+        <mat-form-field class="chip-list">
+          <mat-chip-list #chipList aria-label="Tags">
+            <mat-chip
+              *ngFor="let tag of tags"
+              [selectable]="selectable"
+              [removable]="removable"
+              (removed)="remove(tag)"
+            >
+              {{ tag }}
+              <mat-icon matChipRemove *ngIf="removable">cancel</mat-icon>
+            </mat-chip>
+            <input
+              placeholder="Tags"
+              [matChipInputFor]="chipList"
+              [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+              [matChipInputAddOnBlur]="addOnBlur"
+              (matChipInputTokenEnd)="add($event)"
+            />
+          </mat-chip-list>
+          <mat-hint>Separate by comma</mat-hint>
+        </mat-form-field>
+        <div class="subtle-label mt4">
+          <mat-checkbox color="primary" matInput formControlName="keepPrivate">
+            Keep Private
+          </mat-checkbox>
+          <span
+            class="tool-tip"
+            data-title="Leave this unchecked to give the LazySuzy community access to see and use your uploaded item!"
+          >
+            <mat-icon>info</mat-icon></span
+          >
+        </div>
+      </form>
+      <div class="tc mt4">
+        <button class="btn btn-cancel mh2" (click)="cancelAddImgViaUrl()">
+          Cancel
+        </button>
+        <button class="btn red-button mh2" (click)="saveAddViaUrl()">
+          Add
+        </button>
+      </div>
+    </mat-step>
+  </mat-horizontal-stepper>
+
+  <app-loader
+    [showProgressBar]="loaderTypeProgress"
+    *ngIf="showLoader"
+  ></app-loader>
+</div>

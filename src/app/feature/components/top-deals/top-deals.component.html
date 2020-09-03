@@ -1,15 +1,15 @@
 <div class="flex flex-wrap top-deals">
-  <div class="{{ isHandset ? 'w-100' : 'w-10-ns' }} top-deals-heading">
+  <div class="{{ isHandset ? 'w-100' : 'w-10-ns w-20-m' }} top-deals-heading">
     <h2 class="title-top-deals">top deals</h2>
     <button type="button" class="btn btn-sm btn-dark" (click)="seeAll()">
       see all
     </button>
   </div>
 
-  <div class="{{ isHandset ? 'w-100' : 'w-90-ns' }}">
+  <div class="{{ isHandset ? 'w-100' : 'w-90-ns w-80-m' }}">
     <div *ngIf="!topDeals">
       <img
-        src="../../../../assets/images/three-dots.svg"
+        src="../../../../assets/image/three-dots.svg"
         width="60"
         height="46"
         alt=""

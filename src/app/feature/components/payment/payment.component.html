@@ -1,0 +1,732 @@
+<div class="container flex-ns">
+  <div class="w-30-ns w-100 pa2 mh5-ns mv3" *ngIf="isHandset">
+    <div class="order-summary-card">
+      <div class="order-details section-border">
+        <div class="b pv2">ORDER SUMMARY</div>
+        <div class="flex pt3 pb4" *ngFor="let item of cartProducts">
+          <div class="w-20">
+            <img [src]="item.image" class="prod-image" />
+          </div>
+          <div class="w-50">
+            <div>{{ item.product_name }}</div>
+            <div>by {{ item.site }}</div>
+          </div>
+          <div class="w-10 tc">
+            {{ item.count }}
+          </div>
+          <div class="w-20 tr">${{ item.retail_price | number: '1.2-2' }}</div>
+        </div>
+      </div>
+      <div class="order-pricing-details section-border">
+        <div class="flex justify-between pv2">
+          <span>SUBTOTAL</span>
+          <span>${{ orderAmount.sub_total | number: '1.2-2' }}</span>
+        </div>
+        <div class="flex justify-between pb2">
+          <span
+            >UPS Ground Shipping
+            <span
+              class="tool-tip"
+              data-title="Flat rate shipping of $25 on most standard items. 
+            Additional charges apply for oversized items."
+            >
+              <mat-icon>help</mat-icon></span
+            >
+            ({{ cartProducts.length }} items)</span
+          >
+          <span>${{ orderAmount.shipment_total | number: '1.2-2' }}</span>
+        </div>
+        <div class="flex justify-between pb3">
+          <span>Estimated Tax</span>
+          <span>${{ orderAmount.sales_tax_total | number: '1.2-2' }}</span>
+        </div>
+      </div>
+      <div class="flex justify-between pt2 pink-font b">
+        <span>TOTAL</span>
+        <span>${{ orderAmount.total_cost | number: '1.2-2' }}</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="w-60-ns w-100 ph5-ns pv2">
+    <div class="billing-header pink-font b" *ngIf="!isHandset">
+      Checkout
+    </div>
+    <div class="billing-content pb3">
+      <div class="billing-section border-top">
+        <div class="flex">
+          <div class="step-number">1</div>
+          <div class="section-title">CUSTOMER</div>
+          <div
+            class="edit-btn pointer"
+            *ngIf="customerData.email && !customer"
+            (click)="updateAccordion('customer')"
+          >
+            EDIT
+          </div>
+        </div>
+        <div class="section-content pv3-ns pt4 ml5-ns">
+          <div class="section-row ph0-ns ph3">
+            <ng-container *ngIf="customer; else customerEmail">
+              <form
+                name="email-form"
+                class="flex-ns w-100"
+                (ngSubmit)="emailForm.form.valid && checkEmailValidation()"
+                #emailForm="ngForm"
+              >
+                <div class="w-50-ns w-100">
+                  <input
+                    placeholder="Enter email address"
+                    type="email"
+                    name="email"
+                    #email="ngModel"
+                    class="form-input w-100"
+                    [(ngModel)]="customerData.email"
+                    required
+                  />
+                  <div
+                    *ngIf="emailForm.submitted && email.invalid"
+                    class="invalid-feedback"
+                  >
+                    <div *ngIf="email.errors.required">Email is required</div>
+                  </div>
+                  <div *ngIf="!isEmailValid" class="invalid-feedback">
+                    <div *ngIf="!isEmailValid">
+                      Email must be a valid email address
+                    </div>
+                  </div>
+                </div>
+                <div class="w-50-ns tc">
+                  <button class="email-continue-btn b">CONTINUE</button>
+                </div>
+              </form>
+            </ng-container>
+            <ng-template #customerEmail>
+              {{ customerData.email }}
+            </ng-template>
+          </div>
+        </div>
+      </div>
+      <div class="billing-section">
+        <div class="flex">
+          <div class="step-number">2</div>
+          <div class="section-title">SHIPPING</div>
+          <div
+            class="edit-btn pointer"
+            *ngIf="customerData.shipping_f_Name && !shipping"
+            (click)="updateAccordion('shipping')"
+          >
+            EDIT
+          </div>
+        </div>
+        <div class="section-content pv3-ns pt4 ph0-ns ph3 ml5-ns">
+          <ng-container *ngIf="shipping; else shippingDetails">
+            <div class="section-row pb4">
+              <div class="b">Shipping Address</div>
+              <div class="i">*Required Field</div>
+            </div>
+            <form
+              name="form"
+              (ngSubmit)="f.form.valid && updateAccordion('billing')"
+              #f="ngForm"
+            >
+              <div class="flex-ns pb3">
+                <div class="w-50-ns w-100 pb0-ns pb3">
+                  <label class="db">First Name*</label>
+                  <input
+                    class="form-input w-90 w-95"
+                    name="shipping_f_Name"
+                    #shipping_f_Name="ngModel"
+                    [(ngModel)]="customerData.shipping_f_Name"
+                    required
+                  />
+                  <div
+                    *ngIf="f.submitted && shipping_f_Name.invalid"
+                    class="invalid-feedback"
+                  >
+                    <div *ngIf="shipping_f_Name.errors.required">
+                      First Name is required
+                    </div>
+                  </div>
+                </div>
+                <div class="w-50-ns w-100">
+                  <label class="db">Last Name*</label>
+                  <input
+                    class="form-input w-90 w-95"
+                    name="shipping_l_Name"
+                    #shipping_l_Name="ngModel"
+                    [(ngModel)]="customerData.shipping_l_Name"
+                    required
+                  />
+                  <div
+                    *ngIf="f.submitted && shipping_l_Name.invalid"
+                    class="invalid-feedback"
+                  >
+                    <div *ngIf="shipping_l_Name.errors.required">
+                      Last Name is required
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="pb3">
+                <label class="db">Company Name</label>
+                <input
+                  class="form-input single-line-input"
+                  name="shipping_company_name"
+                  [(ngModel)]="customerData.shipping_company_name"
+                />
+              </div>
+              <div class="w-50-ns w-100 pb3">
+                <label class="db">Phone Number*</label>
+                <input
+                  class="form-input w-90 w-95"
+                  name="shipping_phone"
+                  #shipping_phone="ngModel"
+                  type="number"
+                  [(ngModel)]="customerData.shipping_phone"
+                  required
+                />
+                <div
+                  *ngIf="f.submitted && shipping_phone.invalid"
+                  class="invalid-feedback"
+                >
+                  <div *ngIf="shipping_phone.errors.required">
+                    Phone Number is required
+                  </div>
+                </div>
+              </div>
+              <div class="pb3">
+                <label class="db">Address*</label>
+                <input
+                  class="form-input single-line-input"
+                  name="shipping_address_line1"
+                  #shipping_address_line1="ngModel"
+                  [(ngModel)]="customerData.shipping_address_line1"
+                  required
+                />
+                <div
+                  *ngIf="f.submitted && shipping_address_line1.invalid"
+                  class="invalid-feedback"
+                >
+                  <div *ngIf="shipping_address_line1.errors.required">
+                    Address is required
+                  </div>
+                </div>
+              </div>
+              <div class="pb3">
+                <label class="db">Apartment/Home/Building</label>
+                <input
+                  class="form-input single-line-input"
+                  name="shipping_address_line2"
+                  [(ngModel)]="customerData.shipping_address_line2"
+                />
+              </div>
+              <div class="pb3">
+                <label class="db">City*</label>
+                <input
+                  class="form-input single-line-input"
+                  name="shipping_city"
+                  #shipping_city="ngModel"
+                  [(ngModel)]="customerData.shipping_city"
+                  required
+                />
+                <div
+                  *ngIf="f.submitted && shipping_city.invalid"
+                  class="invalid-feedback"
+                >
+                  <div *ngIf="shipping_city.errors.required">
+                    City is required
+                  </div>
+                </div>
+              </div>
+              <div class="pb3">
+                <label class="db">Country*</label>
+                <select
+                  class="form-input single-line-input white-bg"
+                  #shipping_country="ngModel"
+                  name="shipping_country"
+                  [(ngModel)]="country"
+                  required
+                >
+                  <option value="USA" selected>USA</option>
+                </select>
+                <div
+                  *ngIf="f.submitted && shipping_country.invalid"
+                  class="invalid-feedback"
+                >
+                  <div *ngIf="shipping_country.errors.required">
+                    Country is required
+                  </div>
+                </div>
+              </div>
+              <div class="flex pb3">
+                <div class="w-50">
+                  <label class="db">State*</label>
+                  <select
+                    class="form-input w-90 white-bg dropdown-height"
+                    name="shipping_state"
+                    #shipping_state="ngModel"
+                    [(ngModel)]="customerData.shipping_state"
+                    (change)="shippingStateChanged()"
+                    required
+                  >
+                    <option
+                      *ngFor="let item of statesArray"
+                      [value]="item.abbreviation"
+                      >{{ item.name }}</option
+                    >
+                  </select>
+                  <div
+                    *ngIf="f.submitted && shipping_state.invalid"
+                    class="invalid-feedback"
+                  >
+                    <div *ngIf="shipping_state.errors.required">
+                      State is required
+                    </div>
+                  </div>
+                </div>
+                <div class="w-50">
+                  <label class="db">Postal Code*</label>
+                  <input
+                    class="form-input w-90"
+                    name="shipping_zipcode"
+                    #shipping_zipcode="ngModel"
+                    [(ngModel)]="customerData.shipping_zipcode"
+                    maxlength="5"
+                    minlength="5"
+                    required
+                  />
+                  <div
+                    *ngIf="f.submitted && shipping_zipcode.invalid"
+                    class="invalid-feedback"
+                  >
+                    <div *ngIf="shipping_zipcode.errors.required">
+                      Postal Code is required
+                    </div>
+                  </div>
+                  <div
+                    *ngIf="
+                      f.submitted && customerData.shipping_zipcode.length < 5
+                    "
+                    class="invalid-feedback"
+                  >
+                    Invalid Postal Code
+                  </div>
+                </div>
+              </div>
+              <div class="pb3-ns flex">
+                <input
+                  type="checkbox"
+                  #billingCheckbox
+                  id="billingCheckbox"
+                  [checked]="isBillingAddressSame"
+                  name="billing_Checkbox"
+                  (change)="onCheckboxChange(billingCheckbox.checked)"
+                />
+                <div
+                  class="ml2"
+                  (click)="onCheckboxChange(!billingCheckbox.checked)"
+                >
+                  My billing address is the same as my shipping address
+                </div>
+              </div>
+              <div>
+                <button class="continue-btn b pv2 mv3">CONTINUE</button>
+              </div>
+            </form>
+          </ng-container>
+          <ng-template #shippingDetails>
+            <div *ngIf="customerData.shipping_f_Name">
+              <div>
+                {{ customerData.shipping_f_Name }}
+                {{ customerData.shipping_l_Name }}
+              </div>
+              <div>{{ customerData.shipping_company_name }}</div>
+              <div>
+                {{
+                  customerData.shipping_phone
+                    | americanNumber: customerData.shipping_phone
+                }}
+              </div>
+              <div>{{ customerData.shipping_address_line1 }}</div>
+              <div>{{ customerData.shipping_address_line2 }}</div>
+              <div>{{ customerData.shipping_city }}</div>
+              <div>
+                {{ customerData.shipping_state }},
+                {{ customerData.shipping_zipcode }}
+              </div>
+              <div>{{ country }}</div>
+            </div>
+          </ng-template>
+        </div>
+      </div>
+      <div class="billing-section">
+        <div class="flex">
+          <div class="step-number">3</div>
+          <div class="section-title">BILLING</div>
+          <div
+            class="edit-btn pointer"
+            *ngIf="
+              customerData.billing_f_Name && !billing && !isBillingAddressSame
+            "
+            (click)="updateAccordion('billing')"
+          >
+            EDIT
+          </div>
+        </div>
+        <div class="section-content pv3-ns pt4 ph0-ns ph3 ml5-ns">
+          <ng-container *ngIf="billing; else billingDetails">
+            <div class="section-row pb4">
+              <div class="b">Billing Address</div>
+              <div class="i">*Required Field</div>
+            </div>
+            <form
+              name="billing-form"
+              (ngSubmit)="billingForm.form.valid && updateAccordion('payment')"
+              #billingForm="ngForm"
+            >
+              <div class="flex pb3">
+                <div class="w-50-ns w-100">
+                  <label class="db">First Name*</label>
+                  <input
+                    class="form-input w-90 w-95"
+                    name="billing_f_Name"
+                    #billing_f_Name="ngModel"
+                    [(ngModel)]="customerData.billing_f_Name"
+                    required
+                  />
+                  <div
+                    *ngIf="billingForm.submitted && billing_f_Name.invalid"
+                    class="invalid-feedback"
+                  >
+                    <div *ngIf="billing_f_Name.errors.required">
+                      First Name is required
+                    </div>
+                  </div>
+                </div>
+                <div class="w-50-ns w-100">
+                  <label class="db">Last Name*</label>
+                  <input
+                    class="form-input w-90 w-95"
+                    name="billing_l_Name"
+                    #billing_l_Name="ngModel"
+                    [(ngModel)]="customerData.billing_l_Name"
+                    required
+                  />
+                  <div
+                    *ngIf="billingForm.submitted && billing_l_Name.invalid"
+                    class="invalid-feedback"
+                  >
+                    <div *ngIf="billing_l_Name.errors.required">
+                      Last Name is required
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="pb3">
+                <label class="db">Company Name</label>
+                <input
+                  class="form-input single-line-input"
+                  name="billing_company_name"
+                  [(ngModel)]="customerData.billing_company_name"
+                />
+              </div>
+              <div class="w-50-ns w-100 pb3">
+                <label class="db">Phone Number*</label>
+                <input
+                  class="form-input w-90 w-95"
+                  name="billing_phone"
+                  #billing_phone="ngModel"
+                  [(ngModel)]="customerData.billing_phone"
+                  type="number"
+                  required
+                />
+                <div
+                  *ngIf="billingForm.submitted && billing_phone.invalid"
+                  class="invalid-feedback"
+                >
+                  <div *ngIf="billing_phone.errors.required">
+                    Phone Number is required
+                  </div>
+                </div>
+              </div>
+              <div class="pb3">
+                <label class="db">Address*</label>
+                <input
+                  class="form-input single-line-input"
+                  name="billing_address_line1"
+                  #billing_address_line1="ngModel"
+                  [(ngModel)]="customerData.billing_address_line1"
+                  required
+                />
+                <div
+                  *ngIf="billingForm.submitted && billing_address_line1.invalid"
+                  class="invalid-feedback"
+                >
+                  <div *ngIf="billing_address_line1.errors.required">
+                    Address is required
+                  </div>
+                </div>
+              </div>
+              <div class="pb3">
+                <label class="db">Apartment/Home/Building</label>
+                <input
+                  class="form-input single-line-input"
+                  name="billing_address_line2"
+                  [(ngModel)]="customerData.billing_address_line2"
+                />
+              </div>
+              <div class="pb3">
+                <label class="db">City*</label>
+                <input
+                  class="form-input single-line-input"
+                  name="billing_city"
+                  #billing_city="ngModel"
+                  [(ngModel)]="customerData.billing_city"
+                  required
+                />
+                <div
+                  *ngIf="billingForm.submitted && billing_city.invalid"
+                  class="invalid-feedback"
+                >
+                  <div *ngIf="billing_city.errors.required">
+                    City is required
+                  </div>
+                </div>
+              </div>
+              <div class="pb3">
+                <label class="db">Country*</label>
+                <select
+                  class="form-input single-line-input white-bg"
+                  #billing_country="ngModel"
+                  name="billing_country"
+                  [(ngModel)]="country"
+                  required
+                >
+                  <option value="USA" selected>USA</option>
+                </select>
+                <div
+                  *ngIf="billingForm.submitted && billing_country.invalid"
+                  class="invalid-feedback"
+                >
+                  <div *ngIf="billing_country.errors.required">
+                    Country is required
+                  </div>
+                </div>
+              </div>
+              <div class="flex pb3">
+                <div class="w-50">
+                  <label class="db">State*</label>
+                  <select
+                    class="form-input w-90 white-bg dropdown-height"
+                    name="billing_state"
+                    #billing_state="ngModel"
+                    [(ngModel)]="customerData.billing_state"
+                    required
+                  >
+                    <option
+                      *ngFor="let item of statesArray"
+                      [value]="item.abbreviation"
+                      >{{ item.name }}</option
+                    >
+                  </select>
+                  <div
+                    *ngIf="billingForm.submitted && billing_state.invalid"
+                    class="invalid-feedback"
+                  >
+                    <div *ngIf="billing_state.errors.required">
+                      State is required
+                    </div>
+                  </div>
+                </div>
+                <div class="w-50">
+                  <label class="db">Postal Code*</label>
+                  <input
+                    class="form-input w-90"
+                    name="billing_zipcode"
+                    #billing_zipcode="ngModel"
+                    [(ngModel)]="customerData.billing_zipcode"
+                    maxlength="5"
+                    minlength="5"
+                    required
+                  />
+                  <div
+                    *ngIf="billingForm.submitted && billing_zipcode.invalid"
+                    class="invalid-feedback"
+                  >
+                    <div *ngIf="billing_zipcode.errors.required">
+                      Postal Code is required
+                    </div>
+                  </div>
+                  <div
+                    *ngIf="
+                      billingForm.submitted &&
+                      customerData.billing_zipcode.length < 5
+                    "
+                    class="invalid-feedback"
+                  >
+                    Invalid Postal Code
+                  </div>
+                </div>
+              </div>
+              <div>
+                <button class="continue-btn b pv2 mv3">CONTINUE</button>
+              </div>
+            </form>
+          </ng-container>
+          <ng-template #billingDetails>
+            <div *ngIf="customerData.billing_f_Name">
+              <div>
+                {{ customerData.billing_f_Name }}
+                {{ customerData.billing_l_Name }}
+              </div>
+              <div>{{ customerData.billing_company_name }}</div>
+              <div>
+                {{
+                  customerData.billing_phone
+                    | americanNumber: customerData.billing_phone
+                }}
+              </div>
+              <div>{{ customerData.billing_address_line1 }}</div>
+              <div>{{ customerData.billing_address_line2 }}</div>
+              <div>{{ customerData.billing_city }}</div>
+              <div>
+                {{ customerData.billing_state }},
+                {{ customerData.billing_zipcode }}
+              </div>
+              <div>{{ country }}</div>
+            </div>
+          </ng-template>
+        </div>
+      </div>
+      <div class="billing-section">
+        <div class="flex">
+          <div class="step-number">4</div>
+          <div class="section-title">PAYMENT</div>
+          <!-- <div
+            class="edit-btn pointer"
+            *ngIf="!payment"
+            (click)="updateAccordion('payment')"
+          >
+            EDIT
+          </div> -->
+        </div>
+        <div class="pv3 {{ payment ? 'dn' : '' }}"></div>
+        <div class="mh4-ns {{ payment ? '' : 'dn' }}">
+          <form
+            novalidate
+            (ngSubmit)="buy()"
+            [formGroup]="stripeTest"
+            class="w-100 ma4-ns mv0-ns mv3"
+          >
+            <div class="payment-form mv3-ns">
+              <!-- <div id="card-element" class="field"></div> -->
+              <div class="row">
+                <div class="field">
+                  <label
+                    for="example2-card-number"
+                    data-tid="elements_examples.form.card_number_label"
+                    >Card number</label
+                  >
+                  <div id="form-card-number" class="input empty"></div>
+                  <div class="baseline"></div>
+                </div>
+              </div>
+              <div class="flex justify-between">
+                <div class="w-40">
+                  <label
+                    for="example2-card-expiry"
+                    data-tid="elements_examples.form.card_expiry_label"
+                    >Expiration</label
+                  >
+                  <div id="form-card-expiry" class="input empty"></div>
+                  <div class="baseline"></div>
+                </div>
+                <div class="w-40">
+                  <label
+                    for="example2-card-cvc"
+                    data-tid="elements_examples.form.card_cvc_label"
+                    >CVC</label
+                  >
+                  <div id="form-card-cvc" class="input empty"></div>
+                  <div class="baseline"></div>
+                </div>
+              </div>
+            </div>
+            <button
+              class="place-order-btn b w-100 {{
+                isPaymentExecuting ? 'no-pointer-event' : ''
+              }}"
+              type="submit"
+            >
+              <div
+                class="lds-ellipsis"
+                *ngIf="isPaymentExecuting; else showButton"
+              >
+                <div></div>
+                <div></div>
+                <div></div>
+                <div></div>
+              </div>
+              <ng-template #showButton>
+                PLACE ORDER
+              </ng-template>
+            </button>
+            <div *ngIf="!isRequiredFieldsPresent" class="invalid-feedback">
+              <div *ngIf="!isRequiredFieldsPresent">{{ cardErrorMsg }}</div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="w-30-ns w-100 pa2 mh5-ns mv3" *ngIf="!isHandset">
+    <div class="order-summary-card" *ngIf="!isLoading">
+      <div class="order-details section-border">
+        <div class="b pv2">ORDER SUMMARY</div>
+        <div class="flex pt3 pb4" *ngFor="let item of cartProducts">
+          <div class="w-20">
+            <img [src]="item.image" class="prod-image" />
+          </div>
+          <div class="w-50">
+            <div>{{ item.product_name }}</div>
+            <div>by {{ item.site }}</div>
+          </div>
+          <div class="w-10 tr">
+            {{ item.count }}
+          </div>
+          <div class="w-20 tr">${{ item.retail_price | number: '1.2-2' }}</div>
+        </div>
+      </div>
+      <div class="order-pricing-details section-border">
+        <div class="flex justify-between pv3">
+          <span>SUBTOTAL</span>
+          <span>${{ orderAmount.sub_total | number: '1.2-2' }}</span>
+        </div>
+        <div class="flex justify-between pb3">
+          <span
+            >UPS Ground Shipping
+            <span
+              class="tool-tip"
+              data-title="Flat rate shipping of $25 on most standard items. 
+            Additional charges apply for oversized items."
+            >
+              <mat-icon>help</mat-icon></span
+            >
+            ({{ cartProducts.length }} items)</span
+          >
+          <span>${{ orderAmount.shipment_total | number: '1.2-2' }}</span>
+        </div>
+        <div class="flex justify-between pb3">
+          <span>Estimated Tax</span>
+          <span>${{ orderAmount.sales_tax_total | number: '1.2-2' }}</span>
+        </div>
+      </div>
+      <div class="flex justify-between pt2 pink-font b">
+        <span>TOTAL</span>
+        <span>${{ orderAmount.total_cost | number: '1.2-2' }}</span>
+      </div>
+    </div>
+  </div>
+</div>
+<img *ngIf="isLoading || isStateUpdating" [src]="spinner" class="loader" />

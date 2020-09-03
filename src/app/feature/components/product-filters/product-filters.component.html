@@ -1,26 +1,19 @@
-<ng-container *ngFor="let filter of objectKeys(productFilters||{})">
-  <div class="flex items-center pa3 mr1 filter {{disableTab(filter)?'display-none':''}}">
+<ng-container *ngFor="let filter of objectKeys(productFilters || {})">
+  <div
+    class="flex items-center pa3 mr1 filter {{
+      disableTab(filter) ? 'display-none' : ''
+    }}"
+    *ngIf="!((filter === 'brand' || filter === 'category') && isBrandPage === true)"
+  >
     <span
-      class="filter-name grow pointer {{
-        filter !== 'price'
-          ? activeFilters[filter].length > 0
-            ? 'active'
-            : ''
-          : isPriceChanged
-          ? 'active'
-          : ''
-      }}"
+      class="filter-name grow pointer"
+      [ngClass]="{'active': (filter !== 'price' && activeFilters[filter].length > 0) || (filter === 'price' && isPriceChanged)}"
       >{{ filter }}</span
     >
-    <div class="ml2 arrow-down {{
-      filter !== 'price'
-        ? activeFilters[filter].length > 0
-          ? 'active'
-          : ''
-        : isPriceChanged
-        ? 'active'
-        : ''
-    }}"></div>
+    <div
+      class="ml2 arrow-down"
+      [ngClass]="{'active': (filter !== 'price' && activeFilters[filter].length > 0) || (filter === 'price' && isPriceChanged)}"
+    ></div>
     <div class="filter-options">
       <div class="price-menu" *ngIf="filter === 'price'; else elseBlock">
         <ng5-slider

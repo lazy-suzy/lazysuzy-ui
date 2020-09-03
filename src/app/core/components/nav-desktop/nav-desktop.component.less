@@ -16,19 +16,32 @@ mat-icon.account-icon {
 
 .header-link {
   color: #ffcc00;
-  margin-right: 15px;
+  margin-right: 25px;
   text-decoration: none;
+
+  mat-icon {
+    font-size: 30px;
+    height: 30px;
+    width: 30px;
+    margin-top: 5px;
+  }
+  .mt-0 {
+    margin-top: 0;
+  }
 }
+
 .header-font {
   font-family: 'Lato', sans-serif;
 }
+
 .header-link * {
   vertical-align: text-bottom;
 }
+
 .top-navbar {
-  padding: 15px 5px;
+  padding: 15px 30px;
   margin-bottom: 10px;
-  font-size: 18px;
+  font-size: 16px;
 }
 
 .section {
@@ -73,13 +86,16 @@ mat-icon.account-icon {
       }
     }
   }
+
   div {
     transition: all 0.3s 0s ease-in;
   }
+
   &:hover {
     div {
       background: #ffcc00;
     }
+
     .category-menu {
       display: block;
     }
@@ -90,6 +106,20 @@ mat-icon.account-icon {
   color: #ffcc00;
   font-size: 24px;
 }
+.my-boards-link {
+  color: #fecc38;
+  font-family: 'Sans-serif';
+  margin-right: 20px;
+  font-weight: bold;
+  cursor: pointer;
+  &:focus {
+    outline: none;
+  }
+}
+.mat-badge-content {
+  background: #b76379;
+}
+
 @media screen and (max-width: 480px) {
   .mat-toolbar-row {
     height: 56px;
@@ -114,8 +144,34 @@ mat-icon.account-icon {
     height: 55px;
   }
 }
+.boards-icon {
+  display: none;
+}
 @media (max-width: 768px) {
   .section {
     margin-top: 0;
+  }
+  .top-navbar {
+    font-size: 16px;
+  }
+  .department-name {
+    position: relative;
+    margin-right: 15px;
+  }
+  .my-boards-link {
+    display: none;
+  }
+  .boards-icon {
+    display: inline-flex;
+  }
+}
+
+.center-logo {
+  width: 160px;
+}
+
+@media (max-width: 1025px) {
+  ::ng-deep .mat-menu-panel {
+    height: 120px;
   }
 }

@@ -14,6 +14,7 @@ import { ProductsComponent } from './products.component';
 import { ProductMobileModule } from '../../components/product-mobile/product-mobile.module';
 import { ProductFilterMobileModule } from '../../components/product-filter-mobile/product-filter-mobile.module';
 import { ProductSortMobileModule } from '../../components/product-sort-mobile/product-sort-mobile.module';
+import { BrandListModule } from '../../components/brand-list/brand-list.module';
 
 const DECLARATIONS = [ProductsComponent];
 
@@ -28,6 +29,7 @@ const MODULES = [
   ProductMobileModule,
   ProductFilterMobileModule,
   ProductSortMobileModule,
+  BrandListModule,
   SubscribeModule
 ];
 

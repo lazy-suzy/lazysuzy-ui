@@ -1,0 +1,99 @@
+<div>
+  <div class="ph5-ns ph4 w-100 pt4 board-modal">
+    <div class="canvas-config pb0">
+      <div class="pv3">
+        <!-- <h4 class="board-header">Board Configuration</h4> -->
+        <h5 class="title ml2 text-center b">Start New Design Board</h5>
+      </div>
+      <div class="pb3">
+        <h6 class="title font-size-12">
+          Select Canvas Style
+        </h6>
+      </div>
+      <div class="flex justify-content-between">
+        <div (click)="handleSelection('board')">
+          <div class="canvas-style" [class.selected]="currentTab == 'board'">
+            <div class="canvas-layout"></div>
+            <h5>BOARD</h5>
+          </div>
+        </div>
+        <div (click)="handleSelection('room')">
+          <div class="canvas-style" [class.selected]="currentTab == 'room'">
+            <div class="canvas-layout canvas-layout-room"></div>
+            <h5>ROOM</h5>
+          </div>
+        </div>
+      </div>
+      <div class="flex">
+        <div *ngIf="showBoardPanel" class="w-100" id="board-options-modal">
+          <div class="pb2">
+            <h6 class="title ml2 mt4 font-size-12">Select Canvas Color</h6>
+          </div>
+
+          <div class="flex">
+            <div class="w-100 board-options tc">
+              <ng-container
+                *ngFor="
+                  let backgroundColor of backgroundColors;
+                  let indexOfelement = index
+                "
+              >
+                <div
+                  (click)="handleChange('color', backgroundColor)"
+                  [class.selected]="selected.color == backgroundColor"
+                  [style.background-color]="backgroundColor"
+                  class="canvas-pallete-color col-2"
+                ></div>
+                <br *ngIf="indexOfelement == 5" />
+              </ng-container>
+            </div>
+          </div>
+        </div>
+        <div
+          *ngIf="showRoomPanel"
+          class="w-100 canvas-options"
+          id="room-options-modal"
+        >
+          <div class="pb2">
+            <h6 class="title ml2 mt4 font-size-12">
+              Select Canvas Background
+            </h6>
+          </div>
+
+          <div class="flex justify-content-left canvas-pallete">
+            <div class="w-100 board-options">
+              <img
+                *ngFor="let backgroundImage of backgroundImages; let i = index"
+                (click)="handleChange('background', backgroundImagesThumbs[i])"
+                [class.selected]="
+                  selected.background == backgroundImagesThumbs[i]
+                "
+                [src]="backgroundImagesThumbs[i]"
+                class="w-20 background-image"
+              />
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="flex board-action-buttons">
+        <div class="w-50 ph3 text-right">
+          <button
+            (click)="cancel()"
+            class="btn btn-cancel w-50 js-close-publish-board"
+          >
+            Cancel
+          </button>
+        </div>
+        <div class="w-50 ph3">
+          <button
+            (click)="save()"
+            [disabled]="!isOptionSelected"
+            class="btn red-button w-50"
+          >
+            Go
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Observable, Subscription } from 'rxjs';
 import {
   BreakpointState,
@@ -6,12 +6,17 @@ import {
   BreakpointObserver
 } from '@angular/cdk/layout';
 
+import { Router, NavigationStart } from '@angular/router';
+import { boardRoutesNames } from './modules/board/board.routes.names';
+import { CookieService } from 'ngx-cookie-service';
+import { ApiService } from './shared/services/api/api.service';
+
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.less']
 })
-export class AppComponent {
+export class AppComponent implements OnInit {
   title = 'LazySuzy';
 
   bpObserver: Observable<BreakpointState> = this.breakpointObserver.observe(
@@ -24,9 +29,24 @@ export class AppComponent {
   bpSubscription: Subscription;
   tabletSubscription: Subscription;
   isHandset: boolean;
-  isTablet: boolean = false;
+  isTablet = false;
+  isMinimalMode = false;
 
-  constructor(private breakpointObserver: BreakpointObserver) {}
+  constructor(
+    private breakpointObserver: BreakpointObserver,
+    private router: Router,
+    private apiService: ApiService,
+    private cookie: CookieService
+  ) {
+    router.events.subscribe((navigation) => {
+      if (
+        navigation instanceof NavigationStart &&
+        navigation.url.match(`/${boardRoutesNames.BOARD_EMBED}/`)
+      ) {
+        this.isMinimalMode = true;
+      }
+    });
+  }
 
   ngOnInit(): void {
     this.bpSubscription = this.bpObserver.subscribe(
@@ -41,7 +61,7 @@ export class AppComponent {
     );
   }
 
-  ngOnDestroy(): void {
+  onDestroy(): void {
     this.bpSubscription.unsubscribe();
   }
 }

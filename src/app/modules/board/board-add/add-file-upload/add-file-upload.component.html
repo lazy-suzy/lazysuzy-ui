@@ -1,0 +1,44 @@
+<div class="container add-file-upload-container">
+  <div class="row">
+    <div class="col-md-12">
+      <div
+        ng2FileDrop
+        class="upload-container btn-file pointer"
+        [ngClass]="{ 'another-file-over-class': hasAnotherDropZoneOver }"
+        [uploader]="uploader"
+      >
+        <div class="cloud-icon">
+          <i class="mdi mdi-cloud-upload"></i>
+        </div>
+        <div>
+          <div>Drop image here or click to Upload</div>
+          <input
+            type="file"
+            accept="image/*"
+            ng2FileSelect
+            id="customImageFile"
+            [uploader]="uploader"
+          />
+        </div>
+      </div>
+
+      <!-- <span class="btn btn-primary btn-file">
+                Drag & Drop here<input type="file" ng2FileSelect [uploader]="uploader" />
+            </span> -->
+    </div>
+
+    <div *ngIf="uploader?.queue?.length">
+      <!-- <button type="button" class="btn btn-success" *ngIf="uploader.queue.length" (click)="handleUpload()">
+                Upload
+            </button>
+            <button type="button" class="btn" *ngIf="uploader.queue.length" (click)="handleCancelUpload()">
+                Remove
+            </button> -->
+      <div
+        class="progress-bar"
+        role="progressbar"
+        [ngStyle]="{ width: uploader.progress + '%' }"
+      ></div>
+    </div>
+  </div>
+</div>

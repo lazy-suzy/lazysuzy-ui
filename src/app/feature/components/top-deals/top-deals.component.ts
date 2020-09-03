@@ -1,8 +1,12 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { ApiService, UtilsService } from 'src/app/shared/services';
+import {
+  ApiService,
+  MatDialogUtilsService,
+  EventEmitterService
+} from 'src/app/shared/services';
 import { Router } from '@angular/router';
 import { Carousel } from 'primeng/carousel';
-
+import { Subscription } from 'rxjs';
 @Component({
   selector: 'app-top-deals',
   templateUrl: './top-deals.component.html',
@@ -11,13 +15,14 @@ import { Carousel } from 'primeng/carousel';
 export class TopDealsComponent implements OnInit {
   topDeals: any;
   responsiveOptions: any;
-  @Input() isHandset: boolean = false;
+  @Input() isHandset = false;
   showLoader = false;
-
+  eventSubscription: Subscription;
   constructor(
     private apiService: ApiService,
     private router: Router,
-    private utilsService: UtilsService
+    private matDialogUtils: MatDialogUtilsService,
+    private eventEmitterService: EventEmitterService
   ) {
     this.responsiveOptions = [
       {
@@ -40,12 +45,18 @@ export class TopDealsComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.getTopDeals();
+    this.eventSubscription = this.eventEmitterService.userChangeEvent
+      .asObservable()
+      .subscribe((user) => {
+        this.getTopDeals();
+      });
   }
-
+  onDestroy(): void {
+    this.eventSubscription.unsubscribe();
+  }
   getTopDeals(): void {
     this.showLoader = true;
-    this.apiService.getTopDeals().subscribe(res => {
+    this.apiService.getTopDeals().subscribe((res) => {
       this.topDeals = res.products;
       this.showLoader = false;
     });
@@ -58,10 +69,10 @@ export class TopDealsComponent implements OnInit {
   openDialog(sku) {
     this.isHandset
       ? this.router.navigateByUrl(`/product/${sku}`)
-      : this.utilsService.homepageMatDialog(sku);
+      : this.matDialogUtils.homepageMatDialog(sku);
   }
 
-  handleEvtProductCarousal(e){
+  handleEvtProductCarousal(e) {
     this.openDialog(e);
   }
 }

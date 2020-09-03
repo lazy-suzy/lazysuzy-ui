@@ -1,0 +1,242 @@
+.article-dual-column {
+  color: #56585b;
+  background-color: #fff;
+  font-family: 'Lora', serif;
+  font-size: 14px;
+}
+
+.article-dual-column .intro {
+  font-size: 16px;
+  margin: 0 auto 30px;
+}
+
+.article-dual-column .intro h1 {
+  font-size: 32px;
+  margin-bottom: 15px;
+  padding-top: 20px;
+  line-height: 1.5;
+  color: inherit;
+  margin-top: 25px;
+}
+
+.article-dual-column .intro p {
+  color: #929292;
+  font-size: 12px;
+}
+
+.article-dual-column .intro p .by {
+  font-style: italic;
+}
+
+.article-dual-column .intro p .date {
+  text-transform: uppercase;
+  padding: 4px 0 4px 10px;
+  margin-left: 10px;
+  border-left: 1px solid #ddd;
+}
+
+.article-dual-column .intro p a {
+  color: #333;
+  text-transform: uppercase;
+  padding-left: 3px;
+}
+
+.article-dual-column .intro img {
+  margin-top: 25px;
+}
+
+.article-dual-column .text p {
+  margin-bottom: 20px;
+  line-height: 1.45;
+}
+
+.products-container {
+  display: flex;
+  margin: 24px;
+  flex-wrap: wrap;
+}
+
+.site {
+  color: #606060;
+}
+.name {
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  width: 100%;
+  margin-bottom: 5px;
+  overflow: hidden;
+  color: #333333;
+}
+
+.prices {
+  .cprice {
+    color: #0c1c31;
+    margin-right: 10px;
+    &.sale {
+      color: #b76e79;
+    }
+  }
+
+  .oldprice {
+    text-decoration: line-through;
+  }
+}
+
+.ls-product {
+  margin-bottom: 5px;
+  cursor: pointer;
+}
+.ls-product-div {
+  margin-bottom: 40px;
+  font-family: Lato;
+  .product-tag {
+    position: absolute;
+    border-radius: 0;
+    font-size: 18px;
+    padding: 5px 10px;
+  }
+}
+.shop-title {
+  color: #b76e79;
+}
+.white-background {
+  background-color: #ffffff;
+}
+.shop-title-row {
+  border-bottom: 1px solid #cbcad0;
+  padding-bottom: 10px;
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 10px;
+}
+.board-user-container {
+  width: 60%;
+}
+.profile-avatar {
+  font-size: 36px;
+  color: #7b7979;
+}
+.profile-avatar-image {
+  border-radius: 100%;
+  width: 35px;
+  height: 35px;
+  object-fit: cover;
+}
+.profile-username {
+  font-size: 18px;
+  margin-left: 20px;
+  margin-top: 5px;
+}
+.product-tag {
+  position: absolute;
+}
+.likes-container {
+  display: flex;
+  align-items: center;
+  color: #b76e79;
+  .like-count {
+    font-size: 14px;
+    padding-left: 5px;
+  }
+}
+.new-board-card {
+  padding: 25px 15px;
+  background-color: #f8f9fa;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #b76e79;
+  .new-board-btn {
+    background-color: #ba7989;
+    color: white;
+    text-align: center;
+    padding: 10px 20px;
+    border-radius: 4px;
+    font-weight: bold;
+    margin-left: 50px;
+  }
+  .new-board-text {
+    margin-right: 50px;
+    font-size: 20px;
+  }
+}
+@media (max-width: 1024px) {
+  div .board-user-container {
+    width: 85%;
+  }
+}
+@media (min-width: 768px) {
+  .article-dual-column .text p {
+    font-size: 16px;
+  }
+}
+
+.article-dual-column .text h2 {
+  margin-top: 28px;
+  margin-bottom: 20px;
+  line-height: 1.45;
+  font-size: 16px;
+  font-weight: bold;
+  color: #333;
+}
+
+@media (min-width: 768px) {
+  .article-dual-column .text h2 {
+    font-size: 20px;
+  }
+}
+.row {
+  margin: 0;
+}
+.article-dual-column .text figure {
+  text-align: center;
+  margin-top: 30px;
+  margin-bottom: 20px;
+}
+
+.article-dual-column .text figure img {
+  margin-bottom: 12px;
+  max-width: 100%;
+}
+
+@media (max-width: 767px) {
+  .article-dual-column .toc {
+    border: 1px solid #d3d3d3;
+    padding: 20px 0 15px;
+    margin-bottom: 20px;
+    border-width: 1px 0;
+  }
+  .new-board-card {
+    display: block;
+    .new-board-btn {
+      width: 50%;
+      margin: 10px auto;
+    }
+    .new-board-text {
+      margin-right: 0;
+    }
+  }
+}
+.board-user-container {
+  width: 80%;
+}
+
+.article-dual-column .toc p {
+  text-transform: uppercase;
+  font-size: 12px;
+  font-weight: bold;
+}
+
+.article-dual-column .toc ul {
+  padding-left: 20px;
+  font-size: 13px;
+  margin-bottom: 0;
+}
+
+.article-dual-column .toc li {
+  padding: 2px 0;
+}
+
+.article-dual-column .toc a {
+  color: inherit;
+}
