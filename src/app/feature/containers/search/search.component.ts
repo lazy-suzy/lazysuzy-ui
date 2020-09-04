@@ -1,5 +1,5 @@
 import { COLORS } from "./../../../shared/constants";
-import { Component, OnInit } from "@angular/core";
+import { Component, OnInit, HostListener } from "@angular/core";
 import {
   IProductsPayload,
   ISearchProduct,
@@ -13,7 +13,7 @@ import {
   Breakpoints,
   BreakpointObserver,
 } from "@angular/cdk/layout";
-import { take } from "rxjs/operators";
+import { skip, map, switchMap, tap, first } from "rxjs/operators";
 
 @Component({
   selector: "app-search",
@@ -38,6 +38,9 @@ export class SearchComponent implements OnInit {
   searchKeywords = [];
   mustQueryParams = [];
   shouldQueryParams = [];
+  brands: any;
+  isIconShow = false;
+  topPosToStartShowing = 300;
   constructor(
     private apiService: ApiService,
     private router: Router,
@@ -47,8 +50,9 @@ export class SearchComponent implements OnInit {
 
   ngOnInit(): void {
     this.query = this.route.snapshot.queryParamMap.get("query");
-    this.getSearchKeywords();
-    this.route.queryParams.subscribe((params) => {
+    this.getSearchKeywordsAndBrands();
+    this.route.queryParams.pipe(skip(1)).subscribe((params) => {
+      console.log(this.query);
       this.query = params.query || "";
       this.getNewQueryResult();
     });
@@ -65,22 +69,46 @@ export class SearchComponent implements OnInit {
     this.bpSubscription.unsubscribe();
   }
 
-  getSearchKeywords() {
-    this.apiService
-      .getSearchKeywords()
-      .pipe(take(1))
-      .subscribe((data: any) => {
-        this.searchKeywords = data;
+  getSearchKeywordsAndBrands() {
+    this.getSearchKeywords()
+      .pipe(
+        first(),
+        tap((data: any) => (this.searchKeywords = data)),
+        switchMap(() =>
+          this.getBrands().pipe(
+            first(),
+            map((brands: any) => {
+              return brands.map((brand) => {
+                return {
+                  name: brand.name,
+                  value: brand.value,
+                };
+              });
+            }),
+            tap((data: any) => (this.brands = data))
+          )
+        )
+      )
+      .subscribe(() => {
         this.getNewQueryResult();
       });
+  }
+  getBrands() {
+    return this.apiService.getBrands();
+  }
+  getSearchKeywords() {
+    return this.apiService.getSearchKeywords();
+    // .subscribe((data: any) => {
+    //   this.searchKeywords = data;
+    //   this.getNewQueryResult();
+    // });
   }
 
   createQueryParamsObject() {
     this.mustQueryParams = [];
     this.shouldQueryParams = [];
-    let queries = this.query.split(" ");
-    let fullQuery = queries.join("");
-    const spareValues = this.createMustQuery(queries, fullQuery);
+    let queries = this.query.toLowerCase().split(" ");
+    const spareValues = this.createMustQuery(queries);
     if (!!spareValues.trim()) {
       this.createShouldQuery(queries, spareValues);
     } else {
@@ -89,7 +117,7 @@ export class SearchComponent implements OnInit {
   }
 
   //Form the Must Query
-  createMustQuery(queries: string[], fullQuery: string): string {
+  createMustQuery(queries: string[]): string {
     let color = [];
     let brand = [];
     let objectParam = [];
@@ -103,6 +131,17 @@ export class SearchComponent implements OnInit {
         spareValues.push(value);
       }
     });
+    let spares = spareValues.join("");
+    //  console.log(spares);
+    this.brands.forEach((value) => {
+      const brandName = value["name"].toLowerCase().replace(/\s+/g, "");
+      console.log(brandName);
+      let matcher = new RegExp(brandName);
+      if (matcher.test(spares)) {
+        brand.push(value);
+      }
+    });
+
     if (color.length > 0) {
       color.forEach((value) =>
         this.mustQueryParams.push({
@@ -111,6 +150,15 @@ export class SearchComponent implements OnInit {
           },
         })
       );
+    }
+    if (brand.length > 0) {
+      brand.forEach((brand) => {
+        this.mustQueryParams.push({
+          term: {
+            brand_name: brand.value,
+          },
+        });
+      });
     }
     if (objectParam.length > 0) {
       objectParam.forEach((value) => {
@@ -147,16 +195,16 @@ export class SearchComponent implements OnInit {
     if (spareValue != "") {
       keysWithSpareValues = shouldKeys.map((value) => `${spareValue} ${value}`);
       allKeys = [...shouldKeys, ...keysWithSpareValues];
-    } else{
-      allKeys=[...shouldKeys]
+    } else {
+      allKeys = [...shouldKeys];
     }
-      this.shouldQueryParams = allKeys.map((value) => {
-        return {
-          term: {
-            product_name: value,
-          },
-        };
-      });
+    this.shouldQueryParams = allKeys.map((value) => {
+      return {
+        term: {
+          product_name: value,
+        },
+      };
+    });
     //this.shouldQueryParams = shouldKeys.filter(value=>)
     //  if (this.searchKeywords.hasOwnProperty(params)) {
     //    this.shouldQueryParams = this.searchKeywords[params]
@@ -190,7 +238,7 @@ export class SearchComponent implements OnInit {
       .getSearchProducts(queryString)
       .subscribe((payload: ISearchProductsPayload) => {
         const { hits } = payload.hits;
-        this.totalCount = hits.length;
+        this.totalCount = payload.hits.total.value;
         this.products = hits.map((hit: any) => hit._source);
       });
   }
@@ -218,6 +266,22 @@ export class SearchComponent implements OnInit {
       });
   }
 
+  @HostListener("window:scroll")
+  checkScroll() {
+    const scrollPosition =
+      window.pageYOffset ||
+      document.documentElement.scrollTop ||
+      document.body.scrollTop ||
+      0;
+    this.isIconShow = scrollPosition >= this.topPosToStartShowing;
+  }
+  gotoTop() {
+    window.scroll({
+      top: 0,
+      left: 0,
+      behavior: "smooth",
+    });
+  }
   onScroll() {
     if (this.isProductFetching) {
       return;

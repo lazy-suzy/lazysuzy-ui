@@ -11,25 +11,13 @@
     </span>
   </div>
 </div>
-<div
-  infiniteScroll
-  [infiniteScrollDistance]="2"
-  [infiniteScrollThrottle]="50"
-  (scrolled)="onScroll()"
->
-  <div
-    class="flex flex-wrap justify-center ph3"
-    *ngIf="isHandset; else isDesktop"
-  >
-    <app-search-product
-      *ngFor="let product of products"
-      [product]="product"
-      [ngClass]="{
+<div infiniteScroll [infiniteScrollDistance]="2" [infiniteScrollThrottle]="50" (scrolled)="onScroll()">
+  <div class="flex flex-wrap justify-center ph3" *ngIf="isHandset; else isDesktop">
+    <app-search-product *ngFor="let product of products" [product]="product" [ngClass]="{
         'w-50': productsInRow === 2,
         'w-33': productsInRow === 3,
         'w-100': productsInRow === 1
-      }"
-    ></app-search-product>
+      }"></app-search-product>
   </div>
 
   <ng-template #isDesktop>
@@ -37,11 +25,11 @@
       <span> {{ totalCount }} Results </span>
     </div>
     <div class="flex flex-wrap justify-center">
-      <app-search-product
-        *ngFor="let product of products"
-        [product]="product"
-        class="w-25-ns"
-      ></app-search-product>
+      <app-search-product *ngFor="let product of products" [product]="product" class="w-25-ns"></app-search-product>
     </div>
   </ng-template>
 </div>
+<button class="scroll-to-btn f6 dib white bg-near-black" *ngIf="isIconShow" (click)="gotoTop()">
+  <mat-icon class="account-icon pointer" aria-hidden="false" aria-label="scroll to top">
+    arrow_upward</mat-icon>
+</button>
