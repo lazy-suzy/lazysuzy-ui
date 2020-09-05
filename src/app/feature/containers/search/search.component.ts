@@ -161,7 +161,7 @@ export class SearchComponent implements OnInit {
       brand.forEach((brand) => {
         this.mustQueryParams.push({
           term: {
-            brand_name: brand.value,
+            site_name: brand.value,
           },
         });
       });
