@@ -35,12 +35,18 @@ export class SearchComponent implements OnInit {
   productsInRow = 2;
   isProductFetching = false;
   isBoardApi = false;
+
+  // Search Params
   searchKeywords = [];
   mustQueryParams = [];
   shouldQueryParams = [];
   brands: any;
+
+  // QOL 
   isIconShow = false;
   topPosToStartShowing = 300;
+  spinner = "assets/image/spinner.gif";
+  isLoading= true;
   constructor(
     private apiService: ApiService,
     private router: Router,
@@ -220,6 +226,7 @@ export class SearchComponent implements OnInit {
   }
 
   getNewQueryResult(): void {
+    this.isLoading = true;
     this.iPageNo = 0;
     this.iLimit = 24;
     this.createQueryParamsObject();
@@ -233,13 +240,18 @@ export class SearchComponent implements OnInit {
         },
       },
     });
-    console.log(queryString);
+    console.log(queryString,this.isLoading);
+    
     this.productsSubscription = this.apiService
       .getSearchProducts(queryString)
+      .pipe(
+        first()
+      )
       .subscribe((payload: ISearchProductsPayload) => {
         const { hits } = payload.hits;
         this.totalCount = payload.hits.total.value;
         this.products = hits.map((hit: any) => hit._source);
+        this.isLoading = false;
       });
   }
   getQueryResult(): void {
@@ -312,6 +324,7 @@ export class SearchComponent implements OnInit {
     });
     this.productsSubscription = this.apiService
       .getSearchProducts(queryString)
+     
       .subscribe((payload: ISearchProductsPayload) => {
         const { hits } = payload.hits;
         this.products = [
@@ -319,6 +332,7 @@ export class SearchComponent implements OnInit {
           ...hits.map((hit: any) => hit._source),
         ];
         this.isProductFetching = false;
+        this.isLoading = false
       });
   }
 

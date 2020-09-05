@@ -11,7 +11,7 @@
     </span>
   </div>
 </div>
-<div infiniteScroll [infiniteScrollDistance]="2" [infiniteScrollThrottle]="50" (scrolled)="onScroll()">
+<div ngif="!isLoading" infiniteScroll [infiniteScrollDistance]="2" [infiniteScrollThrottle]="50" (scrolled)="onScroll()">
   <div class="flex flex-wrap justify-center ph3" *ngIf="isHandset; else isDesktop">
     <app-search-product *ngFor="let product of products" [product]="product" [ngClass]="{
         'w-50': productsInRow === 2,
@@ -24,7 +24,7 @@
     <div class="tr w-100 results-text">
       <span> {{ totalCount }} Results </span>
     </div>
-    <div class="flex flex-wrap justify-center">
+    <div class="flex flex-wrap justify-center" *ngIf="!isLoading">
       <app-search-product *ngFor="let product of products" [product]="product" class="w-25-ns"></app-search-product>
     </div>
   </ng-template>
@@ -33,3 +33,4 @@
   <mat-icon class="account-icon pointer" aria-hidden="false" aria-label="scroll to top">
     arrow_upward</mat-icon>
 </button>
+<img *ngIf="isLoading" [src]="spinner" class="loader" />
