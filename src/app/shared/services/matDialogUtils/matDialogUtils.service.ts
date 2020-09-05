@@ -25,7 +25,7 @@ export class MatDialogUtilsService {
     private router: Router,
     private activeRoute: ActivatedRoute,
     private markdownService: MarkdownService
-  ) {}
+  ) { }
 
   closeDialogs() {
     this.dialog.closeAll();
@@ -73,7 +73,7 @@ export class MatDialogUtilsService {
         delete params.modal_sku;
         this.router.navigate([], { queryParams: params });
       } else {
-        this.location.back();
+        // this.location.back();
       }
     });
   }
@@ -86,10 +86,10 @@ export class MatDialogUtilsService {
       panelClass: 'product-details-dialog-container'
     });
     dialogRef.afterOpened().subscribe((result) => {
-      this.location.go(`product/${modalSku}`);
+      // this.location.go(`product/${modalSku}`);
     });
     dialogRef.afterClosed().subscribe((result) => {
-      this.location.go(``);
+      // this.location.go(``);
     });
   }
 

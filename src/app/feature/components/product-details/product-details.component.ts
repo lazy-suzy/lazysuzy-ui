@@ -71,6 +71,8 @@ export class ProductDetailsComponent implements OnInit {
   localStorageUser = {};
   activeProduct: IActiveProduct;
   hasSelection: boolean;
+  beforeSelection: boolean;
+  checkSelection: boolean;
   schema = {};
   invalidLinkImageSrc = 'assets/image/invalid_link.png';
   invalidLink: boolean;
@@ -83,7 +85,7 @@ export class ProductDetailsComponent implements OnInit {
     private eventEmitterService: EventEmitterService,
     private matDialogUtils: MatDialogUtilsService,
     private seoService: SeoService
-  ) {}
+  ) { }
 
   ngOnInit(): void {
     this.isProductFetching = true;
@@ -96,6 +98,7 @@ export class ProductDetailsComponent implements OnInit {
           .subscribe(
             (payload: IProductDetail) => {
               this.product = payload.product;
+              console.log('this.product: ', this.product);
               this.seoData = payload.seo_data;
               if (payload.product) {
                 this.schema = this.seoService.setSchema(this.product);
@@ -144,6 +147,12 @@ export class ProductDetailsComponent implements OnInit {
                 this.isVariationExist = this.utils.checkDataLength(
                   this.product.variations
                 );
+                console.log('this.isVariationExist: ', this.isVariationExist);
+
+                if (!this.isVariationExist) {
+                  this.beforeSelection = true;
+                  this.checkSelection = true;
+                }
                 this.hasVariationsInventory();
                 this.variations = this.product.variations.sort((a, b) =>
                   a.name > b.name ? 1 : -1
@@ -216,10 +225,13 @@ export class ProductDetailsComponent implements OnInit {
     this.topHeight = { 'max-height': `calc(100vh - ${topHeight + 12}px)` };
   }
   onSetImage(variation): void {
+    console.log('setImage entry!');
+
     this.galleryContainer.nativeElement.scrollTop = 0;
     this.items = this.product.on_server_images.map(
       (item) => new ImageItem({ src: item })
     );
+
     if (variation) {
       const src = variation.image;
       const image = new ImageItem({ src });
@@ -242,12 +254,19 @@ export class ProductDetailsComponent implements OnInit {
   }
 
   openCartModal() {
+    console.log('this.product.in_inventory: ', this.product.in_inventory);
+    console.log('this.activeProduct.inventory_product_details.price: ', this.activeProduct.inventory_product_details.price);
+    console.log('this.twoPlus: ', !this.product.in_inventory && !this.activeProduct.inventory_product_details.price);
+    console.log('this.beforeSelection: ', this.beforeSelection);
+
     if (
       !this.product.in_inventory &&
-      !this.activeProduct.inventory_product_details.price
+      !this.activeProduct.inventory_product_details.price ||
+      !this.beforeSelection
     ) {
       this.hasSelection = false;
     } else {
+      this.hasSelection = true;
       const data = {
         sku: this.activeProduct.sku,
         brand: this.product.site,
@@ -264,6 +283,8 @@ export class ProductDetailsComponent implements OnInit {
         count: this.quantity,
         parent_sku: this.product.sku
       };
+      console.log('postData: ', postData);
+      console.log('hasSelection: ', this.hasSelection);
 
       this.apiService.addCartProduct(postData).subscribe(
         (payload: any) => {
@@ -276,7 +297,6 @@ export class ProductDetailsComponent implements OnInit {
         },
         (error: any) => {
           this.errorMessage = 'Cannot add this product at the moment.';
-          console.log(error);
         }
       );
     }
@@ -291,6 +311,7 @@ export class ProductDetailsComponent implements OnInit {
         ? product.inventory_product_details
         : []
     };
+    console.log('this.activeProduct: ', this.activeProduct);
   }
 
   quantityLimit(count) {
@@ -308,5 +329,19 @@ export class ProductDetailsComponent implements OnInit {
         this.activeProduct.inventory_product_details.count = 1;
       }
     }
+  }
+
+  onSetSelectionChecked(e: boolean) {
+    console.log('set Selection checked: ', e);
+    this.beforeSelection = e;
+  }
+
+  onClearSelection(e: boolean) {
+    console.log('onClear selections!');
+    this.checkSelection = e;
+  }
+
+  onSetSelection(e: boolean) {
+    this.hasSelection = e;
   }
 }

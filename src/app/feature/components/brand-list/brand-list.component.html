@@ -1,0 +1,16 @@
+<ul>
+    <li>
+        <a href="javascript: void(0)" class="active"
+            (click)="onSetBrand('')">
+            All BRANDS
+        </a>
+    </li>
+    <ng-container *ngFor="let brand of brandData">
+        <li>
+            <a href="javascript: void(0)"
+                (click)="onSetBrand(brand.value)">{{ brand['name'] }}</a>
+        </li>
+    </ng-container>
+</ul>
+<!--  [ngClass]="{'active': selectedBrandValue === '' && isBrandPage === true}" -->
+<!-- [ngClass]="{'active': (selectedBrandValue === brand['value'] && isBrandPage === true)}" -->
