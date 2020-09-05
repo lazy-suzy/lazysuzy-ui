@@ -50,6 +50,11 @@ const routes: Routes = [
     pathMatch: 'full'
   },
   {
+    path: 'products/brand',
+    component: AllProductsComponent,
+    pathMatch: 'full'
+  },
+  {
     path: 'products/:department',
     component: CategoriesComponent,
     pathMatch: 'full'
@@ -74,10 +79,10 @@ const routes: Routes = [
     component: ResetPasswordComponent,
     pathMatch: 'full'
   },
-  // {
-  //   path: 'blog',
-  //   loadChildren: () => import('./feature/blog/blog/blog.module').then(m => m.BlogModule)
-  // }
+  {
+    path: 'blog',
+    loadChildren: () => import('./feature/blog/blog/blog.module').then(m => m.BlogModule)
+  },
   {
     path: 'admin-dashboard',
     loadChildren: () =>

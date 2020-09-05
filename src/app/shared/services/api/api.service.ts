@@ -126,6 +126,17 @@ export class ApiService {
     return this.httpService.get(url);
   }
 
+  getBrandData(brandName: string):Observable<any> {
+    let endpoint = `brand`;
+    if(brandName !== '') {
+      endpoint = `brand/${brandName}`;
+    }
+    const url = env.useLocalJson
+    ? `${env.JSON_BASE_HREF}${endpoint}`
+    : `${env.API_BASE_HREF}${endpoint}`;
+    return this.httpService.get(url)
+  }
+
   getMultiplePageProducts(
     department: string,
     category: string,
@@ -150,12 +161,22 @@ export class ApiService {
     return this.httpService.get(url);
   }
 
-  getAllDepartments(): Observable<IDepartment> {
-    const endpoint = `all-departments`;
+  getAllBrandNames(): Observable<any> {
+    const endpoint = `brand`;
+    const url = env.useLocalJson
+    ? `${env.JSON_BASE_HREF}${endpoint}`
+    : `${env.API_BASE_HREF}${endpoint}`;
+    return this.httpService.get(url)
+  }
+
+  getAllDepartments(brandFilter: string = ''): Observable<IDepartment> {
+    let endpoint = `all-departments`;
+    if(brandFilter !== '' && brandFilter !== undefined) {
+      endpoint = `all-departments?brands=${brandFilter}`;
+    }
     const url = env.useLocalJson
       ? `${env.JSON_BASE_HREF}${endpoint}`
       : `${env.API_BASE_HREF}${endpoint}`;
-
     return this.httpService.get(url);
   }
 

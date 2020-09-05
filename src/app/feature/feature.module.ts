@@ -20,7 +20,9 @@ import {
   PublicProfileModule
 } from './components';
 import { ResetPasswordComponent } from './containers/reset-password/reset-password.component';
-// import { BlogModule } from './blog/blog/blog.module';
+import { BrandListModule } from './components/brand-list/brand-list.module';
+import { BlogModule } from './blog/blog/blog.module';
+
 const DECLARATIONS = [];
 const MODULES = [
   CommonModule,
@@ -37,8 +39,9 @@ const MODULES = [
   ForgotPasswordModule,
   ResetPasswordModule,
   EditMyProfileModule,
-  PublicProfileModule
-  // BlogModule
+  BrandListModule,
+  PublicProfileModule,
+  BlogModule
 ];
 @NgModule({
   declarations: [...DECLARATIONS, ResetPasswordComponent],
@@ -46,4 +49,4 @@ const MODULES = [
   // providers: [AmericanNumberPipe],
   exports: [...DECLARATIONS, ...MODULES]
 })
-export class FeatureModule {}
+export class FeatureModule { }

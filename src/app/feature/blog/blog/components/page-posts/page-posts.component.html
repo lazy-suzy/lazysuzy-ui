@@ -1,0 +1,15 @@
+
+<div class="spinner">
+  <app-loader *ngIf="showLoader"></app-loader>
+</div>
+
+<div class="container" *ngIf="!showLoader">
+  <div class="wrapper">
+    <h1 [innerHTML]="currentBlog?.title?.rendered"></h1>
+    <small style="text-align: center;">{{currentBlog.date | date: 'fullDate'}}</small>
+    <article>
+      <p [innerHTML]="currentBlog?.content?.rendered">
+      </p>
+    </article>
+  </div>
+</div>

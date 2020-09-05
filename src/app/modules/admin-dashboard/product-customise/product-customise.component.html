@@ -11,7 +11,7 @@
       class="flex justify-start w-75 product-filters"
       *ngIf="!isProductFetching"
     ></app-product-filters>
-    <div>{{ totalCount }} Results</div>
+    <div style="font-size: 14px; min-width: 110px">{{ totalCount }} Results</div>
     <app-sort-type
       [sortTypeList]="sortTypeList"
       (setSortType)="onSetSortType($event)"

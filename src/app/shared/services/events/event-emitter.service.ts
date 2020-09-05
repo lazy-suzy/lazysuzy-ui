@@ -13,6 +13,7 @@ export class EventEmitterService {
   userChangeEvent = new ReplaySubject<any>(1);
   private assetsData = new BehaviorSubject('');
   assets = this.assetsData.asObservable();
+  public isBrandSubject = new BehaviorSubject('');
   constructor() {}
 
   // Triggered from: anywhere
