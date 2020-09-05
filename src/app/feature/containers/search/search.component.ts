@@ -240,8 +240,7 @@ export class SearchComponent implements OnInit {
         },
       },
     });
-    console.log(queryString,this.isLoading);
-    
+    console.log(queryString);
     this.productsSubscription = this.apiService
       .getSearchProducts(queryString)
       .pipe(
