@@ -28,6 +28,10 @@ export class NavDesktopComponent implements OnInit {
   password: any;
   hideBar = false;
   cartProduct: number;
+
+  isBrandPage: boolean = false;
+  params: any;
+
   constructor(
     private router: Router,
     private location: Location,
@@ -37,7 +41,8 @@ export class NavDesktopComponent implements OnInit {
     private cookie: CookieService,
     private activatedRoute: ActivatedRoute,
     private eventEmitterService: EventEmitterService,
-    private matDialogUtils: MatDialogUtilsService
+    private matDialogUtils: MatDialogUtilsService,
+    private activeRoute: ActivatedRoute
   ) {
     this.checkHomeRoute = router.events.subscribe((val) => {
       // this.notHome = location.path() !== '';
@@ -70,6 +75,15 @@ export class NavDesktopComponent implements OnInit {
           }
         });
       });
+
+    this.eventEmitterService.isBrandSubject.subscribe((brandValue: string) => {
+      this.getDepartments(brandValue);
+    });
+
+    this.activeRoute.queryParams.subscribe((params) => {
+      // this.isClearAllVisible = params.filters !== '';
+      this.params = params;
+    });
   }
   onDestroy(): void {
     this.checkHomeRoute.unsubscribe();
@@ -122,9 +136,39 @@ export class NavDesktopComponent implements OnInit {
     }
   }
 
-  getDepartments() {
-    this.apiService.getAllDepartments().subscribe((payload: any) => {
+  getDepartments(brandValue: string = '') {
+    console.log('brand value: ', brandValue)
+    // flag value to show nav bar in brand page
+    let brandValueForDepart = '';
+    if(brandValue === '' || brandValue === undefined) {
+      this.isBrandPage = false;
+      brandValueForDepart = '';
+    } else {
+      this.isBrandPage = true;
+      brandValueForDepart = brandValue;
+    };
+    this.apiService.getAllDepartments(brandValueForDepart).subscribe((payload: any) => {
       this.departments = payload.all_departments;
     });
+  }
+
+  setCategoryForBrandPage(categoryValue: number) {
+    let newParams: any = this.params;
+    let filterValue: string = newParams.filters || '';
+    const checkCategoryPos = filterValue.indexOf('category:');
+    if (checkCategoryPos < 0) {
+      filterValue += `category:${categoryValue};`
+    } else {
+      const restString = filterValue.slice(checkCategoryPos + 9);
+      const endBrandPos = restString.indexOf(';');
+      const subCategoryString = filterValue.substr(checkCategoryPos, (endBrandPos + checkCategoryPos));
+      const newFilterValue = filterValue.replace(subCategoryString, `category:${categoryValue};`);
+      filterValue = newFilterValue;
+    }
+    const resultFilter = {
+      ...newParams,
+      ...{ "filters": filterValue }
+    }
+    this.router.navigate(['products/brand'], { queryParams: resultFilter });
   }
 }

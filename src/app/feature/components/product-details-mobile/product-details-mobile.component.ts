@@ -70,6 +70,8 @@ export class ProductDetailsMobileComponent implements OnInit {
   eventSubscription: Subscription;
   activeProduct: IActiveProduct;
   hasSelection: boolean;
+  beforeSelection: boolean;
+  checkSelection: boolean;
   schema = {};
   invalidLinkImageSrc = 'assets/image/invalid_link.png';
   invalidLink: boolean;
@@ -143,6 +145,10 @@ export class ProductDetailsMobileComponent implements OnInit {
             this.isVariationExist = this.utils.checkDataLength(
               this.product.variations
             );
+            if (!this.isVariationExist) {
+              this.beforeSelection = true;
+              this.checkSelection = true;
+            }
             this.hasVariationsInventory();
             if (!this.isHandset) {
               this.router.navigate(
@@ -252,6 +258,7 @@ export class ProductDetailsMobileComponent implements OnInit {
     } else {
       this.updateActiveProduct(this.product);
       this.hasVariationsInventory();
+      // this.hasSelection = false;
     }
     this.galleryRef.load(this.items);
   }
@@ -266,7 +273,8 @@ export class ProductDetailsMobileComponent implements OnInit {
   openCartModal() {
     if (
       !this.product.in_inventory &&
-      !this.activeProduct.inventory_product_details.price
+      !this.activeProduct.inventory_product_details.price ||
+      !this.beforeSelection
     ) {
       this.hasSelection = false;
     } else {
@@ -282,10 +290,14 @@ export class ProductDetailsMobileComponent implements OnInit {
         quantity: this.quantity
       };
       const postData = {
-        product_sku: this.productSku,
+        product_sku: this.activeProduct.sku,
         count: this.quantity,
         parent_sku: this.product.sku
       };
+
+      console.log('this.product: ', this.product);
+      console.log('postData: ', postData);
+
       this.apiService.addCartProduct(postData).subscribe(
         (payload: any) => {
           if (payload.status) {
@@ -335,5 +347,19 @@ export class ProductDetailsMobileComponent implements OnInit {
         this.activeProduct.inventory_product_details.count = 1;
       }
     }
+  }
+
+  onSetSelectionChecked(e: boolean) {
+    console.log('set Selection checked: ', e);
+    this.beforeSelection = e;
+  }
+
+  onClearSelection(e: boolean) {
+    this.hasSelection = e;
+    this.checkSelection = e;
+  }
+
+  onSetSelection(e: boolean) {
+    this.hasSelection = e;
   }
 }

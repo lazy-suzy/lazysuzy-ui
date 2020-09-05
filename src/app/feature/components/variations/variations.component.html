@@ -1,247 +1,158 @@
 <ng-container *ngIf="isHandset && isSwatchExist; else isBrowser">
-  <div class="variation-container">
-    <div class="flex items-center">
-      <span class="title">Options</span>
-      <span
-        class="clear-btn"
-        *ngIf="selectedSwatch.swatch_image && hasSelection"
-        (click)="clearVariations()"
-        >Clear</span
-      >
-      <span *ngIf="hasSelection === false" class="error-msg">
-        Please make a selection
-      </span>
-    </div>
+    <div class="variation-container">
+        <div class="flex items-center">
+            <span class="title">Options</span>
+            <span class="clear-btn" (click)="clearVariations()" *ngIf="selectedSwatch.swatch_image || selectedFlag">Clear</span>
+            <span *ngIf="hasSelection === false && beforeSelection === false" class="error-msg">
+                Please make a selection
+            </span>
+        </div>
 
-    <div class="variation-options" *ngIf="isSwatchExist">
-      <div
-        class="variation {{
-          !variation.hasOwnProperty('enabled') || variation.enabled
-            ? ''
-            : 'disabledImage'
-        }}"
-        *ngFor="let variation of swatches; let i = index"
-        [class.active]="variation.swatch_image === selectedSwatch.swatch_image"
-      >
-        <a
-          class="{{
+        <div class="variation-options" *ngIf="isSwatchExist">
+            <div class="variation {{
             !variation.hasOwnProperty('enabled') || variation.enabled
-              ? ''
-              : 'disabledTab'
-          }}"
-        >
-          <img
-            [src]="variation.swatch_image"
-            [alt]="variation.name"
-            class="variant-image"
-            (click)="selectedVariation(variation, i)"
-          />
-        </a>
-      </div>
-      <div *ngIf="swatches.length === 0">
-        No product available, please change/clear options
-      </div>
-    </div>
-  </div>
-  <mat-expansion-panel *ngIf="selectionsExist" #example>
-    <mat-expansion-panel-header>
-      <mat-panel-title>
-        SEE MORE
-      </mat-panel-title>
-      <mat-icon *ngIf="!example.expanded">add</mat-icon>
-      <mat-icon *ngIf="example.expanded">remove</mat-icon>
-    </mat-expansion-panel-header>
-    <div class="flex flex-wrap variant-features-options-container">
-      <ng-container *ngFor="let item of inputSelections | keyvalue">
-        <div
-          class="variant-feature-content relative w-50"
-          *ngIf="item.value.select_type === 'multi_select'"
-        >
-          <div class="variant-feature-options">
-            <div class="feature-title pointer flex flex-wrap justify-between">
-              <h6 class="selection-title">
-                Select
-                {{
-                  item.key == 'color_group' ? 'Color' : (item.key | titlecase)
-                }}
-              </h6>
-              <span class="arrow-icon"
-                ><mat-icon>arrow_drop_down</mat-icon></span
-              >
+                ? ''
+                : 'disabledImage'
+            }}" *ngFor="let variation of swatches; let i = index" [class.active]="variation.swatch_image === selectedSwatch.swatch_image">
+                <a class="{{
+                !variation.hasOwnProperty('enabled') || variation.enabled
+                ? ''
+                : 'disabledTab'
+                }}">
+                    <img [src]="variation.swatch_image" [alt]="variation.name" class="variant-image" (click)="selectedVariation(variation, i)" />
+                </a>
             </div>
-            <div class="variant-feature-checkbox">
-              <div *ngFor="let option of item.value.options">
-                <mat-checkbox
-                  (change)="onCheckChange($event, option, item.key)"
-                  [checked]="
-                    selections[item.key] &&
-                    selections[item.key].includes(option)
-                  "
-                  [disabled]="!selectionOptions[option]"
-                  class="options"
-                >
-                  {{ option }}
-                </mat-checkbox>
-              </div>
+            <div *ngIf="swatches.length === 0">
+                No product available, please change/clear options
             </div>
-          </div>
         </div>
-      </ng-container>
     </div>
-    <div class="variant-features-options-container">
-      <div
-        class="variant-feature-content"
-        *ngFor="let item of inputSelections | keyvalue"
-      >
-        <div
-          class="variant-feature-options"
-          *ngIf="item.value.select_type === 'single_select'"
-        >
-          <h6 class="selection-title">
-            Select {{ item.key.replace('_', ' ') | titlecase }}
-          </h6>
-          <div class="flex flex-wrap">
-            <div
-              *ngFor="let option of item.value.options"
-              class="w-33 pa1"
-              [ngClass]="{
-                'w-50': item.value.options.length % 2 === 0
-              }"
-            >
-              <div
-                class="variant-feature options pointer  {{
-                  selectionOptions[option] ? '' : 'disabledTab'
-                }}"
-                (click)="selectedOption(option, item.key)"
-                [class.active]="
-                  selections[item.key] && selections[item.key] === option
-                "
-                [innerHTML]="option"
-              ></div>
-            </div>
-          </div>
+    <mat-expansion-panel *ngIf="selectionsExist" #example>
+        <mat-expansion-panel-header>
+            <mat-panel-title>
+                SEE MORE
+            </mat-panel-title>
+            <mat-icon *ngIf="!example.expanded">add</mat-icon>
+            <mat-icon *ngIf="example.expanded">remove</mat-icon>
+        </mat-expansion-panel-header>
+        <div class="flex flex-wrap variant-features-options-container">
+            <ng-container *ngFor="let item of inputSelections | keyvalue">
+                <div class="variant-feature-content relative w-50" *ngIf="item.value.select_type === 'multi_select'">
+                    <div class="variant-feature-options">
+                        <div class="feature-title pointer flex flex-wrap justify-between">
+                            <h6 class="selection-title">
+                                Select {{ item.key == 'color_group' ? 'Color' : (item.key | titlecase) }}
+                            </h6>
+                            <span class="arrow-icon">
+                                <mat-icon>arrow_drop_down</mat-icon>
+                            </span>
+                        </div>
+                        <div class="variant-feature-checkbox">
+                            <div *ngFor="let option of item.value.options">
+                                <mat-checkbox (change)="onCheckChange($event, option, item.key)" [checked]="
+                                selections[item.key] &&
+                                selections[item.key].includes(option)
+                                " [disabled]="!selectionOptions[option]" class="options">
+                                    {{ option }}
+                                </mat-checkbox>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </ng-container>
         </div>
-      </div>
-    </div>
-  </mat-expansion-panel>
+        <div class="variant-features-options-container">
+            <div class="variant-feature-content" *ngFor="let item of inputSelections | keyvalue">
+                <div class="variant-feature-options" *ngIf="item.value.select_type === 'single_select'">
+                    <h6 class="selection-title">
+                        Select {{ item.key.replace('_', ' ') | titlecase }}
+                    </h6>
+                    <div class="flex flex-wrap">
+                        <div *ngFor="let option of item.value.options" class="w-33 pa1" [ngClass]="{
+                        'w-50': item.value.options.length % 2 === 0}">
+                            <div class="variant-feature options pointer  {{
+                            selectionOptions[option] ? '' : 'disabledTab'
+                            }}" (click)="selectedOption(option, item.key)" [class.active]="
+                            selections[item.key] && selections[item.key] === option
+                            " [innerHTML]="option"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </mat-expansion-panel>
 </ng-container>
 
 <ng-template #isBrowser>
-  <div class="variations-container pr2">
-    <div class="flex items-center justify-between">
-      <span class="title">Options</span>
-      <span
-        class="clear-btn"
-        (click)="clearVariations()"
-        *ngIf="selectedSwatch.swatch_image && hasSelection"
-        >Clear</span
-      >
-      <span *ngIf="hasSelection === false" class="error-msg">
-        Please make a selection
-      </span>
-    </div>
-    <div class="variation-options" *ngIf="isSwatchExist">
-      <div
-        *ngFor="let variation of swatches; let i = index"
-        class="variation-img-box {{
-          !variation.hasOwnProperty('enabled') || variation.enabled
-            ? ''
-            : 'disabledImage'
-        }}"
-        [class.active]="variation.swatch_image === selectedSwatch.swatch_image"
-      >
-        <a
-          class="{{
+    <div class="variations-container pr2">
+        <div class="flex items-center justify-between">
+            <span class="title">Options</span>
+            <span class="clear-btn" (click)="clearVariations()" *ngIf="selectedSwatch.swatch_image || selectedFlag">Clear</span>
+            <span *ngIf="hasSelection === false && (!selectedSwatch.swatch_image || beforeSelection === false)" class="error-msg">
+                Please make a selection
+            </span>
+        </div>
+        <div class="variation-options" *ngIf="isSwatchExist">
+            <div *ngFor="let variation of swatches; let i = index" class="variation-img-box {{
             !variation.hasOwnProperty('enabled') || variation.enabled
-              ? ''
-              : 'disabledTab'
-          }}"
-        >
-          <span data-title="{{ variation.name }}">
-            <img
-              [src]="variation.swatch_image"
-              [alt]="variation.name"
-              class="variation-img"
-              (click)="selectedVariation(variation, i)"
-            />
-          </span>
-        </a>
-      </div>
-      <div *ngIf="swatches.length === 0">
-        No product available, please change/clear options
-      </div>
-    </div>
-    <div class="flex flex-wrap variant-features-options-container">
-      <ng-container *ngFor="let item of inputSelections | keyvalue">
-        <div
-          *ngIf="item.value.select_type === 'multi_select'"
-          class="variant-feature-content relative w-50"
-        >
-          <div class="variant-feature-options">
-            <div class="feature-title pointer flex flex-wrap justify-between">
-              <h6 class="selection-title">
-                Select
-                {{
-                  item.key == 'color_group' ? 'Color' : (item.key | titlecase)
-                }}
-              </h6>
-              <span class="arrow-icon"
-                ><mat-icon>arrow_drop_down</mat-icon></span
-              >
+                ? ''
+                : 'disabledImage'
+            }}" [class.active]="variation.swatch_image === selectedSwatch.swatch_image">
+                <a class="{{
+                    !variation.hasOwnProperty('enabled') || variation.enabled
+                    ? ''
+                    : 'disabledTab'
+                }}">
+                    <span data-title="{{ variation.name }}">
+                        <img [src]="variation.swatch_image" [alt]="variation.name" class="variation-img"
+                            (click)="selectedVariation(variation, i)" />
+                    </span>
+                </a>
             </div>
-            <div class="variant-feature-checkbox">
-              <div *ngFor="let option of item.value.options">
-                <mat-checkbox
-                  (change)="onCheckChange($event, option, item.key)"
-                  [checked]="
-                    selections[item.key] &&
-                    selections[item.key].includes(option)
-                  "
-                  [disabled]="!selectionOptions[option]"
-                  class="options"
-                >
-                  {{ option }}
-                </mat-checkbox>
-              </div>
+            <div *ngIf="swatches.length === 0">
+                No product available, please change/clear options
             </div>
-          </div>
         </div>
-      </ng-container>
-    </div>
-    <div class="variant-features-options-container">
-      <div
-        class="variant-feature-content"
-        *ngFor="let item of inputSelections | keyvalue"
-      >
-        <div
-          class="variant-feature-options"
-          *ngIf="item.value.select_type === 'single_select'"
-        >
-          <h6 class="selection-title">
-            Select {{ item.key.replace('_', ' ') | titlecase }}
-          </h6>
-          <div class="flex flex-wrap">
-            <div
-              *ngFor="let option of item.value.options"
-              class="w-33 pa1"
-              [ngClass]="{
-                'w-50': item.value.options.length % 2 === 0
-              }"
-            >
-              <div
-                class="variant-feature options pointer {{
-                  selectionOptions[option] ? '' : 'disabledTab'
-                }}"
-                (click)="selectedOption(option, item.key)"
-                [class.active]="
-                  selections[item.key] && selections[item.key] === option
-                "
-                [innerHTML]="option"
-              ></div>
-            </div>
-          </div>
+        <div class="flex flex-wrap variant-features-options-container">
+            <ng-container *ngFor="let item of inputSelections | keyvalue">
+                <div *ngIf="item.value.select_type === 'multi_select'" class="variant-feature-content relative w-50">
+                    <div class="variant-feature-options">
+                        <div class="feature-title pointer flex flex-wrap justify-between">
+                            <h6 class="selection-title">
+                                Select {{ item.key == 'color_group' ? 'Color' : (item.key | titlecase) }}
+                            </h6>
+                            <span class="arrow-icon">
+                                <mat-icon>arrow_drop_down</mat-icon>
+                            </span>
+                        </div>
+                        <div class="variant-feature-checkbox">
+                            <div *ngFor="let option of item.value.options">
+                                <mat-checkbox (change)="onCheckChange($event, option, item.key)" [checked]="
+                                        selections[item.key] &&
+                                        selections[item.key].includes(option)" [disabled]="!selectionOptions[option]" class="options">
+                                    {{ option }}
+                                </mat-checkbox>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </ng-container>
         </div>
-      </div>
+        <div class="variant-features-options-container">
+            <div class="variant-feature-content" *ngFor="let item of inputSelections | keyvalue">
+                <div class="variant-feature-options" *ngIf="item.value.select_type === 'single_select'">
+                    <h6 class="selection-title">
+                        Select {{ item.key.replace('_', ' ') | titlecase }}
+                    </h6>
+                    <div class="flex flex-wrap">
+                        <div *ngFor="let option of item.value.options" class="w-33 pa1" [ngClass]="{'w-50': item.value.options.length % 2 === 0}">
+                            <div class="variant-feature options pointer {{ selectionOptions[option] ? '' : 'disabledTab'}}" (click)="selectedOption(option, item.key)" [class.active]="
+                                selections[item.key] && selections[item.key] === option" [innerHTML]="option">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
-  </div>
 </ng-template>

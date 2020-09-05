@@ -76,6 +76,14 @@ export class ProductsComponent implements OnInit {
   eventSubscription: Subscription;
   invalidLinkImageSrc = 'assets/image/invalid_link.png';
   invalidLink: boolean;
+  brandData: any = {
+    cover_image: "",
+    description: "",
+    logo: "",
+    name: "",
+    url: "",
+    value: ""
+  };
   constructor(
     public dialog: MatDialog,
     private productElement: ElementRef,
@@ -88,7 +96,7 @@ export class ProductsComponent implements OnInit {
     public cacheService: CacheService,
     private eventEmitterService: EventEmitterService,
     private seoService: SeoService
-  ) {}
+  ) { }
 
   ngOnInit(): void {
     this.eventSubscription = this.eventEmitterService.userChangeEvent
@@ -133,11 +141,19 @@ export class ProductsComponent implements OnInit {
     this.activeRoute.queryParams.subscribe((params) => {
       this.filters = params.filters || '';
       this.pageNo = parseInt(params.pageNo, 10) || 0;
-      this.sortType = params.sortType || '';
+      this.sortType = params.sortType || 'recommended';
     });
   }
 
   checkPage() {
+    // get brandData when page is loading
+    // const checkBrand = this.filters.indexOf('brand:');
+    // if (checkBrand > -1) {
+    //   const endBrand = this.filters.indexOf(';');
+    //   const brandName = this.filters.substr(6, endBrand - 6);
+    //   this.getBrandData(brandName);
+    // }
+
     if (this.pageNo > 0) {
       this.isProductFetching = true;
       this.productsSubscription = this.apiService
@@ -151,6 +167,7 @@ export class ProductsComponent implements OnInit {
         .subscribe((response) => {
           let allProducts = [];
           // tslint:disable-next-line: prefer-for-of
+          console.log('check for length error: ', response.length)
           for (let i = 0; i < response.length; i++) {
             allProducts = [...allProducts, ...response[i].products];
           }
@@ -163,6 +180,12 @@ export class ProductsComponent implements OnInit {
           this.productFilters = response[0].filterData;
           this.sortTypeList = response[0].sortType;
           this.isProductFetching = false;
+
+          // this.productFilters.brand.map((item: any) => {
+          //   if(item.checked === true) {
+          //     this.getBrandData(item.value);
+          //   }
+          // })
           if (this.cacheService.data.useCache) {
             this.scrollToProductSKU = this.cacheService.data.productSku;
             this.cacheService.data.useCache = false;
@@ -178,6 +201,15 @@ export class ProductsComponent implements OnInit {
     }
 
     // Code for cached product sku
+  }
+
+  getProductwithBrandName(brandValue) {
+    console.log('this is brandValue: ', brandValue);
+    // let filterValue = '';
+    // if (brandValue !== '') {
+    //   filterValue = 'brand:' + brandValue + ';';
+    // };
+    // this.router.navigateByUrl(`/products/brand?undefined=true&limit=24&filters=${filterValue}&sort_type=&pageno=1`)
   }
 
   loadProducts(): void {
@@ -224,6 +256,32 @@ export class ProductsComponent implements OnInit {
     this.filters = e;
     this.loadProducts();
   }
+
+  onSetBrand(brandName: string) {
+    if (brandName === '') {
+      this.filters = '';
+    } else {
+      const checkBrand = this.filters.indexOf('brand:');
+      if (checkBrand < 0) {
+        this.filters += 'brand:' + brandName + ';'
+      } else {
+        const endBrand = this.filters.indexOf(';');
+        this.filters = 'brand:' + brandName + ';' + this.filters.substr(endBrand + 1);
+      }
+      // this.getBrandData(brandName);
+    }
+    this.loadProducts();
+  }
+
+  // getBrandData(brandName: string) {
+  //   this.apiService.getBrandData(brandName).subscribe((brandData: any) => {
+  //     console.log('check for length error: ', brandData.length)
+
+  //     if (brandData.length !== 0) {
+  //       this.brandData = brandData[0];
+  //     }
+  //   })
+  // }
 
   onSetSortType(e): void {
     this.sortType = e;

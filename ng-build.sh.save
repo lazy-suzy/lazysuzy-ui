@@ -1,0 +1,20 @@
+#!/bin/bash
+sudo unlink dist/lazysuzy-ui/images
+sudo unlink dist/lazysuzy-ui/cb2
+sudo unlink dist/lazysuzy-ui/nw
+sudo unlink dist/lazysuzy-ui/cnb
+sudo unlink dist/lazysuzy-ui/Pier-1
+sudo unlink dist/lazysuzy-ui/westelm
+sudo unlink sadsdfd
+
+sudo ng build --prod
+
+sudo ln -s /var/www/html/lazysuzy-code/public/images /var/www/html/lazysuzy-ui/dist/lazysuzy-ui
+sudo ln -s /var/www/html/cb2 /var/www/html/lazysuzy-ui/dist/lazysuzy-ui
+sudo ln -s /var/www/html/nw /var/www/html/lazysuzy-ui/dist/lazysuzy-ui
+sudo ln -s /var/www/html/cnb /var/www/html/lazysuzy-ui/dist/lazysuzy-ui
+sudo ln -s /var/www/html/Pier-1 /var/www/html/lazysuzy-ui/dist/lazysuzy-ui
+sudo ln -s /var/www/html/westelm /var/www/html/lazysuzy-ui/dist/lazysuzy-ui
+
+
+

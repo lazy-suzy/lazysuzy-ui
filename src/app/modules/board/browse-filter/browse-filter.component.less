@@ -5,17 +5,28 @@
   border-right: 5px solid transparent;
 
   border-top: 5px solid#9c9898;
+
   &.active {
     border-top: 5px solid #b76e79;
   }
 }
+
 .filter-container {
   position: relative;
-  flex-wrap: wrap;
+  // flex-wrap: wrap;
+  .filter-name-container {
+      height: 61px;
+      max-width: 305px;
+      width: 100%;
+      overflow-y: hidden;
+      // overflow-x: scroll;
+  }
+
   .filter {
     .filter-name {
       text-transform: capitalize;
       color: #9c9898;
+
       &.active {
         color: #b76e79;
       }
@@ -33,6 +44,7 @@
     overflow: auto;
     left: 0;
     right: 0;
+
     &.open {
       display: block;
     }
@@ -47,12 +59,15 @@
   opacity: 0.4;
   pointer-events: none;
 }
+
 ::ng-deep .ng5-slider {
+
   .ng5-slider-selection,
   .ng5-slider-pointer {
     background-color: #b76e79 !important;
   }
 }
+
 ::ng-deep .mat-checkbox-indeterminate.mat-accent .mat-checkbox-background,
 ::ng-deep .mat-checkbox-checked.mat-accent .mat-checkbox-background {
   background-color: #b76e79 !important;

@@ -13,13 +13,14 @@ import {
   EventEmitterService
 } from './../../../shared/services';
 import { SCROLL_ICON_SHOW_DURATION } from './../../../shared/constants';
-import { Router, ActivatedRoute } from '@angular/router';
-import { Observable, Subscription } from 'rxjs';
+import { Router, ActivatedRoute, NavigationEnd } from '@angular/router';
+import { Observable, Subscription, Subscribable } from 'rxjs';
 import {
   BreakpointState,
   Breakpoints,
   BreakpointObserver
 } from '@angular/cdk/layout';
+import { Title } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-all-products',
@@ -28,6 +29,7 @@ import {
 })
 export class AllProductsComponent implements OnInit {
   productsSubscription: Subscription;
+  isBrandPageSubscription: Subscription;
   routeSubscription: Subscription;
   products: IProductPayload[];
   productFilters: IFilterData;
@@ -56,6 +58,18 @@ export class AllProductsComponent implements OnInit {
   total = 24;
   scrollToProductSKU = '';
   eventSubscription: Subscription;
+  brandData: any = {
+    cover_image: "",
+    description: "",
+    logo: "",
+    name: "",
+    url: "",
+    value: ""
+  };
+  selectedBrandValue: string = '';
+  isBrandPage: boolean = false;
+  isChangingBrandList: boolean = false;
+
   constructor(
     private apiService: ApiService,
     private router: Router,
@@ -63,8 +77,20 @@ export class AllProductsComponent implements OnInit {
     private activeRoute: ActivatedRoute,
     private breakpointObserver: BreakpointObserver,
     public cacheService: CacheService,
-    private eventEmitterService: EventEmitterService
-  ) {}
+    private eventEmitterService: EventEmitterService,
+    private title: Title
+  ) {
+    this.isBrandPageSubscription = this.router.events.subscribe(event => {
+      if (event instanceof NavigationEnd) {
+        const url = event.urlAfterRedirects;
+        const checkBrandPage = url.indexOf('/products/brand');
+        if(checkBrandPage > -1) {
+          this.isBrandPage = true;
+        }
+        // console.log('this is isBrandPage: ', this.isBrandPage);
+      }
+    });
+  }
 
   ngOnInit(): void {
     this.eventSubscription = this.eventEmitterService.userChangeEvent
@@ -84,12 +110,28 @@ export class AllProductsComponent implements OnInit {
     this.routeSubscription.unsubscribe();
     this.bpSubscription.unsubscribe();
     this.eventSubscription.unsubscribe();
+    this.isBrandPageSubscription.unsubscribe();
   }
 
   getParamsFromQuery(): void {
     this.routeSubscription = this.activeRoute.queryParams.subscribe(
       (params) => {
         this.filters = params.filters || '';
+        // console.log('this is filter in getparams: ', this.filters);
+        const checkBrand = this.filters.indexOf('brand:');
+        if (checkBrand < 0) {
+          this.selectedBrandValue = ''
+        } else {
+          const restString = this.filters.slice(checkBrand + 6);
+          const endBrand = restString.indexOf(';');
+          this.selectedBrandValue = restString.substr(0, endBrand);
+          this.getBrandData(this.selectedBrandValue);
+        }
+        if(this.isBrandPage === true) {
+          this.eventEmitterService.isBrandSubject.next(this.selectedBrandValue);
+        }
+        // console.log('this is selectedBrandValue: ', this.selectedBrandValue);
+
         // tslint:disable-next-line: radix
         this.pageNo = parseInt(params.pageNo) || 0;
         this.sortType = params.sortType || '';
@@ -101,7 +143,9 @@ export class AllProductsComponent implements OnInit {
         this.checkPage();
       }
     );
+    this.setTitle(this.brandData.name);
   }
+
   checkPage() {
     if (this.pageNo > 0) {
       this.isProductFetching = true;
@@ -148,12 +192,14 @@ export class AllProductsComponent implements OnInit {
     this.productsSubscription = this.apiService
       .getAllProducts(this.trend, this.total, this.filters, this.sortType)
       .subscribe((payload: IProductsPayload) => {
+        console.log('this is load Products: ', payload)
         this.products = payload.products;
         this.productFilters = payload.filterData;
         this.sortTypeList = payload.sortType;
         this.totalCount = payload.total;
         this.updateQueryString();
         this.isProductFetching = false;
+        this.isChangingBrandList = false;
       });
   }
 
@@ -171,7 +217,50 @@ export class AllProductsComponent implements OnInit {
     );
   }
 
+  getProductwithBrandName(brandValue: string) {
+    if(this.selectedBrandValue !== brandValue) {
+      this.isChangingBrandList = true;
+      this.selectedBrandValue = brandValue;
+      if (brandValue !== '') {
+        this.filters = 'brand:' + brandValue + ';';
+      } else {
+        this.filters = '';
+      }
+      this.getBrandData(brandValue);
+      // this.loadProducts();
+    }
+  }
+
+  getBrandData(brandValue: string) {
+    this.apiService.getBrandData(brandValue).subscribe((brandData: any) => {
+      if (brandData.length !== 0) {
+        this.brandData = brandData[0];
+        console.log('this is brandData: ', this.brandData);
+        if(brandValue !== '') {
+          this.setTitle(this.brandData.name);
+        } else {
+          this.setTitle('')
+        }
+      }
+    })
+  }
+
+  setTitle(title: string = '') {
+    let tabTitle = ''
+    if(title === '') {
+      tabTitle = 'Designer Home Furniture | LazySuzy';
+    } else {
+      tabTitle = title;
+    }
+    this.title.setTitle(tabTitle);
+  }
+
+  ngOnDestroy(): void {
+    this.setTitle('Lazysuzy');
+  }
+
   onSetFilters(e): void {
+    console.log('this is filter from filterbar: ', e)
     this.filters = e;
     this.loadProducts();
   }
