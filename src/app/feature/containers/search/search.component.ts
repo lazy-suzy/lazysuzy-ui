@@ -218,6 +218,7 @@ export class SearchComponent implements OnInit {
         match: {
           name:{
             query:this.query,
+            boost: allKeys.length+1
           }
         },
       })
