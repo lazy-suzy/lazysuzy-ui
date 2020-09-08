@@ -215,7 +215,7 @@ export class SearchComponent implements OnInit {
       };
     });
     this.shouldQueryParams.push({
-        match: {
+        match_phrase: {
           name:{
             query:this.query,
             boost: allKeys.length+1
