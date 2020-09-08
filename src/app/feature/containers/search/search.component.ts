@@ -58,8 +58,8 @@ export class SearchComponent implements OnInit {
     this.query = this.route.snapshot.queryParamMap.get("query");
     this.getSearchKeywordsAndBrands();
     this.route.queryParams.pipe(skip(1)).subscribe((params) => {
-      console.log(this.query);
       this.query = params.query || "";
+      console.log(this.query);
       this.getNewQueryResult();
     });
 
@@ -141,7 +141,6 @@ export class SearchComponent implements OnInit {
     //  console.log(spares);
     this.brands.forEach((value) => {
       const brandName = value["name"].toLowerCase().replace(/\s+/g, "");
-      console.log(brandName);
       let matcher = new RegExp(brandName);
       if (matcher.test(spares)) {
         brand.push(value);
@@ -248,6 +247,7 @@ export class SearchComponent implements OnInit {
         bool: {
           must: this.mustQueryParams,
           should: this.shouldQueryParams,
+          minimum_should_match: 1,
         },
       },
     });
