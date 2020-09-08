@@ -160,15 +160,15 @@ export class SearchComponent implements OnInit {
         });
       });
     }
-    if (objectParam.length > 0) {
-      objectParam.forEach((value) => {
-        this.mustQueryParams.push({
-          term: {
-            product_name: value,
-          },
-        });
-      });
-    }
+    // if (objectParam.length > 0) {
+    //   objectParam.forEach((value) => {
+    //     this.mustQueryParams.push({
+    //       term: {
+    //         product_name: value,
+    //       },
+    //     });
+    //   });
+    // }
     return spareValues.join(" ");
   }
 
@@ -187,9 +187,10 @@ export class SearchComponent implements OnInit {
         return false;
       })
       .forEach((filteredValue) => {
-        shouldKeys = this.searchKeywords[filteredValue].filter(
-          (value) => value != filteredValue
-        );
+        // shouldKeys = this.searchKeywords[filteredValue].filter(
+        //   (value) => value != filteredValue
+        // );
+        shouldKeys = this.searchKeywords[filteredValue];
       });
     let allKeys = [];
     if (spareValue != "") {
@@ -198,13 +199,23 @@ export class SearchComponent implements OnInit {
     } else {
       allKeys = [...shouldKeys];
     }
-    this.shouldQueryParams = allKeys.map((value) => {
+    this.shouldQueryParams = allKeys.map((value,index) => {
       return {
-        term: {
-          product_name: value,
+        match: {
+          name:{
+            query:value,
+            boost:allKeys.length-index
+          }
         },
       };
     });
+    this.shouldQueryParams.push({
+        match: {
+          name:{
+            query:this.query,
+          }
+        },
+      })
     //this.shouldQueryParams = shouldKeys.filter(value=>)
     //  if (this.searchKeywords.hasOwnProperty(params)) {
     //    this.shouldQueryParams = this.searchKeywords[params]
