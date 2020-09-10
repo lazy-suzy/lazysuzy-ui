@@ -111,17 +111,17 @@
         </div>
         <div class="row" style="margin-top: 15px;">
             <div class="col-12">
-                <h4>New Arrivals Group</h4>
+                <h4>New Arrivals Group </h4>
             </div>
-            <mat-radio-group value="one" aria-label="Select an option">
+            <mat-radio-group [(ngModel)]="product.new_group" value="one" aria-label="Select an option">
                 <div class="col-12">
-                    <mat-radio-button color="warn" value="one">One</mat-radio-button>
+                    <mat-radio-button color="warn" [value]="1">One</mat-radio-button>
                 </div>
                 <div class="col-12">
-                    <mat-radio-button color="warn" value="two">Two</mat-radio-button>
+                    <mat-radio-button color="warn" [value]="2">Two</mat-radio-button>
                 </div>
                 <div class="col-12">
-                    <mat-radio-button color="warn" value="three">Three</mat-radio-button>
+                    <mat-radio-button color="warn" [value]="3">Three</mat-radio-button>
                 </div>
             </mat-radio-group>
         </div>
@@ -153,8 +153,5 @@
                 <span>Diameter: {{dimension.diameter}}</span><br />
             </div>
         </div>
-
-
-
     </div>
 </div>

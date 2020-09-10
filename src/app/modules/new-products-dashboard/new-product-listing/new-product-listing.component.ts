@@ -33,7 +33,7 @@ export class NewProductListingComponent implements OnInit {
   loadProduct(page: number = 1): void {
     this.isProductFetching = true;
     this.httpService
-      .get(`${env.ADMIN_API_BASE_HREF}staging-products?page=${page}`)
+      .get(`${env.ADMIN_API_BASE_HREF}new-products?page=${page}`)
       .pipe(
         take(1) // take only one result and then unsubscribe
       )
@@ -71,7 +71,7 @@ export class NewProductListingComponent implements OnInit {
   }
   submit(): void {
     const submitProducts = this.products.data.filter((product) => {
-      if (product.status === "accepted" || product.status === "rejected") {
+      if (product.status === "approved" || product.status === "rejected") {
         return true;
       }
       return false;
@@ -79,7 +79,7 @@ export class NewProductListingComponent implements OnInit {
     const formData = { products: submitProducts };
     this.httpService
       .post(
-        `${env.ADMIN_API_BASE_HREF}staging-products/update-multiple`,
+        `${env.ADMIN_API_BASE_HREF}new-products/update-multiple`,
         formData
       )
       .pipe(
@@ -88,6 +88,7 @@ export class NewProductListingComponent implements OnInit {
       )
       .subscribe(({ status }) => {
         if (status=='success') {
+          this.products=[];
           this.loadProduct();
         }
       });
