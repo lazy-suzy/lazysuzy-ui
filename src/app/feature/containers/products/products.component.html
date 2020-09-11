@@ -1,11 +1,8 @@
 <div class="flex flex-column mh3-ns" *ngIf="products">
   <ng-container *ngIf="isHandset">
-    <div
-      class="{{
+    <div class="{{
         showBar === true ? 'mobile-filter-panel fixed' : 'mobile-filter-panel'
-      }}"
-      (scroll)="(checkScroll)"
-    >
+      }}" (scroll)="(checkScroll)">
       <span class="icon-container" (click)="toggleMobileFilter()">
         <mat-icon aria-hidden="false" aria-label="Filter">
           filter_list
@@ -24,101 +21,57 @@
         </mat-icon>
         <span class="icon-title">Sort</span>
       </span>
-      <app-product-filter-mobile
-        *ngIf="showMobileFilter"
-        (setMobileToggle)="onSetMobileToggle($event)"
-        [productFilters]="productFilters"
-        [isProductFetching]="isProductFetching"
-        [totalCount]="totalCount"
-        (setFilters)="onSetFilters($event)"
-      >
+      <app-product-filter-mobile *ngIf="showMobileFilter" (setMobileToggle)="onSetMobileToggle($event)"
+        [productFilters]="productFilters" [isProductFetching]="isProductFetching" [totalCount]="totalCount"
+        (setFilters)="onSetFilters($event)">
       </app-product-filter-mobile>
-      <app-product-sort-mobile
-        *ngIf="showMobileSort"
-        (setSortToggle)="onSetSortToggle($event)"
-        [sortTypeList]="sortTypeList"
-        (setSortType)="onSetSortType($event)"
-      >
+      <app-product-sort-mobile *ngIf="showMobileSort" (setSortToggle)="onSetSortToggle($event)"
+        [sortTypeList]="sortTypeList" (setSortType)="onSetSortType($event)">
       </app-product-sort-mobile>
     </div>
   </ng-container>
 
-  <div
-    class="flex flex-wrap"
-    [ngClass]="{'products-container': !isHandset}"
-    infiniteScroll
-    [infiniteScrollDistance]="2"
-    [infiniteScrollThrottle]="50"
-    (scrolled)="onScroll()"
-  >
+  <div class="flex flex-wrap" [ngClass]="{'products-container': !isHandset}" infiniteScroll [infiniteScrollDistance]="2"
+    [infiniteScrollThrottle]="50" (scrolled)="onScroll()">
     <ng-container *ngIf="!isHandset">
       <div class="brandlist-container brandlist-left">
         <app-brand-list (setBrand)="getProductwithBrandName($event)"></app-brand-list>
       </div>
     </ng-container>
-    
+
     <ng-container *ngIf="isHandset">
-      <app-product-mobile
-        *ngFor="let product of products"
-        [product]="product"
-        [productsInRow]="productsInRow"
+      <app-product-mobile *ngFor="let product of products" [product]="product" [productsInRow]="productsInRow"
         [ngClass]="{
           'w-50': productsInRow === 2,
           'w-33': productsInRow === 3,
           'w-100': productsInRow === 1
-        }"
-        class="w-50"
-      ></app-product-mobile>
+        }" class="w-50"></app-product-mobile>
     </ng-container>
 
     <ng-container *ngIf="!isHandset">
       <ng-container *ngIf="!isHandset">
         <h4 class="category-title">{{ categoryTitle }}</h4>
         <div class="filter-panel flex justify-around items-center w-100">
-          <app-product-filters
-            [productFilters]="productFilters"
-            (setFilters)="onSetFilters($event)"
-            class="flex justify-start w-75"
-          ></app-product-filters>
+          <app-product-filters [productFilters]="productFilters" (setFilters)="onSetFilters($event)"
+            class="flex justify-start w-75"></app-product-filters>
           <div style="font-size: 14px; min-width: 110px">{{ totalCount }} Results</div>
-          <app-sort-type
-            [sortTypeList]="sortTypeList"
-            [sortType]="sortType"
-            (setSortType)="onSetSortType($event)"
-          >
+          <app-sort-type [sortTypeList]="sortTypeList" [sortType]="sortType" (setSortType)="onSetSortType($event)">
           </app-sort-type>
         </div>
       </ng-container>
-    
-      <app-product
-        *ngFor="let product of products"
-        [product]="product"
-        class="w-25-ns"
-      ></app-product>
+
+      <app-product *ngFor="let product of products" [product]="product" class="w-33-ns" style="margin-bottom: 15px;">
+      </app-product>
     </ng-container>
   </div>
-  <app-subscribe
-    [category]="emailTitle"
-    [homePage]="false"
-    *ngIf="!isProductFetching"
-    class="tc"
-  >
+  <app-subscribe [category]="emailTitle" [homePage]="false" *ngIf="!isProductFetching" class="tc">
   </app-subscribe>
 </div>
 <div class="tc" *ngIf="invalidLink">
   <img [src]="invalidLinkImageSrc" class="invalid-url-image" />
 </div>
 <img *ngIf="isProductFetching" [src]="spinner" class="loader" />
-<button
-  class="scroll-to-btn f6 dib white bg-near-black"
-  *ngIf="isIconShow"
-  (click)="gotoTop()"
->
-  <mat-icon
-    class="account-icon pointer"
-    aria-hidden="false"
-    aria-label="Account"
-  >
-    arrow_upward</mat-icon
-  >
+<button class="scroll-to-btn f6 dib white bg-near-black" *ngIf="isIconShow" (click)="gotoTop()">
+  <mat-icon class="account-icon pointer" aria-hidden="false" aria-label="Account">
+    arrow_upward</mat-icon>
 </button>

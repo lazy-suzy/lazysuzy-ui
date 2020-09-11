@@ -1,29 +1,29 @@
-import { ProductDetailsComponent } from './../product-details/product-details.component';
-import { IProductPayload } from './../../../shared/models';
-import { Component, OnInit, Input } from '@angular/core';
-import { MatDialog } from '@angular/material/dialog';
-import { Observable, Subscription } from 'rxjs';
+import { ProductDetailsComponent } from "./../product-details/product-details.component";
+import { IProductPayload } from "./../../../shared/models";
+import { Component, OnInit, Input } from "@angular/core";
+import { MatDialog } from "@angular/material/dialog";
+import { Observable, Subscription } from "rxjs";
 import {
   BreakpointState,
   Breakpoints,
-  BreakpointObserver
-} from '@angular/cdk/layout';
-import { Location } from '@angular/common';
-import { Router, ActivatedRoute } from '@angular/router';
+  BreakpointObserver,
+} from "@angular/cdk/layout";
+import { Location } from "@angular/common";
+import { Router, ActivatedRoute } from "@angular/router";
 import {
   ApiService,
   UtilsService,
-  MatDialogUtilsService
-} from 'src/app/shared/services';
+  MatDialogUtilsService,
+} from "src/app/shared/services";
 @Component({
-  selector: 'app-product',
-  templateUrl: './product.component.html',
-  styleUrls: ['./product.component.less']
+  selector: "app-product",
+  templateUrl: "./product.component.html",
+  styleUrls: ["./product.component.less"],
 })
 export class ProductComponent implements OnInit {
   @Input() product: IProductPayload;
   starIcons: string[] = new Array();
-  variationImage = '';
+  variationImage = "";
   isVariationImageVisible = false;
   modalSku: any;
   bpObserver: Observable<BreakpointState> = this.breakpointObserver.observe(
@@ -33,6 +33,11 @@ export class ProductComponent implements OnInit {
   bpSubscription: Subscription;
   numbOfSwatchItems: number;
   activeRouteSubscription: Subscription;
+  min_price;
+  max_price;
+  was_min_price;
+  was_max_price;
+
   constructor(
     public dialog: MatDialog,
     private breakpointObserver: BreakpointObserver,
@@ -46,6 +51,7 @@ export class ProductComponent implements OnInit {
 
   ngOnInit(): void {
     this.setRating();
+    this.setPrices();
     this.bpSubscription = this.breakpointObserver
       .observe([Breakpoints.Small])
       .subscribe((state: BreakpointState) => {
@@ -67,15 +73,39 @@ export class ProductComponent implements OnInit {
   setRating(): void {
     let starCount = Math.round(this.product.rating * 2) / 2;
     while (starCount > 0.5) {
-      this.starIcons.push('star');
+      this.starIcons.push("star");
       starCount -= 1;
     }
     if (starCount && this.starIcons.length < 5) {
-      this.starIcons.push('star_half');
+      this.starIcons.push("star_half");
     } else if (this.starIcons.length < 5) {
       while (this.starIcons.length < 5) {
-        this.starIcons.push('star_outline');
+        this.starIcons.push("star_outline");
       }
+    }
+  }
+
+  setPrices(): void {
+    const prices = this.product.is_price.split("-");
+    const wasPrices = this.product.was_price.split("-");
+    this.setMinMaxPrice(prices);
+    this.setWasMinMaxPrice(wasPrices);
+  }
+  setMinMaxPrice(prices: string[]) {
+    if (prices.length == 1) {
+      this.min_price = prices[0];
+    } else {
+      this.min_price = prices[0];
+      this.max_price = prices[1];
+    }
+  }
+
+  setWasMinMaxPrice(prices: string[]) {
+    if (prices.length == 1) {
+      this.was_min_price = prices[0];
+    } else {
+      this.was_min_price = prices[0];
+      this.was_max_price = prices[1];
     }
   }
 
@@ -94,7 +124,7 @@ export class ProductComponent implements OnInit {
   }
 
   hideVariationImage(): void {
-    this.variationImage = '';
+    this.variationImage = "";
     this.isVariationImageVisible = false;
   }
 
