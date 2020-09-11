@@ -1,5 +1,5 @@
-<div class="ls-product-div">
-  <div class="ls-product" (click)="openDialog()">
+<div class="ls-product-div" (click)="openDialog()">
+  <div class="ls-product">
     <img class="{{ isVariationImageVisible ? 'prod-img' : 'prod-img show' }}" [src]="product.main_image"
       [alt]="product.name" />
     <img class="{{
@@ -46,9 +46,21 @@
     <ng-template #isOOS>
       <span class="{{
           (product.is_price !== product.was_price && 'cprice sale') || 'cprice'
-        }}">${{ product.is_price }}</span>
+        }}">
+        <ng-container *ngIf="!this.max_price;else bothPrices">
+${{ min_price | number:"1.2-2" }}
+        </ng-container>
+        <ng-template #bothPrices>
+          ${{ min_price | number:"1.2-2" }}-{{ max_price | number:"1.2-2" }}
+        </ng-template>
+         </span>
       <span *ngIf="product.is_price !== product.was_price" class="oldprice">
-        ${{ product.was_price }}
+         <ng-container *ngIf="!this.max_price;else bothWasPrices">
+           ${{ was_min_price | number:"1.2-2" }}
+         </ng-container>
+         <ng-template #bothWasPrices>
+           ${{ was_min_price | number:"1.2-2" }}-{{ was_max_price | number:"1.2-2" }}
+         </ng-template>
       </span>
     </ng-template>
   </div>
