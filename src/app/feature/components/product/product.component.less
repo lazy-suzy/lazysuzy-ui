@@ -5,7 +5,6 @@
 @font-family-sans-serif: 'Marcellus SC', sans-serif;
 @font-size-base: 0.9rem;
 @line-height-base: 1.6;
-
 // Colors
 @blue: #3490dc;
 @indigo: #6574cd;
@@ -48,6 +47,11 @@
 @listing-top-ctrl-height: 45px;
 @listing-top-ctrl-icon-height: 25px;
 
+.variant-color{
+  font-size: 12px;
+  color: @text-subtle;
+
+}
 .ls-product-div {
   padding-right: 10px;
   padding-left: 10px;
@@ -58,7 +62,7 @@
   @include make-col(1, 4);
 
   .prod-info {
-    margin-bottom: 5px;
+    margin-bottom: 1px;
   }
   .new-tag {
     display: inline-block;
@@ -70,7 +74,7 @@
   }
   .rating-container {
     height: 20px;
-    float: right;
+    float: left;
 
     .rating {
       height: 20px;
@@ -85,7 +89,7 @@
     }
 
     .total-ratings {
-      vertical-align: middle;
+      vertical-align: super;
       font-size: 12px;
     }
   }
@@ -94,7 +98,7 @@
     white-space: nowrap;
     text-overflow: ellipsis;
     width: 100%;
-    margin-bottom: 5px;
+    margin-bottom: 1px;
     overflow: hidden;
   }
   .prices {

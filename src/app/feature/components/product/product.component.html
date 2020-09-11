@@ -1,17 +1,10 @@
 <div class="ls-product-div">
   <div class="ls-product" (click)="openDialog()">
-    <img
-      class="{{ isVariationImageVisible ? 'prod-img' : 'prod-img show' }}"
-      [src]="product.main_image"
-      [alt]="product.name"
-    />
-    <img
-      class="{{
+    <img class="{{ isVariationImageVisible ? 'prod-img' : 'prod-img show' }}" [src]="product.main_image"
+      [alt]="product.name" />
+    <img class="{{
         isVariationImageVisible ? 'variation-img show' : 'variation-img'
-      }}"
-      [src]="variationImage || product.main_image"
-      [alt]="product.name"
-    />
+      }}" [src]="variationImage || product.main_image" [alt]="product.name" />
     <div *ngIf="product.wishlisted; else elseBlock">
       <div class="tile-icon wishlist-icon">
         <mat-icon (click)="wishlistProduct(product.sku, false, $event)">favorite
@@ -20,60 +13,52 @@
     </div>
     <ng-template #elseBlock>
       <div class="tile-icon wishlist-icon">
-        <mat-icon (click)="wishlistProduct(product.sku, true, $event)"
-          >favorite_border
+        <mat-icon (click)="wishlistProduct(product.sku, true, $event)">favorite_border
         </mat-icon>
       </div>
     </ng-template>
   </div>
-  <div *ngIf="product.color && product.color?.split(',').length>1" (click)=openDialog()>
-      <p> + {{product.color?.split(',').length-1}} colors </p>
+  <div (click)=openDialog()>
+    <span class="variant-color" *ngIf="product.color && product.color?.split(',').length>1;else emptySpace"> +{{product.color?.split(',').length-1}} colors
+    </span>
+    <ng-template #emptySpace>
+      <span>&nbsp;</span>
+    </ng-template>
   </div>
   <div class="prod-info">
     <span class="site">
       <span *ngIf="product.is_new" class="new-tag"><strong>NEW</strong></span>
       {{ product.site }}
     </span>
-    <div
-      *ngIf="product.reviews != null && product.reviews != 0"
-      class="rating-container"
-    >
-      <span class="total-ratings">{{ product.reviews }}</span>
-      <div class="rating">
-        <mat-icon *ngFor="let icon of starIcons" class="yellow">
-          {{ icon }}
-        </mat-icon>
-      </div>
-    </div>
   </div>
   <div class="name">{{ product.name }}</div>
   <div class="prices">
-    <div
-      *ngIf="product?.percent_discount > 0"
-      class="discount-percentage"
-      [ngClass]="[product?.percent_discount > 0 ? 'orange-bg' : 'yellow-bg']"
-    >
+    <div *ngIf="product?.percent_discount > 0" class="discount-percentage"
+      [ngClass]="[product?.percent_discount > 0 ? 'orange-bg' : 'yellow-bg']">
       {{ product?.percent_discount | number: '1.0-0' }}% off
     </div>
-    <ng-container
-      *ngIf="
+    <ng-container *ngIf="
         product.in_inventory && product.inventory_product_details.count > 0;
         else isOOS
-      "
-    >
+      ">
       <span class="cprice">${{ product.inventory_product_details.price }}</span>
     </ng-container>
     <ng-template #isOOS>
-      <span
-        class="{{
+      <span class="{{
           (product.is_price !== product.was_price && 'cprice sale') || 'cprice'
-        }}"
-        >${{ product.is_price }}</span
-      >
+        }}">${{ product.is_price }}</span>
       <span *ngIf="product.is_price !== product.was_price" class="oldprice">
         ${{ product.was_price }}
       </span>
     </ng-template>
+  </div>
+  <div *ngIf="product.reviews != null && product.reviews != 0" class="rating-container">
+    <div class="rating">
+      <mat-icon *ngFor="let icon of starIcons" class="yellow">
+        {{ icon }}
+      </mat-icon>
+      <span class="total-ratings">{{ product.reviews }}</span>
+    </div>
   </div>
   <!-- <div class="swatch-list">
     <div
