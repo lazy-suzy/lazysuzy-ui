@@ -9,16 +9,20 @@ export class NewProductRowComponent implements OnInit {
   @Input() product: any = {};
   @Input() index = 1;
   @Input() filters;
+  @Input() mapping_core;
+
   color_filter = [];
   material_filter = [];
   seating_filter = [];
   shape_filter = [];
   fabric_filter = [];
 
+  category_detail = [];
   constructor() {}
 
   ngOnInit() {
     this.setFilters(this.filters);
+    this.setCategoryDetail();
   }
 
   setFilters(filter: any) {
@@ -27,5 +31,14 @@ export class NewProductRowComponent implements OnInit {
     this.shape_filter = filter.Shape;
     this.seating_filter = filter.Seating;
     this.fabric_filter = filter.Fabric;
+  }
+  setCategoryDetail()
+  {
+  //  console.log(Object.keys(this.mapping_core))
+    this.product.ls_id.forEach(ls_id =>{
+      
+      this.category_detail =[];
+
+    })
   }
 }
