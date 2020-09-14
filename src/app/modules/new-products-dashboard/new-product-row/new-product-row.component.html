@@ -86,26 +86,27 @@
                             </mat-select>
                         </mat-form-field>
                     </div>
-                     <div class="col-6">
-                         <mat-form-field appearance="fill">
-                             <mat-label>Fabric</mat-label>
-                             <mat-select [(ngModel)]="product.fabric" multiple>
-                                 <mat-option [value]="key.filter_value" *ngFor="let key of fabric_filter">
-                                     {{key.filter_value}}
-                                 </mat-option>
-                             </mat-select>
-                         </mat-form-field>
-                     </div>
-                     <div class="col-6">
-                         <mat-form-field appearance="fill">
-                             <mat-label>LS_IDs</mat-label>
-                             <mat-select [(ngModel)]="product.ls_id" multiple>
-                                 <mat-option [value]="key.LS_ID" *ngFor="let key of mapping_core">
-                                     {{key.LS_ID}}
-                                 </mat-option>
-                             </mat-select>
-                         </mat-form-field>
-                     </div>
+                    <div class="col-6">
+                        <mat-form-field appearance="fill">
+                            <mat-label>Fabric</mat-label>
+                            <mat-select [(ngModel)]="product.fabric" multiple>
+                                <mat-option [value]="key.filter_value" *ngFor="let key of fabric_filter">
+                                    {{key.filter_value}}
+                                </mat-option>
+                            </mat-select>
+                        </mat-form-field>
+                    </div>
+                    <div class="col-6">
+                        <mat-form-field appearance="fill">
+                            <mat-label>LS_IDs</mat-label>
+                            <mat-select [(ngModel)]="product.ls_id" multiple 
+                            (selectionChange)="setCategoryDetail()">
+                                <mat-option [value]="key.LS_ID" *ngFor="let key of mapping_core">
+                                    {{key.LS_ID}}
+                                </mat-option>
+                            </mat-select>
+                        </mat-form-field>
+                    </div>
                 </div>
             </div>
             <div class="col-6">
@@ -129,6 +130,14 @@
                         </mat-form-field>
                     </div>
                 </div>
+                <div class="row">
+                    <ng-container *ngFor="let category of category_detail">
+                        <div class="col-12">
+                            <span>{{category}}</span>
+                        </div>
+                    </ng-container>
+                </div>
+
             </div>
         </div>
     </div>

@@ -33,12 +33,15 @@ export class NewProductRowComponent implements OnInit {
     this.fabric_filter = filter.Fabric;
   }
   setCategoryDetail()
-  {
+  { 
+    this.category_detail = [];
   //  console.log(Object.keys(this.mapping_core))
     this.product.ls_id.forEach(ls_id =>{
-      
-      this.category_detail =[];
-
+      const value = this.mapping_core.filter(mapper=>mapper.LS_ID==ls_id)
+      if(value.length){
+        const category_detail_string = `${value[0].dept_name_short}/${value[0].cat_name_short}/${value[0].cat_sub_name}`;
+        this.category_detail.push(category_detail_string);
+      }
     })
   }
 }
