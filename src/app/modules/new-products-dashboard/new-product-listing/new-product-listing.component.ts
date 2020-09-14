@@ -1,4 +1,4 @@
-import { Color } from './../../../shared/models/products-payload.interface';
+import { Color } from "./../../../shared/models/products-payload.interface";
 import { tap, take } from "rxjs/operators";
 import { ApiService } from "./../../../shared/services/api/api.service";
 import { Component, OnInit } from "@angular/core";
@@ -19,7 +19,8 @@ export class NewProductListingComponent implements OnInit {
   materials: any = [];
   spinner = "assets/image/spinner.gif";
   page = 1;
-  filters:any;
+  filters: any;
+  mapping_core: any;
   //For Infinite Scroll
   throttle = 300;
   scrollDistance = 1;
@@ -38,25 +39,23 @@ export class NewProductListingComponent implements OnInit {
       .pipe(
         take(1) // take only one result and then unsubscribe
       )
-      .subscribe(({ status, data, filters }) => {
+      .subscribe(({ status, data, extra }) => {
         if ((status = "success")) {
           let receivedProducts = [];
-          this.filters = filters;
+          if (!this.filters) {
+            this.filters = extra.filters;
+          }
+          if (!this.mapping_core) {
+            this.mapping_core = extra.mapping_core;
+            console.log(this.mapping_core.filter(value=> value.LS_ID==304));
+          }
           let receivedData = { ...data };
           if (this.products.data) {
             receivedProducts = [...this.products.data, ...data.data];
             receivedData.data = receivedProducts;
           }
           this.products = { ...receivedData };
-          this.products.data.map((product) => {
-            if (typeof product.color === "string") {
-              product.color = product.color.split(",");
-              //  product.shape = product.shape.split(",")
-              product.colors = product.color.filter(this.removeNullItems);
-              //  product.shapes = product.shape.filter(this.removeNullItems);
-            }
-            return product;
-          });
+          this.products.data.map(this.mapProductFilterValues);
           this.isProductFetching = false;
           this.isLoading = false;
         }
@@ -66,10 +65,30 @@ export class NewProductListingComponent implements OnInit {
     const page: number = this.products.current_page + 1;
     this.loadProduct(page);
   }
- 
-  removeNullItems(elm) {
-    return elm;
+
+  //convert values seperated by commas to arrays.
+  mapProductFilterValues(product) {
+    if (typeof product.color === "string") {
+      product.color = product.color.split(",").filter((elm) => elm);
+    }
+    if (typeof product.seating === "string") {
+      product.seating = product.seating.split(",").filter((elm) => elm);
+    }
+    if (typeof product.shape === "string") {
+      product.shape = product.shape.split(",").filter((elm) => elm);
+    }
+    if (typeof product.material === "string") {
+      product.material = product.material.split(",").filter((elm) => elm);
+    }
+    if (typeof product.fabric === "string") {
+      product.fabric = product.fabric.split(",").filter((elm) => elm);
+    }
+    if (typeof product.ls_id === "string") {
+      product.ls_id = product.ls_id.split(",").filter((elm) => elm).map(elm => +elm);
+    }
+    return product;
   }
+
   submit(): void {
     const submitProducts = this.products.data.filter((product) => {
       if (product.status === "approved" || product.status === "rejected") {
