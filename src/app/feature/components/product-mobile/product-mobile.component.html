@@ -5,7 +5,7 @@
       [src]="product.main_image"
       [alt]="product.name"
     />
-    <div *ngIf="product.variations.length">
+    <div *ngIf="product.variations?.length">
       <div class="tile-icon variation-icon">
         <mat-icon>filter_none </mat-icon>
       </div>
