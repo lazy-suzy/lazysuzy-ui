@@ -20,12 +20,12 @@
         </div>
         <div class="row">
             <div class="col-12">
-                 <div class="price-font">
-                     <span class="product-price mr3">${{ product.price }}</span>
-                     <span class="strike {{
+                <div class="price-font">
+                    <span class="product-price mr3">${{ product.price }}</span>
+                    <span class="strike {{
                   product.price !== product.was_price ? '' : 'dn'
                 }}">${{ product.was_price }}</span>
-                 </div>
+                </div>
                 <!-- <h5>${{product.price}}</h5> -->
             </div>
         </div>
@@ -44,31 +44,58 @@
         <div class="row">
             <div class="col-6">
                 <div class="row">
-                    <div class="col-6" *ngIf="product.colors.length>0">
+                    <div class="col-6">
                         <mat-form-field appearance="fill">
                             <mat-label>Color</mat-label>
                             <mat-select [(ngModel)]="product.color" multiple>
-                                <mat-option [value]="color" *ngFor="let color of product.colors">{{color}}
+                                <mat-option [value]="key.filter_value" *ngFor="let key of color_filter">
+                                    {{key.filter_value}}
                                 </mat-option>
                             </mat-select>
                         </mat-form-field>
 
                     </div>
-                        <div class="col-6" *ngIf="product.shapes?.length>0">
-                            <mat-form-field appearance="fill">
-                                <mat-label>Shape</mat-label>
-                                <mat-select [(ngModel)]="product.shape" multiple>
-                                    <mat-option [value]="shape" *ngFor="let shape of product.shapes">{{shape}}
-                                    </mat-option>
-                                </mat-select>
-                            </mat-form-field>
-                        
-                        </div> <div class="col-6">
+                    <div class="col-6">
+                        <mat-form-field appearance="fill">
+                            <mat-label>Shape</mat-label>
+                            <mat-select [(ngModel)]="product.shape" multiple>
+                                <mat-option [value]="key.filter_value" *ngFor="let key of shape_filter">
+                                    {{key.filter_value}}
+                                </mat-option>
+                            </mat-select>
+                        </mat-form-field>
 
                     </div>
                     <div class="col-6">
-
+                        <mat-form-field appearance="fill">
+                            <mat-label>Material</mat-label>
+                            <mat-select [(ngModel)]="product.shape" multiple>
+                                <mat-option [value]="key.filter_value" *ngFor="let key of material_filter">
+                                    {{key.filter_value}}
+                                </mat-option>
+                            </mat-select>
+                        </mat-form-field>
                     </div>
+                    <div class="col-6">
+                        <mat-form-field appearance="fill">
+                            <mat-label>Seating</mat-label>
+                            <mat-select [(ngModel)]="product.shape" multiple>
+                                <mat-option [value]="key.filter_value" *ngFor="let key of seating_filter">
+                                    {{key.filter_value}}
+                                </mat-option>
+                            </mat-select>
+                        </mat-form-field>
+                    </div>
+                     <div class="col-6">
+                         <mat-form-field appearance="fill">
+                             <mat-label>Fabric</mat-label>
+                             <mat-select [(ngModel)]="product.shape" multiple>
+                                 <mat-option [value]="key.filter_value" *ngFor="let key of fabric_filter">
+                                     {{key.filter_value}}
+                                 </mat-option>
+                             </mat-select>
+                         </mat-form-field>
+                     </div>
                 </div>
             </div>
             <div class="col-6">

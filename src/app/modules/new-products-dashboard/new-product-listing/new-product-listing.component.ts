@@ -1,3 +1,4 @@
+import { Color } from './../../../shared/models/products-payload.interface';
 import { tap, take } from "rxjs/operators";
 import { ApiService } from "./../../../shared/services/api/api.service";
 import { Component, OnInit } from "@angular/core";
@@ -18,7 +19,7 @@ export class NewProductListingComponent implements OnInit {
   materials: any = [];
   spinner = "assets/image/spinner.gif";
   page = 1;
-
+  filters:any;
   //For Infinite Scroll
   throttle = 300;
   scrollDistance = 1;
@@ -37,9 +38,10 @@ export class NewProductListingComponent implements OnInit {
       .pipe(
         take(1) // take only one result and then unsubscribe
       )
-      .subscribe(({ status, data }) => {
-        if (status = 'success') {
+      .subscribe(({ status, data, filters }) => {
+        if ((status = "success")) {
           let receivedProducts = [];
+          this.filters = filters;
           let receivedData = { ...data };
           if (this.products.data) {
             receivedProducts = [...this.products.data, ...data.data];
@@ -64,9 +66,8 @@ export class NewProductListingComponent implements OnInit {
     const page: number = this.products.current_page + 1;
     this.loadProduct(page);
   }
-
-  removeNullItems(elm)
-  {
+ 
+  removeNullItems(elm) {
     return elm;
   }
   submit(): void {
@@ -78,17 +79,14 @@ export class NewProductListingComponent implements OnInit {
     });
     const formData = { products: submitProducts };
     this.httpService
-      .post(
-        `${env.ADMIN_API_BASE_HREF}new-products/update-multiple`,
-        formData
-      )
+      .post(`${env.ADMIN_API_BASE_HREF}new-products/update-multiple`, formData)
       .pipe(
         tap(() => (this.isProductFetching = true)),
         take(1)
       )
       .subscribe(({ status }) => {
-        if (status=='success') {
-          this.products=[];
+        if (status == "success") {
+          this.products = [];
           this.loadProduct();
         }
       });
