@@ -202,7 +202,7 @@
     <div class="col-4">
         <h4>Dimensions</h4>
 
-        <div class="row">
+        <div class="row" *ngIf="product.product_dimension">
             <div class="col-6 m-t-5" *ngFor="let dimension of product.product_dimension">
                 <h3>{{dimension.description}}</h3>
                 <span>Height: {{dimension.height}}</span> <br />
