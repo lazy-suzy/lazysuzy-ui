@@ -8,9 +8,10 @@ import { NewProductListingComponent } from "./new-product-listing/new-product-li
 import { ProductFiltersModule } from "src/app/feature/components";
 import { NewProductRowComponent } from "./new-product-row/new-product-row.component";
 import { InfiniteScrollModule } from "ngx-infinite-scroll";
+import { AttributeFiltersComponent } from './attribute-filters/attribute-filters.component';
 
 @NgModule({
-  declarations: [NewProductListingComponent, NewProductRowComponent],
+  declarations: [NewProductListingComponent, NewProductRowComponent, AttributeFiltersComponent],
   imports: [
     CommonModule,
     NewProductsDashboardRoutingModule,

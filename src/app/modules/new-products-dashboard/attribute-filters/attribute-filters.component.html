@@ -1,0 +1,8 @@
+<mat-form-field appearance="fill">
+    <mat-label>{{filterLabel}}</mat-label>
+    <mat-select [(ngModel)]="product[filterLabel.toLowerCase()]" multiple>
+        <mat-option [value]="key.filter_value" *ngFor="let key of filterValues">
+            {{key.filter_value}}
+        </mat-option>
+    </mat-select>
+</mat-form-field>

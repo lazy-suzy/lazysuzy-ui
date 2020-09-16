@@ -41,11 +41,11 @@
         </div>
     </div>
     <div class="column col-8">
-        <div class="row">
+        <div class="row" style="font-size: 14px;">
             <div class="col-6">
                 <div class="row">
-                    <div class="col-6">
-                        <mat-form-field appearance="fill">
+                    <div class="col-6" >
+                        <mat-form-field class="select-height" appearance="fill">
                             <mat-label>Color</mat-label>
                             <mat-select [(ngModel)]="product.color" multiple>
                                 <mat-option [value]="key.filter_value" *ngFor="let key of color_filter">
@@ -53,9 +53,8 @@
                                 </mat-option>
                             </mat-select>
                         </mat-form-field>
-
                     </div>
-                    <div class="col-6">
+                     <div class="col-6">
                         <mat-form-field appearance="fill">
                             <mat-label>Shape</mat-label>
                             <mat-select [(ngModel)]="product.shape" multiple>
@@ -99,38 +98,51 @@
                     <div class="col-6">
                         <mat-form-field appearance="fill">
                             <mat-label>LS_IDs</mat-label>
-                            <mat-select [(ngModel)]="product.ls_id" multiple 
-                            (selectionChange)="setCategoryDetail()">
+                            <mat-select [(ngModel)]="product.ls_id" multiple (selectionChange)="setCategoryDetail()">
                                 <mat-option [value]="key.LS_ID" *ngFor="let key of mapping_core">
                                     {{key.LS_ID}}
                                 </mat-option>
                             </mat-select>
                         </mat-form-field>
                     </div>
+                    <div class="col-6">
+                        <mat-form-field appearance="fill">
+                            <mat-label>Country</mat-label>
+                            <mat-select [(ngModel)]="product.mfg_country" multiple>
+                                <mat-option [value]="key.filter_value" *ngFor="let key of country_filter">
+                                    {{key.filter_value}}
+                                </mat-option>
+                            </mat-select>
+                        </mat-form-field>
+                    </div> 
                 </div>
             </div>
             <div class="col-6">
-                <div class="row">
-                    <div class="col-4 text-center">
+                <div class="row ">
+                    <div class="col-4">
                         <h5> Master ID</h5>
                     </div>
-                    <div class="col-4">
-                        <mat-form-field appearance="fill">
-                            <input matInput [(ngModel)]="product.master_id">
-                        </mat-form-field>
+                    <div class="col-4 ">
+                        <input [(ngModel)]="product.master_id">
                     </div>
                 </div>
-                <div class="row">
-                    <div class="col-4 text-center">
-                        <h5> Set ID</h5>
+                <div class="row mt-3">
+                    <div class="col-4 input-label">
+                        <h5>Set ID</h5>
                     </div>
                     <div class="col-4">
-                        <mat-form-field appearance="fill">
-                            <input matInput [(ngModel)]="product.set_id">
-                        </mat-form-field>
+                        <input [(ngModel)]="product.set_id">
                     </div>
                 </div>
-                <div class="row">
+                <div *ngIf="product.site_name=='cb2' || product.site_name=='cab'" class="row mt-3">
+                    <div class="col-4 input-label">
+                        <h5>Designer</h5>
+                    </div>
+                    <div class="col-4">
+                        <input [(ngModel)]="product.designer">
+                    </div>
+                </div>
+                <div class="row mt-3">
                     <ng-container *ngFor="let category of category_detail">
                         <div class="col-12">
                             <span>{{category}}</span>
