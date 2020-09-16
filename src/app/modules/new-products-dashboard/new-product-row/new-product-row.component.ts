@@ -39,12 +39,14 @@ export class NewProductRowComponent implements OnInit {
   setCategoryDetail() {
     this.category_detail = [];
     //  console.log(Object.keys(this.mapping_core))
-    this.product.ls_id.forEach((ls_id) => {
-      const value = this.mapping_core.filter((mapper) => mapper.LS_ID == ls_id);
-      if (value.length) {
-        const category_detail_string = `${value[0].dept_name_short} > ${value[0].cat_name_short} > ${value[0].cat_sub_name}`;
-        this.category_detail.push(category_detail_string);
-      }
-    });
+    if(this.product.ls_id){
+      this.product.ls_id.forEach((ls_id) => {
+        const value = this.mapping_core.filter((mapper) => mapper.LS_ID == ls_id);
+        if (value.length) {
+          const category_detail_string = `${value[0].dept_name_short} > ${value[0].cat_name_short} > ${value[0].cat_sub_name}`;
+          this.category_detail.push(category_detail_string);
+        }
+      });
+    }
   }
 }
