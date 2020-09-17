@@ -134,7 +134,7 @@
                         <input [(ngModel)]="product.set_id">
                     </div>
                 </div>
-                <div *ngIf="product.site_name=='cb2' || product.site_name=='cab'" class="row mt-3">
+                <div class="row mt-3">
                     <div class="col-4 input-label">
                         <h5>Designer</h5>
                     </div>
@@ -185,7 +185,7 @@
         </div>
     </div>
     <div class="col-8">
-        <ng-container *ngFor="let image of product.images.split(',')">
+        <ng-container *ngFor="let image of product.images?.split(',')">
             <img src={{image}} height="100px" width='100px'>
         </ng-container>
     </div>

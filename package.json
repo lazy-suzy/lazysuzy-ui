@@ -8,7 +8,8 @@
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e",
-    "start-dev": "ng lint && ng serve"
+    "start-dev": "ng lint && ng serve",
+    "build -s":"ng build --configuration=staging"
   },
   "private": true,
   "dependencies": {
