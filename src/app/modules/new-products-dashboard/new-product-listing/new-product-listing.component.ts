@@ -47,7 +47,6 @@ export class NewProductListingComponent implements OnInit {
           }
           if (!this.mapping_core) {
             this.mapping_core = extra.mapping_core;
-            console.log(this.mapping_core.filter(value=> value.LS_ID==304));
           }
           let receivedData = { ...data };
           if (this.products.data) {
@@ -90,17 +89,18 @@ export class NewProductListingComponent implements OnInit {
   }
 
   submit(): void {
+
     const submitProducts = this.products.data.filter((product) => {
       if (product.status === "approved" || product.status === "rejected") {
         return true;
       }
       return false;
     });
+    this.isProductFetching = true;
     const formData = { products: submitProducts };
     this.httpService
       .post(`${env.ADMIN_API_BASE_HREF}new-products/update-multiple`, formData)
       .pipe(
-        tap(() => (this.isProductFetching = true)),
         take(1)
       )
       .subscribe(({ status }) => {
