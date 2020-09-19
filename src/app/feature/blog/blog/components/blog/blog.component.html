@@ -2,15 +2,22 @@
     <app-loader *ngIf="showLoader"></app-loader>
 </div>
 
-<main *ngIf="!showLoader">
+<main *ngIf="loaded">
     <h1 style="text-align: center;">Home Musings</h1>
     <h2 style="text-align: center;">Our Blog</h2>
 
-    <div class="post-list post-list_columns">
+    <div
+        infinite-scroll 
+        [infiniteScrollDistance]="scrollDistance"
+        [infiniteScrollUpDistance]="scrollUpDistance" 
+        [infiniteScrollThrottle]="throttle" 
+        (scrolled)="onScrollDown()"
+        class="post-list post-list_columns">
         <!-- Post 1 -->
-        <div *ngFor="let post of blogService?.blogs" (click)="goToPost(post.slug)" class="post-list__post post">
+        
+        <div *ngFor="let post of blogService?.blogs; trackBy:post?.id" (click)="goToPost(post.id)" class="post-list__post post">
             <figure class="post__preview-img">
-                <a routerLink="{{post.slug}}">
+                <a routerLink="{{post.id}}">
                     <img *ngIf="!post.better_featured_image" src="./../../../../../../assets/images/Mirrors.png"
                         alt="{{post.title}}">
 
@@ -21,7 +28,7 @@
 
             <div class="post__header">
                 <time datetime="2019-12-12" class="post__time">{{post.date | date: 'fullDate'}}</time>
-                <h2><a routerLink="{{post.slug}}">{{post?.title?.rendered}}</a></h2>
+                <h2><a routerLink="{{post.id}}">{{post?.title?.rendered}}</a></h2>
             </div>
 
             <div class="post__announce" [innerHTML]="post?.excerpt?.rendered">
@@ -32,7 +39,5 @@
                 <!-- <a routerLink="{{post.slug}}" class="post__comments">10</a> -->
             </div>
         </div>
-
-
     </div>
 </main>

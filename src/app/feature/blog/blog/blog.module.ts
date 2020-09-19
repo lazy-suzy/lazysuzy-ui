@@ -1,3 +1,4 @@
+import { InfiniteScrollModule } from 'ngx-infinite-scroll';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
@@ -18,7 +19,8 @@ import { PagePostsComponent } from './components/page-posts/page-posts.component
     CommonModule,
     RouterModule,
     SharedModule,
-    BlogRoutingModule
+    BlogRoutingModule,
+    InfiniteScrollModule,
   ],
   exports: [BlogComponent]
 })

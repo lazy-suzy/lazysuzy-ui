@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Observable } from 'rxjs';
 import { ApiService } from 'src/app/shared/services';
+import { BlogService } from 'src/app/shared/services/blog/blog.service';
 
 @Component({
   selector: 'app-page-posts',
@@ -17,7 +18,7 @@ export class PagePostsComponent implements OnInit {
   currentBlog: any;
 
   constructor(
-    private apiService: ApiService,
+    private blogService: BlogService,
     private route: ActivatedRoute
   ) {
     this.route.params.subscribe(params => {
@@ -27,9 +28,9 @@ export class PagePostsComponent implements OnInit {
 
   ngOnInit() {
     this.showLoader = true;
-    this.posts$ = this.apiService.getPostById(this.postId);
+    this.posts$ = this.blogService.getPost(this.postId);
     this.posts$.subscribe(s => {
-      this.currentBlog = s[0];
+      this.currentBlog = s;
       let x_tags = this.currentBlog.x_tags || '';
       x_tags = x_tags.split(',');
       this.currentBlog.x_tags = [...x_tags];
