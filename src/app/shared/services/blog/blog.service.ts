@@ -1,4 +1,5 @@
-import { HttpClient } from "@angular/common/http";
+import { tap } from 'rxjs/operators';
+import { HttpClient, HttpResponse } from "@angular/common/http";
 import { Injectable } from "@angular/core";
 import { Observable } from "rxjs";
 
@@ -10,8 +11,9 @@ export class BlogService {
   blog_base = "http://wordpress.lazysuzy.com/index.php/wp-json/wp/v2";
   constructor(private httpClient: HttpClient) {}
 
-  getBlogs(page=1):Observable<any[]> {
-    return this.httpClient.get<any[]>(`${this.blog_base}/posts?_embed&page=${page}`, {
+  getBlogs(page=1):Observable<HttpResponse<any>> {
+    return this.httpClient.get<HttpResponse<any>>(`${this.blog_base}/posts?_embed&page=${page}`, {
+      observe:'response',
       params: {
         per_page: "6",
       },
