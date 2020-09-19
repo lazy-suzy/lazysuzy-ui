@@ -47,7 +47,9 @@ export class NavDesktopComponent implements OnInit {
     this.checkHomeRoute = router.events.subscribe((val) => {
       // this.notHome = location.path() !== '';
       this.notHome =
-        location.path() !== '' && location.path().match(/board/) == null;
+        location.path() !== '' && 
+        location.path().match(/board/) == null && 
+        location.path().match(/blog/)==null;
     });
   }
 
