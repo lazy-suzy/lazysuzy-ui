@@ -15,7 +15,7 @@
         class="post-list post-list_columns">
         <!-- Post 1 -->
         
-        <div *ngFor="let post of blogService?.blogs; trackBy:post?.id" (click)="goToPost(post.id)" class="post-list__post post">
+        <div *ngFor="let post of blogService?.blogs" (click)="goToPost(post.id)" class="post-list__post post">
             <figure class="post__preview-img">
                 <a routerLink="{{post.id}}">
                     <img *ngIf="!post.better_featured_image" src="./../../../../../../assets/images/Mirrors.png"
