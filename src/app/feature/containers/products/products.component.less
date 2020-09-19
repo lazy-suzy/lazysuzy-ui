@@ -5,7 +5,10 @@
   font-size: 14px;
 }
 
-.filter-panel {
+.mb-10{
+  margin-bottom: 10px !important;
+}
+.sticky-row {
   position: sticky;
   position: -webkit-sticky;
   position: -moz-sticky;
@@ -13,9 +16,13 @@
   position: -o-sticky;
   top: 0;
   z-index: 1;
+
+}
+
+.filter-panel {
   background: #f8fafc;
   box-shadow: 0 0 1px 1px #eee;
-  margin: 10px 10px 10px 10px;
+  margin: 0px 10px 10px 10px;
 }
 
 .scroll-to-btn {
@@ -116,4 +123,66 @@
   .brand-description {
     text-align: center;
   }
+}
+
+.row {
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-wrap: wrap;
+  flex-wrap: wrap;
+  margin-right: -15px;
+  margin-left: -15px;
+}
+.col-md-1,
+.col-md-10,
+.col-md-11,
+.col-md-12,
+.col-md-2,
+.col-md-3,
+.col-md-4,
+.col-md-5,
+.col-md-6,
+.col-md-7,
+.col-md-8,
+.col-md-9 {
+  float: left;
+}
+.col-md-12 {
+  width: 100%;
+}
+.col-md-11 {
+  width: 91.66666667%;
+}
+.col-md-10 {
+  width: 83.33333333%;
+}
+.col-md-9 {
+  width: 75%;
+}
+.col-md-8 {
+  width: 66.66666667%;
+}
+.col-md-7 {
+  width: 58.33333333%;
+}
+.col-md-6 {
+  width: 50%;
+}
+.col-md-5 {
+  width: 41.66666667%;
+}
+.col-md-4 {
+  width: 33.33333333%;
+}
+.col-md-3 {
+  width: 25%;
+}
+.col-md-2 {
+  width: 16.66666667%;
+}
+.col-md-1 {
+  width: 8.33333333%;
+}
+.col-md-pull-12 {
+  right: 100%;
 }

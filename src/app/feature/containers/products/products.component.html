@@ -31,41 +31,65 @@
     </div>
   </ng-container>
 
-  <div class="flex flex-wrap" [ngClass]="{'products-container': !isHandset}" infiniteScroll [infiniteScrollDistance]="2"
+  <!-- [ngClass]="{'products-container': !isHandset}"  -->
+  <div class="flex" [ngClass]="{'flex-wrap': isHandset}" infiniteScroll [infiniteScrollDistance]="2"
     [infiniteScrollThrottle]="50" (scrolled)="onScroll()">
-    <ng-container *ngIf="!isHandset">
-      <div class="brandlist-container brandlist-left">
-        <app-brand-list (setBrand)="getProductwithBrandName($event)"></app-brand-list>
-      </div>
-    </ng-container>
+
 
     <ng-container *ngIf="isHandset">
       <app-product-mobile *ngFor="let product of products" [product]="product" [productsInRow]="productsInRow"
         [ngClass]="{
-          'w-50': productsInRow === 2,
-          'w-33': productsInRow === 3,
-          'w-100': productsInRow === 1
-        }" class="w-50"></app-product-mobile>
+        'w-50': productsInRow === 2,
+        'w-33': productsInRow === 3,
+        'w-100': productsInRow === 1
+      }" class="w-50"></app-product-mobile>
     </ng-container>
+
 
     <ng-container *ngIf="!isHandset">
-      <ng-container *ngIf="!isHandset">
-        <h4 class="category-title">{{ categoryTitle }}</h4>
-        <div class="filter-panel flex justify-around items-center w-100">
-          <app-product-filters [productFilters]="productFilters" (setFilters)="onSetFilters($event)"
-            class="flex justify-start w-75"></app-product-filters>
-          <div style="font-size: 14px; min-width: 110px">{{ totalCount }} Results</div>
-          <app-sort-type [sortTypeList]="sortTypeList" [sortType]="sortType" (setSortType)="onSetSortType($event)">
-          </app-sort-type>
+      <!-- class="brandlist-container brandlist-left" -->
+      <div class="row">
+        <div class="col-md-2">
+          <app-brand-list (setBrand)="getProductwithBrandName($event)"></app-brand-list>
         </div>
-      </ng-container>
+        <div class="col-md-8">
+          <div class="row mb-10">
+            <div class="col-md-12">
+              <h4 class="category-title">{{ categoryTitle }}</h4>
+            </div>
+          </div>
+          <!--  -->
+          <!-- -->
+          <div class="row sticky-row">
+            <div class="col-md-12">
+              <div class="filter-panel flex flex-wrap justify-around items-center">
+                <!-- class="flex justify-start w-75" -->
+                <app-product-filters [productFilters]="productFilters" (setFilters)="onSetFilters($event)"
+                class="flex justify-start"></app-product-filters>
+                <div style="font-size: 14px;">{{ totalCount }} Results</div>
+                <app-sort-type [sortTypeList]="sortTypeList" [sortType]="sortType" (setSortType)="onSetSortType($event)">
+                </app-sort-type>
+              </div> 
+            </div>
+          </div>
+        <!-- </div> -->
 
-      <app-product *ngFor="let product of products" [product]="product" class="w-33-ns" style="margin-bottom: 15px;">
-      </app-product>
-    </ng-container>
+        <div class="row">
+          <app-product *ngFor="let product of products" [product]="product" class="col-md-4"
+            style="margin-bottom: 15px;">
+          </app-product>
+        </div>
+      </div>
+      <div class="col-md-2">
+
+      </div>
   </div>
-  <app-subscribe [category]="emailTitle" [homePage]="false" *ngIf="!isProductFetching" class="tc">
-  </app-subscribe>
+  </ng-container>
+
+</div>
+
+<app-subscribe [category]="emailTitle" [homePage]="false" *ngIf="!isProductFetching" class="tc">
+</app-subscribe>
 </div>
 <div class="tc" *ngIf="invalidLink">
   <img [src]="invalidLinkImageSrc" class="invalid-url-image" />
