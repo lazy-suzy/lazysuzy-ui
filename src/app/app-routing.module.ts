@@ -84,6 +84,13 @@ const routes: Routes = [
     loadChildren: () => import('./feature/blog/blog/blog.module').then(m => m.BlogModule)
   },
   {
+    path: 'admin/dashboard/new-products',
+    loadChildren: ()=>
+    import('./modules/new-products-dashboard/new-products-dashboard.module').then(
+      (m)=> m.NewProductsDashboardModule
+    )
+  },
+  {
     path: 'admin-dashboard',
     loadChildren: () =>
       import('./modules/admin-dashboard/admin-dashboard.module').then(

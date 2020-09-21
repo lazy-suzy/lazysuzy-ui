@@ -19,7 +19,8 @@
     </ng-template>
   </div>
   <div (click)=openDialog()>
-    <span class="variant-color" *ngIf="product.color && product.color?.split(',').length>1;else emptySpace"> +{{product.color?.split(',').length-1}} colors
+    <span class="variant-color" *ngIf="product.color && product.color?.split(',').length>1;else emptySpace">
+      +{{product.color?.split(',').length-1}} colors
     </span>
     <ng-template #emptySpace>
       <span>&nbsp;</span>
@@ -48,19 +49,19 @@
           (product.is_price !== product.was_price && 'cprice sale') || 'cprice'
         }}">
         <ng-container *ngIf="!this.max_price;else bothPrices">
-${{ min_price | number:"1.2-2" }}
+          ${{ min_price | number:"1.2-2" }}
         </ng-container>
         <ng-template #bothPrices>
           ${{ min_price | number:"1.2-2" }}-{{ max_price | number:"1.2-2" }}
         </ng-template>
-         </span>
+      </span>
       <span *ngIf="product.is_price !== product.was_price" class="oldprice">
-         <ng-container *ngIf="!this.max_price;else bothWasPrices">
-           ${{ was_min_price | number:"1.2-2" }}
-         </ng-container>
-         <ng-template #bothWasPrices>
-           ${{ was_min_price | number:"1.2-2" }}-{{ was_max_price | number:"1.2-2" }}
-         </ng-template>
+        <ng-container *ngIf="!this.max_price;else bothWasPrices">
+          ${{ was_min_price | number:"1.2-2" }}
+        </ng-container>
+        <ng-template #bothWasPrices>
+          ${{ was_min_price | number:"1.2-2" }}-{{ was_max_price | number:"1.2-2" }}
+        </ng-template>
       </span>
     </ng-template>
   </div>
