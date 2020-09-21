@@ -32,8 +32,14 @@
   </ng-container>
 
 
-  <div class="flex flex-wrap justify-between" [ngClass]="{'products-container': !isHandset}" infiniteScroll
-    [infiniteScrollDistance]="2" [infiniteScrollThrottle]="50" (scrolled)="onScroll()">
+  <div 
+  class="flex flex-wrap justify-between" 
+  [ngClass]="{'products-container': !isHandset}" 
+  infiniteScroll
+  [infiniteScrollDistance]="2" 
+  [infiniteScrollThrottle]="50" 
+  (scrolled)="onScroll()">
+
     <ng-container *ngIf="isHandset">
       <app-product-mobile *ngFor="let product of products" [product]="product" [productsInRow]="productsInRow"
         [ngClass]="{
