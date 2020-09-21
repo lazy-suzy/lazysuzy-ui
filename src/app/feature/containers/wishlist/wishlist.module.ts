@@ -1,3 +1,4 @@
+import { ProductMobileModule } from './../../components/product-mobile/product-mobile.module';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ProductModule } from './../../components';
@@ -7,7 +8,7 @@ import { MatIconModule } from '@angular/material/icon';
 
 const DECLARATIONS = [WishlistComponent];
 
-const MODULES = [CommonModule, ProductModule, MatIconModule];
+const MODULES = [CommonModule, ProductModule, ProductMobileModule, MatIconModule];
 
 @NgModule({
   declarations: [...DECLARATIONS],
