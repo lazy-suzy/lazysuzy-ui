@@ -368,9 +368,9 @@ export class VariationsComponent implements OnInit {
 
     if (this.selectionsExist && this.selectedSwatch.swatch_image) {
       // tslint:disable-next-line: forin
-      for (const keys in this.selectionOptions) {
-        this.selectionOptions[keys] = false;
-      }
+      // for (const keys in this.selectionOptions) {
+      //   this.selectionOptions[keys] = false;
+      // }
       // tslint:disable-next-line: forin
       for (const key in variations) {
         const value = variations[key];
