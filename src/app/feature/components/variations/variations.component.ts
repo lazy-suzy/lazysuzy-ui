@@ -137,7 +137,7 @@ export class VariationsComponent implements OnInit {
       this.setPrice.emit(this.priceData);
       this.setImage.emit(variation);
       this.filterSwatches();
-      this.updateSwatches();
+     // this.updateSwatches();
     }
     this.selections = {};
     for (let item in this.inputSelections) {
