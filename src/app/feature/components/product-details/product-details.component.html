@@ -113,8 +113,17 @@
                             [isHandset]="false">
                         </app-redirect>
                     </div>
-                    <app-variations *ngIf="isVariationExist && !product.redirect" [variations]="product.variations" [isSwatchExist]="isSwatchExist" [inputSelections]="product.selections" [hasSelection]="hasSelection" (setPrice)="onSetPrice($event)" (setImage)="onSetImage($event)"
-                        (setSelectionChecked)="onSetSelectionChecked($event)" (clearSelection)="onClearSelection($event)" (setSelection)="onSetSelection($event)">
+                    <app-variations 
+                    *ngIf="isVariationExist && !product.redirect" 
+                    [variations]="product.variations" 
+                    [isSwatchExist]="isSwatchExist" 
+                    [inputSelections]="product.selections" 
+                    [hasSelection]="hasSelection" 
+                    (setPrice)="onSetPrice($event)" 
+                    (setImage)="onSetImage($event)"
+                    (setSelectionChecked)="onSetSelectionChecked($event)" 
+                    (clearSelection)="onClearSelection($event)"
+                    (setSelection)="onSetSelection($event)">
                     </app-variations>
                     <app-sets *ngIf="product.set && product.set.length > 0" [sets]="product.set" [brand]="product.site">
                     </app-sets>
