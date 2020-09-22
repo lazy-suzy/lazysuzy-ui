@@ -136,8 +136,8 @@ export class VariationsComponent implements OnInit {
       };
       this.setPrice.emit(this.priceData);
       this.setImage.emit(variation);
-      this.updateSwatches();
       this.filterSwatches();
+      this.updateSwatches();
     }
     this.selections = {};
     for (let item in this.inputSelections) {
@@ -186,7 +186,6 @@ export class VariationsComponent implements OnInit {
     console.log('inputSelections: ', this.inputSelections);
     console.log('selectedSwatch.swatch_image: ', this.selectedSwatch.swatch_image);
     console.log('selectedSwatch.swatch_image: ', Boolean(this.selectedSwatch.swatch_image));
-
     this.updateSwatches();
   }
 
@@ -274,7 +273,10 @@ export class VariationsComponent implements OnInit {
       }
       return self.checkSwatchSelection(variation, self);
     });
-
+    if(this.filteredVariations.length >0)
+    {
+      this.filterSwatchesBasedOnValidVariations(this.filteredVariations);
+    }
     if (
       this.filteredVariations.length === 1 ||
       this.selectedSwatch.swatch_image
@@ -289,7 +291,37 @@ export class VariationsComponent implements OnInit {
       this.checkSwatchActive();
     }
   }
+  //
+  filterSwatchesBasedOnValidVariations(variations:any[])
+  {
+    for (const keys in this.selectionOptions) {
+      this.selectionOptions[keys] = false;
+    }
+    for (const value of variations) {
+      // console.log('value ', value);
 
+      const options = value.features;
+      // console.log('options ', options);
+
+      // tslint:disable-next-line: forin
+      for (const features in options) {
+        const feature = options[features];
+        // console.log('feature: ', feature);
+        // console.log('value.swatch_image ', value);
+        // console.log('this.selectedSwatch ', this.selectedSwatch);
+
+        if (feature && feature.charAt(0) !== '#') {
+          // console.log('filter feature: ', feature);
+          if (
+            this.selectionOptions.hasOwnProperty(feature)
+          ) {
+            this.selectionOptions[feature] = true;
+          }
+        }
+        // console.log('this.selectionOptions[feature]: ', this.selectionOptions);
+      }
+    }
+  }
   checkSwatchSelection(variation, self) {
     let isValidVariation = true;
     for (const key in self.selections) {
