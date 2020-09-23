@@ -145,9 +145,15 @@
                         Select {{ item.key.replace('_', ' ') | titlecase }}
                     </h6>
                     <div class="flex flex-wrap">
-                        <div *ngFor="let option of item.value.options" class="w-33 pa1" [ngClass]="{'w-50': item.value.options.length % 2 === 0}">
-                            <div class="variant-feature options pointer {{ selectionOptions[option] ? '' : 'disabledTab'}}" (click)="selectedOption(option, item.key)" [class.active]="
-                                selections[item.key] && selections[item.key] === option" [innerHTML]="option">
+                        <div 
+                        *ngFor="let option of item.value.options" 
+                        class="w-33 pa1" 
+                        [ngClass]="{'w-50': item.value.options.length % 2 === 0}">
+                            <div 
+                            class="variant-feature options pointer {{ selectionOptions[option] ? '' : 'disabledTab'}}" 
+                            (click)="selectedOption(option, item.key)" 
+                            [class.active]="selections[item.key] && selections[item.key] === option" 
+                            [innerHTML]="option">
                             </div>
                         </div>
                     </div>

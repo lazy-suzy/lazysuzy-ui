@@ -152,6 +152,7 @@ export class VariationsComponent implements OnInit {
         }
       }
     }
+    this.setSelectedOptionsOfVariation(variation);
     this.selectionEmit();
   }
 
@@ -180,13 +181,44 @@ export class VariationsComponent implements OnInit {
       this.selections[type] = option;
       this.inputSelections[type]['selected'] = true;
     }
-
     this.selectionEmit();
 
     console.log('inputSelections: ', this.inputSelections);
     console.log('selectedSwatch.swatch_image: ', this.selectedSwatch.swatch_image);
     console.log('selectedSwatch.swatch_image: ', Boolean(this.selectedSwatch.swatch_image));
     this.updateSwatches();
+    this.filterVariationsForSingleSelect();
+  }
+
+  setSelectedOptionsOfVariation(variation:any){
+    const features = variation.features
+    for(const filter in features)
+    {
+      const filterValue = features[filter];
+      if(this.inputSelections[filter].select_type !== 'single_select')
+      {
+        if(this.selections[filter])
+        {
+          this.selections[filter].push(filterValue);
+        }
+        else{
+          this.selections[filter]=[filterValue];
+        }
+      }
+      else if(this.inputSelections[filter].select_type === 'single_select')
+      {
+        this.selections[filter]=filterValue;
+        const options = this.inputSelections[filter]['options'];
+        for(const option of options)
+        {
+          if(filterValue !== option)
+          {
+            this.selectionOptions[option]=false;
+          }
+        }
+      }
+    }
+    
   }
 
   onCheckChange(event, option: string, type: string) {
@@ -273,10 +305,7 @@ export class VariationsComponent implements OnInit {
       }
       return self.checkSwatchSelection(variation, self);
     });
-    if(this.filteredVariations.length >0)
-    {
-      this.filterSwatchesBasedOnValidVariations(this.filteredVariations);
-    }
+    //
     if (
       this.filteredVariations.length === 1 ||
       this.selectedSwatch.swatch_image
@@ -291,7 +320,13 @@ export class VariationsComponent implements OnInit {
       this.checkSwatchActive();
     }
   }
-  //
+
+  filterVariationsForSingleSelect(){
+    if(this.filteredVariations.length > 0)
+    {
+      this.filterSwatchesBasedOnValidVariations(this.filteredVariations);
+    }
+  }
   filterSwatchesBasedOnValidVariations(variations:any[])
   {
     for (const keys in this.selectionOptions) {
@@ -318,9 +353,13 @@ export class VariationsComponent implements OnInit {
             this.selectionOptions[feature] = true;
           }
         }
+        
+
         // console.log('this.selectionOptions[feature]: ', this.selectionOptions);
       }
     }
+    const enabledOptions = Object.keys(this.selectionOptions).filter(key=> this.selectionOptions[key]);
+    console.log(enabledOptions);
   }
   checkSwatchSelection(variation, self) {
     let isValidVariation = true;
