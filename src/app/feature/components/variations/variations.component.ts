@@ -1,16 +1,16 @@
-import { Component, OnInit, Input, EventEmitter, Output } from '@angular/core';
-import { MatDialogUtilsService } from 'src/app/shared/services';
-import { Router } from '@angular/router';
-import { Observable, Subscription } from 'rxjs';
+import { Component, OnInit, Input, EventEmitter, Output } from "@angular/core";
+import { MatDialogUtilsService } from "src/app/shared/services";
+import { Router } from "@angular/router";
+import { Observable, Subscription } from "rxjs";
 import {
   BreakpointState,
   Breakpoints,
-  BreakpointObserver
-} from '@angular/cdk/layout';
+  BreakpointObserver,
+} from "@angular/cdk/layout";
 @Component({
-  selector: 'app-variations',
-  templateUrl: './variations.component.html',
-  styleUrls: ['./variations.component.less']
+  selector: "app-variations",
+  templateUrl: "./variations.component.html",
+  styleUrls: ["./variations.component.less"],
 })
 export class VariationsComponent implements OnInit {
   @Output() setImage = new EventEmitter<any>();
@@ -24,6 +24,7 @@ export class VariationsComponent implements OnInit {
   @Input() inputSelections = {};
   @Input() isSwatchExist = false;
   @Input() hasSelection = true;
+
   beforeSelection = false;
   selectedFlag = false;
   bpObserver: Observable<BreakpointState> = this.breakpointObserver.observe(
@@ -35,20 +36,23 @@ export class VariationsComponent implements OnInit {
   selections = {};
   selectedIndex: number;
   priceData = {
-    price: '',
-    wasPrice: ''
+    price: "",
+    wasPrice: "",
   };
   selectionsExist: boolean;
   bpSubscription: Subscription;
   isHandset: boolean;
   selectionOptions = {};
   selectedSwatch = {
-    image: '',
+    image: "",
     swatch_image: null,
-    price: '',
-    wasPrice: ''
+    price: "",
+    wasPrice: "",
   };
   previousSwatch;
+
+  selectionAdd = 1;
+  selectionRemove = 2;
 
   constructor(
     private router: Router,
@@ -63,7 +67,7 @@ export class VariationsComponent implements OnInit {
       }
     );
     this.selectionsExist =
-      this.inputSelections && Object.keys(this.inputSelections)[0] !== 'type';
+      this.inputSelections && Object.keys(this.inputSelections)[0] !== "type";
     if (this.selectionsExist) {
       // tslint:disable-next-line: forin
       for (const key in this.inputSelections) {
@@ -92,15 +96,18 @@ export class VariationsComponent implements OnInit {
         return self.filterDuplicateSwatches(variation, self);
       });
 
-    console.log('swatches: ', this.swatches);
-    console.log('inputSelections: ', this.inputSelections);
-    console.log('Object.values(this.inputSelections): ', Object.values(this.inputSelections));
+    console.log("swatches: ", this.swatches);
+    console.log("inputSelections: ", this.inputSelections);
+    console.log(
+      "Object.values(this.inputSelections): ",
+      Object.values(this.inputSelections)
+    );
     var countSingleSelect = 0;
-    if (this.inputSelections['type'] === 'redirect') {
+    if (this.inputSelections["type"] === "redirect") {
       this.setSelectionChecked.emit(true);
     } else {
       for (let item in this.inputSelections) {
-        this.inputSelections[item]['selected'] = false;
+        this.inputSelections[item]["selected"] = false;
         if (this.inputSelections[item]["select_type"] === "single_select") {
           countSingleSelect++;
         }
@@ -114,7 +121,7 @@ export class VariationsComponent implements OnInit {
     this.bpSubscription.unsubscribe();
   }
   selectedVariation(variation, index: number) {
-    console.log('variation com: ', variation);
+    console.log("variation com: ", variation);
     if (variation.has_parent_sku) {
       if (this.isHandset) {
         this.router.navigate([`/product/${variation.variation_sku}`]);
@@ -127,31 +134,33 @@ export class VariationsComponent implements OnInit {
         image: variation.image,
         swatch_image: variation.swatch_image,
         price: variation.price,
-        wasPrice: variation.was_price
+        wasPrice: variation.was_price,
       };
       this.selectedIndex = index;
       this.priceData = {
         price: variation.price,
-        wasPrice: variation.was_price
+        wasPrice: variation.was_price,
       };
       this.setPrice.emit(this.priceData);
       this.setImage.emit(variation);
       this.filterSwatches();
-     // this.updateSwatches();
+      //this.updateSwatches();
     }
-    this.selections = {};
-    for (let item in this.inputSelections) {
-      if (this.inputSelections[item]["select_type"] === "single_select") {
-        // this.selections[item] = this.inputSelections[item]["options"].find((option) => this.selectionOptions[option]);
-        let enableOptions = this.inputSelections[item]["options"].filter((option) => this.selectionOptions[option]);
-        if (enableOptions.length === 1) {
-          this.selections[item] = enableOptions[0];
-          this.inputSelections[item]['selected'] = true;
-        } else {
-          this.inputSelections[item]['selected'] = false;
-        }
-      }
-    }
+    //this.selections = {};
+    // for (let item in this.inputSelections) {
+    //   if (this.inputSelections[item]["select_type"] === "single_select") {
+    //     // this.selections[item] = this.inputSelections[item]["options"].find((option) => this.selectionOptions[option]);
+    //     let enableOptions = this.inputSelections[item]["options"].filter(
+    //       (option) => this.selectionOptions[option]
+    //     );
+    //     if (enableOptions.length === 1) {
+    //       this.selections[item] = enableOptions[0];
+    //       this.inputSelections[item]["selected"] = true;
+    //     } else {
+    //       this.inputSelections[item]["selected"] = false;
+    //     }
+    //   }
+    // }
     this.setSelectedOptionsOfVariation(variation);
     this.selectionEmit();
   }
@@ -160,72 +169,120 @@ export class VariationsComponent implements OnInit {
     this.beforeSelection = true;
     this.selectedFlag = false;
     for (let selected in this.inputSelections) {
-      if (this.inputSelections[selected]['select_type'] === "single_select") {
-        this.beforeSelection = this.beforeSelection && this.inputSelections[selected]['selected'];
-        this.selectedFlag = this.selectedFlag || this.inputSelections[selected]['selected'];
+      if (this.inputSelections[selected]["select_type"] === "single_select") {
+        this.beforeSelection =
+          this.beforeSelection && this.inputSelections[selected]["selected"];
+        this.selectedFlag =
+          this.selectedFlag || this.inputSelections[selected]["selected"];
       }
     }
-    console.log('beforeSelection: ', this.beforeSelection);
+    console.log("beforeSelection: ", this.beforeSelection);
 
     this.setSelectionChecked.emit(this.beforeSelection);
   }
 
   selectedOption(option: string, type: string) {
-    console.log('this.selections: ', this.selections);
-    console.log('option: ', option);
-    console.log('type: ', type);
+    console.log("this.selections: ", this.selections);
+    console.log("option: ", option);
+    console.log("type: ", type);
     if (this.selections[type] === option) {
       delete this.selections[type];
-      this.inputSelections[type]['selected'] = false;
+      this.inputSelections[type]["selected"] = false;
     } else {
       this.selections[type] = option;
-      this.inputSelections[type]['selected'] = true;
+      this.inputSelections[type]["selected"] = true;
     }
     this.selectionEmit();
 
-    console.log('inputSelections: ', this.inputSelections);
-    console.log('selectedSwatch.swatch_image: ', this.selectedSwatch.swatch_image);
-    console.log('selectedSwatch.swatch_image: ', Boolean(this.selectedSwatch.swatch_image));
+    console.log("inputSelections: ", this.inputSelections);
+    console.log(
+      "selectedSwatch.swatch_image: ",
+      this.selectedSwatch.swatch_image
+    );
+    console.log(
+      "selectedSwatch.swatch_image: ",
+      Boolean(this.selectedSwatch.swatch_image)
+    );
     this.updateSwatches();
     this.filterVariationsForSingleSelect();
   }
 
-  setSelectedOptionsOfVariation(variation:any){
-    const features = variation.features
-    for(const filter in features)
-    {
-      const filterValue = features[filter];
-      if(this.inputSelections[filter].select_type !== 'single_select')
-      {
-        if(this.selections[filter])
-        {
-          this.selections[filter].push(filterValue);
-        }
-        else{
-          this.selections[filter]=[filterValue];
-        }
-      }
-      else if(this.inputSelections[filter].select_type === 'single_select')
-      {
-        this.selections[filter]=filterValue;
-        const options = this.inputSelections[filter]['options'];
-        for(const option of options)
-        {
-          if(filterValue !== option)
-          {
-            this.selectionOptions[option]=false;
+  setSelectedOptionsOfVariation(variation: any) {
+    const variations = this.variations
+      .filter((v) => v.swatch_image === variation.swatch_image)
+      .reduce((a, { features }) => {
+        Object.keys(features).forEach((key) => {
+          if (a[key] && !a[key].includes(features[key])) {
+            a[key].push(features[key]);
+          } else {
+            a[key] = [features[key]];
           }
+        });
+        return a;
+      }, {});
+      for(const filter in variations)
+      {
+        const filterValue = variations[filter];
+       
+        if(this.inputSelections[filter].select_type==="single_select")
+        {
+          const options = this.inputSelections[filter]["options"];
+          for(const value of options)
+          {
+            if(!filterValue.includes(value))
+            {
+              this.selectionOptions[value] = false;
+            }
+          }
+          
         }
       }
-    }
-    
+    // variations.forEach((value) => {
+    //   const features = value.features;
+    //   for (const filter in features) {
+    //     const filterValue = features[filter];
+    //     if (this.inputSelections[filter].select_type === "single_select") {
+    //       // this.selections[filter] = filterValue;
+    //       const options = this.inputSelections[filter]["options"];
+    //       for (const option of options) {
+    //         if (filterValue !== option) {
+    //           this.selectionOptions[option] = false;
+    //         }
+    //       }
+    //     }
+    //   }
+    // });
+
+    // const distinctVariations = this.variations.filter((variation,index,array)=>{
+    //   return array.findIndex(t=> (t.swatch_image === variation.swatch_image))===index;
+    // })
+
+    // if (this.inputSelections[filter].select_type === "multi_select") {
+    //   if (this.selections[filter]) {
+    //     this.selections[filter].push(filterValue);
+    //   } else {
+    //     this.selections[filter] = [filterValue];
+    //   }
+    // } else
   }
 
+  updateSelections(event, option, type) {
+    if (event === this.selectionAdd) {
+      if (this.selections[type]) {
+        if (!this.selections[type].includes(option)) {
+          this.selections[type].push(option);
+        }
+      } else {
+        this.selections[type] = [option];
+      }
+    } else if (event == this.selectionRemove) {
+    }
+  }
   onCheckChange(event, option: string, type: string) {
-    console.log('event: ', event);
-    console.log('option: ', option);
-    console.log('type: ', type);
-    console.log('this.swatches: ', this.swatches);
+    console.log("event: ", event);
+    console.log("option: ", option);
+    console.log("type: ", type);
+    console.log("this.swatches: ", this.swatches);
 
     if (event.source.checked) {
       if (this.selections[type]) {
@@ -233,6 +290,7 @@ export class VariationsComponent implements OnInit {
       } else {
         this.selections[type] = [option];
       }
+      this.selectedFlag = true;
     } else {
       const optionsArr = this.selections[type].filter(
         (value: string) => value !== option
@@ -242,34 +300,96 @@ export class VariationsComponent implements OnInit {
         delete this.selections[type];
       }
     }
-    this.updateSwatches();
+    this.selectedSwatch = {
+      image: "",
+      swatch_image: null,
+      price: "",
+      wasPrice: "",
+    };
+
+    this.updateOptions(type);
+    //this.updateSwatches();
+  }
+  updateVariationsBasedOnSelections() {
+    const self = this;
+    this.swatchFilter = [];
+    const filteredVariations = this.variations
+      .map((variation) => {
+        return {
+          ...variation,
+          enabled: this.checkSwatchSelection(variation, self),
+        };
+      })
+      .filter((variation) => {
+        if (variation.swatch_image !== null) {
+          return this.filterDuplicateSwatches(variation, self);
+        }
+      });
+    this.swatches = [];
+    for (const variation of filteredVariations) {
+      if (
+        this.swatchFilter.includes(variation.swatch_image) &&
+        this.previousSwatch.swatch_image === variation.swatch_image
+      ) {
+        this.swatches.pop();
+      }
+      this.swatches.push(variation);
+      this.previousSwatch = variation;
+    }
+    return filteredVariations;
   }
 
   clearVariations() {
     this.clearSelection.emit(true);
     this.selections = {};
     this.selectedIndex = null;
-    this.setPrice.emit('');
-    this.setImage.emit('');
+    this.setPrice.emit("");
+    this.setImage.emit("");
     this.setSelectionChecked.emit(false);
     for (let item in this.inputSelections) {
-      this.inputSelections[item]['selected'] = false;
+      this.inputSelections[item]["selected"] = false;
     }
     this.selectionEmit();
     this.selectedSwatch = {
-      image: '',
+      image: "",
       swatch_image: null,
-      price: '',
-      wasPrice: ''
+      price: "",
+      wasPrice: "",
     };
     this.selectedFlag = false;
     // this.beforeSelection = true;
     this.setSelection.emit(true);
     this.filterSwatches();
     this.updateSwatches();
-    console.log('hasSelection: ', this.hasSelection);
+    console.log("hasSelection: ", this.hasSelection);
   }
 
+  updateOptions(type: string) {
+    const self = this;
+    const filteredSwatches = this.updateVariationsBasedOnSelections().filter(
+      (variation) => variation.enabled
+    );
+    const excludedOptions = this.inputSelections[type].options;
+    for (const key in this.selectionOptions) {
+      if (excludedOptions.indexOf(key) == -1) {
+        this.selectionOptions[key] = false;
+      }
+    }
+    filteredSwatches.forEach((variation) => {
+      const features = variation.features;
+      for (const filter in features) {
+        if (filter !== type) {
+          const filterValue = features[filter];
+          const options = this.inputSelections[filter]["options"];
+          for (const option of options) {
+            if (filterValue === option) {
+              this.selectionOptions[option] = true;
+            }
+          }
+        }
+      }
+    });
+  }
   updateSwatches() {
     const self = this;
     self.swatchFilter = [];
@@ -277,7 +397,7 @@ export class VariationsComponent implements OnInit {
       .map((variation) => {
         return {
           ...variation,
-          enabled: self.checkSwatchSelection(variation, self)
+          enabled: self.checkSwatchSelection(variation, self),
         };
       })
       .filter((variation) => {
@@ -312,7 +432,7 @@ export class VariationsComponent implements OnInit {
     ) {
       this.priceData = {
         price: this.filteredVariations[0].price,
-        wasPrice: this.filteredVariations[0].was_price
+        wasPrice: this.filteredVariations[0].was_price,
       };
       this.setPrice.emit(this.priceData);
       this.setImage.emit(this.filteredVariations[0]);
@@ -321,14 +441,12 @@ export class VariationsComponent implements OnInit {
     }
   }
 
-  filterVariationsForSingleSelect(){
-    if(this.filteredVariations.length > 0)
-    {
+  filterVariationsForSingleSelect() {
+    if (this.filteredVariations.length > 0) {
       this.filterSwatchesBasedOnValidVariations(this.filteredVariations);
     }
   }
-  filterSwatchesBasedOnValidVariations(variations:any[])
-  {
+  filterSwatchesBasedOnValidVariations(variations: any[]) {
     for (const keys in this.selectionOptions) {
       this.selectionOptions[keys] = false;
     }
@@ -345,20 +463,19 @@ export class VariationsComponent implements OnInit {
         // console.log('value.swatch_image ', value);
         // console.log('this.selectedSwatch ', this.selectedSwatch);
 
-        if (feature && feature.charAt(0) !== '#') {
+        if (feature && feature.charAt(0) !== "#") {
           // console.log('filter feature: ', feature);
-          if (
-            this.selectionOptions.hasOwnProperty(feature)
-          ) {
+          if (this.selectionOptions.hasOwnProperty(feature)) {
             this.selectionOptions[feature] = true;
           }
         }
-        
 
         // console.log('this.selectionOptions[feature]: ', this.selectionOptions);
       }
     }
-    const enabledOptions = Object.keys(this.selectionOptions).filter(key=> this.selectionOptions[key]);
+    const enabledOptions = Object.keys(this.selectionOptions).filter(
+      (key) => this.selectionOptions[key]
+    );
     console.log(enabledOptions);
   }
   checkSwatchSelection(variation, self) {
@@ -388,7 +505,7 @@ export class VariationsComponent implements OnInit {
       self.previousSwatch = variation;
     } else {
       if (
-        variation.hasOwnProperty('enabled') &&
+        variation.hasOwnProperty("enabled") &&
         !self.previousSwatch.enabled &&
         variation.enabled
       ) {
@@ -425,7 +542,7 @@ export class VariationsComponent implements OnInit {
           // console.log('value.swatch_image ', value);
           // console.log('this.selectedSwatch ', this.selectedSwatch);
 
-          if (feature && feature.charAt(0) !== '#') {
+          if (feature && feature.charAt(0) !== "#") {
             // console.log('filter feature: ', feature);
             if (
               this.selectionOptions.hasOwnProperty(feature) &&
@@ -453,19 +570,19 @@ export class VariationsComponent implements OnInit {
     ) {
       this.priceData = {
         price: this.selectedSwatch.price,
-        wasPrice: this.selectedSwatch.wasPrice
+        wasPrice: this.selectedSwatch.wasPrice,
       };
       this.setPrice.emit(this.priceData);
       this.setImage.emit(this.selectedSwatch);
     } else {
       this.selectedSwatch = {
-        image: '',
+        image: "",
         swatch_image: null,
-        price: '',
-        wasPrice: ''
+        price: "",
+        wasPrice: "",
       };
-      this.setPrice.emit('');
-      this.setImage.emit('');
+      this.setPrice.emit("");
+      this.setImage.emit("");
       this.selectedIndex = null;
     }
   }
