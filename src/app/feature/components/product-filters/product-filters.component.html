@@ -3,7 +3,7 @@
     class="flex items-center pa3 mr1 filter {{
       disableTab(filter) ? 'display-none' : ''
     }}"
-    *ngIf="!((filter === 'brand' || filter === 'category') && isBrandPage === true)"
+    *ngIf="!((filter === 'brand' || filter === 'category') && isBrandPage === true) || filter!=='dimensions'"
   >
     <span
       class="filter-name grow pointer"

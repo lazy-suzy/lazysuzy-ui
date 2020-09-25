@@ -4,9 +4,9 @@ import { Options } from 'ng5-slider';
 import { IFilterData } from 'src/app/shared/models';
 
 @Component({
-  selector: 'app-product-filters',
-  templateUrl: './product-filters.component.html',
-  styleUrls: ['./product-filters.component.less']
+  selector: "app-product-filters",
+  templateUrl: "./product-filters.component.html",
+  styleUrls: ["./product-filters.component.less"],
 })
 export class ProductFiltersComponent implements OnInit {
   @Output() setFilters = new EventEmitter<any>();
@@ -18,7 +18,7 @@ export class ProductFiltersComponent implements OnInit {
     category: [],
     shape: [],
     seating: [],
-    price: { from: 0, min: 0, max: 0, to: 0 }
+    price: { from: 0, min: 0, max: 0, to: 0 },
   };
   @Input() isChangingBrandList: boolean = false;
   objectKeys = Object.keys;
@@ -28,10 +28,11 @@ export class ProductFiltersComponent implements OnInit {
     price_from: 0,
     price_to: 0,
     type: [],
+    dimensions: {},
     color: [],
     category: [],
     shape: [],
-    seating: []
+    seating: [],
   };
   isPriceChanged = false;
   minValue = 100;
@@ -40,35 +41,42 @@ export class ProductFiltersComponent implements OnInit {
     floor: 10,
     ceil: 500,
     translate: (value: number) => {
-      return '$' + value;
-    }
+      return "$" + value;
+    },
   };
 
   constructor(private activeRoute: ActivatedRoute) {}
 
   ngOnInit() {
     this.activeRoute.queryParams.subscribe((params) => {
-      this.isClearAllVisible = params.filters !== '';
+      this.isClearAllVisible = params.filters !== "";
     });
   }
 
   // tslint:disable-next-line: use-lifecycle-interface
   ngOnChanges(change: any) {
-    if (change.isChangingBrandList && change.isChangingBrandList.currentValue == true) {
-      console.log('this is ischanging brand list: ', this.isChangingBrandList)
+    if (
+      change.isChangingBrandList &&
+      change.isChangingBrandList.currentValue == true
+    ) {
+      console.log("this is ischanging brand list: ", this.isChangingBrandList);
       this.isPriceChanged = false;
       this.activeFilters = {
         brand: this.activeFilters.brand,
         price_from: 0,
         price_to: 0,
         type: [],
+        dimensions: {},
         color: [],
         shape: [],
         seating: [],
-        category: []
+        category: [],
       };
     } else {
-      if (change.productFilters && change.productFilters.currentValue !== undefined) {
+      if (
+        change.productFilters &&
+        change.productFilters.currentValue !== undefined
+      ) {
         this.productFilters = change.productFilters.currentValue;
         if (this.productFilters && !this.isPriceChanged) {
           this.minValue = this.productFilters.price.from;
@@ -77,8 +85,8 @@ export class ProductFiltersComponent implements OnInit {
             floor: this.productFilters.price.min,
             ceil: this.productFilters.price.max,
             translate: (value: number) => {
-              return '$' + value;
-            }
+              return "$" + value;
+            },
           };
           this.activeFilters.price_from = this.minValue;
           this.activeFilters.price_to = this.maxValue;
@@ -107,7 +115,10 @@ export class ProductFiltersComponent implements OnInit {
               .map((category) => category.value);
           }
         }
-        if(this.productFilters.price.from === this.productFilters.price.min && this.productFilters.price.to === this.productFilters.price.max) {
+        if (
+          this.productFilters.price.from === this.productFilters.price.min &&
+          this.productFilters.price.to === this.productFilters.price.max
+        ) {
           this.isPriceChanged = false;
         } else {
           this.isPriceChanged = true;
@@ -140,16 +151,17 @@ export class ProductFiltersComponent implements OnInit {
   }
 
   clearFilters() {
-    if(this.isBrandPage) {
+    if (this.isBrandPage) {
       this.activeFilters = {
         brand: this.activeFilters.brand,
         price_from: 0,
         price_to: 0,
         type: [],
+        dimensions: {},
         color: [],
         shape: [],
         seating: [],
-        category: []
+        category: [],
       };
     } else {
       this.activeFilters = {
@@ -157,10 +169,11 @@ export class ProductFiltersComponent implements OnInit {
         price_from: 0,
         price_to: 0,
         type: [],
+        dimensions: {},
         color: [],
         shape: [],
         seating: [],
-        category: []
+        category: [],
       };
     }
 
@@ -171,9 +184,9 @@ export class ProductFiltersComponent implements OnInit {
   }
 
   buildAndSetFilters() {
-    let tempFilters = '';
+    let tempFilters = "";
     for (const [filter, options] of Object.entries(this.activeFilters)) {
-      if (filter === 'price_from' || filter === 'price_to') {
+      if (filter === "price_from" || filter === "price_to") {
         tempFilters += `${filter}:${options};`;
       } else {
         if (Array.isArray(options)) {
@@ -182,7 +195,7 @@ export class ProductFiltersComponent implements OnInit {
       }
     }
     this.setFilters.emit(tempFilters);
-    this.isClearAllVisible = tempFilters !== '';
+    this.isClearAllVisible = tempFilters !== "";
     return tempFilters;
   }
 
@@ -194,7 +207,7 @@ export class ProductFiltersComponent implements OnInit {
   }
 
   disableTab(filter) {
-    if (filter !== 'price') {
+    if (filter !== "price" && filter!=='dimensions') {
       return (
         this.productFilters[filter].filter((data) => data.enabled).length === 0
       );
