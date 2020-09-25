@@ -146,21 +146,6 @@ export class VariationsComponent implements OnInit {
       this.filterSwatches();
       //this.updateSwatches();
     }
-    //this.selections = {};
-    // for (let item in this.inputSelections) {
-    //   if (this.inputSelections[item]["select_type"] === "single_select") {
-    //     // this.selections[item] = this.inputSelections[item]["options"].find((option) => this.selectionOptions[option]);
-    //     let enableOptions = this.inputSelections[item]["options"].filter(
-    //       (option) => this.selectionOptions[option]
-    //     );
-    //     if (enableOptions.length === 1) {
-    //       this.selections[item] = enableOptions[0];
-    //       this.inputSelections[item]["selected"] = true;
-    //     } else {
-    //       this.inputSelections[item]["selected"] = false;
-    //     }
-    //   }
-    // }
     this.setSelectedOptionsOfVariation(variation);
     this.selectionEmit();
   }
@@ -211,12 +196,15 @@ export class VariationsComponent implements OnInit {
     const variations = this.variations
       .filter((v) => v.swatch_image === variation.swatch_image)
       .reduce((a, { features }) => {
-        Object.keys(features).forEach((key) => {
-          if (a[key] && !a[key].includes(features[key])) {
-            a[key].push(features[key]);
-          } else {
-            a[key] = [features[key]];
-          }
+         Object.keys(features).forEach((key) => {
+            if (a[key]) {
+              if(!a[key].includes(features[key]))
+              {
+                a[key].push(features[key]);
+              }
+            } else {
+              a[key] = [features[key]];
+           }
         });
         return a;
       }, {});
@@ -237,34 +225,7 @@ export class VariationsComponent implements OnInit {
           
         }
       }
-    // variations.forEach((value) => {
-    //   const features = value.features;
-    //   for (const filter in features) {
-    //     const filterValue = features[filter];
-    //     if (this.inputSelections[filter].select_type === "single_select") {
-    //       // this.selections[filter] = filterValue;
-    //       const options = this.inputSelections[filter]["options"];
-    //       for (const option of options) {
-    //         if (filterValue !== option) {
-    //           this.selectionOptions[option] = false;
-    //         }
-    //       }
-    //     }
-    //   }
-    // });
-
-    // const distinctVariations = this.variations.filter((variation,index,array)=>{
-    //   return array.findIndex(t=> (t.swatch_image === variation.swatch_image))===index;
-    // })
-
-    // if (this.inputSelections[filter].select_type === "multi_select") {
-    //   if (this.selections[filter]) {
-    //     this.selections[filter].push(filterValue);
-    //   } else {
-    //     this.selections[filter] = [filterValue];
-    //   }
-    // } else
-  }
+  } 
 
   updateSelections(event, option, type) {
     if (event === this.selectionAdd) {
