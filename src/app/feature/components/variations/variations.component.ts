@@ -30,27 +30,43 @@ export class VariationsComponent implements OnInit {
   bpObserver: Observable<BreakpointState> = this.breakpointObserver.observe(
     Breakpoints.Handset
   );
-  swatches = [];
-  filteredVariations = [];
+  swatches = []; //This stores all available swatches
+  
+  /**
+   * Stores Variations that are filtered by selections.
+   * Initally equal to @var variations
+   */
+  filteredVariations = []; 
+
   swatchFilter = [];
+  /**
+   * Stores all the selections made by the user in key:value format
+   * key is the @string type of filter and value is @array for multi-select and @string for single-select filters
+   */
   selections = {};
+  
   selectedIndex: number;
+  
   priceData = {
     price: "",
     wasPrice: "",
   };
+
   selectionsExist: boolean;
   bpSubscription: Subscription;
   isHandset: boolean;
-  selectionOptions = {};
+
+  selectionOptions = {}; //stores all options available for selections
+  
+  //Stores currently selected swatch
   selectedSwatch = {
     image: "",
     swatch_image: null,
     price: "",
     wasPrice: "",
   };
+  
   previousSwatch;
-
   selectionAdd = 1;
   selectionRemove = 2;
 
@@ -120,6 +136,12 @@ export class VariationsComponent implements OnInit {
   onDestroy(): void {
     this.bpSubscription.unsubscribe();
   }
+
+  /**
+   * Sets the current selected variation to the variation passed in param
+   * @param variation 
+   * @param index 
+   */
   selectedVariation(variation, index: number) {
     console.log("variation com: ", variation);
     if (variation.has_parent_sku) {
@@ -166,6 +188,13 @@ export class VariationsComponent implements OnInit {
     this.setSelectionChecked.emit(this.beforeSelection);
   }
 
+  /**
+   * Add or remove a single select option from selections object
+   * Then update swatches based on final result
+   * @param string option 
+   * @param string type 
+   * @return void
+   */
   selectedOption(option: string, type: string) {
     console.log("this.selections: ", this.selections);
     console.log("option: ", option);
@@ -191,23 +220,31 @@ export class VariationsComponent implements OnInit {
     this.updateSwatches();
     this.filterVariationsForSingleSelect();
   }
-
+  /**
+   * Set all options available for a particular swatch. 
+   * Only single-select filters are updated
+   * @param variation
+   */
   setSelectedOptionsOfVariation(variation: any) {
+    // Get all the options belonging to swatch
     const variations = this.variations
       .filter((v) => v.swatch_image === variation.swatch_image)
-      .reduce((a, { features }) => {
+      .reduce((acc, { features }) => {
          Object.keys(features).forEach((key) => {
-            if (a[key]) {
-              if(!a[key].includes(features[key]))
+            if (acc[key]) {
+              if(!acc[key].includes(features[key]))
               {
-                a[key].push(features[key]);
+                acc[key].push(features[key]);
               }
             } else {
-              a[key] = [features[key]];
+              acc[key] = [features[key]];
            }
         });
-        return a;
+        return acc;
       }, {});
+
+      // Filter @var selectionOptions based on all options
+
       for(const filter in variations)
       {
         const filterValue = variations[filter];
@@ -222,29 +259,24 @@ export class VariationsComponent implements OnInit {
               this.selectionOptions[value] = false;
             }
           }
+          if(filterValue.length == 1)
+          {
+           this.selections[filter] = filterValue[0];
+          }
           
         }
       }
   } 
-
-  updateSelections(event, option, type) {
-    if (event === this.selectionAdd) {
-      if (this.selections[type]) {
-        if (!this.selections[type].includes(option)) {
-          this.selections[type].push(option);
-        }
-      } else {
-        this.selections[type] = [option];
-      }
-    } else if (event == this.selectionRemove) {
-    }
-  }
+  
+  /**
+   * Whenever multi-select options are changed this method is called. 
+   * It either adds the option or removes the option if already present
+   * Then updates the swatches based on final result.
+   * @param event 
+   * @param option 
+   * @param type 
+   */
   onCheckChange(event, option: string, type: string) {
-    console.log("event: ", event);
-    console.log("option: ", option);
-    console.log("type: ", type);
-    console.log("this.swatches: ", this.swatches);
-
     if (event.source.checked) {
       if (this.selections[type]) {
         this.selections[type].push(option);
@@ -271,6 +303,13 @@ export class VariationsComponent implements OnInit {
     this.updateOptions(type);
     //this.updateSwatches();
   }
+
+  /**
+   * Update variations based on values in current selections
+   * Valid variations are marked as enabled(true) in @method checkSwatchSelection
+   * return filtered variations ie all the variations that were enabled.
+   * @returns array filteredVariations
+   */
   updateVariationsBasedOnSelections() {
     const self = this;
     this.swatchFilter = [];
@@ -278,7 +317,7 @@ export class VariationsComponent implements OnInit {
       .map((variation) => {
         return {
           ...variation,
-          enabled: this.checkSwatchSelection(variation, self),
+          enabled: this.checkSwatchSelection(variation, self), 
         };
       })
       .filter((variation) => {
@@ -300,6 +339,9 @@ export class VariationsComponent implements OnInit {
     return filteredVariations;
   }
 
+  /**
+   * Clears all options in @this.selections and resets all filters.
+   */
   clearVariations() {
     this.clearSelection.emit(true);
     this.selections = {};
@@ -325,6 +367,10 @@ export class VariationsComponent implements OnInit {
     console.log("hasSelection: ", this.hasSelection);
   }
 
+  /**
+   * 
+   * @param type
+   */
   updateOptions(type: string) {
     const self = this;
     const filteredSwatches = this.updateVariationsBasedOnSelections().filter(
@@ -351,6 +397,13 @@ export class VariationsComponent implements OnInit {
       }
     });
   }
+
+  /**
+   * This method updates which swatches to show based on selections.
+   * If swatch is selected
+   * @emits setPrice // Set price Event
+   * @emits setImage // setImage Event
+   */
   updateSwatches() {
     const self = this;
     self.swatchFilter = [];
@@ -386,7 +439,7 @@ export class VariationsComponent implements OnInit {
       }
       return self.checkSwatchSelection(variation, self);
     });
-    //
+
     if (
       this.filteredVariations.length === 1 ||
       this.selectedSwatch.swatch_image
@@ -404,14 +457,26 @@ export class VariationsComponent implements OnInit {
 
   filterVariationsForSingleSelect() {
     if (this.filteredVariations.length > 0) {
-      this.filterSwatchesBasedOnValidVariations(this.filteredVariations);
+      this.filterSwatchesBasedOnValidVariations();
     }
   }
-  filterSwatchesBasedOnValidVariations(variations: any[]) {
-    for (const keys in this.selectionOptions) {
-      this.selectionOptions[keys] = false;
+
+  filterSwatchesBasedOnValidVariations() {
+    let excludedOptions = [];
+    for(const selection in this.selections)
+    {
+      const options = this.inputSelections[selection].options
+      excludedOptions = [...excludedOptions,...options]
     }
-    for (const value of variations) {
+    
+    for(const option in this.selectionOptions)
+    {
+      if(!excludedOptions.includes(option))
+      {
+        this.selectionOptions[option]=false;
+      }
+    }
+    for (const value of this.filteredVariations) {
       // console.log('value ', value);
 
       const options = value.features;
@@ -434,11 +499,9 @@ export class VariationsComponent implements OnInit {
         // console.log('this.selectionOptions[feature]: ', this.selectionOptions);
       }
     }
-    const enabledOptions = Object.keys(this.selectionOptions).filter(
-      (key) => this.selectionOptions[key]
-    );
-    console.log(enabledOptions);
   }
+
+
   checkSwatchSelection(variation, self) {
     let isValidVariation = true;
     for (const key in self.selections) {
@@ -455,6 +518,12 @@ export class VariationsComponent implements OnInit {
     return isValidVariation;
   }
 
+  /**
+   * Filters variations based on swatch image.
+   * Swatch Image is unique across variations with multiple features
+   * @param variation 
+   * @param self 
+   */
   filterDuplicateSwatches(variation, self) {
     let isValidSwatch;
     if (
@@ -480,6 +549,7 @@ export class VariationsComponent implements OnInit {
     }
     return isValidSwatch;
   }
+  
   filterSwatches() {
     const variations = this.variations;
 
