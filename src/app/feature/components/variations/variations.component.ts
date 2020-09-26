@@ -320,7 +320,6 @@ export class VariationsComponent implements OnInit {
                 for (const option of options) {
                     this.selectionOptions[option] = true;
                 }
-                console.log(this.selectionOptions);
             }
         }
 
@@ -421,7 +420,7 @@ export class VariationsComponent implements OnInit {
             .map((variation) => {
                 return {
                     ...variation,
-                    enabled: self.selectSwatchContainingSelection(variation, self),
+                    enabled: self.checkSwatchSelection(variation, self),
                 };
             })
             .filter((variation) => {
@@ -462,7 +461,6 @@ export class VariationsComponent implements OnInit {
                     break;
                 } else {
                     isValidVariation = false;
-
                 }
             }
             return isValidVariation;
