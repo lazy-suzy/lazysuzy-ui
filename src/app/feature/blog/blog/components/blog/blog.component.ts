@@ -38,8 +38,7 @@ export class BlogComponent implements OnInit {
   }
 
   onScrollDown(): void {
-    if(this.page <= this.max_pages)
-    {
+    if (this.page < this.max_pages) {
       this.page = this.page + 1;
       this.getBlogs(this.page);
     }
@@ -51,8 +50,8 @@ export class BlogComponent implements OnInit {
       .getBlogs(page)
       .pipe(first())
       .subscribe(
-        ({headers,body}) => {
-          this.max_pages = headers.get('X-WP-TotalPages')
+        ({ headers, body }) => {
+          this.max_pages = headers.get("X-WP-TotalPages");
           if (!this.posts) {
             this.posts = [...body];
           } else {
@@ -66,5 +65,10 @@ export class BlogComponent implements OnInit {
           (this.showLoader = false), (this.loaded = true);
         }
       );
+  }
+  decodeHtml(text: string): string {
+    const htmlComponent = document.createElement("textarea");
+    htmlComponent.innerHTML = text;
+    return htmlComponent.value;
   }
 }

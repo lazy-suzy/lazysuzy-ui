@@ -28,7 +28,7 @@
 
             <div class="post__header">
                 <time datetime="2019-12-12" class="post__time">{{post.date | date: 'fullDate'}}</time>
-                <h2><a routerLink="{{post.id}}">{{post?.title?.rendered}}</a></h2>
+                <h2><a routerLink="{{post.id}}">{{decodeHtml(post?.title?.rendered)}}</a></h2>
             </div>
 
             <div class="post__announce" [innerHTML]="post?.excerpt?.rendered">

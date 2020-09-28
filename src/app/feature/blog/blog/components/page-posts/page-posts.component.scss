@@ -57,9 +57,18 @@
   z-index: 1;
 
   .wrapper {
-    width: 40%;
+    width: 50%;
     margin: 0 auto;
+    }
 
+    .mobile-wrapper {
+      width: 90%;
+    margin: 0 auto;
+  }
+
+  .post-title {
+    font-size: 60px !important;
+  }
     //article {
     //  p {
     //    &:first-child {
@@ -99,7 +108,6 @@
     //  position: relative;
     //  // top: -10px;
     //}
-  }
 }
 
 ///--------------------------------------------------------------
