@@ -3,8 +3,8 @@
 </div>
 
 <div class="container" *ngIf="!showLoader">
-    <div class="wrapper">
-        <h1 [innerHTML]="currentBlog?.title?.rendered"></h1>
+    <div [ngClass]="{'wrapper': !isHandset,'mobile-wrapper':isHandset}">
+        <h1 class="post-title" [innerHTML]="currentBlog?.title?.rendered"></h1>
         <small style="text-align: center;">{{currentBlog.date | date: 'fullDate'}}</small>
         <div
         [innerHTML]="currentBlog?.content?.rendered">
