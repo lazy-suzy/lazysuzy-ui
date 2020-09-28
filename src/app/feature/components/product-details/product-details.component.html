@@ -143,7 +143,7 @@
                     <div *ngIf="dimensionExist" class="mb2">
                         <hr class="modal-hr" />
                         <span class="title">Dimensions</span>
-                        <div class="mt1 pb1 flex flex-wrap" *ngIf="isArray(product.dimension); else showDimensions">
+                        <div class="mt1 pb1 flex flex-wrap" *ngIf="isArray(product.dimension) && product.dimension.length>0; else showDimensions">
                             <div *ngFor="let dimension of product.dimension" class="fl w-50 pa2">
                                 <div class="dimension-title">{{ dimension.description }}</div>
                                 <div *ngIf="dimension.width > 0">
