@@ -1,7 +1,7 @@
-import { Component, EventEmitter, Output, Input, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
-import { Options } from 'ng5-slider';
-import { IFilterData } from 'src/app/shared/models';
+import { Component, EventEmitter, Output, Input, OnInit } from "@angular/core";
+import { ActivatedRoute } from "@angular/router";
+import { Options } from "ng5-slider";
+import { IFilterData } from "src/app/shared/models";
 
 @Component({
   selector: "app-product-filters",
@@ -18,9 +18,15 @@ export class ProductFiltersComponent implements OnInit {
     category: [],
     shape: [],
     seating: [],
+    height: [],
+    width: [],
+    length: [],
+    diameter: [],
+    square: [],
     price: { from: 0, min: 0, max: 0, to: 0 },
   };
-  @Input() isChangingBrandList: boolean = false;
+  @Input() isChangingBrandList = false;
+  dimensionsKey = "dimensions";
   objectKeys = Object.keys;
   isClearAllVisible = false;
   activeFilters = {
@@ -28,7 +34,21 @@ export class ProductFiltersComponent implements OnInit {
     price_from: 0,
     price_to: 0,
     type: [],
-    dimensions: {},
+    height_from: 0,
+    height_to: 0,
+    width_from: 0,
+    width_to: 0,
+    length_from: 0,
+    length_to: 0,
+    diameter_from: 0,
+    diameter_to: 0,
+    square_from: 0,
+    square_to: 0,
+    height: "",
+    width: "",
+    length: "",
+    diameter: "",
+    square: "",
     color: [],
     category: [],
     shape: [],
@@ -37,7 +57,7 @@ export class ProductFiltersComponent implements OnInit {
   isPriceChanged = false;
   minValue = 100;
   maxValue = 600;
-  silderOptions: Options = {
+  sliderOptions: Options = {
     floor: 10,
     ceil: 500,
     translate: (value: number) => {
@@ -66,11 +86,25 @@ export class ProductFiltersComponent implements OnInit {
         price_from: 0,
         price_to: 0,
         type: [],
-        dimensions: {},
+        height_from: 0,
+        height_to: 0,
+        width_from: 0,
+        width_to: 0,
+        length_from: 0,
+        length_to: 0,
+        diameter_from: 0,
+        diameter_to: 0,
+        square_from: 0,
+        square_to: 0,
+        height: "",
+        width: "",
+        length: "",
+        diameter: "",
+        square: "",
         color: [],
+        category: [],
         shape: [],
         seating: [],
-        category: [],
       };
     } else {
       if (
@@ -81,7 +115,7 @@ export class ProductFiltersComponent implements OnInit {
         if (this.productFilters && !this.isPriceChanged) {
           this.minValue = this.productFilters.price.from;
           this.maxValue = this.productFilters.price.to;
-          this.silderOptions = {
+          this.sliderOptions = {
             floor: this.productFilters.price.min,
             ceil: this.productFilters.price.max,
             translate: (value: number) => {
@@ -114,6 +148,8 @@ export class ProductFiltersComponent implements OnInit {
               .filter((category) => category.checked)
               .map((category) => category.value);
           }
+          if (this.productFilters.height) {
+          }
         }
         if (
           this.productFilters.price.from === this.productFilters.price.min &&
@@ -129,23 +165,39 @@ export class ProductFiltersComponent implements OnInit {
 
   onCheckChange(event, filter: string) {
     const option = event.source.value;
-    if (event.source.checked) {
-      this.activeFilters[filter].push(option);
+    if (this.productFilters[filter][0].values) {
+      this.setDimensionFilters(event, filter);
     } else {
-      const optionsArr = this.activeFilters[filter].filter(
-        (value: string) => value !== option
-      );
-      this.activeFilters[filter] = optionsArr;
+      if (event.source.checked) {
+        this.activeFilters[filter].push(option);
+      } else {
+        const optionsArr = this.activeFilters[filter].filter(
+          (value: string) => value !== option
+        );
+        this.activeFilters[filter] = optionsArr;
+      }
+      if (
+        Math.round(this.minValue) === this.productFilters.price.from &&
+        Math.round(this.maxValue) === this.productFilters.price.to
+      ) {
+        delete this.activeFilters.price_from;
+        delete this.activeFilters.price_to;
+        this.isPriceChanged = false;
+      } else {
+        this.isPriceChanged = true;
+      }
+      this.buildAndSetFilters();
     }
-    if (
-      Math.round(this.minValue) === this.productFilters.price.from &&
-      Math.round(this.maxValue) === this.productFilters.price.to
-    ) {
-      delete this.activeFilters.price_from;
-      delete this.activeFilters.price_to;
-      this.isPriceChanged = false;
-    } else {
-      this.isPriceChanged = true;
+  }
+
+  setDimensionFilters(event, filter) {
+    if (event.source.checked) {
+      const values = event.source.value;
+      this.activeFilters[filter] = this.renderOptions(values);
+      const maxValueString = `${filter}_to`;
+      const minValueString = `${filter}_from`;
+      this.activeFilters[maxValueString] = values.max;
+      this.activeFilters[minValueString] = values.min;
     }
     this.buildAndSetFilters();
   }
@@ -157,11 +209,25 @@ export class ProductFiltersComponent implements OnInit {
         price_from: 0,
         price_to: 0,
         type: [],
-        dimensions: {},
+        height_from: 0,
+        height_to: 0,
+        width_from: 0,
+        width_to: 0,
+        length_from: 0,
+        length_to: 0,
+        diameter_from: 0,
+        diameter_to: 0,
+        square_from: 0,
+        square_to: 0,
+        height: "",
+        width: "",
+        length: "",
+        diameter: "",
+        square: "",
         color: [],
+        category: [],
         shape: [],
         seating: [],
-        category: [],
       };
     } else {
       this.activeFilters = {
@@ -169,11 +235,25 @@ export class ProductFiltersComponent implements OnInit {
         price_from: 0,
         price_to: 0,
         type: [],
-        dimensions: {},
+        height_from: 0,
+        height_to: 0,
+        width_from: 0,
+        width_to: 0,
+        length_from: 0,
+        length_to: 0,
+        diameter_from: 0,
+        diameter_to: 0,
+        square_from: 0,
+        square_to: 0,
+        height: "",
+        width: "",
+        length: "",
+        diameter: "",
+        square: "",
         color: [],
+        category: [],
         shape: [],
         seating: [],
-        category: [],
       };
     }
 
@@ -186,8 +266,10 @@ export class ProductFiltersComponent implements OnInit {
   buildAndSetFilters() {
     let tempFilters = "";
     for (const [filter, options] of Object.entries(this.activeFilters)) {
-      if (filter === "price_from" || filter === "price_to") {
-        tempFilters += `${filter}:${options};`;
+      if (filter.search("_from") !== -1 || filter.search("_to") !== -1) {
+        if (options > 0) {
+          tempFilters += `${filter}:${options};`;
+        }
       } else {
         if (Array.isArray(options)) {
           tempFilters += options.length ? `${filter}:${options};` : ``;
@@ -207,12 +289,23 @@ export class ProductFiltersComponent implements OnInit {
   }
 
   disableTab(filter) {
-    if (filter !== "price" && filter!=='dimensions') {
+    if (filter !== "price" && filter !== "dimensions") {
       return (
         this.productFilters[filter].filter((data) => data.enabled).length === 0
       );
     } else {
       return false;
     }
+  }
+
+  isArray(value) {
+    return Array.isArray(value);
+  }
+
+  renderOptions(option) {
+    const maxValue = option.max;
+    const minValue = option.min;
+    const optionString = `${maxValue} - ${minValue}`;
+    return optionString;
   }
 }
