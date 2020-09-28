@@ -1,15 +1,26 @@
-
 <div class="spinner">
-  <app-loader *ngIf="showLoader"></app-loader>
+    <app-loader *ngIf="showLoader"></app-loader>
 </div>
 
 <div class="container" *ngIf="!showLoader">
-  <div class="wrapper">
-    <h1 [innerHTML]="currentBlog?.title?.rendered"></h1>
-    <small style="text-align: center;">{{currentBlog.date | date: 'fullDate'}}</small>
-    <article>
-      <p [innerHTML]="currentBlog?.content?.rendered">
-      </p>
-    </article>
-  </div>
+    <div class="wrapper">
+        <h1 [innerHTML]="currentBlog?.title?.rendered"></h1>
+        <small style="text-align: center;">{{currentBlog.date | date: 'fullDate'}}</small>
+        <div
+        [innerHTML]="currentBlog?.content?.rendered">
+        </div>
+
+        <!--    -->
+        <!--    -->
+        <!--    <article>-->
+        <!--      <p [innerHTML]="currentBlog?.content?.rendered">-->
+        <!--      </p>-->
+        <!--    </article>-->
+    </div>
 </div>
+
+
+<!--<div class="container" *ngIf="!showLoader">-->
+<!--  <iframe style="width: 100%;height: 100%" [src]="postUrl">-->
+<!--  </iframe>-->
+<!--</div>-->

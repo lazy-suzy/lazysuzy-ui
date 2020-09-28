@@ -1,41 +1,67 @@
-import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
-import { Observable } from 'rxjs';
-import { ApiService } from 'src/app/shared/services';
-import { BlogService } from 'src/app/shared/services/blog/blog.service';
+import {Component, OnDestroy, OnInit} from '@angular/core';
+import {ActivatedRoute} from '@angular/router';
+import {Observable} from 'rxjs';
+import {BlogService} from 'src/app/shared/services/blog/blog.service';
+import {DomSanitizer} from '@angular/platform-browser';
 
 @Component({
-  selector: 'app-page-posts',
-  templateUrl: './page-posts.component.html',
-  styleUrls: ['./page-posts.component.scss']
+    selector: 'app-page-posts',
+    templateUrl: './page-posts.component.html',
+    styleUrls: ['./page-posts.component.scss'],
 })
-export class PagePostsComponent implements OnInit {
+export class PagePostsComponent implements OnInit, OnDestroy {
 
-  posts$: Observable<any[]>;
-  selectedPost: any;
-  showLoader = false;
-  postId = '';
-  currentBlog: any;
+    posts$: Observable<any[]>;
+    selectedPost: any;
+    showLoader = true;
+    postId = '';
+    currentBlog: any;
+    blogStylesUrl = [
+        'http://wordpress.lazysuzy.com/wp-includes/css/dist/block-library/style.min.css?ver=5.4.2',
+        'http://wordpress.lazysuzy.com/wp-content/themes/twentytwenty/style.css?ver=1.2',
+        'http://wordpress.lazysuzy.com/wp-content/themes/twentytwenty/print.css?ver=1.2'
+    ];
 
-  constructor(
-    private blogService: BlogService,
-    private route: ActivatedRoute
-  ) {
-    this.route.params.subscribe(params => {
-      this.postId = params.id;
-    });
-  }
+    constructor(
+        private blogService: BlogService,
+        private route: ActivatedRoute,
+        private sanitizer: DomSanitizer,
+    ) {
+        this.route.params.subscribe(params => {
+            this.postId = params.id;
+        });
+        this.blogStylesUrl.forEach((url, index) => {
+            const head = document.getElementsByTagName('head')[0];
+            const link = document.createElement('link');
+            link.id = `blogUrl${index}`;
+            link.rel = 'stylesheet';
+            link.type = 'text/css';
+            link.href = url;
+            head.appendChild(link);
+        });
+    }
 
-  ngOnInit() {
-    this.showLoader = true;
-    this.posts$ = this.blogService.getPost(this.postId);
-    this.posts$.subscribe(s => {
-      this.currentBlog = s;
-      let x_tags = this.currentBlog.x_tags || '';
-      x_tags = x_tags.split(',');
-      this.currentBlog.x_tags = [...x_tags];
-      this.showLoader = false;
-    });
-  }
+    ngOnInit() {
+        this.showLoader = true;
+        this.posts$ = this.blogService.getPost(this.postId);
+        this.posts$.subscribe(s => {
+            this.currentBlog = s;
+            let x_tags = this.currentBlog.x_tags || '';
+            x_tags = x_tags.split(',');
+            this.currentBlog.x_tags = [...x_tags];
+            this.showLoader = false;
+        });
+    }
+
+    ngOnDestroy(): void {
+        console.log('destroyed');
+        const numberOfElements = this.blogStylesUrl.length - 1;
+        for (let index = 0; index < numberOfElements; index++) {
+            const id = `blogUrl${index}`;
+            const element = document.getElementById(id);
+            element.remove();
+        }
+    }
+
 
 }
