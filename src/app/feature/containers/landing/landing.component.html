@@ -55,19 +55,23 @@
     <div class="reviews-section">
       <div class="header">DON'T TAKE OUR WORD FOR IT</div>
       <div class="flex-ns justify-between-ns review-cards-container">
-        <div class="review-card" *ngFor="let data of reviews">
-          <a href="https://www.trustpilot.com/review/www.lazysuzy.com">
-            <div class="trustpilot-images">
-              <img [src]="trustPilotStarsPath" />
-              <img [src]="trustPilotLogoPath" />
+        <p-carousel contentClass="carousel-items" [value]="reviews" [numVisible]="3" [numScroll]="1">
+          <ng-template let-data pTemplate="item">
+            <div class="review-card">
+              <a href="https://www.trustpilot.com/review/www.lazysuzy.com">
+                <div class="trustpilot-images">
+                  <img [src]="trustPilotStarsPath" />
+                  <img [src]="trustPilotLogoPath" />
+                </div>
+                <div class="content">
+                  <div class="review-title">{{ data.title }}</div>
+                  <div class="review-writer">by {{ data.writer }}</div>
+                  <div class="review-content">{{ data.review }}</div>
+                </div>
+              </a>
             </div>
-            <div class="content">
-              <div class="review-title">{{ data.title }}</div>
-              <div class="review-writer">by {{ data.writer }}</div>
-              <div class="review-content">{{ data.review }}</div>
-            </div>
-          </a>
-        </div>
+          </ng-template>
+        </p-carousel>
       </div>
     </div>
     <app-subscribe [homePage]="true"></app-subscribe>
