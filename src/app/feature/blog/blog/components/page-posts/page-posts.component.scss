@@ -5,7 +5,9 @@
   left: 50%;
   transform: translate(-50%, -50%);
 }
-
+.custom-background {
+  background: white !important;
+}
 // TYPOGRAPHY
 //p {
 //  margin-bottom: 1.3em;
@@ -51,8 +53,8 @@
 
 .container {
   width: 100%;
+  background-color: white;
   //height: 100%;
-  background-color: #f5efe0;
   // margin-top: 400px;
   z-index: 1;
 
@@ -65,9 +67,12 @@
       width: 90%;
     margin: 0 auto;
   }
-
+  
   .post-title {
     font-size: 60px !important;
+  }
+  .blog-content{
+    font-family: Lato, sans-serif !important;
   }
     //article {
     //  p {
