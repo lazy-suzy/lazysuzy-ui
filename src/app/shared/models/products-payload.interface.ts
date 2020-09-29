@@ -96,11 +96,11 @@ export interface IFilterData {
     color: Color[];
     shape: Shape[];
     seating: Seating[];
-    height: [];
-    width: [];
-    length: [];
-    diameter: [];
-    square: [];
+    height?: any[];
+    width?: any[];
+    length?: any[];
+    diameter?: any[];
+    square?: any[];
     category?: Category[];
 }
 
