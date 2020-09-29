@@ -46,21 +46,21 @@
     </ng-container>
     <ng-template #isOOS>
       <span class="{{
-          (product.is_price !== product.was_price && 'cprice sale') || 'cprice'
+          (minPrice < wasMinPrice && 'cprice sale') || 'cprice'
         }}">
-        <ng-container *ngIf="!this.max_price;else bothPrices">
-          ${{ min_price | number:"1.2-2" }}
+        <ng-container *ngIf="!this.maxPrice;else bothPrices">
+          ${{ minPrice | number:"1.2-2" }}
         </ng-container>
         <ng-template #bothPrices>
-          ${{ min_price | number:"1.2-2" }}-{{ max_price | number:"1.2-2" }}
+          ${{ minPrice | number:"1.2-2" }}-{{ maxPrice | number:"1.2-2" }}
         </ng-template>
       </span>
-      <span *ngIf="product.is_price !== product.was_price" class="oldprice">
-        <ng-container *ngIf="!this.max_price;else bothWasPrices">
-          ${{ was_min_price | number:"1.2-2" }}
+      <span *ngIf="this.minPrice < this.wasMinPrice" class="oldprice">
+        <ng-container *ngIf="!this.wasMaxPrice;else bothWasPrices">
+          ${{ wasMinPrice | number:"1.2-2" }}
         </ng-container>
         <ng-template #bothWasPrices>
-          ${{ was_min_price | number:"1.2-2" }}-{{ was_max_price | number:"1.2-2" }}
+          ${{ wasMinPrice | number:"1.2-2" }}-{{ wasMaxPrice | number:"1.2-2" }}
         </ng-template>
       </span>
     </ng-template>
