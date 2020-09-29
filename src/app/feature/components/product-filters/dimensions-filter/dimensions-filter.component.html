@@ -1,0 +1,12 @@
+<ng-container *ngFor="let dimensionKeys of dimensions|keyvalue">
+                 <span
+                         class="filter-name grow pointer">
+    <!--                         [ngClass]="{'active'">-->
+
+    {{dimensionKeys.value.label }}
+    </span>
+    <div
+            class="ml2 arrow-down">
+<!--            [ngClass]="{'active': (filter !== 'price' && activeFilters[filter].length > 0) || (filter === 'price' && isPriceChanged)}"-->
+    </div>
+</ng-container>

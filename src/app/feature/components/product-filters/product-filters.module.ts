@@ -6,6 +6,7 @@ import { NgModule } from '@angular/core';
 import { Ng5SliderModule } from 'ng5-slider';
 import { ProductFiltersComponent } from './product-filters.component';
 import { MatIconModule } from '@angular/material/icon';
+import { DimensionsFilterComponent } from './dimensions-filter/dimensions-filter.component';
 const DECLARATIONS = [ProductFiltersComponent];
 
 const MODULES = [
@@ -17,7 +18,7 @@ const MODULES = [
 ];
 
 @NgModule({
-  declarations: [...DECLARATIONS],
+  declarations: [...DECLARATIONS, DimensionsFilterComponent],
   imports: [...MODULES],
   exports: [...DECLARATIONS, ...MODULES]
 })
