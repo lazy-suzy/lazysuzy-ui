@@ -309,7 +309,7 @@ export class ProductFiltersComponent implements OnInit {
     renderOptions(option) {
         const maxValue = option.max;
         const minValue = option.min;
-        const optionString = `${maxValue} - ${minValue}`;
+        const optionString = `${maxValue}" - ${minValue}"`;
         return optionString;
     }
 }
