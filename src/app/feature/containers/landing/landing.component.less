@@ -8,10 +8,13 @@
 @background-color: #fbfbfb;
 @dropdown-background-color: #f7f6f7;
 
+
+::ng-deep.ui-carousel-items-container .ui-carousel-item{
+  overflow: hidden !important;
+}
 .main-container {
   text-align: center;
 }
-
 .section {
   margin-bottom: 18px;
   // padding: 0 15px;
@@ -168,7 +171,8 @@ h1 {
     padding: 10px 15px;
     text-align: left;
     margin: 10px 0;
-    width: 30%;
+    width: 90%;
+    height: 100%;
     a {
       color: #0c1c31;
       &:hover {
