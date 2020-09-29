@@ -2,11 +2,11 @@
     <app-loader *ngIf="showLoader"></app-loader>
 </div>
 
-<div class="container blog-content" *ngIf="!showLoader">
+<div class="container" *ngIf="!showLoader">
     <div [ngClass]="{'wrapper': !isHandset,'mobile-wrapper':isHandset}">
         <h1 class="post-title" [innerHTML]="currentBlog?.title?.rendered"></h1>
         <small style="text-align: center;">{{currentBlog.date | date: 'fullDate'}}</small>
-        <div
+        <div class = "blog-content"
         [innerHTML]="currentBlog?.content?.rendered">
         </div>
 
