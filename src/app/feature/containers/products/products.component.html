@@ -33,7 +33,7 @@
     </ng-container>
 
     <!-- [ngClass]="{'products-container': !isHandset}"  -->
-    <div class="flex" [ngClass]="{'flex-wrap': isHandset}" infiniteScroll [infiniteScrollDistance]="2"
+    <div [ngClass]="{'flex-wrap flex': isHandset}" infiniteScroll [infiniteScrollDistance]="2"
          [infiniteScrollThrottle]="50" (scrolled)="onScroll()">
 
 
@@ -65,7 +65,7 @@
                         <div class="col-md-12 filter-panel">
                             <div class="row">
                                 <div class="col-md-9" style="align-self: center;">
-                                    <app-product-filters [productFilters]="productFilters"
+                                    <app-product-filters #productFiltersComponent [productFilters]="productFilters"
                                                          (setFilters)="onSetFilters($event)"
                                                          class="flex flex-wrap justify-start"></app-product-filters>
                                 </div>
@@ -83,13 +83,22 @@
                     <!-- </div> -->
 
                     <div class="row">
-                        <app-product *ngFor="let product of products" [product]="product" class="col-md-4"
-                                     style="margin-bottom: 15px;">
-                        </app-product>
+                        <ng-container *ngIf="products.length>0;else emptyProductsMessage">
+                            <app-product *ngFor="let product of products" [product]="product" class="col-md-4"
+                                         style="margin-bottom: 15px;">
+                            </app-product>
+                        </ng-container>
+                        <ng-template #emptyProductsMessage>
+                            <div class="col-md-12" style="text-align: center;">
+                                <p>Oops. No Products Found :( Try removing some filters or
+                                    <a class="clear-filter-text" (click)="productFiltersComponent.clearFilters()">Click Here</a>
+                                    to clear all
+                                    filters </p>
+                            </div>
+                        </ng-template>
                     </div>
                 </div>
                 <div class="col-md-2">
-
                 </div>
             </div>
         </ng-container>
