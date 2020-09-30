@@ -15,7 +15,7 @@
                     [ngClass]="{'active': (filter !== 'price' && activeFilters[filter].length > 0) || (filter === 'price' && isPriceChanged)}"
             ></div>
             <div class="filter-options">
-                <ng-container *ngIf="filter === 'price' || filter===dimensionsKey;else elseBlock">
+                <ng-container *ngIf="filter === 'price';else elseBlock">
                     <div class="price-menu" *ngIf="filter === 'price';">
                         <ng5-slider
                                 [(value)]="minValue"
