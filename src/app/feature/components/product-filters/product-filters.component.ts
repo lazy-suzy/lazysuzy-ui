@@ -156,58 +156,30 @@ export class ProductFiltersComponent implements OnInit {
                             .map((category) => category.value);
                     }
                     if (this.productFilters.height) {
-                        const activeFilterValues = this.productFilters.height
-                            .map((enabled) => {
-                                return enabled.values.filter(value => value.checked);
-                            }).filter(emptyValue => {
-                                if (Array.isArray(emptyValue) && emptyValue.length === 0) {
-                                    return false;
-                                }
-                                return true;
-                            });
-                        this.activeFilters.height = activeFilterValues.map(value => this.renderOptions(value.values));
+                        const activeFilterValues = this.productFilters.height[0].values
+                            .filter((enabled) => enabled.checked);
+                        this.activeFilters.height = activeFilterValues.map(value => this.renderOptions(value));
                         this.activeFilters.height_from = activeFilterValues.map(value => value.min);
                         this.activeFilters.height_to = activeFilterValues.map(value => value.max);
                     }
                     if (this.productFilters.width) {
-                        const activeFilterValues = this.productFilters.width
-                            .map((enabled) => {
-                                return enabled.values.filter(value => value.checked);
-                            }).filter(emptyValue => {
-                                if (Array.isArray(emptyValue) && emptyValue.length === 0) {
-                                    return false;
-                                }
-                                return true;
-                            });
-                        this.activeFilters.width = activeFilterValues.map(value => this.renderOptions(value.values));
+                        const activeFilterValues = this.productFilters.width[0].values
+                            .filter((enabled) => enabled.checked);
+                        this.activeFilters.width = activeFilterValues.map(value => this.renderOptions(value));
                         this.activeFilters.width_from = activeFilterValues.map(value => value.min);
                         this.activeFilters.width_to = activeFilterValues.map(value => value.max);
                     }
                     if (this.productFilters.diameter) {
-                        const activeFilterValues = this.productFilters.diameter
-                            .map((enabled) => {
-                                return enabled.values.filter(value => value.checked);
-                            }).filter(emptyValue => {
-                                if (Array.isArray(emptyValue) && emptyValue.length === 0) {
-                                    return false;
-                                }
-                                return true;
-                            });
-                        this.activeFilters.diameter = activeFilterValues.map(value => this.renderOptions(value.values));
+                        const activeFilterValues = this.productFilters.diameter[0].values
+                            .filter((enabled) => enabled.checked);
+                        this.activeFilters.diameter = activeFilterValues.map(value => this.renderOptions(value));
                         this.activeFilters.diameter_from = activeFilterValues.map(value => value.min);
                         this.activeFilters.diameter_to = activeFilterValues.map(value => value.max);
                     }
                     if (this.productFilters.square) {
-                        const activeFilterValues = this.productFilters.square
-                            .map((enabled) => {
-                                return enabled.values.filter(value => value.checked);
-                            }).filter(emptyValue => {
-                                if (Array.isArray(emptyValue) && emptyValue.length === 0) {
-                                    return false;
-                                }
-                                return true;
-                            });
-                        this.activeFilters.square = activeFilterValues.map(value => this.renderOptions(value.values));
+                        const activeFilterValues = this.productFilters.square[0].values
+                            .filter((enabled) => enabled.checked);
+                        this.activeFilters.square = activeFilterValues.map(value => this.renderOptions(value));
                         this.activeFilters.square_from = activeFilterValues.map(value => value.min);
                         this.activeFilters.square_to = activeFilterValues.map(value => value.max);
                     }
@@ -222,17 +194,6 @@ export class ProductFiltersComponent implements OnInit {
                 }
             }
         }
-    }
-
-    private handleDimensionFilterChange() {
-
-    }
-
-    populateDimensionFilterValues(filter) {
-        const filterValues = this.activeFilters[filter];
-        filterValues.forEach(value => {
-
-        });
     }
 
     onCheckChange(event, filter: string) {
