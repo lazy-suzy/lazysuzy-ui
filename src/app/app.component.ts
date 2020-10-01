@@ -49,14 +49,14 @@ export class AppComponent implements OnInit {
         });
     }
 
-    @HostListener('window:scroll', ['$event'])
+    @HostListener('window:scroll')
     onWindowScroll() {
         // In chrome and some browser scroll is given to body tag
         const pos = (document.documentElement.scrollTop || document.body.scrollTop) + document.documentElement.offsetHeight;
         const max = document.documentElement.scrollHeight;
         // pos/max will give you the distance between scroll bottom and and bottom of screen in percentage.
         const intercom = document.getElementsByClassName('intercom-lightweight-app')[0];
-        if (pos === max) {
+        if (pos === max && intercom) {
             console.log('reached bottom');
             intercom.classList.add('hidden');
         } else {
