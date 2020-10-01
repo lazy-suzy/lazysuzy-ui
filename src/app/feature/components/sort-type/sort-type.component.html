@@ -1,11 +1,9 @@
-<div class="flex items-center sortbar-style">
-  <mat-form-field>
-    <mat-select [(value)]="default" (selectionChange)="sortChanged($event)">
+<div class="custom-class">
+    <mat-select class="w-100 text-right" [(value)]="default" (selectionChange)="sortChanged($event)">
       <mat-option *ngFor="let type of sortTypeList" [value]="type.value">{{
         type.name
       }}</mat-option>
     </mat-select>
-  </mat-form-field>
   <!-- <ng-container  *ngFor="let type of sortTypeList">
     <div *ngIf="type.value === sortType">Sort By <strong>{{ type.name }}</strong></div>
   </ng-container>

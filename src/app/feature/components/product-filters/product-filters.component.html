@@ -1,7 +1,7 @@
 <ng-container *ngFor="let filter of objectKeys(productFilters || {})">
     <ng-container *ngIf="(!isArray(productFilters[filter][0]?.values) || productFilters[filter][0]?.values?.length>0)">
         <div
-                class="flex items-center pa3 mr1 filter
+                class="flex items-center filter-padding mr1 filter
             {{disableTab(filter) ? 'display-none' : ''}}"
                 *ngIf="!((filter === 'brand' || filter === 'category') && isBrandPage === true)">
             <span
