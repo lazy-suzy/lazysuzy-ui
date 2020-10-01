@@ -63,15 +63,15 @@
                     <!-- -->
                     <div class="row sticky-row ">
                         <div class="col-md-12 filter-panel">
-                            <div class="row">
-                                <div class="col-md-9" style="align-self: center;">
+                            <div class="row" style="padding: 10px;">
+                                <div class="col-md-9">
                                     <app-product-filters #productFiltersComponent [productFilters]="productFilters"
                                                          (setFilters)="onSetFilters($event)"
                                                          class="flex flex-wrap justify-start"></app-product-filters>
                                 </div>
-                                <div class="col-md-1" style="align-self: center;"
+                                <div class="col-md-1"
                                 ><span style="font-size: 14px;">{{ totalCount }} Results</span></div>
-                                <div class="col-md-2" style="align-self: center;">
+                                <div class="col-md-2">
                                     <app-sort-type [sortTypeList]="sortTypeList" [sortType]="sortType"
                                                    (setSortType)="onSetSortType($event)">
                                     </app-sort-type>
