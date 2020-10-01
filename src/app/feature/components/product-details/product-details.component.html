@@ -140,7 +140,7 @@
                         </div>
                     </div>
 
-                    <div *ngIf="dimensionExist" class="mb2">
+                    <div *ngIf="dimensionExist;else emptySpace" class="mb2">
                         <hr class="modal-hr" />
                         <span class="title">Dimensions</span>
                         <div class="mt1 pb1 flex flex-wrap" *ngIf="isArray(product.dimension) && product.dimension.length>0; else showDimensions">
@@ -164,6 +164,9 @@
                             </div>
                         </ng-template>
                     </div>
+                    <ng-template #emptySpace>
+                        &nbsp;
+                    </ng-template>
                 </div>
             </div>
         </div>
