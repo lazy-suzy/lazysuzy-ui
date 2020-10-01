@@ -1,18 +1,26 @@
-<div class="flex white mh3 mb2">    
-    <div class="w-60">
-        <p>© 2020 LazySuzy</p>
-        <div class="">
-            <a class="link white" [routerLink]="['/privacypolicy']" >Privacy Policy </a>
+<div class="flex white mh3 font-size-14 mb2">
+    <div class="w-80">
+        <a class="link white font-size-14 lazy-story" [routerLink]="['/aboutus']">The Lazy Story</a>
+        <a class="link white font-size-14 lazy-story" [routerLink]="['/aboutus']">Home Musings</a>
+        <div class="font-size-12">
+            <a class="link white" [routerLink]="['/privacypolicy']">Privacy Policy </a>
             <span>|</span>
             <a class="link white" [routerLink]="['/termsofservice']"> Terms of Service</a>
+            <span> ©2020 LazySuzy</span>
         </div>
     </div>
-    <div class="w-40">
-        <a class="link white lazy-story fr" [routerLink]="['/aboutus']">The Lazy Story</a>
-        <div class="mh1 fr">Connect with Us 
-            <a target="_blank" class="link white" href="//www.facebook.com/shoplazysuzy">
+    <!--        <a class="link white lazy-story fr" [routerLink]="['/blog']">Blog</a>-->
+    <div class="w-20">
+        <div class="mv3">
+            <a target="_blank" class="link icon font-size-14 white" href="//www.facebook.com/shoplazysuzy">
                 <i class="fab fa-facebook-f"></i>
-            </a> 
+            </a>
+            <a target="_blank" class="link font-size-14 icon white" href="mailto:hello@lazysuzy.com">
+                <i class="fas fa-envelope"></i>
+            </a>
+            <a class="link font-size-14 icon white" [routerLink]="['/blog']">
+                <i class="fas fa-rss-square"></i>
+            </a>
         </div>
     </div>
 </div>
