@@ -219,9 +219,8 @@ export class ProductFiltersComponent implements OnInit {
             } else {
                 this.isPriceChanged = true;
             }
-            this.buildAndSetFilters();
         }
-
+        this.buildAndSetFilters();
     }
 
     setDimensionFilters(event, filter) {
@@ -238,7 +237,7 @@ export class ProductFiltersComponent implements OnInit {
             this.activeFilters[maxValueString].splice(index, 1);
             this.activeFilters[minValueString].splice(index, 1);
         }
-        //this.buildAndSetFilters();
+        // this.buildAndSetFilters();
     }
 
     clearFilters() {
