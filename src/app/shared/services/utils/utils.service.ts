@@ -3,20 +3,32 @@ import { MatDialog } from '@angular/material/dialog';
 import { SignupComponent } from 'src/app/core/components';
 import { MarkdownService } from 'ngx-markdown';
 import { environment as env } from 'src/environments/environment';
+import { Subscription, Observable } from "rxjs";
+import {
+  Breakpoints,
+  BreakpointState,
+  BreakpointObserver,
+} from "@angular/cdk/layout";
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: "root",
 })
 export class UtilsService {
   signupRef: ElementRef;
   readonly userType = {
     guest: 0,
-    default: 1
+    default: 1,
   };
+
+  bpObserver: Observable<BreakpointState> = this.breakpointObserver.observe(
+    Breakpoints.Handset
+  );
+  bpSubscription: Subscription;
 
   constructor(
     public dialog: MatDialog,
-    private markdownService: MarkdownService
+    private markdownService: MarkdownService,
+    private breakpointObserver:     BreakpointObserver
   ) {}
 
   closeDialogs() {
@@ -41,29 +53,29 @@ export class UtilsService {
   }
 
   openSignupDialog(isHandset = false, isClose = false) {
-    const width = isHandset ? '100%' : '35%';
+    const width = isHandset ? "100%" : "35%";
     // tslint:disable-next-line: no-unused-expression
     !isClose && this.dialog.closeAll();
     return this.dialog.open(SignupComponent, {
       width,
 
-      panelClass: 'auth-dialog-container',
-      autoFocus: false
+      panelClass: "auth-dialog-container",
+      autoFocus: false,
     });
   }
 
-  compileMarkdown(data, site = 'West Elm') {
+  compileMarkdown(data, site = "West Elm") {
     let compileData;
-    if (site !== 'West Elm') {
+    if (site !== "West Elm") {
       compileData = data.map((item) => `*   ${item}`);
     } else {
       compileData = data;
     }
-    let mergedData = '';
+    let mergedData = "";
     for (const item of compileData) {
       mergedData = `${mergedData}${
-        item.indexOf('</h6>') > -1 ? '\n' : ''
-      }${item}\n${item.indexOf('</h6>') > -1 ? '\n' : ''}`;
+        item.indexOf("</h6>") > -1 ? "\n" : ""
+      }${item}\n${item.indexOf("</h6>") > -1 ? "\n" : ""}`;
     }
     return this.markdownService.compile(mergedData);
   }
@@ -76,7 +88,7 @@ export class UtilsService {
   }
 
   updateProfileImageLink(picture) {
-    return picture.includes('http') ? picture : env.BASE_HREF + picture;
+    return picture.includes("http") ? picture : env.BASE_HREF + picture;
   }
 
   formatPrice(price) {
@@ -85,11 +97,11 @@ export class UtilsService {
       let minRange;
       let maxRange;
       let result;
-      const splitedPrice = priceString.split('-');
+      const splitedPrice = priceString.split("-");
       minRange = parseFloat(splitedPrice[0]).toFixed(2);
       if (splitedPrice.length > 1) {
         maxRange = parseFloat(splitedPrice[1]).toFixed(2);
-        result = minRange.toString() + ' - ' + maxRange.toString();
+        result = minRange.toString() + " - " + maxRange.toString();
       } else {
         maxRange = null;
         result = minRange.toString();
@@ -102,13 +114,17 @@ export class UtilsService {
 
   updateLocalCart(quantityChange) {
     // tslint:disable-next-line: radix
-    const localCartData = parseInt(localStorage.getItem('cart'));
+    const localCartData = parseInt(localStorage.getItem("cart"));
     let quantity = quantityChange;
-    if (typeof quantityChange === 'string') {
+    if (typeof quantityChange === "string") {
       // tslint:disable-next-line: radix
       quantity = parseInt(quantityChange);
     }
     const updateCartTotal = localCartData + quantity;
-    localStorage.setItem('cart', updateCartTotal.toString());
+    localStorage.setItem("cart", updateCartTotal.toString());
+  }
+
+  isHandset():Observable<BreakpointState> {
+    return this.bpObserver;
   }
 }

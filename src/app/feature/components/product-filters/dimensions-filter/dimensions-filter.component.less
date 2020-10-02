@@ -6,35 +6,29 @@
 
   border-top: 8px solid rgb(0, 0, 0);
   &.active {
-    border-top: 8px solid #B76E79;
+    border-top: 8px solid #ffcc00;
   }
 }
-.filter-padding
-{
-  padding-left: 1rem;
-  padding-right: 1rem;
-  padding-bottom: 0.5rem;
-}
+
 .filter {
   position: relative;
   font-size: 14px;
   .filter-name {
     text-transform: uppercase;
     &.active {
-      color: #B76E79;
+      color: #ffcc00;
     }
   }
 
   .filter-options {
     display: none;
     position: absolute;
-    top: 25px;
+    top: 45px;
     background: #fff;
     border-radius: 4px;
     border: 1px solid #f2f4f3;
     max-height: 410px;
     overflow: auto;
-    z-index: 99;
   }
   &:hover {
     .filter-options {
