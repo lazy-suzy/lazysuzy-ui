@@ -55,13 +55,13 @@
         <div class="reviews-section">
             <div class="header">DON'T TAKE OUR WORD FOR IT</div>
             <div class="flex-ns justify-between-ns review-cards-container">
-                <ng-container *ngIf="!isHandset;else mobileCarousel">
+                <ng-container *ngIf="false;else mobileCarousel">
                     <p-carousel
                             contentClass="carousel-items"
                             [numVisible]="3"
                             [numScroll]="1"
                             [value]="reviews"
-                            [circular]="true"
+                            [circular]="false"
                     >
                         <ng-template let-data pTemplate="item">
                             <div class="review-card">
@@ -81,14 +81,14 @@
                     </p-carousel>
                 </ng-container>
                 <ng-template #mobileCarousel>
-                    <div style="width: 100%;">
+                    <div style="width: 100%;" id="testimonials">
                         <owl-carousel
                                 [options]="carousalOptions"
                                 [items]="reviews"
                                 *ngIf="reviews?.length"
                                 [carouselClasses]="['owl-theme']"
                         >
-                                <div class="item carousel-item" style="display: flex" *ngFor="let data of reviews; let i = index">
+                                <div class="item carousel-item" style="display: flex;height: 100%" *ngFor="let data of reviews; let i = index">
                                     <div class="mobile-review-card carousel-box">
                                         <a class="sane-image-width" href="https://www.trustpilot.com/review/www.lazysuzy.com">
                                             <div class="trustpilot-images">
