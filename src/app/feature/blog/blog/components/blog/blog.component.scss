@@ -79,7 +79,7 @@ body {
 
 h1, h2 {
 	display: block;
-	font-family: 'Oswald', sans-serif;
+	font-family: 'Open Sans', sans-serif;
 	font-style: normal;
 	line-height: 1.4em;
 	color: var(--headings-color);
@@ -138,10 +138,10 @@ main {
 	grid-template-areas:
         "pr_img"
         "header"
-        "text"
-        "footer";
+		"author"
+        "text";
     align-items: start;
-    grid-gap: 1em 2em;
+    grid-gap: 0.5em 2em;
 }
 
 .post__preview-img {
@@ -157,7 +157,7 @@ main {
 }
 
 .post__meta {
-	grid-area: footer;
+	grid-area: author;
     align-self: start;
     display: flex;
     justify-content: space-between;
