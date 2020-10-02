@@ -49,7 +49,17 @@ export class LandingComponent implements OnInit {
         items: 1,
         center: true,
         dots: false,
+        nav: true,
+        navText: ['', '<button class=\'right-icon\'><span class="fa fa-chevron-right right-arrow"></span></button>'],
         pagination: true,
+        responsive: {
+            0: {
+                items: 1,
+            },
+            1024: {
+                items: 2.5,
+            },
+        },
     };
     reviews = [
         {

@@ -454,6 +454,64 @@ input::-webkit-input-placeholder {
   }
 }
 
+#testimonials {
+  ::ng-deep.owl-stage {
+    display: flex;
+  }
+
+  ::ng-deep.right-icon {
+    position: absolute;
+    top: 40%;
+    left: 103%;
+    -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+    -webkit-box-direction: normal;
+    font: inherit;
+    line-height: 1.15;
+    text-transform: none;
+    box-sizing: border-box;
+    display: inline-block;
+    padding: 0;
+    text-decoration: none !important;
+    cursor: pointer;
+    zoom: 1;
+    overflow: visible;
+    align-self: center;
+    text-align: center;
+    -webkit-box-flex: 0;
+    flex-grow: 0;
+    flex-shrink: 0;
+    width: 2.5em;
+    height: 2.5em;
+    font-family: "Open Sans", "Helvetica Neue", sans-serif;
+    font-size: 14px;
+    right: 3%;
+    background-color: #ffffff;
+    border: solid 1px rgba(178, 193, 205, 0.64);
+    border-radius: 50%;
+    margin: 0.2em;
+    color: #333333;
+    transition: color 0.2s;
+    .right-arrow{
+      line-height: 1;
+      -webkit-font-smoothing: antialiased;
+      box-sizing: border-box;
+      font-size: 1.25em;
+      width: 100%;
+      display: flex;
+      -webkit-box-pack: center;
+      justify-content: center;
+      -webkit-box-align: center;
+      align-items: center;
+    }
+
+  }
+  ::ng-deep.right-icon:focus{
+    text-decoration: none;
+  }
+
+
+}
+
 .mobile-review-card {
   background: white;
   min-height: 100%;
