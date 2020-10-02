@@ -55,9 +55,11 @@
                 </div>
                 <div class="col-md-8">
                     <div class="row mb-10">
-                        <div class="col-md-12">
+                        <div class="col-md-10">
                             <h4 class="category-title">{{ categoryTitle }}</h4>
                         </div>
+                        <div class="col-md-2 pr2 text-right"
+                        ><span style="font-size: 14px;">{{ totalCount }} Results</span></div>
                     </div>
                     <!--  -->
                     <!-- -->
@@ -69,9 +71,8 @@
                                                          (setFilters)="onSetFilters($event)"
                                                          class="flex flex-wrap justify-start"></app-product-filters>
                                 </div>
-                                <div class="col-md-1"
-                                ><span style="font-size: 14px;">{{ totalCount }} Results</span></div>
-                                <div class="col-md-2">
+
+                                <div class="col-md-3">
                                     <app-sort-type [sortTypeList]="sortTypeList" [sortType]="sortType"
                                                    (setSortType)="onSetSortType($event)">
                                     </app-sort-type>
