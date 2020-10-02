@@ -3,9 +3,7 @@
 </div>
 
 <main *ngIf="loaded">
-    <h1 style="text-align: center;">Home Musings</h1>
-    <h2 style="text-align: center;">Our Blog</h2>
-
+    <h1 style="text-align: center; padding: 1rem 0;">Home Musings</h1>
     <div
         infinite-scroll 
         [infiniteScrollDistance]="scrollDistance"
@@ -27,16 +25,14 @@
             </figure>
 
             <div class="post__header">
-                <time datetime="2019-12-12" class="post__time">{{post.date | date: 'fullDate'}}</time>
+                <time datetime="2019-12-12" class="post__time">{{post.date | date: 'longDate'}}</time>
                 <h2><a routerLink="{{post.id}}">{{decodeHtml(post?.title?.rendered)}}</a></h2>
             </div>
-
-            <div class="post__announce" [innerHTML]="post?.excerpt?.rendered">
-            </div>
-
             <div class="post__meta">
                 <a routerLink="{{post.slug}}">By: {{post.x_author}} </a>
                 <!-- <a routerLink="{{post.slug}}" class="post__comments">10</a> -->
+            </div>
+            <div class="post__announce" [innerHTML]="post?.excerpt?.rendered">
             </div>
         </div>
     </div>

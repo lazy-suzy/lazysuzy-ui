@@ -123,8 +123,8 @@ export class ProductFiltersComponent implements OnInit {
                     this.minValue = this.productFilters.price.from;
                     this.maxValue = this.productFilters.price.to;
                     this.sliderOptions = {
-                        floor: this.productFilters.price.min,
-                        ceil: this.productFilters.price.max,
+                        floor: this.productFilters.price.min ? this.productFilters.price.min : 0,
+                        ceil: this.productFilters.price.max ? this.productFilters.price.max : 0,
                         translate: (value: number) => {
                             return '$' + value;
                         },
