@@ -45,7 +45,7 @@ export class LandingComponent implements OnInit {
     carousalOptions = {
         autoWidth: false,
         loop: true,
-        margin: 0,
+        margin: 10,
         items: 1,
         center: true,
         dots: false,
@@ -57,7 +57,7 @@ export class LandingComponent implements OnInit {
                 items: 1,
             },
             1024: {
-                items: 2.5,
+                items: 3,
             },
         },
     };
@@ -79,6 +79,16 @@ export class LandingComponent implements OnInit {
             writer: 'Yasmin',
             review:
                 'Really helpful and courteous. Great to have an easy place for searching and browsing for our home!'
+        },
+        {
+            title: 'I love my purchase!',
+            writer: 'Sharon Mitchell',
+            review: 'I love my purchase! Great product, great customer service, highly recommend!'
+        },
+        {
+            title: 'Great customer service',
+            writer: 'Pam',
+            review: 'I was ecstatic to find components of the Pier 1 Imports papasan chair still in stock since Pier 1 is going out of business. Although the shipping was delayed for one product, customer service was fantastic with frequent communications on status and when products will arrive. Highly recommend LazySuzy, especially for difficult to find products'
         }
     ];
     boardViewLink = boardRoutesNames.BOARD_VIEW;
