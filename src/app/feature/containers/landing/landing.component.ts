@@ -1,17 +1,17 @@
-import {Component, OnInit, Output} from '@angular/core';
-import {FormBuilder, FormGroup, Validators} from '@angular/forms';
-import {ApiService} from './../../../shared/services';
-import {Observable, Subscription} from 'rxjs';
+import { Component, OnInit, Output } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { ApiService } from './../../../shared/services';
+import { Observable, Subscription } from 'rxjs';
 import {
     BreakpointState,
     Breakpoints,
     BreakpointObserver
 } from '@angular/cdk/layout';
-import {EventEmitterService} from 'src/app/shared/services';
-import {ActivatedRoute, Router} from '@angular/router';
-import {boardRoutesNames} from '../../../modules/board/board.routes.names';
-import {BoardService} from '../../../modules/board/board.service';
-import {Board} from '../../../modules/board/board';
+import { EventEmitterService } from 'src/app/shared/services';
+import { ActivatedRoute, Router } from '@angular/router';
+import { boardRoutesNames } from '../../../modules/board/board.routes.names';
+import { BoardService } from '../../../modules/board/board.service';
+import { Board } from '../../../modules/board/board';
 
 @Component({
     selector: 'app-landing',
@@ -79,67 +79,45 @@ export class LandingComponent implements OnInit {
             writer: 'Yasmin',
             review:
                 'Really helpful and courteous. Great to have an easy place for searching and browsing for our home!'
+        },
+        {
+            title: 'I love my purchase!',
+            writer: 'Sharon Mitchell',
+            review: 'I love my purchase! Great product, great customer service, highly recommend!'
+        },
+        {
+            title: 'Great customer service',
+            writer: 'Pam',
+            review: 'I was ecstatic to find components of the Pier 1 Imports papasan chair still in stock since Pier 1 is going out of business. Although the shipping was delayed for one product, customer service was fantastic with frequent communications on status and when products will arrive. Highly recommend LazySuzy, especially for difficult to find products'
         }
-    ];
-    boardViewLink = boardRoutesNames.BOARD_VIEW;
-    displayBoardPath = 'assets/image/board_display.webp';
-    trustPilotStarsPath = 'assets/image/trustpilot_stars.png';
-    trustPilotLogoPath = 'assets/image/trustpilot_logo.png';
 
-    constructor(
-        private apiService: ApiService,
-        private formBuilder: FormBuilder,
-        private breakpointObserver: BreakpointObserver,
-        private eventEmitterService: EventEmitterService,
-        private route: ActivatedRoute,
-        private router: Router,
-        private boardService: BoardService
-    ) {
+    onDestroy(): void {
+            this.eventSubscription.unsubscribe();
+        }
 
-    }
+    onSubmit(value: any) {
+            this.apiService.getEmail().subscribe((res) => {
+            });
+        }
 
-    ngOnInit() {
-        this.eventSubscription = this.eventEmitterService.userChangeEvent
-            .asObservable()
-            .subscribe((user) => {
-                this.emailForm = this.formBuilder.group({
-                    email: ['', [Validators.required, Validators.email]]
-                });
-                this.bpSubscription = this.bpObserver.subscribe(
-                    (handset: BreakpointState) => {
-                        this.isHandset = handset.matches;
+    newBoard() {
+            const board: Board = new Board();
+            const newBoard = Object.assign({}, board);
+            newBoard.title = 'Untitled Board';
+
+            newBoard.type_privacy = newBoard.is_published = 0;
+
+            // tslint:disable-next-line: no-shadowed-variable
+            this.boardService.addBoard(newBoard).subscribe((board) => {
+                this.router.navigate(
+                    [['/board', this.boardViewLink, board.uuid].join('/')],
+                    {
+                        relativeTo: this.route,
+                        state: {
+                            justCreated: true
+                        }
                     }
                 );
             });
-    }
-
-    onDestroy(): void {
-        this.eventSubscription.unsubscribe();
-    }
-
-    onSubmit(value: any) {
-        this.apiService.getEmail().subscribe((res) => {
-        });
-    }
-
-    newBoard() {
-        const board: Board = new Board();
-        const newBoard = Object.assign({}, board);
-        newBoard.title = 'Untitled Board';
-
-        newBoard.type_privacy = newBoard.is_published = 0;
-
-        // tslint:disable-next-line: no-shadowed-variable
-        this.boardService.addBoard(newBoard).subscribe((board) => {
-            this.router.navigate(
-                [['/board', this.boardViewLink, board.uuid].join('/')],
-                {
-                    relativeTo: this.route,
-                    state: {
-                        justCreated: true
-                    }
-                }
-            );
-        });
-    }
+        }
 }
