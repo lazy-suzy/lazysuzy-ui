@@ -1,8 +1,9 @@
 <div class="flex filter-container">
   <ng-container>
     <div class="flex filter-name-container">
-      <div *ngFor="let filter of objectKeys(filterData || {})">
-        <div (click)="toggleFilterOption(filter)" class="flex items-center pa1 mr1 filter {{
+      <ng-container *ngFor="let filter of objectKeys(filterData || {})">
+        <div *ngIf="!dimensionFilters.includes(filter)">
+          <div (click)="toggleFilterOption(filter)" class="flex items-center pa1 mr1 filter {{
                 disableTab(filter) ? 'display-none' : ''
               }}">
           <span class="filter-name grow pointer {{
@@ -14,7 +15,7 @@
                     ? 'active'
                     : ''
                 }}">{{ filter }}</span>
-          <div class="ml2 arrow-down {{
+            <div class="ml2 arrow-down {{
                   filter !== 'price'
                     ? activeFilters[filter].length > 0
                       ? 'active'
@@ -23,26 +24,29 @@
                     ? 'active'
                     : ''
                 }}"></div>
-        </div>
-      </div>
-    </div>
-
-
-    <div *ngFor="let filter of objectKeys(filterData || {})">
-      <div class="filter-options {{ selectedFilter === filter ? 'open' : '' }}">
-        <div class="price-menu" *ngIf="filter === 'price'; else elseBlock">
-          <ng5-slider [(value)]="minValue" [(highValue)]="maxValue" [options]="silderOptions"
-            (userChangeEnd)="onPriceChange()"></ng5-slider>
-        </div>
-        <ng-template #elseBlock>
-          <div *ngFor="let option of filterData[filter]">
-            <mat-checkbox class="pa2 menu-item" *ngIf="option.enabled" [checked]="option.checked" [value]="option.value"
-              (change)="onCheckChange($event, filter)">
-              {{ option.name }}</mat-checkbox>
           </div>
-        </ng-template>
-      </div>
+        </div>
+      </ng-container>
     </div>
+
+    <ng-container *ngFor="let filter of objectKeys(filterData || {})">
+      <div *ngIf="!dimensionFilters.includes(filter)">
+        <div class="filter-options {{ selectedFilter === filter ? 'open' : '' }}">
+          <div class="price-menu" *ngIf="filter === 'price'; else elseBlock">
+            <ng5-slider [(value)]="minValue" [(highValue)]="maxValue" [options]="silderOptions"
+                        (userChangeEnd)="onPriceChange()"></ng5-slider>
+          </div>
+          <ng-template #elseBlock>
+            <div *ngFor="let option of filterData[filter]">
+              <mat-checkbox class="pa2 menu-item" *ngIf="option.enabled" [checked]="option.checked" [value]="option.value"
+                            (change)="onCheckChange($event, filter)">
+                {{ option.name }}</mat-checkbox>
+            </div>
+          </ng-template>
+        </div>
+      </div>
+    </ng-container>
+
   </ng-container>
 </div>
 <span class="flex items-center pointer f6 fw6 db silver

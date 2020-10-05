@@ -16,6 +16,13 @@ export class BrowsefilterComponent implements OnInit {
   @Input() filterData: any = {};
   objectKeys = Object.keys;
   isClearAllVisible = false;
+  dimensionFilters = [
+      'height',
+      'width',
+      'length',
+      'diameter',
+      'square',
+  ];
   activeFilters = {
     brand: [],
     price_from: 0,
@@ -38,7 +45,7 @@ export class BrowsefilterComponent implements OnInit {
   };
 
   constructor(private fb: FormBuilder) {
-    
+
   }
 
   // tslint:disable-next-line: use-lifecycle-interface
@@ -81,7 +88,7 @@ export class BrowsefilterComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    console.log('thsi si filter value: ', this.filterData)
+    console.log('thsi si filter value: ', this.filterData);
   }
 
   toggleFilterOption(filter: string) {
