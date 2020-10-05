@@ -53,23 +53,22 @@
           </ng-template>
         </ng-container>
         <ng-template #isDesktop>
-          <span class="w-40-ns w-100">
+          <span class="w-50-ns w-100">
             <a href="/product/{{ item.sku }}" class="product-name">{{
               item.name
             }}</a>
           </span>
 
           <ng-container *ngIf="utils.hasInventory(item); else isOOS">
-            <div class="w-60-ns w-100 flex">
-              <span class="price w-50 w-60-ns justify-end tr">
+            <div class="w-50-ns w-100 flex">
+              <span class="price w-50 w-40-ns justify-end tr">
                 ${{ item.inventory_product_details.price }}
               </span>
-              <div class="brand-button-card w-50 w-40-ns">
+              <div class="brand-button-card w-50 w-60-ns">
                 <span class="brand-button">
                   <a
-                    class="pointer"
+                    class="pointer tr-addToCart"
                     (click)="openCartModal(item, i)"
-                    class="tr-addToCart"
                     >ADD TO CART
                   </a>
                 </span>
@@ -94,8 +93,7 @@
                     (click)="openLink($event, item.link)"
                     href="{{ item.link }}"
                     >VIEW AT {{ brand }}</a
-                  ></span
-                >
+                  ></span>
               </div>
             </div>
           </ng-template>
