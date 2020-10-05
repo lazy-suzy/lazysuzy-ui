@@ -78,7 +78,7 @@
                             <h4 style="font-size: 14px;">{{ totalCount }} Results</h4>
                         </div>
                     </div>
-                    <div class="row sticky-row ">
+                    <div class="row sticky-row">
                         <div class="col-md-12 filter-panel">
                             <div class="row" style="padding: 10px;">
                                 <div class="col-md-9">
@@ -124,20 +124,6 @@
 
             <!-- filter bar -->
             <!-- <h4 class="category-title">{{ category }}</h4> -->
-            <div class="filter-panel flex justify-around items-center w-100">
-                <app-product-filters [isBrandPage]="isBrandPage" [productFilters]="productFilters"
-                                     [isChangingBrandList]="isChangingBrandList" (setFilters)="onSetFilters($event)"
-                                     class="flex justify-start w-75"></app-product-filters>
-                <div style="font-size: 14px; min-width: 110px">{{ totalCount }} Results</div>
-                <app-sort-type [sortTypeList]="sortTypeList" (setSortType)="onSetSortType($event)">
-                </app-sort-type>
-            </div>
-            <!-- /filter bar -->
-            <ng-container *ngIf="!isChangingBrandList">
-                <app-product *ngFor="let product of products" [product]="product" class="w-33-ns"
-                             style="margin-bottom: 15px;">
-                </app-product>
-            </ng-container>
         </ng-container>
 
 

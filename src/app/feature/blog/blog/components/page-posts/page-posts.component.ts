@@ -25,9 +25,9 @@ export class PagePostsComponent implements OnInit, OnDestroy {
      * removed from the header.
      */
     blogStylesUrl = [
-        'http://wordpress.lazysuzy.com/wp-includes/css/dist/block-library/style.min.css?ver=5.4.2',
-        'http://wordpress.lazysuzy.com/wp-content/themes/twentytwenty/style.css?ver=1.2',
-        'http://wordpress.lazysuzy.com/wp-content/themes/twentytwenty/print.css?ver=1.2',
+        'https://wordpress.lazysuzy.com/wp-includes/css/dist/block-library/style.min.css?ver=5.4.2',
+        'https://wordpress.lazysuzy.com/wp-content/themes/twentytwenty/style.css?ver=1.2',
+        'https://wordpress.lazysuzy.com/wp-content/themes/twentytwenty/print.css?ver=1.2',
     ];
 
     constructor(
