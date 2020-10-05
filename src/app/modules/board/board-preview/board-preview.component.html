@@ -88,8 +88,8 @@
     </div>
     <div></div>
     <div class="products-container mt-5">
-      <div *ngFor="let product of filteredProducts" class="w-25-ns">
-        <div class="ls-product-div pl-1 pr-1">
+      <div *ngFor="let product of filteredProducts" class="w-third-ns pa2-ns">
+        <div class="ls-product-div pl-2 pr-2 hover-border">
           <div class="product-tag icon">{{ product.index + 1 }}</div>
           <ng-container
             *ngIf="product.productListingUrl !== ''; else isProduct"
@@ -99,12 +99,16 @@
               [href]="product.productListingUrl"
               target="_blank"
             >
-              <img [src]="product.main_image" [alt]="product.name" />
+              <span class="lazysuzy-image-background">
+                <img class="lazysuzy-image" [src]="product.main_image" [alt]="product.name" />
+              </span>
             </a>
           </ng-container>
           <ng-template #isProduct>
             <div class="ls-product" (click)="openDialog(product.sku)">
-              <img [src]="product.main_image" [alt]="product.name" />
+              <span class="lazysuzy-image-background">
+                <img  class="lazysuzy-image" [src]="product.main_image" [alt]="product.name" />
+              </span>
             </div>
           </ng-template>
 
