@@ -45,7 +45,7 @@ export class LandingComponent implements OnInit {
     carousalOptions = {
         autoWidth: false,
         loop: true,
-        margin: 0,
+        margin: 10,
         items: 1,
         center: true,
         dots: false,
@@ -57,7 +57,7 @@ export class LandingComponent implements OnInit {
                 items: 1,
             },
             1024: {
-                items: 2.5,
+                items: 3,
             },
         },
     };

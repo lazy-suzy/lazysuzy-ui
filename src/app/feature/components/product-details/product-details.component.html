@@ -3,11 +3,12 @@
     <div *ngIf="product || !invalidLink; else invalidProduct">
         <div class="product-details-container">
             <button class="close-icon" mat-dialog-close>
-                <mat-icon>close </mat-icon>
+                <mat-icon>close</mat-icon>
             </button>
             <div class="fl w-50">
                 <div class="flex flex-column gallery-container" #gallery>
-                    <img *ngFor="let image of items; index as i" [src]="image.data.src" (click)="openLightbox(i)" class="br2" />
+                    <img *ngFor="let image of items; index as i" [src]="image.data.src" (click)="openLightbox(i)"
+                         class="br2"/>
                 </div>
             </div>
             <div class="fl w-50 pa3 product-details-container">
@@ -23,7 +24,8 @@
                         </div>
                         <ng-template #elseBlock>
                             <div class="tile-icon wishlist-icon wishlist-container">
-                                <mat-icon (click)="wishlistProduct(product.sku, true)">favorite_border </mat-icon><span>
+                                <mat-icon (click)="wishlistProduct(product.sku, true)">favorite_border</mat-icon>
+                                <span>
                                     Save</span>
                             </div>
                         </ng-template>
@@ -36,18 +38,22 @@
                             <span class="strike {{productPrice !== productWasPrice ? '' : 'dn' }}">${{ productWasPrice }}</span>
                         </div>
                         <div class="w-40">
-                            <button mat-raised-button class="bg-red view-details-btn" *ngIf="!utils.hasInventory(activeProduct) && !product.redirect">
+                            <button mat-raised-button class="bg-red view-details-btn"
+                                    *ngIf="!utils.hasInventory(activeProduct) && !product.redirect &&product.product_url">
                                 <a (click)="openLink($event, product.product_url)" [href]="product.product_url"
-                                    class="tr-viewDetails no-underline">
+                                   class="tr-viewDetails no-underline">
                                     VIEW DETAILS
                                 </a>
                             </button>
 
-                            <select [(ngModel)]="quantity" class="quantity-selector w-30 ml2" *ngIf="utils.hasInventory(activeProduct)">
-                                <option *ngFor="let i of quantityLimit(activeProduct.inventory_product_details.count)" [value]="i">{{ i }}</option>
+                            <select [(ngModel)]="quantity" class="quantity-selector w-30 ml2"
+                                    *ngIf="utils.hasInventory(activeProduct)">
+                                <option *ngFor="let i of quantityLimit(activeProduct.inventory_product_details.count)"
+                                        [value]="i">{{ i }}</option>
                             </select>
 
-                            <button mat-raised-button class="bg-red view-details-btn" *ngIf="utils.hasInventory(activeProduct)">
+                            <button mat-raised-button class="bg-red view-details-btn"
+                                    *ngIf="utils.hasInventory(activeProduct)">
                                 <a (click)="openCartModal()" class="tr-addToCart no-underline">
                                     ADD TO CART
                                 </a>
@@ -63,18 +69,22 @@
                             <span class="strike {{ productPrice !== productWasPrice ? '' : 'dn' }}">${{ productWasPrice }}</span>
                         </div>
                         <div>
-                            <button mat-raised-button class="bg-red view-details-btn" *ngIf="!utils.hasInventory(activeProduct) && !product.redirect">
+                            <button mat-raised-button class="bg-red view-details-btn"
+                                    *ngIf="!utils.hasInventory(activeProduct) && !product.redirect">
                                 <a (click)="openLink($event, product.product_url)" [href]="product.product_url"
-                                    class="tr-viewDetails no-underline">
+                                   class="tr-viewDetails no-underline">
                                     VIEW DETAILS
                                 </a>
                             </button>
 
-                            <select [(ngModel)]="quantity" class="quantity-selector w-30 ml2" *ngIf="utils.hasInventory(activeProduct)">
-                                <option *ngFor="let i of quantityLimit(activeProduct.inventory_product_details.count)" [value]="i">{{ i }}</option>
+                            <select [(ngModel)]="quantity" class="quantity-selector w-30 ml2"
+                                    *ngIf="utils.hasInventory(activeProduct)">
+                                <option *ngFor="let i of quantityLimit(activeProduct.inventory_product_details.count)"
+                                        [value]="i">{{ i }}</option>
                             </select>
 
-                            <button mat-raised-button class="bg-red view-details-btn" *ngIf="utils.hasInventory(activeProduct)">
+                            <button mat-raised-button class="bg-red view-details-btn"
+                                    *ngIf="utils.hasInventory(activeProduct)">
                                 <a (click)="openCartModal()" class="tr-addToCart no-underline">
                                     ADD TO CART
                                 </a>
@@ -92,7 +102,8 @@
                                 <mat-icon class="info-icon">info</mat-icon>
                             </span>
                             <div class="stock-msg" *ngIf="activeProduct.inventory_product_details.is_low">
-                                Only {{ activeProduct.inventory_product_details.count > 10 ? '10' : activeProduct.inventory_product_details.count }} left in stock.
+                                Only {{ activeProduct.inventory_product_details.count > 10 ? '10' : activeProduct.inventory_product_details.count }}
+                                left in stock.
                             </div>
                         </div>
                         <div class="shipping-msg">
@@ -100,40 +111,43 @@
                         </div>
                     </div>
                     <ng-container *ngIf="product.redirect; else allConditions">
-                        <hr class="modal-hr mt-3" *ngIf="product.set && product.set.length > 0" />
+                        <hr class="modal-hr mt-3" *ngIf="product.set && product.set.length > 0"/>
                     </ng-container>
                     <ng-template #allConditions>
-                        <hr class="modal-hr mt-3" *ngIf="isVariationExist || (product.set && product.set.length > 0)" />
+                        <hr class="modal-hr mt-3" *ngIf="isVariationExist || (product.set && product.set.length > 0)"/>
                     </ng-template>
                 </div>
 
                 <div class="product-description-container" [ngStyle]="topHeight">
                     <div *ngIf="!isSetItemInInventory">
-                        <app-redirect *ngIf="product.redirect && !utils.hasInventory(activeProduct)" [redirectUrl]="product.redirect_url" [redirectDetails]="product.redirect_details" [category]="product.department_info[0].category_name" [categoryUrl]="product.department_info[0].category_url"
-                            [isHandset]="false">
+                        <app-redirect *ngIf="product.redirect && !utils.hasInventory(activeProduct)"
+                                      [redirectUrl]="product.redirect_url" [redirectDetails]="product.redirect_details"
+                                      [category]="product.department_info[0].category_name"
+                                      [categoryUrl]="product.department_info[0].category_url"
+                                      [isHandset]="false">
                         </app-redirect>
                     </div>
-                    <app-variations 
-                    *ngIf="isVariationExist && !product.redirect" 
-                    [variations]="product.variations" 
-                    [isSwatchExist]="isSwatchExist" 
-                    [inputSelections]="product.selections" 
-                    [hasSelection]="hasSelection" 
-                    (setPrice)="onSetPrice($event)" 
-                    (setImage)="onSetImage($event)"
-                    (setSelectionChecked)="onSetSelectionChecked($event)" 
-                    (clearSelection)="onClearSelection($event)"
-                    (setSelection)="onSetSelection($event)">
+                    <app-variations
+                            *ngIf="isVariationExist && !product.redirect"
+                            [variations]="product.variations"
+                            [isSwatchExist]="isSwatchExist"
+                            [inputSelections]="product.selections"
+                            [hasSelection]="hasSelection"
+                            (setPrice)="onSetPrice($event)"
+                            (setImage)="onSetImage($event)"
+                            (setSelectionChecked)="onSetSelectionChecked($event)"
+                            (clearSelection)="onClearSelection($event)"
+                            (setSelection)="onSetSelection($event)">
                     </app-variations>
                     <app-sets *ngIf="product.set && product.set.length > 0" [sets]="product.set" [brand]="product.site">
                     </app-sets>
-                    <hr class="modal-hr mt-3" />
+                    <hr class="modal-hr mt-3"/>
                     <div class="mb2 pt-1" *ngIf="descriptionExist">
                         <span class="title">Overview</span>
                         <div class="mt1" [innerHTML]="description"></div>
                     </div>
                     <div *ngIf="featuresExist" class="mb2">
-                        <hr class="modal-hr" />
+                        <hr class="modal-hr"/>
                         <span class="title">Features</span>
                         <div class="mt1">
                             <div [innerHTML]="features"></div>
@@ -141,7 +155,7 @@
                     </div>
 
                     <div *ngIf="dimensionExist;else emptySpace" class="mb2">
-                        <hr class="modal-hr" />
+                        <hr class="modal-hr"/>
                         <span class="title">Dimensions</span>
                         <div class="mt1 pb1 flex flex-wrap" *ngIf="isArray(product.dimension) && product.dimension.length>0; else showDimensions">
                             <div *ngFor="let dimension of product.dimension" class="fl w-50 pa2">
@@ -155,7 +169,7 @@
                                 <div *ngIf="dimension.height > 0">
                                     Height: {{ dimension.height }}
                                 </div>
-                                <br />
+                                <br/>
                             </div>
                         </div>
                         <ng-template #showDimensions>
@@ -173,8 +187,8 @@
     </div>
     <ng-template #invalidProduct>
         <div class="tc">
-            <img [src]="invalidLinkImageSrc" class="invalid-url-image" />
+            <img [src]="invalidLinkImageSrc" class="invalid-url-image"/>
         </div>
     </ng-template>
 </ng-container>
-<img *ngIf="isProductFetching; else showDetails" [src]="spinner" class="loader" />
+<img *ngIf="isProductFetching; else showDetails" [src]="spinner" class="loader"/>
