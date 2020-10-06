@@ -51,21 +51,20 @@
 }
 
 .products-container {
-  display: flex;
-  margin: 24px;
-  flex-wrap: wrap;
+  margin: 15%;
+
 }
 
 .site {
   color: #606060;
 }
 .name {
-  white-space: nowrap;
-  text-overflow: ellipsis;
   width: 100%;
   margin-bottom: 5px;
   overflow: hidden;
   color: #333333;
+  font-family: "Open Sans", sans-serif;
+
 }
 
 .prices {
@@ -89,6 +88,8 @@
 .ls-product-div {
   margin-bottom: 40px;
   font-family: Lato;
+  transition: box-shadow .4s;
+  height: 100%;
   .product-tag {
     position: absolute;
     border-radius: 0;
@@ -239,4 +240,48 @@
 
 .article-dual-column .toc a {
   color: inherit;
+}
+
+.card:hover {
+  box-shadow: 0 0 11px rgba(33,33,33,.2);
+  border-radius: 0.25rem;
+  border: 1px solid #ccc;
+}
+
+.lazysuzy-image-background{
+  display: block;
+  background: #f8f8f8;
+}
+.lazysuzy-image{
+
+}
+@media (min-width: 576px) {
+  .card-columns {
+    -webkit-column-count: 3;
+    -moz-column-count: 3;
+    column-count: 3;
+    -webkit-column-gap: 1.25rem;
+    -moz-column-gap: 1.25rem;
+    column-gap: 1.25rem;
+  }
+  .card {
+    position: relative;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+    -ms-flex-direction: column;
+    flex-direction: column;
+    min-width: 0;
+    word-wrap: break-word;
+    background-color: #fff;
+    background-clip: border-box;
+    transition: box-shadow .4s;
+    font-family: Lato, sans-serif;
+  }
+  .card-columns .card {
+    display: inline-block;
+    width: 100%;
+  }
 }

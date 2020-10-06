@@ -87,9 +87,9 @@
       <span class="shop-title">Shop This Look</span>
     </div>
     <div></div>
-    <div class="products-container mt-5">
-      <div *ngFor="let product of filteredProducts" class="w-25-ns">
-        <div class="ls-product-div pl-1 pr-1">
+    <div class="products-container card-columns mt-5">
+      <div *ngFor="let product of filteredProducts">
+        <div class=" card pl-2 pt-2 pr-2">
           <div class="product-tag icon">{{ product.index + 1 }}</div>
           <ng-container
             *ngIf="product.productListingUrl !== ''; else isProduct"
@@ -99,12 +99,16 @@
               [href]="product.productListingUrl"
               target="_blank"
             >
-              <img [src]="product.main_image" [alt]="product.name" />
+              <span class="lazysuzy-image-background">
+                <img class="lazysuzy-image" [src]="product.main_image" [alt]="product.name" />
+              </span>
             </a>
           </ng-container>
           <ng-template #isProduct>
             <div class="ls-product" (click)="openDialog(product.sku)">
-              <img [src]="product.main_image" [alt]="product.name" />
+              <span class="lazysuzy-image-background">
+                <img  class="lazysuzy-image" [src]="product.main_image" [alt]="product.name" />
+              </span>
             </div>
           </ng-template>
 
