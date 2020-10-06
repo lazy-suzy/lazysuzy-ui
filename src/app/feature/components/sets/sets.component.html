@@ -4,16 +4,16 @@
     <div class="sets-container">
       <div class="sets-content">
         <ng-container *ngIf="isHandset; else isDesktop">
-          <span class="w-60">
+          <span class="w-70">
             <a href="/product/{{ item.sku }}" class="product-name">{{
               item.name
             }}</a>
             <ng-container *ngIf="utils.hasInventory(item); else isOOSPrice">
-              <div>${{ item.inventory_product_details.price }}</div>
+              <div class="mobile-price" [innerHTML]="renderItemPrice(item.inventory_product_details)"></div>
             </ng-container>
             <ng-template #isOOSPrice>
               <div>
-                <span class="price">${{ item.price }}</span>
+                <span class="mobile-price">${{ item.price }}</span>
                 <span
                   class="was-price  {{
                     item.price !== item.was_price ? 'strike' : 'dn'
@@ -24,7 +24,7 @@
             </ng-template>
           </span>
           <ng-container *ngIf="utils.hasInventory(item); else isOOS">
-            <div class="w-40 flex">
+            <div class="w-30 flex">
               <div class="brand-button-container">
                 <span class="brand-button">
                   <a
@@ -38,7 +38,7 @@
             </div>
           </ng-container>
           <ng-template #isOOS>
-            <div class="w-40 flex">
+            <div class="w-30 flex">
               <div class="brand-button-container">
                 <span class="brand-button"
                   ><a
@@ -61,8 +61,7 @@
 
           <ng-container *ngIf="utils.hasInventory(item); else isOOS">
             <div class="w-50-ns w-100 flex">
-              <span class="price w-50 w-40-ns justify-end tr">
-                ${{ item.inventory_product_details.price }}
+              <span class="price w-50 w-40-ns justify-end tr" [innerHTML]="renderItemPrice(item.inventory_product_details)">
               </span>
               <div class="brand-button-card w-50 w-60-ns">
                 <span class="brand-button">
