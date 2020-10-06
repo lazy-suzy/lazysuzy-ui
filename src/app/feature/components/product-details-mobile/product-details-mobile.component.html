@@ -34,7 +34,7 @@
                     </div>
                 </div>
                 <button mat-raised-button class="bg-red view-details-btn" *ngIf="
-            product && !utils.hasInventory(activeProduct) && !product.redirect
+            product && !utils.hasInventory(activeProduct) && !product.redirect && product.product_url
           ">
           <a (click)="openLink($event, product.product_url)" [href]="product.product_url"
             class="tr-viewDetails no-underline yellow">
