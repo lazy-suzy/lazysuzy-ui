@@ -16,7 +16,7 @@ export class PagePostsComponent implements OnInit, OnDestroy {
     posts$: Observable<any[]>;
     selectedPost: any;
     showLoader = true;
-    postId = '';
+    postSlug = '';
     currentBlog: any;
     isHandset = false;
     /**
@@ -37,7 +37,7 @@ export class PagePostsComponent implements OnInit, OnDestroy {
         private utils: UtilsService
     ) {
         this.route.params.subscribe((params) => {
-            this.postId = params.id;
+            this.postSlug = params.id;
         });
         const body = document.getElementsByTagName('body')[0];
         body.classList.add('custom-background');
@@ -58,9 +58,9 @@ export class PagePostsComponent implements OnInit, OnDestroy {
 
     ngOnInit() {
         this.showLoader = true;
-        this.posts$ = this.blogService.getPost(this.postId);
+        this.posts$ = this.blogService.getPost(this.postSlug);
         this.posts$.subscribe((s) => {
-            this.currentBlog = s;
+            this.currentBlog = s[0];
             let x_tags = this.currentBlog.x_tags || '';
             x_tags = x_tags.split(',');
             this.currentBlog.x_tags = [...x_tags];
