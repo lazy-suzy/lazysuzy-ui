@@ -5,6 +5,7 @@ import {BlogService} from 'src/app/shared/services/blog/blog.service';
 import {DomSanitizer} from '@angular/platform-browser';
 import {UtilsService} from 'src/app/shared/services';
 import {BreakpointState} from '@angular/cdk/layout';
+import {SeoService} from '../../../../../shared/services/seo/seo.service';
 
 @Component({
     selector: 'app-page-posts',
@@ -16,7 +17,7 @@ export class PagePostsComponent implements OnInit, OnDestroy {
     posts$: Observable<any[]>;
     selectedPost: any;
     showLoader = true;
-    postId = '';
+    postSlug = '';
     currentBlog: any;
     isHandset = false;
     /**
@@ -30,14 +31,12 @@ export class PagePostsComponent implements OnInit, OnDestroy {
         'https://wordpress.lazysuzy.com/wp-content/themes/twentytwenty/print.css?ver=1.2',
     ];
 
-    constructor(
-        private blogService: BlogService,
-        private route: ActivatedRoute,
-        private sanitizer: DomSanitizer,
-        private utils: UtilsService
-    ) {
+    constructor(private blogService: BlogService,
+                private route: ActivatedRoute,
+                private utils: UtilsService,
+                private seoService: SeoService) {
         this.route.params.subscribe((params) => {
-            this.postId = params.id;
+            this.postSlug = params.id;
         });
         const body = document.getElementsByTagName('body')[0];
         body.classList.add('custom-background');
@@ -58,13 +57,18 @@ export class PagePostsComponent implements OnInit, OnDestroy {
 
     ngOnInit() {
         this.showLoader = true;
-        this.posts$ = this.blogService.getPost(this.postId);
+        this.posts$ = this.blogService.getPost(this.postSlug);
         this.posts$.subscribe((s) => {
-            this.currentBlog = s;
+            this.currentBlog = s[0];
             let x_tags = this.currentBlog.x_tags || '';
             x_tags = x_tags.split(',');
             this.currentBlog.x_tags = [...x_tags];
             this.showLoader = false;
+            const link = this.currentBlog.link;
+            //this.seoService.setCanonicalURL(link);
+            this.seoService.setMetadataForBlog(this.currentBlog);
+            this.setBlogOEmbedLink(link);
+
         });
         this.utils.isHandset().subscribe((handset: BreakpointState) => {
             this.isHandset = handset.matches;
@@ -73,10 +77,17 @@ export class PagePostsComponent implements OnInit, OnDestroy {
 
     ngOnDestroy(): void {
         this.removeBlogStylesFromHeader();
+        this.removeOEmbedLink();
+        this.seoService.removeBlogMetadata();
+    }
+
+    private removeOEmbedLink() {
+        const element = document.querySelector(`link[type='application/json+oembed']`)
+        element.remove();
     }
 
     private removeBlogStylesFromHeader() {
-        const numberOfElements = this.blogStylesUrl.length - 1;
+        const numberOfElements = this.blogStylesUrl.length;
         for (let index = 0; index < numberOfElements; index++) {
             const id = `blogUrl${index}`;
             const element = document.getElementById(id);
@@ -84,5 +95,18 @@ export class PagePostsComponent implements OnInit, OnDestroy {
         }
         const body = document.getElementsByTagName('body')[0];
         body.classList.remove('custom-background');
+    }
+
+    setBlogOEmbedLink(url: string) {
+        const wordpressEmbedUrl = `https://wordpress.lazysuzy.com/index.php/wp-json/oembed/1.0/embed`;
+        let element = document.querySelector(`link[rel='canonical']`) || null;
+        if (!element) {
+            const head = document.getElementsByTagName('head')[0];
+            element = document.createElement('link');
+            head.appendChild(element);
+        }
+        element.setAttribute('rel', 'alternate');
+        element.setAttribute('type', 'application/json+oembed');
+        element.setAttribute('href', `${wordpressEmbedUrl}?url=${encodeURIComponent(url)}`)
     }
 }

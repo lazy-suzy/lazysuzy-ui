@@ -23,7 +23,7 @@ export class BlogService {
     }
 
     getPost(id) {
-        return this.httpClient.get<any[]>(`${this.blog_base}/posts/${id}`);
+        return this.httpClient.get<any[]>(`${this.blog_base}/posts?slug=${id}`);
     }
 
     setBlogItems(blogs) {
