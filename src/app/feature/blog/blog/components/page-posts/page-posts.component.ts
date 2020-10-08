@@ -66,6 +66,7 @@ export class PagePostsComponent implements OnInit, OnDestroy {
             this.showLoader = false;
             const link = this.currentBlog.link;
             //this.seoService.setCanonicalURL(link);
+            this.seoService.setMetadataForBlog(this.currentBlog);
             this.setBlogOEmbedLink(link);
 
         });
@@ -77,12 +78,14 @@ export class PagePostsComponent implements OnInit, OnDestroy {
     ngOnDestroy(): void {
         this.removeBlogStylesFromHeader();
         this.removeOEmbedLink();
+        this.seoService.removeBlogMetadata();
     }
 
-    private removeOEmbedLink(){
+    private removeOEmbedLink() {
         const element = document.querySelector(`link[type='application/json+oembed']`)
         element.remove();
     }
+
     private removeBlogStylesFromHeader() {
         const numberOfElements = this.blogStylesUrl.length;
         for (let index = 0; index < numberOfElements; index++) {
@@ -104,6 +107,6 @@ export class PagePostsComponent implements OnInit, OnDestroy {
         }
         element.setAttribute('rel', 'alternate');
         element.setAttribute('type', 'application/json+oembed');
-        element.setAttribute('href',`${wordpressEmbedUrl}?url=${encodeURIComponent(url)}`)
+        element.setAttribute('href', `${wordpressEmbedUrl}?url=${encodeURIComponent(url)}`)
     }
 }
