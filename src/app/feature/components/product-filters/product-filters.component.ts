@@ -22,6 +22,7 @@ export class ProductFiltersComponent implements OnInit {
         width: [],
         length: [],
         diameter: [],
+        depth: [],
         square: [],
         price: {from: 0, min: 0, max: 0, to: 0},
     };
@@ -34,6 +35,7 @@ export class ProductFiltersComponent implements OnInit {
         'length',
         'diameter',
         'square',
+        'depth'
     ];
     activeFilters = {
         brand: [],
@@ -50,6 +52,9 @@ export class ProductFiltersComponent implements OnInit {
         diameter_to: [],
         square_from: [],
         square_to: [],
+        depth_from: [],
+        depth_to: [],
+        depth: [],
         height: [],
         width: [],
         length: [],
@@ -76,7 +81,7 @@ export class ProductFiltersComponent implements OnInit {
 
     ngOnInit() {
         this.activeRoute.queryParams.subscribe((params) => {
-            this.isClearAllVisible = params.filters !== '';
+            this.isClearAllVisible = !!params.filters;
         });
     }
 
@@ -103,6 +108,9 @@ export class ProductFiltersComponent implements OnInit {
                 diameter_to: [],
                 square_from: [],
                 square_to: [],
+                depth_from: [],
+                depth_to: [],
+                depth: [],
                 height: [],
                 width: [],
                 length: [],
@@ -183,6 +191,13 @@ export class ProductFiltersComponent implements OnInit {
                         this.activeFilters.square_from = activeFilterValues.map(value => value.min);
                         this.activeFilters.square_to = activeFilterValues.map(value => value.max);
                     }
+                    if (this.productFilters.depth) {
+                        const activeFilterValues = this.productFilters.depth[0].values
+                            .filter((enabled) => enabled.checked);
+                        this.activeFilters.depth = activeFilterValues.map(value => this.renderOptions(value));
+                        this.activeFilters.depth_from = activeFilterValues.map(value => value.min);
+                        this.activeFilters.depth_to = activeFilterValues.map(value => value.max);
+                    }
                 }
                 if (
                     this.productFilters.price.from === this.productFilters.price.min &&
@@ -209,6 +224,7 @@ export class ProductFiltersComponent implements OnInit {
                 );
                 this.activeFilters[filter] = optionsArr;
             }
+        }
             if (
                 Math.round(this.minValue) === this.productFilters.price.from &&
                 Math.round(this.maxValue) === this.productFilters.price.to
@@ -219,7 +235,7 @@ export class ProductFiltersComponent implements OnInit {
             } else {
                 this.isPriceChanged = true;
             }
-        }
+
         this.buildAndSetFilters();
     }
 
@@ -257,6 +273,9 @@ export class ProductFiltersComponent implements OnInit {
                 diameter_to: [],
                 square_from: [],
                 square_to: [],
+                depth_from: [],
+                depth_to: [],
+                depth: [],
                 height: [],
                 width: [],
                 length: [],
@@ -283,6 +302,9 @@ export class ProductFiltersComponent implements OnInit {
                 diameter_to: [],
                 square_from: [],
                 square_to: [],
+                depth_from: [],
+                depth_to: [],
+                depth: [],
                 height: [],
                 width: [],
                 length: [],
@@ -304,7 +326,7 @@ export class ProductFiltersComponent implements OnInit {
     buildAndSetFilters() {
         let tempFilters = '';
         for (const [filter, options] of Object.entries(this.activeFilters)) {
-            if (filter === 'price_from' || filter === 'price_to') {
+            if ((filter === 'price_from' || filter === 'price_to') && this.isPriceChanged) {
                 tempFilters += `${filter}:${options};`;
             } else {
                 if (Array.isArray(options) && !this.dimensionFilterKeysToExclude.includes(filter)) {
