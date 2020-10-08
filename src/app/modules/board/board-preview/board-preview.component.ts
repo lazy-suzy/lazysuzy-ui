@@ -105,7 +105,7 @@ export class BoardPreviewComponent implements OnInit {
           const uuid = this.route.snapshot.paramMap.get('uuid');
           this.boardService.getBoardByID(uuid, true).subscribe((response) => {
             if (response[0]) {
-              this.boardFound = true;
+
               this.appMeta.board = response[0];
               if (
                 this.appMeta.board.type_privacy === 0 &&
@@ -129,30 +129,37 @@ export class BoardPreviewComponent implements OnInit {
                   }
                 });
               }
-              this.canvas.loadFromJSON(this.appMeta.board.state, () => {
-                if (this.appMeta.flag.isBoot) {
-                  this.appMeta.flag.isBoot = false;
-                  this.enterPreviewMode();
-                  this.handleResize(true);
-                  setTimeout(() => {
-                    // tslint:disable-next-line: prefer-for-of
-                    for (
-                      let index = 0;
-                      index < this.canvas._objects.length;
-                      index++
-                    ) {
-                      if (this.canvas._objects[index].type === 'textbox') {
-                        this.canvas._objects[index].dirty = true;
+              if (this.appMeta.board){
+                this.canvas.loadFromJSON(this.appMeta.board.state, () => {
+                  this.boardFound = true;
+                  if (this.appMeta.flag.isBoot) {
+                    this.appMeta.flag.isBoot = false;
+                    this.enterPreviewMode();
+                    this.handleResize(true);
+                    setTimeout(() => {
+                      // tslint:disable-next-line: prefer-for-of
+                      for (
+                          let index = 0;
+                          index < this.canvas._objects.length;
+                          index++
+                      ) {
+                        if (this.canvas._objects[index].type === 'textbox') {
+                          this.canvas._objects[index].dirty = true;
+                        }
                       }
-                    }
-                    this.canvas.renderAll();
-                  }, 3000);
-                }
-              });
+                      this.canvas.renderAll();
+                    }, 3000);
+                  }
+                });
+              }
+              else if(!response.length)
+              {
+                this.router.navigate(['/']);
+              }
+
+
             }
-            if (this.boardFound === false || !response.length) {
-              this.router.navigate(['/']);
-            }
+
           });
         });
       });
