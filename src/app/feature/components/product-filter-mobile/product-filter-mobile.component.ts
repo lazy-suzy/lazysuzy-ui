@@ -41,6 +41,9 @@ export class ProductFilterMobileComponent implements OnInit {
         diameter_to: [],
         square_from: [],
         square_to: [],
+        depth_from: [],
+        depth_to: [],
+        depth: [],
         height: [],
         width: [],
         length: [],
@@ -53,6 +56,7 @@ export class ProductFilterMobileComponent implements OnInit {
         'length',
         'diameter',
         'square',
+        'depth'
     ];
     dimensionFilterValueStore = [
         'height_from',
@@ -65,6 +69,8 @@ export class ProductFilterMobileComponent implements OnInit {
         'diameter_to',
         'square_from',
         'square_to',
+        'depth_from',
+        'depth_to',
     ];
     isPriceChanged = false;
     minValue = 100;
@@ -164,6 +170,13 @@ export class ProductFilterMobileComponent implements OnInit {
                     this.activeFilters.square_from = activeFilterValues.map(value => value.min);
                     this.activeFilters.square_to = activeFilterValues.map(value => value.max);
                 }
+                if (this.productFilters.depth) {
+                    const activeFilterValues = this.productFilters.depth[0].values
+                        .filter((enabled) => enabled.checked);
+                    this.activeFilters.depth = activeFilterValues.map(value => this.renderOptions(value));
+                    this.activeFilters.depth_from = activeFilterValues.map(value => value.min);
+                    this.activeFilters.depth_to = activeFilterValues.map(value => value.max);
+                }
             }
         }
     }
@@ -181,17 +194,18 @@ export class ProductFilterMobileComponent implements OnInit {
                 );
                 this.activeFilters[filter] = optionsArr;
             }
-            if (
-                this.minValue === this.productFilters.price.from &&
-                this.maxValue === this.productFilters.price.to
-            ) {
-                delete this.activeFilters.price_from;
-                delete this.activeFilters.price_to;
-                this.isPriceChanged = false;
-            } else {
-                this.isPriceChanged = true;
-            }
         }
+        if (
+            this.minValue === this.productFilters.price.from &&
+            this.maxValue === this.productFilters.price.to
+        ) {
+            delete this.activeFilters.price_from;
+            delete this.activeFilters.price_to;
+            this.isPriceChanged = false;
+        } else {
+            this.isPriceChanged = true;
+        }
+
         this.buildAndSetFilters();
     }
 
@@ -214,7 +228,7 @@ export class ProductFilterMobileComponent implements OnInit {
     buildAndSetFilters() {
         let tempFilters = '';
         for (const [filter, options] of Object.entries(this.activeFilters)) {
-            if (filter === 'price_from' || filter === 'price_to') {
+            if ((filter === 'price_from' || filter === 'price_to') && this.isPriceChanged) {
                 tempFilters += `${filter}:${options};`;
             } else {
                 if (Array.isArray(options) && !this.dimensionFilters.includes(filter)) {
@@ -247,6 +261,9 @@ export class ProductFilterMobileComponent implements OnInit {
             diameter_to: [],
             square_from: [],
             square_to: [],
+            depth_from: [],
+            depth_to: [],
+            depth: [],
             height: [],
             width: [],
             length: [],

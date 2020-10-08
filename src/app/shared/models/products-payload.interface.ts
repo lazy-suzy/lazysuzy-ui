@@ -100,6 +100,7 @@ export interface IFilterData {
     width?: any[];
     length?: any[];
     diameter?: any[];
+    depth?: any[];
     square?: any[];
     category?: Category[];
 }
