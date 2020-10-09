@@ -163,7 +163,8 @@ export class BoardListComponent implements OnInit {
     });
   }
 
-  delete(board: Board): void {
+  delete(event,board: Board): void {
+    event.stopPropagation();
     this.dialog
       .open(BoardPopupConfirmComponent, {
         data: {
