@@ -1,7 +1,7 @@
 import {Component, OnInit, Output, EventEmitter, Input, HostListener} from '@angular/core';
 import {FormBuilder} from '@angular/forms';
 import {Options} from 'ng5-slider';
-import {IFilterData} from "../../../shared/models";
+import {IFilterData} from '../../../shared/models';
 
 @Component({
     selector: 'app-browse-filter',
@@ -122,18 +122,18 @@ export class BrowsefilterComponent implements OnInit {
 
     onCheckChange(event, filter: string) {
         const option: string = event.source.value;
-      if (this.filterData[filter][0].values) {
-        this.setDimensionFilters(event, filter);
-      } else {
-        if (event.source.checked) {
-          this.activeFilters[filter].push(option);
+        if (this.filterData[filter][0].values) {
+            this.setDimensionFilters(event, filter);
         } else {
-          const optionsArr = this.activeFilters[filter].filter(
-              (value: string) => value !== option
-          );
-          this.activeFilters[filter] = optionsArr;
+            if (event.source.checked) {
+                this.activeFilters[filter].push(option);
+            } else {
+                const optionsArr = this.activeFilters[filter].filter(
+                    (value: string) => value !== option
+                );
+                this.activeFilters[filter] = optionsArr;
+            }
         }
-      }
         if (
             Math.round(this.minValue) === this.filterData.price.from &&
             Math.round(this.maxValue) === this.filterData.price.to
@@ -150,22 +150,24 @@ export class BrowsefilterComponent implements OnInit {
         }, 3000);
         this.buildAndSetFilters();
     }
-  setDimensionFilters(event, filter) {
-    const values = event.source.value;
-    const maxValueString = `${filter}_to`;
-    const minValueString = `${filter}_from`;
-    if (event.source.checked) {
-      this.activeFilters[filter].push(this.renderOptions(values));
-      this.activeFilters[maxValueString].push(values.max);
-      this.activeFilters[minValueString].push(values.min);
-    } else {
-      const index = this.activeFilters[filter].indexOf(values);
-      this.activeFilters[filter].splice(index, 1);
-      this.activeFilters[maxValueString].splice(index, 1);
-      this.activeFilters[minValueString].splice(index, 1);
+
+    setDimensionFilters(event, filter) {
+        const values = event.source.value;
+        const maxValueString = `${filter}_to`;
+        const minValueString = `${filter}_from`;
+        if (event.source.checked) {
+            this.activeFilters[filter].push(this.renderOptions(values));
+            this.activeFilters[maxValueString].push(values.max);
+            this.activeFilters[minValueString].push(values.min);
+        } else {
+            const index = this.activeFilters[filter].indexOf(values);
+            this.activeFilters[filter].splice(index, 1);
+            this.activeFilters[maxValueString].splice(index, 1);
+            this.activeFilters[minValueString].splice(index, 1);
+        }
+        // this.buildAndSetFilters();
     }
-    // this.buildAndSetFilters();
-  }
+
     clearFilters() {
         this.activeFilters = {
             brand: [],
@@ -207,9 +209,9 @@ export class BrowsefilterComponent implements OnInit {
             if (filter === 'price_from' || filter === 'price_to') {
                 tempFilters += `${filter}:${options};`;
             } else {
-              if (Array.isArray(options) && !this.dimensionFilters.includes(filter)) {
-                tempFilters += options.length ? `${filter}:${options};` : ``;
-              }
+                if (Array.isArray(options) && !this.dimensionFilters.includes(filter)) {
+                    tempFilters += options.length ? `${filter}:${options};` : ``;
+                }
             }
         }
         this.updatesFromFilter.emit({
@@ -272,9 +274,10 @@ export class BrowsefilterComponent implements OnInit {
     onScrollFilterEvent($event) {
         const delta = Math.max(-1, Math.min(1, ($event.wheelDelta || -$event.detail)));
         let ratio = 40;
-        if(Math.abs($event.scrollY)<100){
-            ratio = 1;
+        if (Math.abs($event.deltaY) < 100) {
+            ratio = 7;
         }
+        console.log($event, ratio);
         document.getElementById('scrollableDiv').scrollLeft -= (delta * ratio); // Multiplied by 40
         $event.preventDefault();
     }
