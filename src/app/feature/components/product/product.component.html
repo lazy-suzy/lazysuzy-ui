@@ -19,18 +19,19 @@
     </ng-template>
   </div>
   <div (click)=openDialog()>
-    <span class="variant-color" *ngIf="product.color && product.color?.split(',').length>1;else emptySpace">
-      +{{product.color?.split(',').length-1}} colors
-    </span>
-    <ng-template #emptySpace>
-      <span>&nbsp;</span>
-    </ng-template>
+
   </div>
   <div class="prod-info">
     <span class="site">
       <span *ngIf="product.is_new" class="new-tag"><strong>NEW</strong></span>
       {{ product.site }}
     </span>
+    <span class="variant-color" *ngIf="product.color && product.color?.split(',').length>1;else emptySpace">
+      +{{product.color?.split(',').length-1}} colors
+    </span>
+    <ng-template #emptySpace>
+      <span>&nbsp;</span>
+    </ng-template>
   </div>
   <div class="name">{{ product.name }}</div>
   <div class="prices">
@@ -62,6 +63,9 @@
         <ng-template #bothWasPrices>
           ${{ wasMinPrice | number:"1.2-2" }}-{{ wasMaxPrice | number:"1.2-2" }}
         </ng-template>
+      </span>
+      <span class="free-shipping-text" *ngIf="product.inventory_product_details?.is_shipping_free" >
+        FREE Shipping
       </span>
     </ng-template>
   </div>
