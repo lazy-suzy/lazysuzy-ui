@@ -271,7 +271,11 @@ export class BrowsefilterComponent implements OnInit {
 
     onScrollFilterEvent($event) {
         const delta = Math.max(-1, Math.min(1, ($event.wheelDelta || -$event.detail)));
-        document.getElementById('scrollableDiv').scrollLeft -= (delta * 40); // Multiplied by 40
+        let ratio = 40;
+        if(Math.abs($event.scrollY)<100){
+            ratio = 5;
+        }
+        document.getElementById('scrollableDiv').scrollLeft -= (delta * ratio); // Multiplied by 40
         $event.preventDefault();
     }
 }
