@@ -57,7 +57,6 @@ export class AppComponent implements OnInit {
         // pos/max will give you the distance between scroll bottom and and bottom of screen in percentage.
         const intercom = document.getElementsByClassName('intercom-lightweight-app')[0];
         if (pos >= max && intercom) {
-            console.log('reached bottom');
             intercom.classList.add('hidden');
         } else if (intercom) {
             intercom.classList.remove('hidden');

@@ -581,6 +581,7 @@ export class BoardViewComponent implements OnInit, AfterViewInit {
     }
   }
 
+
   hideMenuMsg(event: any) {
     event.stopPropagation();
     if (this.hasToggleIconTooltip === 'true') {
