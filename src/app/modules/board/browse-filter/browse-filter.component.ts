@@ -22,6 +22,7 @@ export class BrowsefilterComponent implements OnInit {
       'length',
       'diameter',
       'square',
+      'depth'
   ];
   activeFilters = {
     brand: [],
