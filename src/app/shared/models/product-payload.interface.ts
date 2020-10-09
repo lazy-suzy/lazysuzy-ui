@@ -28,6 +28,7 @@ export interface IProductPayload {
   inventory_product_details: {
     price: number;
     count: number;
+    is_shipping_free?
   };
 }
 
