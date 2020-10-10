@@ -8,6 +8,7 @@ import { SigninComponent, SignupComponent } from 'src/app/core/components';
 import { Location } from '@angular/common';
 import { Router, ActivatedRoute } from '@angular/router';
 import { MarkdownService } from 'ngx-markdown';
+import {first, take} from "rxjs/operators";
 
 @Injectable({
   providedIn: 'root'
@@ -96,13 +97,15 @@ export class MatDialogUtilsService {
   openSignupDialog(isHandset = false, isClose = false) {
     const width = isHandset ? '100%' : '35%';
     // tslint:disable-next-line: no-unused-expression
-    !isClose && this.dialog.closeAll();
-    return this.dialog.open(SignupComponent, {
-      width,
-
-      panelClass: 'auth-dialog-container',
-      autoFocus: false
-    });
+    this.dialog.closeAll();
+    setTimeout(()=>{
+      this.dialog.open(SignupComponent, {
+        width,
+        panelClass: 'auth-dialog-container',
+        autoFocus: false,
+      });
+    }, 100);
+    return;
   }
 
   openSigninDialog(width = '35%') {

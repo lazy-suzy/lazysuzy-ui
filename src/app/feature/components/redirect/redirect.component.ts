@@ -22,6 +22,7 @@ export class RedirectComponent implements OnInit {
   ngOnInit() {}
 
   openSignup() {
-    this.matDialogUtils.openSignupDialog(this.isHandset);
+
+    const signupDialog = this.matDialogUtils.openSignupDialog(this.isHandset);
   }
 }
