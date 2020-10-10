@@ -24,7 +24,7 @@
         </div>
         <div class="flex justify-between pb2">
           <span
-            >UPS Ground Shipping
+            >Shipping & Handling
             <span
               class="tool-tip"
               data-title="Flat rate shipping of $25 on most standard items. 
@@ -40,6 +40,7 @@
           <span>Estimated Tax</span>
           <span>${{ orderAmount.sales_tax_total | number: '1.2-2' }}</span>
         </div>
+
       </div>
       <div class="flex justify-between pt2 pink-font b">
         <span>TOTAL</span>
@@ -705,7 +706,7 @@
         </div>
         <div class="flex justify-between pb3">
           <span
-            >UPS Ground Shipping
+            >Handling & Shipping
             <span
               class="tool-tip"
               data-title="Flat rate shipping of $25 on most standard items. 
@@ -721,6 +722,18 @@
           <span>Estimated Tax</span>
           <span>${{ orderAmount.sales_tax_total | number: '1.2-2' }}</span>
         </div>
+<!--        <div class="flex justify-between pb3">-->
+          <div class="flex flex-column pb3" style="align-items: start">
+            <a (click)="showPromoCodeBox()" class="promo-button pink-font">Enter Promo Code</a>
+            <div class="flex justify-start pt2" *ngIf="isPromoCodeBoxVisible">
+              <div class="flex flex-column">
+                <input class="promo-text-field" type="text">
+              </div>
+              <button class="promo-apply-button">Apply</button>
+            </div>
+            <span class="promo-error">Please Enter a valid coupon Code</span>
+          </div>
+<!--        </div>-->
       </div>
       <div class="flex justify-between pt2 pink-font b">
         <span>TOTAL</span>

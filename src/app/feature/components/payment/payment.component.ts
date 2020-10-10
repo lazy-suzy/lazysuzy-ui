@@ -90,6 +90,10 @@ export class PaymentComponent implements OnInit {
   eventSubscription: Subscription;
   orderAmount: IOrderAmount;
   isStateUpdating: boolean;
+
+  // For PromoCodes
+  isPromoCodeBoxVisible = false;
+
   constructor(
     private fb: FormBuilder,
     private stripeService: StripeService,
@@ -316,5 +320,10 @@ export class PaymentComponent implements OnInit {
           console.log(error);
         }
       );
+  }
+
+  showPromoCodeBox()
+  {
+    this.isPromoCodeBoxVisible = !this.isPromoCodeBoxVisible;
   }
 }
