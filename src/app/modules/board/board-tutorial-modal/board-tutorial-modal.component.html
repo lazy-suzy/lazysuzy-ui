@@ -1,0 +1,19 @@
+<div class="flex flex-column text-center">
+    <div>
+        <iframe src="https://www.youtube.com/embed/8dqQjLoNXHw" frameborder="0"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                allowfullscreen></iframe>
+    </div>
+    <div class="greeting-header">
+        <span>Welcome to LazySuzy Boards!</span>
+    </div>
+    <div class="greeting-text lato-text"  [ngClass]="{'p60':isHandset}">
+        <span>Check out the quick tutorial above on how to get started with our boards.</span>
+    </div>
+    <div class="lato-text">
+        <span>Get ready to create your first design today!</span>
+    </div>
+    <div class="button-container" (click)="close();">
+        <button>Get Started <i class="fas fa-long-arrow-alt-right"></i></button>
+    </div>
+</div>
