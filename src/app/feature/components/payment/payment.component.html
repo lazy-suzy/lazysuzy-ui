@@ -704,6 +704,14 @@
           <span>SUBTOTAL</span>
           <span>${{ orderAmount.sub_total | number: '1.2-2' }}</span>
         </div>
+          <div class="flex justify-between pb3" *ngIf="isPromoCodeApplicable">
+              <div class = "flex flex-column">
+                  <span>{{promoCodeDetails.discount_details.description}}</span>
+                  <span>{{promoCodeDetails.discount_details.name}}</span>
+              </div>
+
+              <span>-${{promoCodeDiscount}}</span>
+          </div>
         <div class="flex justify-between pb3">
           <span
             >Handling & Shipping
@@ -727,11 +735,11 @@
             <a (click)="showPromoCodeBox()" class="promo-button pink-font">Enter Promo Code</a>
             <div class="flex justify-start pt2" *ngIf="isPromoCodeBoxVisible">
               <div class="flex flex-column">
-                <input class="promo-text-field" type="text">
+                <input class="promo-text-field" [(ngModel)]="promoCode" type="text">
               </div>
-              <button class="promo-apply-button">Apply</button>
+              <button class="promo-apply-button" (click)="checkPromoCode()">Apply</button>
             </div>
-            <span class="promo-error">Please Enter a valid coupon Code</span>
+            <span *ngIf="promoCodeError" class="promo-error">{{promoCodeErrorMessage}}</span>
           </div>
 <!--        </div>-->
       </div>
