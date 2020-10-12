@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import {Component, OnInit, Input, Inject} from '@angular/core';
 import {
   ApiService,
   UtilsService,
@@ -11,6 +11,7 @@ import {
   BreakpointObserver
 } from '@angular/cdk/layout';
 import { Observable, Subscription } from 'rxjs';
+import {MAT_DIALOG_DATA} from "@angular/material/dialog";
 
 @Component({
   selector: 'app-signin',
@@ -37,7 +38,8 @@ export class SigninComponent implements OnInit {
     private utils: UtilsService,
     private eventService: EventEmitterService,
     private breakpointObserver: BreakpointObserver,
-    private matDialogUtils: MatDialogUtilsService
+    private matDialogUtils: MatDialogUtilsService,
+    @Inject(MAT_DIALOG_DATA) public data,
   ) {}
 
   ngOnInit() {
@@ -98,7 +100,7 @@ export class SigninComponent implements OnInit {
   }
 
   openSignupDialog() {
-    this.matDialogUtils.openSignupDialog(this.isHandset);
+    this.matDialogUtils.openSignupDialog(this.isHandset,this.data.isClose);
   }
 
   closeDialogs() {

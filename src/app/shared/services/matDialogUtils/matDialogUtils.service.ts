@@ -19,7 +19,8 @@ export class MatDialogUtilsService {
     guest: 0,
     default: 1
   };
-
+  signUpDialog;
+  signInDialog;
   constructor(
     public dialog: MatDialog,
     private location: Location,
@@ -87,31 +88,46 @@ export class MatDialogUtilsService {
       panelClass: 'product-details-dialog-container'
     });
     dialogRef.afterOpened().subscribe((result) => {
-      // this.location.go(`product/${modalSku}`);
+       this.location.go(`product/${modalSku}`);
     });
     dialogRef.afterClosed().subscribe((result) => {
-      // this.location.go(``);
+       this.location.back();
     });
   }
 
   openSignupDialog(isHandset = false, isClose = false) {
     const width = isHandset ? '100%' : '35%';
     // tslint:disable-next-line: no-unused-expression
+    if (isClose && this.signInDialog){
+        this.signInDialog.close();
+    }
     !isClose && this.dialog.closeAll();
-    return  this.dialog.open(SignupComponent, {
+
+    this.signUpDialog =this.dialog.open(SignupComponent, {
       width,
       panelClass: 'auth-dialog-container',
       autoFocus: false,
+      data:{
+        isClose:isClose
+      }
     });
+    return this.signUpDialog
   }
 
-  openSigninDialog(width = '35%') {
-    this.dialog.closeAll();
-    return this.dialog.open(SigninComponent, {
+  openSigninDialog(width = '35%',isClose = false) {
+    if(isClose){
+      this.signUpDialog.close();
+    }
+    !isClose && this.dialog.closeAll();
+    this.signInDialog = this.dialog.open(SigninComponent, {
       width,
       panelClass: 'auth-dialog-container',
-      autoFocus: false
+      autoFocus: false,
+      data: {
+        isClose:isClose
+      }
     });
+    return this.signInDialog
   }
 
   openAddToCartDialog(modal) {
