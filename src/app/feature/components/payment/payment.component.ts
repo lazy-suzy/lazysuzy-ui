@@ -97,10 +97,12 @@ export class PaymentComponent implements OnInit {
     isPromoCodeBoxVisible = false;
     promoCode: string;
     promoCodeError = false;
-    promoCodeErrorMessage:string;
-    isPromoCodeApplicable=false;
-    promoCodeDiscount=0;
-    promoCodeDetails:any;
+    promoCodeErrorMessage: string;
+    isPromoCodeApplicable = false;
+    promoCodeDiscount = 0;
+    promoCodeDetails: any;
+    isPromoCodeProcessing: boolean = false;
+
     constructor(
         private fb: FormBuilder,
         private stripeService: StripeService,
@@ -342,33 +344,39 @@ export class PaymentComponent implements OnInit {
         if (this.promoCode === '' || this.promoCode.length === 0) {
             return;
         }
+        this.isPromoCodeProcessing = true;
         this.promoCode = this.promoCode.toUpperCase();
-        this.promoCodeService.getPromoCodeProducts(this.promoCode).subscribe((data:any) => {
+        this.promoCodeService.getPromoCodeProducts(this.promoCode).subscribe((data: any) => {
             console.log(data);
             // this.promoCode = '';
             const {promo_details} = data;
             if (promo_details.error_msg) {
-              this.setPromoCodeIsInvalid(promo_details.error_msg);
-              return
+                this.setPromoCodeIsInvalid(promo_details.error_msg);
+                return;
+            } else {
+                this.applyPromoCode(data);
+                this.promoCode = '';
+                this.showPromoCodeBox();
             }
-            else{
-              this.applyPromoCode(data);
-            }
-        })
+        }, (error => console.log(error)),() => this.isPromoCodeProcessing=false)
 
     }
-    applyPromoCode({products,order,promo_details}){
-      this.isPromoCodeApplicable = true;
-      this.promoCodeDiscount  = products.reduce((acc,product)=>{
-          acc += product.promo_discount;
-          return acc;
-        },0);
-      this.orderAmount.total_cost = order.total_cost;
-      this.promoCodeDetails = promo_details.details;
+
+    applyPromoCode({products, order, promo_details}) {
+        this.promoCodeError = false;
+        this.isPromoCodeApplicable = true;
+        this.promoCodeDiscount = order.total_promo_discount;
+        this.orderAmount.total_cost = order.total_cost;
+        this.promoCodeDetails = promo_details;
     }
-    setPromoCodeIsInvalid(message)
-    {
-      this.promoCodeError = true;
-      this.promoCodeErrorMessage = message
+
+    removePromoCode() {
+        this.isPromoCodeApplicable = false;
+        this.orderAmount.total_cost += Number(this.promoCodeDetails.total_discount)
+    }
+
+    setPromoCodeIsInvalid(message) {
+        this.promoCodeError = true;
+        this.promoCodeErrorMessage = message
     }
 }

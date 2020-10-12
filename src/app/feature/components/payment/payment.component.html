@@ -706,11 +706,11 @@
         </div>
           <div class="flex justify-between pb3" *ngIf="isPromoCodeApplicable">
               <div class = "flex flex-column">
-                  <span>{{promoCodeDetails.discount_details.description}}</span>
-                  <span>{{promoCodeDetails.discount_details.name}}</span>
+                  <span>{{promoCodeDetails.description}}</span>
+                  <span>{{promoCodeDetails.name}} <a (click)="removePromoCode()" class="promo-remove-button pink-font">[Remove]</a></span>
               </div>
 
-              <span>-${{promoCodeDiscount}}</span>
+              <span>-${{promoCodeDiscount | number: '1.2-2'}}</span>
           </div>
         <div class="flex justify-between pb3">
           <span
@@ -737,7 +737,7 @@
               <div class="flex flex-column">
                 <input class="promo-text-field" [(ngModel)]="promoCode" type="text">
               </div>
-              <button class="promo-apply-button" (click)="checkPromoCode()">Apply</button>
+              <button [disabled]="isPromoCodeProcessing" class="promo-apply-button" (click)="checkPromoCode()">Apply</button>
             </div>
             <span *ngIf="promoCodeError" class="promo-error">{{promoCodeErrorMessage}}</span>
           </div>
