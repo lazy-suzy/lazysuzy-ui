@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import {Component, OnInit, Input, Inject} from '@angular/core';
 import {
   ApiService,
   UtilsService,
@@ -11,6 +11,7 @@ import {
   BreakpointObserver
 } from '@angular/cdk/layout';
 import { Observable, Subscription } from 'rxjs';
+import {MAT_DIALOG_DATA} from "@angular/material/dialog";
 
 @Component({
   selector: 'app-signup',
@@ -27,7 +28,7 @@ export class SignupComponent implements OnInit {
   email = '';
   password = '';
   thanksMsg = false;
-
+  @Input() isClose=false;
   bpObserver: Observable<BreakpointState> = this.breakpointObserver.observe(
     Breakpoints.Handset
   );
@@ -39,8 +40,11 @@ export class SignupComponent implements OnInit {
     private utils: UtilsService,
     private eventService: EventEmitterService,
     private breakpointObserver: BreakpointObserver,
+    @Inject(MAT_DIALOG_DATA) public data,
     private matDialogUtils: MatDialogUtilsService
-  ) {}
+  ) {
+    console.log(data);
+  }
 
   ngOnInit() {
     this.bpSubscription = this.bpObserver.subscribe(
@@ -109,6 +113,6 @@ export class SignupComponent implements OnInit {
   }
 
   openSigninDialog() {
-    this.matDialogUtils.openSigninDialog(this.isHandset ? '80%' : '35%');
+    this.matDialogUtils.openSigninDialog(this.isHandset ? '80%' : '35%',this.data.isClose);
   }
 }
