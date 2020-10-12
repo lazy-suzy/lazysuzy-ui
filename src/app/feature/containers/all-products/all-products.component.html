@@ -83,8 +83,8 @@
                             <div class="row" style="padding: 10px;">
                                 <div class="col-md-10">
                                     <app-product-filters #productFiltersComponent [productFilters]="productFilters"
-                                                         (setFilters)="onSetFilters($event)"
-                                                         class="flex flex-wrap justify-start"  style="margin-top: -0.4rem"></app-product-filters>
+                                                         (setFilters)="onSetFilters($event)" [isBrandPage]="isBrandPage"
+                                                         class="flex flex-wrap justify-start"></app-product-filters>
                                 </div>
 
                                 <div class="col-md-2">
