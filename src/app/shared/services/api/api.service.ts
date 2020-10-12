@@ -1,20 +1,21 @@
-import { Injectable } from '@angular/core';
-import { Observable, of } from 'rxjs';
-import { HttpHeaders } from '@angular/common/http';
-import { CookieService } from 'ngx-cookie-service';
-import { environment as env } from 'src/environments/environment';
-import { HttpService } from '../http/http.service';
-import { UtilsService } from '../utils/utils.service';
+import { Injectable } from "@angular/core";
+import { Observable, of } from "rxjs";
+import { HttpHeaders } from "@angular/common/http";
+import { CookieService } from "ngx-cookie-service";
+import { environment as env } from "src/environments/environment";
+import { HttpService } from "../http/http.service";
+import { UtilsService } from "../utils/utils.service";
 import {
   IProductsPayload,
   IProductPayload,
   ISearchProductsPayload,
   IDepartment,
-  IProductDetail
-} from './../../models';
-import { MOCK_PRODUCT_FILTERS } from 'src/app/mocks';
-import { forkJoin } from 'rxjs'; // RxJS 6 syntax
-import { delay, filter } from 'rxjs/operators';
+  IProductDetail,
+} from "./../../models";
+import { MOCK_PRODUCT_FILTERS } from "src/app/mocks";
+import { forkJoin } from "rxjs"; // RxJS 6 syntax
+import { delay, filter } from "rxjs/operators";
+import has = Reflect.has;
 
 @Injectable({
   providedIn: "root",
@@ -126,15 +127,15 @@ export class ApiService {
     return this.httpService.get(url);
   }
 
-  getBrandData(brandName: string):Observable<any> {
+  getBrandData(brandName: string): Observable<any> {
     let endpoint = `brand`;
-    if(brandName !== '') {
+    if (brandName !== "") {
       endpoint = `brand/${brandName}`;
     }
     const url = env.useLocalJson
-    ? `${env.JSON_BASE_HREF}${endpoint}`
-    : `${env.API_BASE_HREF}${endpoint}`;
-    return this.httpService.get(url)
+      ? `${env.JSON_BASE_HREF}${endpoint}`
+      : `${env.API_BASE_HREF}${endpoint}`;
+    return this.httpService.get(url);
   }
 
   getMultiplePageProducts(
@@ -164,14 +165,14 @@ export class ApiService {
   getAllBrandNames(): Observable<any> {
     const endpoint = `brand`;
     const url = env.useLocalJson
-    ? `${env.JSON_BASE_HREF}${endpoint}`
-    : `${env.API_BASE_HREF}${endpoint}`;
-    return this.httpService.get(url)
+      ? `${env.JSON_BASE_HREF}${endpoint}`
+      : `${env.API_BASE_HREF}${endpoint}`;
+    return this.httpService.get(url);
   }
 
-  getAllDepartments(brandFilter: string = ''): Observable<IDepartment> {
+  getAllDepartments(brandFilter: string = ""): Observable<IDepartment> {
     let endpoint = `all-departments`;
-    if(brandFilter !== '' && brandFilter !== undefined) {
+    if (brandFilter !== "" && brandFilter !== undefined) {
       endpoint = `all-departments?brands=${brandFilter}`;
     }
     const url = env.useLocalJson
@@ -345,8 +346,9 @@ export class ApiService {
     return this.httpService.post(url, data, headers);
   }
 
-  getCartProduct(hasState, state) {
-    const endpoint = hasState ? `cart?state_code=${state}` : "cart";
+  getCartProduct(hasState, state, hasPromo?, promoCode?) {
+    let endpoint = hasState ? `cart?state_code=${state}` : "cart";
+    endpoint = hasPromo ? `${endpoint}&promo=${promoCode}` : endpoint;
     const token = this.cookie.get("token");
     const headers = new HttpHeaders({
       "Content-Type": "application/json",
