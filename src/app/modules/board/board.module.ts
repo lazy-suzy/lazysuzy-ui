@@ -50,6 +50,7 @@ import {
   FontPickerConfigInterface
 } from 'ngx-font-picker';
 import { Ng5SliderModule } from 'ng5-slider';
+import { BoardTutorialModalComponent } from './board-tutorial-modal/board-tutorial-modal.component';
 
 const DEFAULT_FONT_PICKER_CONFIG: FontPickerConfigInterface = {
   apiKey: 'AIzaSyBCssLRX6vTUWmk__OTRIz5699gL4kgpVQ'
@@ -103,13 +104,15 @@ const DEFAULT_FONT_PICKER_CONFIG: FontPickerConfigInterface = {
     CurrentBoardComponent,
     AddFileUploadComponent,
     UploadFileDetailsComponent,
-    IconFactoryComponent
+    IconFactoryComponent,
+    BoardTutorialModalComponent
   ],
   entryComponents: [
     AddViaUrlComponent,
     UploadFileDetailsComponent,
     BoardPopupConfigComponent,
-    BoardPopupConfirmComponent
+    BoardPopupConfirmComponent,
+    BoardTutorialModalComponent
   ],
   providers: [
     BoardService,

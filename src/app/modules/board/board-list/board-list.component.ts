@@ -21,6 +21,7 @@ import {
     Breakpoints,
     BreakpointObserver
 } from '@angular/cdk/layout';
+import {BoardTutorialModalComponent} from "../board-tutorial-modal/board-tutorial-modal.component";
 
 @Component({
     selector: 'app-board-list',
@@ -124,6 +125,13 @@ export class BoardListComponent implements OnInit {
             this.isAnyPublished =
                 this.boards.filter((b) => b.is_published === 1).length > 0;
             this.isFetching = false;
+           if(response.length === 0){
+               this.dialog.open(BoardTutorialModalComponent,{
+                   width: "35%",
+                   panelClass: 'auth-dialog-container',
+                   autoFocus: false,
+               })
+           }
         });
         this.boardService.getPublicBoards().subscribe((response) => {
             const boards = response.reverse();
