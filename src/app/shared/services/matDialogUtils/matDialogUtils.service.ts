@@ -97,15 +97,12 @@ export class MatDialogUtilsService {
   openSignupDialog(isHandset = false, isClose = false) {
     const width = isHandset ? '100%' : '35%';
     // tslint:disable-next-line: no-unused-expression
-    this.dialog.closeAll();
-    setTimeout(()=>{
-      this.dialog.open(SignupComponent, {
-        width,
-        panelClass: 'auth-dialog-container',
-        autoFocus: false,
-      });
-    }, 100);
-    return;
+    !isClose && this.dialog.closeAll();
+    return  this.dialog.open(SignupComponent, {
+      width,
+      panelClass: 'auth-dialog-container',
+      autoFocus: false,
+    });
   }
 
   openSigninDialog(width = '35%') {
