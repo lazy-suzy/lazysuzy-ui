@@ -17,7 +17,6 @@ export class ResetPasswordComponent implements OnInit {
   token = '';
   isSuccess = false;
   routeSubscription: any;
-
   constructor(
     private apiService: ApiService,
     private activeRoute: ActivatedRoute,
@@ -95,4 +94,5 @@ export class ResetPasswordComponent implements OnInit {
         );
     }
   }
+
 }
