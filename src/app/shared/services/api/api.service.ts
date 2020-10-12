@@ -463,4 +463,10 @@ export class ApiService {
     const url = `${env.API_BASE_HREF}${endpoint}`;
     return this.httpService.post(url, headers);
   }
+  getSearchKeywords() {
+    const endpoint = `search-keywords`;
+    const token = this.cookie.get("token");
+    const url = `${env.API_BASE_HREF}${endpoint}`;
+    return this.httpService.get(url);
+  }
 }
