@@ -102,6 +102,8 @@ export class PaymentComponent implements OnInit {
     promoCodeDiscount = 0;
     promoCodeDetails: any;
     isPromoCodeProcessing: boolean = false;
+    stateParam = '';
+    promoParam = '';
 
     constructor(
         private fb: FormBuilder,
@@ -323,17 +325,36 @@ export class PaymentComponent implements OnInit {
 
     shippingStateChanged() {
         this.isStateUpdating = true;
-        this.apiService
-            .getCartProduct(true, this.customerData.shipping_state)
-            .subscribe(
-                (payload: any) => {
-                    this.orderAmount = payload.order;
-                    this.isStateUpdating = false;
-                },
-                (error: any) => {
-                    console.log(error);
-                }
-            );
+        this.stateParam = this.customerData.shipping_state;
+        if(this.isPromoCodeApplicable){
+            this.apiService
+                .getCartProduct(true, this.customerData.shipping_state,true,this.promoCodeDetails.code)
+                .subscribe(
+                    (payload: any) => {
+                        this.orderAmount.total_cost = payload.order.total_cost;
+                        this.orderAmount.sales_tax_total= payload.order.sales_tax_total;
+                        this.isStateUpdating = false;
+                    },
+                    (error: any) => {
+                        console.log(error);
+                    }
+                );
+        }
+        else {
+            this.apiService
+                .getCartProduct(true, this.customerData.shipping_state)
+                .subscribe(
+                    (payload: any) => {
+                        this.orderAmount.total_cost = payload.order.total_cost;
+                        this.orderAmount.sales_tax_total= payload.order.sales_tax_total;
+                        this.isStateUpdating = false;
+                    },
+                    (error: any) => {
+                        console.log(error);
+                    }
+                );
+        }
+
     }
 
     showPromoCodeBox() {
@@ -346,7 +367,11 @@ export class PaymentComponent implements OnInit {
         }
         this.isPromoCodeProcessing = true;
         this.promoCode = this.promoCode.toUpperCase();
-        this.promoCodeService.getPromoCodeProducts(this.promoCode).subscribe((data: any) => {
+        let urlParams =`promo=${this.promoCode}`;
+        if(this.hasStateParam()){
+            urlParams +=`&state_code=${this.stateParam}`
+        }
+        this.promoCodeService.getPromoCodeProducts(urlParams).subscribe((data: any) => {
             console.log(data);
             // this.promoCode = '';
             const {promo_details} = data;
@@ -358,7 +383,7 @@ export class PaymentComponent implements OnInit {
                 this.promoCode = '';
                 this.showPromoCodeBox();
             }
-        }, (error => console.log(error)),() => this.isPromoCodeProcessing=false)
+        }, (error => console.log(error)), () => this.isPromoCodeProcessing = false)
 
     }
 
@@ -378,5 +403,12 @@ export class PaymentComponent implements OnInit {
     setPromoCodeIsInvalid(message) {
         this.promoCodeError = true;
         this.promoCodeErrorMessage = message
+    }
+
+    hasStateParam(): boolean {
+        if (this.stateParam) {
+            return true;
+        }
+        return false;
     }
 }

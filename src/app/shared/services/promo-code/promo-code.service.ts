@@ -17,11 +17,9 @@ export class PromoCodeService {
     ) {
     }
 
-    getPromoCodeProducts(code) {
-        const promoCode = {
-            'promo_code': code
-        };
-        const url = `${this.baseUrl}?promo=${code}`;
+    getPromoCodeProducts(urlParams) {
+
+        const url = `${this.baseUrl}?${urlParams}`;
         const headers = new HttpHeaders({
             Authorization: `Bearer ${this.cookie.get('token')}`
         });

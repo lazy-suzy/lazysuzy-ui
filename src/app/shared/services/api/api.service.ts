@@ -15,6 +15,7 @@ import {
 import { MOCK_PRODUCT_FILTERS } from 'src/app/mocks';
 import { forkJoin } from 'rxjs'; // RxJS 6 syntax
 import { delay, filter } from 'rxjs/operators';
+import has = Reflect.has;
 
 @Injectable({
   providedIn: 'root'
@@ -345,8 +346,9 @@ export class ApiService {
     return this.httpService.post(url, data, headers);
   }
 
-  getCartProduct(hasState, state) {
-    const endpoint = hasState ? `cart?state_code=${state}` : 'cart';
+  getCartProduct(hasState, state ,hasPromo?,promoCode?) {
+    let endpoint = hasState ? `cart?state_code=${state}` : 'cart';
+    endpoint = hasPromo?`${endpoint}&promo=${promoCode}`:endpoint;
     const token = this.cookie.get('token');
     const headers = new HttpHeaders({
       'Content-Type': 'application/json',
