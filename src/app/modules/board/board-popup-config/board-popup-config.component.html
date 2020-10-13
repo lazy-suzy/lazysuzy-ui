@@ -1,6 +1,6 @@
 <div>
   <div class="ph5-ns ph4 w-100 pt4 board-modal">
-    <div class="canvas-config pb0">
+    <div  class="canvas-config pb0">
       <div class="pv3">
         <!-- <h4 class="board-header">Board Configuration</h4> -->
         <h5 class="title ml2 text-center b">Start New Design Board</h5>
@@ -75,24 +75,25 @@
           </div>
         </div>
       </div>
-      <div class="flex board-action-buttons">
-        <div class="w-50 ph3 text-right">
-          <button
-            (click)="cancel()"
-            class="btn btn-cancel w-50 js-close-publish-board"
-          >
-            Cancel
-          </button>
-        </div>
-        <div class="w-50 ph3">
-          <button
-            (click)="save()"
-            [disabled]="!isOptionSelected"
-            class="btn red-button w-50"
-          >
-            Go
-          </button>
-        </div>
+
+    </div>
+    <div mat-dialog-actions>
+      <div class="w-50 ph3 text-right">
+        <button
+                (click)="cancel()"
+                class="btn btn-cancel w-50 js-close-publish-board"
+        >
+          Cancel
+        </button>
+      </div>
+      <div class="w-50 ph3">
+        <button
+                (click)="save()"
+                [disabled]="!isOptionSelected"
+                class="btn red-button w-50"
+        >
+          Go
+        </button>
       </div>
     </div>
   </div>
