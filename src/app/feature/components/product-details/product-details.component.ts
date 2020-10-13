@@ -258,9 +258,8 @@ export class ProductDetailsComponent implements OnInit {
     console.log('this.activeProduct.inventory_product_details.price: ', this.activeProduct.inventory_product_details.price);
     console.log('this.twoPlus: ', !this.product.in_inventory && !this.activeProduct.inventory_product_details.price);
     console.log('this.beforeSelection: ', this.beforeSelection);
-
     if (
-      !this.product.in_inventory &&
+      !this.activeProduct.in_inventory &&
       !this.activeProduct.inventory_product_details.price ||
       !this.beforeSelection
     ) {

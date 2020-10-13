@@ -257,6 +257,7 @@ export class VariationsComponent implements OnInit {
                 }
                 if (filterValue.length == 1) {
                     this.selections[filter] = filterValue[0];
+                    this.inputSelections[filter].selected=true;
                 }
             }
         }
