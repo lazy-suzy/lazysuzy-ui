@@ -47,6 +47,7 @@ export class ProductsCarousalComponent implements OnInit {
     loop: true,
     items: this.items,
     dots: true,
+    dotsClass:"owl-dots pt3",
     pagination: true,
     // autoWidth: true,
     // stagePadding: 100,
