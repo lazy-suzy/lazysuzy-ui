@@ -82,14 +82,13 @@ export class ProductFiltersComponent implements OnInit {
     ngOnInit() {
         this.activeRoute.queryParams.subscribe((params) => {
             this.setClearButtonVisibility(params.filters);
-
         });
     }
 
     private setClearButtonVisibility(filters) {
         if (this.isBrandPage) {
             const filtersArray = filters.split(";").filter(value => value);
-            if (filtersArray.length == 1) {
+            if (filtersArray.length <= 1) {
                 this.isClearAllVisible = false;
             }
             else {
@@ -215,8 +214,8 @@ export class ProductFiltersComponent implements OnInit {
                     }
                 }
                 if (
-                    this.productFilters.price.from === this.productFilters.price.min &&
-                    this.productFilters.price.to === this.productFilters.price.max
+                    this.productFilters.price.from === Math.floor(this.productFilters.price.min) &&
+                    this.productFilters.price.to === Math.floor(this.productFilters.price.max)
                 ) {
                     this.isPriceChanged = false;
                 } else {
