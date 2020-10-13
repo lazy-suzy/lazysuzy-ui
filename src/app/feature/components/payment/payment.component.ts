@@ -393,6 +393,7 @@ export class PaymentComponent implements OnInit {
         this.promoCodeDiscount = order.total_promo_discount;
         this.orderAmount.total_cost = order.total_cost;
         this.promoCodeDetails = promo_details;
+        this.cartProducts = products;
     }
 
     removePromoCode() {
