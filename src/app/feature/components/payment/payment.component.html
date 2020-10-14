@@ -3,24 +3,41 @@
     <div class="order-summary-card">
       <div class="order-details section-border">
         <div class="b pv2">ORDER SUMMARY</div>
-        <div class="flex pt3 pb4" *ngFor="let item of cartProducts">
-          <div class="w-20">
-            <img [src]="item.image" class="prod-image" />
+
+        <ng-container *ngFor="let item of cartProducts">
+          <div class="flex pt3 pb4" >
+            <div class="w-20">
+              <img [src]="item.image" class="prod-image" />
+            </div>
+            <div class="w-80 flex flex-column">
+              <div class="flex ">
+                <div class="w-50">{{ item.product_name }}</div>
+                <div class="w-10 tr">
+                  {{ item.count }}
+                </div>
+                <div class="w-40 tr">${{ item.retail_price | number: '1.2-2' }}</div>
+              </div>
+              <div>by {{ item.site }}</div>
+              <div *ngIf="item.is_promo_applied && isPromoCodeApplicable" class="flex justify-between">
+                <div  class="pink-font product-promo-text ">[{{promoCodeDetails.code}}]</div>
+                <div class="tr product-promo-text">-${{item.promo_discount| number: '1.2-2' }}</div>
+              </div>
+            </div>
           </div>
-          <div class="w-50">
-            <div>{{ item.product_name }}</div>
-            <div>by {{ item.site }}</div>
-          </div>
-          <div class="w-10 tc">
-            {{ item.count }}
-          </div>
-          <div class="w-20 tr">${{ item.retail_price | number: '1.2-2' }}</div>
-        </div>
+        </ng-container>
       </div>
       <div class="order-pricing-details section-border">
         <div class="flex justify-between pv2">
           <span>SUBTOTAL</span>
           <span>${{ orderAmount.sub_total | number: '1.2-2' }}</span>
+        </div>
+        <div class="flex justify-between pb3" *ngIf="isPromoCodeApplicable">
+          <div class = "flex flex-column">
+            <span>{{promoCodeDetails.description}}</span>
+            <span>{{promoCodeDetails.code}} <a (click)="removePromoCode()" class="promo-remove-button pink-font">[Remove]</a></span>
+          </div>
+
+          <span>-${{promoCodeDiscount | number: '1.2-2'}}</span>
         </div>
         <div class="flex justify-between pb2">
           <span
@@ -32,6 +49,16 @@
         <div class="flex justify-between pb3">
           <span>Estimated Tax</span>
           <span>${{ orderAmount.sales_tax_total | number: '1.2-2' }}</span>
+        </div>
+        <div class="flex  flex-column pb3" style="align-items: start">
+          <a (click)="showPromoCodeBox()" class="promo-button pink-font">Enter Promo Code</a>
+          <div class="flex flex-wrap justify-start pt2 mt-1" *ngIf="isPromoCodeBoxVisible">
+            <div class="flex flex-column mt3">
+              <input class="promo-text-field" [(ngModel)]="promoCode" type="text">
+            </div>
+            <button [disabled]="isPromoCodeProcessing" class="promo-apply-button mt3" (click)="checkPromoCode()">APPLY</button>
+          </div>
+          <span *ngIf="promoCodeError" class="promo-error">{{promoCodeErrorMessage}}</span>
         </div>
 
       </div>
@@ -730,11 +757,11 @@
 <!--        <div class="flex justify-between pb3">-->
           <div class="flex flex-column pb3" style="align-items: start">
             <a (click)="showPromoCodeBox()" class="promo-button pink-font">Enter Promo Code</a>
-            <div class="flex justify-start pt2" *ngIf="isPromoCodeBoxVisible">
-              <div class="flex flex-column">
+            <div class="flex flex-wrap justify-start pt2 mt-1" *ngIf="isPromoCodeBoxVisible">
+              <div class="flex flex-column mt3">
                 <input class="promo-text-field" [(ngModel)]="promoCode" type="text">
               </div>
-              <button [disabled]="isPromoCodeProcessing" class="promo-apply-button" (click)="checkPromoCode()">APPLY</button>
+              <button [disabled]="isPromoCodeProcessing" class="promo-apply-button mt3" (click)="checkPromoCode()">APPLY</button>
             </div>
             <span *ngIf="promoCodeError" class="promo-error">{{promoCodeErrorMessage}}</span>
           </div>
