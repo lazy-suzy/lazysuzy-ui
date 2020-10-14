@@ -122,8 +122,8 @@
                     <div *ngIf="!isSetItemInInventory">
                         <app-redirect *ngIf="product.redirect && !utils.hasInventory(activeProduct)"
                                       [redirectUrl]="product.redirect_url" [redirectDetails]="product.redirect_details"
-                                      [category]="product.department_info[0].category_name"
-                                      [categoryUrl]="product.department_info[0].category_url"
+                                      [category]="product.department_info[0]?.category_name"
+                                      [categoryUrl]="product.department_info[0]?.category_url"
                                       [isHandset]="false">
                         </app-redirect>
                     </div>

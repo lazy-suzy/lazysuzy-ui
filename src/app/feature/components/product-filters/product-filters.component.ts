@@ -214,8 +214,8 @@ export class ProductFiltersComponent implements OnInit {
                     }
                 }
                 if (
-                    this.productFilters.price.from === Math.floor(this.productFilters.price.min) &&
-                    this.productFilters.price.to === Math.floor(this.productFilters.price.max)
+                    Math.round(this.productFilters.price.from) === Math.round(this.productFilters.price.min) &&
+                    Math.round(this.productFilters.price.to) === Math.round(this.productFilters.price.max)
                 ) {
                     this.isPriceChanged = false;
                 } else {
