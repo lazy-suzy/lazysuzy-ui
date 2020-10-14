@@ -81,11 +81,25 @@ export class ProductFiltersComponent implements OnInit {
 
     ngOnInit() {
         this.activeRoute.queryParams.subscribe((params) => {
-            this.isClearAllVisible = !!params.filters;
+            this.setClearButtonVisibility(params.filters);
         });
     }
 
-    // tslint:disable-next-line: use-lifecycle-interface
+    private setClearButtonVisibility(filters) {
+        if (this.isBrandPage) {
+            const filtersArray = filters.split(";").filter(value => value);
+            if (filtersArray.length <= 1) {
+                this.isClearAllVisible = false;
+            }
+            else {
+                this.isClearAllVisible = true;
+            }
+        } else {
+            this.isClearAllVisible = !!filters;
+        }
+    }
+
+// tslint:disable-next-line: use-lifecycle-interface
     ngOnChanges(change: any) {
         if (
             change.isChangingBrandList &&
@@ -200,8 +214,8 @@ export class ProductFiltersComponent implements OnInit {
                     }
                 }
                 if (
-                    this.productFilters.price.from === this.productFilters.price.min &&
-                    this.productFilters.price.to === this.productFilters.price.max
+                    this.productFilters.price.from === Math.floor(this.productFilters.price.min) &&
+                    this.productFilters.price.to === Math.floor(this.productFilters.price.max)
                 ) {
                     this.isPriceChanged = false;
                 } else {
@@ -335,7 +349,7 @@ export class ProductFiltersComponent implements OnInit {
             }
         }
         this.setFilters.emit(tempFilters);
-        this.isClearAllVisible = tempFilters !== '';
+        this.setClearButtonVisibility(tempFilters);
         return tempFilters;
     }
 
