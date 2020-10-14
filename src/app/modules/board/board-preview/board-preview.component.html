@@ -37,7 +37,7 @@
       </div>
     </div>
   </div>
-  <div class="col col-md-3 flex align-items-center">
+  <div class="col col-md-3 flex justify-center align-items-center">
     <div
       *ngIf="!loadedAsEmbed"
       class="mb-0-ns mb-5 mt-0-ns mt-5 board-user-container"
@@ -113,12 +113,12 @@
           </ng-template>
 
           <div class="prod-info">
-            <span class="site">
+            <span class="site font-size-14">
               {{ product.site }}
             </span>
           </div>
-          <div class="name">{{ product.name }}</div>
-          <div class="prices">
+          <div class="name font-size-14">{{ product.name }}</div>
+          <div class="prices font-size-14">
             <span
               class="{{
                 (product.was_price &&
