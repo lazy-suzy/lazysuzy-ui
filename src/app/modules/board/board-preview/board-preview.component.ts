@@ -193,7 +193,8 @@ export class BoardPreviewComponent implements OnInit {
             height: currentHeight,
         });
         this.canvas.setZoom(scaleRatio);
-
+        this.canvas.backgroundColor="#f8f9fa";
+        this.canvas.renderAll();
         //
         // const scaleFactorX = currentWidth / previousWidth;
         // const scaleFactorY = currentHeight / previousHeight;
