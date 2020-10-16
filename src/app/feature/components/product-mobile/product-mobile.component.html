@@ -43,8 +43,8 @@
       <span class="brand-name">{{product.site}}</span>
       <span class="product-name">{{product.name}}</span>
       <div class="prices">
-          <span>{{isRange?'From':''}} <span [ngClass]="{'sale': isDiscounted}">${{priceObject.isPrice | number:'1.2-2'}}</span> </span>
-          <span *ngIf="isDiscounted" class="strike">${{priceObject.wasPrice | number:'1.2-2'}}</span>
+          <span style="font-size: 12px;">{{isRange?'From':''}} <span class="font-size-14" [ngClass]="{'sale': isDiscounted}">${{renderPrice(priceObject.isPrice) }}</span> </span>
+          <span *ngIf="isDiscounted" class="strike font-size-14">${{renderPrice(priceObject.wasPrice)}}</span>
       </div>
     </div>
   </div>

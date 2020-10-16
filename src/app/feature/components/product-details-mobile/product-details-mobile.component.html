@@ -26,11 +26,9 @@
             <div class="product-site">{{ product.site }}</div>
             <div class="price-container flex flex-wrap items-center">
                 <div class="padding-vertical-2 flex items-center">
-                    <div class="product-price mr3">${{ productPrice }}</div>
-                    <div class="strike product-old-price {{
-              productPrice !== productWasPrice ? '' : 'dn'
-            }}">
-                        ${{ productWasPrice }}
+                    <div class="product-price mr3">${{ priceObject.is_price }}</div>
+                    <div class="strike product-old-price" [ngClass]="{'dn':!isDiscounted}">
+                        ${{ priceObject.was_price }}
                     </div>
                 </div>
                 <button mat-raised-button class="bg-red view-details-btn" *ngIf="
