@@ -47,4 +47,16 @@ export class ProductMobileComponent implements OnInit {
         this.product.wishlisted = mark;
       });
   }
+
+  renderPrice(price:number):number|string{
+    const quotient = Math.floor(price);
+    let remainder = Number((price - quotient).toPrecision(2));
+    if(remainder == 0){
+      return quotient;
+    }
+    else{
+      return  price.toFixed(2);
+    }
+    return 0;
+  }
 }

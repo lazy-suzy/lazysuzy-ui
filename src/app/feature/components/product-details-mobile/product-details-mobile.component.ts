@@ -75,6 +75,13 @@ export class ProductDetailsMobileComponent implements OnInit {
   schema = {};
   invalidLinkImageSrc = 'assets/image/invalid_link.png';
   invalidLink: boolean;
+
+  priceObject={
+    is_price:'',
+    was_price:''
+  };
+  isDiscounted=false;
+  isRange=false;
   constructor(
     private router: Router,
     private activeRoute: ActivatedRoute,
@@ -173,6 +180,11 @@ export class ProductDetailsMobileComponent implements OnInit {
                 this.product.was_price
               );
             }
+            const {isPriceString,isRanged,isDiscounted,wasPriceString} = this.utils.getPriceObject(this.product);
+            this.priceObject.is_price = isPriceString;
+            this.priceObject.was_price = wasPriceString;
+            this.isRange = isRanged;
+            this.isDiscounted = isDiscounted;
             this.items = this.product.on_server_images.map(
               (item) => new ImageItem({ src: item })
             );
