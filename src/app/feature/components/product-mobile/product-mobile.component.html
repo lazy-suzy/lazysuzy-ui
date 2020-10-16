@@ -43,8 +43,8 @@
       <span class="brand-name">{{product.site}}</span>
       <span class="product-name">{{product.name}}</span>
       <div class="prices">
-          <span [ngClass]="{'sale': isDiscounted}">{{isRange?'From':''}} ${{priceObject.isPrice}}</span>
-          <span *ngIf="priceObject.isPrice<=priceObject.wasPrice" class="strike">${{priceObject.wasPrice}}</span>
+          <span>{{isRange?'From':''}} <span [ngClass]="{'sale': isDiscounted}">${{priceObject.isPrice | number:'1.2-2'}}</span> </span>
+          <span *ngIf="isDiscounted" class="strike">${{priceObject.wasPrice | number:'1.2-2'}}</span>
       </div>
     </div>
   </div>
