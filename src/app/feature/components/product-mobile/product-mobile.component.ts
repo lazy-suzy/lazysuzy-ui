@@ -14,10 +14,31 @@ export class ProductMobileComponent implements OnInit {
   @Input() productsInRow: number;
 
   isVariationImageVisible = false;
-
+  priceObject = {
+    isPrice:0,
+    wasPrice:0
+  };
+  isDiscounted = false;
+  isRange = false;
   constructor(private apiService: ApiService) {}
 
-  ngOnInit() {}
+  ngOnInit() {
+    this.formatPriceText(this.product);
+  }
+
+  formatPriceText(product){
+    let {is_price, was_price} = product;
+    is_price = is_price.split('-');
+    was_price = was_price.split('-');
+    if(is_price.length>1){
+        this.isRange = true;
+    }
+    this.priceObject.isPrice = Number(is_price[0]);
+    this.isDiscounted = was_price && was_price[0] > is_price[0];
+    if(this.isDiscounted){
+      this.priceObject.wasPrice = Number(was_price[0]);
+    }
+  }
   wishlistProduct(sku, mark, event) {
     event.stopPropagation();
     this.apiService
