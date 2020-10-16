@@ -35,7 +35,7 @@
                     <div class="price-container">
                         <div class="w-60 price-font">
                             <span class="product-price mr3">${{ productPrice }}</span>
-                            <span class="strike {{productPrice !== productWasPrice ? '' : 'dn' }}">${{ productWasPrice }}</span>
+                            <span class="strike {{hasValidWasPrice ? '' : 'dn' }}">${{ productWasPrice }}</span>
                         </div>
                         <div class="w-40">
                             <button mat-raised-button class="bg-red view-details-btn"
