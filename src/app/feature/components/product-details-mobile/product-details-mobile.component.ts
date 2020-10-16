@@ -168,6 +168,7 @@ export class ProductDetailsMobileComponent implements OnInit {
               );
             } else {
               this.productPrice = this.utils.formatPrice(this.product.is_price);
+
               this.productWasPrice = this.utils.formatPrice(
                 this.product.was_price
               );
