@@ -49,16 +49,31 @@
           <div>
             by <span class="brand-font">{{ item.site }}</span>
           </div>
-          <div>${{ item.price | number: '1.2-2' }}</div>
+          <ng-container *ngIf="item.is_promo_applied;else NoDiscountPrice">
+            <div><span class="pink-font">${{item.total_price}}</span>&nbsp; <span class="strike">${{item.original_total_price}}</span></div>
+          </ng-container>
+          <ng-template #NoDiscountPrice>
+            <div>${{ item.price | number: '1.2-2' }}</div>
+          </ng-template>
+
         </div>
       </div>
     </div>
     <div class="order-pricing section mb3">
       <div class="flex justify-between pv3">
         <div class="b">SUBTOTAL</div>
-        <div class="b">${{ orderAmount.sub_total | number: '1.2-2' }}</div>
+        <div class="b">${{
+          orderAmount.total_promo_discount? orderAmount.total_promo_discount+orderAmount.sub_total:orderAmount.sub_total | number: '1.2-2' }}</div>
+      </div>
+      <div class="flex justify-between pv2" *ngIf="orderAmount.total_promo_discount">
+        <div class="flex flex-column">
+         <span>{{promoDetails.description}}</span>
+          <span style="font-size: 14px">{{promoDetails.code}}</span>
+        </div>
+        <div> -${{ orderAmount.total_promo_discount | number: '1.2-2' }}</div>
       </div>
       <div class="flex justify-between pv2">
+
         <div>Shipping</div>
         <div>${{ orderAmount.shipment_total | number: '1.2-2' }}</div>
       </div>

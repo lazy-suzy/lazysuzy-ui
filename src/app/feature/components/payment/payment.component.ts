@@ -74,7 +74,8 @@ export class PaymentComponent implements OnInit {
         billing_city: null,
         billing_country: null,
         billing_state: null,
-        billing_zipcode: null
+        billing_zipcode: null,
+        promo:''
     };
     country = 'USA';
     isBillingAddressSame = true;
@@ -234,6 +235,9 @@ export class PaymentComponent implements OnInit {
                         this.customerData.token = result.token.id;
                         this.customerData.ip = result.token.client_ip;
                         localStorage.setItem('registeredName', name);
+                        if(this.isPromoCodeApplicable){
+                            this.customerData.promo = this.promoCodeDetails.code;
+                        }
                         this.apiService.postStripeToken(this.customerData).subscribe(
                             (payload: any) => {
                                 this.isPaymentExecuting = false;
