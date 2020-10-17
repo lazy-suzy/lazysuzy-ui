@@ -31,6 +31,7 @@ export class OrderSuccessComponent implements OnInit {
   orderAmount: IOrderAmount;
   isLoading: boolean;
   spinner = 'assets/image/spinner.gif';
+  promoDetails:any={};
   constructor(
     private apiService: ApiService,
     private router: Router,
@@ -58,6 +59,7 @@ export class OrderSuccessComponent implements OnInit {
             this.orderDate = moment(payload.delivery[0].created_at).format(
               'D MMM, YYYY'
             );
+            this.promoDetails = payload.cart.promo_details;
             this.isLoading = false;
           },
           (error: any) => {
