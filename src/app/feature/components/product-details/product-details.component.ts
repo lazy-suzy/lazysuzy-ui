@@ -145,13 +145,14 @@ export class ProductDetailsComponent implements OnInit {
                   this.productWasPrice = this.utils.formatPrice(
                     this.product.was_price
                   );
-                  const minPrice = Number(this.productPrice.split('-')[0]);
-                  const wasMinPrice = Number(this.productWasPrice.split('-')[0]);
 
-                  if(wasMinPrice<=minPrice)
-                  {
-                    this.hasValidWasPrice = false;
-                  }
+                }
+                const minPrice = Number(this.productPrice.split('-')[0]);
+                const wasMinPrice = Number(this.productWasPrice.split('-')[0]);
+
+                if(wasMinPrice<=minPrice)
+                {
+                  this.hasValidWasPrice = false;
                 }
                 this.isVariationExist = this.utils.checkDataLength(
                   this.product.variations
