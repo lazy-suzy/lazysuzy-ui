@@ -39,7 +39,7 @@
       </span>
       </div>
     </div>
-    <div class="flex flex-column product-detail-container">
+    <div *ngIf="productsInRow<3" class="flex flex-column product-detail-container">
       <span class="brand-name">{{product.site}}</span>
       <span class="product-name">{{product.name}}</span>
       <div class="prices">
