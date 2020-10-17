@@ -722,7 +722,7 @@
               <div *ngIf="item.is_promo_applied && isPromoCodeApplicable" class="flex justify-between">
                 <div  class="pink-font product-promo-text font-14 ">{{promoCodeDetails.code}}</div>
 
-                <div class="tr product-promo-text">-${{item.promo_discount| number: '1.2-2' }}</div>
+                <div class="tr product-promo-text">-${{item.promo_discount/item.count| number: '1.2-2' }}</div>
               </div>
             </div>
           </div>
