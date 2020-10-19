@@ -36,6 +36,7 @@ export class CartComponent implements OnInit {
   isCartLoading: boolean;
   isLoggedIn: boolean;
   eventSubscription: Subscription;
+  numberOfProducts=0;
   constructor(
     private breakpointObserver: BreakpointObserver,
     private apiService: ApiService,
@@ -72,6 +73,8 @@ export class CartComponent implements OnInit {
         this.subTotal = payload.order.sub_total;
         this.isCartLoading = false;
         this.isProductFetching = false;
+        this.numberOfProducts = this.cartProducts.reduce((acc,product)=>{ acc+=product.count;return acc},0)
+
       },
       (error: any) => {
         this.isCartLoading = false;

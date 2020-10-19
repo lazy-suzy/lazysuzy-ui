@@ -32,6 +32,7 @@ export class OrderSuccessComponent implements OnInit {
   isLoading: boolean;
   spinner = 'assets/image/spinner.gif';
   promoDetails:any={};
+  numberOfProducts=0;
   constructor(
     private apiService: ApiService,
     private router: Router,
@@ -60,6 +61,7 @@ export class OrderSuccessComponent implements OnInit {
               'D MMM, YYYY'
             );
             this.promoDetails = payload.cart.promo_details;
+            this.numberOfProducts = this.cartProducts.reduce((acc,product)=>acc+=product.count,0);
             this.isLoading = false;
           },
           (error: any) => {
