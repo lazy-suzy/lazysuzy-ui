@@ -3,4 +3,6 @@ export interface IOrderAmount {
   sub_total: number;
   shipment_total: number;
   total_cost: number;
+  total_promo_discount?:number;
+  original_sub_total?:number;
 }

@@ -3,35 +3,45 @@
     <div class="order-summary-card">
       <div class="order-details section-border">
         <div class="b pv2">ORDER SUMMARY</div>
-        <div class="flex pt3 pb4" *ngFor="let item of cartProducts">
-          <div class="w-20">
-            <img [src]="item.image" class="prod-image" />
+
+        <ng-container *ngFor="let item of cartProducts">
+          <div class="flex pt3 pb4" >
+            <div class="w-20">
+              <img [src]="item.image" class="prod-image" />
+            </div>
+            <div class="w-80 flex flex-column">
+              <div class="flex ">
+                <div class="w-50">{{ item.product_name }}</div>
+                <div class="w-10 tr">
+                  {{ item.count }}
+                </div>
+                <div class="w-40 tr">${{ item.retail_price | number: '1.2-2' }}</div>
+              </div>
+              <div>by {{ item.site }}</div>
+              <div *ngIf="item.is_promo_applied && isPromoCodeApplicable" class="flex justify-between">
+                <div  class="pink-font product-promo-text font-14 ">{{promoCodeDetails.code}}</div>
+                <div class="tr product-promo-text">-${{item.promo_discount/item.count| number: '1.2-2' }}</div>
+              </div>
+            </div>
           </div>
-          <div class="w-50">
-            <div>{{ item.product_name }}</div>
-            <div>by {{ item.site }}</div>
-          </div>
-          <div class="w-10 tc">
-            {{ item.count }}
-          </div>
-          <div class="w-20 tr">${{ item.retail_price | number: '1.2-2' }}</div>
-        </div>
+        </ng-container>
       </div>
       <div class="order-pricing-details section-border">
         <div class="flex justify-between pv2">
           <span>SUBTOTAL</span>
-          <span>${{ orderAmount.sub_total | number: '1.2-2' }}</span>
+          <span>${{orderAmount.original_sub_total? (orderAmount.original_sub_total | number: '1.2-2'):(orderAmount.sub_total | number: '1.2-2') }}</span>
+        </div>
+        <div class="flex justify-between pb3" *ngIf="isPromoCodeApplicable">
+          <div class = "flex flex-column">
+            <span>{{promoCodeDetails.description}}</span>
+            <span class="font-14">{{promoCodeDetails.code}} <a (click)="removePromoCode()" class="promo-remove-button pink-font">Remove</a></span>
+          </div>
+
+          <span>-${{promoCodeDiscount | number: '1.2-2'}}</span>
         </div>
         <div class="flex justify-between pb2">
           <span
-            >UPS Ground Shipping
-            <span
-              class="tool-tip"
-              data-title="Flat rate shipping of $25 on most standard items. 
-            Additional charges apply for oversized items."
-            >
-              <mat-icon>help</mat-icon></span
-            >
+            >Shipping & Handling
             ({{ cartProducts.length }} items)</span
           >
           <span>${{ orderAmount.shipment_total | number: '1.2-2' }}</span>
@@ -40,6 +50,17 @@
           <span>Estimated Tax</span>
           <span>${{ orderAmount.sales_tax_total | number: '1.2-2' }}</span>
         </div>
+        <div class="flex  flex-column pb3" style="align-items: start">
+          <a (click)="showPromoCodeBox()" class="promo-button pink-font">Enter Promo Code</a>
+          <div class="flex flex-wrap justify-start pt2 mt-1" *ngIf="isPromoCodeBoxVisible">
+            <div class="flex flex-column mt3">
+              <input class="promo-text-field" [(ngModel)]="promoCode" type="text">
+            </div>
+            <button [disabled]="isPromoCodeProcessing" class="promo-apply-button mt3" (click)="checkPromoCode()">APPLY</button>
+          </div>
+          <span *ngIf="promoCodeError" class="promo-error">{{promoCodeErrorMessage}}</span>
+        </div>
+
       </div>
       <div class="flex justify-between pt2 pink-font b">
         <span>TOTAL</span>
@@ -684,43 +705,65 @@
     <div class="order-summary-card" *ngIf="!isLoading">
       <div class="order-details section-border">
         <div class="b pv2">ORDER SUMMARY</div>
-        <div class="flex pt3 pb4" *ngFor="let item of cartProducts">
-          <div class="w-20">
-            <img [src]="item.image" class="prod-image" />
+        <ng-container *ngFor="let item of cartProducts">
+          <div class="flex pt3 pb4" >
+            <div class="w-20">
+              <img [src]="item.image" class="prod-image" />
+            </div>
+            <div class="w-80 flex flex-column">
+              <div class="flex ">
+                <div class="w-65">{{ item.product_name }}</div>
+                <div class="w-5 tr">
+                  {{ item.count }}
+                </div>
+                <div class="w-30 tr">${{ item.retail_price | number: '1.2-2' }}</div>
+              </div>
+              <div>by {{ item.site }}</div>
+              <div *ngIf="item.is_promo_applied && isPromoCodeApplicable" class="flex justify-between">
+                <div  class="pink-font product-promo-text font-14 ">{{promoCodeDetails.code}}</div>
+
+                <div class="tr product-promo-text">-${{item.promo_discount/item.count| number: '1.2-2' }}</div>
+              </div>
+            </div>
           </div>
-          <div class="w-50">
-            <div>{{ item.product_name }}</div>
-            <div>by {{ item.site }}</div>
-          </div>
-          <div class="w-10 tr">
-            {{ item.count }}
-          </div>
-          <div class="w-20 tr">${{ item.retail_price | number: '1.2-2' }}</div>
-        </div>
+
+        </ng-container>
+
       </div>
       <div class="order-pricing-details section-border">
         <div class="flex justify-between pv3">
           <span>SUBTOTAL</span>
-          <span>${{ orderAmount.sub_total | number: '1.2-2' }}</span>
+          <span>${{orderAmount.original_sub_total? (orderAmount.original_sub_total | number: '1.2-2'):(orderAmount.sub_total | number: '1.2-2') }}</span>
         </div>
+          <div class="flex justify-between pb3" *ngIf="isPromoCodeApplicable">
+              <div class = "flex flex-column">
+                  <span>{{promoCodeDetails.description}}</span>
+                  <span class="font-14">{{promoCodeDetails.code}} <a (click)="removePromoCode()" class="promo-remove-button pink-font">Remove</a></span>
+              </div>
+
+              <span>-${{promoCodeDiscount | number: '1.2-2'}}</span>
+          </div>
         <div class="flex justify-between pb3">
-          <span
-            >UPS Ground Shipping
-            <span
-              class="tool-tip"
-              data-title="Flat rate shipping of $25 on most standard items. 
-            Additional charges apply for oversized items."
-            >
-              <mat-icon>help</mat-icon></span
-            >
-            ({{ cartProducts.length }} items)</span
-          >
+          <span>Shipping & Handling
+            ({{ cartProducts.length }} items)</span>
           <span>${{ orderAmount.shipment_total | number: '1.2-2' }}</span>
         </div>
         <div class="flex justify-between pb3">
           <span>Estimated Tax</span>
           <span>${{ orderAmount.sales_tax_total | number: '1.2-2' }}</span>
         </div>
+<!--        <div class="flex justify-between pb3">-->
+          <div class="flex flex-column pb3" style="align-items: start">
+            <a (click)="showPromoCodeBox()" class="promo-button pink-font">Enter Promo Code</a>
+            <div class="flex flex-wrap justify-start pt2 mt-1" *ngIf="isPromoCodeBoxVisible">
+              <div class="flex flex-column mt3">
+                <input class="promo-text-field" [(ngModel)]="promoCode" type="text">
+              </div>
+              <button [disabled]="isPromoCodeProcessing" class="promo-apply-button mt3" (click)="checkPromoCode()">APPLY</button>
+            </div>
+            <span *ngIf="promoCodeError" class="promo-error">{{promoCodeErrorMessage}}</span>
+          </div>
+<!--        </div>-->
       </div>
       <div class="flex justify-between pt2 pink-font b">
         <span>TOTAL</span>
