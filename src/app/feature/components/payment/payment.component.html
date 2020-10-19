@@ -733,7 +733,7 @@
       <div class="order-pricing-details section-border">
         <div class="flex justify-between pv3">
           <span>SUBTOTAL</span>
-          <span>${{ orderAmount.sub_total | number: '1.2-2' }}</span>
+          <span>${{orderAmount.original_sub_total? (orderAmount.original_sub_total | number: '1.2-2'):(orderAmount.sub_total | number: '1.2-2') }}</span>
         </div>
           <div class="flex justify-between pb3" *ngIf="isPromoCodeApplicable">
               <div class = "flex flex-column">
