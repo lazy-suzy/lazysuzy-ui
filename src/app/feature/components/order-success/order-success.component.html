@@ -63,7 +63,7 @@
       <div class="flex justify-between pv3">
         <div class="b">SUBTOTAL</div>
         <div class="b">${{
-          orderAmount.total_promo_discount? (orderAmount.total_promo_discount+orderAmount.sub_total| number: '1.2-2'):orderAmount.sub_total | number: '1.2-2' }}</div>
+          orderAmount.total_promo_discount? (orderAmount.original_sub_total | number: '1.2-2'):orderAmount.sub_total | number: '1.2-2' }}</div>
       </div>
       <div class="flex justify-between pv2" *ngIf="orderAmount.total_promo_discount">
         <div class="flex flex-column">
