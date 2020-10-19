@@ -71,7 +71,7 @@
     </mat-toolbar-row>
   </mat-toolbar>
   <div class="top-navbar flex justify-left" *ngIf="notHome && !isBrandPage">
-    <ng-container *ngFor="let department of departments">
+    <ng-container *ngFor="let department of departments;let i = index;">
       <div class="department-name" *ngIf="department.enabled">
         <div class="pointer pa2" [routerLink]="department.link">
           {{ department.department | titlecase }}
@@ -90,7 +90,15 @@
           </ng-container>
         </ul>
       </div>
+      <ng-container *ngIf="i === departments.length-1">
+        <div class="department-name">
+          <div class="pointer pa2" [routerLink]="['/products/all']" [queryParams]="{'sale': true}">
+            {{ "sale" | uppercase }}
+          </div>
+        </div>
+      </ng-container>
     </ng-container>
+
   </div>
 
   <div class="top-navbar flex justify-left" *ngIf="notHome && isBrandPage">
@@ -112,8 +120,10 @@
               </a>
             </li>
           </ng-container>
+
         </ul>
       </div>
     </ng-container>
+
   </div>
 </ng-template>
