@@ -5,7 +5,7 @@
       routerLinkActive="active"
       class="no-underline flex items-center"
     >
-      <img class="w4 grow" [src]="logoPath" alt="Lazy Suzy Home" />
+      <img class="grow" [ngClass]="{'w4':!notHome,'logo-size':notHome}" [src]="logoPath" alt="Lazy Suzy Home" />
     </a>
   </div>
 </ng-container>
@@ -76,7 +76,7 @@
         routerLinkActive="active"
         class="no-underline flex items-center ml-1"
       >
-        <img class="w4 grow" [src]="logoPath" alt="Lazy Suzy Home" />
+        <img class="grow" [ngClass]="{'w4':!notHome,'logo-size':notHome}" [src]="logoPath" alt="Lazy Suzy Home" />
       </a>
     </div>
 
@@ -90,10 +90,11 @@
           >search</mat-icon
         >
       </div>
+<!--      *ngIf="!notHome"-->
       <div class="header-link">
         <mat-icon
           class="account-icon"
-          *ngIf="!notHome"
+
           aria-hidden="false"
           [routerLink]="['/board']"
           >dashboard</mat-icon
