@@ -1,9 +1,46 @@
-<div class="ls-product-div" (click)="openDialog()">
-  <div class="ls-product">
+<div class="ls-product-div" [ngClass]="{'paddinghorizontal margin-bottom-40':!isHandset}" (click)="openDialog()">
+
+  <ng-container *ngIf="isHandset;else Desktop">
+    <div class="flex flex-column">
+      <div class="ls-product-mobile">
+        <img
+                class="prod-img img-fluid"
+                [src]="product.main_product_images"
+                [alt]="product.name"
+        />
+
+        <!-- <div *ngIf="product.wishlisted; else elseBlock">
+          <div class="tile-icon wishlist-icon">
+            <mat-icon (click)="wishlistProduct(product.product_sku, false, $event)"
+              >favorite</mat-icon
+            >
+          </div>
+        </div>
+        <ng-template #elseBlock>
+          <div class="tile-icon wishlist-icon">
+            <mat-icon (click)="wishlistProduct(product.product_sku, true, $event)"
+              >favorite_border</mat-icon
+            >
+          </div>
+        </ng-template> -->
+      </div>
+      <div class="product-detail-container" *ngIf="productsInRow!==3">
+      <span class="brand-name">{{product.site_name}}</span>
+      <span class="product-name">{{product.name}}</span>
+      <div class="prices">
+        <span style="font-size: 12px;">{{isRange?'From':''}} <span class="font-size-14" [ngClass]="{'sale': isDiscounted}">${{renderPrice(priceObject.isPrice) }}</span> </span>
+        <span *ngIf="isDiscounted" class="strike font-size-14">${{renderPrice(priceObject.wasPrice)}}</span>
+      </div>
+      </div>
+    </div>
+
+  </ng-container>
+  <ng-template #Desktop>
+    <div class="ls-product">
     <img
-      class="prod-img img-fluid"
-      [src]="product.main_product_images"
-      [alt]="product.name"
+            class="prod-img img-fluid"
+            [src]="product.main_product_images"
+            [alt]="product.name"
     />
 
     <!-- <div *ngIf="product.wishlisted; else elseBlock">
@@ -21,28 +58,30 @@
       </div>
     </ng-template> -->
   </div>
-  <div class="prod-info" *ngIf="!isHandset">
+    <div class="prod-info" *ngIf="!isHandset">
     <span class="site">
       <span *ngIf="product.is_new" class="new-tag"><strong>NEW</strong></span>
       {{ product.site_name }}
     </span>
-    <div
-      *ngIf="product.reviews != null && product.reviews != 0"
-      class="rating-container"
-    >
-      <span class="total-ratings">{{ product.reviews }}</span>
-      <div class="rating">
-        <mat-icon *ngFor="let icon of starIcons" class="yellow">
-          {{ icon }}
-        </mat-icon>
+      <div
+              *ngIf="product.reviews != null && product.reviews != 0"
+              class="rating-container"
+      >
+        <span class="total-ratings">{{ product.reviews }}</span>
+        <div class="rating">
+          <mat-icon *ngFor="let icon of starIcons" class="yellow">
+            {{ icon }}
+          </mat-icon>
+        </div>
       </div>
     </div>
-  </div>
-  <div class="name">{{ product.name }}</div>
-  <div class="prices">
-    <span>${{ product.min_price }}</span>
-    <span *ngIf="product.min_price !== product.max_price">
+    <div class="name">{{ product.name }}</div>
+    <div class="prices">
+      <span>${{ product.min_price }}</span>
+      <span *ngIf="product.min_price !== product.max_price">
       - ${{ product.max_price }}
     </span>
-  </div>
+    </div>
+  </ng-template>
+
 </div>
