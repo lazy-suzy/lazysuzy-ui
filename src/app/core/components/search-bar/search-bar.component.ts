@@ -8,6 +8,7 @@ import { Router } from '@angular/router';
 })
 export class SearchBarComponent {
   @Input() notHome: boolean;
+  @Input() isBoard:boolean;
   @Output() searchComplete = new EventEmitter<any>();
   textChange = false;
 

@@ -1,4 +1,4 @@
-<div class="searchBar" *ngIf="notHome; else isHome">
+<div class="searchBar" *ngIf="notHome || isBoard; else isHome">
   <div class="main-container header-container">
     <form #form="ngForm" role="form" class="searchbar">
       <div *ngIf="!textChange" class="col-form">
