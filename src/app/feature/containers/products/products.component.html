@@ -64,13 +64,13 @@
                     <div class="row sticky-row ">
                         <div class="col-md-12 filter-panel">
                             <div class="row" style="padding: 10px;">
-                                <div class="col-md-10" >
+                                <div class="col-md-10 col-sm-8" >
                                     <app-product-filters #productFiltersComponent [productFilters]="productFilters"
                                                          (setFilters)="onSetFilters($event)"
                                                          class="flex flex-wrap justify-start" style="margin-top: -0.4rem"></app-product-filters>
                                 </div>
 
-                                <div class="col-md-2">
+                                <div class="col-md-2 col-sm-4">
                                     <app-sort-type [sortTypeList]="sortTypeList" [sortType]="sortType"
                                                    (setSortType)="onSetSortType($event)">
                                     </app-sort-type>
