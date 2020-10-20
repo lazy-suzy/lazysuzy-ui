@@ -24,6 +24,7 @@ export class NavMobileComponent implements OnInit {
   showDepartment;
   showSearchComponent = false;
   notHome: boolean;
+  isBoard:boolean;
   checkHomeRoute: Subscription;
   hideBar = false;
   eventSubscription: Subscription;
@@ -47,7 +48,10 @@ export class NavMobileComponent implements OnInit {
       // this.notHome = location.path() !== '';
       this.notHome =
         location.path() !== '' && location.path().match(/board/) == null;
+      this.isBoard =  (location.path().match(/board/) !== null);
     });
+
+    console.log((location.path().match(/board/) !== null),location.path().match(/board/))
   }
 
   ngOnInit(): void {
