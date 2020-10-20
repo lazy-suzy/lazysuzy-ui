@@ -1,4 +1,4 @@
-<div class="flex flex-column mh3-ns" *ngIf="products">
+<div class="flex flex-column" *ngIf="products" [ngClass]="{'mh3-ns':!isHandset}" >
     <ng-container *ngIf="isHandset">
         <div class="{{
         showBar === true ? 'mobile-filter-panel fixed' : 'mobile-filter-panel'
