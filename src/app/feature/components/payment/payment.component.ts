@@ -401,7 +401,15 @@ export class PaymentComponent implements OnInit {
     }
 
     removePromoCode() {
+        this.isLoading = true;
         this.isPromoCodeApplicable = false;
+        this.apiService.getCartProduct(this.hasStateParam(),this.stateParam).subscribe((payload: any) => {
+            this.orderAmount.total_cost = payload.order.total_cost;
+            this.orderAmount.sales_tax_total = payload.order.sales_tax_total;
+            this.isLoading=false;
+        },error => {
+            this.isLoading =false;
+        });
         this.orderAmount.total_cost += Number(this.promoCodeDetails.total_discount)
     }
 
@@ -411,9 +419,6 @@ export class PaymentComponent implements OnInit {
     }
 
     hasStateParam(): boolean {
-        if (this.stateParam) {
-            return true;
-        }
-        return false;
+        return !!this.stateParam;
     }
 }
