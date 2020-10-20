@@ -1,5 +1,5 @@
 <div class="custom-class">
-    <mat-select class="w-100 text-center" [(value)]="default" (selectionChange)="sortChanged($event)">
+    <mat-select class="w-100 text-right" [(value)]="default" (selectionChange)="sortChanged($event)">
       <mat-option *ngFor="let type of sortTypeList" [value]="type.value">{{
         type.name
       }}</mat-option>
