@@ -112,6 +112,29 @@ export class UtilsService {
     }
   }
 
+  getPriceObject(product:any){
+    let isRanged,isDiscounted = false;
+    let {is_price,was_price} = product;
+    let isPriceString,wasPriceString;
+    is_price = is_price.split('-');
+    was_price = was_price.split('-');
+    if(is_price.length>1){
+      isRanged = true;
+      isPriceString = `${Number(is_price[0]).toFixed(2)} - ${Number(is_price[1]).toFixed(2) }`
+    }else {
+      isPriceString = `${Number(is_price[0]).toFixed(2)}`
+    }
+    isDiscounted = was_price && was_price[0] > is_price[0];
+    if(isDiscounted){
+      if (isRanged){
+        wasPriceString = `${Number(was_price[0]).toFixed(2)} - ${Number(was_price[1]).toFixed(2)}`;
+      }
+      else{
+        wasPriceString = `${Number(was_price[0]).toFixed(2)}`
+      }
+    }
+    return {isDiscounted,isRanged,isPriceString,wasPriceString}
+  }
   updateLocalCart(quantityChange) {
     // tslint:disable-next-line: radix
     const localCartData = parseInt(localStorage.getItem("cart"));

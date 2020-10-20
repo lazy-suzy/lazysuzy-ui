@@ -1,54 +1,52 @@
 <div [id]="product.sku" class="ls-product-div">
-  <div class="ls-product" [routerLink]="['/product/' + product.sku]">
-    <img
-      class="{{ isVariationImageVisible ? 'prod-img' : 'prod-img show' }}"
-      [src]="product.main_image"
-      [alt]="product.name"
-    />
-    <div *ngIf="product.variations?.length">
-      <div class="tile-icon variation-icon">
-        <mat-icon>filter_none </mat-icon>
+  <div class="flex flex-column"  [routerLink]="['/product/' + product.sku]">
+    <div class="ls-product">
+      <img
+              class="{{ isVariationImageVisible ? 'prod-img' : 'prod-img show' }}"
+              [src]="product.main_image"
+              [alt]="product.name"
+      />
+      <div *ngIf="product.variations?.length">
+        <div class="tile-icon variation-icon">
+          <mat-icon>filter_none </mat-icon>
+        </div>
       </div>
-    </div>
-    <div *ngIf="product.wishlisted; else elseBlock">
-      <div class="tile-icon wishlist-icon">
-        <mat-icon (click)="wishlistProduct(product.sku, false, $event)"
+      <div *ngIf="product.wishlisted; else elseBlock">
+        <div class="tile-icon wishlist-icon">
+          <mat-icon (click)="wishlistProduct(product.sku, false, $event)"
           >favorite
-        </mat-icon>
+          </mat-icon>
+        </div>
       </div>
-    </div>
-    <ng-template #elseBlock>
-      <div class="tile-icon wishlist-icon">
-        <mat-icon (click)="wishlistProduct(product.sku, true, $event)"
+      <ng-template #elseBlock>
+        <div class="tile-icon wishlist-icon">
+          <mat-icon (click)="wishlistProduct(product.sku, true, $event)"
           >favorite_border
-        </mat-icon>
+          </mat-icon>
+        </div>
+      </ng-template>
+      <div class="free-shipping-container"   *ngIf="product.inventory_product_details?.is_shipping_free">
+        <span>Free Shipping</span>
       </div>
-    </ng-template>
-    <div class="prices">
+      <div class="discount-percentage">
       <span
-        class="{{
-          (product.is_price !== product.was_price && 'cprice sale') || 'cprice'
-        }} {{ productsInRow < 3 ? '' : 'dn' }}"
-        >${{ product.is_price }}
-      </span>
-      <span
-        class="strike {{
-          product.is_price !== product.was_price && productsInRow < 3
-            ? ''
-            : 'dn'
-        }}"
-        >${{ product.was_price }}</span
-      >
-    </div>
-    <div class="discount-percentage">
-      <span
-        *ngIf="product.percent_discount > 0"
-        class="percentage-box {{
+              *ngIf="product.percent_discount > 0"
+              class="percentage-box {{
           product.percent_discount > 0 ? 'orange-bg' : 'yellow-bg'
         }}"
       >
         {{ product.percent_discount | number: '1.0-0' }}%
       </span>
+      </div>
+    </div>
+    <div *ngIf="productsInRow<3" class="flex flex-column product-detail-container">
+      <span class="brand-name">{{product.site}}</span>
+      <span class="product-name">{{product.name}}</span>
+      <div class="prices">
+          <span style="font-size: 12px;">{{isRange?'From':''}} <span class="font-size-14" [ngClass]="{'sale': isDiscounted}">${{renderPrice(priceObject.isPrice) }}</span> </span>
+          <span *ngIf="isDiscounted" class="strike font-size-14">${{renderPrice(priceObject.wasPrice)}}</span>
+      </div>
     </div>
   </div>
+
 </div>

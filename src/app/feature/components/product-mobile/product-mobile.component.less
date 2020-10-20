@@ -26,18 +26,16 @@
       right: 30px;
     }
 
-    .prices {
-      padding: 0 5px;
+    .free-shipping-container{
       position: absolute;
+      display: inline-block;
       bottom: 0;
-      background: #ffffffba;
-      color: #0c1c31;
-      white-space: nowrap;
-      overflow: hidden;
-      max-width: 100%;
-
-      .sale {
-        color: @product-price;
+      background: white;
+      font-size: 12px;
+      color: @product-price;
+      opacity: 75%;
+      span{
+        padding: 0 0.2rem;
       }
     }
 
@@ -56,4 +54,32 @@
       }
     }
   }
+}
+.product-detail-container{
+  padding: 0 0 1rem 0.5rem;
+}
+.brand-name{
+  font-size: 12px;
+   color: rgb(96, 96, 96);;
+}
+.product-name{
+  font-size: 12px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  color: rgb(12, 28, 49);
+}
+.prices {
+  bottom: 0;
+  font-size: 14px;
+  color: #0c1c31;
+  max-width: 100%;
+
+  .sale {
+    color: @product-price;
+    margin-right: 0.5rem;
+  }
+}
+.font-size-14{
+  font-size: 14px;
 }
