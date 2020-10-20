@@ -75,7 +75,8 @@ export class ProductFiltersComponent implements OnInit {
             return '$' + value;
         },
     };
-
+    // Dimension Filters Display
+    displayDimensionFilter:any=[];
     constructor(private activeRoute: ActivatedRoute) {
     }
 
@@ -83,6 +84,13 @@ export class ProductFiltersComponent implements OnInit {
         this.activeRoute.queryParams.subscribe((params) => {
             this.setClearButtonVisibility(params.filters);
         });
+        // Get Dimension filters in another variable. To show them separately.
+        for(const filter in this.productFilters)
+        {
+            if(this.dimensionFilterKeysToExclude.includes(filter)){
+                this.displayDimensionFilter.push(this.productFilters[filter][0]) ;
+            }
+        }
     }
 
     private setClearButtonVisibility(filters) {

@@ -1,5 +1,5 @@
 <ng-container *ngFor="let filter of objectKeys(productFilters || {})">
-    <ng-container *ngIf="(!isArray(productFilters[filter][0]?.values) || productFilters[filter][0]?.values?.length>0)">
+    <ng-container *ngIf="(!dimensionFilterKeysToExclude.includes(filter))">
         <div
                 class="flex items-center filter-padding filter
             {{disableTab(filter) ? 'display-none' : ''}}"
@@ -54,8 +54,40 @@
             </div>
 
         </div>
+
+
     </ng-container>
+
 </ng-container>
+<div class="flex items-center filter-padding filter">
+    <span class="filter-name grow pointer">
+        Size
+    </span>
+    <div class="ml2 arrow-down"></div>
+    <div class="filter-options">
+            <div *ngFor="let filter of this.displayDimensionFilter">
+                <ng-container *ngIf="filter.values.length>0">
+                    <div class="flex flex-column">
+                        <span class="dimension-filter-label">{{filter.name}}</span>
+                        <div *ngFor="let option of filter.values">
+                            <mat-checkbox
+                                    class="dimension-filter-items menu-item"
+                                    [checked]="option.checked"
+                                    [value]="option"
+                                    (change)="onCheckChange($event,filter.name.toLowerCase())"
+                            >
+                                {{renderOptions(option)}}
+                            </mat-checkbox>
+                        </div>
+                    </div>
+
+
+                </ng-container>
+            </div>
+    </div>
+</div>
+
+
 <span
         class="flex  pointer pt2 pl3 f6 fw6 db black link dim"
         *ngIf="isClearAllVisible"
