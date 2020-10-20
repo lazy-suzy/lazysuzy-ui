@@ -4,7 +4,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { CookieService } from 'ngx-cookie-service';
 
 import { Observable, of } from 'rxjs';
-import { catchError, tap } from 'rxjs/operators';
+import {catchError, first, tap} from 'rxjs/operators';
 
 import { Board } from './board';
 import { Asset } from './asset';
@@ -153,6 +153,10 @@ export class BoardService extends SharedBoardService {
     };
   }
 
+   getRoomImagesForBoardConfig() :Observable<any>
+  {
+    return this.http.get(`${this.boardEndpoint}/get/options`,this.getHttpOptions()).pipe(first());
+  }
   private log(message: string) {
     // log the message
   }
