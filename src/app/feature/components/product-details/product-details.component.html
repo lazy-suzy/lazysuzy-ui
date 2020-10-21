@@ -30,14 +30,19 @@
                             </div>
                         </ng-template>
                     </div>
-                    <h3>{{ product.name }}</h3>
+                    <span style="font-size: 16px;">{{ product.name }}</span>
 
                     <div class="price-container">
-                        <div class="w-60 price-font">
-                            <span class="product-price mr3">${{ productPrice }}</span>
-                            <span class="strike {{hasValidWasPrice ? '' : 'dn' }}">${{ productWasPrice }}</span>
+                        <div class="price-font" style="margin-left:-0.5rem;">
+                            <span class="product-price ml2" [ngClass]="{'sale':hasValidWasPrice,'product-price':!hasValidWasPrice}">
+                                {{ renderPrice(productPrice) }}
+                                <span class="ml2 product-price strike {{hasValidWasPrice ? '' : 'dn' }}">
+                                    {{renderPrice(productWasPrice) }}
+                                </span>
+                            </span>
+
                         </div>
-                        <div class="w-40">
+                        <div class="flex justify-between">
                             <button mat-raised-button class="bg-red view-details-btn"
                                     *ngIf="!utils.hasInventory(activeProduct) && !product.redirect &&product.product_url">
                                 <a (click)="openLink($event, product.product_url)" [href]="product.product_url"
@@ -46,7 +51,7 @@
                                 </a>
                             </button>
 
-                            <select [(ngModel)]="quantity" class="quantity-selector w-30 ml2"
+                            <select [(ngModel)]="quantity" class="quantity-selector mr2"
                                     *ngIf="utils.hasInventory(activeProduct)">
                                 <option *ngFor="let i of quantityLimit(activeProduct.inventory_product_details.count)"
                                         [value]="i">{{ i }}</option>
@@ -64,11 +69,15 @@
                         </div>
                     </div>
                     <div class="price-container-tabs">
-                        <div class="price-font">
-                            <span class="product-price mr3">${{ productPrice }}</span>
-                            <span class="strike {{ productPrice !== productWasPrice ? '' : 'dn' }}">${{ productWasPrice }}</span>
+                        <div class="price-font" style="margin-left:-0.5rem;">
+                            <span class="product-price ml2" [ngClass]="{'sale':hasValidWasPrice,'product-price':!hasValidWasPrice}">
+                                ${{ renderPrice(productPrice) }}
+                                <span class="ml2 product-price strike {{hasValidWasPrice ? '' : 'dn' }}">
+                                    ${{ renderPrice(productWasPrice) }}
+                                </span>
+                            </span>
                         </div>
-                        <div>
+                        <div class="flex">
                             <button mat-raised-button class="bg-red view-details-btn"
                                     *ngIf="!utils.hasInventory(activeProduct) && !product.redirect">
                                 <a (click)="openLink($event, product.product_url)" [href]="product.product_url"
@@ -77,7 +86,7 @@
                                 </a>
                             </button>
 
-                            <select [(ngModel)]="quantity" class="quantity-selector w-30 ml2"
+                            <select [(ngModel)]="quantity" class="quantity-selector mr2"
                                     *ngIf="utils.hasInventory(activeProduct)">
                                 <option *ngFor="let i of quantityLimit(activeProduct.inventory_product_details.count)"
                                         [value]="i">{{ i }}</option>
@@ -111,13 +120,12 @@
                         </div>
                     </div>
                     <ng-container *ngIf="product.redirect; else allConditions">
-                        <hr class="modal-hr mt-3" *ngIf="product.set && product.set.length > 0"/>
+                        <hr class="modal-hr mt3" *ngIf="product.set && product.set.length > 0"/>
                     </ng-container>
                     <ng-template #allConditions>
-                        <hr class="modal-hr mt-3" *ngIf="isVariationExist || (product.set && product.set.length > 0)"/>
+                        <hr class="modal-hr mt3" *ngIf="isVariationExist || (product.set && product.set.length > 0)"/>
                     </ng-template>
                 </div>
-
                 <div class="product-description-container" [ngStyle]="topHeight">
                     <div *ngIf="!isSetItemInInventory">
                         <app-redirect *ngIf="product.redirect && !utils.hasInventory(activeProduct)"
