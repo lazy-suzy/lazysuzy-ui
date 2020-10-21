@@ -46,9 +46,9 @@
         <div class="publish-board-title d-flex align-items-center">
           <mat-checkbox
             color="primary"
-            matInput
             [(ngModel)]="boardPrivacy"
-            (click)="updatePrivacy()"
+
+            (toggle)="updatePrivacy()"
           >
           </mat-checkbox>
           <div class="ml-2 pointer" (click)="updatePrivacy()">
