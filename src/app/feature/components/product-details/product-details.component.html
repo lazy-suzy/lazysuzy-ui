@@ -71,9 +71,9 @@
                     <div class="price-container-tabs">
                         <div class="price-font" style="margin-left:-0.5rem;">
                             <span class="product-price ml2" [ngClass]="{'sale':hasValidWasPrice,'product-price':!hasValidWasPrice}">
-                                ${{ renderPrice(productPrice) }}
+                                {{ renderPrice(productPrice) }}
                                 <span class="ml2 product-price strike {{hasValidWasPrice ? '' : 'dn' }}">
-                                    ${{ renderPrice(productWasPrice) }}
+                                   {{ renderPrice(productWasPrice) }}
                                 </span>
                             </span>
                         </div>
