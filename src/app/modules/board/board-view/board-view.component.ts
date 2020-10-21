@@ -427,7 +427,7 @@ export class BoardViewComponent implements OnInit, AfterViewInit {
     dialogRef.componentInstance.onChange.subscribe(this.handleConfigChange);
   }
 
-  selectSideBarItem(item) {
+  selectSideBarItem=(item) =>{
     this.selectedItem = item.value;
     if (this.selectedItem === 'browse') {
       this.filterData = {};
@@ -464,7 +464,7 @@ export class BoardViewComponent implements OnInit, AfterViewInit {
 
   handleAddProductBoardPreview($event) {}
 
-  handleSelectCategory($event) {
+  handleSelectCategory=($event)=> {
     this.boardService.setCategory($event);
     this.hasSearched = false;
     this.selectSideBarItem({
@@ -473,7 +473,7 @@ export class BoardViewComponent implements OnInit, AfterViewInit {
       value: 'browse',
       route: 'board-browse'
     });
-  }
+  };
 
   handleProductPreview(product) {
     this.productForPreview = { ...product };
@@ -513,7 +513,7 @@ export class BoardViewComponent implements OnInit, AfterViewInit {
           s.filterData || {}
         );
         this.showLoader = false;
-      });
+                });
   }
 
   checkFilterEnabled(filterData) {
@@ -1052,7 +1052,7 @@ export class BoardViewComponent implements OnInit, AfterViewInit {
         dropType,
         referenceID,
         referenceType,
-        this.selectedItem
+
       );
     });
 
@@ -1207,13 +1207,13 @@ export class BoardViewComponent implements OnInit, AfterViewInit {
             referenceID +
             '"] img'
         );
+        console.log(this)
         this.handleDrop(
           false,
           draggedObject,
           dropType,
           referenceID,
           referenceType,
-          this.selectedItem
         );
       } else if (dropType === 'text') {
         this.handleDrop(
@@ -1222,7 +1222,7 @@ export class BoardViewComponent implements OnInit, AfterViewInit {
           dropType,
           false,
           false,
-          this.selectedItem
+
         );
       }
     });
@@ -1378,14 +1378,15 @@ export class BoardViewComponent implements OnInit, AfterViewInit {
     // tslint:disable-next-line: semicolon
   };
 
-  handleDrop = (
+  handleDrop =(
     e,
     draggedObject,
     dropType,
     referenceID,
     referenceType,
-    selectedItem
-  ) => {
+
+  ) =>{
+    const selectedItem = this.selectedItem;
     if (dropType === 'image') {
       const referenceObjectValue: any = {
         type: referenceType
