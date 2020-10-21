@@ -85,6 +85,11 @@ export class ProductFiltersComponent implements OnInit {
             this.setClearButtonVisibility(params.filters);
         });
         // Get Dimension filters in another variable. To show them separately.
+       this.populateDimensionFilters();
+    }
+    populateDimensionFilters()
+    {
+        this.displayDimensionFilter = [];
         for(const filter in this.productFilters)
         {
             if(this.dimensionFilterKeysToExclude.includes(filter)){
@@ -92,7 +97,6 @@ export class ProductFiltersComponent implements OnInit {
             }
         }
     }
-
     private setClearButtonVisibility(filters) {
         if (this.isBrandPage) {
             const filtersArray = filters.split(";").filter(value => value);
@@ -149,6 +153,7 @@ export class ProductFiltersComponent implements OnInit {
                 change.productFilters.currentValue !== undefined
             ) {
                 this.productFilters = change.productFilters.currentValue;
+                this.populateDimensionFilters();
                 if (this.productFilters && !this.isPriceChanged) {
                     this.minValue = this.productFilters.price.from;
                     this.maxValue = this.productFilters.price.to;
