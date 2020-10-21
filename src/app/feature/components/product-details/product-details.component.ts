@@ -6,7 +6,7 @@ import {
   ElementRef
 } from '@angular/core';
 import { MAT_DIALOG_DATA } from '@angular/material/dialog';
-import { Subscription } from 'rxjs';
+import {from, Subscription} from 'rxjs';
 import {
   IProductPayload,
   IProductDetail,
@@ -23,6 +23,7 @@ import {
 } from 'src/app/shared/services';
 import { Gallery, GalleryItem, ImageItem } from '@ngx-gallery/core';
 import { Lightbox } from '@ngx-gallery/lightbox';
+import {formatCurrency, getLocaleCurrencySymbol, getLocaleId} from "@angular/common";
 
 @Component({
   selector: 'app-product-details',
@@ -352,5 +353,24 @@ export class ProductDetailsComponent implements OnInit {
 
   onSetSelection(e: boolean) {
     this.hasSelection = e;
+  }
+
+  renderPrice(price){
+    console.log(price)
+    const pricesArray = price.split('-')
+    let fromPrice = parseFloat(pricesArray[0]);
+    let toPrice;
+    if(pricesArray.length>1){
+      toPrice = parseFloat(pricesArray[1]);
+    }
+    if(!toPrice){
+      return this.formatUSCurrency(fromPrice)
+    }
+    else {
+      return `${this.formatUSCurrency(fromPrice)} - ${this.formatUSCurrency(toPrice)}`
+    }
+  }
+  formatUSCurrency(price:number){
+    return  formatCurrency(price,'en-US',getLocaleCurrencySymbol('en-US'),'USD','1.0-2')
   }
 }
