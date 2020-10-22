@@ -104,7 +104,7 @@ export class ProductDetailsComponent implements OnInit {
               this.seoData = payload.seo_data;
               if (payload.product) {
                 this.schema = this.seoService.setSchema(this.product);
-                this.seoService.setMetaTags(this.seoData);
+                this.seoService.setMetaTagsProduct(this.seoData);
                 this.updateActiveProduct(this.product);
                 this.items = this.product.on_server_images.map(
                   (item) => new ImageItem({ src: item })

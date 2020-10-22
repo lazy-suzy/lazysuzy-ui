@@ -33,7 +33,7 @@ export class SeoService {
         const url = env.BASE_HREF + this.router.url.split('?')[0];
         const logoPath = 'assets/image/color_logo_transparent.png';
         const metaData = {
-            TITLE: data.full_title || 'LazySuzy',
+            TITLE: `${data.product_name} - ${data.brand}` || 'LazySuzy',
             IMAGE: data.image_url || logoPath,
             DESCRIPTION:
                 data.description || `Search America's top Home brands in one go`,
@@ -91,6 +91,67 @@ export class SeoService {
         });
     }
 
+    setMetaTagsProduct(data){
+        const url = env.BASE_HREF + this.router.url.split('?')[0];
+        const logoPath = 'assets/image/color_logo_transparent.png';
+        const metaData = {
+            TITLE: data.full_title || 'LazySuzy',
+            IMAGE: data.image_url || logoPath,
+            DESCRIPTION:
+                data.description || `Search America's top Home brands in one go`,
+            URL: url,
+            TYPE: 'website'
+        };
+        this.titleService.setTitle(metaData.TITLE);
+        this.metaService.updateTag({
+            name: this.metaTags.DESCRIPTION,
+            content: metaData.DESCRIPTION
+        });
+        this.metaService.updateTag({
+            name: this.metaTags.IMAGE,
+            content: metaData.IMAGE
+        });
+        this.metaService.updateTag({
+            property: this.metaTags.OG_TITLE,
+            content: metaData.TITLE
+        });
+        this.metaService.updateTag({
+            property: this.metaTags.OG_IMAGE,
+            content: metaData.IMAGE
+        });
+        this.metaService.updateTag({
+            property: this.metaTags.OG_DESCRIPTION,
+            content: metaData.DESCRIPTION
+        });
+        this.metaService.updateTag({
+            property: this.metaTags.OG_URL,
+            content: metaData.URL
+        });
+        this.metaService.updateTag({
+            property: this.metaTags.OG_TYPE,
+            content: metaData.TYPE
+        });
+        this.metaService.updateTag({
+            name: this.metaTags.OG_DESCRIPTION,
+            content: metaData.DESCRIPTION
+        });
+        this.metaService.updateTag({
+            property: this.metaTags.SECURE_IMAGE,
+            content: metaData.IMAGE
+        });
+        this.metaService.updateTag({
+            name: this.metaTags.OG_IMAGE,
+            content: metaData.URL
+        });
+        this.metaService.updateTag({
+            name: this.metaTags.TWITTER_TITLE,
+            content: metaData.TITLE
+        });
+        this.metaService.updateTag({
+            name: this.metaTags.TWITTER_IMAGE,
+            content: metaData.IMAGE
+        });
+    }
     setCanonicalURL() {
         const url = env.BASE_HREF + this.router.url.split('?')[0];
         const head = this.dom.getElementsByTagName('head')[0];
