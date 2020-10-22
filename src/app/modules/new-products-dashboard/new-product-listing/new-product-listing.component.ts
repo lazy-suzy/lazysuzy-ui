@@ -1,8 +1,6 @@
-import { Color } from "./../../../shared/models/products-payload.interface";
-import { tap, take } from "rxjs/operators";
+import {  take } from "rxjs/operators";
 import { ApiService } from "./../../../shared/services/api/api.service";
 import { Component, OnInit } from "@angular/core";
-import { IFilterData } from "src/app/shared/models";
 import { HttpService } from "src/app/shared/services/http/http.service";
 import { environment as env } from "src/environments/environment";
 
@@ -25,17 +23,30 @@ export class NewProductListingComponent implements OnInit {
   throttle = 300;
   scrollDistance = 1;
   scrollUpDistance = 2;
-
-  constructor(private httpService: HttpService) {}
+  selectedBrand = 'all';
+  brands:any;
+  constructor(private httpService: HttpService,
+              private apiService: ApiService
+  ) {}
 
   ngOnInit() {
     this.loadProduct();
+    this.loadBrands();
   }
-
+  loadBrands(){
+    this.apiService.getBrands().subscribe((value:any) => {
+      this.brands = value;
+    })
+  }
+  brandChanged(){
+    this.products.data = [];
+    this.loadProduct();
+  }
   loadProduct(page: number = 1): void {
     this.isProductFetching = true;
+    let url=`${env.ADMIN_API_BASE_HREF}new-products?page=${page}&brand=${this.selectedBrand}`;
     this.httpService
-      .get(`${env.ADMIN_API_BASE_HREF}new-products?page=${page}`)
+      .get(url)
       .pipe(
         take(1) // take only one result and then unsubscribe
       )
