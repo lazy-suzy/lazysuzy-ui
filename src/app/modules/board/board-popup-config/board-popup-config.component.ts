@@ -8,6 +8,7 @@ import {
 } from '@angular/core';
 import { environment } from 'src/environments/environment';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
+import {BoardService} from "../board.service";
 
 @Component({
   selector: 'app-board-popup-config',
@@ -35,18 +36,8 @@ export class BoardPopupConfigComponent implements OnInit {
     '#b94a48',
     '#e85f5b'
   ];
-  backgroundImages = [
-    'https://www.lazysuzy.com/images/board/rooms/blue_gray_1610.jpg',
-    'https://www.lazysuzy.com/images/board/rooms/dining_dark_wood_1610.jpg',
-    'https://www.lazysuzy.com/images/board/rooms/light_wood_1610.jpg',
-    'https://www.lazysuzy.com/images/board/rooms/medium_wood_1610.jpg'
-  ];
-  backgroundImagesThumbs = [
-    'https://www.lazysuzy.com/images/board/rooms/blue_gray_1610_thumb.jpg',
-    'https://www.lazysuzy.com/images/board/rooms/dining_dark_wood_1610_thumb.jpg',
-    'https://www.lazysuzy.com/images/board/rooms/light_wood_1610_thumb.jpg',
-    'https://www.lazysuzy.com/images/board/rooms/medium_wood_1610_thumb.jpg'
-  ];
+  backgroundImages = [];
+  backgroundImagesThumbs = [];
   selected = {
     color: this.backgroundColors[0],
     background: this.backgroundImagesThumbs[0]
@@ -57,7 +48,8 @@ export class BoardPopupConfigComponent implements OnInit {
 
   constructor(
     @Optional() private dialogRef: MatDialogRef<BoardPopupConfigComponent>,
-    @Optional() @Inject(MAT_DIALOG_DATA) private data: any
+    @Optional() @Inject(MAT_DIALOG_DATA) private data: any,
+    private boardService:BoardService
   ) {
     if (data) {
       this.selected.color = data.color || this.selected.color;
@@ -67,6 +59,10 @@ export class BoardPopupConfigComponent implements OnInit {
   ngOnInit() {
     this.showBoardPanel = false;
     this.showRoomPanel = false;
+    this.boardService.getRoomImagesForBoardConfig().subscribe(value=>{
+    this.backgroundImagesThumbs = value.thumbs;
+    this.backgroundImages = value.images;
+    })
   }
 
   handleSelection(selection: string) {
