@@ -1,6 +1,17 @@
 <ng-container *ngIf="!isLoading">
     <div class="row justify-around align-items-baseline">
         <h1 class="header">New Product Dashboard</h1>
+        <mat-form-field class="select-height" appearance="fill">
+            <mat-label>Brand</mat-label>
+            <mat-select (selectionChange)="brandChanged()" [(ngModel)]="selectedBrand">
+                <mat-option value="all">
+                    All Brands
+                </mat-option>
+                <mat-option [value]="key.value" *ngFor="let key of brands">
+                    {{key.name}}
+                </mat-option>
+            </mat-select>
+        </mat-form-field>
         <h4>{{products.total}} Products for review</h4>
         <button mat-raised-button class="submit-btn" (click)="submit()">Submit</button>
     </div>
