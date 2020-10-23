@@ -9,6 +9,7 @@ import {
   BreakpointState,
   BreakpointObserver,
 } from "@angular/cdk/layout";
+import {formatCurrency, getLocaleCurrencySymbol} from "@angular/common";
 
 @Injectable({
   providedIn: "root",
@@ -149,5 +150,20 @@ export class UtilsService {
 
   isHandset():Observable<BreakpointState> {
     return this.bpObserver;
+  }
+
+  parsePrice(price:number):string{
+    const quotient = Math.floor(price);
+    let remainder = Number((price - quotient).toPrecision(2));
+    if(remainder == 0){
+      return this.formatUSCurrency(quotient,'1.0-0');
+    }
+    else{
+      return  this.formatUSCurrency(price,'1.2-2');
+    }
+  }
+
+  formatUSCurrency(price:number,decimals){
+    return  formatCurrency(price,'en-US',getLocaleCurrencySymbol('en-US'),'en-US',decimals)
   }
 }
