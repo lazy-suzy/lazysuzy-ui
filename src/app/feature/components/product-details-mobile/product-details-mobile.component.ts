@@ -126,7 +126,7 @@ export class ProductDetailsMobileComponent implements OnInit {
           this.seoData = payload.seo_data;
           if (this.product) {
             this.schema = this.seoService.setSchema(this.product);
-            this.seoService.setMetaTags(this.seoData);
+            this.seoService.setMetaTagsProduct(this.seoData);
             this.updateActiveProduct(this.product);
             this.description = this.utils.compileMarkdown(
               this.product.description
