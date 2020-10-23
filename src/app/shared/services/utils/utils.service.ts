@@ -125,7 +125,7 @@ export class UtilsService {
     }else {
       isPriceString = `${Number(is_price[0]).toFixed(2)}`
     }
-    isDiscounted = was_price && was_price[0] > is_price[0];
+    isDiscounted = was_price && Number(was_price[0]) > Number(is_price[0]);
     if(isDiscounted){
       if (isRanged){
         wasPriceString = `${Number(was_price[0]).toFixed(2)} - ${Number(was_price[1]).toFixed(2)}`;
