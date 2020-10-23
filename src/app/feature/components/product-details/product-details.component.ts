@@ -356,21 +356,17 @@ export class ProductDetailsComponent implements OnInit {
   }
 
   renderPrice(price){
-    console.log(price)
-    const pricesArray = price.split('-')
-    let fromPrice = parseFloat(pricesArray[0]);
+    const pricesArray = price.split('-');
+    let fromPrice = Number(pricesArray[0]);
     let toPrice;
     if(pricesArray.length>1){
-      toPrice = parseFloat(pricesArray[1]);
+      toPrice = Number(pricesArray[1]);
     }
     if(!toPrice){
-      return this.formatUSCurrency(fromPrice)
+      return `${this.utils.parsePrice(fromPrice)}`
     }
     else {
-      return `${this.formatUSCurrency(fromPrice)} - ${this.formatUSCurrency(toPrice)}`
+      return `${this.utils.parsePrice(fromPrice)} - ${this.utils.parsePrice(toPrice)}`
     }
-  }
-  formatUSCurrency(price:number){
-    return  formatCurrency(price,'en-US',getLocaleCurrencySymbol('en-US'),'USD','1.0-2')
   }
 }

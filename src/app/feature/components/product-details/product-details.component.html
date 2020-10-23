@@ -14,7 +14,7 @@
             <div class="fl w-50 pa3 product-details-container">
                 <div #topContainer>
                     <div class="flex w-100 justify-between items-end">
-                        <span class="mb1">{{ product.site }}</span>
+                        <span class="mb1 lato font-16">{{ product.site }}</span>
                         <div *ngIf="product.wishlisted; else elseBlock">
                             <div class="tile-icon wishlist-icon wishlist-container">
                                 <mat-icon (click)="wishlistProduct(product.sku, false)">favorite
@@ -30,13 +30,13 @@
                             </div>
                         </ng-template>
                     </div>
-                    <span style="font-size: 16px;">{{ product.name }}</span>
+                    <span class="open-sans font-18">{{ product.name }}</span>
 
-                    <div class="price-container">
+                    <div class="price-container mt1">
                         <div class="price-font" style="margin-left:-0.5rem;">
-                            <span class="product-price ml2" [ngClass]="{'sale':hasValidWasPrice,'product-price':!hasValidWasPrice}">
+                            <span class="product-price ml2 open-sans font-18" [ngClass]="{'sale':hasValidWasPrice,'product-price':!hasValidWasPrice}">
                                 {{ renderPrice(productPrice) }}
-                                <span class="ml2 product-price strike {{hasValidWasPrice ? '' : 'dn' }}">
+                                <span class="ml2 product-price strike open-sans font-16 {{hasValidWasPrice ? '' : 'dn' }}">
                                     {{renderPrice(productWasPrice) }}
                                 </span>
                             </span>
@@ -68,11 +68,11 @@
                             </div>
                         </div>
                     </div>
-                    <div class="price-container-tabs">
+                    <div class="price-container-tabs mt1">
                         <div class="price-font" style="margin-left:-0.5rem;">
-                            <span class="product-price ml2" [ngClass]="{'sale':hasValidWasPrice,'product-price':!hasValidWasPrice}">
-                                {{ renderPrice(productPrice) }}
-                                <span class="ml2 product-price strike {{hasValidWasPrice ? '' : 'dn' }}">
+                            <span class="product-price ml2 open-sans font-18" [ngClass]="{'sale':hasValidWasPrice,'product-price':!hasValidWasPrice}">
+                                {{ renderPrice(productPrice) }} &nbsp;
+                                <span class="product-price strike open-sans font-16 {{hasValidWasPrice ? '' : 'dn' }}">
                                    {{ renderPrice(productWasPrice) }}
                                 </span>
                             </span>
