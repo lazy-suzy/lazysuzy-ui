@@ -15,6 +15,7 @@ import { ProductMobileModule } from '../../components/product-mobile/product-mob
 import { ProductFilterMobileModule } from '../../components/product-filter-mobile/product-filter-mobile.module';
 import { ProductSortMobileModule } from '../../components/product-sort-mobile/product-sort-mobile.module';
 import { BrandListModule } from '../../components/brand-list/brand-list.module';
+import {CollectionListModule} from "../../components/collection-list/collection-list.module";
 
 const DECLARATIONS = [ProductsComponent];
 
@@ -35,7 +36,7 @@ const MODULES = [
 
 @NgModule({
   declarations: [...DECLARATIONS],
-  imports: [...MODULES],
+  imports: [...MODULES, CollectionListModule],
   exports: [...DECLARATIONS, ...MODULES]
 })
 export class ProductsModule {}

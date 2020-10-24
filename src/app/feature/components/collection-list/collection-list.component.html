@@ -1,0 +1,14 @@
+<ul>
+    <li>
+        <a href="javascript: void(0)" class="active"
+           (click)="setCollection('')">
+            COLLECTIONS
+        </a>
+    </li>
+    <ng-container *ngFor="let collection of collectionsList">
+        <li>
+            <a href="javascript: void(0)"
+               (click)="setCollection(collection.value)">{{ collection.name }}</a>
+        </li>
+    </ng-container>
+</ul>

@@ -54,25 +54,28 @@
                 <!-- brandlist -->
                 <div class="col-md-2">
                     <div class="brandlist-container brandlist-left">
-                        <app-brand-list [selectedBrandValue]="selectedBrandValue" [isBrandPage]="isBrandPage"
+                        <app-brand-list [selectedBrandValue]="selectedBrandValue" [isBrandPage]="false"
                                         (setBrand)="getProductwithBrandName($event)"></app-brand-list>
-                        <app-collection-list [collectionsList]="collectionsList"></app-collection-list>
+                        <app-collection-list
+                                [collectionsList]="collectionsList"
+                                (emitCollection)="getProductsWithCollection($event)"
+                        ></app-collection-list>
                     </div>
                     <!-- / brandlist -->
                 </div>
                 <div class="col-md-8">
                     <div class="row mb-10">
                         <!-- show brand data -->
-                        <div class="col-md-12">
-                            <ng-container *ngIf="filters && isBrandPage">
+                        <div class="col-md-12" *ngIf="collectionData">
                                 <div class="branddata-container w-100">
-                                    <p class="brand-name">{{ brandData.name }}</p>
-                                    <p class="brand-description">{{ brandData.description }}</p>
+                                    <p class="brand-name">{{collectionData.name| titlecase}}</p>
+                                    <p class="brand-description">{{collectionData.cover_details?.description}}</p>
+                                    <img class="mt2" src="{{collectionData.cover_details?.image}}"/>
+                                    <p class="brand-description mt2">{{collectionData.head_description}}</p>
                                 </div>
-                            </ng-container>
                         </div>
                         <!-- / show brand data -->
-                       
+
                     </div>
                     <div class="row">
                         <div class="col-md-12 pr2 text-right">

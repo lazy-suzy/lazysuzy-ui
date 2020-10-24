@@ -14,6 +14,7 @@ import {SCROLL_ICON_SHOW_DURATION} from './../../../shared/constants';
 import {ActivatedRoute, Router} from '@angular/router';
 import {Observable, Subscription} from 'rxjs';
 import {BreakpointObserver, Breakpoints, BreakpointState} from '@angular/cdk/layout';
+import {first} from "rxjs/operators";
 
 @Component({
     selector: 'app-products',
@@ -70,7 +71,8 @@ export class ProductsComponent implements OnInit {
         url: '',
         value: ''
     };
-
+    // Collection List
+    collectionList:any;
     constructor(
         public dialog: MatDialog,
         private productElement: ElementRef,
@@ -111,6 +113,9 @@ export class ProductsComponent implements OnInit {
                     this.matDialogUtils.openMatDialog(this.modalSku);
                 }
             });
+        this.apiService.getCollections().pipe(first()).subscribe(collection=>{
+            this.collectionList=collection;
+        })
     }
 
     onDestroy(): void {
