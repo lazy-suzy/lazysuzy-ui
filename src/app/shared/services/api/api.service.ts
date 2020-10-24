@@ -468,6 +468,7 @@ export class ApiService {
     const endpoint = `search-keywords`;
     const token = this.cookie.get("token");
     const url = `${env.API_BASE_HREF}${endpoint}`;
+    return this.httpService.get(url);
   }
 
   getCollections(){
