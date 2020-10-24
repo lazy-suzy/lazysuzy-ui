@@ -38,6 +38,7 @@ export interface IProduct {
   department_info: Departmentinfo[];
   in_inventory: boolean;
   inventory_product_details: InventoryProductDetails;
+  collections?:any[];
 }
 
 interface Departmentinfo {
