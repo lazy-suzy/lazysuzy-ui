@@ -86,7 +86,7 @@ export class ProductDetailsComponent implements OnInit {
     public lightbox: Lightbox,
     private eventEmitterService: EventEmitterService,
     private matDialogUtils: MatDialogUtilsService,
-    private seoService: SeoService
+    private seoService: SeoService,
   ) { }
 
   ngOnInit(): void {
@@ -368,5 +368,14 @@ export class ProductDetailsComponent implements OnInit {
     else {
       return `${this.utils.parsePrice(fromPrice)} - ${this.utils.parsePrice(toPrice)}`
     }
+  }
+  isDiscounted(product):boolean{
+      product.is_price = product.price;
+      const price = this.utils.getPriceObject(product);
+      return price.isDiscounted;
+  }
+  toCollectionProduct(product){
+    this.matDialogUtils.closeDialogs();
+    this.matDialogUtils.openMatDialog(product.sku);
   }
 }

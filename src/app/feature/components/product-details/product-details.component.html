@@ -162,7 +162,7 @@
                         </div>
                     </div>
 
-                    <div *ngIf="dimensionExist;else emptySpace" class="mb2">
+                    <div *ngIf="dimensionExist" class="mb2">
                         <hr class="modal-hr"/>
                         <span class="title">Dimensions</span>
                         <div class="mt1 pb1 flex flex-wrap" *ngIf="isArray(product.dimension); else showDimensions">
@@ -186,9 +186,36 @@
                             </div>
                         </ng-template>
                     </div>
-                    <ng-template #emptySpace>
+                    <div class="mb2" *ngIf="product.collections.length">
+                        <hr class="modal-hr"/>
+                        <span class="title">More in the Collection</span>
+                        <div class="pt2">
+                            <p-carousel
+                                    [numVisible]="2"
+                                    [numScroll]="1"
+                                    [value]="product.collections"
+                                    [circular]="false"
+                            >
+                                <ng-template let-data pTemplate="item">
+                                    <div class="carousel-item" (click)="toCollectionProduct(data)">
+                                        <img [src]="'https://lazysuzy.com'+data.image"/>
+                                        <span class="font-16 open-sans collection-product-name">{{data.name}}</span>
+                                        <span class="font-14 open-sans" [ngClass]="{'sale':isDiscounted(data)}">
+                                            {{renderPrice(data.price)}} &nbsp;
+                                            <span *ngIf="isDiscounted(data)" class="strike product-price font-14 open-sans">
+                                                {{renderPrice(data.was_price)}}
+                                            </span>
+                                        </span>
+
+                                    </div>
+                                </ng-template>
+                            </p-carousel>
+                        </div>
+                    </div>
+                    <div>
                         &nbsp;
-                    </ng-template>
+                    </div>
+
                 </div>
             </div>
         </div>
