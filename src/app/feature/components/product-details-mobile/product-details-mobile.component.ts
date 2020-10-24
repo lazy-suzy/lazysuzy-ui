@@ -23,6 +23,7 @@ import {
 import { Gallery, GalleryItem, ImageItem } from '@ngx-gallery/core';
 import { Lightbox } from '@ngx-gallery/lightbox';
 import { VariationsComponent } from '../variations/variations.component';
+import { Carousel } from 'primeng/carousel';
 
 @Component({
   selector: 'app-product-details-mobile',
@@ -94,7 +95,10 @@ export class ProductDetailsMobileComponent implements OnInit {
     private eventEmitterService: EventEmitterService,
     private matDialogUtils: MatDialogUtilsService,
     private seoService: SeoService
-  ) {}
+  ) {
+    // This fixes the p-carousel on mobiles.
+    Carousel.prototype.changePageOnTouch = (e,diff)=>{};
+  }
 
   ngOnInit() {
     this.eventSubscription = this.eventEmitterService.userChangeEvent
@@ -374,5 +378,27 @@ export class ProductDetailsMobileComponent implements OnInit {
 
   onSetSelection(e: boolean) {
     this.hasSelection = e;
+  }
+  renderPrice(price){
+    const pricesArray = price.split('-');
+    let fromPrice = Number(pricesArray[0]);
+    let toPrice;
+    if(pricesArray.length>1){
+      toPrice = Number(pricesArray[1]);
+    }
+    if(!toPrice){
+      return `${this.utils.parsePrice(fromPrice)}`
+    }
+    else {
+      return `${this.utils.parsePrice(fromPrice)} - ${this.utils.parsePrice(toPrice)}`
+    }
+  }
+  isDiscountedCollectionPrice(product):boolean{
+    product.is_price = product.price;
+    const price = this.utils.getPriceObject(product);
+    return price.isDiscounted;
+  }
+  toCollectionProduct(product){
+    this.router.navigate(['/product',product.sku]);
   }
 }
