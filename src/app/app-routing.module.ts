@@ -24,6 +24,7 @@ import {
   PublicProfileComponent
 } from './feature/components';
 import { environment } from 'src/environments/environment';
+import {ProductCollectionsComponent} from "./feature/containers/product-collections/product-collections.component";
 
 const routes: Routes = [
   { path: '', component: LandingComponent, pathMatch: 'full' },
@@ -52,6 +53,11 @@ const routes: Routes = [
   {
     path: 'products/brand',
     component: AllProductsComponent,
+    pathMatch: 'full'
+  },
+  {
+    path: 'products/collections',
+    component: ProductCollectionsComponent,
     pathMatch: 'full'
   },
   {

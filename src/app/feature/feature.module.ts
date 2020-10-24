@@ -22,6 +22,9 @@ import {
 import { ResetPasswordComponent } from './containers/reset-password/reset-password.component';
 import { BrandListModule } from './components/brand-list/brand-list.module';
 import { BlogModule } from './blog/blog/blog.module';
+import { ProductCollectionsComponent } from './containers/product-collections/product-collections.component';
+import {CollectionListComponent} from "./components/collection-list/collection-list.component";
+import {CollectionListModule} from "./components/collection-list/collection-list.module";
 
 const DECLARATIONS = [];
 const MODULES = [
@@ -41,10 +44,11 @@ const MODULES = [
   EditMyProfileModule,
   BrandListModule,
   PublicProfileModule,
-  BlogModule
+  BlogModule,
+  CollectionListModule,
 ];
 @NgModule({
-  declarations: [...DECLARATIONS, ResetPasswordComponent],
+  declarations: [...DECLARATIONS, ResetPasswordComponent, ProductCollectionsComponent],
   imports: [...MODULES],
   // providers: [AmericanNumberPipe],
   exports: [...DECLARATIONS, ...MODULES]

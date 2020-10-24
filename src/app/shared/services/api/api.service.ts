@@ -463,4 +463,14 @@ export class ApiService {
     const url = `${env.API_BASE_HREF}${endpoint}`;
     return this.httpService.post(url, headers);
   }
+
+  getCollections(){
+    const url = `${env.API_BASE_HREF}collections`;
+    return this.httpService.get(url);
+  }
+  getCollectionData(collection)
+  {
+    const url = `${env.API_BASE_HREF}collection?collection=${collection}`
+    return this.httpService.get(url);
+  }
 }
