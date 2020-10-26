@@ -103,9 +103,26 @@
                     </div>
                     <div class="row">
                         <ng-container *ngIf="products.length>0;else emptyProductsMessage">
-                            <app-product *ngFor="let product of products" [product]="product" class="col-md-4"
-                                         style="margin-bottom: 15px;">
-                            </app-product>
+                            <ng-container *ngFor="let product of products; let i = index" >
+                                <app-product  [product]="product" class="col-md-4"
+                                              style="margin-bottom: 15px;">
+                                </app-product>
+                                <div
+                                        *ngIf="i!==0 && (i+1)%6==0 && collectionData.sub_details.length>=((i+1)/6)"
+                                        style="padding: 10px;margin-bottom: 15px"
+                                        class="col-md-12">
+                                    <div class="row">
+                                        <div class="col-md-4 mid-banner">
+                                            <img [src]="collectionData.sub_details[((i+1)/6 - 1)]?.image">
+                                        </div>
+                                        <div class="col-md-8 mid-banner-text">
+                                            <span>{{collectionData.sub_details[((i+1)/6 - 1)]?.description}}</span>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </ng-container>
+
                         </ng-container>
                         <ng-template #emptyProductsMessage>
                             <div class="col-md-12" style="text-align: center;">
