@@ -276,12 +276,15 @@ export class ProductDetailsMobileComponent implements OnInit {
     this.galleryRef.load(this.items);
   }
   onSetPrice(priceData): void {
-    this.productPrice = this.utils.formatPrice(
-      priceData.price || this.product.is_price
-    );
-    this.productWasPrice = this.utils.formatPrice(
-      priceData.wasPrice || this.product.was_price
-    );
+    const newPrices = {
+      'is_price':priceData.price,
+      'was_price':priceData.wasPrice
+    };
+    const {isPriceString,isRanged,isDiscounted,wasPriceString} = this.utils.getPriceObject(newPrices || this.product);
+    this.priceObject.is_price = isPriceString;
+    this.priceObject.was_price = wasPriceString;
+    this.isRange = isRanged;
+    this.isDiscounted = isDiscounted;
   }
   openCartModal() {
     if (
