@@ -43,7 +43,7 @@ export class ProductCollectionsComponent implements OnInit {
   sortTypeList: ISortType[];
   pageNo = 0;
   topPosToStartShowing = 300;
-  fixFilterBar = 150;
+  fixFilterBar = 900;
   isIconShow = false;
   showBar = false;
   isProductFetching = false;
@@ -124,14 +124,14 @@ export class ProductCollectionsComponent implements OnInit {
         (params) => {
           this.filters = params.filters || '';
           // console.log('this is filter in getparams: ', this.filters);
-          const checkBrand = this.filters.indexOf('brand:');
+          const checkBrand = this.filters.indexOf('collection:');
           if (checkBrand < 0) {
             this.selectedBrandValue = ''
           } else {
-            const restString = this.filters.slice(checkBrand + 6);
+            const restString = this.filters.slice(checkBrand + 11);
             const endBrand = restString.indexOf(';');
             this.selectedBrandValue = restString.substr(0, endBrand);
-            this.getBrandData(this.selectedBrandValue);
+            this.getProductsWithCollection(this.selectedBrandValue);
           }
           if(this.isBrandPage === true) {
             this.eventEmitterService.isBrandSubject.next(this.selectedBrandValue);
@@ -252,10 +252,8 @@ export class ProductCollectionsComponent implements OnInit {
   }
 
   getProductsWithCollection(collection){
-    console.log(collection);
-    this.collectionData.name = collection
+    this.collectionData.name = collection;
     this.apiService.getCollectionData(collection).pipe(first()).subscribe(collectionData =>{
-          console.log(collectionData)
           this.collectionData = {...this.collectionData,...collectionData};
           console.log(this.collectionData)
     })
@@ -317,7 +315,7 @@ export class ProductCollectionsComponent implements OnInit {
   }
 
   @HostListener('window:scroll')
-  checkScroll() {
+  checkScroll($event) {
     const scrollPosition =
         window.pageYOffset ||
         document.documentElement.scrollTop ||

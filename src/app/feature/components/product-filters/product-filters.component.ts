@@ -11,6 +11,7 @@ import {IFilterData} from 'src/app/shared/models';
 export class ProductFiltersComponent implements OnInit {
     @Output() setFilters = new EventEmitter<any>();
     @Input() isBrandPage = false;
+    @Input() isCollectionPage=false;
     @Input() productFilters: IFilterData = {
         brand: [],
         type: [],
@@ -98,7 +99,7 @@ export class ProductFiltersComponent implements OnInit {
         }
     }
     private setClearButtonVisibility(filters) {
-        if (this.isBrandPage) {
+        if (this.isBrandPage || this.isCollectionPage) {
             const filtersArray = filters.split(";").filter(value => value);
             if (filtersArray.length <= 1) {
                 this.isClearAllVisible = false;
