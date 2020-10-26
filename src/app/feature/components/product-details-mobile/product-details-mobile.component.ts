@@ -23,6 +23,7 @@ import {
 import { Gallery, GalleryItem, ImageItem } from '@ngx-gallery/core';
 import { Lightbox } from '@ngx-gallery/lightbox';
 import { VariationsComponent } from '../variations/variations.component';
+import { Carousel } from 'primeng/carousel';
 
 @Component({
   selector: 'app-product-details-mobile',
@@ -94,7 +95,10 @@ export class ProductDetailsMobileComponent implements OnInit {
     private eventEmitterService: EventEmitterService,
     private matDialogUtils: MatDialogUtilsService,
     private seoService: SeoService
-  ) {}
+  ) {
+    // This fixes the p-carousel on mobiles.
+    Carousel.prototype.changePageOnTouch = (e,diff)=>{};
+  }
 
   ngOnInit() {
     this.eventSubscription = this.eventEmitterService.userChangeEvent
@@ -110,99 +114,100 @@ export class ProductDetailsMobileComponent implements OnInit {
   }
 
   loadProduct() {
-    this.isProductFetching = true;
     this.routeSubscription = this.activeRoute.params.subscribe(
       (routeParams) => {
+        this.isProductFetching = true;
         this.productSku = routeParams.product;
         this.cacheService.data.productSku = this.productSku;
         this.cacheService.data.useCache = true;
+        this.productSubscription = this.apiService
+            .getProduct(this.productSku)
+            .subscribe(
+                (payload: IProductDetail) => {
+                  this.product = payload.product;
+                  this.seoData = payload.seo_data;
+                  if (this.product) {
+                    this.schema = this.seoService.setSchema(this.product);
+                    this.seoService.setMetaTags(this.seoData);
+                    this.updateActiveProduct(this.product);
+                    this.description = this.utils.compileMarkdown(
+                        this.product.description
+                    );
+                    this.features = this.utils.compileMarkdown(
+                        this.product.features,
+                        this.product.site
+                    );
+                    this.dimensionExist = this.utils.checkDataLength(
+                        this.product.dimension
+                    );
+                    this.featuresExist = this.utils.checkDataLength(
+                        this.product.features
+                    );
+                    this.descriptionExist = this.utils.checkDataLength(
+                        this.product.description
+                    );
+                    this.isSwatchExist = this.utils.checkDataLength(
+                        this.product.variations.filter(
+                            (variation) => variation.swatch_image !== null
+                        )
+                    );
+                    this.isVariationExist = this.utils.checkDataLength(
+                        this.product.variations
+                    );
+                    if (!this.isVariationExist) {
+                      this.beforeSelection = true;
+                      this.checkSelection = true;
+                    }
+                    this.hasVariationsInventory();
+                    if (!this.isHandset) {
+                      this.router.navigate(
+                          [`${this.product.department_info[0].category_url}`],
+                          { queryParams: { modal_sku: this.product.sku } }
+                      );
+                    }
+                    this.variations = this.product.variations.sort((a, b) =>
+                        a.name > b.name ? 1 : -1
+                    );
+                    if (this.product.in_inventory) {
+                      this.productPrice = this.utils.formatPrice(
+                          this.product.inventory_product_details.price
+                      );
+                      this.productWasPrice = this.utils.formatPrice(
+                          this.product.inventory_product_details.was_price
+                      );
+                    } else {
+                      this.productPrice = this.utils.formatPrice(this.product.is_price);
+
+                      this.productWasPrice = this.utils.formatPrice(
+                          this.product.was_price
+                      );
+                    }
+                    const {isPriceString,isRanged,isDiscounted,wasPriceString} = this.utils.getPriceObject(this.product);
+                    this.priceObject.is_price = isPriceString;
+                    this.priceObject.was_price = wasPriceString;
+                    this.isRange = isRanged;
+                    this.isDiscounted = isDiscounted;
+                    this.items = this.product.on_server_images.map(
+                        (item) => new ImageItem({ src: item })
+                    );
+                    if (this.product.set) {
+                      this.checkSetInventory(this.product.set);
+                    }
+                    this.galleryRef.load(this.items);
+                    this.invalidLink = false;
+                  } else {
+                    this.invalidLink = true;
+                  }
+                  this.isProductFetching = false;
+                },
+                (error) => {
+                  this.invalidLink = true;
+                  this.isProductFetching = false;
+                }
+            );
       }
     );
-    this.productSubscription = this.apiService
-      .getProduct(this.productSku)
-      .subscribe(
-        (payload: IProductDetail) => {
-          this.product = payload.product;
-          this.seoData = payload.seo_data;
-          if (this.product) {
-            this.schema = this.seoService.setSchema(this.product);
-            this.seoService.setMetaTagsProduct(this.seoData);
-            this.updateActiveProduct(this.product);
-            this.description = this.utils.compileMarkdown(
-              this.product.description
-            );
-            this.features = this.utils.compileMarkdown(
-              this.product.features,
-              this.product.site
-            );
-            this.dimensionExist = this.utils.checkDataLength(
-              this.product.dimension
-            );
-            this.featuresExist = this.utils.checkDataLength(
-              this.product.features
-            );
-            this.descriptionExist = this.utils.checkDataLength(
-              this.product.description
-            );
-            this.isSwatchExist = this.utils.checkDataLength(
-              this.product.variations.filter(
-                (variation) => variation.swatch_image !== null
-              )
-            );
-            this.isVariationExist = this.utils.checkDataLength(
-              this.product.variations
-            );
-            if (!this.isVariationExist) {
-              this.beforeSelection = true;
-              this.checkSelection = true;
-            }
-            this.hasVariationsInventory();
-            if (!this.isHandset) {
-              this.router.navigate(
-                [`${this.product.department_info[0].category_url}`],
-                { queryParams: { modal_sku: this.product.sku } }
-              );
-            }
-            this.variations = this.product.variations.sort((a, b) =>
-              a.name > b.name ? 1 : -1
-            );
-            if (this.product.in_inventory) {
-              this.productPrice = this.utils.formatPrice(
-                this.product.inventory_product_details.price
-              );
-              this.productWasPrice = this.utils.formatPrice(
-                this.product.inventory_product_details.was_price
-              );
-            } else {
-              this.productPrice = this.utils.formatPrice(this.product.is_price);
 
-              this.productWasPrice = this.utils.formatPrice(
-                this.product.was_price
-              );
-            }
-            const {isPriceString,isRanged,isDiscounted,wasPriceString} = this.utils.getPriceObject(this.product);
-            this.priceObject.is_price = isPriceString;
-            this.priceObject.was_price = wasPriceString;
-            this.isRange = isRanged;
-            this.isDiscounted = isDiscounted;
-            this.items = this.product.on_server_images.map(
-              (item) => new ImageItem({ src: item })
-            );
-            if (this.product.set) {
-              this.checkSetInventory(this.product.set);
-            }
-            this.galleryRef.load(this.items);
-            this.invalidLink = false;
-          } else {
-            this.invalidLink = true;
-          }
-          this.isProductFetching = false;
-        },
-        (error) => {
-          this.invalidLink = true;
-          this.isProductFetching = false;
-        }
-      );
   }
   onDestroy(): void {
     this.productSubscription.unsubscribe();
@@ -374,5 +379,27 @@ export class ProductDetailsMobileComponent implements OnInit {
 
   onSetSelection(e: boolean) {
     this.hasSelection = e;
+  }
+  renderPrice(price){
+    const pricesArray = price.split('-');
+    let fromPrice = Number(pricesArray[0]);
+    let toPrice;
+    if(pricesArray.length>1){
+      toPrice = Number(pricesArray[1]);
+    }
+    if(!toPrice){
+      return `${this.utils.parsePrice(fromPrice)}`
+    }
+    else {
+      return `${this.utils.parsePrice(fromPrice)} - ${this.utils.parsePrice(toPrice)}`
+    }
+  }
+  isDiscountedCollectionPrice(product):boolean{
+    product.is_price = product.price;
+    const price = this.utils.getPriceObject(product);
+    return price.isDiscounted;
+  }
+  toCollectionProduct(product){
+    this.router.navigate(['/product',product.sku]);
   }
 }

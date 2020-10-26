@@ -130,6 +130,32 @@
                             </div>
                         </ng-template>
                     </div>
+                    <div class="mb2" *ngIf="product.collections.length">
+                        <hr class="modal-hr"/>
+                        <span class="title">More in the Collection</span>
+                        <div class="pt2">
+                            <p-carousel
+                                    [numVisible]="2"
+                                    [numScroll]="1"
+                                    [value]="product.collections"
+                                    [circular]="false"
+                            >
+                                <ng-template let-data pTemplate="item">
+                                    <div class="carousel-item" [routerLink]="['/product',data.sku]" >
+                                        <img [src]="'https://lazysuzy.com'+data.image"/>
+                                        <span class="font-16 open-sans collection-product-name">{{data.name}}</span>
+                                        <span class="is-price" [ngClass]="{'sale':isDiscountedCollectionPrice(data)}">
+                                            {{renderPrice(data.price)}} &nbsp;
+                                            <span *ngIf="isDiscountedCollectionPrice(data)" class="strike was-price">
+                                                {{renderPrice(data.was_price)}}
+                                            </span>
+                                        </span>
+
+                                    </div>
+                                </ng-template>
+                            </p-carousel>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>

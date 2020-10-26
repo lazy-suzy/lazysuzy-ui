@@ -86,14 +86,6 @@
       .price-font {
         font-size: 18px;
       }
-
-      .product-price {
-        color: #333333;
-      }
-      .sale{
-        color: #b76e79;
-      }
-
       .view-details-btn {
        // position: absolute;
         //right: 0;
@@ -176,12 +168,6 @@
       font-size: 18px;
       margin-bottom: 10px;
     }
-    .product-price {
-      color: #333333;
-    }
-    .sale{
-      color: #b76e79;
-    }
     .view-details-btn {
       a {
         color: #ffcc00;
@@ -249,4 +235,36 @@ select.quantity-selector {
 }
 .font-18{
   font-size: 18px;
+}
+
+// Carouse Classes for Collection panels
+.carousel-item {
+  display: flex;
+  flex: 1 0 auto;
+  margin: 0 0.5rem;
+  flex-direction: column;
+  cursor: pointer;
+  .collection-product-name{
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+}
+:host ::ng-deep.ui-carousel-dots-container{
+  display: none;
+}
+.open-sans{
+  font-family: "Open Sans", sans-serif;
+}
+.font-16{
+  font-size: 16px;
+}
+.font-14{
+  font-size: 14px;
+}
+.product-price {
+  color: #333333;
+}
+.sale{
+  color: #b76e79;
 }
