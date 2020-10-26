@@ -43,7 +43,7 @@ export class ProductCollectionsComponent implements OnInit {
   sortTypeList: ISortType[];
   pageNo = 0;
   topPosToStartShowing = 300;
-  fixFilterBar = 150;
+  fixFilterBar = 900;
   isIconShow = false;
   showBar = false;
   isProductFetching = false;
@@ -315,7 +315,7 @@ export class ProductCollectionsComponent implements OnInit {
   }
 
   @HostListener('window:scroll')
-  checkScroll() {
+  checkScroll($event) {
     const scrollPosition =
         window.pageYOffset ||
         document.documentElement.scrollTop ||
