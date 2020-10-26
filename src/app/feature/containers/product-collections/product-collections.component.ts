@@ -314,7 +314,7 @@ export class ProductCollectionsComponent implements OnInit {
         });
   }
 
-  @HostListener('window:scroll')
+  @HostListener('window:scroll', ['$event'])
   checkScroll($event) {
     const scrollPosition =
         window.pageYOffset ||
