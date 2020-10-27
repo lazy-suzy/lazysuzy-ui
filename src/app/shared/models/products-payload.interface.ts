@@ -103,6 +103,7 @@ export interface IFilterData {
     depth?: any[];
     square?: any[];
     category?: Category[];
+    collection?:any;
 }
 
 export interface Shape {
