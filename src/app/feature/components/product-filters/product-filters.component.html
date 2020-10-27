@@ -3,7 +3,7 @@
         <div
                 class="flex items-center filter-padding filter
             {{disableTab(filter) ? 'display-none' : ''}}"
-                *ngIf="!((filter === 'brand' || filter === 'category') && isBrandPage === true)">
+                *ngIf="checkIfValidFilter(filter)">
             <span
                     class="filter-name grow pointer"
                     [ngClass]="{'active': (filter !== 'price' && activeFilters[filter].length > 0) || (filter === 'price' && isPriceChanged)}">
