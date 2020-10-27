@@ -21,7 +21,7 @@ import {
   BreakpointObserver
 } from '@angular/cdk/layout';
 import { Title } from '@angular/platform-browser';
-import {first} from "rxjs/operators";
+import {filter, first} from "rxjs/operators";
 
 @Component({
   selector: 'app-product-collections',
@@ -252,10 +252,8 @@ export class ProductCollectionsComponent implements OnInit {
   }
 
   getProductsWithCollection(collection){
-    this.collectionData.name = collection;
     this.apiService.getCollectionData(collection).pipe(first()).subscribe(collectionData =>{
           this.collectionData = {...this.collectionData,...collectionData};
-          console.log(this.collectionData)
     })
   }
 
@@ -353,5 +351,14 @@ export class ProductCollectionsComponent implements OnInit {
     } else {
       this.productsInRow += 1;
     }
+  }
+  checkBannerShow(index)
+  {
+    const filters = this.filters.split(';').filter(value=>value); //remove empty values
+    if(filters.length>1){
+      return false;
+    }
+    const afterProductToShow = 6;
+    return index!==0 && (index+1)%afterProductToShow==0 && this.collectionData.sub_details.length>=((index+1)/afterProductToShow)
   }
 }
