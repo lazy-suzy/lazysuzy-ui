@@ -159,6 +159,9 @@ export class ProductFiltersComponent implements OnInit {
                 if(this.isCollectionPage){
                     this.activeFilters.collection = this.productFilters.collection;
                 }
+                else {
+                    delete this.productFilters.collection;
+                }
                 this.populateDimensionFilters();
                 if (this.productFilters && !this.isPriceChanged) {
                     this.minValue = this.productFilters.price.from;
