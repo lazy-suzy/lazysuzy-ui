@@ -376,7 +376,7 @@ export class ProductDetailsComponent implements OnInit {
   }
   toCollectionProduct(product){
     this.matDialogUtils.closeDialogs();
-    setTimeout(()=>this.matDialogUtils.openMatDialog(product.sku),100)
+    setTimeout(()=>this.matDialogUtils.openMatDialog(product.sku),250)
 
   }
 }
