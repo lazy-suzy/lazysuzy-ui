@@ -363,7 +363,10 @@ export class ProductFilterMobileComponent implements OnInit {
         }
         return false;
     }
+    isCollectionFilter(filter){
+        return filter !== 'collection';
 
+    }
     renderOptions(dimensionValue) {
         const {max, min} = dimensionValue;
         return `${min}" - ${max}"`;
