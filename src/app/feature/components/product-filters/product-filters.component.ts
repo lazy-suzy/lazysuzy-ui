@@ -11,6 +11,7 @@ import {IFilterData} from 'src/app/shared/models';
 export class ProductFiltersComponent implements OnInit {
     @Output() setFilters = new EventEmitter<any>();
     @Input() isBrandPage = false;
+    @Input() isCollectionPage=false;
     @Input() productFilters: IFilterData = {
         brand: [],
         type: [],
@@ -39,6 +40,7 @@ export class ProductFiltersComponent implements OnInit {
     ];
     activeFilters = {
         brand: [],
+        collection:[],
         price_from: 0,
         price_to: 0,
         type: [],
@@ -98,7 +100,7 @@ export class ProductFiltersComponent implements OnInit {
         }
     }
     private setClearButtonVisibility(filters) {
-        if (this.isBrandPage) {
+        if (this.isBrandPage || this.isCollectionPage) {
             const filtersArray = filters.split(";").filter(value => value);
             if (filtersArray.length <= 1) {
                 this.isClearAllVisible = false;
@@ -121,6 +123,7 @@ export class ProductFiltersComponent implements OnInit {
             this.isPriceChanged = false;
             this.activeFilters = {
                 brand: this.activeFilters.brand,
+                collection:[],
                 price_from: 0,
                 price_to: 0,
                 type: [],
@@ -153,6 +156,12 @@ export class ProductFiltersComponent implements OnInit {
                 change.productFilters.currentValue !== undefined
             ) {
                 this.productFilters = change.productFilters.currentValue;
+                if(this.isCollectionPage){
+                    this.activeFilters.collection = this.productFilters.collection;
+                }
+                else {
+                    delete this.productFilters.collection;
+                }
                 this.populateDimensionFilters();
                 if (this.productFilters && !this.isPriceChanged) {
                     this.minValue = this.productFilters.price.from;
@@ -236,6 +245,7 @@ export class ProductFiltersComponent implements OnInit {
                 }
             }
         }
+
     }
 
     onCheckChange(event, filter: string) {
@@ -287,6 +297,7 @@ export class ProductFiltersComponent implements OnInit {
         if (this.isBrandPage) {
             this.activeFilters = {
                 brand: this.activeFilters.brand,
+                collection:[],
                 price_from: 0,
                 price_to: 0,
                 type: [],
@@ -313,9 +324,42 @@ export class ProductFiltersComponent implements OnInit {
                 shape: [],
                 seating: [],
             };
-        } else {
+        } else
+            if(this.isCollectionPage) {
+                this.activeFilters = {
+                    brand: [],
+                    collection: this.activeFilters.collection,
+                    price_from: 0,
+                    price_to: 0,
+                    type: [],
+                    height_from: [],
+                    height_to: [],
+                    width_from: [],
+                    width_to: [],
+                    length_from: [],
+                    length_to: [],
+                    diameter_from: [],
+                    diameter_to: [],
+                    square_from: [],
+                    square_to: [],
+                    depth_from: [],
+                    depth_to: [],
+                    depth: [],
+                    height: [],
+                    width: [],
+                    length: [],
+                    diameter: [],
+                    square: [],
+                    color: [],
+                    category: [],
+                    shape: [],
+                    seating: [],
+                };
+            }
+            else {
             this.activeFilters = {
                 brand: [],
+                collection:[],
                 price_from: 0,
                 price_to: 0,
                 type: [],

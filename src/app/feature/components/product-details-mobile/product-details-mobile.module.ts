@@ -8,6 +8,8 @@ import { VariationsModule } from '../variations/variations.module';
 import { RedirectModule } from '../redirect/redirect.module';
 import { FormsModule } from '@angular/forms';
 import { NgxJsonLdModule } from '@ngx-lite/json-ld';
+import {CarouselModule} from "primeng/carousel";
+import { OwlModule} from "ngx-owl-carousel";
 
 const DECLARATIONS = [ProductDetailsMobileComponent];
 
@@ -19,7 +21,9 @@ const MODULES = [
   VariationsModule,
   RedirectModule,
   FormsModule,
-  NgxJsonLdModule
+  NgxJsonLdModule,
+  CarouselModule,
+  OwlModule
 ];
 
 @NgModule({

@@ -163,12 +163,12 @@
     margin-bottom: 0;
     .nav-link {
       padding: 8px 16px;
-      border: 1px solid #cccccc;
+      //border: 1px solid #cccccc;
       border-bottom-width: 0;
       display: block;
-      font-size: 12px;
+      font-size: 14px;
       color: #0c1c31;
-      font-family: 'Open Sans';
+      font-family: "Open Sans", sans-serif;
     }
     .active {
       background-color: #f8fafc;
@@ -209,4 +209,45 @@
     top: 50%;
     transform: translate(-50%, -50%);
   }
+}
+.carousel-item {
+  display: flex;
+  flex: 1 0 auto;
+  margin: 0 0.5rem;
+  flex-direction: column;
+  .collection-product-name{
+    font-family: "Open Sans", sans-serif;
+    font-size: 12px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+}
+:host ::ng-deep.ui-carousel-dots-container{
+  display: none;
+}
+.is-price{
+  font-family: "Open Sans",sans-serif;
+  font-size: 14px;
+}
+.was-price{
+  font-family: "Open Sans",sans-serif;
+  font-size: 12px;
+  color: #333333;
+}
+
+.open-sans{
+  font-family: "Open Sans", sans-serif;
+}
+.font-16{
+  font-size: 16px;
+}
+.font-14{
+  font-size: 14px;
+}
+.product-price {
+  color: #333333;
+}
+.sale{
+  color: #b76e79;
 }

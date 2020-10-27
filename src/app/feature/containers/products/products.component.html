@@ -48,8 +48,9 @@
         <ng-container *ngIf="!isHandset">
             <!-- class="brandlist-container brandlist-left" -->
             <div class="row">
-                <div class="col-md-2">
+                <div class="col-md-2 pr3">
                     <app-brand-list (setBrand)="getProductwithBrandName($event)"></app-brand-list>
+                    <app-collection-list [collectionsList]="collectionList" ></app-collection-list>
                 </div>
                 <div class="col-md-8">
                     <div class="row mb-10">

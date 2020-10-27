@@ -21,14 +21,15 @@ import {
   BreakpointObserver
 } from '@angular/cdk/layout';
 import { Title } from '@angular/platform-browser';
-import {first} from "rxjs/operators";
+import {filter, first} from "rxjs/operators";
 
 @Component({
-  selector: 'app-all-products',
-  templateUrl: './all-products.component.html',
-  styleUrls: ['./all-products.component.less']
+  selector: 'app-product-collections',
+  templateUrl: './product-collections.component.html',
+  styleUrls: ['./product-collections.component.less']
 })
-export class AllProductsComponent implements OnInit {
+export class ProductCollectionsComponent implements OnInit {
+
   productsSubscription: Subscription;
   isBrandPageSubscription: Subscription;
   routeSubscription: Subscription;
@@ -42,7 +43,7 @@ export class AllProductsComponent implements OnInit {
   sortTypeList: ISortType[];
   pageNo = 0;
   topPosToStartShowing = 300;
-  fixFilterBar = 150;
+  fixFilterBar = 900;
   isIconShow = false;
   showBar = false;
   isProductFetching = false;
@@ -51,7 +52,7 @@ export class AllProductsComponent implements OnInit {
   showMobileSort = false;
   productsInRow = 2;
   bpObserver: Observable<BreakpointState> = this.breakpointObserver.observe(
-    Breakpoints.Handset
+      Breakpoints.Handset
   );
 
   bpSubscription: Subscription;
@@ -71,15 +72,16 @@ export class AllProductsComponent implements OnInit {
   isBrandPage: boolean = false;
   isChangingBrandList: boolean = false;
   collectionsList:any;
+  collectionData:any ={};
   constructor(
-    private apiService: ApiService,
-    private router: Router,
-    private location: Location,
-    private activeRoute: ActivatedRoute,
-    private breakpointObserver: BreakpointObserver,
-    public cacheService: CacheService,
-    private eventEmitterService: EventEmitterService,
-    private title: Title
+      private apiService: ApiService,
+      private router: Router,
+      private location: Location,
+      private activeRoute: ActivatedRoute,
+      private breakpointObserver: BreakpointObserver,
+      public cacheService: CacheService,
+      private eventEmitterService: EventEmitterService,
+      private title: Title
   ) {
     this.isBrandPageSubscription = this.router.events.subscribe(event => {
       if (event instanceof NavigationEnd) {
@@ -98,15 +100,15 @@ export class AllProductsComponent implements OnInit {
 
   ngOnInit(): void {
     this.eventSubscription = this.eventEmitterService.userChangeEvent
-      .asObservable()
-      .subscribe((user) => {
-        this.getParamsFromQuery();
-        this.bpSubscription = this.bpObserver.subscribe(
-          (handset: BreakpointState) => {
-            this.isHandset = handset.matches;
-          }
-        );
-      });
+        .asObservable()
+        .subscribe((user) => {
+          this.getParamsFromQuery();
+          this.bpSubscription = this.bpObserver.subscribe(
+              (handset: BreakpointState) => {
+                this.isHandset = handset.matches;
+              }
+          );
+        });
   }
 
   onDestroy(): void {
@@ -119,33 +121,33 @@ export class AllProductsComponent implements OnInit {
 
   getParamsFromQuery(): void {
     this.routeSubscription = this.activeRoute.queryParams.subscribe(
-      (params) => {
-        this.filters = params.filters || '';
-        // console.log('this is filter in getparams: ', this.filters);
-        const checkBrand = this.filters.indexOf('brand:');
-        if (checkBrand < 0) {
-          this.selectedBrandValue = ''
-        } else {
-          const restString = this.filters.slice(checkBrand + 6);
-          const endBrand = restString.indexOf(';');
-          this.selectedBrandValue = restString.substr(0, endBrand);
-          this.getBrandData(this.selectedBrandValue);
-        }
-        if(this.isBrandPage === true) {
-          this.eventEmitterService.isBrandSubject.next(this.selectedBrandValue);
-        }
-        // console.log('this is selectedBrandValue: ', this.selectedBrandValue);
-
-        // tslint:disable-next-line: radix
-        this.pageNo = parseInt(params.pageNo) || 0;
-        this.sortType = params.sortType || '';
-        Object.keys(params).map((key) => {
-          if (key === 'new' || key === 'bestseller' || key === 'sale') {
-            this.trend = key;
+        (params) => {
+          this.filters = params.filters || '';
+          // console.log('this is filter in getparams: ', this.filters);
+          const checkBrand = this.filters.indexOf('collection:');
+          if (checkBrand < 0) {
+            this.selectedBrandValue = ''
+          } else {
+            const restString = this.filters.slice(checkBrand + 11);
+            const endBrand = restString.indexOf(';');
+            this.selectedBrandValue = restString.substr(0, endBrand);
+            this.getProductsWithCollection(this.selectedBrandValue);
           }
-        });
-        this.checkPage();
-      }
+          if(this.isBrandPage === true) {
+            this.eventEmitterService.isBrandSubject.next(this.selectedBrandValue);
+          }
+          // console.log('this is selectedBrandValue: ', this.selectedBrandValue);
+
+          // tslint:disable-next-line: radix
+          this.pageNo = parseInt(params.pageNo) || 0;
+          this.sortType = params.sortType || '';
+          Object.keys(params).map((key) => {
+            if (key === 'new' || key === 'bestseller' || key === 'sale') {
+              this.trend = key;
+            }
+          });
+          this.checkPage();
+        }
     );
     this.setTitle(this.brandData.name);
   }
@@ -154,35 +156,35 @@ export class AllProductsComponent implements OnInit {
     if (this.pageNo > 0) {
       this.isProductFetching = true;
       this.productsSubscription = this.apiService
-        .getMultiplePageAllProducts(
-          this.trend,
-          this.total,
-          this.filters,
-          this.sortType,
-          this.pageNo
-        )
-        .subscribe((response) => {
-          let allProducts = [];
-          // tslint:disable-next-line: prefer-for-of
-          for (let i = 0; i < response.length; i++) {
-            allProducts = [...allProducts, ...response[i].products];
-          }
-          this.products = allProducts;
-          this.updateQueryString();
-          this.totalCount = response[0].total;
-          this.productFilters = response[0].filterData;
-          this.sortTypeList = response[0].sortType;
-          this.isProductFetching = false;
-          if (this.cacheService.data.useCache) {
-            this.scrollToProductSKU = this.cacheService.data.productSku;
-            this.cacheService.data.useCache = false;
-            setTimeout(() => {
-              // this.productElement.nativeElement.getElementById
-              const el = document.getElementById(this.scrollToProductSKU);
-              window.scrollTo(0, el.offsetTop - 200);
-            }, 500);
-          }
-        });
+          .getMultiplePageAllProducts(
+              this.trend,
+              this.total,
+              this.filters,
+              this.sortType,
+              this.pageNo
+          )
+          .subscribe((response) => {
+            let allProducts = [];
+            // tslint:disable-next-line: prefer-for-of
+            for (let i = 0; i < response.length; i++) {
+              allProducts = [...allProducts, ...response[i].products];
+            }
+            this.products = allProducts;
+            this.updateQueryString();
+            this.totalCount = response[0].total;
+            this.productFilters = response[0].filterData;
+            this.sortTypeList = response[0].sortType;
+            this.isProductFetching = false;
+            if (this.cacheService.data.useCache) {
+              this.scrollToProductSKU = this.cacheService.data.productSku;
+              this.cacheService.data.useCache = false;
+              setTimeout(() => {
+                // this.productElement.nativeElement.getElementById
+                const el = document.getElementById(this.scrollToProductSKU);
+                window.scrollTo(0, el.offsetTop - 200);
+              }, 500);
+            }
+          });
     } else {
       this.loadProducts();
     }
@@ -194,17 +196,17 @@ export class AllProductsComponent implements OnInit {
     this.pageNo = 0;
     this.isProductFetching = true;
     this.productsSubscription = this.apiService
-      .getAllProducts(this.trend, this.total, this.filters, this.sortType)
-      .subscribe((payload: IProductsPayload) => {
-        console.log('this is load Products: ', payload)
-        this.products = payload.products;
-        this.productFilters = payload.filterData;
-        this.sortTypeList = payload.sortType;
-        this.totalCount = payload.total;
-        this.updateQueryString();
-        this.isProductFetching = false;
-        this.isChangingBrandList = false;
-      });
+        .getAllProducts(this.trend, this.total, this.filters, this.sortType)
+        .subscribe((payload: IProductsPayload) => {
+          console.log('this is load Products: ', payload)
+          this.products = payload.products;
+          this.productFilters = payload.filterData;
+          this.sortTypeList = payload.sortType;
+          this.totalCount = payload.total;
+          this.updateQueryString();
+          this.isProductFetching = false;
+          this.isChangingBrandList = false;
+        });
   }
 
   updateQueryString(): void {
@@ -215,9 +217,9 @@ export class AllProductsComponent implements OnInit {
     params = params.set('pageNo', this.pageNo.toString());
 
     this.location.replaceState(
-      window.location.pathname,
-      params.toString(),
-      this.location.getState()
+        window.location.pathname,
+        params.toString(),
+        this.location.getState()
     );
   }
 
@@ -249,8 +251,14 @@ export class AllProductsComponent implements OnInit {
     })
   }
 
+  getProductsWithCollection(collection){
+    this.apiService.getCollectionData(collection).pipe(first()).subscribe(collectionData =>{
+          this.collectionData = collectionData;
+    })
+  }
+
   setTitle(title: string = '') {
-    let tabTitle = ''
+    let tabTitle = '';
     if(title === '') {
       tabTitle = 'Designer Home Furniture | LazySuzy';
     } else {
@@ -290,27 +298,27 @@ export class AllProductsComponent implements OnInit {
     this.isProductFetching = true;
 
     this.productsSubscription = this.apiService
-      .getAllProducts(
-        this.trend,
-        this.total,
-        this.filters,
-        this.sortType,
-        this.pageNo
-      )
-      .subscribe((payload: IProductsPayload) => {
-        this.products = [...this.products, ...payload.products];
-        this.updateQueryString();
-        this.isProductFetching = false;
-      });
+        .getAllProducts(
+            this.trend,
+            this.total,
+            this.filters,
+            this.sortType,
+            this.pageNo
+        )
+        .subscribe((payload: IProductsPayload) => {
+          this.products = [...this.products, ...payload.products];
+          this.updateQueryString();
+          this.isProductFetching = false;
+        });
   }
 
-  @HostListener('window:scroll')
-  checkScroll() {
+  @HostListener('window:scroll', ['$event'])
+  checkScroll($event) {
     const scrollPosition =
-      window.pageYOffset ||
-      document.documentElement.scrollTop ||
-      document.body.scrollTop ||
-      0;
+        window.pageYOffset ||
+        document.documentElement.scrollTop ||
+        document.body.scrollTop ||
+        0;
     this.isIconShow = scrollPosition >= this.topPosToStartShowing;
     this.showBar = scrollPosition >= this.fixFilterBar;
     const self = this;
@@ -343,5 +351,14 @@ export class AllProductsComponent implements OnInit {
     } else {
       this.productsInRow += 1;
     }
+  }
+  checkBannerShow(index)
+  {
+    const filters = this.filters.split(';').filter(value=>value); //remove empty values
+    if(filters.length>1){
+      return false;
+    }
+    const afterProductToShow = 6;
+    return index!==0 && (index+1)%afterProductToShow==0 && this.collectionData.sub_details.length>=((index+1)/afterProductToShow)
   }
 }

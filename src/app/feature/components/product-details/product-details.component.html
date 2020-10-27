@@ -14,7 +14,7 @@
             <div class="fl w-50 pa3 product-details-container">
                 <div #topContainer>
                     <div class="flex w-100 justify-between items-end">
-                        <span class="mb1">{{ product.site }}</span>
+                        <span class="mb1 lato font-16">{{ product.site }}</span>
                         <div *ngIf="product.wishlisted; else elseBlock">
                             <div class="tile-icon wishlist-icon wishlist-container">
                                 <mat-icon (click)="wishlistProduct(product.sku, false)">favorite
@@ -30,14 +30,19 @@
                             </div>
                         </ng-template>
                     </div>
-                    <h3>{{ product.name }}</h3>
+                    <span class="open-sans font-18">{{ product.name }}</span>
 
-                    <div class="price-container">
-                        <div class="w-60 price-font">
-                            <span class="product-price mr3">${{ productPrice }}</span>
-                            <span class="strike {{hasValidWasPrice ? '' : 'dn' }}">${{ productWasPrice }}</span>
+                    <div class="price-container mt1">
+                        <div class="price-font" style="margin-left:-0.5rem;">
+                            <span class="product-price ml2 open-sans font-18" [ngClass]="{'sale':hasValidWasPrice,'product-price':!hasValidWasPrice}">
+                                {{ renderPrice(productPrice) }}
+                                <span class="ml2 product-price strike open-sans font-16 {{hasValidWasPrice ? '' : 'dn' }}">
+                                    {{renderPrice(productWasPrice) }}
+                                </span>
+                            </span>
+
                         </div>
-                        <div class="w-40">
+                        <div class="flex justify-between">
                             <button mat-raised-button class="bg-red view-details-btn"
                                     *ngIf="!utils.hasInventory(activeProduct) && !product.redirect &&product.product_url">
                                 <a (click)="openLink($event, product.product_url)" [href]="product.product_url"
@@ -46,7 +51,7 @@
                                 </a>
                             </button>
 
-                            <select [(ngModel)]="quantity" class="quantity-selector w-30 ml2"
+                            <select [(ngModel)]="quantity" class="quantity-selector mr2"
                                     *ngIf="utils.hasInventory(activeProduct)">
                                 <option *ngFor="let i of quantityLimit(activeProduct.inventory_product_details.count)"
                                         [value]="i">{{ i }}</option>
@@ -63,12 +68,16 @@
                             </div>
                         </div>
                     </div>
-                    <div class="price-container-tabs">
-                        <div class="price-font">
-                            <span class="product-price mr3">${{ productPrice }}</span>
-                            <span class="strike {{ productPrice !== productWasPrice ? '' : 'dn' }}">${{ productWasPrice }}</span>
+                    <div class="price-container-tabs mt1">
+                        <div class="price-font" style="margin-left:-0.5rem;">
+                            <span class="product-price ml2 open-sans font-18" [ngClass]="{'sale':hasValidWasPrice,'product-price':!hasValidWasPrice}">
+                                {{ renderPrice(productPrice) }} &nbsp;
+                                <span class="product-price strike open-sans font-16 {{hasValidWasPrice ? '' : 'dn' }}">
+                                   {{ renderPrice(productWasPrice) }}
+                                </span>
+                            </span>
                         </div>
-                        <div>
+                        <div class="flex">
                             <button mat-raised-button class="bg-red view-details-btn"
                                     *ngIf="!utils.hasInventory(activeProduct) && !product.redirect">
                                 <a (click)="openLink($event, product.product_url)" [href]="product.product_url"
@@ -77,7 +86,7 @@
                                 </a>
                             </button>
 
-                            <select [(ngModel)]="quantity" class="quantity-selector w-30 ml2"
+                            <select [(ngModel)]="quantity" class="quantity-selector mr2"
                                     *ngIf="utils.hasInventory(activeProduct)">
                                 <option *ngFor="let i of quantityLimit(activeProduct.inventory_product_details.count)"
                                         [value]="i">{{ i }}</option>
@@ -111,13 +120,12 @@
                         </div>
                     </div>
                     <ng-container *ngIf="product.redirect; else allConditions">
-                        <hr class="modal-hr mt-3" *ngIf="product.set && product.set.length > 0"/>
+                        <hr class="modal-hr mt3" *ngIf="product.set && product.set.length > 0"/>
                     </ng-container>
                     <ng-template #allConditions>
-                        <hr class="modal-hr mt-3" *ngIf="isVariationExist || (product.set && product.set.length > 0)"/>
+                        <hr class="modal-hr mt3" *ngIf="isVariationExist || (product.set && product.set.length > 0)"/>
                     </ng-template>
                 </div>
-
                 <div class="product-description-container" [ngStyle]="topHeight">
                     <div *ngIf="!isSetItemInInventory">
                         <app-redirect *ngIf="product.redirect && !utils.hasInventory(activeProduct)"
@@ -154,7 +162,7 @@
                         </div>
                     </div>
 
-                    <div *ngIf="dimensionExist;else emptySpace" class="mb2">
+                    <div *ngIf="dimensionExist" class="mb2">
                         <hr class="modal-hr"/>
                         <span class="title">Dimensions</span>
                         <div class="mt1 pb1 flex flex-wrap" *ngIf="isArray(product.dimension); else showDimensions">
@@ -178,9 +186,36 @@
                             </div>
                         </ng-template>
                     </div>
-                    <ng-template #emptySpace>
+                    <div class="mb2" *ngIf="product.collections.length">
+                        <hr class="modal-hr"/>
+                        <span class="title">More in the Collection</span>
+                        <div class="pt2">
+                            <p-carousel
+                                    [numVisible]="2"
+                                    [numScroll]="1"
+                                    [value]="product.collections"
+                                    [circular]="false"
+                            >
+                                <ng-template let-data pTemplate="item">
+                                    <div class="carousel-item" (click)="toCollectionProduct(data)">
+                                        <img [src]="'https://lazysuzy.com'+data.image"/>
+                                        <span class="font-16 open-sans collection-product-name">{{data.name}}</span>
+                                        <span class="font-14 open-sans" [ngClass]="{'sale':isDiscounted(data)}">
+                                            {{renderPrice(data.price)}} &nbsp;
+                                            <span *ngIf="isDiscounted(data)" class="strike product-price font-14 open-sans">
+                                                {{renderPrice(data.was_price)}}
+                                            </span>
+                                        </span>
+
+                                    </div>
+                                </ng-template>
+                            </p-carousel>
+                        </div>
+                    </div>
+                    <div>
                         &nbsp;
-                    </ng-template>
+                    </div>
+
                 </div>
             </div>
         </div>

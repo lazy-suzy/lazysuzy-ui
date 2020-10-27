@@ -6,7 +6,7 @@ import {
   ElementRef
 } from '@angular/core';
 import { MAT_DIALOG_DATA } from '@angular/material/dialog';
-import { Subscription } from 'rxjs';
+import {from, Subscription} from 'rxjs';
 import {
   IProductPayload,
   IProductDetail,
@@ -23,6 +23,7 @@ import {
 } from 'src/app/shared/services';
 import { Gallery, GalleryItem, ImageItem } from '@ngx-gallery/core';
 import { Lightbox } from '@ngx-gallery/lightbox';
+import {formatCurrency, getLocaleCurrencySymbol, getLocaleId} from "@angular/common";
 
 @Component({
   selector: 'app-product-details',
@@ -85,7 +86,7 @@ export class ProductDetailsComponent implements OnInit {
     public lightbox: Lightbox,
     private eventEmitterService: EventEmitterService,
     private matDialogUtils: MatDialogUtilsService,
-    private seoService: SeoService
+    private seoService: SeoService,
   ) { }
 
   ngOnInit(): void {
@@ -352,5 +353,30 @@ export class ProductDetailsComponent implements OnInit {
 
   onSetSelection(e: boolean) {
     this.hasSelection = e;
+  }
+
+  renderPrice(price){
+    const pricesArray = price.split('-');
+    let fromPrice = Number(pricesArray[0]);
+    let toPrice;
+    if(pricesArray.length>1){
+      toPrice = Number(pricesArray[1]);
+    }
+    if(!toPrice){
+      return `${this.utils.parsePrice(fromPrice)}`
+    }
+    else {
+      return `${this.utils.parsePrice(fromPrice)} - ${this.utils.parsePrice(toPrice)}`
+    }
+  }
+  isDiscounted(product):boolean{
+      product.is_price = product.price;
+      const price = this.utils.getPriceObject(product);
+      return price.isDiscounted;
+  }
+  toCollectionProduct(product){
+    this.matDialogUtils.closeDialogs();
+    setTimeout(()=>this.matDialogUtils.openMatDialog(product.sku),250)
+
   }
 }

@@ -1,8 +1,16 @@
 <div class="flex flex-column mh3-ns" *ngIf="products">
+    <div class="flex flex-column" *ngIf="isHandset">
+        <div class="branddata-container w-100">
+            <p class="collection-name-mobile">{{collectionData.name| titlecase}}</p>
+            <p class="collection-description-mobile">{{collectionData.cover_details?.description}}</p>
+            <img class="mt2" src="{{collectionData.cover_details?.image}}"/>
+            <p class="collection-footer-mobile mt2">{{collectionData.head_description}}</p>
+        </div>
+    </div>
     <ng-container *ngIf="isHandset">
         <div class="{{
         showBar === true ? 'mobile-filter-panel fixed' : 'mobile-filter-panel'
-      }}" (scroll)="(checkScroll)">
+      }}" (scroll)="checkScroll($event)">
       <span class="icon-container" (click)="toggleMobileFilter()">
         <mat-icon aria-hidden="false" aria-label="Filter">
           filter_list
@@ -40,12 +48,25 @@
          (scrolled)="onScroll()">
 
         <ng-container *ngIf="isHandset">
-            <app-product-mobile *ngFor="let product of products" [product]="product" [productsInRow]="productsInRow"
-                                [ngClass]="{
+            <ng-container *ngFor="let product of products;let i = index">
+                <app-product-mobile  [product]="product" [productsInRow]="productsInRow"
+                                    [ngClass]="{
           'w-50': productsInRow === 2,
           'w-33': productsInRow === 3,
           'w-100': productsInRow === 1
         }" class="w-50"></app-product-mobile>
+                <div
+                        *ngIf="checkBannerShow(i)"
+                        class="w-100 flex flex-column" style="margin: 1.5rem 0">
+                    <div class="mid-banner-mobile">
+                        <img class="w-100" [src]="collectionData.sub_details[((i+1)/6 - 1)]?.image">
+                    </div>
+                    <div class="mid-banner-text-mobile">
+                        <span style="white-space: pre-line">{{collectionData.sub_details[((i+1)/6 - 1)]?.description}}</span>
+                    </div>
+
+                </div>
+            </ng-container>
         </ng-container>
 
 
@@ -54,25 +75,28 @@
                 <!-- brandlist -->
                 <div class="col-md-2">
                     <div class="pr3">
-                        <app-brand-list [selectedBrandValue]="selectedBrandValue" [isBrandPage]="isBrandPage"
+                        <app-brand-list [selectedBrandValue]="selectedBrandValue" [isBrandPage]="false"
                                         (setBrand)="getProductwithBrandName($event)"></app-brand-list>
-                        <app-collection-list [collectionsList]="collectionsList"></app-collection-list>
+                        <app-collection-list
+                                [collectionsList]="collectionsList"
+                                (emitCollection)="getProductsWithCollection($event)"
+                        ></app-collection-list>
                     </div>
                     <!-- / brandlist -->
                 </div>
                 <div class="col-md-8">
                     <div class="row mb-10">
                         <!-- show brand data -->
-                        <div class="col-md-12">
-                            <ng-container *ngIf="filters && isBrandPage">
+                        <div class="col-md-12" *ngIf="collectionData">
                                 <div class="branddata-container w-100">
-                                    <p class="brand-name">{{ brandData.name }}</p>
-                                    <p class="brand-description">{{ brandData.description }}</p>
+                                    <p class="collection-name">{{collectionData.name| titlecase}}</p>
+                                    <p class="collection-description">{{collectionData.cover_details?.description}}</p>
+                                    <img class="mt2" src="{{collectionData.cover_details?.image}}"/>
+                                    <p class="collection-footer mt2">{{collectionData.head_description}}</p>
                                 </div>
-                            </ng-container>
                         </div>
                         <!-- / show brand data -->
-                       
+
                     </div>
                     <div class="row">
                         <div class="col-md-12 pr2 text-right">
@@ -85,6 +109,7 @@
                                 <div class="col-sm-8 col-md-10 ">
                                     <app-product-filters #productFiltersComponent [productFilters]="productFilters"
                                                          (setFilters)="onSetFilters($event)" [isBrandPage]="isBrandPage"
+                                                         [isCollectionPage]="true"
                                                          [isChangingBrandList]="isChangingBrandList"
                                                          class="flex flex-wrap justify-start" style="margin-top: -0.4rem"></app-product-filters>
                                 </div>
@@ -100,9 +125,26 @@
                     </div>
                     <div class="row">
                         <ng-container *ngIf="products.length>0;else emptyProductsMessage">
-                            <app-product *ngFor="let product of products" [product]="product" class="col-md-4"
-                                         style="margin-bottom: 15px;">
-                            </app-product>
+                            <ng-container *ngFor="let product of products; let i = index" >
+                                <app-product  [product]="product" class="col-md-4"
+                                              style="margin-bottom: 15px;">
+                                </app-product>
+                                <div
+                                        *ngIf="checkBannerShow(i)"
+                                        style="padding: 10px;margin-bottom: 15px"
+                                        class="col-md-12">
+                                    <div class="row">
+                                        <div class="col-md-4 mid-banner">
+                                            <img [src]="collectionData.sub_details[((i+1)/6 - 1)]?.image">
+                                        </div>
+                                        <div class="col-md-8 mid-banner-text">
+                                            <span style="white-space: pre-line">{{collectionData.sub_details[((i+1)/6 - 1)]?.description}}</span>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </ng-container>
+
                         </ng-container>
                         <ng-template #emptyProductsMessage>
                             <div class="col-md-12" style="text-align: center;">

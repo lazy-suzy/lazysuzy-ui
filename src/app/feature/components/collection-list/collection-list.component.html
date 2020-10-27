@@ -1,0 +1,13 @@
+<ul class="mt4">
+    <li>
+       <span class="list-header">
+            COLLECTIONS
+       </span>
+    </li>
+    <ng-container *ngFor="let collection of collectionsList">
+        <li>
+            <a href="javascript: void(0)"
+               (click)="setCollection(collection.value)">{{ collection.name }}</a>
+        </li>
+    </ng-container>
+</ul>

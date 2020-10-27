@@ -13,6 +13,7 @@ import { RedirectModule } from '../redirect/redirect.module';
 import { MatSelectModule } from '@angular/material/select';
 import { FormsModule } from '@angular/forms';
 import { NgxJsonLdModule } from '@ngx-lite/json-ld';
+import {CarouselModule} from "primeng/carousel";
 
 const DECLARATIONS = [
   ProductComponent,
@@ -39,7 +40,7 @@ const COMPONENTS = [ProductDetailsComponent, ConfirmCartProductComponent];
 @NgModule({
   declarations: [...DECLARATIONS],
   entryComponents: [...COMPONENTS],
-  imports: [...MODULES],
+    imports: [...MODULES, CarouselModule],
   exports: [...DECLARATIONS, ...MODULES]
 })
 export class ProductModule {}
