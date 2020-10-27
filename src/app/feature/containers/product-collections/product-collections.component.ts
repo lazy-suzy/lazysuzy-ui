@@ -260,7 +260,7 @@ export class ProductCollectionsComponent implements OnInit {
   }
 
   setTitle(title: string = '') {
-    let tabTitle = ''
+    let tabTitle = '';
     if(title === '') {
       tabTitle = 'Designer Home Furniture | LazySuzy';
     } else {

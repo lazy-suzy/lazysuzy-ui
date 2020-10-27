@@ -1,10 +1,10 @@
 <div class="flex flex-column mh3-ns" *ngIf="products">
     <div class="flex flex-column" *ngIf="isHandset">
         <div class="branddata-container w-100">
-            <p class="brand-name">{{collectionData.name| titlecase}}</p>
-            <p class="brand-description">{{collectionData.cover_details?.description}}</p>
+            <p class="collection-name-mobile">{{collectionData.name| titlecase}}</p>
+            <p class="collection-description-mobile">{{collectionData.cover_details?.description}}</p>
             <img class="mt2" src="{{collectionData.cover_details?.image}}"/>
-            <p class="brand-description mt2">{{collectionData.head_description}}</p>
+            <p class="collection-footer-mobile mt2">{{collectionData.head_description}}</p>
         </div>
     </div>
     <ng-container *ngIf="isHandset">
@@ -74,7 +74,7 @@
             <div class="row">
                 <!-- brandlist -->
                 <div class="col-md-2">
-                    <div class="brandlist-container brandlist-left">
+                    <div class="pr3">
                         <app-brand-list [selectedBrandValue]="selectedBrandValue" [isBrandPage]="false"
                                         (setBrand)="getProductwithBrandName($event)"></app-brand-list>
                         <app-collection-list
