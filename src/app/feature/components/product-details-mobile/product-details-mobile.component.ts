@@ -83,6 +83,16 @@ export class ProductDetailsMobileComponent implements OnInit {
   };
   isDiscounted=false;
   isRange=false;
+  carousalOptions = {
+    autoWidth: false,
+    loop: true,
+    margin:10,
+    items: 1.3,
+    center: false,
+    dots: false,
+    pagination: false,
+  };
+
   constructor(
     private router: Router,
     private activeRoute: ActivatedRoute,
@@ -97,7 +107,6 @@ export class ProductDetailsMobileComponent implements OnInit {
     private seoService: SeoService
   ) {
     // This fixes the p-carousel on mobiles.
-    Carousel.prototype.changePageOnTouch = (e,diff)=>{};
   }
 
   ngOnInit() {
