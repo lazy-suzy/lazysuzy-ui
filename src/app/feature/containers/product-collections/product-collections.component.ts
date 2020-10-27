@@ -253,7 +253,7 @@ export class ProductCollectionsComponent implements OnInit {
 
   getProductsWithCollection(collection){
     this.apiService.getCollectionData(collection).pipe(first()).subscribe(collectionData =>{
-          this.collectionData = {...this.collectionData,...collectionData};
+          this.collectionData = collectionData;
     })
   }
 
