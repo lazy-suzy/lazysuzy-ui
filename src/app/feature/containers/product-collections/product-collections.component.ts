@@ -278,15 +278,18 @@ export class ProductCollectionsComponent implements OnInit {
   }
 
   onSetSortType(e): void {
+    
     this.sortType = e;
     this.loadProducts();
   }
 
   onSetMobileToggle($e): void {
+    
     this.toggleMobileFilter();
   }
 
   onSetSortToggle($e): void {
+    
     this.toggleMobileSort();
   }
 
@@ -345,6 +348,9 @@ export class ProductCollectionsComponent implements OnInit {
   }
 
   toggleMobileSort() {
+    if(!this.showBar){
+      this.gotoTop();
+    }
     this.showMobileSort = !this.showMobileSort;
   }
 
