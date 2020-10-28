@@ -1,8 +1,8 @@
 <div class="search-result-title-bar">
-  <h4 class="w-70 m-3">
+  <h4 class="w-100 mt3" [ngClass]="{'ml3':isHandset}">
     Search results for: <span class="search-term">{{ query }}</span>
   </h4>
-  <div class="w-30" *ngIf="isHandset">
+  <div class="w-100" *ngIf="isHandset">
     <span class="icon-container" (click)="toggleMobileView()">
       <mat-icon aria-hidden="false" aria-label="toggle">
         view_module
