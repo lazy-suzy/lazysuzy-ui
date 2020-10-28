@@ -3,7 +3,7 @@
         <div class="branddata-container w-100">
             <p class="collection-name-mobile">{{collectionData.name| titlecase}}</p>
             <p class="collection-description-mobile">{{collectionData.cover_details?.description}}</p>
-            <img class="mt2" src="{{collectionData.cover_details?.image}}"/>
+            <img *ngIf="collectionData.cover_details?.image" class="mt2" src="{{collectionData.cover_details?.image}}"/>
             <p class="collection-footer-mobile mt2">{{collectionData.head_description}}</p>
         </div>
     </div>
@@ -29,10 +29,13 @@
         </mat-icon>
         <span class="icon-title">Sort</span>
       </span>
-            <app-product-filter-mobile *ngIf="showMobileFilter" (setMobileToggle)="onSetMobileToggle($event)"
-                                       [productFilters]="productFilters" [isProductFetching]="isProductFetching"
+            <app-product-filter-mobile *ngIf="showMobileFilter"
+                                       [productFilters]="productFilters"
+                                       [isProductFetching]="isProductFetching"
                                        [totalCount]="totalCount"
-                                       (setFilters)="onSetFilters($event)">
+                                       [isCollectionPage]="true"
+                                       (setFilters)="onSetFilters($event)"
+                                       (setMobileToggle)="onSetMobileToggle($event)">
             </app-product-filter-mobile>
             <app-product-sort-mobile *ngIf="showMobileSort" (setSortToggle)="onSetSortToggle($event)"
                                      [sortTypeList]="sortTypeList" (setSortType)="onSetSortType($event)">
@@ -64,7 +67,6 @@
                     <div class="mid-banner-text-mobile">
                         <span style="white-space: pre-line">{{collectionData.sub_details[((i+1)/6 - 1)]?.description}}</span>
                     </div>
-
                 </div>
             </ng-container>
         </ng-container>
@@ -91,7 +93,7 @@
                                 <div class="branddata-container w-100">
                                     <p class="collection-name">{{collectionData.name| titlecase}}</p>
                                     <p class="collection-description">{{collectionData.cover_details?.description}}</p>
-                                    <img class="mt2" src="{{collectionData.cover_details?.image}}"/>
+                                    <img class="mt2" *ngIf="collectionData.cover_details?.image" src="{{collectionData.cover_details?.image}}"/>
                                     <p class="collection-footer mt2">{{collectionData.head_description}}</p>
                                 </div>
                         </div>

@@ -20,10 +20,12 @@ export class ProductFilterMobileComponent implements OnInit {
     @Input() productFilters: any;
     @Input() totalCount: number;
     @Input() isProductFetching: boolean;
+    @Input() isCollectionPage: false;
     objectKeys = Object.keys;
     isClearAllVisible = false;
     activeFilters = {
         brand: [],
+        collection: [],
         price_from: 0,
         price_to: 0,
         type: [],
@@ -95,6 +97,9 @@ export class ProductFilterMobileComponent implements OnInit {
     }
 
     ngOnInit() {
+        if(this.isCollectionPage){
+            this.activeTab = 'price';
+        }
         this.selectTab(this.activeTab);
         this.activeRoute.queryParams.subscribe((params) => {
             this.isClearAllVisible = params.filters !== '';
@@ -116,6 +121,12 @@ export class ProductFilterMobileComponent implements OnInit {
                         return '$' + value;
                     }
                 };
+                if(this.isCollectionPage){
+                    this.activeFilters.collection = this.productFilters.collection
+                }
+                else {
+                    delete  this.activeFilters.collection;
+                }
                 this.activeFilters.price_from = this.minValue;
                 this.activeFilters.price_to = this.maxValue;
                 this.activeFilters.brand = this.productFilters.brand
@@ -242,8 +253,14 @@ export class ProductFilterMobileComponent implements OnInit {
     }
 
     clearFilters() {
+        let collection = this.activeFilters.collection;
+        if(!this.isCollectionPage)
+        {
+            collection = [];
+        }
         this.activeFilters = {
             brand: [],
+            collection: collection,
             price_from: 0,
             price_to: 0,
             type: [],
@@ -364,8 +381,11 @@ export class ProductFilterMobileComponent implements OnInit {
         return false;
     }
     isCollectionFilter(filter){
+        if(this.isCollectionPage && filter === 'brand')
+        {
+            return  false;
+        }
         return filter !== 'collection';
-
     }
     renderOptions(dimensionValue) {
         const {max, min} = dimensionValue;
