@@ -3,6 +3,7 @@ import {MatDialogUtilsService} from 'src/app/shared/services';
 import {Router} from '@angular/router';
 import {Observable, Subscription} from 'rxjs';
 import {BreakpointObserver, Breakpoints, BreakpointState,} from '@angular/cdk/layout';
+import { filter, max } from 'rxjs/operators';
 
 @Component({
     selector: 'app-variations',
@@ -158,14 +159,14 @@ export class VariationsComponent implements OnInit {
                 wasPrice: variation.was_price,
             };
             this.selectedIndex = index;
-            this.priceData = {
-                price: variation.price,
-                wasPrice: variation.was_price,
-            };
-            this.setPrice.emit(this.priceData);
-            this.setImage.emit(variation);
+            // this.priceData = {
+            //     price: variation.price,
+            //     wasPrice: variation.was_price,
+            // };
+            // this.setPrice.emit(this.priceData);
+            // this.setImage.emit(variation);
             this.filterSwatches();
-            // this.updateSwatches();
+            //this.updateSwatches();
         }
         this.setSelectedOptionsOfVariation(variation);
         this.selectionEmit();
@@ -241,13 +242,10 @@ export class VariationsComponent implements OnInit {
                 });
                 return acc;
             }, {});
-
         // Filter @var selectionOptions based on all options
-
         // tslint:disable-next-line:forin
         for (const filter in variations) {
             const filterValue = variations[filter];
-
             if (this.inputSelections[filter].select_type === 'single_select') {
                 const options = this.inputSelections[filter].options;
                 for (const value of options) {
@@ -514,6 +512,7 @@ export class VariationsComponent implements OnInit {
             this.swatches.push(variation);
             this.previousSwatch = variation;
         }
+        
         this.filteredVariations = this.variations.filter((variation) => {
             if (self.selectedSwatch.swatch_image) {
                 return (
@@ -523,10 +522,9 @@ export class VariationsComponent implements OnInit {
             }
             return self.checkSwatchSelection(variation, self);
         });
-
+        console.log("Filtered Variation",this.filteredVariations)
         if (
-            this.filteredVariations.length === 1 ||
-            this.selectedSwatch.swatch_image
+            this.filteredVariations.length === 1
         ) {
             this.priceData = {
                 price: this.filteredVariations[0].price,
@@ -684,7 +682,7 @@ export class VariationsComponent implements OnInit {
                 price: this.selectedSwatch.price,
                 wasPrice: this.selectedSwatch.wasPrice,
             };
-            this.setPrice.emit(this.priceData);
+            // this.setPrice.emit(this.priceData);
             this.setImage.emit(this.selectedSwatch);
         } else {
             this.selectedSwatch = {
