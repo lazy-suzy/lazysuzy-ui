@@ -1,5 +1,5 @@
 <div class="search-result-title-bar">
-  <h4 class="w-100 mt3">
+  <h4 class="w-100 mt3" [ngClass]="{'ml3':isHandset}">
     Search results for: <span class="search-term">{{ query }}</span>
   </h4>
   <div class="w-100" *ngIf="isHandset">
