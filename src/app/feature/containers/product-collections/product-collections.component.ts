@@ -338,6 +338,9 @@ export class ProductCollectionsComponent implements OnInit {
   }
 
   toggleMobileFilter() {
+    if(!this.showBar){
+      this.gotoTop();
+    }
     this.showMobileFilter = !this.showMobileFilter;
   }
 
