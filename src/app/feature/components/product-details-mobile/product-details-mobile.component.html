@@ -26,10 +26,20 @@
             <div class="product-site">{{ product.site }}</div>
             <div class="price-container flex flex-wrap items-center">
                 <div class="padding-vertical-2 flex items-center">
-                    <div class="product-price mr3">${{ priceObject.is_price }}</div>
-                    <div class="strike product-old-price" [ngClass]="{'dn':!isDiscounted}">
+                        <span class="product-price">
+                            ${{ priceObject.is_price }}
+                            &nbsp;
+                            <span  class="strike product-old-price" [ngClass]="{'dn':!isDiscounted,'db':isDiscounted}">
+                                ${{ priceObject.was_price }}
+                            </span>
+                        </span>
+                        
+                       
+                   
+                    <!-- <div class="product-price mr3"></div> -->
+                    <!-- <div class="strike product-old-price" [ngClass]="{'dn':!isDiscounted}">
                         ${{ priceObject.was_price }}
-                    </div>
+                    </div> -->
                 </div>
                 <button mat-raised-button class="bg-red view-details-btn" *ngIf="
             product && !utils.hasInventory(activeProduct) && !product.redirect && product.product_url
