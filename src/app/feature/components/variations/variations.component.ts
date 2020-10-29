@@ -244,7 +244,6 @@ export class VariationsComponent implements OnInit {
             }, {});
 
         // Filter @var selectionOptions based on all options
-        //console.log(variations);
         // tslint:disable-next-line:forin
         for (const filter in variations) {
             const filterValue = variations[filter];
@@ -292,12 +291,17 @@ export class VariationsComponent implements OnInit {
             }
         });
         if (maxPrice === minPrice) {
-            maxPrice = 0;
+            this.priceData = {
+                price: `${minPrice}`,
+                wasPrice: '',
+            };
+        } else {
+            this.priceData = {
+                price: `${minPrice} - ${maxPrice}`,
+                wasPrice: '',
+            };
         }
-        this.priceData = {
-            price: `${minPrice} - ${maxPrice}`,
-            wasPrice: '',
-        };
+
         this.setPrice.emit(this.priceData);
     }
 
