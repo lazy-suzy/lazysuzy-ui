@@ -229,7 +229,7 @@ export class VariationsComponent implements OnInit {
     setSelectedOptionsOfVariation(variation: any) {
         // Get all the options belonging to swatch
         const variations = this.variations
-            .filter((v) => v.swatch_image === variation.swatch_image)
+            .filter((v) => v.name === variation.name)
             .reduce((acc, {features}) => {
                 Object.keys(features).forEach((key) => {
                     if (acc[key]) {
@@ -242,7 +242,9 @@ export class VariationsComponent implements OnInit {
                 });
                 return acc;
             }, {});
-
+        this.variations.filter(v => v.swatch_image === variation.swatch_image).forEach(value => {
+            console.log(value.features.furniture_size);
+        });
         // Filter @var selectionOptions based on all options
         // tslint:disable-next-line:forin
         for (const filter in variations) {
@@ -546,6 +548,18 @@ export class VariationsComponent implements OnInit {
                     return self.filterDuplicateSwatches(variation, self);
                 }
             }));
+        // const filteredSwatches = this.variations.map(variation => {
+        //     return {
+        //         ...variation,
+        //         enabled: self.checkSwatchSelection(variation, self)
+        //     };
+        // }).filter(variation => {
+        //    return variation.name === 'Dusty Teal, Twill' || variation.swatch_image;
+        //     // if (variation.swatch_image !== null) {
+        //     //     return self.filterDuplicateSwatches(variation, self);
+        //     // }
+        // });
+        console.log(filteredSwatches);
         this.swatches = [];
         for (const variation of filteredSwatches) {
             if (
@@ -590,6 +604,7 @@ export class VariationsComponent implements OnInit {
 
     filterSwatchesBasedOnValidVariations() {
         let excludedOptions = [];
+        // tslint:disable-next-line:forin
         for (const selection in this.selections) {
             const options = this.inputSelections[selection].options;
             excludedOptions = [...excludedOptions, ...options];
@@ -625,6 +640,7 @@ export class VariationsComponent implements OnInit {
         }
     }
 
+// https://www.lazysuzy.com/westelm/westelm_images/202040_0378_img24l.jpg
     checkSwatchSelection(variation, self) {
         let isValidVariation = true;
         for (const key in self.selections) {
