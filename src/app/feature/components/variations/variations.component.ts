@@ -158,11 +158,11 @@ export class VariationsComponent implements OnInit {
                 wasPrice: variation.was_price,
             };
             this.selectedIndex = index;
-            this.priceData = {
-                price: variation.price,
-                wasPrice: variation.was_price,
-            };
-            this.setPrice.emit(this.priceData);
+            // this.priceData = {
+            //     price: variation.price,
+            //     wasPrice: variation.was_price,
+            // };
+            // this.setPrice.emit(this.priceData);
             this.setImage.emit(variation);
             this.filterSwatches();
             // this.updateSwatches();
@@ -217,6 +217,7 @@ export class VariationsComponent implements OnInit {
             Boolean(this.selectedSwatch.swatch_image)
         );
         this.updateSwatches();
+        this.updatePriceBasedOnSelections();
         this.filterVariationsForSingleSelect();
     }
 
@@ -243,7 +244,7 @@ export class VariationsComponent implements OnInit {
             }, {});
 
         // Filter @var selectionOptions based on all options
-
+        //console.log(variations);
         // tslint:disable-next-line:forin
         for (const filter in variations) {
             const filterValue = variations[filter];
@@ -255,12 +256,49 @@ export class VariationsComponent implements OnInit {
                         this.selectionOptions[value] = false;
                     }
                 }
-                if (filterValue.length == 1) {
+                if (filterValue.length === 1) {
                     this.selections[filter] = filterValue[0];
-                    this.inputSelections[filter].selected=true;
+                    this.inputSelections[filter].selected = true;
                 }
             }
         }
+        this.updatePriceBasedOnSelections();
+
+    }
+
+    private updatePriceBasedOnSelections() {
+        if (!this.selectedSwatch.swatch_image) {
+            return;
+        }
+        const filteredVariations = this.variations.filter(v => v.swatch_image === this.selectedSwatch.swatch_image);
+        const self = this;
+        let minPrice = 0;
+        let maxPrice = 0;
+        filteredVariations.forEach(value => {
+            const isValid = this.checkSwatchSelection(value, self);
+            if (isValid) {
+                if (minPrice && maxPrice) {
+                    if (maxPrice < value.price) {
+                        maxPrice = value.price;
+                    }
+                    if (minPrice > value.price) {
+                        minPrice = value.price;
+                    }
+
+                } else {
+                    minPrice = value.price;
+                    maxPrice = value.price;
+                }
+            }
+        });
+        if (maxPrice === minPrice) {
+            maxPrice = 0;
+        }
+        this.priceData = {
+            price: `${minPrice} - ${maxPrice}`,
+            wasPrice: '',
+        };
+        this.setPrice.emit(this.priceData);
     }
 
     /**
@@ -394,7 +432,7 @@ export class VariationsComponent implements OnInit {
      * @param variation The variation to be marked
      * @param self  The context, If empty takes 'this' as current context
      */
-    selectSwatchContainingSelection(variation, self= this): boolean {
+    selectSwatchContainingSelection(variation, self = this): boolean {
         let isValidVariation = true;
         for (const key in self.selections) {
             if (
@@ -409,6 +447,7 @@ export class VariationsComponent implements OnInit {
         }
         return isValidVariation;
     }
+
     /**
      *
      * @param type
