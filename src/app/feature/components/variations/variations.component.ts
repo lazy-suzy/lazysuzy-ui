@@ -279,10 +279,10 @@ export class VariationsComponent implements OnInit {
             const isValid = this.checkSwatchSelection(value, self);
             if (isValid) {
                 if (minPrice && maxPrice) {
-                    if (maxPrice < value.price) {
+                    if (Number(maxPrice) < Number(value.price)) {
                         maxPrice = value.price;
                     }
-                    if (minPrice > value.price) {
+                    if (Number(minPrice) > Number(value.price)) {
                         minPrice = value.price;
                     }
 
