@@ -1,7 +1,7 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {ActivatedRoute} from '@angular/router';
 import {Options} from 'ng5-slider';
-import {IFilterData} from 'src/app/shared/models';
+import {Brand, Category, Color, IFilterData, Price, Seating, Shape} from 'src/app/shared/models';
 
 @Component({
     selector: 'app-product-filters',
@@ -11,21 +11,31 @@ import {IFilterData} from 'src/app/shared/models';
 export class ProductFiltersComponent implements OnInit {
     @Output() setFilters = new EventEmitter<any>();
     @Input() isBrandPage = false;
-    @Input() isCollectionPage=false;
+    @Input() isCollectionPage = false;
     @Input() productFilters: IFilterData = {
         brand: [],
+        price: {
+            from: 0,
+            to: 0,
+            max: 0,
+            min: 0,
+        },
         type: [],
         color: [],
-        category: [],
         shape: [],
         seating: [],
+        mfg_country: [],
+        designer: [],
+        fabric: [],
+        material: [],
         height: [],
         width: [],
         length: [],
         diameter: [],
         depth: [],
         square: [],
-        price: {from: 0, min: 0, max: 0, to: 0},
+        category: [],
+        collection: [],
     };
     @Input() isChangingBrandList = false;
     objectKeys = Object.keys;
@@ -40,7 +50,7 @@ export class ProductFiltersComponent implements OnInit {
     ];
     activeFilters = {
         brand: [],
-        collection:[],
+        collection: [],
         price_from: 0,
         price_to: 0,
         type: [],
@@ -66,6 +76,10 @@ export class ProductFiltersComponent implements OnInit {
         category: [],
         shape: [],
         seating: [],
+        mfg_country: [],
+        designer: [],
+        fabric: [],
+        material: [],
     };
     isPriceChanged = false;
     minValue = 100;
@@ -78,7 +92,8 @@ export class ProductFiltersComponent implements OnInit {
         },
     };
     // Dimension Filters Display
-    displayDimensionFilter:any=[];
+    displayDimensionFilter: any = [];
+
     constructor(private activeRoute: ActivatedRoute) {
     }
 
@@ -87,25 +102,24 @@ export class ProductFiltersComponent implements OnInit {
             this.setClearButtonVisibility(params.filters);
         });
         // Get Dimension filters in another variable. To show them separately.
-       this.populateDimensionFilters();
+        this.populateDimensionFilters();
     }
-    populateDimensionFilters()
-    {
+
+    populateDimensionFilters() {
         this.displayDimensionFilter = [];
-        for(const filter in this.productFilters)
-        {
-            if(this.dimensionFilterKeysToExclude.includes(filter)){
-                this.displayDimensionFilter.push(this.productFilters[filter][0]) ;
+        for (const filter in this.productFilters) {
+            if (this.dimensionFilterKeysToExclude.includes(filter)) {
+                this.displayDimensionFilter.push(this.productFilters[filter][0]);
             }
         }
     }
+
     private setClearButtonVisibility(filters) {
         if (this.isBrandPage || this.isCollectionPage) {
-            const filtersArray = filters.split(";").filter(value => value);
+            const filtersArray = filters.split(';').filter(value => value);
             if (filtersArray.length <= 1) {
                 this.isClearAllVisible = false;
-            }
-            else {
+            } else {
                 this.isClearAllVisible = true;
             }
         } else {
@@ -123,7 +137,7 @@ export class ProductFiltersComponent implements OnInit {
             this.isPriceChanged = false;
             this.activeFilters = {
                 brand: this.activeFilters.brand,
-                collection:[],
+                collection: [],
                 price_from: 0,
                 price_to: 0,
                 type: [],
@@ -149,6 +163,10 @@ export class ProductFiltersComponent implements OnInit {
                 category: [],
                 shape: [],
                 seating: [],
+                mfg_country: [],
+                designer: [],
+                fabric: [],
+                material: [],
             };
         } else {
             if (
@@ -156,10 +174,9 @@ export class ProductFiltersComponent implements OnInit {
                 change.productFilters.currentValue !== undefined
             ) {
                 this.productFilters = change.productFilters.currentValue;
-                if(this.isCollectionPage){
+                if (this.isCollectionPage) {
                     this.activeFilters.collection = this.productFilters.collection;
-                }
-                else {
+                } else {
                     delete this.productFilters.collection;
                 }
                 this.populateDimensionFilters();
@@ -198,6 +215,16 @@ export class ProductFiltersComponent implements OnInit {
                         this.activeFilters.category = this.productFilters.category
                             .filter((category) => category.checked)
                             .map((category) => category.value);
+                    }
+                    if (this.productFilters.mfg_country) {
+                        this.activeFilters.mfg_country = this.productFilters.mfg_country
+                            .filter((mfgCountry) => mfgCountry.checked)
+                            .map((mfgCountry) => mfgCountry.value);
+                    }
+                    if (this.productFilters.designer) {
+                        this.activeFilters.designer = this.productFilters.designer
+                            .filter((designer) => designer.checked)
+                            .map((designer) => designer.value);
                     }
                     if (this.productFilters.height) {
                         const activeFilterValues = this.productFilters.height[0].values
@@ -262,16 +289,16 @@ export class ProductFiltersComponent implements OnInit {
                 this.activeFilters[filter] = optionsArr;
             }
         }
-            if (
-                Math.round(this.minValue) === this.productFilters.price.from &&
-                Math.round(this.maxValue) === this.productFilters.price.to
-            ) {
-                delete this.activeFilters.price_from;
-                delete this.activeFilters.price_to;
-                this.isPriceChanged = false;
-            } else {
-                this.isPriceChanged = true;
-            }
+        if (
+            Math.round(this.minValue) === this.productFilters.price.from &&
+            Math.round(this.maxValue) === this.productFilters.price.to
+        ) {
+            delete this.activeFilters.price_from;
+            delete this.activeFilters.price_to;
+            this.isPriceChanged = false;
+        } else {
+            this.isPriceChanged = true;
+        }
 
         this.buildAndSetFilters();
     }
@@ -297,7 +324,7 @@ export class ProductFiltersComponent implements OnInit {
         if (this.isBrandPage) {
             this.activeFilters = {
                 brand: this.activeFilters.brand,
-                collection:[],
+                collection: [],
                 price_from: 0,
                 price_to: 0,
                 type: [],
@@ -323,43 +350,15 @@ export class ProductFiltersComponent implements OnInit {
                 category: [],
                 shape: [],
                 seating: [],
+                mfg_country: [],
+                designer: [],
+                fabric: [],
+                material: [],
             };
-        } else
-            if(this.isCollectionPage) {
-                this.activeFilters = {
-                    brand: [],
-                    collection: this.activeFilters.collection,
-                    price_from: 0,
-                    price_to: 0,
-                    type: [],
-                    height_from: [],
-                    height_to: [],
-                    width_from: [],
-                    width_to: [],
-                    length_from: [],
-                    length_to: [],
-                    diameter_from: [],
-                    diameter_to: [],
-                    square_from: [],
-                    square_to: [],
-                    depth_from: [],
-                    depth_to: [],
-                    depth: [],
-                    height: [],
-                    width: [],
-                    length: [],
-                    diameter: [],
-                    square: [],
-                    color: [],
-                    category: [],
-                    shape: [],
-                    seating: [],
-                };
-            }
-            else {
+        } else if (this.isCollectionPage) {
             this.activeFilters = {
                 brand: [],
-                collection:[],
+                collection: this.activeFilters.collection,
                 price_from: 0,
                 price_to: 0,
                 type: [],
@@ -385,6 +384,44 @@ export class ProductFiltersComponent implements OnInit {
                 category: [],
                 shape: [],
                 seating: [],
+                mfg_country: [],
+                designer: [],
+                fabric: [],
+                material: [],
+            };
+        } else {
+            this.activeFilters = {
+                brand: [],
+                collection: [],
+                price_from: 0,
+                price_to: 0,
+                type: [],
+                height_from: [],
+                height_to: [],
+                width_from: [],
+                width_to: [],
+                length_from: [],
+                length_to: [],
+                diameter_from: [],
+                diameter_to: [],
+                square_from: [],
+                square_to: [],
+                depth_from: [],
+                depth_to: [],
+                depth: [],
+                height: [],
+                width: [],
+                length: [],
+                diameter: [],
+                square: [],
+                color: [],
+                category: [],
+                shape: [],
+                seating: [],
+                mfg_country: [],
+                designer: [],
+                fabric: [],
+                material: [],
             };
         }
 
@@ -420,7 +457,7 @@ export class ProductFiltersComponent implements OnInit {
     disableTab(filter) {
         if (filter !== 'price') {
             return (
-                this.productFilters[filter].filter((data) => data.enabled).length === 0
+                this.productFilters[filter].length === 0
             );
         } else {
             return false;
@@ -436,15 +473,17 @@ export class ProductFiltersComponent implements OnInit {
         const minValue = option.min;
         return `${minValue}" - ${maxValue}"`;
     }
+
     //!((filter === 'brand' || filter === 'category') && (isBrandPage === true))
-    checkIfValidFilter(filter):boolean{
-        if(filter === 'brand' || filter === 'category')
-        {
-            if(this.isCollectionPage || this.isBrandPage)
-            {
+    checkIfValidFilter(filter): boolean {
+        if (filter === 'brand' || filter === 'category') {
+            if (this.isCollectionPage || this.isBrandPage) {
                 return false;
             }
         }
-        return  true;
+        return true;
+    }
+    renderFilterName(filter):string{
+        return filter.replace('_',' ').toUpperCase();
     }
 }
