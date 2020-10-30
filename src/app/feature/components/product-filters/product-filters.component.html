@@ -31,6 +31,7 @@
                             <ng-container *ngFor="let option of option.values">
                                 <mat-checkbox
                                         class="pa2 menu-item"
+
                                         [checked]="option.checked"
                                         [value]="option"
                                         (change)="onCheckChange($event,filter)"
@@ -42,6 +43,7 @@
                         <ng-template #normalCheckbox>
 <!--                            //*ngIf="option.enabled"-->
                             <mat-checkbox
+                                    *ngIf="option.count>0"
                                     class="pa2 menu-item"
                                     [checked]="option.checked"
                                     [value]="option.value"
@@ -80,8 +82,6 @@
                             </mat-checkbox>
                         </div>
                     </div>
-
-
                 </ng-container>
             </div>
     </div>

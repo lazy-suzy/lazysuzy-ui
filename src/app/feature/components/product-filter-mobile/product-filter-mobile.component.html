@@ -18,16 +18,22 @@
                 <div class="filter-tabs">
                     <ul class="filter-list">
                         <ng-container *ngFor="let filter of objectKeys(productFilters)">
-                            <li *ngIf="!(emptyDimensions(filter)) && isCollectionFilter(filter)"
+                            <li *ngIf="checkValidFilter(filter)"
                                 class="filter-item {{ activeTab === filter ? 'active' : '' }} {{
                 disableTab(filter) ? 'disabledTab' : ''
               }}"
                                 (click)="selectTab(filter)"
                             >
-                                {{ filter | uppercase }}
+                                {{ renderFilterName(filter)}}
                             </li>
                         </ng-container>
-
+                        <li class="filter-item"
+                            [ngClass]="{
+                                'active':activeTab==='size'
+                            }"
+                            (click)="selectTab('size')">
+                            {{ 'Size' | uppercase }}
+                        </li>
                     </ul>
                 </div>
             </div>
@@ -49,12 +55,9 @@
                     </button>
                 </div>
                 <div class="filter-content">
-                    <div
-                            class="clear-btn {{
-              clearOptionVisible[activeTab] ? 'visible' : 'invisible'
-            }}"
-                            (click)="clearBtn(activeTab)"
-                    >
+                    <div class="clear-btn
+                        {{ clearOptionVisible[activeTab] ? 'visible' : 'invisible'}}"
+                         (click)="clearBtn(activeTab)">
                         clear
                     </div>
                     <ul
@@ -63,8 +66,7 @@
               activeTab === filter.key && activeTab !== 'price'
                 ? 'show'
                 : 'hide'
-            }}"
-                    >
+            }}">
                         <ng-container *ngIf="isDimensionFilter(filter.key);else normalFilters">
                             <li *ngFor="let option of activeFilterTabData" class="filters-list">
                                 <label class="filter-label">
@@ -103,6 +105,24 @@
                                 [options]="silderOptions"
                                 (userChangeEnd)="onPriceChange()"
                         ></ng5-slider>
+                    </div>
+                    <div *ngIf="activeTab==='size'">
+                        <div *ngFor="let filter of this.displayDimensionFilter">
+                            <ng-container *ngIf="filter.values.length>0">
+                                <div class="flex flex-column">
+                                    <span class="dimension-filter-label">{{filter.name | uppercase}}</span>
+                                    <div *ngFor="let option of filter.values" class="flex justify-between">
+                                        <label class="dimension-filter-items menu-item pr3">{{renderOptions(option)}}</label>
+                                        <mat-checkbox
+                                                [checked]="option.checked"
+                                                [value]="option"
+                                                (change)="onCheckChange($event,filter.name.toLowerCase())"
+                                        >
+                                        </mat-checkbox>
+                                    </div>
+                                </div>
+                            </ng-container>
+                        </div>
                     </div>
                 </div>
             </div>

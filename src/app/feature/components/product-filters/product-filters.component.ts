@@ -179,6 +179,7 @@ export class ProductFiltersComponent implements OnInit {
                 } else {
                     delete this.productFilters.collection;
                 }
+                this.clearEmptyFilters();
                 this.populateDimensionFilters();
                 if (this.productFilters && !this.isPriceChanged) {
                     this.minValue = this.productFilters.price.from;
@@ -476,6 +477,12 @@ export class ProductFiltersComponent implements OnInit {
 
     //!((filter === 'brand' || filter === 'category') && (isBrandPage === true))
     checkIfValidFilter(filter): boolean {
+        if (!this.dimensionFilterKeysToExclude.includes(filter) && filter !== 'price') {
+            if (this.productFilters[filter].length === 0) {
+                return false;
+            }
+        }
+
         if (filter === 'brand' || filter === 'category') {
             if (this.isCollectionPage || this.isBrandPage) {
                 return false;
@@ -483,7 +490,16 @@ export class ProductFiltersComponent implements OnInit {
         }
         return true;
     }
-    renderFilterName(filter):string{
-        return filter.replace('_',' ').toUpperCase();
+
+    renderFilterName(filter): string {
+        return filter.replace('_', ' ').toUpperCase();
+    }
+
+    clearEmptyFilters() {
+        for (const productFiltersKey in this.productFilters) {
+            if (!this.dimensionFilterKeysToExclude.includes(productFiltersKey) && productFiltersKey !== 'price') {
+                this.productFilters[productFiltersKey] = this.productFilters[productFiltersKey].filter(value => value.count > 0);
+            }
+        }
     }
 }
