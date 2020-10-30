@@ -250,6 +250,23 @@ select.quantity-selector {
     text-overflow: ellipsis;
   }
 }
+.carousel-single-item{
+  display: flex;
+  flex: 0 0 auto;
+  margin: 0 0.5rem;
+  flex-direction: column;
+  cursor: pointer;
+  .collection-product-name{
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+}
+.hide-nav-arrows{
+   ::ng-deep.ui-button{
+    display: none;
+  }
+}
 :host ::ng-deep.ui-carousel-dots-container{
   display: none;
 }

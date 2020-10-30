@@ -195,9 +195,15 @@
                                     [numScroll]="1"
                                     [value]="product.collections"
                                     [circular]="false"
+                                    [ngClass]="{
+                                    'hide-nav-arrows':product.collections.length<3
+                                    }"
                             >
                                 <ng-template let-data pTemplate="item">
-                                    <div class="carousel-item" (click)="toCollectionProduct(data)">
+                                    <div class="" [ngClass]="{
+                                    'carousel-single-item w-33':product.collections.length === 1,
+                                    'carousel-item': product.collections.length > 1
+                                    }" (click)="toCollectionProduct(data)">
                                         <img [src]="'https://lazysuzy.com'+data.image"/>
                                         <span class="font-16 open-sans collection-product-name">{{data.name}}</span>
                                         <span class="font-14 open-sans" [ngClass]="{'sale':isDiscounted(data)}">
