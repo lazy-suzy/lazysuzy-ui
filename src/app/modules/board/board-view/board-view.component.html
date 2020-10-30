@@ -188,10 +188,10 @@
           <div
             class="static-bottom-panel-wrapper"
             *ngIf="productForPreview"
-            style="z-index: 9999999;"
+
           >
             <ng-container *ngIf="!isTablet; else isDesktop">
-              <div class="static-bottom-panel selected position-fixed">
+              <div class="static-bottom-panel selected position-fixed" style="z-index: 9999999;">
                 <app-product-preview
                   [data]="productForPreview"
                   (clearProductPreview)="handleClearProductPreview($event)"
@@ -206,6 +206,7 @@
                 class="static-bottom-panel selected {{
                   !showMenu ? 'position-absolute' : 'position-fixed'
                 }}"
+                style="z-index: 9999999;"
               >
                 <app-product-preview
                   [data]="productForPreview"
@@ -243,6 +244,7 @@
               class="static-bottom-panel selected {{
                 !showMenu && isTablet ? 'position-absolute' : 'position-fixed'
               }} {{ !isTablet ? 'position-fixed' : '' }}"
+              style="z-index: 9999999;"
             >
               <app-product-preview
                 [data]="productForPreview"
@@ -287,6 +289,7 @@
               class="static-bottom-panel selected {{
                 !showMenu && isTablet ? 'position-absolute' : 'position-fixed'
               }} {{ !isTablet ? 'position-fixed' : '' }}"
+              style="z-index: 9999999;"
             >
               <app-product-preview
                 [data]="productForPreview"
