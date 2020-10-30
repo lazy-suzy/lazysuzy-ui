@@ -51,6 +51,10 @@ export class BrowsefilterComponent implements OnInit {
         diameter: [],
         square: [],
         depth: [],
+        mfg_country: [],
+        designer: [],
+        fabric: [],
+        material: [],
     };
     selectedFilter = '';
     isPriceChanged = false;
@@ -198,6 +202,10 @@ export class BrowsefilterComponent implements OnInit {
             diameter: [],
             square: [],
             depth: [],
+            mfg_country: [],
+            designer: [],
+            fabric: [],
+            material: [],
         };
         delete this.activeFilters.price_from;
         delete this.activeFilters.price_to;
