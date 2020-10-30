@@ -436,15 +436,18 @@ export class ProductFiltersComponent implements OnInit {
         const minValue = option.min;
         return `${minValue}" - ${maxValue}"`;
     }
-    //!((filter === 'brand' || filter === 'category') && (isBrandPage === true))
-    checkIfValidFilter(filter):boolean{
-        if(filter === 'brand' || filter === 'category')
-        {
-            if(this.isCollectionPage || this.isBrandPage)
-            {
+
+    // !((filter === 'brand' || filter === 'category') && (isBrandPage === true))
+    checkIfValidFilter(filter): boolean {
+        if (filter === 'brand' || filter === 'category') {
+            if (this.isCollectionPage || this.isBrandPage) {
                 return false;
             }
         }
-        return  true;
+        return true;
+    }
+
+    renderFilterName(filter): string {
+        return filter.replace('_', ' ').toUpperCase();
     }
 }

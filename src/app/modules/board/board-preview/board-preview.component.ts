@@ -186,14 +186,14 @@ export class BoardPreviewComponent implements OnInit {
             .width();
 
         this.appMeta.value.scaleFactor = currentWidth / previousWidth;
-        const currentHeight = currentWidth / Number.parseFloat(this.canvasMeta.value.aspectRatio)
-        const scaleRatio = Math.min(currentWidth / previousWidth, currentHeight / previousHeight)
+        const currentHeight = currentWidth / Number.parseFloat(this.canvasMeta.value.aspectRatio);
+        const scaleRatio = Math.min(currentWidth / previousWidth, currentHeight / previousHeight);
         this.canvas.setDimensions({
             width: currentWidth,
             height: currentHeight,
         });
         this.canvas.setZoom(scaleRatio);
-        this.canvas.backgroundColor="#f8f9fa";
+        this.canvas.backgroundColor = '#f8f9fa';
         this.canvas.renderAll();
         //
         // const scaleFactorX = currentWidth / previousWidth;
@@ -265,10 +265,15 @@ export class BoardPreviewComponent implements OnInit {
             .subscribe((response) => {
                 const responseData: any = response;
                 for (const prod of responseData) {
-                    this.boardProducts.find((item) => item.sku === prod.sku).main_image =
-                        prod.main_image;
-                    this.boardProducts.find((item) => item.sku === prod.sku).was_price =
-                        prod.was_price;
+                    const boardProduct = this.boardProducts.find(item => item.sku === prod.sku);
+                    boardProduct.main_image = prod.main_image;
+                    boardProduct.was_price = prod.was_price;
+                    boardProduct.is_price = prod.is_price;
+                    boardProduct.productListingUrl = prod.product_detail_url;
+                    // this.boardProducts.find((item) => item.sku === prod.sku).main_image =
+                    //     prod.main_image;
+                    // this.boardProducts.find((item) => item.sku === prod.sku).was_price =
+                    //     prod.was_price;
                 }
                 for (const prod of this.boardProducts) {
                     if (prod.main_image.substring(0, 8) === '/storage') {
