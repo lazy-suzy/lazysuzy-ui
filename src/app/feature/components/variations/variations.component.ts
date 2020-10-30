@@ -275,32 +275,38 @@ export class VariationsComponent implements OnInit {
         const self = this;
         let minPrice = 0;
         let maxPrice = 0;
+        let wasMaxPrice = 0;
+        let wasMinPrice = 0;
         filteredVariations.forEach(value => {
             const isValid = this.checkSwatchSelection(value, self);
             if (isValid) {
                 if (minPrice && maxPrice) {
                     if (Number(maxPrice) < Number(value.price)) {
                         maxPrice = value.price;
+                        wasMaxPrice = value.was_price;
                     }
                     if (Number(minPrice) > Number(value.price)) {
                         minPrice = value.price;
+                        wasMinPrice = value.was_price;
                     }
 
                 } else {
                     minPrice = value.price;
                     maxPrice = value.price;
+                    wasMaxPrice = value.was_price;
+                    wasMinPrice = value.was_price;
                 }
             }
         });
         if (maxPrice === minPrice) {
             this.priceData = {
                 price: `${minPrice}`,
-                wasPrice: '',
+                wasPrice: `${wasMinPrice}`,
             };
         } else {
             this.priceData = {
                 price: `${minPrice} - ${maxPrice}`,
-                wasPrice: '',
+                wasPrice: `${wasMinPrice} -  ${wasMinPrice}`,
             };
         }
 
