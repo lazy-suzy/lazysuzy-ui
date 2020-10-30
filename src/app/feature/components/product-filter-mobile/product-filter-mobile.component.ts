@@ -20,9 +20,10 @@ export class ProductFilterMobileComponent implements OnInit {
     @Input() productFilters: any;
     @Input() totalCount: number;
     @Input() isProductFetching: boolean;
-    @Input() isCollectionPage: false;
+    @Input() isCollectionPage = false;
     objectKeys = Object.keys;
     isClearAllVisible = false;
+    displayDimensionFilter = [];
     activeFilters = {
         brand: [],
         collection: [],
@@ -97,13 +98,23 @@ export class ProductFilterMobileComponent implements OnInit {
     }
 
     ngOnInit() {
-        if(this.isCollectionPage){
+        if (this.isCollectionPage) {
             this.activeTab = 'price';
         }
         this.selectTab(this.activeTab);
         this.activeRoute.queryParams.subscribe((params) => {
             this.isClearAllVisible = params.filters !== '';
         });
+        this.populateDimensionFilters();
+    }
+
+    populateDimensionFilters() {
+        this.displayDimensionFilter = [];
+        for (const filter in this.productFilters) {
+            if (this.isDimensionFilter(filter)) {
+                this.displayDimensionFilter.push(this.productFilters[filter][0]);
+            }
+        }
     }
 
     // tslint:disable-next-line: use-lifecycle-interface
@@ -111,6 +122,7 @@ export class ProductFilterMobileComponent implements OnInit {
         if (change.productFilters !== undefined) {
             this.productFilters = change.productFilters.currentValue;
             this.selectTab(this.activeTab);
+            this.populateDimensionFilters();
             if (this.productFilters && !this.isPriceChanged) {
                 this.minValue = this.productFilters.price.from;
                 this.maxValue = this.productFilters.price.to;
@@ -121,12 +133,13 @@ export class ProductFilterMobileComponent implements OnInit {
                         return '$' + value;
                     }
                 };
-                if(this.isCollectionPage){
-                    this.activeFilters.collection = this.productFilters.collection
+                if (this.isCollectionPage) {
+                    this.activeFilters.collection = this.productFilters.collection;
+                } else {
+                    delete this.activeFilters.collection;
+                    delete this.productFilters.collection;
                 }
-                else {
-                    delete  this.activeFilters.collection;
-                }
+                this.clearEmptyFilters();
                 this.activeFilters.price_from = this.minValue;
                 this.activeFilters.price_to = this.maxValue;
                 this.activeFilters.brand = this.productFilters.brand
@@ -254,13 +267,12 @@ export class ProductFilterMobileComponent implements OnInit {
 
     clearFilters() {
         let collection = this.activeFilters.collection;
-        if(!this.isCollectionPage)
-        {
+        if (!this.isCollectionPage) {
             collection = [];
         }
         this.activeFilters = {
             brand: [],
-            collection: collection,
+            collection,
             price_from: 0,
             price_to: 0,
             type: [],
@@ -310,19 +322,25 @@ export class ProductFilterMobileComponent implements OnInit {
         this.setMobileToggle.emit();
     }
 
+    checkValidFilter(filter): boolean {
+        if (this.isDimensionFilter(filter) || this.isCollectionFilter(filter)) {
+            return false;
+        }
+        return true;
+    }
+
+    renderFilterName(filter): string {
+        return filter.replace('_', ' ').toUpperCase();
+    }
+
     selectTab(filter) {
         this.activeTab = filter;
-        if (filter !== 'price') {
+        if (filter !== 'price' && filter !== 'size') {
             this.showClearBtn(
                 this.productFilters[filter].filter(this.ifChecked),
                 filter
             );
-            if (this.productFilters[filter][0].values && isArray(this.productFilters[filter][0].values)) {
-                const isEnabled = this.productFilters[filter][0].enabled;
-                if (isEnabled) {
-                    this.activeFilterTabData = [...this.productFilters[filter][0].values];
-                }
-            } else {
+            if (filter !== 'size') {
                 this.activeFilterTabData = this.productFilters[filter].filter(
                     this.checkEnabled
                 );
@@ -380,15 +398,24 @@ export class ProductFilterMobileComponent implements OnInit {
         }
         return false;
     }
-    isCollectionFilter(filter){
-        if(this.isCollectionPage && filter === 'brand')
-        {
-            return  false;
+
+    isCollectionFilter(filter) {
+        if (this.isCollectionPage && filter === 'brand') {
+            return false;
         }
-        return filter !== 'collection';
+        return filter === 'collection';
     }
+
     renderOptions(dimensionValue) {
         const {max, min} = dimensionValue;
         return `${min}" - ${max}"`;
+    }
+
+    clearEmptyFilters() {
+        for (const productFiltersKey in this.productFilters) {
+            if (!this.dimensionFilters.includes(productFiltersKey) && productFiltersKey !== 'price') {
+                this.productFilters[productFiltersKey] = this.productFilters[productFiltersKey].filter(value => value.count > 0);
+            }
+        }
     }
 }

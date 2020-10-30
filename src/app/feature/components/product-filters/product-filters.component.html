@@ -7,7 +7,7 @@
             <span
                     class="filter-name grow pointer"
                     [ngClass]="{'active': (filter !== 'price' && activeFilters[filter].length > 0) || (filter === 'price' && isPriceChanged)}">
-        {{ filter }}
+        {{ renderFilterName(filter) }}
 
         </span>
             <div
@@ -31,6 +31,7 @@
                             <ng-container *ngFor="let option of option.values">
                                 <mat-checkbox
                                         class="pa2 menu-item"
+
                                         [checked]="option.checked"
                                         [value]="option"
                                         (change)="onCheckChange($event,filter)"
@@ -40,9 +41,10 @@
                             </ng-container>
                         </ng-container>
                         <ng-template #normalCheckbox>
+<!--                            //*ngIf="option.enabled"-->
                             <mat-checkbox
+                                    *ngIf="option.count>0"
                                     class="pa2 menu-item"
-                                    *ngIf="option.enabled"
                                     [checked]="option.checked"
                                     [value]="option.value"
                                     (change)="onCheckChange($event, filter)">
@@ -80,8 +82,6 @@
                             </mat-checkbox>
                         </div>
                     </div>
-
-
                 </ng-container>
             </div>
     </div>

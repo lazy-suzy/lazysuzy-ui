@@ -96,6 +96,10 @@ export interface IFilterData {
     color: Color[];
     shape: Shape[];
     seating: Seating[];
+    mfg_country?: any[];
+    designer?: any[];
+    fabric?: any[];
+    material?: any [];
     height?: any[];
     width?: any[];
     length?: any[];
@@ -103,7 +107,7 @@ export interface IFilterData {
     depth?: any[];
     square?: any[];
     category?: Category[];
-    collection?:any;
+    collection?: any;
 }
 
 export interface Shape {
