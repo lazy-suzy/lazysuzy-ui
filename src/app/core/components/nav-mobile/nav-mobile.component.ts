@@ -17,10 +17,10 @@ import {EventEmitterService} from 'src/app/shared/services';
     styleUrls: ['./nav-mobile.component.less']
 })
 export class NavMobileComponent implements OnInit {
-    @ViewChild('drawer', {static: false}) drawer: ElementRef;
-    @ViewChild('departmentSideNav', {static: false}) departmentSideNav: ElementRef;
-    @ViewChild('brandSideNav', {static: false}) brandSideNav: ElementRef;
-    @ViewChild('collectionSideNav', {static: false}) collectionSideNav: ElementRef;
+    @ViewChild('drawer', {static: false}) drawer: any;
+    @ViewChild('departmentSideNav', {static: false}) departmentSideNav: any;
+    @ViewChild('brandSideNav', {static: false}) brandSideNav: any;
+    @ViewChild('collectionSideNav', {static: false}) collectionSideNav: any;
     logoPath = 'assets/image/color_logo_transparent.png';
     departments: IAllDepartment[];
     selectedIndex = null;
