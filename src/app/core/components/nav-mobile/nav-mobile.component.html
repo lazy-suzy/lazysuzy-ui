@@ -25,7 +25,7 @@
                 </button>
                 <!--                Main SideBar-->
                 <mat-sidenav #drawer class="mobile-menu-container" [mode]="'over'">
-                    <div class="flex flex-column h-100">
+                    <div class="flex flex-column" style="height: 95vh">
 
                         <ul class="department-container">
                             <li class="department-list">
@@ -86,7 +86,7 @@
 
                 <!--                 Department SideBar-->
                 <mat-sidenav #departmentSideNav class="mobile-menu-container" [mode]="'over'">
-                    <div class="flex flex-column h-100">
+                    <div class="flex flex-column" style="height: 95vh">
                         <div class="nav-back-div">
                             <mat-icon
                                     class="nav-back-icon"
@@ -146,7 +146,7 @@
                 </mat-sidenav>
                 <!--                 Brand SideBar-->
                 <mat-sidenav #brandSideNav class="mobile-menu-container">
-                    <div class="flex flex-column h-100">
+                    <div class="flex flex-column"  style="height: 95vh">
                         <div class="nav-back-div">
                             <mat-icon
                                     class="nav-back-icon"
@@ -184,7 +184,7 @@
                 </mat-sidenav>
                 <!--                 Collection SideBar-->
                 <mat-sidenav #collectionSideNav class="mobile-menu-container">
-                    <div class="flex flex-column h-100">
+                    <div class="flex flex-column"  style="height: 95vh">
                         <div class="nav-back-div">
                             <mat-icon
                                     class="nav-back-icon"
@@ -197,7 +197,7 @@
                         <div>
                             <ul class="department-container">
                                 <li *ngFor="let collection of collections" class="department-list">
-                                    <div class="flex" (click)="toCollectionPage(collection)">
+                                    <div class="flex justify-between"  (click)="toCollectionPage(collection)">
                                     <span
                                             class="department-title"
                                     >
