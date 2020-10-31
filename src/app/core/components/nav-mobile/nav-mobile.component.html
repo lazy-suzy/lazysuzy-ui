@@ -24,13 +24,13 @@
                     <mat-icon class="account-icon">menu</mat-icon>
                 </button>
                 <!--                Main SideBar-->
-                <mat-sidenav #drawer class="mobile-menu-container" [mode]="'over'">
+                <mat-sidenav #drawer [fixedInViewport]="true" class="mobile-menu-container" [mode]="'over'">
                     <div class="flex flex-column" style="height: 95vh">
 
                         <ul class="department-container">
                             <li class="department-list">
                                 <div>
-                                    <span class="department-title" (click)="toNewArrivalsPage()"> Latest Arrival</span>
+                                    <span class="department-title" (click)="toNewArrivalsPage()">Latest Arrivals</span>
                                 </div>
                             </li>
                             <li class="department-list">
@@ -41,8 +41,7 @@
                             <hr class="navbar-horizontal-row">
                             <li class="department-list">
                                 <div (click)="departmentSideNav.open()">
-                                <span class="department-title"
-                                      >
+                                <span class="department-title">
                                     Departments
                                 </span>
                                     <mat-icon
@@ -55,7 +54,7 @@
                             </li>
                             <li class="department-list">
                                 <div (click)="brandSideNav.open();">
-                                    <span class="department-title" >Brand</span>
+                                    <span class="department-title">Brand</span>
                                     <mat-icon
                                             class="department-list-icon"
                                             aria-hidden="false"
@@ -67,7 +66,7 @@
                             <li class="department-list">
                                 <div (click)="collectionSideNav.open();">
                                     <span class="department-title"
-                                          >Collections</span>
+                                    >Collections</span>
                                     <mat-icon
                                             class="department-list-icon"
                                             aria-hidden="false"
@@ -87,14 +86,14 @@
                 <!--                 Department SideBar-->
                 <mat-sidenav #departmentSideNav class="mobile-menu-container" [mode]="'over'">
                     <div class="flex flex-column" style="height: 95vh">
-                        <div class="nav-back-div">
+                        <div class="nav-back-div" (click)="departmentSideNav.close()">
                             <mat-icon
                                     class="nav-back-icon"
                                     aria-hidden="false"
                                     aria-label="Search">
                                 chevron_left
                             </mat-icon>
-                            <span (click)="departmentSideNav.close()">Back</span>
+                            <span>Back</span>
                         </div>
                         <div>
                             <ul class="department-container">
@@ -146,15 +145,15 @@
                 </mat-sidenav>
                 <!--                 Brand SideBar-->
                 <mat-sidenav #brandSideNav class="mobile-menu-container">
-                    <div class="flex flex-column"  style="height: 95vh">
-                        <div class="nav-back-div">
+                    <div class="flex flex-column" style="height: 95vh">
+                        <div class="nav-back-div" (click)="brandSideNav.close()">
                             <mat-icon
                                     class="nav-back-icon"
                                     aria-hidden="false"
                                     aria-label="Search">
                                 chevron_left
                             </mat-icon>
-                            <span (click)="brandSideNav.close()">Back</span>
+                            <span>Back</span>
                         </div>
                         <div>
                             <ul class="department-container">
@@ -184,20 +183,20 @@
                 </mat-sidenav>
                 <!--                 Collection SideBar-->
                 <mat-sidenav #collectionSideNav class="mobile-menu-container">
-                    <div class="flex flex-column"  style="height: 95vh">
-                        <div class="nav-back-div">
+                    <div class="flex flex-column" style="height: 95vh">
+                        <div class="nav-back-div" (click)="collectionSideNav.close()">
                             <mat-icon
                                     class="nav-back-icon"
                                     aria-hidden="false"
                                     aria-label="Search">
                                 chevron_left
                             </mat-icon>
-                            <span (click)="collectionSideNav.close()">Back</span>
+                            <span>Back</span>
                         </div>
                         <div>
                             <ul class="department-container">
                                 <li *ngFor="let collection of collections" class="department-list">
-                                    <div class="flex justify-between"  (click)="toCollectionPage(collection)">
+                                    <div class="flex justify-between" (click)="toCollectionPage(collection)">
                                     <span
                                             class="department-title"
                                     >
