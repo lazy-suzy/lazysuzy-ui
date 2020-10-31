@@ -129,7 +129,7 @@
                                     >
                                         <li *ngFor="let category of department.categories"
                                             class="category-list">
-                                            <a class="category-title" (click)="departmentSideNav.close()"
+                                            <a class="category-title" (click)="closeAll()"
                                                [routerLink]="category.link"
                                             >{{ category.category }}
                                             </a>
