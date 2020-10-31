@@ -1,5 +1,5 @@
 <?php
-​
+
 $requestUrl = strtolower($_SERVER['REQUEST_URI']);
 $baseURL = "https://www.lazysuzy.com";
 $query = "";
@@ -10,10 +10,10 @@ $metaData = [
     'url' => $requestUrl,
     'type' => "article"
 ];
-​
+
 try {
     if(preg_match('/product|products|blog|board/', $requestUrl)) {
-
+    
         $conn = new mysqli('localhost', 'homestead', 'homestead', '$secret');
         if (!$conn->connect_error) {
           if(preg_match('/product\/([A-Za-z0-9\- ]+)/', $requestUrl, $matches)){
@@ -67,14 +67,14 @@ try {
                 }
             }
           }
-
+          
           if($query){
               $result = $conn->query($query);
               if ($result->num_rows > 0){
                   while($row = $result->fetch_assoc()) {
                       foreach ($row as $key => $value)
                           $metaData[$key] = htmlentities($value, ENT_IGNORE | ENT_COMPAT);
-
+                                       
                       break;
                   }
               }
@@ -82,11 +82,11 @@ try {
       }
     }
 } catch (\Exception $e) {
-
+    
 }
-​
-​
-​
+
+
+
 $meta = "<title>{$metaData['title']}</title><meta property='og:title' content=\"{$metaData['title']}\"><meta property='og:description' content=\"{$metaData['description']}\"><meta property='og:image' content=\"{$metaData['image']}\"><meta property=\"og:type\" content=\"{$metaData['type']}\"><meta property=\"og:url\" content=\"{$baseURL}{$metaData['url']}\">";
 echo str_replace("<title>LazySuzy</title>", $meta, file_get_contents('index.html'));
 ?>
