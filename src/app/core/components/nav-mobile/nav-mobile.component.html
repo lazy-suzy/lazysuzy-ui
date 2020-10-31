@@ -40,9 +40,9 @@
                             </li>
                             <hr class="navbar-horizontal-row">
                             <li class="department-list">
-                                <div>
+                                <div (click)="departmentSideNav.open()">
                                 <span class="department-title"
-                                      (click)="departmentSideNav.open()">
+                                      >
                                     Departments
                                 </span>
                                     <mat-icon
@@ -54,8 +54,8 @@
                                 </div>
                             </li>
                             <li class="department-list">
-                                <div>
-                                    <span class="department-title" (click)="brandSideNav.open();">Brand</span>
+                                <div (click)="brandSideNav.open();">
+                                    <span class="department-title" >Brand</span>
                                     <mat-icon
                                             class="department-list-icon"
                                             aria-hidden="false"
@@ -65,9 +65,9 @@
                                 </div>
                             </li>
                             <li class="department-list">
-                                <div>
+                                <div (click)="collectionSideNav.open();">
                                     <span class="department-title"
-                                          (click)="collectionSideNav.open();">Collections</span>
+                                          >Collections</span>
                                     <mat-icon
                                             class="department-list-icon"
                                             aria-hidden="false"
