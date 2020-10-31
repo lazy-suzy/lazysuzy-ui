@@ -43,6 +43,7 @@ mat-icon.account-icon {
   color: #ffcc00;
   margin: 6px 0;
   font-size: 28px;
+
   &:focus {
     outline: none;
   }
@@ -113,7 +114,7 @@ mat-icon.account-icon {
 .mobile-menu-container {
   position: absolute;
   z-index: 99;
-  top: 40px;
+  //top: 40px;
   width: 80%;
   min-height: 100vh;
   color: #fff;
@@ -135,7 +136,7 @@ mat-icon.account-icon {
 }
 
 .department-container {
-  padding: 0;
+  padding: 2rem 0 0 0;
 }
 
 .department-title {
@@ -169,6 +170,45 @@ mat-icon.account-icon {
 .mat-badge-content {
   background: #b76379;
 }
-.logo-size{
+
+.logo-size {
   width: 6.5rem;
+}
+
+mat-drawer-content {
+  padding: 12px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+mat-sidenav {
+  height: 100vh;
+}
+
+.navbar-horizontal-row {
+  margin: 1rem 6rem 0 2rem;
+}
+
+.nav-close-div {
+  margin-top: auto;
+  width: 100%;
+}
+
+.nav-close-button {
+  font-family: Lato, sans-serif;
+  font-size: 14px;
+  color: #eeeeee;
+  width: 100%;
+  padding: 1rem 0;
+  background-color: #0c1d31;
+  border: none;
+  border-top: 1px solid;
+}
+.nav-back-icon{
+  float: left;
+}
+.nav-back-div{
+  margin-top: 2rem;
+  padding-left: 1rem;
 }
