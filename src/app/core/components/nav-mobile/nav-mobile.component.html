@@ -25,7 +25,7 @@
                 </button>
                 <!--                Main SideBar-->
                 <mat-sidenav #drawer [fixedInViewport]="true" class="mobile-menu-container" [mode]="'over'">
-                    <div class="flex flex-column" style="height: 95vh">
+                    <div class="flex flex-column" style="height:93vh">
 
                         <ul class="department-container">
                             <li class="department-list">
@@ -85,7 +85,7 @@
 
                 <!--                 Department SideBar-->
                 <mat-sidenav #departmentSideNav class="mobile-menu-container" [mode]="'over'">
-                    <div class="flex flex-column" style="height: 95vh">
+                    <div class="flex flex-column" style="height:93vh">
                         <div class="nav-back-div" (click)="departmentSideNav.close()">
                             <mat-icon
                                     class="nav-back-icon"
@@ -145,7 +145,7 @@
                 </mat-sidenav>
                 <!--                 Brand SideBar-->
                 <mat-sidenav #brandSideNav class="mobile-menu-container">
-                    <div class="flex flex-column" style="height: 95vh">
+                    <div class="flex flex-column" style="height:93vh">
                         <div class="nav-back-div" (click)="brandSideNav.close()">
                             <mat-icon
                                     class="nav-back-icon"
@@ -183,7 +183,7 @@
                 </mat-sidenav>
                 <!--                 Collection SideBar-->
                 <mat-sidenav #collectionSideNav class="mobile-menu-container">
-                    <div class="flex flex-column" style="height: 95vh">
+                    <div class="flex flex-column" style="height:93vh">
                         <div class="nav-back-div" (click)="collectionSideNav.close()">
                             <mat-icon
                                     class="nav-back-icon"
@@ -198,8 +198,7 @@
                                 <li *ngFor="let collection of collections" class="department-list">
                                     <div class="flex justify-between" (click)="toCollectionPage(collection)">
                                     <span
-                                            class="department-title"
-                                    >
+                                            class="department-title">
                                         {{ collection.name | titlecase }}
                                     </span>
                                         <mat-icon
