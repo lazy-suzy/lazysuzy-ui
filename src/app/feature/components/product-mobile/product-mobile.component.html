@@ -11,6 +11,9 @@
           <mat-icon>filter_none </mat-icon>
         </div>
       </div>
+      <div *ngIf="product.condition" class="condition-icon {{product.condition}}-condition">
+        <span>{{product.condition?.replace('-', " ") | titlecase}}</span>
+      </div>
       <div *ngIf="product.wishlisted; else elseBlock">
         <div class="tile-icon wishlist-icon">
           <mat-icon (click)="wishlistProduct(product.sku, false, $event)"
