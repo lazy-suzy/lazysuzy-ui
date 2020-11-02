@@ -11,8 +11,9 @@
                 </mat-icon>
             </div>
         </div>
-        <div *ngIf="product.condition" class="condition-icon {{product.condition}}-condition">
-            <span>{{product.condition.replace('-', " ") | titlecase}}</span>
+        <div *ngIf="product.condition"
+             class="condition-icon  {{product.condition?.replace(' ','-').toLowerCase()}}-condition">
+            <span>{{product.condition | titlecase}}</span>
         </div>
         <ng-template #elseBlock>
             <div class="tile-icon wishlist-icon">
