@@ -1,12 +1,8 @@
-import {Component, OnInit, Output} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
-import {ApiService} from './../../../shared/services';
+import {ApiService, SeoService} from './../../../shared/services';
 import {Observable, Subscription} from 'rxjs';
-import {
-    BreakpointState,
-    Breakpoints,
-    BreakpointObserver
-} from '@angular/cdk/layout';
+import {BreakpointObserver, Breakpoints, BreakpointState} from '@angular/cdk/layout';
 import {EventEmitterService} from 'src/app/shared/services';
 import {ActivatedRoute, Router} from '@angular/router';
 import {boardRoutesNames} from '../../../modules/board/board.routes.names';
@@ -103,12 +99,14 @@ export class LandingComponent implements OnInit {
         private eventEmitterService: EventEmitterService,
         private route: ActivatedRoute,
         private router: Router,
-        private boardService: BoardService
+        private boardService: BoardService,
+        private seoService: SeoService
     ) {
 
     }
 
     ngOnInit() {
+        this.seoService.setMetaTags({});
         this.eventSubscription = this.eventEmitterService.userChangeEvent
             .asObservable()
             .subscribe((user) => {
