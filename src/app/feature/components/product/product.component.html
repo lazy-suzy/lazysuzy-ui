@@ -1,51 +1,58 @@
 <div class="ls-product-div" (click)="openDialog()">
-  <div class="ls-product">
-    <img class="{{ isVariationImageVisible ? 'prod-img' : 'prod-img show' }}" [src]="product.main_image"
-      [alt]="product.name" />
-    <img class="{{
+    <div class="ls-product">
+        <img class="{{ isVariationImageVisible ? 'prod-img' : 'prod-img show' }}" [src]="product.main_image"
+             [alt]="product.name"/>
+        <img class="{{
         isVariationImageVisible ? 'variation-img show' : 'variation-img'
-      }}" [src]="variationImage || product.main_image" [alt]="product.name" />
-    <div *ngIf="product.wishlisted; else elseBlock">
-      <div class="tile-icon wishlist-icon">
-        <mat-icon (click)="wishlistProduct(product.sku, false, $event)">favorite
-        </mat-icon>
-      </div>
-    </div>
-    <ng-template #elseBlock>
-      <div class="tile-icon wishlist-icon">
-        <mat-icon (click)="wishlistProduct(product.sku, true, $event)">favorite_border
-        </mat-icon>
-      </div>
-    </ng-template>
-  </div>
-  <div (click)=openDialog()>
+      }}" [src]="variationImage || product.main_image" [alt]="product.name"/>
+        <div *ngIf="product.wishlisted; else elseBlock">
+            <div class="tile-icon wishlist-icon">
+                <mat-icon (click)="wishlistProduct(product.sku, false, $event)">favorite
+                </mat-icon>
+            </div>
+        </div>
+        <div style="position: absolute;top: 10px;left: 10px;" class="flex" *ngIf="product.condition">
+            <div  *ngFor="let condition of product.condition.trim().split(',');let i = index;"
+                 class="condition-icon  {{condition?.trim().replace(' ','-').toLowerCase()}}-condition">
+                <span>{{condition | uppercase}}</span>
+            </div>
+        </div>
 
-  </div>
-  <div class="prod-info">
+        <ng-template #elseBlock>
+            <div class="tile-icon wishlist-icon">
+                <mat-icon (click)="wishlistProduct(product.sku, true, $event)">favorite_border
+                </mat-icon>
+            </div>
+        </ng-template>
+    </div>
+    <div (click)=openDialog()>
+
+    </div>
+    <div class="prod-info">
     <span class="site">
       <span *ngIf="product.is_new" class="new-tag"><strong>NEW</strong></span>
-      {{ product.site }}
+        {{ product.site }}
     </span>
-    <span class="variant-color" *ngIf="product.color && product.color?.split(',').length>1;else emptySpace">
-      +{{product.color?.split(',').length-1}} colors
+        <span class="variant-color" *ngIf="product.color && product.color?.split(',').length>1;else emptySpace">
+      +{{product.color?.split(',').length - 1}} colors
     </span>
-    <ng-template #emptySpace>
-      <span>&nbsp;</span>
-    </ng-template>
-  </div>
-  <div class="name">{{ product.name }}</div>
-  <div class="prices">
-    <div *ngIf="product?.percent_discount > 0" class="discount-percentage"
-      [ngClass]="[product?.percent_discount > 0 ? 'orange-bg' : 'yellow-bg']">
-      {{ product?.percent_discount | number: '1.0-0' }}% off
+        <ng-template #emptySpace>
+            <span>&nbsp;</span>
+        </ng-template>
     </div>
-    <ng-container *ngIf="
+    <div class="name">{{ product.name }}</div>
+    <div class="prices">
+        <div *ngIf="product?.percent_discount > 0" class="discount-percentage"
+             [ngClass]="[product?.percent_discount > 0 ? 'orange-bg' : 'yellow-bg']">
+            {{ product?.percent_discount | number: '1.0-0' }}% off
+        </div>
+        <ng-container *ngIf="
         product.in_inventory && product.inventory_product_details.count > 0;
         else isOOS
       ">
-      <span class="cprice">${{ product.inventory_product_details.price }}</span>
-    </ng-container>
-    <ng-template #isOOS>
+            <span class="cprice">${{ product.inventory_product_details.price }}</span>
+        </ng-container>
+        <ng-template #isOOS>
       <span class="{{
           (minPrice < wasMinPrice && 'cprice sale') || 'cprice'
         }}">
@@ -56,7 +63,7 @@
           ${{ minPrice | number:"1.2-2" }}-{{ maxPrice | number:"1.2-2" }}
         </ng-template>
       </span>
-      <span *ngIf="this.minPrice < this.wasMinPrice" class="oldprice">
+            <span *ngIf="this.minPrice < this.wasMinPrice" class="oldprice">
         <ng-container *ngIf="!this.wasMaxPrice;else bothWasPrices">
           ${{ wasMinPrice | number:"1.2-2" }}
         </ng-container>
@@ -64,41 +71,41 @@
           ${{ wasMinPrice | number:"1.2-2" }}-{{ wasMaxPrice | number:"1.2-2" }}
         </ng-template>
       </span>
-      <span class="free-shipping-text" *ngIf="product.inventory_product_details?.is_shipping_free" >
+            <span class="free-shipping-text" *ngIf="product.inventory_product_details?.is_shipping_free">
         FREE Shipping
       </span>
-    </ng-template>
-  </div>
-  <div *ngIf="product.reviews != null && product.reviews != 0" class="rating-container">
-    <div class="rating">
-      <mat-icon *ngFor="let icon of starIcons" class="yellow">
-        {{ icon }}
-      </mat-icon>
-      <span class="total-ratings">{{ product.reviews }}</span>
+        </ng-template>
     </div>
-  </div>
-  <!-- <div class="swatch-list">
-    <div
-      *ngFor="let variation of product.variations | slice: 0:numbOfSwatchItems"
-      class="swatch-item"
-      (click)="openSwatchDialog(variation)"
-    >
-      <img
-        *ngIf="variation.swatch_image"
-        class="carousel-img img-fluid"
-        [src]="variation.swatch_image"
-        (mouseover)="showVariationImage(variation.image)"
-        (mouseout)="hideVariationImage()"
-      />
+    <div *ngIf="product.reviews != null && product.reviews != 0" class="rating-container">
+        <div class="rating">
+            <mat-icon *ngFor="let icon of starIcons" class="yellow">
+                {{ icon }}
+            </mat-icon>
+            <span class="total-ratings">{{ product.reviews }}</span>
+        </div>
     </div>
-    <ng-container *ngIf="product.variations">
+    <!-- <div class="swatch-list">
       <div
-      (click)="openDialog()"
-      *ngIf="product.variations.length > numbOfSwatchItems"
+        *ngFor="let variation of product.variations | slice: 0:numbOfSwatchItems"
+        class="swatch-item"
+        (click)="openSwatchDialog(variation)"
       >
-        + more
+        <img
+          *ngIf="variation.swatch_image"
+          class="carousel-img img-fluid"
+          [src]="variation.swatch_image"
+          (mouseover)="showVariationImage(variation.image)"
+          (mouseout)="hideVariationImage()"
+        />
       </div>
-    </ng-container>
-    
-  </div> -->
+      <ng-container *ngIf="product.variations">
+        <div
+        (click)="openDialog()"
+        *ngIf="product.variations.length > numbOfSwatchItems"
+        >
+          + more
+        </div>
+      </ng-container>
+
+    </div> -->
 </div>

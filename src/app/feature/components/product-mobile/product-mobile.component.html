@@ -11,6 +11,12 @@
           <mat-icon>filter_none </mat-icon>
         </div>
       </div>
+      <div style="position: absolute;top: 5px;left: 5px" class="flex" *ngIf="product.condition">
+        <div  *ngFor="let condition of product.condition.trim().split(',');let i = index;"
+              class="condition-icon  {{condition?.trim().replace(' ','-').toLowerCase()}}-condition">
+          <span>{{condition | uppercase}}</span>
+        </div>
+      </div>
       <div *ngIf="product.wishlisted; else elseBlock">
         <div class="tile-icon wishlist-icon">
           <mat-icon (click)="wishlistProduct(product.sku, false, $event)"
