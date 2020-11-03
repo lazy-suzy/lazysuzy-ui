@@ -2,11 +2,11 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { NavMobileComponent } from './nav-mobile.component';
 import {
-  MatSidenavModule,
-  MatIconModule,
-  MatMenuModule,
-  MatButtonModule,
-  MatBadgeModule
+    MatSidenavModule,
+    MatIconModule,
+    MatMenuModule,
+    MatButtonModule,
+    MatBadgeModule, MatTabsModule, MatListModule
 } from '@angular/material';
 import { RouterModule } from '@angular/router';
 import { SearchBarModule } from '../search-bar/search-bar.module';
@@ -28,7 +28,7 @@ const MODULES = [
 
 @NgModule({
   declarations: [...DECLARATIONS],
-  imports: [...MODULES],
+    imports: [...MODULES, MatTabsModule, MatListModule],
   exports: [...DECLARATIONS, ...MODULES]
 })
 export class NavMobileModule {}
