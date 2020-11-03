@@ -11,7 +11,7 @@
                 </mat-icon>
             </div>
         </div>
-        <div style="position: absolute;top: 10px;left: 10px;" class="flex" *ngIf="product.condition">
+        <div style="position: absolute;top: 10px;" class="flex" *ngIf="product.condition">
             <div  *ngFor="let condition of product.condition.trim().split(',');let i = index;"
                  class="condition-icon  {{condition?.trim().replace(' ','-').toLowerCase()}}-condition">
                 <span>{{condition | uppercase}}</span>
