@@ -141,10 +141,13 @@ export class MatDialogUtilsService {
         });
     }
 
-    openAllOffersDialog() {
+    openAllOffersDialog(deals) {
         const dialogRef = this.dialog.open(OfferDailogComponent, {
             minWidth: '25%',
-            hasBackdrop: false
+            hasBackdrop: false,
+            data: {
+                deals
+            }
         });
     }
 }

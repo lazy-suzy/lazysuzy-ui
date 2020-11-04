@@ -7,6 +7,7 @@ import {ApiService, MatDialogUtilsService, UtilsService} from './../../../shared
 import {MessageService} from 'primeng/api';
 import {CookieService} from 'ngx-cookie-service';
 import {EventEmitterService} from 'src/app/shared/services';
+import {first} from 'rxjs/operators';
 
 @Component({
     selector: 'app-nav-desktop',
@@ -27,6 +28,8 @@ export class NavDesktopComponent implements OnInit {
 
     isBrandPage: boolean = false;
     params: any;
+    deals: any;
+    showOffer = true;
 
     constructor(
         private router: Router,
@@ -46,10 +49,15 @@ export class NavDesktopComponent implements OnInit {
                 location.path() !== '' &&
                 location.path().match(/board/) == null &&
                 location.path().match(/blog/) == null;
+            this.showOffer =
+                location.path().match(/checkout/) === null &&
+                location.path().match(/board\/dashboard/) === null &&
+                location.path().match(/blog/) == null;
         });
     }
 
     ngOnInit(): void {
+        this.getDeals();
         this.eventSubscription = this.eventEmitterService.userChangeEvent
             .asObservable()
             .subscribe((user) => {
@@ -81,6 +89,14 @@ export class NavDesktopComponent implements OnInit {
         this.activeRoute.queryParams.subscribe((params) => {
             // this.isClearAllVisible = params.filters !== '';
             this.params = params;
+        });
+    }
+
+    getDeals() {
+        this.apiService.getDeals().pipe(first()).subscribe((value: any) => {
+            this.deals = value.sort((a, b) => {
+                return a.value - b.value;
+            });
         });
     }
 
@@ -173,6 +189,6 @@ export class NavDesktopComponent implements OnInit {
     }
 
     openOfferModal() {
-        this.matDialogUtils.openAllOffersDialog();
+        this.matDialogUtils.openAllOffersDialog(this.deals);
     }
 }

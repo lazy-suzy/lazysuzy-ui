@@ -17,13 +17,13 @@
     </mat-toolbar>
 </ng-container>
 <ng-template #showBar>
-<!--    [ngClass]="{'sticky-rail': !notHome}"-->
-    <div class="offer-rail ">
-        <span class="offer-details"  > This is a great Offer 1</span>
-        <span style="margin: 0 2rem">|</span>
-        <span class="offer-details"> This is a great Offer 2</span>
-        <span style="margin: 0 2rem">|</span>
-        <span class="offer-details"> This is a great Offer 3</span>
+    <!--    [ngClass]="{'sticky-rail': !notHome}"-->
+    <div class="offer-rail" *ngIf="showOffer">
+        <ng-container *ngFor="let deal of deals|slice:0:2;let i=index">
+            <a [href]="deal.url" class="absolute-anchor-tag"><span class="offer-details"> {{deal.title}}</span></a>
+            <span style="margin: 0 2rem" *ngIf="i<2 && i<deals.length-1">|</span>
+        </ng-container>
+
         <span class="all-offers" (click)="openOfferModal()">View all offers</span>
     </div>
 
