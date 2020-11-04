@@ -4,17 +4,18 @@
   margin: 5px 0;
 
   .images {
-    overflow-x: scroll;
-    overflow-y: hidden;
     height: 230px;
     white-space: nowrap;
+
     &::-webkit-scrollbar {
       width: 10px;
     }
+
     &::-webkit-scrollbar-track {
       box-shadow: inset 0 0 5px grey;
       border-radius: 10px;
     }
+
     &::-webkit-scrollbar-thumb {
       background: #ffcc00;
       border-radius: 10px;
@@ -23,12 +24,14 @@
     &::-webkit-scrollbar-thumb:hover {
       background: #ffcc00ba;
     }
+
     .prod-img {
       max-height: 100%;
       display: inline-block;
     }
   }
 }
+
 .loader {
   position: fixed;
   z-index: 1;
@@ -48,107 +51,88 @@
   border: 0;
   border-top: 1px solid #aab7b6;
 }
+
 .info-icon {
   font-size: 14px;
   width: 18px;
   color: #606060;
 }
+
 .stock-msg {
   font-size: 14px;
   color: #b76e79;
 }
+
 .shipping-msg {
   font-size: 14px;
   color: #606060;
   padding-left: 4px;
 }
+
 .stock-info {
   display: flex;
   justify-content: flex-end;
   padding: 4px 0;
 }
+
 .product-content {
   padding: 10px;
+
   .product-name {
     font-size: 14px;
     max-width: 90%;
     color: #0c1c31;
-    font-family: 'Open Sans';
+    font-family: "Open Sans", "Helvetica Neue", sans-serif;
   }
+
   .product-site {
     font-size: 12px;
-    font-family: 'Lato';
+    font-family: Lato, sans-serif;
     color: #354150;
   }
+
   .wishlist-container {
     position: absolute;
     right: 10px;
   }
+
   .price-container {
     font-size: 24px;
     position: relative;
     padding-bottom: 0.5rem;
-    padding-right: 120px;
+
     .padding-vertical-2 {
       padding: 3px 0;
     }
-    select {
-      background-color: #ffffff;
-      border-radius: 4px;
-      border: 1px solid #606060;
-      padding: 10px;
-      position: absolute;
-      right: 125px;
-      width: 55px;
-      font-size: 14px;
-      -webkit-box-sizing: border-box;
-      -moz-box-sizing: border-box;
-      box-sizing: border-box;
-      -webkit-appearance: none;
-      -moz-appearance: none;
-    }
-    select.quantity-selector {
-      background-image: linear-gradient(45deg, transparent 50%, #ffffff 50%),
-        linear-gradient(135deg, #ffffff 50%, transparent 50%),
-        linear-gradient(to right, #606060, #606060);
-      background-position: calc(100% - 9px) calc(1em + 3px),
-        calc(100% - 6px) calc(1em + 3px), 100% 0;
-      background-size: 4px 5px, 4px 5px, 18px;
-      background-repeat: no-repeat;
-    }
+
     .product-price {
       color: #b76e79;
       font-family: 'Open Sans';
       font-size: 14px;
     }
+
     .product-old-price {
       color: #606060;
       font-family: 'Open Sans';
       font-size: 12px;
     }
-    .view-details-btn {
-      position: absolute;
-      right: 0;
-      padding: 0 8px;
-      border: none;
-      background-color: #0c1c31;
-      color: #ffcc00;
-      width: 30%;
-      font-family: 'Lato';
-      font-size: 12px;
-    }
+
   }
+
   .variation-container {
     max-width: 375px;
     overflow-x: scroll;
     overflow: auto;
+
     .variation-options {
       display: flex;
       flex-wrap: nowrap;
       padding: 5px 0 10px 0;
       width: 375px;
+
       .variation {
         margin: 5px;
+
         .variant-image {
           max-width: 30px;
           height: 30px;
@@ -156,11 +140,13 @@
       }
     }
   }
+
   .description-menu {
     padding: 0;
     display: flex;
     list-style: none;
     margin-bottom: 0;
+
     .nav-link {
       padding: 8px 16px;
       //border: 1px solid #cccccc;
@@ -170,18 +156,23 @@
       color: #0c1c31;
       font-family: "Open Sans", sans-serif;
     }
+
     .active {
       background-color: #f8fafc;
     }
+
     .bg-white {
       background-color: #ffffff;
     }
   }
+
   .menu-content {
     background-color: #f8fafc;
     padding: 18px;
+
     .dimension-container {
       min-height: 75vh;
+
       .dimension-title {
         font-size: 18px;
         font-weight: bold;
@@ -210,12 +201,14 @@
     transform: translate(-50%, -50%);
   }
 }
+
 .carousel-item {
   display: flex;
   flex: 1 0 auto;
   margin: 0 0.5rem;
   flex-direction: column;
-  .collection-product-name{
+
+  .collection-product-name {
     font-family: "Open Sans", sans-serif;
     font-size: 12px;
     white-space: nowrap;
@@ -223,31 +216,80 @@
     text-overflow: ellipsis;
   }
 }
-:host ::ng-deep.ui-carousel-dots-container{
+
+:host ::ng-deep.ui-carousel-dots-container {
   display: none;
 }
-.is-price{
-  font-family: "Open Sans",sans-serif;
+
+.is-price {
+  font-family: "Open Sans", sans-serif;
   font-size: 14px;
 }
-.was-price{
-  font-family: "Open Sans",sans-serif;
+
+.was-price {
+  font-family: "Open Sans", sans-serif;
   font-size: 12px;
   color: #333333;
 }
 
-.open-sans{
+.open-sans {
   font-family: "Open Sans", sans-serif;
 }
-.font-16{
+
+.font-16 {
   font-size: 16px;
 }
-.font-14{
+
+.font-14 {
   font-size: 14px;
 }
+
 .product-price {
   color: #333333;
 }
-.sale{
+
+.sale {
   color: #b76e79;
+}
+
+.cart-actions {
+  select {
+    background-color: #ffffff;
+    border-radius: 4px;
+    border: 1px solid #606060;
+    margin-right: 1rem;
+    padding: 10px;
+    min-width: 55px;
+    width: 20%;
+    max-height: 2.45rem;
+    font-size: 14px;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+  }
+
+  select.quantity-selector {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    background: transparent;
+    background-image: url("data:image/svg+xml;utf8,<svg fill='black' height='24' viewBox='0 0 24 24' width='24' xmlns='http://www.w3.org/2000/svg'><path d='M7 10l5 5 5-5z'/><path d='M0 0h24v24H0z' fill='none'/></svg>");
+    background-repeat: no-repeat;
+    background-position-x: 80%;
+    background-position-y: 45%;
+    border: 1px solid #dfdfdf;
+    border-radius: 5px;
+    margin-right: 2rem;
+    padding: 0 0 0 1.5rem;
+  }
+  .view-details-btn {
+    padding: 0 8px;
+    border: none;
+    background-color: #0c1c31;
+    color: #ffcc00;
+    width: 100%;
+    font-family: Lato, sans-serif;
+    font-size: 12px;
+  }
 }

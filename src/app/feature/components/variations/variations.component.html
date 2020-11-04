@@ -27,14 +27,13 @@
             </div>
         </div>
     </div>
-    <mat-expansion-panel *ngIf="selectionsExist" #example>
-        <mat-expansion-panel-header>
-            <mat-panel-title style="font-family: 'Open sans';font-size: 14px;">
-                SEE MORE OPTIONS
-            </mat-panel-title>
-            <mat-icon *ngIf="!example.expanded">add</mat-icon>
-            <mat-icon *ngIf="example.expanded">remove</mat-icon>
-        </mat-expansion-panel-header>
+    <div style="font-family: 'Open sans';font-size: 14px;">
+        <div class="flex">
+            <div>
+
+            </div>
+
+        </div>
         <div class="flex flex-wrap variant-features-options-container">
             <ng-container *ngFor="let item of inputSelections | keyvalue">
                 <div class="variant-feature-content relative w-50" *ngIf="item.value.select_type === 'multi_select'">
@@ -80,7 +79,7 @@
                 </div>
             </div>
         </div>
-    </mat-expansion-panel>
+    </div>
 </ng-container>
 
 <ng-template #isBrowser>
