@@ -95,7 +95,7 @@ export class NavDesktopComponent implements OnInit {
     getDeals() {
         this.apiService.getDeals().pipe(first()).subscribe((value: any) => {
             this.deals = value.sort((a, b) => {
-                return a.value - b.value;
+                return a.rank - b.rank;
             });
         });
     }
