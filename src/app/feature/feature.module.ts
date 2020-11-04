@@ -1,56 +1,62 @@
-import { CommonModule } from '@angular/common';
-import { NgModule } from '@angular/core';
+import {CommonModule} from '@angular/common';
+import {NgModule} from '@angular/core';
 import {
-  LandingModule,
-  ProductsModule,
-  SearchModule,
-  WishlistModule,
-  AllProductsModule,
-  CategoriesModule,
-  CartModule,
-  ForgotPasswordModule,
-  ResetPasswordModule
+    AllProductsModule,
+    CartModule,
+    CategoriesModule,
+    ForgotPasswordModule,
+    LandingModule,
+    ProductsModule,
+    ResetPasswordModule,
+    SearchModule,
+    WishlistModule
 } from './containers';
-import { AmericanNumberPipe } from '../shared/pipes/american-number.pipe';
 import {
-  ProductDetailsMobileModule,
-  PaymentModule,
-  OrderSuccessModule,
-  EditMyProfileModule,
-  PublicProfileModule
+    EditMyProfileModule,
+    OrderSuccessModule,
+    PaymentModule,
+    ProductDetailsMobileModule,
+    PublicProfileModule
 } from './components';
-import { ResetPasswordComponent } from './containers/reset-password/reset-password.component';
-import { BrandListModule } from './components/brand-list/brand-list.module';
-import { BlogModule } from './blog/blog/blog.module';
-import { ProductCollectionsComponent } from './containers/product-collections/product-collections.component';
-import {CollectionListComponent} from "./components/collection-list/collection-list.component";
-import {CollectionListModule} from "./components/collection-list/collection-list.module";
+import {ResetPasswordComponent} from './containers/reset-password/reset-password.component';
+import {BrandListModule} from './components/brand-list/brand-list.module';
+import {BlogModule} from './blog/blog/blog.module';
+import {ProductCollectionsComponent} from './containers/product-collections/product-collections.component';
+import {CollectionListModule} from './components/collection-list/collection-list.module';
+import {OfferDailogComponent} from './components/offer-dailog/offer-dailog.component';
 
-const DECLARATIONS = [];
-const MODULES = [
-  CommonModule,
-  ProductsModule,
-  LandingModule,
-  SearchModule,
-  WishlistModule,
-  AllProductsModule,
-  CategoriesModule,
-  ProductDetailsMobileModule,
-  CartModule,
-  PaymentModule,
-  OrderSuccessModule,
-  ForgotPasswordModule,
-  ResetPasswordModule,
-  EditMyProfileModule,
-  BrandListModule,
-  PublicProfileModule,
-  BlogModule,
-  CollectionListModule,
+const DECLARATIONS = [
+    ResetPasswordComponent,
+    ProductCollectionsComponent,
+    OfferDailogComponent
 ];
+const MODULES = [
+    CommonModule,
+    ProductsModule,
+    LandingModule,
+    SearchModule,
+    WishlistModule,
+    AllProductsModule,
+    CategoriesModule,
+    ProductDetailsMobileModule,
+    CartModule,
+    PaymentModule,
+    OrderSuccessModule,
+    ForgotPasswordModule,
+    ResetPasswordModule,
+    EditMyProfileModule,
+    BrandListModule,
+    PublicProfileModule,
+    BlogModule,
+    CollectionListModule,
+];
+
 @NgModule({
-  declarations: [...DECLARATIONS, ResetPasswordComponent, ProductCollectionsComponent],
-  imports: [...MODULES],
-  // providers: [AmericanNumberPipe],
-  exports: [...DECLARATIONS, ...MODULES]
+    declarations: [...DECLARATIONS],
+    imports: [...MODULES],
+    // providers: [AmericanNumberPipe],
+    exports: [...DECLARATIONS, ...MODULES],
+    entryComponents: [OfferDailogComponent]
 })
-export class FeatureModule { }
+export class FeatureModule {
+}

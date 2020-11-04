@@ -1,13 +1,9 @@
 import {Component, Input, OnInit} from '@angular/core';
-import {Router, ActivatedRoute} from '@angular/router';
+import {ActivatedRoute, Router} from '@angular/router';
 import {Location} from '@angular/common';
 import {Subscription} from 'rxjs';
 import {IAllDepartment} from '../../../shared/models';
-import {
-    ApiService,
-    UtilsService,
-    MatDialogUtilsService
-} from './../../../shared/services';
+import {ApiService, MatDialogUtilsService, UtilsService} from './../../../shared/services';
 import {MessageService} from 'primeng/api';
 import {CookieService} from 'ngx-cookie-service';
 import {EventEmitterService} from 'src/app/shared/services';
@@ -174,5 +170,9 @@ export class NavDesktopComponent implements OnInit {
             ...{'filters': filterValue}
         };
         this.router.navigate(['products/brand'], {queryParams: resultFilter});
+    }
+
+    openOfferModal() {
+        this.matDialogUtils.openAllOffersDialog();
     }
 }
