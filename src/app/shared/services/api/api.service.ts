@@ -477,6 +477,13 @@ export class ApiService {
         return this.httpService.get(url);
     }
 
+    getSearchKeywords() {
+        const endpoint = `search-keywords`;
+        const token = this.cookie.get('token');
+        const url = `${env.API_BASE_HREF}${endpoint}`;
+        return this.httpService.get(url);
+    }
+
     getDeals() {
         const url = `${env.API_BASE_HREF}deals`;
         return this.httpService.get(url);
