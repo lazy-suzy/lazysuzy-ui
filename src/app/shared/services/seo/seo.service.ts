@@ -3,6 +3,7 @@ import {environment as env} from 'src/environments/environment';
 import {Meta, Title} from '@angular/platform-browser';
 import {DOCUMENT} from '@angular/common';
 import {Router} from '@angular/router';
+import MetaData from './meta-data-model';
 
 @Injectable({
     providedIn: 'root'
@@ -20,6 +21,12 @@ export class SeoService {
         TWITTER_TITLE: 'twitter:text:title',
         TWITTER_IMAGE: 'twitter:image'
     };
+    defaultMetaData: MetaData = {
+        title: 'LazySuzy - Shop your home. From your home.',
+        description: 'Search and discover the latest designs and deals from America\'s top home brands in one place. Find and share inspiration with shoppable design boards.',
+        image: `${env.BASE_HREF}/images/default.png`,
+        type: 'article'
+    };
 
     constructor(
         private titleService: Title,
@@ -29,129 +36,60 @@ export class SeoService {
     ) {
     }
 
-    setMetaTags(data) {
-        const url = env.BASE_HREF + this.router.url.split('?')[0];
-        const logoPath = 'assets/image/color_logo_transparent.png';
-        const metaData = {
-            TITLE: `${data.product_name} - ${data.brand}` || 'LazySuzy',
-            IMAGE: data.image_url || logoPath,
-            DESCRIPTION:
-                data.description || `Search America's top Home brands in one go`,
-            URL: url,
-            TYPE: 'website'
-        };
-        this.titleService.setTitle(metaData.TITLE);
+    setMetaTags(data: MetaData) {
+        data.url = env.BASE_HREF + this.router.url.split('?')[0];
+        const metaData = {...this.defaultMetaData, ...data};
+        this.titleService.setTitle(metaData.title);
         this.metaService.updateTag({
             name: this.metaTags.DESCRIPTION,
-            content: metaData.DESCRIPTION
+            content: metaData.description
         });
         this.metaService.updateTag({
             name: this.metaTags.IMAGE,
-            content: metaData.IMAGE
+            content: metaData.image
         });
         this.metaService.updateTag({
             property: this.metaTags.OG_TITLE,
-            content: metaData.TITLE
+            content: metaData.title
         });
         this.metaService.updateTag({
             property: this.metaTags.OG_IMAGE,
-            content: metaData.IMAGE
+            content: metaData.image
         });
         this.metaService.updateTag({
             property: this.metaTags.OG_DESCRIPTION,
-            content: metaData.DESCRIPTION
+            content: metaData.description
         });
         this.metaService.updateTag({
             property: this.metaTags.OG_URL,
-            content: metaData.URL
+            content: metaData.url
         });
         this.metaService.updateTag({
             property: this.metaTags.OG_TYPE,
-            content: metaData.TYPE
+            content: metaData.type
         });
         this.metaService.updateTag({
             name: this.metaTags.OG_DESCRIPTION,
-            content: metaData.DESCRIPTION
+            content: metaData.description
         });
         this.metaService.updateTag({
             property: this.metaTags.SECURE_IMAGE,
-            content: metaData.IMAGE
+            content: metaData.image
         });
         this.metaService.updateTag({
             name: this.metaTags.OG_IMAGE,
-            content: metaData.URL
+            content: metaData.url
         });
         this.metaService.updateTag({
             name: this.metaTags.TWITTER_TITLE,
-            content: metaData.TITLE
+            content: metaData.title
         });
         this.metaService.updateTag({
             name: this.metaTags.TWITTER_IMAGE,
-            content: metaData.IMAGE
+            content: metaData.image
         });
     }
 
-    setMetaTagsProduct(data){
-        const url = env.BASE_HREF + this.router.url.split('?')[0];
-        const logoPath = 'assets/image/color_logo_transparent.png';
-        const metaData = {
-            TITLE: data.full_title || 'LazySuzy',
-            IMAGE: data.image_url || logoPath,
-            DESCRIPTION:
-                data.description || `Search America's top Home brands in one go`,
-            URL: url,
-            TYPE: 'website'
-        };
-        this.titleService.setTitle(metaData.TITLE);
-        this.metaService.updateTag({
-            name: this.metaTags.DESCRIPTION,
-            content: metaData.DESCRIPTION
-        });
-        this.metaService.updateTag({
-            name: this.metaTags.IMAGE,
-            content: metaData.IMAGE
-        });
-        this.metaService.updateTag({
-            property: this.metaTags.OG_TITLE,
-            content: metaData.TITLE
-        });
-        this.metaService.updateTag({
-            property: this.metaTags.OG_IMAGE,
-            content: metaData.IMAGE
-        });
-        this.metaService.updateTag({
-            property: this.metaTags.OG_DESCRIPTION,
-            content: metaData.DESCRIPTION
-        });
-        this.metaService.updateTag({
-            property: this.metaTags.OG_URL,
-            content: metaData.URL
-        });
-        this.metaService.updateTag({
-            property: this.metaTags.OG_TYPE,
-            content: metaData.TYPE
-        });
-        this.metaService.updateTag({
-            name: this.metaTags.OG_DESCRIPTION,
-            content: metaData.DESCRIPTION
-        });
-        this.metaService.updateTag({
-            property: this.metaTags.SECURE_IMAGE,
-            content: metaData.IMAGE
-        });
-        this.metaService.updateTag({
-            name: this.metaTags.OG_IMAGE,
-            content: metaData.URL
-        });
-        this.metaService.updateTag({
-            name: this.metaTags.TWITTER_TITLE,
-            content: metaData.TITLE
-        });
-        this.metaService.updateTag({
-            name: this.metaTags.TWITTER_IMAGE,
-            content: metaData.IMAGE
-        });
-    }
     setCanonicalURL() {
         const url = env.BASE_HREF + this.router.url.split('?')[0];
         const head = this.dom.getElementsByTagName('head')[0];
@@ -196,7 +134,7 @@ export class SeoService {
         const logoPath = 'assets/image/color_logo_transparent.png';
         const metaData = {
             TITLE: this.parseHtmlToString(blog.title.rendered) || 'LazySuzy',
-            IMAGE: blog.x_featured_media || logoPath,
+            IMAGE: blog.x_featured_media_original || logoPath,
             DESCRIPTION:
                 this.parseHtmlToString(blog.excerpt.rendered) || `Search America's top Home brands in one go`,
             URL: url,
@@ -272,7 +210,7 @@ export class SeoService {
     }
 
     private removeHtmlTags(value: string): string {
-        return value.replace(/(<([^>]+)>)/ig, "");
+        return value.replace(/(<([^>]+)>)/ig, '');
 
     }
 }

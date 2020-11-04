@@ -14,7 +14,8 @@ import {SCROLL_ICON_SHOW_DURATION} from './../../../shared/constants';
 import {ActivatedRoute, Router} from '@angular/router';
 import {Observable, Subscription} from 'rxjs';
 import {BreakpointObserver, Breakpoints, BreakpointState} from '@angular/cdk/layout';
-import {first} from "rxjs/operators";
+import {first} from 'rxjs/operators';
+import MetaData from '../../../shared/services/seo/meta-data-model';
 
 @Component({
     selector: 'app-products',
@@ -72,7 +73,8 @@ export class ProductsComponent implements OnInit {
         value: ''
     };
     // Collection List
-    collectionList:any;
+    collectionList: any;
+
     constructor(
         public dialog: MatDialog,
         private productElement: ElementRef,
@@ -113,9 +115,9 @@ export class ProductsComponent implements OnInit {
                     this.matDialogUtils.openMatDialog(this.modalSku);
                 }
             });
-        this.apiService.getCollections().pipe(first()).subscribe(collection=>{
-            this.collectionList=collection;
-        })
+        this.apiService.getCollections().pipe(first()).subscribe(collection => {
+            this.collectionList = collection;
+        });
     }
 
     onDestroy(): void {
@@ -213,7 +215,12 @@ export class ProductsComponent implements OnInit {
             .getProducts(this.department, this.category, this.filters, this.sortType)
             .subscribe(
                 (payload: IProductsPayload) => {
-                    this.seoService.setMetaTags(payload.seo_data);
+                    const metaData: MetaData = {
+                        title: payload.seo_data.full_title,
+                        image: payload.seo_data.image_url,
+                        description: payload.seo_data.description,
+                    };
+                    this.seoService.setMetaTags(metaData);
                     this.seoService.setCanonicalURL();
                     this.categoryTitle = payload.seo_data.page_title;
                     this.emailTitle = payload.seo_data.email_title;

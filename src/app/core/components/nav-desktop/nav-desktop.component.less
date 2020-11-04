@@ -25,6 +25,7 @@ mat-icon.account-icon {
     width: 30px;
     margin-top: 5px;
   }
+
   .mt-0 {
     margin-top: 0;
   }
@@ -106,16 +107,19 @@ mat-icon.account-icon {
   color: #ffcc00;
   font-size: 24px;
 }
+
 .my-boards-link {
   color: #fecc38;
   font-family: 'Sans-serif';
   margin-right: 20px;
   font-weight: bold;
   cursor: pointer;
+
   &:focus {
     outline: none;
   }
 }
+
 .mat-badge-content {
   background: #b76379;
 }
@@ -144,23 +148,29 @@ mat-icon.account-icon {
     height: 55px;
   }
 }
+
 .boards-icon {
   display: none;
 }
+
 @media (max-width: 768px) {
   .section {
     margin-top: 0;
   }
+
   .top-navbar {
     font-size: 16px;
   }
+
   .department-name {
     position: relative;
     margin-right: 15px;
   }
+
   .my-boards-link {
     display: none;
   }
+
   .boards-icon {
     display: inline-flex;
   }
@@ -174,4 +184,46 @@ mat-icon.account-icon {
   ::ng-deep .mat-menu-panel {
     height: 120px;
   }
+}
+
+.offer-rail {
+  display: flex;
+  background-color: #0c1c31;
+  justify-content: center;
+  a:focus{
+    text-decoration: none;
+    border: none;
+    outline: none;
+  }
+  a:hover{
+    text-decoration: none;
+    border: none;
+    outline: none;
+  }
+  .offer-details{
+    color: #ffcc00;
+    font-family: Lato, sans-serif;
+    font-size: 18px;
+  }
+}
+
+.all-offers {
+  position: absolute;
+  top: 0;
+  left: 75%;
+  color: #ffcc00;
+  font-family: Lato, sans-serif;
+  cursor: pointer;
+  text-decoration: underline;
+  font-size: 16px;
+}
+
+.sticky-rail {
+  position: fixed;
+  top: 0;
+  width: 100%;
+  z-index: 99;
+}
+.offer-rail{
+
 }

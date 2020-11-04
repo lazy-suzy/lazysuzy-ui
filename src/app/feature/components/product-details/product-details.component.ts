@@ -1,29 +1,16 @@
-import {
-    Component,
-    Inject,
-    OnInit,
-    ViewChild,
-    ElementRef
-} from '@angular/core';
+import {Component, ElementRef, Inject, OnInit, ViewChild} from '@angular/core';
 import {MAT_DIALOG_DATA} from '@angular/material/dialog';
-import {from, Subscription} from 'rxjs';
-import {
-    IProductPayload,
-    IProductDetail,
-    IActiveProduct,
-    IProduct,
-    ISeo
-} from 'src/app/shared/models';
+import {Subscription} from 'rxjs';
+import {IActiveProduct, IProduct, IProductDetail, ISeo} from 'src/app/shared/models';
 import {
     ApiService,
-    UtilsService,
     EventEmitterService,
     MatDialogUtilsService,
-    SeoService
+    SeoService,
+    UtilsService
 } from 'src/app/shared/services';
 import {Gallery, GalleryItem, ImageItem} from '@ngx-gallery/core';
 import {Lightbox} from '@ngx-gallery/lightbox';
-import {formatCurrency, getLocaleCurrencySymbol, getLocaleId} from '@angular/common';
 
 @Component({
     selector: 'app-product-details',
@@ -106,7 +93,13 @@ export class ProductDetailsComponent implements OnInit {
                             this.seoData = payload.seo_data;
                             if (payload.product) {
                                 this.schema = this.seoService.setSchema(this.product);
-                                this.seoService.setMetaTagsProduct(this.seoData);
+                                const seoData: any = payload.seo_data;
+                                const metaData = {
+                                    title: `${seoData.brand} ${seoData.product_name} | LazySuzy`,
+                                    description: seoData.description,
+                                    image: seoData.image_url,
+                                };
+                                this.seoService.setMetaTags(metaData);
                                 this.updateActiveProduct(this.product);
                                 this.items = this.product.on_server_images.map(
                                     (item) => new ImageItem({src: item})
