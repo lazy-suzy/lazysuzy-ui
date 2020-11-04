@@ -29,10 +29,10 @@
             <div class="price-container flex items-center">
                 <div class="padding-vertical-2 flex items-center">
                         <span class="product-price">
-                            ${{ priceObject.is_price }}
+                            {{ priceObject.is_price }}
                             &nbsp;
                             <span class="strike product-old-price" [ngClass]="{'dn':!isDiscounted}">
-                                ${{ priceObject.was_price }}
+                                {{ priceObject.was_price }}
                             </span>
                         </span>
                 </div>

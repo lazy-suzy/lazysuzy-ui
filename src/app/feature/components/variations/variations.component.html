@@ -8,18 +8,20 @@
             </span>
         </div>
 
-        <div class="variation-options" *ngIf="isSwatchExist">
+        <div class="variation-options-mobile" *ngIf="isSwatchExist">
             <div class="variation {{
             !variation.hasOwnProperty('enabled') || variation.enabled
                 ? ''
                 : 'disabledImage'
-            }}" *ngFor="let variation of swatches; let i = index" [class.active]="variation.swatch_image === selectedSwatch.swatch_image">
+            }}" *ngFor="let variation of swatches; let i = index"
+                 [class.active]="variation.swatch_image === selectedSwatch.swatch_image">
                 <a class="{{
                 !variation.hasOwnProperty('enabled') || variation.enabled
                 ? ''
                 : 'disabledTab'
                 }}">
-                    <img [src]="variation.swatch_image" [alt]="variation.name" class="variant-image" (click)="selectedVariation(variation, i)" />
+                    <img [src]="variation.swatch_image" [alt]="variation.name" class="variant-image"
+                         (click)="selectedVariation(variation, i)"/>
                 </a>
             </div>
             <div *ngIf="swatches.length === 0">
@@ -28,18 +30,12 @@
         </div>
     </div>
     <div style="font-family: 'Open sans';font-size: 14px;">
-        <div class="flex">
-            <div>
-
-            </div>
-
-        </div>
         <div class="flex flex-wrap variant-features-options-container">
             <ng-container *ngFor="let item of inputSelections | keyvalue">
                 <div class="variant-feature-content relative w-50" *ngIf="item.value.select_type === 'multi_select'">
                     <div class="variant-feature-options">
                         <div class="feature-title pointer flex flex-wrap justify-between">
-                            <h6 class="selection-title">
+                            <h6 class="selection-title-mobile">
                                 Select {{ item.key == 'color_group' ? 'Color' : (item.key | titlecase) }}
                             </h6>
                             <span class="arrow-icon">
@@ -63,7 +59,7 @@
         <div class="variant-features-options-container">
             <div class="variant-feature-content" *ngFor="let item of inputSelections | keyvalue">
                 <div class="variant-feature-options" *ngIf="item.value.select_type === 'single_select'">
-                    <h6 class="selection-title">
+                    <h6 class="selection-title-mobile">
                         Select {{ item.key.replace('_', ' ') | titlecase }}
                     </h6>
                     <div class="flex flex-wrap">
@@ -80,6 +76,7 @@
             </div>
         </div>
     </div>
+
 </ng-container>
 
 <ng-template #isBrowser>
@@ -87,7 +84,8 @@
         <div class="flex items-center justify-between">
             <span class="title">Options</span>
             <span class="clear-btn" (click)="clearVariations()" *ngIf="selectedSwatch.swatch_image || selectedFlag">Clear</span>
-            <span *ngIf="hasSelection === false && (!selectedSwatch.swatch_image || beforeSelection === false)" class="error-msg">
+            <span *ngIf="hasSelection === false && (!selectedSwatch.swatch_image || beforeSelection === false)"
+                  class="error-msg">
                 Please make a selection
             </span>
         </div>
@@ -104,7 +102,7 @@
                 }}">
                     <span data-title="{{ variation.name }}">
                         <img [src]="variation.swatch_image" [alt]="variation.name" class="variation-img"
-                            (click)="selectedVariation(variation, i)" />
+                             (click)="selectedVariation(variation, i)"/>
                     </span>
                 </a>
             </div>
@@ -128,7 +126,8 @@
                             <div *ngFor="let option of item.value.options">
                                 <mat-checkbox (change)="onCheckChange($event, option, item.key)" [checked]="
                                         selections[item.key] &&
-                                        selections[item.key].includes(option)" [disabled]="!selectionOptions[option]" class="options">
+                                        selections[item.key].includes(option)" [disabled]="!selectionOptions[option]"
+                                              class="options">
                                     {{ option }}
                                 </mat-checkbox>
                             </div>
@@ -144,15 +143,15 @@
                         Select {{ item.key.replace('_', ' ') | titlecase }}
                     </h6>
                     <div class="flex flex-wrap">
-                        <div 
-                        *ngFor="let option of item.value.options" 
-                        class="w-33 pa1" 
-                        [ngClass]="{'w-50': item.value.options.length % 2 === 0}">
-                            <div 
-                            class="variant-feature options pointer {{ selectionOptions[option] ? '' : 'disabledTab'}}" 
-                            (click)="selectedOption(option, item.key)" 
-                            [class.active]="selections[item.key] && selections[item.key] === option" 
-                            [innerHTML]="option">
+                        <div
+                                *ngFor="let option of item.value.options"
+                                class="w-33 pa1"
+                                [ngClass]="{'w-50': item.value.options.length % 2 === 0}">
+                            <div
+                                    class="variant-feature options pointer {{ selectionOptions[option] ? '' : 'disabledTab'}}"
+                                    (click)="selectedOption(option, item.key)"
+                                    [class.active]="selections[item.key] && selections[item.key] === option"
+                                    [innerHTML]="option">
                             </div>
                         </div>
                     </div>
