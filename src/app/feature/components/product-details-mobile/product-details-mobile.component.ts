@@ -77,7 +77,7 @@ export class ProductDetailsMobileComponent implements OnInit {
         autoWidth: false,
         loop: true,
         margin: 10,
-        items: 1.3,
+        items: 2.3,
         center: false,
         dots: false,
         pagination: false,
@@ -390,19 +390,8 @@ export class ProductDetailsMobileComponent implements OnInit {
         this.hasSelection = e;
     }
 
-    renderPrice(price) {
-        return this.utils.formatPrice(price);
-        // const pricesArray = price.split('-');
-        // let fromPrice = Number(pricesArray[0]);
-        // let toPrice;
-        // if (pricesArray.length > 1) {
-        //     toPrice = Number(pricesArray[1]);
-        // }
-        // if (!toPrice) {
-        //     return `${this.utils.parsePrice(fromPrice)}`;
-        // } else {
-        //     return `${this.utils.parsePrice(fromPrice)} - ${this.utils.parsePrice(toPrice)}`;
-        // }
+    renderPrice(price, wasPrice = false) {
+        return this.utils.formatPriceMobile(price, wasPrice);
     }
 
     isDiscountedCollectionPrice(product): boolean {

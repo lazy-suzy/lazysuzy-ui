@@ -109,7 +109,31 @@ export class UtilsService {
             return;
         }
     }
+    formatPriceMobile(price, wasPrice) {
+        if (price) {
+            const priceString = price.toString();
+            let minRange;
+            let maxRange;
+            let result;
+            const splitedPrice = priceString.split('-');
+            minRange = parseFloat(splitedPrice[0]).toFixed(2);
+            if (splitedPrice.length > 1) {
+                maxRange = parseFloat(splitedPrice[1]).toFixed(2);
+                if (!wasPrice) {
+                    result = `From ${this.parsePrice(minRange)}`;
+                } else {
+                    result = this.parsePrice(minRange);
+                }
 
+            } else {
+                maxRange = null;
+                result = this.parsePrice(minRange);
+            }
+            return result;
+        } else {
+            return;
+        }
+    }
     getPriceObject(product: any) {
         let isRanged, isDiscounted = false;
         let {is_price, was_price} = product;
