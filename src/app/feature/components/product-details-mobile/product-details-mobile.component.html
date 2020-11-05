@@ -172,7 +172,7 @@
                                         <span class="is-price" [ngClass]="{'sale':isDiscountedCollectionPrice(data)}">
                                             {{renderPrice(data.price)}} &nbsp;
                                             <span *ngIf="isDiscountedCollectionPrice(data)" class="strike was-price">
-                                                {{renderPrice(data.was_price)}}
+                                                {{renderPrice(data.was_price,true)}}
                                             </span>
                                         </span>
 
