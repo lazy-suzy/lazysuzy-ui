@@ -58,6 +58,10 @@ export class NavMobileComponent implements OnInit {
             this.notHome =
                 location.path() !== '' && location.path().match(/board/) == null;
             this.isBoard = (location.path().match(/board/) !== null);
+            this.showOffer =
+                location.path().match(/checkout/) === null &&
+                location.path().match(/board\/dashboard/) === null &&
+                location.path().match(/blog/) == null;
         });
     }
 
