@@ -78,7 +78,7 @@
           >
         </span>
                 <span class="header-link pointer">
-                    <ng-container *ngIf="cartProduct; else filledCartIcon">
+                    <ng-container *ngIf="!cartProduct; else filledCartIcon">
                      <mat-icon
                              class="ml2"
                              [matBadge]="cartProduct > 0 ? cartProduct : null"
