@@ -13,7 +13,7 @@
 
 <ng-template #showBar>
     <div class="offer-rail" *ngIf="showOffer">
-        <ng-container *ngFor="let deal of deals|slice:0:1;let i=index">
+        <ng-container *ngFor="let deal of mobileDeals|slice:0:1;let i=index">
             <a [href]="deal.url" class="absolute-anchor-tag">
                 <span class="offer-details"> {{deal.title | uppercase}}</span>
             </a>
@@ -277,7 +277,7 @@
                 matBadgeSize="small"
                 aria-hidden="false"
                 [routerLink]="['/cart']"
-        >shopping_cart</mat-icon
+        >shopping_bag</mat-icon
         >
       </span>
             <app-auth class="account-menu" [isHandset]="true"></app-auth>

@@ -1,10 +1,6 @@
-import {Component, ElementRef, OnInit, ViewChild} from '@angular/core';
-import {
-    ApiService,
-    UtilsService,
-    MatDialogUtilsService
-} from './../../../shared/services';
-import {Router, NavigationEnd} from '@angular/router';
+import {Component, OnInit, ViewChild} from '@angular/core';
+import {ApiService, MatDialogUtilsService, UtilsService} from './../../../shared/services';
+import {NavigationEnd, Router} from '@angular/router';
 import {IAllDepartment} from '../../../shared/models/all-department.interface';
 import {Subscription} from 'rxjs';
 import {Location} from '@angular/common';
@@ -22,7 +18,7 @@ export class NavMobileComponent implements OnInit {
     @ViewChild('departmentSideNav', {static: false}) departmentSideNav: any;
     @ViewChild('brandSideNav', {static: false}) brandSideNav: any;
     @ViewChild('collectionSideNav', {static: false}) collectionSideNav: any;
-    logoPath = 'assets/image/color_logo_transparent.png';
+    logoPath = 'assets/image/dark_logo_transparent.png';
     departments: IAllDepartment[];
     selectedIndex = null;
     menuVisible = false;
@@ -38,7 +34,9 @@ export class NavMobileComponent implements OnInit {
     brands = [];
     collections = [];
     deals: any;
+    mobileDeals: any;
     showOffer = true;
+
     constructor(
         private apiService: ApiService,
         private utils: UtilsService,
@@ -89,13 +87,16 @@ export class NavMobileComponent implements OnInit {
                 });
             });
     }
+
     getDeals() {
         this.apiService.getDeals().pipe(first()).subscribe((value: any) => {
             this.deals = value.sort((a, b) => {
                 return a.rank - b.rank;
             });
+            this.mobileDeals = this.deals.filter(deal => deal.is_mobile);
         });
     }
+
     onDestroy(): void {
         this.checkHomeRoute.unsubscribe();
         this.eventSubscription.unsubscribe();
@@ -181,6 +182,7 @@ export class NavMobileComponent implements OnInit {
         this.brandSideNav.close();
         this.collectionSideNav.close();
     }
+
     openOfferModal() {
         this.matDialogUtils.openAllOffersDialog(this.deals);
     }
