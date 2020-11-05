@@ -10,6 +10,7 @@ import {Subscription} from 'rxjs';
 import {Location} from '@angular/common';
 import {CookieService} from 'ngx-cookie-service';
 import {EventEmitterService} from 'src/app/shared/services';
+import {first} from 'rxjs/operators';
 
 @Component({
     selector: 'app-nav-mobile',
@@ -36,7 +37,8 @@ export class NavMobileComponent implements OnInit {
     cartProduct: number;
     brands = [];
     collections = [];
-
+    deals: any;
+    showOffer = true;
     constructor(
         private apiService: ApiService,
         private utils: UtilsService,
@@ -60,6 +62,7 @@ export class NavMobileComponent implements OnInit {
     }
 
     ngOnInit(): void {
+        this.getDeals();
         this.eventSubscription = this.eventEmitterService.userChangeEvent
             .asObservable()
             .subscribe((user) => {
@@ -82,7 +85,13 @@ export class NavMobileComponent implements OnInit {
                 });
             });
     }
-
+    getDeals() {
+        this.apiService.getDeals().pipe(first()).subscribe((value: any) => {
+            this.deals = value.sort((a, b) => {
+                return a.rank - b.rank;
+            });
+        });
+    }
     onDestroy(): void {
         this.checkHomeRoute.unsubscribe();
         this.eventSubscription.unsubscribe();
@@ -167,5 +176,8 @@ export class NavMobileComponent implements OnInit {
         this.departmentSideNav.close();
         this.brandSideNav.close();
         this.collectionSideNav.close();
+    }
+    openOfferModal() {
+        this.matDialogUtils.openAllOffersDialog(this.deals);
     }
 }
