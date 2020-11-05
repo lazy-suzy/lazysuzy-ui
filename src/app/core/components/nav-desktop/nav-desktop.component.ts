@@ -16,7 +16,7 @@ import {first} from 'rxjs/operators';
 })
 export class NavDesktopComponent implements OnInit {
     @Input() isTablet: boolean;
-    logoPath = 'assets/image/color_logo_transparent.png';
+    logoPath = 'assets/image/dark_logo_transparent.png';
     departments: IAllDepartment[];
     notHome: boolean;
     checkHomeRoute: Subscription;
@@ -25,8 +25,7 @@ export class NavDesktopComponent implements OnInit {
     password: any;
     hideBar = false;
     cartProduct: number;
-
-    isBrandPage: boolean = false;
+    isBrandPage = false;
     params: any;
     deals: any;
     showOffer = true;
