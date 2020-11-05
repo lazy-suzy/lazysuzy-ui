@@ -29,17 +29,23 @@
 
     <mat-toolbar class="bg-transparent">
         <mat-toolbar-row class="header flex justify-between ph2">
-            <a
-                    routerLink="/"
-                    routerLinkActive="active"
-                    class="no-underline flex items-center"
-            >
-                <img
-                        class="w4 pointer grow title-image"
-                        [src]="logoPath"
-                        alt="Lazy Suzy Home"
-                />
-            </a>
+            <div class="flex">
+                <a
+                        routerLink="/"
+                        routerLinkActive="active"
+                        class="no-underline flex items-center"
+                >
+                    <img
+                            class="w4 pointer grow title-image"
+                            [src]="logoPath"
+                            alt="Lazy Suzy Home"
+                    />
+                </a>
+                <span [routerLink]="['/']" class="my-boards-link ml4">Shop</span>
+
+                <span [routerLink]="['/board']" class="my-boards-link ml4">Design</span>
+            </div>
+
             <app-search-bar
                     *ngIf="notHome"
                     class="section"
@@ -52,7 +58,6 @@
                   href="http://board.lazysuzy.com/myboards.html"
                   >My Board</a
                 > -->
-                <span [routerLink]="['/board']" class="my-boards-link">My Boards</span>
                 <span class="header-link pointer boards-icon">
           <mat-icon aria-hidden="false" [routerLink]="['/board']" class="mt-0"
           >dashboard</mat-icon
@@ -65,8 +70,7 @@
                   matBadgeColor="#b76379"
                   aria-hidden="false"
                   [routerLink]="['/cart']"
-          >shopping_cart</mat-icon
-          >
+          >shopping_bag</mat-icon>
         </span>
                 <span class="header-link pointer">
           <mat-icon aria-hidden="false" [routerLink]="['/wishlist']"
