@@ -55,9 +55,9 @@
                             alt="Lazy Suzy Home"
                     />
                 </a>
-                <span [routerLink]="['/']" class="my-boards-link ml4">Shop</span>
+                <span [routerLink]="['/']" class="my-boards-link ml4" [ngClass]="{'active-nav-link':isShop}" >Shop</span>
 
-                <span [routerLink]="['/board']" class="my-boards-link ml4">Design</span>
+                <span [routerLink]="['/board']" class="my-boards-link ml4"  [ngClass]="{'active-nav-link':isBoard}" >Design</span>
             </div>
 
             <app-search-bar

@@ -29,6 +29,9 @@ export class NavDesktopComponent implements OnInit {
     params: any;
     deals: any;
     showOffer = true;
+    //
+    isShop = true;
+    isBoard = false;
 
     constructor(
         private router: Router,
@@ -52,6 +55,8 @@ export class NavDesktopComponent implements OnInit {
                 location.path().match(/checkout/) === null &&
                 location.path().match(/board/) === null &&
                 location.path().match(/blog/) == null;
+            this.isShop = location.path().match(/board/) == null;
+            this.isBoard = location.path().match(/board/) !== null;
         });
     }
 
