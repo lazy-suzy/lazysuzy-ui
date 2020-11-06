@@ -1,16 +1,13 @@
 import {Component, Input, OnInit} from '@angular/core';
-import {Router, ActivatedRoute} from '@angular/router';
+import {ActivatedRoute, Router} from '@angular/router';
 import {Location} from '@angular/common';
 import {Subscription} from 'rxjs';
 import {IAllDepartment} from '../../../shared/models';
-import {
-    ApiService,
-    UtilsService,
-    MatDialogUtilsService
-} from './../../../shared/services';
+import {ApiService, MatDialogUtilsService, UtilsService} from './../../../shared/services';
 import {MessageService} from 'primeng/api';
 import {CookieService} from 'ngx-cookie-service';
 import {EventEmitterService} from 'src/app/shared/services';
+import {first} from 'rxjs/operators';
 
 @Component({
     selector: 'app-nav-desktop',
@@ -19,7 +16,7 @@ import {EventEmitterService} from 'src/app/shared/services';
 })
 export class NavDesktopComponent implements OnInit {
     @Input() isTablet: boolean;
-    logoPath = 'assets/image/color_logo_transparent.png';
+    logoPath = 'assets/image/dark_logo_transparent.png';
     departments: IAllDepartment[];
     notHome: boolean;
     checkHomeRoute: Subscription;
@@ -28,9 +25,13 @@ export class NavDesktopComponent implements OnInit {
     password: any;
     hideBar = false;
     cartProduct: number;
-
-    isBrandPage: boolean = false;
+    isBrandPage = false;
     params: any;
+    deals: any;
+    showOffer = true;
+    //
+    isShop = true;
+    isBoard = false;
 
     constructor(
         private router: Router,
@@ -49,12 +50,19 @@ export class NavDesktopComponent implements OnInit {
             this.notHome =
                 location.path() !== '' &&
                 location.path().match(/board/) == null &&
-                location.path().match(/blog/) == null &&
+                location.path().match(/blog/) == null&&
                 location.path().match(/faq\-order/) == null;
+            this.showOffer =
+                location.path().match(/checkout/) === null &&
+                location.path().match(/board/) === null &&
+                location.path().match(/blog/) == null;
+            this.isShop = location.path().match(/board/) == null;
+            this.isBoard = location.path().match(/board/) !== null;
         });
     }
 
     ngOnInit(): void {
+        this.getDeals();
         this.eventSubscription = this.eventEmitterService.userChangeEvent
             .asObservable()
             .subscribe((user) => {
@@ -86,6 +94,14 @@ export class NavDesktopComponent implements OnInit {
         this.activeRoute.queryParams.subscribe((params) => {
             // this.isClearAllVisible = params.filters !== '';
             this.params = params;
+        });
+    }
+
+    getDeals() {
+        this.apiService.getDeals().pipe(first()).subscribe((value: any) => {
+            this.deals = value.sort((a, b) => {
+                return a.rank - b.rank;
+            });
         });
     }
 
@@ -175,5 +191,9 @@ export class NavDesktopComponent implements OnInit {
             ...{'filters': filterValue}
         };
         this.router.navigate(['products/brand'], {queryParams: resultFilter});
+    }
+
+    openOfferModal() {
+        this.matDialogUtils.openAllOffersDialog(this.deals);
     }
 }

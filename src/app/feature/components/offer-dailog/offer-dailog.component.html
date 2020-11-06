@@ -1,0 +1,21 @@
+<div class="flex flex-column offer-list">
+    <div>
+        <mat-icon (click)="close();">close</mat-icon>
+    </div>
+    <div class="pa3">
+        <span class="offer-list-header">Sale & Offers</span>
+        <div>
+            <ng-container *ngFor="let deal of deals">
+                <div class="flex flex-column offer-list-item">
+                    <a [href]="deal.url">
+                        <span class="offer-name">{{deal.title}}</span>
+                    </a>
+                    <a [href]="deal.url">
+                        <span class="offer-end">{{deal.sub_title}}</span>
+                    </a>
+                </div>
+            </ng-container>
+        </div>
+    </div>
+
+</div>

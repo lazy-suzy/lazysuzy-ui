@@ -12,6 +12,16 @@
 </ng-container>
 
 <ng-template #showBar>
+    <div class="offer-rail" *ngIf="showOffer">
+        <ng-container *ngFor="let deal of mobileDeals|slice:0:1;let i=index">
+            <a [href]="deal.url" class="absolute-anchor-tag">
+                <span class="offer-details"> {{deal.title | uppercase}}</span>
+            </a>
+            <span class="offer-details" style="margin: 0 1rem" *ngIf="i<0 && i<deals.length-1">|</span>
+        </ng-container>
+
+        <span class="all-offers" (click)="openOfferModal()">View all offers</span>
+    </div>
     <div class="flex items-center header">
         <div class="w-60 flex">
             <ng-container>
@@ -223,7 +233,7 @@
             <a
                     routerLink="/"
                     routerLinkActive="active"
-                    class="no-underline flex items-center ml-1"
+                    class="no-underline flex items-center"
             >
                 <img class="logo-size grow" [src]="logoPath" alt="Lazy Suzy Home"/>
             </a>
@@ -243,7 +253,6 @@
             <div class="header-link">
                 <mat-icon
                         class="account-icon"
-
                         aria-hidden="false"
                         [routerLink]="['/board']"
                 >dashboard
@@ -260,15 +269,30 @@
         >
       </span>
             <span class="flex items-center header-link">
-        <mat-icon
-                class="account-icon"
-                [matBadge]="cartProduct > 0 ? cartProduct : null"
-                matBadgeColor="#b76379"
-                matBadgeSize="small"
-                aria-hidden="false"
-                [routerLink]="['/cart']"
-        >shopping_cart</mat-icon
-        >
+                  <ng-container *ngIf="!cartProduct; else filledCartIcon">
+                     <mat-icon
+                             class="account-icon material-icons-outlined"
+                             [matBadge]="cartProduct > 0 ? cartProduct : null"
+                             matBadgeColor="#b76379"
+                             matBadgeSize="small"
+                             aria-hidden="false"
+                             [routerLink]="['/cart']"
+                     >
+                        shopping_bag
+                     </mat-icon>
+                    </ng-container>
+                    <ng-template #filledCartIcon>
+                          <mat-icon
+                                  class="account-icon"
+                                  [matBadge]="cartProduct > 0 ? cartProduct.toString() : null"
+                                  matBadgeColor="#b76379"
+                                  matBadgeSize="small"
+                                  aria-hidden="false"
+                                  [routerLink]="['/cart']"
+                          >
+                            shopping_bag
+                          </mat-icon>
+                    </ng-template>
       </span>
             <app-auth class="account-menu" [isHandset]="true"></app-auth>
         </div>
@@ -278,6 +302,7 @@
                 class="section"
                 [notHome]="notHome"
                 [isBoard]="isBoard"
+                [isHandset]="true"
         ></app-search-bar>
     </div>
 </ng-template>
