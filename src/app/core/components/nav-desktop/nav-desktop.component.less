@@ -207,7 +207,8 @@ mat-icon.account-icon {
   }
 
   a:hover {
-    text-decoration: none;
+    text-decoration: underline;
+    text-decoration-color: #ffcc00;
     border: none;
     outline: none;
   }
@@ -233,4 +234,11 @@ mat-icon.account-icon {
   top: 0;
   width: 100%;
   z-index: 99;
+}
+.active-nav-link{
+  color: #606060;
+  font-weight: normal;
+  &:hover{
+    text-decoration: none !important;
+  }
 }

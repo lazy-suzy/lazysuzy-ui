@@ -1,24 +1,25 @@
 <div class="searchBar" *ngIf="notHome || isBoard; else isHome">
-  <div class="main-container header-container">
-    <form #form="ngForm" role="form" class="searchbar">
-      <div *ngIf="!textChange" class="col-form">
+    <ng-container *ngIf="!isHandset;else handsetSearch">
+        <div class="main-container header-container">
+            <form #form="ngForm" role="form" class="searchbar">
+                <div *ngIf="!textChange" class="col-form">
         <span>
           <input
-            class="form-control search-input-before header-searchbar"
-            ngModel
-            name="query"
-            type="search"
-            placeholder='Try "White Chair"'
+                  class="form-control search-input-before header-searchbar"
+                  ngModel
+                  name="query"
+                  type="search"
+                  placeholder='Try "White Chair"'
           />
           <span
-            class="btn btn-dark search-button-before header-search-button"
-            (click)="openSearch(form)"
+                  class="btn btn-dark search-button-before header-search-button"
+                  (click)="openSearch(form)"
           >
             <i class="fas fa-search search-icon"></i>
           </span>
         </span>
-      </div>
-      <div *ngIf="textChange" class="col-form">
+                </div>
+                <div *ngIf="textChange" class="col-form">
        <span>
           <input
                   class="form-control search-input-before header-searchbar"
@@ -34,51 +35,81 @@
             <i class="fas fa-search search-icon"></i>
           </span>
         </span>
-      </div>
-    </form>
-  </div>
+                </div>
+            </form>
+        </div>
+    </ng-container>
+    <ng-template #handsetSearch>
+        <div class="handset-search-wrapper">
+            <form #form="ngForm">
+                <div class="flex align-center">
+                    <div class="left-arrow-icon">
+                        <mat-icon (click)="this.searchComplete.emit()">
+                            <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-arrow-left"
+                                 fill="currentColor"
+                                 xmlns="http://www.w3.org/2000/svg">
+                                <path fill-rule="evenodd"
+                                      d="M15 8a.5.5 0 0 0-.5-.5H2.707l3.147-3.146a.5.5 0 1 0-.708-.708l-4 4a.5.5 0 0 0 0 .708l4 4a.5.5 0 0 0 .708-.708L2.707 8.5H14.5A.5.5 0 0 0 15 8z"/>
+                            </svg>
+                        </mat-icon>
+                    </div>
+                    <div class="input-wrapper">
+
+                        <input placeholder='Try "White Chair"'
+                               ngModel
+                               name="query"
+                               type="search">
+                        <span class="btn btn-dark header-search-button">
+                            <i class="fas fa-search search-icon" (click)="openSearch(form)"></i>
+                      </span>
+
+                    </div>
+                </div>
+            </form>
+        </div>
+    </ng-template>
 </div>
 <ng-template #isHome>
-  <div class="searchBar">
-    <div class="main-container search-container">
-      <form #form="ngForm" role="form" class="searchbar">
-        <div *ngIf="!textChange" class="col-form">
+    <div class="searchBar">
+        <div class="main-container search-container">
+            <form #form="ngForm" role="form" class="searchbar">
+                <div *ngIf="!textChange" class="col-form">
           <span>
             <input
-              class="form-control search-input-before"
-              ngModel
-              name="query"
-              type="search"
-              placeholder='Try "White Chair"'
+                    class="form-control search-input-before"
+                    ngModel
+                    name="query"
+                    type="search"
+                    placeholder='Try "White Chair"'
             />
             <button
-              type="submit"
-              class="btn btn-dark search-button-before"
-              (click)="openSearch(form)"
+                    type="submit"
+                    class="btn btn-dark search-button-before"
+                    (click)="openSearch(form)"
             >
               <i class="fas fa-search search-icon"></i>
             </button>
           </span>
-        </div>
-        <div *ngIf="textChange" class="col-form">
+                </div>
+                <div *ngIf="textChange" class="col-form">
           <span>
             <input
-              class="form-control search-input"
-              ngModel
-              name="query"
-              type="search"
-              placeholder="Enter your search term here"
+                    class="form-control search-input"
+                    ngModel
+                    name="query"
+                    type="search"
+                    placeholder="Enter your search term here"
             />
             <button
-              type="submit"
-              class="btn btn-warning search-button"
-              (click)="openSearch(form)"
+                    type="submit"
+                    class="btn btn-warning search-button"
+                    (click)="openSearch(form)"
             >
               <i class="fas fa-search search-icon"></i>
             </button>
           </span>
+                </div>
+            </form>
         </div>
-      </form>
     </div>
-  </div>
 </ng-template>
