@@ -1,0 +1,124 @@
+<div class="wrapper">
+    <div class="content">
+        <div class="header">
+            <span>Ordering FAQ</span>
+        </div>
+
+        <div class="faq-list mt4">
+            <ng-container *ngFor="let question of questions;let i = index;">
+                <div (click)="scrollToView(i+1)" class="mb2 question">{{question}}</div>
+            </ng-container>
+        </div>
+        <hr>
+        <div class="faq-answers">
+            <div class="faq-wrapper">
+                <div class="question" id="1">
+                    How does your order process work?
+                </div>
+                <div class="answer">
+                    The LazySuzy marketplace helps you order from several home brands through a single checkout process
+                    and
+                    one total payment. We then work with our retailer and brand partners to coordinate shipping and
+                    logistics to make sure you have the best possible post-purchase experience. Not only do you save
+                    yourself the pain of having to repeat the same ordering process across several sites, you can also
+                    be
+                    rest assured that we are working hard on your behalf to receive priority service and contininuous
+                    communication on your order status.
+                </div>
+            </div>
+            <div class="faq-wrapper">
+                <div class="question" id="2">
+                    Do you hold and ship products as a third party seller or drop ship from sellers directly?
+                </div>
+                <div class="answer">
+                    Generally, we don't hold any inventory ourselves and ship products directly from sellers once you
+                    place an order. This helps keep costs down and offer you the best possible price on all items listed
+                    on our site. In some cases, where items are selling quickly and are at risk of being sold out, we
+                    may purchase stock in greater quantity before a hot product sells out so that we can offer our users
+                    the opportunity to access hot ticket items exclusively. Look for the *Exclusive* tage on products
+                    that we offer for online ordering that may not be available anywhere else.
+                </div>
+            </div>
+
+            <div class="faq-wrapper">
+                <div class="question" id="3">
+                    How are you able to offer products at prices lower than the seller's own listed price?
+                </div>
+                <div class="answer">
+                    Through our marketplace program, we're able to access product at preferred pricing and through our
+                    super low cost operations we are able to pass on a bulk of the savings to our customers.
+                </div>
+            </div>
+
+            <div class="faq-wrapper" >
+                <div class="question" id="4">
+                    Do you accept returns?
+                </div>
+                <div class="answer mb2">
+                    For most items listed on our site, we accept returns in accordance the seller's return policy. Most
+                    sellers offer favorable return policies except for clearance items which are generally sold as final
+                    and indicated by prices ending in .99 or .98.
+                </div>
+                <div class="answer mb2">
+                    Certain items sold directly by us through our own shipping service are also sold as final sales.
+                    This helps us able to offer competitive shipping rates on items that are otherwise not available for
+                    online ordering by sellers directly and makes items accessible nationwide without having to be near
+                    seller's physical stores. In some cases, returns may also be accepted for drop off at a seller's
+                    nearest location to you.
+
+
+                </div>
+                <div class="answer">
+                    With that said, if you are ever unhappy with your purchase please reach out to us and we will do
+                    everything we can to find a solution that works for you.
+                </div>
+            </div>
+
+            <div class="faq-wrapper">
+                <div class="question" id="5">
+                    Do you offer free delivery?
+                </div>
+                <div class="answer mb2">
+                    In most cases, we follow the shipping rates offered by sellers and generally includes one flat fee
+                    for all bulk items ordered from sellers for white-glove in home delivery and assembly.
+                </div>
+                <div class="answer">
+                    We are working towards shifting our site towards 100% free delivery and are gradually working
+                    towards that goal. Bear with us while we keep working to bring you an ever improving experience!
+                </div>
+            </div>
+
+            <div class="faq-wrapper">
+                <div class="question" id="6">
+                    What happens if an item I order is out of stock or facing delayed delivery times?
+                </div>
+                <div class="answer">
+                    In most cases, if there is any issue with an item your ordered that requires your attention, we will
+                    reach out on the same business day - no matter the time! - and at the latest by the following day.
+                    If an item is completely sold out, we will refund your credit card immediately and if there are
+                    unexpected delays we will work with you to proceed with the approach that suits you best.
+                </div>
+            </div>
+
+            <div class="faq-wrapper" >
+                <div class="question" id="7">
+                    Can I have all items from multiple sellers delivered to me on the same day / same time?
+                </div>
+                <div class="answer">
+                    We can certainly work with you to help coordinate delivery of items from multiple sellers to arrive
+                    during a single window. We know the commitment it is to set up a home with new furnishings and will
+                    aim to make the experience as smooth as possible for you.
+                </div>
+            </div>
+            <div class="faq-wrapper" >
+                <div class="question" id="8">
+                    Can I place orders to International locations outside of the United States?
+                </div>
+                <div class="answer">
+                    At this time, we are unable to serve international locations. If you are based in Canada, send us a
+                    note and we can try to work with you to accomodate your needs.
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

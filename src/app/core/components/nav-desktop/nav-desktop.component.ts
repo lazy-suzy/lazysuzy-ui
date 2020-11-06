@@ -50,7 +50,8 @@ export class NavDesktopComponent implements OnInit {
             this.notHome =
                 location.path() !== '' &&
                 location.path().match(/board/) == null &&
-                location.path().match(/blog/) == null;
+                location.path().match(/blog/) == null&&
+                location.path().match(/faq\-order/) == null;
             this.showOffer =
                 location.path().match(/checkout/) === null &&
                 location.path().match(/board/) === null &&
