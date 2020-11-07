@@ -6,7 +6,7 @@
 
         <div class="faq-list mt4">
             <ng-container *ngFor="let question of questions;let i = index;">
-                <div (click)="scrollToView(i+1)" class="mb2 question">{{question}}</div>
+                <div (click)="scrollToView(question.rank)" class="mb2 question">{{question.text}}</div>
             </ng-container>
         </div>
         <hr>
@@ -111,9 +111,17 @@
                     furnishings and will aim to make the experience as smooth as possible for you.
                 </div>
             </div>
-
             <div class="faq-wrapper">
                 <div class="question" id="7">
+                    Can you place orders to International locations outside of the United States?
+                </div>
+                <div class="answer">
+                    At this time, we are unable to serve international locations. If you are based in Canada, send us a
+                    note and we can try to work with you to accomodate your needs.
+                </div>
+            </div>
+            <div class="faq-wrapper">
+                <div class="question" id="8">
                     How are returns handled?
                 </div>
                 <div class="answer mb2">
