@@ -76,7 +76,7 @@ export class ProductFiltersComponent implements OnInit {
         category: [],
         shape: [],
         seating: [],
-        mfg_country: [],
+        country: [],
         designer: [],
         fabric: [],
         material: [],
@@ -163,7 +163,7 @@ export class ProductFiltersComponent implements OnInit {
                 category: [],
                 shape: [],
                 seating: [],
-                mfg_country: [],
+                country: [],
                 designer: [],
                 fabric: [],
                 material: [],
@@ -217,8 +217,8 @@ export class ProductFiltersComponent implements OnInit {
                             .filter((category) => category.checked)
                             .map((category) => category.value);
                     }
-                    if (this.productFilters.mfg_country) {
-                        this.activeFilters.mfg_country = this.productFilters.mfg_country
+                    if (this.productFilters.country) {
+                        this.activeFilters.country = this.productFilters.country
                             .filter((mfgCountry) => mfgCountry.checked)
                             .map((mfgCountry) => mfgCountry.value);
                     }
@@ -351,7 +351,7 @@ export class ProductFiltersComponent implements OnInit {
                 category: [],
                 shape: [],
                 seating: [],
-                mfg_country: [],
+                country: [],
                 designer: [],
                 fabric: [],
                 material: [],
@@ -385,7 +385,7 @@ export class ProductFiltersComponent implements OnInit {
                 category: [],
                 shape: [],
                 seating: [],
-                mfg_country: [],
+                country: [],
                 designer: [],
                 fabric: [],
                 material: [],
@@ -419,7 +419,7 @@ export class ProductFiltersComponent implements OnInit {
                 category: [],
                 shape: [],
                 seating: [],
-                mfg_country: [],
+                country: [],
                 designer: [],
                 fabric: [],
                 material: [],
