@@ -135,9 +135,6 @@ export class AllProductsComponent implements OnInit {
                 if (this.isBrandPage === true) {
                     this.eventEmitterService.isBrandSubject.next(this.selectedBrandValue);
                 }
-                if (this.isBrandPage) {
-
-                }
                 this.seoService.setMetaTags(metaData);
                 // console.log('this is selectedBrandValue: ', this.selectedBrandValue);
 
@@ -246,19 +243,22 @@ export class AllProductsComponent implements OnInit {
                 this.brandData = brandData[0];
                 console.log('this is brandData: ', this.brandData);
                 if (brandValue !== '') {
-                    this.setTitle(this.brandData.name);
-                } else {
-                    this.setTitle('');
+                    this.setTitle(this.brandData);
                 }
             }
         });
     }
 
-    setTitle(title: string = '') {
+    setTitle(brand: any) {
+        const metaData: MetaData = {};
+        metaData.title = `Shop ${brand.name} furniture for your home | LazySuzy`;
+        metaData.description = brand.description;
+        metaData.image = brand.logo;
+        this.seoService.setMetaTags(metaData);
     }
 
     ngOnDestroy(): void {
-        this.setTitle('Lazysuzy');
+        // this.setTitle();
     }
 
     onSetFilters(e): void {
