@@ -55,7 +55,6 @@ export class FaqComponent implements OnInit {
             this.isHandset = value.matches;
         });
     }
-
     scrollToView(id) {
         document.getElementById(id).scrollIntoView();
     }
