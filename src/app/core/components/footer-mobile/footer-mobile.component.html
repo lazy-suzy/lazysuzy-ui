@@ -1,23 +1,33 @@
-<div class="flex white mh3 font-size-14 mb2">
-    <div class="w-80 font-size-16">
-        <a class="white lazy-story" [routerLink]="['/aboutus']">The Lazy Story</a>
-        <a class="white lazy-story" [routerLink]="['/blog']">Home Musings</a>
-        <div class="font-size-12">
-            <a class="white" [routerLink]="['/privacypolicy']">Privacy Policy </a>
-            <span>|</span>
-            <a class="white" [routerLink]="['/termsofservice']"> Terms of Service</a>
-            <span> ©2020 LazySuzy</span>
+<div class="flex flex-column white mh3 font-size-14 mb2 open-sans">
+    <div class="flex">
+        <div class="w-80 font-size-16 flex flex-column">
+            <a class="white lazy-story" [routerLink]="['/aboutus']">About Us</a>
+            <a class="white lazy-story" [routerLink]="['/blog']">Home Musings</a>
+            <a class="white lazy-story" [routerLink]="['/faq-order']">FAQ - Ordering & Returns</a>
+            <a class="white lazy-story" [routerLink]="['/']">Care & Maintenance Guide</a>
+        </div>
+        <div class="flex flex-column mt2">
+            <div class="flex justify-between items-center mb2">
+                <a target="_blank" class="font-size-16 white" href="mailto:hello@lazysuzy.com">
+                    <i class="fas fa-envelope"></i>
+                </a>
+                <a target="_blank" class="font-size-16 white" href="//www.facebook.com/shoplazysuzy">
+                    <i class="fab fa-facebook-f"></i>
+                </a>
+                <a target="_blank" class="white font-size-16" href="//www.instagram.com/shoplazysuzy/">
+                    <i class="fab fa-instagram"></i>
+                </a>
+            </div>
+            <div>
+                <img class="logo" [src]="logopath">
+            </div>
+
         </div>
     </div>
-    <!--        <a class="link white lazy-story fr" [routerLink]="['/blog']">Blog</a>-->
-    <div class="w-20">
-        <div class="icon-container">
-            <a target="_blank" class="font-size-16 mr4 white" href="mailto:hello@lazysuzy.com">
-                <i class="fas fa-envelope"></i>
-            </a>
-            <a target="_blank" class="font-size-16 white" href="//www.facebook.com/shoplazysuzy">
-                <i class="fab fa-facebook-f"></i>
-            </a>
-        </div>
+    <div class="font-size-12" style="margin-top: 0.6rem">
+        <a class="white" [routerLink]="['/privacypolicy']">Privacy Policy </a>
+        <span>|</span>
+        <a class="white mr3" [routerLink]="['/termsofservice']"> Terms of Service</a>
+        <span> ©2020 LazySuzy</span>
     </div>
 </div>
