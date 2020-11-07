@@ -1,13 +1,9 @@
 import {Component, Input, OnInit} from '@angular/core';
-import {Router, ActivatedRoute} from '@angular/router';
+import {ActivatedRoute, Router} from '@angular/router';
 import {Location} from '@angular/common';
 import {Subscription} from 'rxjs';
 import {IAllDepartment} from '../../../shared/models';
-import {
-    ApiService,
-    UtilsService,
-    MatDialogUtilsService
-} from './../../../shared/services';
+import {ApiService, MatDialogUtilsService, UtilsService} from './../../../shared/services';
 import {MessageService} from 'primeng/api';
 import {CookieService} from 'ngx-cookie-service';
 import {EventEmitterService} from 'src/app/shared/services';
@@ -28,7 +24,7 @@ export class NavDesktopComponent implements OnInit {
     password: any;
     hideBar = false;
     cartProduct: number;
-
+    isFaqPage = false;
     isBrandPage: boolean = false;
     params: any;
 
@@ -46,6 +42,7 @@ export class NavDesktopComponent implements OnInit {
     ) {
         this.checkHomeRoute = router.events.subscribe((val) => {
             // this.notHome = location.path() !== '';
+            this.isFaqPage = location.path().match(/faq\-order/) !== null;
             this.notHome =
                 location.path() !== '' &&
                 location.path().match(/board/) == null &&

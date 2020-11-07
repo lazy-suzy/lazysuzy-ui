@@ -17,7 +17,7 @@
 </ng-container>
 <ng-template #showBar>
   <mat-toolbar class="bg-transparent">
-    <mat-toolbar-row class="header flex justify-between ph2">
+    <mat-toolbar-row class="header flex justify-between ph2" [ngClass]="{'header': !isFaqPage,'faq-header': isFaqPage}" >
       <a
         routerLink="/"
         routerLinkActive="active"
