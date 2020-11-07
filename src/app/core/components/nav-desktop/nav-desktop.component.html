@@ -1,48 +1,78 @@
 <ng-container *ngIf="hideBar; else showBar">
-  <mat-toolbar class="bg-transparent">
-    <mat-toolbar-row class="header flex justify-center ph2" [ngClass]="{'header': !isFaqPage,'faq-header': isFaqPage}">
-      <a
-        routerLink="/"
-        routerLinkActive="active"
-        class="no-underline flex items-center"
-      >
-        <img
-          class="center-logo pointer grow title-image"
-          [src]="logoPath"
-          alt="Lazy Suzy Home"
-        />
-      </a>
-    </mat-toolbar-row>
-  </mat-toolbar>
+    <mat-toolbar class="bg-transparent">
+        <mat-toolbar-row class="header flex justify-center ph2" [ngClass]="{'header': !isFaqPage,'faq-header': isFaqPage}" >
+            <a
+                    routerLink="/"
+                    routerLinkActive="active"
+                    class="no-underline flex items-center"
+            >
+                <img
+                        class="center-logo pointer grow title-image"
+                        [src]="logoPath"
+                        alt="Lazy Suzy Home"
+                />
+            </a>
+        </mat-toolbar-row>
+    </mat-toolbar>
 </ng-container>
 <ng-template #showBar>
-  <mat-toolbar class="bg-transparent">
-    <mat-toolbar-row class="header flex justify-between ph2" [ngClass]="{'header': !isFaqPage,'faq-header': isFaqPage}" >
-      <a
-        routerLink="/"
-        routerLinkActive="active"
-        class="no-underline flex items-center"
-      >
-        <img
-          class="w4 pointer grow title-image"
-          [src]="logoPath"
-          alt="Lazy Suzy Home"
-        />
-      </a>
-      <app-search-bar
-        *ngIf="notHome"
-        class="section"
-        [notHome]="notHome"
-      ></app-search-bar>
-      <div class="mr3 flex items-center">
-        <!-- <a
-          *ngIf="!isTablet"
-          class="header-link header-font"
-          href="http://board.lazysuzy.com/myboards.html"
-          >My Board</a
-        > -->
-        <span [routerLink]="['/board']" class="my-boards-link">My Boards</span>
-        <span class="header-link pointer boards-icon">
+    <!--    [ngClass]="{'sticky-rail': !notHome}"-->
+    <ng-container *ngIf="!isTablet;else tablet">
+        <div class="offer-rail" *ngIf="showOffer">
+            <ng-container *ngFor="let deal of deals|slice:0:3;let i=index">
+                <a [href]="deal.url" class="absolute-anchor-tag">
+                    <span class="offer-details"> {{deal.title | uppercase}}</span>
+                </a>
+                <span class="offer-details" style="margin: 0 2rem" *ngIf="i<2 && i<deals.length-1">|</span>
+            </ng-container>
+
+            <span class="all-offers" (click)="openOfferModal()">View all offers</span>
+        </div>
+    </ng-container>
+    <ng-template #tablet>
+        <div class="offer-rail" *ngIf="showOffer">
+            <ng-container *ngFor="let deal of deals|slice:0:2;let i=index">
+                <a [href]="deal.url" class="absolute-anchor-tag">
+                    <span class="offer-details"> {{deal.title | uppercase}}</span>
+                </a>
+                <span class="offer-details" style="margin: 0 2rem" *ngIf="i<1 && i<deals.length-1">|</span>
+            </ng-container>
+
+            <span class="all-offers" (click)="openOfferModal()">View all offers</span>
+        </div>
+    </ng-template>
+    <mat-toolbar class="bg-transparent">
+        <mat-toolbar-row class="header flex justify-between" [ngClass]="{'header': !isFaqPage,'faq-header': isFaqPage}" >
+            <div class="flex">
+                <a
+                        routerLink="/"
+                        routerLinkActive="active"
+                        class="no-underline flex items-center"
+                >
+                    <img
+                            class="w4 pointer grow title-image"
+                            [src]="logoPath"
+                            alt="Lazy Suzy Home"
+                    />
+                </a>
+                <span [routerLink]="['/']" class="my-boards-link ml4" [ngClass]="{'active-nav-link':isShop}" >SHOP</span>
+
+                <span [routerLink]="['/board']" class="my-boards-link ml4"  [ngClass]="{'active-nav-link':isBoard}" >DESIGN</span>
+            </div>
+
+            <app-search-bar
+                    *ngIf="notHome"
+                    class="section"
+                    [notHome]="notHome"
+            ></app-search-bar>
+            <div class="mr3 flex items-center">
+                <!-- <a
+                  *ngIf="!isTablet"
+                  class="header-link header-font"
+                  href="http://board.lazysuzy.com/myboards.html"
+                  >My Board</a
+                > -->
+                <span class="header-link pointer boards-icon">
           <mat-icon aria-hidden="false" [routerLink]="['/board']" class="mt-0"
           >dashboard</mat-icon
           >

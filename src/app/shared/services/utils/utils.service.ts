@@ -142,16 +142,16 @@ export class UtilsService {
         was_price = was_price.split('-');
         if (is_price.length > 1) {
             isRanged = true;
-            isPriceString = `${Number(is_price[0]).toFixed(2)} - ${Number(is_price[1]).toFixed(2)}`;
+            isPriceString = `${this.parsePrice(Number(is_price[0]))} - ${this.parsePrice(Number(is_price[1]))}`;
         } else {
-            isPriceString = `${Number(is_price[0]).toFixed(2)}`;
+            isPriceString = `${this.parsePrice(Number(is_price[0]))}`;
         }
         isDiscounted = was_price && Number(was_price[0]) > Number(is_price[0]);
         if (isDiscounted) {
             if (isRanged) {
-                wasPriceString = `${Number(was_price[0]).toFixed(2)} - ${Number(was_price[1]).toFixed(2)}`;
+                wasPriceString = `${this.parsePrice(Number(was_price[0]))} - ${this.parsePrice(Number(was_price[1]))}`;
             } else {
-                wasPriceString = `${Number(was_price[0]).toFixed(2)}`;
+                wasPriceString = `${this.parsePrice(Number(was_price[0]))}`;
             }
         }
         return {isDiscounted, isRanged, isPriceString, wasPriceString};
@@ -176,7 +176,7 @@ export class UtilsService {
     parsePrice(price: number): string {
         const quotient = Math.floor(price);
         const remainder = Number((price - quotient).toPrecision(2));
-        if (remainder == 0) {
+        if (remainder === 0) {
             return this.formatUSCurrency(quotient, '1.0-0');
         } else {
             return this.formatUSCurrency(price, '1.2-2');
