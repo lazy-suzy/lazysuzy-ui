@@ -90,6 +90,10 @@ const routes: Routes = [
         loadChildren: () => import('./feature/faq/faq.module').then(m => m.FaqModule)
     },
     {
+        path: 'furniture-care',
+        loadChildren: () => import('./feature/furniture-care/furniture-care.module').then(m => m.FurnitureCareModule)
+    },
+    {
         path: 'admin/dashboard/new-products',
         loadChildren: () =>
             import('./modules/new-products-dashboard/new-products-dashboard.module').then(

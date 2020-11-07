@@ -23,7 +23,6 @@ export class FaqComponent implements OnInit {
 
     ngOnInit() {
     }
-
     scrollToView(id) {
         document.getElementById(id).scrollIntoView();
     }
