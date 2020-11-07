@@ -10,7 +10,7 @@ import {
 import {
   ApiService,
   CacheService,
-  EventEmitterService
+  EventEmitterService, SeoService
 } from './../../../shared/services';
 import { SCROLL_ICON_SHOW_DURATION } from './../../../shared/constants';
 import { Router, ActivatedRoute, NavigationEnd } from '@angular/router';
@@ -22,6 +22,7 @@ import {
 } from '@angular/cdk/layout';
 import { Title } from '@angular/platform-browser';
 import {filter, first} from "rxjs/operators";
+import MetaData from '../../../shared/services/seo/meta-data-model';
 
 @Component({
   selector: 'app-product-collections',
@@ -81,7 +82,8 @@ export class ProductCollectionsComponent implements OnInit {
       private breakpointObserver: BreakpointObserver,
       public cacheService: CacheService,
       private eventEmitterService: EventEmitterService,
-      private title: Title
+      private title: Title,
+      private  seoService: SeoService
   ) {
     this.isBrandPageSubscription = this.router.events.subscribe(event => {
       if (event instanceof NavigationEnd) {
@@ -252,19 +254,18 @@ export class ProductCollectionsComponent implements OnInit {
   }
 
   getProductsWithCollection(collection){
-    this.apiService.getCollectionData(collection).pipe(first()).subscribe(collectionData =>{
+    this.apiService.getCollectionData(collection).pipe(first()).subscribe(collectionData => {
           this.collectionData = collectionData;
-    })
+          this.setTitle(this.collectionData);
+    });
   }
 
-  setTitle(title: string = '') {
-    let tabTitle = '';
-    if(title === '') {
-      tabTitle = 'Designer Home Furniture | LazySuzy';
-    } else {
-      tabTitle = title;
-    }
-    this.title.setTitle(tabTitle);
+  setTitle(collection) {
+    const metaData: MetaData = {};
+    metaData.title = `Shop ${collection.brand_name} ${collection.name} furniture for your home | LazySuzy`;
+    metaData.description = collection.head_description;
+    metaData.image = collection.cover_details.image;
+    this.seoService.setMetaTags(metaData);
   }
 
   ngOnDestroy(): void {
