@@ -36,6 +36,7 @@ export class NavMobileComponent implements OnInit {
     deals: any;
     mobileDeals: any;
     showOffer = true;
+    isFaqPage = false;
 
     constructor(
         private apiService: ApiService,
@@ -53,6 +54,8 @@ export class NavMobileComponent implements OnInit {
         });
         this.checkHomeRoute = router.events.subscribe((val) => {
             // this.notHome = location.path() !== '';
+
+            this.isFaqPage = location.path().match(/faq\-order/) !== null;
             this.notHome =
                 location.path() !== '' && location.path().match(/board/) == null;
             this.isBoard = (location.path().match(/board/) !== null);

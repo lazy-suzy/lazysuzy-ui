@@ -1,12 +1,12 @@
 <div class="wrapper">
-    <div class="content">
+    <div [ngClass]="{'content':!isHandset,'mobile-content':isHandset}">
         <div class="header">
             <span>Ordering FAQ</span>
         </div>
 
         <div class="faq-list mt4">
             <ng-container *ngFor="let question of questions;let i = index;">
-                <div (click)="scrollToView(i+1)" class="mb2 question">{{question}}</div>
+                <div (click)="scrollToView(question.rank)" class="mb2 question">{{question.text}}</div>
             </ng-container>
         </div>
         <hr>
@@ -27,22 +27,47 @@
                 </div>
             </div>
             <div class="faq-wrapper">
+                <div class="question" style="font-style: italic">
+                    What We Offer
+                </div>
+                <div class="answer">
+                    <ul>
+                        <li>A single platform to search and browse home furniture of differentiated quality, function
+                            and design with the best possible prices we can source for you
+                        </li>
+                        <li> Single order process for all furniture in your Shopping Bag from our sellers, with one
+                            quick checkout
+                        </li>
+                        <li> Price Match! If you find a lower price anywhere else on an identical product, we'll gladly
+                            refund the difference
+                        </li>
+                        <li>Access to any valid seller promotion codes as well as additional exclusive promotions
+                        </li>
+                        <li> Communicate with all of your sellers and keep you updated as items ship and/or are ready to
+                            be scheduled for delivery
+                        </li>
+                        <li>Liaise with brands and retailers directly on returns
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="faq-wrapper">
                 <div class="question" id="2">
-                    Do you hold and ship products as a third party seller or drop ship from sellers directly?
+                    How are products ordered on our site and shipped to you?
                 </div>
                 <div class="answer">
                     Generally, we don't hold any inventory ourselves and ship products directly from sellers once you
                     place an order. This helps keep costs down and offer you the best possible price on all items listed
                     on our site. In some cases, where items are selling quickly and are at risk of being sold out, we
-                    may purchase stock in greater quantity before a hot product sells out so that we can offer our users
-                    the opportunity to access hot ticket items exclusively. Look for the *Exclusive* tage on products
-                    that we offer for online ordering that may not be available anywhere else.
+                    may purchase and hold stock directly so that we can offer our users the opportunity to access such
+                    items exclusively. Look for the *Exclusive* tage on products that we offer for online ordering that
+                    may not be available anywhere else.
                 </div>
             </div>
 
             <div class="faq-wrapper">
                 <div class="question" id="3">
-                    How are you able to offer products at prices lower than the seller's own listed price?
+                    How are we able to offer products at prices lower than the seller's own listed price?
                 </div>
                 <div class="answer">
                     Through our marketplace program, we're able to access product at preferred pricing and through our
@@ -50,9 +75,55 @@
                 </div>
             </div>
 
-            <div class="faq-wrapper" >
+            <div class="faq-wrapper">
                 <div class="question" id="4">
-                    Do you accept returns?
+                    What is our shipping policy?
+                </div>
+                <div class="answer mb2">
+                    In most cases, we follow the shipping rates offered by sellers and generally includes one flat fee
+                    for all bulk items ordered from sellers for white-glove in home delivery and assembly.
+                </div>
+                <div class="answer mb2">
+                    We are working towards shifting our site towards 100% free delivery and are gradually working
+                    towards that goal. Bear with us while we keep working to bring you an ever improving experience!
+                </div>
+
+            </div>
+
+            <div class="faq-wrapper">
+                <div class="question" id="5">
+                    What happens if an item you order is out of stock or facing delayed delivery times?
+                </div>
+                <div class="answer mb2">
+                    In most cases, if there is any issue with an item your ordered that requires your attention, we will
+                    reach out on the same business day - no matter the time! - and at the latest by the following day.
+                    If an item is completely sold out, we will refund your credit card immediately and if there are
+                    unexpected delays we will work with you to proceed with the approach that suits you best.
+                </div>
+            </div>
+
+            <div class="faq-wrapper">
+                <div class="question" id="6">
+                    Can items ordered from multiple sellers be delivered on the same day?
+                </div>
+                <div class="answer">
+                    For in-home delivery, we can certainly work with you to help coordinate delivery of items from
+                    multiple sellers to arrive on the same day. We know the commitment it is to set up a home with new
+                    furnishings and will aim to make the experience as smooth as possible for you.
+                </div>
+            </div>
+            <div class="faq-wrapper">
+                <div class="question" id="7">
+                    Can you place orders to International locations outside of the United States?
+                </div>
+                <div class="answer">
+                    At this time, we are unable to serve international locations. If you are based in Canada, send us a
+                    note and we can try to work with you to accomodate your needs.
+                </div>
+            </div>
+            <div class="faq-wrapper">
+                <div class="question" id="8">
+                    How are returns handled?
                 </div>
                 <div class="answer mb2">
                     For most items listed on our site, we accept returns in accordance the seller's return policy. Most
@@ -62,61 +133,12 @@
                 <div class="answer mb2">
                     Certain items sold directly by us through our own shipping service are also sold as final sales.
                     This helps us able to offer competitive shipping rates on items that are otherwise not available for
-                    online ordering by sellers directly and makes items accessible nationwide without having to be near
-                    seller's physical stores. In some cases, returns may also be accepted for drop off at a seller's
-                    nearest location to you.
-
-
-                </div>
-                <div class="answer">
-                    With that said, if you are ever unhappy with your purchase please reach out to us and we will do
-                    everything we can to find a solution that works for you.
-                </div>
-            </div>
-
-            <div class="faq-wrapper">
-                <div class="question" id="5">
-                    Do you offer free delivery?
+                    online ordering by sellers directly and makes items accessible nationwide. In some cases, returns
+                    may also be accepted for drop off at a seller's nearest location to you.
                 </div>
                 <div class="answer mb2">
-                    In most cases, we follow the shipping rates offered by sellers and generally includes one flat fee
-                    for all bulk items ordered from sellers for white-glove in home delivery and assembly.
-                </div>
-                <div class="answer">
-                    We are working towards shifting our site towards 100% free delivery and are gradually working
-                    towards that goal. Bear with us while we keep working to bring you an ever improving experience!
-                </div>
-            </div>
-
-            <div class="faq-wrapper">
-                <div class="question" id="6">
-                    What happens if an item I order is out of stock or facing delayed delivery times?
-                </div>
-                <div class="answer">
-                    In most cases, if there is any issue with an item your ordered that requires your attention, we will
-                    reach out on the same business day - no matter the time! - and at the latest by the following day.
-                    If an item is completely sold out, we will refund your credit card immediately and if there are
-                    unexpected delays we will work with you to proceed with the approach that suits you best.
-                </div>
-            </div>
-
-            <div class="faq-wrapper" >
-                <div class="question" id="7">
-                    Can I have all items from multiple sellers delivered to me on the same day / same time?
-                </div>
-                <div class="answer">
-                    We can certainly work with you to help coordinate delivery of items from multiple sellers to arrive
-                    during a single window. We know the commitment it is to set up a home with new furnishings and will
-                    aim to make the experience as smooth as possible for you.
-                </div>
-            </div>
-            <div class="faq-wrapper" >
-                <div class="question" id="8">
-                    Can I place orders to International locations outside of the United States?
-                </div>
-                <div class="answer">
-                    At this time, we are unable to serve international locations. If you are based in Canada, send us a
-                    note and we can try to work with you to accomodate your needs.
+                    With that said, if you are ever unhappy with your purchase please reach out to us and we will do
+                    everything we can to find a solution that works for you.
                 </div>
             </div>
         </div>

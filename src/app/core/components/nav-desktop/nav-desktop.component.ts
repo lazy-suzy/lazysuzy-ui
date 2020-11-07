@@ -25,7 +25,8 @@ export class NavDesktopComponent implements OnInit {
     password: any;
     hideBar = false;
     cartProduct: number;
-    isBrandPage = false;
+    isFaqPage = false;
+    isBrandPage: boolean = false;
     params: any;
     deals: any;
     showOffer = true;
