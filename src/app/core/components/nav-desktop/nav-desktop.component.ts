@@ -25,7 +25,8 @@ export class NavDesktopComponent implements OnInit {
     password: any;
     hideBar = false;
     cartProduct: number;
-    isBrandPage = false;
+    isFaqPage = false;
+    isBrandPage: boolean = false;
     params: any;
     deals: any;
     showOffer = true;
@@ -47,6 +48,7 @@ export class NavDesktopComponent implements OnInit {
     ) {
         this.checkHomeRoute = router.events.subscribe((val) => {
             // this.notHome = location.path() !== '';
+            this.isFaqPage = location.path().match(/faq\-order/) !== null;
             this.notHome =
                 location.path() !== '' &&
                 location.path().match(/board/) == null &&
