@@ -1,10 +1,6 @@
-import {Component, ElementRef, OnInit, ViewChild} from '@angular/core';
-import {
-    ApiService,
-    UtilsService,
-    MatDialogUtilsService
-} from './../../../shared/services';
-import {Router, NavigationEnd} from '@angular/router';
+import {Component, OnInit, ViewChild} from '@angular/core';
+import {ApiService, MatDialogUtilsService, UtilsService} from './../../../shared/services';
+import {NavigationEnd, Router} from '@angular/router';
 import {IAllDepartment} from '../../../shared/models/all-department.interface';
 import {Subscription} from 'rxjs';
 import {Location} from '@angular/common';
@@ -36,6 +32,7 @@ export class NavMobileComponent implements OnInit {
     cartProduct: number;
     brands = [];
     collections = [];
+    isFaqPage = false;
 
     constructor(
         private apiService: ApiService,
@@ -53,6 +50,8 @@ export class NavMobileComponent implements OnInit {
         });
         this.checkHomeRoute = router.events.subscribe((val) => {
             // this.notHome = location.path() !== '';
+
+            this.isFaqPage = location.path().match(/faq\-order/) !== null;
             this.notHome =
                 location.path() !== '' && location.path().match(/board/) == null;
             this.isBoard = (location.path().match(/board/) !== null);

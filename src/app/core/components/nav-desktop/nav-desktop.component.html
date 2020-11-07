@@ -1,6 +1,6 @@
 <ng-container *ngIf="hideBar; else showBar">
   <mat-toolbar class="bg-transparent">
-    <mat-toolbar-row class="header flex justify-center ph2">
+    <mat-toolbar-row class="header flex justify-center ph2" [ngClass]="{'header': !isFaqPage,'faq-header': isFaqPage}">
       <a
         routerLink="/"
         routerLinkActive="active"

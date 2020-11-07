@@ -1,6 +1,6 @@
-<ng-container *ngIf="hideBar; else showBar">
+<ng-container *ngIf="hideBar; else showBar" >
 
-    <div class="flex items-center justify-center header pv2">
+    <div class="flex items-center justify-center header pv2" [ngClass]="{'header': !isFaqPage,'faq-header': isFaqPage}">
         <a
                 routerLink="/"
                 routerLinkActive="active"
@@ -12,7 +12,7 @@
 </ng-container>
 
 <ng-template #showBar>
-    <div class="flex items-center header">
+    <div class="flex items-center header" [ngClass]="{'header': !isFaqPage,'faq-header': isFaqPage}">
         <div class="w-60 flex">
             <ng-container>
                 <button
