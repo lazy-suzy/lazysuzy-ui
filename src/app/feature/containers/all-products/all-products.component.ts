@@ -258,7 +258,7 @@ export class AllProductsComponent implements OnInit {
     }
 
     ngOnDestroy(): void {
-        this.setTitle('Lazysuzy');
+        // this.setTitle();
     }
 
     onSetFilters(e): void {

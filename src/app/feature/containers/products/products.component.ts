@@ -216,8 +216,8 @@ export class ProductsComponent implements OnInit {
             .subscribe(
                 (payload: IProductsPayload) => {
                     const metaData: MetaData = {
-                        title: payload.seo_data.full_title,
-                        image: payload.seo_data.image_url,
+                        title: `Shop ${payload.seo_data.dept_name_long} Sofas at LazySuzy`,
+                        image: payload.seo_data.cat_image,
                         description: payload.seo_data.description,
                     };
                     this.seoService.setMetaTags(metaData);
