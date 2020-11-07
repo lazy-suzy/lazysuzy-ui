@@ -168,4 +168,8 @@ export interface ISeoData {
     email_title: string;
     description: string;
     image_url: string;
+    cat_image?: string;
+    cat_name_long?: string;
+    cat_name_short?: string;
+    dept_name_long?: string;
 }

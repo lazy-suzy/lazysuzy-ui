@@ -52,7 +52,7 @@ try {
                       $urlChunks = explode("/" , $matches[1]);
                       // department only
                       if(isset($urlChunks[0]) && !empty($urlChunks[0]) && ((isset($urlChunks[1]) && empty($urlChunks[1])) || !isset($urlChunks[1])))
-                        $query = "SELECT CONCAT('Search from hundreds of ', `dept_name_long`, ' products of top brands at once.') as title, CONCAT('{$baseURL}', `dept_image`) as image, CONCAT('Search hundreds of ', `cat_name_long`, ' from top brands at once. Add to your room designs with your own design boards.') as description FROM `mapping_core` WHERE `dept_name_url` = '{$urlChunks[0]}' AND `cat_name_url` = '' AND `dept_image` != ''";
+                       $query = "SELECT CONCAT('Search from hundreds of ', `dept_name_long`, ' products of top brands at once.') as title, CONCAT('{$baseURL}', `dept_image`) as image, CONCAT('Search hundreds of ', `dept_name_long`, ' from top brands at once. Add to your room designs with your own design boards.') as description FROM `mapping_core` WHERE `dept_name_url` = '{$urlChunks[0]}' AND `cat_name_url` = '' AND `dept_image` != ''";
                       // department and category
                       else if(isset($urlChunks[0]) && !empty($urlChunks[0]) && isset($urlChunks[1]) && !empty($urlChunks[1]))
                         $query = "SELECT CONCAT('Shop ', `dept_name_long` , ' ', `cat_name_short`, ' at LazySuzy') as title, CONCAT('{$baseURL}', `cat_image`) as image, CONCAT('Search hundreds of ', `cat_name_long`, ' from top brands at once. Add to your room designs with your own design boards.') as description FROM `mapping_core` WHERE `dept_name_url` = '{$urlChunks[0]}' AND `cat_name_url` = '{$urlChunks[1]}' AND `cat_image` != ''";
