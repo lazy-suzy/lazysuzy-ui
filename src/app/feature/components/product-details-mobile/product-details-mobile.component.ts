@@ -75,7 +75,7 @@ export class ProductDetailsMobileComponent implements OnInit {
     isRange = false;
     carousalOptions = {
         autoWidth: false,
-        loop: true,
+        loop: false,
         margin: 10,
         items: 2.3,
         center: false,

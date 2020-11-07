@@ -6,6 +6,7 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./footer.component.less']
 })
 export class FooterComponent implements OnInit {
+  logopath = 'assets/image/color_logo_transparent.png';
   constructor() { }
 
   ngOnInit() {
