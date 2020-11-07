@@ -53,7 +53,8 @@ export class NavDesktopComponent implements OnInit {
                 location.path() !== '' &&
                 location.path().match(/board/) == null &&
                 location.path().match(/blog/) == null &&
-                location.path().match(/faq\-order/) == null;
+                location.path().match(/faq\-order/) == null &&
+                location.path().match(/furniture\-care/) == null;
             this.showOffer =
                 location.path().match(/checkout/) === null &&
                 location.path().match(/board/) === null &&
