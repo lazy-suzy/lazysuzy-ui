@@ -311,7 +311,7 @@ export class ProductDetailsMobileComponent implements OnInit {
                     this.activeProduct.sku === this.product.sku
                         ? this.activeProduct.name
                         : this.product.name + ' ' + this.activeProduct.name,
-                price: this.priceObject.is_price,
+                price: Number(this.priceObject.is_price.replace('$', '')),
                 quantity: this.quantity
             };
             const postData = {
