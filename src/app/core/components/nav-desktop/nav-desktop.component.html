@@ -42,7 +42,7 @@
         </div>
     </ng-template>
     <mat-toolbar class="bg-transparent">
-        <mat-toolbar-row class="header flex justify-between">
+        <mat-toolbar-row class="header flex justify-between" [ngClass]="{'header': !isFaqPage,'faq-header': isFaqPage}" >
             <div class="flex">
                 <a
                         routerLink="/"
