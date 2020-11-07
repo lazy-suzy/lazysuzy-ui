@@ -24,7 +24,7 @@ export class ProductFiltersComponent implements OnInit {
         color: [],
         shape: [],
         seating: [],
-        mfg_country: [],
+        country: [],
         designer: [],
         fabric: [],
         material: [],

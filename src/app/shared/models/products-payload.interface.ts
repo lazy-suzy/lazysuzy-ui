@@ -96,7 +96,7 @@ export interface IFilterData {
     color: Color[];
     shape: Shape[];
     seating: Seating[];
-    mfg_country?: any[];
+    country?: any[];
     designer?: any[];
     fabric?: any[];
     material?: any [];
