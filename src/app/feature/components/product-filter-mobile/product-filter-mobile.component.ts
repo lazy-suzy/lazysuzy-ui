@@ -52,6 +52,10 @@ export class ProductFilterMobileComponent implements OnInit {
         length: [],
         diameter: [],
         square: [],
+        country: [],
+        designer: [],
+        fabric: [],
+        material: [],
     };
     dimensionFilters = [
         'height',
@@ -298,6 +302,10 @@ export class ProductFilterMobileComponent implements OnInit {
             length: [],
             diameter: [],
             square: [],
+            country: [],
+            designer: [],
+            fabric: [],
+            material: [],
         };
         this.clearOptionVisible = {
             brand: false,
