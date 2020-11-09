@@ -1,7 +1,7 @@
 <div class="searchBar" *ngIf="notHome || isBoard; else isHome">
     <ng-container *ngIf="!isHandset;else handsetSearch">
         <div class="main-container header-container">
-            <form #form="ngForm" role="form" class="searchbar">
+            <form #form="ngForm" role="form" class="searchbar"  (ngSubmit)="openSearch(form)">
                 <div *ngIf="!textChange" class="col-form">
         <span>
           <input
@@ -65,7 +65,7 @@
 <ng-template #isHome>
     <div class="searchBar">
         <div class="main-container search-container">
-            <form #form="ngForm" role="form" class="searchbar">
+            <form #form="ngForm" role="form" class="searchbar"  (ngSubmit)="openSearch(form)">
                 <div *ngIf="!textChange" class="col-form">
           <span>
             <input
