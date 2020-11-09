@@ -74,6 +74,7 @@
                                             class="pa2 menu-item"
                                             [checked]="option.checked"
                                             [value]="option"
+                                            [disabled]="isValueProcessing"
                                             (change)="onCheckChange($event, filter.key)"
                                     >
                                         {{ renderOptions(option) }}
@@ -89,6 +90,7 @@
                                             *ngIf="option.enabled"
                                             [checked]="option.checked"
                                             [value]="option.value"
+                                            [disabled]="isValueProcessing"
                                             (change)="onCheckChange($event, filter.key)"
                                     >
                                         {{ option.name }}
@@ -117,6 +119,7 @@
                                                 [checked]="option.checked"
                                                 [value]="option"
                                                 (change)="onCheckChange($event,filter.name.toLowerCase())"
+                                                [disabled]="isValueProcessing"
                                         >
                                         </mat-checkbox>
                                     </div>
