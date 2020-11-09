@@ -1,6 +1,13 @@
-import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
+import {Component, EventEmitter, Output, Input, OnInit} from '@angular/core';
 import {ActivatedRoute} from '@angular/router';
 import {Options} from 'ng5-slider';
+import {
+    IFilterData,
+    IProductFilterOption,
+    IProductFilter,
+    IProductsPayload
+} from 'src/app/shared/models';
+import {isArray} from 'util';
 
 @Component({
     selector: 'app-product-filter-mobile',
@@ -58,7 +65,6 @@ export class ProductFilterMobileComponent implements OnInit {
         'square',
         'depth'
     ];
-    isValueProcessing = false;
     dimensionFilterValueStore = [
         'height_from',
         'height_to',
@@ -118,7 +124,6 @@ export class ProductFilterMobileComponent implements OnInit {
     // tslint:disable-next-line: use-lifecycle-interface
     ngOnChanges(change: any) {
         if (change.productFilters !== undefined) {
-            this.isValueProcessing = false;
             this.productFilters = change.productFilters.currentValue;
             this.selectTab(this.activeTab);
             this.populateDimensionFilters();
@@ -249,7 +254,6 @@ export class ProductFilterMobileComponent implements OnInit {
     }
 
     buildAndSetFilters() {
-        this.isValueProcessing = true;
         let tempFilters = '';
         for (const [filter, options] of Object.entries(this.activeFilters)) {
             if ((filter === 'price_from' || filter === 'price_to') && this.isPriceChanged) {
