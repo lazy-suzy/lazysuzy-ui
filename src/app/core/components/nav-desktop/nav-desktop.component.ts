@@ -187,7 +187,7 @@ export class NavDesktopComponent implements OnInit {
         }
         const resultFilter = {
             ...newParams,
-            ...{'filters': filterValue}
+            ...{filters: filterValue}
         };
         this.router.navigate(['products/brand'], {queryParams: resultFilter});
     }
