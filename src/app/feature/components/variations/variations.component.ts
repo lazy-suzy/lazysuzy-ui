@@ -151,6 +151,7 @@ export class VariationsComponent implements OnInit {
                 this.matDialogUtils.openVariationDialog(variation.variation_sku);
             }
         } else {
+            this.clearVariations(true);
             this.selectedSwatch = {
                 image: variation.image,
                 swatch_image: variation.swatch_image,
@@ -198,6 +199,7 @@ export class VariationsComponent implements OnInit {
         console.log('this.selections: ', this.selections);
         console.log('option: ', option);
         console.log('type: ', type);
+
         if (this.selections[type] === option) {
             delete this.selections[type];
             this.inputSelections[type].selected = false;
@@ -242,9 +244,8 @@ export class VariationsComponent implements OnInit {
                 });
                 return acc;
             }, {});
-        this.variations.filter(v => v.swatch_image === variation.swatch_image).forEach(value => {
-            console.log(value.features.furniture_size);
-        });
+        const variationProducts = this.variations.filter(v => v.name === variation.name);
+
         // Filter @var selectionOptions based on all options
         // tslint:disable-next-line:forin
         for (const filter in variations) {
@@ -263,6 +264,7 @@ export class VariationsComponent implements OnInit {
                 }
             }
         }
+        console.log(this.selectedSwatch.swatch_image);
         this.updatePriceBasedOnSelections();
 
     }
@@ -414,9 +416,20 @@ export class VariationsComponent implements OnInit {
     /**
      * Clears all options in @this.selections and resets all filters.
      */
-    clearVariations() {
+    clearVariations(singleSelect = false) {
         this.clearSelection.emit(true);
-        this.selections = {};
+        if (singleSelect) {
+            const keys = Object.keys(this.inputSelections).filter(key => this.inputSelections[key].select_type === 'single_select');
+            for (const key of keys) {
+                this.selections.hasOwnProperty(key);
+                {
+                    delete this.selections[key];
+                }
+            }
+        } else {
+            this.selections = {};
+        }
+
         this.selectedIndex = null;
         this.setPrice.emit('');
         this.setImage.emit('');
