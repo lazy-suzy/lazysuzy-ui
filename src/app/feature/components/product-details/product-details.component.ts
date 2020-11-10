@@ -11,6 +11,7 @@ import {
 } from 'src/app/shared/services';
 import {Gallery, GalleryItem, ImageItem} from '@ngx-gallery/core';
 import {Lightbox} from '@ngx-gallery/lightbox';
+import {PixelService} from '../../../shared/services/facebook-pixel/pixel.service';
 
 @Component({
     selector: 'app-product-details',
@@ -75,6 +76,7 @@ export class ProductDetailsComponent implements OnInit {
         private eventEmitterService: EventEmitterService,
         private matDialogUtils: MatDialogUtilsService,
         private seoService: SeoService,
+        private pixelService: PixelService
     ) {
     }
 
@@ -262,10 +264,6 @@ export class ProductDetailsComponent implements OnInit {
     }
 
     openCartModal() {
-        console.log('this.product.in_inventory: ', this.product.in_inventory);
-        console.log('this.activeProduct.inventory_product_details.price: ', this.activeProduct.inventory_product_details.price);
-        console.log('this.twoPlus: ', !this.product.in_inventory && !this.activeProduct.inventory_product_details.price);
-        console.log('this.beforeSelection: ', this.beforeSelection);
         if (
             !this.activeProduct.in_inventory &&
             !this.activeProduct.inventory_product_details.price ||
@@ -290,14 +288,12 @@ export class ProductDetailsComponent implements OnInit {
                 count: this.quantity,
                 parent_sku: this.product.sku
             };
-            console.log('postData: ', postData);
-            console.log('hasSelection: ', this.hasSelection);
-
             this.apiService.addCartProduct(postData).subscribe(
                 (payload: any) => {
                     if (payload.status) {
                         this.errorMessage = '';
                         this.matDialogUtils.openAddToCartDialog(data);
+                        this.pixelService.trackAddToCart(data);
                     } else {
                         this.errorMessage = payload.msg;
                     }
