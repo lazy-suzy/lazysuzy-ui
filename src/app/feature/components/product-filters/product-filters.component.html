@@ -42,14 +42,26 @@
                         </ng-container>
                         <ng-template #normalCheckbox>
 <!--                            //*ngIf="option.enabled"-->
-                            <mat-checkbox
-                                    *ngIf="option.count>0"
-                                    class="pa2 menu-item"
-                                    [checked]="option.checked"
-                                    [value]="option.value"
-                                    (change)="onCheckChange($event, filter)">
-                                {{ option.name }}
-                            </mat-checkbox>
+                            <ng-container *ngIf="filter === 'category'else category">
+                                <mat-checkbox
+                                        class="pa2 menu-item"
+                                        [checked]="option.checked"
+                                        [value]="option.value"
+                                        (change)="onCheckChange($event, filter)">
+                                    {{ option.name }}
+                                </mat-checkbox>
+                            </ng-container>
+                            <ng-template #category>
+                                <mat-checkbox
+                                        *ngIf="option.count>0"
+                                        class="pa2 menu-item"
+                                        [checked]="option.checked"
+                                        [value]="option.value"
+                                        (change)="onCheckChange($event, filter)">
+                                    {{ option.name }}
+                                </mat-checkbox>
+                            </ng-template>
+
                         </ng-template>
                     </div>
                 </ng-template>

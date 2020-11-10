@@ -198,7 +198,7 @@ export class ProductCollectionsComponent implements OnInit {
     this.productsSubscription = this.apiService
         .getAllProducts(this.trend, this.total, this.filters, this.sortType)
         .subscribe((payload: IProductsPayload) => {
-          console.log('this is load Products: ', payload)
+          console.log('this is load Products: ', payload);
           this.products = payload.products;
           this.productFilters = payload.filterData;
           this.sortTypeList = payload.sortType;
