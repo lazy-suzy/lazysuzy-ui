@@ -1,13 +1,6 @@
-import {Component, EventEmitter, Output, Input, OnInit} from '@angular/core';
+import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {ActivatedRoute} from '@angular/router';
 import {Options} from 'ng5-slider';
-import {
-    IFilterData,
-    IProductFilterOption,
-    IProductFilter,
-    IProductsPayload
-} from 'src/app/shared/models';
-import {isArray} from 'util';
 
 @Component({
     selector: 'app-product-filter-mobile',
@@ -20,6 +13,7 @@ export class ProductFilterMobileComponent implements OnInit {
     @Input() productFilters: any;
     @Input() totalCount: number;
     @Input() isProductFetching: boolean;
+    @Input() isBrandPage = false;
     @Input() isCollectionPage = false;
     objectKeys = Object.keys;
     isClearAllVisible = false;
@@ -271,11 +265,15 @@ export class ProductFilterMobileComponent implements OnInit {
 
     clearFilters() {
         let collection = this.activeFilters.collection;
+        let brand = this.activeFilters.brand;
+        if (!this.isBrandPage) {
+            brand = [];
+        }
         if (!this.isCollectionPage) {
             collection = [];
         }
         this.activeFilters = {
-            brand: [],
+            brand,
             collection,
             price_from: 0,
             price_to: 0,
@@ -331,6 +329,9 @@ export class ProductFilterMobileComponent implements OnInit {
     }
 
     checkValidFilter(filter): boolean {
+        if (this.productFilters[filter].length === 0) {
+            return false;
+        }
         if (this.isDimensionFilter(filter) || this.isCollectionFilter(filter)) {
             return false;
         }
@@ -367,7 +368,7 @@ export class ProductFilterMobileComponent implements OnInit {
     }
 
     checkEnabled(data) {
-        return data.enabled;
+        return data.count > 0;
     }
 
     ifChecked(data) {
@@ -421,7 +422,9 @@ export class ProductFilterMobileComponent implements OnInit {
 
     clearEmptyFilters() {
         for (const productFiltersKey in this.productFilters) {
-            if (!this.dimensionFilters.includes(productFiltersKey) && productFiltersKey !== 'price') {
+            if (!this.dimensionFilters.includes(productFiltersKey) &&
+                productFiltersKey !== 'price'
+            ) {
                 this.productFilters[productFiltersKey] = this.productFilters[productFiltersKey].filter(value => value.count > 0);
             }
         }
