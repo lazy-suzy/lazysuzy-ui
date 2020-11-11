@@ -23,6 +23,7 @@ import {
 } from '@angular/cdk/layout';
 import {IOrderAmount} from '../../../shared/models';
 import {PromoCodeService} from "../../../shared/services/promo-code/promo-code.service";
+import {PixelService} from '../../../shared/services/facebook-pixel/pixel.service';
 
 @Component({
     selector: 'app-payment',
@@ -114,6 +115,7 @@ export class PaymentComponent implements OnInit {
         private breakpointObserver: BreakpointObserver,
         private eventEmitterService: EventEmitterService,
         private promoCodeService: PromoCodeService,
+        private  pixelService: PixelService
     ) {
         this.statesArray = STATE_LIST;
     }
@@ -242,6 +244,7 @@ export class PaymentComponent implements OnInit {
                             (payload: any) => {
                                 this.isPaymentExecuting = false;
                                 if (payload.status === 'succeeded') {
+                                    this.pixelService.trackPurchase(payload);
                                     localStorage.setItem('cart', '0');
                                     this.router.navigate([`order/${payload.order_id}`]);
                                 } else {
