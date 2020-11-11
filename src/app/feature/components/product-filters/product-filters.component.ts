@@ -1,7 +1,7 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {ActivatedRoute} from '@angular/router';
 import {Options} from 'ng5-slider';
-import {Brand, Category, Color, IFilterData, Price, Seating, Shape} from 'src/app/shared/models';
+import {IFilterData} from 'src/app/shared/models';
 
 @Component({
     selector: 'app-product-filters',
@@ -98,6 +98,7 @@ export class ProductFiltersComponent implements OnInit {
     }
 
     ngOnInit() {
+
         this.activeRoute.queryParams.subscribe((params) => {
             this.setClearButtonVisibility(params.filters);
         });
@@ -133,7 +134,6 @@ export class ProductFiltersComponent implements OnInit {
             change.isChangingBrandList &&
             change.isChangingBrandList.currentValue === true
         ) {
-            console.log('this is ischanging brand list: ', this.isChangingBrandList);
             this.isPriceChanged = false;
             this.activeFilters = {
                 brand: this.activeFilters.brand,
@@ -226,6 +226,16 @@ export class ProductFiltersComponent implements OnInit {
                         this.activeFilters.designer = this.productFilters.designer
                             .filter((designer) => designer.checked)
                             .map((designer) => designer.value);
+                    }
+                    if (this.productFilters.fabric) {
+                        this.activeFilters.fabric = this.productFilters.fabric
+                            .filter((fabric) => fabric.checked)
+                            .map((fabric) => fabric.value);
+                    }
+                    if (this.productFilters.material) {
+                        this.activeFilters.material = this.productFilters.material
+                            .filter((material) => material.checked)
+                            .map((material) => material.value);
                     }
                     if (this.productFilters.height) {
                         const activeFilterValues = this.productFilters.height[0].values
@@ -483,7 +493,7 @@ export class ProductFiltersComponent implements OnInit {
             }
         }
 
-        if (filter === 'brand' || filter === 'category') {
+        if (filter === 'brand') {
             if (this.isCollectionPage || this.isBrandPage) {
                 return false;
             }
@@ -497,9 +507,12 @@ export class ProductFiltersComponent implements OnInit {
 
     clearEmptyFilters() {
         for (const productFiltersKey in this.productFilters) {
-            if (!this.dimensionFilterKeysToExclude.includes(productFiltersKey) && productFiltersKey !== 'price') {
+            if (!this.dimensionFilterKeysToExclude.includes(productFiltersKey) &&
+                productFiltersKey !== 'price' &&
+                productFiltersKey !== 'category') {
                 this.productFilters[productFiltersKey] = this.productFilters[productFiltersKey].filter(value => value.count > 0);
             }
         }
+        console.log(this.productFilters);
     }
 }

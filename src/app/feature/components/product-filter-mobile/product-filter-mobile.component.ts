@@ -1,13 +1,6 @@
-import {Component, EventEmitter, Output, Input, OnInit} from '@angular/core';
+import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {ActivatedRoute} from '@angular/router';
 import {Options} from 'ng5-slider';
-import {
-    IFilterData,
-    IProductFilterOption,
-    IProductFilter,
-    IProductsPayload
-} from 'src/app/shared/models';
-import {isArray} from 'util';
 
 @Component({
     selector: 'app-product-filter-mobile',
@@ -20,6 +13,7 @@ export class ProductFilterMobileComponent implements OnInit {
     @Input() productFilters: any;
     @Input() totalCount: number;
     @Input() isProductFetching: boolean;
+    @Input() isBrandPage = false;
     @Input() isCollectionPage = false;
     objectKeys = Object.keys;
     isClearAllVisible = false;
@@ -170,6 +164,26 @@ export class ProductFilterMobileComponent implements OnInit {
                         .filter((category) => category.checked)
                         .map((category) => category.value);
                 }
+                if (this.productFilters.country) {
+                    this.activeFilters.country = this.productFilters.country
+                        .filter((mfgCountry) => mfgCountry.checked)
+                        .map((mfgCountry) => mfgCountry.value);
+                }
+                if (this.productFilters.designer) {
+                    this.activeFilters.designer = this.productFilters.designer
+                        .filter((designer) => designer.checked)
+                        .map((designer) => designer.value);
+                }
+                if (this.productFilters.fabric) {
+                    this.activeFilters.fabric = this.productFilters.fabric
+                        .filter((fabric) => fabric.checked)
+                        .map((fabric) => fabric.value);
+                }
+                if (this.productFilters.material) {
+                    this.activeFilters.material = this.productFilters.material
+                        .filter((material) => material.checked)
+                        .map((material) => material.value);
+                }
                 if (this.productFilters.height) {
                     const activeFilterValues = this.productFilters.height[0].values
                         .filter((enabled) => enabled.checked);
@@ -271,11 +285,15 @@ export class ProductFilterMobileComponent implements OnInit {
 
     clearFilters() {
         let collection = this.activeFilters.collection;
+        let brand = this.activeFilters.brand;
+        if (!this.isBrandPage) {
+            brand = [];
+        }
         if (!this.isCollectionPage) {
             collection = [];
         }
         this.activeFilters = {
-            brand: [],
+            brand,
             collection,
             price_from: 0,
             price_to: 0,
@@ -331,6 +349,9 @@ export class ProductFilterMobileComponent implements OnInit {
     }
 
     checkValidFilter(filter): boolean {
+        if (this.productFilters[filter].length === 0) {
+            return false;
+        }
         if (this.isDimensionFilter(filter) || this.isCollectionFilter(filter)) {
             return false;
         }
@@ -348,18 +369,22 @@ export class ProductFilterMobileComponent implements OnInit {
                 this.productFilters[filter].filter(this.ifChecked),
                 filter
             );
-            if (filter !== 'size') {
+            if (filter === 'category') {
+                this.activeFilterTabData = this.productFilters[filter].filter(value => value.enabled);
+            } else {
                 this.activeFilterTabData = this.productFilters[filter].filter(
                     this.checkEnabled
                 );
             }
+
+
         } else {
             this.activeFilterTabData = null;
         }
     }
 
     disableTab(filter) {
-        if (filter !== 'price') {
+        if (filter !== 'price' && filter !== 'category') {
             return this.productFilters[filter].filter(this.checkEnabled).length === 0;
         } else {
             return false;
@@ -367,7 +392,7 @@ export class ProductFilterMobileComponent implements OnInit {
     }
 
     checkEnabled(data) {
-        return data.enabled;
+        return data.count > 0;
     }
 
     ifChecked(data) {
@@ -421,7 +446,10 @@ export class ProductFilterMobileComponent implements OnInit {
 
     clearEmptyFilters() {
         for (const productFiltersKey in this.productFilters) {
-            if (!this.dimensionFilters.includes(productFiltersKey) && productFiltersKey !== 'price') {
+            if (!this.dimensionFilters.includes(productFiltersKey) &&
+                productFiltersKey !== 'price' &&
+                productFiltersKey !== 'category'
+            ) {
                 this.productFilters[productFiltersKey] = this.productFilters[productFiltersKey].filter(value => value.count > 0);
             }
         }
