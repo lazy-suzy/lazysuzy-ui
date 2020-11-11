@@ -331,6 +331,7 @@ export class ProductFilterMobileComponent implements OnInit {
     }
 
     checkValidFilter(filter): boolean {
+        if(this.productFilters[filter].length === 0) return  false;
         if (this.isDimensionFilter(filter) || this.isCollectionFilter(filter)) {
             return false;
         }
@@ -367,7 +368,7 @@ export class ProductFilterMobileComponent implements OnInit {
     }
 
     checkEnabled(data) {
-        return data.enabled;
+        return data.count > 0;
     }
 
     ifChecked(data) {
@@ -421,7 +422,9 @@ export class ProductFilterMobileComponent implements OnInit {
 
     clearEmptyFilters() {
         for (const productFiltersKey in this.productFilters) {
-            if (!this.dimensionFilters.includes(productFiltersKey) && productFiltersKey !== 'price') {
+            if (!this.dimensionFilters.includes(productFiltersKey) &&
+                productFiltersKey !== 'price'
+            ) {
                 this.productFilters[productFiltersKey] = this.productFilters[productFiltersKey].filter(value => value.count > 0);
             }
         }
