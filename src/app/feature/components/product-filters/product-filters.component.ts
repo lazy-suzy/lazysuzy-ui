@@ -227,6 +227,16 @@ export class ProductFiltersComponent implements OnInit {
                             .filter((designer) => designer.checked)
                             .map((designer) => designer.value);
                     }
+                    if (this.productFilters.fabric) {
+                        this.activeFilters.fabric = this.productFilters.fabric
+                            .filter((fabric) => fabric.checked)
+                            .map((fabric) => fabric.value);
+                    }
+                    if (this.productFilters.material) {
+                        this.activeFilters.material = this.productFilters.material
+                            .filter((material) => material.checked)
+                            .map((material) => material.value);
+                    }
                     if (this.productFilters.height) {
                         const activeFilterValues = this.productFilters.height[0].values
                             .filter((enabled) => enabled.checked);

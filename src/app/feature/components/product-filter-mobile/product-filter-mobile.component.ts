@@ -164,6 +164,26 @@ export class ProductFilterMobileComponent implements OnInit {
                         .filter((category) => category.checked)
                         .map((category) => category.value);
                 }
+                if (this.productFilters.country) {
+                    this.activeFilters.country = this.productFilters.country
+                        .filter((mfgCountry) => mfgCountry.checked)
+                        .map((mfgCountry) => mfgCountry.value);
+                }
+                if (this.productFilters.designer) {
+                    this.activeFilters.designer = this.productFilters.designer
+                        .filter((designer) => designer.checked)
+                        .map((designer) => designer.value);
+                }
+                if (this.productFilters.fabric) {
+                    this.activeFilters.fabric = this.productFilters.fabric
+                        .filter((fabric) => fabric.checked)
+                        .map((fabric) => fabric.value);
+                }
+                if (this.productFilters.material) {
+                    this.activeFilters.material = this.productFilters.material
+                        .filter((material) => material.checked)
+                        .map((material) => material.value);
+                }
                 if (this.productFilters.height) {
                     const activeFilterValues = this.productFilters.height[0].values
                         .filter((enabled) => enabled.checked);
@@ -349,18 +369,22 @@ export class ProductFilterMobileComponent implements OnInit {
                 this.productFilters[filter].filter(this.ifChecked),
                 filter
             );
-            if (filter !== 'size') {
+            if (filter === 'category') {
+                this.activeFilterTabData = this.productFilters[filter].filter(value => value.enabled);
+            } else {
                 this.activeFilterTabData = this.productFilters[filter].filter(
                     this.checkEnabled
                 );
             }
+
+
         } else {
             this.activeFilterTabData = null;
         }
     }
 
     disableTab(filter) {
-        if (filter !== 'price') {
+        if (filter !== 'price' && filter !== 'category') {
             return this.productFilters[filter].filter(this.checkEnabled).length === 0;
         } else {
             return false;
@@ -423,7 +447,8 @@ export class ProductFilterMobileComponent implements OnInit {
     clearEmptyFilters() {
         for (const productFiltersKey in this.productFilters) {
             if (!this.dimensionFilters.includes(productFiltersKey) &&
-                productFiltersKey !== 'price'
+                productFiltersKey !== 'price' &&
+                productFiltersKey !== 'category'
             ) {
                 this.productFilters[productFiltersKey] = this.productFilters[productFiltersKey].filter(value => value.count > 0);
             }
