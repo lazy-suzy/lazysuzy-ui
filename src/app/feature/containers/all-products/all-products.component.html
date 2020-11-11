@@ -24,6 +24,7 @@
             <app-product-filter-mobile *ngIf="showMobileFilter" (setMobileToggle)="onSetMobileToggle($event)"
                                        [productFilters]="productFilters" [isProductFetching]="isProductFetching"
                                        [totalCount]="totalCount"
+                                       [isBrandPage]="isBrandPage"
                                        (setFilters)="onSetFilters($event)">
             </app-product-filter-mobile>
             <app-product-sort-mobile *ngIf="showMobileSort" (setSortToggle)="onSetSortToggle($event)"
