@@ -667,6 +667,11 @@ export class VariationsComponent implements OnInit {
         return isValidVariation;
     }
 
+    /**
+     * Check if selection has particular feature or not.
+     * @param feature Features array
+     * @param key Key to be used for comparison
+     */
     selectionHasFeature(feature, key) {
         if (!isArray(this.selections[key]) && feature[key] === this.selections[key]) {
             return true;
