@@ -107,9 +107,9 @@
                         ></ng5-slider>
                     </div>
                     <div *ngIf="activeTab==='size'">
-                        <div *ngFor="let filter of this.displayDimensionFilter">
+                        <div style="padding: 0 0.5rem;" *ngFor="let filter of this.displayDimensionFilter">
                             <ng-container *ngIf="filter.values.length>0">
-                                <div class="flex flex-column">
+                                <div class="flex flex-column" style="padding: 0 0.5rem;" >
                                     <span class="dimension-filter-label">{{filter.name | uppercase}}</span>
                                     <div *ngFor="let option of filter.values" class="flex justify-between">
                                         <label class="dimension-filter-items menu-item pr3">{{renderOptions(option)}}</label>
