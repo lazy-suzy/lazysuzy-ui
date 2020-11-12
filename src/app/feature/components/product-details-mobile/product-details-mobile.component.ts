@@ -14,6 +14,7 @@ import {BreakpointObserver, Breakpoints, BreakpointState} from '@angular/cdk/lay
 import {Gallery, GalleryItem, ImageItem} from '@ngx-gallery/core';
 import {Lightbox} from '@ngx-gallery/lightbox';
 import {VariationsComponent} from '../variations/variations.component';
+import {PixelService} from '../../../shared/services/facebook-pixel/pixel.service';
 
 @Component({
     selector: 'app-product-details-mobile',
@@ -95,7 +96,8 @@ export class ProductDetailsMobileComponent implements OnInit {
         public cacheService: CacheService,
         private eventEmitterService: EventEmitterService,
         private matDialogUtils: MatDialogUtilsService,
-        private seoService: SeoService
+        private seoService: SeoService,
+        private pixelService: PixelService
     ) {
     }
 
@@ -328,6 +330,7 @@ export class ProductDetailsMobileComponent implements OnInit {
                 (payload: any) => {
                     if (payload.status) {
                         this.errorMessage = '';
+                        this.pixelService.trackAddToCart(data);
                         this.matDialogUtils.openAddToCartDialog(data);
                     } else {
                         this.errorMessage = payload.msg;
