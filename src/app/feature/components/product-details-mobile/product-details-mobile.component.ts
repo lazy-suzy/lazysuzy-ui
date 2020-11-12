@@ -311,7 +311,7 @@ export class ProductDetailsMobileComponent implements OnInit {
                     this.activeProduct.sku === this.product.sku
                         ? this.activeProduct.name
                         : this.product.name + ' ' + this.activeProduct.name,
-                price: Number(this.priceObject.is_price.replace('$', '')),
+                price: Number(this.priceObject.is_price.replace(/[^0-9.-]+/g,"")),
                 quantity: this.quantity
             };
             const postData = {
@@ -319,10 +319,6 @@ export class ProductDetailsMobileComponent implements OnInit {
                 count: this.quantity,
                 parent_sku: this.product.sku
             };
-
-            console.log('this.product: ', this.product);
-            console.log('postData: ', postData);
-
             this.apiService.addCartProduct(postData).subscribe(
                 (payload: any) => {
                     if (payload.status) {
