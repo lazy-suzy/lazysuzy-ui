@@ -3,6 +3,7 @@ import {MatDialogUtilsService} from 'src/app/shared/services';
 import {Router} from '@angular/router';
 import {Observable, Subscription} from 'rxjs';
 import {BreakpointObserver, Breakpoints, BreakpointState,} from '@angular/cdk/layout';
+import {isArray} from 'util';
 
 @Component({
     selector: 'app-variations',
@@ -109,13 +110,6 @@ export class VariationsComponent implements OnInit {
             .filter((variation) => {
                 return self.filterDuplicateSwatches(variation, self);
             });
-
-        console.log('swatches: ', this.swatches);
-        console.log('inputSelections: ', this.inputSelections);
-        console.log(
-            'Object.values(this.inputSelections): ',
-            Object.values(this.inputSelections)
-        );
         let countSingleSelect = 0;
         if (this.inputSelections['type'] === 'redirect') {
             this.setSelectionChecked.emit(true);
@@ -244,7 +238,10 @@ export class VariationsComponent implements OnInit {
                 });
                 return acc;
             }, {});
-        const variationProducts = this.variations.filter(v => v.name === variation.name);
+        const variationProducts = this.variations.filter(v => v.name === variation.name).filter(v => this.checkSwatchSelection(v, this));
+        if (variationProducts.length === 0) {
+            this.clearSingleSelections();
+        }
 
         // Filter @var selectionOptions based on all options
         // tslint:disable-next-line:forin
@@ -411,6 +408,16 @@ export class VariationsComponent implements OnInit {
             this.previousSwatch = variation;
         }
         return filteredVariations;
+    }
+
+    clearSingleSelections() {
+        const keys = Object.keys(this.inputSelections).filter(key => this.inputSelections[key].select_type === 'single_select');
+        for (const key of keys) {
+            this.selections.hasOwnProperty(key);
+            {
+                delete this.selections[key];
+            }
+        }
     }
 
     /**
@@ -663,10 +670,7 @@ export class VariationsComponent implements OnInit {
     checkSwatchSelection(variation, self) {
         let isValidVariation = true;
         for (const key in self.selections) {
-            if (
-                variation.features[key] === self.selections[key] ||
-                self.selections[key].includes(variation.features[key])
-            ) {
+            if (this.selectionHasFeature(variation.features, key)) {
                 isValidVariation = true;
             } else {
                 isValidVariation = false;
@@ -674,6 +678,19 @@ export class VariationsComponent implements OnInit {
             }
         }
         return isValidVariation;
+    }
+
+    /**
+     * Check if selection has particular feature or not.
+     * @param feature Features array
+     * @param key Key to be used for comparison
+     */
+    selectionHasFeature(feature, key) {
+        if (!isArray(this.selections[key]) && feature[key] === this.selections[key]) {
+            return true;
+        } else if (isArray(this.selections[key])) {
+            return this.selections[key].includes(feature[key]);
+        }
     }
 
     /**
