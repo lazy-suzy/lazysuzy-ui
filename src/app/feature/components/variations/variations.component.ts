@@ -3,6 +3,7 @@ import {MatDialogUtilsService} from 'src/app/shared/services';
 import {Router} from '@angular/router';
 import {Observable, Subscription} from 'rxjs';
 import {BreakpointObserver, Breakpoints, BreakpointState,} from '@angular/cdk/layout';
+import {isArray} from 'util';
 
 @Component({
     selector: 'app-variations',
@@ -422,7 +423,7 @@ export class VariationsComponent implements OnInit {
     /**
      * Clears all options in @this.selections and resets all filters.
      */
-    clearVariations(singleSelect = false) {
+    clearVariations() {
         this.clearSelection.emit(true);
         if (singleSelect) {
             const keys = Object.keys(this.inputSelections).filter(key => this.inputSelections[key].select_type === 'single_select');
@@ -669,10 +670,7 @@ export class VariationsComponent implements OnInit {
     checkSwatchSelection(variation, self) {
         let isValidVariation = true;
         for (const key in self.selections) {
-            if (
-                variation.features[key] === self.selections[key] ||
-                self.selections[key].includes(variation.features[key])
-            ) {
+            if (this.selectionHasFeature(variation.features, key)) {
                 isValidVariation = true;
             } else {
                 isValidVariation = false;
@@ -680,6 +678,14 @@ export class VariationsComponent implements OnInit {
             }
         }
         return isValidVariation;
+    }
+
+    selectionHasFeature(feature, key) {
+        if (!isArray(this.selections[key]) && feature[key] === this.selections[key]) {
+            return true;
+        } else if (isArray(this.selections[key])) {
+            return this.selections[key].includes(feature[key]);
+        }
     }
 
     /**
