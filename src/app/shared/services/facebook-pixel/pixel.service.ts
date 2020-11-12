@@ -11,7 +11,6 @@ export class PixelService {
     }
 
     public trackAddToCart(product: any) {
-        console.log('track add to Cart');
         const options = {
             contents: [
                 {
@@ -25,4 +24,21 @@ export class PixelService {
         };
         fbq('track', 'AddToCart', options);
     }
+
+    public trackPurchase(order: any) {
+        const options = {
+            currency: 'USD',
+            value: order.amount,
+        };
+        fbq('track', 'Purchase', options);
+    }
+
+    public trackInitiateCheckout() {
+        fbq('track', 'InitiateCheckout');
+    }
+
+    public trackViewContent() {
+        fbq('track', 'ViewContent');
+    }
 }
+
