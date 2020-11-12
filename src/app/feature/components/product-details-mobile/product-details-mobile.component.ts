@@ -1,4 +1,4 @@
-import {Component, OnInit, ViewChild} from '@angular/core';
+import {Component, ElementRef, OnInit, ViewChild} from '@angular/core';
 import {ActivatedRoute, Router} from '@angular/router';
 import {IActiveProduct, IProduct, IProductDetail, ISeo} from 'src/app/shared/models';
 import {
@@ -23,6 +23,7 @@ import {PixelService} from '../../../shared/services/facebook-pixel/pixel.servic
 })
 export class ProductDetailsMobileComponent implements OnInit {
     @ViewChild(VariationsComponent, {static: false}) child: VariationsComponent;
+    @ViewChild('gallery', {static: false}) galleryContainer: ElementRef<any>;
     productSku: any;
     routeSubscription: any;
     product: IProduct;
@@ -295,6 +296,10 @@ export class ProductDetailsMobileComponent implements OnInit {
         this.priceObject.was_price = wasPriceString;
         this.isRange = isRanged;
         this.isDiscounted = isDiscounted;
+        this.galleryContainer.nativeElement.scrollTo({
+            left: 0,
+            behavior: 'smooth'
+        });
     }
 
     openCartModal() {
@@ -313,7 +318,7 @@ export class ProductDetailsMobileComponent implements OnInit {
                     this.activeProduct.sku === this.product.sku
                         ? this.activeProduct.name
                         : this.product.name + ' ' + this.activeProduct.name,
-                price: Number(this.priceObject.is_price.replace(/[^0-9.-]+/g,"")),
+                price: Number(this.priceObject.is_price.replace(/[^0-9.-]+/g, '')),
                 quantity: this.quantity
             };
             const postData = {
