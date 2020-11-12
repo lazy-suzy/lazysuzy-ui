@@ -30,16 +30,20 @@
 
     .content-row {
       display: flex;
+
       .tabs-col {
         padding: 0 0 10px 0;
         background-color: #d6d6d6;
         height: 90vh;
+
         .filter-tabs {
           text-align: left;
         }
+
         .filter-list {
           padding: 0;
           margin: 0;
+
           .filter-item {
             list-style: none;
             padding: 1rem 0.5rem 1rem 1rem;
@@ -49,19 +53,23 @@
             overflow: hidden;
             text-overflow: ellipsis;
           }
+
           .active {
             background-color: #ffffff;
             color: #b76e79 !important;
           }
+
           .disabledTab {
             opacity: 0.4;
             pointer-events: none;
           }
         }
       }
+
       .content-col {
         max-height: 80vh;
         overflow: scroll;
+
         .total-results {
           color: #ffcc00;
           text-align: center;
@@ -73,6 +81,7 @@
           border: 1px solid #d3d3d3;
           background-color: #e9ecef;
           padding: 5px 5px;
+
           .filter-results-button {
             width: 100%;
             background-color: #ffcc00;
@@ -81,25 +90,30 @@
             color: #0c1c31;
           }
         }
+
         .filter-content {
-          padding-right: 20px;
           .clear-btn {
             text-align: right;
             padding: 10px 15px;
             color: #999999;
           }
+
           .filters-list-container {
             margin: 0;
+            padding: 0 0.5rem;
+
             .filters-list {
               list-style: none;
               margin-right: 10px;
               padding: 1px 0;
               color: #0c1c31;
+
               .filter-label {
                 display: block;
                 position: relative;
                 margin: 10px;
                 cursor: pointer;
+
                 ::ng-deep.mat-checkbox-inner-container {
                   position: absolute;
                   right: 0;
@@ -128,6 +142,7 @@
 .invisible {
   visibility: hidden;
 }
+
 ::ng-deep .mat-checkbox-checked .mat-checkbox-background {
   background-color: #ffcc00 !important;
 }
@@ -145,6 +160,7 @@
   width: 90px;
   height: 15px;
 }
+
 .lds-ellipsis div {
   position: absolute;
   top: 5px;
@@ -154,22 +170,27 @@
   background: #fff;
   animation-timing-function: cubic-bezier(0, 1, 1, 0);
 }
+
 .lds-ellipsis div:nth-child(1) {
   left: 8px;
   animation: lds-ellipsis1 0.6s infinite;
 }
+
 .lds-ellipsis div:nth-child(2) {
   left: 8px;
   animation: lds-ellipsis2 0.6s infinite;
 }
+
 .lds-ellipsis div:nth-child(3) {
   left: 32px;
   animation: lds-ellipsis2 0.6s infinite;
 }
+
 .lds-ellipsis div:nth-child(4) {
   left: 56px;
   animation: lds-ellipsis3 0.6s infinite;
 }
+
 @keyframes lds-ellipsis1 {
   0% {
     transform: scale(0);
@@ -178,6 +199,7 @@
     transform: scale(1);
   }
 }
+
 @keyframes lds-ellipsis3 {
   0% {
     transform: scale(1);
@@ -186,6 +208,7 @@
     transform: scale(0);
   }
 }
+
 @keyframes lds-ellipsis2 {
   0% {
     transform: translate(0, 0);
@@ -194,14 +217,16 @@
     transform: translate(24px, 0);
   }
 }
-.dimension-filter-label{
-  padding: 1rem 0 0.5rem 1rem;
+
+.dimension-filter-label {
+  padding: 1rem 0 0.5rem 0rem;
   font-size: 14px;
   font-family: "Open Sans", sans-serif;
   color: #b76e79;
 }
-.dimension-filter-items{
-  padding: 0 0 0 1rem;
+
+.dimension-filter-items {
+  padding: 0 0 0 0rem;
   font-size: 14px;
   font-family: "Open Sans", sans-serif;
 }
