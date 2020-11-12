@@ -145,7 +145,6 @@ export class VariationsComponent implements OnInit {
                 this.matDialogUtils.openVariationDialog(variation.variation_sku);
             }
         } else {
-            this.clearVariations(true);
             this.selectedSwatch = {
                 image: variation.image,
                 swatch_image: variation.swatch_image,
@@ -423,20 +422,9 @@ export class VariationsComponent implements OnInit {
     /**
      * Clears all options in @this.selections and resets all filters.
      */
-    clearVariations(singleSelect = false) {
+    clearVariations() {
         this.clearSelection.emit(true);
-        if (singleSelect) {
-            const keys = Object.keys(this.inputSelections).filter(key => this.inputSelections[key].select_type === 'single_select');
-            for (const key of keys) {
-                this.selections.hasOwnProperty(key);
-                {
-                    delete this.selections[key];
-                }
-            }
-        } else {
-            this.selections = {};
-        }
-
+        this.selections = {};
         this.selectedIndex = null;
         this.setPrice.emit('');
         this.setImage.emit('');
