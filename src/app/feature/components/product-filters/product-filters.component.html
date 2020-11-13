@@ -80,9 +80,9 @@
     <div class="ml2 arrow-down"></div>
     <div class="filter-options">
         <div class="flex">
-            <div *ngFor="let filter of this.displayDimensionFilter">
-                <ng-container *ngIf="filter.values.length>0">
-                    <div class="flex flex-column">
+            <ng-container *ngFor="let filter of this.displayDimensionFilter" >
+                <div *ngIf="filter.values.length>0">
+                    <div class="flex flex-column" style="padding-right: 1rem;">
                         <span class="dimension-filter-label">{{filter.name | uppercase}}</span>
                         <div *ngFor="let option of filter.values">
                             <mat-checkbox
@@ -95,8 +95,8 @@
                             </mat-checkbox>
                         </div>
                     </div>
-                </ng-container>
-            </div>
+                </div>
+            </ng-container>
         </div>
     </div>
 </div>
