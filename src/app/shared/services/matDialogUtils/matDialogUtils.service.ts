@@ -18,6 +18,7 @@ export class MatDialogUtilsService {
     };
     signUpDialog;
     signInDialog;
+    private payload: any;
 
     constructor(
         public dialog: MatDialog,
@@ -33,16 +34,23 @@ export class MatDialogUtilsService {
     }
 
     openMatDialog(modalSku) {
+        let modalData: any = {
+            sku: modalSku,
+        };
+        if (this.payload && this.payload.product.sku === modalSku) {
+            modalData = {...modalData, payload: this.payload};
+        }
         const dialogRef = this.dialog.open(ProductDetailsComponent, {
             width: '80%',
             height: '100%',
-            data: {sku: modalSku},
+            data: modalData,
             panelClass: 'product-details-dialog-container'
         });
         dialogRef.afterOpened().subscribe((result) => {
             this.location.go(`product/${modalSku}`, '', this.location.getState());
         });
         dialogRef.afterClosed().subscribe((result) => {
+            this.payload = null;
             const params = {...this.activeRoute.snapshot.queryParams};
             if (params.modal_sku) {
                 delete params.modal_sku;
@@ -149,5 +157,9 @@ export class MatDialogUtilsService {
                 deals
             }
         });
+    }
+
+    setProduct(payload) {
+        this.payload = payload;
     }
 }

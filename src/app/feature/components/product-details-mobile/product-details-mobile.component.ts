@@ -161,6 +161,7 @@ export class ProductDetailsMobileComponent implements OnInit {
                                 }
                                 this.hasVariationsInventory();
                                 if (!this.isHandset) {
+                                    this.matDialogUtils.setProduct(payload);
                                     this.router.navigate(
                                         [`${this.product.department_info[0].category_url}`],
                                         {queryParams: {modal_sku: this.product.sku}}
