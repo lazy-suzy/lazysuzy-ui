@@ -39,11 +39,7 @@
                                 </div>
                             </div>
                             <div class="flex flex-column">
-                                <!--                                <select [(ngModel)]="quantity" class="quantity-selector mr2"-->
-                                <!--                                        *ngIf="utils.hasInventory(activeProduct)">-->
-                                <!--                                    <option *ngFor="let i of quantityLimit(activeProduct.inventory_product_details.count)"-->
-                                <!--                                            [value]="i">{{ i }}</option>-->
-                                <!--                                </select>-->
+
                                 <div class="flex">
                                     <button (click)="openLink($event, product.product_url)" mat-raised-button class="bg-red w-90 view-details-btn"
                                             *ngIf="!utils.hasInventory(activeProduct) && !product.redirect &&product.product_url">
@@ -52,6 +48,11 @@
                                             VIEW DETAILS
                                         </a>
                                     </button>
+                                    <select [(ngModel)]="quantity" class="quantity-selector mr2"
+                                            *ngIf="utils.hasInventory(activeProduct)">
+                                        <option *ngFor="let i of quantityLimit(activeProduct.inventory_product_details.count)"
+                                                [value]="i">{{ i }}</option>
+                                    </select>
                                     <button (click)="openCartModal()" mat-raised-button
                                             class=" mb1 bg-red w-90 view-details-btn"
                                             *ngIf="utils.hasInventory(activeProduct)">
