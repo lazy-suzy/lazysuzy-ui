@@ -63,7 +63,7 @@
     </ng-template>
 </div>
 <ng-template #isHome>
-    <div class="searchBar">
+    <div class="searchBar" id="homeSearchBar">
         <div class="main-container search-container">
             <form #form="ngForm" role="form" class="searchbar"  (ngSubmit)="openSearch(form)">
                 <div *ngIf="!textChange" class="col-form">
