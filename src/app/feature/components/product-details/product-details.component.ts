@@ -66,6 +66,7 @@ export class ProductDetailsComponent implements OnInit {
     schema = {};
     invalidLinkImageSrc = 'assets/image/invalid_link.png';
     invalidLink: boolean;
+    starIcons = [];
 
     constructor(
         @Inject(MAT_DIALOG_DATA) public data: any,
@@ -104,12 +105,26 @@ export class ProductDetailsComponent implements OnInit {
                 }
             });
     }
-
+    setRating(): void {
+        let starCount = Math.round(this.product.rating * 2) / 2;
+        while (starCount > 0.5) {
+            this.starIcons.push('star');
+            starCount -= 1;
+        }
+        if (starCount && this.starIcons.length < 5) {
+            this.starIcons.push('star_half');
+        } else if (this.starIcons.length < 5) {
+            while (this.starIcons.length < 5) {
+                this.starIcons.push('star_outline');
+            }
+        }
+    }
     private processProduct(payload: IProductDetail, user) {
         this.product = payload.product;
         this.seoData = payload.seo_data;
         if (payload.product) {
             this.setProduct(payload);
+            this.setRating();
         } else {
             this.invalidLink = true;
         }
@@ -190,6 +205,7 @@ export class ProductDetailsComponent implements OnInit {
         }, 1000);
         this.invalidLink = false;
     }
+
     private setSeoData(payload: IProductDetail) {
         this.schema = this.seoService.setSchema(this.product);
         const seoData: any = payload.seo_data;
@@ -200,6 +216,7 @@ export class ProductDetailsComponent implements OnInit {
         };
         this.seoService.setMetaTags(metaData);
     }
+
     onDestroy(): void {
         this.productSubscription.unsubscribe();
         this.eventSubscription.unsubscribe();
