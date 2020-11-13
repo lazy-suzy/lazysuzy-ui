@@ -105,6 +105,7 @@ export class ProductDetailsComponent implements OnInit {
                 }
             });
     }
+
     setRating(): void {
         let starCount = Math.round(this.product.rating * 2) / 2;
         while (starCount > 0.5) {
@@ -119,6 +120,7 @@ export class ProductDetailsComponent implements OnInit {
             }
         }
     }
+
     private processProduct(payload: IProductDetail, user) {
         this.product = payload.product;
         this.seoData = payload.seo_data;
@@ -243,11 +245,15 @@ export class ProductDetailsComponent implements OnInit {
     wishlistProduct(sku, mark) {
         const localData: any = this.localStorageUser;
         if (localData.email.length > 0) {
+            this.product.wishlisted = mark;
             this.apiService
                 .wishlistProduct(sku, mark, false)
-                .subscribe((payload: any) => {
-                    this.product.wishlisted = mark;
-                });
+                .subscribe(_ => {
+
+                    },
+                    error => {
+                        this.product.wishlisted = !mark;
+                    });
         }
     }
 

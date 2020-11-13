@@ -29,7 +29,7 @@
                                 </span>
                                     <div *ngIf="product.reviews != null && product.reviews != 0"
                                          class="rating-container">
-                                        <div class="rating">
+                                        <div class="rating pr2">
                                             <mat-icon *ngFor="let icon of starIcons" class="yellow">
                                                 {{ icon }}
                                             </mat-icon>
@@ -41,18 +41,22 @@
                             <div class="flex flex-column">
 
                                 <div class="flex">
-                                    <button (click)="openLink($event, product.product_url)" mat-raised-button class="bg-red w-90 view-details-btn"
+                                    <button (click)="openLink($event, product.product_url)" mat-raised-button
+                                            class="bg-red w-90 view-details-btn"
                                             *ngIf="!utils.hasInventory(activeProduct) && !product.redirect &&product.product_url">
-                                        <a  [href]="product.product_url"
-                                            class="tr-viewDetails no-underline">
+                                        <a [href]="product.product_url"
+                                           class="tr-viewDetails no-underline">
                                             VIEW DETAILS
                                         </a>
                                     </button>
-                                    <select [(ngModel)]="quantity" class="quantity-selector mr2"
-                                            *ngIf="utils.hasInventory(activeProduct)">
-                                        <option *ngFor="let i of quantityLimit(activeProduct.inventory_product_details.count)"
-                                                [value]="i">{{ i }}</option>
-                                    </select>
+                                    <div class="w-20 pr3" id="newSelect" *ngIf="utils.hasInventory(activeProduct)">
+                                        <select [(ngModel)]="quantity" class="quantity-selector mr2"
+                                                >
+                                            <option *ngFor="let i of quantityLimit(activeProduct.inventory_product_details.count)"
+                                                    [value]="i">{{ i }}</option>
+                                        </select>
+                                    </div>
+
                                     <button (click)="openCartModal()" mat-raised-button
                                             class=" mb1 bg-red w-90 view-details-btn"
                                             *ngIf="utils.hasInventory(activeProduct)">
@@ -63,21 +67,23 @@
                                     <div *ngIf="product.wishlisted; else elseBlock">
                                         <div class="tile-icon wishlist-icon wishlist-container"
                                              (click)="wishlistProduct(product.sku, false)">
-                                            <mat-icon>favorite
+                                            <mat-icon style="font-size: 28px">favorite
                                             </mat-icon>
                                         </div>
+
                                     </div>
+                                    <ng-template #elseBlock>
+                                        <div class="tile-icon wishlist-icon wishlist-container">
+                                            <mat-icon style="font-size: 28px"
+                                                      (click)="wishlistProduct(product.sku, true)">favorite_border
+                                            </mat-icon>
+                                        </div>
+                                    </ng-template>
                                 </div>
                                 <div *ngIf="errorMessage !== ''" class="invalid-feedback">
                                     <div>{{ errorMessage }} Hello</div>
                                 </div>
 
-                                <ng-template #elseBlock>
-                                    <div class="tile-icon wishlist-icon wishlist-container">
-                                        <mat-icon (click)="wishlistProduct(product.sku, true)">favorite_border
-                                        </mat-icon>
-                                    </div>
-                                </ng-template>
 
                             </div>
                         </div>
@@ -183,13 +189,13 @@
                         <div class="mt1 pb1 flex flex-wrap" *ngIf="isArray(product.dimension); else showDimensions">
                             <div *ngFor="let dimension of product.dimension" class="fl w-50 pa2">
                                 <div class="dimension-title">{{ dimension.description }}</div>
-                                <div *ngIf="dimension.width > 0">
+                                <div class="dimensions-details" *ngIf="dimension.width > 0">
                                     Width: {{ dimension.width }}
                                 </div>
-                                <div *ngIf="dimension.depth > 0">
+                                <div class="dimensions-details" *ngIf="dimension.depth > 0">
                                     Depth: {{ dimension.depth }}
                                 </div>
-                                <div *ngIf="dimension.height > 0">
+                                <div class="dimensions-details" *ngIf="dimension.height > 0">
                                     Height: {{ dimension.height }}
                                 </div>
                                 <br/>
