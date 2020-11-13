@@ -84,106 +84,120 @@ export class ProductDetailsComponent implements OnInit {
         this.eventSubscription = this.eventEmitterService.userChangeEvent
             .asObservable()
             .subscribe((user) => {
-                this.productSubscription = this.apiService
-                    .getProduct(this.data.sku)
-                    .subscribe(
-                        (payload: IProductDetail) => {
-                            this.product = payload.product;
-                            console.log('this.product: ', this.product);
-                            this.seoData = payload.seo_data;
-                            if (payload.product) {
-                                this.schema = this.seoService.setSchema(this.product);
-                                const seoData: any = payload.seo_data;
-                                const metaData = {
-                                    title: `${seoData.brand} ${seoData.product_name} | LazySuzy`,
-                                    description: seoData.description,
-                                    image: seoData.image_url,
-                                };
-                                this.seoService.setMetaTags(metaData);
-                                this.updateActiveProduct(this.product);
-                                this.items = this.product.on_server_images.map(
-                                    (item) => new ImageItem({src: item})
-                                );
-                                this.galleryRef.load(this.items);
-                                this.description = this.utils.compileMarkdown(
-                                    this.product.description
-                                );
-                                this.features = this.utils.compileMarkdown(
-                                    this.product.features,
-                                    this.product.site
-                                );
-                                this.dimensionExist = this.utils.checkDataLength(
-                                    this.product.dimension
-                                );
-                                this.featuresExist = this.utils.checkDataLength(
-                                    this.product.features
-                                );
-                                this.descriptionExist = this.utils.checkDataLength(
-                                    this.product.description
-                                );
-                                this.isSwatchExist = this.utils.checkDataLength(
-                                    this.product.variations.filter(
-                                        (variation) => variation.swatch_image !== null
-                                    )
-                                );
-                                if (this.product.in_inventory) {
-                                    this.productPrice = this.utils.formatPrice(
-                                        this.product.inventory_product_details.price
-                                    );
-                                    this.productWasPrice = this.utils.formatPrice(
-                                        this.product.inventory_product_details.was_price
-                                    );
-                                } else {
-                                    this.productPrice = this.utils.formatPrice(
-                                        this.product.is_price
-                                    );
-
-                                    this.productWasPrice = this.utils.formatPrice(
-                                        this.product.was_price
-                                    );
-
-                                }
-                                const minPrice = Number(this.productPrice.split('-')[0]);
-                                const wasMinPrice = Number(this.productWasPrice.split('-')[0]);
-
-                                if (wasMinPrice <= minPrice) {
-                                    this.hasValidWasPrice = false;
-                                }
-                                this.isVariationExist = this.utils.checkDataLength(
-                                    this.product.variations
-                                );
-                                console.log('this.isVariationExist: ', this.isVariationExist);
-
-                                if (!this.isVariationExist) {
-                                    this.beforeSelection = true;
-                                    this.checkSelection = true;
-                                }
-                                this.hasVariationsInventory();
-                                this.variations = this.product.variations.sort((a, b) =>
-                                    a.name > b.name ? 1 : -1
-                                );
-                                if (this.product.set) {
-                                    this.checkSetInventory(this.product.set);
-                                }
-                                const self = this;
-                                setTimeout(() => {
-                                    self.getMaxHeight();
-                                }, 1000);
-                                this.invalidLink = false;
-                            } else {
+                console.log(user);
+                if (this.data.payload) {
+                    this.processProduct(this.data.payload, user);
+                } else {
+                    this.productSubscription = this.apiService
+                        .getProduct(this.data.sku)
+                        .subscribe(
+                            (payload: IProductDetail) => {
+                                this.processProduct(payload, user);
+                            },
+                            (error) => {
                                 this.invalidLink = true;
+                                this.isProductFetching = false;
                             }
-                            this.isProductFetching = false;
-                            this.localStorageUser = user;
-                        },
-                        (error) => {
-                            this.invalidLink = true;
-                            this.isProductFetching = false;
-                        }
-                    );
+                        );
+                }
             });
     }
 
+    private processProduct(payload: IProductDetail, user) {
+        this.product = payload.product;
+        this.seoData = payload.seo_data;
+        if (payload.product) {
+            this.setProduct(payload);
+        } else {
+            this.invalidLink = true;
+        }
+        this.isProductFetching = false;
+        this.localStorageUser = user;
+    }
+
+    private setProduct(payload: IProductDetail) {
+        this.setSeoData(payload);
+        this.updateActiveProduct(this.product);
+        this.items = this.product.on_server_images.map(
+            (item) => new ImageItem({src: item})
+        );
+        this.galleryRef.load(this.items);
+        this.description = this.utils.compileMarkdown(
+            this.product.description
+        );
+        this.features = this.utils.compileMarkdown(
+            this.product.features,
+            this.product.site
+        );
+        this.dimensionExist = this.utils.checkDataLength(
+            this.product.dimension
+        );
+        this.featuresExist = this.utils.checkDataLength(
+            this.product.features
+        );
+        this.descriptionExist = this.utils.checkDataLength(
+            this.product.description
+        );
+        this.isSwatchExist = this.utils.checkDataLength(
+            this.product.variations.filter(
+                (variation) => variation.swatch_image !== null
+            )
+        );
+        if (this.product.in_inventory) {
+            this.productPrice = this.utils.formatPrice(
+                this.product.inventory_product_details.price
+            );
+            this.productWasPrice = this.utils.formatPrice(
+                this.product.inventory_product_details.was_price
+            );
+        } else {
+            this.productPrice = this.utils.formatPrice(
+                this.product.is_price
+            );
+
+            this.productWasPrice = this.utils.formatPrice(
+                this.product.was_price
+            );
+
+        }
+        const minPrice = Number(this.productPrice.split('-')[0]);
+        const wasMinPrice = Number(this.productWasPrice.split('-')[0]);
+
+        if (wasMinPrice <= minPrice) {
+            this.hasValidWasPrice = false;
+        }
+        this.isVariationExist = this.utils.checkDataLength(
+            this.product.variations
+        );
+        console.log('this.isVariationExist: ', this.isVariationExist);
+
+        if (!this.isVariationExist) {
+            this.beforeSelection = true;
+            this.checkSelection = true;
+        }
+        this.hasVariationsInventory();
+        this.variations = this.product.variations.sort((a, b) =>
+            a.name > b.name ? 1 : -1
+        );
+        if (this.product.set) {
+            this.checkSetInventory(this.product.set);
+        }
+        const self = this;
+        setTimeout(() => {
+            self.getMaxHeight();
+        }, 1000);
+        this.invalidLink = false;
+    }
+    private setSeoData(payload: IProductDetail) {
+        this.schema = this.seoService.setSchema(this.product);
+        const seoData: any = payload.seo_data;
+        const metaData = {
+            title: `${seoData.brand} ${seoData.product_name} | LazySuzy`,
+            description: seoData.description,
+            image: seoData.image_url,
+        };
+        this.seoService.setMetaTags(metaData);
+    }
     onDestroy(): void {
         this.productSubscription.unsubscribe();
         this.eventSubscription.unsubscribe();
