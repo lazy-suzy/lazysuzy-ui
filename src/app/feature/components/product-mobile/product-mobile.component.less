@@ -26,7 +26,7 @@
       right: 30px;
     }
 
-    .free-shipping-container{
+    .free-shipping-container {
       position: absolute;
       display: inline-block;
       bottom: 0;
@@ -34,7 +34,8 @@
       font-size: 12px;
       color: @product-price;
       opacity: 75%;
-      span{
+
+      span {
         padding: 0 0.2rem;
       }
     }
@@ -55,20 +56,24 @@
     }
   }
 }
-.product-detail-container{
+
+.product-detail-container {
   padding: 0 0 1rem 0.5rem;
 }
-.brand-name{
+
+.brand-name {
   font-size: 12px;
-   color: rgb(96, 96, 96);;
+  color: rgb(96, 96, 96);;
 }
-.product-name{
+
+.product-name {
   font-size: 12px;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
   color: rgb(12, 28, 49);
 }
+
 .prices {
   bottom: 0;
   font-size: 14px;
@@ -80,10 +85,19 @@
     margin-right: 0.5rem;
   }
 }
-.font-size-14{
+
+.font-size-14 {
   font-size: 14px;
 }
-.condition-icon{
+
+.condition-tag-container {
+  z-index: 96;
+  position: absolute;
+  top: 5px;
+  left: 5px
+}
+
+.condition-icon {
   position: relative;
   font-size: 12px;
   font-family: "Open Sans", "Helvetica Neue", sans-serif;
@@ -93,23 +107,28 @@
   color: #B76E79;
   background-color: #f2f4f3;
 }
-.new-condition{
+
+.new-condition {
   background-color: #f2f4f3;
   color: #B76E79;
 }
-.low-stock-condition{
+
+.low-stock-condition {
   background-color: #ffcc00;
   color: #0C1C31;
 }
-.clearance-condition{
+
+.clearance-condition {
   background-color: #ffcc00;
   color: #0C1C31;
 }
-.exclusive-condition{
+
+.exclusive-condition {
   background-color: #0c1c31;
   color: #ffcc00;
 }
-.hot-condition{
+
+.hot-condition {
   background-color: #e61610;
   color: #f7f6f6;
 }
