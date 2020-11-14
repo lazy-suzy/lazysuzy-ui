@@ -158,6 +158,9 @@
       .variant-feature {
         padding: 5px;
         height: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
         background-color: #f7f6f6;
         color: #000000;
         border: 1px solid #606060;
@@ -208,10 +211,29 @@
   }
 }
 .title {
-  font-size: 14px;
+
+  font-size: 16px;
   font-family: "Open Sans", sans-serif;
   text-transform: uppercase;
   // color: #b76e79;
+}
+#desktopBrowser{
+  .title {
+    font-size: 16px;
+    font-family: "Open Sans", sans-serif;
+    color: #0C1C31;
+    font-weight: bold;
+    text-transform: uppercase;
+    // color: #b76e79;
+  }
+  .selection-title {
+    font-family: "Open Sans", sans-serif;
+    font-size: 16px;
+    margin: 10px 0;
+    text-transform: uppercase;
+    color: #606060;
+  }
+
 }
 .selection-title {
   font-family: Lato, sans-serif;

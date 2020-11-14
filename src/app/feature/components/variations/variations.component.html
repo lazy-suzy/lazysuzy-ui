@@ -80,7 +80,7 @@
 </ng-container>
 
 <ng-template #isBrowser>
-    <div class="variations-container pr2">
+    <div id="desktopBrowser" class="variations-container pr2">
         <div class="flex items-center justify-between">
             <span class="title">Options</span>
             <span class="clear-btn" (click)="clearVariations()" *ngIf="selectedSwatch.swatch_image || selectedFlag">Clear</span>
@@ -143,7 +143,7 @@
                         Select {{ item.key.replace('_', ' ') | titlecase }}
                     </h6>
                     <div class="flex flex-wrap">
-                        <div
+                        <div style="max-width: 14rem;"
                                 *ngFor="let option of item.value.options"
                                 class="w-33 pa1"
                                 [ngClass]="{'w-50': item.value.options.length % 2 === 0}">
