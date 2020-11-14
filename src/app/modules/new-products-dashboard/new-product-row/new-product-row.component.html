@@ -143,6 +143,14 @@
                     </div>
                 </div>
                 <div class="row mt-3">
+                    <div class="col-4 input-label">
+                        <h5>Product Collection</h5>
+                    </div>
+                    <div class="col-4">
+                        <input [(ngModel)]="product.collection">
+                    </div>
+                </div>
+                <div class="row mt-3">
                     <ng-container *ngFor="let category of category_detail">
                         <div class="col-12">
                             <span>{{category}}</span>
