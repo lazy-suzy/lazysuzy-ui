@@ -44,7 +44,7 @@
         <div class="row" style="font-size: 14px;">
             <div class="col-6">
                 <div class="row">
-                    <div class="col-6" >
+                    <div class="col-6">
                         <mat-form-field class="select-height" appearance="fill">
                             <mat-label>Color</mat-label>
                             <mat-select [(ngModel)]="product.color" multiple>
@@ -54,7 +54,7 @@
                             </mat-select>
                         </mat-form-field>
                     </div>
-                     <div class="col-6">
+                    <div class="col-6">
                         <mat-form-field appearance="fill">
                             <mat-label>Shape</mat-label>
                             <mat-select [(ngModel)]="product.shape" multiple>
@@ -114,7 +114,7 @@
                                 </mat-option>
                             </mat-select>
                         </mat-form-field>
-                    </div> 
+                    </div>
                 </div>
             </div>
             <div class="col-6">
@@ -185,30 +185,68 @@
         </div>
     </div>
     <div class="col-8">
-        <ng-container *ngFor="let image of product.product_images?.split(',')">
-            <img src={{image}} height="100px" width='100px'>
-        </ng-container>
+        <div class="flex flex-wrap">
+            <ng-container *ngFor="let image of product.product_images?.split(',');let index = index">
+                <div class="flex flex-column mh3">
+                    <img src={{image}} height="150px" width='150px'>
+                    <mat-radio-group (change)="updateImage(index,image,$event)">
+                        <div class="flex justify-between">
+                            <mat-radio-button value="primary">B1</mat-radio-button>
+                            <mat-radio-button value="secondary">B2</mat-radio-button>
+                        </div>
+                    </mat-radio-group>
+                </div>
+            </ng-container>
+        </div>
     </div>
 </div>
 <div class="row" style="margin-top:15px">
     <div class="col-4">
         <h4>Description</h4>
         <p [innerHTML]='product.product_description'></p>
+        <textarea [(ngModel)]="product.product_description" style="width: 100%;height: 10rem;">
+
+        </textarea>
     </div>
     <div class="col-4">
         <h4>Features</h4>
         <p [innerHTML]='product.product_feature'></p>
+        <textarea [(ngModel)]="product.product_feature" style="width: 100%;height: 10rem;">
+        </textarea>
     </div>
     <div class="col-4">
         <h4>Dimensions</h4>
 
         <div class="row" *ngIf="product.product_dimension">
             <div class="col-6 m-t-5" *ngFor="let dimension of product.product_dimension">
-                <h3>{{dimension.description}}</h3>
-                <span>Height: {{dimension.height}}</span> <br />
-                <span>Width: {{dimension.width}}</span><br />
-                <span>Depth: {{dimension.depth}}</span><br />
-                <span>Diameter: {{dimension.diameter}}</span><br />
+                <div>
+                    <h3>{{dimension.description}}</h3>
+                    <span>Height: {{dimension.height}}</span> <br/>
+                    <span>Width: {{dimension.width}}</span><br/>
+                    <span>Depth: {{dimension.depth}}</span><br/>
+                    <span>Diameter: {{dimension.diameter}}</span><br/>
+                </div>
+                <div class="mt1">
+                    <input style="width: 100%" [(ngModel)]="dimension.description">
+                    <div class="flex flex-column">
+                        <div class="flex justify-between mv2">
+                            <label>Height</label>
+                            <input [(ngModel)]="dimension.height">
+                        </div>
+                        <div class="flex justify-between mv2">
+                            <label>Width</label>
+                            <input [(ngModel)]="dimension.width">
+                        </div>
+                        <div class="flex justify-between mv2">
+                            <label>Depth</label>
+                            <input [(ngModel)]="dimension.depth">
+                        </div>
+                        <div class="flex justify-between mv2">
+                            <label>Diameter</label>
+                            <input [(ngModel)]="dimension.diameter">
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
