@@ -73,12 +73,18 @@ export class NewProductRowComponent implements OnInit {
         this.adminDashboardService.tagImage(data).subscribe((response) => {
             if (response.status) {
                 if (value === 'primary') {
-                    const images = this.product.image_xbg_select_primary.split(',');
+                    let images = [];
+                    if (this.product.image_xbg_select_primary) {
+                         images = this.product.image_xbg_select_primary.split(',');
+                    }
                     images.push(response.image);
                     this.product.image_xbg_select_primary = images.join(',');
                 }
                 if (value === 'secondary') {
-                    const images = this.product.image_xbg_select_secondary.split(',');
+                    let images = [];
+                    if (this.product.image_xbg_select_secondary) {
+                        images = this.product.image_xbg_select_secondary.split(',');
+                    }
                     images.push(response.image);
                     this.product.image_xbg_select_secondary = images.join(',');
                 }
