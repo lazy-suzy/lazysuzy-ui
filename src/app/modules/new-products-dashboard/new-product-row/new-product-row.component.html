@@ -194,7 +194,7 @@
     </div>
     <div class="col-8">
         <div class="flex flex-wrap">
-            <ng-container *ngFor="let image of product.product_images?.split(',');let index = index">
+            <ng-container *ngFor="let image of product.main_product_images?.split(',');let index = index">
                 <div class="flex flex-column mh3">
                     <img src={{image}} height="150px" width='150px'>
                     <mat-radio-group *ngIf="product.status ==='approved'"
