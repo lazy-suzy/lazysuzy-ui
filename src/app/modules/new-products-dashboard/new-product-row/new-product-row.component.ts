@@ -1,4 +1,5 @@
 import {Component, Input, OnInit} from '@angular/core';
+import {AdminDashboardService} from '../../admin-dashboard/admin-dashboard.service';
 
 interface ImageItem {
     index: number;
@@ -29,7 +30,9 @@ export class NewProductRowComponent implements OnInit {
     xImagePrimary = [];
     xImageSecondary = [];
 
-    constructor() {
+    constructor(
+        private adminDashboardService: AdminDashboardService
+    ) {
     }
 
     ngOnInit() {
@@ -59,6 +62,34 @@ export class NewProductRowComponent implements OnInit {
                 }
             });
         }
+    }
+
+    tagImage(productSku, image, value) {
+        const data = {
+            product_sku: productSku,
+            image,
+            type: value
+        };
+        this.adminDashboardService.tagImage(data).subscribe((response) => {
+            if (response.status) {
+                if (value === 'primary') {
+                    let images = [];
+                    if (this.product.image_xbg_select_primary) {
+                         images = this.product.image_xbg_select_primary.split(',');
+                    }
+                    images.push(response.image);
+                    this.product.image_xbg_select_primary = images.join(',');
+                }
+                if (value === 'secondary') {
+                    let images = [];
+                    if (this.product.image_xbg_select_secondary) {
+                        images = this.product.image_xbg_select_secondary.split(',');
+                    }
+                    images.push(response.image);
+                    this.product.image_xbg_select_secondary = images.join(',');
+                }
+            }
+        });
     }
 
     updateImage(index: number, image: string, $event) {

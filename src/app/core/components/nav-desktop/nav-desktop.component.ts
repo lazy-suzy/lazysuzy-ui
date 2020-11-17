@@ -67,6 +67,7 @@ export class NavDesktopComponent implements OnInit {
 
     ngOnInit(): void {
         this.getDeals();
+        this.loadNewsLetterPopup();
         this.eventSubscription = this.eventEmitterService.userChangeEvent
             .asObservable()
             .subscribe((user) => {
@@ -107,6 +108,12 @@ export class NavDesktopComponent implements OnInit {
                 return a.rank - b.rank;
             });
         });
+    }
+
+    loadNewsLetterPopup() {
+        if (this.showOffer) {
+            setTimeout(() => this.matDialogUtils.openNewsLetter(), 5000);
+        }
     }
 
     onDestroy(): void {

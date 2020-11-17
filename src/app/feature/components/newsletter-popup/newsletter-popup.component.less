@@ -1,0 +1,49 @@
+.main-div {
+  background-image: url("https://lazysuzy.com/images/landing/PopSignBlkFri.png");
+  height: 100%;
+  background-repeat: no-repeat;
+  background-size: cover;
+  position: relative;
+}
+
+::ng-deep.mat-dialog-container {
+  padding: 0;
+}
+
+img {
+  visibility: hidden;
+}
+
+.fixed-input {
+  position: absolute;
+  left: 53%;
+  bottom: 19%;
+  width: 30%;
+  padding: 0.5rem;
+  border-radius: 5px;
+  &:focus{
+    outline: none;
+  }
+}
+
+.fixed-button {
+  position: absolute;
+  bottom: 10%;
+  left: 53%;
+  width: 30%;
+  padding: 0.3rem 0.5rem;
+  border-radius: 5px;
+  background-color: #ffcc00;
+  &:focus{
+    outline: none;
+  }
+}
+
+.close-button {
+  cursor: pointer;
+  position: absolute;
+  top: 0;
+  right: 0;
+  float: right;
+  color: white;
+}
