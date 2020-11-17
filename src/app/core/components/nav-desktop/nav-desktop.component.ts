@@ -101,6 +101,9 @@ export class NavDesktopComponent implements OnInit {
             this.deals = value.sort((a, b) => {
                 return a.rank - b.rank;
             });
+            this.deals = this.deals.filter(v => {
+                return v.is_active;
+            });
         });
     }
 

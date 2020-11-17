@@ -93,7 +93,7 @@ export class NavMobileComponent implements OnInit {
             this.deals = value.sort((a, b) => {
                 return a.rank - b.rank;
             });
-            this.mobileDeals = this.deals.filter(deal => deal.is_mobile);
+            this.mobileDeals = this.deals.filter(deal => deal.is_mobile).filter(val => val.is_active);
         });
     }
 
