@@ -11,7 +11,7 @@
           <mat-icon>filter_none </mat-icon>
         </div>
       </div>
-      <div class="flex condition-tag-container" *ngIf="product.condition">
+      <div class="condition-tag-container" *ngIf="product.condition">
         <div  *ngFor="let condition of product.condition.trim().split(',');let i = index;"
               class="condition-icon  {{condition?.trim().replace(' ','-').toLowerCase()}}-condition">
           <span>{{condition | uppercase}}</span>
