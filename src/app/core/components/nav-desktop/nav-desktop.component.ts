@@ -111,13 +111,14 @@ export class NavDesktopComponent implements OnInit {
     }
 
     loadNewsLetterPopup() {
-        const showNewsLetter =
-            this.location.path().match(/checkout/) === null &&
-            this.location.path().match(/board/) === null &&
-            this.location.path().match(/blog/) == null;
-        if (showNewsLetter) {
-            setTimeout(() => this.matDialogUtils.openNewsLetter(), 5000);
-        }
+        this.matDialogUtils.openNewsLetter()
+        // const showNewsLetter =
+        //     this.location.path().match(/checkout/) === null &&
+        //     this.location.path().match(/board/) === null &&
+        //     this.location.path().match(/blog/) == null;
+        // if (showNewsLetter) {
+        //     setTimeout(() => this.matDialogUtils.openNewsLetter(), 5000);
+        // }
     }
 
     onDestroy(): void {
