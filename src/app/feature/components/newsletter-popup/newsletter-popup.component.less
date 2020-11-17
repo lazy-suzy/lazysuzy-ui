@@ -51,6 +51,16 @@ img {
   width: 30%;
   text-align: center;
 }
+.submit-text{
+  position: absolute;
+  left: 53%;
+  bottom: 19%;
+  width: 30%;
+  font-family: "Open Sans", sans-serif;
+  font-size: 14px;
+  color: white;
+  animation: slide-up 0.4s ease-in-out;
+}
 
 .close-button {
   cursor: pointer;
@@ -59,4 +69,15 @@ img {
   right: 0;
   float: right;
   color: white;
+}
+
+@keyframes slide-up {
+  0% {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }

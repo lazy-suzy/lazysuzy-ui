@@ -237,12 +237,6 @@ export class ApiService {
         return this.httpService.get(url);
     }
 
-    subscriptionAll(email): Observable<string> {
-        const subEndPoint = `subscribe`;
-        const url = `${env.API_BASE_HREF}${subEndPoint}?email=${email}`;
-        return this.httpService.get(url);
-    }
-
     wishlistProduct(sku, mark, isHandset: boolean) {
         let endpoint;
         if (mark) {
