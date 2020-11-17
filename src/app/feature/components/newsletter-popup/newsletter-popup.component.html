@@ -3,7 +3,13 @@
     <span (click)="onClose()" class="close-button">
         <mat-icon>close</mat-icon>
     </span>
-    <input type="email" [(ngModel)]="email" class="fixed-input">
-    <button class="fixed-button" (click)="submitEmail()">GET EARLY ACCESS</button>
-    <span *ngIf="errorText" class="error-text">{{errorText}}</span>
+    <ng-container *ngIf="!submitted;else submit">
+        <input type="email" [(ngModel)]="email" class="fixed-input">
+        <button class="fixed-button" (click)="submitEmail()">GET EARLY ACCESS</button>
+        <span *ngIf="errorText" class="error-text">{{errorText}}</span>
+    </ng-container>
 </div>
+<ng-template #submit>
+    <span class="submit-text">All set! Watch out for your early access invite.</span>
+    <button class="fixed-button" (click)="onClose()">SHOP SALE NOW</button>
+</ng-template>

@@ -10,6 +10,7 @@ import {ApiService} from '../../../shared/services';
 export class NewsletterPopupComponent implements OnInit {
     email: string;
     errorText: string;
+    submitted = false;
 
     constructor(
         private dialogRef: MatDialogRef<NewsletterPopupComponent>,
@@ -31,8 +32,8 @@ export class NewsletterPopupComponent implements OnInit {
             return;
         }
         if (this.email && emailMatch) {
-            this.apiService.subscriptionAll(this.email).subscribe(response => {
-                this.onClose();
+            this.apiService.subscription('PopupForm', this.email).subscribe((response: any) => {
+                this.submitted = true;
             });
         }
     }
