@@ -5,4 +5,5 @@
     </span>
     <input type="email" [(ngModel)]="email" class="fixed-input">
     <button class="fixed-button" (click)="submitEmail()">GET EARLY ACCESS</button>
+    <span *ngIf="errorText" class="error-text">{{errorText}}</span>
 </div>

@@ -9,6 +9,7 @@ import {ApiService} from '../../../shared/services';
 })
 export class NewsletterPopupComponent implements OnInit {
     email: string;
+    errorText: string;
 
     constructor(
         private dialogRef: MatDialogRef<NewsletterPopupComponent>,
@@ -24,7 +25,12 @@ export class NewsletterPopupComponent implements OnInit {
     }
 
     submitEmail() {
-        if (this.email && this.email.match(/^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/g)) {
+        const emailMatch = this.email.match(/^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/g);
+        if (!emailMatch) {
+            this.errorText = 'Please Enter a valid Email address';
+            return;
+        }
+        if (this.email && emailMatch) {
             this.apiService.subscriptionAll(this.email).subscribe(response => {
                 this.onClose();
             });
