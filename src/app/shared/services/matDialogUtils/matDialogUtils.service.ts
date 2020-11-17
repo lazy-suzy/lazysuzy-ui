@@ -6,6 +6,7 @@ import {Location} from '@angular/common';
 import {ActivatedRoute, Router} from '@angular/router';
 import {MarkdownService} from 'ngx-markdown';
 import {OfferDailogComponent} from '../../../feature/components/offer-dailog/offer-dailog.component';
+import {NewsletterPopupComponent} from '../../../feature/components/newsletter-popup/newsletter-popup.component';
 
 @Injectable({
     providedIn: 'root'
@@ -156,6 +157,13 @@ export class MatDialogUtilsService {
             data: {
                 deals
             }
+        });
+    }
+
+    openNewsLetter() {
+        const dialogRef = this.dialog.open(NewsletterPopupComponent, {
+            hasBackdrop: true,
+            disableClose: true
         });
     }
 
