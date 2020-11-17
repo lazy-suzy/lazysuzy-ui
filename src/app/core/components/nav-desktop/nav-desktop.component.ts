@@ -29,7 +29,7 @@ export class NavDesktopComponent implements OnInit {
     isBrandPage: boolean = false;
     params: any;
     deals: any;
-    showOffer = true;
+    showOffer = false;
     //
     isShop = true;
     isBoard = false;
@@ -111,7 +111,11 @@ export class NavDesktopComponent implements OnInit {
     }
 
     loadNewsLetterPopup() {
-        if (this.showOffer) {
+        const showNewsLetter =
+            this.location.path().match(/checkout/) === null &&
+            this.location.path().match(/board/) === null &&
+            this.location.path().match(/blog/) == null;
+        if (showNewsLetter) {
             setTimeout(() => this.matDialogUtils.openNewsLetter(), 5000);
         }
     }
