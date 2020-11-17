@@ -45,6 +45,7 @@
                             <ng-container *ngIf="filter === 'category'else category">
                                 <mat-checkbox
                                         class="pa2 menu-item"
+                                        *ngIf="option.enabled"
                                         [checked]="option.checked"
                                         [value]="option.value"
                                         (change)="onCheckChange($event, filter)">
