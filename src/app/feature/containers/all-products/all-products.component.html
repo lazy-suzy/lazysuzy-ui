@@ -73,27 +73,34 @@
                             </ng-container>
                         </div>
                         <!-- / show brand data -->
-                       
+
                     </div>
                     <div class="row">
                         <div class="col-md-12 pr2 text-right">
                             <h4 style="font-size: 14px;">{{ totalCount }} Results</h4>
                         </div>
                     </div>
-                    <div class="row sticky-row">
+                    <div class="row sticky-row ">
                         <div class="col-md-12 filter-panel">
-                            <div class="row" style="padding: 10px;">
-                                <div class="col-sm-8 col-md-10 ">
-                                    <app-product-filters #productFiltersComponent [productFilters]="productFilters"
-                                                         (setFilters)="onSetFilters($event)" [isBrandPage]="isBrandPage"
-                                                         [isChangingBrandList]="isChangingBrandList"
-                                                         class="flex flex-wrap justify-start" style="margin-top: -0.4rem"></app-product-filters>
+                            <div class="flex justify-between" style="padding: 10px;">
+                                <div>
+                                    <span class="pointer" (click)="toggleFilterBar()">
+                                         <mat-icon class="filter-icon">filter_list</mat-icon>Filters
+                                    </span>
                                 </div>
-
-                                <div class="col-sm-4 col-md-2 ">
+                                <div style="min-width: 10rem">
                                     <app-sort-type [sortTypeList]="sortTypeList" [sortType]="sortType"
                                                    (setSortType)="onSetSortType($event)">
                                     </app-sort-type>
+                                </div>
+                            </div>
+                            <div class="row slide-down" style="padding: 10px;" *ngIf="showFilters">
+                                <div class="col-md-12">
+                                    <app-product-filters #productFiltersComponent [productFilters]="productFilters"
+                                                         (setFilters)="onSetFilters($event)" [isBrandPage]="isBrandPage"
+                                                         [isChangingBrandList]="isChangingBrandList"
+                                                         class="flex flex-wrap justify-start"
+                                                         style="margin-top: -0.4rem"></app-product-filters>
                                 </div>
                             </div>
                             <!-- class="flex justify-start w-75" -->
@@ -108,7 +115,8 @@
                         <ng-template #emptyProductsMessage>
                             <div class="col-md-12" style="text-align: center;">
                                 <p>Oops. No Products Found :( Try removing some filters or
-                                    <a class="clear-filter-text" (click)="productFiltersComponent.clearFilters()">Click Here</a>
+                                    <a class="clear-filter-text" (click)="productFiltersComponent.clearFilters()">Click
+                                        Here</a>
                                     to clear all
                                     filters </p>
                             </div>

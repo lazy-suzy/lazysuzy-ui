@@ -52,7 +52,7 @@
 
         <ng-container *ngIf="isHandset">
             <ng-container *ngFor="let product of products;let i = index">
-                <app-product-mobile  [product]="product" [productsInRow]="productsInRow"
+                <app-product-mobile [product]="product" [productsInRow]="productsInRow"
                                     [ngClass]="{
           'w-50': productsInRow === 2,
           'w-33': productsInRow === 3,
@@ -65,7 +65,7 @@
                         <img class="w-100" [src]="collectionData.sub_details[((i+1)/6 - 1)]?.image">
                     </div>
                     <div class="mid-banner-text-mobile">
-                        <span style="white-space: pre-line">{{collectionData.sub_details[((i+1)/6 - 1)]?.description}}</span>
+                        <span style="white-space: pre-line">{{collectionData.sub_details[((i + 1) / 6 - 1)]?.description}}</span>
                     </div>
                 </div>
             </ng-container>
@@ -90,12 +90,13 @@
                     <div class="row mb-10">
                         <!-- show brand data -->
                         <div class="col-md-12" *ngIf="collectionData">
-                                <div class="branddata-container w-100">
-                                    <p class="collection-name">{{collectionData.name| titlecase}}</p>
-                                    <p class="collection-description">{{collectionData.cover_details?.description}}</p>
-                                    <img class="mt2" *ngIf="collectionData.cover_details?.image" src="{{collectionData.cover_details?.image}}"/>
-                                    <p class="collection-footer mt2">{{collectionData.head_description}}</p>
-                                </div>
+                            <div class="branddata-container w-100">
+                                <p class="collection-name">{{collectionData.name| titlecase}}</p>
+                                <p class="collection-description">{{collectionData.cover_details?.description}}</p>
+                                <img class="mt2" *ngIf="collectionData.cover_details?.image"
+                                     src="{{collectionData.cover_details?.image}}"/>
+                                <p class="collection-footer mt2">{{collectionData.head_description}}</p>
+                            </div>
                         </div>
                         <!-- / show brand data -->
 
@@ -105,21 +106,28 @@
                             <h4 style="font-size: 14px;">{{ totalCount }} Results</h4>
                         </div>
                     </div>
-                    <div class="row sticky-row">
+                    <div class="row sticky-row ">
                         <div class="col-md-12 filter-panel">
-                            <div class="row" style="padding: 10px;">
-                                <div class="col-sm-8 col-md-10 ">
+                            <div class="flex justify-between" style="padding: 10px;">
+                                <div>
+                                    <span class="pointer" (click)="toggleFilterBar()">
+                                         <mat-icon class="filter-icon">filter_list</mat-icon>Filters
+                                    </span>
+                                </div>
+                                <div style="min-width: 10rem">
+                                    <app-sort-type [sortTypeList]="sortTypeList" [sortType]="sortType"
+                                                   (setSortType)="onSetSortType($event)">
+                                    </app-sort-type>
+                                </div>
+                            </div>
+                            <div class="row slide-down" style="padding: 10px;" *ngIf="showFilters">
+                                <div class="col-md-12">
                                     <app-product-filters #productFiltersComponent [productFilters]="productFilters"
                                                          (setFilters)="onSetFilters($event)" [isBrandPage]="isBrandPage"
                                                          [isCollectionPage]="true"
                                                          [isChangingBrandList]="isChangingBrandList"
-                                                         class="flex flex-wrap justify-start" style="margin-top: -0.4rem"></app-product-filters>
-                                </div>
-
-                                <div class="col-sm-4 col-md-2 ">
-                                    <app-sort-type [sortTypeList]="sortTypeList" [sortType]="sortType"
-                                                   (setSortType)="onSetSortType($event)">
-                                    </app-sort-type>
+                                                         class="flex flex-wrap justify-start"
+                                                         style="margin-top: -0.4rem"></app-product-filters>
                                 </div>
                             </div>
                             <!-- class="flex justify-start w-75" -->
@@ -127,9 +135,9 @@
                     </div>
                     <div class="row">
                         <ng-container *ngIf="products.length>0;else emptyProductsMessage">
-                            <ng-container *ngFor="let product of products; let i = index" >
-                                <app-product  [product]="product" class="col-md-4"
-                                              style="margin-bottom: 15px;">
+                            <ng-container *ngFor="let product of products; let i = index">
+                                <app-product [product]="product" class="col-md-4"
+                                             style="margin-bottom: 15px;">
                                 </app-product>
                                 <div
                                         *ngIf="checkBannerShow(i)"
@@ -140,7 +148,7 @@
                                             <img [src]="collectionData.sub_details[((i+1)/6 - 1)]?.image">
                                         </div>
                                         <div class="col-md-8 mid-banner-text">
-                                            <span style="white-space: pre-line">{{collectionData.sub_details[((i+1)/6 - 1)]?.description}}</span>
+                                            <span style="white-space: pre-line">{{collectionData.sub_details[((i + 1) / 6 - 1)]?.description}}</span>
                                         </div>
                                     </div>
 
@@ -151,7 +159,8 @@
                         <ng-template #emptyProductsMessage>
                             <div class="col-md-12" style="text-align: center;">
                                 <p>Oops. No Products Found :( Try removing some filters or
-                                    <a class="clear-filter-text" (click)="productFiltersComponent.clearFilters()">Click Here</a>
+                                    <a class="clear-filter-text" (click)="productFiltersComponent.clearFilters()">Click
+                                        Here</a>
                                     to clear all
                                     filters </p>
                             </div>

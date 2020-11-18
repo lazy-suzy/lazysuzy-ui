@@ -59,7 +59,7 @@ export class AllProductsComponent implements OnInit {
     isBrandPage: boolean = false;
     isChangingBrandList: boolean = false;
     collectionsList: any;
-
+    showFilters = false;
     constructor(
         private apiService: ApiService,
         private router: Router,
@@ -85,7 +85,9 @@ export class AllProductsComponent implements OnInit {
             this.collectionsList = collections;
         });
     }
-
+    toggleFilterBar() {
+        this.showFilters = !this.showFilters;
+    }
     ngOnInit(): void {
         this.eventSubscription = this.eventEmitterService.userChangeEvent
             .asObservable()
