@@ -61,7 +61,7 @@ export class ProductCollectionsComponent implements OnInit {
     isChangingBrandList: boolean = false;
     collectionsList: any;
     collectionData: any = {};
-
+    showFilters = false
     constructor(
         private apiService: ApiService,
         private router: Router,
@@ -109,6 +109,9 @@ export class ProductCollectionsComponent implements OnInit {
         this.isBrandPageSubscription.unsubscribe();
     }
 
+    toggleFilterBar() {
+        this.showFilters = !this.showFilters;
+    }
     getParamsFromQuery(): void {
         this.routeSubscription = this.activeRoute.queryParams.subscribe(
             (params) => {

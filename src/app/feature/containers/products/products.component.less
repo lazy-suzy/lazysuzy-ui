@@ -28,12 +28,7 @@
   margin: 0px 10px 10px 10px;
   transition: max-height 0.4s ease-in-out;
 }
-.filter-icon{
-  font-size: 20px;
-  margin-top: 0.1rem;
-  text-align: center;
-  vertical-align: middle;
-}
+
 .scroll-to-btn {
   position: fixed;
   bottom: 120px;
@@ -148,20 +143,7 @@
   margin-right: -15px;
   margin-left: -15px;
 }
-.slide-down{
-  animation: slide 0.4s ease;
-}
 
-@keyframes slide {
-  0% {
-    opacity: 0;
-    transform: translateY(-20px);
-  }
-  100% {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
 .col-md-1,
 .col-md-10,
 .col-md-11,
@@ -242,4 +224,26 @@
 
 .col-md-pull-12 {
   right: 100%;
+}
+
+.filter-icon {
+  font-size: 20px;
+  margin-top: 0.1rem;
+  text-align: center;
+  vertical-align: middle;
+}
+
+.slide-down {
+  animation: slide 0.4s ease;
+}
+
+@keyframes slide {
+  0% {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
