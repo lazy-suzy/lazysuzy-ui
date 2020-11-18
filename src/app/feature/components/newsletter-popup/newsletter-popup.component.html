@@ -5,13 +5,14 @@
         <mat-icon>close</mat-icon>
     </span>
     <ng-container *ngIf="!submitted;else submit">
-        <input type="email" [(ngModel)]="email" class="fixed-input">
+        <span class="signup-text">Sign Up for Early Access</span>
+        <input placeholder="Enter Email" type="email" [(ngModel)]="email" class="fixed-input">
         <button class="fixed-button" (click)="submitEmail()">GET EARLY ACCESS</button>
         <span *ngIf="errorText" class="error-text">{{errorText}}</span>
     </ng-container>
     <ng-template #submit>
         <span class="submit-text">All set! Watch out for your early access invite.</span>
-        <button class="fixed-button" (click)="onClose()">SHOP SALE NOW</button>
+        <button class="fixed-button" (click)="onClose()">CONTINUE SHOPPING</button>
     </ng-template>
 </div>
 <ng-template #handsetPopup>
@@ -21,13 +22,14 @@
             <mat-icon>close</mat-icon>
         </span>
         <ng-container *ngIf="!submitted;else submit">
-            <input type="email" [(ngModel)]="email" class="fixed-input">
+            <span class="signup-text">Sign Up for Early Access</span>
+            <input placeholder="Enter Email" type="email" [(ngModel)]="email" class="fixed-input">
             <button class="fixed-button" (click)="submitEmail()">GET EARLY ACCESS</button>
             <span *ngIf="errorText" class="error-text">{{errorText}}</span>
         </ng-container>
         <ng-template #submit>
             <span class="submit-text">All set! Watch out for your early access invite.</span>
-            <button class="fixed-button" (click)="onClose()">SHOP SALE NOW</button>
+            <button class="fixed-button" (click)="onClose()">CONTINUE SHOPPING</button>
         </ng-template>
     </div>
 </ng-template>
