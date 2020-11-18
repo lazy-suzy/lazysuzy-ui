@@ -1,4 +1,4 @@
-import {Component, HostListener, OnInit} from '@angular/core';
+import {Component, HostListener, OnInit, ViewChild} from '@angular/core';
 import {Location} from '@angular/common';
 import {HttpParams} from '@angular/common/http';
 import {IFilterData, IProductPayload, IProductsPayload, ISortType} from './../../../shared/models';
@@ -17,7 +17,7 @@ import MetaData from '../../../shared/services/seo/meta-data-model';
     styleUrls: ['./product-collections.component.less']
 })
 export class ProductCollectionsComponent implements OnInit {
-
+    @ViewChild('productFiltersComponent', {static: true}) productFilter: any;
     productsSubscription: Subscription;
     isBrandPageSubscription: Subscription;
     routeSubscription: Subscription;
@@ -100,7 +100,9 @@ export class ProductCollectionsComponent implements OnInit {
                 );
             });
     }
-
+    clearFilters() {
+        this.productFilter.clearFilters();
+    }
     onDestroy(): void {
         this.productsSubscription.unsubscribe();
         this.routeSubscription.unsubscribe();
