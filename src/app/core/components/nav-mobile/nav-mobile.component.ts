@@ -68,6 +68,7 @@ export class NavMobileComponent implements OnInit {
 
     ngOnInit(): void {
         this.getDeals();
+        this.openNewsletterPopup();
         this.eventSubscription = this.eventEmitterService.userChangeEvent
             .asObservable()
             .subscribe((user) => {
@@ -89,6 +90,16 @@ export class NavMobileComponent implements OnInit {
                     }
                 });
             });
+    }
+
+    openNewsletterPopup() {
+        const showNewsLetter =
+            this.location.path().match(/checkout/) === null &&
+            this.location.path().match(/board/) === null &&
+            this.location.path().match(/blog/) == null;
+        if (showNewsLetter) {
+            setTimeout(() => this.matDialogUtils.openNewsLetter(true), 5000);
+        }
     }
 
     getDeals() {
