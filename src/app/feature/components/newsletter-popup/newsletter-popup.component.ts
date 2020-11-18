@@ -1,5 +1,5 @@
-import {Component, OnInit} from '@angular/core';
-import {MatDialogRef} from '@angular/material';
+import {Component, Inject, OnInit} from '@angular/core';
+import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material';
 import {ApiService} from '../../../shared/services';
 
 @Component({
@@ -11,14 +11,26 @@ export class NewsletterPopupComponent implements OnInit {
     email: string;
     errorText: string;
     submitted = false;
+    isHandset = false;
+    desktopImageUrl = 'https://lazysuzy.com/images/landing/PopSignBlkFri.png';
+    mobileImageUrl = 'https://lazysuzy.com/images/landing/PopSignBlkFriM.jpg';
 
     constructor(
         private dialogRef: MatDialogRef<NewsletterPopupComponent>,
-        private apiService: ApiService
+        private apiService: ApiService,
+        @Inject(MAT_DIALOG_DATA) public data
     ) {
     }
 
+    setStyles() {
+        return {
+            'background-image': `url('${this.isHandset ? this.mobileImageUrl : this.desktopImageUrl}')`,
+            'background-size': this.isHandset ? 'contain' : 'cover',
+        };
+    }
+
     ngOnInit() {
+        this.isHandset = this.data.handset;
     }
 
     onClose() {
