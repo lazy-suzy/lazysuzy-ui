@@ -2,7 +2,7 @@
   .fixed-input {
     position: absolute;
     left: 50%;
-    bottom: 19%;
+    bottom: 13%;
     width: 40%;
     padding: 0.5rem;
     border-radius: 5px;
@@ -12,14 +12,26 @@
     }
   }
 
+  .signup-text {
+    position: absolute;
+    left: 50%;
+    bottom: 22%;
+    width: 40%;
+    text-align: center;
+    font-family: "Open Sans", "Helvetica Neue", sans-serif;
+    font-size: 18px;
+    color: white;
+  }
+
   .fixed-button {
     position: absolute;
-    bottom: 10%;
+    bottom: 5%;
     left: 50%;
     width: 40%;
-    padding: 0.3rem 0.5rem;
+    padding: 0.5rem;
     border-radius: 5px;
     background-color: #ffcc00;
+    border: none;
 
     &:focus {
       outline: none;
@@ -31,7 +43,7 @@
     font-size: 12px;
     color: #FF0000;
     position: absolute;
-    bottom: 5%;
+    bottom: 1%;
     left: 50%;
     width: 40%;
     text-align: center;
@@ -40,7 +52,7 @@
   .submit-text {
     position: absolute;
     left: 50%;
-    bottom: 19%;
+    bottom: 13%;
     width: 40%;
     font-family: "Open Sans", sans-serif;
     font-size: 14px;
@@ -51,11 +63,22 @@
 }
 
 // For Mobile Handsets
-#mobilePopup{
+#mobilePopup {
+  .signup-text {
+    position: absolute;
+    left: 54%;
+    bottom: 30%;
+    width: 40%;
+    text-align: center;
+    font-family: "Open Sans", "Helvetica Neue", sans-serif;
+    font-size: 12px;
+    color: white;
+  }
+
   .fixed-input {
     position: absolute;
     left: 54%;
-    bottom: 25%;
+    bottom: 21%;
     width: 40%;
     padding: 0.25rem;
     border-radius: 5px;
@@ -67,7 +90,7 @@
 
   .fixed-button {
     position: absolute;
-    bottom: 14%;
+    bottom: 12%;
     left: 54%;
     width: 40%;
     padding: 0.2rem 0.1rem;
@@ -85,7 +108,7 @@
     font-size: 12px;
     color: #FF0000;
     position: absolute;
-    bottom: 5%;
+    bottom: 2%;
     left: 53%;
     width: 40%;
     text-align: center;
@@ -94,7 +117,7 @@
   .submit-text {
     position: absolute;
     left: 53%;
-    bottom: 24%;
+    bottom: 25%;
     width: 40%;
     font-family: "Open Sans", sans-serif;
     font-size: 12px;
@@ -104,8 +127,9 @@
     text-align: center;
   }
 }
+
 .main-div {
- // background-image: url("https://lazysuzy.com/images/landing/PopSignBlkFri.png");
+  // background-image: url("https://lazysuzy.com/images/landing/PopSignBlkFri.png");
   height: 100%;
   background-repeat: no-repeat;
   position: relative;
