@@ -77,7 +77,7 @@
                                     </app-sort-type>
                                 </div>
                             </div>
-                            <div class="row slide-down" style="padding: 10px;" >
+                            <div class="row slide-down" style="padding: 10px;" *ngIf="showFilters">
                                 <div class="col-md-12">
                                     <app-product-filters #productFiltersComponent [productFilters]="productFilters"
                                                          (setFilters)="onSetFilters($event)"
@@ -99,7 +99,7 @@
                         <ng-template #emptyProductsMessage>
                             <div class="col-md-12" style="text-align: center;">
                                 <p>Oops. No Products Found :( Try removing some filters or
-                                    <a class="clear-filter-text">Click
+                                    <a class="clear-filter-text" (click)="clearFilters()">Click
                                         Here</a>
                                     to clear all
                                     filters </p>
