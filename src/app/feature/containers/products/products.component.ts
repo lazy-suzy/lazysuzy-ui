@@ -74,6 +74,7 @@ export class ProductsComponent implements OnInit {
     };
     // Collection List
     collectionList: any;
+    showFilters = false;
 
     constructor(
         public dialog: MatDialog,
@@ -125,6 +126,10 @@ export class ProductsComponent implements OnInit {
         this.routeSubscription.unsubscribe();
         this.bpSubscription.unsubscribe();
         this.eventSubscription.unsubscribe();
+    }
+
+    toggleFilterBar() {
+        this.showFilters = !this.showFilters;
     }
 
     getParams(): void {
