@@ -1,0 +1,165 @@
+#desktopPopup {
+  .fixed-input {
+    position: absolute;
+    left: 50%;
+    bottom: 13%;
+    width: 40%;
+    padding: 0.5rem;
+    border-radius: 5px;
+
+    &:focus {
+      outline: none;
+    }
+  }
+
+  .signup-text {
+    position: absolute;
+    left: 50%;
+    bottom: 22%;
+    width: 40%;
+    text-align: center;
+    font-family: "Open Sans", "Helvetica Neue", sans-serif;
+    font-size: 18px;
+    color: white;
+  }
+
+  .fixed-button {
+    position: absolute;
+    bottom: 5%;
+    left: 50%;
+    width: 40%;
+    padding: 0.5rem;
+    border-radius: 5px;
+    background-color: #ffcc00;
+    border: none;
+
+    &:focus {
+      outline: none;
+    }
+  }
+
+  .error-text {
+    font-family: Lato, sans-serif;
+    font-size: 12px;
+    color: #FF0000;
+    position: absolute;
+    bottom: 1%;
+    left: 50%;
+    width: 40%;
+    text-align: center;
+  }
+
+  .submit-text {
+    position: absolute;
+    left: 50%;
+    bottom: 13%;
+    width: 40%;
+    font-family: "Open Sans", sans-serif;
+    font-size: 14px;
+    color: white;
+    animation: slide-up 0.4s ease-in-out;
+    text-align: center;
+  }
+}
+
+// For Mobile Handsets
+#mobilePopup {
+  .signup-text {
+    position: absolute;
+    left: 54%;
+    bottom: 30%;
+    width: 40%;
+    text-align: center;
+    font-family: "Open Sans", "Helvetica Neue", sans-serif;
+    font-size: 12px;
+    color: white;
+  }
+
+  .fixed-input {
+    position: absolute;
+    left: 54%;
+    bottom: 21%;
+    width: 40%;
+    padding: 0.25rem;
+    border-radius: 5px;
+
+    &:focus {
+      outline: none;
+    }
+  }
+
+  .fixed-button {
+    position: absolute;
+    bottom: 12%;
+    left: 54%;
+    width: 40%;
+    padding: 0.2rem 0.1rem;
+    border-radius: 5px;
+    background-color: #ffcc00;
+    font-size: 14px;
+
+    &:focus {
+      outline: none;
+    }
+  }
+
+  .error-text {
+    font-family: Lato, sans-serif;
+    font-size: 12px;
+    color: #FF0000;
+    position: absolute;
+    bottom: 2%;
+    left: 53%;
+    width: 40%;
+    text-align: center;
+  }
+
+  .submit-text {
+    position: absolute;
+    left: 53%;
+    bottom: 25%;
+    width: 40%;
+    font-family: "Open Sans", sans-serif;
+    font-size: 12px;
+    color: white;
+    -webkit-animation: slide-up 0.4s ease-in-out;
+    animation: slide-up 0.4s ease-in-out;
+    text-align: center;
+  }
+}
+
+.main-div {
+  // background-image: url("https://lazysuzy.com/images/landing/PopSignBlkFri.png");
+  height: 100%;
+  background-repeat: no-repeat;
+  position: relative;
+}
+
+::ng-deep.mat-dialog-container {
+  padding: 0;
+}
+
+img {
+  visibility: hidden;
+}
+
+
+.close-button {
+  cursor: pointer;
+  position: absolute;
+  top: 0;
+  right: 0;
+  float: right;
+  color: white;
+}
+
+@keyframes slide-up {
+  0% {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}

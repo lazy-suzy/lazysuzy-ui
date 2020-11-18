@@ -6,6 +6,7 @@ import {Location} from '@angular/common';
 import {ActivatedRoute, Router} from '@angular/router';
 import {MarkdownService} from 'ngx-markdown';
 import {OfferDailogComponent} from '../../../feature/components/offer-dailog/offer-dailog.component';
+import {NewsletterPopupComponent} from '../../../feature/components/newsletter-popup/newsletter-popup.component';
 
 @Injectable({
     providedIn: 'root'
@@ -157,6 +158,24 @@ export class MatDialogUtilsService {
                 deals
             }
         });
+    }
+
+    openNewsLetter(handset = false) {
+        let config: any = {
+            hasBackdrop: true,
+            disableClose: true,
+            data: {
+                handset
+            }
+        };
+        if (handset) {
+            // const dimensions = {
+            //     width: '360px',
+            //     height: '360px'
+            // };
+            // config = {...config, ...dimensions};
+        }
+        const dialogRef = this.dialog.open(NewsletterPopupComponent, config);
     }
 
     setProduct(payload) {

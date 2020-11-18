@@ -29,7 +29,7 @@ export class NavDesktopComponent implements OnInit {
     isBrandPage: boolean = false;
     params: any;
     deals: any;
-    showOffer = true;
+    showOffer = false;
     //
     isShop = true;
     isBoard = false;
@@ -67,6 +67,7 @@ export class NavDesktopComponent implements OnInit {
 
     ngOnInit(): void {
         this.getDeals();
+        this.loadNewsLetterPopup();
         this.eventSubscription = this.eventEmitterService.userChangeEvent
             .asObservable()
             .subscribe((user) => {
@@ -110,6 +111,16 @@ export class NavDesktopComponent implements OnInit {
                 return v.is_active;
             });
         });
+    }
+
+    loadNewsLetterPopup() {
+        const showNewsLetter =
+            this.location.path().match(/checkout/) === null &&
+            this.location.path().match(/board/) === null &&
+            this.location.path().match(/blog/) == null;
+        if (showNewsLetter) {
+            setTimeout(() => this.matDialogUtils.openNewsLetter(), 5000);
+        }
     }
 
     onDestroy(): void {

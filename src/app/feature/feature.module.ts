@@ -24,6 +24,7 @@ import {BlogModule} from './blog/blog/blog.module';
 import {ProductCollectionsComponent} from './containers/product-collections/product-collections.component';
 import {CollectionListModule} from './components/collection-list/collection-list.module';
 import {OfferDailogComponent} from './components/offer-dailog/offer-dailog.component';
+import {NewsletterPopupComponent} from './components/newsletter-popup/newsletter-popup.component';
 
 const DECLARATIONS = [
     ResetPasswordComponent,
@@ -52,11 +53,11 @@ const MODULES = [
 ];
 
 @NgModule({
-    declarations: [...DECLARATIONS],
+    declarations: [...DECLARATIONS, NewsletterPopupComponent],
     imports: [...MODULES],
     // providers: [AmericanNumberPipe],
     exports: [...DECLARATIONS, ...MODULES],
-    entryComponents: [OfferDailogComponent]
+    entryComponents: [OfferDailogComponent, NewsletterPopupComponent]
 })
 export class FeatureModule {
 }
