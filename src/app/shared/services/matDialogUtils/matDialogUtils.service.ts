@@ -4,9 +4,9 @@ import {ConfirmCartProductComponent, ProductDetailsComponent} from 'src/app/feat
 import {SigninComponent, SignupComponent} from 'src/app/core/components';
 import {Location} from '@angular/common';
 import {ActivatedRoute, Router} from '@angular/router';
-import {MarkdownService} from 'ngx-markdown';
 import {OfferDailogComponent} from '../../../feature/components/offer-dailog/offer-dailog.component';
 import {NewsletterPopupComponent} from '../../../feature/components/newsletter-popup/newsletter-popup.component';
+import {CookieService} from 'ngx-cookie-service';
 
 @Injectable({
     providedIn: 'root'
@@ -26,7 +26,7 @@ export class MatDialogUtilsService {
         private location: Location,
         private router: Router,
         private activeRoute: ActivatedRoute,
-        private markdownService: MarkdownService
+        private cookie: CookieService
     ) {
     }
 
@@ -161,21 +161,15 @@ export class MatDialogUtilsService {
     }
 
     openNewsLetter(handset = false) {
-        let config: any = {
+        const config: any = {
             hasBackdrop: true,
             disableClose: true,
             data: {
                 handset
             }
         };
-        if (handset) {
-            // const dimensions = {
-            //     width: '360px',
-            //     height: '360px'
-            // };
-            // config = {...config, ...dimensions};
-        }
         const dialogRef = this.dialog.open(NewsletterPopupComponent, config);
+        dialogRef.afterClosed().subscribe(event => this.cookie.set('popupShow', '1', 1));
     }
 
     setProduct(payload) {
