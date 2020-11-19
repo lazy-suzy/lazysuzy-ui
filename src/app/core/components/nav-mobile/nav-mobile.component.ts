@@ -90,10 +90,11 @@ export class NavMobileComponent implements OnInit {
 
     getDeals() {
         this.apiService.getDeals().pipe(first()).subscribe((value: any) => {
+            this.deals = value.filter(val => val.is_active);
             this.deals = value.sort((a, b) => {
                 return a.rank - b.rank;
             });
-            this.mobileDeals = this.deals.filter(deal => deal.is_mobile).filter(val => val.is_active);
+            this.mobileDeals = this.deals.filter(deal => deal.is_mobile);
         });
     }
 
