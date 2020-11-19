@@ -1,13 +1,12 @@
-<mat-sidenav-container [hasBackdrop]="true">
+<ng-container *ngIf="!isHandset; else mobileView">
   <div *ngIf="!isMinimalMode">
     <ng-container *ngIf="isHandset; else isBrowser">
-        <app-nav-mobile></app-nav-mobile>
+      <app-nav-mobile></app-nav-mobile>
     </ng-container>
     <ng-template #isBrowser>
       <app-nav-desktop [isTablet]="isTablet"></app-nav-desktop>
     </ng-template>
   </div>
-
   <div class="content-height">
     <router-outlet></router-outlet>
   </div>
@@ -20,4 +19,30 @@
       <app-footer class="footer-display w-100"></app-footer>
     </ng-template>
   </div>
-</mat-sidenav-container>
+</ng-container>
+<ng-template #mobileView>
+  <mat-sidenav-container [hasBackdrop]="true">
+    <div *ngIf="!isMinimalMode">
+      <ng-container *ngIf="isHandset; else isBrowser">
+        <app-nav-mobile></app-nav-mobile>
+      </ng-container>
+      <ng-template #isBrowser>
+        <app-nav-desktop [isTablet]="isTablet"></app-nav-desktop>
+      </ng-template>
+    </div>
+
+    <div class="content-height">
+      <router-outlet></router-outlet>
+    </div>
+
+    <div *ngIf="!isMinimalMode">
+      <ng-container *ngIf="isHandset; else isDesktop">
+        <app-footer-mobile class="footer-display w-100"></app-footer-mobile>
+      </ng-container>
+      <ng-template #isDesktop>
+        <app-footer class="footer-display w-100"></app-footer>
+      </ng-template>
+    </div>
+  </mat-sidenav-container>
+</ng-template>
+
