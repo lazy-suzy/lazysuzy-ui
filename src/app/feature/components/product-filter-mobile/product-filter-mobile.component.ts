@@ -348,11 +348,19 @@ export class ProductFilterMobileComponent implements OnInit {
         this.setMobileToggle.emit();
     }
 
+    /**
+     * Check if filter is valid to be shown.
+     * Important: The Order of checking here matters, don't change
+     * @param filter- Filter to be checked
+     */
     checkValidFilter(filter): boolean {
-        if (this.productFilters[filter].length === 0) {
-            return false;
+        if (filter === 'price') {
+            return true;
         }
         if (this.isDimensionFilter(filter) || this.isCollectionFilter(filter)) {
+            return false;
+        }
+        if (this.productFilters[filter].length === 0) {
             return false;
         }
         return true;
