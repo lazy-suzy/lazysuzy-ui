@@ -75,18 +75,13 @@
                         <!-- / show brand data -->
 
                     </div>
-                    <div class="row">
-                        <div class="col-md-12 pr2 text-right">
-                            <h4 style="font-size: 14px;">{{ totalCount }} Results</h4>
-                        </div>
-                    </div>
                     <div class="row sticky-row ">
                         <div class="col-md-12 filter-panel">
                             <div class="flex justify-between" style="padding: 10px;">
                                 <div>
-                                  <span class="pointer" (click)="toggleFilterBar()">
+                               <span style="font-size: 14px" class="pointer" (click)="toggleFilterBar()">
                                          <mat-icon class="filter-icon">
-                                             <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-sliders"
+                                             <svg width="15px" height="1em" viewBox="0 0 16 16" class="bi bi-sliders"
                                                   fill="currentColor" xmlns="http://www.w3.org/2000/svg">
   <path fill-rule="evenodd"
         d="M11.5 2a1.5 1.5 0 1 0 0 3 1.5 1.5 0 0 0 0-3zM9.05 3a2.5 2.5 0 0 1 4.9 0H16v1h-2.05a2.5 2.5 0 0 1-4.9 0H0V3h9.05zM4.5 7a1.5 1.5 0 1 0 0 3 1.5 1.5 0 0 0 0-3zM2.05 8a2.5 2.5 0 0 1 4.9 0H16v1H6.95a2.5 2.5 0 0 1-4.9 0H0V8h2.05zm9.45 4a1.5 1.5 0 1 0 0 3 1.5 1.5 0 0 0 0-3zm-2.45 1a2.5 2.5 0 0 1 4.9 0H16v1h-2.05a2.5 2.5 0 0 1-4.9 0H0v-1h9.05z"/>
@@ -94,10 +89,15 @@
                                          </mat-icon>&nbsp;Filters
                                     </span>
                                 </div>
-                                <div style="min-width: 10rem">
-                                    <app-sort-type [sortTypeList]="sortTypeList" [sortType]="sortType"
-                                                   (setSortType)="onSetSortType($event)">
-                                    </app-sort-type>
+                                <div class="flex">
+                                    <div class="pt1 text-right">
+                                        <h4 style="font-size: 14px;">{{ totalCount }} Results</h4>
+                                    </div>
+                                    <div style="min-width: 10rem">
+                                        <app-sort-type [sortTypeList]="sortTypeList" [sortType]="sortType"
+                                                       (setSortType)="onSetSortType($event)">
+                                        </app-sort-type>
+                                    </div>
                                 </div>
                             </div>
                             <div class="row slide-down" style="padding: 10px;" *ngIf="showFilters">
@@ -136,8 +136,8 @@
     </div>
 </div>
 <img *ngIf="isProductFetching" [src]="spinner" class="loader"/>
-<button class="scroll-to-btn f6 dib white bg-near-black" *ngIf="isIconShow" (click)="gotoTop()">
-    <mat-icon class="account-icon pointer" aria-hidden="false" aria-label="Account">
-        arrow_upward
+<button class="scroll-to-btn f6 dib" *ngIf="isIconShow" (click)="gotoTop()">
+    <mat-icon class="account-icon pointer" aria-hidden="false" aria-label="Scroll Up">
+        expand_less
     </mat-icon>
 </button>
