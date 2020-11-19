@@ -56,14 +56,14 @@
                 <div class="col-md-8">
                     <div class="row mb-10">
                         <div class="col-md-10">
-                            <h4 class="category-title">{{ categoryTitle }}</h4>
+                            <span class="category-title">{{ categoryTitle }}</span>
                         </div>
                     </div>
                     <!--  -->
                     <!-- -->
                     <div class="row sticky-row ">
                         <div class="col-md-12 filter-panel">
-                            <div class="flex justify-between" style="padding: 10px;">
+                            <div class="flex justify-between content-center" style="padding: 10px;">
                                 <div>
                                     <span style="font-size: 14px" class="pointer" (click)="toggleFilterBar()">
                                          <mat-icon class="filter-icon">
@@ -75,9 +75,9 @@
                                          </mat-icon>&nbsp;Filters
                                     </span>
                                 </div>
-                                <div class="flex">
-                                    <div class="pt1 text-right">
-                                        <h4 style="font-size: 14px;">{{ totalCount }} Results</h4>
+                                <div class="flex content-center">
+                                    <div>
+                                        <span style="font-size: 14px;">{{ totalCount }} Results</span>
                                     </div>
                                     <div style="min-width: 10rem">
                                         <app-sort-type [sortTypeList]="sortTypeList" [sortType]="sortType"
@@ -87,7 +87,7 @@
                                 </div>
 
                             </div>
-                            <div class="row slide-down" style="padding: 10px;" *ngIf="showFilters">
+                            <div class="row slide-down" style="padding: 0 10px 10px 10px;" *ngIf="showFilters">
                                 <div class="col-md-12">
                                     <app-product-filters #productFiltersComponent [productFilters]="productFilters"
                                                          (setFilters)="onSetFilters($event)"
@@ -131,8 +131,8 @@
     <img [src]="invalidLinkImageSrc" class="invalid-url-image"/>
 </div>
 <img *ngIf="isProductFetching" [src]="spinner" class="loader"/>
-<button class="scroll-to-btn f6 dib white bg-near-black" *ngIf="isIconShow" (click)="gotoTop()">
-    <mat-icon class="account-icon pointer" aria-hidden="false" aria-label="Account">
-        arrow_upward
+<button class="scroll-to-btn f6 dib" *ngIf="isIconShow" (click)="gotoTop()">
+    <mat-icon class="account-icon pointer" aria-hidden="false" aria-label="Scroll Up">
+        expand_less
     </mat-icon>
 </button>
