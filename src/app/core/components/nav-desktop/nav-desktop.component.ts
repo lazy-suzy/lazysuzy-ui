@@ -118,7 +118,8 @@ export class NavDesktopComponent implements OnInit {
             this.location.path().match(/checkout/) === null &&
             this.location.path().match(/board/) === null &&
             this.location.path().match(/blog/) == null;
-        if (showNewsLetter) {
+        const popUpAlreadyShown = this.cookie.get('popupShow');
+        if (showNewsLetter && !popUpAlreadyShown) {
             setTimeout(() => this.matDialogUtils.openNewsLetter(), 5000);
         }
     }
