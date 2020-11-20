@@ -106,7 +106,7 @@ export class UtilsService {
             }
             return result;
         } else {
-            return;
+            return '0';
         }
     }
     formatPriceMobile(price, wasPrice) {
