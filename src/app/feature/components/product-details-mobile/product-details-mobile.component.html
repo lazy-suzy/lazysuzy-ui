@@ -38,10 +38,11 @@
                 </div>
             </div>
             <div class="flex cart-actions">
-                <button (click)="openLink($event, product.product_url)" mat-raised-button class="bg-red view-details-btn" *ngIf="
+                <button (click)="openLink($event, product.product_url)" mat-raised-button
+                        class="bg-red view-details-btn" *ngIf="
             product && !utils.hasInventory(activeProduct) && !product.redirect && product.product_url
           ">
-                    <a  [href]="product.product_url"
+                    <a [href]="product.product_url"
                        class="tr-viewDetails no-underline yellow">
                         VIEW DETAILS
                     </a>
@@ -54,14 +55,14 @@
               )
             " [value]="i">{{ i }}</option>
                 </select>
-                <div class="flex flex-column w-70"    *ngIf="product && utils.hasInventory(activeProduct)">
+                <div class="flex flex-column w-70" *ngIf="product && utils.hasInventory(activeProduct)">
                     <button (click)="openCartModal()" mat-raised-button class="bg-red view-details-btn"
-                         >
+                    >
                         <a class="tr-addToCart no-underline yellow">
                             ADD TO BAG
                         </a>
                     </button>
-                    <div  *ngIf="errorMessage !== ''" class="invalid-feedback">
+                    <div *ngIf="errorMessage !== ''" class="invalid-feedback">
                         <div>{{ errorMessage }}</div>
                     </div>
                 </div>
@@ -118,15 +119,15 @@
                 <ul class="description-menu">
                     <li (click)="selectTab('desc')" *ngIf="descriptionExist"
                         class="{{ activeTab === 'desc' ? 'active b' : 'bg-white' }}">
-                        <span class="nav-link">Description</span>
+                        <span class="nav-link">DESCRIPTION</span>
                     </li>
                     <li (click)="selectTab('features')" *ngIf="featuresExist"
                         class="{{ activeTab === 'features' ? 'active b' : 'bg-white' }}">
-                        <span class="nav-link">Features</span>
+                        <span class="nav-link">FEATURES</span>
                     </li>
                     <li (click)="selectTab('dimensions')" *ngIf="dimensionExist"
                         class="{{ activeTab === 'dimensions' ? 'active b' : 'bg-white' }}">
-                        <span class="nav-link">Dimensions</span>
+                        <span class="nav-link">DIMENSIONS</span>
                     </li>
                 </ul>
                 <div class="menu-content">
@@ -140,11 +141,11 @@
                     </div>
                     <div *ngIf="dimensionExist" class="{{ activeTab === 'dimensions' ? '' : 'dn' }}">
                         <div *ngIf="isArray(product.dimension); else showDimensions" class="dimension-container">
-                            <div *ngFor="let dimension of product.dimension" class="fl w-50 pa2">
+                            <div *ngFor="let dimension of product.dimension" class="w-50 pa2">
                                 <div class="dimension-title">{{ dimension.description }}</div>
-                                <div>Width: {{ dimension.width }}</div>
-                                <div>Depth: {{ dimension.depth }}</div>
-                                <div>Height: {{ dimension.height }}</div>
+                                <div *ngIf="dimension.width">Width: {{ dimension.width }}</div>
+                                <div *ngIf="dimension.depth">Depth: {{ dimension.depth }}</div>
+                                <div *ngIf="dimension.height">Height: {{ dimension.height }}</div>
                                 <br/>
                             </div>
                         </div>
@@ -174,7 +175,7 @@
                                     <span class="is-price" [ngClass]="{'sale':isDiscountedCollectionPrice(data)}">
                                             {{renderPrice(data.price)}} &nbsp;
                                             <span *ngIf="isDiscountedCollectionPrice(data)" class="strike was-price">
-                                                {{renderPrice(data.was_price,true)}}
+                                                {{renderPrice(data.was_price, true)}}
                                             </span>
                                         </span>
 
