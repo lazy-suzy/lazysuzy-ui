@@ -12,9 +12,9 @@ import {
 } from './../../../shared/services';
 import {SCROLL_ICON_SHOW_DURATION} from './../../../shared/constants';
 import {ActivatedRoute, Router} from '@angular/router';
-import {Observable, Subscription} from 'rxjs';
+import {fromEvent, Observable, Subscription} from 'rxjs';
 import {BreakpointObserver, Breakpoints, BreakpointState} from '@angular/cdk/layout';
-import {first} from 'rxjs/operators';
+import {first, tap, throttleTime} from 'rxjs/operators';
 import MetaData from '../../../shared/services/seo/meta-data-model';
 
 @Component({
@@ -76,6 +76,7 @@ export class ProductsComponent implements OnInit {
     // Collection List
     collectionList: any;
     showFilters = false;
+    timeout: any;
 
     constructor(
         public dialog: MatDialog,
@@ -340,11 +341,15 @@ export class ProductsComponent implements OnInit {
         this.showBar = scrollPosition >= this.fixFilterBar;
         const self = this;
         if (this.isIconShow) {
-            setTimeout(() => {
+            if (this.timeout) {
+                clearTimeout(this.timeout);
+            }
+            this.timeout = setTimeout(() => {
                 self.isIconShow = false;
             }, SCROLL_ICON_SHOW_DURATION);
         }
     }
+
 
     gotoTop() {
         window.scroll({
