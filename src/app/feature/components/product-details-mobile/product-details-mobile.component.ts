@@ -75,7 +75,7 @@ export class ProductDetailsMobileComponent implements OnInit {
     isRange = false;
     carousalOptions = {
         autoWidth: false,
-        loop: false,
+        loop: true,
         margin: 10,
         items: 2.3,
         center: false,
@@ -123,6 +123,9 @@ export class ProductDetailsMobileComponent implements OnInit {
                     .subscribe(
                         (payload: IProductDetail) => {
                             this.product = payload.product;
+                            if (this.product.collections.length < 3) {
+                                this.carousalOptions.loop = false;
+                            }
                             this.seoData = payload.seo_data;
                             if (this.product) {
                                 this.schema = this.seoService.setSchema(this.product);
