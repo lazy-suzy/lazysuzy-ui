@@ -42,7 +42,7 @@ export class ProductCollectionsComponent implements OnInit {
     bpObserver: Observable<BreakpointState> = this.breakpointObserver.observe(
         Breakpoints.Handset
     );
-
+    timeout: any;
     bpSubscription: Subscription;
     isHandset = false;
     total = 24;
@@ -325,7 +325,10 @@ export class ProductCollectionsComponent implements OnInit {
         this.showBar = scrollPosition >= this.fixFilterBar;
         const self = this;
         if (this.isIconShow) {
-            setTimeout(() => {
+            if (this.timeout) {
+                clearTimeout(this.timeout);
+            }
+            this.timeout = setTimeout(() => {
                 self.isIconShow = false;
             }, SCROLL_ICON_SHOW_DURATION);
         }
