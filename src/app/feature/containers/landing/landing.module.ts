@@ -14,6 +14,9 @@ import { NewArrivalsModule } from './../../components';
 import { BestSellersModule } from '../../components/best-sellers/best-sellers.module';
 import { EmailSubscriptionModule } from '../../components/email-subscription/email-subscription.module';
 import { SubscribeModule } from '../../components/subscribe/subscribe.module';
+import {FeatureModule} from '../../feature.module';
+import { FlashSaleComponent } from './flash-sale/flash-sale.component';
+import { FlashSaleProductComponent } from './flash-sale-product/flash-sale-product.component';
 
 const DECLARATIONS = [LandingComponent];
 
@@ -33,8 +36,8 @@ const MODULES = [
 ];
 
 @NgModule({
-  declarations: [...DECLARATIONS],
-  imports: [...MODULES, CarouselModule],
+  declarations: [...DECLARATIONS, FlashSaleComponent, FlashSaleProductComponent],
+    imports: [...MODULES, CarouselModule],
   exports: [...DECLARATIONS, ...MODULES],
   schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })

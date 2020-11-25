@@ -1,0 +1,39 @@
+<div class="flex flex-column">
+    <img [src]="deal.image" class="product-image">
+    <div class="flex justify-between pv2 items-center">
+                    <span class="price">
+                        {{utils.parsePrice(deal.price)}}
+                        <span class="original-price strike">{{utils.parsePrice(deal.was_price)}}</span>
+                    </span>
+        <span class="discount">{{calculateDiscount(deal)}}</span>
+    </div>
+    <mat-progress-bar mode="determinate" value="50"></mat-progress-bar>
+    <div class="flex justify-between">
+        <span class="remaining-quantity">5 of 10 Claimed</span>
+        <ng-container [ngSwitch]="deal.status">
+            <span *ngSwitchCase="statusOrder[0]" class="sale-time">Ended</span>
+            <span *ngSwitchCase="statusOrder[1]">Ends in {{time}}</span>
+            <span *ngSwitchCase="statusOrder[2]">Starts in {{time}}</span>
+            <span *ngSwitchCase="statusOrder[3]">Starts in {{time}}</span>
+        </ng-container>
+
+    </div>
+    <div class="product-brand">{{deal.brand}}</div>
+    <span class="product-name">{{deal.product_name}}</span>
+    <div class="rating-container">
+        <div class="rating">
+            <mat-icon *ngFor="let icon of starIcons" class="yellow">
+                {{ icon }}
+            </mat-icon>
+            <span class="total-ratings">{{ deal.reviews }}</span>
+        </div>
+    </div>
+    <ng-container [ngSwitch]="deal.status">
+        <button *ngSwitchCase="this.statusOrder[0]" class="mt2 deal-btn">Deal Ended</button>
+        <button *ngSwitchCase="this.statusOrder[1]" class="mt2 deal-btn add-to-bag" (click)="addToCart()">Add To Bag
+        </button>
+        <button *ngSwitchCase="this.statusOrder[2]" class="mt2 deal-btn">Starts Soon</button>
+        <button *ngSwitchCase="this.statusOrder[3]" class="mt2 deal-btn">Coming Soon</button>
+    </ng-container>
+
+</div>
