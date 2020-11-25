@@ -2,8 +2,8 @@
     <img [src]="deal.image" class="product-image">
     <div class="flex justify-between pv2 items-center">
                     <span class="price">
-                        {{utils.parsePrice(deal.price)}}
-                        <span class="original-price strike">{{utils.parsePrice(deal.was_price)}}</span>
+                        {{parsePrice(deal.price)}}
+                        <span class="original-price strike">{{parsePrice(deal.was_price)}}</span>
                     </span>
         <span class="discount">{{calculateDiscount(deal)}}</span>
     </div>

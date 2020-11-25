@@ -35,6 +35,10 @@ export class FlashSaleProductComponent implements OnInit {
         this.setRating();
     }
 
+    parsePrice(price) {
+        return this.utils.parsePrice(price);
+    }
+
     setRating(): void {
         let starCount = Math.round(this.deal.rating * 2) / 2;
         while (starCount > 0.5) {
