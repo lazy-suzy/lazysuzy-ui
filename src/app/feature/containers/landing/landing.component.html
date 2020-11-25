@@ -3,7 +3,12 @@
         <h1 class="search-title">Search America's top Home brands in one go</h1>
 
         <app-search-bar class="section"></app-search-bar>
+        
+        <app-flash-sale></app-flash-sale>
+
         <app-banner [isHandset]="isHandset"></app-banner>
+
+       
         <app-browse-by-room></app-browse-by-room>
 
 
@@ -88,30 +93,32 @@
                                 *ngIf="reviews?.length"
                                 [carouselClasses]="['owl-theme']"
                         >
-                                <div class="item carousel-item" style="display: flex;height: 100%" *ngFor="let data of reviews; let i = index">
-                                    <div class="mobile-review-card carousel-box">
-                                        <a class="sane-image-width" href="https://www.trustpilot.com/review/www.lazysuzy.com">
-                                            <div class="trustpilot-images">
-                                                <img [src]="trustPilotStarsPath"/>
-                                                <img [src]="trustPilotLogoPath"/>
-                                            </div>
-                                            <div class="content">
-                                                <div class="review-title">{{ data.title }}</div>
-                                                <div class="review-writer">by {{ data.writer }}</div>
-                                                <div class="review-content">{{ data.review }}</div>
-                                            </div>
-                                        </a>
-                                    </div>
+                            <div class="item carousel-item" style="display: flex;height: 100%"
+                                 *ngFor="let data of reviews; let i = index">
+                                <div class="mobile-review-card carousel-box">
+                                    <a class="sane-image-width"
+                                       href="https://www.trustpilot.com/review/www.lazysuzy.com">
+                                        <div class="trustpilot-images">
+                                            <img [src]="trustPilotStarsPath"/>
+                                            <img [src]="trustPilotLogoPath"/>
+                                        </div>
+                                        <div class="content">
+                                            <div class="review-title">{{ data.title }}</div>
+                                            <div class="review-writer">by {{ data.writer }}</div>
+                                            <div class="review-content">{{ data.review }}</div>
+                                        </div>
+                                    </a>
                                 </div>
+                            </div>
 
-<!--                            <div style="display: flex;" *ngFor="let data of reviews; let i = index">-->
-<!--                                <div class="mobile-review-card">-->
-<!--                                    <p>Hello</p>-->
-<!--                                </div>-->
-<!--                                                            <div class="review-card">-->
+                            <!--                            <div style="display: flex;" *ngFor="let data of reviews; let i = index">-->
+                            <!--                                <div class="mobile-review-card">-->
+                            <!--                                    <p>Hello</p>-->
+                            <!--                                </div>-->
+                            <!--                                                            <div class="review-card">-->
 
-<!--                                                            </div>-->
-<!--                            </div>-->
+                            <!--                                                            </div>-->
+                            <!--                            </div>-->
                         </owl-carousel>
                     </div>
 

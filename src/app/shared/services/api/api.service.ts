@@ -34,6 +34,14 @@ export class ApiService {
         return this.httpService.get(url);
     }
 
+    getBlowOutDeals() {
+        const dealEndpoint = `v1/blowout-deals`;
+        const url = env.useLocalJson
+            ? `${env.JSON_BASE_HREF}${dealEndpoint}`
+            : `${env.API_BASE_HREF}${dealEndpoint}`;
+        return this.httpService.get(url);
+    }
+
     getBestSellers(filters = '', page = 0): Observable<IProductsPayload> {
         const endpoint = `products/all`;
         const url = env.useLocalJson
