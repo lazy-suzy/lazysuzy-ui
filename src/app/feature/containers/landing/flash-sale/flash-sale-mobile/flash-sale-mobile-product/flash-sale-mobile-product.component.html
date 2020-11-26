@@ -1,8 +1,13 @@
 <div class="flex product">
-    <img [src]="deal.image"
+
+    <img *ngIf="deal.status === 'DEAL_EXPIRED' || deal.status==='DEAL_ONGOING';else customImage"
+         [src]="deal.image"
          class="w-50 pa2"
          (click)="openProduct()"
     >
+    <ng-template #customImage>
+        <img class="product-image" [src]="comingUpImage">
+    </ng-template>
     <div class="w-50 flex flex-column pa2 product-details">
         <div>
             <span class="discount">{{calculateDiscount(deal)}}</span>

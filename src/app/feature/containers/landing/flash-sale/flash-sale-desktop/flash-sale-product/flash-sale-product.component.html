@@ -1,10 +1,13 @@
 <div class="flex flex-column h-100">
 
-    <img *ngIf="deal.status !== statusOrder[3]"
+    <img *ngIf="deal.status === 'DEAL_EXPIRED' || deal.status==='DEAL_ONGOING';else customImage"
          [src]="deal.image"
          class="product-image"
          (click)="openProductModal()">
-    <img *ngIf="deal.status === statusOrder[3]" class="product-image" [src]="comingUpImage">
+    <ng-template #customImage>
+        <img class="product-image" [src]="comingUpImage">
+    </ng-template>
+
 
     <div class="flex justify-between pv2 items-center">
                     <span class="price">
