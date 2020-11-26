@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {ApiService, UtilsService} from '../../../../shared/services';
+import {ApiService} from '../../../../../shared/services';
 import {first} from 'rxjs/operators';
 
 @Component({

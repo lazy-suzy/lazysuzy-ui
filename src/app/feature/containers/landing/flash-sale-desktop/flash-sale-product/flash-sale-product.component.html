@@ -1,5 +1,8 @@
-<div class="flex flex-column">
-    <img [src]="deal.image" class="product-image">
+<div class="flex flex-column h-100">
+
+    <img *ngIf="deal.status !== statusOrder[3]" [src]="deal.image" class="product-image" (click)="openProductModal()">
+    <img *ngIf="deal.status === statusOrder[3]" class="product-image" [src]="comingUpImage">
+
     <div class="flex justify-between pv2 items-center">
                     <span class="price">
                         {{parsePrice(deal.price)}}
@@ -12,9 +15,9 @@
         <span class="remaining-quantity">5 of 10 Claimed</span>
         <ng-container [ngSwitch]="deal.status">
             <span *ngSwitchCase="statusOrder[0]" class="sale-time">Ended</span>
-            <span *ngSwitchCase="statusOrder[1]">Ends in {{time}}</span>
-            <span *ngSwitchCase="statusOrder[2]">Starts in {{time}}</span>
-            <span *ngSwitchCase="statusOrder[3]">Starts in {{time}}</span>
+            <span *ngSwitchCase="statusOrder[1]"  class="sale-time">Ends in {{time}}</span>
+            <span *ngSwitchCase="statusOrder[2]"  class="sale-time">Starts in {{time}}</span>
+            <span *ngSwitchCase="statusOrder[3]"  class="sale-time">Starts in {{time}}</span>
         </ng-container>
 
     </div>

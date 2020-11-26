@@ -1,6 +1,6 @@
 import {Component, Input, OnInit} from '@angular/core';
-import {ApiService, MatDialogUtilsService, UtilsService} from '../../../../shared/services';
-import {PixelService} from '../../../../shared/services/facebook-pixel/pixel.service';
+import {ApiService, MatDialogUtilsService, UtilsService} from '../../../../../shared/services';
+import {PixelService} from '../../../../../shared/services/facebook-pixel/pixel.service';
 
 @Component({
     selector: 'app-flash-sale-product',
@@ -13,6 +13,7 @@ export class FlashSaleProductComponent implements OnInit {
     time: string;
     timeInterval;
     starIcons: string[] = [];
+    comingUpImage = 'https://lazysuzy.com/images/landing/LightningDeals.png';
 
     constructor(
         private utils: UtilsService,
@@ -37,6 +38,10 @@ export class FlashSaleProductComponent implements OnInit {
 
     parsePrice(price) {
         return this.utils.parsePrice(price);
+    }
+
+    openProductModal() {
+        this.matDialogUtils.openVariationDialog(this.deal.product_sku);
     }
 
     setRating(): void {
