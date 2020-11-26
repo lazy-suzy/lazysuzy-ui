@@ -13,7 +13,7 @@ export class FlashSaleMobileProductComponent implements OnInit {
     time: string;
     timeInterval;
     starIcons: string[] = [];
-
+    comingUpImage = 'https://lazysuzy.com/images/landing/LightningDeals.png';
 
     constructor(
         public flashSaleService: FlashSaleService,
@@ -33,7 +33,7 @@ export class FlashSaleMobileProductComponent implements OnInit {
     }
 
     openProduct() {
-        this.router.navigate(['/product',this.deal.product_sku]);
+        this.router.navigate(['/product', this.deal.product_sku]);
     }
 
     setRating(): void {
