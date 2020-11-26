@@ -1,5 +1,6 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {FlashSaleService} from '../../flash-sale.service';
+import {Router} from '@angular/router';
 
 @Component({
     selector: 'app-flash-sale-mobile-product',
@@ -15,7 +16,8 @@ export class FlashSaleMobileProductComponent implements OnInit {
 
 
     constructor(
-        private flashSaleService: FlashSaleService
+        public flashSaleService: FlashSaleService,
+        private router: Router
     ) {
         this.statusOrder = flashSaleService.getStatusOrder();
     }
@@ -28,6 +30,10 @@ export class FlashSaleMobileProductComponent implements OnInit {
             this.setRemainingTimeInterval(this.deal.start_time);
         }
         this.setRating();
+    }
+
+    openProduct() {
+        this.router.navigate(['/product',this.deal.product_sku]);
     }
 
     setRating(): void {

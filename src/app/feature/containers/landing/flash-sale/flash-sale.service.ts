@@ -25,6 +25,10 @@ export class FlashSaleService {
         return this.statusOrder;
     }
 
+    openProductModal(productSku) {
+        this.matDialogUtils.openVariationDialog(productSku);
+    }
+
     getBlowoutDeals() {
         return this.apiService.getBlowOutDeals().pipe(first(),
             map((response: any[]) => {

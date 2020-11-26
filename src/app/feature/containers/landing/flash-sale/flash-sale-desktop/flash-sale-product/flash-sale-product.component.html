@@ -1,6 +1,9 @@
 <div class="flex flex-column h-100">
 
-    <img *ngIf="deal.status !== statusOrder[3]" [src]="deal.image" class="product-image" (click)="openProductModal()">
+    <img *ngIf="deal.status !== statusOrder[3]"
+         [src]="deal.image"
+         class="product-image"
+         (click)="openProductModal()">
     <img *ngIf="deal.status === statusOrder[3]" class="product-image" [src]="comingUpImage">
 
     <div class="flex justify-between pv2 items-center">
@@ -10,14 +13,14 @@
                     </span>
         <span class="discount">{{calculateDiscount(deal)}}</span>
     </div>
-    <mat-progress-bar mode="determinate" value="50"></mat-progress-bar>
+    <mat-progress-bar mode="determinate" value="{{calculatePercentSold()}}"></mat-progress-bar>
     <div class="flex justify-between">
-        <span class="remaining-quantity">5 of 10 Claimed</span>
+        <span class="remaining-quantity">{{deal.quantity}} of {{deal.total_quantity}} Claimed</span>
         <ng-container [ngSwitch]="deal.status">
             <span *ngSwitchCase="statusOrder[0]" class="sale-time">Ended</span>
-            <span *ngSwitchCase="statusOrder[1]"  class="sale-time">Ends in {{time}}</span>
-            <span *ngSwitchCase="statusOrder[2]"  class="sale-time">Starts in {{time}}</span>
-            <span *ngSwitchCase="statusOrder[3]"  class="sale-time">Starts in {{time}}</span>
+            <span *ngSwitchCase="statusOrder[1]" class="sale-time">Ends in {{time}}</span>
+            <span *ngSwitchCase="statusOrder[2]" class="sale-time">Starts in {{time}}</span>
+            <span *ngSwitchCase="statusOrder[3]" class="sale-time">Starts in {{time}}</span>
         </ng-container>
     </div>
     <div class="product-brand">{{deal.brand}}</div>

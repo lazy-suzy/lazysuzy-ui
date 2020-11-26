@@ -1,5 +1,8 @@
 <div class="flex product">
-    <img [src]="deal.image" class="w-50 pa2">
+    <img [src]="deal.image"
+         class="w-50 pa2"
+         (click)="openProduct()"
+    >
     <div class="w-50 flex flex-column pa2 product-details">
         <div>
             <span class="discount">{{calculateDiscount(deal)}}</span>

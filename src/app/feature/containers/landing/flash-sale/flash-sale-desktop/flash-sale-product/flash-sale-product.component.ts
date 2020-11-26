@@ -58,7 +58,9 @@ export class FlashSaleProductComponent implements OnInit {
             }
         }
     }
-
+    calculatePercentSold() {
+        return this.flashSaleService.calculatePercentSold(this.deal);
+    }
     setRemainingTimeInterval(endDate) {
         this.getTimeRemaining(endDate, this);
         this.timeInterval = setInterval(() => this.getTimeRemaining(endDate, this), 1000);
