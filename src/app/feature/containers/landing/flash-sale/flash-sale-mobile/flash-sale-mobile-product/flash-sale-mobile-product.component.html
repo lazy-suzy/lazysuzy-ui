@@ -1,0 +1,36 @@
+<div class="flex product">
+    <img [src]="deal.image"
+         class="w-50 pa2"
+         (click)="openProduct()"
+    >
+    <div class="w-50 flex flex-column pa2 product-details">
+        <div>
+            <span class="discount">{{calculateDiscount(deal)}}</span>
+        </div>
+        <div class="price"> $269 <span class="original-price strike">$299</span></div>
+        <span class="brand">{{deal.brand}}</span>
+        <span class="product-name">{{deal.product_name}}</span>
+        <div class="rating-container">
+            <div class="rating">
+                <mat-icon *ngFor="let icon of starIcons" class="yellow">
+                    {{ icon }}
+                </mat-icon>
+                <span class="total-ratings">{{ deal.reviews }}</span>
+            </div>
+        </div>
+        <ng-container [ngSwitch]="deal.status">
+            <button *ngSwitchCase="this.statusOrder[1]" class="mv2 deal-btn add-to-bag" (click)="addToCart()">
+                Add To Bag
+            </button>
+            <button *ngSwitchCase="this.statusOrder[2]" class="mt2 deal-btn">Starts Soon</button>
+        </ng-container>
+
+        <mat-progress-bar mode="determinate" value="{{calculatePercentSold()}}"></mat-progress-bar>
+        <span>{{deal.quantity}} of {{deal.total_quantity}} claimed</span>
+        <ng-container [ngSwitch]="deal.status">
+            <span *ngSwitchCase="statusOrder[1]" class="sale-time">Ends in {{time}}</span>
+            <span *ngSwitchCase="statusOrder[2]" class="sale-time">Starts in {{time}}</span>
+        </ng-container>
+
+    </div>
+</div>
