@@ -1,6 +1,7 @@
 import {Component, Input, OnInit} from '@angular/core';
-import {ApiService, MatDialogUtilsService, UtilsService} from '../../../../../shared/services';
-import {PixelService} from '../../../../../shared/services/facebook-pixel/pixel.service';
+import {ApiService, MatDialogUtilsService, UtilsService} from '../../../../../../shared/services';
+import {PixelService} from '../../../../../../shared/services/facebook-pixel/pixel.service';
+import {FlashSaleService} from '../../flash-sale.service';
 
 @Component({
     selector: 'app-flash-sale-product',
@@ -18,8 +19,7 @@ export class FlashSaleProductComponent implements OnInit {
     constructor(
         private utils: UtilsService,
         private matDialogUtils: MatDialogUtilsService,
-        private apiService: ApiService,
-        private pixelService: PixelService
+        private flashSaleService: FlashSaleService
     ) {
     }
 
@@ -76,38 +76,10 @@ export class FlashSaleProductComponent implements OnInit {
     }
 
     calculateDiscount(deal) {
-        const {was_price, price} = deal;
-        const discount = ((was_price - price) / was_price) * 100;
-        return `${Math.round(discount)}% off`;
+        return this.flashSaleService.calculateDiscount(deal);
     }
 
-    addToCart() {
-        const data = {
-            sku: this.deal.product_sku,
-            brand: this.deal.brand,
-            image: this.deal.image,
-            name: this.deal.product_name,
-            price: this.deal.price,
-            quantity: 1
-        };
-        const postData = {
-            product_sku: this.deal.product_sku,
-            count: 1,
-            parent_sku: this.deal.parent_sku
-        };
-        console.log(postData);
-        this.apiService.addCartProduct(postData).subscribe(
-            (payload: any) => {
-                if (payload.status) {
-
-                    this.matDialogUtils.openAddToCartDialog(data);
-                    this.pixelService.trackAddToCart(data);
-                } else {
-                }
-            },
-            (error: any) => {
-                // this.errorMessage = 'Cannot add this product at the moment.';
-            }
-        );
+    addToCart(deal) {
+        this.flashSaleService.addToCartDeal(deal);
     }
 }

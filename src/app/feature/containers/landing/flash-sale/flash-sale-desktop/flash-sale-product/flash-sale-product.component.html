@@ -19,7 +19,6 @@
             <span *ngSwitchCase="statusOrder[2]"  class="sale-time">Starts in {{time}}</span>
             <span *ngSwitchCase="statusOrder[3]"  class="sale-time">Starts in {{time}}</span>
         </ng-container>
-
     </div>
     <div class="product-brand">{{deal.brand}}</div>
     <span class="product-name">{{deal.product_name}}</span>
@@ -33,7 +32,7 @@
     </div>
     <ng-container [ngSwitch]="deal.status">
         <button *ngSwitchCase="this.statusOrder[0]" class="mt2 deal-btn">Deal Ended</button>
-        <button *ngSwitchCase="this.statusOrder[1]" class="mt2 deal-btn add-to-bag" (click)="addToCart()">Add To Bag
+        <button *ngSwitchCase="this.statusOrder[1]" class="mt2 deal-btn add-to-bag" (click)="addToCart(deal)">Add To Bag
         </button>
         <button *ngSwitchCase="this.statusOrder[2]" class="mt2 deal-btn">Starts Soon</button>
         <button *ngSwitchCase="this.statusOrder[3]" class="mt2 deal-btn">Coming Soon</button>
