@@ -1,4 +1,5 @@
 import {Component, Input, OnInit} from '@angular/core';
+import moment from 'moment';
 
 @Component({
     selector: 'app-flash-sale-mobile-product-horizontal',
