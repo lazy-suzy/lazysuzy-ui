@@ -51,7 +51,8 @@ export class FlashSaleService {
         const postData = {
             product_sku: deal.product_sku,
             count: 1,
-            parent_sku: deal.parent_sku
+            parent_sku: deal.parent_sku,
+            cart_origin: 'blowout_flash'
         };
         this.apiService.addCartProduct(postData).subscribe(
             (payload: any) => {
