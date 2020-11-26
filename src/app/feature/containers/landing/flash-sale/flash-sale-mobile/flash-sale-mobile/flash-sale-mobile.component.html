@@ -1,11 +1,11 @@
-<div class="flex flex-column">
+<div class="flex flex-column flash-sales-container">
     <div class="header-container">
         <span class="header">Black Friday Blowout</span>
     </div>
     <div class="deals-container">
-        <ng-container *ngFor="let deal of onlyActiveAndRecentDeals">
+        <div style="background:#fff" *ngFor="let deal of onlyActiveAndRecentDeals">
             <app-flash-sale-mobile-product [deal]="deal"></app-flash-sale-mobile-product>
-        </ng-container>
+        </div>
     </div>
     <div class="flex">
         <ng-container *ngFor="let deal of upcomingDeals|slice:0:3">
