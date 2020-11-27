@@ -71,7 +71,14 @@ export class FlashSaleService {
 
     calculateDiscount(deal) {
         const {was_price, price} = deal;
-        const discount = ((was_price - price) / was_price) * 100;
+        const priceRange = price.trim().split('-');
+        const wasPriceRange = was_price.trim().split('-');
+        const discountMin = (1 - priceRange[0] / wasPriceRange[0]) * 100;
+        let discountMax = 0;
+        if (priceRange.length > 1) {
+            discountMax = (1 - priceRange[1] / wasPriceRange[1]) * 100;
+        }
+        const discount = Math.max(discountMin, discountMax);
         return `${Math.round(discount)}% off`;
     }
 

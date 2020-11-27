@@ -1,6 +1,7 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {FlashSaleService} from '../../flash-sale.service';
 import {Router} from '@angular/router';
+import {UtilsService} from '../../../../../../shared/services';
 
 @Component({
     selector: 'app-flash-sale-mobile-product',
@@ -17,9 +18,14 @@ export class FlashSaleMobileProductComponent implements OnInit {
 
     constructor(
         public flashSaleService: FlashSaleService,
+        public utils: UtilsService,
         private router: Router
     ) {
         this.statusOrder = flashSaleService.getStatusOrder();
+    }
+
+    parsePrice(price) {
+        return this.utils.formatPrice(price);
     }
 
     ngOnInit() {

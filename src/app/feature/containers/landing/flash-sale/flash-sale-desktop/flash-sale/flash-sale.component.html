@@ -2,7 +2,11 @@
     <span class="deals-heading mb3">BLACK FRIDAY BLOWOUT DEALS</span>
     <div class="flex flex-wrap product-container">
         <div class="product" *ngFor="let deal of flashDeals">
-            <app-flash-sale-product [deal]="deal" [statusOrder]="statusOrder"></app-flash-sale-product>
+            <app-flash-sale-product
+                    [deal]="deal"
+                    [statusOrder]="statusOrder"
+                    (dealTimeCompleted)="reloadDealProducts()"
+            ></app-flash-sale-product>
         </div>
     </div>
 </div>

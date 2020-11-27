@@ -96,9 +96,9 @@ export class UtilsService {
             let maxRange;
             let result;
             const splitedPrice = priceString.split('-');
-            minRange = parseFloat(splitedPrice[0]).toFixed(2);
+            minRange = this.parsePrice(splitedPrice[0]);
             if (splitedPrice.length > 1) {
-                maxRange = parseFloat(splitedPrice[1]).toFixed(2);
+                maxRange = this.parsePrice(splitedPrice[1]);
                 result = minRange.toString() + ' - ' + maxRange.toString();
             } else {
                 maxRange = null;

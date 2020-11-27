@@ -18,12 +18,19 @@ export class FlashSaleComponent implements OnInit {
     ) {
     }
 
+    reloadDealProducts() {
+        this.getFlashDeals();
+    }
+
     ngOnInit() {
         this.statusOrder = this.flashService.getStatusOrder();
+        this.getFlashDeals();
+    }
+
+    getFlashDeals() {
         this.flashService.getBlowoutDeals().subscribe((response: any) => {
             this.flashDeals = response;
         });
     }
-
 
 }
