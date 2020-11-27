@@ -4,7 +4,11 @@
     </div>
     <div class="deals-container">
         <div style="background:#fff" *ngFor="let deal of onlyActiveAndRecentDeals">
-            <app-flash-sale-mobile-product [deal]="deal"></app-flash-sale-mobile-product>
+            <app-flash-sale-mobile-product
+                    [deal]="deal"
+                    (dealTimeCompleted)="reloadDealProducts()"
+
+            ></app-flash-sale-mobile-product>
         </div>
     </div>
     <div class="flex">
