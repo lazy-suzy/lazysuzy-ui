@@ -67,7 +67,7 @@ export class NavDesktopComponent implements OnInit {
 
     ngOnInit(): void {
         this.getDeals();
-        this.loadNewsLetterPopup();
+      //  this.loadNewsLetterPopup();
         this.eventSubscription = this.eventEmitterService.userChangeEvent
             .asObservable()
             .subscribe((user) => {
