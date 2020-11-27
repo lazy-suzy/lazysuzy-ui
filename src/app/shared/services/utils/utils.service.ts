@@ -96,6 +96,27 @@ export class UtilsService {
             let maxRange;
             let result;
             const splitedPrice = priceString.split('-');
+            minRange = parseFloat(splitedPrice[0]).toFixed(2);
+            if (splitedPrice.length > 1) {
+                maxRange = parseFloat(splitedPrice[1]).toFixed(2);
+                result = minRange.toString() + ' - ' + maxRange.toString();
+            } else {
+                maxRange = null;
+                result = minRange.toString();
+            }
+            return result;
+        } else {
+            return '0';
+        }
+    }
+
+    formatPriceNew(price) {
+        if (price) {
+            const priceString = price.toString();
+            let minRange;
+            let maxRange;
+            let result;
+            const splitedPrice = priceString.split('-');
             minRange = this.parsePrice(splitedPrice[0]);
             if (splitedPrice.length > 1) {
                 maxRange = this.parsePrice(splitedPrice[1]);
@@ -109,6 +130,7 @@ export class UtilsService {
             return '0';
         }
     }
+
     formatPriceMobile(price, wasPrice) {
         if (price) {
             const priceString = price.toString();
@@ -134,6 +156,7 @@ export class UtilsService {
             return;
         }
     }
+
     getPriceObject(product: any) {
         let isRanged, isDiscounted = false;
         let {is_price, was_price} = product;

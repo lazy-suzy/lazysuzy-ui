@@ -26,7 +26,7 @@ export class FlashSaleMobileProductComponent implements OnInit {
     }
 
     parsePrice(price) {
-        return this.utils.formatPrice(price);
+        return this.utils.formatPriceNew(price);
     }
 
     ngOnInit() {
