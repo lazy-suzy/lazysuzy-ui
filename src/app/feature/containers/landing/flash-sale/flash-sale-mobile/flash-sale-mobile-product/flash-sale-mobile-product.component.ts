@@ -69,7 +69,10 @@ export class FlashSaleMobileProductComponent implements OnInit {
     addToCart() {
         this.flashSaleService.addToCartDeal(this.deal);
     }
-
+    
+    isDiscounted() {
+        return this.flashSaleService.isDiscounted(this.deal);
+    }
     setRemainingTimeInterval() {
         this.getTimeRemaining(this);
         this.timeInterval = setInterval(() => this.getTimeRemaining(this), 1000);

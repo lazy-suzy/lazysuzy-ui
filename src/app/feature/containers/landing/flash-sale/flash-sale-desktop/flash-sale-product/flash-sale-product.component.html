@@ -11,9 +11,12 @@
         <div class="flex justify-between pv2 items-start">
                     <span class="price">
                         {{parsePrice(deal.price)}}
-                        <span class="db original-price strike">{{parsePrice(deal.was_price)}}</span>
+                        <span class="db original-price"
+                              [ngClass]="{'strike': isDiscounted()}">
+                            {{isDiscounted() ? parsePrice(deal.was_price) : '&nbsp;'}}
+                        </span>
                     </span>
-            <span class="discount">{{calculateDiscount(deal)}}</span>
+            <span *ngIf="isDiscounted()" class="discount">{{calculateDiscount(deal)}}</span>
         </div>
         <mat-progress-bar mode="determinate" value="{{calculatePercentSold()}}"></mat-progress-bar>
         <div class="flex justify-between">
@@ -40,11 +43,11 @@
         <div class="flex justify-between pv2 items-center">
                     <span class="price">
                        &nbsp;
-                        <span class="original-price strike">&nbsp;</span>
+                        <span class="original-price">&nbsp;</span>
                     </span>
             <span>&nbsp;</span>
         </div>
-        <mat-progress-bar mode="determinate" value="{{calculatePercentSold()}}"></mat-progress-bar>
+        <mat-progress-bar mode="determinate" value="0"></mat-progress-bar>
         <div class="flex justify-between">
             <span class="remaining-quantity">&nbsp;</span>
             <ng-container [ngSwitch]="deal.status">
@@ -70,7 +73,8 @@
         <ng-container *ngSwitchCase="this.statusOrder[1]">
             <button *ngIf="!deal.is_variation" class="mt2 deal-btn add-to-bag" (click)="addToCart(deal)">Add To Bag
             </button>
-            <button *ngIf="deal.is_variation" class="mt2 deal-btn add-to-bag" (click)="openProductModal()">Choose Options
+            <button *ngIf="deal.is_variation" class="mt2 deal-btn add-to-bag" (click)="openProductModal()">Choose
+                Options
             </button>
         </ng-container>
 
