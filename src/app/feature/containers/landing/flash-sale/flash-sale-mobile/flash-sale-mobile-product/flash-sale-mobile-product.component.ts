@@ -24,10 +24,10 @@ export class FlashSaleMobileProductComponent implements OnInit {
 
     ngOnInit() {
         if (this.deal.status === 'DEAL_ONGOING') {
-            this.setRemainingTimeInterval(this.deal.end_time);
+            this.setRemainingTimeInterval();
         }
         if (this.deal.status === 'DEAL_COMING_NEXT') {
-            this.setRemainingTimeInterval(this.deal.start_time);
+            this.setRemainingTimeInterval();
         }
         this.setRating();
     }
@@ -63,19 +63,16 @@ export class FlashSaleMobileProductComponent implements OnInit {
         this.flashSaleService.addToCartDeal(this.deal);
     }
 
-    setRemainingTimeInterval(endDate) {
-        this.getTimeRemaining(endDate, this);
-        this.timeInterval = setInterval(() => this.getTimeRemaining(endDate, this), 1000);
+    setRemainingTimeInterval() {
+        this.getTimeRemaining(this);
+        this.timeInterval = setInterval(() => this.getTimeRemaining(this), 1000);
     }
 
-    getTimeRemaining(endTime, self) {
-        const total = Date.parse(endTime) - Date.parse(new Date().toISOString());
-        const seconds = '0' + Math.floor((total / 1000) % 60);
-        const minutes = '0' + Math.floor((total / 1000 / 60) % 60);
-        const hours = '0' + Math.floor((total / (1000 * 60 * 60)) % 24);
-        self.time = `${hours.slice(-2)}:${minutes.slice(-2)}:${seconds.slice(-2)}`;
-        if (total <= 0) {
+    getTimeRemaining(self) {
+        self.time = this.flashSaleService.getTimeRemaining(self.deal.time);
+        if (self.deal.time <= 0) {
             clearInterval(self.timeInterval);
         }
+        self.deal.time -= 1;
     }
 }

@@ -1,4 +1,5 @@
 import {Component, Input, OnInit} from '@angular/core';
+import {FlashSaleService} from '../../flash-sale.service';
 
 @Component({
     selector: 'app-flash-sale-mobile-product-horizontal',
@@ -11,26 +12,25 @@ export class FlashSaleMobileProductHorizontalComponent implements OnInit {
     time: string;
     timeInterval;
 
-    constructor() {
+    constructor(
+        private flashSaleService: FlashSaleService
+    ) {
     }
 
     ngOnInit() {
-        this.setRemainingTimeInterval(this.deal.start_time);
+        this.setRemainingTimeInterval();
     }
 
-    setRemainingTimeInterval(endDate) {
-        this.getTimeRemaining(endDate, this);
-        this.timeInterval = setInterval(() => this.getTimeRemaining(endDate, this), 1000);
+    setRemainingTimeInterval() {
+        this.getTimeRemaining(this);
+        this.timeInterval = setInterval(() => this.getTimeRemaining(this), 1000);
     }
 
-    getTimeRemaining(endTime, self) {
-        const total = Date.parse(endTime) - Date.parse(new Date().toISOString());
-        const seconds = '0' + Math.floor((total / 1000) % 60);
-        const minutes = '0' + Math.floor((total / 1000 / 60) % 60);
-        const hours = '0' + Math.floor((total / (1000 * 60 * 60)) % 24);
-        self.time = `${hours.slice(-2)}:${minutes.slice(-2)}:${seconds.slice(-2)}`;
-        if (total <= 0) {
+    getTimeRemaining(self) {
+        self.time = this.flashSaleService.getTimeRemaining(self.deal.time);
+        if (self.deal.time <= 0) {
             clearInterval(self.timeInterval);
         }
+        self.deal.time -= 1;
     }
 }

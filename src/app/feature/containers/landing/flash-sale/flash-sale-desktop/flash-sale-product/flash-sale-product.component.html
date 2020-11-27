@@ -27,7 +27,7 @@
     </div>
     <div class="product-brand">{{deal.brand}}</div>
     <span class="product-name">{{deal.product_name}}</span>
-    <div class="rating-container">
+    <div class="rating-container" *ngIf="deal.rating != 0">
         <div class="rating">
             <mat-icon *ngFor="let icon of starIcons" class="yellow">
                 {{ icon }}

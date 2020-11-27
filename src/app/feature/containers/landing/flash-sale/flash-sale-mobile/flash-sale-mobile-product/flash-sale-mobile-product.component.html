@@ -15,7 +15,7 @@
         <div class="price"> $269 <span class="original-price strike">$299</span></div>
         <span class="brand">{{deal.brand}}</span>
         <span class="product-name">{{deal.product_name}}</span>
-        <div class="rating-container">
+        <div class="rating-container" *ngIf="deal.rating != 0">
             <div class="rating">
                 <mat-icon *ngFor="let icon of starIcons" class="yellow">
                     {{ icon }}
