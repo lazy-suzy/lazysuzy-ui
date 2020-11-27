@@ -68,7 +68,7 @@ export class NavMobileComponent implements OnInit {
 
     ngOnInit(): void {
         this.getDeals();
-        this.openNewsletterPopup();
+       // this.openNewsletterPopup();
         this.eventSubscription = this.eventEmitterService.userChangeEvent
             .asObservable()
             .subscribe((user) => {

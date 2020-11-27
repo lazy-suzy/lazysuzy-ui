@@ -40,11 +40,11 @@ export class FlashSaleProductComponent implements OnInit {
     }
 
     parsePrice(price) {
-        return this.utils.formatPrice(price);
+        return this.utils.formatPriceNew(price);
     }
 
     openProductModal() {
-        this.matDialogUtils.openVariationDialog(this.deal.product_sku);
+        this.matDialogUtils.openMatDialog(this.deal.product_sku);
     }
 
     setRating(): void {
