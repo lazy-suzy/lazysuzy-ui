@@ -11,12 +11,16 @@
             ></app-flash-sale-mobile-product>
         </div>
     </div>
-    <div class="flex">
-        <ng-container *ngFor="let deal of upcomingDeals|slice:0:3">
-            <app-flash-sale-mobile-product-horizontal
-                    class="w-33"
-                    [deal]="deal"
-            ></app-flash-sale-mobile-product-horizontal>
-        </ng-container>
+    <div class="flex flex-column horizontal-container" *ngIf="upcomingDeals.length>0">
+        <span class="sub-header">Coming Up Next</span>
+        <div class="flex">
+            <ng-container *ngFor="let deal of upcomingDeals|slice:0:3">
+                <app-flash-sale-mobile-product-horizontal
+                        class="w-33"
+                        [deal]="deal"
+                ></app-flash-sale-mobile-product-horizontal>
+            </ng-container>
+        </div>
+
     </div>
 </div>
