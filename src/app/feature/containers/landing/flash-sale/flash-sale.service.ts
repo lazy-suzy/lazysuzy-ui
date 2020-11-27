@@ -78,4 +78,13 @@ export class FlashSaleService {
     calculatePercentSold(deal) {
         return (deal.quantity / deal.total_quantity) * 100;
     }
+
+    getTimeRemaining(time) {
+        // const total = Date.parse(endTime) - this.serverTime;
+        const total = time * 1000;
+        const seconds = '0' + Math.floor((total / 1000) % 60);
+        const minutes = '0' + Math.floor((total / 1000 / 60) % 60);
+        const hours = '0' + Math.floor((total / (1000 * 60 * 60)) % 24);
+        return `${hours.slice(-2)}:${minutes.slice(-2)}:${seconds.slice(-2)}`;
+    }
 }
