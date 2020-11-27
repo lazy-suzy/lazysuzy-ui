@@ -58,11 +58,12 @@
                                         class="blue-font"
                                         (click)="openProductPage(product.product_sku)"
                                 >
-                                    {{ product.product_name }}
+                                    {{ decodeHtml(product.product_name) }}
                                 </div>
                                 <div class="gray-font fs14">by {{ product.site }}</div>
                                 <div class="pink-font b">
                                     ${{ product.retail_price | number: '1.2-2' }}
+                                    <span class="strike original-price" *ngIf="isDiscounted(product)"> ${{product.was_price | number: '1.2-2'}}</span>
                                 </div>
                             </div>
                         </div>
