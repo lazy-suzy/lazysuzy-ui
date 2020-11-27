@@ -11,7 +11,7 @@
             </div>
             <div class="w-80 flex flex-column">
               <div class="flex ">
-                <div class="w-50">{{ item.product_name }}</div>
+                <div class="w-50">{{ decodeHtml(decodeHtml(item.product_name)) }}</div>
                 <div class="w-10 tr">
                   {{ item.count }}
                 </div>
@@ -712,7 +712,7 @@
             </div>
             <div class="w-80 flex flex-column">
               <div class="flex ">
-                <div class="w-65">{{ item.product_name }}</div>
+                <div class="w-65">{{ decodeHtml(item.product_name) }}</div>
                 <div class="w-5 tr">
                   {{ item.count }}
                 </div>

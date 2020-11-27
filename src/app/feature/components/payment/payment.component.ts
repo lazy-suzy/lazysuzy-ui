@@ -22,7 +22,7 @@ import {
     BreakpointObserver
 } from '@angular/cdk/layout';
 import {IOrderAmount} from '../../../shared/models';
-import {PromoCodeService} from "../../../shared/services/promo-code/promo-code.service";
+import {PromoCodeService} from '../../../shared/services/promo-code/promo-code.service';
 import {PixelService} from '../../../shared/services/facebook-pixel/pixel.service';
 
 @Component({
@@ -76,7 +76,7 @@ export class PaymentComponent implements OnInit {
         billing_country: null,
         billing_state: null,
         billing_zipcode: null,
-        promo:''
+        promo: ''
     };
     country = 'USA';
     isBillingAddressSame = true;
@@ -186,6 +186,12 @@ export class PaymentComponent implements OnInit {
         this.eventSubscription.unsubscribe();
     }
 
+    decodeHtml(text: string): string {
+        const htmlComponent = document.createElement('textarea');
+        htmlComponent.innerHTML = text;
+        return htmlComponent.value;
+    }
+
     getCartProducts(hasState, state) {
         this.isLoading = true;
         this.apiService.getCartProduct(hasState, state).subscribe(
@@ -230,14 +236,14 @@ export class PaymentComponent implements OnInit {
                 ' ' +
                 this.customerData.billing_l_Name;
             this.stripeService
-            // tslint:disable-next-line: no-unused-expression
+                // tslint:disable-next-line: no-unused-expression
                 .createToken((this.cardNumber, this.cardExpiry, this.cardCvc), {name})
                 .subscribe((result: any) => {
                     if (result.token) {
                         this.customerData.token = result.token.id;
                         this.customerData.ip = result.token.client_ip;
                         localStorage.setItem('registeredName', name);
-                        if(this.isPromoCodeApplicable){
+                        if (this.isPromoCodeApplicable) {
                             this.customerData.promo = this.promoCodeDetails.code;
                         }
                         this.apiService.postStripeToken(this.customerData).subscribe(
@@ -333,27 +339,26 @@ export class PaymentComponent implements OnInit {
     shippingStateChanged() {
         this.isStateUpdating = true;
         this.stateParam = this.customerData.shipping_state;
-        if(this.isPromoCodeApplicable){
+        if (this.isPromoCodeApplicable) {
             this.apiService
-                .getCartProduct(true, this.customerData.shipping_state,true,this.promoCodeDetails.code)
+                .getCartProduct(true, this.customerData.shipping_state, true, this.promoCodeDetails.code)
                 .subscribe(
                     (payload: any) => {
                         this.orderAmount.total_cost = payload.order.total_cost;
-                        this.orderAmount.sales_tax_total= payload.order.sales_tax_total;
+                        this.orderAmount.sales_tax_total = payload.order.sales_tax_total;
                         this.isStateUpdating = false;
                     },
                     (error: any) => {
                         console.log(error);
                     }
                 );
-        }
-        else {
+        } else {
             this.apiService
                 .getCartProduct(true, this.customerData.shipping_state)
                 .subscribe(
                     (payload: any) => {
                         this.orderAmount.total_cost = payload.order.total_cost;
-                        this.orderAmount.sales_tax_total= payload.order.sales_tax_total;
+                        this.orderAmount.sales_tax_total = payload.order.sales_tax_total;
                         this.isStateUpdating = false;
                     },
                     (error: any) => {
@@ -374,9 +379,9 @@ export class PaymentComponent implements OnInit {
         }
         this.isPromoCodeProcessing = true;
         this.promoCode = this.promoCode.toUpperCase();
-        let urlParams =`promo=${this.promoCode}`;
-        if(this.hasStateParam()){
-            urlParams +=`&state_code=${this.stateParam}`
+        let urlParams = `promo=${this.promoCode}`;
+        if (this.hasStateParam()) {
+            urlParams += `&state_code=${this.stateParam}`;
         }
         this.promoCodeService.getPromoCodeProducts(urlParams).subscribe((data: any) => {
             console.log(data);
@@ -390,7 +395,7 @@ export class PaymentComponent implements OnInit {
                 this.promoCode = '';
                 this.showPromoCodeBox();
             }
-        }, (error => console.log(error)), () => this.isPromoCodeProcessing = false)
+        }, (error => console.log(error)), () => this.isPromoCodeProcessing = false);
 
     }
 
@@ -406,19 +411,19 @@ export class PaymentComponent implements OnInit {
     removePromoCode() {
         this.isLoading = true;
         this.isPromoCodeApplicable = false;
-        this.apiService.getCartProduct(this.hasStateParam(),this.stateParam).subscribe((payload: any) => {
+        this.apiService.getCartProduct(this.hasStateParam(), this.stateParam).subscribe((payload: any) => {
             this.orderAmount.total_cost = payload.order.total_cost;
             this.orderAmount.sales_tax_total = payload.order.sales_tax_total;
-            this.isLoading=false;
-        },error => {
-            this.isLoading =false;
+            this.isLoading = false;
+        }, error => {
+            this.isLoading = false;
         });
-        this.orderAmount.total_cost += Number(this.promoCodeDetails.total_discount)
+        this.orderAmount.total_cost += Number(this.promoCodeDetails.total_discount);
     }
 
     setPromoCodeIsInvalid(message) {
         this.promoCodeError = true;
-        this.promoCodeErrorMessage = message
+        this.promoCodeErrorMessage = message;
     }
 
     hasStateParam(): boolean {
