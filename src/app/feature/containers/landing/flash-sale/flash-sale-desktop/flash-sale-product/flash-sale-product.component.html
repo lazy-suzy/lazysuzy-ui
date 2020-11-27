@@ -7,38 +7,73 @@
     <ng-template #customImage>
         <img class="product-image" [src]="comingUpImage">
     </ng-template>
-
-    <div class="flex justify-between pv2 items-center">
+    <ng-container *ngIf="deal.status !== 'DEAL_INQUEUE' else emptyProduct">
+        <div class="flex justify-between pv2 items-start">
                     <span class="price">
                         {{parsePrice(deal.price)}}
-                        <span class="original-price strike">{{parsePrice(deal.was_price)}}</span>
+                        <span class="db original-price strike">{{parsePrice(deal.was_price)}}</span>
                     </span>
-        <span class="discount">{{calculateDiscount(deal)}}</span>
-    </div>
-    <mat-progress-bar mode="determinate" value="{{calculatePercentSold()}}"></mat-progress-bar>
-    <div class="flex justify-between">
-        <span class="remaining-quantity">{{deal.quantity}} of {{deal.total_quantity}} Claimed</span>
-        <ng-container [ngSwitch]="deal.status">
-            <span *ngSwitchCase="statusOrder[0]" class="sale-time">Ended</span>
-            <span *ngSwitchCase="statusOrder[1]" class="sale-time">Ends in {{time}}</span>
-            <span *ngSwitchCase="statusOrder[2]" class="sale-time">Starts in {{time}}</span>
-            <span *ngSwitchCase="statusOrder[3]" class="sale-time">Starts in {{time}}</span>
-        </ng-container>
-    </div>
-    <div class="product-brand">{{deal.brand}}</div>
-    <span class="product-name">{{deal.product_name}}</span>
-    <div class="rating-container" *ngIf="deal.rating != 0">
-        <div class="rating">
-            <mat-icon *ngFor="let icon of starIcons" class="yellow">
-                {{ icon }}
-            </mat-icon>
-            <span class="total-ratings">{{ deal.reviews }}</span>
+            <span class="discount">{{calculateDiscount(deal)}}</span>
         </div>
-    </div>
+        <mat-progress-bar mode="determinate" value="{{calculatePercentSold()}}"></mat-progress-bar>
+        <div class="flex justify-between">
+            <span class="remaining-quantity">{{deal.quantity}} of {{deal.total_quantity}} Claimed</span>
+            <ng-container [ngSwitch]="deal.status">
+                <span *ngSwitchCase="statusOrder[0]" class="sale-time">Ended</span>
+                <span *ngSwitchCase="statusOrder[1]" class="sale-time">Ends in {{time}}</span>
+                <span *ngSwitchCase="statusOrder[2]" class="sale-time">Starts in {{time}}</span>
+                <span *ngSwitchCase="statusOrder[3]" class="sale-time">Starts in {{time}}</span>
+            </ng-container>
+        </div>
+        <div class="product-brand">{{deal.brand}}</div>
+        <span class="product-name">{{deal.product_name}}</span>
+        <div class="rating-container" *ngIf="deal.rating != 0">
+            <div class="rating">
+                <mat-icon *ngFor="let icon of starIcons" class="yellow">
+                    {{ icon }}
+                </mat-icon>
+                <span class="total-ratings">{{ deal.reviews }}</span>
+            </div>
+        </div>
+    </ng-container>
+    <ng-template #emptyProduct>
+        <div class="flex justify-between pv2 items-center">
+                    <span class="price">
+                       &nbsp;
+                        <span class="original-price strike">&nbsp;</span>
+                    </span>
+            <span>&nbsp;</span>
+        </div>
+        <mat-progress-bar mode="determinate" value="{{calculatePercentSold()}}"></mat-progress-bar>
+        <div class="flex justify-between">
+            <span class="remaining-quantity">&nbsp;</span>
+            <ng-container [ngSwitch]="deal.status">
+                <span *ngSwitchCase="statusOrder[0]" class="sale-time">Ended</span>
+                <span *ngSwitchCase="statusOrder[1]" class="sale-time">Ends in {{time}}</span>
+                <span *ngSwitchCase="statusOrder[2]" class="sale-time">Starts in {{time}}</span>
+                <span *ngSwitchCase="statusOrder[3]" class="sale-time">Starts in {{time}}</span>
+            </ng-container>
+        </div>
+        <div class="product-brand">&nbsp;</div>
+        <span class="product-name">&nbsp;</span>
+        <div class="rating-container" *ngIf="deal.rating != 0">
+            <div class="rating">
+                <mat-icon *ngFor="let icon of starIcons" class="yellow">
+                    &nbsp;
+                </mat-icon>
+                <span class="total-ratings">{{ deal.reviews }}</span>
+            </div>
+        </div>
+    </ng-template>
     <ng-container [ngSwitch]="deal.status">
         <button *ngSwitchCase="this.statusOrder[0]" class="mt2 deal-btn">Deal Ended</button>
-        <button *ngSwitchCase="this.statusOrder[1]" class="mt2 deal-btn add-to-bag" (click)="addToCart(deal)">Add To Bag
-        </button>
+        <ng-container *ngSwitchCase="this.statusOrder[1]">
+            <button *ngIf="!deal.is_variation" class="mt2 deal-btn add-to-bag" (click)="addToCart(deal)">Add To Bag
+            </button>
+            <button *ngIf="deal.is_variation" class="mt2 deal-btn add-to-bag" (click)="openProductModal()">Choose Options
+            </button>
+        </ng-container>
+
         <button *ngSwitchCase="this.statusOrder[2]" class="mt2 deal-btn">Starts Soon</button>
         <button *ngSwitchCase="this.statusOrder[3]" class="mt2 deal-btn">Coming Soon</button>
     </ng-container>

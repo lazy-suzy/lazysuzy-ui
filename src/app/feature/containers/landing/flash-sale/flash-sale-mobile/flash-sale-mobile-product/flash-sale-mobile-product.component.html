@@ -12,7 +12,8 @@
         <div>
             <span class="discount">{{calculateDiscount(deal)}}</span>
         </div>
-        <div class="price"> $269 <span class="original-price strike">$299</span></div>
+        <div class="price">  {{parsePrice(deal.price)}} <span
+                class="original-price strike db"> {{parsePrice(deal.was_price)}}</span></div>
         <span class="brand">{{deal.brand}}</span>
         <span class="product-name">{{deal.product_name}}</span>
         <div class="rating-container" *ngIf="deal.rating != 0">
@@ -24,10 +25,13 @@
             </div>
         </div>
         <ng-container [ngSwitch]="deal.status">
-            <button *ngSwitchCase="this.statusOrder[1]" class="mv2 deal-btn add-to-bag" (click)="addToCart()">
-                Add To Bag
-            </button>
-            <button *ngSwitchCase="this.statusOrder[2]" class="mt2 deal-btn">Starts Soon</button>
+            <ng-container *ngSwitchCase="this.statusOrder[1]">
+                <button *ngIf="!deal.is_variation" class="mv2 deal-btn add-to-bag" (click)="addToCart()">Add To Bag
+                </button>
+                <button *ngIf="deal.is_variation" class="mv2 deal-btn add-to-bag" (click)="openProduct()">Choose Options
+                </button>
+            </ng-container>
+            <button *ngSwitchCase="this.statusOrder[2]" class="mv2 deal-btn">Starts Soon</button>
         </ng-container>
 
         <mat-progress-bar mode="determinate" value="{{calculatePercentSold()}}"></mat-progress-bar>

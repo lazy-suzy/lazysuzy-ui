@@ -1,4 +1,4 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {ApiService, MatDialogUtilsService, UtilsService} from '../../../../../../shared/services';
 import {PixelService} from '../../../../../../shared/services/facebook-pixel/pixel.service';
 import {FlashSaleService} from '../../flash-sale.service';
@@ -11,6 +11,7 @@ import {FlashSaleService} from '../../flash-sale.service';
 export class FlashSaleProductComponent implements OnInit {
     @Input() deal: any;
     @Input() statusOrder: string[];
+    @Output() dealTimeCompleted: EventEmitter<any> = new EventEmitter<any>();
     time: string;
     timeInterval;
     starIcons: string[] = [];
@@ -39,7 +40,7 @@ export class FlashSaleProductComponent implements OnInit {
     }
 
     parsePrice(price) {
-        return this.utils.parsePrice(price);
+        return this.utils.formatPrice(price);
     }
 
     openProductModal() {
@@ -75,6 +76,7 @@ export class FlashSaleProductComponent implements OnInit {
         self.time = this.flashSaleService.getTimeRemaining(self.deal.time);
         if (self.deal.time <= 0) {
             clearInterval(self.timeInterval);
+            self.dealTimeCompleted.emit(true);
         }
         self.deal.time -= 1;
         //  this.serverTime += 1000;
