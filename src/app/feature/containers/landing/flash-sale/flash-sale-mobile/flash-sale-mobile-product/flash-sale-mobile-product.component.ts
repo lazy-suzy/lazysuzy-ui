@@ -1,4 +1,4 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {FlashSaleService} from '../../flash-sale.service';
 import {Router} from '@angular/router';
 import {UtilsService} from '../../../../../../shared/services';
@@ -10,6 +10,7 @@ import {UtilsService} from '../../../../../../shared/services';
 })
 export class FlashSaleMobileProductComponent implements OnInit {
     @Input() deal: any;
+    @Output() dealTimeCompleted: EventEmitter<any> = new EventEmitter<any>();
     statusOrder: any = [];
     time: string;
     timeInterval;
@@ -78,6 +79,7 @@ export class FlashSaleMobileProductComponent implements OnInit {
         self.time = this.flashSaleService.getTimeRemaining(self.deal.time);
         if (self.deal.time <= 0) {
             clearInterval(self.timeInterval);
+            self.dealTimeCompleted.emit(true);
         }
         self.deal.time -= 1;
     }

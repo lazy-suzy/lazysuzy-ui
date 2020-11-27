@@ -20,6 +20,14 @@ export class FlashSaleMobileComponent implements OnInit {
 
     ngOnInit() {
         this.statusOrder = this.flashSaleService.getStatusOrder();
+        this.getFlashDeals();
+    }
+
+    reloadDealProducts() {
+        this.getFlashDeals();
+    }
+
+    getFlashDeals() {
         this.flashSaleService.getBlowoutDeals().subscribe(response => {
                 this.deals = response;
                 this.onlyActiveAndRecentDeals = this.deals.filter(deal => {
@@ -31,5 +39,4 @@ export class FlashSaleMobileComponent implements OnInit {
             }
         );
     }
-
 }
