@@ -9,11 +9,11 @@
         <img class="product-image" [src]="comingUpImage">
     </ng-template>
     <div class="w-50 flex flex-column pa2 product-details">
-        <div>
+        <div  *ngIf="isDiscounted()">
             <span class="discount">{{calculateDiscount(deal)}}</span>
         </div>
         <div class="price">  {{parsePrice(deal.price)}} <span
-                class="original-price strike db"> {{parsePrice(deal.was_price)}}</span></div>
+                class="original-price strike db" *ngIf="isDiscounted()"> {{parsePrice(deal.was_price)}}</span></div>
         <span class="brand">{{deal.brand}}</span>
         <span class="product-name">{{deal.product_name}}</span>
         <div class="rating-container" *ngIf="deal.rating != 0">

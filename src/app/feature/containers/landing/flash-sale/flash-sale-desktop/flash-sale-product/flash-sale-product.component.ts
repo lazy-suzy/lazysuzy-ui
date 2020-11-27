@@ -82,6 +82,10 @@ export class FlashSaleProductComponent implements OnInit {
         //  this.serverTime += 1000;
     }
 
+    isDiscounted() {
+        return this.flashSaleService.isDiscounted(this.deal);
+    }
+
     calculateDiscount(deal) {
         return this.flashSaleService.calculateDiscount(deal);
     }

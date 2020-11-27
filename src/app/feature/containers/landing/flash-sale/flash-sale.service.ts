@@ -86,6 +86,19 @@ export class FlashSaleService {
         return (deal.quantity / deal.total_quantity) * 100;
     }
 
+    isDiscounted(deal) {
+        const {was_price, price} = deal;
+        const priceRange = price.trim().split('-');
+        const wasPriceRange = was_price.trim().split('-');
+        const discountMin = ((wasPriceRange[0] - priceRange[0]) / wasPriceRange[0]) * 100;
+        let discountMax = 0;
+        if (priceRange.length > 1) {
+            discountMax = ((wasPriceRange[1] - priceRange[1]) / wasPriceRange[1]) * 100;
+        }
+        const discount = Math.max(discountMin, discountMax);
+        return discount !== 0;
+    }
+
     getTimeRemaining(time) {
         // const total = Date.parse(endTime) - this.serverTime;
         const total = time * 1000;
