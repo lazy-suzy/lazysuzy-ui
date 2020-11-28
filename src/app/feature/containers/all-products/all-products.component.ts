@@ -61,6 +61,7 @@ export class AllProductsComponent implements OnInit {
     isChangingBrandList: boolean = false;
     collectionsList: any;
     showFilters = false;
+
     constructor(
         private apiService: ApiService,
         private router: Router,
@@ -86,9 +87,11 @@ export class AllProductsComponent implements OnInit {
             this.collectionsList = collections;
         });
     }
+
     toggleFilterBar() {
         this.showFilters = !this.showFilters;
     }
+
     ngOnInit(): void {
         this.eventSubscription = this.eventEmitterService.userChangeEvent
             .asObservable()
@@ -101,9 +104,11 @@ export class AllProductsComponent implements OnInit {
                 );
             });
     }
+
     clearFilters() {
         this.productFilter.clearFilters();
     }
+
     onDestroy(): void {
         this.productsSubscription.unsubscribe();
         this.routeSubscription.unsubscribe();
@@ -337,6 +342,21 @@ export class AllProductsComponent implements OnInit {
 
     toggleMobileFilter() {
         this.showMobileFilter = !this.showMobileFilter;
+        if (this.showMobileFilter) {
+            this.hideIntercom();
+        } else {
+            this.showIntercom();
+        }
+    }
+
+    hideIntercom() {
+        const intercom = document.getElementsByClassName('intercom-lightweight-app')[0];
+        intercom.classList.add('dn');
+    }
+
+    showIntercom() {
+        const intercom = document.getElementsByClassName('intercom-lightweight-app')[0];
+        intercom.classList.remove('dn');
     }
 
     toggleMobileSort() {
