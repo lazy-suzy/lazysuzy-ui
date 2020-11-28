@@ -1,5 +1,5 @@
 import {IProductPayload} from './../../../shared/models';
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, OnInit, Input} from '@angular/core';
 import {ApiService} from 'src/app/shared/services';
 
 @Component({
@@ -34,7 +34,7 @@ export class ProductMobileComponent implements OnInit {
             this.isRange = true;
         }
         this.priceObject.isPrice = Number(is_price[0]);
-        this.isDiscounted = was_price && was_price[0] > is_price[0];
+        this.isDiscounted = was_price && Number(was_price[0]) > Number(is_price[0]);
         if (this.isDiscounted) {
             this.priceObject.wasPrice = Number(was_price[0]);
         }
@@ -51,12 +51,11 @@ export class ProductMobileComponent implements OnInit {
 
     renderPrice(price: number): number | string {
         const quotient = Math.floor(price);
-        const remainder = Number((price - quotient).toPrecision(2));
+        let remainder = Number((price - quotient).toPrecision(2));
         if (remainder === 0) {
             return quotient;
         } else {
             return price.toFixed(2);
         }
-        return 0;
     }
 }
