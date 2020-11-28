@@ -28,13 +28,13 @@
                 <button
                         mat-icon-button
                         id="side-nav-btn"
-                        (click)="drawer.toggle()"
+                        (click)="drawer.toggle();hideIntercom()"
                         class="fixed top-0 z-99"
                 >
                     <mat-icon class="account-icon">menu</mat-icon>
                 </button>
                 <!--                Main SideBar-->
-                <mat-sidenav #drawer [fixedInViewport]="true" class="mobile-menu-container" [mode]="'over'">
+                <mat-sidenav #drawer [fixedInViewport]="true" (closed)="showIntercom()"  class="mobile-menu-container" [mode]="'over'">
                     <div class="flex flex-column" style="height:100%">
 
                         <ul class="department-container">
