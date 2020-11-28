@@ -4,8 +4,9 @@
 
         <app-search-bar class="section"></app-search-bar>
 
-        <app-flash-sale *ngIf="!isHandset"></app-flash-sale>
-        <app-flash-sale-mobile *ngIf="isHandset"></app-flash-sale-mobile>
+        <!--        Uncomment below 2 lines for Flash sale components-->
+        <!--        <app-flash-sale *ngIf="!isHandset"></app-flash-sale>-->
+        <!--        <app-flash-sale-mobile *ngIf="isHandset"></app-flash-sale-mobile>-->
 
         <app-banner [isHandset]="isHandset"></app-banner>
 
