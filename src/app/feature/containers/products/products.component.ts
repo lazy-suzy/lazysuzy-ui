@@ -361,6 +361,21 @@ export class ProductsComponent implements OnInit {
 
     toggleMobileFilter() {
         this.showMobileFilter = !this.showMobileFilter;
+        if (this.showMobileFilter) {
+            this.hideIntercom();
+        } else {
+            this.showIntercom();
+        }
+    }
+
+    hideIntercom() {
+        const intercom = document.getElementsByClassName('intercom-lightweight-app')[0];
+        intercom.classList.add('dn');
+    }
+
+    showIntercom() {
+        const intercom = document.getElementsByClassName('intercom-lightweight-app')[0];
+        intercom.classList.remove('dn');
     }
 
     toggleMobileSort() {

@@ -360,10 +360,7 @@ export class ProductFilterMobileComponent implements OnInit {
         if (this.isDimensionFilter(filter) || this.isCollectionFilter(filter)) {
             return false;
         }
-        if (this.productFilters[filter].length === 0) {
-            return false;
-        }
-        return true;
+        return this.productFilters[filter].length !== 0;
     }
 
     renderFilterName(filter): string {
