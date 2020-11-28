@@ -66,9 +66,19 @@ export class NavMobileComponent implements OnInit {
         });
     }
 
+    hideIntercom() {
+        const intercom = document.getElementsByClassName('intercom-lightweight-app')[0];
+        intercom.classList.add('dn');
+    }
+
+    showIntercom() {
+        const intercom = document.getElementsByClassName('intercom-lightweight-app')[0];
+        intercom.classList.remove('dn');
+    }
+
     ngOnInit(): void {
         this.getDeals();
-       // this.openNewsletterPopup();
+        // this.openNewsletterPopup();
         this.eventSubscription = this.eventEmitterService.userChangeEvent
             .asObservable()
             .subscribe((user) => {
