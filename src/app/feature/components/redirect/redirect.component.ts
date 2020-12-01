@@ -80,7 +80,7 @@ export class RedirectComponent implements OnInit {
                             payload.success.user
                         );
                         this.markWishlist();
-                        this.matDialogUtils.closeDialogs();
+                        // this.matDialogUtils.closeDialogs();
                     }
                 },
                 (error: any) => {
