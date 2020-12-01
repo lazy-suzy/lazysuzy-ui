@@ -67,20 +67,29 @@ export class RedirectComponent implements OnInit {
     login() {
         if (this.validateForm(this.email, this.password)) {
             const formData: any = new FormData();
+            formData.append('name', name);
             formData.append('email', this.email);
             formData.append('password', this.password);
-            this.apiService.login(formData).subscribe(
+            formData.append('c_password', this.password);
+            this.apiService.signup(formData).subscribe(
                 (payload: any) => {
                     if (payload.success) {
                         this.error = false;
-                        this.eventService.fetchUser(payload.success.token, payload.user);
-                        this.matDialogUtils.closeDialogs();
+                        this.eventService.fetchUser(
+                            payload.success.token,
+                            payload.success.user
+                        );
                         this.markWishlist();
-                    } else {
-                        this.handleError(payload);
+                        this.matDialogUtils.closeDialogs();
                     }
                 },
-                (payload: any) => this.handleError(payload.error)
+                (error: any) => {
+                    if (error.error.error.email) {
+                        this.error = true;
+                        this.errorMsg = 'This email already exists';
+                        return false;
+                    }
+                }
             );
         }
     }
