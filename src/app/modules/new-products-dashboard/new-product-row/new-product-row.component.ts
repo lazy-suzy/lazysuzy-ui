@@ -26,7 +26,7 @@ export class NewProductRowComponent implements OnInit {
     fabric_filter = [];
     country_filter = [];
     category_detail = [];
-
+    productImages = [];
     xImagePrimary = [];
     xImageSecondary = [];
 
@@ -38,6 +38,18 @@ export class NewProductRowComponent implements OnInit {
     ngOnInit() {
         this.setFilters(this.filters);
         this.setCategoryDetail();
+        this.loadAllProductImages();
+    }
+
+    loadAllProductImages() {
+        this.product.main_product_images.split(',').forEach(value => {
+            this.productImages.push(value);
+        });
+        this.product.product_images.split(',').forEach(value => {
+            if (this.productImages.indexOf(value) === -1) {
+                this.productImages.push(value);
+            }
+        });
     }
 
     setFilters(filter: any) {
@@ -75,7 +87,7 @@ export class NewProductRowComponent implements OnInit {
                 if (value === 'primary') {
                     let images = [];
                     if (this.product.image_xbg_select_primary) {
-                         images = this.product.image_xbg_select_primary.split(',');
+                        images = this.product.image_xbg_select_primary.split(',');
                     }
                     images.push(response.image);
                     this.product.image_xbg_select_primary = images.join(',');
