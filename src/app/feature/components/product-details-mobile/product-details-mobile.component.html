@@ -96,14 +96,14 @@
             (product && product.set && product.set.length > 0)
           "/>
             </ng-template>
-            <div *ngIf="!isSetItemInInventory">
-                <app-redirect *ngIf="
-            product && product.redirect && !utils.hasInventory(activeProduct)
-          " [redirectUrl]="product.redirect_url" [redirectDetails]="product.redirect_details"
-                              [category]="product.department_info[0].category_name"
-                              [categoryUrl]="product.department_info[0].category_url" [isHandset]="true"></app-redirect>
-            </div>
 
+            <div *ngIf="!isSetItemInInventory">
+                <app-redirect *ngIf="product && product.redirect && !utils.hasInventory(activeProduct)"
+                              [isHandset]="true"
+                              [isWishlisted]="product.wishlisted"
+                              (wishlist)="wishlistProduct(product.sku,true)"
+                ></app-redirect>
+            </div>
             <app-variations *ngIf="product && isVariationExist && !product.redirect" [variations]="variations"
                             [isSwatchExist]="isSwatchExist" [inputSelections]="product.selections"
                             [hasSelection]="hasSelection" (setPrice)="onSetPrice($event)"
