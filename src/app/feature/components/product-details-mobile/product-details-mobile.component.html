@@ -12,12 +12,16 @@
 
             <div class="flex justify-between">
                 <div class="product-site">{{ product.site }}</div>
-                <div *ngIf="product && product.wishlisted; else elseBlock">
-                    <div class="tile-icon wishlist-icon wishlist-container">
-                        <mat-icon (click)="wishlistProduct(product.sku, false)">favorite
-                        </mat-icon>
+                <ng-container *ngIf="
+            product && !utils.hasInventory(activeProduct) && !product.redirect && product.product_url
+          ">
+                    <div *ngIf="product && product.wishlisted; else elseBlock">
+                        <div class="tile-icon wishlist-icon wishlist-container">
+                            <mat-icon (click)="wishlistProduct(product.sku, false)">favorite
+                            </mat-icon>
+                        </div>
                     </div>
-                </div>
+                </ng-container>
                 <ng-template #elseBlock>
                     <div class="tile-icon wishlist-icon wishlist-container">
                         <mat-icon (click)="wishlistProduct(product.sku, true)">favorite_border
