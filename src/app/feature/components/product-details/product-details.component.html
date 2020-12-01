@@ -84,7 +84,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="price-container-tabs mt1" *ngIf="!product.redirect || utils.hasInventory(activeProduct)">
+                        <div class="price-container-tabs mt1">
                             <div class="price-font" style="margin-left:-0.5rem;">
                             <span class="product-price ml2 open-sans font-18"
                                   [ngClass]="{'sale':hasValidWasPrice,'product-price':!hasValidWasPrice}">
@@ -94,7 +94,7 @@
                                 </span>
                             </span>
                             </div>
-                            <div class="flex">
+                            <div class="flex" *ngIf="!product.redirect || utils.hasInventory(activeProduct)">
                                 <button mat-raised-button class="bg-red view-details-btn"
                                         *ngIf="!utils.hasInventory(activeProduct) && !product.redirect">
                                     <a (click)="openLink($event, product.product_url)" [href]="product.product_url"
