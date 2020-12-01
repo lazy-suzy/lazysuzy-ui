@@ -1,39 +1,40 @@
-<div class="redirect-container">
-  <div>Sorry, this item is currently unavailable.</div>
-  <div>
-    <span class="link underline blue pointer" (click)="openSignup()"
-      >Sign up</span
-    >
-    to be alerted when it becomes available.
-  </div>
-  <div
-    class="suggested-container"
-    *ngIf="redirectUrl && redirectUrl.length > 0; else showCategory"
-  >
-    <a href="{{ redirectUrl }}" class="underline-none">
-      <div class="suggested-content flex flex-wrap items-center">
-        <div class=" alternative-text">Suggested Alternative</div>
-        <img class="w-10-ns w-20" [src]="redirectDetails.main_image" />
-        <div class="w-60-ns alternative-option w-80">
-          <div>{{ redirectDetails.name }}</div>
-          <div>
-            <span>${{ redirectDetails.price }}</span>
-            <span
-              class="strike pl2 {{
-                redirectDetails.price !== redirectDetails.was_price ? '' : 'dn'
-              }}"
-              >${{ redirectDetails.was_price }}</span
-            >
-          </div>
+<ng-container *ngIf="!isHandset else handset">
+    <ng-container *ngIf="!isWishlisted else alreadyWishlisted">
+        <div class="flex items-center mb2" *ngIf="!showLogin else loginTemplate">
+            <span class="mr3">Out of Stock!</span>
+            <button class="flex-grow-1 waitlist-button" (click)="checkLogin()">Join Waitlist</button>
         </div>
-      </div>
-    </a>
-  </div>
-  <ng-template #showCategory>
-    In the meantime, see more
-    <a class="link underline blue pointer" href="{{ categoryUrl }}"
-      >{{ category }} here</a
-    >.
-  </ng-template>
-</div>
-<!--  -->
+        <ng-template #loginTemplate>
+            <div class="flex items-center mb2">
+                <input class="input" placeholder="Email" type="email" [(ngModel)]="email">
+                <input class="input" placeholder="Password" type="password" [(ngModel)]="password">
+                <button class="login-button" (click)="this.login()">Go</button>
+            </div>
+            <p *ngIf="error" class="error-message">{{errorMsg}}</p>
+        </ng-template>
+        <span class="hint-message"><mat-icon>error</mat-icon>Sign up and we'll be in touch when we have an update.</span>
+    </ng-container>
+    <ng-template #alreadyWishlisted>
+        <span class="finish-message">YOU'RE ON THE WAITLIST. WATCH YOUR INBOX FOR UPDATES.</span>
+    </ng-template>
+</ng-container>
+<ng-template #handset>
+    <ng-container *ngIf="!isWishlisted else alreadyWishlisted">
+        <div class="flex items-center mb2" *ngIf="!showLogin else loginTemplate">
+            <span class="mr3">Out of Stock!</span>
+            <button class="flex-grow-1 waitlist-button" (click)="checkLogin()">Join Waitlist</button>
+        </div>
+        <ng-template #loginTemplate>
+            <div class="flex flex-column mb2">
+                <input class="input w-100 mb2" placeholder="Email" type="email" [(ngModel)]="email">
+                <input class="input w-100 mb2" placeholder="Password" type="password" [(ngModel)]="password">
+                <button class="login-button " (click)="this.login()">Go</button>
+            </div>
+            <p *ngIf="error" class="error-message">{{errorMsg}}</p>
+        </ng-template>
+        <span class="hint-message"><mat-icon>error</mat-icon>Sign up and we'll be in touch when we have an update.</span>
+    </ng-container>
+    <ng-template #alreadyWishlisted>
+        <span class="finish-message">YOU'RE ON THE WAITLIST. WATCH YOUR INBOX FOR UPDATES.</span>
+    </ng-template>
+</ng-template>

@@ -38,12 +38,11 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="flex flex-column">
-
+                            <div class="flex flex-column" *ngIf="product.redirect && utils.hasInventory(activeProduct)">
                                 <div class="flex">
                                     <button (click)="openLink($event, product.product_url)" mat-raised-button
                                             class="bg-red w-90 view-details-btn"
-                                            *ngIf="!utils.hasInventory(activeProduct) && !product.redirect &&product.product_url">
+                                            *ngIf="!utils.hasInventory(activeProduct) && !product.redirect && product.product_url">
                                         <a [href]="product.product_url"
                                            class="tr-viewDetails no-underline">
                                             VIEW DETAILS
@@ -51,7 +50,7 @@
                                     </button>
                                     <div class="w-20 pr3" id="newSelect" *ngIf="utils.hasInventory(activeProduct)">
                                         <select [(ngModel)]="quantity" class="quantity-selector mr2"
-                                                >
+                                        >
                                             <option *ngFor="let i of quantityLimit(activeProduct.inventory_product_details.count)"
                                                     [value]="i">{{ i }}</option>
                                         </select>
@@ -83,8 +82,6 @@
                                 <div *ngIf="errorMessage !== ''" class="invalid-feedback">
                                     <div>{{ errorMessage }} Hello</div>
                                 </div>
-
-
                             </div>
                         </div>
                         <div class="price-container-tabs mt1">
@@ -123,6 +120,15 @@
                                 </div>
                             </div>
                         </div>
+                        <div *ngIf="!isSetItemInInventory">
+                            <app-redirect *ngIf="product.redirect && !utils.hasInventory(activeProduct)"
+                                          [isWishlisted]="product.wishlisted"
+                                          [isHandset]="false"
+                                          (wishlist)="wishlistProduct(product.sku,true)"
+
+                            >
+                            </app-redirect>
+                        </div>
                         <div class="stock-info" *ngIf="utils.hasInventory(activeProduct) &&
                         (activeProduct.inventory_product_details.is_low || activeProduct.inventory_product_details.message)">
                             <div class="flex">
@@ -148,14 +154,7 @@
                     </ng-template>
                 </div>
                 <div class="product-description-container" [ngStyle]="topHeight">
-                    <div *ngIf="!isSetItemInInventory">
-                        <app-redirect *ngIf="product.redirect && !utils.hasInventory(activeProduct)"
-                                      [redirectUrl]="product.redirect_url" [redirectDetails]="product.redirect_details"
-                                      [category]="product.department_info[0]?.category_name"
-                                      [categoryUrl]="product.department_info[0]?.category_url"
-                                      [isHandset]="false">
-                        </app-redirect>
-                    </div>
+
                     <app-variations
                             *ngIf="isVariationExist && !product.redirect"
                             [variations]="product.variations"
