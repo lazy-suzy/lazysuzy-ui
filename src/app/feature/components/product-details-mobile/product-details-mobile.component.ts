@@ -15,6 +15,7 @@ import {Gallery, GalleryItem, ImageItem} from '@ngx-gallery/core';
 import {Lightbox} from '@ngx-gallery/lightbox';
 import {VariationsComponent} from '../variations/variations.component';
 import {PixelService} from '../../../shared/services/facebook-pixel/pixel.service';
+import {first} from 'rxjs/operators';
 
 @Component({
     selector: 'app-product-details-mobile',
@@ -84,6 +85,16 @@ export class ProductDetailsMobileComponent implements OnInit {
         dots: false,
         pagination: false,
     };
+    recentProducts = [];
+    recentOptions = {
+        autoWidth: false,
+        loop: true,
+        margin: 10,
+        items: 2.3,
+        center: false,
+        dots: false,
+        pagination: false,
+    };
 
     constructor(
         private router: Router,
@@ -102,6 +113,7 @@ export class ProductDetailsMobileComponent implements OnInit {
     }
 
     ngOnInit() {
+        this.loadRecentProducts();
         this.eventSubscription = this.eventEmitterService.userChangeEvent
             .asObservable()
             .subscribe((user) => {
@@ -219,6 +231,15 @@ export class ProductDetailsMobileComponent implements OnInit {
         this.productSubscription.unsubscribe();
         this.bpSubscription.unsubscribe();
         this.eventSubscription.unsubscribe();
+    }
+
+    loadRecentProducts() {
+        this.apiService.getRecentProducts().pipe(first()).subscribe((response: any[]) => {
+            this.recentProducts = response;
+            if (this.recentProducts.length < 2) {
+                this.recentOptions.loop = false;
+            }
+        });
     }
 
     selectTab(tab) {

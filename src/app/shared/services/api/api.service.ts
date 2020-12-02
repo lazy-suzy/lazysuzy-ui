@@ -496,4 +496,14 @@ export class ApiService {
         const url = `${env.API_BASE_HREF}deals`;
         return this.httpService.get(url);
     }
+
+    getRecentProducts() {
+        const recentProductsUrl = `sku-history`;
+        const token = this.cookie.get('token');
+        const headers = new HttpHeaders({
+            Authorization: `Bearer ${token}`
+        });
+        const url = `${env.API_BASE_HREF}${recentProductsUrl}`;
+        return this.httpService.get(url, headers);
+    }
 }
