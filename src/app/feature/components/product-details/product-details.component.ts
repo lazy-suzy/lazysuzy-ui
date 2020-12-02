@@ -12,6 +12,7 @@ import {
 import {Gallery, GalleryItem, ImageItem} from '@ngx-gallery/core';
 import {Lightbox} from '@ngx-gallery/lightbox';
 import {PixelService} from '../../../shared/services/facebook-pixel/pixel.service';
+import {first} from 'rxjs/operators';
 
 @Component({
     selector: 'app-product-details',
@@ -67,6 +68,7 @@ export class ProductDetailsComponent implements OnInit {
     invalidLinkImageSrc = 'assets/image/invalid_link.png';
     invalidLink: boolean;
     starIcons = [];
+    recentProducts = [];
 
     constructor(
         @Inject(MAT_DIALOG_DATA) public data: any,
@@ -83,7 +85,7 @@ export class ProductDetailsComponent implements OnInit {
 
     ngOnInit(): void {
         this.isProductFetching = true;
-
+        this.loadRecentProducts();
         this.eventSubscription = this.eventEmitterService.userChangeEvent
             .asObservable()
             .subscribe((user) => {
@@ -104,6 +106,12 @@ export class ProductDetailsComponent implements OnInit {
                         );
                 }
             });
+    }
+
+    loadRecentProducts() {
+        this.apiService.getRecentProducts().pipe(first()).subscribe((response: any[]) => {
+            this.recentProducts = response;
+        });
     }
 
     setRating(): void {
@@ -405,9 +413,9 @@ export class ProductDetailsComponent implements OnInit {
         return price.isDiscounted;
     }
 
-    toCollectionProduct(product) {
+    toCollectionProduct(sku) {
         this.matDialogUtils.closeDialogs();
-        setTimeout(() => this.matDialogUtils.openMatDialog(product.sku), 250);
+        setTimeout(() => this.matDialogUtils.openMatDialog(sku), 250);
 
     }
 }
