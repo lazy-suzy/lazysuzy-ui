@@ -1,31 +1,63 @@
-.redirect-container {
-  font-size: 16px;
-  margin-bottom: 16px;
-  .pointer {
-    cursor: pointer;
-  }
-  .suggested-container {
-    border: 2px solid #dbdbdb;
-    margin: 10px 10px 10px 0;
-    .suggested-content {
-      padding: 8px 16px;
-      .alternative-text {
-        padding: 12px;
-        width: 25%;
-        color: #b76e79;
-      }
-      .alternative-option {
-        padding: 12px 8px;
-        color: #000000;
-      }
-    }
+.waitlist-button {
+  padding: 0.5rem;
+  border-radius: 5px;
+  font-family: "Open Sans", "Helvetica Neue", sans-serif;
+  font-size: 14px;
+  font-weight: bold;
+  color: #606060;
+  background: #f7f6f6;
+  text-transform: uppercase;
+  border: grey 1px solid;
+  &:focus {
+    outline: none;
   }
 }
-.underline-none:hover {
-  text-decoration: none;
+
+.input {
+  border-radius: 5px;
+  padding: 0.5rem 1rem;
+  margin-right: 1rem;
 }
-@media (max-width: 767px) {
-  .alternative-text {
-    width: 100% !important;
-  }
+
+.error-message {
+  font-family: "Open Sans", "Helvetica Neue", sans-serif;
+  color: red;
+  font-size: 12px;
+}
+
+.login-button {
+  padding: 0.5rem 3rem;
+  border-radius: 5px;
+  background: #0c1c31;
+  color: #ffcc00;
+  border: none;
+  font-family: "Open Sans", "Helvetica Neue", sans-serif;
+  font-size: 14px;
+  font-weight: bold;
+}
+
+mat-icon {
+  vertical-align: middle;
+  font-size: 14px;
+  height: 16px;
+  width: 16px;
+}
+
+.hint-message {
+  font-family: Lato, sans-serif;
+  font-size: 14px;
+  color: #606060;
+}
+
+.finish-message {
+  font-family: "Open Sans", "Helvetica Neue", sans-serif;
+  font-size: 14px;
+  font-weight: bold;
+  color: #606060;
+  text-transform: uppercase;
+}
+.stock-message{
+  font-family: "Open Sans", "Helvetica Neue", sans-serif;
+  font-size: 14px;
+  font-weight: bold;
 }

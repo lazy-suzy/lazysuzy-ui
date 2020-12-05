@@ -19,6 +19,7 @@ export class MatDialogUtilsService {
     };
     signUpDialog;
     signInDialog;
+    productDialog;
     private payload: any;
 
     constructor(
@@ -35,31 +36,38 @@ export class MatDialogUtilsService {
     }
 
     openMatDialog(modalSku) {
+
         let modalData: any = {
             sku: modalSku,
         };
         if (this.payload && this.payload.product.sku === modalSku) {
             modalData = {...modalData, payload: this.payload};
         }
-        const dialogRef = this.dialog.open(ProductDetailsComponent, {
-            width: '80%',
-            height: '100%',
-            data: modalData,
-            panelClass: 'product-details-dialog-container'
-        });
-        dialogRef.afterOpened().subscribe((result) => {
-            this.location.go(`product/${modalSku}`, '', this.location.getState());
-        });
-        dialogRef.afterClosed().subscribe((result) => {
-            this.payload = null;
-            const params = {...this.activeRoute.snapshot.queryParams};
-            if (params.modal_sku) {
-                delete params.modal_sku;
-                this.router.navigate([], {queryParams: params});
-            } else {
-                this.location.back();
-            }
-        });
+        if (this.productDialog) {
+            this.productDialog.componentInstance.data = modalData;
+        } else {
+            this.productDialog = this.dialog.open(ProductDetailsComponent, {
+                width: '80%',
+                height: '100%',
+                data: modalData,
+                panelClass: 'product-details-dialog-container'
+            });
+            this.productDialog.afterOpened().subscribe((result) => {
+                this.location.go(`product/${modalSku}`, '', this.location.getState());
+            });
+            this.productDialog.afterClosed().subscribe((result) => {
+                this.payload = null;
+                const params = {...this.activeRoute.snapshot.queryParams};
+                this.productDialog = undefined;
+                if (params.modal_sku) {
+                    delete params.modal_sku;
+                    this.router.navigate([], {queryParams: params});
+                } else {
+                    this.location.back();
+                }
+            });
+        }
+
     }
 
     openVariationDialog(modalSku) {

@@ -107,6 +107,7 @@ export class ProductDetailsComponent implements OnInit {
     }
 
     setRating(): void {
+        this.starIcons = [];
         let starCount = Math.round(this.product.rating * 2) / 2;
         while (starCount > 0.5) {
             this.starIcons.push('star');
