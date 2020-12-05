@@ -19,6 +19,7 @@ import {FlashSaleProductComponent} from './flash-sale/flash-sale-desktop/flash-s
 import {FlashSaleMobileComponent} from './flash-sale/flash-sale-mobile/flash-sale-mobile/flash-sale-mobile.component';
 import {FlashSaleMobileProductComponent} from './flash-sale/flash-sale-mobile/flash-sale-mobile-product/flash-sale-mobile-product.component';
 import {FlashSaleMobileProductHorizontalComponent} from './flash-sale/flash-sale-mobile/flash-sale-mobile-product-horizontal/flash-sale-mobile-product-horizontal.component';
+import { FeaturedBrandsComponent } from './featured-brands/featured-brands.component';
 
 const DECLARATIONS = [LandingComponent];
 
@@ -44,7 +45,8 @@ const MODULES = [
         FlashSaleProductComponent,
         FlashSaleMobileComponent,
         FlashSaleMobileProductComponent,
-        FlashSaleMobileProductHorizontalComponent
+        FlashSaleMobileProductHorizontalComponent,
+        FeaturedBrandsComponent
     ],
     imports: [...MODULES, CarouselModule],
     exports: [...DECLARATIONS, ...MODULES],

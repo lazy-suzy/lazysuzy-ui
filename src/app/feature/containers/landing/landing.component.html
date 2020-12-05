@@ -1,24 +1,24 @@
 <div class="homepage">
     <div class="main-container">
-        <h1 class="search-title">Search America's top Home brands in one go</h1>
+        <!-- <h1 class="search-title">Search America's top Home brands in one go</h1> -->
 
-        <app-search-bar class="section"></app-search-bar>
+        <!-- <app-search-bar class="section"></app-search-bar> -->
 
         <!--        Uncomment below 2 lines for Flash sale components-->
         <!--        <app-flash-sale *ngIf="!isHandset"></app-flash-sale>-->
         <!--        <app-flash-sale-mobile *ngIf="isHandset"></app-flash-sale-mobile>-->
 
         <app-banner [isHandset]="isHandset"></app-banner>
-
+        <app-best-sellers [isHandset]="isHandset"></app-best-sellers>
+        <app-new-arrivals [isHandset]="isHandset"></app-new-arrivals>
+        <app-featured-brands></app-featured-brands>
         <app-browse-by-room></app-browse-by-room>
-
-
         <app-brand-footer></app-brand-footer>
 
         <div [class]="isHandset ? '' : 'mh2'">
-            <app-new-arrivals [isHandset]="isHandset"></app-new-arrivals>
+           
             <app-top-deals [isHandset]="isHandset"></app-top-deals>
-            <app-best-sellers [isHandset]="isHandset"></app-best-sellers>
+           
         </div>
         <div class="design-board-section">
             <div class="header">LazySuzy Design Boards</div>

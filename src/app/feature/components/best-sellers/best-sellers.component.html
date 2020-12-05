@@ -1,14 +1,11 @@
-<div class="flex flex-wrap best-sellers">
+<div class="flex flex-column flex-wrap best-sellers">
   <div
-    class="{{ isHandset ? 'w-100' : 'w-10-ns w-20-m' }} best-sellers-heading"
+    class="{{ isHandset ? 'w-100' : 'ml4 w-20-m' }} best-sellers-heading"
   >
-    <h2 class="title-best-sellers">best sellers</h2>
-    <button type="button" class="btn btn-sm btn-dark" (click)="seeAll()">
-      see all
-    </button>
+    <h2 class="title-best-sellers">Hot Right Now</h2>
   </div>
 
-  <div class="{{ isHandset ? 'w-100' : 'w-90-ns w-80-m' }}">
+  <div class="w-100">
     <div *ngIf="!bestSellers">
       <img
         src="../../../../assets/image/three-dots.svg"
