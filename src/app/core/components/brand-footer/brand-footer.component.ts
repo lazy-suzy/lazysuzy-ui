@@ -26,6 +26,7 @@ import { Subscription } from 'rxjs';
 export class BrandFooterComponent implements OnInit {
   fade: any;
   eventSubscription: Subscription;
+  featuredBrands = [];
   constructor(
     private apiService: ApiService,
     private eventEmitterService: EventEmitterService
@@ -50,6 +51,7 @@ export class BrandFooterComponent implements OnInit {
           return val;
         }
       });
+      this.featuredBrands = this.brands.filter(_ => _.feature === 1);
     });
   }
 }

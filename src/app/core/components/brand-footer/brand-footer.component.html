@@ -1,15 +1,42 @@
 <div class="brand-footer delay-2s" [@fadeInUp]="fade">
   <div class="flex justify-between items-center black brands">
     <h3 class="brand-text w-100 ml2 mr2">
-      Timeless classics and latest hot trends from America's top home brands. One search & done.
+      Top home brands and local makers
     </h3>
   </div>
-  <div class="flex flex-wrap brand-box mh0 mv1">
+  <div class="flex flex-wrap justify-around brand-box ph1 mv1">
     <ng-container  *ngFor="let data of brands">
-      <div class="brands w-25 w-25-ns" *ngIf="data.logo">
+      <div class="brands" *ngIf="data.logo">
         <img onerror="this.style.display='none'" class="image" src="{{ data.logo }}" alt="Brand Image" />&nbsp;
       </div>
     </ng-container>
+  </div>
+  <div *ngIf="featuredBrands.length">
+    <div class="wavy-loops-bottom">
+      <svg xmlns="http://www.w3.org/2000/svg" id="Layer_1" data-name="Layer 1" viewBox="0 0 500 57.01">
+        <defs>
+          <style>
+            .cls-1{fill:#b76e79;}
+            .font-text {
+              font-family: "Open Sans",sans-serif;
+              fill: white;
+              font-size: 12px;
+              font-weight: bold;}
+          </style>
 
+        </defs>
+        <path class="cls-1" d="M500,200H0V173a281.22,281.22,0,0,1,89-14c34.3.27,52.92,7,75,11,85.69,15.67,118.55-27.92,205-27,30.2.32,75.43,6.17,131,35" style="fill: rgb(183, 110, 121);" transform="translate(0 -142.99)"/>
+        <text class="font-text" x="-410" y="35">Featured Brands</text>
+      </svg>
+    </div>
+    <div class="brand flex justify-around"  >
+      <ng-container *ngFor="let image of featuredBrands">
+        <div class="flex flex-column">
+          <img [src]='image.cover_image' alt="{{image.name}}">
+          <span class="featured-brand-name">{{image.name}}</span>
+          <span class="featured-brand-location">{{image.location}}</span>
+        </div>
+      </ng-container>
+    </div>
   </div>
 </div>

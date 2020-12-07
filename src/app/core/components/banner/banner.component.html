@@ -6,6 +6,9 @@
 </div>
 
 <div class="banner" *ngIf="!isHandset">
+  <div class="navbar">
+    <app-nav-desktop></app-nav-desktop>
+  </div>
   <p-carousel
     class="bannerCarousel"
     [value]="bannerData"

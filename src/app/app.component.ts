@@ -5,11 +5,13 @@ import {
     Breakpoints,
     BreakpointObserver
 } from '@angular/cdk/layout';
+import {Location} from '@angular/common';
 
 import {Router, NavigationStart} from '@angular/router';
 import {boardRoutesNames} from './modules/board/board.routes.names';
 import {CookieService} from 'ngx-cookie-service';
 import {ApiService} from './shared/services/api/api.service';
+import {environment} from '../environments/environment';
 
 @Component({
     selector: 'app-root',
@@ -32,12 +34,14 @@ export class AppComponent implements OnInit {
     isHandset: boolean;
     isTablet = false;
     isMinimalMode = false;
+    showNavbar = true;
 
     constructor(
         private breakpointObserver: BreakpointObserver,
         private router: Router,
         private apiService: ApiService,
-        private cookie: CookieService
+        private cookie: CookieService,
+        private location: Location,
     ) {
         router.events.subscribe((navigation) => {
             if (
@@ -46,6 +50,9 @@ export class AppComponent implements OnInit {
             ) {
                 this.isMinimalMode = true;
             }
+            const url = new RegExp(`${environment.SITE_URL.replace('http://', '')}($|\\/$|\\/\\?)`, 'gm');
+
+            this.showNavbar = !location.path();
         });
     }
 
