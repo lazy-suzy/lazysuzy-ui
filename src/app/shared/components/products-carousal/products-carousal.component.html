@@ -1,9 +1,11 @@
 <div *ngIf="!isBanner && !isBoards">
+
   <owl-carousel
     [options]="carousalOptions"
     *ngIf="data?.length"
     [carouselClasses]="['owl-carousel']"
   >
+
     <div class="item carousel" *ngFor="let product of data; let i = index">
       <img src="{{ product.main_image }}" alt="" />
       <div class="inner">

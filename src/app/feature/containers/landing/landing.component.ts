@@ -30,7 +30,7 @@ export class LandingComponent implements OnInit {
     bpSubscription: Subscription;
     isHandset = false;
     eventSubscription: Subscription;
-
+    desktopAboutImage = "https://www.lazysuzy.com/images/landing/WhoIsLZ_d.png";
     contentList = [
         'Design your space the way you want',
         'Mix and match various styles',
@@ -53,7 +53,9 @@ export class LandingComponent implements OnInit {
                 items: 1,
             },
             1024: {
-                items: 3,
+                items: 5,
+                loop: false,
+                center: false
             },
         },
     };
