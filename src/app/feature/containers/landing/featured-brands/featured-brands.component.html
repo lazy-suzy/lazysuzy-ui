@@ -1,13 +1,17 @@
-<div class="brand flex justify-between">
-    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320">
-        <path fill="#ffd700" fill-opacity="1"
-            d="M0,32L48,32C96,32,192,32,288,74.7C384,117,480,203,576,224C672,245,768,203,864,160C960,117,1056,75,1152,64C1248,53,1344,75,1392,85.3L1440,96L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z">
-        </path>
-    </svg>
-    <ng-container *ngFor="let image of bannerImages">
-        <div>
-            <img [src]='image.image'>
-        </div>
-    </ng-container>
-
+<div class="320">
+    <div class="wavy-loops-bottom">
+        <svg xmlns="http://www.w3.org/2000/svg" id="Layer_1" data-name="Layer 1" viewBox="0 0 500 57.01">
+            <defs>
+              <style>.cls-1{fill:rgb(126, 80, 80);}</style>
+            </defs>
+            <path class="cls-1" d="M500,200H0V173a281.22,281.22,0,0,1,89-14c34.3.27,52.92,7,75,11,85.69,15.67,118.55-27.92,205-27,30.2.32,75.43,6.17,131,35" style="fill: rgb(183, 110, 121);" transform="translate(0 -142.99)"/>
+          </svg>
+    </div>
+    <div class="brand flex justify-between">
+        <ng-container *ngFor="let image of bannerImages">
+            <div>
+                <img [src]='image.image'>
+            </div>
+        </ng-container>
+    </div>
 </div>
