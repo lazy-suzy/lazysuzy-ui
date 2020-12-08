@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
 import {ApiService} from 'src/app/shared/services';
 
 @Component({
@@ -7,7 +7,7 @@ import {ApiService} from 'src/app/shared/services';
     styleUrls: ['./featured-brands.component.less']
 })
 export class FeaturedBrandsComponent implements OnInit {
-
+    @Input() isHandset = false;
     bannerImages;
 
     constructor(private apiService: ApiService) {

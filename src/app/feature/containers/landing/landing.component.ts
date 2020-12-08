@@ -41,21 +41,23 @@ export class LandingComponent implements OnInit {
     carousalOptions = {
         autoWidth: false,
         loop: true,
-        margin: 10,
         items: 1,
         center: true,
         dots: false,
         nav: true,
+        margin: 10,
         navText: ['', '<button class=\'right-icon\'><span class="fa fa-chevron-right right-arrow"></span></button>'],
         pagination: true,
         responsive: {
             0: {
+                nav: false,
                 items: 1,
             },
             1024: {
                 items: 5,
                 loop: false,
-                center: false
+                center: false,
+                margin: 10,
             },
         },
     };

@@ -1,26 +1,68 @@
-<div class="delivery-detail-container pa5">
-    <h2>Easy Checkout: One Cart + Transparent Delivery Charges</h2>
-    <div class="flex justify-around mt4 ph7">
-        <div class=" delivery-detail flex flex-column">
-            <h4 class="shipping-type">UPS/Fedex</h4>
-            <p class="shipping-detail">Ground Delivery</p>
-            <hr class="thick-hr">
-            <span class="shipping-value">5 <sub>%</sub></span>
-            <p class="shipping-value-details">of Item Value</p>
-        </div>
-        <div class=" delivery-detail flex flex-column">
-            <h4 class="shipping-type">IN-HOME DELIVERY</h4>
-            <p class="shipping-detail">Single Brand</p>
-            <hr class="thick-hr">
-            <span class="shipping-value"><sup>$</sup>99</span>
-            <p class="shipping-value-details">/ order</p>
-        </div>
-        <div class=" delivery-detail flex flex-column">
-            <h4 class="shipping-type">IN-HOME DELIVERY</h4>
-            <p class="shipping-detail">Multiple Brands</p>
-            <hr class="thick-hr">
-            <span class="shipping-value"><sup>$</sup>149</span>
-            <p class="shipping-value-details">/ order</p>
+<div id="desktop" *ngIf="!isHandset else handset">
+    <div class="delivery-detail-container pa5">
+        <h2>Easy Checkout: One Cart + Transparent Delivery Charges</h2>
+        <div class="flex justify-around mt4 ph7">
+            <div class=" delivery-detail flex flex-column">
+                <h4 class="shipping-type">UPS/Fedex</h4>
+                <p class="shipping-detail">Ground Delivery</p>
+                <hr class="thick-hr">
+                <span class="shipping-value">5 <sub>%</sub></span>
+                <p class="shipping-value-details">of Item Value</p>
+            </div>
+            <div class=" delivery-detail flex flex-column">
+                <h4 class="shipping-type">IN-HOME DELIVERY</h4>
+                <p class="shipping-detail">Single Brand</p>
+                <hr class="thick-hr">
+                <span class="shipping-value"><sup>$</sup>99</span>
+                <p class="shipping-value-details">/ order</p>
+            </div>
+            <div class=" delivery-detail flex flex-column">
+                <h4 class="shipping-type">IN-HOME DELIVERY</h4>
+                <p class="shipping-detail">Multiple Brands</p>
+                <hr class="thick-hr">
+                <span class="shipping-value"><sup>$</sup>149</span>
+                <p class="shipping-value-details">/ order</p>
+            </div>
         </div>
     </div>
 </div>
+
+
+<ng-template #handset>
+    <div id="handset">
+        <div class="delivery-detail-container pa5">
+            <h2 class="open-sans-18 header">Easy Checkout: One Cart + Transparent Delivery Charges</h2>
+            <div class="flex flex-column mt4">
+                <div class=" delivery-detail mb5 flex flex-column">
+                    <h4 class="shipping-type">UPS/Fedex</h4>
+                    <p class="shipping-detail">Ground Delivery</p>
+                    <hr class="thick-hr">
+                    <span class="shipping-value">
+                        5
+                        <sub>
+                            % &nbsp;<span class="shipping-value-details">of Item Value</span>
+                        </sub>
+                    </span>
+
+                </div>
+                <div class=" delivery-detail mb5 flex flex-column">
+                    <h4 class="shipping-type">IN-HOME DELIVERY</h4>
+                    <p class="shipping-detail">Single Brand</p>
+                    <hr class="thick-hr">
+                    <span class="shipping-value">
+                        <sup>$</sup>99&nbsp;<span class="shipping-value-details">/ order</span>
+                    </span>
+                </div>
+                <div class=" delivery-detail mb5 flex flex-column">
+                    <h4 class="shipping-type">IN-HOME DELIVERY</h4>
+                    <p class="shipping-detail">Multiple Brands</p>
+                    <hr class="thick-hr">
+                    <span class="shipping-value">
+                        <sup>$</sup>149&nbsp;<span class="shipping-value-details">/ order</span>
+                    </span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</ng-template>
