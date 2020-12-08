@@ -1,7 +1,23 @@
-<div class="brand flex justify-between">
+<div id="desktop" class="brand flex justify-around" *ngIf="!isHandset;else handset">
     <ng-container *ngFor="let image of bannerImages">
-        <div>
+        <div class="flex flex-column image">
             <img [src]='image.image'>
+            <span class="text-left open-sans-18 mt2">
+                <a [href]="image.link" class="image-text"> {{image.link_label}}</a>
+            </span>
         </div>
     </ng-container>
 </div>
+
+<ng-template #handset>
+    <div id="handset" class="brand flex flex-column">
+        <ng-container *ngFor="let image of bannerImages">
+            <div class="flex flex-column image mb4">
+                <img [src]='image.image'>
+                <span class="text-left open-sans-18 mt2">
+                <a [href]="image.link" class="image-text"> {{image.link_label}}</a>
+            </span>
+            </div>
+        </ng-container>
+    </div>
+</ng-template>

@@ -8,14 +8,17 @@
         <!--        Uncomment below 2 lines for Flash sale components-->
         <!--        <app-flash-sale *ngIf="!isHandset"></app-flash-sale>-->
         <!--        <app-flash-sale-mobile *ngIf="isHandset"></app-flash-sale-mobile>-->
+        <!--        <app-banner [isHandset]="isHandset"></app-banner>-->
 
-        <app-banner [isHandset]="isHandset"></app-banner>
-        <app-best-sellers [isHandset]="isHandset"></app-best-sellers>
-        <app-new-arrivals [isHandset]="isHandset"></app-new-arrivals>
-        <app-featured-brands></app-featured-brands>
+        <div [class]="isHandset ? '' : 'mh2'">
+            <app-best-sellers [isHandset]="isHandset"></app-best-sellers>
+            <app-new-arrivals [isHandset]="isHandset"></app-new-arrivals>
+        </div>
+
+        <app-featured-brands [isHandset]="isHandset"></app-featured-brands>
         <app-browse-by-room></app-browse-by-room>
-        <app-brand-footer></app-brand-footer>
-        <app-about-small></app-about-small>
+        <app-brand-footer [isHandset]="isHandset"></app-brand-footer>
+        <app-about-small [isHandset]="isHandset"></app-about-small>
         <div class="reviews-section">
             <div class="header">DON'T TAKE OUR WORD FOR IT</div>
             <div class="flex-ns review-cards-container">
@@ -52,7 +55,8 @@
                                 *ngIf="reviews?.length"
                                 [carouselClasses]="['owl-theme']"
                         >
-                            <div class="item carousel-item" style="display: flex;height: 100%"
+                            <div [ngClass]="{'item': !isHandset}" class="carousel-item"
+                                 style="display: flex;height: 100%"
                                  *ngFor="let data of reviews; let i = index">
                                 <div class="mobile-review-card carousel-box">
                                     <a class="sane-image-width"
@@ -84,51 +88,11 @@
                 </ng-template>
             </div>
         </div>
-        <app-delivery-details></app-delivery-details>
-        <!--        <app-featured-brands></app-featured-brands>-->
-<!--        <div [class]="isHandset ? '' : 'mh2'">-->
+        <app-delivery-details [isHandset]="isHandset"></app-delivery-details>
+        <div [class]="isHandset ? '' : 'mh2'">
+            <app-top-deals [isHandset]="isHandset"></app-top-deals>
+        </div>
 
-
-
-<!--        </div>-->
-        <app-top-deals [isHandset]="isHandset"></app-top-deals>
-<!--        <div class="design-board-section">-->
-<!--            <div class="header">LazySuzy Design Boards</div>-->
-<!--            <div class="content">-->
-<!--                <div class="displayTablet">-->
-<!--                    <div class="image-content">-->
-<!--                        <a href="https://www.lazysuzy.com/board/preview/y7vt3u">-->
-<!--                            <img [src]="displayBoardPath"/>-->
-<!--                        </a>-->
-<!--                    </div>-->
-<!--                </div>-->
-<!--                <div class="text-content">-->
-<!--                    <div class="title">-->
-<!--                        Create & share your own style!-->
-<!--                    </div>-->
-<!--                    <div class="content-list" *ngFor="let text of contentList">-->
-<!--                        <div class="list-image">-->
-<!--                            <input-->
-<!--                                    type="checkbox"-->
-<!--                                    id="checkbox"-->
-<!--                                    checked="checked"-->
-<!--                                    disabled="disabled"-->
-<!--                            />-->
-<!--                            <label for="checkbox"></label>-->
-<!--                        </div>-->
-<!--                        <div class="list-text">{{ text }}</div>-->
-<!--                    </div>-->
-<!--                    <div class="action-btn" (click)="newBoard()">-->
-<!--                        <span> Try it out now!</span>-->
-<!--                    </div>-->
-<!--                </div>-->
-<!--                <div class="image-content" class="displayDesktop">-->
-<!--                    <a href="https://www.lazysuzy.com/board/preview/y7vt3u">-->
-<!--                        <img [src]="displayBoardPath"/>-->
-<!--                    </a>-->
-<!--                </div>-->
-<!--            </div>-->
-<!--        </div>-->
 
         <app-subscribe [homePage]="true"></app-subscribe>
     </div>
