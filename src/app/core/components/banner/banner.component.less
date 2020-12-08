@@ -6,11 +6,35 @@
 .bannerCarousel {
   padding-top: 3%;
 }
-.navbar{
+
+#banner {
+  ::ng-deep.ui-carousel-next {
+    display: none;
+  }
+
+  ::ng-deep.ui-carousel-prev {
+    visibility: hidden;
+  }
+  ::ng-deep.ui-button:enabled:focus{
+    outline: none;
+    box-shadow: none;
+  }
+  ::ng-deep.ui-carousel-dot-icon {
+    width: 10px;
+    height: 10px;
+    border-radius: 100%;
+  }
+  ::ng-deep.ui-carousel-content{
+    overflow: hidden;
+  }
+}
+
+.navbar {
   position: absolute;
   z-index: 99;
   width: 100%;
 }
+
 .bannerCarousel .ui-button {
   margin: 0 !important;
 }
@@ -19,6 +43,7 @@
   .banner {
     margin-bottom: 50px;
   }
+
   .bannerCarousel .ui-button {
     font-size: 6px !important;
   }

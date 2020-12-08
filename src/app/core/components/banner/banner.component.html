@@ -5,13 +5,12 @@
   ></app-products-carousal>
 </div>
 
-<div class="banner" *ngIf="!isHandset">
+<div class="banner" id="banner" *ngIf="!isHandset">
   <p-carousel
     class="bannerCarousel"
     [value]="bannerData"
     [numVisible]="1"
     [numScroll]="1"
-    [autoplayInterval]="8000"
     [circular]="true"
   >
     <ng-template let-data pTemplate="item">
