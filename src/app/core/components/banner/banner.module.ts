@@ -5,7 +5,6 @@ import { OwlModule } from 'ngx-owl-carousel';
 import { RouterModule } from '@angular/router';
 import { CarouselModule } from 'primeng/carousel';
 import { SharedModule } from 'src/app/shared/shared.module';
-import {NavDesktopModule} from '..';
 
 const DECLARATIONS = [BannerComponent];
 
@@ -19,7 +18,7 @@ const MODULES = [
 
 @NgModule({
   declarations: [...DECLARATIONS],
-    imports: [...MODULES, NavDesktopModule],
+  imports: [...MODULES],
   exports: [...DECLARATIONS, ...MODULES]
 })
 export class BannerModule {}

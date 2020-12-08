@@ -11,6 +11,7 @@ import {
 import { RouterModule } from '@angular/router';
 import { SearchBarModule } from '../search-bar/search-bar.module';
 import { AuthModule } from '../auth/auth.module';
+import {BannerModule} from '../banner/banner.module';
 
 const DECLARATIONS = [NavMobileComponent];
 
@@ -28,7 +29,7 @@ const MODULES = [
 
 @NgModule({
   declarations: [...DECLARATIONS],
-    imports: [...MODULES, MatTabsModule, MatListModule],
+    imports: [...MODULES, MatTabsModule, MatListModule, BannerModule],
   exports: [...DECLARATIONS, ...MODULES]
 })
 export class NavMobileModule {}

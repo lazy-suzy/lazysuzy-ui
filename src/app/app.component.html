@@ -4,7 +4,7 @@
       <app-nav-mobile></app-nav-mobile>
     </ng-container>
     <ng-template #isBrowser>
-      <app-nav-desktop *ngIf="!showNavbar" [isTablet]="isTablet"></app-nav-desktop>
+      <app-nav-desktop [isTablet]="isTablet"></app-nav-desktop>
     </ng-template>
   </div>
   <div class="content-height">

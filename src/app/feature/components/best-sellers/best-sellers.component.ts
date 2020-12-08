@@ -7,6 +7,7 @@ import {
 import { Router } from '@angular/router';
 import { Carousel } from 'primeng/carousel';
 import { Subscription } from 'rxjs';
+import {first} from 'rxjs/operators';
 @Component({
   selector: 'app-best-sellers',
   templateUrl: './best-sellers.component.html',
@@ -50,7 +51,8 @@ export class BestSellersComponent implements OnInit {
   }
   getBestSellers(): void {
     this.showLoader = true;
-    this.apiService.getBestSellers().subscribe((res) => {
+    console.log('bestseller');
+    this.apiService.getBestSellers().pipe(first()).subscribe((res) => {
       this.bestSellers = res.products;
       this.showLoader = false;
     });

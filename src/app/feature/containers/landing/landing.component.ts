@@ -30,7 +30,7 @@ export class LandingComponent implements OnInit {
     bpSubscription: Subscription;
     isHandset = false;
     eventSubscription: Subscription;
-    desktopAboutImage = "https://www.lazysuzy.com/images/landing/WhoIsLZ_d.png";
+    desktopAboutImage = 'https://www.lazysuzy.com/images/landing/WhoIsLZ_d.png';
     contentList = [
         'Design your space the way you want',
         'Mix and match various styles',

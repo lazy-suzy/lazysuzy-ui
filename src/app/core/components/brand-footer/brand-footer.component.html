@@ -32,7 +32,7 @@
     <div class="brand flex  pa3"  >
       <ng-container *ngFor="let image of featuredBrands">
         <div class="flex flex-column w-33 ma3 pa3">
-          <img [src]='"https://lazysuzy.com"+image.cover_image' alt="{{image.name}}">
+          <img [src]='image.cover_image' alt="{{image.name}}">
           <span class="featured-brand-name">{{image.name}}</span>
           <span class="featured-brand-location">{{image.location}}</span>
         </div>

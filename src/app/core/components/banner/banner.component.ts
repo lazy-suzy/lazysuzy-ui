@@ -1,6 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { ApiService } from './../../../shared/services';
-import { Router, ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-banner',
@@ -14,8 +13,6 @@ export class BannerComponent implements OnInit {
 
   constructor(
     private apiService: ApiService,
-    private router: Router,
-    private activeRoute: ActivatedRoute
   ) {}
 
   ngOnInit() {
