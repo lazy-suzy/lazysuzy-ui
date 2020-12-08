@@ -2,6 +2,9 @@
     <ng-container *ngFor="let image of bannerImages">
         <div class="image">
             <img [src]='image.image'>
+            <p class="mt2 text-left open-sans-18">
+                <a [href]="image.link" class="image-text"> {{image.link_label}}</a>
+            </p>
         </div>
     </ng-container>
 </div>
