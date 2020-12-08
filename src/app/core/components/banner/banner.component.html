@@ -1,24 +1,33 @@
 <div class="banner" *ngIf="isHandset">
-  <app-products-carousal
-    [isBanner]="isBanner"
-    [data]="bannerData"
-  ></app-products-carousal>
+    <app-products-carousal
+            [isBanner]="isBanner"
+            [data]="bannerData"
+    ></app-products-carousal>
 </div>
 
 <div class="banner" id="banner" *ngIf="!isHandset">
-  <p-carousel
-    class="bannerCarousel"
-    [value]="bannerData"
-    [numVisible]="1"
-    [numScroll]="1"
-    [circular]="true"
-  >
-    <ng-template let-data pTemplate="item">
-      <div class="product">
-        <a href="{{ data.link }}">
-          <img class="product_image" src="{{ data.image }}" alt="Owl Image" />
-        </a>
-      </div>
-    </ng-template>
-  </p-carousel>
+    <p-carousel
+            class="bannerCarousel"
+            [value]="bannerData"
+            [numVisible]="1"
+            [numScroll]="1"
+            [circular]="true"
+    >
+        <ng-template let-data pTemplate="item">
+            <div class="product">
+                <a href="{{ data.link }}">
+                    <img class="product_image" src="{{ data.image }}" alt="Owl Image"/>
+                </a>
+                <div class="banner-text flex flex-column">
+                    <span class="banner-label open-sans-14">{{data.banner_label}}</span>
+                </div>
+                <div class="banner-link-text flex flex-column">
+                    <span class="banner-link lato-12">{{data.link_label}}</span>
+                </div>
+
+            </div>
+
+
+        </ng-template>
+    </p-carousel>
 </div>
