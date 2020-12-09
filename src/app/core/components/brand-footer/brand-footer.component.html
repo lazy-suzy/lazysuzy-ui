@@ -1,5 +1,5 @@
-<div class="brand-footer delay-2s" [@fadeInUp]="fade">
-    <div class="flex justify-between items-center black brands">
+<div class="brand-footer delay-2s mt113" [@fadeInUp]="fade">
+    <div class="flex pt113 justify-between items-center black brands">
         <h3 class="brand-text w-100 ml2 mr2">
             Top home brands and local makers
         </h3>
@@ -44,7 +44,7 @@
                 </text>
             </svg>
         </div>
-        <div class="brand justify-center flex pa3" *ngIf="!isHandset else handsetFeaturedBrand">
+        <div class="brand justify-center flex pt3 pl3 pr3 pb113" *ngIf="!isHandset else handsetFeaturedBrand">
             <ng-container *ngFor="let image of featuredBrands">
                 <div class="flex  flex-column ma3 pa3">
                     <img [src]='image.cover_image' class="featured-brand-image" alt="{{image.name}}">
