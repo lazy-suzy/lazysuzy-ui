@@ -21,7 +21,7 @@ import {
     Breakpoints,
     BreakpointObserver
 } from '@angular/cdk/layout';
-import {BoardTutorialModalComponent} from "../board-tutorial-modal/board-tutorial-modal.component";
+import {BoardTutorialModalComponent} from '../board-tutorial-modal/board-tutorial-modal.component';
 
 @Component({
     selector: 'app-board-list',
@@ -45,6 +45,7 @@ export class BoardListComponent implements OnInit {
     isAnyPublished = false;
     sharedBoards = [];
     timestamp = new Date().getTime();
+
     constructor(
         private boardService: BoardService,
         private router: Router,
@@ -124,21 +125,21 @@ export class BoardListComponent implements OnInit {
             this.isAnyPublished =
                 this.boards.filter((b) => b.is_published === 1).length > 0;
             this.isFetching = false;
-           if(response.length === 0){
-               const width = this.isHandset? "100%":"35%";
-               const maxHeight = this.isHandset?"75vh":"70vh";
-               const height = this.isHandset?"75%":"63%";
-               this.dialog.open(BoardTutorialModalComponent,{
-                   width,
-                   height,
-                   maxHeight,
-                   panelClass: 'auth-dialog-container',
-                   autoFocus: false,
-                   data:{
-                       isHandset :this.isHandset
-                   }
-               })
-           }
+            if (response.length === 0) {
+                const width = this.isHandset ? '100%' : '35%';
+                const maxHeight = this.isHandset ? '75vh' : '70vh';
+                const height = this.isHandset ? '75%' : '63%';
+                this.dialog.open(BoardTutorialModalComponent, {
+                    width,
+                    height,
+                    maxHeight,
+                    panelClass: 'auth-dialog-container',
+                    autoFocus: false,
+                    data: {
+                        isHandset: this.isHandset
+                    }
+                });
+            }
         });
         this.boardService.getPublicBoards().subscribe((response) => {
             const boards = response.reverse();
