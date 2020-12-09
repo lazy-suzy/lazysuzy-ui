@@ -15,16 +15,13 @@
     >
         <ng-template let-data pTemplate="item">
             <div class="product">
-                <a href="{{ data.link }}">
-                    <img class="product_image" src="{{ data.image }}" alt="Owl Image"/>
-                </a>
+                <img class="product_image" src="{{ data.image }}" alt="Owl Image"/>
                 <div class="banner-text flex flex-column">
                     <span class="banner-label open-sans-14">{{data.banner_label}}</span>
+                    <a href="{{ data.link }}" class="text-center">
+                        <span class="banner-link mt4 lato-12">{{data.link_label}}</span>
+                    </a>
                 </div>
-                <div class="banner-link-text flex flex-column">
-                    <span class="banner-link lato-12">{{data.link_label}}</span>
-                </div>
-
             </div>
 
 

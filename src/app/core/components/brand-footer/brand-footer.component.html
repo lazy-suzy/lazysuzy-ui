@@ -44,10 +44,10 @@
                 </text>
             </svg>
         </div>
-        <div class="brand flex pa3" *ngIf="!isHandset else handsetFeaturedBrand">
+        <div class="brand justify-center flex pa3" *ngIf="!isHandset else handsetFeaturedBrand">
             <ng-container *ngFor="let image of featuredBrands">
-                <div class="flex flex-column w-33 ma3 pa3">
-                    <img [src]='image.cover_image' alt="{{image.name}}">
+                <div class="flex  flex-column ma3 pa3">
+                    <img [src]='image.cover_image' class="featured-brand-image" alt="{{image.name}}">
                     <span class="featured-brand-name">{{image.name}}</span>
                     <span class="featured-brand-location">{{image.location}}</span>
                 </div>
