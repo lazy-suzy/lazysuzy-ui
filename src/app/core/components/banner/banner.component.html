@@ -18,9 +18,9 @@
             <div class="product">
                 <img class="product_image" src="{{ data.image }}" alt="Owl Image"/>
                 <div class="banner-text flex flex-column">
-                    <span class="banner-label open-sans-14">{{data.banner_label}}</span>
+                    <span class="banner-label open-sans-14" [ngStyle]="{'color': data.font_hex}" >{{data.banner_label}}</span>
                     <span class="banner-link text-center mt4 lato-12">
-                        <a href="{{ data.link }}" class="banner-link lato-12">
+                        <a href="{{ data.link }}" [ngStyle]="{'color': data.font_hex}" class="banner-link lato-12">
                          {{data.link_label}}
                         </a>
                     </span>
