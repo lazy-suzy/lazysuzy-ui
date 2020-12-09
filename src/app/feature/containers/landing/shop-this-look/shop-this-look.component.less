@@ -1,0 +1,41 @@
+.container {
+  margin-top: 5%;
+}
+
+.header {
+  font-size: 30px;
+  color: #0C1C31;
+  text-align: left;
+}
+
+.shared-boards-container {
+  background-color: #ebebeb;
+  margin-bottom: 60px;
+  padding-bottom: 30px;
+
+  .shared-list-header {
+    padding: 40px 0 0;
+  }
+}
+
+::ng-deep .ui-carousel-content {
+  padding: 0;
+}
+
+::ng-deep .ui-carousel-dots-container {
+  display: none;
+}
+
+.owl-carousel {
+  display: none;
+}
+
+@media screen and (max-width: 1024px) {
+  .top-deal-slider {
+    display: none;
+  }
+
+  .owl-carousel {
+    display: block;
+  }
+}

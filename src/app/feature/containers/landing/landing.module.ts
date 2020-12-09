@@ -22,6 +22,7 @@ import {FlashSaleMobileProductHorizontalComponent} from './flash-sale/flash-sale
 import { FeaturedBrandsComponent } from './featured-brands/featured-brands.component';
 import { AboutSmallComponent } from './about-small/about-small.component';
 import { DeliveryDetailsComponent } from './delivery-details/delivery-details.component';
+import { ShopThisLookComponent } from './shop-this-look/shop-this-look.component';
 
 const DECLARATIONS = [LandingComponent];
 
@@ -50,7 +51,8 @@ const MODULES = [
         FlashSaleMobileProductHorizontalComponent,
         FeaturedBrandsComponent,
         AboutSmallComponent,
-        DeliveryDetailsComponent
+        DeliveryDetailsComponent,
+        ShopThisLookComponent
     ],
     imports: [...MODULES, CarouselModule],
     exports: [...DECLARATIONS, ...MODULES],

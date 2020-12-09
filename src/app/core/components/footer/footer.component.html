@@ -1,10 +1,11 @@
-<div class="flex justify-between white mh3 mv2" style="padding: 0 5%;">
+<div class="flex justify-between white mh3 mv5" style="padding: 0 5%;">
     <div class="flex flex-column">
         <div class="flex justify-between mv2">
-            <div class="flex flex-column">
+            <div class="flex flex-column mr5">
+                <span class="mb5">About Us</span>
                 <div class="mb2">
                     <a class="link white white-link" [routerLink]="['/aboutus']">
-                        About Us
+                        Our Story
                     </a>
                 </div>
                 <div class="mb2">
@@ -12,8 +13,14 @@
                         Home Musings
                     </a>
                 </div>
+                <div class="mb2">
+                    <a class="link white white-link" target="_blank" href="https://angel.co/company/lazy-suzy">
+                        Careers
+                    </a>
+                </div>
             </div>
-            <div class="flex flex-column">
+            <div class="flex flex-column mr5">
+                <span class="mb5">Support</span>
                 <div class="mb2">
                     <a class="link white white-link" [routerLink]="['/faq-order']">
                         FAQ - Ordering & Returns
@@ -25,9 +32,19 @@
                     </a>
                 </div>
             </div>
+            <div class="flex flex-column">
+                <span class="mb5">Shop by Room</span>
+                <ng-container *ngFor="let data of departments">
+                    <div class="mb2">
+                        <a class="link white white-link" href="{{data.link}}">
+                            {{data.department}}
+                        </a>
+                    </div>
+                </ng-container>
+            </div>
         </div>
 
-        <div class="flex nowrap" >
+        <div class="flex nowrap">
             <p class="left-link mr10p mv0">© 2020 LazySuzy</p>
             <a class="link left-link" [routerLink]="['/privacypolicy']"
             >Privacy Policy
@@ -41,7 +58,7 @@
 
     <div class="flex flex-column items-center mt2">
         <div class="flex w-100 justify-between">
-            <div >
+            <div>
                 <a class="white white-link" href="mailto:hello@lazysuzy.com">
                     <mat-icon aria-hidden="false">email</mat-icon>
                 </a>
