@@ -1,13 +1,13 @@
-<h2 class="section-title mt113">Browse by room</h2>
+<h2 class="section-title" [ngClass]="{'mt113':!isHandset,'mt56':isHandset}">Browse by room</h2>
 <div class="browse-by-room-section">
-  <div class="flex flex-wrap">
-    <div class="content-item w-25" *ngFor="let data of departments">
-      <div class="pic mb2">
-        <a href="{{ data.link }}">
-          <img class="img" [src]="data.image" />
-        </a>
-      </div>
-      <span class="badge">{{ data.department }}</span>
+    <div class="flex flex-wrap">
+        <div class="content-item w-25" *ngFor="let data of departments">
+            <div class="pic mb2">
+                <a href="{{ data.link }}">
+                    <img class="img" [src]="data.image"/>
+                </a>
+            </div>
+            <span class="badge">{{ data.department }}</span>
+        </div>
     </div>
-  </div>
 </div>

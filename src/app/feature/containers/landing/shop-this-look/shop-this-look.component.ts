@@ -10,7 +10,7 @@ import {boardRoutesNames} from '../../../../modules/board/board.routes.names';
     styleUrls: ['./shop-this-look.component.less']
 })
 export class ShopThisLookComponent implements OnInit {
-    @Input() isHandset = false;
+    @Input() isHandset;
 
     boardPreviewLink = boardRoutesNames.BOARD_PREVIEW;
     sharedBoards = [];

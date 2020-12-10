@@ -16,10 +16,10 @@
         </div>
 
         <app-featured-brands [isHandset]="isHandset"></app-featured-brands>
-        <app-browse-by-room></app-browse-by-room>
+        <app-browse-by-room [isHandset]="isHandset"></app-browse-by-room>
         <app-brand-footer [isHandset]="isHandset"></app-brand-footer>
         <app-about-small [isHandset]="isHandset"></app-about-small>
-        <div class="reviews-section pt113 pb113">
+        <div class="reviews-section pt113 pb113" [ngClass]="{'pt113 pb113':!isHandset,'pt56 pb56':isHandset}">
             <div class="header">Don't take our word for it</div>
             <div class="flex-ns review-cards-container">
                 <ng-container *ngIf="false;else mobileCarousel">
@@ -91,7 +91,7 @@
         <app-delivery-details [isHandset]="isHandset"></app-delivery-details>
         <div [class]="isHandset ? '' : 'mh2'">
             <app-shop-this-look [isHandset]="isHandset"></app-shop-this-look>
-<!--            <app-top-deals [isHandset]="isHandset"></app-top-deals>-->
+            <!--            <app-top-deals [isHandset]="isHandset"></app-top-deals>-->
         </div>
 
 

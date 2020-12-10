@@ -1,4 +1,5 @@
-<div id="shop-look-container" class="flex flex-column container mb113 mt113">
+<div id="shop-look-container" class="flex flex-column container"
+     [ngClass]="{'mb113 mt113':!isHandset,'mt56 mb56':isHandset}">
     <h2 class="open-sans-14 header ml4">Shop the look</h2>
     <div>
         <p-carousel
@@ -28,6 +29,7 @@
             </ng-template>
         </p-carousel>
         <app-products-carousal
+                *ngIf="isHandset"
                 [items]="isHandset ? 1 : 4"
                 [data]="sharedBoards"
                 [isBoards]="true"
