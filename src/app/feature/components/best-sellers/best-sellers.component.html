@@ -1,63 +1,63 @@
-<div class="flex flex-wrap best-sellers">
-  <div
-    class="{{ isHandset ? 'w-100 mt56' : 'mt113 ml4' }} best-sellers-heading"
-  >
-    <h2 class="title-best-sellers">Hot right now</h2>
-  </div>
+<div class="flex flex-wrap best-sellers" [ngClass]="{'mt56':isHandset,'mt113':!isHandset}">
+    <div
+            class="{{ isHandset ? 'w-100' : 'ml4' }} best-sellers-heading"
+    >
+        <h2 class="title-best-sellers">Hot right now</h2>
+    </div>
 
-  <div class="w-100">
-    <div *ngIf="!bestSellers">
-      <img
-        src="../../../../assets/image/three-dots.svg"
-        width="60"
-        height="46"
-        alt=""
-      />
-    </div>
-    <div *ngIf="bestSellers">
-      <p-carousel
-        *ngIf="!isHandset"
-        class="top-deal-slider"
-        [value]="bestSellers"
-        [numVisible]="4"
-        [numScroll]="1"
-        [responsiveOptions]="responsiveOptions"
-      >
-        <ng-template let-data pTemplate="item">
-          <div class="product">
-            <a (click)="openDialog(data.sku)">
-              <img
-                class="product_image"
-                src="{{ data.main_image }}"
-                alt="Owl Image"
-              />
-            </a>
-            <div class="product_detail">
-              <span class="product_brand">{{ data.site }}</span>
-              <br />
-              <span class="product_name">{{ data.name }}</span>
-              <br />
-              <span
-                *ngIf="data.is_price == data.was_price"
-                class="current-price"
-                >${{ data.is_price }}</span
-              >
-              <span
-                *ngIf="!(data.is_price == data.was_price)"
-                class="current-price"
-                >${{ data.is_price }} &nbsp;
+    <div class="w-100">
+        <div *ngIf="!bestSellers">
+            <img
+                    src="../../../../assets/image/three-dots.svg"
+                    width="60"
+                    height="46"
+                    alt=""
+            />
+        </div>
+        <div *ngIf="bestSellers">
+            <p-carousel
+                    *ngIf="!isHandset"
+                    class="top-deal-slider"
+                    [value]="bestSellers"
+                    [numVisible]="4"
+                    [numScroll]="1"
+                    [responsiveOptions]="responsiveOptions"
+            >
+                <ng-template let-data pTemplate="item">
+                    <div class="product">
+                        <a (click)="openDialog(data.sku)">
+                            <img
+                                    class="product_image"
+                                    src="{{ data.main_image }}"
+                                    alt="Owl Image"
+                            />
+                        </a>
+                        <div class="product_detail">
+                            <span class="product_brand">{{ data.site }}</span>
+                            <br/>
+                            <span class="product_name">{{ data.name }}</span>
+                            <br/>
+                            <span
+                                    *ngIf="data.is_price == data.was_price"
+                                    class="current-price"
+                            >${{ data.is_price }}</span
+                            >
+                            <span
+                                    *ngIf="!(data.is_price == data.was_price)"
+                                    class="current-price"
+                            >${{ data.is_price }} &nbsp;
                 <s class="old-price"> ${{ data.was_price }}</s></span
-              >
+                            >
+                        </div>
+                    </div>
+                </ng-template>
+            </p-carousel>
+            <div *ngIf="isHandset">
+                <app-products-carousal
+                        [data]="bestSellers"
+                        (updates)="handleEvtProductCarousal($event)"
+                ></app-products-carousal>
             </div>
-          </div>
-        </ng-template>
-      </p-carousel>
-      <div *ngIf="isHandset">
-        <app-products-carousal
-          [data]="bestSellers"
-          (updates)="handleEvtProductCarousal($event)"
-        ></app-products-carousal>
-      </div>
+        </div>
     </div>
-  </div>
 </div>
