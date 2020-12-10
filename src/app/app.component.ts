@@ -8,6 +8,7 @@ import {
 
 import {Router, NavigationStart} from '@angular/router';
 import {boardRoutesNames} from './modules/board/board.routes.names';
+import * as AOS from 'aos';
 
 @Component({
     selector: 'app-root',
@@ -62,6 +63,7 @@ export class AppComponent implements OnInit {
 
 
     ngOnInit(): void {
+        AOS.init();
         this.bpSubscription = this.bpObserver.subscribe(
             (handset: BreakpointState) => {
                 this.isHandset = handset.matches;

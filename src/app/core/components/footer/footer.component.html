@@ -1,7 +1,7 @@
 <div class="flex justify-between white mh3 mt113 mb56" style="padding: 0 5%;">
     <div class="flex flex-column">
         <div class="flex justify-between mb56">
-            <div class="flex flex-column mr5">
+            <div class="flex flex-column mr6">
                 <span class="mb5">About Us</span>
                 <div class="mb2">
                     <a class="link white white-link" [routerLink]="['/aboutus']">
@@ -19,7 +19,7 @@
                     </a>
                 </div>
             </div>
-            <div class="flex flex-column mr5">
+            <div class="flex flex-column mr6">
                 <span class="mb5">Support</span>
                 <div class="mb2">
                     <a class="link white white-link" [routerLink]="['/faq-order']">
@@ -57,7 +57,11 @@
     </div>
 
     <div class="flex flex-column items-center">
+        <div class="mb4">
+            <img class="logo" [src]="logopath">
+        </div>
         <div class="flex w-100 justify-between">
+
             <div>
                 <a class="white white-link" href="mailto:hello@lazysuzy.com">
                     <mat-icon aria-hidden="false">email</mat-icon>
@@ -82,9 +86,7 @@
                 </a>
             </div>
         </div>
-        <div>
-            <img class="logo" [src]="logopath">
-        </div>
+
     </div>
 
     <!-- <div class="w-25 flex justify-around">

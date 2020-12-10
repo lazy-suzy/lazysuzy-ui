@@ -1,5 +1,4 @@
-<div class="brand-footer delay-2s" [ngClass]="{'mt113 pt113':!isHandset,'mt56 pt56':isHandset}"
-     [@fadeInUp]="fade ?'not-visible':'visible'">
+<div class="brand-footer delay-2s" [ngClass]="{'mt113 pt113':!isHandset,'mt56 pt56':isHandset}">
     <div class="flex justify-between items-center black brands">
         <h3 class="brand-text w-100 ml2 mr2">
             Top home brands and local makers
@@ -24,8 +23,8 @@
                         .font-text {
                             font-family: "Open Sans", sans-serif;
                             fill: white;
-                            font-size: 12px;
-                            font-weight: bold;
+                            font-size: 24px;
+                            font-weight: normal;
                         }
 
                         .font-text-mobile {
@@ -42,8 +41,8 @@
                       style="fill: rgb(183, 110, 121);" transform="translate(0 -142.99)"/>
                 <ng-container *ngIf="!isHandset else handsetText">
                     <text class="font-text"
-                          x="-410"
-                          y="35">Featured Brands
+                          x="-454"
+                          y="54">Featured Brands
                     </text>
                 </ng-container>
                 <ng-template #handsetText>
@@ -56,8 +55,13 @@
             </svg>
         </div>
         <div class="brand justify-center flex pt3 pl3 pr3 pb113" *ngIf="!isHandset else handsetFeaturedBrand">
-            <ng-container *ngFor="let image of featuredBrands">
-                <div class="flex  flex-column ma3 pa3">
+            <ng-container *ngFor="let image of featuredBrands;let i = index">
+                <div class="flex  flex-column ma3 pa3"
+                     data-aos-offset="1000"
+                     data-aos-duration="750"
+                     data-aos="fade-up"
+                     data-aos-once="true"
+                >
                     <img [src]='image.cover_image' class="featured-brand-image" alt="{{image.name}}">
                     <span class="featured-brand-name">{{image.name}}</span>
                     <span class="featured-brand-location">{{image.location}}</span>
