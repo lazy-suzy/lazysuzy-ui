@@ -21,13 +21,11 @@ export class ProductsCarousalComponent implements OnInit {
     bannerCarousalOptions = {
         items: 1,
         margin: 10,
-        autoplay: true,
-        autoplayTimeout: 8000,
-        autoplayHoverPause: true,
+        autoplay: false,
+        autoplayHoverPause: false,
         dots: true,
         pagination: true,
         smartSpeed: 1000,
-        autoplaySpeed: 1000,
         loop: true,
         nav: true,
         navText: false
