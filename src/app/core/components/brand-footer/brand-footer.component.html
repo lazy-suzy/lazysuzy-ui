@@ -1,5 +1,6 @@
-<div class="brand-footer delay-2s mt113" [@fadeInUp]="fade">
-    <div class="flex pt113 justify-between items-center black brands">
+<div class="brand-footer delay-2s" [ngClass]="{'mt113 pt113':!isHandset,'mt56 pt56':isHandset}"
+     [@fadeInUp]="fade ?'not-visible':'visible'">
+    <div class="flex justify-between items-center black brands">
         <h3 class="brand-text w-100 ml2 mr2">
             Top home brands and local makers
         </h3>
@@ -30,8 +31,8 @@
                         .font-text-mobile {
                             font-family: "Open Sans", sans-serif;
                             fill: white;
-                            font-size: 16px;
-                            font-weight: bold;
+                            font-size: 20px;
+                            font-weight: normal;
                         }
                     </style>
 
@@ -39,9 +40,19 @@
                 <path class="cls-1"
                       d="M500,200H0V173a281.22,281.22,0,0,1,89-14c34.3.27,52.92,7,75,11,85.69,15.67,118.55-27.92,205-27,30.2.32,75.43,6.17,131,35"
                       style="fill: rgb(183, 110, 121);" transform="translate(0 -142.99)"/>
-                <text [ngClass]="{'font-text':!isHandset,'font-text-mobile':isHandset}" x="-410"
-                      y="35">Featured Brands
-                </text>
+                <ng-container *ngIf="!isHandset else handsetText">
+                    <text class="font-text"
+                          x="-410"
+                          y="35">Featured Brands
+                    </text>
+                </ng-container>
+                <ng-template #handsetText>
+                    <text class="font-text-mobile"
+                          x="-436"
+                          y="40">Featured Brands
+                    </text>
+                </ng-template>
+
             </svg>
         </div>
         <div class="brand justify-center flex pt3 pl3 pr3 pb113" *ngIf="!isHandset else handsetFeaturedBrand">
@@ -54,7 +65,7 @@
             </ng-container>
         </div>
         <ng-template #handsetFeaturedBrand>
-            <div id="handset" class="brand flex flex-column pa3">
+            <div id="handset" class="brand flex flex-column pt3 pl3 pr3 pb56">
                 <ng-container *ngFor="let image of featuredBrands let i = index">
                     <div class="flex mb4" *ngIf="i%2==0">
                         <img class="w-70 featured-brand-image" [src]='image.cover_image' alt="{{image.name}}">
