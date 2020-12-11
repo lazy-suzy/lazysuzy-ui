@@ -4,9 +4,9 @@
             Top home brands and local makers
         </h3>
     </div>
-    <div class="flex flex-wrap justify-around brand-box ph1 mv1">
+    <div class="flex justify-center brand-box ph1 mv1" [ngClass]="{'flex-wrap':isHandset}">
         <ng-container *ngFor="let data of brands">
-            <div class="brands" *ngIf="data.logo">
+            <div class="mh3 brand-logo-container" *ngIf="data.logo">
                 <img onerror="this.style.display='none'" class="image" src="{{ data.logo }}" alt="Brand Image"/>&nbsp;
             </div>
         </ng-container>
@@ -23,7 +23,7 @@
                         .font-text {
                             font-family: "Open Sans", sans-serif;
                             fill: white;
-                            font-size: 24px;
+                            font-size: 10px;
                             font-weight: normal;
                         }
 
@@ -41,8 +41,8 @@
                       style="fill: rgb(183, 110, 121);" transform="translate(0 -142.99)"/>
                 <ng-container *ngIf="!isHandset else handsetText">
                     <text class="font-text"
-                          x="-454"
-                          y="54">Featured Brands
+                          x="-407"
+                          y="30">Featured Brands
                     </text>
                 </ng-container>
                 <ng-template #handsetText>
@@ -54,15 +54,18 @@
 
             </svg>
         </div>
-        <div class="brand justify-center flex pt3 pl3 pr3 pb113" *ngIf="!isHandset else handsetFeaturedBrand">
+        <div class="brand justify-center flex pt3 pl3 pr3 pb113"
+             *ngIf="!isHandset else handsetFeaturedBrand">
             <ng-container *ngFor="let image of featuredBrands;let i = index">
-                <div class="flex  flex-column ma3 pa3"
-                     data-aos-offset="1000"
-                     data-aos-duration="750"
-                     data-aos="fade-up"
-                     data-aos-once="true"
+                <div class="flex  flex-column ma3 pa3 some-name"
+                     [attr.data-aos]="'fade-up'"
+                     [attr.data-aos-duration]="'750'"
+                     [attr.data-aos-once]="'false'"
+                     [attr.data-aos-anchor-placement]="'top-center'"
                 >
-                    <img [src]='image.cover_image' class="featured-brand-image" alt="{{image.name}}">
+                    <img [src]='image.cover_image' class="featured-brand-image"
+
+                         alt="{{image.name}}">
                     <span class="featured-brand-name">{{image.name}}</span>
                     <span class="featured-brand-location">{{image.location}}</span>
                 </div>

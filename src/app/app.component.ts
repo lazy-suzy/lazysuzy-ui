@@ -1,4 +1,4 @@
-import {Component, HostListener, OnInit} from '@angular/core';
+import {AfterViewInit, Component, HostListener, Inject, OnInit} from '@angular/core';
 import {Observable, Subscription} from 'rxjs';
 import {
     BreakpointState,
@@ -15,7 +15,9 @@ import * as AOS from 'aos';
     templateUrl: './app.component.html',
     styleUrls: ['./app.component.less']
 })
-export class AppComponent implements OnInit {
+export class AppComponent implements OnInit, AfterViewInit {
+
+
     title = 'LazySuzy';
 
 
@@ -37,6 +39,7 @@ export class AppComponent implements OnInit {
         private breakpointObserver: BreakpointObserver,
         private router: Router,
     ) {
+
         router.events.subscribe((navigation) => {
             if (
                 navigation instanceof NavigationStart &&
@@ -45,6 +48,10 @@ export class AppComponent implements OnInit {
                 this.isMinimalMode = true;
             }
         });
+    }
+
+    ngAfterViewInit(): void {
+        AOS.init();
     }
 
     @HostListener('window:scroll')
@@ -63,7 +70,6 @@ export class AppComponent implements OnInit {
 
 
     ngOnInit(): void {
-        AOS.init();
         this.bpSubscription = this.bpObserver.subscribe(
             (handset: BreakpointState) => {
                 this.isHandset = handset.matches;
