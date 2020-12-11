@@ -54,6 +54,18 @@ export class LandingComponent implements OnInit {
                 items: 1,
             },
             1024: {
+                items: 3,
+                loop: false,
+                center: false,
+                margin: 10,
+            },
+            1366: {
+                items: 4,
+                loop: false,
+                center: false,
+                margin: 10,
+            },
+            1920: {
                 items: 5,
                 loop: false,
                 center: false,
