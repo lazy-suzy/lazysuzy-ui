@@ -6,7 +6,7 @@
     </div>
     <div class="flex justify-center brand-box ph1 mv1" [ngClass]="{'flex-wrap':isHandset}">
         <ng-container *ngFor="let data of brands">
-            <div class="mh3 brand-logo-container" *ngIf="data.logo">
+            <div class="mh2 brand-logo-container" *ngIf="data.logo">
                 <img onerror="this.style.display='none'" class="image" src="{{ data.logo }}" alt="Brand Image"/>&nbsp;
             </div>
         </ng-container>
@@ -63,11 +63,11 @@
                      [attr.data-aos-once]="'false'"
                      [attr.data-aos-anchor-placement]="'top-center'"
                 >
-                    <img [src]='image.cover_image' class="featured-brand-image"
+                    <img (click)="toLink(image.value)" [src]='image.cover_image' class="featured-brand-image"
 
                          alt="{{image.name}}">
-                    <span class="featured-brand-name">{{image.name}}</span>
-                    <span class="featured-brand-location">{{image.location}}</span>
+                    <span class="featured-brand-name" (click)="toLink(image.value)">{{image.name}}</span>
+                    <span class="featured-brand-location" (click)="toLink(image.value)">{{image.location}}</span>
                 </div>
             </ng-container>
         </div>
@@ -75,10 +75,10 @@
             <div id="handset" class="brand flex flex-column pt3 pl3 pr3 pb56">
                 <ng-container *ngFor="let image of featuredBrands let i = index">
                     <div class="flex mb4" *ngIf="i%2==0">
-                        <img class="w-70 featured-brand-image" [src]='image.cover_image' alt="{{image.name}}">
+                        <img class="w-70 featured-brand-image" [src]='image.cover_image' alt="{{image.name}}" (click)="toLink(image.value)">
                         <div class="w-30 ml2 flex flex-column">
-                            <span class="open-sans-14 bold featured-brand-name">{{image.name}}</span>
-                            <span class="lato-12 bold featured-brand-location">{{image.location}}</span>
+                            <span class="open-sans-14 bold featured-brand-name" (click)="toLink(image.value)">{{image.name}}</span>
+                            <span class="lato-12 bold featured-brand-location" (click)="toLink(image.value)">{{image.location}}</span>
                         </div>
                     </div>
                     <div class="flex mb4" *ngIf="!(i%2==0)">

@@ -2,6 +2,7 @@ import {AfterViewInit, Component, Input, NgZone, OnInit} from '@angular/core';
 import {ApiService, EventEmitterService} from '../../../shared/services';
 
 import {Subscription} from 'rxjs';
+import {Router} from '@angular/router';
 
 declare var AOS: any;
 
@@ -18,7 +19,8 @@ export class BrandFooterComponent implements OnInit, AfterViewInit {
     constructor(
         private apiService: ApiService,
         private eventEmitterService: EventEmitterService,
-        private ngZone: NgZone
+        private ngZone: NgZone,
+        private router: Router
     ) {
     }
 
@@ -55,5 +57,9 @@ export class BrandFooterComponent implements OnInit, AfterViewInit {
                 setTimeout(() => AOS.refresh(), 2000);
             });
         });
+    }
+
+    toLink(link) {
+        this.router.navigateByUrl(`/products/brand?brand=${link}`);
     }
 }
