@@ -20,7 +20,7 @@
         <app-brand-footer [isHandset]="isHandset"></app-brand-footer>
         <app-about-small [isHandset]="isHandset"></app-about-small>
         <div class="reviews-section" [ngClass]="{'ptstandard pbstandard':!isHandset,'pt56 pb56':isHandset}">
-            <div class="header">Don't take our word for it</div>
+            <div class="header mb3">Don't take our word for it</div>
             <div class="flex-ns review-cards-container">
                 <ng-container *ngIf="false;else mobileCarousel">
                     <p-carousel
