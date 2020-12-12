@@ -19,4 +19,7 @@ export class FeaturedBrandsComponent implements OnInit {
         });
     }
 
+    toLink(link) {
+        window.location.href = link;
+    }
 }

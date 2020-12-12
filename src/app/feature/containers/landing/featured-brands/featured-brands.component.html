@@ -1,7 +1,7 @@
 <div id="desktop" class="brand mtstandard flex justify-around" *ngIf="!isHandset;else handset">
     <ng-container *ngFor="let image of bannerImages">
         <div class="flex flex-column image">
-            <img [src]='image.image'>
+            <img [src]='image.image' (click)="toLink(image.link)">
             <span class="text-left open-sans-18 mt2">
                 <a [href]="image.link" class="image-text"> {{image.link_label}}</a>
             </span>
@@ -13,7 +13,7 @@
     <div id="handset" class=" mt56 brand flex flex-column">
         <ng-container *ngFor="let image of bannerImages">
             <div class="flex flex-column image mb4">
-                <img [src]='image.image'>
+                <img [src]='image.image' (click)="toLink(image.link)">
                 <span class="text-left open-sans-18 mt2">
                 <a [href]="image.link" class="image-text"> {{image.link_label}}</a>
             </span>
