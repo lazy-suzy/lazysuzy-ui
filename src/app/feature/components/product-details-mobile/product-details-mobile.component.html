@@ -71,7 +71,6 @@
                     </div>
                 </div>
             </div>
-
             <div *ngIf="!isSetItemInInventory">
                 <app-redirect *ngIf="product && product.redirect && !utils.hasInventory(activeProduct)"
                               [isHandset]="true"
@@ -98,123 +97,126 @@
                     {{ activeProduct.inventory_product_details.message }}
                 </div>
             </div>
+
             <ng-container *ngIf="product && product.redirect; else allConditions">
                 <hr class="modal-hr mt-3" *ngIf="product && product.set && product.set.length > 0"/>
             </ng-container>
             <div class="ship-info mb1 flex"
                  *ngIf="product.inventory_product_details?.shipping_desc || utils.hasInventory(activeProduct)">
-            <span class="shipping-label">Shipping:</span>
-            <span class="shipping-details ml1">{{utils.getShippingDesc(product)}}</span>
-        </div>
-        <ng-template #allConditions>
-            <hr class="modal-hr mt-3" *ngIf="
+                <span class="shipping-label">Shipping: &nbsp;</span>
+                <span class="shipping-details">{{utils.getShippingDesc(product)}}</span>
+            </div>
+            <ng-template #allConditions>
+                <hr class="modal-hr mt-3" *ngIf="
             isVariationExist ||
             (product && product.set && product.set.length > 0)
           "/>
-        </ng-template>
+            </ng-template>
 
 
-        <app-variations *ngIf="product && isVariationExist && !product.redirect" [variations]="variations"
-                        [isSwatchExist]="isSwatchExist" [inputSelections]="product.selections"
-                        [hasSelection]="hasSelection" (setPrice)="onSetPrice($event)"
-                        (setImage)="onSetImage($event)"
-                        (reload)="onVariationChange()" (setSelectionChecked)="onSetSelectionChecked($event)"
-                        (clearSelection)="onClearSelection($event)"
-                        (setSelection)="onSetSelection($event)"></app-variations>
-        <app-sets *ngIf="product && product.set && product.set.length > 0" [sets]="product.set"
-                  [brand]="product.site" [isHandset]="true">
-        </app-sets>
-        <hr class="modal-hr"/>
-        <div class="pv2">
-            <ul class="description-menu">
-                <li (click)="selectTab('desc')" *ngIf="descriptionExist"
-                    class="{{ activeTab === 'desc' ? 'active b' : 'bg-white' }}">
-                    <span class="nav-link">DESCRIPTION</span>
-                </li>
-                <li (click)="selectTab('features')" *ngIf="featuresExist"
-                    class="{{ activeTab === 'features' ? 'active b' : 'bg-white' }}">
-                    <span class="nav-link">FEATURES</span>
-                </li>
-                <li (click)="selectTab('dimensions')" *ngIf="dimensionExist"
-                    class="{{ activeTab === 'dimensions' ? 'active b' : 'bg-white' }}">
-                    <span class="nav-link">DIMENSIONS</span>
-                </li>
-            </ul>
-            <div class="menu-content">
-                <div *ngIf="descriptionExist" class="{{ activeTab === 'desc' ? '' : 'dn' }}">
-                    <div [innerHTML]="description" class="nav-content"></div>
-                </div>
-                <div *ngIf="featuresExist" class="{{ activeTab === 'features' ? '' : 'dn' }}">
-                    <div class="mt1 pl3">
-                        <div [innerHTML]="features" class="nav-content"></div>
+            <app-variations *ngIf="product && isVariationExist && !product.redirect" [variations]="variations"
+                            [isSwatchExist]="isSwatchExist" [inputSelections]="product.selections"
+                            [hasSelection]="hasSelection" (setPrice)="onSetPrice($event)"
+                            (setImage)="onSetImage($event)"
+                            (reload)="onVariationChange()" (setSelectionChecked)="onSetSelectionChecked($event)"
+                            (clearSelection)="onClearSelection($event)"
+                            (setSelection)="onSetSelection($event)"></app-variations>
+            <app-sets *ngIf="product && product.set && product.set.length > 0" [sets]="product.set"
+                      [brand]="product.site" [isHandset]="true">
+            </app-sets>
+            <hr class="modal-hr"/>
+            <div class="pv2">
+                <ul class="description-menu">
+                    <li (click)="selectTab('desc')" *ngIf="descriptionExist"
+                        class="{{ activeTab === 'desc' ? 'active b' : 'bg-white' }}">
+                        <span class="nav-link">DESCRIPTION</span>
+                    </li>
+                    <li (click)="selectTab('features')" *ngIf="featuresExist"
+                        class="{{ activeTab === 'features' ? 'active b' : 'bg-white' }}">
+                        <span class="nav-link">FEATURES</span>
+                    </li>
+                    <li (click)="selectTab('dimensions')" *ngIf="dimensionExist"
+                        class="{{ activeTab === 'dimensions' ? 'active b' : 'bg-white' }}">
+                        <span class="nav-link">DIMENSIONS</span>
+                    </li>
+                </ul>
+                <div class="menu-content">
+                    <div *ngIf="descriptionExist" class="{{ activeTab === 'desc' ? '' : 'dn' }}">
+                        <div [innerHTML]="description" class="nav-content"></div>
                     </div>
-                </div>
-                <div *ngIf="dimensionExist" class="{{ activeTab === 'dimensions' ? '' : 'dn' }}">
-                    <div *ngIf="isArray(product.dimension); else showDimensions" class="dimension-container">
-                        <div *ngFor="let dimension of product.dimension" class="w-50 pa2">
-                            <div class="dimension-title">{{ dimension.description }}</div>
-                            <div *ngIf="dimension.width">Width: {{ dimension.width }}</div>
-                            <div *ngIf="dimension.depth">Depth: {{ dimension.depth }}</div>
-                            <div *ngIf="dimension.height">Height: {{ dimension.height }}</div>
-                            <br/>
+                    <div *ngIf="featuresExist" class="{{ activeTab === 'features' ? '' : 'dn' }}">
+                        <div class="mt1 pl3">
+                            <div [innerHTML]="features" class="nav-content"></div>
                         </div>
                     </div>
-                    <ng-template #showDimensions>
-                        <div class="nav-content">
-                            {{ product.dimension }}
+                    <div *ngIf="dimensionExist" class="{{ activeTab === 'dimensions' ? '' : 'dn' }}">
+                        <div *ngIf="isArray(product.dimension); else showDimensions" class="dimension-container">
+                            <div *ngFor="let dimension of product.dimension" class="w-50 pa2">
+                                <div class="dimension-title">{{ dimension.description }}</div>
+                                <div *ngIf="dimension.width">Width: {{ dimension.width }}</div>
+                                <div *ngIf="dimension.depth">Depth: {{ dimension.depth }}</div>
+                                <div *ngIf="dimension.height">Height: {{ dimension.height }}</div>
+                                <br/>
+                            </div>
                         </div>
-                    </ng-template>
+                        <ng-template #showDimensions>
+                            <div class="nav-content">
+                                {{ product.dimension }}
+                            </div>
+                        </ng-template>
+                    </div>
+
                 </div>
+                <div class="mb2" *ngIf="product.collections.length">
+                    <hr class="modal-hr"/>
+                    <span class="title">MORE IN THE COLLECTION</span>
+                    <div class="pt2">
 
-            </div>
-            <div class="mb2" *ngIf="product.collections.length">
-                <hr class="modal-hr"/>
-                <span class="title">MORE IN THE COLLECTION</span>
-                <div class="pt2">
-
-                    <owl-carousel
-                            [options]="carousalOptions"
-                            [items]="product.collections"
-                            *ngIf="product.collections?.length"
-                            [carouselClasses]="['owl-theme']"
-                    >
-                        <ng-container *ngFor="let data of product.collections; let i = index">
-                            <div class="carousel-item" [routerLink]="['/product',data.sku]">
-                                <img [src]="'https://lazysuzy.com'+data.image"/>
-                                <span class="font-16 open-sans collection-product-name">{{data.name}}</span>
-                                <span class="is-price" [ngClass]="{'sale':isDiscountedCollectionPrice(data)}">
+                        <owl-carousel
+                                [options]="carousalOptions"
+                                [items]="product.collections"
+                                *ngIf="product.collections?.length"
+                                [carouselClasses]="['owl-theme']"
+                        >
+                            <ng-container *ngFor="let data of product.collections; let i = index">
+                                <div class="carousel-item" [routerLink]="['/product',data.sku]">
+                                    <img [src]="'https://lazysuzy.com'+data.image"/>
+                                    <span class="font-16 open-sans collection-product-name">{{data.name}}</span>
+                                    <span class="is-price" [ngClass]="{'sale':isDiscountedCollectionPrice(data)}">
                                             {{renderPrice(data.price)}} &nbsp;
                                             <span *ngIf="isDiscountedCollectionPrice(data)" class="strike was-price">
                                                 {{renderPrice(data.was_price, true)}}
                                             </span>
                                         </span>
 
-                            </div>
-                        </ng-container>
-                    </owl-carousel>
-                </div>
-            </div>
-            <div class="mb2" *ngIf="recentProducts.length">
-                <hr class="modal-hr"/>
-                <span class="title">Recently Viewed Products</span>
-                <div class="pt2">
-                    <owl-carousel
-                            [options]="recentOptions"
-                            [items]="recentProducts"
-                            *ngIf="recentProducts?.length"
-                            [carouselClasses]="['owl-theme']"
-                    >
-                        <ng-container *ngFor="let data of recentProducts; let i = index">
-                            <div class="carousel-item" [routerLink]="['/product',data.product_sku]">
-                                <img [src]="data.image"/>
-                                <span class="font-16 open-sans collection-product-name">{{data.product_name}}</span>
-                            </div>
-                        </ng-container>
-                    </owl-carousel>
+                                </div>
+                            </ng-container>
+
+                        </owl-carousel>
+                        <!--                            <p-carousel-->
+                        <!--                                    [numVisible]="2"-->
+                        <!--                                    [numScroll]="1"-->
+                        <!--                                    [value]="product.collections"-->
+                        <!--                                    [circular]="false"-->
+                        <!--                            >-->
+                        <!--                                <ng-template let-data pTemplate="item">-->
+                        <!--                                    <div class="carousel-item" [routerLink]="['/product',data.sku]" >-->
+                        <!--                                        <img [src]="'https://lazysuzy.com'+data.image"/>-->
+                        <!--                                        <span class="font-16 open-sans collection-product-name">{{data.name}}</span>-->
+                        <!--                                        <span class="is-price" [ngClass]="{'sale':isDiscountedCollectionPrice(data)}">-->
+                        <!--                                            {{renderPrice(data.price)}} &nbsp;-->
+                        <!--                                            <span *ngIf="isDiscountedCollectionPrice(data)" class="strike was-price">-->
+                        <!--                                                {{renderPrice(data.was_price)}}-->
+                        <!--                                            </span>-->
+                        <!--                                        </span>-->
+
+                        <!--                                    </div>-->
+                        <!--                                </ng-template>-->
+                        <!--                            </p-carousel>-->
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
     </div>
     <ng-template #invalidProduct>
         <div class="tc">

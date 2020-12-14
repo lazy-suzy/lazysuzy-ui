@@ -17,7 +17,7 @@
                         <span class="mb1 lato font-16">{{ product.site }}</span>
                         <span class="open-sans font-18 mb1">{{ product.name }}</span>
                         <div class="price-container mb2">
-                            <div class="price-font mb1" style="margin-left:-0.5rem;">
+                            <div class="price-font mb2" style="margin-left:-0.5rem;">
                                 <div class="flex justify-between">
                                     <span class="product-price ml2 open-sans font-18"
                                           [ngClass]="{'sale':hasValidWasPrice,'product-price':!hasValidWasPrice}">
@@ -38,8 +38,7 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="flex flex-column"
-                                 *ngIf="!product.redirect || utils.hasInventory(activeProduct)">
+                            <div class="flex flex-column" *ngIf="!product.redirect || utils.hasInventory(activeProduct)">
                                 <div class="flex">
                                     <button (click)="openLink($event, product.product_url)" mat-raised-button
                                             class="bg-red w-90 view-details-btn"
@@ -121,7 +120,6 @@
                                 </div>
                             </div>
                         </div>
-
                         <div *ngIf="!isSetItemInInventory">
                             <app-redirect *ngIf="product.redirect && !utils.hasInventory(activeProduct)"
                                           [isWishlisted]="product.wishlisted"
@@ -131,7 +129,6 @@
                             >
                             </app-redirect>
                         </div>
-
                         <div class="stock-info" *ngIf="utils.hasInventory(activeProduct) &&
                         (activeProduct.inventory_product_details.is_low || activeProduct.inventory_product_details.message)">
                             <div class="flex">
@@ -193,12 +190,7 @@
                     <div *ngIf="dimensionExist" class="mb2">
                         <hr class="modal-hr"/>
                         <span class="title">Dimensions</span>
-<<<<<<< Updated upstream
                         <div class="mt1 pb1 flex flex-wrap" *ngIf="isArray(product.dimension); else showDimensions">
-=======
-                        <div class="mt1 pb1 flex flex-wrap"
-                             *ngIf="isArray(product.dimension) && product.dimension.length>0; else showDimensions">
->>>>>>> Stashed changes
                             <div *ngFor="let dimension of product.dimension" class="fl w-50 pa2">
                                 <div class="dimension-title">{{ dimension.description }}</div>
                                 <div class="dimensions-details" *ngIf="dimension.width > 0">
