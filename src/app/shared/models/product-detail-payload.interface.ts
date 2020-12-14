@@ -84,4 +84,5 @@ interface InventoryProductDetails {
   is_low: boolean;
   message: string;
   was_price: number;
+  shipping_desc: string;
 }
