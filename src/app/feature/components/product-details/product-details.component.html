@@ -16,8 +16,8 @@
                     <div class="flex flex-column">
                         <span class="mb1 lato font-16">{{ product.site }}</span>
                         <span class="open-sans font-18 mb1">{{ product.name }}</span>
-                        <div class="price-container">
-                            <div class="price-font mb3" style="margin-left:-0.5rem;">
+                        <div class="price-container mb2">
+                            <div class="price-font mb1" style="margin-left:-0.5rem;">
                                 <div class="flex justify-between">
                                     <span class="product-price ml2 open-sans font-18"
                                           [ngClass]="{'sale':hasValidWasPrice,'product-price':!hasValidWasPrice}">
@@ -38,7 +38,8 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="flex flex-column" *ngIf="!product.redirect || utils.hasInventory(activeProduct)">
+                            <div class="flex flex-column"
+                                 *ngIf="!product.redirect || utils.hasInventory(activeProduct)">
                                 <div class="flex">
                                     <button (click)="openLink($event, product.product_url)" mat-raised-button
                                             class="bg-red w-90 view-details-btn"
@@ -146,9 +147,10 @@
                                 {{ activeProduct.inventory_product_details.message }}
                             </div>
                         </div>
-                        <div class="ship-info mb1 flex" *ngIf="product.inventory_product_details?.shipping_desc">
+                        <div class="ship-info mb1 flex"
+                             *ngIf="product.inventory_product_details?.shipping_desc || utils.hasInventory(activeProduct)">
                             <span class="shipping-label">Shipping: &nbsp;</span>
-                            <span class="shipping-details">{{product.inventory_product_details.shipping_desc}}</span>
+                            <span class="shipping-details">{{utils.getShippingDesc(product)}}</span>
                         </div>
                     </div>
 
@@ -191,7 +193,12 @@
                     <div *ngIf="dimensionExist" class="mb2">
                         <hr class="modal-hr"/>
                         <span class="title">Dimensions</span>
+<<<<<<< Updated upstream
                         <div class="mt1 pb1 flex flex-wrap" *ngIf="isArray(product.dimension); else showDimensions">
+=======
+                        <div class="mt1 pb1 flex flex-wrap"
+                             *ngIf="isArray(product.dimension) && product.dimension.length>0; else showDimensions">
+>>>>>>> Stashed changes
                             <div *ngFor="let dimension of product.dimension" class="fl w-50 pa2">
                                 <div class="dimension-title">{{ dimension.description }}</div>
                                 <div class="dimensions-details" *ngIf="dimension.width > 0">
