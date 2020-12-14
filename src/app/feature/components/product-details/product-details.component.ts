@@ -197,7 +197,6 @@ export class ProductDetailsComponent implements OnInit {
         this.isVariationExist = this.utils.checkDataLength(
             this.product.variations
         );
-        console.log('this.isVariationExist: ', this.isVariationExist);
 
         if (!this.isVariationExist) {
             this.beforeSelection = true;

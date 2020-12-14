@@ -209,4 +209,13 @@ export class UtilsService {
     formatUSCurrency(price: number, decimals) {
         return formatCurrency(price, 'en-US', getLocaleCurrencySymbol('en-US'), 'en-US', decimals);
     }
+
+    getShippingDesc(product) {
+        if (product.inventory_product_details) {
+            return product.inventory_product_details.shipping_desc;
+        }
+        if (this.checkDataLength(product.variations)) {
+            return product.variations[0].inventory_product_details.shipping_desc;
+        }
+    }
 }
