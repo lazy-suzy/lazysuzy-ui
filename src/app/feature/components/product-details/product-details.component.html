@@ -120,6 +120,7 @@
                                 </div>
                             </div>
                         </div>
+
                         <div *ngIf="!isSetItemInInventory">
                             <app-redirect *ngIf="product.redirect && !utils.hasInventory(activeProduct)"
                                           [isWishlisted]="product.wishlisted"
@@ -129,6 +130,7 @@
                             >
                             </app-redirect>
                         </div>
+
                         <div class="stock-info" *ngIf="utils.hasInventory(activeProduct) &&
                         (activeProduct.inventory_product_details.is_low || activeProduct.inventory_product_details.message)">
                             <div class="flex">
@@ -143,6 +145,10 @@
                             <div class="shipping-msg">
                                 {{ activeProduct.inventory_product_details.message }}
                             </div>
+                        </div>
+                        <div class="ship-info mb1 flex" *ngIf="product.inventory_product_details?.shipping_desc">
+                            <span class="shipping-label">Shipping: &nbsp;</span>
+                            <span class="shipping-details">{{product.inventory_product_details.shipping_desc}}</span>
                         </div>
                     </div>
 
