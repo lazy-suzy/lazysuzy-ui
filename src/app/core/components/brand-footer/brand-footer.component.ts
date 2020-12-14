@@ -60,6 +60,6 @@ export class BrandFooterComponent implements OnInit, AfterViewInit {
     }
 
     toLink(link) {
-        this.router.navigateByUrl(`/products/brand?brand=${link}`);
+        this.router.navigateByUrl(`products/brand?undefined=true&limit=24&filters=brand:${link};&sort_type=&pageno=1`);
     }
 }
