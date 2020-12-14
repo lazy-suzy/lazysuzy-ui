@@ -72,7 +72,7 @@
             </ng-container>
         </div>
         <ng-template #handsetFeaturedBrand>
-            <div id="handset" class="brand flex flex-column pt3 pl3 pr3 pb56">
+            <div id="handset" class="brand flex flex-column pt4 pl3 pr3 pb56">
                 <ng-container *ngFor="let image of featuredBrands let i = index">
                     <div class="flex mb4" *ngIf="i%2==0">
                         <img class="w-70 featured-brand-image" [src]='image.cover_image' alt="{{image.name}}" (click)="toLink(image.value)">
