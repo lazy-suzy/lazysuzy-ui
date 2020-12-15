@@ -14,9 +14,9 @@
         <ng-container *ngFor="let image of bannerImages">
             <div class="flex flex-column image mb4">
                 <img [src]='image.image' (click)="toLink(image.link)">
-                <span class="text-left open-sans-18 mt2">
-                <a [href]="image.link" class="image-text"> {{image.link_label}}</a>
-            </span>
+                <span class="text-left lato-16 ph2 mt2">
+                 <a [href]="image.link" class="image-text"> {{image.link_label}}</a>
+                </span>
             </div>
         </ng-container>
     </div>

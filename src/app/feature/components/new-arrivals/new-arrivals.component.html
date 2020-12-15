@@ -1,8 +1,11 @@
 <div class="flex flex-column flex-wrap new-arrivals">
   <div
-    class="{{ isHandset ? 'w-100 mt56' : 'mtstandard ml4' }} new-arrivals-heading"
+    class="{{ isHandset ? 'w-100 mt56' : 'mtstandard ml4' }} new-arrivals-heading flex"
   >
     <h2 class="title-new-arrivals">New arrivals</h2>
+    <button type="button" class="btn btn-sm btn-dark" [ngClass]="{'mb2':isHandset}" (click)="seeAll()">
+      See all
+    </button>
   </div>
 
   <div class="w-100">
