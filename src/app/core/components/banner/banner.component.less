@@ -1,9 +1,74 @@
 .banner {
-  margin-bottom: 100px;
+  //margin-bottom: 100px;
+  position: relative;
 }
 
 .bannerCarousel {
   padding-top: 3%;
+}
+
+#banner {
+  ::ng-deep.ui-carousel-next {
+    display: none;
+  }
+
+  ::ng-deep.ui-carousel-prev {
+    visibility: hidden;
+  }
+
+  ::ng-deep.ui-button:enabled:focus {
+    outline: none;
+    box-shadow: none;
+  }
+
+  ::ng-deep.ui-carousel-dot-icon {
+    width: 10px;
+    height: 10px;
+    border-radius: 100%;
+  }
+
+  ::ng-deep.ui-carousel-content {
+    overflow: hidden;
+  }
+  ::ng-deep.ui-carousel .ui-carousel-dots-container .ui-carousel-dot-item.ui-state-highlight .ui-carousel-dot-icon {
+    background-color: #FFCC00;
+  }
+}
+
+::ng-deep.dots{
+  position: absolute !important;
+  bottom: 5%;
+  left: 50%;
+}
+
+.product {
+  position: relative;
+}
+
+.banner-text {
+  position: absolute;
+  top: 38%;
+  left: 2%;
+  width: 32rem;
+
+  .banner-label {
+    font-size: 55px;
+    //color: #0c1c31;
+    text-align: center;
+  }
+
+  .banner-link {
+    font-size: 30px;
+    //color: #fffffa;
+    text-decoration: underline;
+  }
+}
+
+
+.navbar {
+  position: absolute;
+  z-index: 99;
+  width: 100%;
 }
 
 .bannerCarousel .ui-button {
@@ -14,6 +79,7 @@
   .banner {
     margin-bottom: 50px;
   }
+
   .bannerCarousel .ui-button {
     font-size: 6px !important;
   }

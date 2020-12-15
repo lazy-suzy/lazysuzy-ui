@@ -1,14 +1,14 @@
-<div class="flex flex-wrap new-arrivals">
+<div class="flex flex-column flex-wrap new-arrivals">
   <div
-    class="{{ isHandset ? 'w-100' : 'w-10-ns w-20-m' }} new-arrivals-heading"
+    class="{{ isHandset ? 'w-100 mt56' : 'mtstandard ml4' }} new-arrivals-heading flex"
   >
-    <h2 class="title-new-arrivals">new arrivals</h2>
-    <button type="button" class="btn btn-sm btn-dark" (click)="seeAll()">
-      see all
+    <h2 class="title-new-arrivals">New arrivals</h2>
+    <button type="button" class="btn btn-sm btn-dark" [ngClass]="{'mb2':isHandset}" (click)="seeAll()">
+      See all
     </button>
   </div>
 
-  <div class="{{ isHandset ? 'w-100' : 'w-90-ns w-80-m' }}">
+  <div class="w-100">
     <div *ngIf="!newProducts">
       <img
         src="../../../../assets/image/three-dots.svg"

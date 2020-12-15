@@ -1,78 +1,84 @@
 <div *ngIf="!isBanner && !isBoards">
-  <owl-carousel
-    [options]="carousalOptions"
-    *ngIf="data?.length"
-    [carouselClasses]="['owl-carousel']"
-  >
-    <div class="item carousel" *ngFor="let product of data; let i = index">
-      <img src="{{ product.main_image }}" alt="" />
-      <div class="inner">
-        <a class="launch-icon" [href]="['/product/' + product.sku]">
-          <mat-icon aria-hidden="false" aria-label="toggle">
-            launch
-          </mat-icon>
-        </a>
-        <div class="product_name">{{ product.name }}</div>
-        <div class="product_brand">{{ product.site }}</div>
-        <span
-          *ngIf="product.is_price == product.was_price"
-          class="current-price"
-          >${{ product.is_price }}</span
-        >
-        <span
-          *ngIf="!(product.is_price == product.was_price)"
-          class="current-price"
-          >${{ product.is_price }} &nbsp;
+
+    <owl-carousel
+            [options]="carousalOptions"
+            *ngIf="data?.length"
+            [carouselClasses]="['owl-carousel']"
+    >
+
+        <div class="item carousel" *ngFor="let product of data; let i = index">
+            <img src="{{ product.main_image }}" alt=""/>
+            <div class="inner">
+                <a class="launch-icon" [href]="['/product/' + product.sku]">
+                    <mat-icon aria-hidden="false" aria-label="toggle">
+                        launch
+                    </mat-icon>
+                </a>
+                <div class="product_name">{{ product.name }}</div>
+                <div class="product_brand">{{ product.site }}</div>
+                <span
+                        *ngIf="product.is_price == product.was_price"
+                        class="current-price"
+                >${{ product.is_price }}</span
+                >
+                <span
+                        *ngIf="!(product.is_price == product.was_price)"
+                        class="current-price"
+                >${{ product.is_price }} &nbsp;
           <s class="old-price"> ${{ product.was_price }}</s></span
-        >
-      </div>
-      <div
-        *ngIf="nameOfCarousal == 'top-deals' && product.percent_discount > 0"
-        class="discount-percentage"
-        [ngClass]="[
+                >
+            </div>
+            <div
+                    *ngIf="nameOfCarousal == 'top-deals' && product.percent_discount > 0"
+                    class="discount-percentage"
+                    [ngClass]="[
           product.percent_discount > 30
             ? 'discount-red-top-deals'
             : 'discount-gold-top-deals'
         ]"
-      >
-        {{ product.percent_discount | number: '1.0-0' }}% off
-      </div>
-    </div>
-  </owl-carousel>
+            >
+                {{ product.percent_discount | number: '1.0-0' }}% off
+            </div>
+        </div>
+    </owl-carousel>
 </div>
 
 <div *ngIf="isBanner">
-  <owl-carousel
-    [options]="bannerCarousalOptions"
-    *ngIf="data?.length"
-    [carouselClasses]="['owl-carousel', 'owl-theme']"
-  >
-    <a
-      class="item"
-      *ngFor="let product of data; let i = index"
-      href="{{ product.link }}"
+    <owl-carousel
+            [options]="bannerCarousalOptions"
+            *ngIf="data?.length"
+            [carouselClasses]="['owl-carousel', 'owl-theme']"
     >
-      <img class="owl-item-bg" src="{{ product.image }}" alt="Owl Image" />
-    </a>
-  </owl-carousel>
+        <div *ngFor="let product of data; let i = index" style="position: relative">
+            <img class="owl-item-bg" src="{{ product.image }}" alt="Owl Image"/>
+            <div class="flex flex-column banner-text ph1 w-100" [ngStyle]="{color: product.font_hex}">
+                <span class="banner-label mb3">{{product.banner_label}}</span>
+                <span>
+                    <a class="banner-link" [ngStyle]="{color: product.font_hex}" [href]="product.link">
+                         {{product.link_label}}
+                    </a>
+                </span>
+            </div>
+        </div>
+    </owl-carousel>
 </div>
 
 <div *ngIf="isBoards">
-  <owl-carousel
-    [options]="boardCarousalOptions"
-    *ngIf="data?.length"
-    [carouselClasses]="['owl-carousel', 'owl-theme']"
-  >
-    <a
-      class="item carousel"
-      *ngFor="let board of data; let i = index"
-      [href]="['/board/preview/' + board.uuid]"
+    <owl-carousel
+            [options]="boardCarousalOptions"
+            *ngIf="data?.length"
+            [carouselClasses]="['owl-carousel', 'owl-theme']"
     >
-      <img
-        [src]="getPreviewImagePath(board.preview)"
-        class="board-image"
-        alt=""
-      />
-    </a>
-  </owl-carousel>
+        <a
+                class="item carousel"
+                *ngFor="let board of data; let i = index"
+                [href]="['/board/preview/' + board.uuid]"
+        >
+            <img
+                    [src]="getPreviewImagePath(board.preview)"
+                    class="board-image"
+                    alt=""
+            />
+        </a>
+    </owl-carousel>
 </div>

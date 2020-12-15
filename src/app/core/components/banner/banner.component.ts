@@ -1,26 +1,24 @@
-import { Component, OnInit, Input } from '@angular/core';
-import { ApiService } from './../../../shared/services';
-import { Router, ActivatedRoute } from '@angular/router';
+import {Component, OnInit, Input} from '@angular/core';
+import {ApiService} from './../../../shared/services';
 
 @Component({
-  selector: 'app-banner',
-  templateUrl: './banner.component.html',
-  styleUrls: ['./banner.component.less']
+    selector: 'app-banner',
+    templateUrl: './banner.component.html',
+    styleUrls: ['./banner.component.less']
 })
 export class BannerComponent implements OnInit {
-  bannerData: any;
-  isBanner = true;
-  @Input() isHandset = false;
+    bannerData: any;
+    isBanner = true;
+    @Input() isHandset = false;
 
-  constructor(
-    private apiService: ApiService,
-    private router: Router,
-    private activeRoute: ActivatedRoute
-  ) {}
+    constructor(
+        private apiService: ApiService,
+    ) {
+    }
 
-  ngOnInit() {
-    this.apiService.bannerData().subscribe((res) => {
-      this.bannerData = res;
-    });
-  }
+    ngOnInit() {
+        this.apiService.bannerData().subscribe((res: any[]) => {
+            this.bannerData = res.filter(value => value.position === 'primary');
+        });
+    }
 }

@@ -1,25 +1,34 @@
 <div class="banner" *ngIf="isHandset">
-  <app-products-carousal
-    [isBanner]="isBanner"
-    [data]="bannerData"
-  ></app-products-carousal>
+    <app-products-carousal
+            [isBanner]="isBanner"
+            [data]="bannerData"
+    ></app-products-carousal>
 </div>
 
-<div class="banner" *ngIf="!isHandset">
-  <p-carousel
-    class="bannerCarousel"
-    [value]="bannerData"
-    [numVisible]="1"
-    [numScroll]="1"
-    [autoplayInterval]="8000"
-    [circular]="true"
-  >
-    <ng-template let-data pTemplate="item">
-      <div class="product">
-        <a href="{{ data.link }}">
-          <img class="product_image" src="{{ data.image }}" alt="Owl Image" />
-        </a>
-      </div>
-    </ng-template>
-  </p-carousel>
+<div class="banner" id="banner" *ngIf="!isHandset">
+    <p-carousel
+            class="bannerCarousel"
+            [value]="bannerData"
+            [numVisible]="1"
+            [numScroll]="1"
+            [circular]="true"
+            [dotsContainerClass]="'dots'"
+    >
+        <ng-template let-data pTemplate="item">
+            <div class="product">
+                <img class="product_image" src="{{ data.image }}" alt="Owl Image"/>
+                <div class="banner-text flex flex-column">
+                    <span class="banner-label open-sans-14" [ngStyle]="{'color': data.font_hex}" >{{data.banner_label}}</span>
+                    <span class="banner-link text-center mt4 lato-12">
+                        <a href="{{ data.link }}" [ngStyle]="{'color': data.font_hex}" class="banner-link lato-12">
+                         {{data.link_label}}
+                        </a>
+                    </span>
+
+                </div>
+            </div>
+
+
+        </ng-template>
+    </p-carousel>
 </div>

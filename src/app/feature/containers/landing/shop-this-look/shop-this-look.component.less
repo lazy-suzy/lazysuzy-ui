@@ -1,0 +1,51 @@
+
+.header {
+  font-size: 24px;
+  color: #0C1C31;
+  text-align: left;
+  margin-left: 2.5rem;
+}
+
+.shared-boards-container {
+  background-color: #ebebeb;
+  margin-bottom: 60px;
+  padding-bottom: 30px;
+
+  .shared-list-header {
+    padding: 40px 0 0;
+  }
+}
+
+#shop-look-container {
+  ::ng-deep .ui-carousel-content {
+    padding: 0;
+  }
+
+  ::ng-deep .ui-carousel-dots-container {
+    display: none;
+
+  }
+}
+
+.owl-carousel {
+  display: none;
+}
+
+@media screen and (max-width: 768px) {
+  .header {
+    font-size: 20px;
+    color: #0C1C31;
+    text-align: left;
+    margin-left: 1rem;
+  }
+}
+
+@media screen and (max-width: 1024px) {
+  .top-deal-slider {
+    display: none;
+  }
+
+  .owl-carousel {
+    display: block;
+  }
+}
