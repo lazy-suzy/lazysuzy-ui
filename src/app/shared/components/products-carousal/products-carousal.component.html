@@ -52,7 +52,7 @@
         <div *ngFor="let product of data; let i = index" style="position: relative">
             <img class="owl-item-bg" src="{{ product.image }}" alt="Owl Image"/>
             <div class="flex flex-column banner-text ph1 w-100" [ngStyle]="{color: product.font_hex}">
-                <span class="banner-label mb4">{{product.banner_label}}</span>
+                <span class="banner-label mb3">{{product.banner_label}}</span>
                 <span>
                     <a class="banner-link" [ngStyle]="{color: product.font_hex}" [href]="product.link">
                          {{product.link_label}}
