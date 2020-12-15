@@ -38,7 +38,8 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="flex flex-column" *ngIf="!product.redirect || utils.hasInventory(activeProduct)">
+                            <div class="flex flex-column"
+                                 *ngIf="!product.redirect || utils.hasInventory(activeProduct)">
                                 <div class="flex">
                                     <button (click)="openLink($event, product.product_url)" mat-raised-button
                                             class="bg-red w-90 view-details-btn"
@@ -143,6 +144,13 @@
                             <div class="shipping-msg">
                                 {{ activeProduct.inventory_product_details.message }}
                             </div>
+                        </div>
+                        <div class="ship-status mb1 flex" *ngIf="product.online_msg">
+                            <span class="ship-status-label">Status:</span>
+                            <span class="ship-status-details ml1">
+                                <mat-icon
+                                        [ngStyle]="{'color':product.is_back_order ?'#FFCC00':'#54AD32'}">stop_circle</mat-icon>
+                                {{product.online_msg}}</span>
                         </div>
                         <div class="ship-info mb1 flex"
                              *ngIf="product.inventory_product_details?.shipping_desc || utils.hasInventory(activeProduct)">
