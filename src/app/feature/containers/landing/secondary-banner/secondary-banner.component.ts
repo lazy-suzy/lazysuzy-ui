@@ -1,12 +1,12 @@
 import {Component, Input, OnInit} from '@angular/core';
-import {ApiService} from 'src/app/shared/services';
+import {ApiService} from '../../../../shared/services';
 
 @Component({
-    selector: 'app-featured-brands',
-    templateUrl: './featured-brands.component.html',
-    styleUrls: ['./featured-brands.component.less']
+    selector: 'app-secondary-banner',
+    templateUrl: './secondary-banner.component.html',
+    styleUrls: ['./secondary-banner.component.less']
 })
-export class FeaturedBrandsComponent implements OnInit {
+export class SecondaryBannerComponent implements OnInit {
     @Input() isHandset = false;
     bannerImages;
 
@@ -22,4 +22,5 @@ export class FeaturedBrandsComponent implements OnInit {
     toLink(link) {
         window.location.href = link;
     }
+
 }
