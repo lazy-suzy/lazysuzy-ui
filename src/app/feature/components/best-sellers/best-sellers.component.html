@@ -1,8 +1,11 @@
 <div class="flex flex-wrap best-sellers" [ngClass]="{'mt56':isHandset,'mtstandard':!isHandset}">
     <div
-            class="{{ isHandset ? 'w-100' : 'ml4' }} best-sellers-heading"
+            class="{{ isHandset ? 'w-100' : 'ml4' }} best-sellers-heading flex"
     >
         <h2 class="title-best-sellers">Hot right now</h2>
+        <button type="button" class="btn btn-sm btn-dark" [ngClass]="{'mb2':isHandset}" (click)="seeAll()">
+            See all
+        </button>
     </div>
 
     <div class="w-100">
