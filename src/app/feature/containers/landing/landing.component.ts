@@ -30,7 +30,7 @@ export class LandingComponent implements OnInit {
     bpSubscription: Subscription;
     isHandset = false;
     eventSubscription: Subscription;
-
+    desktopAboutImage = 'https://www.lazysuzy.com/images/landing/WhoIsLZ_d.png';
     contentList = [
         'Design your space the way you want',
         'Mix and match various styles',
@@ -41,19 +41,37 @@ export class LandingComponent implements OnInit {
     carousalOptions = {
         autoWidth: false,
         loop: true,
-        margin: 10,
         items: 1,
         center: true,
         dots: false,
         nav: true,
+        margin: 10,
         navText: ['', '<button class=\'right-icon\'><span class="fa fa-chevron-right right-arrow"></span></button>'],
         pagination: true,
         responsive: {
             0: {
+                nav: false,
                 items: 1,
             },
             1024: {
                 items: 3,
+                loop: true,
+                center: false,
+                margin: 10,
+                nav: true,
+            },
+            1366: {
+                items: 4,
+                loop: true,
+                center: false,
+                margin: 10,
+                nav: true,
+            },
+            1920: {
+                items: 5,
+                loop: false,
+                center: false,
+                margin: 10,
             },
         },
     };

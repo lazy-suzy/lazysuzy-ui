@@ -36,7 +36,7 @@ export class NavDesktopComponent implements OnInit {
 
     constructor(
         private router: Router,
-        private location: Location,
+        public location: Location,
         private utils: UtilsService,
         private apiService: ApiService,
         private messageService: MessageService,

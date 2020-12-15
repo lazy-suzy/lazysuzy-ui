@@ -43,7 +43,7 @@ export class NavMobileComponent implements OnInit {
         private utils: UtilsService,
         private cookie: CookieService,
         private router: Router,
-        private location: Location,
+        public location: Location,
         private eventEmitterService: EventEmitterService,
         private matDialogUtils: MatDialogUtilsService
     ) {

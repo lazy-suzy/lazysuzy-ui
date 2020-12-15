@@ -1,20 +1,20 @@
-@button-backgroud: white;
+@button-background: transparent;
 @button-color: #b76e79;
 @brand-old: #898989;
 @heading-color: #0c1c31;
 
 .best-sellers {
-  padding-top: 10%;
+  //padding-top: 5%;
 }
 
 .best-sellers-heading {
-  margin-top: 5%;
+  //margin-top: 5%;
   text-align: left;
 }
 
 .btn {
   color: @button-color;
-  background: @button-backgroud;
+  background: @button-background;
   font-size: 18px;
   border: none;
 }
@@ -40,8 +40,10 @@
 }
 
 .title-best-sellers {
-  font-weight: 700;
+  font-size: 24px;
+  font-weight: normal;
   text-align: left;
+  margin-left: 1rem;
   color: @heading-color;
 }
 
@@ -64,14 +66,14 @@
 
   .title-best-sellers {
     font-size: 25px;
-    font-weight: 700;
+    font-weight: normal;
     float: left;
     padding-left: 0%;
   }
 
   .btn {
     font-size: 16px;
-    background: @button-backgroud;
+    background: @button-background;
     border: none;
     color: @button-color;
     padding: 0 10px;
@@ -97,7 +99,9 @@
 }
 @media only screen and (max-width: 767px) {
   .title-best-sellers {
-    padding-left: 3%;
+    //padding-left: 3%;
+    font-size: 20px;
+    margin-left: 0;
   }
   .best-sellers-heading {
     padding: 0 15px;

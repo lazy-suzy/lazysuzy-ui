@@ -1,4 +1,4 @@
-<ng-container *ngIf="hideBar; else showBar" >
+<ng-container *ngIf="hideBar; else showBar">
 
     <div class="flex items-center justify-center header pv2" [ngClass]="{'header': !isFaqPage,'faq-header': isFaqPage}">
         <a
@@ -22,245 +22,250 @@
 
         <span class="all-offers" (click)="openOfferModal()">View all offers</span>
     </div>
-    <div class="flex items-center header" [ngClass]="{'header': !isFaqPage,'faq-header': isFaqPage}" >
-        <div class="w-60 flex">
-            <ng-container>
-                <button
-                        mat-icon-button
-                        id="side-nav-btn"
-                        (click)="drawer.toggle();hideIntercom()"
-                        class="fixed top-0 z-99"
-                >
-                    <mat-icon class="account-icon">menu</mat-icon>
-                </button>
-                <!--                Main SideBar-->
-                <mat-sidenav #drawer [fixedInViewport]="true" (closed)="showIntercom()"  class="mobile-menu-container" [mode]="'over'">
-                    <div class="flex flex-column" style="height:100%">
 
-                        <ul class="department-container">
-                            <li class="department-list">
-                                <div>
-                                    <span class="department-title" (click)="toNewArrivalsPage()">Latest Arrivals</span>
-                                </div>
-                            </li>
-                            <li class="department-list">
-                                <div>
-                                    <span class="department-title" (click)="toTopDealsPage()">Sale + Clearance</span>
-                                </div>
-                            </li>
-                            <hr class="navbar-horizontal-row">
-                            <li class="department-list">
-                                <div (click)="departmentSideNav.open()">
+    <div [ngClass]="{'landing-page-navbar':!location.path()}">
+        <div class="flex items-center header" [ngClass]="{'header': !isFaqPage,'faq-header': isFaqPage}">
+            <div class="w-60 flex">
+                <ng-container>
+                    <button
+                            mat-icon-button
+                            id="side-nav-btn"
+                            (click)="drawer.toggle();hideIntercom()"
+                            class="fixed top-0 z-99"
+                    >
+                        <mat-icon class="account-icon">menu</mat-icon>
+                    </button>
+                    <!--                Main SideBar-->
+                    <mat-sidenav #drawer [fixedInViewport]="true" (closed)="showIntercom()"
+                                 class="mobile-menu-container" [mode]="'over'">
+                        <div class="flex flex-column" style="height:100%">
+
+                            <ul class="department-container">
+                                <li class="department-list">
+                                    <div>
+                                        <span class="department-title"
+                                              (click)="toNewArrivalsPage()">Latest Arrivals</span>
+                                    </div>
+                                </li>
+                                <li class="department-list">
+                                    <div>
+                                        <span class="department-title"
+                                              (click)="toTopDealsPage()">Sale + Clearance</span>
+                                    </div>
+                                </li>
+                                <hr class="navbar-horizontal-row">
+                                <li class="department-list">
+                                    <div (click)="departmentSideNav.open()">
                                 <span class="department-title">
                                     Departments
                                 </span>
-                                    <mat-icon
-                                            class="department-list-icon"
-                                            aria-hidden="false"
-                                            aria-label="Search">
-                                        chevron_right
-                                    </mat-icon>
-                                </div>
-                            </li>
-                            <li class="department-list">
-                                <div (click)="brandSideNav.open();">
-                                    <span class="department-title">Brand</span>
-                                    <mat-icon
-                                            class="department-list-icon"
-                                            aria-hidden="false"
-                                            aria-label="Search">
-                                        chevron_right
-                                    </mat-icon>
-                                </div>
-                            </li>
-                            <li class="department-list">
-                                <div (click)="collectionSideNav.open();">
+                                        <mat-icon
+                                                class="department-list-icon"
+                                                aria-hidden="false"
+                                                aria-label="Search">
+                                            chevron_right
+                                        </mat-icon>
+                                    </div>
+                                </li>
+                                <li class="department-list">
+                                    <div (click)="brandSideNav.open();">
+                                        <span class="department-title">Brand</span>
+                                        <mat-icon
+                                                class="department-list-icon"
+                                                aria-hidden="false"
+                                                aria-label="Search">
+                                            chevron_right
+                                        </mat-icon>
+                                    </div>
+                                </li>
+                                <li class="department-list">
+                                    <div (click)="collectionSideNav.open();">
                                     <span class="department-title"
                                     >Collections</span>
-                                    <mat-icon
-                                            class="department-list-icon"
-                                            aria-hidden="false"
-                                            aria-label="Search">
-                                        chevron_right
-                                    </mat-icon>
-                                </div>
-                            </li>
+                                        <mat-icon
+                                                class="department-list-icon"
+                                                aria-hidden="false"
+                                                aria-label="Search">
+                                            chevron_right
+                                        </mat-icon>
+                                    </div>
+                                </li>
 
-                        </ul>
-                        <div class="nav-close-div">
-                            <button class="nav-close-button" (click)="closeAll();">Close</button>
+                            </ul>
+                            <div class="nav-close-div">
+                                <button class="nav-close-button" (click)="closeAll();">Close</button>
+                            </div>
                         </div>
-                    </div>
-                </mat-sidenav>
+                    </mat-sidenav>
 
-                <!--                 Department SideBar-->
-                <mat-sidenav #departmentSideNav class="mobile-menu-container" [mode]="'over'">
-                    <div class="flex flex-column" style="height:100%">
-                        <div class="nav-back-div" (click)="departmentSideNav.close()">
-                            <mat-icon
-                                    class="nav-back-icon"
-                                    aria-hidden="false"
-                                    aria-label="Search">
-                                chevron_left
-                            </mat-icon>
-                            <span>Back</span>
-                        </div>
-                        <div>
-                            <ul class="department-container">
-                                <li *ngFor="let department of departments" class="department-list">
-                                    <div (click)="showDepartmentChild(department.department)">
+                    <!--                 Department SideBar-->
+                    <mat-sidenav #departmentSideNav class="mobile-menu-container" [mode]="'over'">
+                        <div class="flex flex-column" style="height:100%">
+                            <div class="nav-back-div" (click)="departmentSideNav.close()">
+                                <mat-icon
+                                        class="nav-back-icon"
+                                        aria-hidden="false"
+                                        aria-label="Search">
+                                    chevron_left
+                                </mat-icon>
+                                <span>Back</span>
+                            </div>
+                            <div>
+                                <ul class="department-container">
+                                    <li *ngFor="let department of departments" class="department-list">
+                                        <div (click)="showDepartmentChild(department.department)">
                                     <span
                                             class="department-title
                                             {{showDepartment === department.department ? 'active' : 'none'}}"
                                     >
                                         {{ department.department | titlecase }}
                                     </span>
-                                        <mat-icon
-                                                class="department-list-icon"
-                                                *ngIf="showDepartment !== department.department"
-                                                aria-hidden="false"
-                                                aria-label="Search">
-                                            chevron_right
-                                        </mat-icon>
-                                        <mat-icon
-                                                class="department-list-icon active"
-                                                *ngIf="showDepartment === department.department"
-                                                aria-hidden="false"
-                                                aria-label="Search"
-                                        >
-                                            expand_more
-                                        </mat-icon>
-                                    </div>
-                                    <ul
-                                            class="category-container {{
+                                            <mat-icon
+                                                    class="department-list-icon"
+                                                    *ngIf="showDepartment !== department.department"
+                                                    aria-hidden="false"
+                                                    aria-label="Search">
+                                                chevron_right
+                                            </mat-icon>
+                                            <mat-icon
+                                                    class="department-list-icon active"
+                                                    *ngIf="showDepartment === department.department"
+                                                    aria-hidden="false"
+                                                    aria-label="Search"
+                                            >
+                                                expand_more
+                                            </mat-icon>
+                                        </div>
+                                        <ul
+                                                class="category-container {{
                                                         showDepartment === department.department ? 'show' : 'hide'
                                                       }}"
-                                    >
-                                        <li *ngFor="let category of department.categories"
-                                            class="category-list">
-                                            <a class="category-title" (click)="closeAll()"
-                                               [routerLink]="category.link"
-                                            >{{ category.category }}
-                                            </a>
-                                        </li>
-                                    </ul>
-                                </li>
+                                        >
+                                            <li *ngFor="let category of department.categories"
+                                                class="category-list">
+                                                <a class="category-title" (click)="closeAll()"
+                                                   [routerLink]="category.link"
+                                                >{{ category.category }}
+                                                </a>
+                                            </li>
+                                        </ul>
+                                    </li>
 
-                            </ul>
+                                </ul>
+                            </div>
+                            <div class="nav-close-div">
+                                <button class="nav-close-button" (click)="closeAll();">Close</button>
+                            </div>
                         </div>
-                        <div class="nav-close-div">
-                            <button class="nav-close-button" (click)="closeAll();">Close</button>
-                        </div>
-                    </div>
-                </mat-sidenav>
-                <!--                 Brand SideBar-->
-                <mat-sidenav #brandSideNav class="mobile-menu-container">
-                    <div class="flex flex-column" style="height:100%">
-                        <div class="nav-back-div" (click)="brandSideNav.close()">
-                            <mat-icon
-                                    class="nav-back-icon"
-                                    aria-hidden="false"
-                                    aria-label="Search">
-                                chevron_left
-                            </mat-icon>
-                            <span>Back</span>
-                        </div>
-                        <div>
-                            <ul class="department-container">
-                                <li *ngFor="let brand of brands" class="department-list">
-                                    <div (click)="toBrandPage(brand)">
+                    </mat-sidenav>
+                    <!--                 Brand SideBar-->
+                    <mat-sidenav #brandSideNav class="mobile-menu-container">
+                        <div class="flex flex-column" style="height:100%">
+                            <div class="nav-back-div" (click)="brandSideNav.close()">
+                                <mat-icon
+                                        class="nav-back-icon"
+                                        aria-hidden="false"
+                                        aria-label="Search">
+                                    chevron_left
+                                </mat-icon>
+                                <span>Back</span>
+                            </div>
+                            <div>
+                                <ul class="department-container">
+                                    <li *ngFor="let brand of brands" class="department-list">
+                                        <div (click)="toBrandPage(brand)">
                                     <span
                                             class="department-title"
                                     >
                                         {{ brand.name | titlecase }}
                                     </span>
-                                        <mat-icon
-                                                class="department-list-icon"
-                                                aria-hidden="false"
-                                                aria-label="Search">
-                                            chevron_right
-                                        </mat-icon>
-                                    </div>
-                                </li>
+                                            <mat-icon
+                                                    class="department-list-icon"
+                                                    aria-hidden="false"
+                                                    aria-label="Search">
+                                                chevron_right
+                                            </mat-icon>
+                                        </div>
+                                    </li>
 
-                            </ul>
-                        </div>
+                                </ul>
+                            </div>
 
-                        <div class="nav-close-div">
-                            <button class="nav-close-button" (click)="closeAll();">Close</button>
+                            <div class="nav-close-div">
+                                <button class="nav-close-button" (click)="closeAll();">Close</button>
+                            </div>
                         </div>
-                    </div>
-                </mat-sidenav>
-                <!--                 Collection SideBar-->
-                <mat-sidenav #collectionSideNav class="mobile-menu-container">
-                    <div class="flex flex-column" style="height:100%">
-                        <div class="nav-back-div" (click)="collectionSideNav.close()">
-                            <mat-icon
-                                    class="nav-back-icon"
-                                    aria-hidden="false"
-                                    aria-label="Search">
-                                chevron_left
-                            </mat-icon>
-                            <span>Back</span>
-                        </div>
-                        <div>
-                            <ul class="department-container">
-                                <li *ngFor="let collection of collections" class="department-list">
-                                    <div class="flex justify-between" (click)="toCollectionPage(collection)">
+                    </mat-sidenav>
+                    <!--                 Collection SideBar-->
+                    <mat-sidenav #collectionSideNav class="mobile-menu-container">
+                        <div class="flex flex-column" style="height:100%">
+                            <div class="nav-back-div" (click)="collectionSideNav.close()">
+                                <mat-icon
+                                        class="nav-back-icon"
+                                        aria-hidden="false"
+                                        aria-label="Search">
+                                    chevron_left
+                                </mat-icon>
+                                <span>Back</span>
+                            </div>
+                            <div>
+                                <ul class="department-container">
+                                    <li *ngFor="let collection of collections" class="department-list">
+                                        <div class="flex justify-between" (click)="toCollectionPage(collection)">
                                     <span
                                             class="department-title">
                                         {{ collection.name | titlecase }}
                                     </span>
-                                        <mat-icon
-                                                class="department-list-icon"
-                                                aria-hidden="false"
-                                                aria-label="Search">
-                                            chevron_right
-                                        </mat-icon>
-                                    </div>
-                                </li>
+                                            <mat-icon
+                                                    class="department-list-icon"
+                                                    aria-hidden="false"
+                                                    aria-label="Search">
+                                                chevron_right
+                                            </mat-icon>
+                                        </div>
+                                    </li>
 
-                            </ul>
+                                </ul>
+                            </div>
+
+                            <div class="nav-close-div">
+                                <button class="nav-close-button" (click)="closeAll();">Close</button>
+                            </div>
                         </div>
+                    </mat-sidenav>
+                </ng-container>
 
-                        <div class="nav-close-div">
-                            <button class="nav-close-button" (click)="closeAll();">Close</button>
-                        </div>
-                    </div>
-                </mat-sidenav>
-            </ng-container>
-
-            <a
-                    routerLink="/"
-                    routerLinkActive="active"
-                    class="no-underline flex items-center"
-            >
-                <img class="logo-size grow" [src]="logoPath" alt="Lazy Suzy Home"/>
-            </a>
-        </div>
-
-        <div class="flex items-center navbar-icons w-40 justify-end">
-            <div class="header-link">
-                <mat-icon
-                        class="account-icon"
-                        *ngIf="notHome || isBoard"
-                        aria-hidden="false"
-                        (click)="showSearchBar()"
-                >search
-                </mat-icon>
-            </div>
-            <!--      *ngIf="!notHome"-->
-            <div class="header-link">
-                <mat-icon
-                        class="account-icon"
-                        aria-hidden="false"
-                        [routerLink]="['/board']"
-                >dashboard
-                </mat-icon
+                <a
+                        routerLink="/"
+                        routerLinkActive="active"
+                        class="no-underline flex items-center"
                 >
+                    <img class="logo-size grow" [src]="logoPath" alt="Lazy Suzy Home"/>
+                </a>
             </div>
 
-            <span class="flex items-center header-link">
+            <div class="flex items-center navbar-icons w-40 justify-end">
+                <div class="header-link">
+                    <mat-icon
+                            class="account-icon"
+                            *ngIf="notHome || isBoard"
+                            aria-hidden="false"
+                            (click)="showSearchBar()"
+                    >search
+                    </mat-icon>
+                </div>
+                <!--      *ngIf="!notHome"-->
+                <div class="header-link">
+                    <mat-icon
+                            class="account-icon"
+                            aria-hidden="false"
+                            [routerLink]="['/board']"
+                    >dashboard
+                    </mat-icon
+                    >
+                </div>
+
+                <span class="flex items-center header-link">
         <mat-icon
                 class="account-icon"
                 aria-hidden="false"
@@ -268,7 +273,7 @@
         >favorite_border</mat-icon
         >
       </span>
-            <span class="flex items-center header-link">
+                <span class="flex items-center header-link">
                   <ng-container *ngIf="!cartProduct; else filledCartIcon">
                      <mat-icon
                              class="account-icon material-icons-outlined"
@@ -294,15 +299,17 @@
                           </mat-icon>
                     </ng-template>
       </span>
-            <app-auth class="account-menu" [isHandset]="true"></app-auth>
+                <app-auth class="account-menu" [isHandset]="true"></app-auth>
+            </div>
+            <app-search-bar
+                    (searchComplete)="onSearchComplete($event)"
+                    *ngIf="showSearchComponent"
+                    class="section"
+                    [notHome]="notHome"
+                    [isBoard]="isBoard"
+                    [isHandset]="true"
+            ></app-search-bar>
         </div>
-        <app-search-bar
-                (searchComplete)="onSearchComplete($event)"
-                *ngIf="showSearchComponent"
-                class="section"
-                [notHome]="notHome"
-                [isBoard]="isBoard"
-                [isHandset]="true"
-        ></app-search-bar>
     </div>
+    <app-banner *ngIf="!location.path()" [isHandset]="true"></app-banner>
 </ng-template>

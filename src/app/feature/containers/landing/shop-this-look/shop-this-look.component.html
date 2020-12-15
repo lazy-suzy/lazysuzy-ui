@@ -1,0 +1,39 @@
+<div id="shop-look-container" class="flex flex-column container"
+     [ngClass]="{'mtstandard mbstandard':!isHandset,'mt56 mb56':isHandset}">
+    <h2 class="open-sans-14 header">Shop the look</h2>
+    <div>
+        <p-carousel
+                *ngIf="!isHandset && sharedBoards.length > 3"
+                class="top-deal-slider"
+                [value]="sharedBoards"
+                [numVisible]="4"
+                [numScroll]="1"
+                [responsiveOptions]="responsiveOptions"
+        >
+            <ng-template let-data pTemplate="item">
+                <div class="board-card">
+                    <div
+                            class="canvas-preview pointer"
+                            routerLink="/board/{{ boardPreviewLink }}/{{ data.uuid }}"
+                    >
+                        <img
+                                width="100%"
+                                class="edit-board"
+                                [src]="getPreviewImagePath(data)"
+                        />
+                    </div>
+                    <div class="preview-title">
+                        {{ data.title }}
+                    </div>
+                </div>
+            </ng-template>
+        </p-carousel>
+        <app-products-carousal
+                *ngIf="isHandset"
+                [items]="isHandset ? 1 : 4"
+                [data]="sharedBoards"
+                [isBoards]="true"
+                class="owl-carousel"
+        ></app-products-carousal>
+    </div>
+</div>
