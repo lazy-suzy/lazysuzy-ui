@@ -41,7 +41,7 @@
                         </span>
                 </div>
             </div>
-            <div class="flex cart-actions">
+            <div class="flex cart-actions mb2">
                 <button (click)="openLink($event, product.product_url)" mat-raised-button
                         class="bg-red view-details-btn" *ngIf="
             product && !utils.hasInventory(activeProduct) && !product.redirect && product.product_url
@@ -78,7 +78,7 @@
                               (wishlist)="wishlistProduct(product.sku,true)"
                 ></app-redirect>
             </div>
-            <div class="stock-info" *ngIf="
+            <div class="stock-info mb2" *ngIf="
           product &&
           utils.hasInventory(activeProduct) &&
           (activeProduct.inventory_product_details.is_low ||
@@ -98,11 +98,9 @@
                 </div>
             </div>
 
-            <ng-container *ngIf="product && product.redirect; else allConditions">
-                <hr class="modal-hr mt-3" *ngIf="product && product.set && product.set.length > 0"/>
-            </ng-container>
-<!--       Ship Status      Only applies for CB2 and CAB Products for now-->
-            <div class="ship-status mb1 flex" *ngIf="product.online_msg">
+
+<!--       Ship Status -- Only applies for CB2 and CAB Products for now-->
+            <div class="ship-status mb2 flex" *ngIf="product.online_msg">
                 <span class="ship-status-label">Status:</span>
                 <span class="ship-status-details ml1">
                                 <mat-icon
@@ -110,11 +108,14 @@
                     {{product.online_msg}}</span>
             </div>
 <!--            End of Ship status-->
-            <div class="ship-info mb1 flex"
+            <div class="ship-info mb2 flex"
                  *ngIf="product.inventory_product_details?.shipping_desc || utils.hasInventory(activeProduct)">
                 <span class="shipping-label">Shipping: &nbsp;</span>
                 <span class="shipping-details ml1">{{utils.getShippingDesc(product)}}</span>
             </div>
+            <ng-container *ngIf="product && product.redirect; else allConditions">
+                <hr class="modal-hr mt-3" *ngIf="product && product.set && product.set.length > 0"/>
+            </ng-container>
             <ng-template #allConditions>
                 <hr class="modal-hr mt-3" *ngIf="
             isVariationExist ||
