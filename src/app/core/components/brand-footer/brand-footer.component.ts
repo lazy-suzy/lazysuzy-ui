@@ -52,10 +52,6 @@ export class BrandFooterComponent implements OnInit, AfterViewInit {
                 }
             });
             this.featuredBrands = this.brands.filter(_ => _.feature === 1);
-            AOS.refresh();
-            this.ngZone.runOutsideAngular(() => {
-                setTimeout(() => AOS.refresh(), 2000);
-            });
         });
     }
 
