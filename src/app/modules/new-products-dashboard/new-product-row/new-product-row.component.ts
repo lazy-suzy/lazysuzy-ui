@@ -138,6 +138,16 @@ export class NewProductRowComponent implements OnInit {
         }
     }
 
+    cropImage(image) {
+        this.adminDashboardService.cropImage(image, this.product).subscribe(
+            (response: any) => {
+                const newImage = response.newImage;
+                const index = this.productImages.indexOf(image);
+                this.productImages[index] = response.newImage;
+            }
+        );
+    }
+
     private updatePrimaryXImage(index, image) {
         const imageItem = {
             index,

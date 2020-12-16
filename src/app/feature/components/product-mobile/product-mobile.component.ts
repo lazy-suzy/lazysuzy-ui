@@ -1,6 +1,7 @@
 import {IProductPayload} from './../../../shared/models';
 import {Component, OnInit, Input} from '@angular/core';
 import {ApiService} from 'src/app/shared/services';
+import {WishlistSnackbarService} from '../../../shared/services/wishlist-service/wishlist-snackbar.service';
 
 @Component({
     selector: 'app-product-mobile',
@@ -19,7 +20,10 @@ export class ProductMobileComponent implements OnInit {
     isDiscounted = false;
     isRange = false;
 
-    constructor(private apiService: ApiService) {
+    constructor(
+        private apiService: ApiService,
+        private snackBarService: WishlistSnackbarService
+    ) {
     }
 
     ngOnInit() {
@@ -46,6 +50,11 @@ export class ProductMobileComponent implements OnInit {
             .wishlistProduct(sku, mark, true)
             .subscribe((payload: any) => {
                 this.product.wishlisted = mark;
+                if (mark) {
+                    this.snackBarService.addToWishlist(sku);
+                } else {
+                    this.snackBarService.removeIfExistsProduct(sku);
+                }
             });
     }
 
