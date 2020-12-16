@@ -15,6 +15,7 @@ import {Gallery, GalleryItem, ImageItem} from '@ngx-gallery/core';
 import {Lightbox} from '@ngx-gallery/lightbox';
 import {VariationsComponent} from '../variations/variations.component';
 import {PixelService} from '../../../shared/services/facebook-pixel/pixel.service';
+import {WishlistSnackbarService} from '../../../shared/services/wishlist-service/wishlist-snackbar.service';
 
 @Component({
     selector: 'app-product-details-mobile',
@@ -97,7 +98,8 @@ export class ProductDetailsMobileComponent implements OnInit {
         private eventEmitterService: EventEmitterService,
         private matDialogUtils: MatDialogUtilsService,
         private seoService: SeoService,
-        private pixelService: PixelService
+        private pixelService: PixelService,
+        private snackBarService: WishlistSnackbarService
     ) {
     }
 
@@ -251,6 +253,9 @@ export class ProductDetailsMobileComponent implements OnInit {
             .wishlistProduct(sku, mark, true)
             .subscribe((payload: any) => {
                 this.product.wishlisted = mark;
+                if (mark) {
+                    this.snackBarService.addToWishlist(sku);
+                }
             });
     }
 

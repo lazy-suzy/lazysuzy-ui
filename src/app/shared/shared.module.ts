@@ -6,6 +6,7 @@ import { LoaderModule } from './components/loader/loader.module';
 import { MaterialModule } from './material-module';
 import { AmericanNumberPipe } from './pipes/american-number.pipe';
 import { RouterModule } from '@angular/router';
+import { WishlistSnackbarComponent } from './components/wishlist-snackbar/wishlist-snackbar.component';
 
 const DECLARATIONS = [ProductsCarousalComponent, AmericanNumberPipe];
 
@@ -18,8 +19,11 @@ const MODULES = [
 ];
 
 @NgModule({
-  declarations: [...DECLARATIONS],
+  declarations: [...DECLARATIONS, WishlistSnackbarComponent],
   imports: [...MODULES],
-  exports: [...DECLARATIONS, ...MODULES]
+  exports: [...DECLARATIONS, ...MODULES],
+  entryComponents: [
+    WishlistSnackbarComponent,
+  ],
 })
 export class SharedModule {}

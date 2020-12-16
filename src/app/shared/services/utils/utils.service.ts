@@ -56,7 +56,7 @@ export class UtilsService {
         !isClose && this.dialog.closeAll();
         return this.dialog.open(SignupComponent, {
             width,
-
+            data: {isClose},
             panelClass: 'auth-dialog-container',
             autoFocus: false,
         });
