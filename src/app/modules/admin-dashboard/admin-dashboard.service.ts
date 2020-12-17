@@ -36,11 +36,12 @@ export class AdminDashboardService {
         this.unsubscribe$.complete();
     }
 
-    cropImage(image, product): Observable<any> {
+    cropImage(image, imageType, product): Observable<any> {
         const endPoint = `new-products/remove-background`;
         const url = `${env.ADMIN_API_BASE_HREF}${endPoint}`;
         const data = {
             image,
+            image_type: imageType,
             product_sku: product.product_sku
         };
         return this.httpService.post(url, data);

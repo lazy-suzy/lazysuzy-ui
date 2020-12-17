@@ -15,23 +15,23 @@
         <h4>{{products.total}} Products for review</h4>
         <button mat-raised-button class="submit-btn" (click)="submit()">Submit</button>
     </div>
-    <div class="container" 
-    infinite-scroll 
-    [infiniteScrollDistance]="scrollDistance"
-    [infiniteScrollUpDistance]="scrollUpDistance" 
-    [infiniteScrollThrottle]="throttle" 
-    (scrolled)="onScrollDown()">
+    <div class="container"
+         infinite-scroll
+         [infiniteScrollDistance]="scrollDistance"
+         [infiniteScrollUpDistance]="scrollUpDistance"
+         [infiniteScrollThrottle]="throttle"
+         (scrolled)="onScrollDown()">
 
         <ng-container *ngFor="let product of products.data;let i=index">
-            <app-new-product-row 
-            [product]="product" 
-            [index]="i+1"
-            [filters]=filters
-            [mapping_core]=mapping_core
+            <app-new-product-row
+                    [product]="product"
+                    [index]="i+1"
+                    [filters]=filters
+                    [mapping_core]=mapping_core
             ></app-new-product-row>
-            <hr />
+            <hr/>
         </ng-container>
 
     </div>
 </ng-container>
-<img *ngIf="isProductFetching" [src]="spinner" class="loader" />
+<img *ngIf="isProductFetching" [src]="spinner" class="loader"/>

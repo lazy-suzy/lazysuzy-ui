@@ -194,7 +194,7 @@
     </div>
     <div class="col-8">
         <div class="flex flex-wrap">
-            <ng-container *ngFor="let image of productImages;let index = index">
+            <ng-container *ngFor="let image of product.main_product_images.split(',');let index = index">
                 <div class="flex flex-column mh3">
                     <img src="{{image}}" height="150px" width='150px'>
                     <mat-radio-group *ngIf="product.status ==='approved'"
@@ -205,7 +205,22 @@
                         </div>
                     </mat-radio-group>
                     <div class="flex justify-center mt1">
-                        <button class="btn" (click)="cropImage(image)">Crop</button>
+                        <button class="btn" (click)="cropImage(image,'main_product_images')">Crop</button>
+                    </div>
+                </div>
+            </ng-container>
+            <ng-container *ngFor="let image of product.product_images.split(',');let index = index">
+                <div class="flex flex-column mh3">
+                    <img src="{{image}}" height="150px" width='150px'>
+                    <mat-radio-group *ngIf="product.status ==='approved'"
+                                     (change)="tagImage(product.product_sku,image,$event.value)">
+                        <div class="flex justify-between">
+                            <mat-radio-button value="primary">B1</mat-radio-button>
+                            <mat-radio-button value="secondary">B2</mat-radio-button>
+                        </div>
+                    </mat-radio-group>
+                    <div class="flex justify-center mt1">
+                        <button class="btn" (click)="cropImage(image,'product_images')">Crop</button>
                     </div>
                 </div>
             </ng-container>
