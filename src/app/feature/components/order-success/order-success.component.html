@@ -46,21 +46,21 @@
                 <ng-container *ngFor="let item of cartProducts">
                     <div class="pv2 blue-font w-30-ns">
                         <img [src]="item.image"/>
-                        <div class="open-sans-18">{{ renderText(item.product_name) }}</div>
+                        <div class="open-sans-14">{{ renderText(item.product_name) }}</div>
                         <div>
-                           <span class="open-sans-14 brand-font"> by {{ item.site }}</span>
+                            <span class="open-sans-14 brand-font">by <span class="upper-case">{{ item.site }}</span></span>
                         </div>
                         <ng-container *ngIf="item.is_promo_applied;else NoDiscountPrice">
-                            <div><span class=" open-sans-18pink-font" >${{item.total_price | number: '1.2-2'}}</span>&nbsp; <span
-                                    class="open-sans-14 gray-font strike">${{item.original_total_price | number: '1.2-2'}}</span></div>
+                            <div><span class=" open-sans-14 pink-font" >${{item.total_price | number: '1.2-2'}}</span>&nbsp; <span
+                                    class="open-sans-12 brand-font strike">${{item.original_total_price | number: '1.2-2'}}</span></div>
                         </ng-container>
                         <ng-template #NoDiscountPrice>
-                            <div class="open-sans-18 pink-font">${{ item.price | number: '1.2-2' }}</div>
+                            <div class="open-sans-14">${{ item.price | number: '1.2-2' }}</div>
                         </ng-template>
                         <div class="flex">
-                            <span class="open-sans-14 bold">Delivery:</span>
+                            <span class="open-sans-14 brand-font bold upper-case">Delivery:</span>
                             <span class="delivery-text ml1 open-sans-14">
-                                <span class="upper-case">{{item.label}}</span>  {{item.back_order_msg_date}}
+                               {{item.label}} {{item.back_order_msg_date}}
                             </span>
                         </div>
                     </div>
