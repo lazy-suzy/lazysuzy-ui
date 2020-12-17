@@ -1,138 +1,146 @@
 <div class="pv4-ns ph6-ns pa2 tc" *ngIf="!isLoading">
-  <div class="pink-font ml3-ns b pb2-ns pv2">
-    THANKS FOR YOUR ORDER!
-  </div>
-  <!-- <div class="signup-card mv3 w-70-ns tl" *ngIf="!isLoggedIn">
-    <div class="mv3 gray-font b">
-      Sign Up or Log In to keep track of your Order History
+    <div class="pink-font ml3-ns b pb2-ns pv2">
+        THANKS FOR YOUR ORDER!
     </div>
-    <div class="flex-ns justify-center mv3">
-      <div class="w-40-ns">
-        <input
-          type="password"
-          placeholder="Password"
-          class="form-input"
-          [(ngModel)]="password"
-        />
-        <span class="error-msg" *ngIf="showError"
-          >Password must contain 8 characters</span
-        >
+    <!-- <div class="signup-card mv3 w-70-ns tl" *ngIf="!isLoggedIn">
+      <div class="mv3 gray-font b">
+        Sign Up or Log In to keep track of your Order History
       </div>
-      <div class="w-50-ns tc">
-        <button
-          class="register-btn w-70-ns w-100 mt0-ns mt3 b"
-          (click)="updatePassword()"
-        >
-          Access LazySuzy Account
-        </button>
-      </div>
-    </div>
-    <span class="success-msg mh4" *ngIf="showSuccess">User registered</span>
-  </div> -->
-  <div class="products-card mv3 w-70-ns tl">
-    <div class="order-header section pv3">
-      <div class="pb2 flex">
-        <div class="w-20-ns w-40">Order No:</div>
-        <div>{{ orderId }}</div>
-      </div>
-      <div class="pb2 flex">
-        <div class="w-20-ns w-40">Order Date:</div>
-        <div>{{ orderDate }}</div>
-      </div>
-    </div>
-    <div class="order-products pb4 section">
-      <div class="pv3">{{ numberOfProducts }} Items</div>
-      <div class="flex-ns">
-        <div class="w-33-ns pv2 blue-font" *ngFor="let item of cartProducts">
-          <img [src]="item.image" />
-          <div>{{ item.product_name }}</div>
-          <div>
-            by <span class="brand-font">{{ item.site }}</span>
-          </div>
-          <ng-container *ngIf="item.is_promo_applied;else NoDiscountPrice">
-            <div><span class="pink-font">${{item.total_price | number: '1.2-2'}}</span>&nbsp; <span class="strike">${{item.original_total_price | number: '1.2-2'}}</span></div>
-          </ng-container>
-          <ng-template #NoDiscountPrice>
-            <div>${{ item.price | number: '1.2-2' }}</div>
-          </ng-template>
-
+      <div class="flex-ns justify-center mv3">
+        <div class="w-40-ns">
+          <input
+            type="password"
+            placeholder="Password"
+            class="form-input"
+            [(ngModel)]="password"
+          />
+          <span class="error-msg" *ngIf="showError"
+            >Password must contain 8 characters</span
+          >
+        </div>
+        <div class="w-50-ns tc">
+          <button
+            class="register-btn w-70-ns w-100 mt0-ns mt3 b"
+            (click)="updatePassword()"
+          >
+            Access LazySuzy Account
+          </button>
         </div>
       </div>
-    </div>
-    <div class="order-pricing section mb3">
-      <div class="flex justify-between pv3">
-        <div class="b">SUBTOTAL</div>
-        <div class="b">${{
-          orderAmount.total_promo_discount? (orderAmount.original_sub_total | number: '1.2-2'):orderAmount.sub_total | number: '1.2-2' }}</div>
-      </div>
-      <div class="flex justify-between pv2" *ngIf="orderAmount.total_promo_discount">
-        <div class="flex flex-column">
-         <span>{{promoDetails.description}}</span>
-          <span style="font-size: 14px">{{promoDetails.code}}</span>
+      <span class="success-msg mh4" *ngIf="showSuccess">User registered</span>
+    </div> -->
+    <div class="products-card mv3 w-70-ns tl">
+        <div class="order-header section pv3">
+            <div class="pb2 flex">
+                <div class="w-20-ns w-40">Order No:</div>
+                <div>{{ orderId }}</div>
+            </div>
+            <div class="pb2 flex">
+                <div class="w-20-ns w-40">Order Date:</div>
+                <div>{{ orderDate }}</div>
+            </div>
         </div>
-        <div> -${{ orderAmount.total_promo_discount | number: '1.2-2' }}</div>
-      </div>
-      <div class="flex justify-between pv2">
-
-        <div>Shipping</div>
-        <div>${{ orderAmount.shipment_total | number: '1.2-2' }}</div>
-      </div>
-      <div class="flex justify-between pv2">
-        <div>Estimated Tax</div>
-        <div>${{ orderAmount.sales_tax_total | number: '1.2-2' }}</div>
-      </div>
-      <div class="flex justify-between pink-font b pv3">
-        <div>TOTAL</div>
-        <div>${{ orderAmount.total_cost | number: '1.2-2' }}</div>
-      </div>
-    </div>
-    <div class="order-details section">
-      <div class="flex-ns">
-        <div class="w-50-ns mh4-ns" *ngIf="deliveryData.length > 0">
-          <div class="header b">SHIPPING DETAILS</div>
-          <div class="content ml2 pv2">
-            <div>
-              {{ deliveryData[0].shipping_f_Name }}
-              {{ deliveryData[0].shipping_l_Name }}
+        <div class="order-products pb4 section">
+            <div class="pv3">{{ numberOfProducts }} Items</div>
+            <div class="flex-ns flex-wrap justify-between">
+                <ng-container *ngFor="let item of cartProducts">
+                    <div class="pv2 blue-font w-30-ns">
+                        <img [src]="item.image"/>
+                        <div class="open-sans-18">{{ renderText(item.product_name) }}</div>
+                        <div>
+                           <span class="open-sans-14 brand-font"> by {{ item.site }}</span>
+                        </div>
+                        <ng-container *ngIf="item.is_promo_applied;else NoDiscountPrice">
+                            <div><span class=" open-sans-18pink-font" >${{item.total_price | number: '1.2-2'}}</span>&nbsp; <span
+                                    class="open-sans-14 gray-font strike">${{item.original_total_price | number: '1.2-2'}}</span></div>
+                        </ng-container>
+                        <ng-template #NoDiscountPrice>
+                            <div class="open-sans-18 pink-font">${{ item.price | number: '1.2-2' }}</div>
+                        </ng-template>
+                        <div class="flex">
+                            <span class="open-sans-14 bold">Delivery:</span>
+                            <span class="delivery-text ml1 open-sans-14">
+                                <span class="upper-case">{{item.label}}</span>  {{item.back_order_msg_date}}
+                            </span>
+                        </div>
+                    </div>
+                </ng-container>
             </div>
-            <div>
-              {{
-                deliveryData[0].shipping_phone
-                  | americanNumber: deliveryData[0].shipping_phone
-              }}
-            </div>
-
-            <div>{{ deliveryData[0].shipping_address_line1 }}</div>
-            <div>{{ deliveryData[0].shipping_address_line2 }}</div>
-            <div>{{ deliveryData[0].shipping_city }}</div>
-            <div>
-              {{ deliveryData[0].shipping_state }},
-              {{ deliveryData[0].shipping_zipcode }}
-            </div>
-          </div>
         </div>
-
-        <div class="w-50-ns mh4-ns">
-          <div class="header b">PAYMENT DETAILS</div>
-          <div class="content ml2 pv2">
-            <div>XXXX XXXXXX X{{ cardDetails.last4 }}</div>
-            <div>
-              EXP: {{ cardDetails.exp_month }}/{{ cardDetails.exp_year }}
+        <div class="order-pricing section mb3">
+            <div class="flex justify-between pv3">
+                <div class="b">SUBTOTAL</div>
+                <div class="b">${{
+                    orderAmount.total_promo_discount ? (orderAmount.original_sub_total | number: '1.2-2') : orderAmount.sub_total | number: '1.2-2' }}</div>
             </div>
-          </div>
-          <div class="header b">DELIVERY METHOD</div>
-          <div class="content ml2 pv2">
-            <div>UPS Ground</div>
-            <div>Arrives within 4-5 days</div>
-          </div>
+            <div class="flex justify-between pv2" *ngIf="orderAmount.total_promo_discount">
+                <div class="flex flex-column">
+                    <span>{{promoDetails.description}}</span>
+                    <span style="font-size: 14px">{{promoDetails.code}}</span>
+                </div>
+                <div> -${{ orderAmount.total_promo_discount | number: '1.2-2' }}</div>
+            </div>
+            <div class="flex justify-between pv2">
+
+                <div>Shipping</div>
+                <div>${{ orderAmount.shipment_total | number: '1.2-2' }}</div>
+            </div>
+            <div class="flex justify-between pv2">
+                <div>Estimated Tax</div>
+                <div>${{ orderAmount.sales_tax_total | number: '1.2-2' }}</div>
+            </div>
+            <div class="flex justify-between pink-font b pv3">
+                <div>TOTAL</div>
+                <div>${{ orderAmount.total_cost | number: '1.2-2' }}</div>
+            </div>
         </div>
-      </div>
+        <div class="order-details section">
+            <div class="flex-ns">
+                <div class="w-50-ns mh4-ns" *ngIf="deliveryData.length > 0">
+                    <div class="header b">SHIPPING DETAILS</div>
+                    <div class="content ml2 pv2">
+                        <div>
+                            {{ deliveryData[0].shipping_f_Name }}
+                            {{ deliveryData[0].shipping_l_Name }}
+                        </div>
+                        <div>
+                            {{
+                            deliveryData[0].shipping_phone
+                                | americanNumber: deliveryData[0].shipping_phone
+                            }}
+                        </div>
+
+                        <div>{{ deliveryData[0].shipping_address_line1 }}</div>
+                        <div>{{ deliveryData[0].shipping_address_line2 }}</div>
+                        <div>{{ deliveryData[0].shipping_city }}</div>
+                        <div>
+                            {{ deliveryData[0].shipping_state }},
+                            {{ deliveryData[0].shipping_zipcode }}
+                        </div>
+                    </div>
+                </div>
+
+                <div class="w-50-ns mh4-ns">
+                    <div class="header b">PAYMENT DETAILS</div>
+                    <div class="content ml2 pv2">
+                        <div>XXXX XXXXXX X{{ cardDetails.last4 }}</div>
+                        <div>
+                            EXP: {{ cardDetails.exp_month }}/{{ cardDetails.exp_year }}
+                        </div>
+                    </div>
+<!--                    <div class="header b">DELIVERY METHOD</div>-->
+<!--                    <div class="content ml2 pv2">-->
+<!--                        <div>UPS Ground</div>-->
+<!--                        <div>Arrives within 4-5 days</div>-->
+<!--                    </div>-->
+                </div>
+            </div>
+        </div>
+        <div class="mv3">
+            <div class="b tc">
+                Please check your inbox for a confirmation email
+            </div>
+        </div>
     </div>
-    <div class="mv3">
-      <div class="b tc">
-        Please check your inbox for a confirmation email
-      </div>
-    </div>
-  </div>
 </div>
-<img *ngIf="isLoading" [src]="spinner" class="loader" />
+<img *ngIf="isLoading" [src]="spinner" class="loader"/>
