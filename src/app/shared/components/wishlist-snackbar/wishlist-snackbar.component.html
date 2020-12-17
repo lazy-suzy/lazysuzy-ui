@@ -1,11 +1,11 @@
 <div class="flex justify-between" *ngIf="isGuest;else User">
-    <span class="open-sans-12">Added to Favorites. Sign up to save to your account.</span>
+    <span class="label">Added to Favorites. Sign up to save to your account.</span>
     <button (click)="snackBarRef.dismissWithAction()">Sign Up</button>
 </div>
 
 <ng-template #User>
     <div class="flex justify-between">
-        <span class="open-sans-12">Added to Favorites.</span>
+        <span class="label">Added to Favorites.</span>
         <button (click)="snackBarRef.dismiss()">Ok</button>
     </div>
 </ng-template>
