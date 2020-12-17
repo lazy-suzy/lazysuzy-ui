@@ -1,6 +1,6 @@
 <div class="flex justify-between" *ngIf="isGuest;else User">
     <span class="label">Added to Favorites. Sign up to save to your account.</span>
-    <button (click)="snackBarRef.dismissWithAction()">Sign Up</button>
+    <button class="ml3-ns" (click)="snackBarRef.dismissWithAction()">Sign Up</button>
 </div>
 
 <ng-template #User>
