@@ -1,4 +1,4 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {AdminDashboardService} from '../../admin-dashboard/admin-dashboard.service';
 
 interface ImageItem {
@@ -17,6 +17,7 @@ export class NewProductRowComponent implements OnInit {
     @Input() filters;
     @Input() mapping_core;
 
+    @Output() updateProduct = new EventEmitter();
     allFilters = {};
     filterKeys = [];
     color_filter = [];
@@ -104,55 +105,11 @@ export class NewProductRowComponent implements OnInit {
         });
     }
 
-    updateImage(index: number, image: string, $event) {
-        const imageItem: ImageItem = {
-            index,
-            image
-        };
-        if ($event.value === 'primary') {
-            this.checkSecondaryImage(imageItem);
-            this.xImagePrimary.push(imageItem);
-        } else {
-            this.checkPrimaryImage(imageItem);
-            this.xImageSecondary.push(imageItem);
-        }
-        this.product.image_xbg_select_primary = this.xImagePrimary.map(this.imageOnly).join(',');
-        this.product.image_xbg_select_secondary = this.xImageSecondary.map(this.imageOnly).join(',');
-    }
-
-    imageOnly(imageItem: ImageItem) {
-        return imageItem.image;
-    }
-
-    checkPrimaryImage(imageItem) {
-        const itemIndex = this.xImagePrimary.findIndex((value: ImageItem) => value.index === imageItem.index);
-        if (itemIndex !== -1) {
-            this.xImagePrimary.splice(itemIndex, 1);
-        }
-    }
-
-    checkSecondaryImage(imageItem) {
-        const itemIndex = this.xImageSecondary.findIndex((value: ImageItem) => value.index === imageItem.index);
-        if (itemIndex !== -1) {
-            this.xImageSecondary.splice(itemIndex, 1);
-        }
-    }
-
-    cropImage(image) {
-        this.adminDashboardService.cropImage(image, this.product).subscribe(
+    cropImage(image, imageType) {
+        this.adminDashboardService.cropImage(image, imageType, this.product).subscribe(
             (response: any) => {
-                const newImage = response.newImage;
-                const index = this.productImages.indexOf(image);
-                this.productImages[index] = response.newImage;
+                this.product[imageType] = response.product[imageType];
             }
         );
-    }
-
-    private updatePrimaryXImage(index, image) {
-        const imageItem = {
-            index,
-            image
-        };
-        this.xImageSecondary.push(imageItem);
     }
 }
