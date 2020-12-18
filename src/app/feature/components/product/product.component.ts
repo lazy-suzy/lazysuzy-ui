@@ -15,6 +15,7 @@ import {
     UtilsService,
     MatDialogUtilsService,
 } from 'src/app/shared/services';
+import {WishlistSnackbarService} from '../../../shared/services/wishlist-service/wishlist-snackbar.service';
 
 @Component({
     selector: 'app-product',
@@ -47,7 +48,8 @@ export class ProductComponent implements OnInit {
         private activeRoute: ActivatedRoute,
         private apiService: ApiService,
         private utilsService: UtilsService,
-        private matDialogUtils: MatDialogUtilsService
+        private matDialogUtils: MatDialogUtilsService,
+        private snackBarService: WishlistSnackbarService
     ) {
     }
 
@@ -102,6 +104,7 @@ export class ProductComponent implements OnInit {
             this.maxPrice = +prices[1];
         }
     }
+
     // + unary operator convert string to integer
     setWasMinMaxPrice(prices: string[]) {
         if (prices.length === 1) {
@@ -138,6 +141,11 @@ export class ProductComponent implements OnInit {
             .wishlistProduct(sku, mark, false)
             .subscribe((payload: any) => {
                 this.product.wishlisted = mark;
+                if (mark) {
+                    this.snackBarService.addToWishlist(sku);
+                } else {
+                    this.snackBarService.removeIfExistsProduct(sku);
+                }
             });
     }
 }

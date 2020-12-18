@@ -1,0 +1,52 @@
+
+.label {
+  font-family: "Open Sans", "Helvetica Neue", sans-serif;
+  font-size: 16px;
+  //white-space: nowrap;
+}
+
+button {
+  font-family: "Open Sans", "Helvetica Neue", sans-serif;
+  border: none;
+  background: transparent;
+  color: #b76e79;
+  white-space: nowrap;
+}
+
+@media screen and  (max-width: 768px) {
+  button {
+    border: none;
+    background: transparent;
+    color: #b76e79;
+    white-space: nowrap;
+    font-size: 12px;
+    padding: 1px 0;
+  }
+
+  .label {
+    font-family: "Open Sans", "Helvetica Neue", sans-serif;
+    font-size: 12px;
+  }
+}
+
+
+::ng-deep.snackbar-container {
+  background: #f2f4f3;
+  color: #0c1c31;
+  margin: 0 0 3rem 0 !important;
+  border-radius: 0;
+  max-width: 80vw;
+}
+
+::ng-deep.visible-none {
+  visibility: hidden;
+}
+
+::ng-deep.snackbar-container-handset {
+  background: #f2f4f3;
+  width: 100%;
+  color: #0c1c31;
+  max-width: 100%;
+  margin: 0 !important;
+  border-radius: 0;
+}

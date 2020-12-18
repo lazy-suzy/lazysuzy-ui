@@ -21,6 +21,8 @@ export class UtilsService {
         Breakpoints.Handset
     );
     bpSubscription: Subscription;
+    signInDialogRef: any;
+    signUpDialogRef: any;
 
     constructor(
         public dialog: MatDialog,
@@ -56,7 +58,7 @@ export class UtilsService {
         !isClose && this.dialog.closeAll();
         return this.dialog.open(SignupComponent, {
             width,
-
+            data: {isClose},
             panelClass: 'auth-dialog-container',
             autoFocus: false,
         });
