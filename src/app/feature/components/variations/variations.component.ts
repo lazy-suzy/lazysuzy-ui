@@ -137,30 +137,23 @@ export class VariationsComponent implements OnInit {
      */
     selectedVariation(variation, index: number) {
         console.log('variation com: ', variation);
-        if (variation.has_parent_sku) {
-            if (this.isHandset) {
-                this.router.navigate([`/product/${variation.variation_sku}`]);
-                this.reload.emit();
-            } else {
-                this.matDialogUtils.openVariationDialog(variation.variation_sku);
-            }
-        } else {
-            this.selectedSwatch = {
-                image: variation.image,
-                swatch_image: variation.swatch_image,
-                price: variation.price,
-                wasPrice: variation.was_price,
-            };
-            this.selectedIndex = index;
-            // this.priceData = {
-            //     price: variation.price,
-            //     wasPrice: variation.was_price,
-            // };
-            // this.setPrice.emit(this.priceData);
-            this.setImage.emit(variation);
-            this.filterSwatches();
-            // this.updateSwatches();
-        }
+        // variation.has_parent_sku
+        this.selectedSwatch = {
+            image: variation.image,
+            swatch_image: variation.swatch_image,
+            price: variation.price,
+            wasPrice: variation.was_price,
+        };
+        this.selectedIndex = index;
+        // this.priceData = {
+        //     price: variation.price,
+        //     wasPrice: variation.was_price,
+        // };
+        // this.setPrice.emit(this.priceData);
+        this.setImage.emit(variation);
+        this.filterSwatches();
+        // this.updateSwatches();
+
         this.setSelectedOptionsOfVariation(variation);
         this.selectionEmit();
     }
