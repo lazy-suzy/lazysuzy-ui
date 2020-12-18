@@ -11,7 +11,7 @@ import {
     BreakpointObserver
 } from '@angular/cdk/layout';
 import {Observable, Subscription} from 'rxjs';
-import {MAT_DIALOG_DATA} from '@angular/material/dialog';
+import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material/dialog';
 
 @Component({
     selector: 'app-signup',
@@ -36,6 +36,7 @@ export class SignupComponent implements OnInit {
     bpSubscription: Subscription;
 
     constructor(
+        private dialogRef: MatDialogRef<SignupComponent>,
         private apiService: ApiService,
         private utils: UtilsService,
         private eventService: EventEmitterService,
@@ -114,6 +115,7 @@ export class SignupComponent implements OnInit {
     }
 
     openSigninDialog() {
+        this.dialogRef.close();
         this.matDialogUtils.openSigninDialog(this.isHandset ? '90%' : '35%', this.data.isClose);
     }
 }
