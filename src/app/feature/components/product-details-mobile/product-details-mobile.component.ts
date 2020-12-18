@@ -99,7 +99,7 @@ export class ProductDetailsMobileComponent implements OnInit {
         private matDialogUtils: MatDialogUtilsService,
         private seoService: SeoService,
         private pixelService: PixelService,
-        private snackBarService: WishlistSnackbarService
+        private snackBarService: WishlistSnackbarService,
     ) {
     }
 
@@ -255,6 +255,8 @@ export class ProductDetailsMobileComponent implements OnInit {
                 this.product.wishlisted = mark;
                 if (mark) {
                     this.snackBarService.addToWishlist(sku);
+                } else {
+                    this.snackBarService.removeIfExistsProduct(sku);
                 }
             });
     }
