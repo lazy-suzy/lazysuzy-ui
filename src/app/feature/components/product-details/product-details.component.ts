@@ -13,6 +13,7 @@ import {Gallery, GalleryItem, ImageItem} from '@ngx-gallery/core';
 import {Lightbox} from '@ngx-gallery/lightbox';
 import {PixelService} from '../../../shared/services/facebook-pixel/pixel.service';
 import {first} from 'rxjs/operators';
+import {WishlistSnackbarService} from '../../../shared/services/wishlist-service/wishlist-snackbar.service';
 
 @Component({
     selector: 'app-product-details',
@@ -79,7 +80,8 @@ export class ProductDetailsComponent implements OnInit {
         private eventEmitterService: EventEmitterService,
         private matDialogUtils: MatDialogUtilsService,
         private seoService: SeoService,
-        private pixelService: PixelService
+        private pixelService: PixelService,
+        private snackBarService: WishlistSnackbarService
     ) {
     }
 
@@ -257,7 +259,11 @@ export class ProductDetailsComponent implements OnInit {
             this.apiService
                 .wishlistProduct(sku, mark, false)
                 .subscribe(_ => {
-
+                        if (mark) {
+                            this.snackBarService.addToWishlist(sku);
+                        } else {
+                            this.snackBarService.removeIfExistsProduct(sku);
+                        }
                     },
                     error => {
                         this.product.wishlisted = !mark;
