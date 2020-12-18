@@ -67,7 +67,7 @@ export class NavDesktopComponent implements OnInit {
 
     ngOnInit(): void {
         this.getDeals();
-      //  this.loadNewsLetterPopup();
+        //  this.loadNewsLetterPopup();
         this.eventSubscription = this.eventEmitterService.userChangeEvent
             .asObservable()
             .subscribe((user) => {
@@ -93,7 +93,9 @@ export class NavDesktopComponent implements OnInit {
             });
 
         this.eventEmitterService.isBrandSubject.subscribe((brandValue: string) => {
-            this.getDepartments(brandValue);
+            // Uncomment this line for brand specific category sub nav bar
+            // this.getDepartments(brandValue);
+            this.getDepartments();
         });
 
         this.activeRoute.queryParams.subscribe((params) => {
