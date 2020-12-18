@@ -124,14 +124,14 @@ export class MatDialogUtilsService {
             panelClass: 'auth-dialog-container',
             autoFocus: false,
             data: {
-                isClose: isClose
+                isClose
             }
         });
         return this.signUpDialog;
     }
 
     openSigninDialog(width = '35%', isClose = false) {
-        if (isClose) {
+        if (isClose && this.signUpDialog) {
             this.signUpDialog.close();
         }
         !isClose && this.dialog.closeAll();
@@ -140,7 +140,7 @@ export class MatDialogUtilsService {
             panelClass: 'auth-dialog-container',
             autoFocus: false,
             data: {
-                isClose: isClose
+                isClose
             }
         });
         return this.signInDialog;

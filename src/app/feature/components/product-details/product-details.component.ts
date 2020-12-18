@@ -253,22 +253,20 @@ export class ProductDetailsComponent implements OnInit {
     }
 
     wishlistProduct(sku, mark) {
-        const localData: any = this.localStorageUser;
-        if (localData.email.length > 0) {
-            this.product.wishlisted = mark;
-            this.apiService
-                .wishlistProduct(sku, mark, false)
-                .subscribe(_ => {
-                        if (mark) {
-                            this.snackBarService.addToWishlist(sku);
-                        } else {
-                            this.snackBarService.removeIfExistsProduct(sku);
-                        }
-                    },
-                    error => {
-                        this.product.wishlisted = !mark;
-                    });
-        }
+        this.product.wishlisted = mark;
+        this.apiService
+            .wishlistProduct(sku, mark, false)
+            .subscribe(_ => {
+                    if (mark) {
+                        this.snackBarService.addToWishlist(sku);
+                    } else {
+                        this.snackBarService.removeIfExistsProduct(sku);
+                    }
+                },
+                error => {
+                    this.product.wishlisted = !mark;
+                });
+
     }
 
     openLink(event, url) {

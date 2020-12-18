@@ -21,6 +21,8 @@ export class UtilsService {
         Breakpoints.Handset
     );
     bpSubscription: Subscription;
+    signInDialogRef: any;
+    signUpDialogRef: any;
 
     constructor(
         public dialog: MatDialog,

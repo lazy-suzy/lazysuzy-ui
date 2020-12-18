@@ -41,7 +41,7 @@ export class WishlistSnackbarService {
             duration: 5000
         });
         snackBarRef.onAction().subscribe(() => {
-            this.utils.openSignupDialog(this.isHandset);
+            this.utils.openSignupDialog(this.isHandset, true);
             this.eventEmitterService.userChangeEvent.asObservable().subscribe(user => {
                 if (user.user_type > 0) {
                     this.markProductWishlisted();
