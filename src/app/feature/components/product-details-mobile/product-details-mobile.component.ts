@@ -244,7 +244,6 @@ export class ProductDetailsMobileComponent implements OnInit {
         this.galleryRef.setConfig({
             imageSize: 'contain',
             itemTemplate: this.itemTemplate,
-            gestures: false
         });
         this.galleryRef.load(this.items);
     }
