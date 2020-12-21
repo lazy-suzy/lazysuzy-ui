@@ -201,28 +201,27 @@
 
                                 </div>
                             </ng-container>
-
                         </owl-carousel>
-                        <!--                            <p-carousel-->
-                        <!--                                    [numVisible]="2"-->
-                        <!--                                    [numScroll]="1"-->
-                        <!--                                    [value]="product.collections"-->
-                        <!--                                    [circular]="false"-->
-                        <!--                            >-->
-                        <!--                                <ng-template let-data pTemplate="item">-->
-                        <!--                                    <div class="carousel-item" [routerLink]="['/product',data.sku]" >-->
-                        <!--                                        <img [src]="'https://lazysuzy.com'+data.image"/>-->
-                        <!--                                        <span class="font-16 open-sans collection-product-name">{{data.name}}</span>-->
-                        <!--                                        <span class="is-price" [ngClass]="{'sale':isDiscountedCollectionPrice(data)}">-->
-                        <!--                                            {{renderPrice(data.price)}} &nbsp;-->
-                        <!--                                            <span *ngIf="isDiscountedCollectionPrice(data)" class="strike was-price">-->
-                        <!--                                                {{renderPrice(data.was_price)}}-->
-                        <!--                                            </span>-->
-                        <!--                                        </span>-->
-
-                        <!--                                    </div>-->
-                        <!--                                </ng-template>-->
-                        <!--                            </p-carousel>-->
+                    </div>
+                </div>
+                <div class="mb2" *ngIf="recentProducts.length">
+                    <hr class="modal-hr"/>
+                    <span class="title">Recently Viewed Products</span>
+                    <div class="pt2">
+                        <owl-carousel
+                                [options]="recentOptions"
+                                [items]="recentProducts"
+                                *ngIf="recentProducts?.length"
+                                [carouselClasses]="['owl-theme']"
+                        >
+                            <ng-container *ngFor="let data of recentProducts; let i = index">
+                                <div class="carousel-item" [routerLink]="['/product',data.product_sku]">
+                                    <img [src]="data.image"/>
+                                    <span class="open-sans font-14 gray-color">{{data.brand_name}}</span>
+                                    <span class="font-14 open-sans">{{data.product_name}}</span>
+                                </div>
+                            </ng-container>
+                        </owl-carousel>
                     </div>
                 </div>
             </div>

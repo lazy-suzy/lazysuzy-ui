@@ -236,7 +236,7 @@
                                     <div class="" [ngClass]="{
                                     'carousel-single-item w-33':product.collections.length === 1,
                                     'carousel-item': product.collections.length > 1
-                                    }" (click)="toCollectionProduct(data)">
+                                    }" (click)="toCollectionProduct(data.sku)">
                                         <img [src]="'https://lazysuzy.com'+data.image"/>
                                         <span class="font-16 open-sans collection-product-name">{{data.name}}</span>
                                         <span class="font-14 open-sans" [ngClass]="{'sale':isDiscounted(data)}">
@@ -247,6 +247,32 @@
                                             </span>
                                         </span>
 
+                                    </div>
+                                </ng-template>
+                            </p-carousel>
+                        </div>
+                    </div>
+                    <div class="mb2" *ngIf="recentProducts.length">
+                        <hr class="modal-hr"/>
+                        <span class="title">Recently Viewed Products</span>
+                        <div class="pt2">
+                            <p-carousel
+                                    [numVisible]="2"
+                                    [numScroll]="1"
+                                    [value]="recentProducts"
+                                    [circular]="false"
+                                    [ngClass]="{
+                                    'hide-nav-arrows':recentProducts.length<3
+                                    }"
+                            >
+                                <ng-template let-data pTemplate="item">
+                                    <div class="" [ngClass]="{
+                                    'carousel-single-item w-33':recentProducts.length === 1,
+                                    'carousel-item': recentProducts.length > 1
+                                    }" (click)="toCollectionProduct(data.product_sku)">
+                                        <img [src]="data.image"/>
+                                        <span class="open-sans font-14 gray-color">{{data.brand_name}}</span>
+                                        <span class="font-14 open-sans">{{data.product_name}}</span>
                                     </div>
                                 </ng-template>
                             </p-carousel>
