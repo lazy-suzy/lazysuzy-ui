@@ -1,9 +1,7 @@
 <img *ngIf="isProductFetching" [src]="spinner" class="loader"/>
 <ng-template #itemTemplate let-index="index" let-type="type" let-data="data" let-currIndex="currIndex">
     <ng-container *ngIf="type === 'imageViewer' && index === currIndex">
-        <pinch-zoom>
-            <img src="{{data.src}}" />
-        </pinch-zoom>
+        <ngx-imageviewer [src]="data.src"></ngx-imageviewer>
     </ng-container>
 </ng-template>
 <ngx-json-ld [json]="schema"></ngx-json-ld>

@@ -11,7 +11,7 @@ import {NgxJsonLdModule} from '@ngx-lite/json-ld';
 import {CarouselModule} from 'primeng/carousel';
 import {OwlModule} from 'ngx-owl-carousel';
 import {GalleryModule} from '@ngx-gallery/core';
-import {PinchZoomModule} from 'ngx-pinch-zoom';
+import {ImageViewerModule} from '@hallysonh/ngx-imageviewer';
 
 const DECLARATIONS = [ProductDetailsMobileComponent];
 
@@ -30,7 +30,7 @@ const MODULES = [
 
 @NgModule({
     declarations: [...DECLARATIONS],
-    imports: [...MODULES, GalleryModule, PinchZoomModule],
+    imports: [...MODULES, GalleryModule, ImageViewerModule],
     exports: [...DECLARATIONS, ...MODULES]
 })
 export class ProductDetailsMobileModule {
