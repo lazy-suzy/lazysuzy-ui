@@ -271,7 +271,8 @@
                                     'carousel-item': recentProducts.length > 1
                                     }" (click)="toCollectionProduct(data.product_sku)">
                                         <img [src]="data.image"/>
-                                        <span class="font-16 open-sans collection-product-name">{{data.product_name}}</span>
+                                        <span class="open-sans font-16 gray-color">{{data.brand_name}}</span>
+                                        <span class="font-16 open-sans">{{data.product_name}}</span>
                                     </div>
                                 </ng-template>
                             </p-carousel>
