@@ -33,6 +33,7 @@ export class NavDesktopComponent implements OnInit {
     //
     isShop = true;
     isBoard = false;
+    aboutUsPage = false;
 
     constructor(
         private router: Router,
@@ -47,7 +48,6 @@ export class NavDesktopComponent implements OnInit {
         private activeRoute: ActivatedRoute
     ) {
         this.checkHomeRoute = router.events.subscribe((val) => {
-            // this.notHome = location.path() !== '';
             this.isFaqPage = location.path().match(/faq\-order/) !== null ||
                 location.path().match(/furniture\-care/) !== null;
             this.notHome =
@@ -55,19 +55,25 @@ export class NavDesktopComponent implements OnInit {
                 location.path().match(/board/) == null &&
                 location.path().match(/blog/) == null &&
                 location.path().match(/faq\-order/) == null &&
-                location.path().match(/furniture\-care/) == null;
+                location.path().match(/furniture\-care/) == null &&
+                location.path().match(/aboutus/) === null;
+
+            this.aboutUsPage = location.path().match(/aboutus/) !== null;
+
             this.showOffer =
                 location.path().match(/checkout/) === null &&
                 location.path().match(/board/) === null &&
                 location.path().match(/blog/) == null;
+
             this.isShop = location.path().match(/board/) == null;
+
             this.isBoard = location.path().match(/board/) !== null;
         });
     }
 
     ngOnInit(): void {
         this.getDeals();
-      //  this.loadNewsLetterPopup();
+        //  this.loadNewsLetterPopup();
         this.eventSubscription = this.eventEmitterService.userChangeEvent
             .asObservable()
             .subscribe((user) => {
