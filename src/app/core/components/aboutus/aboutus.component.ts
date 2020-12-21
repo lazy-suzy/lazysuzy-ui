@@ -1,14 +1,21 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
+import {UtilsService} from '../../../shared/services';
 
 @Component({
-  selector: 'app-aboutus',
-  templateUrl: './aboutus.component.html',
-  styleUrls: ['./aboutus.component.less']
+    selector: 'app-aboutus',
+    templateUrl: './aboutus.component.html',
+    styleUrls: ['./aboutus.component.less']
 })
 export class AboutusComponent implements OnInit {
-  logoPath = 'assets/image/color_logo_transparent.png';
+    logoPath = 'assets/image/color_logo_transparent.png';
+    isHandset = false;
 
-  constructor() {}
+    constructor(private utils: UtilsService) {
+    }
 
-  ngOnInit() {}
+    ngOnInit() {
+        this.utils.isHandset().subscribe(handset => {
+            this.isHandset = handset.matches;
+        });
+    }
 }

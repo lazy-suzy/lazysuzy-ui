@@ -1,15 +1,16 @@
 <div class="aboutus flex items-center flex-column">
-    <h2 class="main-header open-sans-18 w-40-ns">MEET AMERICA'S MAKERS & DESIGNERS FOR YOUR HOME</h2>
+    <span class="main-header open-sans-18 w-100" *ngIf="!isHandset else mobileHeader">MEET AMERICA'S MAKERS & <br>DESIGNERS FOR YOUR HOME</span>
     <div class="w-40-ns mt56 open-sans-18 flex flex-column items-center main-content">
         <p>What is LazySuzy? Your favorite home brands and independent boutiques—all in one place. Because finding
             quality, tasteful, and timeless homeware + home décor shouldn’t be harder than finding your home itself.
             You've done the hard work of finding a place to call home. Now let's give your dream home some style &
             character. </p>
-        <p>LazySuzy thoughtfully aggregates the best home products from around the world, creating an expertly curated
+        <p class="mt4">LazySuzy thoughtfully aggregates the best home products from around the world, creating an
+            expertly curated
             shopping experience for you and a superior platform for designers and off-the-beaten-path makers alike.
             Think of us as your shortcut to style for your home.</p>
     </div>
-    <div class="our-features justify-between w-100">
+    <div class="our-features justify-between mt113 w-100">
         <div class="flex flex-column feature-container">
             <h3 class="open-sans-18 feature-header">TRANSPARENCY</h3>
             <p class="lato-16 feature-detail">We are an impartial platform where you can search for furniture and décor
@@ -28,3 +29,8 @@
         </div>
     </div>
 </div>
+<ng-template #mobileHeader>
+     <span class="main-header open-sans-18 w-100">
+         MEET AMERICA'S<br> MAKERS & DESIGNERS <br> FOR YOUR HOME
+     </span>
+</ng-template>
