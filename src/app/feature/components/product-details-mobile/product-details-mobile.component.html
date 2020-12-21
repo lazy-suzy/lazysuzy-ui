@@ -197,8 +197,8 @@
                             <ng-container *ngFor="let data of recentProducts; let i = index">
                                 <div class="carousel-item" [routerLink]="['/product',data.product_sku]">
                                     <img [src]="data.image"/>
-                                    <span class="open-sans font-16 gray-color">{{data.brand_name}}</span>
-                                    <span class="font-16 open-sans">{{data.product_name}}</span>
+                                    <span class="open-sans font-14 gray-color">{{data.brand_name}}</span>
+                                    <span class="font-14 open-sans">{{data.product_name}}</span>
                                 </div>
                             </ng-container>
                         </owl-carousel>
