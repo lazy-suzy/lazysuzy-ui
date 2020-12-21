@@ -52,7 +52,7 @@ export class BestSellersComponent implements OnInit {
   getBestSellers(): void {
     this.showLoader = true;
     console.log('bestseller');
-    this.apiService.getBestSellers().pipe(first()).subscribe((res) => {
+    this.apiService.getTrendingProducts().pipe(first()).subscribe((res) => {
       this.bestSellers = res.products;
       this.showLoader = false;
     });

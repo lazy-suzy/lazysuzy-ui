@@ -42,6 +42,12 @@ export class ApiService {
         return this.httpService.get(url);
     }
 
+    getTrendingProducts(): Observable<IProductsPayload> {
+        const endPoint = `trending`;
+        const url = `${env.API_BASE_HREF}${endPoint}`;
+        return  this.httpService.get(url);
+    }
+
     getBestSellers(filters = '', page = 0): Observable<IProductsPayload> {
         const endpoint = `products/all`;
         const url = env.useLocalJson
