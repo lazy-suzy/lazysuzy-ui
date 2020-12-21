@@ -1,4 +1,11 @@
 <img *ngIf="isProductFetching" [src]="spinner" class="loader"/>
+<ng-template #itemTemplate let-index="index" let-type="type" let-data="data" let-currIndex="currIndex">
+    <ng-container *ngIf="type === 'imageViewer' && index === currIndex">
+        <pinch-zoom>
+            <img src="{{data.src}}" />
+        </pinch-zoom>
+    </ng-container>
+</ng-template>
 <ngx-json-ld [json]="schema"></ngx-json-ld>
 <ng-container *ngIf="!isProductFetching">
     <div *ngIf="product || !invalidLink; else invalidProduct">
@@ -8,6 +15,7 @@
                      class="prod-img"/>
             </div>
         </div>
+
         <div class="product-content">
 
             <div class="flex justify-between">
@@ -99,7 +107,7 @@
             </div>
 
 
-<!--       Ship Status -- Only applies for CB2 and CAB Products for now-->
+            <!--       Ship Status -- Only applies for CB2 and CAB Products for now-->
             <div class="ship-status mb2 flex" *ngIf="product.online_msg">
                 <span class="ship-status-label">Status:</span>
                 <span class="ship-status-details ml1">
@@ -107,7 +115,7 @@
                                         [ngStyle]="{'color':product.is_back_order ?'#FFCC00':'#54AD32'}">lens</mat-icon>
                     {{product.online_msg}}</span>
             </div>
-<!--            End of Ship status-->
+            <!--            End of Ship status-->
             <div class="ship-info mb2 flex"
                  *ngIf="product.inventory_product_details?.shipping_desc || utils.hasInventory(activeProduct)">
                 <span class="shipping-label">Shipping: &nbsp;</span>

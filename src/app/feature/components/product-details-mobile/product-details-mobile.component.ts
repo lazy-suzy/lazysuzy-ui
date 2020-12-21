@@ -1,4 +1,4 @@
-import {Component, ElementRef, OnInit, ViewChild} from '@angular/core';
+import {Component, ElementRef, OnInit, TemplateRef, ViewChild} from '@angular/core';
 import {ActivatedRoute, Router} from '@angular/router';
 import {IActiveProduct, IProduct, IProductDetail, ISeo} from 'src/app/shared/models';
 import {
@@ -16,6 +16,7 @@ import {Lightbox} from '@ngx-gallery/lightbox';
 import {VariationsComponent} from '../variations/variations.component';
 import {PixelService} from '../../../shared/services/facebook-pixel/pixel.service';
 import {WishlistSnackbarService} from '../../../shared/services/wishlist-service/wishlist-snackbar.service';
+import * as Hammer from 'hammerjs';
 
 @Component({
     selector: 'app-product-details-mobile',
@@ -25,6 +26,8 @@ import {WishlistSnackbarService} from '../../../shared/services/wishlist-service
 export class ProductDetailsMobileComponent implements OnInit {
     @ViewChild(VariationsComponent, {static: false}) child: VariationsComponent;
     @ViewChild('gallery', {static: false}) galleryContainer: ElementRef<any>;
+    @ViewChild('itemTemplate', {static: true}) itemTemplate: TemplateRef<any>;
+
     productSku: any;
     routeSubscription: any;
     product: IProduct;
@@ -101,6 +104,7 @@ export class ProductDetailsMobileComponent implements OnInit {
         private pixelService: PixelService,
         private snackBarService: WishlistSnackbarService,
     ) {
+        //hammer.get('pinch').set({ enable: true });
     }
 
     ngOnInit() {
@@ -194,13 +198,10 @@ export class ProductDetailsMobileComponent implements OnInit {
                                 this.priceObject.was_price = wasPriceString;
                                 this.isRange = isRanged;
                                 this.isDiscounted = isDiscounted;
-                                this.items = this.product.on_server_images.map(
-                                    (item) => new ImageItem({src: item})
-                                );
+                                this.createGalleryItems(this.product.on_server_images);
                                 if (this.product.set) {
                                     this.checkSetInventory(this.product.set);
                                 }
-                                this.galleryRef.load(this.items);
                                 this.invalidLink = false;
                             } else {
                                 this.invalidLink = true;
@@ -215,6 +216,25 @@ export class ProductDetailsMobileComponent implements OnInit {
             }
         );
 
+    }
+
+    createGalleryItems(items: any[]) {
+        this.items = items.map(
+            (item) => {
+                return {
+                    type: 'imageViewer',
+                    data: {
+                        src: item
+                    }
+                };
+            }
+        );
+        this.galleryRef.setConfig({
+            imageSize: 'contain',
+            itemTemplate: this.itemTemplate,
+            gestures: false
+        });
+        this.galleryRef.load(this.items);
     }
 
     onDestroy(): void {
