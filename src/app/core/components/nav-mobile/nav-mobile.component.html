@@ -23,7 +23,7 @@
         <span class="all-offers" (click)="openOfferModal()">View all offers</span>
     </div>
 
-    <div [ngClass]="{'landing-page-navbar':!location.path()}">
+    <div [ngClass]="{'landing-page-navbar':(!location.path() || aboutUsPage)}">
         <div class="flex items-center header" [ngClass]="{'header': !isFaqPage,'faq-header': isFaqPage}">
             <div class="w-60 flex">
                 <ng-container>
@@ -312,4 +312,8 @@
         </div>
     </div>
     <app-banner *ngIf="!location.path()" [isHandset]="true"></app-banner>
+    <div *ngIf="aboutUsPage">
+        <img class="about-us-image" src="https://lazysuzy.com/images/about/about-desktop.png">
+    </div>
+
 </ng-template>
