@@ -1,7 +1,7 @@
 <img *ngIf="isProductFetching" [src]="spinner" class="loader"/>
 <ng-template #itemTemplate let-index="index" let-type="type" let-data="data" let-currIndex="currIndex">
     <ng-container *ngIf="type === 'imageViewer' && index === currIndex">
-        <img class="gallery-image" [src]="data.src">
+        <img  class="gallery-image" [src]="data.src">
     </ng-container>
 </ng-template>
 <ngx-json-ld [json]="schema"></ngx-json-ld>
@@ -11,7 +11,7 @@
             <div class="images">
                 <img *ngFor="let image of items; index as i" [src]="image.data.src"
                      (click)="openLightbox(i)"
-                     class="prod-img"/>
+                     class="prod-img" />
             </div>
         </div>
 

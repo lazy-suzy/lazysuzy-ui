@@ -16,7 +16,7 @@ import {Lightbox} from '@ngx-gallery/lightbox';
 import {VariationsComponent} from '../variations/variations.component';
 import {PixelService} from '../../../shared/services/facebook-pixel/pixel.service';
 import {WishlistSnackbarService} from '../../../shared/services/wishlist-service/wishlist-snackbar.service';
-import {MatDialog} from '@angular/material';
+import {first} from 'rxjs/operators';
 
 @Component({
     selector: 'app-product-details-mobile',
@@ -231,19 +231,13 @@ export class ProductDetailsMobileComponent implements OnInit {
 
     createGalleryItems(items: any[]) {
         this.items = items.map(
-            (item) => {
-                return {
-                    type: 'imageViewer',
-                    data: {
-                        src: item
-                    }
-                };
-            }
+            (item) => new ImageItem({src: item, thumb: item})
         );
         this.galleryRef.setConfig({
             imageSize: 'contain',
             itemTemplate: this.itemTemplate,
-            gestures: false
+            gestures: false,
+            thumb: true,
         });
         this.galleryRef.load(this.items);
     }
@@ -296,6 +290,13 @@ export class ProductDetailsMobileComponent implements OnInit {
         this.lightbox.open(index, this.galleryId, {
             panelClass: 'fullscreen'
         });
+        const intercom = document.getElementsByClassName('intercom-lightweight-app')[0];
+        if (intercom) {
+            intercom.classList.add('hidden');
+        }
+        this.lightbox.closed.pipe(first()).subscribe(_ => {
+            intercom.classList.remove('hidden');
+        });
     }
 
     isArray(obj: any) {
@@ -312,7 +313,7 @@ export class ProductDetailsMobileComponent implements OnInit {
     onSetImage(variation): void {
         // this.galleryContainer.nativeElement.scrollTop = 0;
         this.items = this.product.on_server_images.map(
-            (item) => new ImageItem({src: item})
+            (item) => new ImageItem({src: item, thumb: item})
         );
         if (variation) {
             const src = variation.image;
