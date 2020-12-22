@@ -27,7 +27,7 @@
         [responsiveOptions]="responsiveOptions"
       >
         <ng-template let-data pTemplate="item">
-          <div class="product">
+          <div class="product flex flex-column h-100">
             <a (click)="openDialog(data.sku)">
               <img
                 class="product_image"
