@@ -1,4 +1,4 @@
-<div class="ls-product-div" (click)="openDialog()">
+<div class="ls-product-div flex flex-column h-100" (click)="openDialog()">
     <div class="ls-product">
         <img class="{{ isVariationImageVisible ? 'prod-img' : 'prod-img show' }}" [src]="product.main_image"
              [alt]="product.name"/>
@@ -24,9 +24,6 @@
                 </mat-icon>
             </div>
         </ng-template>
-    </div>
-    <div (click)=openDialog()>
-
     </div>
     <div class="prod-info">
     <span class="site">
@@ -76,7 +73,7 @@
       </span>
         </ng-template>
     </div>
-    <div *ngIf="product.reviews != null && product.reviews != 0" class="rating-container">
+    <div *ngIf="product.reviews != null && product.reviews != 0 else emptySpace" class="rating-container">
         <div class="rating">
             <mat-icon *ngFor="let icon of starIcons" class="yellow">
                 {{ icon }}
