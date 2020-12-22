@@ -1,14 +1,8 @@
 <img *ngIf="isProductFetching" [src]="spinner" class="loader"/>
-<ng-template #itemTemplate let-data>
-    <owl-carousel
-            [options]="imageDialogCarouselOptions"
-
-    >
-        <div class="item" *ngFor="let image of data.items;let i = index">
-            <img [src]="image.data.src">
-        </div>
-    </owl-carousel>
-
+<ng-template #itemTemplate let-index="index" let-type="type" let-data="data" let-currIndex="currIndex">
+    <ng-container *ngIf="type === 'imageViewer' && index === currIndex">
+        <img class="gallery-image" [src]="data.src">
+    </ng-container>
 </ng-template>
 <ngx-json-ld [json]="schema"></ngx-json-ld>
 <ng-container *ngIf="!isProductFetching">
