@@ -17,7 +17,7 @@ import {VariationsComponent} from '../variations/variations.component';
 import {PixelService} from '../../../shared/services/facebook-pixel/pixel.service';
 import {first} from 'rxjs/operators';
 import {WishlistSnackbarService} from '../../../shared/services/wishlist-service/wishlist-snackbar.service';
-import * as Hammer from 'hammerjs';
+import {MatDialog} from '@angular/material';
 
 @Component({
     selector: 'app-product-details-mobile',
@@ -100,6 +100,18 @@ export class ProductDetailsMobileComponent implements OnInit {
         pagination: false,
     };
 
+    imageDialogCarouselOptions = {
+        margin: 10,
+        loop: true,
+        items: 1,
+        dots: true,
+        touchDrag: false,
+        pagination: true,
+        // autoWidth: true,
+        // stagePadding: 100,
+        singleItem: true
+    };
+
     constructor(
         private router: Router,
         private activeRoute: ActivatedRoute,
@@ -115,7 +127,6 @@ export class ProductDetailsMobileComponent implements OnInit {
         private pixelService: PixelService,
         private snackBarService: WishlistSnackbarService,
     ) {
-        //hammer.get('pinch').set({ enable: true });
     }
 
     ngOnInit() {
@@ -244,6 +255,7 @@ export class ProductDetailsMobileComponent implements OnInit {
         this.galleryRef.setConfig({
             imageSize: 'contain',
             itemTemplate: this.itemTemplate,
+            gestures: false
         });
         this.galleryRef.load(this.items);
     }

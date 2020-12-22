@@ -11,7 +11,6 @@ import {NgxJsonLdModule} from '@ngx-lite/json-ld';
 import {CarouselModule} from 'primeng/carousel';
 import {OwlModule} from 'ngx-owl-carousel';
 import {GalleryModule} from '@ngx-gallery/core';
-import {ImageViewerModule} from '@hallysonh/ngx-imageviewer';
 
 const DECLARATIONS = [ProductDetailsMobileComponent];
 
@@ -25,12 +24,13 @@ const MODULES = [
     FormsModule,
     NgxJsonLdModule,
     CarouselModule,
-    OwlModule
+    OwlModule,
+
 ];
 
 @NgModule({
     declarations: [...DECLARATIONS],
-    imports: [...MODULES, GalleryModule, ImageViewerModule],
+    imports: [...MODULES, GalleryModule],
     exports: [...DECLARATIONS, ...MODULES]
 })
 export class ProductDetailsMobileModule {
