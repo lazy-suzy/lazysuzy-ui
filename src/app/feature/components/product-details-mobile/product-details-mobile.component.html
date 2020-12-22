@@ -10,7 +10,7 @@
         <div class="images-container" #gallery>
             <div class="images">
                 <img *ngFor="let image of items; index as i" [src]="image.data.src"
-                     (click)="openImageDialog(image.data.src, i)"
+                     (click)="openLightbox(i)"
                      class="prod-img"/>
             </div>
         </div>

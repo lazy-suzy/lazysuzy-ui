@@ -100,6 +100,7 @@ export class ProductDetailsMobileComponent implements OnInit {
         // stagePadding: 100,
         singleItem: true
     };
+
     constructor(
         private router: Router,
         private activeRoute: ActivatedRoute,
@@ -114,9 +115,7 @@ export class ProductDetailsMobileComponent implements OnInit {
         private seoService: SeoService,
         private pixelService: PixelService,
         private snackBarService: WishlistSnackbarService,
-        private dialog: MatDialog
     ) {
-        //hammer.get('pinch').set({ enable: true });
     }
 
     ngOnInit() {
@@ -296,15 +295,6 @@ export class ProductDetailsMobileComponent implements OnInit {
     openLightbox(index: number) {
         this.lightbox.open(index, this.galleryId, {
             panelClass: 'fullscreen'
-        });
-    }
-
-    openImageDialog(imagePath, index) {
-        this.dialog.open(this.itemTemplate, {
-            data: {
-                items: this.items,
-                index
-            }
         });
     }
 
