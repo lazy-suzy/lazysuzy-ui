@@ -27,6 +27,7 @@ export class ProductDetailsMobileComponent implements OnInit {
     @ViewChild(VariationsComponent, {static: false}) child: VariationsComponent;
     @ViewChild('gallery', {static: false}) galleryContainer: ElementRef<any>;
     @ViewChild('itemTemplate', {static: true}) itemTemplate: TemplateRef<any>;
+    @ViewChild('thumbTemplate', {static: true}) thumbTemplate: TemplateRef<any>;
 
     productSku: any;
     routeSubscription: any;
@@ -236,8 +237,10 @@ export class ProductDetailsMobileComponent implements OnInit {
         this.galleryRef.setConfig({
             imageSize: 'contain',
             itemTemplate: this.itemTemplate,
+            // thumbTemplate: this.thumbTemplate,
             gestures: false,
             thumb: true,
+            thumbWidth: 90,
         });
         this.galleryRef.load(this.items);
     }
