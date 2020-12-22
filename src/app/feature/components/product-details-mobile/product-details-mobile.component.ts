@@ -16,7 +16,7 @@ import {Lightbox} from '@ngx-gallery/lightbox';
 import {VariationsComponent} from '../variations/variations.component';
 import {PixelService} from '../../../shared/services/facebook-pixel/pixel.service';
 import {WishlistSnackbarService} from '../../../shared/services/wishlist-service/wishlist-snackbar.service';
-import * as Hammer from 'hammerjs';
+import {MatDialog} from '@angular/material';
 
 @Component({
     selector: 'app-product-details-mobile',
@@ -89,6 +89,17 @@ export class ProductDetailsMobileComponent implements OnInit {
         pagination: false,
     };
 
+    imageDialogCarouselOptions = {
+        margin: 10,
+        loop: true,
+        items: 1,
+        dots: true,
+        touchDrag: false,
+        pagination: true,
+        // autoWidth: true,
+        // stagePadding: 100,
+        singleItem: true
+    };
     constructor(
         private router: Router,
         private activeRoute: ActivatedRoute,
@@ -103,6 +114,7 @@ export class ProductDetailsMobileComponent implements OnInit {
         private seoService: SeoService,
         private pixelService: PixelService,
         private snackBarService: WishlistSnackbarService,
+        private dialog: MatDialog
     ) {
         //hammer.get('pinch').set({ enable: true });
     }
@@ -283,6 +295,15 @@ export class ProductDetailsMobileComponent implements OnInit {
     openLightbox(index: number) {
         this.lightbox.open(index, this.galleryId, {
             panelClass: 'fullscreen'
+        });
+    }
+
+    openImageDialog(imagePath, index) {
+        this.dialog.open(this.itemTemplate, {
+            data: {
+                items: this.items,
+                index
+            }
         });
     }
 
