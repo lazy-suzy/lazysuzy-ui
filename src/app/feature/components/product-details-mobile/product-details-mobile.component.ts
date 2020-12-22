@@ -15,7 +15,6 @@ import {Gallery, GalleryItem, ImageItem} from '@ngx-gallery/core';
 import {Lightbox} from '@ngx-gallery/lightbox';
 import {VariationsComponent} from '../variations/variations.component';
 import {PixelService} from '../../../shared/services/facebook-pixel/pixel.service';
-import {first} from 'rxjs/operators';
 import {WishlistSnackbarService} from '../../../shared/services/wishlist-service/wishlist-snackbar.service';
 import {first} from 'rxjs/operators';
 
