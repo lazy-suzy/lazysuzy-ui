@@ -310,6 +310,9 @@ export class ProductDetailsComponent implements OnInit {
         this.productWasPrice = this.utils.formatPrice(
             priceData.wasPrice || this.product.was_price
         );
+        const minPrice = Number(this.productPrice.split('-')[0]);
+        const wasMinPrice = Number(this.productWasPrice.split('-')[0]);
+        this.hasValidWasPrice = !(wasMinPrice <= minPrice);
     }
 
     openCartModal() {
