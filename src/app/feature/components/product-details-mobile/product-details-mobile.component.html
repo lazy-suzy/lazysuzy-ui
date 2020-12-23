@@ -1,13 +1,23 @@
 <img *ngIf="isProductFetching" [src]="spinner" class="loader"/>
+<ng-template #itemTemplate let-index="index" let-type="type" let-data="data" let-currIndex="currIndex">
+    <ng-container *ngIf="index === currIndex">
+        <img class="gallery-image" [src]="data.src">
+    </ng-container>
+</ng-template>
+<ng-template #thumbTemplate let-index="index" let-type="type" let-data="data" let-currIndex="currIndex">
+    <img class="gallery-thumb" [src]="data.thumb">
+</ng-template>
 <ngx-json-ld [json]="schema"></ngx-json-ld>
 <ng-container *ngIf="!isProductFetching">
     <div *ngIf="product || !invalidLink; else invalidProduct">
         <div class="images-container" #gallery>
             <div class="images">
-                <img *ngFor="let image of items; index as i" [src]="image.data.src" (click)="openLightbox(i)"
+                <img *ngFor="let image of items; index as i" [src]="image.data.src"
+                     (click)="openLightbox(i)"
                      class="prod-img"/>
             </div>
         </div>
+
         <div class="product-content">
 
             <div class="flex justify-between">
@@ -99,7 +109,7 @@
             </div>
 
 
-<!--       Ship Status -- Only applies for CB2 and CAB Products for now-->
+            <!--       Ship Status -- Only applies for CB2 and CAB Products for now-->
             <div class="ship-status mb2 flex" *ngIf="product.online_msg">
                 <span class="ship-status-label">Status:</span>
                 <span class="ship-status-details ml1">
@@ -107,7 +117,7 @@
                                         [ngStyle]="{'color':product.is_back_order ?'#FFCC00':'#54AD32'}">lens</mat-icon>
                     {{product.online_msg}}</span>
             </div>
-<!--            End of Ship status-->
+            <!--            End of Ship status-->
             <div class="ship-info mb2 flex"
                  *ngIf="product.inventory_product_details?.shipping_desc || utils.hasInventory(activeProduct)">
                 <span class="shipping-label">Shipping: &nbsp;</span>

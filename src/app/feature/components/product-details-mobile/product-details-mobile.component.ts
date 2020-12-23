@@ -1,4 +1,4 @@
-import {Component, ElementRef, OnInit, ViewChild} from '@angular/core';
+import {Component, ElementRef, OnInit, TemplateRef, ViewChild} from '@angular/core';
 import {ActivatedRoute, Router} from '@angular/router';
 import {IActiveProduct, IProduct, IProductDetail, ISeo} from 'src/app/shared/models';
 import {
@@ -26,6 +26,9 @@ import {first} from 'rxjs/operators';
 export class ProductDetailsMobileComponent implements OnInit {
     @ViewChild(VariationsComponent, {static: false}) child: VariationsComponent;
     @ViewChild('gallery', {static: false}) galleryContainer: ElementRef<any>;
+    @ViewChild('itemTemplate', {static: true}) itemTemplate: TemplateRef<any>;
+    @ViewChild('thumbTemplate', {static: true}) thumbTemplate: TemplateRef<any>;
+
     productSku: any;
     routeSubscription: any;
     product: IProduct;
@@ -95,6 +98,18 @@ export class ProductDetailsMobileComponent implements OnInit {
         center: false,
         dots: false,
         pagination: false,
+    };
+
+    imageDialogCarouselOptions = {
+        margin: 10,
+        loop: true,
+        items: 1,
+        dots: true,
+        touchDrag: false,
+        pagination: true,
+        // autoWidth: true,
+        // stagePadding: 100,
+        singleItem: true
     };
 
     constructor(
@@ -206,13 +221,10 @@ export class ProductDetailsMobileComponent implements OnInit {
                                 this.priceObject.was_price = wasPriceString;
                                 this.isRange = isRanged;
                                 this.isDiscounted = isDiscounted;
-                                this.items = this.product.on_server_images.map(
-                                    (item) => new ImageItem({src: item})
-                                );
+                                this.createGalleryItems(this.product.on_server_images);
                                 if (this.product.set) {
                                     this.checkSetInventory(this.product.set);
                                 }
-                                this.galleryRef.load(this.items);
                                 this.invalidLink = false;
                             } else {
                                 this.invalidLink = true;
@@ -227,6 +239,21 @@ export class ProductDetailsMobileComponent implements OnInit {
             }
         );
 
+    }
+
+    createGalleryItems(items: any[]) {
+        this.items = items.map(
+            (item) => new ImageItem({src: item, thumb: item})
+        );
+        this.galleryRef.setConfig({
+            imageSize: 'contain',
+            itemTemplate: this.itemTemplate,
+            // thumbTemplate: this.thumbTemplate,
+            gestures: false,
+            thumb: true,
+            thumbWidth: 90,
+        });
+        this.galleryRef.load(this.items);
     }
 
     onDestroy(): void {
@@ -286,6 +313,13 @@ export class ProductDetailsMobileComponent implements OnInit {
         this.lightbox.open(index, this.galleryId, {
             panelClass: 'fullscreen'
         });
+        const intercom = document.getElementsByClassName('intercom-lightweight-app')[0];
+        if (intercom) {
+            intercom.classList.add('hidden');
+        }
+        this.lightbox.closed.pipe(first()).subscribe(_ => {
+            intercom.classList.remove('hidden');
+        });
     }
 
     isArray(obj: any) {
@@ -302,7 +336,7 @@ export class ProductDetailsMobileComponent implements OnInit {
     onSetImage(variation): void {
         // this.galleryContainer.nativeElement.scrollTop = 0;
         this.items = this.product.on_server_images.map(
-            (item) => new ImageItem({src: item})
+            (item) => new ImageItem({src: item, thumb: item})
         );
         if (variation) {
             const src = variation.image;
