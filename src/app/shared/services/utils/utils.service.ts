@@ -217,7 +217,8 @@ export class UtilsService {
             return product.inventory_product_details.shipping_desc;
         }
         if (this.checkDataLength(product.variations)) {
-            return product.variations[0].inventory_product_details.shipping_desc;
+            const variations = product.variations.filter(v => v.in_inventory);
+            return variations[0].inventory_product_details.shipping_desc;
         }
     }
 }
