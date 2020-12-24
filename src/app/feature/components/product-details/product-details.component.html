@@ -7,7 +7,7 @@
             </button>
             <div class="fl w-50">
                 <div class="flex flex-column gallery-container" #gallery>
-                    <img *ngFor="let image of items; index as i" [src]="image.data.src" (click)="openLightbox(i)"
+                    <img style="object-fit: contain;" *ngFor="let image of items; index as i" [src]="image.data.src" (click)="openLightbox(i)"
                          class="br2"/>
                 </div>
             </div>
