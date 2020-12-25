@@ -122,12 +122,12 @@ mat-icon.account-icon {
 }
 
 .my-boards-link {
+  position: relative;
   color: #606060;
   font-weight: normal;
-  font-family: "Open Sans";
+  font-family: "Open Sans", "Helvetica Neue", sans-serif;
   font-size: 18px;
   cursor: default;
-
   &:focus {
     outline: none;
   }
@@ -136,7 +136,24 @@ mat-icon.account-icon {
     text-decoration: none;
   }
 }
-
+.target {
+ // position: absolute !important;
+  top: 40%;
+  transition: all .35s ease-in-out;
+}
+.navbar-header{
+  hr{
+    position: absolute;
+    color: black;
+    bottom: -7px;
+    border-width: 1px;
+    border-color: black;
+  }
+}
+.my-boards-link:hover::before{
+  visibility: visible;
+  width: 100%;
+}
 .mat-badge-content {
   background: #b76379;
 }
@@ -249,7 +266,7 @@ mat-icon.account-icon {
 .active-nav-link {
   color: #0c1c31;
   font-weight: bold;
-  border-bottom: 1px solid #0C1C31;
+  //border-bottom: 1px solid #0C1C31;
 }
 
 .landing-page-navbar {
