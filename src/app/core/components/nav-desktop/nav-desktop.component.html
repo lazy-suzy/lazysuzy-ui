@@ -46,7 +46,7 @@
         <mat-toolbar class="bg-transparent">
             <mat-toolbar-row class="header flex justify-between"
                              [ngClass]="{'header': !isFaqPage,'faq-header': isFaqPage}">
-                <div class="flex">
+                <div class="flex navbar-header">
                     <a
                             routerLink="/"
                             routerLinkActive="active"
@@ -58,10 +58,14 @@
                                 alt="Lazy Suzy Home"
                         />
                     </a>
-                    <span [routerLink]="['/']" class="my-boards-link ml4"
-                          [ngClass]="{'active-nav-link':isShop}">SHOP</span>
+                    <div class="flex" style="position: relative">
+                        <span (mouseleave)="setLink(0)" (mouseover)="setLink(1)" #shop [routerLink]="['/']" class="my-boards-link ml4"
+                              [ngClass]="{'active-nav-link':isShop}">SHOP</span>
 
-                    <span [routerLink]="['/board']" class="my-boards-link ml4" [ngClass]="{'active-nav-link':isBoard}">DESIGN</span>
+                        <span (mouseleave)="setLink(0)" (mouseover)="setLink(2)" #design [routerLink]="['/board']" class="my-boards-link ml4"
+                              [ngClass]="{'active-nav-link':isBoard}">DESIGN</span>
+                        <hr #target class="target" [ngStyle]="{ top: (!location.path() || aboutUsPage)?'40%':'40%'}">
+                    </div>
                 </div>
 
                 <app-search-bar
