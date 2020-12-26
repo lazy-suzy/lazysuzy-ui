@@ -380,7 +380,6 @@ export class ProductDetailsComponent implements OnInit {
                 ? product.inventory_product_details
                 : []
         };
-        console.log('this.activeProduct: ', this.activeProduct);
     }
 
     quantityLimit(count) {

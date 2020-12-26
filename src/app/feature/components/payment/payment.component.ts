@@ -87,14 +87,18 @@ export class PaymentComponent implements OnInit {
     bpObserver: Observable<BreakpointState> = this.breakpointObserver.observe(
         Breakpoints.Handset
     );
+    bpTabletObserver: Observable<BreakpointState> = this.breakpointObserver.observe(
+        Breakpoints.Tablet
+    );
     bpSubscription: Subscription;
+    bpTabletSubscription: Subscription;
     isHandset: boolean;
     isLoading = true;
     localStorageUser = {};
     eventSubscription: Subscription;
     orderAmount: IOrderAmount;
     isStateUpdating: boolean;
-
+    isTablet = false;
     // For PromoCodes
     isPromoCodeBoxVisible = false;
     promoCode: string;
@@ -126,6 +130,13 @@ export class PaymentComponent implements OnInit {
                 this.isHandset = handset.matches;
             }
         );
+        this.bpTabletSubscription = this.bpTabletObserver.subscribe(
+            (tablet: BreakpointState) => {
+                this.isTablet = tablet.matches;
+                console.log(this.isTablet);
+            }
+        );
+
         this.stripeTest = this.fb.group({
             name: ['', [Validators.required]]
         });
@@ -184,6 +195,8 @@ export class PaymentComponent implements OnInit {
 
     onDestroy(): void {
         this.eventSubscription.unsubscribe();
+        this.bpSubscription.unsubscribe();
+        this.bpTabletSubscription.unsubscribe();
     }
 
     decodeHtml(text: string): string {
