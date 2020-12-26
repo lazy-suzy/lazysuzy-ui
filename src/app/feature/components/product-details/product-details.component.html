@@ -1,9 +1,4 @@
 <ngx-json-ld [json]="schema"></ngx-json-ld>
-<ng-template #itemTemplate let-index="index" let-type="type" let-data="data" let-currIndex="currIndex">
-    <ng-container *ngIf="index === currIndex">
-        <img class="gallery-image" [src]="data.src">
-    </ng-container>
-</ng-template>
 <ng-container *ngIf="!isProductFetching">
     <div *ngIf="product || !invalidLink; else invalidProduct">
         <div class="product-details-container">
