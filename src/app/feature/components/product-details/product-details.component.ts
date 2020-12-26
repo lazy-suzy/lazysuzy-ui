@@ -1,4 +1,4 @@
-import {Component, ElementRef, Inject, OnInit, ViewChild} from '@angular/core';
+import {Component, ElementRef, Inject, OnInit, TemplateRef, ViewChild} from '@angular/core';
 import {MAT_DIALOG_DATA} from '@angular/material/dialog';
 import {Subscription} from 'rxjs';
 import {IActiveProduct, IProduct, IProductDetail, ISeo} from 'src/app/shared/models';
@@ -23,6 +23,8 @@ import {first} from 'rxjs/operators';
 export class ProductDetailsComponent implements OnInit {
     @ViewChild('topContainer', {static: false}) topContainer: ElementRef;
     @ViewChild('gallery', {static: false}) galleryContainer: ElementRef;
+    @ViewChild('itemTemplate', {static: true}) itemTemplate: TemplateRef<any>;
+
     product: IProduct;
     seoData: ISeo;
     productSubscription: Subscription;
@@ -148,10 +150,7 @@ export class ProductDetailsComponent implements OnInit {
     private setProduct(payload: IProductDetail) {
         this.setSeoData(payload);
         this.updateActiveProduct(this.product);
-        this.items = this.product.on_server_images.map(
-            (item) => new ImageItem({src: item})
-        );
-        this.galleryRef.load(this.items);
+        this.createGalleryItems(this.product.on_server_images);
         this.description = this.utils.compileMarkdown(
             this.product.description
         );
@@ -216,6 +215,21 @@ export class ProductDetailsComponent implements OnInit {
             self.getMaxHeight();
         }, 1000);
         this.invalidLink = false;
+    }
+
+    createGalleryItems(items: any[]) {
+        this.items = items.map(
+            (item) => new ImageItem({src: item, thumb: item})
+        );
+        this.galleryRef.setConfig({
+            imageSize: 'contain',
+            itemTemplate: this.itemTemplate,
+            // thumbTemplate: this.thumbTemplate,
+            gestures: false,
+            thumb: true,
+            thumbWidth: 90,
+        });
+        this.galleryRef.load(this.items);
     }
 
     private setSeoData(payload: IProductDetail) {
@@ -287,12 +301,12 @@ export class ProductDetailsComponent implements OnInit {
 
         this.galleryContainer.nativeElement.scrollTop = 0;
         this.items = this.product.on_server_images.map(
-            (item) => new ImageItem({src: item})
+            (item) => new ImageItem({src: item, thumb: item})
         );
 
         if (variation) {
             const src = variation.image;
-            const image = new ImageItem({src});
+            const image = new ImageItem({src, thumb: src});
             this.items.splice(0, 0, image);
             this.updateActiveProduct(variation);
             this.hasSelection = true;
