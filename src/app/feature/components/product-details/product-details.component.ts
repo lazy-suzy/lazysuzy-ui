@@ -36,7 +36,7 @@ export class ProductDetailsComponent implements OnInit {
     isSwatchExist: boolean;
     isVariationExist: boolean;
     galleryId = 'myLightbox';
-    items: GalleryItem[];
+    items: GalleryItem[] | any;
     isProductFetching = true;
     showDetails = false;
     spinner = 'assets/image/spinner.gif';
@@ -219,11 +219,11 @@ export class ProductDetailsComponent implements OnInit {
 
     createGalleryItems(items: any[]) {
         this.items = items.map(
-            (item) => new ImageItem({src: item, thumb: item})
+            (item) => (new ImageItem({src: item, thumb: item}))
         );
         this.galleryRef.setConfig({
             imageSize: 'contain',
-            itemTemplate: this.itemTemplate,
+            // itemTemplate: this.itemTemplate,
             // thumbTemplate: this.thumbTemplate,
             gestures: false,
             thumb: true,
@@ -301,7 +301,7 @@ export class ProductDetailsComponent implements OnInit {
 
         this.galleryContainer.nativeElement.scrollTop = 0;
         this.items = this.product.on_server_images.map(
-            (item) => new ImageItem({src: item, thumb: item})
+            (item) => (new ImageItem({src: item, thumb: item}))
         );
 
         if (variation) {
