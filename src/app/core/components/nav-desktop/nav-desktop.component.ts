@@ -130,7 +130,7 @@ export class NavDesktopComponent implements OnInit, AfterViewInit {
     }
 
     setLink(link) {
-        let width, height, left, top;
+        let width, height, left;
         let parentLeft;
         if (link === 0) {
             link = this.isShop ? 1 : 2;
@@ -141,11 +141,15 @@ export class NavDesktopComponent implements OnInit, AfterViewInit {
             width = this.shop.nativeElement.getBoundingClientRect().width;
             height = this.shop.nativeElement.getBoundingClientRect().height;
             left = this.shop.nativeElement.getBoundingClientRect().left - parentLeft;
+            this.shop.nativeElement.classList.add('active-nav-link');
+            this.design.nativeElement.classList.remove('active-nav-link');
         } else {
             parentLeft = this.design.nativeElement.parentElement.getBoundingClientRect().left;
             width = this.design.nativeElement.getBoundingClientRect().width;
             height = this.design.nativeElement.getBoundingClientRect().height;
             left = this.design.nativeElement.getBoundingClientRect().left - parentLeft;
+            this.shop.nativeElement.classList.remove('active-nav-link');
+            this.design.nativeElement.classList.add('active-nav-link');
         }
         this.target.nativeElement.style.width = `${width}px`;
         this.target.nativeElement.style.height = `${height}px`;
