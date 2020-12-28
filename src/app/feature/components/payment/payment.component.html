@@ -1,9 +1,10 @@
-<div class="container flex-ns">
-  <div class="w-30-ns w-100 pa2 mh5-ns mv3" *ngIf="isHandset">
+<div class="container" [ngClass]="{'flex-ns':!(isTablet || isHandset)}" >
+  <div class=" w-100 pa2  mv3"
+       [ngClass]="{'w-30-ns,mh5-ns': !(isHandset|| isTablet)}"
+       *ngIf="(isHandset || isTablet)">
     <div class="order-summary-card">
       <div class="order-details section-border">
         <div class="b pv2">ORDER SUMMARY</div>
-
         <ng-container *ngFor="let item of cartProducts">
           <div class="flex pt3 pb4" >
             <div class="w-20">
@@ -69,8 +70,8 @@
     </div>
   </div>
 
-  <div class="w-60-ns w-100 ph5-ns pv2">
-    <div class="billing-header pink-font b" *ngIf="!isHandset">
+  <div class=" w-100 pv2" [ngClass]="{'w-60-ns ph5-ns':!(isHandset || isTablet)}">
+    <div class="billing-header pink-font b" *ngIf="!(isHandset|| isTablet)">
       Checkout
     </div>
     <div class="billing-content pb3">
@@ -86,16 +87,19 @@
             EDIT
           </div>
         </div>
-        <div class="section-content pv3-ns pt4 ml5-ns">
-          <div class="section-row ph0-ns ph3">
+        <div class="section-content  pt4 ml5-ns"
+             [ngClass]="{'pv3-ns ml5-ns': !(isHandset || isTablet)}"
+        >
+          <div class="section-row ph3"  [ngClass]="{'ph0-ns': !(isHandset || isTablet)}">
             <ng-container *ngIf="customer; else customerEmail">
               <form
                 name="email-form"
-                class="flex-ns w-100"
+                class="w-100"
+                [ngClass]="{'flex-ns': !(isHandset || isTablet)}"
                 (ngSubmit)="emailForm.form.valid && checkEmailValidation()"
                 #emailForm="ngForm"
               >
-                <div class="w-50-ns w-100">
+                <div class="w-100" [ngClass]="{'w-50-ns': !(isHandset || isTablet)}">
                   <input
                     placeholder="Enter email address"
                     type="email"
@@ -117,7 +121,7 @@
                     </div>
                   </div>
                 </div>
-                <div class="w-50-ns tc">
+                <div class="w-100 tc" [ngClass]="{'w-50-ns': !(isHandset || isTablet)}">
                   <button class="email-continue-btn b">CONTINUE</button>
                 </div>
               </form>
@@ -140,7 +144,9 @@
             EDIT
           </div>
         </div>
-        <div class="section-content pv3-ns pt4 ph0-ns ph3 ml5-ns">
+        <div class="section-content pt4 ph3 "
+             [ngClass]="{'pv3-ns ph0-ns ml5-ns': !(isHandset || isTablet)}"
+        >
           <ng-container *ngIf="shipping; else shippingDetails">
             <div class="section-row pb4">
               <div class="b">Shipping Address</div>
@@ -395,7 +401,9 @@
             EDIT
           </div>
         </div>
-        <div class="section-content pv3-ns pt4 ph0-ns ph3 ml5-ns">
+        <div class="section-content pt4 ph3"
+             [ngClass]="{'pv3-ns ph0-ns ml5-ns': !(isHandset || isTablet)}"
+        >
           <ng-container *ngIf="billing; else billingDetails">
             <div class="section-row pb4">
               <div class="b">Billing Address</div>
@@ -638,7 +646,8 @@
             novalidate
             (ngSubmit)="buy()"
             [formGroup]="stripeTest"
-            class="w-100 ma4-ns mv0-ns mv3"
+            class="w-100 mv3"
+            [ngClass]="{'ma4-ns mv0-ns': !(isHandset || isTablet)}"
           >
             <div class="payment-form mv3-ns">
               <!-- <div id="card-element" class="field"></div> -->
@@ -701,7 +710,7 @@
       </div>
     </div>
   </div>
-  <div class="w-30-ns w-100 pa2 mh5-ns mv3" *ngIf="!isHandset">
+  <div class="w-100 pa2 mv3 w-30-ns mh5-ns" *ngIf="!(isHandset || isTablet)">
     <div class="order-summary-card" *ngIf="!isLoading">
       <div class="order-details section-border">
         <div class="b pv2">ORDER SUMMARY</div>
