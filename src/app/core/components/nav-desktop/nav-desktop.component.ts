@@ -75,12 +75,10 @@ export class NavDesktopComponent implements OnInit, AfterViewInit {
     }
 
     ngOnInit(): void {
-        this.getDeals();
-
-        //  this.loadNewsLetterPopup();
         this.eventSubscription = this.eventEmitterService.userChangeEvent
             .asObservable()
             .subscribe((user) => {
+                this.getDeals();
                 this.eventEmitterService.updateCart.subscribe((payload) => {
                     // tslint:disable-next-line: radix
                     this.cartProduct = parseInt(localStorage.getItem('cart'));
