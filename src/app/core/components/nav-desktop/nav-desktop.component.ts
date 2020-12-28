@@ -1,4 +1,4 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {AfterViewInit, Component, ElementRef, Input, OnInit, ViewChild} from '@angular/core';
 import {ActivatedRoute, Router} from '@angular/router';
 import {Location} from '@angular/common';
 import {Subscription} from 'rxjs';
@@ -14,7 +14,10 @@ import {first} from 'rxjs/operators';
     templateUrl: './nav-desktop.component.html',
     styleUrls: ['./nav-desktop.component.less']
 })
-export class NavDesktopComponent implements OnInit {
+export class NavDesktopComponent implements OnInit, AfterViewInit {
+    @ViewChild('shop', {static: false}) shop: ElementRef<any>;
+    @ViewChild('design', {static: false}) design: ElementRef<any>;
+    @ViewChild('target', {static: false}) target: ElementRef<any>;
     @Input() isTablet: boolean;
     logoPath = 'assets/image/dark_logo_transparent.png';
     departments: IAllDepartment[];
@@ -73,6 +76,7 @@ export class NavDesktopComponent implements OnInit {
 
     ngOnInit(): void {
         this.getDeals();
+
         //  this.loadNewsLetterPopup();
         this.eventSubscription = this.eventEmitterService.userChangeEvent
             .asObservable()
@@ -86,15 +90,9 @@ export class NavDesktopComponent implements OnInit {
                 this.getDepartments();
                 this.router.events.subscribe((res) => {
                     const orderRoute = this.router.url.slice(1, 6);
-                    if (
-                        this.router.url === '/aboutus' ||
+                    this.hideBar = this.router.url === '/aboutus' ||
                         this.router.url === '/checkout' ||
-                        orderRoute === 'order'
-                    ) {
-                        this.hideBar = true;
-                    } else {
-                        this.hideBar = false;
-                    }
+                        orderRoute === 'order';
                 });
             });
 
@@ -108,6 +106,10 @@ export class NavDesktopComponent implements OnInit {
         });
     }
 
+    ngAfterViewInit(): void {
+        this.initializeNavbarHover();
+    }
+
     getDeals() {
         this.apiService.getDeals().pipe(first()).subscribe((value: any) => {
             this.deals = value.sort((a, b) => {
@@ -117,6 +119,41 @@ export class NavDesktopComponent implements OnInit {
                 return v.is_active;
             });
         });
+    }
+
+    initializeNavbarHover() {
+        console.log(this.shop, this.design);
+        const target = document.querySelector('.target');
+        const links = document.querySelectorAll('.my-boards-link');
+    }
+
+    setLink(link) {
+        let width, height, left;
+        let parentLeft;
+        if (link === 0) {
+            link = this.isShop ? 1 : 2;
+        }
+
+        if (link === 1) {
+            parentLeft = this.shop.nativeElement.parentElement.getBoundingClientRect().left;
+            width = this.shop.nativeElement.getBoundingClientRect().width;
+            height = this.shop.nativeElement.getBoundingClientRect().height;
+            left = this.shop.nativeElement.getBoundingClientRect().left - parentLeft;
+            this.shop.nativeElement.classList.add('active-nav-link');
+            this.design.nativeElement.classList.remove('active-nav-link');
+        } else {
+            parentLeft = this.design.nativeElement.parentElement.getBoundingClientRect().left;
+            width = this.design.nativeElement.getBoundingClientRect().width;
+            height = this.design.nativeElement.getBoundingClientRect().height;
+            left = this.design.nativeElement.getBoundingClientRect().left - parentLeft;
+            this.shop.nativeElement.classList.remove('active-nav-link');
+            this.design.nativeElement.classList.add('active-nav-link');
+        }
+        this.target.nativeElement.style.width = `${width}px`;
+        this.target.nativeElement.style.height = `${height}px`;
+        this.target.nativeElement.style.left = `${left}px`;
+        // this.target.nativeElement.style.top = `${top}px`;
+        this.target.nativeElement.style.transform = 'none';
     }
 
     loadNewsLetterPopup() {
