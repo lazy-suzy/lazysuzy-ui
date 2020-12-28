@@ -20,7 +20,7 @@ export class CollectionListComponent implements OnInit {
     if (collection !== '') {
       filterValue = 'collection:' + collection + ';';
     }
-    this.router.navigateByUrl(`/products/collections?undefined=true&filters=${filterValue}&sort_type=&pageno=1`)
+    this.router.navigateByUrl(`/products/collections?&filters=${filterValue}`)
     this.emitCollection.emit(collection);
   }
 

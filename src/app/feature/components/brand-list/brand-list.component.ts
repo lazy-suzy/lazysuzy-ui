@@ -41,8 +41,8 @@ export class BrandListComponent implements OnInit {
     let filterValue = '';
     if (brandValue !== '') {
       filterValue = 'brand:' + brandValue + ';';
-    };
-    this.router.navigateByUrl(`/products/brand?undefined=true&limit=24&filters=${filterValue}&sort_type=&pageno=1`)
+    }
+    this.router.navigateByUrl(`/products/brand?filters=${filterValue}`);
     this.setBrand.emit(brandValue);
   }
 

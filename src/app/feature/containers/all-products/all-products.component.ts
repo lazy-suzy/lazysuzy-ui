@@ -221,11 +221,18 @@ export class AllProductsComponent implements OnInit {
 
     updateQueryString(): void {
         let params = new HttpParams();
-        params = params.set(this.trend, 'true');
-        params = params.set('filters', this.filters);
-        params = params.set('sortType', this.sortType);
-        params = params.set('pageNo', this.pageNo.toString());
-
+        if (this.trend) {
+            params = params.set(this.trend, 'true');
+        }
+        if (this.filters) {
+            params = params.set('filters', this.filters);
+        }
+        if (this.sortType) {
+            params = params.set('sortType', this.sortType);
+        }
+        if (this.pageNo) {
+            params = params.set('pageNo', this.pageNo.toString());
+        }
         this.location.replaceState(
             window.location.pathname,
             params.toString(),
