@@ -203,6 +203,10 @@ export class ProductDetailsComponent implements OnInit {
             this.beforeSelection = true;
             this.checkSelection = true;
         }
+        if (this.isVariationExist && this.product.variations.length === 1) {
+            this.beforeSelection = true;
+            this.checkSelection = true;
+        }
         this.hasVariationsInventory();
         this.variations = this.product.variations.sort((a, b) =>
             a.name > b.name ? 1 : -1
@@ -330,6 +334,9 @@ export class ProductDetailsComponent implements OnInit {
     }
 
     openCartModal() {
+        console.log(!this.activeProduct.in_inventory &&
+            !this.activeProduct.inventory_product_details.price ||
+            !this.beforeSelection);
         if (
             !this.activeProduct.in_inventory &&
             !this.activeProduct.inventory_product_details.price ||
@@ -354,6 +361,7 @@ export class ProductDetailsComponent implements OnInit {
                 count: this.quantity,
                 parent_sku: this.product.sku
             };
+            console.log(postData);
             this.apiService.addCartProduct(postData).subscribe(
                 (payload: any) => {
                     if (payload.status) {
@@ -372,14 +380,24 @@ export class ProductDetailsComponent implements OnInit {
     }
 
     updateActiveProduct(product) {
-        this.activeProduct = {
-            sku: product.variation_sku ? product.variation_sku : product.sku,
-            in_inventory: product.in_inventory,
-            name: product.name,
-            inventory_product_details: product.inventory_product_details
-                ? product.inventory_product_details
-                : []
-        };
+        if (product.site === 'West Elm' && this.product.variations.length === 1) {
+            this.activeProduct = {
+                sku: product.variations[0].variation_sku,
+                in_inventory: product.variations[0].in_inventory,
+                name: product.variations[0].name,
+                inventory_product_details: product.variations[0].inventory_product_details
+            };
+        } else {
+            this.activeProduct = {
+                sku: product.variation_sku ? product.variation_sku : product.sku,
+                in_inventory: product.in_inventory,
+                name: product.name,
+                inventory_product_details: product.inventory_product_details
+                    ? product.inventory_product_details
+                    : []
+            };
+        }
+
     }
 
     quantityLimit(count) {
