@@ -81,7 +81,7 @@
                                     </ng-template>
                                 </div>
                                 <div *ngIf="errorMessage !== ''" class="invalid-feedback">
-                                    <div>{{ errorMessage }} Hello</div>
+                                    <div>{{ errorMessage }}</div>
                                 </div>
                             </div>
                         </div>
@@ -163,13 +163,13 @@
                         <hr class="modal-hr mt3" *ngIf="product.set && product.set.length > 0"/>
                     </ng-container>
                     <ng-template #allConditions>
-                        <hr class="modal-hr mt3" *ngIf="isVariationExist || (product.set && product.set.length > 0)"/>
+                        <hr class="modal-hr mt3" *ngIf="(isVariationExist && product.variations.length>1) || (product.set && product.set.length > 0)"/>
                     </ng-template>
                 </div>
                 <div class="product-description-container" [ngStyle]="topHeight">
 
                     <app-variations
-                            *ngIf="isVariationExist && !product.redirect"
+                            *ngIf="isVariationExist && !product.redirect && product.variations?.length>1"
                             [variations]="product.variations"
                             [isSwatchExist]="isSwatchExist"
                             [inputSelections]="product.selections"
