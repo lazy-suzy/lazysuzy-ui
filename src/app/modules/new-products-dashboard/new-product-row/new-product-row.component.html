@@ -186,24 +186,24 @@
                     <div class="col-4 input-label">
                         <h5>Back order msg</h5>
                     </div>
-                    <div class="col-4">
-                        <input [(ngModel)]="product.back_order_msg">
+                    <div class="col-6">
+                        <textarea class="w-100" rows="2" [(ngModel)]="product.back_order_msg"></textarea>
                     </div>
                 </div>
                 <div class="row mt-3">
                     <div class="col-4 input-label">
                         <h5>Back order date</h5>
                     </div>
-                    <div class="col-4">
-                        <input [(ngModel)]="product.back_order_msg_date">
+                    <div class="col-6">
+                        <textarea class="w-100" rows="2" [(ngModel)]="product.back_order_msg_date"></textarea>
                     </div>
                 </div>
                 <div class="row mt-3">
                     <div class="col-4 input-label">
                         <h5>Online msg</h5>
                     </div>
-                    <div class="col-4">
-                        <input [(ngModel)]="product.online_msg">
+                    <div class="col-6">
+                        <textarea class="w-100" rows="2" [(ngModel)]="product.online_msg"></textarea>
                     </div>
                 </div>
             </div>
@@ -301,8 +301,8 @@
         <div class="row" *ngIf="product.product_dimension">
             <ng-container *ngIf="isArray(product.product_dimension);else otherDimensions">
                 <div class="col-6 m-t-5" *ngFor="let dimension of product.product_dimension">
-                    <div>
-                        <h3>{{dimension.description}}</h3>
+                    <div class="mt3">
+                        <label class="bold">{{dimension.description}}</label> <br />
                         <span>Height: {{dimension.height}}</span> <br/>
                         <span>Width: {{dimension.width}}</span><br/>
                         <span>Depth: {{dimension.depth}}</span><br/>
@@ -353,7 +353,7 @@
 </div>
 <div class="row mt3">
     <div class="col-3">
-        <h2>Product Sub 1</h2>
+        <label class="bold">Product Sub 1</label>
         <div class="flex mt2 justify-between">
             <label>Header</label>
             <textarea [(ngModel)]="product.product_sub_header_1"></textarea>
@@ -368,7 +368,7 @@
         </div>
     </div>
     <div class="col-3">
-        <h2>Product Sub 2</h2>
+        <label class="bold">Product Sub 2</label>
         <div class="flex mt2 justify-between">
             <label>Header</label>
             <textarea [(ngModel)]="product.product_sub_header_2"></textarea>
@@ -383,7 +383,7 @@
         </div>
     </div>
     <div class="col-3">
-        <h2>Product Sub 3</h2>
+        <label class="bold">Product Sub 3</label>
         <div class="flex mt2 justify-between">
             <label>Header</label>
             <textarea [(ngModel)]="product.product_sub_header_3"></textarea>
@@ -398,7 +398,7 @@
         </div>
     </div>
     <div class="col-3">
-        <h2>Product Sub 4</h2>
+        <label class="bold">Product Sub 4</label>
         <div class="flex mt2 justify-between">
             <label>Header</label>
             <textarea [(ngModel)]="product.product_sub_header_4"></textarea>
