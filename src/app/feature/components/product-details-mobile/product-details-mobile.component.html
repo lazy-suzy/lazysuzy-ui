@@ -128,13 +128,14 @@
             </ng-container>
             <ng-template #allConditions>
                 <hr class="modal-hr mt-3" *ngIf="
-            isVariationExist ||
+            (isVariationExist && product.variations?.length>1) ||
             (product && product.set && product.set.length > 0)
           "/>
             </ng-template>
 
 
-            <app-variations *ngIf="product && isVariationExist && !product.redirect" [variations]="variations"
+            <app-variations *ngIf="product && isVariationExist && !product.redirect && product.variations?.length>1"
+                            [variations]="variations"
                             [isSwatchExist]="isSwatchExist" [inputSelections]="product.selections"
                             [hasSelection]="hasSelection" (setPrice)="onSetPrice($event)"
                             (setImage)="onSetImage($event)"

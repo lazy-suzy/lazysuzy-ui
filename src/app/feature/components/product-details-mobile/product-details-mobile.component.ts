@@ -191,6 +191,10 @@ export class ProductDetailsMobileComponent implements OnInit {
                                     this.beforeSelection = true;
                                     this.checkSelection = true;
                                 }
+                                if (this.isVariationExist && this.product.variations.length === 1) {
+                                    this.beforeSelection = true;
+                                    this.checkSelection = true;
+                                }
                                 this.hasVariationsInventory();
                                 if (!this.isHandset) {
                                     this.matDialogUtils.setProduct(payload);
@@ -419,14 +423,23 @@ export class ProductDetailsMobileComponent implements OnInit {
     }
 
     updateActiveProduct(product) {
-        this.activeProduct = {
-            sku: product.variation_sku ? product.variation_sku : product.sku,
-            in_inventory: product.in_inventory,
-            name: product.name,
-            inventory_product_details: product.inventory_product_details
-                ? product.inventory_product_details
-                : []
-        };
+        if (product.site === 'West Elm' && this.product.variations.length === 1) {
+            this.activeProduct = {
+                sku: product.variations[0].variation_sku,
+                in_inventory: product.variations[0].in_inventory,
+                name: product.variations[0].name,
+                inventory_product_details: product.variations[0].inventory_product_details
+            };
+        } else {
+            this.activeProduct = {
+                sku: product.variation_sku ? product.variation_sku : product.sku,
+                in_inventory: product.in_inventory,
+                name: product.name,
+                inventory_product_details: product.inventory_product_details
+                    ? product.inventory_product_details
+                    : []
+            };
+        }
     }
 
     quantityLimit(count) {
