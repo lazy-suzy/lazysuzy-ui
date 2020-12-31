@@ -44,8 +44,8 @@
                <label>Is Backordered</label>
                     <mat-radio-group [(ngModel)]="product.is_back_order" aria-label="Select an option">
                         <div class="flex">
-                            <mat-radio-button color="warn" value="1">Yes</mat-radio-button>
-                            <mat-radio-button class="ml3" color="warn" value="0">No</mat-radio-button>
+                            <mat-radio-button color="warn" [value]="1">Yes</mat-radio-button>
+                            <mat-radio-button class="ml3" color="warn" [value]="0">No</mat-radio-button>
                         </div>
                     </mat-radio-group>
             </div>
@@ -134,8 +134,8 @@
                     <div class="col-6">
                         <mat-radio-group [(ngModel)]="product.is_handmade" aria-label="Select an option">
                             <div class="flex">
-                                <mat-radio-button color="warn" value="1">Yes</mat-radio-button>
-                                <mat-radio-button class="ml3" color="warn" value="0">No</mat-radio-button>
+                                <mat-radio-button color="warn" [value]="1">Yes</mat-radio-button>
+                                <mat-radio-button class="ml3" color="warn" [value]="0">No</mat-radio-button>
                             </div>
                         </mat-radio-group>
                     </div>
