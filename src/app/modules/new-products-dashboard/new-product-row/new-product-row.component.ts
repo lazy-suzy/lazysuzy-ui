@@ -77,6 +77,10 @@ export class NewProductRowComponent implements OnInit {
         }
     }
 
+    isArray(value) {
+        return Array.isArray(value);
+    }
+
     tagImage(productSku, image, value) {
         const data = {
             product_sku: productSku,
@@ -103,6 +107,26 @@ export class NewProductRowComponent implements OnInit {
                 }
             }
         });
+    }
+
+    addDimension() {
+        let dimensionSequence = 1;
+        if (!this.product.product_dimension) {
+            this.product.product_dimension = [];
+        } else {
+            dimensionSequence = this.product.product_dimension.length + 1;
+        }
+        const dimension = {
+            depth: '',
+            description: '',
+            diameter: '',
+            dimensionSequence,
+            hasDimensions: true,
+            height: '',
+            weight: '',
+            width: '',
+        };
+        this.product.product_dimension.push(dimension);
     }
 
     cropImage(image, imageType) {

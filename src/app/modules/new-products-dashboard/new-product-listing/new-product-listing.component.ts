@@ -121,10 +121,12 @@ export class NewProductListingComponent implements OnInit {
                 take(1)
             )
             .subscribe(({status}) => {
-                if (status == 'success') {
+                if (status === 'success') {
                     this.products = [];
                     this.loadProduct();
                 }
+            }, (error) => {
+                this.isProductFetching = false;
             });
     }
 

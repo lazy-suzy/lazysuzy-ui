@@ -1,9 +1,9 @@
 export const environment = {
   production: false,
-  useLocalJson: true,
+  useLocalJson: false,
   APP_NAME: 'LazySuzy',
   JSON_BASE_HREF: 'assets/resources/',
-  ADMIN_API_BASE_HREF: 'http://staging.lazysuzy.com:8081/api/admin/',
+  ADMIN_API_BASE_HREF: 'http://localhost/lazysuzy-code/public/api/admin/',
   API_BASE_HREF: 'http://localhost/lazysuzy-code/public/api/',
   BASE_HREF: 'http://localhost/lazysuzy-code/public',
   SITE_URL: 'http://localhost:4200',

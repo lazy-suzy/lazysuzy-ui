@@ -5,7 +5,7 @@
     <div class="column col-3">
         <div class="row">
             <div class="col-12">
-                <h5>{{product.product_sku}}</h5>
+                <a [href]="product.product_url" target="_blank">{{product.product_sku}}</a>
             </div>
         </div>
         <div class="row">
@@ -37,6 +37,17 @@
         <div class="row">
             <div class="col-12">
                 <h5>Last updated date: {{product.updated_date}}</h5>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-12">
+               <label>Is Backordered</label>
+                    <mat-radio-group [(ngModel)]="product.is_back_order" aria-label="Select an option">
+                        <div class="flex">
+                            <mat-radio-button color="warn" [value]="1">Yes</mat-radio-button>
+                            <mat-radio-button class="ml3" color="warn" [value]="0">No</mat-radio-button>
+                        </div>
+                    </mat-radio-group>
             </div>
         </div>
     </div>
@@ -116,6 +127,19 @@
                         </mat-form-field>
                     </div>
                 </div>
+                <div class="row">
+                    <div class="col-3">
+                        <label>Is Handmade</label>
+                    </div>
+                    <div class="col-6">
+                        <mat-radio-group [(ngModel)]="product.is_handmade" aria-label="Select an option">
+                            <div class="flex">
+                                <mat-radio-button color="warn" [value]="1">Yes</mat-radio-button>
+                                <mat-radio-button class="ml3" color="warn" [value]="0">No</mat-radio-button>
+                            </div>
+                        </mat-radio-group>
+                    </div>
+                </div>
             </div>
             <div class="col-6">
                 <div class="row ">
@@ -158,7 +182,32 @@
                     </ng-container>
                 </div>
 
+                <div class="row mt-3">
+                    <div class="col-4 input-label">
+                        <h5>Back order msg</h5>
+                    </div>
+                    <div class="col-6">
+                        <textarea class="w-100" rows="2" [(ngModel)]="product.back_order_msg"></textarea>
+                    </div>
+                </div>
+                <div class="row mt-3">
+                    <div class="col-4 input-label">
+                        <h5>Back order date</h5>
+                    </div>
+                    <div class="col-6">
+                        <textarea class="w-100" rows="2" [(ngModel)]="product.back_order_msg_date"></textarea>
+                    </div>
+                </div>
+                <div class="row mt-3">
+                    <div class="col-4 input-label">
+                        <h5>Online msg</h5>
+                    </div>
+                    <div class="col-6">
+                        <textarea class="w-100" rows="2" [(ngModel)]="product.online_msg"></textarea>
+                    </div>
+                </div>
             </div>
+
         </div>
     </div>
 </div>
@@ -242,39 +291,125 @@
         </textarea>
     </div>
     <div class="col-4">
-        <h4>Dimensions</h4>
+        <div class="flex justify-between">
+            <h4>Dimensions</h4>
+            <button mat-raised-button color="accent" (click)="addDimension()">Add Dimension</button>
+        </div>
+
+
 
         <div class="row" *ngIf="product.product_dimension">
-            <div class="col-6 m-t-5" *ngFor="let dimension of product.product_dimension">
-                <div>
-                    <h3>{{dimension.description}}</h3>
-                    <span>Height: {{dimension.height}}</span> <br/>
-                    <span>Width: {{dimension.width}}</span><br/>
-                    <span>Depth: {{dimension.depth}}</span><br/>
-                    <span>Diameter: {{dimension.diameter}}</span><br/>
-                </div>
-                <div class="mt1">
-                    <input style="width: 100%" [(ngModel)]="dimension.description">
-                    <div class="flex flex-column">
-                        <div class="flex justify-between mv2">
-                            <label>Height</label>
-                            <input [(ngModel)]="dimension.height">
-                        </div>
-                        <div class="flex justify-between mv2">
-                            <label>Width</label>
-                            <input [(ngModel)]="dimension.width">
-                        </div>
-                        <div class="flex justify-between mv2">
-                            <label>Depth</label>
-                            <input [(ngModel)]="dimension.depth">
-                        </div>
-                        <div class="flex justify-between mv2">
-                            <label>Diameter</label>
-                            <input [(ngModel)]="dimension.diameter">
+            <ng-container *ngIf="isArray(product.product_dimension);else otherDimensions">
+                <div class="col-6 m-t-5" *ngFor="let dimension of product.product_dimension">
+                    <div class="mt3">
+                        <label class="bold">{{dimension.description}}</label> <br />
+                        <span>Height: {{dimension.height}}</span> <br/>
+                        <span>Width: {{dimension.width}}</span><br/>
+                        <span>Depth: {{dimension.depth}}</span><br/>
+                        <span>Diameter: {{dimension.diameter}}</span><br/>
+                    </div>
+                    <div class="mt1">
+                        <input style="width: 100%" [(ngModel)]="dimension.description">
+                        <div class="flex flex-column">
+                            <div class="flex justify-between mv2">
+                                <label>Height</label>
+                                <input [(ngModel)]="dimension.height">
+                            </div>
+                            <div class="flex justify-between mv2">
+                                <label>Width</label>
+                                <input [(ngModel)]="dimension.width">
+                            </div>
+                            <div class="flex justify-between mv2">
+                                <label>Depth</label>
+                                <input [(ngModel)]="dimension.depth">
+                            </div>
+                            <div class="flex justify-between mv2">
+                                <label>Diameter</label>
+                                <input [(ngModel)]="dimension.diameter">
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
+            </ng-container>
+            <ng-template #otherDimensions>
+                <div class="col-6 m-t-5">
+                    {{product.product_dimension}}
+                </div>
+            </ng-template>
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col-6">
+        <label class="bold">Product Assembly</label>
+        <p>{{product.product_assembly}}</p>
+        <textarea rows="6" class="w-100" [(ngModel)]="product.product_assembly"></textarea>
+    </div>
+    <div class="col-6">
+        <label class="bold">Product Care</label>
+        <p>{{product.product_care}}</p>
+        <textarea rows="6" class="w-100" [(ngModel)]="product.product_care"></textarea>
+    </div>
+</div>
+<div class="row mt3">
+    <div class="col-3">
+        <label class="bold">Product Sub 1</label>
+        <div class="flex mt2 justify-between">
+            <label>Header</label>
+            <textarea [(ngModel)]="product.product_sub_header_1"></textarea>
+        </div>
+        <div class="flex mt2 justify-between">
+            <label>Description</label>
+            <textarea [(ngModel)]="product.product_sub_desc_1"></textarea>
+        </div>
+        <div class="flex mt2 justify-between">
+            <label>Image</label>
+            <textarea [(ngModel)]="product.product_image_sub_1"></textarea>
+        </div>
+    </div>
+    <div class="col-3">
+        <label class="bold">Product Sub 2</label>
+        <div class="flex mt2 justify-between">
+            <label>Header</label>
+            <textarea [(ngModel)]="product.product_sub_header_2"></textarea>
+        </div>
+        <div class="flex mt2 justify-between">
+            <label>Description</label>
+            <textarea [(ngModel)]="product.product_sub_desc_2"></textarea>
+        </div>
+        <div class="flex mt2 justify-between">
+            <label>Image</label>
+            <textarea [(ngModel)]="product.product_image_sub_2"></textarea>
+        </div>
+    </div>
+    <div class="col-3">
+        <label class="bold">Product Sub 3</label>
+        <div class="flex mt2 justify-between">
+            <label>Header</label>
+            <textarea [(ngModel)]="product.product_sub_header_3"></textarea>
+        </div>
+        <div class="flex mt2 justify-between">
+            <label>Description</label>
+            <textarea [(ngModel)]="product.product_sub_desc_3"></textarea>
+        </div>
+        <div class="flex mt2 justify-between">
+            <label>Image</label>
+            <textarea [(ngModel)]="product.product_image_sub_3"></textarea>
+        </div>
+    </div>
+    <div class="col-3">
+        <label class="bold">Product Sub 4</label>
+        <div class="flex mt2 justify-between">
+            <label>Header</label>
+            <textarea [(ngModel)]="product.product_sub_header_4"></textarea>
+        </div>
+        <div class="flex mt2 justify-between">
+            <label>Description</label>
+            <textarea [(ngModel)]="product.product_sub_desc_4"></textarea>
+        </div>
+        <div class="flex mt2 justify-between">
+            <label>Image</label>
+            <textarea [(ngModel)]="product.product_image_sub_4"></textarea>
         </div>
     </div>
 </div>
