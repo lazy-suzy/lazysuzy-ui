@@ -31,6 +31,8 @@ export class ProductDetailsComponent implements OnInit {
     eventSubscription: Subscription;
     selectedIndex: number;
     dimensionExist: boolean;
+	assemblyExist: boolean;
+	careExist: boolean;
     featuresExist: boolean;
     descriptionExist: boolean;
     isSwatchExist: boolean;
@@ -160,6 +162,12 @@ export class ProductDetailsComponent implements OnInit {
         );
         this.dimensionExist = this.utils.checkDataLength(
             this.product.dimension
+        );
+		this.assemblyExist = this.utils.checkDataLength(
+            this.product.product_assembly
+        );
+		this.careExist = this.utils.checkDataLength(
+            this.product.product_care
         );
         this.featuresExist = this.utils.checkDataLength(
             this.product.features
