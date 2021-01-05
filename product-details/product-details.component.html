@@ -198,7 +198,7 @@
                     <div *ngIf="dimensionExist" class="mb2">
                         <hr class="modal-hr"/>
                         <span class="title">Dimensions</span>
-                        <div class="mt1 pb1 flex flex-wrap" *ngIf="isArray(product.dimension); else showDimensions">
+                        <div class="mt1 pb1 flex flex-wrap" *ngIf="isArray(product.dimension) && product.dimension.length>0; else showDimensions">
                             <div *ngFor="let dimension of product.dimension" class="fl w-50 pa2">
                                 <div class="dimension-title">{{ dimension.description }}</div>
                                 <div class="dimensions-details" *ngIf="dimension.width > 0">
@@ -219,26 +219,6 @@
                             </div>
                         </ng-template>
                     </div>
-					
-					<!-- ***************************************  -->
-					
-					<div *ngIf="assemblyExist" class="mb2"> 
-					 <hr class="modal-hr"/>
-                        <span class="title">Assembly</span>
-                        <div class="mt1" [innerHTML]="product.product_assembly"></div> 
-                    </div>
-					
-					
-					<div *ngIf="dimensionExist" class="mb2">
-                        <hr class="modal-hr"/>
-                        <span class="title">Care</span>
-                        <div class="mt1" [innerHTML]="product.product_care"></div>
-                    </div>
-					
-					
-					<!-- ***************************************  -->
-					
-					
                     <div class="mb2" *ngIf="product.collections.length">
                         <hr class="modal-hr"/>
                         <span class="title">More in the Collection</span>
