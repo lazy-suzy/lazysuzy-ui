@@ -201,6 +201,7 @@
                         <div class="mt1 pb1 flex flex-wrap" *ngIf="isArray(product.dimension); else showDimensions">
                             <div *ngFor="let dimension of product.dimension" class="fl w-50 pa2">
                                 <div class="dimension-title">{{ dimension.description }}</div>
+								
                                 <div class="dimensions-details" *ngIf="dimension.width > 0">
                                     Width: {{ dimension.width }}
                                 </div>
