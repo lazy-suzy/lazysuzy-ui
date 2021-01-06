@@ -163,12 +163,16 @@ export class ProductDetailsComponent implements OnInit {
         this.dimensionExist = this.utils.checkDataLength(
             this.product.dimension
         );
+	if(this.product.product_assembly!=null){
 		this.assemblyExist = this.utils.checkDataLength(
-            this.product.product_assembly
-        );
+			this.product.product_assembly
+		);
+	}
+	if(this.product.product_care!=null){
 		this.careExist = this.utils.checkDataLength(
-            this.product.product_care
-        );
+			this.product.product_care
+		);
+	}
         this.featuresExist = this.utils.checkDataLength(
             this.product.features
         );
