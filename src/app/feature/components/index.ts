@@ -29,3 +29,5 @@ export * from './editMyProfile/editMyProfile.component';
 export * from './editMyProfile/editMyProfile.module';
 export * from './publicProfile/publicProfile.module';
 export * from './publicProfile/publicProfile.component';
+export * from './reviewForm/reviewForm.component';
+export * from './reviewForm/reviewForm.module';
