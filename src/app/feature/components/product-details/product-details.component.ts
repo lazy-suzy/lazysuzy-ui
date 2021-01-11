@@ -174,6 +174,7 @@ export class ProductDetailsComponent implements OnInit {
 				this.product.product_care
 			);
 		}
+
         this.featuresExist = this.utils.checkDataLength(
             this.product.features
         );

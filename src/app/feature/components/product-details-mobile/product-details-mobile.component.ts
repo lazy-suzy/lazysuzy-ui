@@ -177,7 +177,8 @@ export class ProductDetailsMobileComponent implements OnInit {
                                 );
                                 this.featuresExist = this.utils.checkDataLength(
                                     this.product.features
-                                );
+                                ); 
+								
 								if(this.product.product_assembly!=null){
 									this.assemblyExist = this.utils.checkDataLength(
 										this.product.product_assembly
@@ -188,6 +189,7 @@ export class ProductDetailsMobileComponent implements OnInit {
 										this.product.product_care
 									);
 								}
+
                                 this.descriptionExist = this.utils.checkDataLength(
                                     this.product.description
                                 );
