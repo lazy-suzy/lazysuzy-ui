@@ -14,6 +14,7 @@ import {Lightbox} from '@ngx-gallery/lightbox';
 import {PixelService} from '../../../shared/services/facebook-pixel/pixel.service';
 import {WishlistSnackbarService} from '../../../shared/services/wishlist-service/wishlist-snackbar.service';
 import {first} from 'rxjs/operators';
+import { Router } from '@angular/router';
 
 @Component({
     selector: 'app-product-details',
@@ -85,7 +86,8 @@ export class ProductDetailsComponent implements OnInit {
         private matDialogUtils: MatDialogUtilsService,
         private seoService: SeoService,
         private pixelService: PixelService,
-        private snackBarService: WishlistSnackbarService
+        private snackBarService: WishlistSnackbarService,
+		private router: Router
     ) {
     }
 
@@ -94,11 +96,10 @@ export class ProductDetailsComponent implements OnInit {
         this.loadRecentProducts();
         this.eventSubscription = this.eventEmitterService.userChangeEvent
             .asObservable()
-            .subscribe((user) => {
-                console.log(user);
+            .subscribe((user) => { 
                 if (this.data.payload) {
                     this.processProduct(this.data.payload, user);
-                } else {
+                } else { 
                     this.productSubscription = this.apiService
                         .getProduct(this.data.sku)
                         .subscribe(
@@ -162,13 +163,17 @@ export class ProductDetailsComponent implements OnInit {
         );
         this.dimensionExist = this.utils.checkDataLength(
             this.product.dimension
-        );
-		this.assemblyExist = this.utils.checkDataLength(
-            this.product.product_assembly
-        );
-		this.careExist = this.utils.checkDataLength(
-            this.product.product_care
-        );
+        ); 
+		if(this.product.product_assembly!=null){
+			this.assemblyExist = this.utils.checkDataLength(
+				this.product.product_assembly
+			);
+		}
+		if(this.product.product_care!=null){
+			this.careExist = this.utils.checkDataLength(
+				this.product.product_care
+			);
+		}
         this.featuresExist = this.utils.checkDataLength(
             this.product.features
         );
@@ -464,4 +469,8 @@ export class ProductDetailsComponent implements OnInit {
         setTimeout(() => this.matDialogUtils.openMatDialog(sku), 250);
 
     }
+	goToReview(sku){
+		window.location.href='./product/review/'+sku;
+		//this.router.navigateByUrl('/product/review/',sku)
+	}
 }

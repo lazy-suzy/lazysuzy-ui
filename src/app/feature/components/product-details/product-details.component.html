@@ -27,9 +27,10 @@
                                     {{renderPrice(productWasPrice) }}
                                     </span>
                                 </span>
-                                    <div *ngIf="product.reviews != null && product.reviews != 0"
-                                         class="rating-container">
-                                        <div class="rating pr2">
+								
+                                    <div class="rating-container">
+									    <div class="write-review" (click)="goToReview(product.sku)" >Write a Review </div>
+                                        <div class="rating pr2" *ngIf="product.reviews != null && product.reviews != 0">
                                             <mat-icon *ngFor="let icon of starIcons" class="yellow">
                                                 {{ icon }}
                                             </mat-icon>
@@ -230,7 +231,7 @@
                     </div>
 					
 					
-					<div *ngIf="dimensionExist" class="mb2">
+					<div *ngIf="careExist" class="mb2">
                         <hr class="modal-hr"/>
                         <span class="title">Care</span>
                         <div class="mt1" [innerHTML]="product.product_care"></div>
