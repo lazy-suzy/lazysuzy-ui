@@ -35,6 +35,8 @@ export interface IProduct {
     dimension: Dimension[];
     thumb: string[];
     features: string[];
+    product_assembly: string[];
+    product_care: string[];
     on_server_images: string[];
     department_info: Departmentinfo[];
     in_inventory: boolean;

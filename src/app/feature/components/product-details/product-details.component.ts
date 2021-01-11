@@ -31,6 +31,8 @@ export class ProductDetailsComponent implements OnInit {
     eventSubscription: Subscription;
     selectedIndex: number;
     dimensionExist: boolean;
+	assemblyExist: boolean;
+	careExist: boolean;
     featuresExist: boolean;
     descriptionExist: boolean;
     isSwatchExist: boolean;
@@ -96,7 +98,7 @@ export class ProductDetailsComponent implements OnInit {
                 console.log(user);
                 if (this.data.payload) {
                     this.processProduct(this.data.payload, user);
-                } else {
+                } else {console.log(this.data.sku);
                     this.productSubscription = this.apiService
                         .getProduct(this.data.sku)
                         .subscribe(
@@ -160,7 +162,17 @@ export class ProductDetailsComponent implements OnInit {
         );
         this.dimensionExist = this.utils.checkDataLength(
             this.product.dimension
-        );
+        ); 
+		if(this.product.product_assembly!=null){
+			this.assemblyExist = this.utils.checkDataLength(
+				this.product.product_assembly
+			);
+		}
+		if(this.product.product_care!=null){
+			this.careExist = this.utils.checkDataLength(
+				this.product.product_care
+			);
+		}
         this.featuresExist = this.utils.checkDataLength(
             this.product.features
         );
