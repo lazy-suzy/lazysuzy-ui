@@ -28,8 +28,8 @@
                                     </span>
                                 </span>
 								
-                                    <div class="rating-container">
-									    <div class="write-review" (click)="goToReview(product.sku)" >Write a Review </div>
+                                    <div class="rating-container"><!--goToReview(product.sku)-->
+									    <div class="write-review" (click)="openMyReviewModal()" >Write a Review </div>
                                         <div class="rating pr2" *ngIf="product.reviews != null && product.reviews != 0">
                                             <mat-icon *ngFor="let icon of starIcons" class="yellow">
                                                 {{ icon }}

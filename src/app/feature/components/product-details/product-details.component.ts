@@ -474,4 +474,36 @@ export class ProductDetailsComponent implements OnInit {
 		window.location.href='./product/review/'+sku;
 		//this.router.navigateByUrl('/product/review/',sku)
 	}
+	
+	   openMyReviewModal() {
+        
+        if (
+            !this.activeProduct.in_inventory &&
+            !this.activeProduct.inventory_product_details.price ||
+            !this.beforeSelection
+        ) {
+            this.hasSelection = false;
+        } else {
+            this.hasSelection = true;
+            const data = {
+                sku: this.activeProduct.sku,
+                brand: this.product.site,
+                image: this.items[0].data.src,
+                name:
+                    this.activeProduct.sku === this.product.sku
+                        ? this.activeProduct.name
+                        : this.product.name + ' ' + this.activeProduct.name,
+                price: this.productPrice,
+                quantity: this.quantity
+            };
+            const postData = {
+                product_sku: this.activeProduct.sku,
+                count: this.quantity,
+                parent_sku: this.product.sku
+            };
+          
+			this.matDialogUtils.openMyReviewDialog(data);
+            
+        }
+    }
 }
