@@ -2,194 +2,248 @@
 
 
 .profile-container {
-  width: 50%;
-  margin: auto;
-  .header {
-    padding-bottom: 15px;
-    border-bottom: 1px solid #aab7b6;
-    margin-bottom: 15px;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-  }
-  .title {
-    color: #b76e79;
-    font-size: 24px;
-  }
-  .profile-form-container {
     width: 90%;
-    margin: 0 auto 20px;
-    .account-avatar-row {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      position: relative;
-      height: 70px;
-      margin: 25px auto 25px -10px;
-      width: 90%;
-      overflow: hidden;
-      .profile-image-input {
-        position: absolute;
-        left: 0;
-        height: 70px;
-        width: 70px;
-        opacity: 0;
-        z-index: 1;
-        border-radius: 100%;
-      }
-      .edit-image {
-        position: absolute;
-        left: 20px;
-        top: 25px;
-        color: #808080;
-      }
-      .account-icon {
-        font-size: 75px;
-        margin: 0 0 45px -5px;
-        color: #d4d4d4;
-      }
+    margin: auto;
+
+    .header {
+        padding-bottom: 15px;
+        border-bottom: 1px solid #aab7b6;
+        margin-bottom: 5px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
     }
-    .input-container {
-      margin: 25px 0;
-      border-color: #999999;
-      &:focus {
-        border-color: #999999;
-      }
+
+    .title {
+        color: #b76e79;
+        font-size: 24px;
     }
-    label {
-      color: #999999;
-    }
-    input {
-      &:focus {
-        outline: none;
-      }
-    }
-    .form-input {
-      padding: 8px 16px;
-      height: 40px;
-      border-radius: 3px;
-      border-color: #999999;
-    }
-    .profile-link {
-      font-size: 14px;
-      span a {
+
+    .require {
+        font-size: 13px;
         color: #999999;
-      }
+        font-weight: normal;
     }
-    .last-name {
-      text-align: left;
-      margin-left: 15px;
-    }
-    .text-area {
-      height: 100px;
-      resize: none;
-      border-color: #999999;
-      &:focus {
-        outline: none;
-      }
-    }
-    .tag-line-container {
-      height: 40px;
-    }
-    .action-buttons-row {
-      width: 100%;
-      text-align: right;
-      margin: 15px 0;
-    }
-    button {
-      padding: 10px 40px;
-      border: none;
-      border-radius: 4px;
-    }
-    .profile-cancel-btn {
-      color: #0c1c31;
-      &:focus {
-        outline: none;
-      }
-    }
-    .profile-update-btn {
-      background-color: #0c1c31;
-      color: #f7c107;
-    }
-    .profile-avatar {
-      width: 50%;
-     /* border-radius: 100%;
+
+    .profile-form-container {
+        width: 90%;
+        margin: 0 auto 20px;
+
+        .account-avatar-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: relative;
+            height: 70px;
+            margin: 19px auto 14px 0px;
+            width: 90%;
+            overflow: hidden;
+
+            .profile-image-input {
+                position: absolute;
+                left: 0;
+                height: 70px;
+                width: 70px;
+                opacity: 0;
+                z-index: 1;
+                border-radius: 100%;
+            }
+
+            .edit-image {
+                position: absolute;
+                left: 20px;
+                top: 25px;
+                color: #808080;
+            }
+
+            .account-icon {
+                font-size: 75px;
+                margin: 0 0 45px -5px;
+                color: #d4d4d4;
+            }
+        }
+
+        .input-container {
+            /*margin: 25px 0;*/
+            border-color: #999999;
+
+            &:focus {
+                border-color: #999999;
+            }
+        }
+
+        label {
+            color: #999999;
+        }
+
+        input {
+            &:focus {
+                outline: none;
+            }
+        }
+
+        .form-input {
+            padding: 8px 16px;
+            height: 40px;
+            border-radius: 3px;
+            border-color: #999999;
+            margin-bottom: 20px;
+        }
+
+        .form-textarea {
+            padding: 8px 16px;
+            height: 40px;
+            border-radius: 3px;
+            border-color: #999999;
+        }
+
+        .profile-link {
+            font-size: 14px;
+
+            span a {
+                color: #999999;
+            }
+        }
+
+        .last-name {
+            text-align: left;
+            margin-left: 15px;
+        }
+
+        .text-area {
+            height: 100px;
+            resize: none;
+            border-color: #999999;
+
+            &:focus {
+                outline: none;
+            }
+        }
+
+        .tag-line-container {
+            height: 40px;
+        }
+
+        .action-buttons-row {
+            width: 100%;
+            text-align: right;
+            margin: 15px 0;
+        }
+
+        button {
+            padding: 10px 30px;
+            border: none;
+            border-radius: 4px;
+        }
+
+        .profile-cancel-btn {
+            color: #0c1c31;
+
+            &:focus {
+                outline: none;
+            }
+        }
+
+        .profile-update-btn {
+            background-color: #0c1c31;
+            color: #f7c107;
+        }
+
+        .profile-avatar {
+            width: 50%;
+            /* border-radius: 100%;
       left: 50%;
       height: 100%;*/
-      object-fit: cover;
-      top: 50%;
-      position: absolute;
-      -webkit-transform: translate(-50%, -50%);
-      -ms-transform: translate(-50%, -50%);
-      transform: translate(-50%, -50%);
+            object-fit: cover;
+            top: 50%;
+            position: absolute;
+            -webkit-transform: translate(-50%, -50%);
+            -ms-transform: translate(-50%, -50%);
+            transform: translate(-50%, -50%);
+        }
     }
-  }
-  
-  /***********************************************************************/
-  .star-cb-group {
-  /* remove inline-block whitespace */
-  font-size: 0;
-  * {
-    font-size: 2rem;
-  }
-  /* flip the order so we can use the + and ~ combinators */
-  unicode-bidi: bidi-override;
-  direction: rtl;
-  & > input {
-    display: none;
-    & + label {
-      /* only enough room for the star */
-      display: inline-block;
-      overflow: hidden;
-      text-indent: 9999px;
-      width: 1em;
-      white-space: nowrap;
-      cursor: pointer;
-      &:before {
-        display: inline-block;
-        text-indent: -9999px;
-        content: '\2606';
-        color: #888;
-      }
-    }
-    &:checked ~ label:before,
-      & + label:hover ~ label:before,
-      & + label:hover:before {
-      content: '\2605';
-      color: #e52;
-      text-shadow: 0 0 1px #333;
-    }
-  }
-  
-  /* the hidden clearer */
-  & > .star-cb-clear + label {
-    text-indent: -9999px;
-    width: .5em;
-    margin-left: -.5em;
-  }
-  & > .star-cb-clear + label:before {
-    width: .5em;
-  }
+    /***********************************************************************/
+    .star-cb-group {
+        /* remove inline-block whitespace */
+        font-size: 0;
 
-  &:hover > input + label:before {
-    content: '\2606';
-    color: #888;
-    text-shadow: none;
-  }
-  &:hover > input + label:hover ~ label:before,
-  &:hover > input + label:hover:before {
-    content: '\2605';
-    color: #e52;
-    text-shadow: 0 0 1px #333;
-  }
-}
-  
-  
-  /**************************************************************************/
-  
+        * {
+            font-size: 2rem;
+        }
+        /* flip the order so we can use the + and ~ combinators */
+        unicode-bidi: bidi-override;
+        direction: rtl;
+
+        & > input {
+            display: none;
+
+            & + label {
+                /* only enough room for the star */
+                display: inline-block;
+                overflow: hidden;
+                text-indent: 9999px;
+                width: 1em;
+                white-space: nowrap;
+                cursor: pointer;
+
+                &:before {
+                    display: inline-block;
+                    text-indent: -9999px;
+                    content: '\2606';
+                    color: #888;
+                }
+            }
+
+            &:checked ~ label:before,
+            & + label:hover ~ label:before,
+            & + label:hover:before {
+                content: '\2605';
+                color: #e52;
+                text-shadow: 0 0 1px #333;
+            }
+        }
+        /* the hidden clearer */
+        & > .star-cb-clear + label {
+            text-indent: -9999px;
+            width: .5em;
+            margin-left: -.5em;
+        }
+
+        & > .star-cb-clear + label:before {
+            width: .5em;
+        }
+
+        &:hover > input + label:before {
+            content: '\2606';
+            color: #888;
+            text-shadow: none;
+        }
+
+        &:hover > input + label:hover ~ label:before,
+        &:hover > input + label:hover:before {
+            content: '\2605';
+            color: #e52;
+            text-shadow: 0 0 1px #333;
+        }
+    }
+    /**************************************************************************/
+    .close-icon {
+        position: absolute;
+        right: 89px;
+        top: 10px;
+        background-color: transparent;
+        border: none;
+        z-index: 99;
+    }
+
+    .border {
+        border-bottom: 1px solid #aab7b6;
+        margin-bottom: 5px;
+    }
 }
 .avatar-container {
-  width: 15%;
+  width: 45%;
+  margin-right:5%;
 }
 .form-input-container {
   width: 85%;
@@ -226,34 +280,52 @@
   color: #ffcc00;
 }
 @media (max-width: 767px) {
-  .profile-container {
-    width: 100%;
-    .header {
-      display: block;
-    }
-    .title {
-      padding: 15px;
-    }
-    .form-msg {
-      margin: 0 15px;
-    }
-    .profile-form-container {
-      width: 90%;
-      .account-avatar-row {
-        text-align: right;
-        width: 20%;
-        margin: 25px auto;
-      }
+    .profile-container {
+        width: 100%;
 
-      .last-name {
-        margin: 20px 0 10px;
-      }
-      .action-buttons-row {
-        text-align: center;
-        margin: 10px 0 20px;
-      }
+        .header {
+            display: block;
+        }
+
+        .title {
+            padding: 15px;
+        }
+
+        .require {
+            font-size: 13px;
+            color: #999999;
+            font-weight: normal;
+        }
+
+
+        .form-msg {
+            margin: 0 15px;
+        }
+
+        .profile-form-container {
+            width: 90%;
+
+            .account-avatar-row {
+                text-align: right;
+                width: 20%;
+                margin: 25px auto;
+            }
+
+            .last-name {
+                margin: 20px 0 10px;
+            }
+
+            .action-buttons-row {
+                text-align: center;
+                margin: 10px 0 20px;
+            }
+        }
+
+        .border {
+            border-bottom: 1px solid #aab7b6;
+            margin-bottom: 5px;
+        }
     }
-  }
   .avatar-container {
     width: 100%;
   }
@@ -272,3 +344,5 @@
     margin-bottom: 100px !important;
   }
 }
+
+

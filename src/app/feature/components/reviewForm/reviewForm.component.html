@@ -1,144 +1,165 @@
 <div class="profile-container">
-  <div class="header">
-    <div class="title b">Give your Review Here</div>
+  <div>&nbsp;</div>
   
-  </div>
   <div class="profile-form-container">
-    <form name="review-form" class="w-100 flex-ns" #reviewForm="ngForm">
-      <!--<div class="avatar-container">
-        
-      </div>
-     -->
-	 <div class="form-input-container">
-        <div class="w-100 input-container">
-          <div class="flex justify-between items-center">
-            <label class="db">Header</label>
-          
-          </div>
-          <input
-            class="form-input w-100"
-            name="reviewHeader"
-            #reviewUserName="ngModel"
-            [(ngModel)]="reviewHeader" 
-          />
-           <span *ngIf="headererror" class="error-msg">
-            This field is required.
-          </span>
-        </div>
-		<!-- [checked]="rateval ==1" -->
-		<div class="w-100 input-container">
-			<span class="star-cb-group">
-			  <input type="radio" id="rating-5" name="rating" value="5" (change)="starCount(5)" /><label for="rating-5">5</label>
-			  <input type="radio" id="rating-4" name="rating" value="4"  (change)="starCount(4)" /><label for="rating-4">4</label>
-			  <input type="radio" id="rating-3" name="rating" value="3" (change)="starCount(3)" /><label for="rating-3">3</label>
-			  <input type="radio" id="rating-2" name="rating" value="2" (change)="starCount(2)" /><label for="rating-2">2</label>
-			  <input type="radio" id="rating-1" name="rating" value="1" (change)="starCount(1)" /><label for="rating-1">1</label>
-			  <input type="radio" id="rating-0" name="rating" value="0" (change)="starCount(0)" checked="checked" class="star-cb-clear" /><label for="rating-0">0</label>
-			</span>
-		
-		</div>
-		
-		
-		<div class="w-100 input-container">
-          <div class="flex justify-between items-center">
-            <label class="db">Review</label>
-          
-          </div>
-          <input
-            class="form-input w-100"
-            name="reviewText"
-            #reviewUserName="ngModel"
-            [(ngModel)]="reviewText"
-          />
-           <span *ngIf="rtexterror" class="error-msg">
-            This field is required.
-          </span>
-        </div>
-		
-		<div class="account-avatar-row">
-          <input
-            type="file"
-            accept=".jpg,.png"
-            name="reviewImage"
-            class="profile-image-input pointer"
-            (mouseover)="over()"
-            (mouseout)="out()"
-            (change)="readFile($event)"
-          />
-          <span class="edit-image {{ hasEditIcon ? '' : 'dn' }}">
-            <mat-icon
-              class="pointer"
-              aria-hidden="false"
-              aria-label="Edit-Image"
-              >edit</mat-icon
-            >
-          </span>
-          <mat-icon
-            class="account-icon"
-            aria-hidden="false"
-            aria-label="Account"
-            *ngIf="!hasImage"
-          >
-            account_circle
-          </mat-icon>
-          <img [src]="imageSrc" *ngIf="hasImage" class="profile-avatar" />
-        </div>
-		
-		
-		
-		
-		<div class="w-100 input-container" *ngIf="presentUserName==''">
-          <div class="flex justify-between items-center">
-            <label class="db">User Name</label>
-          
-          </div>
-          <input
-            class="form-input w-100"
-            name="reviewUserName"
-            #reviewUserName="ngModel"
-            [(ngModel)]="username"
-          />
+      
+    <form name="review-form" class="w-100 flex-ns gallery-container" #reviewForm="ngForm">
+ 
+        <div class="avatar-container">
+
+            <div class="w-100 tc">
+                <img [src]="product.image" class="product-image" />
+            </div>
+            <div class="w-100">
+                {{product.name}}
+            </div>
+            <div class="w-100">
+                By {{product.brand}}
+            </div>
 
         </div>
-		
-		
-		
-		<div class="w-100 input-container"  *ngIf="presentUserName==''">
-          <div class="flex justify-between items-center">
-            <label class="db">User Email</label>
-          
-          </div>
-          <input
-            class="form-input w-100"
-            name="reviewUserEmail"
-            #reviewUserName="ngModel"
-            [(ngModel)]="useremail"
-          />
-          <span *ngIf="emailerror" class="error-msg">
-            The email id is not valid.
-          </span>
-        </div>
-		
-		<div class="w-100 input-container" *ngIf="presentLocation==''">
-          <label class="db">Location</label>
-          <input
-            class="form-input w-100"
-            name="reviewLocation"
-            #reviewLocation="ngModel"
-            [(ngModel)]="location"
-          />
-        </div>
-		
-		 
-        <div class="action-buttons-row">
-          <button class="profile-cancel-btn b" [routerLink]="['/board']">
-            CANCEL
-          </button>
-          <button class="profile-update-btn b ml3" (click)="reviewUpdate()">
-            UPDATE
-          </button>
-        </div>
-      </div>
+        
+	 
+	 
+        <div class="form-input-container">
+            <div class="header">
+                <div class="title b">My Review<br /><div class="require">*Required Field</div></div>
+
+
+            </div>
+
+            <div class="w-100 input-container">
+                <div class="flex justify-between items-center border">
+                        <label class="db">Overall Rating* </label>
+                        <span class="star-cb-group">
+                            <input type="radio" id="rating-5" name="rating" value="5" (change)="starCount(5)" /><label for="rating-5">5</label>
+                            <input type="radio" id="rating-4" name="rating" value="4" (change)="starCount(4)" /><label for="rating-4">4</label>
+                            <input type="radio" id="rating-3" name="rating" value="3" (change)="starCount(3)" /><label for="rating-3">3</label>
+                            <input type="radio" id="rating-2" name="rating" value="2" (change)="starCount(2)" /><label for="rating-2">2</label>
+                            <input type="radio" id="rating-1" name="rating" value="1" (change)="starCount(1)" /><label for="rating-1">1</label>
+                            <input type="radio" id="rating-0" name="rating" value="0" (change)="starCount(0)" checked="checked" class="star-cb-clear" /><label for="rating-0">0</label>
+                        </span>
+
+                </div>
+            </div>
+
+
+            <div class="w-100 input-container">
+                <div class="flex justify-between items-center">
+                    <label class="db">Header*</label>
+
+                </div>
+                <input class="form-input w-100"
+                        name="reviewHeader"
+                        #reviewUserName="ngModel"
+                        [(ngModel)]="reviewHeader" placeholder="Example:Love this couch!" />
+                <span *ngIf="headererror" class="error-msg">
+                    This field is required.
+                </span>
+            </div>
+            <!-- [checked]="rateval ==1" -->
+
+
+
+            <div class="w-100 input-container">
+                <div class="flex justify-between items-center">
+                    <label class="db">Review*</label>
+
+                </div>
+                <textarea class="form-textarea w-100"
+                       name="reviewText"
+                       #reviewUserName="ngModel"
+                       [(ngModel)]="reviewText" style="height:120px;" placeholder="What did you like or dislike? How do you use this product? What met your expectations and what surprised you?"></textarea>
+
+                 
+                <span *ngIf="rtexterror" class="error-msg">
+                    This field is required.
+                </span>
+                <div class="border">&nbsp;</div>
+            </div>
+
+            <div class="">
+                <div class="flex justify-between items-center">
+                    <label class="db">
+                        Add a Photo
+                        <div class="require">Inspire others with up to 5 photos to highlight features or share your unique style.</div>
+                    </label>
+
+
+
+                </div>
+                <input type="file"
+                       accept=".jpg,.png"
+                       name="reviewImage"
+                       class="profile-image-input pointer"
+                       (mouseover)="over()"
+                       (mouseout)="out()"
+                       (change)="readFile($event)" />
+                <!--<span class="edit-image {{ hasEditIcon ? '' : 'dn' }}">
+                    <mat-icon class="pointer"
+                              aria-hidden="false"
+                              aria-label="Edit-Image">edit</mat-icon>
+                </span>-->
+                <!--<mat-icon class="account-icon"
+              aria-hidden="false"
+              aria-label="Account"
+              *ngIf="!hasImage">
+        account_circle
+    </mat-icon>-->
+                <img [src]="imageSrc" *ngIf="hasImage" />
+
+                <div class="border">&nbsp;</div>
+            </div>
+
+
+
+
+            <div class="w-100 input-container" *ngIf="presentUserName==''">
+                <div class="flex justify-between items-center">
+                    <label class="db">Name</label>
+
+                </div>
+                <input class="form-input w-100"
+                        name="reviewUserName"
+                        #reviewUserName="ngModel"
+                        [(ngModel)]="username" />
+
+            </div>
+
+
+
+            <div class="w-100 input-container" *ngIf="presentUserName==''">
+                <div class="flex justify-between items-center">
+                    <label class="db">      Email</label>
+
+                </div>
+                <input class="form-input w-100"
+                        name="reviewUserEmail"
+                        #reviewUserName="ngModel"
+                        [(ngModel)]="useremail" />
+                <span *ngIf="emailerror" class="error-msg">
+                    The email id is not valid.
+                </span>
+            </div>
+
+            <div class="w-100 input-container" *ngIf="presentLocation==''">
+                <label class="db">Location</label>
+                <input class="form-input w-100"
+                        name="reviewLocation"
+                        #reviewLocation="ngModel"
+                        [(ngModel)]="location" />
+            </div>
+
+
+            <div class="action-buttons-row">
+                <button class="profile-cancel-btn b" mat-dialog-close>
+                    CANCEL
+                </button>
+                <button class="profile-update-btn b ml3" (click)="reviewUpdate()">
+                    UPDATE
+                </button>
+            </div>
+            </div>
     </form>
   </div>
 </div>

@@ -13,6 +13,7 @@ import { CookieService } from 'ngx-cookie-service';
 import { MatSnackBar } from '@angular/material';
 import {MAT_DIALOG_DATA} from '@angular/material/dialog';  
 
+
 @Component({
   selector: 'app-reviewform',
   templateUrl: './reviewForm.component.html',
@@ -37,18 +38,18 @@ export class ReviewFormComponent implements OnInit {
 	headererror: boolean = false;
 	useremail:string='';
 	hasHeaderError = false;
-	sku: string;
-	product: IProduct; 
+	sku: string;  
 	ratingvalue: number=0;
 	reviewHeader:  string = '';
 	reviewText:  string = '';
+	 product: any = {};
   
   
   eventSubscription: Subscription;
   websiteRegex = /^[a-zA-Z0-9][a-zA-Z0-9-]{1,61}[a-zA-Z0-9].[a-zA-Z]{2,}$/;
   
   constructor( 
- //  @Inject(MAT_DIALOG_DATA) public data: any,
+   @Inject(MAT_DIALOG_DATA) public data: any,
     private apiService: ApiService,
     private eventEmitterService: EventEmitterService,
     private router: Router,
@@ -59,9 +60,10 @@ export class ReviewFormComponent implements OnInit {
   ) {}
 
   ngOnInit() {
-	 this.route.params.subscribe(routeParams => {
-      this.sku = routeParams.product;
-	 
+	  this.product = this.data.modal;console.log(this.product );
+	// this.route.params.subscribe(routeParams => {
+      this.sku = this.product.sku;
+	 console.log(this.sku );
 	   this.eventSubscription = this.eventEmitterService.userChangeEvent
       .asObservable()
       .subscribe((user) => {
@@ -89,22 +91,12 @@ export class ReviewFormComponent implements OnInit {
 		}
       });
  
-    });  
+  //  });  
 	  
    
   }
   
-  private processProduct(payload: IProductDetail, user) {
-        this.product = payload.product;
-        if (payload.product) {
-			this.sku = this.product.sku;
-            console.log(this.sku);
-        } else {
-           // this.invalidLink = true;
-        }
-      //  this.isProductFetching = false;
-      //  this.localStorageUser = user;
-    }
+
 
   onDestroy(): void {
     this.eventSubscription.unsubscribe();

@@ -1,6 +1,6 @@
 import {ElementRef, Injectable} from '@angular/core';
 import {MatDialog} from '@angular/material/dialog';
-import {ConfirmCartProductComponent, ProductDetailsComponent} from 'src/app/feature/components';
+import {ConfirmCartProductComponent, ProductDetailsComponent, ReviewFormComponent} from 'src/app/feature/components';
 import {SigninComponent, SignupComponent} from 'src/app/core/components';
 import {Location} from '@angular/common';
 import {ActivatedRoute, Router} from '@angular/router';
@@ -182,5 +182,17 @@ export class MatDialogUtilsService {
 
     setProduct(payload) {
         this.payload = payload;
+    }
+	 
+	openMyReviewDialog(modal) {console.log(modal)
+        const dialogRef = this.dialog.open(ReviewFormComponent, {
+            width: '30%',
+            height: '90%',
+            data: {
+                    modal,
+                total: modal.price * modal.quantity
+            },
+            panelClass: 'review-details-dialog-container'
+        });
     }
 }
