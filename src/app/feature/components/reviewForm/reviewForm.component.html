@@ -39,7 +39,9 @@
                             <input type="radio" id="rating-1" name="rating" value="1" (change)="starCount(1)" /><label for="rating-1">1</label>
                             <input type="radio" id="rating-0" name="rating" value="0" (change)="starCount(0)" checked="checked" class="star-cb-clear" /><label for="rating-0">0</label>
                         </span>
-
+                        <span *ngIf="ratingerror" class="error-msg">
+                            This field is required.
+                        </span>
                 </div>
             </div>
 

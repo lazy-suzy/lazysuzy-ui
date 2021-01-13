@@ -36,6 +36,7 @@ export class ReviewFormComponent implements OnInit {
 	emailerror: boolean = false;
 	rtexterror: boolean = false;
 	headererror: boolean = false;
+    ratingerror: boolean = false;
 	useremail:string='';
 	hasHeaderError = false;
 	sku: string;  
@@ -115,8 +116,14 @@ export class ReviewFormComponent implements OnInit {
     if (this.presentUserName !== '') {
       formData.append('user_name', this.presentUserName);
     }  
-	else{
-		formData.append('user_name', this.username);
+    else {
+        if (this.username == '') {
+                formData.append('user_name', 'anonymous');
+        }
+        else {
+                formData.append('user_name', this.username);
+        }
+		
 	}
 	 
 	if (this.presentUserEmail !== '') { 
@@ -144,9 +151,15 @@ export class ReviewFormComponent implements OnInit {
 	formData.append('count_reported', '0');
 	formData.append('source', 'user');
 	
-	 
+      if (this.ratingvalue>0) {
+          this.ratingerror = false;
+          formData.append('rating', this.ratingvalue.toString());
+      }
+      else {
+          this.ratingerror = true;
+      }
 	
-	formData.append('rating', this.ratingvalue.toString()); 
+	 
 	if(this.reviewHeader!=''){
 		this.headererror= false;
 		formData.append('headline', this.hasNull(this.reviewHeader));
@@ -164,7 +177,7 @@ export class ReviewFormComponent implements OnInit {
 	}
 	
 	
-	if(!this.emailerror && !this.headererror && !this.rtexterror ){
+      if (!this.emailerror && !this.headererror && !this.rtexterror && !this.ratingerror){
 	 this.isLoading = true;	
      this.apiService.submitReview(formData).subscribe((payload: any) => {
       this.isLoading = false;
@@ -173,8 +186,9 @@ export class ReviewFormComponent implements OnInit {
         horizontalPosition: 'center',
         verticalPosition: 'bottom'
       });
-      const token = this.cookie.get('token');
-      this.eventEmitterService.fetchUser(token, payload.user);
+         location.reload();
+     // const token = this.cookie.get('token');
+     // this.eventEmitterService.fetchUser(token, payload.user);
       if (payload.errors.length) {
         const errorsArray = payload.errors;
         /*for (const error of errorsArray) { 

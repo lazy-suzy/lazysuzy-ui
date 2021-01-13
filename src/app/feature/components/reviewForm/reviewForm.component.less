@@ -131,7 +131,7 @@
         }
 
         button {
-            padding: 10px 30px;
+            padding: 10px 15px;
             border: none;
             border-radius: 4px;
         }
@@ -280,6 +280,11 @@
   color: #ffcc00;
 }
 @media (max-width: 767px) {
+    ::ng-deep.cdk-overlay-pane {
+        width: 95% !important;
+        height: 90% !important;
+        margin-top: 0 !important;
+    }
     .profile-container {
         width: 100%;
 
