@@ -117,8 +117,13 @@ export class ReviewFormComponent implements OnInit {
       formData.append('user_name', this.presentUserName);
     }  
     else {
-        if (this.username == '') { this.username = 'anonymous';}
-		formData.append('user_name', this.username);
+        if (this.username == '') {
+                formData.append('user_name', 'anonymous');
+        }
+        else {
+                formData.append('user_name', this.username);
+        }
+		
 	}
 	 
 	if (this.presentUserEmail !== '') { 
@@ -181,8 +186,9 @@ export class ReviewFormComponent implements OnInit {
         horizontalPosition: 'center',
         verticalPosition: 'bottom'
       });
-      const token = this.cookie.get('token');
-      this.eventEmitterService.fetchUser(token, payload.user);
+         location.reload();
+     // const token = this.cookie.get('token');
+     // this.eventEmitterService.fetchUser(token, payload.user);
       if (payload.errors.length) {
         const errorsArray = payload.errors;
         /*for (const error of errorsArray) { 
