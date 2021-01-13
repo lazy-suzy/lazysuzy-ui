@@ -184,9 +184,9 @@ export class MatDialogUtilsService {
         this.payload = payload;
     }
 	 
-	openMyReviewDialog(modal) {console.log(modal)
+	openMyReviewDialog(modal) { 
         const dialogRef = this.dialog.open(ReviewFormComponent, {
-            width: '30%',
+            width: '80%',
             height: '90%',
             data: {
                     modal,

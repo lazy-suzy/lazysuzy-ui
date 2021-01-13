@@ -36,6 +36,7 @@ export class ReviewFormComponent implements OnInit {
 	emailerror: boolean = false;
 	rtexterror: boolean = false;
 	headererror: boolean = false;
+    ratingerror: boolean = false;
 	useremail:string='';
 	hasHeaderError = false;
 	sku: string;  
@@ -115,7 +116,8 @@ export class ReviewFormComponent implements OnInit {
     if (this.presentUserName !== '') {
       formData.append('user_name', this.presentUserName);
     }  
-	else{
+    else {
+        if (this.username == '') { this.username = 'anonymous';}
 		formData.append('user_name', this.username);
 	}
 	 
@@ -144,9 +146,15 @@ export class ReviewFormComponent implements OnInit {
 	formData.append('count_reported', '0');
 	formData.append('source', 'user');
 	
-	 
+      if (this.ratingvalue>0) {
+          this.ratingerror = false;
+          formData.append('rating', this.ratingvalue.toString());
+      }
+      else {
+          this.ratingerror = true;
+      }
 	
-	formData.append('rating', this.ratingvalue.toString()); 
+	 
 	if(this.reviewHeader!=''){
 		this.headererror= false;
 		formData.append('headline', this.hasNull(this.reviewHeader));
@@ -164,7 +172,7 @@ export class ReviewFormComponent implements OnInit {
 	}
 	
 	
-	if(!this.emailerror && !this.headererror && !this.rtexterror ){
+      if (!this.emailerror && !this.headererror && !this.rtexterror && !this.ratingerror){
 	 this.isLoading = true;	
      this.apiService.submitReview(formData).subscribe((payload: any) => {
       this.isLoading = false;

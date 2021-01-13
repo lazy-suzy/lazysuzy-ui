@@ -42,13 +42,19 @@
             <div class="product-name">{{ product.name }}</div>
             <div class="price-container flex items-center">
                 <div class="padding-vertical-2 flex items-center">
-                        <span class="product-price">
-                            {{ priceObject.is_price }}
-                            &nbsp;
-                            <span class="strike product-old-price" [ngClass]="{'dn':!isDiscounted}">
-                                {{ priceObject.was_price }}
-                            </span>
+                    <span class="product-price">
+                        {{ priceObject.is_price }}
+                        &nbsp;
+                        <span class="strike product-old-price" [ngClass]="{'dn':!isDiscounted}">
+                            {{ priceObject.was_price }}
                         </span>
+                    </span>
+                </div>
+
+                <div class="rating-container">
+                    <!--goToReview(product.sku)-->
+                    <div class="write-review" (click)="openMyReviewModal()">Write a Review </div>
+                 
                 </div>
             </div>
             <div class="flex cart-actions mb2">
