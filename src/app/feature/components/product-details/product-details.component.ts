@@ -51,6 +51,7 @@ export class ProductDetailsComponent implements OnInit {
     topHeight = {'max-height': '0'};
     swatches = [];
     errorMessage = '';
+    activeTab = 'mr';
     priceData = {
         price: '',
         wasPrice: ''
@@ -75,6 +76,13 @@ export class ProductDetailsComponent implements OnInit {
     invalidLink: boolean;
     starIcons = [];
     recentProducts = [];
+    recentReviews = [];
+    lowest_reviews: any = [];
+    highest_reviews: any = [];
+    all_reviews: any = [];
+    tot_no: number = 0;
+    totrating: number = 0;
+    total_count: number = 0;
 
     constructor(
         @Inject(MAT_DIALOG_DATA) public data: any,
@@ -98,13 +106,15 @@ export class ProductDetailsComponent implements OnInit {
             .asObservable()
             .subscribe((user) => { 
                 if (this.data.payload) {
-                    this.processProduct(this.data.payload, user);
+                    this.processProduct(this.data.payload, user); 
+                    this.loadProductReviews(this.data.sku);
                 } else { 
                     this.productSubscription = this.apiService
                         .getProduct(this.data.sku)
                         .subscribe(
-                            (payload: IProductDetail) => {
+                            (payload: IProductDetail) => { 
                                 this.processProduct(payload, user);
+                                this.loadProductReviews(this.data.sku)
                             },
                             (error) => {
                                 this.invalidLink = true;
@@ -120,6 +130,27 @@ export class ProductDetailsComponent implements OnInit {
             this.recentProducts = response;
         });
     }
+
+    loadProductReviews(sku) {console.log(sku)
+        this.apiService.getProductReviews(sku).subscribe((response: any[]) => {
+            this.recentReviews = response;
+            if (this.recentReviews['all_reviews'] && this.recentReviews['all_reviews'].length > 0) {
+                this.all_reviews = this.recentReviews['all_reviews'];
+                this.total_count = this.recentReviews['count_rating'];
+                this.tot_no = parseInt(this.recentReviews['count_rating']) * 5;
+                this.totrating = (parseInt(this.recentReviews['tot_rating']) / this.tot_no) * 100;
+
+            }
+            if (this.recentReviews['highest_reviews'] && this.recentReviews['highest_reviews'].length > 0) {
+                this.highest_reviews = this.recentReviews['highest_reviews'];
+            }
+            if (this.recentReviews['lowest_reviews'] && this.recentReviews['lowest_reviews'].length > 0) {
+                this.lowest_reviews = this.recentReviews['lowest_reviews'];
+              
+            }
+        });
+    }
+    
 
     setRating(): void {
         this.starIcons = [];
@@ -505,5 +536,9 @@ export class ProductDetailsComponent implements OnInit {
 			this.matDialogUtils.openMyReviewDialog(data);
             
         }
+    }
+
+    selectTab(tab) {
+        this.activeTab = tab;
     }
 }

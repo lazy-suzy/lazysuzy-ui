@@ -503,15 +503,21 @@ export class ApiService {
 	
  
 	
-	 submitReview(data) {console.log(data)
-    //   const endpoint = 'http://127.0.0.1:8000/api/review';
+	 submitReview(data) { 
 	   const endpoint = 'review';
         const token = this.cookie.get('token');
         const headers = new HttpHeaders({
             Authorization: `Bearer ${token}`
         });
-        const url = `${env.API_BASE_HREF}${endpoint}`;
-      //  const url = `${endpoint}`;
+        const url = `${env.API_BASE_HREF}${endpoint}`; 
         return this.httpService.post(url, data, headers);
+     }
+
+    
+
+    getProductReviews(id: string){
+        const endpoint = `review/${id}`;
+        const url = `${env.API_BASE_HREF}${endpoint}`;
+        return this.httpService.get(url);
     }
 }
