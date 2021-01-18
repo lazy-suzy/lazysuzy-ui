@@ -123,7 +123,7 @@
                                         [ngStyle]="{'color':product.is_back_order ?'#FFCC00':'#54AD32'}">lens</mat-icon>
                     {{product.online_msg}}</span>
             </div>
-            <!--            End of Ship status-->
+            <!--End of Ship status-->
             <div class="ship-info mb2 flex"
                  *ngIf="product.inventory_product_details?.shipping_desc || utils.hasInventory(activeProduct)">
                 <span class="shipping-label">Shipping: &nbsp;</span>

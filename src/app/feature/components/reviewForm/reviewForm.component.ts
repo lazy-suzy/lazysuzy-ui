@@ -146,7 +146,7 @@ export class ReviewFormComponent implements OnInit {
 		formData.append('user_location', this.location);
 	}
 	
-	formData.append('status', '0');
+	formData.append('status', '1');
 	formData.append('count_helpful', '0');
 	formData.append('count_reported', '0');
 	formData.append('source', 'user');
