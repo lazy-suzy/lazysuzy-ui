@@ -90,32 +90,36 @@
 
 
                 </div>
-                <input type="file"
-                       accept=".jpg,.png,.jpeg,.gif,.svg"
-                       name="reviewImage"
-                       multiple
-                       class="profile-image-input pointer"
-                       (mouseover)="over()"
-                       (mouseout)="out()"
-                       (change)="readFile($event)" />
+                
 
-                <!--<img [src]="imageSrc" *ngIf="hasImage" />-->
-                <img *ngFor='let url of imageSrc' [src]="url" height="50" style="margin: 7px 3px;max-width: 30%;">
+                <div class="upload-btn-wrapper">
+                    <button class="btn">+</button>
+                    <input type="file"
+                           accept=".jpg,.png,.jpeg,.gif,.svg"
+                           name="reviewImage"
+                           id="file"
+                           multiple 
+                           (mouseover)="over()"
+                           (mouseout)="out()"
+                           (change)="readFile($event)" />
+                </div>
 
 
-                <!--
+                <div *ngIf="imageSrc.length>0" style="clear:both;">
+                    <div class="img-block" *ngFor="let url of imageSrc; let i= index" style="height:60px;margin: 7px 3px;max-width: 30%; float:left;">
+                        <img [src]="url" height="50" alt="">
+                        <div class="close" style="font-size: 10px; cursor: pointer;"><i class="icon-lab_cross" (click)="deleteUploadedImage(i)">Remove</i></div>
+                    </div>
+                </div>
 
 
-    <img *ngFor='let url of images' [src]="url" height="150" style="margin: 7px 3px;max-width: 30%;"> <br />
-    -->
-
-                <div class="border">&nbsp;</div>
+                <div class="border" style="clear:both;">&nbsp;</div>
             </div>
 
 
 
 
-            <div class="w-100 input-container" *ngIf="presentUserName==''">
+            <div class="w-100 input-container" style="clear:both;" *ngIf="presentUserName==''">
                 <div class="flex justify-between items-center">
                     <label class="db">Name</label>
 

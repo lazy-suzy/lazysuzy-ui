@@ -1,4 +1,4 @@
-import { Component, ElementRef, Inject, OnInit, TemplateRef, ViewChild} from '@angular/core';
+import { Component, ElementRef, Inject, OnInit, TemplateRef, ViewChild, Renderer} from '@angular/core';
 import {
   ApiService,
   EventEmitterService,
@@ -58,7 +58,8 @@ export class ReviewFormComponent implements OnInit {
     private cookie: CookieService,
     private snackBar: MatSnackBar,
     private utils: UtilsService, 
-	private route: ActivatedRoute,
+    private route: ActivatedRoute,
+    private renderer: Renderer
   ) {}
 
   ngOnInit() {
@@ -282,6 +283,12 @@ export class ReviewFormComponent implements OnInit {
   validateEmail(email) {
   const re = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
   return re.test(email);
+    }
+
+    deleteUploadedImage(index) {
+        this.imageSrc.splice(index, 1);
+        this.images.splice(index, 1);
+        this.renderer.selectRootElement('#file').value = '';
     }
 
   }
