@@ -91,24 +91,23 @@
 
                 </div>
                 <input type="file"
-                       accept=".jpg,.png"
+                       accept=".jpg,.png,.jpeg,.gif,.svg"
                        name="reviewImage"
+                       multiple
                        class="profile-image-input pointer"
                        (mouseover)="over()"
                        (mouseout)="out()"
                        (change)="readFile($event)" />
-                <!--<span class="edit-image {{ hasEditIcon ? '' : 'dn' }}">
-                    <mat-icon class="pointer"
-                              aria-hidden="false"
-                              aria-label="Edit-Image">edit</mat-icon>
-                </span>-->
-                <!--<mat-icon class="account-icon"
-              aria-hidden="false"
-              aria-label="Account"
-              *ngIf="!hasImage">
-        account_circle
-    </mat-icon>-->
-                <img [src]="imageSrc" *ngIf="hasImage" />
+
+                <!--<img [src]="imageSrc" *ngIf="hasImage" />-->
+                <img *ngFor='let url of imageSrc' [src]="url" height="50" style="margin: 7px 3px;max-width: 30%;">
+
+
+                <!--
+
+
+    <img *ngFor='let url of images' [src]="url" height="150" style="margin: 7px 3px;max-width: 30%;"> <br />
+    -->
 
                 <div class="border">&nbsp;</div>
             </div>

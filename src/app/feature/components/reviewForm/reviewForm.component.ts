@@ -23,9 +23,10 @@ export class ReviewFormComponent implements OnInit {
   
 	username: string =  ''; 
 	location: string =  '';
-	image: string =  '';
+	//image: string =  '';
+    images = [];
 	file: any;
-	imageSrc: any;
+    imageSrc = [];
 	hasEditIcon = false;
 	isLoading = false;
 	presentUserName: string = '';
@@ -69,22 +70,13 @@ export class ReviewFormComponent implements OnInit {
       .asObservable()
       .subscribe((user) => {
 	 
-       /* if (user.user_type === 0) {
-          this.router.navigate([`/`]);
-        }*/
-		
 		if (user.user_type >0) {
         this.apiService.getProfile().subscribe((payload: any) => {
           const userData = payload.auth.user;
           this.username = userData.username; 
           this.useremail = userData.email;
           this.location = userData.location;
-         
-        /*  this.hasImage =
-            userData.picture && userData.picture !== 'null' ? true : false;
-          if (this.hasImage) {
-            this.imageSrc = this.utils.updateProfileImageLink(userData.picture);
-          }*/
+        
           this.presentUserName = userData.username;
           this.presentUserEmail = userData.email;
           this.presentLocation = userData.location;
@@ -106,10 +98,26 @@ export class ReviewFormComponent implements OnInit {
   reviewUpdate() {
     
     const formData = new FormData();
-	console.log(this.file);
-     if (this.file) {
+	console.log(this.images.length);
+    /* if (this.file) {
       formData.append('review_images', this.file);
-    }
+      }
+      */
+      if (this.images.length > 5) {
+          this.snackBar.open('Maximum 5 images can be uploaded', 'Dismiss', {
+              duration: 4000,
+              horizontalPosition: 'center',
+              verticalPosition: 'bottom'
+          });
+      }
+      else {
+               for (var i = 0; i < this.images.length; i++) {
+                  formData.append("rimage[]", this.images[i]);
+              }
+      }
+      
+
+
 	if (this.sku) {
       formData.append('product_sku', this.sku);
     }
@@ -177,7 +185,7 @@ export class ReviewFormComponent implements OnInit {
 	}
 	
 	
-      if (!this.emailerror && !this.headererror && !this.rtexterror && !this.ratingerror){
+      if (!this.emailerror && !this.headererror && !this.rtexterror && !this.ratingerror && this.images.length<=5){
 	 this.isLoading = true;	
      this.apiService.submitReview(formData).subscribe((payload: any) => {
       this.isLoading = false;
@@ -218,17 +226,53 @@ export class ReviewFormComponent implements OnInit {
     this.hasEditIcon = false;
   }
 
-  readFile(event) {
-    if (event.target.files && event.target.files[0]) {
-      const reader = new FileReader();
-      this.file = event.target.files[0];
-      reader.readAsDataURL(event.target.files[0]);
-      reader.onload = () => {
-        this.imageSrc = reader.result;
-        this.hasImage = true;
-      };
+    readFile(event) {
+        console.log(event.target.files)
+        let flag = 0;    
+        let files = event.target.files;
+        for (let file of files) {
+            if ((file['size'] / 1048576) > 2) {
+                flag++;
+            }
+        }
+
+        if (flag > 0) {
+            this.snackBar.open('Image size should not be more than 2mb.', 'Dismiss', {
+                duration: 4000,
+                horizontalPosition: 'center',
+                verticalPosition: 'bottom'
+            });
+        }
+        else {
+                if (files && files.length <= 5) {
+                    if (event.target.files && event.target.files.length > 0) {
+
+                        for (let i = 0; i < event.target.files.length; i++) {
+                            const reader = new FileReader();
+                            this.images.push(event.target.files[i]);
+
+                            reader.onload = (event: any) => {
+                                // this.imageSrc = reader.result;
+                                //  this.imageSrc.push(reader.result); 
+                                this.imageSrc.push(event.target.result);
+
+                                this.hasImage = true;
+                            };
+                            reader.readAsDataURL(event.target.files[i]);
+                        }
+                    }
+                }
+                else {
+                    this.snackBar.open('Maximum 5 images can be uploaded', 'Dismiss', {
+                        duration: 4000,
+                        horizontalPosition: 'center',
+                        verticalPosition: 'bottom'
+                    });
+                }
+ 
+        }
+
     }
-  }
   
   starCount(event){
   //console.log(event);
@@ -238,5 +282,6 @@ export class ReviewFormComponent implements OnInit {
   validateEmail(email) {
   const re = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
   return re.test(email);
-}
-}
+    }
+
+  }
