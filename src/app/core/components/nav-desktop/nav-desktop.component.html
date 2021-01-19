@@ -27,7 +27,7 @@
                 <span class="offer-details" style="margin: 0 2rem" *ngIf="i<2 && i<deals.length-1">|</span>
             </ng-container>
 
-            <span class="all-offers" (click)="openOfferModal()">View all offers</span>
+            <span *ngIf="deals.length>3" class="all-offers" (click)="openOfferModal()">View all offers</span>
         </div>
     </ng-container>
     <ng-template #tablet>
@@ -39,7 +39,7 @@
                 <span class="offer-details" style="margin: 0 2rem" *ngIf="i<1 && i<deals.length-1">|</span>
             </ng-container>
 
-            <span class="all-offers" (click)="openOfferModal()">View all offers</span>
+            <span *ngIf="deals.length>2" class="all-offers" (click)="openOfferModal()">View all offers</span>
         </div>
     </ng-template>
     <div [ngClass]="{'landing-page-navbar':(!location.path() || aboutUsPage)}">

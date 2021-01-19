@@ -20,7 +20,7 @@
             <span class="offer-details" style="margin: 0 1rem" *ngIf="i<0 && i<deals.length-1">|</span>
         </ng-container>
 
-        <span class="all-offers" (click)="openOfferModal()">View all offers</span>
+        <span class="all-offers" *ngIf="mobileDeals.length>1" (click)="openOfferModal()">View all offers</span>
     </div>
 
     <div [ngClass]="{'landing-page-navbar':(!location.path() || aboutUsPage)}">

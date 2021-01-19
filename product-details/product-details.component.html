@@ -219,26 +219,6 @@
                             </div>
                         </ng-template>
                     </div>
-					
-					<!-- ***************************************  -->
-					
-					<div *ngIf="assemblyExist" class="mb2"> 
-					 <hr class="modal-hr"/>
-                        <span class="title">Assembly</span>
-                        <div class="mt1" [innerHTML]="product.product_assembly"></div> 
-                    </div>
-					
-					
-					<div *ngIf="careExist" class="mb2">
-                        <hr class="modal-hr"/>
-                        <span class="title">Care</span>
-                        <div class="mt1" [innerHTML]="product.product_care"></div>
-                    </div>
-					
-					
-					<!-- ***************************************  -->
-					
-					
                     <div class="mb2" *ngIf="product.collections.length">
                         <hr class="modal-hr"/>
                         <span class="title">More in the Collection</span>

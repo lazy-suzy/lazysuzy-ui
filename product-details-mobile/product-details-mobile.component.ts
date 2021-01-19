@@ -38,8 +38,6 @@ export class ProductDetailsMobileComponent implements OnInit {
     dimensionExist = false;
     featuresExist = false;
     descriptionExist = false;
-    assemblyExist = false;
-    careExist = false;
     spinner = 'assets/image/spinner.gif';
     bpObserver: Observable<BreakpointState> = this.breakpointObserver.observe(
         Breakpoints.Handset
@@ -171,23 +169,13 @@ export class ProductDetailsMobileComponent implements OnInit {
                                 this.features = this.utils.compileMarkdown(
                                     this.product.features,
                                     this.product.site
-                                ); 
+                                );
                                 this.dimensionExist = this.utils.checkDataLength(
                                     this.product.dimension
                                 );
                                 this.featuresExist = this.utils.checkDataLength(
                                     this.product.features
                                 );
-				if(this.product.product_assembly!=null){
-					this.assemblyExist = this.utils.checkDataLength(
-						this.product.product_assembly
-					);
-				}
-				if(this.product.product_care!=null){
-					this.careExist = this.utils.checkDataLength(
-						this.product.product_care
-					);
-				}
                                 this.descriptionExist = this.utils.checkDataLength(
                                     this.product.description
                                 );
