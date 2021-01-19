@@ -31,8 +31,8 @@ export class ProductDetailsComponent implements OnInit {
     eventSubscription: Subscription;
     selectedIndex: number;
     dimensionExist: boolean;
-	assemblyExist: boolean;
-	careExist: boolean;
+    assemblyExist: boolean;
+    careExist: boolean;
     featuresExist: boolean;
     descriptionExist: boolean;
     isSwatchExist: boolean;
@@ -163,16 +163,16 @@ export class ProductDetailsComponent implements OnInit {
         this.dimensionExist = this.utils.checkDataLength(
             this.product.dimension
         );
-	if(this.product.product_assembly!=null){
-		this.assemblyExist = this.utils.checkDataLength(
-			this.product.product_assembly
-		);
-	}
-	if(this.product.product_care!=null){
-		this.careExist = this.utils.checkDataLength(
-			this.product.product_care
-		);
-	}
+        if (this.product.product_assembly != null) {
+            this.assemblyExist = this.utils.checkDataLength(
+                this.product.product_assembly
+            );
+        }
+        if (this.product.product_care != null) {
+            this.careExist = this.utils.checkDataLength(
+                this.product.product_care
+            );
+        }
         this.featuresExist = this.utils.checkDataLength(
             this.product.features
         );
@@ -313,8 +313,6 @@ export class ProductDetailsComponent implements OnInit {
     }
 
     onSetImage(variation): void {
-        console.log('setImage entry!');
-
         this.galleryContainer.nativeElement.scrollTop = 0;
         this.items = this.product.on_server_images.map(
             (item) => (new ImageItem({src: item, thumb: item}))
@@ -346,9 +344,6 @@ export class ProductDetailsComponent implements OnInit {
     }
 
     openCartModal() {
-        console.log(!this.activeProduct.in_inventory &&
-            !this.activeProduct.inventory_product_details.price ||
-            !this.beforeSelection);
         if (
             !this.activeProduct.in_inventory &&
             !this.activeProduct.inventory_product_details.price ||
@@ -373,7 +368,6 @@ export class ProductDetailsComponent implements OnInit {
                 count: this.quantity,
                 parent_sku: this.product.sku
             };
-            console.log(postData);
             this.apiService.addCartProduct(postData).subscribe(
                 (payload: any) => {
                     if (payload.status) {
@@ -430,12 +424,10 @@ export class ProductDetailsComponent implements OnInit {
     }
 
     onSetSelectionChecked(e: boolean) {
-        console.log('set Selection checked: ', e);
         this.beforeSelection = e;
     }
 
     onClearSelection(e: boolean) {
-        console.log('onClear selections!');
         this.checkSelection = e;
     }
 
