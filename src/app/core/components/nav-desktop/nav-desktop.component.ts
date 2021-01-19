@@ -29,7 +29,7 @@ export class NavDesktopComponent implements OnInit, AfterViewInit {
     hideBar = false;
     cartProduct: number;
     isFaqPage = false;
-    isBrandPage: boolean = false;
+    isBrandPage = false;
     params: any;
     deals: any;
     showOffer = false;

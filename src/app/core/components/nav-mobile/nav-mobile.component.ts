@@ -123,6 +123,7 @@ export class NavMobileComponent implements OnInit {
                 return a.rank - b.rank;
             });
             this.mobileDeals = this.deals.filter(deal => deal.is_mobile);
+            this.showOffer = this.showOffer && (this.mobileDeals.length >= 1);
         });
     }
 
