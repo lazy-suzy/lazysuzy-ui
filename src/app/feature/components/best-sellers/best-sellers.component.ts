@@ -58,7 +58,7 @@ export class BestSellersComponent implements OnInit {
   }
 
   seeAll() {
-    this.router.navigateByUrl('/products/all?bestseller=true');
+    this.router.navigateByUrl('/products/all?trending=true');
   }
 
   openDialog(sku) {

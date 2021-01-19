@@ -152,7 +152,7 @@ export class AllProductsComponent implements OnInit {
                 this.pageNo = parseInt(params.pageNo) || 0;
                 this.sortType = params.sortType || '';
                 Object.keys(params).map((key) => {
-                    if (key === 'new' || key === 'bestseller' || key === 'sale') {
+                    if (key === 'new' || key === 'bestseller' || key === 'sale' || key === 'trending') {
                         this.trend = key;
                     }
                 });
