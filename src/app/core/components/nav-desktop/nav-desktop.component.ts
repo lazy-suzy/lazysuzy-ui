@@ -116,6 +116,7 @@ export class NavDesktopComponent implements OnInit, AfterViewInit {
             this.deals = this.deals.filter(v => {
                 return v.is_active;
             });
+            this.showOffer = this.showOffer && (this.deals.length >= 1);
         });
     }
 
