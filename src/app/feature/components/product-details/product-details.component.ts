@@ -31,8 +31,8 @@ export class ProductDetailsComponent implements OnInit {
     eventSubscription: Subscription;
     selectedIndex: number;
     dimensionExist: boolean;
-	assemblyExist: boolean;
-	careExist: boolean;
+    assemblyExist: boolean;
+    careExist: boolean;
     featuresExist: boolean;
     descriptionExist: boolean;
     isSwatchExist: boolean;
@@ -160,19 +160,19 @@ export class ProductDetailsComponent implements OnInit {
             this.product.features,
             this.product.site
         );
-        this.dimensionExist = this.utils.checkDataLength(
+        this.dimensionExist = this.utils.checkDimensionsLength(
             this.product.dimension
         );
-	if(this.product.product_assembly!=null){
-		this.assemblyExist = this.utils.checkDataLength(
-			this.product.product_assembly
-		);
-	}
-	if(this.product.product_care!=null){
-		this.careExist = this.utils.checkDataLength(
-			this.product.product_care
-		);
-	}
+        if (this.product.product_assembly != null) {
+            this.assemblyExist = this.utils.checkDataLength(
+                this.product.product_assembly
+            );
+        }
+        if (this.product.product_care != null) {
+            this.careExist = this.utils.checkDataLength(
+                this.product.product_care
+            );
+        }
         this.featuresExist = this.utils.checkDataLength(
             this.product.features
         );
@@ -231,6 +231,10 @@ export class ProductDetailsComponent implements OnInit {
             self.getMaxHeight();
         }, 1000);
         this.invalidLink = false;
+    }
+
+    objKeys(anObject) {
+        return Object.keys(anObject);
     }
 
     createGalleryItems(items: any[]) {
