@@ -26,6 +26,8 @@ export class NewProductRowComponent implements OnInit {
     shape_filter = [];
     fabric_filter = [];
     country_filter = [];
+    style_filter = [];
+    firmness_filter = [];
     category_detail = [];
     productImages = [];
     xImagePrimary = [];
@@ -61,6 +63,8 @@ export class NewProductRowComponent implements OnInit {
         this.seating_filter = filter.Seating;
         this.fabric_filter = filter.Fabric;
         this.country_filter = filter.Country;
+        this.style_filter = filter.Style;
+        this.firmness_filter = filter.Firmness;
     }
 
     setCategoryDetail() {

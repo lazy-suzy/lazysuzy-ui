@@ -98,16 +98,6 @@
                     </div>
                     <div class="col-6">
                         <mat-form-field appearance="fill">
-                            <mat-label>Fabric</mat-label>
-                            <mat-select [(ngModel)]="product.fabric" multiple>
-                                <mat-option [value]="key.filter_value" *ngFor="let key of fabric_filter">
-                                    {{key.filter_value}}
-                                </mat-option>
-                            </mat-select>
-                        </mat-form-field>
-                    </div>
-                    <div class="col-6">
-                        <mat-form-field appearance="fill">
                             <mat-label>LS_IDs</mat-label>
                             <mat-select [(ngModel)]="product.ls_id" multiple (selectionChange)="setCategoryDetail()">
                                 <mat-option [value]="key.LS_ID" *ngFor="let key of mapping_core">
@@ -121,6 +111,26 @@
                             <mat-label>Country</mat-label>
                             <mat-select [(ngModel)]="product.mfg_country" multiple>
                                 <mat-option [value]="key.filter_value" *ngFor="let key of country_filter">
+                                    {{key.filter_value}}
+                                </mat-option>
+                            </mat-select>
+                        </mat-form-field>
+                    </div>
+                    <div class="col-6">
+                        <mat-form-field appearance="fill">
+                            <mat-label>Style</mat-label>
+                            <mat-select [(ngModel)]="product.style" multiple>
+                                <mat-option [value]="key.filter_value" *ngFor="let key of style_filter">
+                                    {{key.filter_value}}
+                                </mat-option>
+                            </mat-select>
+                        </mat-form-field>
+                    </div>
+                    <div class="col-6">
+                        <mat-form-field appearance="fill">
+                            <mat-label>Firmness</mat-label>
+                            <mat-select [(ngModel)]="product.firmness" multiple>
+                                <mat-option [value]="key.filter_value" *ngFor="let key of firmness_filter">
                                     {{key.filter_value}}
                                 </mat-option>
                             </mat-select>
