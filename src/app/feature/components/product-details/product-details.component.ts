@@ -192,7 +192,7 @@ export class ProductDetailsComponent implements OnInit {
             this.product.features,
             this.product.site
         );
-        this.dimensionExist = this.utils.checkDataLength(
+        this.dimensionExist = this.utils.checkDimensionsLength(
             this.product.dimension
         );
         if (this.product.product_assembly != null) {
@@ -263,6 +263,10 @@ export class ProductDetailsComponent implements OnInit {
             self.getMaxHeight();
         }, 1000);
         this.invalidLink = false;
+    }
+
+    objKeys(anObject) {
+        return Object.keys(anObject);
     }
 
     createGalleryItems(items: any[]) {

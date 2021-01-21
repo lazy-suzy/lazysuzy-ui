@@ -166,11 +166,11 @@
                         class="{{ activeTab === 'dimensions' ? 'active b' : 'bg-white' }}">
                         <span class="nav-link">DIMENSIONS</span>
                     </li>
-					<li (click)="selectTab('assembly')" *ngIf="assemblyExist"
+                    <li (click)="selectTab('assembly')" *ngIf="assemblyExist"
                         class="{{ activeTab === 'assembly' ? 'active b' : 'bg-white' }}">
                         <span class="nav-link">Assembly</span>
                     </li>
-					<li (click)="selectTab('care')" *ngIf="careExist"
+                    <li (click)="selectTab('care')" *ngIf="careExist"
                         class="{{ activeTab === 'care' ? 'active b' : 'bg-white' }}">
                         <span class="nav-link">Care</span>
                     </li>
@@ -178,19 +178,40 @@
                 <div class="menu-content">
                     <div *ngIf="descriptionExist" class="{{ activeTab === 'desc' ? '' : 'dn' }}">
                         <div [innerHTML]="description" class="nav-content"></div>
-                    </div> 
+                    </div>
                     <div *ngIf="featuresExist" class="{{ activeTab === 'features' ? '' : 'dn' }}">
                         <div class="mt1 pl3">
                             <div [innerHTML]="features" class="nav-content"></div>
                         </div>
                     </div>
-					<div *ngIf="dimensionExist" class="{{ activeTab === 'dimensions' ? '' : 'dn' }}">
-                        <div *ngIf="isArray(product.dimension); else showDimensions" class="dimension-container">
-                            <div *ngFor="let dimension of product.dimension" class="w-50 pa2">
-                                <div class="dimension-title">{{ dimension.description }}</div>
-                                <div *ngIf="dimension.width">Width: {{ dimension.width }}</div>
-                                <div *ngIf="dimension.depth">Depth: {{ dimension.depth }}</div>
-                                <div *ngIf="dimension.height">Height: {{ dimension.height }}</div>
+                    <div *ngIf="dimensionExist" class="{{ activeTab === 'dimensions' ? '' : 'dn' }}">
+                        <div class="dimension-container">
+                            <div *ngFor="let key of objKeys(product.dimension)" class="fl w-50 pa2">
+                                <ng-container *ngIf="objKeys(product.dimension).length>1">
+                                    <div class="dimension-header upper-case bold mb1">{{ key }}</div>
+                                </ng-container>
+                                <ng-container *ngFor="let dimension of product.dimension[key]">
+                                    <div class="dimension-title mt2">{{ dimension.name }}</div>
+                                    <div class="dimensions-details" *ngIf="dimension.value.width">
+                                        Width: {{ dimension.value.width }}
+                                    </div>
+                                    <div class="dimensions-details" *ngIf="dimension.value.depth">
+                                        Depth: {{ dimension.value.depth }}
+                                    </div>
+                                    <div class="dimensions-details" *ngIf="dimension.value.height">
+                                        Height: {{ dimension.value.height }}
+                                    </div>
+                                    <div class="dimensions-details" *ngIf="dimension.value.length">
+                                        Length: {{ dimension.value.length }}
+                                    </div>
+                                    <div class="dimensions-details" *ngIf="dimension.value.diameter">
+                                        Diameter: {{ dimension.value.diameter }}
+                                    </div>
+                                    <div class="dimensions-details" *ngIf="dimension.value.weight">
+                                        Weight: {{ dimension.value.weight }}
+                                    </div>
+                                </ng-container>
+
                                 <br/>
                             </div>
                         </div>
@@ -200,11 +221,11 @@
                             </div>
                         </ng-template>
                     </div>
-					<div *ngIf="assemblyExist" class="{{ activeTab === 'assembly' ? '' : 'dn' }}">
-                            <div [innerHTML]="product.product_assembly" class="nav-content"></div>
+                    <div *ngIf="assemblyExist" class="{{ activeTab === 'assembly' ? '' : 'dn' }}">
+                        <div [innerHTML]="product.product_assembly" class="nav-content"></div>
                     </div>
-					<div *ngIf="careExist" class="{{ activeTab === 'care' ? '' : 'dn' }}">
-                            <div [innerHTML]="product.product_care" class="nav-content"></div>
+                    <div *ngIf="careExist" class="{{ activeTab === 'care' ? '' : 'dn' }}">
+                        <div [innerHTML]="product.product_care" class="nav-content"></div>
                     </div>
 
                 </div>

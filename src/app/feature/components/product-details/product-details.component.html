@@ -27,9 +27,9 @@
                                     {{renderPrice(productWasPrice) }}
                                     </span>
                                 </span>
-								
+
                                     <div class="rating-container"><!--goToReview(product.sku)-->
-									    <!--<div class="write-review" (click)="openMyReviewModal()" >Write a Review </div>-->
+                                        <!--<div class="write-review" (click)="openMyReviewModal()" >Write a Review </div>-->
                                         <div class="rating pr2" *ngIf="product.reviews != null && product.reviews != 0">
                                             <mat-icon *ngFor="let icon of starIcons" class="yellow">
                                                 {{ icon }}
@@ -164,7 +164,8 @@
                         <hr class="modal-hr mt3" *ngIf="product.set && product.set.length > 0"/>
                     </ng-container>
                     <ng-template #allConditions>
-                        <hr class="modal-hr mt3" *ngIf="(isVariationExist && product.variations.length>1) || (product.set && product.set.length > 0)"/>
+                        <hr class="modal-hr mt3"
+                            *ngIf="(isVariationExist && product.variations.length>1) || (product.set && product.set.length > 0)"/>
                     </ng-template>
                 </div>
                 <div class="product-description-container" [ngStyle]="topHeight">
@@ -182,13 +183,13 @@
                     </app-variations>
                     <app-sets *ngIf="product.set && product.set.length > 0" [sets]="product.set" [brand]="product.site">
                     </app-sets>
-                    <hr class="modal-hr mt-3" />
+                    <hr class="modal-hr mt-3"/>
                     <div class="mb2 pt-1" *ngIf="descriptionExist">
                         <span class="title">Overview</span>
                         <div class="mt1" [innerHTML]="description"></div>
                     </div>
                     <div *ngIf="featuresExist" class="mb2">
-                        <hr class="modal-hr" />
+                        <hr class="modal-hr"/>
                         <span class="title">Features</span>
                         <div class="mt1">
                             <div [innerHTML]="features"></div>
@@ -196,22 +197,36 @@
                     </div>
 
                     <div *ngIf="dimensionExist" class="mb2">
-                        <hr class="modal-hr" />
+                        <hr class="modal-hr"/>
                         <span class="title">Dimensions</span>
-                        <div class="mt1 pb1 flex flex-wrap" *ngIf="isArray(product.dimension); else showDimensions">
-                            <div *ngFor="let dimension of product.dimension" class="fl w-50 pa2">
-                                <div class="dimension-title">{{ dimension.description }}</div>
+                        <div class="mt1 pb1 flex flex-wrap">
+                            <div *ngFor="let key of objKeys(product.dimension)" class="fl w-50 pa2">
+                                <ng-container *ngIf="objKeys(product.dimension).length>1">
+                                    <div class="dimension-header upper-case bold mb1">{{ key }}</div>
+                                </ng-container>
+                                <ng-container *ngFor="let dimension of product.dimension[key]">
+                                    <div class="dimension-title mt2">{{ dimension.name }}</div>
+                                    <div class="dimensions-details" *ngIf="dimension.value.width">
+                                        Width: {{ dimension.value.width }}
+                                    </div>
+                                    <div class="dimensions-details" *ngIf="dimension.value.depth">
+                                        Depth: {{ dimension.value.depth }}
+                                    </div>
+                                    <div class="dimensions-details" *ngIf="dimension.value.height">
+                                        Height: {{ dimension.value.height }}
+                                    </div>
+                                    <div class="dimensions-details" *ngIf="dimension.value.length">
+                                        Length: {{ dimension.value.length }}
+                                    </div>
+                                    <div class="dimensions-details" *ngIf="dimension.value.diameter">
+                                        Diameter: {{ dimension.value.diameter }}
+                                    </div>
+                                    <div class="dimensions-details" *ngIf="dimension.value.weight">
+                                        Weight: {{ dimension.value.weight }}
+                                    </div>
+                                </ng-container>
 
-                                <div class="dimensions-details" *ngIf="dimension.width > 0">
-                                    Width: {{ dimension.width }}
-                                </div>
-                                <div class="dimensions-details" *ngIf="dimension.depth > 0">
-                                    Depth: {{ dimension.depth }}
-                                </div>
-                                <div class="dimensions-details" *ngIf="dimension.height > 0">
-                                    Height: {{ dimension.height }}
-                                </div>
-                                <br />
+                                <br/>
                             </div>
                         </div>
                         <ng-template #showDimensions>
@@ -224,14 +239,14 @@
                     <!-- ***************************************  -->
 
                     <div *ngIf="assemblyExist" class="mb2">
-                        <hr class="modal-hr" />
+                        <hr class="modal-hr"/>
                         <span class="title">Assembly</span>
                         <div class="mt1" [innerHTML]="product.product_assembly"></div>
                     </div>
 
 
                     <div *ngIf="careExist" class="mb2">
-                        <hr class="modal-hr" />
+                        <hr class="modal-hr"/>
                         <span class="title">Care</span>
                         <div class="mt1" [innerHTML]="product.product_care"></div>
                     </div>
@@ -250,162 +265,159 @@
                             <div class="flex">
                                 <button (click)="openMyReviewModal()" mat-raised-button
                                         class=" mb1 bg-red w-90 view-details-btn">
-                                    <a class="tr-addToCart no-underline" style="color: #ffcc00;padding-right: 10px;text-decoration: none;">
+                                    <a class="tr-addToCart no-underline"
+                                       style="color: #ffcc00;padding-right: 10px;text-decoration: none;">
                                         Write a Review
                                     </a>
                                 </button>
                             </div>
                         </span>
                     </div>
-                     
-                        <div class="mb2">
+
+                    <div class="mb2">
 
 
+                        <ul class="description-menu">
+                            <li (click)="selectTab('mr')"
+                                class="{{ activeTab === 'mr' ? 'active b' : 'bg-white' }}">
+                                <span class="nav-link">Most Recent</span>
+                            </li>
+                            <li (click)="selectTab('hr')"
+                                class="{{ activeTab === 'hr' ? 'active b' : 'bg-white' }}">
+                                <span class="nav-link">Highest Rated</span>
+                            </li>
+                            <li (click)="selectTab('lr')"
+                                class="{{ activeTab === 'lr' ? 'active b' : 'bg-white' }}">
+                                <span class="nav-link">Lowest Rated</span>
+                            </li>
 
-                            <ul class="description-menu">
-                                <li (click)="selectTab('mr')"
-                                    class="{{ activeTab === 'mr' ? 'active b' : 'bg-white' }}">
-                                    <span class="nav-link">Most Recent</span>
-                                </li>
-                                <li (click)="selectTab('hr')"
-                                    class="{{ activeTab === 'hr' ? 'active b' : 'bg-white' }}">
-                                    <span class="nav-link">Highest Rated</span>
-                                </li>
-                                <li (click)="selectTab('lr')"
-                                    class="{{ activeTab === 'lr' ? 'active b' : 'bg-white' }}">
-                                    <span class="nav-link">Lowest Rated</span>
-                                </li>
-
-                            </ul>
-                            <div class="menu-content">
-                                <div class="{{ activeTab === 'mr' ? '' : 'dn' }}">
-                                    <div class="nav-content">
-                                        <div class="mt1 pb1 flex flex-wrap" *ngIf="all_reviews && all_reviews.length>0">
-                                            <div class="fl w-50 pa2" *ngFor="let ar of all_reviews;">
-                                                <div class="dimension-title" style="margin-bottom:10px;">
-                                                    <div class="star-ratings-sprite">
-                                                        <span [style.width.%]="ar['rating']*20" class="star-ratings-sprite-rating"></span>
-                                                    </div>
+                        </ul>
+                        <div class="menu-content">
+                            <div class="{{ activeTab === 'mr' ? '' : 'dn' }}">
+                                <div class="nav-content">
+                                    <div class="mt1 pb1 flex flex-wrap" *ngIf="all_reviews && all_reviews.length>0">
+                                        <div class="fl w-50 pa2" *ngFor="let ar of all_reviews;">
+                                            <div class="dimension-title" style="margin-bottom:10px;">
+                                                <div class="star-ratings-sprite">
+                                                    <span [style.width.%]="ar['rating']*20"
+                                                          class="star-ratings-sprite-rating"></span>
                                                 </div>
-
-                                                <div class="dimensions-title b">
-                                                    {{ar['headline']}}
-                                                </div>
-                                                <div class="dimensions-details ruser">
-                                                    {{ar['user_name']}} |  {{ar['user_location']}}
-                                                </div>
-                                                <div class="dimensions-details rtext" [innerHtml]="ar['review']"></div>
-                                                <div class="dimensions-details">
-                                                    <button class="profile-cancel-btn b btncls" type="button"> Helpful </button>
-                                                    &nbsp;&nbsp;<a class="profile-cancel-btn b btncls"> Report </a>
-
-                                                </div>
-                                                <br />
                                             </div>
 
+                                            <div class="dimensions-title b">
+                                                {{ar['headline']}}
+                                            </div>
+                                            <div class="dimensions-details ruser">
+                                                {{ar['user_name']}} |  {{ar['user_location']}}
+                                            </div>
+                                            <div class="dimensions-details rtext" [innerHtml]="ar['review']"></div>
+                                            <div class="dimensions-details">
+                                                <button class="profile-cancel-btn b btncls" type="button"> Helpful
+                                                </button>
+                                                &nbsp;&nbsp;<a class="profile-cancel-btn b btncls"> Report </a>
+
+                                            </div>
+                                            <br/>
                                         </div>
-                                        <div class="mt1 pb1 flex flex-wrap" *ngIf="!all_reviews || all_reviews.length<=0">
-                                            No review available
-                                        </div>
+
                                     </div>
-
-
+                                    <div class="mt1 pb1 flex flex-wrap" *ngIf="!all_reviews || all_reviews.length<=0">
+                                        No review available
+                                    </div>
                                 </div>
-                                <div class="{{ activeTab === 'hr' ? '' : 'dn' }}">
-                                    <div class="nav-content">
-                                        <div class="mt1 pb1 flex flex-wrap" *ngIf="highest_reviews && highest_reviews.length>0">
-                                            <div class="fl w-50 pa2" *ngFor="let hr of highest_reviews;">
-                                                <div class="dimension-title"  style="margin-bottom:10px;">
-                                                    <div class="star-ratings-sprite">
-                                                        <span [style.width.%]="hr['rating']*20" class="star-ratings-sprite-rating"></span>
-                                                    </div>
-                                                </div>
 
-                                                <div class="dimensions-title b">
-                                                    {{hr['headline']}}
-                                                </div>
-                                                <div class="dimensions-details ruser">
-                                                    {{hr['user_name']}} |  {{hr['user_location']}}
-                                                </div>
-                                                <div class="dimensions-details rtext" [innerHtml]="hr['review']"></div>
-                                                <div class="dimensions-details">
-                                                    <button class="profile-cancel-btn b btncls" type="button"> Helpful </button>
-                                                    &nbsp;&nbsp;<a class="profile-cancel-btn b btncls"> Report </a>
 
+                            </div>
+                            <div class="{{ activeTab === 'hr' ? '' : 'dn' }}">
+                                <div class="nav-content">
+                                    <div class="mt1 pb1 flex flex-wrap"
+                                         *ngIf="highest_reviews && highest_reviews.length>0">
+                                        <div class="fl w-50 pa2" *ngFor="let hr of highest_reviews;">
+                                            <div class="dimension-title" style="margin-bottom:10px;">
+                                                <div class="star-ratings-sprite">
+                                                    <span [style.width.%]="hr['rating']*20"
+                                                          class="star-ratings-sprite-rating"></span>
                                                 </div>
-                                                <br />
                                             </div>
 
+                                            <div class="dimensions-title b">
+                                                {{hr['headline']}}
+                                            </div>
+                                            <div class="dimensions-details ruser">
+                                                {{hr['user_name']}} |  {{hr['user_location']}}
+                                            </div>
+                                            <div class="dimensions-details rtext" [innerHtml]="hr['review']"></div>
+                                            <div class="dimensions-details">
+                                                <button class="profile-cancel-btn b btncls" type="button"> Helpful
+                                                </button>
+                                                &nbsp;&nbsp;<a class="profile-cancel-btn b btncls"> Report </a>
+
+                                            </div>
+                                            <br/>
                                         </div>
-                                        <div class="mt1 pb1 flex flex-wrap" *ngIf="!highest_reviews || highest_reviews.length<=0">
-                                            No review available
-                                        </div>
+
                                     </div>
-
-
+                                    <div class="mt1 pb1 flex flex-wrap"
+                                         *ngIf="!highest_reviews || highest_reviews.length<=0">
+                                        No review available
+                                    </div>
                                 </div>
-                                <div class="{{ activeTab === 'lr' ? '' : 'dn' }}">
-                                    <div class="nav-content">
-                                        <div class="mt1 pb1 flex flex-wrap" *ngIf="lowest_reviews && lowest_reviews.length>0">
-                                            <div class="fl w-50 pa2" *ngFor="let lr of lowest_reviews;">
-                                                <div class="dimension-title"  style="margin-bottom:10px;">
-                                                    <div class="star-ratings-sprite">
-                                                        <span [style.width.%]="lr['rating']*20" class="star-ratings-sprite-rating"></span>
-                                                    </div>
-                                                </div>
 
-                                                <div class="dimensions-title b">
-                                                    {{lr['headline']}}
-                                                </div>
-                                                <div class="dimensions-details ruser">
-                                                    {{lr['user_name']}} |  {{lr['user_location']}}
-                                                </div>
-                                                <div class="dimensions-details rtext" [innerHtml]="lr['review']"></div>
-                                                <div class="dimensions-details">
-                                                    <button class="profile-cancel-btn b btncls" type="button"> Helpful </button>
-                                                    &nbsp;&nbsp;<a class="profile-cancel-btn b btncls"> Report </a>
 
+                            </div>
+                            <div class="{{ activeTab === 'lr' ? '' : 'dn' }}">
+                                <div class="nav-content">
+                                    <div class="mt1 pb1 flex flex-wrap"
+                                         *ngIf="lowest_reviews && lowest_reviews.length>0">
+                                        <div class="fl w-50 pa2" *ngFor="let lr of lowest_reviews;">
+                                            <div class="dimension-title" style="margin-bottom:10px;">
+                                                <div class="star-ratings-sprite">
+                                                    <span [style.width.%]="lr['rating']*20"
+                                                          class="star-ratings-sprite-rating"></span>
                                                 </div>
-                                                <br />
                                             </div>
 
+                                            <div class="dimensions-title b">
+                                                {{lr['headline']}}
+                                            </div>
+                                            <div class="dimensions-details ruser">
+                                                {{lr['user_name']}} |  {{lr['user_location']}}
+                                            </div>
+                                            <div class="dimensions-details rtext" [innerHtml]="lr['review']"></div>
+                                            <div class="dimensions-details">
+                                                <button class="profile-cancel-btn b btncls" type="button"> Helpful
+                                                </button>
+                                                &nbsp;&nbsp;<a class="profile-cancel-btn b btncls"> Report </a>
+
+                                            </div>
+                                            <br/>
                                         </div>
-                                        <div class="mt1 pb1 flex flex-wrap" *ngIf="!lowest_reviews || lowest_reviews.length<=0">
-                                            No review available
-                                        </div>
+
                                     </div>
-
-
+                                    <div class="mt1 pb1 flex flex-wrap"
+                                         *ngIf="!lowest_reviews || lowest_reviews.length<=0">
+                                        No review available
+                                    </div>
                                 </div>
+
 
                             </div>
 
                         </div>
-                        <!-- ***************************************  -->
+
+                    </div>
+                    <!-- ***************************************  -->
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-                        <div class="mb2" *ngIf="product.collections.length">
-                            <hr class="modal-hr" />
-                            <span class="title">More in the Collection</span>
-                            <div class="pt2">
-                                <p-carousel [numVisible]="2"
-                                            [numScroll]="1"
-                                            [value]="product.collections"
-                                            [circular]="false"
-                                            [ngClass]="{
+                    <div class="mb2" *ngIf="product.collections.length">
+                        <hr class="modal-hr"/>
+                        <span class="title">More in the Collection</span>
+                        <div class="pt2">
+                            <p-carousel [numVisible]="2"
+                                        [numScroll]="1"
+                                        [value]="product.collections"
+                                        [circular]="false"
+                                        [ngClass]="{
                                             'hide-nav-arrows' :product.collections.length<3
                                     }"
                             >
@@ -427,17 +439,17 @@
                                     </div>
                                 </ng-template>
                             </p-carousel>
-                            </div>
                         </div>
-                        <div class="mb2" *ngIf="recentProducts.length">
-                            <hr class="modal-hr" />
-                            <span class="title">Recently Viewed</span>
-                            <div class="pt2">
-                                <p-carousel [numVisible]="2"
-                                            [numScroll]="1"
-                                            [value]="recentProducts"
-                                            [circular]="false"
-                                            [ngClass]="{
+                    </div>
+                    <div class="mb2" *ngIf="recentProducts.length">
+                        <hr class="modal-hr"/>
+                        <span class="title">Recently Viewed</span>
+                        <div class="pt2">
+                            <p-carousel [numVisible]="2"
+                                        [numScroll]="1"
+                                        [value]="recentProducts"
+                                        [circular]="false"
+                                        [ngClass]="{
                                             'hide-nav-arrows' :recentProducts.length<3
                                     }"
                             >
@@ -452,14 +464,14 @@
                                     </div>
                                 </ng-template>
                             </p-carousel>
-                            </div>
                         </div>
-                        <div>
-                            &nbsp;
-                        </div>
-
                     </div>
+                    <div>
+                        &nbsp;
+                    </div>
+
                 </div>
+            </div>
         </div>
     </div>
     <ng-template #invalidProduct>

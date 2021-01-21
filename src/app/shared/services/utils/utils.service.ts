@@ -42,6 +42,11 @@ export class UtilsService {
         return data.length > 0;
     }
 
+    checkDimensionsLength(data) {
+        const keys = Object.keys(data);
+        return keys.length > 0;
+    }
+
     hasInventory(product) {
         if (product.in_inventory) {
             return (

@@ -3,6 +3,14 @@
   color: @gray-color;
 }
 
+.bold {
+  font-weight: bold;
+}
+
+.upper-case {
+  text-transform: uppercase;
+}
+
 .mat-raised-button.mat-button-base {
   background-color: #0c1c31;
 }
@@ -45,201 +53,207 @@
 }
 
 .product-details-container {
-    position: relative;
+  position: relative;
 
-    .modal-hr {
-        border: 0;
-        border-top: 1px solid #aab7b6;
+  .modal-hr {
+    border: 0;
+    border-top: 1px solid #aab7b6;
+  }
+
+  .gallery-container {
+    overflow: auto;
+    max-height: 100vh;
+
+    &::-webkit-scrollbar {
+      width: 10px;
     }
 
-    .gallery-container {
-        overflow: auto;
-        max-height: 100vh;
-
-        &::-webkit-scrollbar {
-            width: 10px;
-        }
-
-        &::-webkit-scrollbar-track {
-            box-shadow: inset 0 0 5px grey;
-            border-radius: 10px;
-        }
-
-        &::-webkit-scrollbar-thumb {
-            background: #ffcc00;
-            border-radius: 10px;
-        }
-
-        &::-webkit-scrollbar-thumb:hover {
-            background: #ffcc00ba;
-        }
+    &::-webkit-scrollbar-track {
+      box-shadow: inset 0 0 5px grey;
+      border-radius: 10px;
     }
 
-    .description-menu {
-        padding: 0;
-        display: flex;
-        list-style: none;
-        margin-bottom: 0;
+    &::-webkit-scrollbar-thumb {
+      background: #ffcc00;
+      border-radius: 10px;
+    }
+
+    &::-webkit-scrollbar-thumb:hover {
+      background: #ffcc00ba;
+    }
+  }
+
+  .description-menu {
+    padding: 0;
+    display: flex;
+    list-style: none;
+    margin-bottom: 0;
+    overflow: hidden;
+
+    .nav-link {
+      padding: 8px 16px;
+      //border: 1px solid #cccccc;
+      border-bottom-width: 0;
+      display: block;
+      font-size: 14px;
+      color: #0c1c31;
+      font-family: "Open Sans", sans-serif;
+    }
+
+    .active {
+      background-color: #f8fafc;
+    }
+
+    .bg-white {
+      background-color: #ffffff;
+    }
+  }
+
+  .menu-content {
+    background-color: #f8fafc;
+    padding: 18px;
+
+    .dimension-container {
+      //min-height: 75vh;
+      font-family: Lato, sans-serif;
+      font-size: 14px;
+      display: flex;
+      flex-wrap: wrap;
+
+      .dimension-title {
+        font-size: 14px;
+        font-family: "Open Sans", "Helvetica Neue", sans-serif;
+        color: #606060;
+        font-weight: bold;
+      }
+    }
+  }
+
+
+  .product-details-container {
+    .wishlist-container {
+      display: flex;
+      margin: 6px;
+      color: #B76E79;
+      cursor: pointer;
+      margin-left: 1rem;
+    }
+
+    .title {
+      font-family: "Open Sans", sans-serif;
+      color: #0C1C31;
+      font-size: 16px;
+      text-transform: uppercase;
+      font-weight: bold;
+    }
+
+    .price-container {
+      // font-size: 24px;
+      position: relative;
+      display: flex;
+      flex-direction: column;
+
+      .price-font {
+        font-size: 18px;
+      }
+
+      .view-details-btn {
+        // position: absolute;
+        //right: 0;
+        //width: 8rem;
+        height: 2.4rem;
+
+        a {
+          color: #ffcc00;
+        }
+
+        a:hover {
+          text-decoration: none;
+          color: #ffcc00;
+        }
+      }
+    }
+
+    .product-description-container {
+      overflow-y: auto;
+      transition: all 0.3s 0s ease-in-out;
+      max-height: 0px;
+
+      &::-webkit-scrollbar {
+        width: 10px;
+      }
+
+      &::-webkit-scrollbar-track {
+        box-shadow: inset 0 0 5px grey;
+        border-radius: 10px;
+      }
+
+      &::-webkit-scrollbar-thumb {
+        background: #ffcc00;
+        border-radius: 10px;
+      }
+
+      &::-webkit-scrollbar-thumb:hover {
+        background: #ffcc00ba;
+      }
+
+      hr {
+        border-color: #aab7b6;
+      }
+
+      .dimension-header {
+        font-family: "Open Sans", "Helvetica Neue", sans-serif;
+        font-size: 16px;
+        color: #666666;
+      }
+
+      .dimension-title {
+        font-family: "Open Sans", "Helvetica Neue", sans-serif;
+        font-size: 16px;
+        color: #606060;
+        text-transform: uppercase;
+      }
+
+      .star-ratings-sprite {
+        background: url("https://s3-us-west-2.amazonaws.com/s.cdpn.io/2605/star-rating-sprite.png") repeat-x;
+        font-size: 0;
+        height: 21px;
+        line-height: 0;
         overflow: hidden;
+        text-indent: -999em;
+        width: 110px;
 
-        .nav-link {
-            padding: 8px 16px;
-            //border: 1px solid #cccccc;
-            border-bottom-width: 0;
-            display: block;
-            font-size: 14px;
-            color: #0c1c31;
-            font-family: "Open Sans", sans-serif;
+        &-rating {
+          background: url("https://s3-us-west-2.amazonaws.com/s.cdpn.io/2605/star-rating-sprite.png") repeat-x;
+          background-position: 0 100%;
+          float: left;
+          height: 21px;
+          display: block;
         }
+      }
 
-        .active {
-            background-color: #f8fafc;
-        }
+      .ruser {
+        font-size: 11px;
+        color: #606060a8;
+      }
 
-        .bg-white {
-            background-color: #ffffff;
-        }
+      .rtext {
+        font-size: 13px;
+        color: #464444;
+        /*max-height: 125px;
+        overflow: hidden;*/
+        margin-bottom: 12px;
+      }
+
+      .btncls {
+        margin-top: 12px;
+        color: #0c1c31;
+        padding: 10px 15px;
+        border: none;
+        border-radius: 4px;
+      }
     }
-
-    .menu-content {
-        background-color: #f8fafc;
-        padding: 18px;
-
-        .dimension-container {
-            //min-height: 75vh;
-            font-family: Lato, sans-serif;
-            font-size: 14px;
-            display: flex;
-            flex-wrap: wrap;
-
-            .dimension-title {
-                font-size: 14px;
-                font-family: "Open Sans", "Helvetica Neue", sans-serif;
-                color: #606060;
-                font-weight: bold;
-            }
-        }
-    }
-
-
-    .product-details-container {
-        .wishlist-container {
-            display: flex;
-            margin: 6px;
-            color: #B76E79;
-            cursor: pointer;
-            margin-left: 1rem;
-        }
-
-        .title {
-            font-family: "Open Sans", sans-serif;
-            color: #0C1C31;
-            font-size: 16px;
-            text-transform: uppercase;
-            font-weight: bold;
-        }
-
-        .price-container {
-            // font-size: 24px;
-            position: relative;
-            display: flex;
-            flex-direction: column;
-
-            .price-font {
-                font-size: 18px;
-            }
-
-            .view-details-btn {
-                // position: absolute;
-                //right: 0;
-                //width: 8rem;
-                height: 2.4rem;
-
-                a {
-                    color: #ffcc00;
-                }
-
-                a:hover {
-                    text-decoration: none;
-                    color: #ffcc00;
-                }
-            }
-        }
-
-        .product-description-container {
-            overflow-y: auto;
-            transition: all 0.3s 0s ease-in-out;
-            max-height: 0px;
-
-            &::-webkit-scrollbar {
-                width: 10px;
-            }
-
-            &::-webkit-scrollbar-track {
-                box-shadow: inset 0 0 5px grey;
-                border-radius: 10px;
-            }
-
-            &::-webkit-scrollbar-thumb {
-                background: #ffcc00;
-                border-radius: 10px;
-            }
-
-            &::-webkit-scrollbar-thumb:hover {
-                background: #ffcc00ba;
-            }
-
-            hr {
-                border-color: #aab7b6;
-            }
-
-            .dimension-title {
-                font-family: "Open Sans", "Helvetica Neue", sans-serif;
-                font-size: 16px;
-                color: #606060;
-                text-transform: uppercase;
-            }
-
-            .star-ratings-sprite {
-                background: url("https://s3-us-west-2.amazonaws.com/s.cdpn.io/2605/star-rating-sprite.png") repeat-x;
-                font-size: 0;
-                height: 21px;
-                line-height: 0;
-                overflow: hidden;
-                text-indent: -999em;
-                width: 110px;
-
-                &-rating {
-                    background: url("https://s3-us-west-2.amazonaws.com/s.cdpn.io/2605/star-rating-sprite.png") repeat-x;
-                    background-position: 0 100%;
-                    float: left;
-                    height: 21px;
-                    display: block;
-                }
-            }
-
-            .ruser {
-                font-size: 11px;
-                color: #606060a8;
-            }
-
-            .rtext {
-                font-size: 13px;
-                color: #464444;
-                /*max-height: 125px;
-                overflow: hidden;*/
-                margin-bottom:12px;
-            }
-
-            .btncls {
-                margin-top: 12px;
-                color: #0c1c31;
-                padding: 10px 15px;
-                border: none;
-                border-radius: 4px;
-            }
-        }
-    }
+  }
 }
 
 .close-icon {
@@ -266,34 +280,41 @@
 .price-container-tabs {
   display: none;
 }
-.ship-info{
+
+.ship-info {
   font-family: Lato, sans-serif;
   font-size: 14px;
   color: #606060;
+
   .shipping-label {
 
     font-weight: bold;
     text-transform: uppercase;
   }
+
   .shipping-details {
 
   }
 }
-.ship-status{
+
+.ship-status {
   font-family: Lato, sans-serif;
   font-size: 14px;
   color: #606060;
-  mat-icon{
+
+  mat-icon {
     height: 18px;
     width: 18px;
     font-size: 16px;
     vertical-align: bottom;
   }
+
   .ship-status-label {
 
     font-weight: bold;
     text-transform: uppercase;
   }
+
   .ship-status-details {
 
   }
@@ -464,15 +485,15 @@ select.quantity-selector {
     vertical-align: text-top;
     font-size: 12px;
   }
-  
-  .write-review{
-	float:left;
-	margin-right: 10px;
-	font-size: 15px;
-	margin-top: 4px;
-	font-family: Lato, sans-serif;
-	color: #606060;
-	cursor:pointer;
+
+  .write-review {
+    float: left;
+    margin-right: 10px;
+    font-size: 15px;
+    margin-top: 4px;
+    font-family: Lato, sans-serif;
+    color: #606060;
+    cursor: pointer;
   }
 }
 
@@ -508,6 +529,7 @@ select.quantity-selector {
     padding: 0 0 0 25%;
   }
 }
-::ng-deep.g-active-thumb{
+
+::ng-deep.g-active-thumb {
   border: 1px solid #FFCC00;
 }
