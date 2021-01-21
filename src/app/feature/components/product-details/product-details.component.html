@@ -201,7 +201,7 @@
                         <span class="title">Dimensions</span>
                         <div class="mt1 pb1 flex flex-wrap">
                             <div *ngFor="let key of objKeys(product.dimension)" class="fl w-50 pa2">
-                                <ng-container *ngIf="objKeys(product.dimension).length>1">
+                                <ng-container *ngIf="!this.isSingleDimension">
                                     <div class="dimension-header upper-case bold mb1">{{ key }}</div>
                                 </ng-container>
                                 <ng-container *ngFor="let dimension of product.dimension[key]">
@@ -209,6 +209,9 @@
                                     <div class="dimensions-details" *ngIf="dimension.value.width">
                                         Width: {{ dimension.value.width }}
                                     </div>
+                                    <ng-container *ngIf="dimension.value.NULL">
+                                        <span class="dimensions-details"> :{{dimension.value.NULL}}</span>
+                                    </ng-container>
                                     <div class="dimensions-details" *ngIf="dimension.value.depth">
                                         Depth: {{ dimension.value.depth }}
                                     </div>

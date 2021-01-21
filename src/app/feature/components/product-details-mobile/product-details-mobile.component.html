@@ -187,12 +187,15 @@
                     <div *ngIf="dimensionExist" class="{{ activeTab === 'dimensions' ? '' : 'dn' }}">
                         <div class="dimension-container">
                             <div *ngFor="let key of objKeys(product.dimension)" class="fl pa2"
-                                 [ngClass]="{'w-50':objKeys(product.dimension).length>1,'w-100':!objKeys(product.dimension).length>1}">
-                                <ng-container *ngIf="objKeys(product.dimension).length>1">
+                                 [ngClass]="{'w-50':!isSingleDimension,'w-100':isSingleDimension}">
+                                <ng-container *ngIf="!this.isSingleDimension">
                                     <div class="dimension-header upper-case bold mb1">{{ key }}</div>
                                 </ng-container>
                                 <ng-container *ngFor="let dimension of product.dimension[key]">
                                     <div class="dimension-title mt2">{{ dimension.name }}</div>
+                                    <ng-container *ngIf="dimension.value.NULL">
+                                        <span class="dimensions-details"> :{{dimension.value.NULL}}</span>
+                                    </ng-container>
                                     <div class="dimensions-details" *ngIf="dimension.value.width">
                                         Width: {{ dimension.value.width }}
                                     </div>
