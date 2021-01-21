@@ -256,9 +256,14 @@ export class ProductDetailsMobileComponent implements OnInit {
         );
 
     }
+
     objKeys(anObject) {
-        return Object.keys(anObject);
+        if (anObject) {
+            return Object.keys(anObject);
+        }
+        return [];
     }
+
     createGalleryItems(items: any[]) {
         this.items = items.map(
             (item) => new ImageItem({src: item, thumb: item})
