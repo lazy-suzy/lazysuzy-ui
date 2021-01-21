@@ -163,7 +163,8 @@
                         <hr class="modal-hr mt3" *ngIf="product.set && product.set.length > 0"/>
                     </ng-container>
                     <ng-template #allConditions>
-                        <hr class="modal-hr mt3" *ngIf="(isVariationExist && product.variations.length>1) || (product.set && product.set.length > 0)"/>
+                        <hr class="modal-hr mt3"
+                            *ngIf="(isVariationExist && product.variations.length>1) || (product.set && product.set.length > 0)"/>
                     </ng-template>
                 </div>
                 <div class="product-description-container" [ngStyle]="topHeight">
@@ -200,7 +201,7 @@
                         <span class="title">Dimensions</span>
                         <div class="mt1 pb1 flex flex-wrap">
                             <div *ngFor="let key of objKeys(product.dimension)" class="fl w-50 pa2">
-                                <ng-container *ngIf="objKeys(product.dimension).length>1">
+                                <ng-container *ngIf="!this.isSingleDimension">
                                     <div class="dimension-header upper-case bold mb1">{{ key }}</div>
                                 </ng-container>
                                 <ng-container *ngFor="let dimension of product.dimension[key]">
@@ -208,6 +209,9 @@
                                     <div class="dimensions-details" *ngIf="dimension.value.width">
                                         Width: {{ dimension.value.width }}
                                     </div>
+                                    <ng-container *ngIf="dimension.value.NULL">
+                                        <span class="dimensions-details"> :{{dimension.value.NULL}}</span>
+                                    </ng-container>
                                     <div class="dimensions-details" *ngIf="dimension.value.depth">
                                         Depth: {{ dimension.value.depth }}
                                     </div>
@@ -234,26 +238,26 @@
                             </div>
                         </ng-template>
                     </div>
-					
-					<!-- ***************************************  -->
-					
-					<div *ngIf="assemblyExist" class="mb2"> 
-					 <hr class="modal-hr"/>
+
+                    <!-- ***************************************  -->
+
+                    <div *ngIf="assemblyExist" class="mb2">
+                        <hr class="modal-hr"/>
                         <span class="title">Assembly</span>
-                        <div class="mt1" [innerHTML]="product.product_assembly"></div> 
+                        <div class="mt1" [innerHTML]="product.product_assembly"></div>
                     </div>
-					
-					
-					<div *ngIf="careExist" class="mb2">
+
+
+                    <div *ngIf="careExist" class="mb2">
                         <hr class="modal-hr"/>
                         <span class="title">Care</span>
                         <div class="mt1" [innerHTML]="product.product_care"></div>
                     </div>
-					
-					
-					<!-- ***************************************  -->
-					
-					
+
+
+                    <!-- ***************************************  -->
+
+
                     <div class="mb2" *ngIf="product.collections.length">
                         <hr class="modal-hr"/>
                         <span class="title">More in the Collection</span>

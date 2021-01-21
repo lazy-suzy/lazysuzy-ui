@@ -75,7 +75,7 @@ export class ProductDetailsMobileComponent implements OnInit {
     schema = {};
     invalidLinkImageSrc = 'assets/image/invalid_link.png';
     invalidLink: boolean;
-
+    isSingleDimension: boolean;
     priceObject = {
         is_price: '',
         was_price: ''
@@ -175,6 +175,7 @@ export class ProductDetailsMobileComponent implements OnInit {
                                 this.dimensionExist = this.utils.checkDimensionsLength(
                                     this.product.dimension
                                 );
+                                this.isSingleDimension = !(Object.keys(this.product.dimension).length > 1);
                                 this.featuresExist = this.utils.checkDataLength(
                                     this.product.features
                                 );

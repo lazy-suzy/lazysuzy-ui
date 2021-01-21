@@ -74,6 +74,7 @@ export class ProductDetailsComponent implements OnInit {
     invalidLink: boolean;
     starIcons = [];
     recentProducts = [];
+    isSingleDimension: boolean;
 
     constructor(
         @Inject(MAT_DIALOG_DATA) public data: any,
@@ -163,6 +164,7 @@ export class ProductDetailsComponent implements OnInit {
         this.dimensionExist = this.utils.checkDimensionsLength(
             this.product.dimension
         );
+        this.isSingleDimension = !(Object.keys(this.product.dimension).length > 1);
         if (this.product.product_assembly != null) {
             this.assemblyExist = this.utils.checkDataLength(
                 this.product.product_assembly
@@ -237,7 +239,7 @@ export class ProductDetailsComponent implements OnInit {
         if (anObject) {
             return Object.keys(anObject);
         }
-        return  [];
+        return [];
 
     }
 
