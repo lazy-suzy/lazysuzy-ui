@@ -18,7 +18,8 @@ import {
     PaymentComponent,
     ProductDetailsMobileComponent,
     PublicProfileComponent,
-	ReviewFormComponent
+	ReviewFormMobileComponent,
+	ReviewFormComponent,
 } from './feature/components';
 import {environment} from 'src/environments/environment';
 import {ProductCollectionsComponent} from './feature/containers/product-collections/product-collections.component';
@@ -109,8 +110,8 @@ const routes: Routes = [
             )
     },
     {path: 'settings/profile', component: EditMyProfileComponent},
-    {path: 'p/:profile', component: PublicProfileComponent},
-	{path: 'product/review/:product', component: ReviewFormComponent}
+    {path: 'p/:profile', component: PublicProfileComponent}, 
+    { path: 'product/review/:product', component: ReviewFormMobileComponent }
 ];
 
 @NgModule({

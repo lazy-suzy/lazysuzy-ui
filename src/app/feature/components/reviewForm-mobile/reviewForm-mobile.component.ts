@@ -19,11 +19,11 @@ import {WishlistSnackbarService} from '../../../shared/services/wishlist-service
 import {first} from 'rxjs/operators';
 
 @Component({
-    selector: 'app-product-details-mobile',
-    templateUrl: './product-details-mobile.component.html',
-    styleUrls: ['./product-details-mobile.component.less']
+    selector: 'app-reviewForm-mobile',
+    templateUrl: './reviewForm-mobile.component.html',
+    styleUrls: ['./reviewForm-mobile.component.less']
 })
-export class ProductDetailsMobileComponent implements OnInit {
+export class ReviewFormMobileComponent implements OnInit {
     @ViewChild(VariationsComponent, {static: false}) child: VariationsComponent;
     @ViewChild('gallery', {static: false}) galleryContainer: ElementRef<any>;
     @ViewChild('itemTemplate', {static: true}) itemTemplate: TemplateRef<any>;
@@ -132,16 +132,17 @@ export class ProductDetailsMobileComponent implements OnInit {
     }
 
     ngOnInit() {
-        this.loadRecentProducts();
+      //  this.loadRecentProducts();
         this.eventSubscription = this.eventEmitterService.userChangeEvent
             .asObservable()
             .subscribe((user) => {
                 this.bpSubscription = this.bpObserver.subscribe(
                     (handset: BreakpointState) => {
+                        console.log(handset.matches)
                         this.isHandset = handset.matches;
                     }
                 );
-                this.loadProduct();
+                 this.loadProduct();
             });
     }
 
@@ -150,22 +151,22 @@ export class ProductDetailsMobileComponent implements OnInit {
             (routeParams) => {
                 this.isProductFetching = true;
                 this.productSku = routeParams.product;
-                this.cacheService.data.productSku = this.productSku;
+               // this.cacheService.data.productSku = this.productSku;
                 this.cacheService.data.useCache = true;
                 this.productSubscription = this.apiService
                     .getProduct(this.productSku)
                     .subscribe(
                         (payload: IProductDetail) => {
                             this.product = payload.product;
-                            if (this.product.collections.length < 3) {
+                           if (this.product.collections.length < 3) {
                                 this.carousalOptions.loop = false;
                             }
-                            this.seoData = payload.seo_data;
+                            this.seoData = payload.seo_data; 
                             if (this.product) {
                                 this.schema = this.seoService.setSchema(this.product);
-                                this.seoService.setMetaTags(this.seoData);
-                                this.updateActiveProduct(this.product);
-                                this.description = this.utils.compileMarkdown(
+                             this.seoService.setMetaTags(this.seoData);
+                               this.updateActiveProduct(this.product);
+                               this.description = this.utils.compileMarkdown(
                                     this.product.description
                                 );
                                 this.features = this.utils.compileMarkdown(
@@ -211,11 +212,12 @@ export class ProductDetailsMobileComponent implements OnInit {
                                 }
                                 this.hasVariationsInventory();
                                 if (!this.isHandset) {
-                                    this.matDialogUtils.setProduct(payload);
-                                    this.router.navigate(
+                                     this.matDialogUtils.setProduct(payload);
+                                    this.openMyReviewModal();
+                                     this.router.navigate(
                                         [`${this.product.department_info[0].category_url}`],
                                         {queryParams: {modal_sku: this.product.sku}}
-                                    );
+                                    ); 
                                 }
                                 this.variations = this.product.variations.sort((a, b) =>
                                     a.name > b.name ? 1 : -1
@@ -280,14 +282,14 @@ export class ProductDetailsMobileComponent implements OnInit {
         this.eventSubscription.unsubscribe();
     }
 
-    loadRecentProducts() {
+   /* loadRecentProducts() {
         this.apiService.getRecentProducts().pipe(first()).subscribe((response: any[]) => {
             this.recentProducts = response;
             if (this.recentProducts.length < 2) {
                 this.recentOptions.loop = false;
             }
         });
-    }
+    }*/
 
     selectTab(tab) {
         this.activeTab = tab;
@@ -502,17 +504,16 @@ export class ProductDetailsMobileComponent implements OnInit {
     }
 
     openMyReviewModal() {
+        console.log(this.product)
             this.hasSelection = true;
             const data = {
-                sku: this.activeProduct.sku,
+                sku: this.product.sku,
                 brand: this.product.site,
                 image: this.product.main_image,
                 name:
                     this.activeProduct.sku === this.product.sku
                         ? this.activeProduct.name
-                        : this.product.name + ' ' + this.activeProduct.name,
-                price: this.productPrice,
-                quantity: this.quantity
+                        : this.product.name + ' ' + this.activeProduct.name
             };
             const postData = {
                 product_sku: this.activeProduct.sku,
@@ -523,8 +524,5 @@ export class ProductDetailsMobileComponent implements OnInit {
             this.matDialogUtils.openMyReviewDialog(data);
 
     }
-    goToReview(sku) {
-        window.location.href = './product/review/' + sku;
-        //this.router.navigateByUrl('/product/review/',sku)
-    }
+     
 }

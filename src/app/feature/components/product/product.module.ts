@@ -14,10 +14,12 @@ import { MatSelectModule } from '@angular/material/select';
 import { FormsModule } from '@angular/forms';
 import { NgxJsonLdModule } from '@ngx-lite/json-ld';
 import {CarouselModule} from "primeng/carousel";
+import { ReviewFormComponent } from './../reviewForm/reviewForm.component';
 
 const DECLARATIONS = [
   ProductComponent,
   ProductDetailsComponent,
+  ReviewFormComponent,
   ConfirmCartProductComponent
 ];
 
@@ -35,7 +37,7 @@ const MODULES = [
   NgxJsonLdModule
 ];
 
-const COMPONENTS = [ProductDetailsComponent, ConfirmCartProductComponent];
+const COMPONENTS = [ProductDetailsComponent, ConfirmCartProductComponent,ReviewFormComponent];
 
 @NgModule({
   declarations: [...DECLARATIONS],

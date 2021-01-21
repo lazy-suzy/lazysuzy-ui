@@ -45,7 +45,8 @@ export class ReviewFormComponent implements OnInit {
 	reviewText:  string = '';
     product: any = {};
     topHeight = { 'max-height': '0' };
-  
+    brand: string = '';
+    image: string = '';
   
   eventSubscription: Subscription;
   websiteRegex = /^[a-zA-Z0-9][a-zA-Z0-9-]{1,61}[a-zA-Z0-9].[a-zA-Z]{2,}$/;
@@ -62,10 +63,18 @@ export class ReviewFormComponent implements OnInit {
     private renderer: Renderer
   ) {}
 
-  ngOnInit() {
-      this.product = this.data.modal; console.log(this.product);
-      //this.topHeight = { 'max-height': `calc(100vh - ${12}px)` };
-	// this.route.params.subscribe(routeParams => {
+    ngOnInit() {
+        if (this.data.payload == undefined) {
+            this.product = this.data.modal;
+            this.brand = this.product.brand;
+            this.image = this.product.image;
+        }
+            
+        else {
+            this.product = this.data.payload.product;
+            this.brand = this.product.site;
+            this.image = this.product.main_image;
+        }
       this.sku = this.product.sku;
 	 console.log(this.sku );
 	   this.eventSubscription = this.eventEmitterService.userChangeEvent
@@ -86,7 +95,6 @@ export class ReviewFormComponent implements OnInit {
 		}
       });
  
-  //  });  
 	  
    
   }

@@ -16,8 +16,9 @@ import {
     OrderSuccessModule,
     PaymentModule,
     ProductDetailsMobileModule,
-    PublicProfileModule,
-	ReviewFormModule
+    PublicProfileModule, 
+   // ReviewFormModule,
+    ReviewFormMobileModule
 } from './components';
 import {ResetPasswordComponent} from './containers/reset-password/reset-password.component';
 import {BrandListModule} from './components/brand-list/brand-list.module';
@@ -51,7 +52,8 @@ const MODULES = [
     PublicProfileModule,
     BlogModule,
     CollectionListModule,
-	ReviewFormModule
+   // ReviewFormModule,
+    ReviewFormMobileModule
 ];
 
 @NgModule({

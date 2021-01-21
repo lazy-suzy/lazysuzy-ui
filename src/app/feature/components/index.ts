@@ -30,4 +30,6 @@ export * from './editMyProfile/editMyProfile.module';
 export * from './publicProfile/publicProfile.module';
 export * from './publicProfile/publicProfile.component';
 export * from './reviewForm/reviewForm.component';
-export * from './reviewForm/reviewForm.module';
+
+export * from './reviewForm-mobile/reviewForm-mobile.component';
+export * from './reviewForm-mobile/reviewForm-mobile.module';

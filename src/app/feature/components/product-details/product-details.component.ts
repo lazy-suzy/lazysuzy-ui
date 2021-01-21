@@ -512,7 +512,7 @@ export class ProductDetailsComponent implements OnInit {
             const data = {
                 sku: this.activeProduct.sku,
                 brand: this.product.site,
-                image: this.items[0].data.src,
+                image: this.product.main_image,
                 name:
                     this.activeProduct.sku === this.product.sku
                         ? this.activeProduct.name
