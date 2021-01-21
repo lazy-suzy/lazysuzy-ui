@@ -184,15 +184,44 @@ export class MatDialogUtilsService {
         this.payload = payload;
     }
 	 
-	openMyReviewDialog(modal) { 
+	openMyReviewDialog1(modal) { 
         const dialogRef = this.dialog.open(ReviewFormComponent, {
             width: '80%',
-            height: '90%',
+            height: '100%',
             data: {
                     modal,
                 total: modal.price * modal.quantity
             },
-            panelClass: 'review-details-dialog-container'
+            panelClass: 'product-details-dialog-container'
         });
+    }
+
+    openMyReviewDialog(modal) {
+        console.log(modal);
+        
+     
+       
+        this.productDialog = this.dialog.open(ReviewFormComponent, {
+            width: '80%',
+            height: '100%',
+            data: { modal },
+                panelClass: 'product-details-dialog-container'
+            });
+            this.productDialog.afterOpened().subscribe((result) => {
+                this.location.go(`product/review/${modal.sku}`, '', this.location.getState());
+            });
+            this.productDialog.afterClosed().subscribe((result) => {
+                this.payload = null;
+                const params = { ...this.activeRoute.snapshot.queryParams };
+                this.productDialog = undefined;
+                if (params.modal_sku) {
+                    delete params.modal_sku;
+                    this.router.navigate([], { queryParams: params });
+                } else {
+                    this.location.back();
+                }
+            });
+        
+
     }
 }

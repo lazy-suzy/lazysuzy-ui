@@ -1,35 +1,37 @@
 <div class="profile-container">
-  <div>&nbsp;</div>
-  
-  <div class="profile-form-container">
-      
-    <form name="review-form" class="w-100 flex-ns gallery-container" #reviewForm="ngForm">
- 
-        <div class="avatar-container">
+    <div>&nbsp;</div>
+    <button class="close-icon" mat-dialog-close>
+        <mat-icon>close</mat-icon>
+    </button>
+    <div class="profile-form-container">
 
-            <div class="w-100 tc">
-                <img [src]="product.image" class="product-image" />
-            </div>
-            <div class="w-100">
-                {{product.name}}
-            </div>
-            <div class="w-100">
-                By {{product.brand}}
-            </div>
+        <form name="review-form" class="w-100 flex-ns gallery-container" #reviewForm="ngForm">
 
-        </div>
-        
-	 
-	 
-        <div class="form-input-container">
-            <div class="header">
-                <div class="title b">My Review<br /><div class="require">*Required Field</div></div>
+            <div class="avatar-container" (click)="gotoProduct()">
 
+                <div class="w-100 tc">
+                    <img [src]="product.image" class="product-image" />
+                </div>
+                <div class="w-100">
+                    {{product.name| uppercase}}
+                </div>
+                <div class="w-100" style="font-size: 14px;">
+                    by <span style="color: #606060;">{{product.brand}}</span>
+                </div>
 
             </div>
 
-            <div class="w-100 input-container">
-                <div class="flex justify-between items-center border">
+
+
+            <div class="form-input-container  product-description-container" style="max-height: calc(100vh - 60px);">
+                <div class="header">
+                    <div class="title b">My Review<br /><div class="require">*Required Field</div></div>
+
+
+                </div>
+
+                <div class="w-100 input-container">
+                    <div class="flex justify-between items-center border">
                         <label class="db">Overall Rating* </label>
                         <span class="star-cb-group">
                             <input type="radio" id="rating-5" name="rating" value="5" (change)="starCount(5)" /><label for="rating-5">5</label>
@@ -42,130 +44,130 @@
                         <span *ngIf="ratingerror" class="error-msg">
                             This field is required.
                         </span>
-                </div>
-            </div>
-
-
-            <div class="w-100 input-container">
-                <div class="flex justify-between items-center">
-                    <label class="db">Header*</label>
-
-                </div>
-                <input class="form-input w-100"
-                        name="reviewHeader"
-                        #reviewUserName="ngModel"
-                        [(ngModel)]="reviewHeader" placeholder="Example:Love this couch!" />
-                <span *ngIf="headererror" class="error-msg">
-                    This field is required.
-                </span>
-            </div>
-            <!-- [checked]="rateval ==1" -->
-
-
-
-            <div class="w-100 input-container">
-                <div class="flex justify-between items-center">
-                    <label class="db">Review*</label>
-
-                </div>
-                <textarea class="form-textarea w-100"
-                       name="reviewText"
-                       #reviewUserName="ngModel"
-                       [(ngModel)]="reviewText" style="height:120px;" placeholder="What did you like or dislike? How do you use this product? What met your expectations and what surprised you?"></textarea>
-
-                 
-                <span *ngIf="rtexterror" class="error-msg">
-                    This field is required.
-                </span>
-                <div class="border">&nbsp;</div>
-            </div>
-
-            <div class="">
-                <div class="flex justify-between items-center">
-                    <label class="db">
-                        Add a Photo
-                        <div class="require">Inspire others with up to 5 photos to highlight features or share your unique style.</div>
-                    </label>
-
-
-
-                </div>
-                
-
-                <div class="upload-btn-wrapper">
-                    <button class="btn">+</button>
-                    <input type="file"
-                           accept=".jpg,.png,.jpeg,.gif,.svg"
-                           name="reviewImage"
-                           id="file"
-                           multiple 
-                           (mouseover)="over()"
-                           (mouseout)="out()"
-                           (change)="readFile($event)" />
-                </div>
-
-
-                <div *ngIf="imageSrc.length>0" style="clear:both;">
-                    <div class="img-block" *ngFor="let url of imageSrc; let i= index" style="height:60px;margin: 7px 3px;max-width: 30%; float:left;">
-                        <img [src]="url" height="50" alt="">
-                        <div class="close" style="font-size: 10px; cursor: pointer;"><i class="icon-lab_cross" (click)="deleteUploadedImage(i)">Remove</i></div>
                     </div>
                 </div>
 
 
-                <div class="border" style="clear:both;">&nbsp;</div>
-            </div>
+                <div class="w-100 input-container">
+                    <div class="flex justify-between items-center">
+                        <label class="db">Headline</label>
+
+                    </div>
+                    <input class="form-input w-100"
+                           name="reviewHeader"
+                           #reviewUserName="ngModel"
+                           [(ngModel)]="reviewHeader" placeholder="Example:Love this couch!" />
+                    <!----><span *ngIf="headererror" class="error-msg">
+                        This field is required.
+                    </span>-->
+                </div>
+                <!-- [checked]="rateval ==1" -->
+
+
+
+                <div class="w-100 input-container">
+                    <div class="flex justify-between items-center">
+                        <label class="db">Review</label>
+
+                    </div>
+                    <textarea class="form-textarea w-100"
+                              name="reviewText"
+                              #reviewUserName="ngModel"
+                              [(ngModel)]="reviewText" style="height:120px;" placeholder="What did you like or dislike? How do you use this product? What met your expectations and what surprised you?"></textarea>
+
+
+                    <!--<span *ngIf="rtexterror" class="error-msg">
+                        This field is required.
+                    </span>-->
+                    <div class="border">&nbsp;</div>
+                </div>
+
+                <div class="">
+                    <div class="flex justify-between items-center">
+                        <label class="db">
+                            Add a Photo
+                            <div class="require">Inspire others to highlight features or share your unique style.</div>
+                        </label>
+
+
+
+                    </div>
+
+
+                    <div class="upload-btn-wrapper">
+                        <button class="btn">+</button>
+                        <input type="file"
+                               accept=".jpg,.png,.jpeg,.gif,.svg"
+                               name="reviewImage"
+                               id="file"
+                               multiple
+                               (mouseover)="over()"
+                               (mouseout)="out()"
+                               (change)="readFile($event)" />
+                    </div>
+
+
+                    <div *ngIf="imageSrc.length>0" style="clear:both;">
+                        <div class="img-block" *ngFor="let url of imageSrc; let i= index" style="height:60px;margin: 7px 3px;max-width: 30%; float:left;">
+                            <img [src]="url" height="50" alt="">
+                            <div class="close" style="font-size: 10px; cursor: pointer;"><i class="icon-lab_cross" (click)="deleteUploadedImage(i)">Remove</i></div>
+                        </div>
+                    </div>
+
+
+                    <div class="border" style="clear:both;">&nbsp;</div>
+                </div>
 
 
 
 
-            <div class="w-100 input-container" style="clear:both;" *ngIf="presentUserName==''">
-                <div class="flex justify-between items-center">
-                    <label class="db">Name</label>
+                <div class="w-100 input-container" style="clear:both;" *ngIf="presentUserName==''">
+                    <div class="flex justify-between items-center">
+                        <label class="db">Name</label>
+
+                    </div>
+                    <input class="form-input w-100"
+                           name="reviewUserName"
+                           #reviewUserName="ngModel"
+                           [(ngModel)]="username" placeholder="Enter your name or an alias" />
 
                 </div>
-                <input class="form-input w-100"
-                        name="reviewUserName"
-                        #reviewUserName="ngModel"
-                        [(ngModel)]="username" />
-
-            </div>
 
 
 
-            <div class="w-100 input-container" *ngIf="presentUserName==''">
-                <div class="flex justify-between items-center">
-                    <label class="db">      Email</label>
+                <div class="w-100 input-container" *ngIf="presentUserName==''">
+                    <div class="flex justify-between items-center">
+                        <label class="db">      Email</label>
 
+                    </div>
+                    <input class="form-input w-100"
+                           name="reviewUserEmail"
+                           #reviewUserName="ngModel"
+                           [(ngModel)]="useremail" placeholder="Enter your email for verification.Not shared publicly " />
+                    <span *ngIf="emailerror" class="error-msg">
+                        The email id is not valid.
+                    </span>
                 </div>
-                <input class="form-input w-100"
-                        name="reviewUserEmail"
-                        #reviewUserName="ngModel"
-                        [(ngModel)]="useremail" />
-                <span *ngIf="emailerror" class="error-msg">
-                    The email id is not valid.
-                </span>
-            </div>
 
-            <div class="w-100 input-container" *ngIf="presentLocation==''">
-                <label class="db">Location</label>
-                <input class="form-input w-100"
-                        name="reviewLocation"
-                        #reviewLocation="ngModel"
-                        [(ngModel)]="location" />
-            </div>
+                <div class="w-100 input-container" *ngIf="presentLocation==''">
+                    <label class="db">Location</label>
+                    <input class="form-input w-100"
+                           name="reviewLocation"
+                           #reviewLocation="ngModel"
+                           [(ngModel)]="location" placeholder="Ex.San Francisco, CA" />
+                </div>
 
-
-            <div class="action-buttons-row">
-                <button class="profile-cancel-btn b" mat-dialog-close>
-                    CANCEL
-                </button>
-                <button class="profile-update-btn b ml3" (click)="reviewUpdate()">
-                    UPDATE
-                </button>
+                <div class="require" style="font-size:17px;">Thanks for sharing your feedback!</div> 
+                <div class="action-buttons-row">
+                    <!--<button class="profile-cancel-btn b" mat-dialog-close>
+            CANCEL
+        </button>-->
+                    <button class="profile-update-btn b ml3" (click)="reviewUpdate()">
+                        POST REVIEW
+                    </button>
+                </div>
             </div>
-            </div>
-    </form>
-  </div>
+        </form>
+    </div>
 </div>
 <img *ngIf="isLoading" [src]="spinner" class="loader" />

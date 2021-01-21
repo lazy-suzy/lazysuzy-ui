@@ -502,14 +502,6 @@ export class ProductDetailsMobileComponent implements OnInit {
     }
 
     openMyReviewModal() {
-
-        if (
-            !this.activeProduct.in_inventory &&
-            !this.activeProduct.inventory_product_details.price ||
-            !this.beforeSelection
-        ) {
-            this.hasSelection = false;
-        } else {
             this.hasSelection = true;
             const data = {
                 sku: this.activeProduct.sku,
@@ -530,7 +522,6 @@ export class ProductDetailsMobileComponent implements OnInit {
 
             this.matDialogUtils.openMyReviewDialog(data);
 
-        }
     }
     goToReview(sku) {
         window.location.href = './product/review/' + sku;

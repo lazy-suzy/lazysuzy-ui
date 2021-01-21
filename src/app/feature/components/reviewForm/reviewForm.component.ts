@@ -2,8 +2,7 @@ import { Component, ElementRef, Inject, OnInit, TemplateRef, ViewChild, Renderer
 import {
   ApiService,
   EventEmitterService,
-  UtilsService,
-   MatDialogUtilsService
+  UtilsService
 } from 'src/app/shared/services';
 import { IProfile, IProduct, IProductDetail } from '../../../shared/models';
 import { environment as env } from 'src/environments/environment';
@@ -20,7 +19,7 @@ import {MAT_DIALOG_DATA} from '@angular/material/dialog';
   styleUrls: ['./reviewForm.component.less']
 })
 export class ReviewFormComponent implements OnInit {
-  
+     
 	username: string =  ''; 
 	location: string =  '';
 	//image: string =  '';
@@ -44,7 +43,8 @@ export class ReviewFormComponent implements OnInit {
 	ratingvalue: number=0;
 	reviewHeader:  string = '';
 	reviewText:  string = '';
-	 product: any = {};
+    product: any = {};
+    topHeight = { 'max-height': '0' };
   
   
   eventSubscription: Subscription;
@@ -63,7 +63,8 @@ export class ReviewFormComponent implements OnInit {
   ) {}
 
   ngOnInit() {
-	  this.product = this.data.modal;console.log(this.product );
+      this.product = this.data.modal; console.log(this.product);
+      //this.topHeight = { 'max-height': `calc(100vh - ${12}px)` };
 	// this.route.params.subscribe(routeParams => {
       this.sku = this.product.sku;
 	 console.log(this.sku );
@@ -159,7 +160,10 @@ export class ReviewFormComponent implements OnInit {
 	formData.append('count_helpful', '0');
 	formData.append('count_reported', '0');
 	formData.append('source', 'user');
-	
+    formData.append('headline', this.hasNull(this.reviewHeader));
+    formData.append('review', this.hasNull(this.reviewText));
+
+
       if (this.ratingvalue>0) {
           this.ratingerror = false;
           formData.append('rating', this.ratingvalue.toString());
@@ -169,7 +173,7 @@ export class ReviewFormComponent implements OnInit {
       }
 	
 	 
-	if(this.reviewHeader!=''){
+	/*if(this.reviewHeader!=''){
 		this.headererror= false;
 		formData.append('headline', this.hasNull(this.reviewHeader));
 	}
@@ -183,10 +187,10 @@ export class ReviewFormComponent implements OnInit {
 	}
 	else{
 			this.rtexterror= true;
-	}
+	}*/
 	
 	
-      if (!this.emailerror && !this.headererror && !this.rtexterror && !this.ratingerror && this.images.length<=5){
+      if (!this.emailerror && !this.ratingerror && this.images.length<=5){
 	 this.isLoading = true;	
      this.apiService.submitReview(formData).subscribe((payload: any) => {
       this.isLoading = false;
@@ -289,6 +293,11 @@ export class ReviewFormComponent implements OnInit {
         this.imageSrc.splice(index, 1);
         this.images.splice(index, 1);
         this.renderer.selectRootElement('#file').value = '';
+    }
+
+    gotoProduct() {
+       // this.router.navigateByUrl(`/product/${this.sku}`)
+        window.location.href = './product/' + this.sku;
     }
 
   }
