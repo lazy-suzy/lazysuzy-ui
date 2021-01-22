@@ -133,6 +133,44 @@ export class NewProductRowComponent implements OnInit {
         this.product.product_dimension.push(dimension);
     }
 
+    addDimensionGroup() {
+        if (!this.product.product_dimension) {
+            this.product.product_dimension = {};
+        }
+        const dimensionGroup = {
+            '': [
+                {
+                    name: '',
+                    value: {
+                        height: '',
+                        width: '',
+                        length: '',
+                        depth: '',
+                        diameter: '',
+                        weight: '',
+                    }
+                }
+            ]
+        };
+        this.product.product_dimension = {...this.product.product_dimension, ...dimensionGroup};
+    }
+
+    changeDimensionKey(key) {
+        console.log(key);
+    }
+
+    objKeys(value) {
+        if (this.isObject(value)) {
+            return Object.keys(value);
+        } else {
+            return [];
+        }
+    }
+
+    isObject(value) {
+        return typeof value === 'object';
+    }
+
     cropImage(image, imageType) {
         this.adminDashboardService.cropImage(image, imageType, this.product).subscribe(
             (response: any) => {
