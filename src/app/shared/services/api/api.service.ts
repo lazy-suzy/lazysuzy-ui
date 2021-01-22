@@ -528,8 +528,9 @@ export class ApiService {
 
     
 
-    getProductReviews(id: string){
-        const endpoint = `review/${id}`;
+    getProductReviews(id: string,limit) {
+       // const limit = 6;
+        const endpoint = `review/getreview-${id}/${limit}`;
         const url = `${env.API_BASE_HREF}${endpoint}`;
         return this.httpService.get(url);
     }

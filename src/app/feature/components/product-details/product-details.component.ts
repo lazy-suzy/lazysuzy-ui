@@ -146,9 +146,10 @@ export class ProductDetailsComponent implements OnInit {
       });
   }
 
-  loadProductReviews(sku) {
+    loadProductReviews(sku) {
+        var limit = 5;
     console.log(sku);
-    this.apiService.getProductReviews(sku).subscribe((response: any[]) => {
+    this.apiService.getProductReviews(sku,limit).subscribe((response: any[]) => {
       this.recentReviews = response;
       if (
         this.recentReviews["all_reviews"] &&
