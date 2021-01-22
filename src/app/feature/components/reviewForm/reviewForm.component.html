@@ -43,7 +43,7 @@
                                 <input type="radio" id="rating-0" name="rating" value="0" (change)="starCount(0)" checked="checked" class="star-cb-clear" /><label for="rating-0">0</label>
                             </span>
                             <span *ngIf="ratingerror" class="error-msg">
-                                This field is required.
+                                Please select a rating to submit.
                             </span>
                         </div>
 
@@ -82,7 +82,7 @@
                         <!--<span *ngIf="rtexterror" class="error-msg">
                             This field is required.
                         </span>-->
-                        <div class="border">&nbsp;</div>
+                        <div class="border mr-top" >&nbsp;</div>
                     </div>
 
                     <div class="">
@@ -118,7 +118,7 @@
                         </div>
 
 
-                        <div class="border" style="clear:both;">&nbsp;</div>
+                        <div class="border  mr-top" style="clear:both;">&nbsp;</div>
                     </div>
 
 
@@ -143,13 +143,14 @@
                             <label class="db">      Email</label>
 
                         </div>
-                        <input class="form-input w-100"
+                        <input class="form-input w-100" style=" margin-bottom: 0 !important;"
                                name="reviewUserEmail"
                                #reviewUserName="ngModel"
                                [(ngModel)]="useremail" placeholder="Enter your email for verification. Not shared publicly " />
                         <span *ngIf="emailerror" class="error-msg">
-                            The email id is not valid.
+                            {{emailmsg}}
                         </span>
+                        <div>&nbsp;</div>
                     </div>
 
                     <div class="w-100 input-container" *ngIf="presentLocation==''">

@@ -47,6 +47,7 @@ export class ReviewFormComponent implements OnInit {
     topHeight = { 'max-height': '0' };
     brand: string = '';
     image: string = '';
+    emailmsg: string = '';
   
   eventSubscription: Subscription;
   websiteRegex = /^[a-zA-Z0-9][a-zA-Z0-9-]{1,61}[a-zA-Z0-9].[a-zA-Z]{2,}$/;
@@ -75,8 +76,7 @@ export class ReviewFormComponent implements OnInit {
             this.brand = this.product.site;
             this.image = this.product.main_image;
         }
-      this.sku = this.product.sku;
-	 console.log(this.sku );
+      this.sku = this.product.sku; 
 	   this.eventSubscription = this.eventEmitterService.userChangeEvent
       .asObservable()
       .subscribe((user) => {
@@ -148,14 +148,24 @@ export class ReviewFormComponent implements OnInit {
 	  this.emailerror= false;
       formData.append('user_email', this.presentUserEmail);
     }  
-	else{
-		if(this.validateEmail(this.useremail)){
-			this.emailerror= false;
-			formData.append('user_email', this.useremail);
-		}
-		else{
-			   this.emailerror= true;
-		}		
+    else {
+        console.log(this.useremail);
+        if (this.useremail == '' || this.useremail=='0') {
+            this.emailmsg = 'Please enter your email for verification.';
+            this.emailerror = true;
+        }
+        else {
+                if(this.validateEmail(this.useremail)){
+                        this.emailerror= false;
+                        formData.append('user_email', this.useremail);
+                }
+                else {
+                        this.emailmsg = 'Please enter a valid email address.';
+                        this.emailerror= true;
+                }	
+        }
+        
+			
 	}
 	if (this.presentLocation !== '') {
       formData.append('user_location', this.presentLocation);
