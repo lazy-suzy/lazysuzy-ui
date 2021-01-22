@@ -217,7 +217,7 @@ export class VariationsComponent implements OnInit {
     setSelectedOptionsOfVariation(variation: any) {
         // Get all the options belonging to swatch
         const variations = this.variations
-            .filter((v) => v.name === variation.name)
+            .filter((v) => v.swatch_image === variation.swatch_image)
             .reduce((acc, {features}) => {
                 Object.keys(features).forEach((key) => {
                     if (acc[key]) {

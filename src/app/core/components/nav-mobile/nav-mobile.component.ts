@@ -36,6 +36,7 @@ export class NavMobileComponent implements OnInit {
     deals: any;
     mobileDeals: any;
     showOffer = true;
+    isOfferEmpty = false;
     isFaqPage = false;
     aboutUsPage = false;
 
@@ -63,9 +64,9 @@ export class NavMobileComponent implements OnInit {
             this.isBoard = (location.path().match(/board/) !== null);
             this.aboutUsPage = location.path().match(/aboutus/) !== null;
             this.showOffer =
-                location.path().match(/checkout/) === null &&
+                (location.path().match(/checkout/) === null &&
                 location.path().match(/board\/dashboard/) === null &&
-                location.path().match(/blog/) == null;
+                location.path().match(/blog/) == null) && !this.isOfferEmpty;
         });
     }
 
@@ -123,6 +124,8 @@ export class NavMobileComponent implements OnInit {
                 return a.rank - b.rank;
             });
             this.mobileDeals = this.deals.filter(deal => deal.is_mobile);
+            this.isOfferEmpty = this.mobileDeals.length <= 0;
+            this.showOffer = this.showOffer && !this.isOfferEmpty;
         });
     }
 

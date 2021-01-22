@@ -105,6 +105,7 @@ export class LandingComponent implements OnInit {
             review: 'I was ecstatic to find components of the Pier 1 Imports papasan chair still in stock since Pier 1 is going out of business. Although the shipping was delayed for one product, customer service was fantastic with frequent communications on status and when products will arrive. Highly recommend LazySuzy, especially for difficult to find products'
         }
     ];
+
     boardViewLink = boardRoutesNames.BOARD_VIEW;
     displayBoardPath = 'assets/image/board_display.webp';
     trustPilotStarsPath = 'assets/image/trustpilot_stars.png';

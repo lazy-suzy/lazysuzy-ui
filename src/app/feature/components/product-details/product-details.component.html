@@ -199,9 +199,36 @@
                     <div *ngIf="dimensionExist" class="mb2">
                         <hr class="modal-hr"/>
                         <span class="title">Dimensions</span>
-                        <div class="mt1 pb1 flex flex-wrap" *ngIf="isArray(product.dimension); else showDimensions">
-                            <div *ngFor="let dimension of product.dimension" class="fl w-50 pa2">
-                                <div class="dimension-title">{{ dimension.description }}</div>
+                        <div class="mt1 pb1 flex flex-wrap">
+                            <div *ngFor="let key of objKeys(product.dimension)" class="fl w-50 pa2">
+                                <ng-container *ngIf="!this.isSingleDimension">
+                                    <div class="dimension-header upper-case bold mb1">{{ key }}</div>
+                                </ng-container>
+                                <ng-container *ngFor="let dimension of product.dimension[key]">
+                                    <div class="dimension-title mt2">{{ dimension.name }}</div>
+                                    <div class="dimensions-details" *ngIf="dimension.value.width">
+                                        Width: {{ dimension.value.width }}
+                                    </div>
+                                    <ng-container *ngIf="dimension.value.NULL">
+                                        <span class="dimensions-details"> :{{dimension.value.NULL}}</span>
+                                    </ng-container>
+                                    <div class="dimensions-details" *ngIf="dimension.value.depth">
+                                        Depth: {{ dimension.value.depth }}
+                                    </div>
+                                    <div class="dimensions-details" *ngIf="dimension.value.height">
+                                        Height: {{ dimension.value.height }}
+                                    </div>
+                                    <div class="dimensions-details" *ngIf="dimension.value.length">
+                                        Length: {{ dimension.value.length }}
+                                    </div>
+                                    <div class="dimensions-details" *ngIf="dimension.value.diameter">
+                                        Diameter: {{ dimension.value.diameter }}
+                                    </div>
+                                    <div class="dimensions-details" *ngIf="dimension.value.weight">
+                                        Weight: {{ dimension.value.weight }}
+                                    </div>
+                                </ng-container>
+
 
                                 <div class="dimensions-details" *ngIf="dimension.width > 0">
                                     Width: {{ dimension.width }}
@@ -212,6 +239,7 @@
                                 <div class="dimensions-details" *ngIf="dimension.height > 0">
                                     Height: {{ dimension.height }}
                                 </div>
+
                                 <br/>
                             </div>
                         </div>
@@ -226,14 +254,18 @@
 
                     <div *ngIf="assemblyExist" class="mb2">
                         <hr class="modal-hr"/>
+
                         <span class="title">ASSEMBLY</span>
+
                         <div class="mt1" [innerHTML]="product.product_assembly"></div>
                     </div>
 
 
                     <div *ngIf="careExist" class="mb2">
                         <hr class="modal-hr"/>
+
                         <span class="title">CARE</span>
+
                         <div class="mt1" [innerHTML]="product.product_care"></div>
                     </div>
 
@@ -259,6 +291,7 @@
                             </div>
                         </span>
 
+
                     </div>
                     <div class="flex justify-center" *ngIf="total_count===0">
                         <button (click)="openMyReviewModal()" mat-raised-button
@@ -270,6 +303,7 @@
                         </button>
                     </div>
                     <div class="mb2" *ngIf="total_count>0">
+
                         <ul class="description-menu">
                             <li (click)="selectTab('mr')"
                                 class="{{ activeTab === 'mr' ? 'active b' : 'bg-white' }}">

@@ -29,7 +29,7 @@ export class NavDesktopComponent implements OnInit, AfterViewInit {
     hideBar = false;
     cartProduct: number;
     isFaqPage = false;
-    isBrandPage: boolean = false;
+    isBrandPage = false;
     params: any;
     deals: any;
     showOffer = false;
@@ -95,7 +95,9 @@ export class NavDesktopComponent implements OnInit, AfterViewInit {
             });
 
         this.eventEmitterService.isBrandSubject.subscribe((brandValue: string) => {
-            this.getDepartments(brandValue);
+            // Uncomment this line for brand specific category sub nav bar
+            // this.getDepartments(brandValue);
+            this.getDepartments();
         });
 
         this.activeRoute.queryParams.subscribe((params) => {
@@ -116,6 +118,7 @@ export class NavDesktopComponent implements OnInit, AfterViewInit {
             this.deals = this.deals.filter(v => {
                 return v.is_active;
             });
+            this.showOffer = this.showOffer && (this.deals.length >= 1);
         });
     }
 

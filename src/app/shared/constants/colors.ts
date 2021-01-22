@@ -1,0 +1,18 @@
+export const COLORS = [
+  "brown",
+  "blue",
+  "gray",
+  "pink",
+  "red",
+  "black",
+  "beige",
+  "white",
+  "green",
+  "purple",
+  "gold",
+  "tan",
+  "natural",
+  "silver",
+  "yellow",
+  "orange",
+];
