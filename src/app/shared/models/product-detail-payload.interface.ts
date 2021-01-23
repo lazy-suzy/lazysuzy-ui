@@ -32,7 +32,7 @@ export interface IProduct {
     redirect_details: {};
     variations: Variation[];
     description: string[];
-    dimension: Dimension[];
+    dimension: DimensionGroup[];
     thumb: string[];
     features: string[];
     product_assembly: string[];
@@ -55,10 +55,22 @@ interface Departmentinfo {
     sub_category_url: string;
 }
 
+interface DimensionGroup {
+    groupName: string;
+    groupValue: Dimension[];
+}
+
 interface Dimension {
-    ') or e': string;
-    ').': string;
-    description: string;
+    name: string;
+    value: {
+        height: string;
+        width: string;
+        length: string;
+        diameter: string;
+        depth: string;
+        weight: string;
+        NULL: string; // Used for empty values
+    };
 }
 
 interface Variation {

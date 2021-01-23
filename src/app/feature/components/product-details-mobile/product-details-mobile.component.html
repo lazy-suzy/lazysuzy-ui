@@ -180,12 +180,12 @@
                     </div>
                     <div *ngIf="dimensionExist" class="{{ activeTab === 'dimensions' ? '' : 'dn' }}">
                         <div class="dimension-container">
-                            <div *ngFor="let key of objKeys(product.dimension)" class="fl pa2"
+                            <div *ngFor="let key of product.dimension" class="fl pa2"
                                  [ngClass]="{'w-50':!isSingleDimension,'w-100':isSingleDimension}">
                                 <ng-container *ngIf="!this.isSingleDimension">
-                                    <div class="dimension-header upper-case bold mb1">{{ key }}</div>
+                                    <div class="dimension-header upper-case bold mb1">{{ key.groupName }}</div>
                                 </ng-container>
-                                <ng-container *ngFor="let dimension of product.dimension[key]">
+                                <ng-container *ngFor="let dimension of key.groupValue">
                                     <div class="dimension-title mt2">{{ dimension.name }}</div>
                                     <ng-container *ngIf="dimension.value.NULL">
                                         <span class="dimensions-details"> :{{dimension.value.NULL}}</span>

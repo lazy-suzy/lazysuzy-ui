@@ -204,7 +204,7 @@
                                 <ng-container *ngIf="!this.isSingleDimension">
                                     <div class="dimension-header upper-case bold mb1">{{ key.groupName }}</div>
                                 </ng-container>
-                                <ng-container *ngFor="let dimension of key.groupValues">
+                                <ng-container *ngFor="let dimension of key.groupValue">
                                     <div class="dimension-title mt2">{{ dimension.name }}</div>
                                     <div class="dimensions-details" *ngIf="dimension.value.width">
                                         Width: {{ dimension.value.width }}

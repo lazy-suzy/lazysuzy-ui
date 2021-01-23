@@ -175,7 +175,7 @@ export class ProductDetailsMobileComponent implements OnInit {
                                 this.dimensionExist = this.utils.checkDimensionsLength(
                                     this.product.dimension
                                 );
-                                this.isSingleDimension = !(Object.keys(this.product.dimension).length > 1);
+                                this.isSingleDimension = (this.product.dimension.length === 1);
                                 this.featuresExist = this.utils.checkDataLength(
                                     this.product.features
                                 );
