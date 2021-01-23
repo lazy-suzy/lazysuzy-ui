@@ -200,11 +200,11 @@
                         <hr class="modal-hr"/>
                         <span class="title">Dimensions</span>
                         <div class="mt1 pb1 flex flex-wrap">
-                            <div *ngFor="let key of objKeys(product.dimension)" class="fl w-50 pa2">
+                            <div *ngFor="let key of product.dimension" class="fl w-50 pa2">
                                 <ng-container *ngIf="!this.isSingleDimension">
-                                    <div class="dimension-header upper-case bold mb1">{{ key }}</div>
+                                    <div class="dimension-header upper-case bold mb1">{{ key.groupName }}</div>
                                 </ng-container>
-                                <ng-container *ngFor="let dimension of product.dimension[key]">
+                                <ng-container *ngFor="let dimension of key.groupValues">
                                     <div class="dimension-title mt2">{{ dimension.name }}</div>
                                     <div class="dimensions-details" *ngIf="dimension.value.width">
                                         Width: {{ dimension.value.width }}
