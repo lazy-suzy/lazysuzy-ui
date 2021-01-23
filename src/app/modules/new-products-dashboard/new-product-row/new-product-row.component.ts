@@ -113,32 +113,32 @@ export class NewProductRowComponent implements OnInit {
         });
     }
 
-    addDimension() {
-        let dimensionSequence = 1;
-        if (!this.product.product_dimension) {
-            this.product.product_dimension = [];
-        } else {
-            dimensionSequence = this.product.product_dimension.length + 1;
-        }
-        const dimension = {
-            depth: '',
-            description: '',
-            diameter: '',
-            dimensionSequence,
-            hasDimensions: true,
-            height: '',
-            weight: '',
-            width: '',
+    addDimension(index) {
+        const newDimension = {
+            name: '',
+            value: {
+                height: '',
+                width: '',
+                length: '',
+                depth: '',
+                diameter: '',
+                weight: '',
+                NULL: '',
+            }
         };
-        this.product.product_dimension.push(dimension);
+        if (!this.product.product_dimension[index].groupValue) {
+            this.product.product_dimension[index].groupValue = [];
+        }
+        this.product.product_dimension[index].groupValue.push(newDimension);
     }
 
     addDimensionGroup() {
         if (!this.product.product_dimension) {
-            this.product.product_dimension = {};
+            this.product.product_dimension = [];
         }
         const dimensionGroup = {
-            '': [
+            groupName: '',
+            groupValue: [
                 {
                     name: '',
                     value: {
@@ -148,23 +148,12 @@ export class NewProductRowComponent implements OnInit {
                         depth: '',
                         diameter: '',
                         weight: '',
+                        NULL: '',
                     }
                 }
             ]
         };
-        this.product.product_dimension = {...this.product.product_dimension, ...dimensionGroup};
-    }
-
-    changeDimensionKey(key) {
-        console.log(key);
-    }
-
-    objKeys(value) {
-        if (this.isObject(value)) {
-            return Object.keys(value);
-        } else {
-            return [];
-        }
+        this.product.product_dimension.push(dimensionGroup);
     }
 
     isObject(value) {

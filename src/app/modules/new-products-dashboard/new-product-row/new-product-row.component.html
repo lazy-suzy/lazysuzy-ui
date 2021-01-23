@@ -309,12 +309,15 @@
 
         <div class="row" *ngIf="product.product_dimension">
             <ng-container *ngIf="isObject(product.product_dimension);else otherDimensions">
-                <div class="col-6 mt-5" *ngFor="let key of objKeys(product.product_dimension)">
-                    <span style="font-size: 16px;font-weight: bold">{{key}}</span> <br/>
-                    <input (input)="changeDimensionKey(key)" [(ngModel)]="key">
-                    <ng-container *ngIf="isArray(product.product_dimension[key])">
+                <div class="col-6 mt-5" *ngFor="let key of product.product_dimension;let i = index">
+                    <span style="font-size: 16px;font-weight: bold">{{key.groupName}}</span> <br/>
+                    <input [(ngModel)]="key.groupName">
+                    <button style="float: right" mat-raised-button color="primary"
+                            (click)="addDimension(i)">Add Dimension
+                    </button>
+                    <ng-container *ngIf="isArray(key.groupValue)">
                         <div class="flex flex-wrap justify-between">
-                            <div class="flex flex-column w-33 mb3" *ngFor="let dimension of product.product_dimension[key]">
+                            <div class="flex flex-column w-33 mb3" *ngFor="let dimension of key.groupValue">
                                 <div>
                                     <label class="bold">{{dimension.name}}</label> <br/>
                                     <span *ngIf="dimension.value.height">Height: {{dimension.value.height}} <br/></span>
@@ -362,6 +365,12 @@
                                         <div class="flex justify-between mv2">
                                             <label>Weight</label>
                                             <input [(ngModel)]="dimension.value.weight"/>
+                                        </div>
+                                    </div>
+                                    <div class="flex flex-column">
+                                        <div class="flex justify-between mv2">
+                                            <label>NULL</label>
+                                            <input [(ngModel)]="dimension.value.NULL"/>
                                         </div>
                                     </div>
                                 </div>

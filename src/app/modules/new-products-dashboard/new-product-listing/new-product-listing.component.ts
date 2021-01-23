@@ -106,7 +106,6 @@ export class NewProductListingComponent implements OnInit {
     }
 
     submit(): void {
-
         const submitProducts = this.products.data.filter((product) => {
             if (product.status === 'approved' || product.status === 'rejected') {
                 return true;
