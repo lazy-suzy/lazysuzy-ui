@@ -92,16 +92,16 @@
 
     .nav-link {
       padding: 8px 16px;
-      //border: 1px solid #cccccc;
+      font-family: "Open Sans", "Helvetica Neue", sans-serif;
       border-bottom-width: 0;
       display: block;
-      font-size: 14px;
-      color: #0c1c31;
-      font-family: "Open Sans", sans-serif;
+      font-size: 16px;
+      text-transform: uppercase;
+      color: #666666;
     }
 
-    .active {
-      background-color: #f8fafc;
+    .review-tab-active {
+      border-bottom: 1px solid #c8c7cc;
     }
 
     .bg-white {
@@ -112,7 +112,19 @@
   .menu-content {
     background-color: #f8fafc;
     padding: 18px;
-
+    font-family: "Open Sans", "Helvetica Neue", sans-serif;
+    font-size: 14px;
+    color: black;
+    .review-header{
+      font-weight: bold;
+    }
+    .review-user-info{
+      color: #666666;
+    }
+    .review-details{
+      font-family: Lato, sans-serif;
+      text-align: justify;
+    }
     .dimension-container {
       //min-height: 75vh;
       font-family: Lato, sans-serif;
@@ -129,7 +141,9 @@
     }
   }
 
-
+.w-45{
+  width: 45%;
+}
   .product-details-container {
     .wishlist-container {
       display: flex;
@@ -212,7 +226,44 @@
         font-size: 16px;
         color: #606060;
       }
-
+      .star-rating-outer {
+        display: inline-block;
+        position: relative;
+        font-family: 'Material Icons', serif;
+        font-weight: normal;
+        font-size: 18px;
+      }
+      .star-rating-outer::before {
+        content: '\e83a \e83a \e83a \e83a \e83a';
+      }
+      .star-rating-inner {
+        position: absolute;
+        top: 0;
+        left: 0;
+        white-space: nowrap;
+        overflow: hidden;
+        width: 0;
+      }
+      .star-rating-inner::before {
+        content: '\e838 \e838 \e838 \e838 \e838';
+      }
+      .star-rating-text{
+        font-size: 12px;
+      }
+      .add-review-btn{
+        background-color: #f7f6f6;
+        font-family: "Open Sans", serif;
+        font-size: 16px;
+        text-transform: uppercase;
+        color: #0C1C31;
+        margin: 5px 0;
+        padding: 10px 20px;
+        border: 1px solid #aaaaaa;
+      }
+      .all-review-link{
+        cursor: pointer;
+        color: #0C1C31;
+      }
       .star-ratings-sprite {
         background: url("https://s3-us-west-2.amazonaws.com/s.cdpn.io/2605/star-rating-sprite.png") repeat-x;
         font-size: 0;
@@ -534,6 +585,6 @@ select.quantity-selector {
 }
 
 .product-details-dialog-container > mat-dialog-container {
-    overflow-x:hidden !important;
-    overflow-y:scroll !important; 
-    }
+  overflow-x: hidden !important;
+  overflow-y: scroll !important;
+}

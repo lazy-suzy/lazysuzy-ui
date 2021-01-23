@@ -259,167 +259,73 @@
 
 
                     <!-- ***************************************  -->
-                    <div class="mb2" style="height:55px;">
-                        <span class="title" style="float:left">Review&nbsp;&nbsp;</span>
-                        <span class="title" style="float:left" *ngIf="totrating>0">
-                            <div class="star-ratings-sprite">
-                                <span [style.width.%]="totrating" class="star-ratings-sprite-rating"></span>
+                    <div class="mb2">
+                        <hr class="modal-hr"/>
+                        <div class="flex pr3 justify-between">
+                            <span class="title">Review</span>
+                            <div>
+                                <div class="title flex items-center" *ngIf="totrating>0">
+                                    <div class="star-rating-outer yellow">
+                                        <div [style.width.%]="totrating" class="star-rating-inner">
+                                        </div>
+                                    </div>
+                                    <span class="star-rating-text">&nbsp;{{total_count}}</span>
+                                </div>
                             </div>
-                        </span>
-                        <span class="title" style="float:left" *ngIf="total_count>0">&nbsp;&nbsp;{{total_count}}</span>
-                        <span style="float:right;">
-                            <div class="flex" *ngIf="total_count>0">
-                                <button (click)="openMyReviewModal()" mat-raised-button
-                                        class=" mb1 bg-red w-90 view-details-btn">
-                                    <a class="tr-addToCart no-underline"
-                                       style="color: #ffcc00;padding-right: 10px;text-decoration: none;">
-                                        Write a Review
-                                    </a>
-                                </button>
-                            </div>
-                        </span>
-
-
-                    </div>
-                    <div class="flex justify-center" *ngIf="total_count===0">
-                        <button (click)="openMyReviewModal()" mat-raised-button
-                                class="bg-red w-80 view-details-btn">
-                            <a class="tr-addToCart no-underline"
-                               style="color: #ffcc00;padding-right: 10px;text-decoration: none; font-weight: bold">
-                                BE THE FIRST TO REVIEW
-                            </a>
-                        </button>
+                        </div>
+                        <div class="flex justify-center mt2">
+                            <button (click)="openMyReviewModal()" class="w-80 add-review-btn">
+                                {{total_count > 0 ? ' Write a Review' : 'BE THE FIRST TO REVIEW'}}
+                            </button>
+                        </div>
                     </div>
                     <div class="mb2" *ngIf="total_count>0">
-
-                        <ul class="description-menu">
-                            <li (click)="selectTab('mr')"
-                                class="{{ activeTab === 'mr' ? 'active b' : 'bg-white' }}">
-                                <span class="nav-link">Most Recent</span>
+                        <ul class="description-menu justify-around">
+                            <li (click)="selectTab('mr')">
+                                <span class="nav-link" [ngClass]="{'review-tab-active b':activeTab === 'mr'}">Most Recent</span>
                             </li>
-                            <li (click)="selectTab('hr')"
-                                class="{{ activeTab === 'hr' ? 'active b' : 'bg-white' }}">
-                                <span class="nav-link">Highest Rated</span>
+                            <li (click)="selectTab('hr')">
+                                <span class="nav-link" [ngClass]="{'review-tab-active b':activeTab === 'hr'}">Highest Rated</span>
                             </li>
-                            <li (click)="selectTab('lr')"
-                                class="{{ activeTab === 'lr' ? 'active b' : 'bg-white' }}">
-                                <span class="nav-link">Lowest Rated</span>
+                            <li (click)="selectTab('lr')">
+                                <span class="nav-link" [ngClass]="{'review-tab-active b':activeTab === 'lr'}">Lowest Rated</span>
                             </li>
-
                         </ul>
                         <div class="menu-content">
                             <div class="{{ activeTab === 'mr' ? '' : 'dn' }}">
-                                <div class="nav-content">
-                                    <div class="mt1 pb1 flex flex-wrap" *ngIf="all_reviews && all_reviews.length>0">
-                                        <div class="fl w-50 pa2" *ngFor="let ar of all_reviews;">
-                                            <div class="dimension-title" style="margin-bottom:10px;">
-                                                <div class="star-ratings-sprite">
-                                                    <span [style.width.%]="ar['rating']*20"
-                                                          class="star-ratings-sprite-rating"></span>
-                                                </div>
-                                            </div>
-
-                                            <div class="dimensions-title b">
-                                                {{ar['headline']}}
-                                            </div>
-                                            <div class="dimensions-details ruser">
-                                                {{ar['user_name']}} |  {{ar['user_location']}}
-                                            </div>
-                                            <div class="dimensions-details rtext" [innerHtml]="ar['review']"></div>
-                                            <div class="dimensions-details">
-                                                <button class="profile-cancel-btn b btncls" type="button"> Helpful
-                                                </button>
-                                                &nbsp;&nbsp;<a class="profile-cancel-btn b btncls"> Report </a>
-
-                                            </div>
-                                            <br/>
+                                <div class="flex justify-between flex-wrap">
+                                    <ng-container *ngFor="let review of all_reviews;let i = index">
+                                        <div class="w-45">
+                                            <app-review-desktop [review]="review" [galleryId]="'all_review_gallery'+i"></app-review-desktop>
                                         </div>
-
-                                    </div>
-                                    <div class="mt1 pb1 flex flex-wrap" *ngIf="!all_reviews || all_reviews.length<=0">
-                                        No review available
-                                    </div>
+                                    </ng-container>
                                 </div>
-
-
                             </div>
                             <div class="{{ activeTab === 'hr' ? '' : 'dn' }}">
-                                <div class="nav-content">
-                                    <div class="mt1 pb1 flex flex-wrap"
-                                         *ngIf="highest_reviews && highest_reviews.length>0">
-                                        <div class="fl w-50 pa2" *ngFor="let hr of highest_reviews;">
-                                            <div class="dimension-title" style="margin-bottom:10px;">
-                                                <div class="star-ratings-sprite">
-                                                    <span [style.width.%]="hr['rating']*20"
-                                                          class="star-ratings-sprite-rating"></span>
-                                                </div>
-                                            </div>
-
-                                            <div class="dimensions-title b">
-                                                {{hr['headline']}}
-                                            </div>
-                                            <div class="dimensions-details ruser">
-                                                {{hr['user_name']}} |  {{hr['user_location']}}
-                                            </div>
-                                            <div class="dimensions-details rtext" [innerHtml]="hr['review']"></div>
-                                            <div class="dimensions-details">
-                                                <button class="profile-cancel-btn b btncls" type="button"> Helpful
-                                                </button>
-                                                &nbsp;&nbsp;<a class="profile-cancel-btn b btncls"> Report </a>
-
-                                            </div>
-                                            <br/>
+                                <div class="flex justify-between flex-wrap">
+                                    <ng-container *ngFor="let review of highest_reviews;let i = index">
+                                        <div class="w-45">
+                                            <app-review-desktop [review]="review" [galleryId]="'highest_reviews'+i"></app-review-desktop>
                                         </div>
-
-                                    </div>
-                                    <div class="mt1 pb1 flex flex-wrap"
-                                         *ngIf="!highest_reviews || highest_reviews.length<=0">
-                                        No review available
-                                    </div>
+                                    </ng-container>
                                 </div>
-
-
                             </div>
                             <div class="{{ activeTab === 'lr' ? '' : 'dn' }}">
-                                <div class="nav-content">
-                                    <div class="mt1 pb1 flex flex-wrap"
-                                         *ngIf="lowest_reviews && lowest_reviews.length>0">
-                                        <div class="fl w-50 pa2" *ngFor="let lr of lowest_reviews;">
-                                            <div class="dimension-title" style="margin-bottom:10px;">
-                                                <div class="star-ratings-sprite">
-                                                    <span [style.width.%]="lr['rating']*20"
-                                                          class="star-ratings-sprite-rating"></span>
-                                                </div>
-                                            </div>
-
-                                            <div class="dimensions-title b">
-                                                {{lr['headline']}}
-                                            </div>
-                                            <div class="dimensions-details ruser">
-                                                {{lr['user_name']}} |  {{lr['user_location']}}
-                                            </div>
-                                            <div class="dimensions-details rtext" [innerHtml]="lr['review']"></div>
-                                            <div class="dimensions-details">
-                                                <button class="profile-cancel-btn b btncls" type="button"> Helpful
-                                                </button>
-                                                &nbsp;&nbsp;<a class="profile-cancel-btn b btncls"> Report </a>
-
-                                            </div>
-                                            <br/>
+                                <div class="flex justify-between flex-wrap">
+                                    <ng-container *ngFor="let review of lowest_reviews;let i = index">
+                                        <div class="w-45">
+                                            <app-review-desktop [review]="review" [galleryId]="'lowest_reviews'+i"></app-review-desktop>
                                         </div>
-
-                                    </div>
-                                    <div class="mt1 pb1 flex flex-wrap"
-                                         *ngIf="!lowest_reviews || lowest_reviews.length<=0">
-                                        No review available
-                                    </div>
+                                    </ng-container>
                                 </div>
-
-
                             </div>
-
                         </div>
 
+                    </div>
+                    <div *ngIf="total_count>10">
+                        <a class="open-sans-14 bold all-review-link">See All Reviews
+                            <mat-icon style="vertical-align: middle;font-size: 20px">chevron_right</mat-icon>
+                        </a>
                     </div>
                     <!-- ***************************************  -->
 

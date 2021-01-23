@@ -1,0 +1,24 @@
+<div class="flex flex-column mb4">
+    <div class="star-rating-outer yellow mr-auto">
+        <div [style.width.%]="(review.rating)*20" class="star-rating-inner">
+        </div>
+    </div>
+    <div>
+        <span class="review-header">{{review.headline}}</span>
+    </div>
+    <div>
+        <span class="review-user-info">{{review.user_name}} | {{review.user_location}}</span>
+    </div>
+    <div>
+        <p class="review-details" [innerHTML]="review.review"></p>
+    </div>
+    <div class="review-images" *ngIf="review.review_images">
+        <ng-container *ngFor="let image of items;let i=index">
+            <img *ngIf="image" class="w-50" [src]="image.data.src" alt="review-image-{{i+1}}" [gallery]="this.galleryRef" [lightbox]="i">
+        </ng-container>
+    </div>
+    <div class="flex">
+        <button class="review-helpful-btn">Helpful</button>
+        <a class="review-report-btn">Report</a>
+    </div>
+</div>
