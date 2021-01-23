@@ -42,6 +42,9 @@ export class NewProductRowComponent implements OnInit {
         this.setFilters(this.filters);
         this.setCategoryDetail();
         this.loadAllProductImages();
+        if (!this.product.is_handmade) {
+            this.product.is_handmade = 0;
+        }
     }
 
     loadAllProductImages() {
