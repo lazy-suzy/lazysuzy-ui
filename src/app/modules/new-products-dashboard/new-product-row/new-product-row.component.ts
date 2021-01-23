@@ -117,12 +117,12 @@ export class NewProductRowComponent implements OnInit {
         const newDimension = {
             name: '',
             value: {
-                height: '',
                 width: '',
-                length: '',
                 depth: '',
+                height: '',
                 diameter: '',
                 weight: '',
+                length: '',
                 NULL: '',
             }
         };
@@ -142,12 +142,12 @@ export class NewProductRowComponent implements OnInit {
                 {
                     name: '',
                     value: {
-                        height: '',
                         width: '',
-                        length: '',
                         depth: '',
+                        height: '',
                         diameter: '',
                         weight: '',
+                        length: '',
                         NULL: '',
                     }
                 }

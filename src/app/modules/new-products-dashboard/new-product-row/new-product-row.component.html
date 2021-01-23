@@ -320,23 +320,19 @@
                             <div class="flex flex-column w-33 mb3" *ngFor="let dimension of key.groupValue">
                                 <div>
                                     <label class="bold">{{dimension.name}}</label> <br/>
-                                    <span *ngIf="dimension.value.height">Height: {{dimension.value.height}} <br/></span>
+
                                     <span *ngIf="dimension.value.width">Width: {{dimension.value.width}}<br/></span>
                                     <span *ngIf="dimension.value.depth">Depth: {{dimension.value.depth}}<br/></span>
+                                    <span *ngIf="dimension.value.height">Height: {{dimension.value.height}} <br/></span>
                                     <span *ngIf="dimension.value.diameter">Diameter: {{dimension.value.diameter}}
                                         <br/></span>
-                                    <span *ngIf="dimension.value.length">Length: {{dimension.value.length}}<br/></span>
                                     <span *ngIf="dimension.value.weight">Weight: {{dimension.value.weight}}<br/></span>
+                                    <span *ngIf="dimension.value.length">Length: {{dimension.value.length}}<br/></span>
                                     <span *ngIf="dimension.value.NULL">:{{dimension.value.NULL}}<br/></span>
                                 </div>
                                 <div style="margin-top:auto">
                                     <input style="width: 100%" [(ngModel)]="dimension.name">
-                                    <div class="flex flex-column">
-                                        <div class="flex justify-between mv2">
-                                            <label>Height</label>
-                                            <input [(ngModel)]="dimension.value.height"/>
-                                        </div>
-                                    </div>
+
                                     <div class="flex flex-column">
                                         <div class="flex justify-between mv2">
                                             <label>Width</label>
@@ -351,20 +347,26 @@
                                     </div>
                                     <div class="flex flex-column">
                                         <div class="flex justify-between mv2">
+                                            <label>Height</label>
+                                            <input [(ngModel)]="dimension.value.height"/>
+                                        </div>
+                                    </div>
+                                    <div class="flex flex-column">
+                                        <div class="flex justify-between mv2">
                                             <label>Diameter</label>
                                             <input [(ngModel)]="dimension.value.diameter"/>
                                         </div>
                                     </div>
                                     <div class="flex flex-column">
                                         <div class="flex justify-between mv2">
-                                            <label>Length</label>
-                                            <input [(ngModel)]="dimension.value.length"/>
+                                            <label>Weight</label>
+                                            <input [(ngModel)]="dimension.value.weight"/>
                                         </div>
                                     </div>
                                     <div class="flex flex-column">
                                         <div class="flex justify-between mv2">
-                                            <label>Weight</label>
-                                            <input [(ngModel)]="dimension.value.weight"/>
+                                            <label>Length</label>
+                                            <input [(ngModel)]="dimension.value.length"/>
                                         </div>
                                     </div>
                                     <div class="flex flex-column">
