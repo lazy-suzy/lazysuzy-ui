@@ -3,6 +3,7 @@ import {ApiService} from './../../../shared/services/api/api.service';
 import {Component, OnInit} from '@angular/core';
 import {HttpService} from 'src/app/shared/services/http/http.service';
 import {environment as env} from 'src/environments/environment';
+import {toTitleCase} from 'codelyzer/util/utils';
 
 @Component({
     selector: 'app-new-product-listing',
@@ -82,10 +83,10 @@ export class NewProductListingComponent implements OnInit {
         this.loadProduct(page);
     }
 
-    //convert values seperated by commas to arrays.
+    // convert values seperated by commas to arrays.
     mapProductFilterValues(product) {
         if (typeof product.color === 'string') {
-            product.color = product.color.split(',').filter((elm) => elm);
+            product.color = product.color.split(',').filter((elm) => elm).map(elm => toTitleCase(elm));
         }
         if (typeof product.seating === 'string') {
             product.seating = product.seating.split(',').filter((elm) => elm);
