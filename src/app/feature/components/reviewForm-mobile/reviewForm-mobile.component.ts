@@ -1,141 +1,97 @@
-import {Component, ElementRef, OnInit, TemplateRef, ViewChild} from '@angular/core';
+import { Component, OnInit, Renderer } from '@angular/core';
 import {ActivatedRoute, Router} from '@angular/router';
-import {IActiveProduct, IProduct, IProductDetail, ISeo} from 'src/app/shared/models';
+import {IActiveProduct, IProduct, IProductDetail} from 'src/app/shared/models';
 import {
     ApiService,
     CacheService,
     EventEmitterService,
     MatDialogUtilsService,
-    SeoService,
     UtilsService
 } from 'src/app/shared/services';
 import {Observable, Subscription} from 'rxjs';
-import {BreakpointObserver, Breakpoints, BreakpointState} from '@angular/cdk/layout';
-import {Gallery, GalleryItem, ImageItem} from '@ngx-gallery/core';
-import {Lightbox} from '@ngx-gallery/lightbox';
-import {VariationsComponent} from '../variations/variations.component';
-import {PixelService} from '../../../shared/services/facebook-pixel/pixel.service';
-import {WishlistSnackbarService} from '../../../shared/services/wishlist-service/wishlist-snackbar.service';
-import {first} from 'rxjs/operators';
+import { BreakpointObserver, Breakpoints, BreakpointState } from '@angular/cdk/layout'; 
+import { MatSnackBar } from '@angular/material';
 
 @Component({
     selector: 'app-reviewForm-mobile',
     templateUrl: './reviewForm-mobile.component.html',
     styleUrls: ['./reviewForm-mobile.component.less']
 })
-export class ReviewFormMobileComponent implements OnInit {
-    @ViewChild(VariationsComponent, {static: false}) child: VariationsComponent;
-    @ViewChild('gallery', {static: false}) galleryContainer: ElementRef<any>;
-    @ViewChild('itemTemplate', {static: true}) itemTemplate: TemplateRef<any>;
-    @ViewChild('thumbTemplate', {static: true}) thumbTemplate: TemplateRef<any>;
+export class ReviewFormMobileComponent implements OnInit { 
 
     productSku: any;
     routeSubscription: any;
-    product: IProduct;
-    seoData: ISeo;
-    productSubscription: Subscription;
-    activeTab = 'desc';
-    dimensionExist = false;
-    featuresExist = false;
-    descriptionExist = false;
-    assemblyExist = false;
-    careExist = false;
+    product: IProduct; 
     spinner = 'assets/image/spinner.gif';
     bpObserver: Observable<BreakpointState> = this.breakpointObserver.observe(
         Breakpoints.Handset
-    );
-    galleryId = 'myLightbox';
-    items: GalleryItem[];
-    bpSubscription: Subscription;
+    );   
     isHandset: boolean;
-    isVariationExist: boolean;
-    selectedIndex: any;
-    isSwatchExist: boolean;
-    isProductFetching = true;
-    description: any;
-    features: any;
-    productPrice: any;
-    productWasPrice: any;
-    variations = [];
-    selectedSwatch = {
-        swatch_image: null,
-        price: '',
-        wasPrice: ''
-    };
-    errorMessage = '';
-    quantity = 1;
-    quantityArray = [];
-    galleryRef = this.gallery.ref(this.galleryId);
-    isSetItemInInventory = false;
-    eventSubscription: Subscription;
-    activeProduct: IActiveProduct;
-    hasSelection: boolean;
-    beforeSelection: boolean;
-    checkSelection: boolean;
-    schema = {};
+    bpSubscription: Subscription; 
+      
+   
+    errorMessage = ''; 
+    eventSubscription: Subscription; 
+    hasSelection: boolean; 
     invalidLinkImageSrc = 'assets/image/invalid_link.png';
     invalidLink: boolean;
+    productSubscription: Subscription;
+    username: string = '';
+    location: string = '';
+    useremail: string = '';
+    presentUserName: string = '';
+    presentUserEmail: string = '';
+    presentLocation: string = '';
+    images = []; 
+    imageSrc = [];
+    hasImage: boolean;
+    emailerror: boolean = false;
+    rtexterror: boolean = false;
+    headererror: boolean = false;
+    ratingerror: boolean = false;
+    sku: string;
+    ratingvalue: number = 0;
+    reviewHeader: string = '';
+    emailmsg: string = '';
+    reviewText: string = '';
+    isLoading = false;
+    img: string = '';
+    productname: string = '';
+    productsite: string = '';
 
-    priceObject = {
-        is_price: '',
-        was_price: ''
-    };
-    isDiscounted = false;
-    isRange = false;
-    carousalOptions = {
-        autoWidth: false,
-        loop: true,
-        margin: 10,
-        items: 2.3,
-        center: false,
-        dots: false,
-        pagination: false,
-    };
-    recentProducts = [];
-    recentOptions = {
-        autoWidth: false,
-        loop: true,
-        margin: 10,
-        items: 2.3,
-        center: false,
-        dots: false,
-        pagination: false,
-    };
-
-    imageDialogCarouselOptions = {
-        margin: 10,
-        loop: true,
-        items: 1,
-        dots: true,
-        touchDrag: false,
-        pagination: true,
-        // autoWidth: true,
-        // stagePadding: 100,
-        singleItem: true
-    };
 
     constructor(
         private router: Router,
         private activeRoute: ActivatedRoute,
         private apiService: ApiService,
         public utils: UtilsService,
-        private breakpointObserver: BreakpointObserver,
-        public gallery: Gallery,
-        public lightbox: Lightbox,
+        private breakpointObserver: BreakpointObserver, 
         public cacheService: CacheService,
         private eventEmitterService: EventEmitterService,
-        private matDialogUtils: MatDialogUtilsService,
-        private seoService: SeoService,
-        private pixelService: PixelService,
-        private snackBarService: WishlistSnackbarService,
+        private snackBar: MatSnackBar,
+        private renderer: Renderer,
+        private matDialogUtils: MatDialogUtilsService 
     ) {
     }
 
-    ngOnInit() {
-      //  this.loadRecentProducts();
+    ngOnInit() { 
         this.eventSubscription = this.eventEmitterService.userChangeEvent
             .asObservable()
             .subscribe((user) => {
+
+                if (user.user_type > 0) {
+                    this.apiService.getProfile().subscribe((payload: any) => {
+                        const userData = payload.auth.user;
+                        this.username = userData.username;
+                        this.useremail = userData.email;
+                        this.location = userData.location;
+
+                        this.presentUserName = userData.username;
+                        this.presentUserEmail = userData.email;
+                        this.presentLocation = userData.location;
+                    });
+                }
+
                 this.bpSubscription = this.bpObserver.subscribe(
                     (handset: BreakpointState) => {
                         console.log(handset.matches)
@@ -148,69 +104,19 @@ export class ReviewFormMobileComponent implements OnInit {
 
     loadProduct() {
         this.routeSubscription = this.activeRoute.params.subscribe(
-            (routeParams) => {
-                this.isProductFetching = true;
-                this.productSku = routeParams.product;
-               // this.cacheService.data.productSku = this.productSku;
-                this.cacheService.data.useCache = true;
+            (routeParams) => { 
+                this.productSku = routeParams.product; 
                 this.productSubscription = this.apiService
                     .getProduct(this.productSku)
                     .subscribe(
                         (payload: IProductDetail) => {
                             this.product = payload.product;
-                           if (this.product.collections.length < 3) {
-                                this.carousalOptions.loop = false;
-                            }
-                            this.seoData = payload.seo_data; 
-                            if (this.product) {
-                                this.schema = this.seoService.setSchema(this.product);
-                             this.seoService.setMetaTags(this.seoData);
-                               this.updateActiveProduct(this.product);
-                               this.description = this.utils.compileMarkdown(
-                                    this.product.description
-                                );
-                                this.features = this.utils.compileMarkdown(
-                                    this.product.features,
-                                    this.product.site
-                                ); 
-                                this.dimensionExist = this.utils.checkDataLength(
-                                    this.product.dimension
-                                );
-                                this.featuresExist = this.utils.checkDataLength(
-                                    this.product.features
-                                ); 
-								
-								if(this.product.product_assembly!=null){
-									this.assemblyExist = this.utils.checkDataLength(
-										this.product.product_assembly
-									);
-								}
-								if(this.product.product_care!=null){
-									this.careExist = this.utils.checkDataLength(
-										this.product.product_care
-									);
-								}
-
-                                this.descriptionExist = this.utils.checkDataLength(
-                                    this.product.description
-                                );
-                                this.isSwatchExist = this.utils.checkDataLength(
-                                    this.product.variations.filter(
-                                        (variation) => variation.swatch_image !== null
-                                    )
-                                );
-                                this.isVariationExist = this.utils.checkDataLength(
-                                    this.product.variations
-                                );
-                                if (!this.isVariationExist) {
-                                    this.beforeSelection = true;
-                                    this.checkSelection = true;
-                                }
-                                if (this.isVariationExist && this.product.variations.length === 1) {
-                                    this.beforeSelection = true;
-                                    this.checkSelection = true;
-                                }
-                                this.hasVariationsInventory();
+                            this.img = this.product.main_image;
+                            this.productname = this.product.name;
+                            this.productsite = this.product.site;
+                            console.log(this.product)
+                            if (this.product) { 
+                              
                                 if (!this.isHandset) {
                                      this.matDialogUtils.setProduct(payload);
                                     this.openMyReviewModal();
@@ -219,41 +125,14 @@ export class ReviewFormMobileComponent implements OnInit {
                                         {queryParams: {modal_sku: this.product.sku}}
                                     ); 
                                 }
-                                this.variations = this.product.variations.sort((a, b) =>
-                                    a.name > b.name ? 1 : -1
-                                );
-                                if (this.product.in_inventory) {
-                                    this.productPrice = this.utils.formatPrice(
-                                        this.product.inventory_product_details.price
-                                    );
-                                    this.productWasPrice = this.utils.formatPrice(
-                                        this.product.inventory_product_details.was_price
-                                    );
-                                } else {
-                                    this.productPrice = this.utils.formatPrice(this.product.is_price);
-
-                                    this.productWasPrice = this.utils.formatPrice(
-                                        this.product.was_price
-                                    );
-                                }
-                                const {isPriceString, isRanged, isDiscounted, wasPriceString} = this.utils.getPriceObject(this.product);
-                                this.priceObject.is_price = isPriceString;
-                                this.priceObject.was_price = wasPriceString;
-                                this.isRange = isRanged;
-                                this.isDiscounted = isDiscounted;
-                                this.createGalleryItems(this.product.on_server_images);
-                                if (this.product.set) {
-                                    this.checkSetInventory(this.product.set);
-                                }
+                               
                                 this.invalidLink = false;
                             } else {
                                 this.invalidLink = true;
-                            }
-                            this.isProductFetching = false;
+                            } 
                         },
                         (error) => {
-                            this.invalidLink = true;
-                            this.isProductFetching = false;
+                            this.invalidLink = true; 
                         }
                     );
             }
@@ -261,248 +140,218 @@ export class ReviewFormMobileComponent implements OnInit {
 
     }
 
-    createGalleryItems(items: any[]) {
-        this.items = items.map(
-            (item) => new ImageItem({src: item, thumb: item})
-        );
-        this.galleryRef.setConfig({
-            imageSize: 'contain',
-            // itemTemplate: this.itemTemplate,
-            // thumbTemplate: this.thumbTemplate,
-            gestures: false,
-            thumb: true,
-            thumbWidth: 90,
-        });
-        this.galleryRef.load(this.items);
-    }
-
+  
     onDestroy(): void {
         this.productSubscription.unsubscribe();
         this.bpSubscription.unsubscribe();
         this.eventSubscription.unsubscribe();
     }
 
-   /* loadRecentProducts() {
-        this.apiService.getRecentProducts().pipe(first()).subscribe((response: any[]) => {
-            this.recentProducts = response;
-            if (this.recentProducts.length < 2) {
-                this.recentOptions.loop = false;
-            }
-        });
-    }*/
+    reviewUpdate() {
 
-    selectTab(tab) {
-        this.activeTab = tab;
-    }
-
-    selectedVariation(variation, index, container) {
-        if (variation.has_parent_sku) {
-            this.router.navigate([`/product/${variation.variation_sku}`]);
-        } else {
-            this.selectedSwatch = {
-                swatch_image: variation.swatch_image,
-                price: variation.price,
-                wasPrice: variation.was_price
-            };
-            this.productPrice = variation.price;
-            this.productWasPrice = variation.was_price;
-            this.onSetImage(variation.image);
-            this.selectedIndex = index;
-            container.scrollLeft = 0;
-        }
-    }
-
-    onVariationChange() {
-        this.loadProduct();
-    }
-
-    wishlistProduct(sku, mark) {
-        this.apiService
-            .wishlistProduct(sku, mark, true)
-            .subscribe((payload: any) => {
-                this.product.wishlisted = mark;
-                if (mark) {
-                    this.snackBarService.addToWishlist(sku);
-                } else {
-                    this.snackBarService.removeIfExistsProduct(sku);
-                }
+        const formData = new FormData();
+        console.log(this.images.length);
+        /* if (this.file) {
+          formData.append('review_images', this.file);
+          }
+          */
+        if (this.images.length > 5) {
+            this.snackBar.open('Maximum 5 images can be uploaded', 'Dismiss', {
+                duration: 4000,
+                horizontalPosition: 'center',
+                verticalPosition: 'bottom'
             });
-    }
-
-    openLightbox(index: number) {
-        this.lightbox.open(index, this.galleryId, {
-            panelClass: 'fullscreen'
-        });
-        const intercom = document.getElementsByClassName('intercom-lightweight-app')[0];
-        if (intercom) {
-            intercom.classList.add('hidden');
         }
-        this.lightbox.closed.pipe(first()).subscribe(_ => {
-            intercom.classList.remove('hidden');
-        });
-    }
-
-    isArray(obj: any) {
-        return Array.isArray(obj);
-    }
-
-    openLink(event, url) {
-        event.preventDefault();
-        if (typeof vglnk) {
-            vglnk.open(url, '_blank');
+        else {
+            for (var i = 0; i < this.images.length; i++) {
+                formData.append("rimage[]", this.images[i]);
+            }
         }
-    }
 
-    onSetImage(variation): void {
-        // this.galleryContainer.nativeElement.scrollTop = 0;
-        this.items = this.product.on_server_images.map(
-            (item) => new ImageItem({src: item, thumb: item})
-        );
-        if (variation) {
-            const src = variation.image;
-            const image = new ImageItem({src});
-            this.items.splice(0, 0, image);
-            this.updateActiveProduct(variation);
-            this.hasSelection = true;
-        } else {
-            this.updateActiveProduct(this.product);
-            this.hasVariationsInventory();
-            // this.hasSelection = false;
+
+
+        if (this.sku) {
+            formData.append('product_sku', this.sku);
         }
-        this.galleryRef.load(this.items);
-    }
+        if (this.presentUserName !== '') {
+            formData.append('user_name', this.presentUserName);
+        }
+        else {
+            if (this.username == '') {
+                formData.append('user_name', 'anonymous');
+            }
+            else {
+                formData.append('user_name', this.username);
+            }
 
-    onSetPrice(priceData): void {
-        const newPrices = {
-            is_price: priceData.price,
-            was_price: priceData.wasPrice
-        };
-        const {isPriceString, isRanged, isDiscounted, wasPriceString} = this.utils.getPriceObject(newPrices || this.product);
-        this.priceObject.is_price = isPriceString;
-        this.priceObject.was_price = wasPriceString;
-        this.isRange = isRanged;
-        this.isDiscounted = isDiscounted;
-        this.galleryContainer.nativeElement.scrollTo({
-            left: 0,
-            behavior: 'smooth'
-        });
-    }
+        }
 
-    openCartModal() {
-        if (
-            !this.product.in_inventory &&
-            !this.activeProduct.inventory_product_details.price ||
-            !this.beforeSelection
-        ) {
-            this.hasSelection = false;
-        } else {
-            const data = {
-                sku: this.activeProduct.sku,
-                brand: this.product.site,
-                image: this.items[0].data.src,
-                name:
-                    this.activeProduct.sku === this.product.sku
-                        ? this.activeProduct.name
-                        : this.product.name + ' ' + this.activeProduct.name,
-                price: Number(this.priceObject.is_price.replace(/[^0-9.-]+/g, '')),
-                quantity: this.quantity
-            };
-            const postData = {
-                product_sku: this.activeProduct.sku,
-                count: this.quantity,
-                parent_sku: this.product.sku
-            };
-            this.apiService.addCartProduct(postData).subscribe(
-                (payload: any) => {
-                    if (payload.status) {
-                        this.errorMessage = '';
-                        this.pixelService.trackAddToCart(data);
-                        this.matDialogUtils.openAddToCartDialog(data);
-                    } else {
-                        this.errorMessage = payload.msg;
-                    }
-                },
-                (error: any) => {
-                    this.errorMessage = 'Cannot add this product at the moment.';
-                    console.log(error);
+        if (this.presentUserEmail !== '') {
+            this.emailerror = false;
+            formData.append('user_email', this.presentUserEmail);
+        }
+        else {
+            console.log(this.useremail);
+            if (this.useremail == '' || this.useremail == '0') {
+                this.emailmsg = 'Please enter your email for verification.';
+                this.emailerror = true;
+            }
+            else {
+                if (this.validateEmail(this.useremail)) {
+                    this.emailerror = false;
+                    formData.append('user_email', this.useremail);
                 }
-            );
+                else {
+                    this.emailmsg = 'Please enter a valid email address.';
+                    this.emailerror = true;
+                }
+            }
+
+
+        }
+        if (this.presentLocation !== '') {
+            formData.append('user_location', this.presentLocation);
+        }
+        else {
+            formData.append('user_location', this.location);
+        }
+
+        formData.append('status', '1');
+        formData.append('count_helpful', '0');
+        formData.append('count_reported', '0');
+        formData.append('source', 'user');
+        formData.append('headline', this.hasNull(this.reviewHeader));
+        formData.append('review', this.hasNull(this.reviewText));
+
+
+        if (this.ratingvalue > 0) {
+            this.ratingerror = false;
+            formData.append('rating', this.ratingvalue.toString());
+        }
+        else {
+            this.ratingerror = true;
+        }
+
+
+        /*if(this.reviewHeader!=''){
+            this.headererror= false;
+            formData.append('headline', this.hasNull(this.reviewHeader));
+        }
+        else{
+                this.headererror= true;
+        }
+    	
+        if(this.reviewText!=''){
+            this.rtexterror= false;
+            formData.append('review', this.hasNull(this.reviewText));
+        }
+        else{
+                this.rtexterror= true;
+        }*/
+
+
+        if (!this.emailerror && !this.ratingerror && this.images.length <= 5) {
+            this.isLoading = true;
+            this.apiService.submitReview(formData).subscribe((payload: any) => {
+                this.isLoading = false;
+                this.snackBar.open('Review Submitted', 'Dismiss', {
+                    duration: 4000,
+                    horizontalPosition: 'center',
+                    verticalPosition: 'bottom'
+                });
+                location.reload();
+                if (payload.errors.length) {
+                    const errorsArray = payload.errors;
+                    /*for (const error of errorsArray) { 
+                      if (error.original.error.username) {
+                        this.hasUsernameError = true;
+                      }
+                    }*/
+                }
+                const self = this;
+                setTimeout(() => {
+                    //self.hasUsernameError = false;
+                }, 5000);
+            });
         }
     }
+    hasNull(data) {
+        if (data && data !== 'null') {
+            return data;
+        }
+        return '';
+    }
 
-    checkSetInventory(product) {
-        for (const item of product) {
-            if (item.in_inventory) {
-                this.isSetItemInInventory = true;
+    readFile(event) {
+        console.log(event.target.files)
+        let flag = 0;
+        let files = event.target.files;
+        for (let file of files) {
+            if ((file['size'] / 1048576) > 2) {
+                flag++;
             }
         }
-    }
 
-    updateActiveProduct(product) {
-        if (product.site === 'West Elm' && this.product.variations.length === 1) {
-            this.activeProduct = {
-                sku: product.variations[0].variation_sku,
-                in_inventory: product.variations[0].in_inventory,
-                name: product.variations[0].name,
-                inventory_product_details: product.variations[0].inventory_product_details
-            };
-        } else {
-            this.activeProduct = {
-                sku: product.variation_sku ? product.variation_sku : product.sku,
-                in_inventory: product.in_inventory,
-                name: product.name,
-                inventory_product_details: product.inventory_product_details
-                    ? product.inventory_product_details
-                    : []
-            };
+        if (flag > 0) {
+            this.snackBar.open('Image size should not be more than 2mb.', 'Dismiss', {
+                duration: 4000,
+                horizontalPosition: 'center',
+                verticalPosition: 'bottom'
+            });
         }
-    }
+        else {
+            if (files && files.length <= 5) {
+                if (event.target.files && event.target.files.length > 0) {
 
-    quantityLimit(count) {
-        const maxNumber = count < 10 ? count : 10;
-        return Array.from({length: maxNumber}, Number.call, (i) => i + 1);
-    }
+                    for (let i = 0; i < event.target.files.length; i++) {
+                        const reader = new FileReader();
+                        this.images.push(event.target.files[i]);
 
-    hasVariationsInventory() {
-        if (
-            this.isVariationExist &&
-            this.product.inventory_product_details === null
-        ) {
-            if (this.product.variations.find((item) => item.in_inventory === true)) {
-                this.activeProduct.in_inventory = true;
-                this.activeProduct.inventory_product_details.count = 1;
+                        reader.onload = (event: any) => {
+                            // this.imageSrc = reader.result;
+                            //  this.imageSrc.push(reader.result); 
+                            this.imageSrc.push(event.target.result);
+
+                            this.hasImage = true;
+                        };
+                        reader.readAsDataURL(event.target.files[i]);
+                    }
+                }
             }
+            else {
+                this.snackBar.open('Maximum 5 images can be uploaded', 'Dismiss', {
+                    duration: 4000,
+                    horizontalPosition: 'center',
+                    verticalPosition: 'bottom'
+                });
+            }
+
         }
+
     }
 
-    onSetSelectionChecked(e: boolean) {
-        console.log('set Selection checked: ', e);
-        this.beforeSelection = e;
+    starCount(event) {
+        //console.log(event);
+        this.ratingvalue = event;
     }
 
-    onClearSelection(e: boolean) {
-        this.hasSelection = e;
-        this.checkSelection = e;
+    validateEmail(email) {
+        const re = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+        return re.test(email);
     }
 
-    onSetSelection(e: boolean) {
-        this.hasSelection = e;
+    deleteUploadedImage(index) {
+        this.imageSrc.splice(index, 1);
+        this.images.splice(index, 1);
+        this.renderer.selectRootElement('#file').value = '';
     }
 
-    renderPrice(price, wasPrice = false) {
-        return this.utils.formatPriceMobile(price, wasPrice);
+    gotoProduct() {
+        // this.router.navigateByUrl(`/product/${this.sku}`)
+        window.location.href = './product/' + this.sku;
     }
 
-    isDiscountedCollectionPrice(product): boolean {
-        product.is_price = product.price;
-        const price = this.utils.getPriceObject(product);
-        return price.isDiscounted;
-    }
-
-    toCollectionProduct(product) {
-        this.router.navigate(['/product', product.sku]);
-    }
-
+  
     openMyReviewModal() {
         console.log(this.product)
             this.hasSelection = true;
@@ -510,16 +359,9 @@ export class ReviewFormMobileComponent implements OnInit {
                 sku: this.product.sku,
                 brand: this.product.site,
                 image: this.product.main_image,
-                name:
-                    this.activeProduct.sku === this.product.sku
-                        ? this.activeProduct.name
-                        : this.product.name + ' ' + this.activeProduct.name
+                name: this.product.name 
             };
-            const postData = {
-                product_sku: this.activeProduct.sku,
-                count: this.quantity,
-                parent_sku: this.product.sku
-            };
+            
 
             this.matDialogUtils.openMyReviewDialog(data);
 
