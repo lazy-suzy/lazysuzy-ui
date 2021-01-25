@@ -188,35 +188,40 @@
                         <div class="dimension-container">
                             <div *ngFor="let key of product.dimension" class="fl pa2"
                                  [ngClass]="{'w-50':!isSingleDimension,'w-100':isSingleDimension}">
-                                <ng-container *ngIf="!this.isSingleDimension">
-                                    <div class="dimension-header upper-case bold mb1">{{ key.groupName }}</div>
-                                </ng-container>
-                                <ng-container *ngFor="let dimension of key.groupValue">
-                                    <div class="dimension-title mt2">{{ dimension.name }}</div>
-                                    <ng-container *ngIf="dimension.value.NULL">
-                                        <span class="dimensions-details"> :{{dimension.value.NULL}}</span>
-                                    </ng-container>
-                                    <div class="dimensions-details" *ngIf="dimension.value.width">
-                                        Width: {{ dimension.value.width }}
-                                    </div>
-                                    <div class="dimensions-details" *ngIf="dimension.value.depth">
-                                        Depth: {{ dimension.value.depth }}
-                                    </div>
-                                    <div class="dimensions-details" *ngIf="dimension.value.height">
-                                        Height: {{ dimension.value.height }}
-                                    </div>
-                                    <div class="dimensions-details" *ngIf="dimension.value.length">
-                                        Length: {{ dimension.value.length }}
-                                    </div>
-                                    <div class="dimensions-details" *ngIf="dimension.value.diameter">
-                                        Diameter: {{ dimension.value.diameter }}
-                                    </div>
-                                    <div class="dimensions-details" *ngIf="dimension.value.weight">
-                                        Weight: {{ dimension.value.weight }}
-                                    </div>
-                                </ng-container>
+                                <div class="flex flex-wrap">
 
-                                <br/>
+                                    <ng-container *ngIf="!this.isSingleDimension">
+                                        <div class="dimension-header upper-case bold mb1">{{ key.groupName }}</div>
+                                    </ng-container>
+                                    <ng-container *ngFor="let dimension of key.groupValue">
+                                        <div [ngClass]="{'w-50':isSingleDimension,'w-100':!isSingleDimension}">
+                                            <div class="dimension-title mt2">{{ dimension.name }}</div>
+                                            <ng-container *ngIf="dimension.value.NULL">
+                                                <span class="dimensions-details"> :{{dimension.value.NULL}}</span>
+                                            </ng-container>
+                                            <div class="dimensions-details" *ngIf="dimension.value.width">
+                                                Width: {{ dimension.value.width }}
+                                            </div>
+                                            <div class="dimensions-details" *ngIf="dimension.value.depth">
+                                                Depth: {{ dimension.value.depth }}
+                                            </div>
+                                            <div class="dimensions-details" *ngIf="dimension.value.height">
+                                                Height: {{ dimension.value.height }}
+                                            </div>
+                                            <div class="dimensions-details" *ngIf="dimension.value.length">
+                                                Length: {{ dimension.value.length }}
+                                            </div>
+                                            <div class="dimensions-details" *ngIf="dimension.value.diameter">
+                                                Diameter: {{ dimension.value.diameter }}
+                                            </div>
+                                            <div class="dimensions-details" *ngIf="dimension.value.weight">
+                                                Weight: {{ dimension.value.weight }}
+                                            </div>
+                                        </div>
+                                    </ng-container>
+                                    <br/>
+
+                                </div>
                             </div>
                         </div>
                         <ng-template #showDimensions>
