@@ -163,7 +163,8 @@
                         <hr class="modal-hr mt3" *ngIf="product.set && product.set.length > 0"/>
                     </ng-container>
                     <ng-template #allConditions>
-                        <hr class="modal-hr mt3" *ngIf="(isVariationExist && product.variations.length>1) || (product.set && product.set.length > 0)"/>
+                        <hr class="modal-hr mt3"
+                            *ngIf="(isVariationExist && product.variations.length>1) || (product.set && product.set.length > 0)"/>
                     </ng-template>
                 </div>
                 <div class="product-description-container" [ngStyle]="topHeight">
@@ -198,18 +199,43 @@
                     <div *ngIf="dimensionExist" class="mb2">
                         <hr class="modal-hr"/>
                         <span class="title">Dimensions</span>
-                        <div class="mt1 pb1 flex flex-wrap" *ngIf="isArray(product.dimension); else showDimensions">
-                            <div *ngFor="let dimension of product.dimension" class="fl w-50 pa2">
-                                <div class="dimension-title">{{ dimension.description }}</div>
-                                <div class="dimensions-details" *ngIf="dimension.width > 0">
-                                    Width: {{ dimension.width }}
+                        <div class="mt1 pb1 flex flex-wrap">
+                            <div *ngFor="let key of product.dimension" class="fl pa2"
+                                 [ngClass]="{'w-100':this.isSingleDimension,'w-50':!this.isSingleDimension}">
+                                <ng-container *ngIf="!this.isSingleDimension">
+                                    <div class="dimension-header upper-case bold mb1">{{ key.groupName }}</div>
+                                </ng-container>
+                                <div class="flex flex-wrap"
+                                >
+                                    <ng-container *ngFor="let dimension of key.groupValue">
+                                        <div [ngClass]="{'w-100':!this.isSingleDimension,'w-50':this.isSingleDimension}">
+                                            <div class="dimension-title mt2">{{ dimension.name }}</div>
+                                            <div class="dimensions-details" *ngIf="dimension.value.width">
+                                                Width: {{ dimension.value.width }}
+                                            </div>
+                                            <ng-container *ngIf="dimension.value.NULL">
+                                                <span class="dimensions-details"> :{{dimension.value.NULL}}</span>
+                                            </ng-container>
+                                            <div class="dimensions-details" *ngIf="dimension.value.depth">
+                                                Depth: {{ dimension.value.depth }}
+                                            </div>
+                                            <div class="dimensions-details" *ngIf="dimension.value.height">
+                                                Height: {{ dimension.value.height }}
+                                            </div>
+                                            <div class="dimensions-details" *ngIf="dimension.value.length">
+                                                Length: {{ dimension.value.length }}
+                                            </div>
+                                            <div class="dimensions-details" *ngIf="dimension.value.diameter">
+                                                Diameter: {{ dimension.value.diameter }}
+                                            </div>
+                                            <div class="dimensions-details" *ngIf="dimension.value.weight">
+                                                Weight: {{ dimension.value.weight }}
+                                            </div>
+                                        </div>
+
+                                    </ng-container>
                                 </div>
-                                <div class="dimensions-details" *ngIf="dimension.depth > 0">
-                                    Depth: {{ dimension.depth }}
-                                </div>
-                                <div class="dimensions-details" *ngIf="dimension.height > 0">
-                                    Height: {{ dimension.height }}
-                                </div>
+
                                 <br/>
                             </div>
                         </div>
@@ -219,26 +245,26 @@
                             </div>
                         </ng-template>
                     </div>
-					
-					<!-- ***************************************  -->
-					
-					<div *ngIf="assemblyExist" class="mb2"> 
-					 <hr class="modal-hr"/>
-                        <span class="title">Assembly</span>
-                        <div class="mt1" [innerHTML]="product.product_assembly"></div> 
-                    </div>
-					
-					
-					<div *ngIf="careExist" class="mb2">
+
+                    <!-- ***************************************  -->
+
+                    <div *ngIf="assemblyExist" class="mb2">
                         <hr class="modal-hr"/>
-                        <span class="title">Care</span>
+                        <span class="title">ASSEMBLY</span>
+                        <div class="mt1" [innerHTML]="product.product_assembly"></div>
+                    </div>
+
+
+                    <div *ngIf="careExist" class="mb2">
+                        <hr class="modal-hr"/>
+                        <span class="title">CARE</span>
                         <div class="mt1" [innerHTML]="product.product_care"></div>
                     </div>
-					
-					
-					<!-- ***************************************  -->
-					
-					
+
+
+                    <!-- ***************************************  -->
+
+
                     <div class="mb2" *ngIf="product.collections.length">
                         <hr class="modal-hr"/>
                         <span class="title">More in the Collection</span>

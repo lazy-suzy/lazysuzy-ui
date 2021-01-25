@@ -2,7 +2,12 @@
 .gray-color {
   color: @gray-color;
 }
-
+.bold{
+  font-weight: bold;
+}
+.upper-case{
+  text-transform: uppercase;
+}
 .images-container {
   height: 230px;
   overflow-x: auto;
@@ -180,15 +185,22 @@
     .dimension-container {
       //min-height: 75vh;
       font-family: Lato, sans-serif;
-      font-size: 14px;
+      font-size: 12px;
       display: flex;
       flex-wrap: wrap;
-
+      .dimension-header{
+        font-size: 12px;
+        font-family: "Open Sans", "Helvetica Neue", sans-serif;
+        color: #666666;
+      }
       .dimension-title {
-        font-size: 14px;
+        font-size: 12px;
         font-family: "Open Sans", "Helvetica Neue", sans-serif;
         color: #606060;
-        font-weight: bold;
+      }
+      .dimensions-details{
+        font-size: 12px;
+        font-family: Lato, sans-serif;
       }
     }
   }

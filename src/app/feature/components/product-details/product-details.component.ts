@@ -31,8 +31,8 @@ export class ProductDetailsComponent implements OnInit {
     eventSubscription: Subscription;
     selectedIndex: number;
     dimensionExist: boolean;
-	assemblyExist: boolean;
-	careExist: boolean;
+    assemblyExist: boolean;
+    careExist: boolean;
     featuresExist: boolean;
     descriptionExist: boolean;
     isSwatchExist: boolean;
@@ -74,6 +74,7 @@ export class ProductDetailsComponent implements OnInit {
     invalidLink: boolean;
     starIcons = [];
     recentProducts = [];
+    isSingleDimension: boolean;
 
     constructor(
         @Inject(MAT_DIALOG_DATA) public data: any,
@@ -160,19 +161,20 @@ export class ProductDetailsComponent implements OnInit {
             this.product.features,
             this.product.site
         );
-        this.dimensionExist = this.utils.checkDataLength(
+        this.dimensionExist = this.utils.checkDimensionsLength(
             this.product.dimension
         );
-	if(this.product.product_assembly!=null){
-		this.assemblyExist = this.utils.checkDataLength(
-			this.product.product_assembly
-		);
-	}
-	if(this.product.product_care!=null){
-		this.careExist = this.utils.checkDataLength(
-			this.product.product_care
-		);
-	}
+        this.isSingleDimension = (this.product.dimension.length === 1);
+        if (this.product.product_assembly != null) {
+            this.assemblyExist = this.utils.checkDataLength(
+                this.product.product_assembly
+            );
+        }
+        if (this.product.product_care != null) {
+            this.careExist = this.utils.checkDataLength(
+                this.product.product_care
+            );
+        }
         this.featuresExist = this.utils.checkDataLength(
             this.product.features
         );
@@ -231,6 +233,14 @@ export class ProductDetailsComponent implements OnInit {
             self.getMaxHeight();
         }, 1000);
         this.invalidLink = false;
+    }
+
+    objKeys(anObject) {
+        if (anObject) {
+            return Object.keys(anObject);
+        }
+        return [];
+
     }
 
     createGalleryItems(items: any[]) {
