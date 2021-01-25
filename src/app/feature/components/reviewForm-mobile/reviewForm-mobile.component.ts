@@ -170,8 +170,8 @@ export class ReviewFormMobileComponent implements OnInit {
 
 
 
-        if (this.sku) {
-            formData.append('product_sku', this.sku);
+        if (this.productSku) {
+            formData.append('product_sku', this.productSku);
         }
         if (this.presentUserName !== '') {
             formData.append('user_name', this.presentUserName);
