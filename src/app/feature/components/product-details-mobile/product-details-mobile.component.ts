@@ -551,7 +551,8 @@ export class ProductDetailsMobileComponent implements OnInit {
     }
 
     goToReview(sku) {
-        window.location.href = './product/review/' + sku;
-        //this.router.navigateByUrl('/product/review/',sku)
+        console.log(sku)
+       // window.location.href = './product/review/' + sku;
+        this.router.navigateByUrl(`/product/review/${sku}`)
     }
 }

@@ -23,8 +23,7 @@ export class ReviewFormComponent implements OnInit {
 	username: string =  ''; 
 	location: string =  '';
 	//image: string =  '';
-    images = [];
-	file: any;
+    images = []; 
     imageSrc = [];
 	hasEditIcon = false;
 	isLoading = false;

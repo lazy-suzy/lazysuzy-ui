@@ -1,266 +1,178 @@
-<img *ngIf="isProductFetching" [src]="spinner" class="loader"/>
-<ng-template #itemTemplate let-index="index" let-type="type" let-data="data" let-currIndex="currIndex">
-    <ng-container *ngIf="index === currIndex">
-        <img class="gallery-image" [src]="data.src">
-    </ng-container>
-</ng-template>
-<ng-template #thumbTemplate let-index="index" let-type="type" let-data="data" let-currIndex="currIndex">
-    <img class="gallery-thumb" [src]="data.thumb">
-</ng-template>
-<ngx-json-ld [json]="schema"></ngx-json-ld>
-<ng-container *ngIf="!isProductFetching">
-    <div *ngIf="product || !invalidLink; else invalidProduct">
-        <div class="images-container" #gallery>
-            <div class="images">
-                <img *ngFor="let image of items; index as i" [src]="image.data.src"
-                     (click)="openLightbox(i)"
-                     class="prod-img"/>
-            </div>
-        </div>
+<div class="profile-container">
+    <div>&nbsp;</div>
 
-        <div class="product-content">
+    <div class="content-height">
+        
+        <div class="product-details-container">
 
-            <div class="flex justify-between">
-                <div class="product-site">{{ product.site }}</div>
-                <ng-container *ngIf="
-            product && !utils.hasInventory(activeProduct) && !product.redirect && product.product_url
-          ">
-                    <div *ngIf="product && product.wishlisted; else elseBlock">
-                        <div class="tile-icon wishlist-icon wishlist-container">
-                            <mat-icon (click)="wishlistProduct(product.sku, false)">favorite
-                            </mat-icon>
+            <form name="review-form" class="w-100 flex-ns gallery-container" #reviewForm="ngForm">
+
+                <div class="avatar-container" (click)="gotoProduct()">
+                    <div style="float:left; width:30%; margin-right:10px;">
+                        <div class="w-100 tc">
+                            <img [src]="img" class="product-image" />
                         </div>
                     </div>
-                </ng-container>
-                <ng-template #elseBlock>
-                    <div class="tile-icon wishlist-icon wishlist-container">
-                        <mat-icon (click)="wishlistProduct(product.sku, true)">favorite_border
-                        </mat-icon>
+                    <div style="float:left; width:65%;">
+                        <div class="w-100">
+                            {{productname| uppercase}}
+                        </div>
+                        <div class="w-100" style="font-size: 14px;">
+                            <span style="color: #606060;">by {{productsite}}</span>
+                        </div>
                     </div>
-                </ng-template>
-            </div>
-            <div class="product-name">{{ product.name }}</div>
-            <div class="price-container flex items-center">
-                <div class="padding-vertical-2 flex items-center">
-                    <span class="product-price">
-                        {{ priceObject.is_price }}
-                        &nbsp;
-                        <span class="strike product-old-price" [ngClass]="{'dn':!isDiscounted}">
-                            {{ priceObject.was_price }}
+                    
+
+                </div>
+                <div style="clear:both;">&nbsp;</div>
+
+                <!--<div class="product-description-container" style="max-height: calc(100vh - 60px);">-->
+                <div class="form-input-container">
+                    <div class="header">
+                        <div class="title b">My Review<br /><div class="require">*Required Field</div></div>
+
+
+                    </div>
+
+                    <div class="w-100 input-container">
+                        <div class="flex justify-between items-center">
+                            <label class="db b">Overall Rating* </label>
+                        </div>
+                        <span class="star-cb-group">
+                            <input type="radio" id="rating-5" name="rating" value="5" (change)="starCount(5)" /><label for="rating-5">5</label>
+                            <input type="radio" id="rating-4" name="rating" value="4" (change)="starCount(4)" /><label for="rating-4">4</label>
+                            <input type="radio" id="rating-3" name="rating" value="3" (change)="starCount(3)" /><label for="rating-3">3</label>
+                            <input type="radio" id="rating-2" name="rating" value="2" (change)="starCount(2)" /><label for="rating-2">2</label>
+                            <input type="radio" id="rating-1" name="rating" value="1" (change)="starCount(1)" /><label for="rating-1">1</label>
+                            <input type="radio" id="rating-0" name="rating" value="0" (change)="starCount(0)" checked="checked" class="star-cb-clear" /><label for="rating-0">0</label>
                         </span>
-                    </span>
-                </div>
-
-                <div class="rating-container">
-                    <!--goToReview(product.sku)-->
-                    <div class="write-review" (click)="openMyReviewModal()">Write a Review </div>
-                 
-                </div>
-            </div>
-            <div class="flex cart-actions mb2">
-                <button (click)="openLink($event, product.product_url)" mat-raised-button
-                        class="bg-red view-details-btn" *ngIf="
-            product && !utils.hasInventory(activeProduct) && !product.redirect && product.product_url
-          ">
-                    <a [href]="product.product_url"
-                       class="tr-viewDetails no-underline yellow">
-                        VIEW DETAILS
-                    </a>
-                </button>
-                <select [(ngModel)]="quantity" #quantitySelector class="quantity-selector"
-                        *ngIf="product && utils.hasInventory(activeProduct)">
-                    <option *ngFor="
-              let i of quantityLimit(
-                activeProduct.inventory_product_details.count
-              )
-            " [value]="i">{{ i }}</option>
-                </select>
-                <div class="flex flex-column w-70" *ngIf="product && utils.hasInventory(activeProduct)">
-                    <button (click)="openCartModal()" mat-raised-button class="bg-red view-details-btn"
-                    >
-                        <a class="tr-addToCart no-underline yellow">
-                            ADD TO BAG
-                        </a>
-                    </button>
-                    <div *ngIf="errorMessage !== ''" class="invalid-feedback">
-                        <div>{{ errorMessage }}</div>
-                    </div>
-                </div>
-            </div>
-            <div *ngIf="!isSetItemInInventory">
-                <app-redirect *ngIf="product && product.redirect && !utils.hasInventory(activeProduct)"
-                              [isHandset]="true"
-                              [isWishlisted]="product.wishlisted"
-                              (wishlist)="wishlistProduct(product.sku,true)"
-                ></app-redirect>
-            </div>
-            <div class="stock-info mb2" *ngIf="
-          product &&
-          utils.hasInventory(activeProduct) &&
-          (activeProduct.inventory_product_details.is_low ||
-            activeProduct.inventory_product_details.message)
-        ">
-                <div class="flex">
-                    <span>
-            <mat-icon class="info-icon">info</mat-icon>
-          </span>
-                    <div class="stock-msg" *ngIf="activeProduct && activeProduct.inventory_product_details.is_low">
-                        Only {{ activeProduct.inventory_product_details.count > 10 ? '10' : activeProduct.inventory_product_details.count }}
-                        left in stock.
-                    </div>
-                </div>
-                <div class="shipping-msg">
-                    {{ activeProduct.inventory_product_details.message }}
-                </div>
-            </div>
-
-
-            <!--       Ship Status -- Only applies for CB2 and CAB Products for now-->
-            <div class="ship-status mb2 flex" *ngIf="product.online_msg">
-                <span class="ship-status-label">Status:</span>
-                <span class="ship-status-details ml1">
-                                <mat-icon
-                                        [ngStyle]="{'color':product.is_back_order ?'#FFCC00':'#54AD32'}">lens</mat-icon>
-                    {{product.online_msg}}</span>
-            </div>
-            <!--End of Ship status-->
-            <div class="ship-info mb2 flex"
-                 *ngIf="product.inventory_product_details?.shipping_desc || utils.hasInventory(activeProduct)">
-                <span class="shipping-label">Shipping: &nbsp;</span>
-                <span class="shipping-details ml1">{{utils.getShippingDesc(product)}}</span>
-            </div>
-            <ng-container *ngIf="product && product.redirect; else allConditions">
-                <hr class="modal-hr mt-3" *ngIf="product && product.set && product.set.length > 0"/>
-            </ng-container>
-            <ng-template #allConditions>
-                <hr class="modal-hr mt-3" *ngIf="
-            (isVariationExist && product.variations?.length>1) ||
-            (product && product.set && product.set.length > 0)
-          "/>
-            </ng-template>
-
-
-            <app-variations *ngIf="product && isVariationExist && !product.redirect && product.variations?.length>1"
-                            [variations]="variations"
-                            [isSwatchExist]="isSwatchExist" [inputSelections]="product.selections"
-                            [hasSelection]="hasSelection" (setPrice)="onSetPrice($event)"
-                            (setImage)="onSetImage($event)"
-                            (reload)="onVariationChange()" (setSelectionChecked)="onSetSelectionChecked($event)"
-                            (clearSelection)="onClearSelection($event)"
-                            (setSelection)="onSetSelection($event)"></app-variations>
-            <app-sets *ngIf="product && product.set && product.set.length > 0" [sets]="product.set"
-                      [brand]="product.site" [isHandset]="true">
-            </app-sets>
-            <hr class="modal-hr"/>
-            <div class="pv2">
-                <ul class="description-menu">
-                    <li (click)="selectTab('desc')" *ngIf="descriptionExist"
-                        class="{{ activeTab === 'desc' ? 'active b' : 'bg-white' }}">
-                        <span class="nav-link">DESCRIPTION</span>
-                    </li>
-                    <li (click)="selectTab('features')" *ngIf="featuresExist"
-                        class="{{ activeTab === 'features' ? 'active b' : 'bg-white' }}">
-                        <span class="nav-link">FEATURES</span>
-                    </li>
-                    <li (click)="selectTab('dimensions')" *ngIf="dimensionExist"
-                        class="{{ activeTab === 'dimensions' ? 'active b' : 'bg-white' }}">
-                        <span class="nav-link">DIMENSIONS</span>
-                    </li>
-					<li (click)="selectTab('assembly')" *ngIf="assemblyExist"
-                        class="{{ activeTab === 'assembly' ? 'active b' : 'bg-white' }}">
-                        <span class="nav-link">Assembly</span>
-                    </li>
-					<li (click)="selectTab('care')" *ngIf="careExist"
-                        class="{{ activeTab === 'care' ? 'active b' : 'bg-white' }}">
-                        <span class="nav-link">Care</span>
-                    </li>
-                </ul>
-                <div class="menu-content">
-                    <div *ngIf="descriptionExist" class="{{ activeTab === 'desc' ? '' : 'dn' }}">
-                        <div [innerHTML]="description" class="nav-content"></div>
-                    </div> 
-                    <div *ngIf="featuresExist" class="{{ activeTab === 'features' ? '' : 'dn' }}">
-                        <div class="mt1 pl3">
-                            <div [innerHTML]="features" class="nav-content"></div>
+                        <div *ngIf="ratingerror" class="error-msg">
+                            Please select a rating to submit.
                         </div>
+
+                        <div style="clear:both;margin-top:-15px;">&nbsp;</div>
+                        <!-- <div class="border" style="clear:both;">&nbsp;</div>-->
                     </div>
-					<div *ngIf="dimensionExist" class="{{ activeTab === 'dimensions' ? '' : 'dn' }}">
-                        <div *ngIf="isArray(product.dimension); else showDimensions" class="dimension-container">
-                            <div *ngFor="let dimension of product.dimension" class="w-50 pa2">
-                                <div class="dimension-title">{{ dimension.description }}</div>
-                                <div *ngIf="dimension.width">Width: {{ dimension.width }}</div>
-                                <div *ngIf="dimension.depth">Depth: {{ dimension.depth }}</div>
-                                <div *ngIf="dimension.height">Height: {{ dimension.height }}</div>
-                                <br/>
+
+
+                    <div class="w-100 input-container">
+                        <div class="flex justify-between items-center">
+                            <label class="db b">Headline</label>
+
+                        </div>
+                        <input class="form-input w-100"
+                               name="reviewHeader"
+                               #reviewUserName="ngModel"
+                               [(ngModel)]="reviewHeader" placeholder="Example: Love this couch!" />
+                        <!--<span *ngIf="headererror" class="error-msg">
+                            This field is required.
+                        </span>-->
+                    </div>
+                    <!-- [checked]="rateval ==1" -->
+
+
+
+                    <div class="w-100 input-container">
+                        <div class="flex justify-between items-center">
+                            <label class="db b">Review</label>
+
+                        </div>
+                        <textarea class="form-textarea w-100"
+                                  name="reviewText"
+                                  #reviewUserName="ngModel"
+                                  [(ngModel)]="reviewText" style="height:120px;" placeholder="What did you like or dislike? How do you use this product? What met your expectations and what surprised you?"></textarea>
+
+
+                        <!--border--><div style="margin-top:0px">&nbsp;</div>
+                    </div>
+
+                    <div class="">
+                        <div class="flex justify-between items-center">
+                            <label class="db b">
+                                Add a Photo
+                                <div class="require">Inspire others to highlight features or share your unique style.</div>
+                            </label>
+
+
+
+                        </div>
+
+
+                        <div class="upload-btn-wrapper">
+                            <button class="btn">+</button>
+                            <input type="file"
+                                   accept=".jpg,.png,.jpeg,.gif,.svg"
+                                   name="reviewImage"
+                                   id="file"
+                                   multiple
+                                   (change)="readFile($event)" />
+                        </div>
+
+
+                        <div *ngIf="imageSrc.length>0" style="clear:both;">
+                            <div class="img-block" *ngFor="let url of imageSrc; let i= index" style="height:60px;margin: 7px 3px;max-width: 30%; float:left;">
+                                <img [src]="url" height="50" alt="">
+                                <div class="close" style="font-size: 10px; cursor: pointer;"><i class="icon-lab_cross" (click)="deleteUploadedImage(i)">Remove</i></div>
                             </div>
                         </div>
-                        <ng-template #showDimensions>
-                            <div class="nav-content">
-                                {{ product.dimension }}
-                            </div>
-                        </ng-template>
-                    </div>
-					<div *ngIf="assemblyExist" class="{{ activeTab === 'assembly' ? '' : 'dn' }}">
-                            <div [innerHTML]="product.product_assembly" class="nav-content"></div>
-                    </div>
-					<div *ngIf="careExist" class="{{ activeTab === 'care' ? '' : 'dn' }}">
-                            <div [innerHTML]="product.product_care" class="nav-content"></div>
+
+
+                        <div class="mr-top" style="clear:both;">&nbsp;</div><!--border-->
                     </div>
 
-                </div>
-                <div class="mb2" *ngIf="product.collections.length">
-                    <hr class="modal-hr"/>
-                    <span class="title">MORE IN THE COLLECTION</span>
-                    <div class="pt2">
 
-                        <owl-carousel
-                                [options]="carousalOptions"
-                                [items]="product.collections"
-                                *ngIf="product.collections?.length"
-                                [carouselClasses]="['owl-theme']"
-                        >
-                            <ng-container *ngFor="let data of product.collections; let i = index">
-                                <div class="carousel-item" [routerLink]="['/product',data.sku]">
-                                    <img [src]="'https://lazysuzy.com'+data.image"/>
-                                    <span class="font-16 open-sans collection-product-name">{{data.name}}</span>
-                                    <span class="is-price" [ngClass]="{'sale':isDiscountedCollectionPrice(data)}">
-                                            {{renderPrice(data.price)}} &nbsp;
-                                            <span *ngIf="isDiscountedCollectionPrice(data)" class="strike was-price">
-                                                {{renderPrice(data.was_price, true)}}
-                                            </span>
-                                        </span>
 
-                                </div>
-                            </ng-container>
-                        </owl-carousel>
+
+                    <div class="w-100 input-container" style="clear:both;" *ngIf="presentUserName==''">
+                        <div class="flex justify-between items-center">
+                            <label class="db b">Name</label>
+
+                        </div>
+                        <input class="form-input w-100"
+                               name="reviewUserName"
+                               #reviewUserName="ngModel"
+                               [(ngModel)]="username" placeholder="Enter your name or an alias" />
+
+                    </div>
+
+
+
+                    <div class="w-100 input-container" *ngIf="presentUserName==''">
+                        <div class="flex justify-between items-center">
+                            <label class="db b">      Email</label>
+
+                        </div>
+                        <input class="form-input w-100" style=" margin-bottom: 0 !important;"
+                               name="reviewUserEmail"
+                               #reviewUserName="ngModel"
+                               [(ngModel)]="useremail" placeholder="Enter your email for verification. Not shared publicly " />
+                        <span *ngIf="emailerror" class="error-msg">
+                            {{emailmsg}}
+                        </span>
+                        <div>&nbsp;</div>
+                    </div>
+
+                    <div class="w-100 input-container" *ngIf="presentLocation==''">
+                        <label class="db b">Location</label>
+                        <input class="form-input w-100"
+                               name="reviewLocation"
+                               #reviewLocation="ngModel"
+                               [(ngModel)]="location" placeholder="Ex. San Francisco, CA" />
+                    </div>
+
+                    <div class="require" style="font-size:17px;">Thanks for sharing your feedback!</div>
+                    <div class="action-buttons-row w-100 input-container">
+                        <!--<button class="profile-cancel-btn b" mat-dialog-close>
+                            CANCEL
+                        </button>-->
+                        <button class="profile-update-btn b ml3 form-input w-100 " (click)="reviewUpdate()">
+                            POST REVIEW
+                        </button>
                     </div>
                 </div>
-                <div class="mb2" *ngIf="recentProducts.length">
-                    <hr class="modal-hr"/>
-                    <span class="title">Recently Viewed</span>
-                    <div class="pt2">
-                        <owl-carousel
-                                [options]="recentOptions"
-                                [items]="recentProducts"
-                                *ngIf="recentProducts?.length"
-                                [carouselClasses]="['owl-theme']"
-                        >
-                            <ng-container *ngFor="let data of recentProducts; let i = index">
-                                <div class="carousel-item" [routerLink]="['/product',data.product_sku]">
-                                    <img [src]="data.image"/>
-                                    <span class="open-sans font-14 gray-color">{{data.brand_name}}</span>
-                                    <span class="font-14 open-sans">{{data.product_name}}</span>
-                                </div>
-                            </ng-container>
-                        </owl-carousel>
-                    </div>
-                </div>
-            </div>
+                <!--</div>-->
+            </form>
         </div>
     </div>
-    <ng-template #invalidProduct>
-        <div class="tc">
-            <img [src]="invalidLinkImageSrc" class="invalid-url-image"/>
-        </div>
-    </ng-template>
-</ng-container>
+</div>
+<img *ngIf="isLoading" [src]="spinner" class="loader" />
