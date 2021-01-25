@@ -408,3 +408,40 @@
 .gallery-thumb {
   border: 1px solid #FFCC00;
 }
+
+//Custom Select
+.custom-select {
+  width: 100%;
+  padding: 0.5rem;
+  text-align-last: center;
+}
+
+// Star Rating CSS
+.star-rating-outer {
+  display: inline-block;
+  position: relative;
+  font-family: 'Material Icons', serif;
+  font-weight: normal;
+  font-size: 18px;
+}
+
+.star-rating-outer::before {
+  content: '\e83a \e83a \e83a \e83a \e83a';
+}
+
+.star-rating-inner {
+  position: absolute;
+  top: 0;
+  left: 0;
+  white-space: nowrap;
+  overflow: hidden;
+  width: 0;
+}
+
+.star-rating-inner::before {
+  content: '\e838 \e838 \e838 \e838 \e838';
+}
+
+.star-rating-text {
+  font-size: 12px;
+}

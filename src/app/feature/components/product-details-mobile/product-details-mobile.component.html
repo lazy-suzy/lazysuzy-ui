@@ -53,7 +53,7 @@
 
                 <div class="rating-container">
                     <!--openMyReviewModal()-->
-                    <div class="write-review" (click)="goToReview(product.sku)">Write a Review </div>
+                    <div class="write-review" (click)="goToReview(product.sku)">Write a Review</div>
 
                 </div>
             </div>
@@ -280,6 +280,47 @@
                         </owl-carousel>
                     </div>
                 </div>
+                <div class="mb2 ">
+                    <hr class="modal-hr"/>
+                    <div class="flex flex-column">
+                        <div class="flex justify-between">
+                            <span>Reviews</span>
+                            <a>Write a review</a>
+                        </div>
+                        <div class="title flex items-center" *ngIf="totalRating>0">
+                            <div class="star-rating-outer yellow">
+                                <div [style.width.%]="totalRating" class="star-rating-inner">
+                                </div>
+                            </div>
+                            <span class="star-rating-text">&nbsp;{{totalCount}}</span>
+                        </div>
+                        <div class="w-100 mb2">
+                            <select class="custom-select" (change)="changeReview($event)">
+                                <option value="mr">MOST RECENT</option>
+                                <option value="hr">HIGHEST RATED</option>
+                                <option value="lr">LOWEST RATED</option>
+                            </select>
+                        </div>
+                        <div *ngIf="currentReviewSelection==='mr'">
+                            <ng-container *ngFor="let review of allReviews;let i = index">
+                                <app-review-mobile [review]="review" [galleryId]="'allreviews'+i"></app-review-mobile>
+                            </ng-container>
+                        </div>
+                        <div *ngIf="currentReviewSelection==='hr'">
+                            <ng-container *ngFor="let review of highestReviews;let i = index">
+                                <app-review-mobile [review]="review"
+                                                   [galleryId]="'highestReviews'+i"></app-review-mobile>
+                            </ng-container>
+                        </div>
+                        <div *ngIf="currentReviewSelection==='lr'">
+                            <ng-container *ngFor="let review of lowestReviews;let i = index">
+                                <app-review-mobile [review]="review"
+                                                   [galleryId]="'lowestReviews'+i"></app-review-mobile>
+                            </ng-container>
+                        </div>
+                    </div>
+                </div>
+
             </div>
         </div>
     </div>
