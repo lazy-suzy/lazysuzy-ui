@@ -110,7 +110,7 @@
 
                         </span>
                         <span *ngIf="imageSrc.length>0" style="float:left; margin-left:10px;">
-                            <div class="img-block" *ngFor="let url of imageSrc; let i= index" style="height:60px;margin: 7px 3px;max-width: 30%; float:left;">
+                            <div class="img-block" *ngFor="let url of imageSrc; let i= index" style="height:60px;margin: 7px 3px; float:left;">
                                 <img [src]="url" height="50" alt="">
                                 <div class="close" style="font-size: 10px; cursor: pointer;"><i class="icon-lab_cross" (click)="deleteUploadedImage(i)">Remove</i></div>
                             </div>
