@@ -50,12 +50,6 @@
                         </span>
                     </span>
                 </div>
-
-                <div class="rating-container">
-                    <!--openMyReviewModal()-->
-                    <div class="write-review" (click)="goToReview(product.sku)">Write a Review </div>
-
-                </div>
             </div>
             <div class="flex cart-actions mb2">
                 <button (click)="openLink($event, product.product_url)" mat-raised-button
@@ -278,6 +272,64 @@
                                 </div>
                             </ng-container>
                         </owl-carousel>
+                    </div>
+                </div>
+                <div class="mb2 ">
+                    <hr class="modal-hr"/>
+                    <div class="flex flex-column">
+                        <div class="flex justify-between">
+                            <span class="open-sans-12 bold">Reviews</span>
+                            <a class="add-review-link open-sans-12" *ngIf="totalCount>0"
+                               (click)="goToReview(product.sku)">Write a review</a>
+                        </div>
+                        <div class="title flex items-center" *ngIf="totalRating>0 && totalCount>0">
+                            <div class="star-rating-outer yellow">
+                                <div [style.width.%]="totalRating" class="star-rating-inner">
+                                </div>
+                            </div>
+                            <span class="star-rating-text">&nbsp;{{totalCount}}</span>
+                        </div>
+                        <div class="w-100 mb2" *ngIf="totalCount>0">
+                            <select class="custom-select" (change)="changeReview($event)">
+                                <option value="mr">MOST RECENT</option>
+                                <option value="hr">HIGHEST RATED</option>
+                                <option value="lr">LOWEST RATED</option>
+                            </select>
+                        </div>
+                        <div *ngIf="currentReviewSelection==='mr'">
+                            <ng-container *ngFor="let review of allReviews;let i = index">
+                                <app-review-mobile [review]="review" [galleryId]="'allreviews'+i"></app-review-mobile>
+                            </ng-container>
+                        </div>
+                        <div *ngIf="currentReviewSelection==='hr'">
+                            <ng-container *ngFor="let review of highestReviews;let i = index">
+                                <app-review-mobile [review]="review"
+                                                   [galleryId]="'highestReviews'+i"></app-review-mobile>
+                            </ng-container>
+                        </div>
+                        <div *ngIf="currentReviewSelection==='lr'">
+                            <ng-container *ngFor="let review of lowestReviews;let i = index">
+                                <app-review-mobile [review]="review"
+                                                   [galleryId]="'lowestReviews'+i"></app-review-mobile>
+                            </ng-container>
+                        </div>
+                        <div *ngIf="totalCount>10">
+                            <a class="open-sans-12 bold all-review-link">See All Reviews
+                                <mat-icon style="vertical-align: middle;font-size: 18px;height: 20px;width: 20px">
+                                    chevron_right
+                                </mat-icon>
+                            </a>
+                        </div>
+                        <div class="flex justify-center">
+                            <a class="w-100 bold open-sans-12 add-review-btn" (click)="goToReview(product.sku)">
+                                {{totalCount > 0 ? 'Write a review' : 'Be the first to Review'}}
+                                <span style="float: right">
+                                    <mat-icon style="vertical-align: middle;font-size: 18px;height: 20px;width: 20px">
+                                    chevron_right
+                                    </mat-icon>
+                                </span>
+                            </a>
+                        </div>
                     </div>
                 </div>
             </div>

@@ -262,7 +262,7 @@
                     <div class="mb2">
                         <hr class="modal-hr"/>
                         <div class="flex pr3 justify-between">
-                            <span class="title">Review</span>
+                            <span class="title">Reviews</span>
                             <div>
                                 <div class="title flex items-center" *ngIf="totrating>0">
                                     <div class="star-rating-outer yellow">
@@ -279,54 +279,7 @@
                             </button>
                         </div>
                     </div>
-                    <div class="mb2" *ngIf="total_count>0">
-                        <ul class="description-menu justify-around">
-                            <li (click)="selectTab('mr')">
-                                <span class="nav-link" [ngClass]="{'review-tab-active b':activeTab === 'mr'}">Most Recent</span>
-                            </li>
-                            <li (click)="selectTab('hr')">
-                                <span class="nav-link" [ngClass]="{'review-tab-active b':activeTab === 'hr'}">Highest Rated</span>
-                            </li>
-                            <li (click)="selectTab('lr')">
-                                <span class="nav-link" [ngClass]="{'review-tab-active b':activeTab === 'lr'}">Lowest Rated</span>
-                            </li>
-                        </ul>
-                        <div class="menu-content">
-                            <div class="{{ activeTab === 'mr' ? '' : 'dn' }}">
-                                <div class="flex justify-between flex-wrap">
-                                    <ng-container *ngFor="let review of all_reviews;let i = index">
-                                        <div class="w-45">
-                                            <app-review-desktop [review]="review" [galleryId]="'all_review_gallery'+i"></app-review-desktop>
-                                        </div>
-                                    </ng-container>
-                                </div>
-                            </div>
-                            <div class="{{ activeTab === 'hr' ? '' : 'dn' }}">
-                                <div class="flex justify-between flex-wrap">
-                                    <ng-container *ngFor="let review of highest_reviews;let i = index">
-                                        <div class="w-45">
-                                            <app-review-desktop [review]="review" [galleryId]="'highest_reviews'+i"></app-review-desktop>
-                                        </div>
-                                    </ng-container>
-                                </div>
-                            </div>
-                            <div class="{{ activeTab === 'lr' ? '' : 'dn' }}">
-                                <div class="flex justify-between flex-wrap">
-                                    <ng-container *ngFor="let review of lowest_reviews;let i = index">
-                                        <div class="w-45">
-                                            <app-review-desktop [review]="review" [galleryId]="'lowest_reviews'+i"></app-review-desktop>
-                                        </div>
-                                    </ng-container>
-                                </div>
-                            </div>
-                        </div>
 
-                    </div>
-                    <div *ngIf="total_count>10">
-                        <a class="open-sans-14 bold all-review-link">See All Reviews
-                            <mat-icon style="vertical-align: middle;font-size: 20px">chevron_right</mat-icon>
-                        </a>
-                    </div>
                     <!-- ***************************************  -->
 
 
@@ -362,6 +315,59 @@
                             </p-carousel>
                         </div>
                     </div>
+                    <!--Reviews Section-->
+                    <div class="mb2" *ngIf="total_count>0">
+                        <ul class="description-menu justify-around">
+                            <li (click)="selectTab('mr')">
+                                <span class="nav-link" [ngClass]="{'review-tab-active b':activeTab === 'mr'}">Most Recent</span>
+                            </li>
+                            <li (click)="selectTab('hr')">
+                                <span class="nav-link" [ngClass]="{'review-tab-active b':activeTab === 'hr'}">Highest Rated</span>
+                            </li>
+                            <li (click)="selectTab('lr')">
+                                <span class="nav-link" [ngClass]="{'review-tab-active b':activeTab === 'lr'}">Lowest Rated</span>
+                            </li>
+                        </ul>
+                        <div class="menu-content">
+                            <div class="{{ activeTab === 'mr' ? '' : 'dn' }}">
+                                <div class="flex justify-between flex-wrap">
+                                    <ng-container *ngFor="let review of all_reviews;let i = index">
+                                        <div class="w-45">
+                                            <app-review-desktop [review]="review"
+                                                                [galleryId]="'all_review_gallery'+i"></app-review-desktop>
+                                        </div>
+                                    </ng-container>
+                                </div>
+                            </div>
+                            <div class="{{ activeTab === 'hr' ? '' : 'dn' }}">
+                                <div class="flex justify-between flex-wrap">
+                                    <ng-container *ngFor="let review of highest_reviews;let i = index">
+                                        <div class="w-45">
+                                            <app-review-desktop [review]="review"
+                                                                [galleryId]="'highest_reviews'+i"></app-review-desktop>
+                                        </div>
+                                    </ng-container>
+                                </div>
+                            </div>
+                            <div class="{{ activeTab === 'lr' ? '' : 'dn' }}">
+                                <div class="flex justify-between flex-wrap">
+                                    <ng-container *ngFor="let review of lowest_reviews;let i = index">
+                                        <div class="w-45">
+                                            <app-review-desktop [review]="review"
+                                                                [galleryId]="'lowest_reviews'+i"></app-review-desktop>
+                                        </div>
+                                    </ng-container>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                    <div *ngIf="total_count>10">
+                        <a class="open-sans-14 bold all-review-link">See All Reviews
+                            <mat-icon style="vertical-align: middle;font-size: 20px">chevron_right</mat-icon>
+                        </a>
+                    </div>
+                    <!--Reviews Section End-->
                     <div class="mb2" *ngIf="recentProducts.length">
                         <hr class="modal-hr"/>
                         <span class="title">Recently Viewed</span>

@@ -1,6 +1,6 @@
-import {Component, ElementRef, OnInit, TemplateRef, ViewChild,} from '@angular/core';
+import {Component, ElementRef, OnInit, TemplateRef, ViewChild} from '@angular/core';
 import {ActivatedRoute, Router} from '@angular/router';
-import {IActiveProduct, IProduct, IProductDetail, ISeo,} from 'src/app/shared/models';
+import {IActiveProduct, IProduct, IProductDetail, ISeo} from 'src/app/shared/models';
 import {
     ApiService,
     CacheService,
@@ -10,7 +10,7 @@ import {
     UtilsService,
 } from 'src/app/shared/services';
 import {Observable, Subscription} from 'rxjs';
-import {BreakpointObserver, Breakpoints, BreakpointState,} from '@angular/cdk/layout';
+import {BreakpointObserver, Breakpoints, BreakpointState} from '@angular/cdk/layout';
 import {Gallery, GalleryItem, ImageItem} from '@ngx-gallery/core';
 import {Lightbox} from '@ngx-gallery/lightbox';
 import {VariationsComponent} from '../variations/variations.component';
@@ -113,6 +113,14 @@ export class ProductDetailsMobileComponent implements OnInit {
         // stagePadding: 100,
         singleItem: true,
     };
+    recentReviews: any;
+    allReviews: any;
+    totalCount: any;
+    lowestReviews: any;
+    totalRating: number;
+    highestReviews: any;
+    totalNo: number;
+    currentReviewSelection = 'mr';
 
     constructor(
         private router: Router,
@@ -263,8 +271,38 @@ export class ProductDetailsMobileComponent implements OnInit {
                             this.isProductFetching = false;
                         }
                     );
+                this.loadProductReviews(this.productSku);
             }
         );
+    }
+
+    loadProductReviews(sku) {
+        const limit = 10;
+        this.apiService.getProductReviews(sku, limit).subscribe((response: any) => {
+            this.recentReviews = response;
+            if (
+                this.recentReviews.all_reviews &&
+                this.recentReviews.all_reviews.length > 0
+            ) {
+                this.allReviews = this.recentReviews.all_reviews;
+                this.totalCount = this.recentReviews.count_rating;
+                this.totalNo = Number(this.recentReviews.count_rating) * 5;
+                this.totalRating =
+                    (Number(this.recentReviews.tot_rating) / this.totalNo) * 100;
+            }
+            if (
+                this.recentReviews.highest_reviews &&
+                this.recentReviews.highest_reviews.length > 0
+            ) {
+                this.highestReviews = this.recentReviews.highest_reviews;
+            }
+            if (
+                this.recentReviews.lowest_reviews &&
+                this.recentReviews.lowest_reviews.length > 0
+            ) {
+                this.lowestReviews = this.recentReviews.lowest_reviews;
+            }
+        });
     }
 
     objKeys(anObject) {
@@ -272,6 +310,10 @@ export class ProductDetailsMobileComponent implements OnInit {
             return Object.keys(anObject);
         }
         return [];
+    }
+
+    changeReview(event) {
+        this.currentReviewSelection = event.target.value;
     }
 
     createGalleryItems(items: any[]) {
@@ -526,33 +568,29 @@ export class ProductDetailsMobileComponent implements OnInit {
     }
 
     openMyReviewModal() {
- 
-    
-            this.hasSelection = true;
-            const data = {
-                sku: this.activeProduct.sku,
-                brand: this.product.site,
-                image: this.product.main_image,
-                name:
-                    this.activeProduct.sku === this.product.sku
-                        ? this.activeProduct.name
-                        : this.product.name + ' ' + this.activeProduct.name,
-                price: this.productPrice,
-                quantity: this.quantity,
-            };
-            const postData = {
-                product_sku: this.activeProduct.sku,
-                count: this.quantity,
-                parent_sku: this.product.sku,
-            };
-
-            this.matDialogUtils.openMyReviewDialog(data);
- 
+        this.hasSelection = true;
+        const data = {
+            sku: this.activeProduct.sku,
+            brand: this.product.site,
+            image: this.product.main_image,
+            name:
+                this.activeProduct.sku === this.product.sku
+                    ? this.activeProduct.name
+                    : this.product.name + ' ' + this.activeProduct.name,
+            price: this.productPrice,
+            quantity: this.quantity,
+        };
+        const postData = {
+            product_sku: this.activeProduct.sku,
+            count: this.quantity,
+            parent_sku: this.product.sku,
+        };
+        this.matDialogUtils.openMyReviewDialog(data);
     }
 
     goToReview(sku) {
-        console.log(sku)
-       // window.location.href = './product/review/' + sku;
-        this.router.navigateByUrl(`/product/review/${sku}`)
+        console.log(sku);
+        // window.location.href = './product/review/' + sku;
+        this.router.navigateByUrl(`/product/review/${sku}`);
     }
 }

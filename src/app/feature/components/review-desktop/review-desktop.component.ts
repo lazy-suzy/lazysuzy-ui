@@ -27,11 +27,6 @@ export class ReviewDesktopComponent implements OnInit {
             this.createGalleryItems(images);
         }
     }
-    openLightbox(index: number) {
-        this.lightbox.open(index, this.galleryId, {
-            panelClass: 'fullscreen',
-        });
-    }
     createGalleryItems(items: any[]) {
         this.items = items.map((item) => new ImageItem({src: item, thumb: item}));
         const lightboxGalleryRef = this.gallery.ref(this.galleryRef);

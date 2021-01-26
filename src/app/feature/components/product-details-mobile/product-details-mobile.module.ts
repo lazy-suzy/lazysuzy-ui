@@ -11,6 +11,8 @@ import {NgxJsonLdModule} from '@ngx-lite/json-ld';
 import {CarouselModule} from 'primeng/carousel';
 import {OwlModule} from 'ngx-owl-carousel';
 import {GalleryModule} from '@ngx-gallery/core';
+import { ReviewMobileComponent } from './review-mobile/review-mobile.component';
+import {LightboxModule} from '@ngx-gallery/lightbox';
 
 const DECLARATIONS = [ProductDetailsMobileComponent];
 
@@ -29,8 +31,8 @@ const MODULES = [
 ];
 
 @NgModule({
-    declarations: [...DECLARATIONS],
-    imports: [...MODULES, GalleryModule],
+    declarations: [...DECLARATIONS, ReviewMobileComponent],
+    imports: [...MODULES, GalleryModule, LightboxModule],
     exports: [...DECLARATIONS, ...MODULES]
 })
 export class ProductDetailsMobileModule {
