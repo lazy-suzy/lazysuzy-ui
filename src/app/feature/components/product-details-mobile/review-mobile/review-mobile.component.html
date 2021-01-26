@@ -10,22 +10,23 @@
         <span class="review-user-info">{{review.user_name}} {{review.user_location ? '| ' + review.user_location : ''}}</span>
     </div>
     <div>
-        <span class="open-sans-14 font-dark-gray">Reviewed on {{review.submission_time}}</span>
+        <span class="open-sans-12 font-dark-gray">Reviewed on {{review.submission_time}}</span>
     </div>
     <div>
         <p class="review-details" [innerHTML]="review.review"></p>
     </div>
     <div class="review-images mb2" *ngIf="review.review_images">
         <ng-container *ngFor="let image of items;let i=index">
-            <img *ngIf="image" class="w-45" [src]="image.data.src" alt="review-image-{{i+1}}" [gallery]="this.galleryRef" [lightbox]="i">
+            <img *ngIf="image" class="w-40" [src]="image.data.src" alt="review-image-{{i+1}}"
+                 [gallery]="this.galleryRef" [lightbox]="i">
         </ng-container>
     </div>
     <div *ngIf="review.count_helpful>0" class="mb2">
-        <span class="open-sans-14 font-dark-gray">{{review.count_helpful}} {{review.count_helpful > 1 ? 'shoppers' : 'shopper'}}
+        <span class="open-sans-12 font-dark-gray">{{review.count_helpful}} {{review.count_helpful > 1 ? 'shoppers' : 'shopper'}}
             found this helpful</span>
     </div>
-    <div class="flex">
-        <button class="review-helpful-btn">Helpful</button>
-        <a class="review-report-btn">Report</a>
+    <div class="flex items-center">
+        <button class="review-helpful-btn lato-12">Helpful</button>
+        <a class="review-report-btn open-sans-12 font-dark-gray">Report</a>
     </div>
 </div>
