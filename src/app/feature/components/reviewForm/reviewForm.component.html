@@ -61,8 +61,8 @@
                                #reviewUserName="ngModel"
                                [(ngModel)]="reviewHeader" placeholder="Example: Love this couch!" />
                         <!--<span *ngIf="headererror" class="error-msg">
-                            This field is required.
-                        </span>-->
+            This field is required.
+        </span>-->
                     </div>
                     <!-- [checked]="rateval ==1" -->
 
@@ -80,9 +80,9 @@
 
 
                         <!--<span *ngIf="rtexterror" class="error-msg">
-                            This field is required.
-                        </span>-->
-                        <div class="border mr-top" >&nbsp;</div>
+            This field is required.
+        </span>-->
+                        <div class="border mr-top">&nbsp;</div>
                     </div>
 
                     <div class="">
@@ -97,7 +97,7 @@
                         </div>
 
 
-                        <div class="upload-btn-wrapper">
+                        <span class="upload-btn-wrapper" style="float:left;">
                             <button class="btn">+</button>
                             <input type="file"
                                    accept=".jpg,.png,.jpeg,.gif,.svg"
@@ -107,18 +107,16 @@
                                    (mouseover)="over()"
                                    (mouseout)="out()"
                                    (change)="readFile($event)" />
-                        </div>
 
-
-                        <div *ngIf="imageSrc.length>0" style="clear:both;">
+                        </span>
+                        <span *ngIf="imageSrc.length>0" style="float:left; margin-left:10px;">
                             <div class="img-block" *ngFor="let url of imageSrc; let i= index" style="height:60px;margin: 7px 3px;max-width: 30%; float:left;">
                                 <img [src]="url" height="50" alt="">
                                 <div class="close" style="font-size: 10px; cursor: pointer;"><i class="icon-lab_cross" (click)="deleteUploadedImage(i)">Remove</i></div>
                             </div>
-                        </div>
+                        </span>
 
-
-                        <div class="border  mr-top" style="clear:both;">&nbsp;</div>
+                        <div class="border  mr-top" style="clear:both;margin-top:85px;">&nbsp;</div>
                     </div>
 
 
@@ -160,12 +158,12 @@
                                #reviewLocation="ngModel"
                                [(ngModel)]="location" placeholder="Ex. San Francisco, CA" />
                     </div>
-
+                    <div class="mr-bottom" style="clear:both;">&nbsp;</div>
                     <div class="require" style="font-size:17px;">Thanks for sharing your feedback!</div>
                     <div class="action-buttons-row">
                         <!--<button class="profile-cancel-btn b" mat-dialog-close>
-                            CANCEL
-                        </button>-->
+            CANCEL
+        </button>-->
                         <button class="profile-update-btn b ml3" (click)="reviewUpdate()">
                             POST REVIEW
                         </button>
