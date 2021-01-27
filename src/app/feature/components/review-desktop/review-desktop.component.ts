@@ -1,6 +1,7 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {Gallery, GalleryItem, ImageItem} from '@ngx-gallery/core';
 import {Lightbox} from '@ngx-gallery/lightbox';
+import {ApiService} from '../../../shared/services';
 
 @Component({
     selector: 'app-review-desktop',
@@ -13,10 +14,13 @@ export class ReviewDesktopComponent implements OnInit {
     @Input() galleryId: any;
     items: GalleryItem[] | any;
     galleryRef;
+    markedHelpful = false;
+    markedReported = false;
 
     constructor(
         public gallery: Gallery,
         public lightbox: Lightbox,
+        private apiService: ApiService
     ) {
     }
 
@@ -27,11 +31,30 @@ export class ReviewDesktopComponent implements OnInit {
             this.createGalleryItems(images);
         }
     }
+
     createGalleryItems(items: any[]) {
         this.items = items.map((item) => new ImageItem({src: item, thumb: item}));
         const lightboxGalleryRef = this.gallery.ref(this.galleryRef);
         // 3. Load the items into the lightbox
         lightboxGalleryRef.load(this.items);
         // this.galleryRef.load(this.items);
+    }
+
+    markHelpful() {
+        const user: any = JSON.parse(localStorage.getItem('user'));
+        if (user) {
+            this.apiService.markReviewHelpful(user.id, this.review.id).subscribe((response: any) => {
+                this.markedHelpful = true;
+            });
+        }
+    }
+
+    reportReview() {
+        const user: any = JSON.parse(localStorage.getItem('user'));
+        if (user) {
+            this.apiService.reportReview(user.id, this.review.id).subscribe((response: any) => {
+                this.markedReported = true;
+            });
+        }
     }
 }
