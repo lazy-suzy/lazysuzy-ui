@@ -3,15 +3,9 @@
         <div [style.width.%]="(review.rating)*20" class="star-rating-inner">
         </div>
     </div>
-    <div>
-        <span class="review-header">{{review.headline}}</span>
-    </div>
-    <div>
-        <span class="review-user-info">{{review.user_name}} {{review.user_location ? '| ' + review.user_location : ''}}</span>
-    </div>
-    <div>
-        <span class="open-sans-12 font-dark-gray">Reviewed on {{review.submission_time}}</span>
-    </div>
+    <span class="review-header">{{review.headline}}</span>
+    <span class="review-user-info">{{review.user_name}} {{review.user_location ? '| ' + review.user_location : ''}}</span>
+    <span class="lato-12 font-dark-gray">Reviewed on {{review.submission_time}}</span>
     <div>
         <p class="review-details" [innerHTML]="review.review"></p>
     </div>
@@ -21,10 +15,8 @@
                  [gallery]="this.galleryRef" [lightbox]="i">
         </ng-container>
     </div>
-    <div *ngIf="review.count_helpful>0" class="mb2">
-        <span class="open-sans-12 font-dark-gray">{{review.count_helpful}} {{review.count_helpful > 1 ? 'shoppers' : 'shopper'}}
+    <span *ngIf="review.count_helpful>0" class="mb1 open-sans-12 font-dark-gray">{{review.count_helpful}} {{review.count_helpful > 1 ? 'shoppers' : 'shopper'}}
             found this helpful</span>
-    </div>
     <div class="flex items-center">
         <button class="review-helpful-btn lato-12">Helpful</button>
         <a class="review-report-btn open-sans-12 font-dark-gray">Report</a>
