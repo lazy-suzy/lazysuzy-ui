@@ -255,7 +255,7 @@ export class ReviewFormMobileComponent implements OnInit {
             this.apiService.submitReview(formData).subscribe((payload: any) => {
                 this.isLoading = false;
                 this.snackBar.open('Review Submitted', 'Dismiss', {
-                    duration: 4000,
+                    duration: 7000,
                     horizontalPosition: 'center',
                     verticalPosition: 'bottom'
                 });

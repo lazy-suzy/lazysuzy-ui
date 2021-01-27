@@ -97,7 +97,12 @@
 
                         </div>
 
-
+                        <span *ngIf="imageSrc.length>0" style="float:left;">
+                            <div class="img-block" *ngFor="let url of imageSrc; let i= index" style="float: left; margin-right: 5px;">
+                                <img [src]="url" height="60" alt="">
+                                <div class="close" style="font-size: 10px; cursor: pointer;"><i class="icon-lab_cross" (click)="deleteUploadedImage(i)">Remove</i></div>
+                            </div>
+                        </span>
                         <span class="upload-btn-wrapper" style="float:left;">
                             <button class="btn">+</button>
                             <input type="file"
@@ -109,12 +114,7 @@
                         </span>
 
 
-                        <span *ngIf="imageSrc.length>0" style="float:left; margin-left:10px;max-width:75%;">
-                            <div class="img-block" *ngFor="let url of imageSrc; let i= index" style="height:60px;margin: 7px 3px;max-width: 30%; float:left;">
-                                <img [src]="url" height="50" alt="">
-                                <div class="close" style="font-size: 10px; cursor: pointer;"><i class="icon-lab_cross" (click)="deleteUploadedImage(i)">Remove</i></div>
-                            </div>
-                        </span>
+
 
 
                         <div class="mr-top" style="clear:both;">&nbsp;</div><!--border-->
