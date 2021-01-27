@@ -1,7 +1,7 @@
-import {Component, ElementRef, Inject, OnInit, TemplateRef, ViewChild, } from '@angular/core';
+import {Component, ElementRef, Inject, OnInit, TemplateRef, ViewChild,} from '@angular/core';
 import {MAT_DIALOG_DATA} from '@angular/material/dialog';
 import {Subscription} from 'rxjs';
-import {IActiveProduct, IProduct, IProductDetail, ISeo, } from 'src/app/shared/models';
+import {IActiveProduct, IProduct, IProductDetail, ISeo,} from 'src/app/shared/models';
 import {
     ApiService,
     EventEmitterService,
@@ -133,6 +133,14 @@ export class ProductDetailsComponent implements OnInit {
             .subscribe((response: any[]) => {
                 this.recentProducts = response;
             });
+    }
+
+    openAllReviewsModal() {
+        const reviewsData = {
+            totalReviews: this.total_count,
+            totalRatings: this.totrating,
+        };
+        this.matDialogUtils.openAllReviewsModal(this.product, reviewsData);
     }
 
     loadProductReviews(sku) {
