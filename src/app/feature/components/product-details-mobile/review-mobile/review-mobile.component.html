@@ -3,7 +3,7 @@
         <div [style.width.%]="(review.rating)*20" class="star-rating-inner">
         </div>
     </div>
-    <span class="review-header">{{review.headline}}</span>
+    <span class="open-sans-12">{{review.headline}}</span>
     <span class="review-user-info">{{review.user_name}} {{review.user_location ? '| ' + review.user_location : ''}}</span>
     <span class="lato-12 font-dark-gray">Reviewed on {{review.submission_time}}</span>
     <div>
@@ -15,10 +15,13 @@
                  [gallery]="this.galleryRef" [lightbox]="i">
         </ng-container>
     </div>
-    <span *ngIf="review.count_helpful>0" class="mb1 open-sans-12 font-dark-gray">{{review.count_helpful}} {{review.count_helpful > 1 ? 'shoppers' : 'shopper'}}
-            found this helpful</span>
+    <span *ngIf="review.count_helpful>0"
+          class="mb1 open-sans-12 font-dark-gray">{{review.count_helpful}} {{review.count_helpful > 1 ? 'shoppers' : 'shopper'}}
+        found this helpful</span>
     <div class="flex items-center">
-        <button class="review-helpful-btn lato-12">Helpful</button>
-        <a class="review-report-btn open-sans-12 font-dark-gray">Report</a>
+        <button *ngIf="!markedHelpful" class="review-helpful-btn lato-12" (click)="markHelpful()">Helpful</button>
+        <span *ngIf="markedHelpful" class="lato-12 green"><mat-icon class="circle-icon">check_circle</mat-icon>Thank you for the feedback.</span>
+        <a *ngIf="!markedReported" class=" ml2 review-report-btn open-sans-12 font-dark-gray" (click)="reportReview()">Report</a>
+        <span class="open-sans-12 underline ml2" *ngIf="markedReported">Reported</span>
     </div>
 </div>

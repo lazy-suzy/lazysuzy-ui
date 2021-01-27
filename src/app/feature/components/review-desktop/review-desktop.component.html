@@ -25,7 +25,9 @@
             found this helpful</span>
     </div>
     <div class="flex">
-        <button class="review-helpful-btn">Helpful</button>
-        <a class="review-report-btn">Report</a>
+        <button *ngIf="!markedHelpful" class="review-helpful-btn lato-14" (click)="markHelpful()">Helpful</button>
+        <span *ngIf="markedHelpful" class="lato-14 green"><mat-icon class="circle-icon">check_circle</mat-icon>Thank you for the feedback.</span>
+        <a *ngIf="!markedReported" class=" ml2 review-report-btn open-sans-14 font-dark-gray" (click)="reportReview()">Report</a>
+        <span class="open-sans-14 underline ml2" *ngIf="markedReported">Reported</span>
     </div>
 </div>
