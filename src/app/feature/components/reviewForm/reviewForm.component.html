@@ -1,9 +1,10 @@
 <div class="profile-container">
-    <div>&nbsp;</div>
+   
     
-    <div class="product-description-container" style="max-height: calc(100vh - 0px);"><button class="close-icon" mat-dialog-close>
-    <mat-icon>close</mat-icon>
-</button>
+    <div class="product-description-container" style="max-height: calc(100vh - 0px);">
+        <div>&nbsp;</div><button class="close-icon" mat-dialog-close>
+            <mat-icon>close</mat-icon>
+        </button>
         <div class="product-details-container">
 
             <form name="review-form" class="w-100 flex-ns gallery-container" #reviewForm="ngForm">
@@ -22,7 +23,7 @@
 
                 </div>
 
-                 
+
                 <div class="form-input-container">
                     <div class="header">
                         <div class="title b">My Review<br /><div class="require">*Required Field</div></div>
@@ -60,8 +61,8 @@
                                #reviewUserName="ngModel"
                                [(ngModel)]="reviewHeader" placeholder="Example: Love this couch!" />
                         <!--<span *ngIf="headererror" class="error-msg">
-            This field is required.
-        </span>-->
+                        This field is required.
+                    </span>-->
                     </div>
                     <!-- [checked]="rateval ==1" -->
 
@@ -79,8 +80,8 @@
 
 
                         <!--<span *ngIf="rtexterror" class="error-msg">
-            This field is required.
-        </span>-->
+                        This field is required.
+                    </span>-->
                         <div class="border mr-top">&nbsp;</div>
                     </div>
 
@@ -161,15 +162,15 @@
                     <div class="require" style="font-size:17px;">Thanks for sharing your feedback!</div>
                     <div class="action-buttons-row">
                         <!--<button class="profile-cancel-btn b" mat-dialog-close>
-            CANCEL
-        </button>-->
+                        CANCEL
+                    </button>-->
                         <button class="profile-update-btn b ml3" (click)="reviewUpdate()">
                             POST REVIEW
                         </button>
                     </div>
-                </div> 
+                </div>
             </form>
         </div>
-        </div>
+    </div>
     </div>
     <img *ngIf="isLoading" [src]="spinner" class="loader" />
