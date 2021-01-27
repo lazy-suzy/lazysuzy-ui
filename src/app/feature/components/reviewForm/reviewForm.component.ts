@@ -212,11 +212,12 @@ export class ReviewFormComponent implements OnInit {
      this.apiService.submitReview(formData).subscribe((payload: any) => {
       this.isLoading = false;
       this.snackBar.open('Review Submitted', 'Dismiss', {
-        duration: 4000,
+        duration: 7000,
         horizontalPosition: 'center',
         verticalPosition: 'bottom'
       });
-         location.reload();
+         // location.reload();
+         window.location.href = './product/' + this.sku;
      // const token = this.cookie.get('token');
      // this.eventEmitterService.fetchUser(token, payload.user);
       if (payload.errors.length) {
