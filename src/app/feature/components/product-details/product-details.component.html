@@ -200,34 +200,42 @@
                         <hr class="modal-hr"/>
                         <span class="title">Dimensions</span>
                         <div class="mt1 pb1 flex flex-wrap">
-                            <div *ngFor="let key of objKeys(product.dimension)" class="fl w-50 pa2">
+                            <div *ngFor="let key of product.dimension" class="fl pa2"
+                                 [ngClass]="{'w-100':this.isSingleDimension,'w-50':!this.isSingleDimension}">
                                 <ng-container *ngIf="!this.isSingleDimension">
-                                    <div class="dimension-header upper-case bold mb1">{{ key }}</div>
+                                    <div class="dimension-header upper-case bold mb1">{{ key.groupName }}</div>
                                 </ng-container>
-                                <ng-container *ngFor="let dimension of product.dimension[key]">
-                                    <div class="dimension-title mt2">{{ dimension.name }}</div>
-                                    <div class="dimensions-details" *ngIf="dimension.value.width">
-                                        Width: {{ dimension.value.width }}
-                                    </div>
-                                    <ng-container *ngIf="dimension.value.NULL">
-                                        <span class="dimensions-details"> :{{dimension.value.NULL}}</span>
+                                <div class="flex flex-wrap"
+                                >
+                                    <ng-container *ngFor="let dimension of key.groupValue">
+                                        <div [ngClass]="{'w-100':!this.isSingleDimension,'w-50':this.isSingleDimension}">
+                                            <div class="dimension-title mt2">{{ dimension.name }}</div>
+                                            <div class="dimensions-details" *ngIf="dimension.value.width">
+                                                Width: {{ dimension.value.width }}
+                                            </div>
+                                            <ng-container *ngIf="dimension.value.NULL">
+                                                <span class="dimensions-details"> :{{dimension.value.NULL}}</span>
+                                            </ng-container>
+                                            <div class="dimensions-details" *ngIf="dimension.value.depth">
+                                                Depth: {{ dimension.value.depth }}
+                                            </div>
+                                            <div class="dimensions-details" *ngIf="dimension.value.height">
+                                                Height: {{ dimension.value.height }}
+                                            </div>
+                                            <div class="dimensions-details" *ngIf="dimension.value.length">
+                                                Length: {{ dimension.value.length }}
+                                            </div>
+                                            <div class="dimensions-details" *ngIf="dimension.value.diameter">
+                                                Diameter: {{ dimension.value.diameter }}
+                                            </div>
+                                            <div class="dimensions-details" *ngIf="dimension.value.weight">
+                                                Weight: {{ dimension.value.weight }}
+                                            </div>
+                                        </div>
+
                                     </ng-container>
-                                    <div class="dimensions-details" *ngIf="dimension.value.depth">
-                                        Depth: {{ dimension.value.depth }}
-                                    </div>
-                                    <div class="dimensions-details" *ngIf="dimension.value.height">
-                                        Height: {{ dimension.value.height }}
-                                    </div>
-                                    <div class="dimensions-details" *ngIf="dimension.value.length">
-                                        Length: {{ dimension.value.length }}
-                                    </div>
-                                    <div class="dimensions-details" *ngIf="dimension.value.diameter">
-                                        Diameter: {{ dimension.value.diameter }}
-                                    </div>
-                                    <div class="dimensions-details" *ngIf="dimension.value.weight">
-                                        Weight: {{ dimension.value.weight }}
-                                    </div>
-                                </ng-container>
+                                </div>
+
                                 <br/>
                             </div>
                         </div>
@@ -242,18 +250,14 @@
 
                     <div *ngIf="assemblyExist" class="mb2">
                         <hr class="modal-hr"/>
-
                         <span class="title">ASSEMBLY</span>
-
                         <div class="mt1" [innerHTML]="product.product_assembly"></div>
                     </div>
 
 
                     <div *ngIf="careExist" class="mb2">
                         <hr class="modal-hr"/>
-
                         <span class="title">CARE</span>
-
                         <div class="mt1" [innerHTML]="product.product_care"></div>
                     </div>
 

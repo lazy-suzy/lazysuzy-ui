@@ -110,11 +110,11 @@ export class ReviewFormMobileComponent implements OnInit {
                     .getProduct(this.productSku)
                     .subscribe(
                         (payload: IProductDetail) => {
-                            this.product = payload.product;
+                            this.product = payload.product;console.log(this.product)
                             this.img = this.product.main_image;
                             this.productname = this.product.name;
                             this.productsite = this.product.site;
-                            console.log(this.product)
+                            
                             if (this.product) { 
                               
                                 if (!this.isHandset) {
@@ -259,7 +259,8 @@ export class ReviewFormMobileComponent implements OnInit {
                     horizontalPosition: 'center',
                     verticalPosition: 'bottom'
                 });
-                location.reload();
+                //location.reload();
+                this.router.navigateByUrl(`/product/${this.productSku}`)
                 if (payload.errors.length) {
                     const errorsArray = payload.errors;
                     /*for (const error of errorsArray) { 

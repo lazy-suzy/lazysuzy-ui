@@ -65,8 +65,8 @@
                                #reviewUserName="ngModel"
                                [(ngModel)]="reviewHeader" placeholder="Example: Love this couch!" />
                         <!--<span *ngIf="headererror" class="error-msg">
-                            This field is required.
-                        </span>-->
+            This field is required.
+        </span>-->
                     </div>
                     <!-- [checked]="rateval ==1" -->
 
@@ -98,7 +98,7 @@
                         </div>
 
 
-                        <div class="upload-btn-wrapper">
+                        <span class="upload-btn-wrapper" style="float:left;">
                             <button class="btn">+</button>
                             <input type="file"
                                    accept=".jpg,.png,.jpeg,.gif,.svg"
@@ -106,15 +106,15 @@
                                    id="file"
                                    multiple
                                    (change)="readFile($event)" />
-                        </div>
+                        </span>
 
 
-                        <div *ngIf="imageSrc.length>0" style="clear:both;">
+                        <span *ngIf="imageSrc.length>0" style="float:left; margin-left:10px;max-width:75%;">
                             <div class="img-block" *ngFor="let url of imageSrc; let i= index" style="height:60px;margin: 7px 3px;max-width: 30%; float:left;">
                                 <img [src]="url" height="50" alt="">
                                 <div class="close" style="font-size: 10px; cursor: pointer;"><i class="icon-lab_cross" (click)="deleteUploadedImage(i)">Remove</i></div>
                             </div>
-                        </div>
+                        </span>
 
 
                         <div class="mr-top" style="clear:both;">&nbsp;</div><!--border-->
@@ -159,12 +159,12 @@
                                #reviewLocation="ngModel"
                                [(ngModel)]="location" placeholder="Ex. San Francisco, CA" />
                     </div>
-
+                    <div class="mr-bottom" style="clear:both;">&nbsp;</div>
                     <div class="require" style="font-size:17px;">Thanks for sharing your feedback!</div>
                     <div class="action-buttons-row w-100 input-container">
                         <!--<button class="profile-cancel-btn b" mat-dialog-close>
-                            CANCEL
-                        </button>-->
+            CANCEL
+        </button>-->
                         <button class="profile-update-btn b ml3 form-input w-100 " (click)="reviewUpdate()">
                             POST REVIEW
                         </button>
