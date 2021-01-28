@@ -514,12 +514,6 @@ export class ProductDetailsComponent implements OnInit {
             price: this.productPrice,
             quantity: this.quantity
         };
-        const postData = {
-            product_sku: this.activeProduct.sku,
-            count: this.quantity,
-            parent_sku: this.product.sku
-        };
-
         this.matDialogUtils.openMyReviewDialog(data);
 
 

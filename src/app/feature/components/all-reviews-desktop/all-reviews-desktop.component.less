@@ -6,6 +6,10 @@
   height: 100%;
 }
 
+.mh-auto {
+  margin: 0 auto;
+}
+
 .container {
   padding: 2% 2%;
   height: 100%;
@@ -43,10 +47,16 @@
   transform: translateX(-50%) translateY(-50%);
 }
 
+.custom-width {
+  width: 48%;
+}
+
 .reviews-wrapper {
   height: calc(100vh - 250px);
   overflow-y: scroll;
-  padding-right: 1rem;
+  justify-content: space-between;
+  padding: 0 2%;
+  padding-top: 5rem;
 
   &::-webkit-scrollbar {
     width: 10px;

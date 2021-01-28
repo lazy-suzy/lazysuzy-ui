@@ -5,14 +5,14 @@
     <div class="container">
         <div class="flex justify-between">
             <div class="w-40 flex">
-                <img style="height: 10rem" [src]="product.main_image">
+                <img (click)="openProductPage()" style="height: 10rem" [src]="product.main_image">
                 <div class="flex flex-column">
                     <span class="open-sans-18">{{product.name}}</span>
                     <span class="lato-14 light-gray">by {{product.site}}</span>
                 </div>
             </div>
-            <div class="w-50 product-overall-rating mr5">
-                <div class="flex justify-between">
+            <div class="w-30 mh-auto">
+                <div class="flex items-center justify-between mb2">
                     <div class="flex items-center">
                         <div class="star-rating-outer yellow mr-auto">
                             <div [style.width.%]="(reviewData.totalRatings)" class="star-rating-inner">
@@ -24,13 +24,13 @@
                     <span>{{reviewData.totalReviews}} Total Ratings</span>
                 </div>
                 <div class="flex">
-                    <button mat-raised-button class="add-review-btn w-100">Write a Review</button>
+                    <button (click)="openWriteReviewModal()" mat-raised-button class="add-review-btn w-100">Write a Review</button>
                 </div>
             </div>
         </div>
 
         <div class="text-center">
-            <span class="open-sans-18 dark-blue upper-case bold">Reviews</span>
+            <span class="open-sans-18 dark-blue upper-case bold db mb2">Reviews</span>
             <ul class="description-menu">
                 <li class="nav-link" [ngClass]="{'review-tab-active':currentSortType===''}" (click)="changeSort('')">
                     Most
@@ -44,7 +44,7 @@
                 </li>
             </ul>
         </div>
-        <div class="flex flex-wrap justify-between pt4 reviews-wrapper"
+        <div class="flex flex-wrap reviews-wrapper"
              infinite-scroll
              [infiniteScrollDistance]="scrollDistance"
              [infiniteScrollUpDistance]="scrollUpDistance"
@@ -52,7 +52,7 @@
              [scrollWindow]="false"
              (scrolled)="onScrollDown()"
         >
-            <div class="w-45" *ngFor="let review of reviews;let i = index">
+            <div class="custom-width" *ngFor="let review of reviews;let i = index">
                 <app-review-desktop [review]="review" [galleryId]="'review'+i"></app-review-desktop>
             </div>
         </div>
