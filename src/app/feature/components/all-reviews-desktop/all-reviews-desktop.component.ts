@@ -73,6 +73,5 @@ export class AllReviewsDesktopComponent implements OnInit {
 
     openProductPage() {
         this.dialog.close();
-        this.router.navigate(['/product', this.product.sku]);
     }
 }
