@@ -2,7 +2,7 @@
     <div class="flex mb2">
         <img (click)="openProductPage()" class="review-image" [src]="product?.main_image">
         <div class="ml2 flex flex-column">
-            <span class="open-sans-14 dark-blue upper-case">{{product?.name}}</span>
+            <span class="open-sans-14 dark-blue upper-case" (click)="openProductPage()">{{product?.name}}</span>
             <span class="open-sans-14 light-gray">by {{product?.site}}</span>
         </div>
     </div>
@@ -17,7 +17,7 @@
         </div>
         <span class="open-sans-14 light-gray">{{reviewData?.totalReviews}} total ratings</span>
     </div>
-    <div class="flex mb2">
+    <div class="flex mb4">
         <a class="w-100 bold open-sans-12 add-review-btn" (click)="goToReview(product?.sku)">
             Write a review
             <span style="float: right">
@@ -27,8 +27,8 @@
                                 </span>
         </a>
     </div>
-    <span class="open-sans-14 light-gray upper-case bold db mb2">Review</span>
-    <div class="w-100 mb2">
+    <span class="open-sans-14 light-gray upper-case bold db mb4">Reviews</span>
+    <div class="w-100 mb4">
         <select class="custom-select" (change)="changeReview($event)">
             <option value="">MOST RECENT</option>
             <option value="rating_high_to_low">HIGHEST RATED</option>
@@ -36,11 +36,12 @@
         </select>
     </div>
 
-    <div class="flex flex-column"
+    <div class="flex flex-column reviews-section"
          infinite-scroll
          [infiniteScrollDistance]="scrollDistance"
          [infiniteScrollUpDistance]="scrollUpDistance"
          [infiniteScrollThrottle]="throttle"
+         [scrollWindow]="false"
          (scrolled)="onScrollDown()"
     >
         <ng-container *ngFor="let review of reviews;let i = index">

@@ -588,6 +588,10 @@ export class ProductDetailsMobileComponent implements OnInit {
         this.matDialogUtils.openMyReviewDialog(data);
     }
 
+    openAllReviewsPage() {
+        this.router.navigate(['/product', 'view-reviews', this.productSku]);
+    }
+
     goToReview(sku) {
         console.log(sku);
         // window.location.href = './product/review/' + sku;
