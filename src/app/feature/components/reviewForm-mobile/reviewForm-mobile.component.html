@@ -2,7 +2,7 @@
     <div>&nbsp;</div>
 
     <div class="content-height">
-        
+
         <div class="product-details-container">
 
             <form name="review-form" class="w-100 flex-ns gallery-container" #reviewForm="ngForm">
@@ -21,12 +21,11 @@
                             <span style="color: #606060;">by {{productsite}}</span>
                         </div>
                     </div>
-                    
+
 
                 </div>
                 <div style="clear:both;">&nbsp;</div>
 
-                <!--<div class="product-description-container" style="max-height: calc(100vh - 60px);">-->
                 <div class="form-input-container">
                     <div class="header">
                         <div class="title b">My Review<br /><div class="require">*Required Field</div></div>
@@ -65,8 +64,8 @@
                                #reviewUserName="ngModel"
                                [(ngModel)]="reviewHeader" placeholder="Example: Love this couch!" />
                         <!--<span *ngIf="headererror" class="error-msg">
-            This field is required.
-        </span>-->
+                            This field is required.
+                        </span>-->
                     </div>
                     <!-- [checked]="rateval ==1" -->
 
@@ -163,14 +162,13 @@
                     <div class="require" style="font-size:17px;">Thanks for sharing your feedback!</div>
                     <div class="action-buttons-row w-100 input-container">
                         <!--<button class="profile-cancel-btn b" mat-dialog-close>
-            CANCEL
-        </button>-->
+                            CANCEL
+                        </button>-->
                         <button class="profile-update-btn b ml3 form-input w-100 " (click)="reviewUpdate()">
                             POST REVIEW
                         </button>
                     </div>
                 </div>
-                <!--</div>-->
             </form>
         </div>
     </div>

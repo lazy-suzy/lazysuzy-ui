@@ -1,6 +1,6 @@
-import {Component, OnInit, Renderer} from '@angular/core';
-import {ActivatedRoute, Router} from '@angular/router';
-import {IProduct, IProductDetail} from 'src/app/shared/models';
+import { Component, OnInit, Renderer } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
+import { IProduct, IProductDetail } from 'src/app/shared/models';
 import {
     ApiService,
     CacheService,
@@ -8,9 +8,9 @@ import {
     MatDialogUtilsService,
     UtilsService
 } from 'src/app/shared/services';
-import {Observable, Subscription} from 'rxjs';
-import {BreakpointObserver, Breakpoints, BreakpointState} from '@angular/cdk/layout';
-import {MatSnackBar} from '@angular/material';
+import { Observable, Subscription } from 'rxjs';
+import { BreakpointObserver, Breakpoints, BreakpointState } from '@angular/cdk/layout';
+import { MatSnackBar } from '@angular/material';
 
 @Component({
     selector: 'app-reviewForm-mobile',
@@ -123,7 +123,7 @@ export class ReviewFormMobileComponent implements OnInit {
                                     this.openMyReviewModal();
                                     this.router.navigate(
                                         [`${this.product.department_info[0].category_url}`],
-                                        {queryParams: {modal_sku: this.product.sku}}
+                                        { queryParams: { modal_sku: this.product.sku } }
                                     );
                                 }
 

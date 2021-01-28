@@ -1,13 +1,13 @@
-import {ElementRef, Injectable} from '@angular/core';
-import {MatDialog} from '@angular/material/dialog';
-import {ConfirmCartProductComponent, ProductDetailsComponent, ReviewFormComponent} from 'src/app/feature/components';
-import {SigninComponent, SignupComponent} from 'src/app/core/components';
-import {Location} from '@angular/common';
-import {ActivatedRoute, Router} from '@angular/router';
-import {OfferDailogComponent} from '../../../feature/components/offer-dailog/offer-dailog.component';
-import {NewsletterPopupComponent} from '../../../feature/components/newsletter-popup/newsletter-popup.component';
-import {CookieService} from 'ngx-cookie-service';
-import {AllReviewsDesktopComponent} from '../../../feature/components/all-reviews-desktop/all-reviews-desktop.component';
+import { ElementRef, Injectable } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
+import { ConfirmCartProductComponent, ProductDetailsComponent, ReviewFormComponent } from 'src/app/feature/components';
+import { SigninComponent, SignupComponent } from 'src/app/core/components';
+import { Location } from '@angular/common';
+import { ActivatedRoute, Router } from '@angular/router';
+import { OfferDailogComponent } from '../../../feature/components/offer-dailog/offer-dailog.component';
+import { NewsletterPopupComponent } from '../../../feature/components/newsletter-popup/newsletter-popup.component';
+import { CookieService } from 'ngx-cookie-service';
+import { AllReviewsDesktopComponent } from '../../../feature/components/all-reviews-desktop/all-reviews-desktop.component';
 
 @Injectable({
     providedIn: 'root'
@@ -42,7 +42,7 @@ export class MatDialogUtilsService {
             sku: modalSku,
         };
         if (this.payload && this.payload.product.sku === modalSku) {
-            modalData = {...modalData, payload: this.payload};
+            modalData = { ...modalData, payload: this.payload };
         }
         if (this.productDialog) {
             this.productDialog.componentInstance.data = modalData;
@@ -58,11 +58,11 @@ export class MatDialogUtilsService {
             });
             this.productDialog.afterClosed().subscribe((result) => {
                 this.payload = null;
-                const params = {...this.activeRoute.snapshot.queryParams};
+                const params = { ...this.activeRoute.snapshot.queryParams };
                 this.productDialog = undefined;
                 if (params.modal_sku) {
                     delete params.modal_sku;
-                    this.router.navigate([], {queryParams: params});
+                    this.router.navigate([], { queryParams: params });
                 } else {
                     this.location.back();
                 }
@@ -75,7 +75,7 @@ export class MatDialogUtilsService {
         const dialogRef = this.dialog.open(ProductDetailsComponent, {
             width: '80%',
             height: '100%',
-            data: {sku: modalSku},
+            data: { sku: modalSku },
             panelClass: 'product-details-dialog-container'
         });
         dialogRef.afterOpened().subscribe((result) => {
@@ -87,10 +87,10 @@ export class MatDialogUtilsService {
         });
         dialogRef.afterClosed().subscribe((result) => {
             this.dialog.closeAll();
-            const params = {...this.activeRoute.snapshot.queryParams};
+            const params = { ...this.activeRoute.snapshot.queryParams };
             if (params.modal_sku) {
                 delete params.modal_sku;
-                this.router.navigate([], {queryParams: params});
+                this.router.navigate([], { queryParams: params });
             } else {
                 // this.location.back();
             }
@@ -101,7 +101,7 @@ export class MatDialogUtilsService {
         const dialogRef = this.dialog.open(ProductDetailsComponent, {
             width: '80%',
             height: '100%',
-            data: {sku: modalSku},
+            data: { sku: modalSku },
             panelClass: 'product-details-dialog-container'
         });
         dialogRef.afterOpened().subscribe((result) => {
@@ -197,10 +197,43 @@ export class MatDialogUtilsService {
 
     openMyReviewDialog(modal) {
         console.log(modal);
+
+
+
         this.productDialog = this.dialog.open(ReviewFormComponent, {
             width: '80%',
             height: '100%',
-            data: {modal},
+            data: { modal },
+            panelClass: 'product-details-dialog-container'
+        });
+        this.productDialog.afterOpened().subscribe((result) => {
+            this.location.go(`product/review/${modal.sku}`, '', this.location.getState());
+        });
+        this.productDialog.afterClosed().subscribe((result) => {
+
+            this.payload = null;
+            const params = { ...this.activeRoute.snapshot.queryParams };
+            // this.productDialog = undefined;
+            if (params.modal_sku) {
+                //  delete params.modal_sku;
+                //  this.router.navigate([], { queryParams: params });
+                this.router.navigate(['/product/', modal.sku]);
+            } else {
+                //this.location.back();
+                this.router.navigateByUrl(`/product/${modal.sku}`)
+            }
+
+        });
+
+
+    }
+
+    openMyReviewDialog_bkup(modal) {
+        console.log(modal);
+        this.productDialog = this.dialog.open(ReviewFormComponent, {
+            width: '80%',
+            height: '100%',
+            data: { modal },
             panelClass: 'product-details-dialog-container'
         });
         this.productDialog.afterOpened().subscribe((result) => {
@@ -209,11 +242,11 @@ export class MatDialogUtilsService {
         this.productDialog.afterClosed().subscribe((result) => {
             this.payload = null;
             window.location.href = './product/' + modal.sku;
-            const params = {...this.activeRoute.snapshot.queryParams};
+            const params = { ...this.activeRoute.snapshot.queryParams };
             this.productDialog = undefined;
             if (params.modal_sku) {
                 delete params.modal_sku;
-                this.router.navigate([''], {queryParams: params});
+                this.router.navigate([''], { queryParams: params });
             } else {
                 this.location.back();
             }
@@ -242,4 +275,6 @@ export class MatDialogUtilsService {
             }
         });
     }
+
+
 }
