@@ -16,8 +16,7 @@ import {
     OrderSuccessModule,
     PaymentModule,
     ProductDetailsMobileModule,
-    PublicProfileModule, 
-   // ReviewFormModule,
+    PublicProfileModule,
     ReviewFormMobileModule
 } from './components';
 import {ResetPasswordComponent} from './containers/reset-password/reset-password.component';
@@ -52,7 +51,7 @@ const MODULES = [
     PublicProfileModule,
     BlogModule,
     CollectionListModule,
-   // ReviewFormModule,
+    // ReviewFormModule,
     ReviewFormMobileModule
 ];
 

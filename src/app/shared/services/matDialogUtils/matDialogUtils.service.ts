@@ -7,6 +7,7 @@ import {ActivatedRoute, Router} from '@angular/router';
 import {OfferDailogComponent} from '../../../feature/components/offer-dailog/offer-dailog.component';
 import {NewsletterPopupComponent} from '../../../feature/components/newsletter-popup/newsletter-popup.component';
 import {CookieService} from 'ngx-cookie-service';
+import {AllReviewsDesktopComponent} from '../../../feature/components/all-reviews-desktop/all-reviews-desktop.component';
 
 @Injectable({
     providedIn: 'root'
@@ -183,7 +184,7 @@ export class MatDialogUtilsService {
     setProduct(payload) {
         this.payload = payload;
     }
-	 
+
     /*openMyReviewDialog(modal) {
         console.log(modal);
         const dialogRef = this.dialog.open(ReviewFormComponent, {
@@ -196,34 +197,34 @@ export class MatDialogUtilsService {
 
     openMyReviewDialog(modal) {
         console.log(modal);
-        
-     
-       
+
+
+
         this.productDialog = this.dialog.open(ReviewFormComponent, {
             width: '80%',
             height: '100%',
             data: { modal },
-                panelClass: 'product-details-dialog-container'
-            });
+            panelClass: 'product-details-dialog-container'
+        });
         this.productDialog.afterOpened().subscribe((result) => {
-                this.location.go(`product/review/${modal.sku}`, '', this.location.getState());
-            });
+            this.location.go(`product/review/${modal.sku}`, '', this.location.getState());
+        });
         this.productDialog.afterClosed().subscribe((result) => {
 
             this.payload = null;
             const params = { ...this.activeRoute.snapshot.queryParams };
-           // this.productDialog = undefined;
+            // this.productDialog = undefined;
             if (params.modal_sku) {
-              //  delete params.modal_sku;
-              //  this.router.navigate([], { queryParams: params });
+                //  delete params.modal_sku;
+                //  this.router.navigate([], { queryParams: params });
                 this.router.navigate(['/product/', modal.sku]);
             } else {
                 //this.location.back();
                 this.router.navigateByUrl(`/product/${modal.sku}`)
             }
 
-            });   
-        
+        });
+
 
     }
 
@@ -251,4 +252,19 @@ export class MatDialogUtilsService {
             }
         });
     }
+
+    openAllReviewsModal(product, reviewsData) {
+        const data = {
+            product,
+            reviewsData
+        };
+        const dialog = this.dialog.open(AllReviewsDesktopComponent, {
+            width: '80%',
+            height: '100%',
+            data,
+            panelClass: 'product-details-dialog-container'
+        });
+    }
+
+   
 }

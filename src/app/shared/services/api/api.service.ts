@@ -553,4 +553,13 @@ export class ApiService {
         const url = `${env.API_BASE_HREF}${endpoint}`;
         return this.httpService.post(url, data);
     }
+
+    // Get Full Review List
+    getFullReviewList(sku, pageNo, sortType: string = '') {
+        const endpoint = sortType ?
+            `allreviews/${sku}?sort_type=${sortType}&pageno=${pageNo}` :
+            `allreviews/${sku}?pageno=${pageNo}`;
+        const url = `${env.API_BASE_HREF}${endpoint}`;
+        return this.httpService.get(url);
+    }
 }

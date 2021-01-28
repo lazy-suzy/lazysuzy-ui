@@ -15,16 +15,18 @@ import {FormsModule} from '@angular/forms';
 import {NgxJsonLdModule} from '@ngx-lite/json-ld';
 import {CarouselModule} from 'primeng/carousel';
 import {ReviewFormComponent} from './../reviewForm/reviewForm.component';
-import {FeatureModule} from '../../feature.module';
 import {ReviewDesktopComponent} from '../review-desktop/review-desktop.component';
 import {LightboxModule} from '@ngx-gallery/lightbox';
+import {AllReviewsDesktopComponent} from '../all-reviews-desktop/all-reviews-desktop.component';
+import {InfiniteScrollModule} from 'ngx-infinite-scroll';
 
 const DECLARATIONS = [
     ProductComponent,
     ProductDetailsComponent,
     ReviewFormComponent,
     ConfirmCartProductComponent,
-    ReviewDesktopComponent
+    ReviewDesktopComponent,
+    AllReviewsDesktopComponent,
 ];
 
 const MODULES = [
@@ -41,12 +43,18 @@ const MODULES = [
     NgxJsonLdModule
 ];
 
-const COMPONENTS = [ProductDetailsComponent, ConfirmCartProductComponent, ReviewFormComponent, ReviewDesktopComponent];
+const COMPONENTS = [
+    ProductDetailsComponent,
+    ConfirmCartProductComponent,
+    ReviewFormComponent,
+    ReviewDesktopComponent,
+    AllReviewsDesktopComponent
+];
 
 @NgModule({
     declarations: [...DECLARATIONS],
     entryComponents: [...COMPONENTS],
-    imports: [...MODULES, CarouselModule, LightboxModule],
+    imports: [...MODULES, CarouselModule, LightboxModule, InfiniteScrollModule],
     exports: [...DECLARATIONS, ...MODULES]
 })
 export class ProductModule {
