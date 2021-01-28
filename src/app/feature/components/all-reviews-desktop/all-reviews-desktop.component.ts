@@ -1,6 +1,7 @@
 import {Component, Inject, OnInit} from '@angular/core';
-import {MAT_DIALOG_DATA} from '@angular/material/dialog';
-import {ApiService} from '../../../shared/services';
+import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material/dialog';
+import {ApiService, MatDialogUtilsService} from '../../../shared/services';
+import {Router} from '@angular/router';
 
 @Component({
     selector: 'app-all-reviews-desktop',
@@ -23,7 +24,10 @@ export class AllReviewsDesktopComponent implements OnInit {
 
     constructor(
         @Inject(MAT_DIALOG_DATA) public data: any,
+        private dialog: MatDialogRef<AllReviewsDesktopComponent>,
         private apiService: ApiService,
+        private matDialog: MatDialogUtilsService,
+        private router: Router
     ) {
     }
 
@@ -55,5 +59,20 @@ export class AllReviewsDesktopComponent implements OnInit {
     onScrollDown() {
         this.pageNo++;
         this.fetchProductReviews();
+    }
+
+    openWriteReviewModal() {
+        const data = {
+            sku: this.product.sku,
+            brand: this.product.site,
+            image: this.product.main_image,
+            name: this.product.name,
+        };
+        this.matDialog.openMyReviewDialog(data);
+    }
+
+    openProductPage() {
+        this.dialog.close();
+        this.router.navigate(['/product', this.product.sku]);
     }
 }
