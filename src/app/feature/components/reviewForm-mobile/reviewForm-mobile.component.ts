@@ -1,6 +1,6 @@
-import { Component, OnInit, Renderer } from '@angular/core';
+import {Component, OnInit, Renderer} from '@angular/core';
 import {ActivatedRoute, Router} from '@angular/router';
-import {IActiveProduct, IProduct, IProductDetail} from 'src/app/shared/models';
+import {IProduct, IProductDetail} from 'src/app/shared/models';
 import {
     ApiService,
     CacheService,
@@ -9,30 +9,30 @@ import {
     UtilsService
 } from 'src/app/shared/services';
 import {Observable, Subscription} from 'rxjs';
-import { BreakpointObserver, Breakpoints, BreakpointState } from '@angular/cdk/layout'; 
-import { MatSnackBar } from '@angular/material';
+import {BreakpointObserver, Breakpoints, BreakpointState} from '@angular/cdk/layout';
+import {MatSnackBar} from '@angular/material';
 
 @Component({
     selector: 'app-reviewForm-mobile',
     templateUrl: './reviewForm-mobile.component.html',
     styleUrls: ['./reviewForm-mobile.component.less']
 })
-export class ReviewFormMobileComponent implements OnInit { 
+export class ReviewFormMobileComponent implements OnInit {
 
     productSku: any;
     routeSubscription: any;
-    product: IProduct; 
+    product: IProduct;
     spinner = 'assets/image/spinner.gif';
     bpObserver: Observable<BreakpointState> = this.breakpointObserver.observe(
         Breakpoints.Handset
-    );   
+    );
     isHandset: boolean;
-    bpSubscription: Subscription; 
-      
-   
-    errorMessage = ''; 
-    eventSubscription: Subscription; 
-    hasSelection: boolean; 
+    bpSubscription: Subscription;
+
+
+    errorMessage = '';
+    eventSubscription: Subscription;
+    hasSelection: boolean;
     invalidLinkImageSrc = 'assets/image/invalid_link.png';
     invalidLink: boolean;
     productSubscription: Subscription;
@@ -42,7 +42,7 @@ export class ReviewFormMobileComponent implements OnInit {
     presentUserName: string = '';
     presentUserEmail: string = '';
     presentLocation: string = '';
-    images = []; 
+    images = [];
     imageSrc = [];
     hasImage: boolean;
     emailerror: boolean = false;
@@ -65,16 +65,16 @@ export class ReviewFormMobileComponent implements OnInit {
         private activeRoute: ActivatedRoute,
         private apiService: ApiService,
         public utils: UtilsService,
-        private breakpointObserver: BreakpointObserver, 
+        private breakpointObserver: BreakpointObserver,
         public cacheService: CacheService,
         private eventEmitterService: EventEmitterService,
         private snackBar: MatSnackBar,
         private renderer: Renderer,
-        private matDialogUtils: MatDialogUtilsService 
+        private matDialogUtils: MatDialogUtilsService
     ) {
     }
 
-    ngOnInit() { 
+    ngOnInit() {
         this.eventSubscription = this.eventEmitterService.userChangeEvent
             .asObservable()
             .subscribe((user) => {
@@ -94,45 +94,46 @@ export class ReviewFormMobileComponent implements OnInit {
 
                 this.bpSubscription = this.bpObserver.subscribe(
                     (handset: BreakpointState) => {
-                        console.log(handset.matches)
+                        console.log(handset.matches);
                         this.isHandset = handset.matches;
                     }
                 );
-                 this.loadProduct();
+                this.loadProduct();
             });
     }
 
     loadProduct() {
         this.routeSubscription = this.activeRoute.params.subscribe(
-            (routeParams) => { 
-                this.productSku = routeParams.product; 
+            (routeParams) => {
+                this.productSku = routeParams.product;
                 this.productSubscription = this.apiService
                     .getProduct(this.productSku)
                     .subscribe(
                         (payload: IProductDetail) => {
-                            this.product = payload.product;console.log(this.product)
+                            this.product = payload.product;
+                            console.log(this.product);
                             this.img = this.product.main_image;
                             this.productname = this.product.name;
                             this.productsite = this.product.site;
-                            
-                            if (this.product) { 
-                              
+
+                            if (this.product) {
+
                                 if (!this.isHandset) {
-                                     this.matDialogUtils.setProduct(payload);
+                                    this.matDialogUtils.setProduct(payload);
                                     this.openMyReviewModal();
-                                     this.router.navigate(
+                                    this.router.navigate(
                                         [`${this.product.department_info[0].category_url}`],
                                         {queryParams: {modal_sku: this.product.sku}}
-                                    ); 
+                                    );
                                 }
-                               
+
                                 this.invalidLink = false;
                             } else {
                                 this.invalidLink = true;
-                            } 
+                            }
                         },
                         (error) => {
-                            this.invalidLink = true; 
+                            this.invalidLink = true;
                         }
                     );
             }
@@ -140,7 +141,7 @@ export class ReviewFormMobileComponent implements OnInit {
 
     }
 
-  
+
     onDestroy(): void {
         this.productSubscription.unsubscribe();
         this.bpSubscription.unsubscribe();
@@ -161,13 +162,11 @@ export class ReviewFormMobileComponent implements OnInit {
                 horizontalPosition: 'center',
                 verticalPosition: 'bottom'
             });
-        }
-        else {
+        } else {
             for (var i = 0; i < this.images.length; i++) {
-                formData.append("rimage[]", this.images[i]);
+                formData.append('rimage[]', this.images[i]);
             }
         }
-
 
 
         if (this.productSku) {
@@ -175,12 +174,10 @@ export class ReviewFormMobileComponent implements OnInit {
         }
         if (this.presentUserName !== '') {
             formData.append('user_name', this.presentUserName);
-        }
-        else {
+        } else {
             if (this.username == '') {
                 formData.append('user_name', 'anonymous');
-            }
-            else {
+            } else {
                 formData.append('user_name', this.username);
             }
 
@@ -189,19 +186,16 @@ export class ReviewFormMobileComponent implements OnInit {
         if (this.presentUserEmail !== '') {
             this.emailerror = false;
             formData.append('user_email', this.presentUserEmail);
-        }
-        else {
+        } else {
             console.log(this.useremail);
             if (this.useremail == '' || this.useremail == '0') {
                 this.emailmsg = 'Please enter your email for verification.';
                 this.emailerror = true;
-            }
-            else {
+            } else {
                 if (this.validateEmail(this.useremail)) {
                     this.emailerror = false;
                     formData.append('user_email', this.useremail);
-                }
-                else {
+                } else {
                     this.emailmsg = 'Please enter a valid email address.';
                     this.emailerror = true;
                 }
@@ -211,8 +205,7 @@ export class ReviewFormMobileComponent implements OnInit {
         }
         if (this.presentLocation !== '') {
             formData.append('user_location', this.presentLocation);
-        }
-        else {
+        } else {
             formData.append('user_location', this.location);
         }
 
@@ -227,8 +220,7 @@ export class ReviewFormMobileComponent implements OnInit {
         if (this.ratingvalue > 0) {
             this.ratingerror = false;
             formData.append('rating', this.ratingvalue.toString());
-        }
-        else {
+        } else {
             this.ratingerror = true;
         }
 
@@ -260,7 +252,7 @@ export class ReviewFormMobileComponent implements OnInit {
                     verticalPosition: 'bottom'
                 });
                 //location.reload();
-                this.router.navigateByUrl(`/product/${this.productSku}`)
+                this.router.navigateByUrl(`/product/${this.productSku}`);
                 if (payload.errors.length) {
                     const errorsArray = payload.errors;
                     /*for (const error of errorsArray) { 
@@ -276,6 +268,7 @@ export class ReviewFormMobileComponent implements OnInit {
             });
         }
     }
+
     hasNull(data) {
         if (data && data !== 'null') {
             return data;
@@ -284,7 +277,7 @@ export class ReviewFormMobileComponent implements OnInit {
     }
 
     readFile(event) {
-        console.log(event.target.files)
+        console.log(event.target.files);
         let flag = 0;
         let files = event.target.files;
         for (let file of files) {
@@ -299,8 +292,7 @@ export class ReviewFormMobileComponent implements OnInit {
                 horizontalPosition: 'center',
                 verticalPosition: 'bottom'
             });
-        }
-        else {
+        } else {
             if (files && files.length <= 5) {
                 if (event.target.files && event.target.files.length > 0) {
 
@@ -318,8 +310,7 @@ export class ReviewFormMobileComponent implements OnInit {
                         reader.readAsDataURL(event.target.files[i]);
                     }
                 }
-            }
-            else {
+            } else {
                 this.snackBar.open('Maximum 5 images can be uploaded', 'Dismiss', {
                     duration: 4000,
                     horizontalPosition: 'center',
@@ -352,20 +343,20 @@ export class ReviewFormMobileComponent implements OnInit {
         window.location.href = './product/' + this.sku;
     }
 
-  
-    openMyReviewModal() {
-        console.log(this.product)
-            this.hasSelection = true;
-            const data = {
-                sku: this.product.sku,
-                brand: this.product.site,
-                image: this.product.main_image,
-                name: this.product.name 
-            };
-            
 
-            this.matDialogUtils.openMyReviewDialog(data);
+    openMyReviewModal() {
+        console.log(this.product);
+        this.hasSelection = true;
+        const data = {
+            sku: this.product.sku,
+            brand: this.product.site,
+            image: this.product.main_image,
+            name: this.product.name
+        };
+
+
+        this.matDialogUtils.openMyReviewDialog(data);
 
     }
-     
+
 }

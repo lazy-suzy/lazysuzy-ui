@@ -13,6 +13,8 @@ import {OwlModule} from 'ngx-owl-carousel';
 import {GalleryModule} from '@ngx-gallery/core';
 import { ReviewMobileComponent } from './review-mobile/review-mobile.component';
 import {LightboxModule} from '@ngx-gallery/lightbox';
+import { AllReviewsMobileComponent } from './all-reviews-mobile/all-reviews-mobile.component';
+import {InfiniteScrollModule} from 'ngx-infinite-scroll';
 
 const DECLARATIONS = [ProductDetailsMobileComponent];
 
@@ -31,8 +33,8 @@ const MODULES = [
 ];
 
 @NgModule({
-    declarations: [...DECLARATIONS, ReviewMobileComponent],
-    imports: [...MODULES, GalleryModule, LightboxModule],
+    declarations: [...DECLARATIONS, ReviewMobileComponent, AllReviewsMobileComponent],
+    imports: [...MODULES, GalleryModule, LightboxModule, InfiniteScrollModule],
     exports: [...DECLARATIONS, ...MODULES]
 })
 export class ProductDetailsMobileModule {

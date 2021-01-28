@@ -231,5 +231,15 @@ export class MatDialogUtilsService {
             data,
             panelClass: 'product-details-dialog-container'
         });
+        dialog.afterOpened().subscribe(_ => {
+            this.location.go(`product/view-reviews/${product.sku}`);
+        });
+        dialog.afterClosed().subscribe(_ => {
+            if (this.productDialog) {
+                this.location.replaceState(`product/${product.sku}`);
+            } else {
+                this.location.back();
+            }
+        });
     }
 }
