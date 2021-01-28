@@ -205,22 +205,50 @@ export class MatDialogUtilsService {
             data: { modal },
                 panelClass: 'product-details-dialog-container'
             });
-            this.productDialog.afterOpened().subscribe((result) => {
+        this.productDialog.afterOpened().subscribe((result) => {
                 this.location.go(`product/review/${modal.sku}`, '', this.location.getState());
             });
-            this.productDialog.afterClosed().subscribe((result) => {
-                this.payload = null;
-                 window.location.href = './product/' + modal.sku;
-                  const params = { ...this.activeRoute.snapshot.queryParams };
-                this.productDialog = undefined;
-                if (params.modal_sku) {
-                    delete params.modal_sku;
-                    this.router.navigate([''], { queryParams: params });
-                } else {
-                    this.location.back();
-                }  
-            });
+        this.productDialog.afterClosed().subscribe((result) => {
+
+            this.payload = null;
+            const params = { ...this.activeRoute.snapshot.queryParams };
+           // this.productDialog = undefined;
+            if (params.modal_sku) {
+              //  delete params.modal_sku;
+              //  this.router.navigate([], { queryParams: params });
+                this.router.navigate(['/product/', modal.sku]);
+            } else {
+                //this.location.back();
+                this.router.navigateByUrl(`/product/${modal.sku}`)
+            }
+
+            });   
         
 
+    }
+
+    openMyReviewDialog_bkup(modal) {
+        console.log(modal);
+        this.productDialog = this.dialog.open(ReviewFormComponent, {
+            width: '80%',
+            height: '100%',
+            data: { modal },
+            panelClass: 'product-details-dialog-container'
+        });
+        this.productDialog.afterOpened().subscribe((result) => {
+            this.location.go(`product/review/${modal.sku}`, '', this.location.getState());
+        });
+        this.productDialog.afterClosed().subscribe((result) => {
+            this.payload = null;
+            window.location.href = './product/' + modal.sku;
+            const params = { ...this.activeRoute.snapshot.queryParams };
+            this.productDialog = undefined;
+            if (params.modal_sku) {
+                delete params.modal_sku;
+                this.router.navigate([''], { queryParams: params });
+            } else {
+                this.location.back();
+            }
+        });
     }
 }

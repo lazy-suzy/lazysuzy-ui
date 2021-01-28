@@ -217,7 +217,8 @@ export class ReviewFormComponent implements OnInit {
         verticalPosition: 'bottom'
       });
          // location.reload();
-         window.location.href = './product/' + this.sku;
+         // this.router.navigateByUrl(`/product/${this.sku}`)
+        window.location.href = './product/' + this.sku;
      // const token = this.cookie.get('token');
      // this.eventEmitterService.fetchUser(token, payload.user);
       if (payload.errors.length) {
@@ -316,6 +317,11 @@ export class ReviewFormComponent implements OnInit {
     gotoProduct() {
        // this.router.navigateByUrl(`/product/${this.sku}`)
         window.location.href = './product/' + this.sku;
+    }
+
+    closePopup() {
+     this.router.navigateByUrl(`/product/${this.sku}`)
+         //  window.location.href = './product/' + this.sku;
     }
 
   }
