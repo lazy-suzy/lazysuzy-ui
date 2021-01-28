@@ -72,6 +72,6 @@ export class AllReviewsDesktopComponent implements OnInit {
     }
 
     openProductPage() {
-        this.dialog.close();
+        window.location.href = '/product/' + this.product.sku;
     }
 }

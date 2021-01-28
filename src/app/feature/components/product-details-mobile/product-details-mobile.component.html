@@ -319,7 +319,7 @@
                             </ng-container>
                         </div>
                         <div *ngIf="totalCount>10">
-                            <a class="open-sans-12 bold all-review-link">See All Reviews
+                            <a (click)="openAllReviewsPage()" class="open-sans-12 bold all-review-link">See All Reviews
                                 <mat-icon style="vertical-align: middle;font-size: 18px;height: 20px;width: 20px">
                                     chevron_right
                                 </mat-icon>

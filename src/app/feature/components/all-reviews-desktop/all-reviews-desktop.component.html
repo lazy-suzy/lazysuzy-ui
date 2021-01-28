@@ -4,10 +4,11 @@
     </button>
     <div class="container">
         <div class="flex justify-between">
-            <div class="w-40 flex">
-                <img (click)="openProductPage()" style="height: 10rem" [src]="product.main_image">
-                <div class="flex flex-column">
-                    <span class="open-sans-18">{{product.name}}</span>
+            <div class="w-40 flex" style="padding-left: 2%">
+                <img (click)="openProductPage()" style="height: 10rem; cursor: pointer;" [src]="product.main_image">
+                <div class="flex flex-column ml3">
+                    <span class="open-sans-18" style="cursor: pointer"
+                          (click)="openProductPage()">{{product.name}}</span>
                     <span class="lato-14 light-gray">by {{product.site}}</span>
                 </div>
             </div>
@@ -24,7 +25,9 @@
                     <span>{{reviewData.totalReviews}} total ratings</span>
                 </div>
                 <div class="flex">
-                    <button (click)="openWriteReviewModal()" mat-raised-button class="add-review-btn w-100">Write a Review</button>
+                    <button (click)="openWriteReviewModal()" mat-raised-button class="add-review-btn w-100">Write a
+                        Review
+                    </button>
                 </div>
             </div>
         </div>
