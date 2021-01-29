@@ -36,12 +36,11 @@
         </select>
     </div>
 
-    <div class="flex flex-column reviews-section"
+    <div class="flex flex-column"
          infinite-scroll
          [infiniteScrollDistance]="scrollDistance"
          [infiniteScrollUpDistance]="scrollUpDistance"
          [infiniteScrollThrottle]="throttle"
-         [scrollWindow]="false"
          (scrolled)="onScrollDown()"
     >
         <ng-container *ngFor="let review of reviews;let i = index">
