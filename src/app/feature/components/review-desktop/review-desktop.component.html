@@ -1,0 +1,33 @@
+<div class="flex flex-column mb4">
+    <div class="star-rating-outer yellow mr-auto">
+        <div [style.width.%]="(review.rating)*20" class="star-rating-inner">
+        </div>
+    </div>
+    <div>
+        <span class="review-header">{{review.headline}}</span>
+    </div>
+    <div>
+        <span class="review-user-info">{{review.user_name}} {{review.user_location ? '| ' + review.user_location : ''}}</span>
+    </div>
+    <div>
+        <span class="open-sans-14 font-dark-gray">Reviewed on {{review.submission_time}}</span>
+    </div>
+    <div>
+        <p class="review-details" [innerHTML]="review.review"></p>
+    </div>
+    <div class="review-image-container mb2" *ngIf="review.review_images">
+        <ng-container *ngFor="let image of items;let i=index">
+            <img *ngIf="image" class="review-image" [src]="image.data.src" alt="review-image-{{i+1}}" [gallery]="this.galleryRef" [lightbox]="i">
+        </ng-container>
+    </div>
+    <div *ngIf="review.helpful_user_count>0" class="mb2">
+        <span class="open-sans-14 font-dark-gray">{{review.helpful_user_count}} {{review.helpful_user_count > 1 ? 'shoppers' : 'shopper'}}
+            found this helpful</span>
+    </div>
+    <div class="flex">
+        <button *ngIf="!markedHelpful" class="review-helpful-btn lato-14" (click)="markHelpful()">Helpful</button>
+        <span *ngIf="markedHelpful" class="lato-14 green"><mat-icon class="circle-icon">check_circle</mat-icon>Thank you for the feedback.</span>
+        <a *ngIf="!markedReported" class=" ml2 review-report-btn open-sans-14 font-dark-gray" (click)="reportReview()">Report</a>
+        <span class="open-sans-14 underline ml2" *ngIf="markedReported">Reported</span>
+    </div>
+</div>

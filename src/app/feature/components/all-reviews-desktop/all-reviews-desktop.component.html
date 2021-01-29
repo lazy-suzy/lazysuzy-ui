@@ -1,0 +1,65 @@
+<div class="reviews-modal pb4">
+    <button class="close-icon" mat-dialog-close>
+        <mat-icon>close</mat-icon>
+    </button>
+    <div class="container">
+        <div class="flex justify-between">
+            <div class="w-40 flex" style="padding-left: 2%">
+                <img (click)="openProductPage()" style="height: 10rem; cursor: pointer;" [src]="product.main_image">
+                <div class="flex flex-column ml3">
+                    <span class="open-sans-18" style="cursor: pointer"
+                          (click)="openProductPage()">{{product.name}}</span>
+                    <span class="lato-14 light-gray">by {{product.site}}</span>
+                </div>
+            </div>
+            <div class="w-30 mh-auto" style="min-width: 325px;">
+                <div class="flex items-center justify-between mb2">
+                    <div class="flex items-center">
+                        <div class="star-rating-outer yellow mr-auto">
+                            <div [style.width.%]="(reviewData.totalRatings)" class="star-rating-inner">
+                            </div>
+                        </div>
+                        <span class="open-sans-18 dark-blue">&nbsp;{{renderPercentage(reviewData.totalRatings)}}
+                            out of 5</span>
+                    </div>
+                    <span>{{reviewData.totalReviews}} total ratings</span>
+                </div>
+                <div class="flex">
+                    <button (click)="openWriteReviewModal()" mat-raised-button class="add-review-btn w-100">Write a
+                        Review
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <div class="text-center">
+            <span class="open-sans-18 dark-blue upper-case bold db mb2">Reviews</span>
+            <ul class="description-menu">
+                <li class="nav-link" [ngClass]="{'review-tab-active':currentSortType===''}" (click)="changeSort('')">
+                    Most
+                    Recent
+                </li>
+                <li class="nav-link" [ngClass]="{'review-tab-active':currentSortType==='rating_high_to_low'}"
+                    (click)="changeSort('rating_high_to_low')">Highest Rated
+                </li>
+                <li class="nav-link" [ngClass]="{'review-tab-active':currentSortType==='rating_low_to_high'}"
+                    (click)="changeSort('rating_low_to_high')">Lowest Rated
+                </li>
+            </ul>
+        </div>
+        <div class="flex flex-wrap reviews-wrapper"
+             infinite-scroll
+             [infiniteScrollDistance]="scrollDistance"
+             [infiniteScrollUpDistance]="scrollUpDistance"
+             [infiniteScrollThrottle]="throttle"
+             [scrollWindow]="false"
+             (scrolled)="onScrollDown()"
+        >
+            <div class="custom-width" *ngFor="let review of reviews;let i = index">
+                <app-review-desktop [review]="review" [galleryId]="'review'+i"></app-review-desktop>
+            </div>
+        </div>
+    </div>
+    <div>&nbsp;</div>
+</div>
+<img *ngIf="isReviewFetching" [src]="spinner" class="loader"/>

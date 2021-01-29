@@ -45,7 +45,7 @@ export class ApiService {
     getTrendingProducts(): Observable<IProductsPayload> {
         const endPoint = `trending`;
         const url = `${env.API_BASE_HREF}${endPoint}`;
-        return  this.httpService.get(url);
+        return this.httpService.get(url);
     }
 
     getBestSellers(filters = '', page = 0): Observable<IProductsPayload> {
@@ -504,5 +504,54 @@ export class ApiService {
         });
         const url = `${env.API_BASE_HREF}${recentProductsUrl}`;
         return this.httpService.get(url, headers);
+    }
+
+    submitReview(data) {
+        const endpoint = 'review';
+        const token = this.cookie.get('token');
+        const headers = new HttpHeaders({
+            Authorization: `Bearer ${token}`
+        });
+        const url = `${env.API_BASE_HREF}${endpoint}`;
+        return this.httpService.post(url, data, headers);
+    }
+
+
+    getProductReviews(id: string, limit) {
+        // const limit = 6;
+        const endpoint = `review/getreview-${id}/${limit}`;
+        const url = `${env.API_BASE_HREF}${endpoint}`;
+        return this.httpService.get(url);
+    }
+
+    // Mark Review Helpful
+    markReviewHelpful(userId: number, reviewId: number) {
+        const data = {
+            user_id: userId,
+            review_id: reviewId
+        };
+        const endpoint = `mark-helpful`;
+        const url = `${env.API_BASE_HREF}${endpoint}`;
+        return this.httpService.post(url, data);
+    }
+
+    // Report Review
+    reportReview(userId: number, reviewId: number) {
+        const data = {
+            user_id: userId,
+            review_id: reviewId
+        };
+        const endpoint = `mark-reported`;
+        const url = `${env.API_BASE_HREF}${endpoint}`;
+        return this.httpService.post(url, data);
+    }
+
+    // Get Full Review List
+    getFullReviewList(sku, pageNo, sortType: string = '') {
+        const endpoint = sortType ?
+            `allreviews/${sku}?sort_type=${sortType}&pageno=${pageNo}` :
+            `allreviews/${sku}?pageno=${pageNo}`;
+        const url = `${env.API_BASE_HREF}${endpoint}`;
+        return this.httpService.get(url);
     }
 }

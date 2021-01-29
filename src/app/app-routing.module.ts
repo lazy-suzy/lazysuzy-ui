@@ -17,10 +17,12 @@ import {
     OrderSuccessComponent,
     PaymentComponent,
     ProductDetailsMobileComponent,
-    PublicProfileComponent
+    PublicProfileComponent,
+    ReviewFormMobileComponent
 } from './feature/components';
 import {environment} from 'src/environments/environment';
 import {ProductCollectionsComponent} from './feature/containers/product-collections/product-collections.component';
+import {AllReviewsMobileComponent} from './feature/components/product-details-mobile/all-reviews-mobile/all-reviews-mobile.component';
 
 const routes: Routes = [
     {path: '', component: LandingComponent, pathMatch: 'full'},
@@ -108,7 +110,9 @@ const routes: Routes = [
             )
     },
     {path: 'settings/profile', component: EditMyProfileComponent},
-    {path: 'p/:profile', component: PublicProfileComponent}
+    {path: 'p/:profile', component: PublicProfileComponent},
+    {path: 'product/review/:product', component: ReviewFormMobileComponent},
+    {path: 'product/view-reviews/:product', component: AllReviewsMobileComponent}
 ];
 
 @NgModule({

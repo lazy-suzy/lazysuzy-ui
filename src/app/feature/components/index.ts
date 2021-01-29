@@ -1,3 +1,4 @@
+
 export * from './product/product.module';
 export * from './search-product/search-product.module';
 export * from './room/room.module';
@@ -29,3 +30,7 @@ export * from './editMyProfile/editMyProfile.component';
 export * from './editMyProfile/editMyProfile.module';
 export * from './publicProfile/publicProfile.module';
 export * from './publicProfile/publicProfile.component';
+export * from './reviewForm/reviewForm.component';
+
+export * from './reviewForm-mobile/reviewForm-mobile.component';
+export * from './reviewForm-mobile/reviewForm-mobile.module';

@@ -27,9 +27,10 @@
                                     {{renderPrice(productWasPrice) }}
                                     </span>
                                 </span>
-                                    <div *ngIf="product.reviews != null && product.reviews != 0"
-                                         class="rating-container">
-                                        <div class="rating pr2">
+
+                                    <div class="rating-container"><!--goToReview(product.sku)-->
+                                        <!--<div class="write-review" (click)="openMyReviewModal()" >Write a Review </div>-->
+                                        <div class="rating pr2" *ngIf="product.reviews != null && product.reviews != 0">
                                             <mat-icon *ngFor="let icon of starIcons" class="yellow">
                                                 {{ icon }}
                                             </mat-icon>
@@ -169,17 +170,16 @@
                 </div>
                 <div class="product-description-container" [ngStyle]="topHeight">
 
-                    <app-variations
-                            *ngIf="isVariationExist && !product.redirect && product.variations?.length>1"
-                            [variations]="product.variations"
-                            [isSwatchExist]="isSwatchExist"
-                            [inputSelections]="product.selections"
-                            [hasSelection]="hasSelection"
-                            (setPrice)="onSetPrice($event)"
-                            (setImage)="onSetImage($event)"
-                            (setSelectionChecked)="onSetSelectionChecked($event)"
-                            (clearSelection)="onClearSelection($event)"
-                            (setSelection)="onSetSelection($event)">
+                    <app-variations *ngIf="isVariationExist && !product.redirect && product.variations?.length>1"
+                                    [variations]="product.variations"
+                                    [isSwatchExist]="isSwatchExist"
+                                    [inputSelections]="product.selections"
+                                    [hasSelection]="hasSelection"
+                                    (setPrice)="onSetPrice($event)"
+                                    (setImage)="onSetImage($event)"
+                                    (setSelectionChecked)="onSetSelectionChecked($event)"
+                                    (clearSelection)="onClearSelection($event)"
+                                    (setSelection)="onSetSelection($event)">
                     </app-variations>
                     <app-sets *ngIf="product.set && product.set.length > 0" [sets]="product.set" [brand]="product.site">
                     </app-sets>
@@ -265,17 +265,19 @@
                     <!-- ***************************************  -->
 
 
+                    <!-- ***************************************  -->
+
+
                     <div class="mb2" *ngIf="product.collections.length">
                         <hr class="modal-hr"/>
                         <span class="title">More in the Collection</span>
                         <div class="pt2">
-                            <p-carousel
-                                    [numVisible]="2"
-                                    [numScroll]="1"
-                                    [value]="product.collections"
-                                    [circular]="false"
-                                    [ngClass]="{
-                                    'hide-nav-arrows':product.collections.length<3
+                            <p-carousel [numVisible]="2"
+                                        [numScroll]="1"
+                                        [value]="product.collections"
+                                        [circular]="false"
+                                        [ngClass]="{
+                                            'hide-nav-arrows' :product.collections.length<3
                                     }"
                             >
                                 <ng-template let-data pTemplate="item">
@@ -298,17 +300,89 @@
                             </p-carousel>
                         </div>
                     </div>
+                    <!--Reviews Section-->
+                    <div class="mb2">
+                        <hr class="modal-hr"/>
+                        <div class="flex pr3 justify-between">
+                            <span class="title">Reviews</span>
+                            <div>
+                                <div class="title flex items-center" *ngIf="totrating>0">
+                                    <div class="star-rating-outer yellow">
+                                        <div [style.width.%]="totrating" class="star-rating-inner">
+                                        </div>
+                                    </div>
+                                    <span class="star-rating-text">&nbsp;{{total_count}}</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="flex justify-center mt2">
+                            <button mat-raised-button (click)="openMyReviewModal()" class="w-80 add-review-btn">
+                                {{total_count > 0 ? ' Write a Review' : 'BE THE FIRST TO REVIEW'}}
+                            </button>
+                        </div>
+                    </div>
+                    <div class="mb2" *ngIf="total_count>0">
+                        <ul class="description-menu justify-around">
+                            <li (click)="selectTab('mr')">
+                                <span class="nav-link" [ngClass]="{'review-tab-active b':activeTab === 'mr'}">Most Recent</span>
+                            </li>
+                            <li (click)="selectTab('hr')">
+                                <span class="nav-link" [ngClass]="{'review-tab-active b':activeTab === 'hr'}">Highest Rated</span>
+                            </li>
+                            <li (click)="selectTab('lr')">
+                                <span class="nav-link" [ngClass]="{'review-tab-active b':activeTab === 'lr'}">Lowest Rated</span>
+                            </li>
+                        </ul>
+                        <div class="menu-content">
+                            <div class="{{ activeTab === 'mr' ? '' : 'dn' }}">
+                                <div class="flex justify-between flex-wrap">
+                                    <ng-container *ngFor="let review of all_reviews;let i = index">
+                                        <div class="w-45">
+                                            <app-review-desktop [review]="review"
+                                                                [galleryId]="'all_review_gallery'+i"></app-review-desktop>
+                                        </div>
+                                    </ng-container>
+                                </div>
+                            </div>
+                            <div class="{{ activeTab === 'hr' ? '' : 'dn' }}">
+                                <div class="flex justify-between flex-wrap">
+                                    <ng-container *ngFor="let review of highest_reviews;let i = index">
+                                        <div class="w-45">
+                                            <app-review-desktop [review]="review"
+                                                                [galleryId]="'highest_reviews'+i"></app-review-desktop>
+                                        </div>
+                                    </ng-container>
+                                </div>
+                            </div>
+                            <div class="{{ activeTab === 'lr' ? '' : 'dn' }}">
+                                <div class="flex justify-between flex-wrap">
+                                    <ng-container *ngFor="let review of lowest_reviews;let i = index">
+                                        <div class="w-45">
+                                            <app-review-desktop [review]="review"
+                                                                [galleryId]="'lowest_reviews'+i"></app-review-desktop>
+                                        </div>
+                                    </ng-container>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                    <div *ngIf="total_count>10">
+                        <a (click)="openAllReviewsModal()" class="open-sans-14 bold all-review-link">See All Reviews
+                            <mat-icon style="vertical-align: middle;font-size: 20px">chevron_right</mat-icon>
+                        </a>
+                    </div>
+                    <!--Reviews Section End-->
                     <div class="mb2" *ngIf="recentProducts.length">
                         <hr class="modal-hr"/>
                         <span class="title">Recently Viewed</span>
                         <div class="pt2">
-                            <p-carousel
-                                    [numVisible]="2"
-                                    [numScroll]="1"
-                                    [value]="recentProducts"
-                                    [circular]="false"
-                                    [ngClass]="{
-                                    'hide-nav-arrows':recentProducts.length<3
+                            <p-carousel [numVisible]="2"
+                                        [numScroll]="1"
+                                        [value]="recentProducts"
+                                        [circular]="false"
+                                        [ngClass]="{
+                                            'hide-nav-arrows' :recentProducts.length<3
                                     }"
                             >
                                 <ng-template let-data pTemplate="item">

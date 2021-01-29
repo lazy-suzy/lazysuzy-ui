@@ -7,7 +7,7 @@ import {
     EventEmitterService,
     MatDialogUtilsService,
     SeoService,
-    UtilsService
+    UtilsService,
 } from 'src/app/shared/services';
 import {Observable, Subscription} from 'rxjs';
 import {BreakpointObserver, Breakpoints, BreakpointState} from '@angular/cdk/layout';
@@ -21,7 +21,7 @@ import {first} from 'rxjs/operators';
 @Component({
     selector: 'app-product-details-mobile',
     templateUrl: './product-details-mobile.component.html',
-    styleUrls: ['./product-details-mobile.component.less']
+    styleUrls: ['./product-details-mobile.component.less'],
 })
 export class ProductDetailsMobileComponent implements OnInit {
     @ViewChild(VariationsComponent, {static: false}) child: VariationsComponent;
@@ -60,7 +60,7 @@ export class ProductDetailsMobileComponent implements OnInit {
     selectedSwatch = {
         swatch_image: null,
         price: '',
-        wasPrice: ''
+        wasPrice: '',
     };
     errorMessage = '';
     quantity = 1;
@@ -78,7 +78,7 @@ export class ProductDetailsMobileComponent implements OnInit {
     isSingleDimension: boolean;
     priceObject = {
         is_price: '',
-        was_price: ''
+        was_price: '',
     };
     isDiscounted = false;
     isRange = false;
@@ -111,8 +111,16 @@ export class ProductDetailsMobileComponent implements OnInit {
         pagination: true,
         // autoWidth: true,
         // stagePadding: 100,
-        singleItem: true
+        singleItem: true,
     };
+    recentReviews: any;
+    allReviews: any;
+    totalCount: any;
+    lowestReviews: any;
+    totalRating: number;
+    highestReviews: any;
+    totalNo: number;
+    currentReviewSelection = 'mr';
 
     constructor(
         private router: Router,
@@ -127,7 +135,7 @@ export class ProductDetailsMobileComponent implements OnInit {
         private matDialogUtils: MatDialogUtilsService,
         private seoService: SeoService,
         private pixelService: PixelService,
-        private snackBarService: WishlistSnackbarService,
+        private snackBarService: WishlistSnackbarService
     ) {
     }
 
@@ -204,7 +212,10 @@ export class ProductDetailsMobileComponent implements OnInit {
                                     this.beforeSelection = true;
                                     this.checkSelection = true;
                                 }
-                                if (this.isVariationExist && this.product.variations.length === 1) {
+                                if (
+                                    this.isVariationExist &&
+                                    this.product.variations.length === 1
+                                ) {
                                     this.beforeSelection = true;
                                     this.checkSelection = true;
                                 }
@@ -227,13 +238,20 @@ export class ProductDetailsMobileComponent implements OnInit {
                                         this.product.inventory_product_details.was_price
                                     );
                                 } else {
-                                    this.productPrice = this.utils.formatPrice(this.product.is_price);
+                                    this.productPrice = this.utils.formatPrice(
+                                        this.product.is_price
+                                    );
 
                                     this.productWasPrice = this.utils.formatPrice(
                                         this.product.was_price
                                     );
                                 }
-                                const {isPriceString, isRanged, isDiscounted, wasPriceString} = this.utils.getPriceObject(this.product);
+                                const {
+                                    isPriceString,
+                                    isRanged,
+                                    isDiscounted,
+                                    wasPriceString,
+                                } = this.utils.getPriceObject(this.product);
                                 this.priceObject.is_price = isPriceString;
                                 this.priceObject.was_price = wasPriceString;
                                 this.isRange = isRanged;
@@ -253,9 +271,38 @@ export class ProductDetailsMobileComponent implements OnInit {
                             this.isProductFetching = false;
                         }
                     );
+                this.loadProductReviews(this.productSku);
             }
         );
+    }
 
+    loadProductReviews(sku) {
+        const limit = 10;
+        this.apiService.getProductReviews(sku, limit).subscribe((response: any) => {
+            this.recentReviews = response;
+            if (
+                this.recentReviews.all_reviews &&
+                this.recentReviews.all_reviews.length > 0
+            ) {
+                this.allReviews = this.recentReviews.all_reviews;
+                this.totalCount = this.recentReviews.count_rating;
+                this.totalNo = Number(this.recentReviews.count_rating) * 5;
+                this.totalRating =
+                    (Number(this.recentReviews.tot_rating) / this.totalNo) * 100;
+            }
+            if (
+                this.recentReviews.highest_reviews &&
+                this.recentReviews.highest_reviews.length > 0
+            ) {
+                this.highestReviews = this.recentReviews.highest_reviews;
+            }
+            if (
+                this.recentReviews.lowest_reviews &&
+                this.recentReviews.lowest_reviews.length > 0
+            ) {
+                this.lowestReviews = this.recentReviews.lowest_reviews;
+            }
+        });
     }
 
     objKeys(anObject) {
@@ -265,10 +312,12 @@ export class ProductDetailsMobileComponent implements OnInit {
         return [];
     }
 
+    changeReview(event) {
+        this.currentReviewSelection = event.target.value;
+    }
+
     createGalleryItems(items: any[]) {
-        this.items = items.map(
-            (item) => new ImageItem({src: item, thumb: item})
-        );
+        this.items = items.map((item) => new ImageItem({src: item, thumb: item}));
         this.galleryRef.setConfig({
             imageSize: 'contain',
             // itemTemplate: this.itemTemplate,
@@ -287,12 +336,15 @@ export class ProductDetailsMobileComponent implements OnInit {
     }
 
     loadRecentProducts() {
-        this.apiService.getRecentProducts().pipe(first()).subscribe((response: any[]) => {
-            this.recentProducts = response;
-            if (this.recentProducts.length < 2) {
-                this.recentOptions.loop = false;
-            }
-        });
+        this.apiService
+            .getRecentProducts()
+            .pipe(first())
+            .subscribe((response: any[]) => {
+                this.recentProducts = response;
+                if (this.recentProducts.length < 2) {
+                    this.recentOptions.loop = false;
+                }
+            });
     }
 
     selectTab(tab) {
@@ -306,7 +358,7 @@ export class ProductDetailsMobileComponent implements OnInit {
             this.selectedSwatch = {
                 swatch_image: variation.swatch_image,
                 price: variation.price,
-                wasPrice: variation.was_price
+                wasPrice: variation.was_price,
             };
             this.productPrice = variation.price;
             this.productWasPrice = variation.was_price;
@@ -335,13 +387,15 @@ export class ProductDetailsMobileComponent implements OnInit {
 
     openLightbox(index: number) {
         this.lightbox.open(index, this.galleryId, {
-            panelClass: 'fullscreen'
+            panelClass: 'fullscreen',
         });
-        const intercom = document.getElementsByClassName('intercom-lightweight-app')[0];
+        const intercom = document.getElementsByClassName(
+            'intercom-lightweight-app'
+        )[0];
         if (intercom) {
             intercom.classList.add('hidden');
         }
-        this.lightbox.closed.pipe(first()).subscribe(_ => {
+        this.lightbox.closed.pipe(first()).subscribe((_) => {
             intercom.classList.remove('hidden');
         });
     }
@@ -379,23 +433,28 @@ export class ProductDetailsMobileComponent implements OnInit {
     onSetPrice(priceData): void {
         const newPrices = {
             is_price: priceData.price,
-            was_price: priceData.wasPrice
+            was_price: priceData.wasPrice,
         };
-        const {isPriceString, isRanged, isDiscounted, wasPriceString} = this.utils.getPriceObject(newPrices || this.product);
+        const {
+            isPriceString,
+            isRanged,
+            isDiscounted,
+            wasPriceString,
+        } = this.utils.getPriceObject(newPrices || this.product);
         this.priceObject.is_price = isPriceString;
         this.priceObject.was_price = wasPriceString;
         this.isRange = isRanged;
         this.isDiscounted = isDiscounted;
         this.galleryContainer.nativeElement.scrollTo({
             left: 0,
-            behavior: 'smooth'
+            behavior: 'smooth',
         });
     }
 
     openCartModal() {
         if (
-            !this.product.in_inventory &&
-            !this.activeProduct.inventory_product_details.price ||
+            (!this.product.in_inventory &&
+                !this.activeProduct.inventory_product_details.price) ||
             !this.beforeSelection
         ) {
             this.hasSelection = false;
@@ -409,12 +468,12 @@ export class ProductDetailsMobileComponent implements OnInit {
                         ? this.activeProduct.name
                         : this.product.name + ' ' + this.activeProduct.name,
                 price: Number(this.priceObject.is_price.replace(/[^0-9.-]+/g, '')),
-                quantity: this.quantity
+                quantity: this.quantity,
             };
             const postData = {
                 product_sku: this.activeProduct.sku,
                 count: this.quantity,
-                parent_sku: this.product.sku
+                parent_sku: this.product.sku,
             };
             this.apiService.addCartProduct(postData).subscribe(
                 (payload: any) => {
@@ -448,7 +507,8 @@ export class ProductDetailsMobileComponent implements OnInit {
                 sku: product.variations[0].variation_sku,
                 in_inventory: product.variations[0].in_inventory,
                 name: product.variations[0].name,
-                inventory_product_details: product.variations[0].inventory_product_details
+                inventory_product_details:
+                product.variations[0].inventory_product_details,
             };
         } else {
             this.activeProduct = {
@@ -457,7 +517,7 @@ export class ProductDetailsMobileComponent implements OnInit {
                 name: product.name,
                 inventory_product_details: product.inventory_product_details
                     ? product.inventory_product_details
-                    : []
+                    : [],
             };
         }
     }
@@ -505,5 +565,36 @@ export class ProductDetailsMobileComponent implements OnInit {
 
     toCollectionProduct(product) {
         this.router.navigate(['/product', product.sku]);
+    }
+
+    openMyReviewModal() {
+        this.hasSelection = true;
+        const data = {
+            sku: this.activeProduct.sku,
+            brand: this.product.site,
+            image: this.product.main_image,
+            name:
+                this.activeProduct.sku === this.product.sku
+                    ? this.activeProduct.name
+                    : this.product.name + ' ' + this.activeProduct.name,
+            price: this.productPrice,
+            quantity: this.quantity,
+        };
+        const postData = {
+            product_sku: this.activeProduct.sku,
+            count: this.quantity,
+            parent_sku: this.product.sku,
+        };
+        this.matDialogUtils.openMyReviewDialog(data);
+    }
+
+    openAllReviewsPage() {
+        this.router.navigate(['/product', 'view-reviews', this.productSku]);
+    }
+
+    goToReview(sku) {
+        console.log(sku);
+        // window.location.href = './product/review/' + sku;
+        this.router.navigateByUrl(`/product/review/${sku}`);
     }
 }

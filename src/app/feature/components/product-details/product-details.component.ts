@@ -1,24 +1,25 @@
-import {Component, ElementRef, Inject, OnInit, TemplateRef, ViewChild} from '@angular/core';
+import {Component, ElementRef, Inject, OnInit, TemplateRef, ViewChild,} from '@angular/core';
 import {MAT_DIALOG_DATA} from '@angular/material/dialog';
 import {Subscription} from 'rxjs';
-import {IActiveProduct, IProduct, IProductDetail, ISeo} from 'src/app/shared/models';
+import {IActiveProduct, IProduct, IProductDetail, ISeo,} from 'src/app/shared/models';
 import {
     ApiService,
     EventEmitterService,
     MatDialogUtilsService,
     SeoService,
-    UtilsService
+    UtilsService,
 } from 'src/app/shared/services';
 import {Gallery, GalleryItem, ImageItem} from '@ngx-gallery/core';
 import {Lightbox} from '@ngx-gallery/lightbox';
 import {PixelService} from '../../../shared/services/facebook-pixel/pixel.service';
 import {WishlistSnackbarService} from '../../../shared/services/wishlist-service/wishlist-snackbar.service';
 import {first} from 'rxjs/operators';
+import {Router} from '@angular/router';
 
 @Component({
     selector: 'app-product-details',
     templateUrl: './product-details.component.html',
-    styleUrls: ['./product-details.component.less']
+    styleUrls: ['./product-details.component.less'],
 })
 export class ProductDetailsComponent implements OnInit {
     @ViewChild('topContainer', {static: false}) topContainer: ElementRef;
@@ -50,14 +51,15 @@ export class ProductDetailsComponent implements OnInit {
     topHeight = {'max-height': '0'};
     swatches = [];
     errorMessage = '';
+    activeTab = 'mr';
     priceData = {
         price: '',
-        wasPrice: ''
+        wasPrice: '',
     };
     selectedSwatch = {
         swatch_image: null,
         price: '',
-        wasPrice: ''
+        wasPrice: '',
     };
     hasValidWasPrice = true;
     quantity = 1;
@@ -74,6 +76,13 @@ export class ProductDetailsComponent implements OnInit {
     invalidLink: boolean;
     starIcons = [];
     recentProducts = [];
+    recentReviews: any;
+    lowest_reviews: any = [];
+    highest_reviews: any = [];
+    all_reviews: any = [];
+    tot_no = 0;
+    totrating = 0;
+    total_count = 0;
     isSingleDimension: boolean;
 
     constructor(
@@ -86,7 +95,8 @@ export class ProductDetailsComponent implements OnInit {
         private matDialogUtils: MatDialogUtilsService,
         private seoService: SeoService,
         private pixelService: PixelService,
-        private snackBarService: WishlistSnackbarService
+        private snackBarService: WishlistSnackbarService,
+        private router: Router
     ) {
     }
 
@@ -96,15 +106,16 @@ export class ProductDetailsComponent implements OnInit {
         this.eventSubscription = this.eventEmitterService.userChangeEvent
             .asObservable()
             .subscribe((user) => {
-                console.log(user);
                 if (this.data.payload) {
                     this.processProduct(this.data.payload, user);
+                    this.loadProductReviews(this.data.sku);
                 } else {
                     this.productSubscription = this.apiService
                         .getProduct(this.data.sku)
                         .subscribe(
                             (payload: IProductDetail) => {
                                 this.processProduct(payload, user);
+                                this.loadProductReviews(this.data.sku);
                             },
                             (error) => {
                                 this.invalidLink = true;
@@ -116,8 +127,48 @@ export class ProductDetailsComponent implements OnInit {
     }
 
     loadRecentProducts() {
-        this.apiService.getRecentProducts().pipe(first()).subscribe((response: any[]) => {
-            this.recentProducts = response;
+        this.apiService
+            .getRecentProducts()
+            .pipe(first())
+            .subscribe((response: any[]) => {
+                this.recentProducts = response;
+            });
+    }
+
+    openAllReviewsModal() {
+        const reviewsData = {
+            totalReviews: this.total_count,
+            totalRatings: this.totrating,
+        };
+        this.matDialogUtils.openAllReviewsModal(this.product, reviewsData);
+    }
+
+    loadProductReviews(sku) {
+        const limit = 10;
+        this.apiService.getProductReviews(sku, limit).subscribe((response: any) => {
+            this.recentReviews = response;
+            if (
+                this.recentReviews.all_reviews &&
+                this.recentReviews.all_reviews.length > 0
+            ) {
+                this.all_reviews = this.recentReviews.all_reviews;
+                this.total_count = this.recentReviews.count_rating;
+                this.tot_no = Number(this.recentReviews.count_rating) * 5;
+                this.totrating =
+                    (Number(this.recentReviews.tot_rating) / this.tot_no) * 100;
+            }
+            if (
+                this.recentReviews.highest_reviews &&
+                this.recentReviews.highest_reviews.length > 0
+            ) {
+                this.highest_reviews = this.recentReviews.highest_reviews;
+            }
+            if (
+                this.recentReviews.lowest_reviews &&
+                this.recentReviews.lowest_reviews.length > 0
+            ) {
+                this.lowest_reviews = this.recentReviews.lowest_reviews;
+            }
         });
     }
 
@@ -154,9 +205,7 @@ export class ProductDetailsComponent implements OnInit {
         this.setSeoData(payload);
         this.updateActiveProduct(this.product);
         this.createGalleryItems(this.product.on_server_images);
-        this.description = this.utils.compileMarkdown(
-            this.product.description
-        );
+        this.description = this.utils.compileMarkdown(this.product.description);
         this.features = this.utils.compileMarkdown(
             this.product.features,
             this.product.site
@@ -171,13 +220,9 @@ export class ProductDetailsComponent implements OnInit {
             );
         }
         if (this.product.product_care != null) {
-            this.careExist = this.utils.checkDataLength(
-                this.product.product_care
-            );
+            this.careExist = this.utils.checkDataLength(this.product.product_care);
         }
-        this.featuresExist = this.utils.checkDataLength(
-            this.product.features
-        );
+        this.featuresExist = this.utils.checkDataLength(this.product.features);
         this.descriptionExist = this.utils.checkDataLength(
             this.product.description
         );
@@ -194,14 +239,9 @@ export class ProductDetailsComponent implements OnInit {
                 this.product.inventory_product_details.was_price
             );
         } else {
-            this.productPrice = this.utils.formatPrice(
-                this.product.is_price
-            );
+            this.productPrice = this.utils.formatPrice(this.product.is_price);
 
-            this.productWasPrice = this.utils.formatPrice(
-                this.product.was_price
-            );
-
+            this.productWasPrice = this.utils.formatPrice(this.product.was_price);
         }
         const minPrice = Number(this.productPrice.split('-')[0]);
         const wasMinPrice = Number(this.productWasPrice.split('-')[0]);
@@ -209,9 +249,7 @@ export class ProductDetailsComponent implements OnInit {
         if (wasMinPrice <= minPrice) {
             this.hasValidWasPrice = false;
         }
-        this.isVariationExist = this.utils.checkDataLength(
-            this.product.variations
-        );
+        this.isVariationExist = this.utils.checkDataLength(this.product.variations);
 
         if (!this.isVariationExist) {
             this.beforeSelection = true;
@@ -240,13 +278,10 @@ export class ProductDetailsComponent implements OnInit {
             return Object.keys(anObject);
         }
         return [];
-
     }
 
     createGalleryItems(items: any[]) {
-        this.items = items.map(
-            (item) => (new ImageItem({src: item, thumb: item}))
-        );
+        this.items = items.map((item) => new ImageItem({src: item, thumb: item}));
         this.galleryRef.setConfig({
             imageSize: 'contain',
             // itemTemplate: this.itemTemplate,
@@ -276,7 +311,7 @@ export class ProductDetailsComponent implements OnInit {
 
     openLightbox(index: number) {
         this.lightbox.open(index, this.galleryId, {
-            panelClass: 'fullscreen'
+            panelClass: 'fullscreen',
         });
     }
 
@@ -294,19 +329,18 @@ export class ProductDetailsComponent implements OnInit {
 
     wishlistProduct(sku, mark) {
         this.product.wishlisted = mark;
-        this.apiService
-            .wishlistProduct(sku, mark, false)
-            .subscribe(_ => {
-                    if (mark) {
-                        this.snackBarService.addToWishlist(sku);
-                    } else {
-                        this.snackBarService.removeIfExistsProduct(sku);
-                    }
-                },
-                error => {
-                    this.product.wishlisted = !mark;
-                });
-
+        this.apiService.wishlistProduct(sku, mark, false).subscribe(
+            (_) => {
+                if (mark) {
+                    this.snackBarService.addToWishlist(sku);
+                } else {
+                    this.snackBarService.removeIfExistsProduct(sku);
+                }
+            },
+            (error) => {
+                this.product.wishlisted = !mark;
+            }
+        );
     }
 
     openLink(event, url) {
@@ -323,11 +357,9 @@ export class ProductDetailsComponent implements OnInit {
     }
 
     onSetImage(variation): void {
-        console.log('setImage entry!');
-
         this.galleryContainer.nativeElement.scrollTop = 0;
         this.items = this.product.on_server_images.map(
-            (item) => (new ImageItem({src: item, thumb: item}))
+            (item) => new ImageItem({src: item, thumb: item})
         );
 
         if (variation) {
@@ -356,12 +388,9 @@ export class ProductDetailsComponent implements OnInit {
     }
 
     openCartModal() {
-        console.log(!this.activeProduct.in_inventory &&
-            !this.activeProduct.inventory_product_details.price ||
-            !this.beforeSelection);
         if (
-            !this.activeProduct.in_inventory &&
-            !this.activeProduct.inventory_product_details.price ||
+            (!this.activeProduct.in_inventory &&
+                !this.activeProduct.inventory_product_details.price) ||
             !this.beforeSelection
         ) {
             this.hasSelection = false;
@@ -376,14 +405,13 @@ export class ProductDetailsComponent implements OnInit {
                         ? this.activeProduct.name
                         : this.product.name + ' ' + this.activeProduct.name,
                 price: this.productPrice,
-                quantity: this.quantity
+                quantity: this.quantity,
             };
             const postData = {
                 product_sku: this.activeProduct.sku,
                 count: this.quantity,
-                parent_sku: this.product.sku
+                parent_sku: this.product.sku,
             };
-            console.log(postData);
             this.apiService.addCartProduct(postData).subscribe(
                 (payload: any) => {
                     if (payload.status) {
@@ -407,7 +435,8 @@ export class ProductDetailsComponent implements OnInit {
                 sku: product.variations[0].variation_sku,
                 in_inventory: product.variations[0].in_inventory,
                 name: product.variations[0].name,
-                inventory_product_details: product.variations[0].inventory_product_details
+                inventory_product_details:
+                product.variations[0].inventory_product_details,
             };
         } else {
             this.activeProduct = {
@@ -416,10 +445,9 @@ export class ProductDetailsComponent implements OnInit {
                 name: product.name,
                 inventory_product_details: product.inventory_product_details
                     ? product.inventory_product_details
-                    : []
+                    : [],
             };
         }
-
     }
 
     quantityLimit(count) {
@@ -440,12 +468,10 @@ export class ProductDetailsComponent implements OnInit {
     }
 
     onSetSelectionChecked(e: boolean) {
-        console.log('set Selection checked: ', e);
         this.beforeSelection = e;
     }
 
     onClearSelection(e: boolean) {
-        console.log('onClear selections!');
         this.checkSelection = e;
     }
 
@@ -455,7 +481,7 @@ export class ProductDetailsComponent implements OnInit {
 
     renderPrice(price) {
         const pricesArray = price.split('-');
-        let fromPrice = Number(pricesArray[0]);
+        const fromPrice = Number(pricesArray[0]);
         let toPrice;
         if (pricesArray.length > 1) {
             toPrice = Number(pricesArray[1]);
@@ -463,8 +489,34 @@ export class ProductDetailsComponent implements OnInit {
         if (!toPrice) {
             return `${this.utils.parsePrice(fromPrice)}`;
         } else {
-            return `${this.utils.parsePrice(fromPrice)} - ${this.utils.parsePrice(toPrice)}`;
+            return `${this.utils.parsePrice(fromPrice)} - ${this.utils.parsePrice(
+                toPrice
+            )}`;
         }
+    }
+
+    goToReview(sku) {
+        window.location.href = './product/review/' + sku;
+        // this.router.navigateByUrl('/product/review/',sku)
+    }
+
+    openMyReviewModal() {
+
+        this.hasSelection = true;
+        const data = {
+            sku: this.activeProduct.sku,
+            brand: this.product.site,
+            image: this.product.main_image,
+            name:
+                this.activeProduct.sku === this.product.sku
+                    ? this.activeProduct.name
+                    : this.product.name + ' ' + this.activeProduct.name,
+            price: this.productPrice,
+            quantity: this.quantity
+        };
+        this.matDialogUtils.openMyReviewDialog(data);
+
+
     }
 
     isDiscounted(product): boolean {
@@ -476,6 +528,10 @@ export class ProductDetailsComponent implements OnInit {
     toCollectionProduct(sku) {
         this.matDialogUtils.closeDialogs();
         setTimeout(() => this.matDialogUtils.openMatDialog(sku), 250);
+    }
 
+
+    selectTab(tab) {
+        this.activeTab = tab;
     }
 }
