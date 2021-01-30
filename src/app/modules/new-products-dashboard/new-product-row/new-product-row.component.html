@@ -129,7 +129,7 @@
                     <div class="col-6">
                         <mat-form-field appearance="fill">
                             <mat-label>Firmness</mat-label>
-                            <mat-select [(ngModel)]="product.firmness" multiple>
+                            <mat-select [(ngModel)]="product.firmness">
                                 <mat-option [value]="key.filter_value" *ngFor="let key of firmness_filter">
                                     {{key.filter_value}}
                                 </mat-option>
