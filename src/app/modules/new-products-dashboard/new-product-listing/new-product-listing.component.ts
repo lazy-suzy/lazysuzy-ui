@@ -103,6 +103,9 @@ export class NewProductListingComponent implements OnInit {
         if (typeof product.ls_id === 'string') {
             product.ls_id = product.ls_id.split(',').filter((elm) => elm).map(elm => +elm);
         }
+        if (typeof product.style === 'string') {
+            product.style = product.style.split(',').filter((elm) => elm);
+        }
         return product;
     }
 
