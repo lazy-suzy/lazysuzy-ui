@@ -504,7 +504,7 @@ export class ProductDetailsComponent implements OnInit {
 
         this.hasSelection = true;
         const data = {
-            sku: this.activeProduct.sku,
+            sku: this.product.sku,
             brand: this.product.site,
             image: this.product.main_image,
             name:
