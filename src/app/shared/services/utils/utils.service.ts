@@ -70,11 +70,7 @@ export class UtilsService {
 
     compileMarkdown(data, site = 'West Elm') {
         let compileData;
-        if (site !== 'West Elm') {
-            compileData = data.map((item) => `*   ${item}`);
-        } else {
-            compileData = data;
-        }
+        compileData = data.map((item) => `*   ${item.trim()}`);
         let mergedData = '';
         for (const item of compileData) {
             mergedData = `${mergedData}${
