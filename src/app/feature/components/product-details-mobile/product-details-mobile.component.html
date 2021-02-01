@@ -225,10 +225,10 @@
                         </ng-template>
                     </div>
                     <div *ngIf="assemblyExist" class="{{ activeTab === 'assembly' ? '' : 'dn' }}">
-                        <div [innerHTML]="product.product_assembly" class="nav-content"></div>
+                        <div [innerHTML]="assembly" class="nav-content"></div>
                     </div>
                     <div *ngIf="careExist" class="{{ activeTab === 'care' ? '' : 'dn' }}">
-                        <div [innerHTML]="product.product_care" class="nav-content"></div>
+                        <div [innerHTML]="care" class="nav-content"></div>
                     </div>
 
                 </div>

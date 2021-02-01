@@ -84,6 +84,10 @@ export class UtilsService {
         return this.markdownService.compile(mergedData);
     }
 
+    compileMarkdownText(data) {
+        return this.markdownService.compile(data);
+    }
+
     updateBoardLike(board, like) {
         return (
             (board.is_liked = like),

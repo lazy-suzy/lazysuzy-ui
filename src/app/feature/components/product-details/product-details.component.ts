@@ -45,6 +45,7 @@ export class ProductDetailsComponent implements OnInit {
     spinner = 'assets/image/spinner.gif';
     description: any;
     features: any;
+
     productPrice: any;
     productWasPrice: any;
     variations = [];
@@ -84,6 +85,9 @@ export class ProductDetailsComponent implements OnInit {
     totrating = 0;
     total_count = 0;
     isSingleDimension: boolean;
+
+    assembly: any;
+    care: any;
 
     constructor(
         @Inject(MAT_DIALOG_DATA) public data: any,
@@ -222,6 +226,8 @@ export class ProductDetailsComponent implements OnInit {
         if (this.product.product_care != null) {
             this.careExist = this.utils.checkDataLength(this.product.product_care);
         }
+        this.assembly = this.utils.compileMarkdownText(this.product.product_assembly);
+        this.care = this.utils.compileMarkdownText(this.product.product_care);
         this.featuresExist = this.utils.checkDataLength(this.product.features);
         this.descriptionExist = this.utils.checkDataLength(
             this.product.description
