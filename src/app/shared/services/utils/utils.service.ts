@@ -68,9 +68,13 @@ export class UtilsService {
         });
     }
 
-    compileMarkdown(data, site = 'West Elm') {
+    compileMarkdown(data, overview = false) {
         let compileData;
-        compileData = data.map((item) => `*   ${item.trim()}`);
+        if (!overview) {
+            compileData = data.map((item) => `*   ${item.trim()}`);
+        } else {
+            compileData = data.map((item) => `${item.trim()}`);
+        }
         let mergedData = '';
         for (const item of compileData) {
             mergedData = `${mergedData}${

@@ -210,23 +210,23 @@
                                     <ng-container *ngFor="let dimension of key.groupValue">
                                         <div [ngClass]="{'w-100':!this.isSingleDimension,'w-50':this.isSingleDimension}">
                                             <div class="dimension-title mt2">{{ dimension.name }}</div>
-                                            <div class="dimensions-details" *ngIf="dimension.value.width">
-                                                Width: {{ dimension.value.width }}
-                                            </div>
                                             <ng-container *ngIf="dimension.value.NULL">
                                                 <span class="dimensions-details">{{dimension.value.NULL}}</span>
                                             </ng-container>
+                                            <div class="dimensions-details" *ngIf="dimension.value.width">
+                                                Width: {{ dimension.value.width }}"
+                                            </div>
                                             <div class="dimensions-details" *ngIf="dimension.value.depth">
-                                                Depth: {{ dimension.value.depth }} "
+                                                Depth: {{ dimension.value.depth }}"
                                             </div>
                                             <div class="dimensions-details" *ngIf="dimension.value.height">
-                                                Height: {{ dimension.value.height }} "
+                                                Height: {{ dimension.value.height }}"
                                             </div>
                                             <div class="dimensions-details" *ngIf="dimension.value.length">
-                                                Length: {{ dimension.value.length }} "
+                                                Length: {{ dimension.value.length }}"
                                             </div>
                                             <div class="dimensions-details" *ngIf="dimension.value.diameter">
-                                                Diameter: {{ dimension.value.diameter }} "
+                                                Diameter: {{ dimension.value.diameter }}"
                                             </div>
                                             <div class="dimensions-details" *ngIf="dimension.value.weight">
                                                 Weight: {{ dimension.value.weight }} lbs
