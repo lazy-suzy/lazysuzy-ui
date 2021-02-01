@@ -174,11 +174,11 @@ export class ProductDetailsMobileComponent implements OnInit {
                                 this.seoService.setMetaTags(this.seoData);
                                 this.updateActiveProduct(this.product);
                                 this.description = this.utils.compileMarkdown(
-                                    this.product.description
+                                    this.product.description,
+                                    true
                                 );
                                 this.features = this.utils.compileMarkdown(
-                                    this.product.features,
-                                    this.product.site
+                                    this.product.features
                                 );
                                 this.dimensionExist = this.utils.checkDimensionsLength(
                                     this.product.dimension
