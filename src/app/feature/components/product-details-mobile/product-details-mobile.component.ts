@@ -114,6 +114,9 @@ export class ProductDetailsMobileComponent implements OnInit {
         singleItem: true
     };
 
+    assembly: any;
+    care: any;
+
     constructor(
         private router: Router,
         private activeRoute: ActivatedRoute,
@@ -189,6 +192,8 @@ export class ProductDetailsMobileComponent implements OnInit {
                                         this.product.product_care
                                     );
                                 }
+                                this.assembly = this.utils.compileMarkdownText(this.product.product_assembly);
+                                this.care = this.utils.compileMarkdownText(this.product.product_care);
                                 this.descriptionExist = this.utils.checkDataLength(
                                     this.product.description
                                 );
