@@ -526,4 +526,8 @@ export class ProductDetailsComponent implements OnInit {
         this.matDialogUtils.closeDialogs();
         setTimeout(() => this.matDialogUtils.openMatDialog(sku), 250);
     }
+
+    selectTab(tab) {
+        this.activeTab = tab;
+    }
 }
