@@ -12,9 +12,9 @@ import {
 } from './../../../shared/services';
 import {SCROLL_ICON_SHOW_DURATION} from './../../../shared/constants';
 import {ActivatedRoute, Router} from '@angular/router';
-import {fromEvent, Observable, Subscription} from 'rxjs';
+import {Observable, Subscription} from 'rxjs';
 import {BreakpointObserver, Breakpoints, BreakpointState} from '@angular/cdk/layout';
-import {first, tap, throttleTime} from 'rxjs/operators';
+import {first} from 'rxjs/operators';
 import MetaData from '../../../shared/services/seo/meta-data-model';
 
 @Component({
@@ -99,6 +99,9 @@ export class ProductsComponent implements OnInit {
             .subscribe((user) => {
                 this.getParams();
                 this.getParamsFromQuery();
+                this.modalSku = this.activeRoute.snapshot.queryParamMap.get(
+                    'modal_sku'
+                );
                 this.bpSubscription = this.bpObserver.subscribe(
                     (handset: BreakpointState) => {
                         this.isHandset = handset.matches;
@@ -111,9 +114,7 @@ export class ProductsComponent implements OnInit {
                         this.checkPage();
                     }
                 );
-                this.modalSku = this.activeRoute.snapshot.queryParamMap.get(
-                    'modal_sku'
-                );
+
                 if (this.modalSku) {
                     this.matDialogUtils.openMatDialog(this.modalSku);
                 }
@@ -231,8 +232,10 @@ export class ProductsComponent implements OnInit {
                         image: payload.seo_data.cat_image,
                         description: payload.seo_data.description,
                     };
-                    this.seoService.setMetaTags(metaData);
-                    this.seoService.setCanonicalURL();
+                    if (!this.modalSku) {
+                        this.seoService.setMetaTags(metaData);
+                        this.seoService.setCanonicalURL();
+                    }
                     this.categoryTitle = payload.seo_data.page_title;
                     this.emailTitle = payload.seo_data.email_title;
                     this.products = payload.products;

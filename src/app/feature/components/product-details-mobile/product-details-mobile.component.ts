@@ -101,7 +101,15 @@ export class ProductDetailsMobileComponent implements OnInit {
         dots: false,
         pagination: false,
     };
-
+    otherPeopleOptions = {
+        autoWidth: false,
+        loop: true,
+        margin: 10,
+        items: 2.3,
+        center: false,
+        dots: false,
+        pagination: false,
+    };
     imageDialogCarouselOptions = {
         margin: 10,
         loop: true,
@@ -610,5 +618,10 @@ export class ProductDetailsMobileComponent implements OnInit {
         this.apiService.getOtherPeopleProducts(this.product.sku).subscribe((response: any[]) => {
             this.otherPeopleProducts = response;
         });
+    }
+
+    isRangedPrice(price: string) {
+        const priceArray = price.split('-');
+        return priceArray.length > 1;
     }
 }

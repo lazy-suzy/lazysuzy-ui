@@ -285,7 +285,7 @@
                     <span class="title">Others have viewed</span>
                     <div class="pt2">
                         <owl-carousel
-                                [options]="recentOptions"
+                                [options]="otherPeopleOptions"
                                 [items]="otherPeopleProducts"
                                 *ngIf="otherPeopleProducts?.length"
                                 [carouselClasses]="['owl-theme']"
@@ -295,6 +295,11 @@
                                     <img style="height: 150px;width:150px;object-fit: contain" [src]="data.image"/>
                                     <span class="open-sans font-14 gray-color">{{data.brand_name}}</span>
                                     <span class="font-14 open-sans">{{data.product_name}}</span>
+                                    <span class="open-sans-14">
+                                        {{isRangedPrice(data.price) ?
+                                        'From $' + data.price.split('-')[0]
+                                        : '$' + data.price}}
+                                    </span>
                                 </div>
                             </ng-container>
                         </owl-carousel>
