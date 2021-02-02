@@ -171,10 +171,9 @@ export class ProductDetailsMobileComponent implements OnInit {
                             if (this.product.collections.length < 3) {
                                 this.carousalOptions.loop = false;
                             }
-                            this.seoData = payload.seo_data;
                             if (this.product) {
                                 this.schema = this.seoService.setSchema(this.product);
-                                this.seoService.setMetaTags(this.seoData);
+                                this.setSeoData(payload);
                                 this.updateActiveProduct(this.product);
                                 this.description = this.utils.compileMarkdown(
                                     this.product.description,
@@ -279,6 +278,17 @@ export class ProductDetailsMobileComponent implements OnInit {
                 this.loadProductReviews(this.productSku);
             }
         );
+    }
+
+    private setSeoData(payload: IProductDetail) {
+        this.schema = this.seoService.setSchema(this.product);
+        const seoData: any = payload.seo_data;
+        const metaData = {
+            title: `${seoData.brand} ${seoData.product_name} | LazySuzy`,
+            description: seoData.description,
+            image: seoData.image_url,
+        };
+        this.seoService.setMetaTags(metaData);
     }
 
     loadProductReviews(sku) {
