@@ -554,4 +554,11 @@ export class ApiService {
         const url = `${env.API_BASE_HREF}${endpoint}`;
         return this.httpService.get(url);
     }
+
+    // getOtherPeopleProducts()
+    getOtherPeopleProducts(sku) {
+        const endPoint = `other-views/userrelated-${sku}`;
+        const url = `${env.API_BASE_HREF}${endPoint}`;
+        return this.httpService.get(url);
+    }
 }

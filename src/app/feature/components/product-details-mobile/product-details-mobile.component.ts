@@ -124,6 +124,7 @@ export class ProductDetailsMobileComponent implements OnInit {
 
     assembly: any;
     care: any;
+    otherPeopleProducts = [];
 
     constructor(
         private router: Router,
@@ -251,6 +252,7 @@ export class ProductDetailsMobileComponent implements OnInit {
                                         this.product.was_price
                                     );
                                 }
+
                                 const {
                                     isPriceString,
                                     isRanged,
@@ -265,6 +267,7 @@ export class ProductDetailsMobileComponent implements OnInit {
                                 if (this.product.set) {
                                     this.checkSetInventory(this.product.set);
                                 }
+                                this.loadOtherPeopleProducts();
                                 this.invalidLink = false;
                             } else {
                                 this.invalidLink = true;
@@ -601,5 +604,11 @@ export class ProductDetailsMobileComponent implements OnInit {
         console.log(sku);
         // window.location.href = './product/review/' + sku;
         this.router.navigateByUrl(`/product/review/${sku}`);
+    }
+
+    loadOtherPeopleProducts() {
+        this.apiService.getOtherPeopleProducts(this.product.sku).subscribe((response: any[]) => {
+            this.otherPeopleProducts = response;
+        });
     }
 }

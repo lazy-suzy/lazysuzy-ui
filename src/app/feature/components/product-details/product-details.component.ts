@@ -86,6 +86,7 @@ export class ProductDetailsComponent implements OnInit {
     total_count = 0;
     isSingleDimension: boolean;
 
+    otherPeopleProducts = [];
     assembly: any;
     care: any;
 
@@ -107,12 +108,14 @@ export class ProductDetailsComponent implements OnInit {
     ngOnInit(): void {
         this.isProductFetching = true;
         this.loadRecentProducts();
+
         this.eventSubscription = this.eventEmitterService.userChangeEvent
             .asObservable()
             .subscribe((user) => {
                 if (this.data.payload) {
                     this.processProduct(this.data.payload, user);
                     this.loadProductReviews(this.data.sku);
+                    this.loadOtherPeopleProducts();
                 } else {
                     this.productSubscription = this.apiService
                         .getProduct(this.data.sku)
@@ -137,6 +140,12 @@ export class ProductDetailsComponent implements OnInit {
             .subscribe((response: any[]) => {
                 this.recentProducts = response;
             });
+    }
+
+    loadOtherPeopleProducts() {
+        this.apiService.getOtherPeopleProducts(this.product.sku).subscribe((response: any[]) => {
+            this.otherPeopleProducts = response;
+        });
     }
 
     openAllReviewsModal() {

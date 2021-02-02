@@ -279,6 +279,28 @@
                         </owl-carousel>
                     </div>
                 </div>
+                <!--                Others have viewed Section-->
+                <div class="mb2" *ngIf="recentProducts.length">
+                    <hr class="modal-hr"/>
+                    <span class="title">Others have viewed</span>
+                    <div class="pt2">
+                        <owl-carousel
+                                [options]="recentOptions"
+                                [items]="otherPeopleProducts"
+                                *ngIf="otherPeopleProducts?.length"
+                                [carouselClasses]="['owl-theme']"
+                        >
+                            <ng-container *ngFor="let data of otherPeopleProducts; let i = index">
+                                <div class="carousel-item" [routerLink]="['/product',data.product_sku]">
+                                    <img style="height: 150px;width:150px;object-fit: contain" [src]="data.image"/>
+                                    <span class="open-sans font-14 gray-color">{{data.brand_name}}</span>
+                                    <span class="font-14 open-sans">{{data.product_name}}</span>
+                                </div>
+                            </ng-container>
+                        </owl-carousel>
+                    </div>
+                </div>
+                <!--                Others have viewed section end-->
                 <div class="mb2 ">
                     <hr class="modal-hr"/>
                     <div class="flex flex-column">

@@ -397,6 +397,33 @@
                             </p-carousel>
                         </div>
                     </div>
+                    <!--                    USER RELATED PRODUCTS SECTION-->
+                    <div class="mb2" *ngIf="otherPeopleProducts.length">
+                        <hr class="modal-hr"/>
+                        <span class="title">Others have viewed</span>
+                        <div class="pt2">
+                            <p-carousel [numVisible]="2"
+                                        [numScroll]="1"
+                                        [value]="otherPeopleProducts"
+                                        [circular]="false"
+                                        [ngClass]="{
+                                            'hide-nav-arrows' :otherPeopleProducts.length<3
+                                    }"
+                            >
+                                <ng-template let-data pTemplate="item">
+                                    <div class="h-100" [ngClass]="{
+                                    'carousel-single-item w-33':otherPeopleProducts.length === 1,
+                                    'carousel-item': otherPeopleProducts.length > 1
+                                    }" (click)="toCollectionProduct(data.product_sku)">
+                                        <img style="margin: auto 0;" [src]="data.image"/>
+                                        <span class="open-sans font-14 gray-color">{{data.brand_name}}</span>
+                                        <span class="font-14 open-sans">{{data.product_name}}</span>
+                                    </div>
+                                </ng-template>
+                            </p-carousel>
+                        </div>
+                    </div>
+                    <!--                    USER RELATED PRODUCTS SECTION END-->
                     <div>
                         &nbsp;
                     </div>
