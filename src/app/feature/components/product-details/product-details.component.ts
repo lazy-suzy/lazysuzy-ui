@@ -368,7 +368,7 @@ export class ProductDetailsComponent implements OnInit {
     getMaxHeight() {
         const topHeight =
             this.topContainer && (this.topContainer.nativeElement.offsetHeight || 0);
-        this.topHeight = {'max-height': `calc(100vh - ${topHeight + 12}px)`};
+        this.topHeight = {'max-height': `calc(100vh - ${topHeight + 51}px)`};
     }
 
     onSetImage(variation): void {
