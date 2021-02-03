@@ -115,7 +115,7 @@ export class ProductDetailsComponent implements OnInit {
                 if (this.data.payload) {
                     this.processProduct(this.data.payload, user);
                     this.loadProductReviews(this.data.sku);
-                    this.loadOtherPeopleProducts();
+
                 } else {
                     this.productSubscription = this.apiService
                         .getProduct(this.data.sku)
@@ -123,6 +123,7 @@ export class ProductDetailsComponent implements OnInit {
                             (payload: IProductDetail) => {
                                 this.processProduct(payload, user);
                                 this.loadProductReviews(this.data.sku);
+
                             },
                             (error) => {
                                 this.invalidLink = true;
@@ -204,6 +205,7 @@ export class ProductDetailsComponent implements OnInit {
     private processProduct(payload: IProductDetail, user) {
         this.product = payload.product;
         this.seoData = payload.seo_data;
+        this.loadOtherPeopleProducts();
         if (payload.product) {
             this.setProduct(payload);
             this.setRating();
