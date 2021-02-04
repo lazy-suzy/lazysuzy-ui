@@ -617,6 +617,10 @@ export class ProductDetailsMobileComponent implements OnInit {
     loadOtherPeopleProducts() {
         this.apiService.getOtherPeopleProducts(this.product.sku).subscribe((response: any[]) => {
             this.otherPeopleProducts = response;
+            if (this.otherPeopleProducts.length <= 2) {
+                this.otherPeopleOptions.loop = false;
+            }
+
         });
     }
 
