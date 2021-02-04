@@ -68,6 +68,8 @@ export class MatDialogUtilsService {
                 }
             });
         }
+        // return the dialog instance, required to listen to dialog close in containers for setting listing page seo;
+        return this.productDialog;
 
     }
 

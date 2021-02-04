@@ -173,7 +173,15 @@ export class ProductDetailsMobileComponent implements OnInit {
                             }
                             if (this.product) {
                                 this.schema = this.seoService.setSchema(this.product);
-                                this.setSeoData(payload);
+                                if (!this.isHandset) {
+                                    this.matDialogUtils.setProduct(payload);
+                                    this.router.navigate(
+                                        [`${this.product.department_info[0].category_url}`],
+                                        {queryParams: {modal_sku: this.product.sku}}
+                                    );
+                                } else {
+                                    this.setSeoData(payload);
+                                }
                                 this.updateActiveProduct(this.product);
                                 this.description = this.utils.compileMarkdown(
                                     this.product.description,
@@ -224,13 +232,7 @@ export class ProductDetailsMobileComponent implements OnInit {
                                     this.checkSelection = true;
                                 }
                                 this.hasVariationsInventory();
-                                if (!this.isHandset) {
-                                    this.matDialogUtils.setProduct(payload);
-                                    this.router.navigate(
-                                        [`${this.product.department_info[0].category_url}`],
-                                        {queryParams: {modal_sku: this.product.sku}}
-                                    );
-                                }
+
                                 this.variations = this.product.variations.sort((a, b) =>
                                     a.name > b.name ? 1 : -1
                                 );

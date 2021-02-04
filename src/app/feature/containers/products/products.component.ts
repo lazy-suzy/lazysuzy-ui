@@ -78,6 +78,8 @@ export class ProductsComponent implements OnInit {
     showFilters = false;
     timeout: any;
 
+    seoMetaData: MetaData;
+
     constructor(
         public dialog: MatDialog,
         private productElement: ElementRef,
@@ -116,7 +118,10 @@ export class ProductsComponent implements OnInit {
                 );
 
                 if (this.modalSku) {
-                    this.matDialogUtils.openMatDialog(this.modalSku);
+                    const dialogRef = this.matDialogUtils.openMatDialog(this.modalSku);
+                    dialogRef.afterClosed().pipe(first()).subscribe(result => {
+                        this.seoService.setMetaTags(this.seoMetaData);
+                    });
                 }
             });
         this.apiService.getCollections().pipe(first()).subscribe(collection => {
@@ -175,7 +180,6 @@ export class ProductsComponent implements OnInit {
                 .subscribe((response) => {
                     let allProducts = [];
                     // tslint:disable-next-line: prefer-for-of
-                    console.log('check for length error: ', response.length);
                     for (let i = 0; i < response.length; i++) {
                         allProducts = [...allProducts, ...response[i].products];
                     }
@@ -227,13 +231,13 @@ export class ProductsComponent implements OnInit {
             .getProducts(this.department, this.category, this.filters, this.sortType)
             .subscribe(
                 (payload: IProductsPayload) => {
-                    const metaData: MetaData = {
+                    this.seoMetaData = {
                         title: `Shop ${payload.seo_data.dept_name_long} Sofas at LazySuzy`,
                         image: payload.seo_data.cat_image,
                         description: payload.seo_data.description,
                     };
                     if (!this.modalSku) {
-                        this.seoService.setMetaTags(metaData);
+                        this.seoService.setMetaTags(this.seoMetaData);
                         this.seoService.setCanonicalURL();
                     }
 
