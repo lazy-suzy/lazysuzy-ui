@@ -1,8 +1,12 @@
-<ng-container *ngIf="!isHandset;else mobileOrderDetails">
-    <app-order-details-desktop [orderDetails]="orderDetails.data"></app-order-details-desktop>
-</ng-container>
+<div class="ph6-ns pv4-ns ph3 pv3">
+    <h3 class="open-sans-18 upper-case">Purchase History</h3> <br>
+    <ng-container *ngIf="!isHandset;else mobileOrderDetails">
+        <app-order-details-desktop [orderDetails]="orderDetails.data"></app-order-details-desktop>
+    </ng-container>
+</div>
+
 
 <ng-template #mobileOrderDetails>
-    <app-order-details-mobile [orderDetails]="orderDetails">
+    <app-order-details-mobile [orderDetails]="orderDetails.data">
     </app-order-details-mobile>
 </ng-template>

@@ -1,8 +1,7 @@
-<div class="login-container flex justify-center">
-
+<div class="login-container flex-ns items-center justify-center">
     <div>
-        <span class="mr-auto open-sans-18">Track Your Order</span>
-        <div class="flex">
+        <h3 class="mr-auto open-sans-18">Track Your Order</h3>
+        <div class="flex-ns">
             <div class="flex flex-column">
                 <span class="open-sans-18 dark-grey">Sign In to view order history</span>
                 <div class="social-btn">
@@ -14,26 +13,32 @@
                         <i class="fab fa-facebook-f">&nbsp;</i>Continue with Facebook
                     </button>
                 </div>
-                <hr>
+                <hr class="w-100" style="border-top: 1px solid #606060">
+
                 <div class="social-btn">
-                    <input class="form-control" type="email" placeholder="Email">
-                    <input class="form-control mt3" type="Password" placeholder="Password">
-                    <button class="submit-btn mt3">Sign In</button>
+                    <input class="form-control" type="email" placeholder="Email" [(ngModel)]="email">
+                    <input class="form-control mt3" type="Password"
+                           placeholder="Password" [(ngModel)]="password">
+                    <span class="error-msg" *ngIf="error">{{
+                        errorMsg
+                        }}</span>
+                    <button type="submit" class="submit-btn mt3" (click)="login($event,email,password)">Sign In</button>
                     <div class="flex justify-between mt3 lato-18 gray">
                         <a class="link" [routerLink]="['/forgot-password']">Forgot Password</a>
                         <span>|</span>
-                        <a class="link">Create an Account</a>
-
+                        <a class="link" (click)="openSignUpDialog()">Create an Account</a>
                     </div>
                 </div>
+
             </div>
             <div class="vertical-line"></div>
             <form [formGroup]="orderDetailsForm" (ngSubmit)="submitOrderDetails()">
                 <div class="flex flex-column">
                     <span>Look up Your Order</span>
-                    <input class="form-control" type="text" formControlName="orderNumber" placeholder="Order Number">
-                    <input class="form-control" type="text" formControlName="zipCode" placeholder="ZipCode">
-                    <input type="submit" value="Track Order">
+                    <input class="form-control mt3" type="text" formControlName="orderNumber"
+                           placeholder="Order Number">
+                    <input class="form-control mt3" type="text" formControlName="zipCode" placeholder="ZipCode">
+                    <input type="submit" class="mt3 submit-btn" value="Track Order">
                     <p class="open-sans-12 red" *ngIf="orderDetailsFormError">
                         {{orderDetailsErrorFormMessage}}
                     </p>

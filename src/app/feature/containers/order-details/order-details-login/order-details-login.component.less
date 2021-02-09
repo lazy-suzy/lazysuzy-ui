@@ -4,17 +4,24 @@
   color: @grey;
 }
 
+.error-msg {
+  color: #ff0000;
+  font-size: 12px;
+  display: block;
+  min-height: 25px;
+}
+
 .dark-grey {
   color: @dark-grey;
 }
 
 .login-container {
-  margin: auto;
+  //margin: auto;
 }
 
 .social-btn {
   max-width: 480px;
-  padding: 20px 50px;
+  //padding: 20px 50px;
 }
 
 .facebookBtn,
@@ -32,14 +39,16 @@
 }
 
 .vertical-line {
-  border-left: 1px solid;
+  border-left: 1px solid #606060;
+  margin: 0 3rem;
 }
 
 .submit-btn {
-  padding: 0 10%;
+  padding: 0 5%;
   height: 2.4rem;
   border: none;
-  min-width: 1rem;
+  min-width: 6rem;
+  max-width: 25%;
   background-color: #0c1c31;
   color: #ffcc00;
   font-family: Lato, sans-serif;
@@ -56,4 +65,19 @@
   text-decoration: none;
   cursor: pointer;
   color: @grey;
+}
+
+@media only screen and (max-width: 768px) {
+  .login-container {
+    padding: 2rem;
+  }
+
+  .submit-btn {
+    max-width: 45%;
+  }
+
+  .vertical-line {
+    border-top: 1px solid;
+    margin: 2rem 0;
+  }
 }
