@@ -12,12 +12,16 @@
     <div>
         <span class="open-sans-14 font-dark-gray">Reviewed on {{review.submission_time}}</span>
     </div>
+    <div *ngIf="review.status == 3">
+        <span class="open-sans-14 bold" style="color: #b76e79">Verified Purchase</span>
+    </div>
     <div>
         <p class="review-details" [innerHTML]="review.review"></p>
     </div>
     <div class="review-image-container mb2" *ngIf="review.review_images">
         <ng-container *ngFor="let image of items;let i=index">
-            <img *ngIf="image" class="review-image" [src]="image.data.src" alt="review-image-{{i+1}}" [gallery]="this.galleryRef" [lightbox]="i">
+            <img *ngIf="image" class="review-image" [src]="image.data.src" alt="review-image-{{i+1}}"
+                 [gallery]="this.galleryRef" [lightbox]="i">
         </ng-container>
     </div>
     <div *ngIf="review.helpful_user_count>0" class="mb2">
