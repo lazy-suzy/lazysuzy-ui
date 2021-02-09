@@ -6,6 +6,9 @@
     <span class="open-sans-12">{{review.headline}}</span>
     <span class="review-user-info">{{review.user_name}} {{review.user_location ? '| ' + review.user_location : ''}}</span>
     <span class="lato-12 font-dark-gray">Reviewed on {{review.submission_time}}</span>
+    <div *ngIf="review.status == 3">
+        <span class="open-sans-12 bold" style="color: #b76e79">Verified Purchase</span>
+    </div>
     <div>
         <p class="review-details" [innerHTML]="review.review"></p>
     </div>
