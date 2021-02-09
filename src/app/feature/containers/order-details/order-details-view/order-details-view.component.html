@@ -1,0 +1,8 @@
+<ng-container *ngIf="!isHandset;else mobileOrderDetails">
+    <app-order-details-desktop [orderDetails]="orderDetails.data"></app-order-details-desktop>
+</ng-container>
+
+<ng-template #mobileOrderDetails>
+    <app-order-details-mobile [orderDetails]="orderDetails">
+    </app-order-details-mobile>
+</ng-template>

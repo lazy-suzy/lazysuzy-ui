@@ -1,0 +1,48 @@
+<div class="login-container flex justify-center">
+
+    <div>
+        <span class="mr-auto open-sans-18">Track Your Order</span>
+        <div class="flex">
+            <div class="flex flex-column">
+                <span class="open-sans-18 dark-grey">Sign In to view order history</span>
+                <div class="social-btn">
+                    <button class="btn btn-light googleBtn black" (click)="socialSignIn('google')">
+                        <i class="fab fa-google">&nbsp;</i>
+                        Continue with Google
+                    </button>
+                    <button class="btn btn-primary facebookBtn white" (click)="socialSignIn('facebook')">
+                        <i class="fab fa-facebook-f">&nbsp;</i>Continue with Facebook
+                    </button>
+                </div>
+                <hr>
+                <div class="social-btn">
+                    <input class="form-control" type="email" placeholder="Email">
+                    <input class="form-control mt3" type="Password" placeholder="Password">
+                    <button class="submit-btn mt3">Sign In</button>
+                    <div class="flex justify-between mt3 lato-18 gray">
+                        <a class="link" [routerLink]="['/forgot-password']">Forgot Password</a>
+                        <span>|</span>
+                        <a class="link">Create an Account</a>
+
+                    </div>
+                </div>
+            </div>
+            <div class="vertical-line"></div>
+            <form [formGroup]="orderDetailsForm" (ngSubmit)="submitOrderDetails()">
+                <div class="flex flex-column">
+                    <span>Look up Your Order</span>
+                    <input class="form-control" type="text" formControlName="orderNumber" placeholder="Order Number">
+                    <input class="form-control" type="text" formControlName="zipCode" placeholder="ZipCode">
+                    <input type="submit" value="Track Order">
+                    <p class="open-sans-12 red" *ngIf="orderDetailsFormError">
+                        {{orderDetailsErrorFormMessage}}
+                    </p>
+                    <p>
+                        Please contact us at <a href="mailto:hello@lazysuzy.com">hello@lazysuzy.com</a> if you need
+                        further assistance.
+                    </p>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
