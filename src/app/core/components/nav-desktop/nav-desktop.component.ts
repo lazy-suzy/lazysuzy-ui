@@ -87,10 +87,10 @@ export class NavDesktopComponent implements OnInit, AfterViewInit {
                 this.cartProduct = parseInt(localStorage.getItem('cart'));
                 this.getDepartments();
                 this.router.events.subscribe((res) => {
-                    const orderRoute = this.router.url.slice(1, 6);
+                    const orderRoute = this.router.url.match(/order\/.*/) !== null;
                     this.hideBar = this.router.url === '/aboutus' ||
                         this.router.url === '/checkout' ||
-                        orderRoute === 'order';
+                        orderRoute;
                 });
             });
 
