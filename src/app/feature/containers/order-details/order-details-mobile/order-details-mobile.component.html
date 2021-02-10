@@ -1,17 +1,17 @@
 <div class="flex flex-column">
-    <div class="order-details-container flex flex-column" *ngFor="let order of orderDetails;let i = index">
-        <div class="flex flex-column">
-            <div class="flex">
+    <div class="order-details-container flex flex-column mb3" *ngFor="let order of orderDetails;let i = index">
+        <div class="flex flex-column ">
+            <div class="flex dark-gray">
                 <span class="open-sans-14 w-30 bold upper-case">Order No.:</span>
                 <span class="open-sans-14 w-70">{{order.order_id}}</span>
             </div>
-            <div class="flex">
+            <div class="flex dark-gray">
                 <span class="open-sans-14 w-30 bold upper-case">Order Date:</span>
                 <span class="open-sans-14 w-70">{{order.created_at}}</span>
             </div>
-            <div class="flex">
+            <div class="flex dark-gray">
                 <span class="open-sans-14 w-30 bold upper-case">Ship to:</span>
-                <div class="open-sans-14 w-70">
+                <div class="open-sans-14 w-70 ">
                     <p class="open-sans-14">{{order.shipping_f_name}} {{order.shipping_l_name}}</p>
                     <p class="open-sans-14">{{order.shipping_address_line1}} </p>
                     <p class="open-sans-14" *ngIf="order.shipping_address_line2">{{order.shipping_address_line2}} </p>
@@ -28,21 +28,21 @@
                     <div class="flex flex-column">
                         <div class="flex">
                             <img class="w-30" [src]="product.image">
-                            <div class="flex flex-column w-70">
-                                <span>{{product.product_sku}}</span>
-                                <span>{{product.product_name}}</span>
-                                <span>by {{product.brand_name}}</span>
-                                <span>${{product.price}}</span>
-                                <span>Qty: {{product.quantity}}</span>
+                            <div class=" ml3 flex flex-column w-70">
+                                <span class="open-sans-12 dark-gray">{{product.product_sku}}</span>
+                                <span class="open-sans-14 dark-blue">{{product.product_name}}</span>
+                                <span class="open-sans-12 dark-gray">by {{product.brand_name}}</span>
+                                <span class="open-sans-14 dark-blue">${{product.price}}</span>
+                                <span class="open-sans-12 dark-blue">Qty: {{product.quantity}}</span>
                             </div>
                         </div>
                         <span class="open-sans-18 mt3 bold upper-case">{{product.status}}</span>
-                        <span>Estimated Delivery: </span>
+                        <span *ngIf="product.tracking">Estimated Delivery: </span>
                         <a *ngIf="product.tracking_url"
                            class="mt3 w-100 btn btn-default custom-button lato-14 upper-case"
                            target="_blank"
                            [href]="product.tracking_url">Track Order</a>
-                        <span>Tracking: {{product.tracking}}</span>
+                        <span *ngIf="product.tracking">Tracking: {{product.tracking}}</span>
                     </div>
                 </ng-container>
 
