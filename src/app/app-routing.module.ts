@@ -112,7 +112,14 @@ const routes: Routes = [
     {path: 'settings/profile', component: EditMyProfileComponent},
     {path: 'p/:profile', component: PublicProfileComponent},
     {path: 'product/review/:product', component: ReviewFormMobileComponent},
-    {path: 'product/view-reviews/:product', component: AllReviewsMobileComponent}
+    {path: 'product/view-reviews/:product', component: AllReviewsMobileComponent},
+    {
+        path: 'order-details',
+        loadChildren: () =>
+            import('./feature/containers/order-details/order-details.module').then(
+                (m) => m.OrderDetailsModule
+            )
+    }
 ];
 
 @NgModule({

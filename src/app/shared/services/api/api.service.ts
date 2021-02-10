@@ -561,4 +561,13 @@ export class ApiService {
         const url = `${env.API_BASE_HREF}${endPoint}`;
         return this.httpService.get(url);
     }
+
+    // Api to get Order Details
+    getOrderDetails(orderNumber, zipCode) {
+        const endPoint = orderNumber && zipCode ?
+            `order_status?orderid=${orderNumber}&zipcode=${zipCode}` :
+            `order_status`;
+        const url = `${env.API_BASE_HREF}${endPoint}`;
+        return this.httpService.get(url);
+    }
 }

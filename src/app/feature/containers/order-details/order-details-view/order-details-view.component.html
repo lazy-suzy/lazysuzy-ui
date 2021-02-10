@@ -1,0 +1,29 @@
+<div class="ph6-ns pv4-ns ph3 pv3">
+    <h3 class="open-sans-18 upper-case">Purchase History</h3> <br>
+
+    <ng-container *ngIf="orderDetails.data.length;else showOrderDetails">
+        <div style="margin-top: 15%;height: 50vh" class="flex flex-column justify-center items-center">
+            <div class="flex flex-column items-center">
+                <span class="open-sans-18 dark-gray">Let's make your home complete.</span>
+                <button class="mt3 shop-now-btn">Shop Now</button>
+            </div>
+            <div style="margin-top: auto" class="flex justify-center items-center">
+                <span class="help-text">Expected to see something here? Contact us at
+                   <a class="help-text" href="mailto:hello@lazysuzy.com">hello@lazysuzy.com</a>
+                    if you need further assistance.
+                </span>
+            </div>
+        </div>
+    </ng-container>
+
+</div>
+<ng-template #showOrderDetails>
+    <ng-container *ngIf="!isHandset;else mobileOrderDetails">
+        <app-order-details-desktop [orderDetails]="orderDetails.data"></app-order-details-desktop>
+    </ng-container>
+</ng-template>
+
+<ng-template #mobileOrderDetails>
+    <app-order-details-mobile [orderDetails]="orderDetails.data">
+    </app-order-details-mobile>
+</ng-template>
