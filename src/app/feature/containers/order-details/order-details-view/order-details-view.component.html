@@ -1,7 +1,7 @@
 <div class="ph6-ns pv4-ns ph3 pv3">
     <h3 class="open-sans-18 upper-case">Purchase History</h3> <br>
 
-    <ng-container *ngIf="orderDetails.data.length;else showOrderDetails">
+    <ng-container *ngIf="!orderDetails.data.length;else showOrderDetails">
         <div style="margin-top: 15%;height: 50vh" class="flex flex-column justify-center items-center">
             <div class="flex flex-column items-center">
                 <span class="open-sans-18 dark-gray">Let's make your home complete.</span>
