@@ -1,10 +1,12 @@
 <div class="login-container flex-ns items-center justify-center">
     <div>
         <h3 class="mr-auto open-sans-18">Track Your Order</h3>
-        <div class="flex-ns">
-            <div class="flex flex-column">
-                <span class="open-sans-18 dark-grey">Sign In to view order history</span>
-                <div class="social-btn">
+        <div class="flex-ns mt4-ns">
+            <div class="flex flex-column w-50-ns">
+                <span class="open-sans-18-ns open-sans-14 dark-grey upper-case mb3">
+                    Sign In to view order history
+                </span>
+                <div class="">
                     <button class="btn btn-light googleBtn black" (click)="socialSignIn('google')">
                         <i class="fab fa-google">&nbsp;</i>
                         Continue with Google
@@ -13,37 +15,41 @@
                         <i class="fab fa-facebook-f">&nbsp;</i>Continue with Facebook
                     </button>
                 </div>
-                <hr class="w-100" style="border-top: 1px solid #606060">
+                <hr style="border-top: 1px solid #606060">
 
-                <div class="social-btn">
-                    <input class="form-control" type="email" placeholder="Email" [(ngModel)]="email">
-                    <input class="form-control mt3" type="Password"
+                <div class="">
+                    <input class="form-control custom-input" type="email" placeholder="Email" [(ngModel)]="email">
+                    <input class="form-control mt3 custom-input" type="Password"
                            placeholder="Password" [(ngModel)]="password">
                     <span class="error-msg" *ngIf="error">{{
                         errorMsg
                         }}</span>
-                    <button type="submit" class="submit-btn mt3" (click)="login($event,email,password)">Sign In</button>
-                    <div class="flex justify-between mt3 lato-18 gray">
+                    <button type="submit" class="submit-btn w-100 mt3" (click)="login($event,email,password)">Sign In
+                    </button>
+                    <div class="flex mt3 lato-18-ns lato-12 gray">
                         <a class="link" [routerLink]="['/forgot-password']">Forgot Password</a>
-                        <span>|</span>
-                        <a class="link" (click)="openSignUpDialog()">Create an Account</a>
+                        <span class="mh4-ns mh3">|</span>
+                        <a class="link lato-18-ns lato-12" (click)="openSignUpDialog()">Create an Account</a>
                     </div>
                 </div>
 
             </div>
             <div class="vertical-line"></div>
-            <form [formGroup]="orderDetailsForm" (ngSubmit)="submitOrderDetails()">
+            <form class="w-50-ns" [formGroup]="orderDetailsForm" (ngSubmit)="submitOrderDetails()">
                 <div class="flex flex-column">
-                    <span>Look up Your Order</span>
-                    <input class="form-control mt3" type="text" formControlName="orderNumber"
+                    <span class="open-sans-18-ns open-sans-14 dark-grey upper-case mb3">Look up Your Order</span>
+                    <input class="form-control mt3 custom-input" type="text" formControlName="orderNumber"
                            placeholder="Order Number">
-                    <input class="form-control mt3" type="text" formControlName="zipCode" placeholder="ZipCode">
-                    <input type="submit" class="mt3 submit-btn" value="Track Order">
+                    <input class="form-control mt3 custom-input" type="text" formControlName="zipCode"
+                           placeholder="ZIP Code">
+                    <input type="submit" class="mt3  submit-btn" value="Track Order">
                     <p class="open-sans-12 red" *ngIf="orderDetailsFormError">
                         {{orderDetailsErrorFormMessage}}
                     </p>
-                    <p>
-                        Please contact us at <a href="mailto:hello@lazysuzy.com">hello@lazysuzy.com</a> if you need
+                    <p class="gray lato-18-ns lato-12 mt3">
+                        Please contact us at
+                        <a class="gray lato-18-ns lato-12"
+                           href="mailto:hello@lazysuzy.com">hello@lazysuzy.com</a> if you need
                         further assistance.
                     </p>
                 </div>
