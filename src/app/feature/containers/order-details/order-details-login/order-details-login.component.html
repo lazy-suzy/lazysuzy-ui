@@ -46,7 +46,7 @@
                     <span class="error-msg" *ngIf="error">{{
                         errorMsg
                         }}</span>
-                    <button type="submit" class="submit-btn w-100 mt3" (click)="login($event,email,password)">Sign In
+                    <button type="submit" class="submit-btn w-100 mt3" (click)="login()">Sign In
                     </button>
                     <div class="flex mt3 lato-18-ns lato-12 gray">
                         <a class="link" [routerLink]="['/forgot-password']">Forgot Password</a>
