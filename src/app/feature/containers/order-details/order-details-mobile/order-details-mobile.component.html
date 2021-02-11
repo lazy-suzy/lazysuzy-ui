@@ -37,7 +37,7 @@
                             </div>
                         </div>
                         <span class="open-sans-18 mt3 bold upper-case">{{product.status}}</span>
-                        <span *ngIf="product.tracking">Estimated Delivery: </span>
+                        <span *ngIf="product.delivery_date">Estimated Delivery: {{product.delivery_date}}</span>
                         <a *ngIf="product.tracking_url"
                            class="mt3 w-100 btn btn-default custom-button lato-14 upper-case"
                            target="_blank"
