@@ -30,7 +30,7 @@
             <span class="open-sans-14">${{product.price}}</span>
             <span class="open-sans-12">Qty: {{product.quantity}}</span>
             <h3 class="open-sans-18 mt2 upper-case">{{product.status}}</h3>
-            <span class="lato-14 upper-case" *ngIf="product.tracking">Estimated Delivery</span>
+            <span class="lato-14 upper-case" *ngIf="product.delivery_date">Estimated Delivery: {{product.delivery_date}}</span>
             <span *ngIf="product.tracking">{{product.tracking}}</span>
             <a *ngIf="product.tracking_url" class="btn btn-default lato-18 upper-case" target="_blank"
                [href]="product.tracking_url">Track Order</a>

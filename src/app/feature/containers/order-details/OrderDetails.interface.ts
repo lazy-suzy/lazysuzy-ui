@@ -21,6 +21,7 @@ export interface OrderDetailProduct {
     price: number;
     status: string;
     note?: any;
+    delivery_date: string;
     date: string;
     tracking: string;
     tracking_url: string;
