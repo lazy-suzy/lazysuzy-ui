@@ -3,7 +3,9 @@
 .gray {
   color: @grey;
 }
-
+hr{
+  width: 100%;
+}
 .error-msg {
   color: #ff0000;
   font-size: 12px;
@@ -19,14 +21,9 @@
   //margin: auto;
 }
 
-.social-btn {
-  max-width: 480px;
-  //padding: 20px 50px;
-}
-
 .facebookBtn,
 .googleBtn {
-  box-shadow: 2px 5px 8px 1px #a2a1a1;
+  //box-shadow: 2px 5px 8px 1px #a2a1a1;
   font-size: 18px;
   margin: 10px auto;
   padding: 12px;
@@ -48,17 +45,20 @@
   height: 2.4rem;
   border: none;
   min-width: 6rem;
-  max-width: 25%;
+  max-width: 50%;
   background-color: #0c1c31;
   color: #ffcc00;
   font-family: Lato, sans-serif;
   font-size: 14px;
   border-radius: 5px;
+  text-transform: uppercase;
 }
 
 .custom-input {
-  max-width: 480px;
-  padding: 20px 50px;
+  //max-width: 480px;
+  padding: 12px;
+  height: auto;
+  line-height: 1.42857143;
 }
 
 .link {
@@ -71,9 +71,11 @@
   .login-container {
     padding: 2rem;
   }
-
+  hr{
+    width: 80%;
+  }
   .submit-btn {
-    max-width: 45%;
+    max-width: 100%;
   }
 
   .vertical-line {
