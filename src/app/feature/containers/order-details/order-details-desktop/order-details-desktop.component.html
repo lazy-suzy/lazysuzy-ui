@@ -2,8 +2,8 @@
     <div class="flex ph3 items-center justify-between">
         <div class="flex">
             <div class="flex flex-column">
-                <span class="open-sans-14 dark-gray bold">Order No:</span>
-                <span class="open-sans-14 dark-gray bold">Order Date:</span>
+                <span class="open-sans-14 upper-case dark-gray bold">Order No:</span>
+                <span class="open-sans-14 upper-case dark-gray bold">Order Date:</span>
             </div>
             <div class="flex flex-column ml3">
                 <span class="open-sans-14 dark-gray">{{order.order_id}}</span>
@@ -17,24 +17,24 @@
         </div>
     </div>
     <hr class="mh3"/>
-    <span class="pl3 open-sans-18">{{calculateTotalItems(order.products)}} Items</span>
+    <span class="pl3 open-sans-14">{{calculateTotalItems(order.products)}} Items</span>
     <div class="flex flex-wrap">
         <div class="flex flex-column pa3 w-33" *ngFor="let product of order.products">
             <img style="object-fit: contain;"
                  class="mr-auto"
                  [src]="product.image"
                  alt="Product Ordered Image">
-            <span class="open-sans-12 mt3">{{product.product_sku}}</span>
+            <span class="open-sans-12 mt4">{{product.product_sku}}</span>
             <span class="open-sans-14">{{product.product_name}}</span>
-            <span class="open-sans-14">by {{product.brand_name}}</span>
+            <span class="open-sans-14">by {{product.site}}</span>
             <span class="open-sans-14">${{product.price}}</span>
             <span class="open-sans-12">Qty: {{product.quantity}}</span>
-            <h3 class="open-sans-18 mt2 upper-case">{{product.status}}</h3>
-            <span class="lato-14 upper-case" *ngIf="product.delivery_date">Estimated Delivery: {{product.delivery_date}}</span>
-            <span *ngIf="product.tracking">{{product.tracking}}</span>
-            <a *ngIf="product.tracking_url" class="btn btn-default lato-18 upper-case" target="_blank"
+            <h3 class="open-sans-18 mv3 bold upper-case">{{product.status}}</h3>
+            <span class="lato-14 upper-case" *ngIf="product.delivery_date">Estimated Delivery:
+                <span class="lato-18">{{product.delivery_date}}</span></span>
+            <a *ngIf="product.tracking_url" class="btn btn-default lato-18 custom-button upper-case" target="_blank"
                [href]="product.tracking_url">Track Order</a>
-            <span *ngIf="product.tracking" class="upper-case lato-14">Tracking: [{{product.tracking}}]</span>
+            <span *ngIf="product.tracking" class="upper-case lato-14">Tracking: {{product.tracking}}</span>
         </div>
     </div>
 </div>

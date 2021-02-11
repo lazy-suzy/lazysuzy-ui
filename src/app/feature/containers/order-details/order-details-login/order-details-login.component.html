@@ -17,10 +17,32 @@
                 </div>
                 <hr style="border-top: 1px solid #606060">
 
-                <div class="">
-                    <input class="form-control custom-input" type="email" placeholder="Email" [(ngModel)]="email">
-                    <input class="form-control mt3 custom-input" type="Password"
-                           placeholder="Password" [(ngModel)]="password">
+                <form [formGroup]="signInForm" class="">
+                    <span *ngIf="email.errors?.email && (email.touched || email.dirty)" class="invalid-label lato-18">
+                        Please Enter a Valid Email id
+                    </span>
+                    <span *ngIf="email.errors?.required && (email.touched || email.dirty)"
+                          class="invalid-label lato-18">
+                        Please Enter an Email id
+                    </span>
+                    <input class="form-control custom-input mb3" type="email"
+                           placeholder="Email"
+                           formControlName="email"
+                           [class.invalid-input]="email.invalid && (email.touched || email.dirty)"
+                    >
+
+                    <span *ngIf="password.errors?.minlength && (password.touched|| password.dirty)"
+                          class="invalid-label lato-18">
+                        Password should atleast be 8 characters
+                    </span>
+                    <span *ngIf="password.errors?.required && (password.touched|| password.dirty)"
+                          class="invalid-label lato-18">
+                        Password Field is Required
+                    </span>
+                    <input class="form-control custom-input" type="Password"
+                           placeholder="Password" formControlName="password"
+                           [class.invalid-input]="password.invalid && (password.touched|| password.dirty)"
+                    >
                     <span class="error-msg" *ngIf="error">{{
                         errorMsg
                         }}</span>
@@ -31,17 +53,30 @@
                         <span class="mh4-ns mh3">|</span>
                         <a class="link lato-18-ns lato-12" (click)="openSignUpDialog()">Create an Account</a>
                     </div>
-                </div>
+                </form>
 
             </div>
             <div class="vertical-line"></div>
             <form class="w-50-ns" [formGroup]="orderDetailsForm" (ngSubmit)="submitOrderDetails()">
                 <div class="flex flex-column">
-                    <span class="open-sans-18-ns open-sans-14 dark-grey upper-case mb3">Look up Your Order</span>
-                    <input class="form-control mt3 custom-input" type="text" formControlName="orderNumber"
-                           placeholder="Order Number">
-                    <input class="form-control mt3 custom-input" type="text" formControlName="zipCode"
-                           placeholder="ZIP Code">
+                    <span class="open-sans-18-ns open-sans-14 dark-grey upper-case mb5">Look up Your Order</span>
+                    <span *ngIf="orderNumber.invalid && orderNumber.touched" class="invalid-label lato-18">
+                        Please Enter Your Order Number
+                    </span>
+                    <input class="form-control custom-input mb3" type="text"
+                           formControlName="orderNumber"
+                           placeholder="Order Number"
+                           [class.invalid-input]="orderNumber.invalid && orderNumber.touched"
+                    >
+                    <span *ngIf="zipCode.invalid && zipCode.touched" class="invalid-label lato-18">
+                         Please enter your zip code.
+                    </span>
+
+                    <input class="form-control custom-input mb3" type="text"
+                           formControlName="zipCode"
+                           placeholder="ZIP Code"
+                           [class.invalid-input]="zipCode.invalid && zipCode.touched"
+                    >
                     <input type="submit" class="mt3  submit-btn" value="Track Order">
                     <p class="open-sans-12 red" *ngIf="orderDetailsFormError">
                         {{orderDetailsErrorFormMessage}}

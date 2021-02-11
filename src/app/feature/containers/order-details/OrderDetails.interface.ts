@@ -29,6 +29,6 @@ export interface OrderDetailProduct {
     label: string;
     product_name: string;
     image: string;
-    brand_name: string;
+    site: string;
     product_sku: string;
 }
