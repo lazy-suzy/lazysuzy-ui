@@ -14,13 +14,11 @@ export class OrderDetailsLoginComponent implements OnInit {
 
     // Form Groups
     orderDetailsForm: FormGroup;
-
+    signInForm: FormGroup;
 
     orderDetailsFormError = false;
     orderDetailsErrorFormMessage = '';
     // For Login
-    email = '';
-    password = '';
     error;
     errorMsg = '';
 
@@ -38,6 +36,27 @@ export class OrderDetailsLoginComponent implements OnInit {
             orderNumber: ['CCHVA', Validators.required],
             zipCode: ['56003', Validators.required],
         });
+        this.signInForm = fb.group({
+            email: ['', [Validators.required, Validators.email]],
+            password: ['', [Validators.required, Validators.minLength(8)]]
+        });
+    }
+
+    // Getters for form
+    get orderNumber() {
+        return this.orderDetailsForm.controls.orderNumber;
+    }
+
+    get zipCode() {
+        return this.orderDetailsForm.controls.zipCode;
+    }
+
+    get email() {
+        return this.signInForm.controls.email;
+    }
+
+    get password() {
+        return this.signInForm.controls.password;
     }
 
     ngOnInit() {
@@ -71,28 +90,9 @@ export class OrderDetailsLoginComponent implements OnInit {
         this.matDialogUtilsService.openSignupDialog();
     }
 
-    validateForm(email, password) {
-        this.error = false;
-        if (!email) {
-            this.error = true;
-            this.errorMsg = 'Email cannot be blank';
-        } else if (!password) {
-            this.error = true;
-            this.errorMsg = 'Password cannot be blank';
-        } else if (password.length < 8) {
-            this.error = true;
-            this.errorMsg = 'Password must contain 8 characters';
-        }
-        return !this.error;
-    }
-
-    login(event, email, password) {
-        event.preventDefault();
-        if (this.validateForm(email, password)) {
-            const formData: any = new FormData();
-            formData.append('email', email);
-            formData.append('password', password);
-            this.apiService.login(formData).subscribe(
+    login() {
+        if (this.signInForm.valid) {
+            this.apiService.login(this.signInForm.value).subscribe(
                 (payload: any) => {
                     if (payload.success) {
                         this.error = false;
@@ -104,6 +104,8 @@ export class OrderDetailsLoginComponent implements OnInit {
                 },
                 (payload: any) => this.handleError(payload.error)
             );
+        } else {
+            this.signInForm.markAllAsTouched();
         }
     }
 
