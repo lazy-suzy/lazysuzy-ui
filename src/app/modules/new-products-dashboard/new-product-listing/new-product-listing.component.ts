@@ -101,7 +101,7 @@ export class NewProductListingComponent implements OnInit {
             product.fabric = product.fabric.split(',').filter((elm) => elm);
         }
         if (typeof product.ls_id === 'string') {
-            product.ls_id = product.ls_id.split(',').filter((elm) => elm).map(elm => +elm);
+            product.ls_id = product.ls_id.split(',').filter((elm) => elm);
         }
         if (typeof product.style === 'string') {
             product.style = product.style.split(',').filter((elm) => elm);
