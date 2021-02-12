@@ -33,8 +33,8 @@ export class OrderDetailsLoginComponent implements OnInit {
         private authGuardService: AuthGuardService,
     ) {
         this.orderDetailsForm = fb.group({
-            orderNumber: ['CCHVA', Validators.required],
-            zipCode: ['56003', Validators.required],
+            orderNumber: ['', Validators.required],
+            zipCode: ['', Validators.required],
         });
         this.signInForm = fb.group({
             email: ['', [Validators.required, Validators.email]],
