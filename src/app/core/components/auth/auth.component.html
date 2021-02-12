@@ -1,43 +1,61 @@
 <div *ngIf="initialized">
   <span
-    *ngIf="isCurrentUserGuest(); else userName"
-    (click)="openSignupDialog()"
+          *ngIf="isCurrentUserGuest(); else userName"
+          [matMenuTriggerFor]="guestOptionMenu"
   >
     <mat-icon
-      class="default-account-icon pointer"
-      aria-hidden="false"
-      aria-label="Account"
+            class="default-account-icon pointer"
+            aria-hidden="false"
+            aria-label="Account"
     >
      person_outline
     </mat-icon>
   </span>
 
-  <ng-template #userName>
-    <img
-      *ngIf="hasPicture; else showInitials"
-      [src]="user.picture"
-      class="profile-avatar"
-      [matMenuTriggerFor]="optionsMenu"
-    />
-    <ng-template #showInitials>
+    <ng-template #userName>
+        <img
+                *ngIf="hasPicture; else showInitials"
+                [src]="user.picture"
+                class="profile-avatar"
+                [matMenuTriggerFor]="optionsMenu"
+        />
+        <ng-template #showInitials>
       <span class="profile-name pointer" [matMenuTriggerFor]="optionsMenu">
         {{ initials }}
       </span>
+        </ng-template>
     </ng-template>
-  </ng-template>
+    <mat-menu #guestOptionMenu="matMenu">
+      <span>
+        <button mat-menu-item class="open-sans-14 upper-case dark-blue" (click)="openSignupDialog()">
 
-  <mat-menu #optionsMenu="matMenu">
-    <span>
-      <button
-        mat-menu-item
-        [routerLink]="['/settings/profile']"
-        routerLinkActive="router-link-active"
-      >
+          Sign Up</button>
+      </span>
+        <span>
+         <button class="open-sans-14 upper-case dark-blue" mat-menu-item (click)="openSignInDialog()"> Sign In</button>
+      </span>
+        <span>
+         <button class="open-sans-14 upper-case dark-blue" mat-menu-item
+                 [routerLink]="['/order-details']"> Track Order</button>
+      </span>
+    </mat-menu>
+    <mat-menu #optionsMenu="matMenu">
+        <span>
+         <button class="open-sans-14 upper-case dark-blue"
+                 mat-menu-item
+                 [routerLink]="['/order-details']">
+             My Orders</button>
+      </span>
+        <span>
+      <button class="open-sans-14 upper-case dark-blue"
+              mat-menu-item
+              [routerLink]="['/settings/profile']"
+              routerLinkActive="router-link-active">
         Profile
       </button>
     </span>
-    <span>
-      <button mat-menu-item (click)="logout()">Logout</button>
+        <span>
+      <button class="open-sans-14 upper-case dark-blue" mat-menu-item (click)="logout()">Logout</button>
     </span>
-  </mat-menu>
+    </mat-menu>
 </div>
