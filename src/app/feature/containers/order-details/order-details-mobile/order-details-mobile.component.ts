@@ -1,5 +1,6 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {OrderInfo} from '../OrderDetails.interface';
+import {Router} from '@angular/router';
 
 @Component({
     selector: 'app-order-details-mobile',
@@ -11,7 +12,9 @@ export class OrderDetailsMobileComponent implements OnInit {
     @Input() orderDetails: OrderInfo[];
     orderDetailsOpenStatus = [];
 
-    constructor() {
+    constructor(
+        private router: Router
+    ) {
     }
 
     ngOnInit() {
@@ -24,5 +27,9 @@ export class OrderDetailsMobileComponent implements OnInit {
 
     closeItem(index) {
         this.orderDetailsOpenStatus[index] = false;
+    }
+
+    openProductPage(sku) {
+        this.router.navigate(['/product', sku]);
     }
 }

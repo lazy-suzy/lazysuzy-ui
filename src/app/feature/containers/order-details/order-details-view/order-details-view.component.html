@@ -1,4 +1,4 @@
-<div class="order-view-container">
+<div class="order-view-container" *ngIf="!isLinkFetching">
     <h3 class="open-sans-18 upper-case">Purchase History</h3> <br>
 
     <ng-container *ngIf="!orderDetails.data.length;else showOrderDetails">
@@ -27,3 +27,5 @@
     <app-order-details-mobile [orderDetails]="orderDetails.data">
     </app-order-details-mobile>
 </ng-template>
+
+<img *ngIf="isLinkFetching" [src]="spinner" class="loader"/>
