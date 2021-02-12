@@ -28,4 +28,10 @@ export class OrderDetailsDesktopComponent implements OnInit {
     openProductPage(sku) {
         this.matDialogUtilsService.openMatDialog(sku);
     }
+
+    decodeHtml(text: string): string {
+        const htmlComponent = document.createElement('textarea');
+        htmlComponent.innerHTML = text;
+        return htmlComponent.value;
+    }
 }
