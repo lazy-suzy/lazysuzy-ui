@@ -44,7 +44,6 @@ export class SignupComponent implements OnInit {
         @Inject(MAT_DIALOG_DATA) public data,
         private matDialogUtils: MatDialogUtilsService
     ) {
-        console.log(data);
     }
 
     ngOnInit() {
