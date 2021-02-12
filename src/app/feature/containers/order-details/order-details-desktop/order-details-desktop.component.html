@@ -17,15 +17,16 @@
         </div>
     </div>
     <hr class="mh3"/>
-    <span class="pl3 open-sans-14">{{calculateTotalItems(order.products)}} Items</span>
+    <span class="pl3 open-sans-14">{{calculateTotalItems(order.products)}}</span>
     <div class="flex flex-wrap">
         <div class="flex flex-column pa3 w-33" *ngFor="let product of order.products">
-            <img style="object-fit: contain;"
+            <img style="object-fit: contain;cursor:pointer;"
                  class="mr-auto"
                  [src]="product.image"
-                 alt="Product Ordered Image">
+                 alt="Product Ordered Image" (click)="openProductPage(product.product_sku)">
             <span class="open-sans-12 mt4">{{product.product_sku}}</span>
-            <span class="open-sans-14 bold">{{product.product_name}}</span>
+            <span class="open-sans-14 bold" style="cursor: pointer"
+                  (click)="openProductPage(product.product_sku)">{{product.product_name}}</span>
             <span class="open-sans-14 dark-gray">by {{product.site}}</span>
             <span class="open-sans-14">${{product.price}}</span>
             <span class="open-sans-12">Qty: {{product.quantity}}</span>
@@ -34,7 +35,7 @@
                 <span class="lato-18">{{product.delivery_date}}</span></span>
             <a *ngIf="product.tracking_url" class="mt2 btn btn-default lato-18 custom-button upper-case" target="_blank"
                [href]="product.tracking_url">Track Order</a>
-            <span *ngIf="product.tracking" class="upper-case lato-14">Tracking: {{product.tracking}}</span>
+            <span *ngIf="product.tracking" class="upper-case mt2 lato-14">Tracking: {{product.tracking}}</span>
         </div>
     </div>
 </div>

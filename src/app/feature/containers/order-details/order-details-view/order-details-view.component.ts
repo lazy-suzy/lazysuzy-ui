@@ -17,6 +17,8 @@ export class OrderDetailsViewComponent implements OnInit {
         data: [],
     };
     isHandset = false;
+    spinner = 'assets/image/spinner.gif';
+    isLinkFetching = true;
 
     constructor(
         private route: ActivatedRoute,
@@ -37,6 +39,8 @@ export class OrderDetailsViewComponent implements OnInit {
             this.orderDetails = this.orderDetailsService.getOrderDetails();
             if (!this.orderDetails.status) {
                 this.setOrderDetailsFromApi(params);
+            } else {
+                this.isLinkFetching = false;
             }
         } else {
             if (this.authService.isGuest()) {
@@ -51,6 +55,7 @@ export class OrderDetailsViewComponent implements OnInit {
         this.orderDetailsService.getOrderDetailsFromApi(params.orderNumber, params.zipCode).subscribe(
             (response: OrderDetailsInterface) => {
                 this.orderDetails = response;
+                this.isLinkFetching = false;
             }
         );
     }

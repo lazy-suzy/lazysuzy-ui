@@ -6,7 +6,7 @@
                 <span class="open-sans-14 ml2 w-70">{{order.order_id}}</span>
             </div>
             <div class="flex dark-gray">
-                <span class="open-sans-14 w-30 bold upper-case">Order Date:</span>
+                <span class="open-sans-14 w-30 bold upper-case" style="white-space: nowrap">Order Date:</span>
                 <span class="open-sans-14 ml2 w-70">{{order.created_at}}</span>
             </div>
             <div class="flex dark-gray">
@@ -27,10 +27,10 @@
                     <hr class="w-100">
                     <div class="flex flex-column">
                         <div class="flex">
-                            <img class="w-30" style="object-fit: contain" [src]="product.image">
+                            <img (click)="openProductPage(product.product_sku)" class="w-30" style="object-fit: contain" [src]="product.image">
                             <div class="ml3 flex flex-column w-70">
                                 <span class="open-sans-12 dark-gray">{{product.product_sku}}</span>
-                                <span class="open-sans-14 dark-blue bold">{{product.product_name}}</span>
+                                <span (click)="openProductPage(product.product_sku)" class="open-sans-14 dark-blue bold">{{product.product_name}}</span>
                                 <span class="open-sans-12 dark-gray">by {{product.site}}</span>
                                 <span class="open-sans-14 dark-blue">${{product.price}}</span>
                                 <span class="open-sans-12 dark-blue">Qty: {{product.quantity}}</span>
