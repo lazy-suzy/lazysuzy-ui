@@ -29,8 +29,13 @@ export class OrderDetailsMobileComponent implements OnInit {
         this.orderDetailsOpenStatus[index] = false;
     }
 
-    openProductPage(sku) {
-        this.router.navigate(['/product', sku]);
+    openProductPage(product) {
+        if (product.parent_sku) {
+            this.router.navigate(['/product', product.parent_sku]);
+        } else {
+            this.router.navigate(['/product', product.product_sku]);
+        }
+
     }
 
     decodeHtml(text: string): string {

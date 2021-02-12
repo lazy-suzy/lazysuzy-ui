@@ -25,8 +25,13 @@ export class OrderDetailsDesktopComponent implements OnInit {
         return length > 1 ? `${length} items` : `${length} item`;
     }
 
-    openProductPage(sku) {
-        this.matDialogUtilsService.openMatDialog(sku);
+    openProductPage(product) {
+        if (product.parent_sku) {
+            this.matDialogUtilsService.openMatDialog(product.parent_sku);
+        } else {
+            this.matDialogUtilsService.openMatDialog(product.product_sku);
+        }
+
     }
 
     decodeHtml(text: string): string {

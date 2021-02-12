@@ -31,4 +31,5 @@ export interface OrderDetailProduct {
     image: string;
     site: string;
     product_sku: string;
+    parent_sku: string;
 }
