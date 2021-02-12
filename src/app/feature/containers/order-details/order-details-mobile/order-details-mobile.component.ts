@@ -32,4 +32,10 @@ export class OrderDetailsMobileComponent implements OnInit {
     openProductPage(sku) {
         this.router.navigate(['/product', sku]);
     }
+
+    decodeHtml(text: string): string {
+        const htmlComponent = document.createElement('textarea');
+        htmlComponent.innerHTML = text;
+        return htmlComponent.value;
+    }
 }

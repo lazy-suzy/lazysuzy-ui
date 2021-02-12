@@ -24,7 +24,7 @@
                  class="mr-auto"
                  [src]="product.image"
                  alt="Product Ordered Image" (click)="openProductPage(product.product_sku)">
-            <span class="open-sans-12 mt4">{{product.product_sku}}</span>
+            <span class="open-sans-12 mt4">{{decodeHtml(product.product_name)}}</span>
             <span class="open-sans-14 bold" style="cursor: pointer"
                   (click)="openProductPage(product.product_sku)">{{product.product_name}}</span>
             <span class="open-sans-14 dark-gray">by {{product.site}}</span>
