@@ -142,6 +142,12 @@ export class NewProductRowComponent implements OnInit {
         this.product.product_dimension.push(dimensionGroup);
     }
 
+    copyDimension(index) {
+        // DEEP COPY HACK
+        const newDimension = JSON.parse(JSON.stringify(this.product.product_dimension[index]));
+        this.product.product_dimension = [...this.product.product_dimension, newDimension];
+    }
+
     isObject(value) {
         return typeof value === 'object';
     }
