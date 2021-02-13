@@ -312,12 +312,20 @@
                 <div class="col-6 mt-5" *ngFor="let key of product.product_dimension;let i = index">
                     <span style="font-size: 16px;font-weight: bold">{{key.groupName}}</span> <br/>
                     <input [(ngModel)]="key.groupName">
-                    <button style="float: right" mat-raised-button color="primary"
-                            (click)="addDimension(i)">Add Dimension
-                    </button>
+                    <div style="float: right" class="flex flex-column">
+                        <button  mat-raised-button color="primary"
+                                (click)="addDimension(i)">Add Dimension
+                        </button>
+                        <div class="mt3">
+                            <button  mat-raised-button color="secondary"
+                                     (click)="copyDimension(i)">Copy Dimension
+                            </button>
+                        </div>
+
+                    </div>
                     <ng-container *ngIf="isArray(key.groupValue)">
                         <div class="flex flex-wrap justify-between">
-                            <div class="flex flex-column w-33 mb3" *ngFor="let dimension of key.groupValue">
+                            <div class="flex flex-column w-30 mb3" *ngFor="let dimension of key.groupValue">
                                 <div>
                                     <label class="bold">{{dimension.name}}</label> <br/>
 
