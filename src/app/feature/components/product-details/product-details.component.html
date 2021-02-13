@@ -314,11 +314,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="flex justify-center mt3" style="margin-bottom: 20px">
-                            <button mat-raised-button (click)="openMyReviewModal()" class="w-80 add-review-btn">
-                                {{total_count > 0 ? ' Write a Review' : 'BE THE FIRST TO REVIEW'}}
-                            </button>
-                        </div>
+
                     </div>
                     <div class="mb2" *ngIf="total_count>0">
                         <ul class="description-menu justify-around">
@@ -364,7 +360,11 @@
                                 </div>
                             </div>
                         </div>
-
+                    </div>
+                    <div class="flex justify-center" style="margin-bottom: 20px">
+                        <button mat-raised-button (click)="openMyReviewModal()" class="w-80 add-review-btn">
+                            {{total_count > 0 ? ' Write a Review' : 'BE THE FIRST TO REVIEW'}}
+                        </button>
                     </div>
                     <div *ngIf="total_count>10">
                         <a (click)="openAllReviewsModal()" class="open-sans-14 bold all-review-link">See All Reviews
@@ -372,6 +372,13 @@
                         </a>
                     </div>
                     <!--Reviews Section End-->
+                    <!--                    Return Section-->
+                    <div class="mb2" *ngIf="product.return_policy">
+                        <hr class="modal-hr"/>
+                        <span class="title">Returns</span>
+                        <p>{{product.return_policy}}</p>
+                    </div>
+                    <!--                    Returns Section end-->
                     <div class="mb2" *ngIf="recentProducts.length">
                         <hr class="modal-hr"/>
                         <span class="title">Recently Viewed</span>
