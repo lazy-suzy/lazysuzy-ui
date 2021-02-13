@@ -168,6 +168,10 @@
                         class="{{ activeTab === 'care' ? 'active b' : 'bg-white' }}">
                         <span class="nav-link">CARE</span>
                     </li>
+                    <li (click)="selectTab('returns')" *ngIf="product.return_policy"
+                        class="{{ activeTab === 'returns' ? 'active b' : 'bg-white' }}">
+                        <span class="nav-link">RETURNS</span>
+                    </li>
                 </ul>
                 <div class="menu-content">
                     <div *ngIf="descriptionExist" class="{{ activeTab === 'desc' ? '' : 'dn' }}">
@@ -230,7 +234,9 @@
                     <div *ngIf="careExist" class="{{ activeTab === 'care' ? '' : 'dn' }}">
                         <div [innerHTML]="product.product_care" class="nav-content"></div>
                     </div>
-
+                    <div *ngIf="product.return_policy" class="{{ activeTab === 'returns' ? '' : 'dn' }}">
+                        <div [innerHTML]="product.return_policy" class="nav-content"></div>
+                    </div>
                 </div>
                 <div class="mb2" *ngIf="product.collections.length">
                     <hr class="modal-hr"/>
