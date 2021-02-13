@@ -89,6 +89,7 @@
     list-style: none;
     margin-bottom: 0;
     overflow: hidden;
+
     .nav-link {
       padding: 8px 16px;
       font-family: "Open Sans", "Helvetica Neue", sans-serif;
@@ -110,20 +111,24 @@
   }
 
   .menu-content {
-    padding: 18px;
+    padding: 18px 18px 0 18px;
     font-family: "Open Sans", "Helvetica Neue", sans-serif;
     font-size: 14px;
     color: black;
-    .review-header{
+
+    .review-header {
       font-weight: bold;
     }
-    .review-user-info{
+
+    .review-user-info {
       color: #666666;
     }
-    .review-details{
+
+    .review-details {
       font-family: Lato, sans-serif;
       text-align: justify;
     }
+
     .dimension-container {
       //min-height: 75vh;
       font-family: Lato, sans-serif;
@@ -140,9 +145,10 @@
     }
   }
 
-  .w-45{
+  .w-45 {
     width: 45%;
   }
+
   .product-details-container {
     .wishlist-container {
       display: flex;
@@ -158,6 +164,8 @@
       font-size: 16px;
       text-transform: uppercase;
       font-weight: bold;
+      margin-bottom: 1rem;
+      display: block;
     }
 
     .price-container {
@@ -225,6 +233,7 @@
         font-size: 16px;
         color: #606060;
       }
+
       .star-rating-outer {
         display: inline-block;
         position: relative;
@@ -232,9 +241,11 @@
         font-weight: normal;
         font-size: 18px;
       }
+
       .star-rating-outer::before {
         content: '\e83a \e83a \e83a \e83a \e83a';
       }
+
       .star-rating-inner {
         position: absolute;
         top: 0;
@@ -243,13 +254,16 @@
         overflow: hidden;
         width: 0;
       }
+
       .star-rating-inner::before {
         content: '\e838 \e838 \e838 \e838 \e838';
       }
-      .star-rating-text{
+
+      .star-rating-text {
         font-size: 12px;
       }
-      .add-review-btn{
+
+      .add-review-btn {
         background-color: #f7f6f6;
         font-family: "Open Sans", sans-serif;
         font-size: 14px;
@@ -258,10 +272,12 @@
         color: #0C1C31;
         border: 1px solid #aaaaaa;
       }
-      .all-review-link{
+
+      .all-review-link {
         cursor: pointer;
         color: #0C1C31;
       }
+
       .star-ratings-sprite {
         background: url("https://s3-us-west-2.amazonaws.com/s.cdpn.io/2605/star-rating-sprite.png") repeat-x;
         font-size: 0;

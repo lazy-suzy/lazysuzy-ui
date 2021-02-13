@@ -1,5 +1,6 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {AdminDashboardService} from '../../admin-dashboard/admin-dashboard.service';
+import {DimensionGroupInterface, DimensionValueInterface} from '../dimension.interface';
 
 interface ImageItem {
     index: number;
@@ -117,17 +118,9 @@ export class NewProductRowComponent implements OnInit {
     }
 
     addDimension(index) {
-        const newDimension = {
+        const newDimension: DimensionValueInterface = {
             name: '',
-            value: {
-                width: '',
-                depth: '',
-                height: '',
-                diameter: '',
-                weight: '',
-                length: '',
-                NULL: '',
-            }
+            value: {}
         };
         if (!this.product.product_dimension[index].groupValue) {
             this.product.product_dimension[index].groupValue = [];
@@ -139,22 +132,12 @@ export class NewProductRowComponent implements OnInit {
         if (!this.product.product_dimension) {
             this.product.product_dimension = [];
         }
-        const dimensionGroup = {
+        const dimensionGroup: DimensionGroupInterface = {
             groupName: '',
-            groupValue: [
-                {
-                    name: '',
-                    value: {
-                        width: '',
-                        depth: '',
-                        height: '',
-                        diameter: '',
-                        weight: '',
-                        length: '',
-                        NULL: '',
-                    }
-                }
-            ]
+            groupValue: [{
+                name: '',
+                value: {}
+            }]
         };
         this.product.product_dimension.push(dimensionGroup);
     }

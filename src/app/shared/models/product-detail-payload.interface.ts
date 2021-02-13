@@ -6,7 +6,6 @@ export interface IProductDetail {
 }
 
 export interface IProduct {
-
     id: number;
     sku: string;
     is_new: boolean;
@@ -44,6 +43,7 @@ export interface IProduct {
     collections?: any[];
     online_msg?: string;
     is_back_order?: number;
+    return_policy?: string;
 }
 
 interface Departmentinfo {
