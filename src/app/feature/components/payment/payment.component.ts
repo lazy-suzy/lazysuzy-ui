@@ -1,26 +1,11 @@
-import {Component, OnInit, ViewChild} from '@angular/core';
-import {
-    FormGroup,
-    FormBuilder,
-    Validators,
-    ReactiveFormsModule,
-    FormsModule
-} from '@angular/forms';
-import {
-    StripeService,
-    Elements,
-    Element as StripeElement,
-    ElementsOptions
-} from 'ngx-stripe';
+import {Component, OnInit} from '@angular/core';
+import {FormBuilder, FormGroup, Validators} from '@angular/forms';
+import {Element as StripeElement, Elements, ElementsOptions, StripeService} from 'ngx-stripe';
 import {ApiService, EventEmitterService} from 'src/app/shared/services';
 import {STATE_LIST} from './../../../shared/constants';
 import {Router} from '@angular/router';
 import {Observable, Subscription} from 'rxjs';
-import {
-    BreakpointState,
-    Breakpoints,
-    BreakpointObserver
-} from '@angular/cdk/layout';
+import {BreakpointObserver, Breakpoints, BreakpointState} from '@angular/cdk/layout';
 import {IOrderAmount} from '../../../shared/models';
 import {PromoCodeService} from '../../../shared/services/promo-code/promo-code.service';
 import {PixelService} from '../../../shared/services/facebook-pixel/pixel.service';
@@ -441,5 +426,10 @@ export class PaymentComponent implements OnInit {
 
     hasStateParam(): boolean {
         return !!this.stateParam;
+    }
+
+    saveEmail(emailId) {
+        this.apiService.saveCheckoutEmail(emailId).subscribe(response => {
+        });
     }
 }

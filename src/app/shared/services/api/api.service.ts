@@ -570,4 +570,19 @@ export class ApiService {
         const url = `${env.API_BASE_HREF}${endPoint}`;
         return this.httpService.get(url);
     }
+
+    saveCheckoutEmail(emailId = '') {
+        if (emailId) {
+            const endpoint = 'save_checkout';
+            const token = this.cookie.get('token');
+            const headers = new HttpHeaders({
+                Authorization: `Bearer ${token}`
+            });
+            const data = {
+                emailid: emailId
+            };
+            const url = `${env.API_BASE_HREF}${endpoint}`;
+            return this.httpService.post(url, data, headers);
+        }
+    }
 }

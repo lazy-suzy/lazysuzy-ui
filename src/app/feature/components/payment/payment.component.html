@@ -122,7 +122,7 @@
                   </div>
                 </div>
                 <div class="w-100 tc" [ngClass]="{'w-50-ns': !(isHandset || isTablet)}">
-                  <button class="email-continue-btn b">CONTINUE</button>
+                  <button class="email-continue-btn b" (click)="saveEmail(customerData.email)">CONTINUE</button>
                 </div>
               </form>
             </ng-container>
