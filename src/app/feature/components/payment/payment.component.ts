@@ -118,7 +118,6 @@ export class PaymentComponent implements OnInit {
         this.bpTabletSubscription = this.bpTabletObserver.subscribe(
             (tablet: BreakpointState) => {
                 this.isTablet = tablet.matches;
-                console.log(this.isTablet);
             }
         );
 
@@ -172,7 +171,7 @@ export class PaymentComponent implements OnInit {
         this.eventSubscription = this.eventEmitterService.userChangeEvent
             .asObservable()
             .subscribe((user) => {
-                this.customerData.email = user.email;
+             //   this.customerData.email = user.email;
                 this.localStorageUser = user;
                 this.getCartProducts(false, this.customerData.shipping_state);
             });
@@ -196,6 +195,7 @@ export class PaymentComponent implements OnInit {
             (payload: any) => {
                 this.cartProducts = payload.products;
                 this.orderAmount = payload.order;
+                this.customerData.email = payload.user.emailid;
                 this.isLoading = false;
             },
             (error: any) => {
