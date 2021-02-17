@@ -20,10 +20,10 @@
             <span class="offer-details" style="margin: 0 1rem" *ngIf="i<0 && i<deals.length-1">|</span>
         </ng-container>
 
-        <span class="all-offers" (click)="openOfferModal()">View all offers</span>
+        <span class="all-offers" *ngIf="mobileDeals.length>1" (click)="openOfferModal()">View all offers</span>
     </div>
 
-    <div [ngClass]="{'landing-page-navbar':(!location.path() || aboutUsPage)}">
+    <div [ngClass]="{'landing-page-navbar':(!location.path() || aboutUsPage),'top-0':!this.showOffer}">
         <div class="flex items-center header" [ngClass]="{'header': !isFaqPage,'faq-header': isFaqPage}">
             <div class="w-60 flex">
                 <ng-container>
