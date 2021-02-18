@@ -103,6 +103,13 @@ const routes: Routes = [
             )
     },
     {
+        path: 'admin/dashboard/collections',
+        loadChildren: () =>
+            import('./modules/collections-dashboard/collections-dashboard.module').then(
+                (m) => m.CollectionsDashboardModule
+            )
+    },
+    {
         path: 'admin-dashboard',
         loadChildren: () =>
             import('./modules/admin-dashboard/admin-dashboard.module').then(
