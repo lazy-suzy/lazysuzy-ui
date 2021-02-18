@@ -1,0 +1,73 @@
+<div class="ph5 pv3" *ngIf="!isLoading">
+    <div class="flex justify-between mb3">
+        <h3>New Collection Form</h3>
+        <button mat-raised-button color="primary" (click)="submit()">Submit</button>
+    </div>
+    <form [formGroup]="collectionsForm" class="flex flex-column">
+        <div class="flex mb3">
+            <span class="w-10 open-sans-14">Collection Name</span>
+            <input formControlName="name">
+            <div class="w-80 flex justify-center">
+                <span>Display Link</span>
+                <mat-radio-group formControlName="isdisplay">
+                    <mat-radio-button [value]="1">Yes</mat-radio-button>
+                    <mat-radio-button [value]="0">No</mat-radio-button>
+                </mat-radio-group>
+            </div>
+        </div>
+        <div class="flex mb3 items-start">
+            <span class="w-10 open-sans-14">Collection ID</span>
+            <input formControlName="value">
+            <div class="w-10 ml3 open-sans-14">
+                <mat-select (selectionChange)="setCollection($event)">
+                    <mat-option *ngFor="let collection of collections" [value]="collection">{{collection.collection}}
+                        ({{collection.product_count}})
+                    </mat-option>
+                </mat-select>
+            </div>
+        </div>
+        <div class="flex mb3">
+            <span class="w-10 open-sans-14">Brand</span>
+            <div class="w-10">
+                <mat-select formControlName="brand">
+                    <mat-option *ngFor="let brand of brands" [value]="brand.name">{{brand.name}}</mat-option>
+                </mat-select>
+            </div>
+        </div>
+        <div class="flex mb3">
+            <label class="w-10 open-sans-14">Header</label>
+            <textarea formControlName="desc_header" class="w-30" rows="2">
+            </textarea>
+        </div>
+        <div class="flex mb3">
+            <label class="w-10 open-sans-14">Cover Description</label>
+            <textarea formControlName="desc_cover" class="w-60" rows="5">
+            </textarea>
+        </div>
+        <div class="flex mb3">
+            <label class="w-10 open-sans-14">Cover Image Path</label>
+            <input formControlName="image_cover" class="w-30">
+        </div>
+        <div class="flex justify-between mb3">
+            <label class="w-10 open-sans-14">Features</label>
+            <button mat-raised-button (click)="addFeature()">Add Feature</button>
+        </div>
+        <div class="flex flex-wrap mb3">
+            <div formArrayName="feature" class="w-20 mr3 mb3"
+                 *ngFor="let feature of features.controls; let i = index">
+                <div class="flex flex-column" [formGroupName]="i">
+                    <span>Feature {{i + 1}}</span>
+                    <div class="flex justify-between mb2">
+                        <label>Description</label>
+                        <textarea formControlName="description"></textarea>
+                    </div>
+                    <div class="flex justify-between">
+                        <label>Image</label>
+                        <input formControlName="image">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
+<img *ngIf="isLoading" [src]="spinner" class="loader"/>

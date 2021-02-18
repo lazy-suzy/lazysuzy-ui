@@ -585,4 +585,10 @@ export class ApiService {
             return this.httpService.post(url, data, headers);
         }
     }
+
+    getCollectionsCount() {
+        const endPoint = 'get_all_collection';
+        const url = `${env.API_BASE_HREF}${endPoint}`;
+        return this.httpService.get(url);
+    }
 }
