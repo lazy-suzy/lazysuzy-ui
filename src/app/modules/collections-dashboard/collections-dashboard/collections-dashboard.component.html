@@ -9,7 +9,7 @@
             <input formControlName="name">
             <div class="w-80 flex justify-center">
                 <span>Display Link</span>
-                <mat-radio-group formControlName="isdisplay">
+                <mat-radio-group class="ml2" formControlName="isdisplay">
                     <mat-radio-button [value]="1">Yes</mat-radio-button>
                     <mat-radio-button [value]="0">No</mat-radio-button>
                 </mat-radio-group>
@@ -53,21 +53,21 @@
             <button mat-raised-button (click)="addFeature()">Add Feature</button>
         </div>
         <div class="flex flex-wrap mb3">
-            <div formArrayName="feature" class="w-20 mr3 mb3"
+            <div formArrayName="feature" class="w-25 mr3 mb3"
                  *ngFor="let feature of features.controls; let i = index">
                 <div class="flex flex-column" [formGroupName]="i">
                     <span>Feature {{i + 1}}</span>
-                    <div class="flex justify-between mb2">
+                    <div class="flex mb2">
                         <label>Description</label>
-                        <textarea formControlName="description"></textarea>
+                        <textarea class="w-100 ml3" formControlName="description"></textarea>
                     </div>
-                    <div class="flex justify-between">
+                    <div class="flex">
                         <label>Image</label>
-                        <input formControlName="image">
+                        <input class="w-100 ml3" formControlName="image">
                     </div>
                 </div>
             </div>
         </div>
     </form>
 </div>
-<img *ngIf="isLoading" [src]="spinner" class="loader"/>
+<img *ngIf="isLoading || isSubmitting" [src]="spinner" class="loader"/>

@@ -11,6 +11,7 @@ import {environment as env} from 'src/environments/environment';
 })
 export class CollectionsDashboardComponent implements OnInit {
     isLoading = true;
+    isSubmitting = false;
     spinner = 'assets/image/spinner.gif';
     collectionsForm: FormGroup;
     brands: any;
@@ -79,20 +80,21 @@ export class CollectionsDashboardComponent implements OnInit {
     }
 
     submit() {
-        this.isLoading = true;
+        this.isSubmitting = true;
         // Remove Null Features before submitting
         this.collectionsForm.value.feature = this.collectionsForm.value.feature.filter(value => {
             return !!(value.image && value.description);
         });
         const url = `${env.ADMIN_API_BASE_HREF}save_collection`;
         this.httpService.post(url, this.collectionsForm.value).subscribe((response: any) => {
-            if (response.status) {
-                this.collectionsForm.reset();
-                this.initializeFeaturesArray();
-                this.isLoading = true;
-            }
+            this.collectionsForm.reset();
+            this.initializeFeaturesArray();
+            this.collectionsForm.patchValue({
+                isdisplay: 0
+            });
+            this.isSubmitting = false;
         }, (error => {
-            this.isLoading = true;
+            this.isSubmitting = false;
         }));
     }
 }
