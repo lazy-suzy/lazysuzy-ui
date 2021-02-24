@@ -31,7 +31,7 @@ export class NavDesktopComponent implements OnInit, AfterViewInit {
     isFaqPage = false;
     isBrandPage = false;
     params: any;
-    deals: any;
+    deals = [];
     showOffer = false;
     //
     isShop = true;
@@ -66,7 +66,8 @@ export class NavDesktopComponent implements OnInit, AfterViewInit {
             this.showOffer =
                 location.path().match(/checkout/) === null &&
                 location.path().match(/board/) === null &&
-                location.path().match(/blog/) == null;
+                location.path().match(/blog/) == null &&
+                (this.deals.length >= 1);
 
             this.isShop = location.path().match(/board/) == null;
 
