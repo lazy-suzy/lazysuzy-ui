@@ -33,8 +33,8 @@ export class NavMobileComponent implements OnInit {
     cartProduct: number;
     brands = [];
     collections = [];
-    deals: any;
-    mobileDeals: any;
+    deals = [];
+    mobileDeals = [];
     showOffer = true;
     isOfferEmpty = false;
     isFaqPage = false;
