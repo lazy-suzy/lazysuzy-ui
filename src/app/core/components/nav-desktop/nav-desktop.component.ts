@@ -63,11 +63,7 @@ export class NavDesktopComponent implements OnInit, AfterViewInit {
 
             this.aboutUsPage = location.path().match(/aboutus/) !== null;
 
-            this.showOffer =
-                location.path().match(/checkout/) === null &&
-                location.path().match(/board/) === null &&
-                location.path().match(/blog/) == null &&
-                (this.deals.length >= 1);
+            this.showOffer = this.shouldShowOffer(location.path());
 
             this.isShop = location.path().match(/board/) == null;
 
@@ -117,8 +113,16 @@ export class NavDesktopComponent implements OnInit, AfterViewInit {
             this.deals = this.deals.filter(v => {
                 return v.is_active;
             });
-            this.showOffer = this.showOffer && (this.deals.length >= 1);
+            this.showOffer = this.shouldShowOffer(this.location.path());
         });
+    }
+
+    shouldShowOffer(path: string): boolean {
+        return path.match(/checkout/) === null &&
+            path.match(/board/) === null &&
+            path.match(/blog/) == null &&
+            this.deals &&
+            (this.deals.length >= 1);
     }
 
     initializeNavbarHover() {

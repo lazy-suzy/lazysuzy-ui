@@ -63,10 +63,8 @@ export class NavMobileComponent implements OnInit {
                 location.path().match(/aboutus/) === null;
             this.isBoard = (location.path().match(/board/) !== null);
             this.aboutUsPage = location.path().match(/aboutus/) !== null;
-            this.showOffer =
-                (location.path().match(/checkout/) === null &&
-                location.path().match(/board\/dashboard/) === null &&
-                location.path().match(/blog/) == null) && !this.isOfferEmpty;
+            this.showOffer = this.shouldShowOffer(location.path());
+
         });
     }
 
@@ -125,10 +123,14 @@ export class NavMobileComponent implements OnInit {
             });
             this.mobileDeals = this.deals.filter(deal => deal.is_mobile);
             this.isOfferEmpty = this.mobileDeals.length <= 0;
-            this.showOffer = this.showOffer && !this.isOfferEmpty;
+            this.showOffer = this.shouldShowOffer(this.location.path());
         });
     }
-
+    shouldShowOffer(path: string): boolean {
+        return  (path.match(/checkout/) === null &&
+            path.match(/board\/dashboard/) === null &&
+            path.match(/blog/) == null) && !this.isOfferEmpty;
+    }
     onDestroy(): void {
         this.checkHomeRoute.unsubscribe();
         this.eventSubscription.unsubscribe();
