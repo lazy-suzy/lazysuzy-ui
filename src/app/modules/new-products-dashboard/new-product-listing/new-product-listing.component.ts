@@ -27,6 +27,10 @@ export class NewProductListingComponent implements OnInit {
     selectedBrand = 'all';
     brands: any;
 
+    showMessage = false;
+    message = '';
+    skippedSkus = [];
+
     constructor(private httpService: HttpService,
                 private apiService: ApiService
     ) {
@@ -65,7 +69,7 @@ export class NewProductListingComponent implements OnInit {
                     if (!this.mapping_core) {
                         this.mapping_core = extra.mapping_core;
                     }
-                    let receivedData = {...data};
+                    const receivedData = {...data};
                     if (this.products.data) {
                         receivedProducts = [...this.products.data, ...data.data];
                         receivedData.data = receivedProducts;
@@ -123,8 +127,15 @@ export class NewProductListingComponent implements OnInit {
             .pipe(
                 take(1)
             )
-            .subscribe(({status}) => {
-                if (status === 'success') {
+            .subscribe((response: any) => {
+                if (response.status === 'success') {
+                    if (response.message) {
+                        this.message = response.message;
+                        this.skippedSkus = response.skippedSkus;
+                        this.showMessage = true;
+                    } else {
+                        this.showMessage = false;
+                    }
                     this.products = [];
                     this.loadProduct();
                 }

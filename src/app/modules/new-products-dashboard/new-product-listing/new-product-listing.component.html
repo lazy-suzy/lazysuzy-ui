@@ -12,6 +12,10 @@
                 </mat-option>
             </mat-select>
         </mat-form-field>
+        <div *ngIf="showMessage" class="flex flex-column">
+            <span>{{message}}</span>
+            <span *ngFor="let sku of skippedSkus">{{sku}}</span>
+        </div>
         <h4>{{products.total}} Products for review</h4>
         <button mat-raised-button class="submit-btn" (click)="submit()">Submit</button>
     </div>
