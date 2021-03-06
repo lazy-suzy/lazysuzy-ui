@@ -3,6 +3,7 @@ import {AuthService, FacebookLoginProvider, GoogleLoginProvider} from 'angularx-
 import {CookieService} from 'ngx-cookie-service';
 import {ApiService, EventEmitterService, MatDialogUtilsService, UtilsService} from 'src/app/shared/services';
 import {environment as env} from 'src/environments/environment';
+import {toTitleCase} from 'codelyzer/util/utils';
 
 @Component({
     selector: 'app-auth',
@@ -93,6 +94,8 @@ export class AuthComponent implements OnInit {
             this.initials = (
                 (initials.shift() || '') + (initials.pop() || '')
             ).toUpperCase();
+        } else if (this.user.username) {
+            this.initials = this.user.username[0].toUpperCase();
         }
         this.eventEmitterService.invokeUserChange(this.user);
     }
