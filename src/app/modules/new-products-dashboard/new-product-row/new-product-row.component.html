@@ -39,6 +39,11 @@
                 <h5>Last updated date: {{product.updated_date}}</h5>
             </div>
         </div>
+        <div class="row" *ngIf="product.in_inventory">
+            <div class="col-12">
+                <span class="red">In Inventory</span>
+            </div>
+        </div>
         <div class="row">
             <div class="col-12">
                 <label>Is Backordered</label>

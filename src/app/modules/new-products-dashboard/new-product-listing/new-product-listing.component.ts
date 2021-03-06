@@ -61,7 +61,7 @@ export class NewProductListingComponent implements OnInit {
                 take(1) // take only one result and then unsubscribe
             )
             .subscribe(({status, data, extra}) => {
-                if ((status = 'success')) {
+                if ((status === 'success')) {
                     let receivedProducts = [];
                     if (!this.filters) {
                         this.filters = extra.filters;

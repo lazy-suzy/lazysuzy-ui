@@ -3,8 +3,16 @@
   padding-left: 10px;
   flex-grow: 0.5;
 }
+
 .align-items-baseline {
   align-items: baseline;
+}
+
+.sticky {
+  position: sticky;
+  top: 0;
+  z-index: 999;
+  background: #fff;
 }
 
 .submit-btn {
@@ -15,6 +23,7 @@
   margin: 10px;
   padding: 10px;
 }
+
 .loader {
   position: fixed;
   z-index: 1;
@@ -22,6 +31,7 @@
   left: 50%;
   transform: translateX(-50%) translateY(-50%);
 }
+
 .row {
   display: -ms-flexbox;
   display: flex;
@@ -55,8 +65,7 @@
 .col-7,
 .col-8,
 .col-9,
-.col-auto
-{
+.col-auto {
   position: relative;
   width: 100%;
   padding-right: 15px;
