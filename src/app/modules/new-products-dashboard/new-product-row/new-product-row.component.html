@@ -18,13 +18,16 @@
                 <h5>{{product.site_name}}</h5>
             </div>
         </div>
+        <!--        ||-->
+        <!--        product.max_price < product.max_was_price-->
         <div class="row">
             <div class="col-12">
                 <div class="price-font">
-                    <span class="product-price mr3">${{ product.price }}</span>
+                    <span class="product-price mr3">{{ renderPriceRange(product.min_price, product.max_price) }}</span>
                     <span class="strike {{
-                  product.price !== product.was_price ? '' : 'dn'
-                }}">${{ product.was_price }}</span>
+                  (product.min_price < product.min_was_price ) ?
+                  '' : 'dn'
+                }}">${{ renderPriceRange(product.min_was_price, product.max_was_price) }}</span>
                 </div>
                 <!-- <h5>${{product.price}}</h5> -->
             </div>
@@ -258,7 +261,7 @@
     </div>
     <div class="col-8">
         <div class="flex flex-wrap">
-            <ng-container *ngFor="let image of product.main_product_images.split(',');let index = index">
+            <ng-container *ngFor="let image of product.main_product_images?.split(',');let index = index">
                 <div class="flex flex-column mh3">
                     <img src="{{image}}" height="150px" width='150px'>
                     <mat-radio-group *ngIf="product.status ==='approved'"
@@ -273,7 +276,7 @@
                     </div>
                 </div>
             </ng-container>
-            <ng-container *ngFor="let image of product.product_images.split(',');let index = index">
+            <ng-container *ngFor="let image of product.product_images?.split(',');let index = index">
                 <div class="flex flex-column mh3">
                     <img src="{{image}}" height="150px" width='150px'>
                     <mat-radio-group *ngIf="product.status ==='approved'"
@@ -318,12 +321,12 @@
                     <span style="font-size: 16px;font-weight: bold">{{key.groupName}}</span> <br/>
                     <input [(ngModel)]="key.groupName">
                     <div style="float: right" class="flex flex-column">
-                        <button  mat-raised-button color="primary"
+                        <button mat-raised-button color="primary"
                                 (click)="addDimension(i)">Add Dimension
                         </button>
                         <div class="mt3">
-                            <button  mat-raised-button color="secondary"
-                                     (click)="copyDimension(i)">Copy Dimension
+                            <button mat-raised-button color="secondary"
+                                    (click)="copyDimension(i)">Copy Dimension
                             </button>
                         </div>
 

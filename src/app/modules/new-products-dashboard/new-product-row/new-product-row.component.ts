@@ -1,6 +1,7 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {AdminDashboardService} from '../../admin-dashboard/admin-dashboard.service';
 import {DimensionGroupInterface, DimensionValueInterface} from '../dimension.interface';
+import {formatCurrency, getLocaleCurrencySymbol} from '@angular/common';
 
 interface ImageItem {
     index: number;
@@ -158,5 +159,19 @@ export class NewProductRowComponent implements OnInit {
                 this.product[imageType] = response.product[imageType];
             }
         );
+    }
+
+    renderPriceRange(minPrice: number, maxPrice: number): string {
+        minPrice = Number(minPrice);
+        maxPrice = Number(maxPrice);
+        if (maxPrice && (maxPrice > minPrice)) {
+            return `${this.formatUSCurrency(minPrice, '1.2-2')}-${this.formatUSCurrency(maxPrice, '1.2-2')}`;
+        } else {
+            return this.formatUSCurrency(minPrice, '1.2-2');
+        }
+    }
+
+    formatUSCurrency(price: number, decimals) {
+        return formatCurrency(price, 'en-US', getLocaleCurrencySymbol('en-US'), 'en-US', decimals);
     }
 }
