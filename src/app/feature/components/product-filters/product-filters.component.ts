@@ -513,6 +513,5 @@ export class ProductFiltersComponent implements OnInit {
                 this.productFilters[productFiltersKey] = this.productFilters[productFiltersKey].filter(value => value.count > 0);
             }
         }
-        console.log(this.productFilters);
     }
 }

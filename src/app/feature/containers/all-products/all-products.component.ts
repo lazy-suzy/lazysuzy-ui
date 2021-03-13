@@ -17,7 +17,7 @@ import MetaData from '../../../shared/services/seo/meta-data-model';
     styleUrls: ['./all-products.component.less']
 })
 export class AllProductsComponent implements OnInit {
-    @ViewChild('productFiltersComponent', {static: true}) productFilter: any;
+    @ViewChild('productFiltersComponent', {static: false}) productFilter: any;
     productsSubscription: Subscription;
     isBrandPageSubscription: Subscription;
     routeSubscription: Subscription;
