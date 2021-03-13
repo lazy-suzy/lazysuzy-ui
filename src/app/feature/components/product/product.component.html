@@ -50,9 +50,9 @@
             <span class="cprice">${{ product.inventory_product_details.price }}</span>
         </ng-container>
         <ng-template #isOOS>
-      <span class="{{
-          ((minPrice < wasMinPrice || maxPrice<wasMaxPrice) && 'cprice sale') || 'cprice'
-        }}">
+      <span
+              [ngClass]="{'sale':(minPrice < wasMinPrice || maxPrice<wasMaxPrice) }"
+              class="cprice">
         <ng-container *ngIf="!this.maxPrice;else bothPrices">
           ${{ minPrice | number:"1.2-2" }}
         </ng-container>
@@ -60,7 +60,7 @@
           ${{ minPrice | number:"1.2-2" }}-{{ maxPrice | number:"1.2-2" }}
         </ng-template>
       </span>
-            <span *ngIf="this.minPrice < this.wasMinPrice" class="oldprice">
+            <span *ngIf="(this.minPrice < this.wasMinPrice || maxPrice<wasMaxPrice)" class="oldprice">
         <ng-container *ngIf="!this.wasMaxPrice;else bothWasPrices">
           ${{ wasMinPrice | number:"1.2-2" }}
         </ng-container>
